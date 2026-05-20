@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Runway — Inspired Design</title>
+<meta name="description" content="A Runway-inspired marketing tribute: cinematic dark canvas, abcNormal-style display via DM Sans, full-bleed photographic UI, cool-slate neutrals, zero shadows. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,450;9..40,500;9..40,600&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand canvas */
+  --black: #000000;
+  --deep-black: #030303;
+  --dark-surface: #1a1a1a;
+  --border-dark: #27272a;
+  /* Light */
+  --white: #ffffff;
+  --near-white: #fefefe;
+  --cool-cloud: #e9ecf2;
+  /* Neutrals */
+  --charcoal: #404040;
+  --near-charcoal: #3f3f3f;
+  --cool-slate: #767d88;
+  --mid-slate: #7d848e;
+  --muted-gray: #a7a7a7;
+  --cool-silver: #c9ccd1;
+  --light-silver: #d0d4d4;
+  --tw-gray: #6b7280;
+  --dark-link: #0c0c0c;
+  --footer-gray: #999999;
+  /* Photographic gradients (only allowed in imagery) */
+  --photo-1: linear-gradient(135deg, #2a1810 0%, #6b3a1a 35%, #c4632a 65%, #f4b870 100%);
+  --photo-2: linear-gradient(120deg, #0a1428 0%, #1d3a5f 40%, #4a6b8a 70%, #c9d4e3 100%);
+  --photo-3: linear-gradient(160deg, #1a0a1f 0%, #4a1d3a 40%, #8a3a4f 70%, #f0a890 100%);
+  --photo-4: linear-gradient(180deg, #0f1a14 0%, #2a4a3a 40%, #6b8a70 70%, #d4e0c9 100%);
+  --photo-5: linear-gradient(135deg, #050505 0%, #1a1a1a 50%, #3a3a3a 100%);
+  --photo-6: linear-gradient(45deg, #2a0a0a 0%, #5f1d1d 40%, #c4503a 70%, #f4d4b8 100%);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "DM Sans", "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  font-size: 16px;
+  line-height: 1.50;
+  letter-spacing: -0.16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--white); color: var(--black); }
+
+/* Display — tight, negative-tracking, line-height 1.0 */
+.display {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.00;
+  letter-spacing: -1.2px;
+}
+.h-section {
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.05;
+  letter-spacing: -1px;
+}
+.h-sub {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.00;
+  letter-spacing: -0.9px;
+}
+.eyebrow {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  color: var(--cool-slate);
+}
+.micro {
+  font-size: 11px;
+  font-weight: 450;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--muted-gray);
+}
+
+/* Layout */
+.wrap { max-width: 1600px; margin: 0 auto; padding: 0 48px; }
+.wrap-narrow { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+@media (max-width: 760px) {
+  .wrap, .wrap-narrow { padding: 0 20px; }
+}
+
+/* Nav */
+.top-nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 30;
+  padding: 20px 0;
+}
+.nav-inner { display: flex; align-items: center; gap: 32px; }
+.logo {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.4px;
+  color: var(--white);
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-mark {
+  width: 22px; height: 22px;
+  background: var(--white);
+  display: inline-block;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 60%, 0 100%);
+}
+.nav-center { display: flex; gap: 28px; margin-left: 16px; }
+.nav-center a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cool-silver);
+  letter-spacing: -0.1px;
+}
+.nav-center a:hover { color: var(--white); }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+/* Buttons — restrained */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  padding: 10px 18px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 150ms ease;
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--white);
+  color: var(--black);
+}
+.btn-primary:hover { background: var(--cool-silver); }
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--border-dark);
+}
+.btn-ghost:hover { border-color: var(--cool-slate); }
+.btn-text {
+  background: transparent;
+  color: var(--white);
+  padding: 10px 4px;
+}
+.btn-text:hover { color: var(--cool-silver); }
+
+/* ─── Hero — cinematic ─── */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  background: var(--black);
+  overflow: hidden;
+  padding: 140px 0 80px;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--photo-1);
+  opacity: 0.85;
+}
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 35%, rgba(0,0,0,0.85) 100%);
+}
+.hero-inner { position: relative; z-index: 2; width: 100%; }
+.hero-eyebrow {
+  color: var(--cool-cloud);
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+.hero h1 {
+  font-size: clamp(48px, 7vw, 96px);
+  margin: 0 0 28px;
+  max-width: 1100px;
+  color: var(--white);
+}
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--cool-cloud);
+  max-width: 540px;
+  margin: 0 0 36px;
+  opacity: 0.85;
+  letter-spacing: -0.18px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ─── Trust bar ─── */
+.trust {
+  background: var(--black);
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border-dark);
+}
+.trust-row {
+  display: flex;
+  gap: 56px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.trust-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  color: var(--mid-slate);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.trust-logos {
+  display: flex; gap: 48px; align-items: center; flex-wrap: wrap;
+}
+.trust-logo {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--cool-slate);
+  letter-spacing: -0.2px;
+  opacity: 0.85;
+}
+
+/* ─── Mixed grid feature ─── */
+.section {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--border-dark);
+}
+.section-light {
+  background: var(--cool-cloud);
+  color: var(--charcoal);
+  border-bottom: none;
+}
+.section-light .eyebrow { color: var(--charcoal); opacity: 0.55; }
+.section-light .h-section { color: var(--near-charcoal); }
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 32px; margin-bottom: 48px; flex-wrap: wrap;
+}
+.section-head h2 { margin: 12px 0 0; max-width: 720px; }
+.section-head p {
+  max-width: 380px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--cool-slate);
+  margin: 0;
+  letter-spacing: -0.15px;
+}
+
+/* Editorial mixed-size grid */
+.mix-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr;
+  grid-template-rows: 320px 240px;
+  gap: 12px;
+}
+.mix-grid > .tile { position: relative; overflow: hidden; border-radius: 8px; }
+.mix-grid .tile-1 { grid-row: 1 / 3; background: var(--photo-3); }
+.mix-grid .tile-2 { background: var(--photo-2); }
+.mix-grid .tile-3 { background: var(--photo-4); }
+.mix-grid .tile-4 { grid-column: 2 / 4; background: var(--photo-6); }
+.tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+.tile-overlay .micro {
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 10px;
+}
+.tile-overlay h3 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.00;
+  letter-spacing: -0.3px;
+  margin: 0;
+  color: var(--white);
+}
+@media (max-width: 900px) {
+  .mix-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 220px);
+  }
+  .mix-grid .tile-1 { grid-row: auto; }
+  .mix-grid .tile-4 { grid-column: auto; }
+}
+
+/* ─── Video-prompt UI mockup ─── */
+.prompt-stage {
+  margin-top: 28px;
+  background: var(--dark-surface);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 18px;
+}
+@media (max-width: 880px) { .prompt-stage { grid-template-columns: 1fr; } }
+.prompt-side {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.prompt-label {
+  font-size: 11px;
+  font-weight: 450;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--mid-slate);
+}
+.prompt-input {
+  background: var(--black);
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+  padding: 14px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--cool-cloud);
+  letter-spacing: -0.16px;
+  min-height: 110px;
+}
+.prompt-input span { color: var(--cool-slate); }
+.prompt-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.meta-chip {
+  background: var(--black);
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 12px;
+}
+.meta-chip .micro { color: var(--mid-slate); margin-bottom: 4px; display: block; }
+.meta-chip .v { color: var(--white); font-weight: 500; }
+.prompt-cta {
+  display: flex; gap: 8px;
+}
+.prompt-cta .btn { flex: 1; justify-content: center; padding: 10px; }
+
+.prompt-preview {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--photo-1);
+  min-height: 320px;
+}
+.preview-frame {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1a0a1f 0%, #4a1d3a 40%, #8a3a4f 70%, #f0a890 100%);
+}
+.preview-overlay {
+  position: absolute;
+  left: 16px; right: 16px; bottom: 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.preview-pill {
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 450;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dot-rec {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #ff4d4d;
+  display: inline-block;
+}
+.timeline-bar {
+  position: absolute;
+  left: 16px; right: 16px; top: 16px;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.18);
+  overflow: hidden;
+}
+.timeline-bar::after {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0; width: 42%;
+  background: var(--white);
+}
+
+/* ─── Research grid (light) ─── */
+.research-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 1000px) {
+  .research-grid { grid-template-columns: 1fr; }
+}
+.research-card { display: flex; flex-direction: column; gap: 14px; }
+.research-thumb {
+  border-radius: 8px;
+  aspect-ratio: 16 / 10;
+  background: var(--photo-2);
+  overflow: hidden;
+  position: relative;
+}
+.research-card:nth-child(2) .research-thumb { background: var(--photo-4); }
+.research-card:nth-child(3) .research-thumb { background: var(--photo-6); }
+.research-card .eyebrow { color: var(--cool-slate); }
+.research-card h3 {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.3px;
+  color: var(--charcoal);
+  margin: 0;
+}
+.research-card:first-child .research-thumb { aspect-ratio: 16 / 11; }
+.research-card:first-child h3 { font-size: 28px; }
+.research-card p {
+  font-size: 14px;
+  color: var(--cool-slate);
+  margin: 0;
+  letter-spacing: -0.14px;
+}
+
+/* ─── Pricing ─── */
+.pricing {
+  background: var(--black);
+  padding: 96px 0;
+  border-bottom: 1px solid var(--border-dark);
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+.plan {
+  background: var(--dark-surface);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.plan .plan-tag {
+  font-size: 11px;
+  font-weight: 450;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--cool-slate);
+}
+.plan h3 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.5px;
+  margin: 0;
+  color: var(--white);
+}
+.plan-price {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.9px;
+  color: var(--white);
+}
+.plan-price small {
+  font-size: 14px;
+  color: var(--cool-slate);
+  font-weight: 400;
+  letter-spacing: -0.14px;
+}
+.plan ul { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.plan li {
+  font-size: 14px;
+  color: var(--cool-cloud);
+  line-height: 1.4;
+  letter-spacing: -0.14px;
+  padding-left: 18px;
+  position: relative;
+}
+.plan li::before {
+  content: "→";
+  position: absolute;
+  left: 0; top: 0;
+  color: var(--cool-slate);
+}
+.plan-feature {
+  border-color: var(--cool-slate);
+}
+.plan-feature .plan-tag { color: var(--white); }
+.plan .btn { margin-top: auto; justify-content: center; }
+
+/* ─── CTA / Mission ─── */
+.mission {
+  background: var(--black);
+  padding: 140px 0;
+  text-align: center;
+  border-bottom: 1px solid var(--border-dark);
+}
+.mission h2 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.00;
+  letter-spacing: -1.1px;
+  margin: 0 auto;
+  max-width: 900px;
+  color: var(--white);
+}
+.mission p {
+  margin: 28px auto 36px;
+  font-size: 16px;
+  color: var(--cool-slate);
+  max-width: 560px;
+  letter-spacing: -0.16px;
+}
+
+/* ─── Design System Reference ─── */
+.ds {
+  background: var(--deep-black);
+  padding: 96px 0;
+  border-top: 1px solid var(--border-dark);
+}
+.ds-head { margin-bottom: 56px; max-width: 720px; }
+.ds-head h2 {
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.00;
+  letter-spacing: -1.1px;
+  margin: 12px 0 16px;
+  color: var(--white);
+}
+.ds-head p {
+  font-size: 15px;
+  color: var(--cool-slate);
+  margin: 0;
+  letter-spacing: -0.15px;
+}
+.ds-block { margin-bottom: 64px; }
+.ds-block h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.45px;
+  color: var(--cool-slate);
+  font-weight: 500;
+  margin: 0 0 24px;
+}
+.color-group { margin-bottom: 28px; }
+.color-group-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  color: var(--mid-slate);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+.swatch {
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--dark-surface);
+}
+.swatch-chip {
+  height: 56px;
+  border-radius: 4px;
+  border: 1px solid var(--border-dark);
+}
+.swatch-name { font-size: 13px; color: var(--white); font-weight: 500; letter-spacing: -0.13px; }
+.swatch-hex {
+  font-family: "Inter", monospace;
+  font-size: 11px;
+  font-weight: 450;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--cool-slate);
+}
+
+.type-table, .comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.type-table th, .type-table td,
+.comp-table th, .comp-table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-dark);
+  color: var(--cool-cloud);
+  vertical-align: middle;
+}
+.type-table th, .comp-table th {
+  color: var(--mid-slate);
+  font-size: 11px;
+  font-weight: 450;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-family: "Inter", sans-serif;
+  background: var(--dark-surface);
+}
+.type-table .preview { color: var(--white); }
+.type-table tr:last-child td, .comp-table tr:last-child td { border-bottom: none; }
+
+.radius-ladder {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+.radius-cell {
+  border: 1px solid var(--border-dark);
+  background: var(--dark-surface);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.radius-vis {
+  width: 88px; height: 88px;
+  background: var(--cool-cloud);
+}
+.radius-cell .v { font-size: 14px; color: var(--white); font-weight: 500; }
+.radius-cell .micro { color: var(--mid-slate); }
+
+/* ─── Footer ─── */
+.foot {
+  background: var(--black);
+  padding: 80px 0 40px;
+  border-top: 1px solid var(--border-dark);
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+@media (max-width: 880px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+.foot-brand { color: var(--cool-slate); font-size: 13px; max-width: 280px; letter-spacing: -0.13px; }
+.foot-brand .logo { margin-bottom: 14px; }
+.foot-col h5 {
+  font-size: 11px;
+  font-weight: 450;
+  text-transform: uppercase;
+  letter-spacing: 0.45px;
+  color: var(--mid-slate);
+  margin: 0 0 16px;
+}
+.foot-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--footer-gray);
+  margin-bottom: 10px;
+  letter-spacing: -0.14px;
+}
+.foot-col a:hover { color: var(--white); }
+.foot-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-dark);
+  font-size: 12px;
+  color: var(--mid-slate);
+  letter-spacing: 0.1px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.foot-bottom .micro { color: var(--mid-slate); }
+
+/* Floating link */
+.floating-design-link {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 99;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--black);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+  text-decoration: none;
+  transition: background 150ms ease;
+}
+.floating-design-link:hover { background: var(--cool-silver); }
+.floating-design-link .mono { font-family: inherit; }
+
+/* Icons */
+.i { width: 16px; height: 16px; display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a class="logo" href="#">
+        <span class="logo-mark"></span>
+        <span>Runway</span>
+      </a>
+      <div class="nav-center">
+        <a href="#">Research</a>
+        <a href="#">Tools</a>
+        <a href="#">Studios</a>
+        <a href="#">Pricing</a>
+        <a href="#">Company</a>
+      </div>
+      <div class="nav-right">
+        <a class="btn btn-text" href="#">Sign in</a>
+        <a class="btn btn-primary" href="#">Try Runway</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow hero-eyebrow">Gen-4 — In production</div>
+    <h1 class="display">A new medium for storytellers — built on the world&rsquo;s most consistent generative video models.</h1>
+    <p class="hero-sub">Direct, edit, and finish entire scenes from a single prompt. Runway gives creative teams a film-grade generative stack — without the render farm.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#">Start a project
+        <svg class="i" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#">Watch reel</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-row">
+      <span class="trust-label">Trusted by directors at</span>
+      <div class="trust-logos">
+        <span class="trust-logo">CBS</span>
+        <span class="trust-logo">Madonna</span>
+        <span class="trust-logo">A24</span>
+        <span class="trust-logo">Pixar</span>
+        <span class="trust-logo">New Balance</span>
+        <span class="trust-logo">Vogue</span>
+        <span class="trust-logo">NYT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 1 — Editorial Mixed Grid -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Models · Research</span>
+        <h2 class="h-section display">Frames from a process. Stills from a future.</h2>
+      </div>
+      <p>Every release we ship is paired with a body of imagery — generated, captured, and edited inside Runway. The model is the camera.</p>
+    </div>
+    <div class="mix-grid">
+      <div class="tile tile-1">
+        <div class="tile-overlay">
+          <span class="micro">Gen-4 · 4K · 09s</span>
+          <h3>Aperture, a short directed in 11 days.</h3>
+        </div>
+      </div>
+      <div class="tile tile-2">
+        <div class="tile-overlay">
+          <span class="micro">Diffusion · v3</span>
+          <h3>Coastline studies, January.</h3>
+        </div>
+      </div>
+      <div class="tile tile-3">
+        <div class="tile-overlay">
+          <span class="micro">Act-Two</span>
+          <h3>Motion brush, frame by frame.</h3>
+        </div>
+      </div>
+      <div class="tile tile-4">
+        <div class="tile-overlay">
+          <span class="micro">Production · Atelier</span>
+          <h3>Atelier campaign — eight scenes, one prompt sheet.</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 2 — Video Prompt UI mockup -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Studio · Workflow</span>
+        <h2 class="h-section display">Prompt. Direct. Cut. Inside one timeline.</h2>
+      </div>
+      <p>The Runway Studio is built for cinematographers — not for engineers. Every frame is editable, every shot is reproducible.</p>
+    </div>
+
+    <div class="prompt-stage">
+      <div class="prompt-side">
+        <div>
+          <div class="prompt-label">Prompt</div>
+          <div class="prompt-input">
+            A cinematic 35mm tracking shot of a vintage saloon car
+            <span>driving along a coastal highway at golden hour, soft volumetric haze, anamorphic flare, shallow depth of field, color graded teal and amber.</span>
+          </div>
+        </div>
+        <div>
+          <div class="prompt-label">Scene parameters</div>
+          <div class="prompt-meta">
+            <div class="meta-chip">
+              <span class="micro">Model</span>
+              <span class="v">Gen-4 Turbo</span>
+            </div>
+            <div class="meta-chip">
+              <span class="micro">Length</span>
+              <span class="v">10 s · 24 fps</span>
+            </div>
+            <div class="meta-chip">
+              <span class="micro">Aspect</span>
+              <span class="v">2.39 : 1</span>
+            </div>
+            <div class="meta-chip">
+              <span class="micro">Seed</span>
+              <span class="v">4471 · locked</span>
+            </div>
+          </div>
+        </div>
+        <div class="prompt-cta">
+          <a class="btn btn-primary" href="#">Render</a>
+          <a class="btn btn-ghost" href="#">Save preset</a>
+        </div>
+      </div>
+
+      <div class="prompt-preview">
+        <div class="preview-frame"></div>
+        <div class="timeline-bar"></div>
+        <div class="preview-overlay">
+          <span class="preview-pill"><span class="dot-rec"></span> Live preview · 4 / 10</span>
+          <span class="preview-pill">Take 03 · v4</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 3 — Research grid (light) -->
+<section class="section section-light">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Research</span>
+        <h2 class="h-section display" style="color: var(--near-charcoal)">Latest from the lab.</h2>
+      </div>
+      <p style="color: var(--charcoal); opacity: 0.7;">An ongoing thread on simulation, world models, and the future of moving image.</p>
+    </div>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="research-thumb"></div>
+        <span class="eyebrow">Paper · Gen-4</span>
+        <h3>Frame Coherence Across 4K Generative Sequences</h3>
+        <p>How we hold subject identity across 240+ frames using motion-conditioned diffusion.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-thumb"></div>
+        <span class="eyebrow">Note · Act-Two</span>
+        <h3>Performance capture without a soundstage.</h3>
+        <p>Recasting body & face transfer for indie productions.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-thumb"></div>
+        <span class="eyebrow">Field study</span>
+        <h3>What 1,200 directors taught us about AI on set.</h3>
+        <p>A short report from the Runway Production Partner program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Plans</span>
+        <h2 class="h-section display">Studio-grade, paid by the scene.</h2>
+      </div>
+      <p>Every tier includes Gen-4, Act-Two, motion brush, and the full Studio editor. The line between hobbyist and feature director is just runtime.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan">
+        <span class="plan-tag">Standard</span>
+        <h3>Director</h3>
+        <div class="plan-price">$15<small>&nbsp;/ month</small></div>
+        <ul>
+          <li>625 generation credits</li>
+          <li>4K export, no watermark</li>
+          <li>Up to 10s per clip · Gen-4</li>
+          <li>Standard render queue</li>
+        </ul>
+        <a class="btn btn-ghost" href="#">Choose plan</a>
+      </div>
+      <div class="plan plan-feature">
+        <span class="plan-tag">Most chosen</span>
+        <h3>Studio</h3>
+        <div class="plan-price">$95<small>&nbsp;/ month</small></div>
+        <ul>
+          <li>6,200 credits + rollover</li>
+          <li>Priority render queue</li>
+          <li>Up to 20s per clip · Gen-4 Turbo</li>
+          <li>Team session + shared assets</li>
+          <li>Brand-trained model slot</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Choose plan</a>
+      </div>
+      <div class="plan">
+        <span class="plan-tag">Enterprise</span>
+        <h3>Production</h3>
+        <div class="plan-price">Custom<small>&nbsp;/ contact</small></div>
+        <ul>
+          <li>Unlimited renders, SSO</li>
+          <li>Dedicated GPU pool</li>
+          <li>Custom-trained models on set</li>
+          <li>Production-partner support</li>
+        </ul>
+        <a class="btn btn-ghost" href="#">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission">
+  <div class="wrap-narrow">
+    <h2 class="display">We are building AI to simulate the world through imagination, art, and aesthetics.</h2>
+    <p>This is not a tool. It is a new medium — and it is open to anyone with something to say.</p>
+    <a class="btn btn-primary" href="#">Read our research →</a>
+  </div>
+</section>
+
+<!-- ─── DESIGN SYSTEM REFERENCE ─── -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-head">
+      <span class="eyebrow">Reference · §0</span>
+      <h2 class="display">The system underneath the surface.</h2>
+      <p>A single typeface. Cool-slate neutrals. Zero shadows. Runway&rsquo;s interface is built to disappear behind the photograph — these are the tokens that keep it invisible.</p>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <h3>Color</h3>
+
+      <div class="color-group">
+        <div class="color-group-label">Primary &amp; Surface</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#000000"></div><span class="swatch-name">Runway Black</span><span class="swatch-hex">#000000</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#030303"></div><span class="swatch-name">Deep Black</span><span class="swatch-hex">#030303</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#1a1a1a"></div><span class="swatch-name">Dark Surface</span><span class="swatch-hex">#1a1a1a</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#ffffff"></div><span class="swatch-name">Pure White</span><span class="swatch-hex">#ffffff</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#fefefe"></div><span class="swatch-name">Near White</span><span class="swatch-hex">#fefefe</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#e9ecf2"></div><span class="swatch-name">Cool Cloud</span><span class="swatch-hex">#e9ecf2</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#27272a"></div><span class="swatch-name">Border Dark</span><span class="swatch-hex">#27272a</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-group-label">Neutrals &amp; Text</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#404040"></div><span class="swatch-name">Charcoal</span><span class="swatch-hex">#404040</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#3f3f3f"></div><span class="swatch-name">Near Charcoal</span><span class="swatch-hex">#3f3f3f</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#767d88"></div><span class="swatch-name">Cool Slate</span><span class="swatch-hex">#767d88</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#7d848e"></div><span class="swatch-name">Mid Slate</span><span class="swatch-hex">#7d848e</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#a7a7a7"></div><span class="swatch-name">Muted Gray</span><span class="swatch-hex">#a7a7a7</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#c9ccd1"></div><span class="swatch-name">Cool Silver</span><span class="swatch-hex">#c9ccd1</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#d0d4d4"></div><span class="swatch-name">Light Silver</span><span class="swatch-hex">#d0d4d4</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#6b7280"></div><span class="swatch-name">Tailwind Gray</span><span class="swatch-hex">#6b7280</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#999999"></div><span class="swatch-name">Footer Gray</span><span class="swatch-hex">#999999</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-group-label">Gradient System</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background: var(--photo-1)"></div><span class="swatch-name">Photographic only</span><span class="swatch-hex">No interface gradients</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="ds-block">
+      <h3>Typography — single face, total system</h3>
+      <table class="type-table">
+        <thead>
+          <tr><th>Role</th><th>Size</th><th>Weight</th><th>Line height</th><th>Tracking</th><th>Preview</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Display / Hero</td><td>48px</td><td>400</td><td>1.00</td><td>-1.2px</td><td class="preview" style="font-size:24px;font-weight:400;line-height:1.0;letter-spacing:-0.6px">A new medium</td></tr>
+          <tr><td>Section Heading</td><td>40px</td><td>400</td><td>1.00</td><td>-1px</td><td class="preview" style="font-size:22px;font-weight:400;letter-spacing:-0.45px">Frames from a process</td></tr>
+          <tr><td>Sub-heading</td><td>36px</td><td>400</td><td>1.00</td><td>-0.9px</td><td class="preview" style="font-size:20px;font-weight:400;letter-spacing:-0.4px">Studio &middot; Workflow</td></tr>
+          <tr><td>Card Title</td><td>24px</td><td>400</td><td>1.00</td><td>normal</td><td class="preview" style="font-size:18px;font-weight:400">Aperture, a short</td></tr>
+          <tr><td>Body</td><td>16px</td><td>400</td><td>1.50</td><td>-0.16px</td><td class="preview" style="font-size:15px">The interface should disappear.</td></tr>
+          <tr><td>Caption / Label</td><td>14px</td><td>500</td><td>1.43</td><td>0.35px (UC)</td><td class="preview" style="font-size:12px;text-transform:uppercase;letter-spacing:0.35px">Research · Gen-4</td></tr>
+          <tr><td>Small</td><td>13px</td><td>400</td><td>1.30</td><td>-0.16px</td><td class="preview" style="font-size:12px">A compact description.</td></tr>
+          <tr><td>Micro / Tag</td><td>11px</td><td>450</td><td>1.30</td><td>normal (UC)</td><td class="preview" style="font-size:11px;font-weight:450;text-transform:uppercase;letter-spacing:0.4px">Gen-4 · 4K · 09s</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3>Radius — subtly rounded, never circular</h3>
+      <div class="radius-ladder">
+        <div class="radius-cell">
+          <div class="radius-vis" style="border-radius:4px"></div>
+          <span class="v">4px</span>
+          <span class="micro">Sharp · Buttons</span>
+        </div>
+        <div class="radius-cell">
+          <div class="radius-vis" style="border-radius:6px"></div>
+          <span class="v">6px</span>
+          <span class="micro">Subtle · Links</span>
+        </div>
+        <div class="radius-cell">
+          <div class="radius-vis" style="border-radius:8px"></div>
+          <span class="v">8px</span>
+          <span class="micro">Comfortable · Cards</span>
+        </div>
+        <div class="radius-cell">
+          <div class="radius-vis" style="border-radius:16px"></div>
+          <span class="v">16px</span>
+          <span class="micro">Generous · Alerts</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3>Components — minimal matrix</h3>
+      <table class="comp-table">
+        <thead>
+          <tr><th>Component</th><th>Background</th><th>Border</th><th>Radius</th><th>Sample</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary button</td>
+            <td>#ffffff</td>
+            <td>none</td>
+            <td>4px</td>
+            <td><a class="btn btn-primary" href="#">Try Runway</a></td>
+          </tr>
+          <tr>
+            <td>Ghost button</td>
+            <td>transparent</td>
+            <td>1px #27272a</td>
+            <td>4px</td>
+            <td><a class="btn btn-ghost" href="#">Watch reel</a></td>
+          </tr>
+          <tr>
+            <td>Dark card</td>
+            <td>#1a1a1a</td>
+            <td>1px #27272a</td>
+            <td>8px</td>
+            <td><span style="display:inline-block;background:#1a1a1a;border:1px solid #27272a;border-radius:8px;padding:10px 16px;font-size:12px;color:#c9ccd1">Card surface</span></td>
+          </tr>
+          <tr>
+            <td>Image tile</td>
+            <td>photograph</td>
+            <td>none</td>
+            <td>8px</td>
+            <td><span style="display:inline-block;width:72px;height:32px;border-radius:8px;background:var(--photo-3)"></span></td>
+          </tr>
+          <tr>
+            <td>Uppercase label</td>
+            <td>—</td>
+            <td>none</td>
+            <td>—</td>
+            <td><span class="micro" style="color:var(--cool-slate)">Gen-4 · In production</span></td>
+          </tr>
+          <tr>
+            <td>Floating pill (preview overlay)</td>
+            <td>rgba(0,0,0,0.55) + blur</td>
+            <td>1px rgba(255,255,255,0.12)</td>
+            <td>999px</td>
+            <td><span class="preview-pill" style="position:relative"><span class="dot-rec"></span> Live</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#">
+          <span class="logo-mark"></span>
+          <span>Runway</span>
+        </a>
+        <p>Tools for human imagination. Built for filmmakers, by an AI research company.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Product</h5>
+        <a href="#">Gen-4</a><a href="#">Act-Two</a><a href="#">Studio</a><a href="#">Mobile</a>
+      </div>
+      <div class="foot-col">
+        <h5>Research</h5>
+        <a href="#">Papers</a><a href="#">Lab notes</a><a href="#">Models</a><a href="#">Roadmap</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h5>Resources</h5>
+        <a href="#">Docs</a><a href="#">Tutorials</a><a href="#">Status</a><a href="#">Legal</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Inspired tribute · awesome-design-md</span>
+      <span class="micro">design.runwayml.html</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.runwayml.html" target="_blank" rel="noopener">
+  <span class="mono">View DESIGN.md</span>
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

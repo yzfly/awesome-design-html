@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Apple Music — iOS design spec</title>
+<meta name="description" content="Apple Music iOS app design reference. Pink-red gradient brand mark, SF Pro Display, white canvas, time-synced lyrics, Dolby Atmos badge, AirPlay device sheet." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#fff; --surface-1:#fafafa; --surface-2:#f2f2f7; --surface-card:#fff; --surface-grouped:#f2f2f7;
+  --am-pink:#FA233B; --am-pink2:#FB5C74;
+  --ink:#000; --ink-soft:#1c1c1e; --ink-muted:#8e8e93; --ink-dim:#aeaeb2;
+  --border:#d1d1d6; --border-soft:#e5e5ea;
+  --negative:#FF3B30; --warning:#FF9500; --announce:#007AFF;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:6px; --r-lg:8px; --r-xl:12px; --r-pill:500px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.4px}
+.brand-mark{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,#FA233B,#FB5C74);display:grid;place-items:center}
+.brand-mark svg{width:16px;height:16px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-full);font-size:14px;font-weight:500;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink);background:var(--surface-2)}
+.nav-pill.active{color:var(--am-pink);background:rgba(250,35,59,.08);font-weight:600}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.02)}
+.btn-primary{background:var(--am-pink);color:#fff;padding:12px 22px;border-radius:var(--r-xl)}
+.btn-primary:hover{background:#e01e34}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:10px 18px;border-radius:var(--r-xl)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 18px;border-radius:var(--r-xl)}
+.btn-light{background:#000;color:#fff;padding:12px 22px;border-radius:var(--r-xl)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(250,35,59,.08),transparent 70%),radial-gradient(700px 500px at 80% 30%,rgba(251,92,116,.10),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-full);background:rgba(250,35,59,.08);color:var(--am-pink);font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--am-pink)}
+.hero h1{font-size:clamp(44px,7vw,90px);line-height:1;letter-spacing:-2.5px;font-weight:800;margin-bottom:22px;color:#000}
+.hero h1 .gradient-word{background:linear-gradient(120deg,#FA233B,#FB5C74);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-muted);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.08)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#fff}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar.np{color:#fff}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:#8e8e93;letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;font-size:11px;display:flex;flex-direction:column;color:#000}
+
+/* ========== SCREEN: LISTEN NOW ========== */
+.am-bg{background:#fff;position:absolute;inset:0}
+.am-head{padding:56px 18px 8px}
+.am-head .greet{font-size:11px;color:#8e8e93;font-weight:500;letter-spacing:.2px}
+.am-head h1{font-size:26px;font-weight:800;letter-spacing:-.8px;line-height:1.05;margin-top:2px}
+.am-sec{padding:14px 18px 6px}
+.am-sec h2{font-size:18px;font-weight:800;letter-spacing:-.5px}
+.am-sec .more{font-size:12px;color:var(--am-pink);font-weight:600;float:right}
+.am-stations{display:flex;gap:10px;overflow:hidden;padding:6px 18px 0}
+.am-station{flex-shrink:0;width:78px;text-align:center}
+.am-station .disc{width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,#FA233B,#FB5C74);position:relative;margin-bottom:6px;box-shadow:0 4px 14px rgba(250,35,59,.25)}
+.am-station .disc.s2{background:linear-gradient(135deg,#7b2cbf,#3a0ca3)}
+.am-station .disc.s3{background:linear-gradient(135deg,#0a4d68,#088395)}
+.am-station .disc.s4{background:linear-gradient(135deg,#f7931e,#cc1f1a)}
+.am-station .disc::after{content:"";position:absolute;inset:32px;border-radius:50%;background:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.am-station .nm{font-size:10.5px;font-weight:600;line-height:1.2;color:#000}
+.am-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 18px}
+.am-tile{display:flex;align-items:center;gap:8px}
+.am-tile .alb{width:50px;height:50px;border-radius:5px;background:linear-gradient(135deg,#7b2cbf,#3a0ca3);flex-shrink:0}
+.am-tile .alb.a2{background:linear-gradient(135deg,#0a4d68,#088395)}
+.am-tile .alb.a3{background:linear-gradient(135deg,#f7931e,#cc1f1a)}
+.am-tile .alb.a4{background:linear-gradient(135deg,#1d3557,#457b9d)}
+.am-tile .alb.a5{background:radial-gradient(circle at 30% 30%,#ffd60a,#5f0f40)}
+.am-tile .alb.a6{background:linear-gradient(135deg,#06d6a0,#073b4c)}
+.am-tile .meta{flex:1;min-width:0}
+.am-tile .t{font-size:12px;font-weight:600;line-height:1.2;color:#000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.am-tile .s{font-size:10.5px;color:#8e8e93;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.am-hero{margin:8px 18px 0;border-radius:10px;background:linear-gradient(135deg,#FA233B,#FB5C74,#FF9500);padding:14px;color:#fff;position:relative;overflow:hidden;box-shadow:0 8px 28px rgba(250,35,59,.25)}
+.am-hero .lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:700;opacity:.9}
+.am-hero h3{font-size:18px;font-weight:800;letter-spacing:-.4px;line-height:1.1;margin:4px 0 6px}
+.am-hero .by{font-size:11px;opacity:.9}
+.am-mini{position:absolute;bottom:62px;left:0;right:0;height:54px;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-top:1px solid #e5e5ea;display:flex;align-items:center;gap:8px;padding:6px 14px;z-index:9}
+.am-mini .alb{width:40px;height:40px;border-radius:5px;background:linear-gradient(135deg,#FA233B,#FB5C74);flex-shrink:0}
+.am-mini .meta{flex:1;min-width:0}
+.am-mini .t{font-size:13px;font-weight:600;color:#000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.am-mini .s{font-size:11px;color:#8e8e93;margin-top:1px}
+.am-mini .ctrl{display:flex;align-items:center;gap:18px}
+.am-mini .ctrl svg{width:22px;height:22px;fill:#000}
+
+/* ========== SCREEN: NOW PLAYING ========== */
+.np-bg{position:absolute;inset:0;background:linear-gradient(180deg,#FB5C74 0%,#FA233B 40%,#7a1020 75%,#3a0810 100%)}
+.np-head{padding:62px 26px 0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.np-pull{width:34px;height:4px;border-radius:2px;background:rgba(255,255,255,.35)}
+.np-cover{margin:18px 26px 0;aspect-ratio:1;border-radius:8px;background:linear-gradient(160deg,#ff6b35 0%,#f7931e 25%,#cc1f1a 60%,#3a0808 100%);box-shadow:0 20px 50px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.np-cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.25),transparent 50%)}
+.np-info{padding:18px 26px 0;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.np-info .ti{flex:1;min-width:0}
+.np-info .nm{font-size:18px;font-weight:700;color:#fff;letter-spacing:-.4px;line-height:1.15}
+.np-info .ar{font-size:14px;color:rgba(255,255,255,.85);margin-top:2px}
+.np-info .heart{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;flex-shrink:0}
+.np-info .heart svg{width:18px;height:18px;fill:#fff}
+.np-progress{padding:18px 26px 4px}
+.np-bar{height:5px;background:rgba(255,255,255,.25);border-radius:999px;overflow:hidden;margin-bottom:6px;position:relative}
+.np-bar .fill{height:100%;width:38%;background:rgba(255,255,255,.85);border-radius:999px}
+.np-times{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.75);font-feature-settings:"tnum"}
+.np-controls{display:flex;align-items:center;justify-content:space-between;padding:14px 30px 6px}
+.np-controls svg{fill:#fff}
+.np-controls .icon{width:26px;height:26px;opacity:.95}
+.np-controls .play-btn{width:60px;height:60px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.np-controls .play-btn svg{width:26px;height:26px;fill:#000;margin-left:2px}
+.np-vol{padding:18px 26px 0;display:flex;align-items:center;gap:10px}
+.np-vol svg{width:14px;height:14px;fill:rgba(255,255,255,.7)}
+.np-vol .bar{flex:1;height:5px;background:rgba(255,255,255,.25);border-radius:999px;overflow:hidden}
+.np-vol .bar .fill{height:100%;width:55%;background:rgba(255,255,255,.7);border-radius:999px}
+.np-bottom{padding:18px 26px 0;display:flex;align-items:center;justify-content:space-around}
+.np-bottom svg{width:22px;height:22px;fill:#fff;opacity:.9}
+.np-atmos{position:absolute;top:60px;right:24px;display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.12);padding:4px 8px;border-radius:6px;font-size:9.5px;color:#fff;font-weight:700;letter-spacing:.4px}
+
+/* ========== SCREEN: LIBRARY ========== */
+.lib-head{padding:50px 18px 8px}
+.lib-head h1{font-size:32px;font-weight:800;letter-spacing:-.8px;color:#000}
+.lib-head .edit{position:absolute;right:18px;top:60px;font-size:14px;color:var(--am-pink);font-weight:500}
+.lib-list{padding:8px 0 0}
+.lib-row{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:1px solid #f2f2f7;font-size:15px;color:#000}
+.lib-row.last{border-bottom:0}
+.lib-row .lhs{display:flex;align-items:center;gap:12px}
+.lib-row .lhs svg{width:18px;height:18px;fill:var(--am-pink)}
+.lib-row .chev{color:#c7c7cc}
+.lib-row .chev svg{width:12px;height:12px;fill:currentColor}
+.lib-sec-title{font-size:18px;font-weight:800;letter-spacing:-.5px;padding:18px 18px 10px}
+.lib-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 18px}
+.lib-card{cursor:pointer}
+.lib-card .alb{width:100%;aspect-ratio:1;border-radius:6px;background:linear-gradient(135deg,#FA233B,#FB5C74);margin-bottom:6px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.lib-card .alb.l2{background:linear-gradient(135deg,#7b2cbf,#3a0ca3)}
+.lib-card .alb.l3{background:linear-gradient(135deg,#0a4d68,#088395)}
+.lib-card .alb.l4{background:linear-gradient(135deg,#06d6a0,#073b4c)}
+.lib-card .t{font-size:12px;font-weight:600;color:#000;line-height:1.2}
+.lib-card .s{font-size:11px;color:#8e8e93;margin-top:2px}
+
+/* tab bar */
+.am-tab{position:absolute;bottom:0;left:0;right:0;height:62px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);display:flex;justify-content:space-around;align-items:flex-start;padding:6px 4px 0;z-index:10;border-top:1px solid #e5e5ea}
+.am-tab .tb{display:flex;flex-direction:column;align-items:center;gap:3px;color:#8e8e93;font-size:9.5px;font-weight:500}
+.am-tab .tb.active{color:var(--am-pink);font-weight:600}
+.am-tab .tb svg{width:22px;height:22px;fill:currentColor}
+
+/* ========== FEATURES ========== */
+.section{padding:120px 0;border-top:1px solid var(--border-soft)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:600;color:var(--am-pink);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:800;letter-spacing:-1.5px;line-height:1.02;margin-bottom:18px;color:#000}
+.section-head p{font-size:17px;color:var(--ink-muted);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:#fff;border-radius:14px;padding:28px;border:1px solid var(--border-soft);box-shadow:0 1px 0 rgba(0,0,0,.02)}
+.feat:hover{background:#fafafa}
+.feat .feat-ic{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#FA233B,#FB5C74);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:#fff}
+.feat h3{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:10px;color:#000}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:1px 6px;border-radius:3px;color:#000}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:700;letter-spacing:-.8px;margin-bottom:16px;color:#000}
+.ios-feat-text p{font-size:15px;color:var(--ink-muted);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:5px 10px;border-radius:6px;color:#000;border:1px solid var(--border-soft)}
+.ios-feat-visual{background:var(--surface-1);border-radius:18px;padding:40px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* lyrics */
+.lyr-stage{width:300px;background:linear-gradient(180deg,#FB5C74,#FA233B,#7a1020);border-radius:16px;padding:30px 22px;color:#fff}
+.lyr-stage .l{font-weight:800;line-height:1.35;letter-spacing:-.4px;transition:all .25s}
+.lyr-stage .l.dim1{font-size:16px;opacity:.35}
+.lyr-stage .l.dim2{font-size:18px;opacity:.55}
+.lyr-stage .l.active{font-size:24px;opacity:1;color:#fff}
+.lyr-stage .l.next{font-size:18px;opacity:.55}
+.lyr-stage .lab{font-family:var(--font-mono);font-size:10px;opacity:.7;margin-top:18px;text-align:center;letter-spacing:.4px}
+
+/* AirPlay sheet */
+.ap-sheet{width:300px;background:rgba(245,245,247,.95);backdrop-filter:blur(20px);border:1px solid #e5e5ea;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.15)}
+.ap-sheet .hd{padding:14px 16px;font-size:13px;font-weight:600;color:#8e8e93;text-transform:uppercase;letter-spacing:.6px}
+.ap-sheet .row{display:flex;align-items:center;gap:12px;padding:11px 16px;background:#fff;border-bottom:1px solid #e5e5ea;font-size:15px;color:#000}
+.ap-sheet .row:last-child{border-bottom:0}
+.ap-sheet .row .ic{width:24px;height:24px;display:grid;place-items:center;color:#8e8e93}
+.ap-sheet .row .ic svg{width:18px;height:18px;fill:currentColor}
+.ap-sheet .row.sel .ic{color:var(--am-pink)}
+.ap-sheet .row .nm{flex:1}
+.ap-sheet .row.sel .nm{color:var(--am-pink);font-weight:500}
+.ap-sheet .row .ck{color:var(--am-pink)}
+.ap-sheet .row .ck svg{width:16px;height:16px;fill:currentColor}
+
+/* atmos badge */
+.atmos-stage{display:flex;flex-direction:column;align-items:center;gap:16px}
+.atmos-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;background:linear-gradient(135deg,#1c1c1e,#3a3a3c);color:#fff;font-weight:700;font-size:13px;letter-spacing:.4px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.atmos-badge .d{display:flex;align-items:center;gap:2px}
+.atmos-badge .d span{display:block;width:3px;background:#fff;border-radius:1px}
+.atmos-badge .d span:nth-child(1){height:8px}
+.atmos-badge .d span:nth-child(2){height:12px}
+.atmos-badge .d span:nth-child(3){height:6px}
+.atmos-badge .d span:nth-child(4){height:14px}
+.atmos-card{width:240px;background:#fff;border:1px solid #e5e5ea;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center}
+.atmos-card .alb{width:54px;height:54px;border-radius:6px;background:linear-gradient(135deg,#ff6b35,#cc1f1a)}
+.atmos-card .meta{flex:1}
+.atmos-card .t{font-size:14px;font-weight:600;color:#000}
+.atmos-card .s{font-size:12px;color:#8e8e93;margin-top:2px}
+
+/* ========== DS ========== */
+.ds-section{padding:120px 0;background:#fafafa;border-top:1px solid var(--border-soft)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1.5px;line-height:1.02;margin:14px 0 14px;color:#000}
+.ds-intro p{font-size:16px;color:var(--ink-muted);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--am-pink);border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-full);white-space:nowrap;background:#fff}
+.ds-source:hover{background:var(--surface-2)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:700;letter-spacing:-.6px;margin-bottom:8px;color:#000}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:12px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2;color:#000}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:#8e8e93;margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:#8e8e93;font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle;color:#000}
+.ds-type-table td.token{color:var(--am-pink)}
+.ds-type-table td.sample{font-family:var(--font-ui)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#FA233B,#FB5C74);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:600;color:#000}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:#8e8e93;margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#8e8e93;margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-pill{background:#f2f2f7;border:0;border-radius:10px;padding:11px 14px;color:#000;font-family:inherit;font-size:14px;width:100%;outline:none}
+.input-pill::placeholder{color:#8e8e93}
+.tag{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:4px;letter-spacing:.2px}
+.tag-new{background:var(--am-pink);color:#fff;text-transform:uppercase}
+.tag-atmos{background:#1c1c1e;color:#fff}
+.tag-explicit{background:#8e8e93;color:#fff;font-size:9px;padding:2px 4px}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:10px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:#8e8e93;text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:700;margin-top:6px;color:#000;letter-spacing:-.3px}
+.token-cell .tk-note{font-size:11px;color:#8e8e93;margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:#8e8e93;line-height:1.5}
+.foot a{color:var(--am-pink);font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#fff;border:1px solid var(--border);color:var(--am-pink);font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-full);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.float-link:hover{background:var(--surface-2)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2M9 18a3 3 0 11-3-3 3 3 0 013 3zm12-2a3 3 0 11-3-3 3 3 0 013 3z" stroke="#fff" stroke-width="2" fill="none"/></svg>
+      </span>
+      Apple Music <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Sign In</a>
+      <a class="btn btn-primary" href="#">Try It Free</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>The system app that <span class="gradient-word">sings</span> in Dolby Atmos.</h1>
+    <p>Apple Music on iOS, dissected. SF Pro Display at -0.5px tracking. A pink-red brand mark, white canvas, art-derived Now Playing gradient, and lyrics that glow at the beat.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- LIBRARY -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="lib-head">
+              <h1>Library</h1>
+              <span class="edit">Edit</span>
+            </div>
+            <div class="lib-list">
+              <div class="lib-row"><div class="lhs"><svg viewBox="0 0 24 24"><path d="M3 6h13M3 12h13M3 18h13M19 6v12l-3-2 3-2-3-2 3-2-3-2 3-2z"/></svg>Playlists</div><div class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#c7c7cc" stroke-width="2" fill="none"/></svg></div></div>
+              <div class="lib-row"><div class="lhs"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2"/></svg>Artists</div><div class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#c7c7cc" stroke-width="2" fill="none"/></svg></div></div>
+              <div class="lib-row"><div class="lhs"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>Albums</div><div class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#c7c7cc" stroke-width="2" fill="none"/></svg></div></div>
+              <div class="lib-row"><div class="lhs"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2"/></svg>Songs</div><div class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#c7c7cc" stroke-width="2" fill="none"/></svg></div></div>
+              <div class="lib-row"><div class="lhs"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M10 9v6l5-3z" fill="#fff"/></svg>Music Videos</div><div class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#c7c7cc" stroke-width="2" fill="none"/></svg></div></div>
+              <div class="lib-row last"><div class="lhs"><svg viewBox="0 0 24 24"><path d="M12 4v12M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" fill="none"/></svg>Downloaded</div><div class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke="#c7c7cc" stroke-width="2" fill="none"/></svg></div></div>
+            </div>
+            <div class="lib-sec-title">Recently Added</div>
+            <div class="lib-grid">
+              <div class="lib-card"><div class="alb"></div><div class="t">After Hours</div><div class="s">The Weeknd</div></div>
+              <div class="lib-card"><div class="alb l2"></div><div class="t">Currents</div><div class="s">Tame Impala</div></div>
+              <div class="lib-card"><div class="alb l3"></div><div class="t">Random Access</div><div class="s">Daft Punk</div></div>
+              <div class="lib-card"><div class="alb l4"></div><div class="t">Norman F***ing</div><div class="s">Lana Del Rey</div></div>
+            </div>
+            <div class="am-mini">
+              <div class="alb"></div>
+              <div class="meta">
+                <div class="t">Blinding Lights</div>
+                <div class="s">The Weeknd</div>
+              </div>
+              <div class="ctrl">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M3 7v10h4l5 5V2L7 7H3z"/></svg>
+              </div>
+            </div>
+            <div class="am-tab">
+              <div class="tb"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2M9 18a3 3 0 11-3-3 3 3 0 013 3zm12-2a3 3 0 11-3-3 3 3 0 013 3z" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>Listen Now</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="1.6"/></svg>Browse</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="3"/></svg>Radio</div>
+              <div class="tb active"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z"/></svg>Library</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="1.6"/></svg>Search</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Library</div>
+      </div>
+
+      <!-- NOW PLAYING (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar np">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="np-bg"></div>
+          <div class="scr" style="color:#fff">
+            <div class="np-head"><div class="np-pull"></div></div>
+            <div class="np-atmos">
+              <div style="display:flex;gap:1.5px"><span style="display:block;width:2px;height:8px;background:#fff;border-radius:1px"></span><span style="display:block;width:2px;height:12px;background:#fff;border-radius:1px"></span><span style="display:block;width:2px;height:6px;background:#fff;border-radius:1px"></span></div>
+              ATMOS
+            </div>
+            <div class="np-cover"></div>
+            <div class="np-info">
+              <div class="ti">
+                <div class="nm">Blinding Lights</div>
+                <div class="ar">The Weeknd · After Hours</div>
+              </div>
+              <div class="heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+            </div>
+            <div class="np-progress">
+              <div class="np-bar"><div class="fill"></div></div>
+              <div class="np-times"><span>1:14</span><span>-2:18</span></div>
+            </div>
+            <div class="np-controls">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M16 4v16M14.5 12l-9 7V5l9 7z"/></svg>
+              <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <svg class="icon" viewBox="0 0 24 24"><path d="M5 6l10 6L5 18V6zm13 0h-2v12h2z"/></svg>
+            </div>
+            <div class="np-vol">
+              <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3z"/></svg>
+              <div class="bar"><div class="fill"></div></div>
+              <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm14-1l4 4-4 4m-2-2l4-4-4-4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+            </div>
+            <div class="np-bottom">
+              <svg viewBox="0 0 24 24"><path d="M3 18h18M3 6h18M3 12h12M19 9l3 3-3 3" stroke="#fff" stroke-width="1.8" fill="none"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M3 6h18l-2 12H5z" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="13" r="3"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h12M3 18h18" stroke="#fff" stroke-width="1.8"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Now Playing</div>
+      </div>
+
+      <!-- LISTEN NOW -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen am-bg">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="am-head">
+              <div class="greet">Good evening</div>
+              <h1>Jiang Shu</h1>
+            </div>
+            <div class="am-sec"><h2>Stations for You<span class="more">See All</span></h2></div>
+            <div class="am-stations">
+              <div class="am-station"><div class="disc"></div><div class="nm">Made for Jiang</div></div>
+              <div class="am-station"><div class="disc s2"></div><div class="nm">Indie Station</div></div>
+              <div class="am-station"><div class="disc s3"></div><div class="nm">Chill Mix</div></div>
+              <div class="am-station"><div class="disc s4"></div><div class="nm">Discovery</div></div>
+            </div>
+            <div class="am-sec" style="padding-top:18px"><h2>Recently Played</h2></div>
+            <div class="am-grid">
+              <div class="am-tile"><div class="alb"></div><div class="meta"><div class="t">After Hours</div><div class="s">The Weeknd</div></div></div>
+              <div class="am-tile"><div class="alb a2"></div><div class="meta"><div class="t">Currents</div><div class="s">Tame Impala</div></div></div>
+              <div class="am-tile"><div class="alb a3"></div><div class="meta"><div class="t">Random Access</div><div class="s">Daft Punk</div></div></div>
+              <div class="am-tile"><div class="alb a4"></div><div class="meta"><div class="t">In Rainbows</div><div class="s">Radiohead</div></div></div>
+            </div>
+            <div class="am-hero">
+              <div class="lbl">New Release</div>
+              <h3>Songs for the Drive Home</h3>
+              <div class="by">Curated by Apple Music</div>
+            </div>
+            <div class="am-tab">
+              <div class="tb active"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2M9 18a3 3 0 11-3-3 3 3 0 013 3zm12-2a3 3 0 11-3-3 3 3 0 013 3z" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>Listen Now</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="1.6"/></svg>Browse</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="3"/></svg>Radio</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z"/></svg>Library</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="1.6"/></svg>Search</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Listen Now</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>White canvas. Pink mark. Album art does the rest.</h2>
+      <p>Apple Music inherits its skeleton from iOS — large titles, grouped lists, SF Pro typography — and lets the dynamic Now Playing gradient be the only "designed" surface in the app.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2M9 18a3 3 0 11-3-3 3 3 0 013 3zm12-2a3 3 0 11-3-3 3 3 0 013 3z" stroke="#fff" stroke-width="2" fill="none"/></svg></div>
+        <h3>Listen Now</h3>
+        <p>iOS large title at <code>32pt/800</code>. Horizontal Stations carousel with 78pt circular disks, then a 2×3 Recently Played grid, then a gradient hero card.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <h3>Now Playing</h3>
+        <p>Modal sheet pulled up from the mini-player. Album-art-derived gradient backdrop, large square cover, white 60pt circular play, and the iconic time-synced lyrics scroll.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z"/></svg></div>
+        <h3>Library</h3>
+        <p>Standard iOS section list — Playlists / Artists / Albums / Songs / Music Videos / Downloaded — with the pink chevron, then a 2-column "Recently Added" grid.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Time-synced lyrics</div>
+          <h3>Karaoke that knows the beat.</h3>
+          <p>Tap the lyric icon during Now Playing and the cover shrinks. Lyrics scroll past at the song's actual timestamps; the active line is <code>24pt/800</code> in full opacity, neighbors fade to <code>0.55</code>, the line two-away dims to <code>0.35</code>.</p>
+          <p>Tap any line to seek to its timestamp. The gradient backdrop comes from the album art's dominant hue, capped at <code>80% saturation</code>.</p>
+          <div class="ios-feat-tokens">
+            <code>active: 24pt/800</code>
+            <code>dim-1: opacity .55</code>
+            <code>dim-2: opacity .35</code>
+            <code>seek-on-tap: on</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="lyr-stage">
+            <div class="l dim2">I been tryna call</div>
+            <div class="l dim1">I been on my own for long enough</div>
+            <div class="l active">Maybe you can show me how to love, maybe</div>
+            <div class="l next">I'm going through withdrawals</div>
+            <div class="l dim1">You don't even have to do too much</div>
+            <div class="lab">tap line to seek · syncs at song timestamps</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="ap-sheet">
+            <div class="hd">Speakers & TVs</div>
+            <div class="row sel"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 10h14l-1 8H6z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 14h6" stroke="currentColor" stroke-width="1.6"/></svg></div><div class="nm">iPhone</div><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" fill="none"/></svg></div></div>
+            <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><circle cx="12" cy="18" r="3"/></svg></div><div class="nm">AirPods Pro</div></div>
+            <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="3"/></svg></div><div class="nm">HomePod (Living Room)</div></div>
+            <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 20h6" stroke="currentColor" stroke-width="1.6"/></svg></div><div class="nm">Apple TV (Bedroom)</div></div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">AirPlay device picker</div>
+          <h3>One sheet, every speaker in the house.</h3>
+          <p>The standard iOS AirPlay sheet — translucent <code>systemMaterialLight</code>, 14pt corner, 50pt row height. Selected device gets the pink color treatment on its icon, name, and checkmark.</p>
+          <p>Headphones get a circle icon, HomePod gets a tonal disc, Apple TV gets the rectangular speaker glyph. Categories are uppercase <code>13pt</code> at <code>0.6px</code> tracking.</p>
+          <div class="ios-feat-tokens">
+            <code>blur: systemMaterialLight</code>
+            <code>radius: 14pt</code>
+            <code>selected: #FA233B</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Spatial Audio</div>
+          <h3>Dolby Atmos lives at the top right.</h3>
+          <p>When the playing track is mastered in Dolby Atmos, an <code>ATMOS</code> badge appears at the top-right of Now Playing — black gradient with a 4-bar animated equalizer that pulses with the music.</p>
+          <p>The badge becomes a button: tap it to surface the Spatial Audio settings sheet (Always On / Fixed / Off) without leaving Now Playing.</p>
+          <div class="ios-feat-tokens">
+            <code>badge: 13pt/700</code>
+            <code>bg: #1C1C1E gradient</code>
+            <code>radius: 8pt</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="atmos-stage">
+            <div class="atmos-badge">
+              <div class="d"><span></span><span></span><span></span><span></span></div>
+              DOLBY ATMOS
+            </div>
+            <div class="atmos-card">
+              <div class="alb"></div>
+              <div class="meta">
+                <div class="t">Blinding Lights</div>
+                <div class="s">After Hours · Dolby Atmos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The system aesthetic, signed in pink.</h2>
+        <p>Apple Music's iOS token set inherits Apple's HIG — SF Pro Display, system gray ladder, large titles at -0.5px — and ships exactly one brand color on top.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.apple-music-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A bright white canvas, Apple's system gray ladder for text, and one pink-red gradient that lives only on the brand mark, Now Playing accents, and active tab labels.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FA233B"></div><div class="name">AM Pink</div><div class="val">#FA233B</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FB5C74"></div><div class="name">AM Pink Soft</div><div class="val">#FB5C74</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FA233B,#FB5C74)"></div><div class="name">AM Gradient</div><div class="val">FA→FB</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fff;border:1px solid #d1d1d6"></div><div class="name">Canvas</div><div class="val">#FFFFFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000"></div><div class="name">Ink</div><div class="val">#000000</div></div>
+      </div>
+
+      <div class="ds-caption">System Gray Ladder</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1c1c1e"></div><div class="name">Label</div><div class="val">#1C1C1E</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3a3a3c"></div><div class="name">Label 2</div><div class="val">#3A3A3C</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8e8e93"></div><div class="name">Muted</div><div class="val">#8E8E93</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#aeaeb2"></div><div class="name">Tertiary</div><div class="val">#AEAEB2</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#c7c7cc"></div><div class="name">Chevron</div><div class="val">#C7C7CC</div></div>
+      </div>
+
+      <div class="ds-caption">Surface</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#fafafa;border:1px solid #e5e5ea"></div><div class="name">Surface 1</div><div class="val">#FAFAFA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f2f2f7"></div><div class="name">Grouped</div><div class="val">#F2F2F7</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e5e5ea"></div><div class="name">Border</div><div class="val">#E5E5EA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#d1d1d6"></div><div class="name">Separator</div><div class="val">#D1D1D6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(255,255,255,.85)"></div><div class="name">Mini-player Bg</div><div class="val">white/.85</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic (system)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#007AFF"></div><div class="name">Link Blue</div><div class="val">#007AFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#34C759"></div><div class="name">Success</div><div class="val">#34C759</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF9500"></div><div class="name">Warning</div><div class="val">#FF9500</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF3B30"></div><div class="name">Destructive</div><div class="val">#FF3B30</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#1c1c1e,#3a3a3c)"></div><div class="name">Atmos Bg</div><div class="val">1C→3A</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">SF Pro Display in production — substituted with Inter. All large titles use <code>-0.5px</code> tracking. Numbers use tabular figures. Bold 700–800 for titles; body stays at 400.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--large-title</td><td class="sample" style="font-size:32px;font-weight:800;letter-spacing:-.8px">Library</td><td>32 / 2.0rem</td><td>800</td><td>-0.8px</td></tr>
+          <tr><td class="token">--screen-title</td><td class="sample" style="font-size:26px;font-weight:800;letter-spacing:-.5px">Good evening, Jiang</td><td>26 / 1.63rem</td><td>800</td><td>-0.5px</td></tr>
+          <tr><td class="token">--section-title</td><td class="sample" style="font-size:18px;font-weight:800;letter-spacing:-.5px">Recently Played</td><td>18 / 1.13rem</td><td>800</td><td>-0.5px</td></tr>
+          <tr><td class="token">--np-title</td><td class="sample" style="font-size:18px;font-weight:700;letter-spacing:-.4px">Blinding Lights</td><td>18 / 1.13rem</td><td>700</td><td>-0.4px</td></tr>
+          <tr><td class="token">--lyric-active</td><td class="sample" style="font-size:24px;font-weight:800;letter-spacing:-.4px">Maybe you can show me</td><td>24 / 1.5rem</td><td>800</td><td>-0.4px</td></tr>
+          <tr><td class="token">--list-row</td><td class="sample" style="font-size:15px;font-weight:400">Playlists</td><td>15 / 0.94rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--meta-line</td><td class="sample" style="font-size:11px;font-weight:500;color:#8e8e93">The Weeknd · After Hours</td><td>11 / 0.69rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--tab-active</td><td class="sample" style="font-size:9.5px;font-weight:600;color:#FA233B">Listen Now</td><td>9.5 / 0.59rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--scrubber-time</td><td class="sample" style="font-size:10px;font-weight:500;color:#8e8e93;font-feature-settings:'tnum'">1:14 / 3:32</td><td>10 / 0.63rem</td><td>500 tnum</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Soft Apple-system corners — 6pt on album art, 10pt on the mini-player surface, 14pt on modal sheets. Buttons at 12pt. Brand mark at 7pt (the famous rounded squircle).</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Tag</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Album</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Tile</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Sheet</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:38px"></div><div class="ds-radius-label">Screen</div><div class="ds-radius-val">38px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Play</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants Listen Now, Now Playing, and Library agree on.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">5 tabs. Active tab tints to #FA233B.</div></div>
+        <div class="token-cell"><div class="tk-label">Mini-player height</div><div class="tk-val">54pt</div><div class="tk-note">Material blur backdrop. 40pt album art.</div></div>
+        <div class="token-cell"><div class="tk-label">Now Playing play</div><div class="tk-val">60×60pt</div><div class="tk-note">White circle. 6pt y-offset 18pt blur shadow.</div></div>
+        <div class="token-cell"><div class="tk-label">Station disc</div><div class="tk-val">78pt</div><div class="tk-note">Circular. Inner black hole 14pt for "vinyl" feel.</div></div>
+        <div class="token-cell"><div class="tk-label">Scrubber height</div><div class="tk-val">5pt</div><div class="tk-note">Expands to 8pt during drag.</div></div>
+        <div class="token-cell"><div class="tk-label">Side padding</div><div class="tk-val">18pt</div><div class="tk-note">26pt on Now Playing for breathing room.</div></div>
+        <div class="token-cell"><div class="tk-label">Atmos badge</div><div class="tk-val">8pt radius</div><div class="tk-note">4-bar EQ animation pulses at track BPM.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation curve</div><div class="tk-val">spring</div><div class="tk-note">.35 response · .85 damping for sheet present.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">System-style components signed in pink. Pills are softer (12pt vs 4pt), text is heavier, and the play circle is the iconic Apple Music moment.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Try It Free</a>
+            <a class="btn btn-pill" href="#">Subscribe</a>
+            <a class="btn btn-outline" href="#">Add to Library</a>
+            <a class="btn btn-light" href="#">Open App</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button style="width:60px;height:60px;border-radius:50%;background:#fff;border:1px solid #e5e5ea;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.12)"><svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><path d="M8 5v14l11-7z"/></svg></button>
+              <button style="width:36px;height:36px;border-radius:50%;background:rgba(250,35,59,.12);display:grid;place-items:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#FA233B"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search Apple Music" />
+            <input class="input-pill" placeholder="Search Library" />
+            <div class="ds-card-row">
+              <span class="tag tag-new">New</span>
+              <span class="tag tag-atmos">DOLBY ATMOS</span>
+              <span class="tag tag-explicit">E</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="width:100%;background:#fff;border:1px solid #e5e5ea;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
+              <div style="width:50px;height:50px;border-radius:6px;background:linear-gradient(135deg,#FA233B,#FB5C74)"></div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:600">Blinding Lights</div>
+                <div style="font-size:11px;color:#8e8e93;margin-top:2px">The Weeknd · After Hours</div>
+              </div>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#FA233B"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+            </div>
+            <div style="width:100%;border-radius:10px;padding:14px;background:linear-gradient(135deg,#FA233B,#FB5C74,#FF9500);color:#fff">
+              <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.9">New Release</div>
+              <div style="font-size:16px;font-weight:800;letter-spacing:-.3px;line-height:1.1;margin:4px 0 6px">Songs for the Drive Home</div>
+              <div style="font-size:11px;opacity:.9">Curated by Apple Music</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2M9 18a3 3 0 11-3-3 3 3 0 013 3zm12-2a3 3 0 11-3-3 3 3 0 013 3z" stroke="#fff" stroke-width="2" fill="none"/></svg></span>
+      Apple Music iOS
+    </div>
+    <p>Design reference. Not affiliated with Apple Inc. Tokens are derived from the public iOS app and Apple's Human Interface Guidelines. Source spec at <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.apple-music-ios.html" target="_blank" rel="noopener">this reference</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.apple-music-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.apple-music-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

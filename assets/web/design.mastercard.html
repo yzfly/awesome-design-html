@@ -1,0 +1,1040 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mastercard — Inspired Design</title>
+<meta name="description" content="A Mastercard-inspired editorial fintech marketing page: warm cream canvas, circular portrait constellation, ink-black pill CTAs, ghost-watermark headlines and orbital orange arcs. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;450;500;600;700&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand mark — logo only, never UI */
+  --mc-red: #eb001b;
+  --mc-yellow: #f79e1b;
+
+  /* Ink + canvas */
+  --ink: #141413;
+  --ink-soft: #262627;
+  --canvas: #f3f0ee;
+  --canvas-lifted: #fcfbfa;
+  --canvas-whisper: #e8e2da;
+  --white: #ffffff;
+  --soft-bone: #f4f4f4;
+
+  /* Signal (consent + accent) */
+  --signal: #cf4500;
+  --signal-light: #f37338;
+  --clay: #9a3a0a;
+
+  /* Neutrals */
+  --slate: #696969;
+  --granite: #555555;
+  --graphite: #565656;
+  --dust: #d1cdc7;
+
+  /* Semantic */
+  --link: #3860be;
+
+  /* Radius — Mastercard ladder: tiny / 20 / 24 / 40 / 50% / pill */
+  --r-tiny: 4px;
+  --r-btn: 20px;
+  --r-consent: 24px;
+  --r-stadium: 40px;
+  --r-pill: 999px;
+  --r-circle: 50%;
+
+  /* Shadows (atmospheric, never harsh) */
+  --sh-1: rgba(0,0,0,0.04) 0px 4px 24px 0px;
+  --sh-2: rgba(0,0,0,0.08) 0px 24px 48px 0px;
+  --sh-3: rgba(0,0,0,0.25) 0px 70px 110px 0px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Sofia Sans", "Inter", -apple-system, system-ui, Arial, sans-serif;
+  font-weight: 450;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+.mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 500; font-feature-settings: "tnum"; }
+
+/* — Type ladder — */
+.h-hero    { font-size: 64px; font-weight: 500; line-height: 1.0; letter-spacing: -1.28px; margin: 0; }
+.h-section { font-size: 36px; font-weight: 500; line-height: 1.22; letter-spacing: -0.72px; margin: 0; }
+.h-card    { font-size: 24px; font-weight: 500; line-height: 1.2;  letter-spacing: -0.48px; margin: 0; }
+.h-sub     { font-size: 14px; font-weight: 700; line-height: 1.3; margin: 0; }
+.eyebrow {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.56px;
+  text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ink);
+}
+.eyebrow::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--signal-light); display: inline-block;
+}
+.body-p  { font-size: 16px; font-weight: 450; line-height: 1.4; color: var(--ink-soft); }
+.body-sm { font-size: 14px; font-weight: 450; line-height: 1.45; color: var(--granite); }
+.caption { font-size: 12px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase; color: var(--slate); }
+
+/* — Layout — */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+.section { padding: 96px 0; }
+.section-tight { padding: 64px 0; }
+
+/* — Floating nav pill — */
+.nav-outer {
+  position: sticky; top: 24px; z-index: 60;
+  margin: 24px auto 0; padding: 0 24px;
+  display: flex; justify-content: center;
+}
+.nav {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--r-pill);
+  box-shadow: var(--sh-1);
+  display: flex; align-items: center; gap: 40px;
+  padding: 14px 22px 14px 28px;
+  max-width: 1100px; width: 100%;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 500; font-size: 17px; letter-spacing: -0.3px; color: var(--ink);
+}
+.brand-mark { position: relative; width: 38px; height: 24px; flex: none; }
+.brand-mark .c { position: absolute; top: 0; width: 24px; height: 24px; border-radius: 50%; }
+.brand-mark .c-l { left: 0; background: var(--mc-red); }
+.brand-mark .c-r { right: 0; background: var(--mc-yellow); }
+.brand-mark .c-x { left: 7px; width: 24px; height: 24px; border-radius: 50%; background: #f97316; mix-blend-mode: multiply; }
+.nav-links { display: flex; gap: 32px; margin-left: auto; }
+.nav-links a { font-size: 15px; font-weight: 500; letter-spacing: -0.3px; color: var(--ink); }
+.nav-links a:hover { color: var(--signal); }
+.nav-right { display: flex; gap: 8px; align-items: center; }
+.icon-circle {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--white); border: 1.5px solid var(--ink); cursor: pointer;
+}
+.icon-circle:hover { background: var(--canvas); }
+
+/* — Buttons — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit; font-size: 16px; font-weight: 500; line-height: 1.15;
+  letter-spacing: -0.32px;
+  padding: 12px 26px; border-radius: var(--r-btn); border: 1.5px solid transparent;
+  cursor: pointer; transition: transform .15s ease, background .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-ink    { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
+.btn-ink:hover { background: var(--ink-soft); }
+.btn-outline { background: var(--white); color: var(--ink); border-color: var(--ink); font-weight: 450; }
+.btn-outline:hover { background: var(--canvas); }
+.btn-signal { background: var(--signal); color: #fff; border-radius: var(--r-consent); padding: 9px 30px; font-size: 13px; letter-spacing: 0.13px; border: 0; }
+.btn-link-clay { color: var(--clay); font-weight: 500; padding: 12px 0; background: transparent; border: 0; }
+
+/* — Satellite (circle micro-CTA) — */
+.satellite {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--white);
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: var(--sh-1); cursor: pointer; border: 0;
+}
+.satellite:hover { background: var(--canvas); }
+
+/* — Hero — */
+.hero {
+  padding: 56px 0 96px;
+}
+.hero-frame {
+  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
+  border-radius: var(--r-stadium);
+  min-height: 520px;
+  padding: 56px 60px;
+  color: var(--canvas);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: end;
+  position: relative;
+  overflow: hidden;
+}
+.hero-frame::after {
+  content: "";
+  position: absolute; right: -120px; top: -120px;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(247,158,27,0.55), rgba(235,0,27,0.35) 55%, transparent 75%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+.hero-eyebrow { color: var(--canvas); opacity: 0.85; }
+.hero-eyebrow::before { background: var(--signal-light); }
+.hero h1 { font-size: 72px; font-weight: 500; line-height: 1.0; letter-spacing: -1.6px; margin: 16px 0 0; }
+.hero-right { position: relative; z-index: 1; }
+.hero-right p { font-size: 17px; line-height: 1.5; color: rgba(243,240,238,0.85); max-width: 380px; margin: 0 0 28px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-on-dark { background: var(--canvas); color: var(--ink); border-color: var(--canvas); }
+.btn-on-dark:hover { background: var(--white); }
+.btn-on-dark-ghost { background: transparent; color: var(--canvas); border-color: rgba(243,240,238,0.5); }
+.btn-on-dark-ghost:hover { border-color: var(--canvas); }
+
+/* Trust strip below hero */
+.trust-strip {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 24px; padding: 28px 8px 0;
+  color: var(--slate);
+}
+.trust-strip .caption { color: var(--slate); }
+.trust-logos { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
+.trust-logos span { font-weight: 700; font-size: 15px; letter-spacing: -0.2px; color: var(--graphite); opacity: 0.75; }
+
+/* — Ghost watermark + constellation — */
+.constellation { position: relative; padding-top: 24px; }
+.ghost {
+  position: absolute; left: -8px; top: -12px;
+  font-size: 128px; font-weight: 500; line-height: 1; letter-spacing: -3px;
+  color: var(--canvas-whisper);
+  pointer-events: none; user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+.constellation-grid {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  row-gap: 80px; column-gap: 24px;
+  margin-top: 220px;
+}
+.portrait-card { position: relative; }
+.portrait-card.p1 { grid-column: 2 / span 4; }
+.portrait-card.p2 { grid-column: 7 / span 4; margin-top: 80px; }
+.portrait-card.p3 { grid-column: 3 / span 4; margin-top: -40px; }
+.portrait-card.p4 { grid-column: 8 / span 4; margin-top: 40px; }
+.portrait {
+  width: 300px; height: 300px; border-radius: 50%;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.portrait.p-warm  { background: radial-gradient(circle at 35% 30%, #ffb37a 0%, #e16524 45%, var(--canvas) 100%); }
+.portrait.p-cool  { background: radial-gradient(circle at 40% 35%, #e9d3b8 0%, #b8854a 50%, var(--canvas) 100%); }
+.portrait.p-sun   { background: radial-gradient(circle at 50% 40%, #f4c34c 0%, #cf6f0e 55%, var(--canvas) 100%); }
+.portrait.p-rose  { background: radial-gradient(circle at 35% 40%, #f7a395 0%, #b13c2a 55%, var(--canvas) 100%); }
+.portrait-sat {
+  position: absolute; right: -14px; bottom: 24px;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--white); box-shadow: var(--sh-2);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.portrait-card .eyebrow { margin-top: 22px; }
+.portrait-card h3 { margin: 10px 0 8px; max-width: 320px; }
+.portrait-card p { margin: 0; max-width: 340px; color: var(--graphite); }
+/* Orbital arc decorations */
+.arc {
+  position: absolute;
+  border: 1px solid var(--signal-light);
+  border-color: var(--signal-light) transparent transparent transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.arc-1 { width: 520px; height: 380px; left: 200px; top: 120px; transform: rotate(-12deg); }
+.arc-2 { width: 700px; height: 480px; right: 60px; top: 360px; transform: rotate(8deg); }
+.arc-3 { width: 580px; height: 360px; left: 80px; top: 680px; transform: rotate(-6deg); }
+
+/* — Numerics / stats band — */
+.stats-band {
+  background: var(--canvas-lifted);
+  border-radius: var(--r-stadium);
+  padding: 56px 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  box-shadow: var(--sh-1);
+}
+.stat .n {
+  font-size: 56px; font-weight: 500; line-height: 1.0; letter-spacing: -1.6px;
+  font-feature-settings: "tnum"; color: var(--ink);
+}
+.stat .l { margin-top: 10px; font-size: 14px; color: var(--graphite); max-width: 220px; }
+
+/* — Pill carousel section — */
+.pill-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: stretch;
+}
+.pill-card {
+  border-radius: var(--r-stadium);
+  background: linear-gradient(160deg, #f0d4b2 0%, #d68442 100%);
+  min-height: 460px;
+  padding: 32px;
+  position: relative;
+  color: var(--ink);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.pill-card.alt { background: linear-gradient(160deg, #ebd9cc 0%, #c25a36 100%); }
+.pill-card .chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--white); color: var(--ink);
+  padding: 8px 16px; border-radius: var(--r-pill);
+  font-size: 13px; font-weight: 500;
+  align-self: flex-start;
+}
+.pill-card h3 { font-size: 30px; font-weight: 500; letter-spacing: -0.6px; line-height: 1.15; max-width: 320px; margin: 0; }
+.pill-card .pill-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.pill-card .pill-cta {
+  background: var(--ink); color: var(--canvas);
+  padding: 14px 30px; border-radius: var(--r-stadium);
+  font-weight: 500; font-size: 16px; letter-spacing: -0.32px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+
+/* — Pricing / plans — */
+.plans {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.plan {
+  background: var(--canvas-lifted);
+  border-radius: var(--r-stadium);
+  padding: 36px;
+  box-shadow: var(--sh-1);
+  position: relative;
+  display: flex; flex-direction: column;
+}
+.plan.featured {
+  background: var(--ink); color: var(--canvas); box-shadow: var(--sh-2);
+}
+.plan .pname { font-size: 14px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase; color: var(--slate); }
+.plan.featured .pname { color: var(--signal-light); }
+.plan .price {
+  font-size: 56px; font-weight: 500; line-height: 1.0; letter-spacing: -1.4px;
+  margin: 14px 0 4px;
+  font-feature-settings: "tnum";
+}
+.plan .price small { font-size: 16px; color: var(--graphite); font-weight: 450; letter-spacing: 0; }
+.plan.featured .price small { color: var(--dust); }
+.plan .lede { color: var(--graphite); margin: 0 0 22px; }
+.plan.featured .lede { color: var(--dust); }
+.plan ul { list-style: none; padding: 0; margin: 0 0 32px; }
+.plan li {
+  padding: 10px 0; font-size: 15px;
+  border-top: 1px solid rgba(20,20,19,0.08);
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.plan.featured li { border-top-color: rgba(243,240,238,0.15); }
+.plan li::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--signal-light); margin-top: 8px; flex: none;
+}
+
+/* — CTA orbit band — */
+.cta-orbit {
+  background: var(--ink); color: var(--canvas);
+  border-radius: var(--r-stadium);
+  padding: 80px 64px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative; overflow: hidden;
+}
+.cta-orbit h2 { font-size: 52px; font-weight: 500; line-height: 1.05; letter-spacing: -1.2px; margin: 16px 0 0; }
+.cta-orbit p { color: rgba(243,240,238,0.78); max-width: 420px; margin: 0; }
+.cta-orbit .eyebrow { color: var(--canvas); }
+.cta-orbit .arc-d {
+  position: absolute; right: -100px; bottom: -160px;
+  width: 460px; height: 460px; border-radius: 50%;
+  border: 1.5px solid var(--signal-light); opacity: 0.45;
+}
+.cta-orbit .arc-d::after {
+  content: ""; position: absolute;
+  width: 100%; height: 100%; border-radius: 50%;
+  border: 1.5px solid var(--signal-light); opacity: 0.5;
+  transform: scale(0.7); top: 0; left: 0;
+}
+
+/* — DS reference section — */
+.ds-wrap {
+  border-top: 1px dashed rgba(20,20,19,0.18);
+  padding: 96px 0;
+}
+.ds-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 56px; }
+.ds-head h2 { max-width: 640px; }
+.ds-block { padding: 48px 0; border-top: 1px solid rgba(20,20,19,0.1); }
+.ds-block:first-of-type { border-top: 0; }
+.ds-block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 28px; }
+.ds-block-head h3 { font-size: 28px; font-weight: 500; letter-spacing: -0.6px; margin: 0; }
+
+/* Color grid */
+.color-group { margin-bottom: 32px; }
+.color-group .gh { font-size: 13px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase; color: var(--slate); margin-bottom: 14px; }
+.color-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.swatch {
+  background: var(--canvas-lifted);
+  border-radius: var(--r-stadium);
+  padding: 16px;
+  display: flex; gap: 16px; align-items: center;
+  box-shadow: var(--sh-1);
+}
+.swatch .chip {
+  width: 56px; height: 56px; border-radius: 50%;
+  flex: none; box-shadow: inset 0 0 0 1px rgba(20,20,19,0.06);
+}
+.swatch .meta .name { font-weight: 500; font-size: 15px; }
+.swatch .meta .hex { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--graphite); margin-top: 2px; }
+
+/* Typography table */
+.ty-table { width: 100%; border-collapse: collapse; }
+.ty-table th, .ty-table td {
+  text-align: left; padding: 14px 16px;
+  border-bottom: 1px solid rgba(20,20,19,0.08);
+  font-size: 14px;
+}
+.ty-table th { font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; font-size: 12px; color: var(--slate); }
+.ty-table .sample { font-family: "Sofia Sans", sans-serif; }
+
+/* Radius ladder */
+.r-ladder { display: flex; gap: 18px; flex-wrap: wrap; }
+.r-tile {
+  background: var(--canvas-lifted); padding: 24px; box-shadow: var(--sh-1);
+  min-width: 140px;
+  display: flex; flex-direction: column; gap: 8px; align-items: flex-start;
+}
+.r-tile .pad { width: 64px; height: 64px; background: var(--ink); }
+.r-tile.t4  { border-radius: 4px; } .r-tile.t4 .pad { border-radius: 4px; }
+.r-tile.t20 { border-radius: 20px; } .r-tile.t20 .pad { border-radius: 20px; }
+.r-tile.t24 { border-radius: 24px; } .r-tile.t24 .pad { border-radius: 24px; }
+.r-tile.t40 { border-radius: 40px; } .r-tile.t40 .pad { border-radius: 40px; }
+.r-tile.t50 { border-radius: 50%; padding: 20px; } .r-tile.t50 .pad { border-radius: 50%; }
+.r-tile.tpill { border-radius: 999px; padding: 16px 24px; } .r-tile.tpill .pad { border-radius: 999px; width: 96px; height: 32px; }
+.r-tile .lab { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--graphite); }
+
+/* Components matrix */
+.comp-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.comp {
+  background: var(--canvas-lifted); border-radius: var(--r-stadium);
+  padding: 28px; box-shadow: var(--sh-1);
+  display: flex; flex-direction: column; gap: 14px; min-height: 200px;
+}
+.comp .clabel { font-size: 12px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase; color: var(--slate); }
+.comp .crow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.comp .badge {
+  font-family: "JetBrains Mono", monospace; font-size: 11px;
+  background: var(--soft-bone); padding: 3px 8px; border-radius: var(--r-pill);
+  color: var(--graphite);
+}
+
+/* — Footer — */
+.footer {
+  background: var(--ink); color: var(--canvas);
+  padding: 96px 0 64px;
+  margin-top: 64px;
+}
+.footer h2 { font-size: 44px; font-weight: 500; letter-spacing: -1px; line-height: 1.1; max-width: 720px; margin: 0 0 56px; }
+.foot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.foot-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase; color: var(--dust); margin: 0 0 18px; }
+.foot-col a { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 14px; font-weight: 450; color: var(--canvas); opacity: 0.92; }
+.foot-col a:hover { opacity: 1; color: var(--signal-light); }
+.foot-col a .ext { font-size: 11px; opacity: 0.65; }
+.foot-bottom {
+  margin-top: 56px; padding-top: 28px;
+  border-top: 1px solid rgba(243,240,238,0.18);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;
+  align-items: center;
+  font-size: 12px; color: var(--dust);
+}
+.country-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: var(--r-pill);
+  border: 1px solid rgba(255,255,255,0.4); color: var(--canvas);
+  font-size: 13px;
+}
+.socials { display: flex; gap: 10px; }
+.socials a { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; }
+.socials a:hover { background: rgba(255,255,255,0.16); }
+
+/* — Floating source link — */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px; z-index: 100;
+  background: var(--ink); color: var(--canvas);
+  padding: 12px 22px; border-radius: var(--r-pill);
+  font-size: 13px; font-weight: 500; letter-spacing: -0.2px;
+  box-shadow: var(--sh-2);
+}
+.src-link:hover { background: var(--ink-soft); }
+
+@media (max-width: 1024px) {
+  .hero-frame { grid-template-columns: 1fr; padding: 40px; }
+  .hero h1 { font-size: 56px; }
+  .constellation-grid { row-gap: 48px; }
+  .portrait-card.p1, .portrait-card.p2, .portrait-card.p3, .portrait-card.p4 { grid-column: 2 / span 10; margin-top: 0; }
+  .portrait { width: 260px; height: 260px; margin: 0 auto; }
+  .stats-band { grid-template-columns: repeat(2, 1fr); padding: 40px; }
+  .pill-row { grid-template-columns: 1fr; }
+  .plans { grid-template-columns: 1fr; }
+  .cta-orbit { grid-template-columns: 1fr; padding: 48px 32px; }
+  .color-grid { grid-template-columns: repeat(2, 1fr); }
+  .comp-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: repeat(2, 1fr); }
+  .arc { display: none; }
+  .ghost { font-size: 72px; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 24px 0 56px; }
+  .hero h1 { font-size: 40px; }
+  .stats-band { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .footer h2 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- — Floating nav pill — -->
+<div class="nav-outer">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#">
+      <span class="brand-mark" aria-hidden="true">
+        <span class="c c-l"></span>
+        <span class="c c-r"></span>
+        <span class="c c-x"></span>
+      </span>
+      <span>mastercard</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">For you</a>
+      <a href="#">For business</a>
+      <a href="#">For the world</a>
+      <a href="#">For innovators</a>
+      <a href="#">News and trends</a>
+    </div>
+    <div class="nav-right">
+      <button class="icon-circle" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+    </div>
+  </nav>
+</div>
+
+<main class="wrap">
+
+  <!-- — HERO — -->
+  <section class="hero">
+    <div class="hero-frame">
+      <div>
+        <span class="eyebrow hero-eyebrow">Priceless connections</span>
+        <h1>Building the<br/>economy of<br/>everyone.</h1>
+      </div>
+      <div class="hero-right">
+        <p>Sixty years of moving money for the people who move the world. Real-time rails across 210 countries, secured by tokenized identity and trusted by every major bank on earth.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-on-dark">Explore the network</button>
+          <button class="btn btn-on-dark-ghost">Watch the film</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-strip">
+      <span class="caption">Trusted by 25,000+ financial institutions</span>
+      <div class="trust-logos">
+        <span>HSBC</span>
+        <span>JPMorgan</span>
+        <span>Santander</span>
+        <span>Citi</span>
+        <span>DBS</span>
+        <span>BBVA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- — CONSTELLATION (services) — -->
+  <section class="section constellation">
+    <span class="ghost" aria-hidden="true">Priceless possibilities.</span>
+
+    <div class="constellation-grid">
+      <span class="arc arc-1" aria-hidden="true"></span>
+      <span class="arc arc-2" aria-hidden="true"></span>
+      <span class="arc arc-3" aria-hidden="true"></span>
+
+      <article class="portrait-card p1">
+        <div class="portrait p-warm" aria-hidden="true">
+          <button class="portrait-sat" aria-label="Open">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <span class="eyebrow">Services</span>
+        <h3 class="h-card">Tokenize every transaction the world can think of.</h3>
+        <p class="body-p">Replace static card numbers with dynamic, network-issued tokens — same approval rates, fraud down by 30%.</p>
+      </article>
+
+      <article class="portrait-card p2">
+        <div class="portrait p-cool" aria-hidden="true">
+          <button class="portrait-sat" aria-label="Open">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <span class="eyebrow">Solutions</span>
+        <h3 class="h-card">Cross-border in 60 seconds, settled in local currency.</h3>
+        <p class="body-p">Mastercard Move connects 95% of the world's banked population — pre-funding optional, FX baked in.</p>
+      </article>
+
+      <article class="portrait-card p3">
+        <div class="portrait p-sun" aria-hidden="true">
+          <button class="portrait-sat" aria-label="Open">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <span class="eyebrow">Identity</span>
+        <h3 class="h-card">Prove who you are without exposing what you are.</h3>
+        <p class="body-p">Decentralized identity primitives let consumers consent once, share zero — issuers verify everything they need.</p>
+      </article>
+
+      <article class="portrait-card p4">
+        <div class="portrait p-rose" aria-hidden="true">
+          <button class="portrait-sat" aria-label="Open">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <span class="eyebrow">Insights</span>
+        <h3 class="h-card">Decision intelligence on rails that already see everything.</h3>
+        <p class="body-p">125 billion data signals a year, distilled into pre-authorization scores that issuers trust on the millisecond.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- — STATS BAND — -->
+  <section class="section-tight">
+    <div class="stats-band">
+      <div class="stat">
+        <div class="n mono">3.4B</div>
+        <div class="l">cards in circulation across the Mastercard network worldwide</div>
+      </div>
+      <div class="stat">
+        <div class="n mono">210</div>
+        <div class="l">countries and territories with full acceptance, real-time</div>
+      </div>
+      <div class="stat">
+        <div class="n mono">$9.7T</div>
+        <div class="l">in gross dollar volume processed every twelve months</div>
+      </div>
+      <div class="stat">
+        <div class="n mono">99.999%</div>
+        <div class="l">authorization availability — under one minute of downtime annually</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — PILL STORIES — -->
+  <section class="section">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:32px;">
+      <div>
+        <span class="eyebrow">Stories</span>
+        <h2 class="h-section" style="margin-top:14px;max-width:520px;">Priceless is not a tagline, it's a way of paying attention.</h2>
+      </div>
+      <a href="#" class="btn btn-outline">Read the newsroom</a>
+    </div>
+
+    <div class="pill-row">
+      <article class="pill-card">
+        <span class="chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>
+          Story
+        </span>
+        <div>
+          <h3>How a coffee farmer in Kenya got paid on Tuesday for what she sold on Monday.</h3>
+        </div>
+        <div class="pill-foot">
+          <span class="caption" style="color:rgba(20,20,19,0.65)">Mastercard Farm Pass · 5 min read</span>
+          <a class="pill-cta" href="#">Read story
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="pill-card alt">
+        <span class="chip">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>
+          Story
+        </span>
+        <div>
+          <h3>The orchestra that issued its season tickets as programmable money.</h3>
+        </div>
+        <div class="pill-foot">
+          <span class="caption" style="color:rgba(20,20,19,0.65)">Tokenized assets · 3 min read</span>
+          <a class="pill-cta" href="#">Read story
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- — PLANS — -->
+  <section class="section">
+    <div style="margin-bottom:48px;max-width:640px;">
+      <span class="eyebrow">For business</span>
+      <h2 class="h-section" style="margin-top:14px;">Acceptance plans built for the businesses behind every counter.</h2>
+    </div>
+
+    <div class="plans">
+      <article class="plan">
+        <span class="pname">Starter</span>
+        <div class="price mono">$0<small> /mo + 1.9% per transaction</small></div>
+        <p class="lede">For sole proprietors and weekend markets. Tap, dip, scan — settle next morning to any local bank account.</p>
+        <ul>
+          <li>Contactless + chip + magstripe acceptance</li>
+          <li>Tokenized card-on-file storage</li>
+          <li>Daily settlement, no monthly fee</li>
+          <li>Basic dispute defense and chargeback alerts</li>
+        </ul>
+        <button class="btn btn-ink" style="align-self:flex-start;">Open an account</button>
+      </article>
+
+      <article class="plan featured">
+        <span class="pname">Scale</span>
+        <div class="price mono">$89<small> /mo + 1.4% per transaction</small></div>
+        <p class="lede">For multi-location merchants. Routing, gateway, and Mastercard Decision Intelligence baked into one console.</p>
+        <ul>
+          <li>Real-time multi-currency settlement</li>
+          <li>Adaptive routing across 6 acquirers</li>
+          <li>Decision Intelligence Pro fraud scoring</li>
+          <li>Recurring billing + dunning recovery</li>
+          <li>Priority dispute desk (24/7)</li>
+        </ul>
+        <button class="btn btn-on-dark" style="align-self:flex-start;">Talk to sales</button>
+      </article>
+
+      <article class="plan">
+        <span class="pname">Enterprise</span>
+        <div class="price mono">Custom<small> · negotiated by IC</small></div>
+        <p class="lede">For card programs, fintechs, and sovereign rails. Direct connection to the Mastercard network with co-issued BIN sponsorship.</p>
+        <ul>
+          <li>Network-direct authorization endpoints</li>
+          <li>Co-branded BIN issuance + sponsorship</li>
+          <li>Mastercard Move correspondent rails</li>
+          <li>Dedicated risk and compliance officer</li>
+          <li>SLA-backed 99.999% authorization availability</li>
+        </ul>
+        <button class="btn btn-outline" style="align-self:flex-start;">Request RFP</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- — CTA ORBIT — -->
+  <section class="section">
+    <div class="cta-orbit">
+      <div>
+        <span class="eyebrow">Innovators welcome</span>
+        <h2>Issue your<br/>first card on<br/>the network<br/>this week.</h2>
+      </div>
+      <div>
+        <p>Mastercard Developers ships sandbox credentials in under five minutes. Build issuing, acceptance, or Move flows against the same APIs the world's largest banks use in production.</p>
+        <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+          <button class="btn btn-on-dark">Get sandbox keys</button>
+          <button class="btn btn-on-dark-ghost">Read the docs</button>
+        </div>
+      </div>
+      <span class="arc-d" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       PART B  —  DESIGN SYSTEM REFERENCE
+       ========================================================== -->
+  <section class="ds-wrap" id="ds">
+    <div class="ds-head">
+      <div>
+        <span class="eyebrow">The design system</span>
+        <h2 class="h-section" style="margin-top:14px;">A 60-year-old payments network, drawn as an editorial magazine.</h2>
+      </div>
+      <p class="body-p" style="max-width:340px;color:var(--graphite);">Warm cream surfaces, pill geometry, circular portraits, traced-orange orbits, ink-black CTAs — synthesized from <code style="font-family:'JetBrains Mono',monospace;font-size:13px;">DESIGN.md</code>.</p>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <h3>Color</h3>
+        <span class="caption">Three surface tones, one ink, one signal</span>
+      </div>
+
+      <div class="color-group">
+        <div class="gh">Brand mark (logo only)</div>
+        <div class="color-grid">
+          <div class="swatch"><span class="chip" style="background:#eb001b"></span><div class="meta"><div class="name">Mastercard Red</div><div class="hex">#eb001b</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#f79e1b"></span><div class="meta"><div class="name">Mastercard Yellow</div><div class="hex">#f79e1b</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="gh">Ink + surface</div>
+        <div class="color-grid">
+          <div class="swatch"><span class="chip" style="background:#141413"></span><div class="meta"><div class="name">Ink Black</div><div class="hex">#141413</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#262627"></span><div class="meta"><div class="name">Charcoal</div><div class="hex">#262627</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#f3f0ee"></span><div class="meta"><div class="name">Canvas Cream</div><div class="hex">#f3f0ee</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#fcfbfa"></span><div class="meta"><div class="name">Lifted Cream</div><div class="hex">#fcfbfa</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#ffffff"></span><div class="meta"><div class="name">White</div><div class="hex">#ffffff</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#f4f4f4"></span><div class="meta"><div class="name">Soft Bone</div><div class="hex">#f4f4f4</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="gh">Signal (consent + accent)</div>
+        <div class="color-grid">
+          <div class="swatch"><span class="chip" style="background:#cf4500"></span><div class="meta"><div class="name">Signal Orange</div><div class="hex">#cf4500</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#f37338"></span><div class="meta"><div class="name">Light Signal</div><div class="hex">#f37338</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#9a3a0a"></span><div class="meta"><div class="name">Clay Brown</div><div class="hex">#9a3a0a</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#3860be"></span><div class="meta"><div class="name">Link Blue</div><div class="hex">#3860be</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="gh">Neutrals</div>
+        <div class="color-grid">
+          <div class="swatch"><span class="chip" style="background:#696969"></span><div class="meta"><div class="name">Slate Gray</div><div class="hex">#696969</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#555555"></span><div class="meta"><div class="name">Granite</div><div class="hex">#555555</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#565656"></span><div class="meta"><div class="name">Graphite</div><div class="hex">#565656</div></div></div>
+          <div class="swatch"><span class="chip" style="background:#d1cdc7"></span><div class="meta"><div class="name">Dust Taupe</div><div class="hex">#d1cdc7</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <h3>Typography</h3>
+        <span class="caption">MarkForMC · weight 450 is load-bearing · -2% tracking on display</span>
+      </div>
+      <table class="ty-table">
+        <thead><tr>
+          <th>Role</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Hero H1</td><td class="sample" style="font-size:30px;font-weight:500;letter-spacing:-0.6px;">Priceless.</td><td>64 / 1.0</td><td>500</td><td>-2%</td></tr>
+          <tr><td>Section H2</td><td class="sample" style="font-size:22px;font-weight:500;letter-spacing:-0.4px;">For business</td><td>36 / 1.22</td><td>500</td><td>-2%</td></tr>
+          <tr><td>Card H3</td><td class="sample" style="font-size:18px;font-weight:500;letter-spacing:-0.3px;">Tokenize transactions</td><td>24 / 1.2</td><td>500</td><td>-2%</td></tr>
+          <tr><td>Eyebrow</td><td class="sample" style="font-size:13px;font-weight:700;letter-spacing:0.56px;text-transform:uppercase;">· Services</td><td>14 / 1.0</td><td>700</td><td>+4%</td></tr>
+          <tr><td>Body</td><td class="sample" style="font-size:15px;font-weight:450;">A 60-year-old network, drawn editorial.</td><td>16 / 1.4</td><td>450</td><td>normal</td></tr>
+          <tr><td>Button label</td><td class="sample" style="font-size:14px;font-weight:500;letter-spacing:-0.3px;">Explore the network</td><td>16 / 1.0</td><td>500</td><td>-3%</td></tr>
+          <tr><td>Footer link</td><td class="sample" style="font-size:13px;font-weight:450;">Privacy choices</td><td>14 / 1.43</td><td>450</td><td>normal</td></tr>
+          <tr><td>Mono / Numeric</td><td class="sample mono" style="font-size:14px;">$9.7T · 3.4B</td><td>14–56</td><td>500</td><td>tnum</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <h3>Radius</h3>
+        <span class="caption">Either small (≤6) or 20–40 or full-pill — no middle ground</span>
+      </div>
+      <div class="r-ladder">
+        <div class="r-tile t4"><div class="pad"></div><div class="lab">4px · tiny</div></div>
+        <div class="r-tile t20"><div class="pad"></div><div class="lab">20px · body CTA</div></div>
+        <div class="r-tile t24"><div class="pad"></div><div class="lab">24px · consent</div></div>
+        <div class="r-tile t40"><div class="pad"></div><div class="lab">40px · stadium</div></div>
+        <div class="r-tile t50"><div class="pad"></div><div class="lab">50% · portrait</div></div>
+        <div class="r-tile tpill"><div class="pad"></div><div class="lab">999px · pill</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <h3>Components</h3>
+        <span class="caption">Buttons · satellites · chips · pills</span>
+      </div>
+
+      <div class="comp-grid">
+        <div class="comp">
+          <span class="clabel">Primary — Ink Pill</span>
+          <div class="crow"><button class="btn btn-ink">Learn more</button></div>
+          <div class="crow">
+            <span class="badge">bg #141413</span>
+            <span class="badge">text #f3f0ee</span>
+            <span class="badge">radius 20</span>
+            <span class="badge">pad 12 26</span>
+          </div>
+          <p class="body-sm">All marketing CTAs in the page body — never use orange here.</p>
+        </div>
+
+        <div class="comp">
+          <span class="clabel">Secondary — Outlined</span>
+          <div class="crow"><button class="btn btn-outline">Read more</button></div>
+          <div class="crow">
+            <span class="badge">bg #ffffff</span>
+            <span class="badge">border 1.5 #141413</span>
+            <span class="badge">radius 20</span>
+            <span class="badge">weight 450</span>
+          </div>
+          <p class="body-sm">Pairs with primary, or stands alone for utility actions.</p>
+        </div>
+
+        <div class="comp">
+          <span class="clabel">Consent — Signal</span>
+          <div class="crow"><button class="btn-signal">Accept all cookies</button></div>
+          <div class="crow">
+            <span class="badge">bg #cf4500</span>
+            <span class="badge">radius 24</span>
+            <span class="badge">pad 9 30</span>
+            <span class="badge">13/400</span>
+          </div>
+          <p class="body-sm">Consent + legal only. Reads as compliance — never as marketing.</p>
+        </div>
+
+        <div class="comp">
+          <span class="clabel">Satellite — Circle micro-CTA</span>
+          <div class="crow">
+            <button class="satellite" aria-label="Open">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+          <div class="crow">
+            <span class="badge">56px</span>
+            <span class="badge">radius 50%</span>
+            <span class="badge">white bg</span>
+            <span class="badge">docks portrait</span>
+          </div>
+          <p class="body-sm">Bottom-right of every circular portrait, protruding ~40% outside.</p>
+        </div>
+
+        <div class="comp">
+          <span class="clabel">Pill Chip (carousel tag)</span>
+          <div class="crow">
+            <span style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#141413;padding:8px 16px;border-radius:999px;font-size:13px;font-weight:500;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>
+              Story
+            </span>
+          </div>
+          <div class="crow">
+            <span class="badge">radius 999</span>
+            <span class="badge">pad 8 16</span>
+          </div>
+          <p class="body-sm">Lives inside pill carousel cards; never on the cream canvas.</p>
+        </div>
+
+        <div class="comp">
+          <span class="clabel">Country selector (footer)</span>
+          <div class="crow">
+            <span class="country-pill" style="background:#141413;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+              English (United States)
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </div>
+          <div class="crow">
+            <span class="badge">radius 999</span>
+            <span class="badge">border 1 rgba(255,255,255,.4)</span>
+          </div>
+          <p class="body-sm">Only on the dark footer surface.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ELEVATION -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <h3>Elevation</h3>
+        <span class="caption">Atmospheric cushioning, not directional light</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        <div style="background:#fcfbfa;padding:32px;border-radius:40px;box-shadow:var(--sh-1);">
+          <span class="clabel">Level 1 · Float</span>
+          <div class="mono" style="font-size:12px;color:var(--graphite);margin-top:10px;">rgba(0,0,0,.04) 0 4 24</div>
+          <p class="body-sm" style="margin:10px 0 0">Floating nav pill. Barely there.</p>
+        </div>
+        <div style="background:#fcfbfa;padding:32px;border-radius:40px;box-shadow:var(--sh-2);">
+          <span class="clabel">Level 2 · Lift</span>
+          <div class="mono" style="font-size:12px;color:var(--graphite);margin-top:10px;">rgba(0,0,0,.08) 0 24 48</div>
+          <p class="body-sm" style="margin:10px 0 0">Hero media, elevated cards.</p>
+        </div>
+        <div style="background:#fcfbfa;padding:32px;border-radius:40px;box-shadow:var(--sh-3);">
+          <span class="clabel">Level 3 · Hero</span>
+          <div class="mono" style="font-size:12px;color:var(--graphite);margin-top:10px;">rgba(0,0,0,.25) 0 70 110</div>
+          <p class="body-sm" style="margin:10px 0 0">Rare. Feature tile only.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- — Footer — -->
+<footer class="footer">
+  <div class="wrap">
+    <h2>We're always here when you need us.</h2>
+
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>Need help?</h4>
+        <a href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>Contact us<span class="ext">↗</span></a>
+        <a href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Lost or stolen card<span class="ext">↗</span></a>
+        <a href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Find an ATM</a>
+        <a href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg>Help center</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>For business</h4>
+        <a href="#">Acceptance solutions</a>
+        <a href="#">Mastercard Move</a>
+        <a href="#">Decision Intelligence</a>
+        <a href="#">Cyber + Intelligence</a>
+        <a href="#">Open Banking</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>For the world</h4>
+        <a href="#">Sustainability</a>
+        <a href="#">Center for Inclusive Growth</a>
+        <a href="#">Newsroom</a>
+        <a href="#">Investor relations</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>About Mastercard</h4>
+        <a href="#">Company overview</a>
+        <a href="#">Careers<span class="ext">↗</span></a>
+        <a href="#">Innovation</a>
+        <a href="#">Partners</a>
+        <a href="#">Developers<span class="ext">↗</span></a>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Mastercard. Mastercard, the Mastercard brand mark and Priceless are registered trademarks.</span>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <span class="country-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+          English (United States)
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </span>
+        <div class="socials" aria-label="Social links">
+          <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.66 0h4.37v1.91h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v8.45h-4.56v-7.49c0-1.79-.04-4.09-2.49-4.09-2.5 0-2.88 1.95-2.88 3.96V22H7.88V8z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.13 8.44 9.88V14.9h-2.54V12h2.54V9.8c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.9h-2.33v6.98C18.34 21.13 22 16.99 22 12z"/></svg></a>
+          <a href="#" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mastercard.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

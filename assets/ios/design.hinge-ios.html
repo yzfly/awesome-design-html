@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hinge — iOS design spec</title>
+<meta name="description" content="Hinge iOS app design reference. White canvas, calm purple accent, prompt-driven profiles, slow scroll, comment-the-prompt heart." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#fff; --surface-1:#fafafa; --surface-2:#f5f3f8; --surface-card:#fff; --surface-tint:#F1ECF7;
+  --accent:#5D3F92; --accent-hover:#4A3175; --accent-soft:#7B5FB1;
+  --ink:#000; --ink-soft:#3a3a3a; --ink-muted:#7B7B7B; --ink-dim:#A6A6A6;
+  --border:#EFEFEF; --border-soft:#F4F4F4; --border-strong:#E0E0E0;
+  --rose:#C9A24F; --negative:#C04545; --confirm:#3A7D5F;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-serif:"Cormorant Garamond","Georgia",serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:14px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-serif);font-weight:600;font-size:22px;letter-spacing:-.4px}
+.brand-mark{width:32px;height:32px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff;font-family:var(--font-serif);font-weight:600;font-size:18px;font-style:italic}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:500;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.03)}
+.btn-primary{background:var(--accent);color:#fff;padding:12px 22px;border-radius:var(--r-pill)}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:10px 18px;border-radius:var(--r-pill)}
+.btn-outline{background:transparent;border:1px solid var(--border-strong);color:var(--ink);padding:10px 18px;border-radius:var(--r-pill)}
+.btn-light{background:#000;color:#fff;padding:12px 22px;border-radius:var(--r-pill)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#FAF7FE 60%,#fff 100%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(93,63,146,.08),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-pill);background:var(--surface-tint);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hero h1{font-family:var(--font-serif);font-size:clamp(46px,7.5vw,92px);line-height:1;letter-spacing:-1.8px;font-weight:500;margin-bottom:22px;color:var(--ink)}
+.hero h1 .gradient-word{color:var(--accent);font-style:italic}
+.hero p{font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(74,49,117,.18),0 0 0 1px rgba(0,0,0,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar.light{color:#fff}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.97}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.97}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+/* ========== SCREENS ========== */
+.scr{position:absolute;inset:0;color:var(--ink);font-size:11px;display:flex;flex-direction:column;padding-top:52px;background:var(--canvas)}
+
+/* DISCOVER (profile) */
+.dis-head{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 10px}
+.dis-head .dh-title{font-family:var(--font-serif);font-size:22px;font-weight:500;letter-spacing:-.3px}
+.dis-head svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.8}
+.dis-scroll{flex:1;overflow:hidden;padding:0 14px 70px;display:flex;flex-direction:column;gap:10px}
+.dis-photo{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(160deg,#d9c6ec,#a07ccf 40%,#5D3F92 90%)}
+.dis-photo .face-tone{position:absolute;inset:18% 22% 22% 22%;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.45),rgba(255,255,255,.05) 60%)}
+.dis-photo .name-overlay{position:absolute;left:14px;bottom:12px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.dis-photo .name-overlay .nm{font-family:var(--font-serif);font-size:22px;font-weight:500;line-height:1}
+.dis-photo .name-overlay .age{font-size:13px;font-weight:500;opacity:.95;margin-top:3px}
+.dis-card{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.03);position:relative}
+.dis-prompt{font-size:10px;font-weight:600;color:var(--ink-muted);letter-spacing:.2px;margin-bottom:6px}
+.dis-answer{font-family:var(--font-serif);font-size:15px;line-height:1.25;color:var(--ink);font-weight:500;padding-right:32px}
+.dis-heart{position:absolute;right:10px;bottom:10px;width:32px;height:32px;border-radius:50%;background:#fff;border:1.5px solid var(--accent);display:grid;place-items:center;box-shadow:0 2px 6px rgba(93,63,146,.18)}
+.dis-heart svg{width:14px;height:14px;fill:var(--accent)}
+.dis-photo-card{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(140deg,#F1ECF7,#cfb8e9)}
+.dis-photo-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.6),transparent 55%)}
+
+/* LIKES YOU grid */
+.ly-head{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 8px}
+.ly-tabs{display:flex;gap:6px;padding:0 14px 12px}
+.ly-tab{flex:1;text-align:center;padding:8px 0;font-size:12px;font-weight:600;color:var(--ink-muted);border-radius:var(--r-pill);background:var(--surface-2)}
+.ly-tab.active{color:#fff;background:var(--accent)}
+.ly-grid{flex:1;padding:0 14px 70px;display:grid;grid-template-columns:1fr 1fr;gap:8px;overflow:hidden}
+.ly-card{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3/4;background:linear-gradient(160deg,#d9c6ec,#7B5FB1)}
+.ly-card.blur::after{content:"";position:absolute;inset:0;backdrop-filter:blur(8px);background:rgba(255,255,255,.35)}
+.ly-card .ly-note{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(255,255,255,.92);border-radius:8px;padding:6px 8px;font-size:9.5px;color:var(--ink);z-index:3;line-height:1.3}
+.ly-card .ly-note b{font-weight:600;display:block;margin-bottom:1px;color:var(--accent)}
+.ly-card .ly-lock{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:10px;font-weight:600;z-index:4;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+
+/* STANDOUTS */
+.st-head{padding:4px 16px 8px}
+.st-head .h1{font-family:var(--font-serif);font-size:22px;font-weight:500;letter-spacing:-.3px}
+.st-head .h2{font-size:12px;color:var(--ink-muted);margin-top:2px}
+.st-body{flex:1;padding:0 14px 70px;overflow:hidden;display:flex;flex-direction:column;gap:12px}
+.st-card{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:7/5;background:linear-gradient(150deg,#3a2858,#7B5FB1 50%,#cfb8e9)}
+.st-card .st-prompt{position:absolute;left:12px;right:60px;bottom:38px;color:#fff}
+.st-card .st-prompt .q{font-size:10px;font-weight:500;opacity:.88;letter-spacing:.2px}
+.st-card .st-prompt .a{font-family:var(--font-serif);font-size:14px;font-weight:500;line-height:1.2;margin-top:3px}
+.st-rose{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:50%;background:#CBA258;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.st-rose svg{width:18px;height:18px;fill:#fff}
+.st-card .name-pill{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.45);color:#fff;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:600}
+.st-section-h{font-size:10px;font-weight:600;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
+
+/* tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:rgba(255,255,255,.94);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:flex-start;padding:10px 14px 0;backdrop-filter:blur(20px);z-index:10}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-muted);font-size:9px;font-weight:500}
+.tab.active{color:var(--accent)}
+.tab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}
+.tab.active svg{fill:currentColor;stroke:currentColor}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:600;color:var(--accent);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-family:var(--font-serif);font-size:clamp(36px,4.8vw,60px);font-weight:500;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px}
+.section-head h2 em{font-style:italic;color:var(--accent)}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.55;max-width:580px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:14px;padding:28px;border:1px solid var(--border)}
+.feat:hover{background:var(--surface-tint)}
+.feat .feat-ic{width:36px;height:36px;border-radius:50%;background:var(--surface-tint);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--accent)}
+.feat h3{font-family:var(--font-serif);font-size:24px;font-weight:500;letter-spacing:-.4px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.6}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:1px 6px;border-radius:3px;color:var(--ink-soft);border:1px solid var(--border)}
+
+/* iOS-specific feature row */
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-family:var(--font-serif);font-size:34px;font-weight:500;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.65;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:5px 10px;border-radius:4px;color:var(--ink-soft);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--surface-1);border-radius:14px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* Comment-on-prompt visual */
+.cop-stack{display:flex;flex-direction:column;gap:14px;width:260px}
+.cop-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.04);position:relative}
+.cop-card .q{font-size:11px;color:var(--ink-muted);font-weight:600;margin-bottom:5px}
+.cop-card .a{font-family:var(--font-serif);font-size:18px;line-height:1.25;font-weight:500}
+.cop-heart-fab{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;background:var(--accent);display:grid;place-items:center;box-shadow:0 4px 10px rgba(93,63,146,.4)}
+.cop-heart-fab svg{width:16px;height:16px;fill:#fff}
+.cop-input{background:#fff;border:1px solid var(--border-strong);border-radius:var(--r-pill);padding:11px 14px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-muted)}
+.cop-input .send{margin-left:auto;width:26px;height:26px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.cop-input .send svg{width:12px;height:12px;fill:#fff}
+
+/* Rose visual */
+.rose-stage{display:flex;flex-direction:column;align-items:center;gap:20px}
+.rose-big{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E8C97A,#CBA258 55%,#8a6c33);display:grid;place-items:center;box-shadow:0 24px 50px rgba(203,162,88,.32)}
+.rose-big svg{width:60px;height:60px;fill:#fff;opacity:.95}
+.rose-meta{text-align:center}
+.rose-meta .rm-t{font-family:var(--font-serif);font-size:22px;font-weight:500;letter-spacing:-.3px}
+.rose-meta .rm-s{font-size:12px;color:var(--ink-muted);margin-top:4px}
+
+/* Voice prompt visual */
+.vp-stack{width:300px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.vp-q{font-size:11px;color:var(--ink-muted);font-weight:600;margin-bottom:4px}
+.vp-a{font-family:var(--font-serif);font-size:15px;font-weight:500;line-height:1.25;margin-bottom:14px}
+.vp-wave{display:flex;align-items:center;gap:2px;height:36px;background:var(--surface-2);border-radius:8px;padding:0 12px}
+.vp-wave span{flex:1;background:var(--accent);border-radius:1.5px;opacity:.85}
+.vp-wave span:nth-child(odd){height:60%}
+.vp-wave span:nth-child(even){height:30%}
+.vp-wave span:nth-child(3n){height:80%}
+.vp-wave span:nth-child(5n){height:45%}
+.vp-controls{display:flex;align-items:center;gap:10px;margin-top:12px}
+.vp-controls .play{width:38px;height:38px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.vp-controls .play svg{width:16px;height:16px;fill:#fff}
+.vp-time{font-family:var(--font-mono);font-size:12px;color:var(--ink-muted)}
+
+/* ========== DESIGN SYSTEM SECTION (Part B) ========== */
+.ds-section{padding:120px 0;background:var(--surface-1);border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-family:var(--font-serif);font-size:clamp(34px,4.2vw,54px);font-weight:500;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:580px;line-height:1.55}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--accent);border:1px solid var(--border-strong);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;background:#fff}
+.ds-source:hover{background:var(--surface-tint)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-family:var(--font-serif);font-size:28px;font-weight:500;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.55;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+/* swatches */
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:10px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px;border:1px solid var(--border)}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* type table */
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:var(--accent)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+.ds-type-table td.sample.serif{font-family:var(--font-serif)}
+
+/* radius */
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,var(--accent),#3a2858);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:600}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* components */
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-circle{width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 16px rgba(93,63,146,.3)}
+.btn-circle svg{width:22px;height:22px;fill:currentColor}
+.btn-circle-rose{width:52px;height:52px;border-radius:50%;background:#CBA258;color:#fff;display:grid;place-items:center;box-shadow:0 6px 16px rgba(203,162,88,.3)}
+.btn-circle-rose svg{width:22px;height:22px;fill:currentColor}
+.btn-ghost-circle{width:42px;height:42px;border-radius:50%;background:#fff;border:1.5px solid var(--accent);color:var(--accent);display:grid;place-items:center}
+.btn-ghost-circle svg{width:18px;height:18px;fill:currentColor}
+.input-pill{background:#fff;border:1px solid var(--border-strong);border-radius:var(--r-pill);padding:11px 16px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:999px;letter-spacing:.3px}
+.tag-rose{background:#F8EFD9;color:#8a6c33}
+.tag-prompt{background:var(--surface-tint);color:var(--accent)}
+.tag-new{background:#E8F4EC;color:var(--confirm)}
+
+/* iOS-specific token strip */
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:10px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-family:var(--font-serif);font-size:22px;font-weight:500;margin-top:6px;color:var(--ink);letter-spacing:-.3px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.45}
+
+/* ========== FOOTER ========== */
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.55}
+.foot a{color:var(--accent);font-weight:600}
+
+/* floating link */
+.float-link{position:fixed;bottom:18px;right:18px;background:#fff;border:1px solid var(--border-strong);color:var(--accent);font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 8px 24px rgba(93,63,146,.12)}
+.float-link:hover{background:var(--surface-tint)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">h</span>
+      Hinge <span style="font-family:var(--font-ui);font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Log In</a>
+      <a class="btn btn-light" href="#">Get the App</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>The app designed to be <span class="gradient-word">deleted.</span></h1>
+    <p>The Hinge iOS app, dissected. White canvas. One calm violet. Profiles you scroll, not swipe. Every card has a heart, every prompt has a reply.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- LIKES YOU -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="14" height="10" viewBox="0 0 18 14" fill="#000"><path d="M9 3c-2.4 0-4.6.9-6.3 2.4l1.6 1.6C5.6 5.8 7.2 5.2 9 5.2s3.4.6 4.7 1.8l1.6-1.6C13.6 3.9 11.4 3 9 3zm0 4c-1.4 0-2.7.5-3.6 1.4l1.6 1.6C7.5 9.4 8.2 9.2 9 9.2s1.5.2 2 .8l1.6-1.6C11.7 7.5 10.4 7 9 7zm0 4l-1.4 1.4c.4.4.9.6 1.4.6s1-.2 1.4-.6L9 11z"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="ly-head">
+              <div style="font-family:var(--font-serif);font-size:22px;font-weight:500">Likes You</div>
+              <div style="font-size:11px;color:var(--ink-muted)">24 new</div>
+            </div>
+            <div class="ly-tabs">
+              <div class="ly-tab active">Hearts</div>
+              <div class="ly-tab">Roses</div>
+            </div>
+            <div class="ly-grid">
+              <div class="ly-card" style="background:linear-gradient(150deg,#f4d8c2,#c98f6b)">
+                <div class="ly-note"><b>Liked your prompt</b>"morning coffee, no agenda"</div>
+              </div>
+              <div class="ly-card blur" style="background:linear-gradient(160deg,#cfb8e9,#5D3F92)">
+                <div class="ly-lock">Subscribe to see</div>
+              </div>
+              <div class="ly-card" style="background:linear-gradient(140deg,#d3e1d8,#6b8a78)">
+                <div class="ly-note"><b>Liked your photo</b></div>
+              </div>
+              <div class="ly-card blur" style="background:linear-gradient(150deg,#e8d4c8,#9c6f55)">
+                <div class="ly-lock">Subscribe to see</div>
+              </div>
+              <div class="ly-card" style="background:linear-gradient(160deg,#e4d2eb,#7B5FB1)">
+                <div class="ly-note"><b>Liked you</b>with a comment</div>
+              </div>
+              <div class="ly-card blur" style="background:linear-gradient(150deg,#f5e9d6,#b88f4f)">
+                <div class="ly-lock">Subscribe to see</div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>Discover</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg>Standouts</div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v6H4zm0 10h16v6H4z"/></svg>Likes</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg>Chats</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Likes You</div>
+      </div>
+
+      <!-- DISCOVER (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="dis-head">
+              <div class="dh-title">Discover</div>
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>
+            </div>
+            <div class="dis-scroll">
+              <div class="dis-photo">
+                <div class="face-tone"></div>
+                <div class="name-overlay">
+                  <div class="nm">Elena</div>
+                  <div class="age">28</div>
+                </div>
+              </div>
+              <div class="dis-card">
+                <div class="dis-prompt">My simple pleasures</div>
+                <div class="dis-answer">Morning coffee with no agenda, the dog asleep on my feet.</div>
+                <div class="dis-heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+              </div>
+              <div class="dis-photo-card"></div>
+              <div class="dis-card">
+                <div class="dis-prompt">A shower thought I recently had</div>
+                <div class="dis-answer">Olive oil counts as a personality trait.</div>
+                <div class="dis-heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>Discover</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg>Standouts</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 4h16v6H4zm0 10h16v6H4z"/></svg>Likes</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg>Chats</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Discover · One Profile</div>
+      </div>
+
+      <!-- STANDOUTS -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="st-head">
+              <div class="h1">Standouts</div>
+              <div class="h2">Today's curated picks · resets in 14h</div>
+            </div>
+            <div class="st-body">
+              <div class="st-card">
+                <div class="name-pill">Mara · 29</div>
+                <div class="st-prompt">
+                  <div class="q">I'll know I've made it when</div>
+                  <div class="a">My bookshelf collapses.</div>
+                </div>
+                <div class="st-rose">
+                  <svg viewBox="0 0 24 24"><path d="M12 4c-3 2-4 5-3 8 1 2 3 3 5 2 1 2 3 3 5 2 1-3 0-7-3-9-1 1-3 1-4-3z"/></svg>
+                </div>
+              </div>
+              <div class="st-card" style="background:linear-gradient(150deg,#2b3e2e,#6b8a78 60%,#d3e1d8)">
+                <div class="name-pill">Caleb · 31</div>
+                <div class="st-prompt">
+                  <div class="q">My most controversial opinion</div>
+                  <div class="a">Almonds taste like cardboard.</div>
+                </div>
+                <div class="st-rose">
+                  <svg viewBox="0 0 24 24"><path d="M12 4c-3 2-4 5-3 8 1 2 3 3 5 2 1 2 3 3 5 2 1-3 0-7-3-9-1 1-3 1-4-3z"/></svg>
+                </div>
+              </div>
+              <div class="st-section-h">We Met</div>
+              <div class="dis-card">
+                <div class="dis-prompt">Did your date with Alex go well?</div>
+                <div class="dis-answer" style="font-size:13px">Two taps · Yes / Not really.</div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>Discover</div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg>Standouts</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 4h16v6H4zm0 10h16v6H4z"/></svg>Likes</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg>Chats</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Standouts</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. <em>One calm violet.</em></h2>
+      <p>Every Hinge screen earns its position on an iPhone through the same rules — white canvas, slow scroll, prompt-cards stacked vertically, and a single accent purple that means "this is the one button worth pressing."</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+        <h3>Discover</h3>
+        <p>One profile at a time — full-bleed photos and prompt cards alternate down a single scrollable feed. Each card has its own <code>#5D3F92</code> heart. You're not swiping; you're reading.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v6H4zm0 10h16v6H4z"/></svg></div>
+        <h3>Likes You</h3>
+        <p>2-column grid of inbound likes. Hearts tab default; Roses tab for premium. Free tier blurs every other card behind a <code>backdrop-filter</code> of 8px — the paywall is honest about itself.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg></div>
+        <h3>Standouts</h3>
+        <p>A daily-refresh tray of the day's best prompts, paired with a gold Rose CTA — the one currency that costs something. Plus a "We Met" follow-up loop.</p>
+      </div>
+    </div>
+
+    <!-- iOS-specific feature blocks -->
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Comment-on-Prompt</div>
+          <h3>Reply to a specific thing, not a whole person.</h3>
+          <p>Tap the floating violet heart on any prompt card and a sheet pops up with a single text input — your reply attaches to that prompt, not the profile. This is the entire conversational engine of the app.</p>
+          <p>Send button is a <code>#5D3F92</code> circle; idle hearts are outlined, active hearts fill.</p>
+          <div class="ios-feat-tokens">
+            <code>sheet: detents [.medium]</code>
+            <code>radius: 14px</code>
+            <code>send: 26pt circle</code>
+            <code>haptic: light</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="cop-stack">
+            <div class="cop-card">
+              <div class="q">My simple pleasures</div>
+              <div class="a">Morning coffee with no agenda.</div>
+              <div class="cop-heart-fab"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+            </div>
+            <div class="cop-input">
+              <span>Same. Best part of waking up.</span>
+              <span class="send"><svg viewBox="0 0 24 24"><path d="M2 12l20-8-8 20-2-8-10-4z"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual" style="background:linear-gradient(140deg,#F1ECF7,#fff)">
+          <div class="rose-stage">
+            <div class="rose-big">
+              <svg viewBox="0 0 24 24"><path d="M12 4c-3 2-4 5-3 8 1 2 3 3 5 2 1 2 3 3 5 2 1-3 0-7-3-9-1 1-3 1-4-3zM10 14l-3 6 5-2"/></svg>
+            </div>
+            <div class="rose-meta">
+              <div class="rm-t">Send a Rose</div>
+              <div class="rm-s">3× more likely to start a conversation</div>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Rose Economy</div>
+          <h3>The premium currency that actually means something.</h3>
+          <p>One free Rose per week. Extra Roses cost money. Receiving one bumps you to the top of someone's Likes You queue and sends an explicit "this person stood out" signal — not a generic like.</p>
+          <p>Gold <code>#CBA258</code> is the only warm color in the app — reserved entirely for the Rose system. Never used for active states, never used for CTAs.</p>
+          <div class="ios-feat-tokens">
+            <code>rose: #CBA258</code>
+            <code>shadow: y6 b16</code>
+            <code>StoreKit: 1 / 3 / 12 / 50</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Voice Prompts</div>
+          <h3>Hear the laugh before you decide.</h3>
+          <p>Profiles can host one 30-second voice answer to a Hinge prompt. The waveform renders pre-baked from AVAudioSession amplitude samples; tap to play, scrub to seek. AirPods routing is automatic.</p>
+          <p>Wave bars use the accent at <code>opacity:.85</code>, gaining 100% opacity as the playhead crosses each bar — visual scrubber and waveform in one element.</p>
+          <div class="ios-feat-tokens">
+            <code>max: 30s</code>
+            <code>bars: 48</code>
+            <code>AVAudioSession: .playback</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="vp-stack">
+            <div class="vp-q">A voice answer to</div>
+            <div class="vp-a">"The way to win me over is…"</div>
+            <div class="vp-wave">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="vp-controls">
+              <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <div class="vp-time">0:08 / 0:28</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The whole vocabulary, in one place.</h2>
+        <p>Every token Hinge's iOS app reaches for — surface ladder, type ramp, radius scale, components. Quiet by design; loud only at the points of decision.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.hinge-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">White is the canvas. Black is the type. Violet is the only thing asking for your attention — and it asks softly. Gold appears only on Roses; never anywhere else.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#5D3F92"></div><div class="name">Hinge Violet</div><div class="val">#5D3F92</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#7B5FB1"></div><div class="name">Violet Soft</div><div class="val">#7B5FB1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F1ECF7"></div><div class="name">Violet Tint</div><div class="val">#F1ECF7</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF"></div><div class="name">Canvas</div><div class="val">#FFFFFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Ink</div><div class="val">#000000</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Primary</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3a3a3a"></div><div class="name">Body</div><div class="val">#3a3a3a</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#7B7B7B"></div><div class="name">Muted</div><div class="val">#7B7B7B</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#A6A6A6"></div><div class="name">Dim</div><div class="val">#A6A6A6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border:1px solid #EFEFEF"></div><div class="name">On-Violet</div><div class="val">#FFFFFF</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FAFAFA"></div><div class="name">Surface</div><div class="val">#FAFAFA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F5F3F8"></div><div class="name">Surface 2</div><div class="val">#F5F3F8</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EFEFEF"></div><div class="name">Border</div><div class="val">#EFEFEF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E0E0E0"></div><div class="name">Border Strong</div><div class="val">#E0E0E0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F4F4F4"></div><div class="name">Border Soft</div><div class="val">#F4F4F4</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#CBA258"></div><div class="name">Rose Gold</div><div class="val">#CBA258</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#C04545"></div><div class="name">Negative</div><div class="val">#C04545</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3A7D5F"></div><div class="name">Confirm</div><div class="val">#3A7D5F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(140deg,#5D3F92,#3a2858)"></div><div class="name">Active Gradient</div><div class="val">violet ramp</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(140deg,#CBA258,#8a6c33)"></div><div class="name">Rose Gradient</div><div class="val">gold ramp</div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Hinge Drive in production — Cormorant Garamond stands in for the display serif, Inter for sans. Prompt answers always use the serif. UI labels stay sans. The mix is the brand.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display-serif</td><td class="sample serif" style="font-size:32px;font-weight:500;letter-spacing:-.5px">Discover</td><td>32 / 2.00rem</td><td>500</td><td>-0.5px</td></tr>
+          <tr><td class="token">--name-overlay</td><td class="sample serif" style="font-size:22px;font-weight:500;letter-spacing:-.3px">Elena, 28</td><td>22 / 1.38rem</td><td>500</td><td>-0.3px</td></tr>
+          <tr><td class="token">--prompt-answer</td><td class="sample serif" style="font-size:18px;font-weight:500;line-height:1.25">Olive oil counts as a personality trait.</td><td>18 / 1.13rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--prompt-question</td><td class="sample" style="font-size:11px;font-weight:600;color:#7B7B7B">My simple pleasures</td><td>11 / 0.69rem</td><td>600</td><td>0.2px</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:15px;font-weight:400">Liked your prompt</td><td>15 / 0.94rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--button-pill</td><td class="sample" style="font-size:14px;font-weight:600">Send a Like</td><td>14 / 0.88rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--tab-active</td><td class="sample" style="font-size:9px;font-weight:500;color:#5D3F92">Discover</td><td>9 / 0.56rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--meta-time</td><td class="sample" style="font-size:11px;font-weight:500;color:#7B7B7B;font-feature-settings:'tnum'">14h until refresh</td><td>11 / 0.69rem</td><td>500 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--badge-rose</td><td class="sample" style="font-size:10.5px;font-weight:600;letter-spacing:.3px;color:#8a6c33">Sent a Rose</td><td>10.5 / 0.66rem</td><td>600</td><td>0.3px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Soft, not severe. Photos and cards live at 12–14px; pills are full-radius; tab icons stay open. There is no sharp corner in Hinge.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Hairline</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Chip</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Input</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Photo</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">Sheet</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">∞</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Heart</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- iOS spec strip -->
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">4-tab arrangement: Discover, Standouts, Likes, Chats.</div></div>
+        <div class="token-cell"><div class="tk-label">Heart FAB</div><div class="tk-val">32pt</div><div class="tk-note">Outlined idle, filled active. One per prompt card.</div></div>
+        <div class="token-cell"><div class="tk-label">Profile scroll</div><div class="tk-val">vertical</div><div class="tk-note">No swipe deck. One profile, top-to-bottom.</div></div>
+        <div class="token-cell"><div class="tk-label">Photo radius</div><div class="tk-val">12pt</div><div class="tk-note">Card radius 14pt. Standouts hero 14pt.</div></div>
+        <div class="token-cell"><div class="tk-label">Likes blur</div><div class="tk-val">8px</div><div class="tk-note">backdrop-filter on every other card for free tier.</div></div>
+        <div class="token-cell"><div class="tk-label">Side padding</div><div class="tk-val">14pt</div><div class="tk-note">Photos full bleed; prompt cards inset 14pt.</div></div>
+        <div class="token-cell"><div class="tk-label">Rose price</div><div class="tk-val">1 / wk</div><div class="tk-note">Free tier. Packs 3 / 12 / 50 via StoreKit.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation curve</div><div class="tk-val">easeOut</div><div class="tk-note">.30s for prompt-comment sheet present.</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Hearts, pills, and inset cards — every Hinge interaction lives inside one of these three shapes.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Send a Like</a>
+            <a class="btn btn-pill" href="#">Skip</a>
+            <a class="btn btn-outline" href="#">Edit Profile</a>
+            <a class="btn btn-light" href="#">Subscribe</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="btn-circle" aria-label="Like"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></button>
+              <button class="btn-circle-rose" aria-label="Rose"><svg viewBox="0 0 24 24"><path d="M12 4c-3 2-4 5-3 8 1 2 3 3 5 2 1 2 3 3 5 2 1-3 0-7-3-9-1 1-3 1-4-3z"/></svg></button>
+              <button class="btn-ghost-circle" aria-label="Heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Add a comment to your Like" />
+            <input class="input-pill" placeholder="Search for prompts" />
+            <div class="ds-card-row">
+              <span class="tag tag-rose">Sent a Rose</span>
+              <span class="tag tag-prompt">Prompt</span>
+              <span class="tag tag-new">Active today</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Prompt Card</h5>
+          <div class="ds-card-stack">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;width:100%;position:relative;box-shadow:0 4px 14px rgba(0,0,0,.04)">
+              <div style="font-size:11px;font-weight:600;color:var(--ink-muted);margin-bottom:5px">My simple pleasures</div>
+              <div style="font-family:var(--font-serif);font-size:16px;font-weight:500;line-height:1.25;padding-right:30px">Morning coffee with no agenda.</div>
+              <div style="position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);display:grid;place-items:center">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+              </div>
+            </div>
+            <div style="background:linear-gradient(150deg,#3a2858,#7B5FB1);border-radius:14px;padding:14px;width:100%;color:#fff;position:relative;min-height:80px">
+              <div style="font-size:11px;font-weight:500;opacity:.85;margin-bottom:4px">A standout pick</div>
+              <div style="font-family:var(--font-serif);font-size:15px;font-weight:500;line-height:1.25">I'll know I've made it when…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark">h</span>
+      Hinge iOS
+    </div>
+    <p>Design reference. Not affiliated with Hinge, Inc. Token values are derived from the public iOS app and Hinge's published brand identity. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.hinge-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.hinge-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.hinge-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

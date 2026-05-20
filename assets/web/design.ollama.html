@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ollama — Inspired Design</title>
+<meta name="description" content="An Ollama-inspired marketing page and design-system reference: paper-white Markdown-README canvas, rounded heading face, black pill CTAs, inline curl install pill, terminal-mockup card with traffic-light dots, hand-drawn llama mascot. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --primary: #000000;
+  --on-primary: #ffffff;
+  --ink: #000000;
+  --ink-deep: #090909;
+  --charcoal: #525252;
+  --body: #737373;
+  --mute: #a3a3a3;
+  --canvas: #ffffff;
+  --surface-soft: #fafafa;
+  --surface-card: #ffffff;
+  --hairline: #e5e5e5;
+  --hairline-strong: #d4d4d4;
+  --on-dark: #ffffff;
+  --on-dark-mute: rgba(255,255,255,0.7);
+  --surface-dark: #171717;
+  --focus-ring: rgba(59,130,246,0.5);
+  --terminal-red: #ff5f56;
+  --terminal-yellow: #ffbd2e;
+  --terminal-green: #27c93f;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(0,0,0,0.12); }
+
+.rounded-face { font-family: "Nunito", system-ui, sans-serif; }
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace; }
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+.wrap-wide { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.wrap-widest { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* Top nav */
+.topnav {
+  height: 56px;
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+  border-bottom: 1px solid var(--hairline);
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 24px; font-size: 14px; font-weight: 500; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 17px; color: var(--ink); font-family: "Nunito", sans-serif; }
+
+/* llama mascot */
+.llama-svg { display: inline-block; }
+.llama-32 { width: 32px; height: 32px; }
+.llama-48 { width: 48px; height: 48px; }
+.llama-96 { width: 96px; height: 96px; }
+
+.nav-links { display: flex; align-items: center; gap: 22px; color: var(--ink); font-weight: 500; }
+.nav-links a:hover { color: var(--body); }
+.spacer { flex: 1; }
+.nav-cta { display: flex; align-items: center; gap: 10px; }
+.search-pill {
+  background: var(--surface-soft);
+  border-radius: 9999px;
+  padding: 8px 16px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; color: var(--body);
+  height: 36px;
+  width: 240px;
+}
+.search-pill input { background: transparent; border: 0; outline: 0; flex: 1; font-size: 14px; color: var(--ink); font-family: inherit; }
+.search-pill input::placeholder { color: var(--mute); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 14px; font-weight: 500; line-height: 1;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  height: 36px;
+  transition: background 150ms ease;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--ink-deep); }
+.btn-secondary { background: var(--canvas); color: var(--ink); border: 1px solid var(--hairline-strong); }
+.btn-secondary:hover { background: var(--surface-soft); }
+.btn-on-dark { background: var(--canvas); color: var(--ink); }
+
+/* Hero */
+.hero { padding: 88px 0 64px; text-align: center; }
+.hero-llama { margin-bottom: 24px; }
+.hero h1 {
+  font-family: "Nunito", system-ui, sans-serif;
+  font-size: 36px; font-weight: 500;
+  line-height: 1.11;
+  letter-spacing: 0;
+  margin: 0 auto 24px;
+  max-width: 18ch;
+  color: var(--ink);
+}
+.hero .sub {
+  font-size: 16px; color: var(--body);
+  max-width: 520px; margin: 0 auto 32px;
+}
+
+/* Install snippet pill */
+.install-pill {
+  background: var(--surface-soft);
+  border-radius: 9999px;
+  padding: 12px 20px;
+  height: 48px;
+  display: inline-flex; align-items: center; gap: 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  color: var(--ink);
+  max-width: 100%;
+}
+.install-pill .copy {
+  width: 28px; height: 28px;
+  border-radius: 9999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--body);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.install-pill .copy:hover { background: var(--hairline); color: var(--ink); }
+
+.hero-ctas { display: inline-flex; align-items: center; gap: 12px; margin-top: 32px; flex-wrap: wrap; justify-content: center; }
+
+/* Section */
+.section { padding: 88px 0; }
+.section h2 {
+  font-family: "Nunito", system-ui, sans-serif;
+  font-size: 24px; font-weight: 600;
+  line-height: 1.33;
+  letter-spacing: 0;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+.section p { font-size: 16px; color: var(--body); line-height: 1.5; }
+
+/* automate-your-work split */
+.split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: center;
+}
+.split .txt p { margin: 0 0 16px; }
+.split .txt .chip {
+  display: inline-block;
+  background: var(--surface-soft);
+  color: var(--ink);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  margin-top: 8px;
+}
+
+/* terminal mockup card */
+.terminal-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.terminal-head {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 14px;
+}
+.tlight { width: 12px; height: 12px; border-radius: 9999px; }
+.tlight.r { background: var(--terminal-red); }
+.tlight.y { background: var(--terminal-yellow); }
+.tlight.g { background: var(--terminal-green); }
+.terminal-head .ttl { margin-left: 12px; font-family: "Inter", sans-serif; font-size: 12px; color: var(--mute); }
+.terminal-body div { margin: 0; padding: 0; white-space: nowrap; overflow-x: auto; }
+.terminal-body .cmt { color: var(--mute); }
+.terminal-body .cmd { color: var(--ink); }
+.terminal-body .out { color: var(--charcoal); }
+.terminal-body .prompt { color: var(--mute); }
+.terminal-body .ok { color: var(--terminal-green); }
+.cursor { display: inline-block; width: 7px; height: 16px; background: var(--ink); vertical-align: text-bottom; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* Privacy strip */
+.privacy {
+  text-align: center;
+  padding: 88px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.privacy .lock {
+  width: 56px; height: 56px;
+  border-radius: 9999px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Pricing */
+.pricing-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+.pricing-head h2 {
+  font-family: "Nunito", sans-serif;
+  font-size: 30px; font-weight: 500;
+  line-height: 1.2; margin: 0 0 12px;
+}
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.tier {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex; flex-direction: column;
+}
+.tier .tier-llama { margin-bottom: 16px; }
+.tier h3 {
+  font-family: "Inter", sans-serif;
+  font-size: 20px; font-weight: 500; margin: 0 0 6px;
+}
+.tier .blurb { font-size: 14px; font-weight: 500; color: var(--charcoal); margin: 0 0 24px; }
+.tier .price {
+  font-family: "Nunito", sans-serif;
+  font-size: 30px; font-weight: 500; line-height: 1.2; letter-spacing: 0;
+  margin: 0;
+}
+.tier .price small { font-size: 14px; color: var(--body); font-family: "Inter", sans-serif; font-weight: 400; margin-left: 6px; }
+.tier .cta { margin: 24px 0; }
+.tier ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; color: var(--charcoal); display: flex; align-items: flex-start; gap: 10px; }
+.tier li svg { flex-shrink: 0; margin-top: 3px; color: var(--ink); }
+
+.tier.dark { background: var(--surface-dark); border-color: var(--surface-dark); color: var(--on-dark); }
+.tier.dark h3, .tier.dark .price { color: var(--on-dark); }
+.tier.dark .blurb { color: var(--on-dark-mute); }
+.tier.dark li { color: var(--on-dark); }
+.tier.dark li svg { color: var(--on-dark); }
+.tier.dark .price small { color: var(--on-dark-mute); }
+
+/* FAQ */
+.faq { max-width: 720px; margin: 0 auto; }
+.faq .q {
+  border-bottom: 1px solid var(--hairline);
+  padding: 24px 0;
+}
+.faq .q:last-child { border-bottom: 0; }
+.faq h4 {
+  font-family: "Inter", sans-serif;
+  font-size: 18px; font-weight: 500; line-height: 1.56;
+  margin: 0 0 8px; color: var(--ink);
+}
+.faq p { font-size: 16px; line-height: 1.5; color: var(--body); margin: 0; }
+.faq a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Design system */
+.ds { padding: 96px 0; background: var(--canvas); border-top: 1px solid var(--hairline); }
+.ds-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.ds-head h2 { font-family: "Nunito", sans-serif; font-size: 30px; font-weight: 500; margin: 0 0 12px; }
+.ds-head p { color: var(--body); }
+
+.ds-section { margin-bottom: 56px; }
+.ds-section h3 {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--ink); text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+.color-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.swatch { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 12px; padding: 14px; }
+.swatch .chip { height: 56px; border-radius: 8px; margin-bottom: 10px; }
+.swatch .nm { font-size: 13px; font-weight: 500; }
+.swatch .hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--body); margin-top: 4px; }
+
+.type-table { width: 100%; background: var(--canvas); border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; border-collapse: separate; border-spacing: 0; }
+.type-table th, .type-table td { padding: 14px 18px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--hairline); }
+.type-table th { font-weight: 600; color: var(--body); text-transform: uppercase; letter-spacing: 0.5px; font-size: 12px; background: var(--surface-soft); }
+.type-table tr:last-child td { border-bottom: 0; }
+.type-table .meta { font-family: "JetBrains Mono", monospace; color: var(--body); }
+
+.radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+.radius-cell { background: var(--canvas); border: 1px solid var(--hairline); padding: 18px; border-radius: 12px; text-align: center; }
+.radius-cell .box { height: 64px; background: var(--ink); margin-bottom: 12px; }
+.radius-cell .nm { font-size: 13px; font-weight: 500; color: var(--ink); }
+.radius-cell .val { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--body); margin-top: 2px; }
+
+.comp-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.comp-cell { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; }
+.comp-cell .lbl { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--body); text-transform: uppercase; margin-bottom: 16px; }
+.comp-cell .demo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.input-demo { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 9999px; padding: 9px 16px; height: 40px; font-size: 16px; color: var(--ink); width: 100%; outline: none; font-family: inherit; }
+.input-demo:focus { box-shadow: 0 0 0 3px var(--focus-ring); }
+
+/* Footer */
+.footer { padding: 32px 24px; text-align: center; border-top: 1px solid var(--hairline); }
+.footer .row { display: inline-flex; flex-wrap: wrap; gap: 18px; font-size: 12px; color: var(--body); justify-content: center; }
+.footer a:hover { color: var(--ink); }
+.footer .copy { font-size: 12px; color: var(--body); margin-top: 12px; }
+
+/* floating link */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px; z-index: 80;
+  background: var(--ink); color: var(--on-primary);
+  padding: 10px 16px; border-radius: 9999px;
+  font-size: 13px; font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
+.src-link:hover { background: var(--ink-deep); }
+
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .comp-matrix { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .search-pill { display: none; }
+  .hero h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LLAMA SVG (reusable via data attr below; inline copies for fidelity) -->
+
+<header class="topnav">
+  <div class="wrap-widest row">
+    <a href="#" class="brand">
+      <!-- llama -->
+      <svg class="llama-svg" style="width:24px;height:24px;" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 35 v-8 c0-2-1-3-1-5 v-3 c0-3 2-5 5-5 h6 c3 0 5 2 5 5 v3 c0 2-1 3-1 5 v8"/>
+        <path d="M14 19 v-5 c0-2-1-3-2-4 c-1-1-1-2-1-3"/>
+        <path d="M11 7 c-2 0-3 2-3 4"/>
+        <circle cx="18" cy="18" r="0.7" fill="currentColor"/>
+        <circle cx="24" cy="18" r="0.7" fill="currentColor"/>
+        <path d="M20 22 q1 1 2 0"/>
+      </svg>
+      Ollama
+    </a>
+    <nav class="nav-links">
+      <a href="#">Models</a>
+      <a href="#">Docs</a>
+      <a href="#">Pricing</a>
+    </nav>
+    <span class="spacer"></span>
+    <div class="search-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="search" placeholder="Search models" />
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-secondary">Sign in</a>
+      <a href="#" class="btn btn-primary">Download</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-llama">
+      <!-- hand-drawn llama -->
+      <svg class="llama-svg llama-96" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink);">
+        <!-- body -->
+        <path d="M38 102 v-22 c0-5 -3 -8 -3 -14 v-12 c0 -8 6 -14 14 -14 h22 c8 0 14 6 14 14 v12 c0 6 -3 9 -3 14 v22"/>
+        <!-- left ear / neck up -->
+        <path d="M38 54 v-18 c0 -5 -3 -8 -6 -11 c-3 -3 -3 -7 -3 -10"/>
+        <path d="M29 15 c-6 0 -10 6 -10 12"/>
+        <!-- right ear -->
+        <path d="M70 50 q4 -6 8 -10"/>
+        <!-- eyes -->
+        <circle cx="48" cy="46" r="1.8" fill="currentColor" stroke="none"/>
+        <circle cx="66" cy="46" r="1.8" fill="currentColor" stroke="none"/>
+        <!-- smile -->
+        <path d="M54 56 q3 3 6 0"/>
+        <!-- legs accent -->
+        <path d="M48 102 v6 M72 102 v6"/>
+      </svg>
+    </div>
+    <h1 class="rounded-face">Get up and running with large language models, locally.</h1>
+    <p class="sub">Run Llama, Mistral, Gemma, and dozens more — on your own laptop, with a single command.</p>
+
+    <div>
+      <span class="install-pill">
+        <span class="mono">curl -fsSL https://ollama.com/install.sh | sh</span>
+        <span class="copy" title="Copy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        </span>
+      </span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary">Download for Mac</a>
+      <a href="#" class="btn btn-secondary">Linux & Windows</a>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATE YOUR WORK -->
+<section class="section">
+  <div class="wrap-wide">
+    <div class="split">
+      <div class="txt">
+        <h2 class="rounded-face">Automate your work.</h2>
+        <p>Run any model, locally or in the cloud. Build agents, automate workflows, ship apps — without sending a single token to a third party.</p>
+        <p>The CLI is the API. Start a model in one line; stream tokens in the next.</p>
+        <span class="chip mono">ollama run llama3.2</span>
+      </div>
+      <div class="terminal-card">
+        <div class="terminal-head">
+          <span class="tlight r"></span><span class="tlight y"></span><span class="tlight g"></span>
+          <span class="ttl">~ — ollama</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="cmt"># run a model locally</span></div>
+          <div><span class="prompt">$</span> <span class="cmd">ollama run llama3.2</span></div>
+          <div><span class="out">pulling manifest...</span></div>
+          <div><span class="out">verifying sha256 digest </span><span class="ok">✓</span></div>
+          <div><span class="out">writing manifest </span><span class="ok">✓</span></div>
+          <div><span class="out">success</span></div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">&gt;&gt;&gt;</span> <span class="cmd">Why is the sky blue?</span></div>
+          <div><span class="out">Rayleigh scattering: shorter wavelengths</span></div>
+          <div><span class="out">scatter more than longer ones</span><span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- START LOCAL SCALE CLOUD -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap-wide">
+    <div class="split">
+      <div class="terminal-card">
+        <div class="terminal-head">
+          <span class="tlight r"></span><span class="tlight y"></span><span class="tlight g"></span>
+          <span class="ttl">~ — scale cloud</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="cmt"># same command, datacenter GPUs</span></div>
+          <div><span class="prompt">$</span> <span class="cmd">ollama run llama3.2:70b --cloud</span></div>
+          <div><span class="out">connecting to ollama cloud...</span></div>
+          <div><span class="out">attached gpu: H100 80G </span><span class="ok">✓</span></div>
+          <div><span class="out">streaming response...</span></div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">&gt;&gt;&gt;</span> <span class="cmd">Summarize this 200-page PDF.</span></div>
+          <div><span class="out">Reading 423,991 tokens...</span></div>
+          <div><span class="out">Done in 14.2s</span><span class="cursor"></span></div>
+        </div>
+      </div>
+      <div class="txt">
+        <h2 class="rounded-face">Start local.<br/>Scale cloud.</h2>
+        <p>The same model, the same prompt, the same CLI — running on your laptop or on an H100. Switch with a flag, never with a rewrite.</p>
+        <p>No vendor lock-in. Models stay portable: pull once, run anywhere.</p>
+        <span class="chip mono">--cloud</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy">
+  <div class="wrap">
+    <div class="lock">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></svg>
+    </div>
+    <h2 class="rounded-face">Your data stays yours.</h2>
+    <p style="max-width:520px;margin:0 auto;">Models run on your machine by default. When you scale to the cloud, your prompts and outputs are never used to train anything.</p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="wrap-widest">
+    <div class="pricing-head">
+      <h2 class="rounded-face">Pricing</h2>
+      <p>Local is free. Cloud is per-token. Pick the tier that fits how you build.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="tier">
+        <div class="tier-llama">
+          <svg class="llama-svg llama-32" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 35 v-8 c0-2-1-3-1-5 v-3 c0-3 2-5 5-5 h6 c3 0 5 2 5 5 v3 c0 2-1 3-1 5 v8"/><path d="M14 19 v-5 c0-2-1-3-2-4 c-1-1-1-2-1-3"/><path d="M11 7 c-2 0-3 2-3 4"/><circle cx="18" cy="18" r="0.7" fill="currentColor"/><circle cx="24" cy="18" r="0.7" fill="currentColor"/><path d="M20 22 q1 1 2 0"/></svg>
+        </div>
+        <h3>Free</h3>
+        <p class="blurb">For local development.</p>
+        <p class="price">$0<small>/ month</small></p>
+        <div class="cta"><a href="#" class="btn btn-primary">Download</a></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Run unlimited models locally</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Full CLI and HTTP API</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Community support</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-llama">
+          <svg class="llama-svg llama-32" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 35 v-8 c0-2-1-3-1-5 v-3 c0-3 2-5 5-5 h6 c3 0 5 2 5 5 v3 c0 2-1 3-1 5 v8"/><path d="M14 19 v-5 c0-2-1-3-2-4 c-1-1-1-2-1-3"/><path d="M11 7 c-2 0-3 2-3 4"/><circle cx="18" cy="18" r="0.7" fill="currentColor"/><circle cx="24" cy="18" r="0.7" fill="currentColor"/><path d="M20 22 q1 1 2 0"/></svg>
+        </div>
+        <h3>Pro</h3>
+        <p class="blurb">Run hosted models when you outgrow local.</p>
+        <p class="price">$20<small>/ month</small></p>
+        <div class="cta"><a href="#" class="btn btn-primary">Get Pro</a></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Everything in Free, plus:</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 30M tokens per month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Access cloud-hosted 70B models</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Faster pulls and pre-warmed models</li>
+        </ul>
+      </div>
+      <div class="tier dark">
+        <div class="tier-llama">
+          <svg class="llama-svg llama-32" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--on-dark);"><path d="M14 35 v-8 c0-2-1-3-1-5 v-3 c0-3 2-5 5-5 h6 c3 0 5 2 5 5 v3 c0 2-1 3-1 5 v8"/><path d="M14 19 v-5 c0-2-1-3-2-4 c-1-1-1-2-1-3"/><path d="M11 7 c-2 0-3 2-3 4"/><circle cx="18" cy="18" r="0.7" fill="currentColor"/><circle cx="24" cy="18" r="0.7" fill="currentColor"/><path d="M20 22 q1 1 2 0"/></svg>
+        </div>
+        <h3>Max</h3>
+        <p class="blurb">Solve harder tasks, faster.</p>
+        <p class="price">$80<small>/ month</small></p>
+        <div class="cta"><a href="#" class="btn btn-on-dark">Get Max</a></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Everything in Pro, plus:</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 200M tokens per month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Access larger models on data-center-grade hardware</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Priority routing and dedicated capacity</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="wrap">
+    <h2 class="rounded-face" style="text-align:center;font-size:30px;margin-bottom:48px;">Frequently asked questions</h2>
+    <div class="faq">
+      <div class="q">
+        <h4>Is Ollama really free to run locally?</h4>
+        <p>Yes. The Ollama CLI is open source under the MIT license and free for personal and commercial use. You only pay if you opt into the hosted cloud tier.</p>
+      </div>
+      <div class="q">
+        <h4>Which models can I run?</h4>
+        <p>Anything in the <a href="#">Ollama library</a> — Llama 3, Mistral, Gemma, Phi, Qwen, DeepSeek, and many more. You can also <a href="#">bring your own GGUF</a> models with a Modelfile.</p>
+      </div>
+      <div class="q">
+        <h4>Does Ollama see my prompts?</h4>
+        <p>No. When you run locally, everything stays on your machine. When you opt into the cloud tier, your prompts and outputs are encrypted in transit and never used to train models. Contact us at <a href="mailto:hello@ollama.com">hello@ollama.com</a> for the full data policy.</p>
+      </div>
+      <div class="q">
+        <h4>Can I cancel anytime?</h4>
+        <p>Yes. Cancel from your billing dashboard — your account drops back to the free local tier at the end of the cycle.</p>
+      </div>
+      <div class="q">
+        <h4>How does GPU support work?</h4>
+        <p>Ollama auto-detects Metal on Apple Silicon, CUDA on NVIDIA, and ROCm on AMD. Falls back to CPU otherwise. No driver flags, no env vars.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM REFERENCE -->
+<section class="ds" id="design-system">
+  <div class="wrap-widest">
+    <div class="ds-head">
+      <h2 class="rounded-face">The reference.</h2>
+      <p>One canvas. Pill geometry. The system is the documentation.</p>
+    </div>
+
+    <div class="ds-section">
+      <h3>Color</h3>
+      <div style="margin-bottom:24px;">
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:12px;">Surface &amp; Ink</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#000000;"></div><div class="nm">primary</div><div class="hex">#000000</div></div>
+          <div class="swatch"><div class="chip" style="background:#171717;"></div><div class="nm">surface-dark</div><div class="hex">#171717</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffffff;border:1px solid var(--hairline);"></div><div class="nm">canvas</div><div class="hex">#ffffff</div></div>
+          <div class="swatch"><div class="chip" style="background:#fafafa;border:1px solid var(--hairline);"></div><div class="nm">surface-soft</div><div class="hex">#fafafa</div></div>
+          <div class="swatch"><div class="chip" style="background:#e5e5e5;"></div><div class="nm">hairline</div><div class="hex">#e5e5e5</div></div>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;">
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:12px;">Text</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#525252;"></div><div class="nm">charcoal</div><div class="hex">#525252</div></div>
+          <div class="swatch"><div class="chip" style="background:#737373;"></div><div class="nm">body</div><div class="hex">#737373</div></div>
+          <div class="swatch"><div class="chip" style="background:#a3a3a3;"></div><div class="nm">mute</div><div class="hex">#a3a3a3</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:12px;">Traffic lights (terminal only)</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#ff5f56;"></div><div class="nm">terminal-red</div><div class="hex">#ff5f56</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffbd2e;"></div><div class="nm">terminal-yellow</div><div class="hex">#ffbd2e</div></div>
+          <div class="swatch"><div class="chip" style="background:#27c93f;"></div><div class="nm">terminal-green</div><div class="hex">#27c93f</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <h3>Typography</h3>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Spec</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>display-xl</td>
+            <td class="rounded-face" style="font-size:36px;font-weight:500;line-height:1.11;">Get up and running.</td>
+            <td class="meta">Nunito · 36 / 500 · 0</td>
+          </tr>
+          <tr>
+            <td>display-lg</td>
+            <td class="rounded-face" style="font-size:30px;font-weight:500;line-height:1.2;">Pricing</td>
+            <td class="meta">Nunito · 30 / 500 · 0</td>
+          </tr>
+          <tr>
+            <td>heading-lg</td>
+            <td class="rounded-face" style="font-size:24px;font-weight:600;line-height:1.33;">Automate your work.</td>
+            <td class="meta">Nunito · 24 / 600 · 0</td>
+          </tr>
+          <tr>
+            <td>body-md</td>
+            <td>Run any model, locally or in the cloud.</td>
+            <td class="meta">Inter · 16 / 400 · 1.5</td>
+          </tr>
+          <tr>
+            <td>body-sm</td>
+            <td style="font-size:14px;">Access larger models on data-center-grade hardware.</td>
+            <td class="meta">Inter · 14 / 400 · 1.43</td>
+          </tr>
+          <tr>
+            <td>code-md</td>
+            <td class="mono" style="font-size:16px;">curl -fsSL https://ollama.com/install.sh | sh</td>
+            <td class="meta">ui-monospace · 16 / 400</td>
+          </tr>
+          <tr>
+            <td>button-md</td>
+            <td style="font-size:14px;font-weight:500;">Download</td>
+            <td class="meta">Inter · 14 / 500 · 1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-section">
+      <h3>Radius</h3>
+      <div class="radius-grid">
+        <div class="radius-cell"><div class="box" style="border-radius:0;"></div><div class="nm">none</div><div class="val">0px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:6px;"></div><div class="nm">sm · code chip</div><div class="val">6px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:8px;"></div><div class="nm">md</div><div class="val">8px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:12px;"></div><div class="nm">lg · cards</div><div class="val">12px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:9999px;"></div><div class="nm">full · pills</div><div class="val">9999px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <h3>Components</h3>
+      <div class="comp-matrix">
+        <div class="comp-cell">
+          <div class="lbl">Buttons</div>
+          <div class="demo">
+            <a href="#" class="btn btn-primary">Download</a>
+            <a href="#" class="btn btn-secondary">Sign in</a>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Install snippet</div>
+          <div class="demo">
+            <span class="install-pill" style="height:40px;font-size:13px;padding:8px 14px;">
+              <span class="mono">ollama run llama3.2</span>
+              <span class="copy"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span>
+            </span>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Search pill</div>
+          <div class="demo">
+            <span class="search-pill" style="width:100%;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+              <input type="search" placeholder="Search models" />
+            </span>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Text input (pill)</div>
+          <div class="demo">
+            <input class="input-demo" placeholder="hello@ollama.com" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="row">
+    <a href="#">Download</a>
+    <a href="#">Blog</a>
+    <a href="#">Docs</a>
+    <a href="#">GitHub</a>
+    <a href="#">Discord</a>
+    <a href="#">X</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </div>
+  <div class="copy">© 2026 Ollama — Inspired demo. Not affiliated.</div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.ollama.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,1183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shopify — Inspired Design</title>
+<meta name="description" content="A Shopify-inspired marketing page: cream canvas, aloe and pistachio greens, thin Neue Haas display type, pill buttons, merchant dashboard mockup. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  /* Brand */
+  --primary: #000000;
+  --ink: #000000;
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  /* Surface */
+  --canvas-night: #000000;
+  --canvas-night-elevated: #0a0a0a;
+  --canvas-light: #ffffff;
+  --canvas-cream: #fbfbf5;
+  --surface-elevated-dark: #1e2c31;
+  /* Shade ladder */
+  --shade-30: #d4d4d8;
+  --shade-40: #a1a1aa;
+  --shade-50: #71717a;
+  --shade-60: #52525b;
+  --shade-70: #3f3f46;
+  /* Hairlines */
+  --hairline-light: #e4e4e7;
+  --hairline-dark: #1e2c31;
+  /* Accents */
+  --aloe-10: #c1fbd4;
+  --pistachio-10: #d4f9e0;
+  --link-cool-1: #9dabad;
+  --link-cool-2: #9797a2;
+  --link-cool-3: #bdbdca;
+  --link-mint: #99b3ad;
+  /* Radius */
+  --r-xs: 4px;
+  --r-sm: 5px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 20px;
+  --r-pill: 9999px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-feature-settings: "ss03";
+  background: var(--canvas-cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+::selection { background: var(--aloe-10); color: var(--ink); }
+.display { font-weight: 300; letter-spacing: -0.5px; }
+
+/* Layout */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.wrap-wide { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+
+/* Top nav (DARK on cinematic hero, switches to LIGHT below) */
+.topnav-dark {
+  background: var(--canvas-night);
+  color: var(--on-dark);
+  height: 72px;
+  position: relative; z-index: 30;
+}
+.topnav-dark .row { display: flex; align-items: center; height: 100%; gap: 32px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 600 22px/1 "Inter"; color: inherit;
+  letter-spacing: -0.5px;
+}
+.brand .bag {
+  width: 28px; height: 28px;
+  background: var(--aloe-10);
+  border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
+}
+.nav-links { display: flex; gap: 4px; flex: 1; justify-content: center; }
+.nav-links a {
+  color: var(--on-dark); padding: 8px 16px;
+  font: 400 16px/1.5 "Inter";
+}
+.nav-right { display: flex; gap: 8px; align-items: center; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--r-pill);
+  font: 400 16px/1.5 "Inter";
+  border: none; cursor: pointer;
+  transition: opacity .15s;
+}
+.btn:hover { opacity: 0.9; }
+.btn-primary-pill { background: var(--ink); color: var(--on-primary); }
+.btn-outline-dark {
+  background: transparent; color: var(--on-dark);
+  border: 1.5px solid var(--on-dark); padding: 10.5px 26px;
+}
+.btn-outline-dark:hover { background: var(--on-dark); color: var(--ink); }
+.btn-outline-light {
+  background: var(--canvas-light); color: var(--ink);
+  border: 1px solid var(--ink);
+}
+.btn-aloe { background: var(--aloe-10); color: var(--ink); }
+.btn-aloe:hover { background: #a8f5c0; }
+.btn-sm { padding: 8px 16px; font-size: 14px; }
+
+/* Type */
+.eyebrow {
+  font: 400 12px/1.2 "Inter"; letter-spacing: 0.72px;
+  text-transform: uppercase; color: var(--ink);
+  margin-bottom: 16px;
+}
+.display-xxl { font: 300 clamp(56px, 9vw, 96px)/1.0 "Inter"; letter-spacing: 2.4px; margin: 0; }
+.display-xl { font: 300 clamp(40px, 6vw, 70px)/1.0 "Inter"; letter-spacing: 0; margin: 0; }
+.display-lg { font: 300 clamp(36px, 5vw, 55px)/1.16 "Inter"; margin: 0; }
+.display-md { font: 300 clamp(32px, 4vw, 48px)/1.14 "Inter"; margin: 0; }
+.heading-xl { font: 500 28px/1.28 "Inter"; letter-spacing: 0.42px; margin: 0; }
+.heading-lg { font: 400 24px/1.14 "Inter"; letter-spacing: 0.36px; margin: 0; }
+.heading-md { font: 500 20px/1.4 "Inter"; letter-spacing: 0.3px; margin: 0; }
+.body-lg { font: 550 18px/1.56 "Inter"; }
+.body-md { font: 420 16px/1.5 "Inter"; }
+
+/* —— CINEMATIC HERO (dark) —— */
+.hero-cinematic {
+  background: var(--canvas-night); color: var(--on-dark);
+  padding: 80px 0 120px;
+  position: relative; overflow: hidden;
+}
+.hero-cinematic-inner { position: relative; z-index: 2; }
+.hero-cinematic .eyebrow { color: var(--link-cool-1); }
+.hero-cinematic h1 { color: var(--on-dark); max-width: 1100px; margin-bottom: 32px; }
+.hero-cinematic .lead {
+  font: 400 20px/1.5 "Inter"; color: var(--link-cool-3);
+  max-width: 540px; margin: 0 0 32px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Hero photo strip — full bleed */
+.hero-photo-strip {
+  margin-top: 80px;
+  height: 480px;
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 30% 50%, rgba(193,251,212,0.25), transparent 60%),
+    radial-gradient(ellipse 50% 80% at 75% 60%, rgba(255,200,150,0.2), transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% 10%, rgba(157,171,173,0.2), transparent 60%),
+    linear-gradient(180deg, #1a2a2a 0%, #0a0a0a 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-photo-strip::before {
+  /* merchant silhouette stand-in */
+  content: ""; position: absolute; left: 25%; bottom: 0; width: 50%; height: 80%;
+  background:
+    radial-gradient(ellipse 40% 30% at 50% 25%, #d4a87a, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 50% 65%, #5a3a2a, transparent 70%);
+  filter: blur(2px);
+}
+.hero-photo-strip::after {
+  /* counter / surface stand-in */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 25%; height: 4px;
+  background: rgba(193,251,212,0.4);
+}
+
+/* Logo strip */
+.logo-strip {
+  background: var(--canvas-night);
+  padding: 48px 0 80px;
+  color: var(--link-cool-1);
+}
+.logo-strip .label {
+  text-align: center; font: 400 12px/1.2 "Inter";
+  letter-spacing: 0.72px; text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.logos-row {
+  display: flex; justify-content: space-around; align-items: center;
+  flex-wrap: wrap; gap: 32px;
+  filter: brightness(0.7);
+}
+.logo-word {
+  font: 600 24px/1 "Inter"; color: var(--link-cool-3);
+  letter-spacing: -0.5px;
+}
+
+/* Cinematic feature cards */
+.cinematic-features {
+  background: var(--canvas-night);
+  color: var(--on-dark);
+  padding: 96px 0 128px;
+}
+.cf-head { max-width: 800px; margin-bottom: 64px; }
+.cf-head .eyebrow { color: var(--link-cool-1); }
+.cf-head h2 { color: var(--on-dark); margin-bottom: 24px; }
+.cf-head p { color: var(--link-cool-3); font-size: 20px; max-width: 600px; }
+.cf-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 16px; }
+.cf-card {
+  background: var(--canvas-night-elevated);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  color: var(--on-dark);
+  position: relative;
+  box-shadow: 0 1px 2px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.04);
+  display: flex; flex-direction: column;
+  min-height: 420px;
+}
+.cf-card.tall { grid-row: span 1; min-height: 420px; }
+.cf-card h3 { font: 300 36px/1.14 "Inter"; margin: 0 0 16px; }
+.cf-card .small { font: 400 14px/1.5 "Inter"; color: var(--link-cool-3); margin: 0 0 24px; }
+.cf-mockup {
+  flex: 1;
+  background: var(--surface-elevated-dark);
+  border-radius: var(--r-md);
+  margin-top: 16px;
+  position: relative; overflow: hidden;
+}
+.cf-mockup-photo {
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(193,251,212,0.15), transparent 60%),
+    linear-gradient(135deg, #1e2c31 0%, #0a1518 100%);
+}
+.cf-mockup-photo::after {
+  content: ""; position: absolute; left: 20%; bottom: 0; width: 60%; height: 70%;
+  background: radial-gradient(ellipse 50% 40% at 50% 50%, #99b3ad, transparent 70%);
+  filter: blur(8px);
+}
+.cf-checkout {
+  padding: 16px;
+}
+.cf-checkout .row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--hairline-dark); font: 400 12px/1.5 "Inter"; color: var(--on-dark); }
+.cf-checkout .row:last-of-type { border-bottom: none; }
+.cf-checkout .row .price { color: var(--aloe-10); font-weight: 500; }
+
+/* —— TRANSACTIONAL BAND (LIGHT) —— */
+.section-light {
+  background: var(--canvas-cream);
+  padding: 96px 0;
+}
+.section-head { margin-bottom: 64px; max-width: 720px; }
+.section-head h2 { margin-bottom: 16px; }
+.section-head p { font-size: 20px; color: var(--shade-50); }
+
+/* Pistachio band */
+.pistachio-band {
+  background: var(--pistachio-10);
+  border-radius: var(--r-lg);
+  padding: 64px;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px;
+  align-items: center;
+  margin: 64px 0;
+}
+.pistachio-band h3 { font: 300 48px/1.14 "Inter"; margin: 0 0 24px; }
+.pistachio-band p { font: 400 18px/1.56 "Inter"; color: var(--shade-60); margin: 0 0 24px; }
+.pistachio-mock {
+  aspect-ratio: 4/3;
+  background: var(--canvas-light);
+  border-radius: var(--r-md);
+  box-shadow:
+    0 8px 8px rgba(0,0,0,0.06),
+    0 4px 4px rgba(0,0,0,0.06),
+    0 2px 2px rgba(0,0,0,0.06),
+    0 0 0 1px rgba(0,0,0,0.06);
+  position: relative; overflow: hidden;
+  padding: 16px;
+}
+.pistachio-mock-header {
+  display: flex; gap: 6px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--hairline-light);
+  margin-bottom: 16px;
+}
+.pistachio-mock-header span { width: 10px; height: 10px; border-radius: 50%; background: var(--hairline-light); }
+.pistachio-mock-row {
+  display: flex; gap: 8px; align-items: center;
+  padding: 10px 8px; border-radius: 4px;
+  font: 400 12px/1 "Inter"; color: var(--shade-60);
+  margin-bottom: 4px;
+}
+.pistachio-mock-row .ico { width: 16px; height: 16px; background: var(--pistachio-10); border-radius: 4px; }
+.pistachio-mock-row.active { background: var(--aloe-10); color: var(--ink); font-weight: 500; }
+
+/* ===== MERCHANT DASHBOARD MOCKUP ===== */
+.dashboard-section {
+  background: var(--canvas-cream);
+  padding: 96px 0 128px;
+}
+.dashboard-frame {
+  background: var(--canvas-light);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--hairline-light);
+  box-shadow:
+    0 8px 8px rgba(0,0,0,0.08),
+    0 4px 4px rgba(0,0,0,0.08),
+    0 2px 2px rgba(0,0,0,0.08),
+    0 0 0 1px rgba(0,0,0,0.06);
+  overflow: hidden;
+  display: grid; grid-template-columns: 240px 1fr;
+  min-height: 640px;
+}
+.dash-side {
+  background: var(--canvas-cream);
+  border-right: 1px solid var(--hairline-light);
+  padding: 20px 12px;
+}
+.dash-brand {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px;
+  font: 600 18px/1 "Inter"; letter-spacing: -0.3px;
+  margin-bottom: 24px;
+}
+.dash-brand .bag {
+  width: 24px; height: 24px;
+  background: var(--aloe-10); border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+}
+.dash-nav { list-style: none; padding: 0; margin: 0; }
+.dash-nav li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border-radius: 6px;
+  font: 500 14px/1.5 "Inter"; color: var(--shade-70);
+  cursor: pointer; margin-bottom: 2px;
+}
+.dash-nav li.active { background: var(--canvas-light); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+.dash-nav li:hover { background: var(--canvas-light); }
+.dash-nav .ico { width: 16px; height: 16px; color: currentColor; }
+.dash-nav .badge {
+  margin-left: auto;
+  background: var(--ink); color: var(--on-primary);
+  font: 500 10px/1 "Inter"; padding: 3px 7px;
+  border-radius: 999px;
+}
+.dash-divider {
+  border-top: 1px solid var(--hairline-light);
+  margin: 16px 0;
+}
+.dash-section-title {
+  font: 500 11px/1 "Inter"; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--shade-40);
+  padding: 8px 12px; margin: 0;
+}
+
+.dash-main { padding: 24px 32px; background: var(--canvas-light); }
+.dash-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 24px;
+}
+.dash-header h2 { font: 500 24px/1.14 "Inter"; margin: 0; }
+.dash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.dash-stat-card {
+  background: var(--canvas-light);
+  border: 1px solid var(--hairline-light);
+  border-radius: var(--r-md);
+  padding: 16px;
+}
+.dash-stat-card .lbl { font: 500 12px/1 "Inter"; color: var(--shade-50); margin-bottom: 6px; }
+.dash-stat-card .num { font: 500 24px/1 "Inter"; margin-bottom: 4px; }
+.dash-stat-card .delta { font: 500 12px/1 "Inter"; color: #166534; display: inline-flex; align-items: center; gap: 4px; }
+.dash-stat-card .delta.down { color: #c62828; }
+
+.dash-chart-card {
+  background: var(--canvas-light);
+  border: 1px solid var(--hairline-light);
+  border-radius: var(--r-md);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.dash-chart-title { display: flex; justify-content: space-between; margin-bottom: 16px; }
+.dash-chart-title h3 { font: 500 16px/1 "Inter"; margin: 0; }
+.dash-chart {
+  height: 180px;
+  background: linear-gradient(180deg, var(--aloe-10) 0%, transparent 80%);
+  position: relative; overflow: hidden;
+  border-radius: 4px;
+}
+.dash-chart svg { width: 100%; height: 100%; display: block; }
+
+.dash-orders-card {
+  background: var(--canvas-light);
+  border: 1px solid var(--hairline-light);
+  border-radius: var(--r-md);
+  padding: 4px 0;
+}
+.dash-orders-card .head, .dash-orders-card .row {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 0.6fr;
+  padding: 12px 20px; gap: 12px;
+  font: 400 14px/1.5 "Inter";
+  align-items: center;
+  border-bottom: 1px solid var(--hairline-light);
+}
+.dash-orders-card .head { font-weight: 500; color: var(--shade-50); font-size: 12px; }
+.dash-orders-card .row:last-child { border-bottom: none; }
+.dash-orders-card .order-id { font-weight: 500; }
+.dash-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--aloe-10); color: var(--ink);
+  padding: 4px 10px; border-radius: 999px;
+  font: 500 12px/1 "Inter";
+}
+.dash-status.pending { background: #fff4d4; color: #6b4a08; }
+.dash-status.cancelled { background: var(--shade-30); color: var(--shade-70); }
+
+/* Pricing */
+.pricing-section { padding: 96px 0; background: var(--canvas-cream); }
+.pricing-head { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+.pricing-head h2 { margin-bottom: 16px; }
+.pricing-head p { font-size: 20px; color: var(--shade-50); }
+.pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.price-card {
+  background: var(--canvas-light);
+  border: 1px solid var(--hairline-light);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex; flex-direction: column;
+  box-shadow:
+    0 8px 8px rgba(0,0,0,0.04),
+    0 4px 4px rgba(0,0,0,0.04),
+    0 2px 2px rgba(0,0,0,0.04);
+}
+.price-card.featured {
+  background: var(--aloe-10);
+  border-color: transparent;
+}
+.price-card h4 { font: 500 28px/1.28 "Inter"; letter-spacing: 0.42px; margin: 0 0 8px; }
+.price-card .price-num { font: 300 48px/1.14 "Inter"; margin: 16px 0 4px; letter-spacing: -1px; }
+.price-card .price-num .currency { font-size: 24px; vertical-align: top; line-height: 1; }
+.price-card .price-num .period { font: 500 13px/1.5 "Inter"; color: var(--shade-50); display: block; margin-top: 4px; letter-spacing: -0.13px; }
+.price-card ul { list-style: none; padding: 0; margin: 24px 0; flex: 1; }
+.price-card ul li {
+  padding: 6px 0; font: 420 14px/1.5 "Inter";
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.price-card ul li::before { content: "✓"; color: var(--ink); flex: 0 0 16px; font-weight: 500; }
+.price-card .btn { width: 100%; }
+
+/* Feature 3-up cards (light) */
+.feature-3up-light { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.feature-light {
+  background: var(--canvas-light);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  border: 1px solid var(--hairline-light);
+}
+.feature-light .pill-tag {
+  display: inline-flex; align-items: center;
+  background: var(--aloe-10); color: var(--ink);
+  font: 400 12px/1.2 "Inter"; letter-spacing: 0.72px;
+  text-transform: uppercase;
+  padding: 4px 12px; border-radius: 999px;
+  margin-bottom: 16px;
+}
+.feature-light h3 { font: 500 24px/1.14 "Inter"; margin: 0 0 12px; letter-spacing: 0.36px; }
+.feature-light p { font: 420 16px/1.5 "Inter"; color: var(--shade-50); margin: 0 0 16px; }
+.feature-light a { font: 500 14px/1.5 "Inter"; text-decoration: underline; color: var(--ink); }
+
+/* CTA band */
+.cta-band {
+  background: var(--canvas-night); color: var(--on-dark);
+  padding: 96px 0;
+  text-align: center;
+}
+.cta-band h2 { color: var(--on-dark); margin: 0 auto 24px; max-width: 760px; }
+.cta-band p { color: var(--link-cool-3); font-size: 18px; max-width: 540px; margin: 0 auto 32px; }
+.cta-band-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ===========================
+   PART B — Design System
+   =========================== */
+.ds-section { background: var(--canvas-cream); padding: 100px 0 80px; border-top: 1px solid var(--hairline-light); }
+.ds-intro { max-width: 720px; margin-bottom: 64px; }
+.ds-intro h2 { font: 300 64px/1.14 "Inter"; margin: 0 0 16px; }
+.ds-intro p { font-size: 18px; color: var(--shade-50); }
+.ds-block { margin-bottom: 64px; }
+.ds-block-title {
+  font: 400 12px/1.2 "Inter"; letter-spacing: 0.72px;
+  text-transform: uppercase; color: var(--shade-50);
+  border-bottom: 1px solid var(--hairline-light);
+  padding-bottom: 8px; margin-bottom: 24px;
+  display: flex; justify-content: space-between; align-items: end;
+}
+.ds-block-title > span:first-child { color: var(--ink); font-weight: 500; font-size: 14px; letter-spacing: 0.28px; }
+
+.color-group { margin-bottom: 32px; }
+.color-group h4 { font: 500 16px/1.5 "Inter"; margin: 0 0 16px; }
+.color-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.color-tile {
+  background: var(--canvas-light);
+  border: 1px solid var(--hairline-light);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.color-swatch { height: 80px; }
+.color-meta { padding: 10px 12px; font-size: 12px; }
+.color-meta .name { font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 2px; }
+.color-meta .hex { color: var(--shade-50); font-family: ui-monospace, Menlo, monospace; font-size: 11px; }
+
+.type-table { width: 100%; border-collapse: collapse; background: var(--canvas-light); border: 1px solid var(--hairline-light); border-radius: var(--r-lg); overflow: hidden; }
+.type-table th, .type-table td { text-align: left; padding: 16px 20px; border-bottom: 1px solid var(--hairline-light); vertical-align: middle; }
+.type-table tr:last-child td { border-bottom: none; }
+.type-table th { font: 500 12px/1.2 "Inter"; letter-spacing: 0.72px; text-transform: uppercase; color: var(--shade-50); background: var(--canvas-cream); }
+.type-table td.token { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--shade-60); width: 180px; }
+.type-table td.spec { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--shade-40); width: 220px; }
+
+.radius-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.radius-tile { text-align: center; }
+.radius-box { height: 90px; background: var(--ink); margin-bottom: 12px; }
+.radius-tile .name { font: 500 13px/1 "Inter"; color: var(--ink); margin-bottom: 2px; }
+.radius-tile .val { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--shade-50); }
+
+.comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.comp-card {
+  background: var(--canvas-light);
+  border: 1px solid var(--hairline-light);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+.comp-card .label { font: 500 12px/1.2 "Inter"; letter-spacing: 0.72px; text-transform: uppercase; color: var(--shade-50); margin-bottom: 16px; }
+.comp-card .stack { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.input-demo {
+  background: var(--canvas-light); border: 1px solid var(--hairline-light);
+  border-radius: var(--r-md);
+  padding: 10px 12px; width: 100%;
+  font: 420 16px/1.5 "Inter"; outline: none; color: var(--ink);
+}
+.input-demo:focus { border-color: var(--ink); }
+
+/* Footer */
+.footer {
+  background: var(--canvas-night); color: var(--on-dark);
+  padding: 80px 0 32px;
+}
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 64px; }
+.footer h5 { font: 500 14px/1.5 "Inter"; color: var(--on-dark); margin: 0 0 16px; letter-spacing: 0.28px; }
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer ul li { padding: 5px 0; }
+.footer ul li a { color: var(--link-cool-1); font: 400 14px/1.5 "Inter"; }
+.footer ul li a:hover { color: var(--on-dark); }
+.footer-bottom {
+  border-top: 1px solid var(--shade-70);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  font: 500 13px/1.5 "Inter"; color: var(--link-cool-2);
+}
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--aloe-10); color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 8px 16px; border-radius: var(--r-pill);
+  font: 500 13px/1 "Inter";
+}
+.src-link:hover { background: #a8f5c0; }
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .cf-grid { grid-template-columns: 1fr; }
+  .pistachio-band { grid-template-columns: 1fr; padding: 32px; gap: 32px; }
+  .feature-3up-light { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr 1fr; }
+  .dashboard-frame { grid-template-columns: 1fr; }
+  .dash-side { display: none; }
+  .dash-stats { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .color-grid { grid-template-columns: repeat(3, 1fr); }
+  .radius-grid { grid-template-columns: repeat(3, 1fr); }
+  .comp-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 599px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .dash-orders-card .head, .dash-orders-card .row { grid-template-columns: 1fr 1fr; }
+  .color-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV (DARK on hero) -->
+<nav class="topnav-dark">
+  <div class="wrap-wide row">
+    <a class="brand" href="#">
+      <span class="bag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 4h-2v2h-4V4H8a2 2 0 0 0-2 2v14h12V6a2 2 0 0 0-2-2zm-7 4h6v1h-6V8z"/></svg>
+      </span>
+      <span>shopify</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Solutions</a>
+      <a href="#">Catalog</a>
+      <a href="#">Pricing</a>
+      <a href="#">Resources</a>
+      <a href="#">Enterprise</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="btn btn-outline-dark btn-sm">Log in</a>
+      <a href="#" class="btn btn-primary-pill" style="background:var(--on-dark);color:var(--ink);">Start free trial</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CINEMATIC HERO -->
+<section class="hero-cinematic">
+  <div class="wrap-wide hero-cinematic-inner">
+    <span class="eyebrow">Build a business · grow it</span>
+    <h1 class="display-xxl">Sell to anyone,<br>from anywhere.</h1>
+    <p class="lead">A unified commerce platform that connects your storefront, social, marketplace, and in-person sales — and lets one inventory follow the customer wherever they go.</p>
+    <div class="hero-cta">
+      <button class="btn btn-outline-dark">Start free trial</button>
+      <button class="btn btn-outline-dark" style="border-color:transparent;color:var(--link-cool-3);">Talk to sales →</button>
+    </div>
+    <div class="hero-photo-strip"></div>
+  </div>
+</section>
+
+<!-- LOGO STRIP -->
+<section class="logo-strip">
+  <div class="wrap-wide">
+    <div class="label">Powering over a million merchants in 175 countries</div>
+    <div class="logos-row">
+      <span class="logo-word">Allbirds</span>
+      <span class="logo-word">Heinz</span>
+      <span class="logo-word">Gymshark</span>
+      <span class="logo-word">Mattel</span>
+      <span class="logo-word">Staples</span>
+      <span class="logo-word">Kotn</span>
+      <span class="logo-word">Hasbro</span>
+    </div>
+  </div>
+</section>
+
+<!-- CINEMATIC FEATURES -->
+<section class="cinematic-features">
+  <div class="wrap-wide">
+    <div class="cf-head">
+      <span class="eyebrow">Commerce, end to end</span>
+      <h2 class="display-md" style="color:var(--on-dark);">One platform, every channel.<br>One inventory, every sale.</h2>
+      <p>From the storefront to the warehouse to the customer's door — the same product, the same order, the same customer profile, in one place.</p>
+    </div>
+    <div class="cf-grid">
+
+      <div class="cf-card tall">
+        <span class="eyebrow" style="color:var(--link-cool-1);">Storefront builder</span>
+        <h3>Drag, drop,<br>ship.</h3>
+        <p class="small">Beautiful storefronts in minutes. 100+ themes, every page customizable without code.</p>
+        <div class="cf-mockup cf-mockup-photo"></div>
+      </div>
+
+      <div class="cf-card">
+        <span class="eyebrow" style="color:var(--link-cool-1);">Checkout</span>
+        <h3 style="font-size:28px;">The world's<br>highest-converting checkout.</h3>
+        <div class="cf-mockup cf-checkout" style="background: var(--canvas-night-elevated);">
+          <div class="row"><span>Aloe Mat</span><span class="price">$48.00</span></div>
+          <div class="row"><span>Mug, ceramic</span><span class="price">$22.00</span></div>
+          <div class="row"><span>Shipping</span><span class="price">Free</span></div>
+          <div class="row" style="margin-top:8px;font-weight:500;color:var(--on-dark);"><span>Total</span><span class="price" style="font-size:18px;">$70.00</span></div>
+          <button class="btn btn-aloe" style="width:100%;margin-top:12px;">Pay now</button>
+        </div>
+      </div>
+
+      <div class="cf-card">
+        <span class="eyebrow" style="color:var(--link-cool-1);">Payments</span>
+        <h3 style="font-size:28px;">Get paid, in any currency.</h3>
+        <p class="small">Accept Shop Pay, Apple Pay, Google Pay, credit, debit and 100+ payment methods worldwide.</p>
+        <div class="cf-mockup" style="background:var(--surface-elevated-dark);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;padding:24px;">
+          <div style="background:var(--aloe-10);color:var(--ink);padding:10px 20px;border-radius:999px;font:500 13px/1 'Inter';">Shop Pay</div>
+          <div style="background:rgba(255,255,255,0.08);color:var(--on-dark);padding:10px 20px;border-radius:999px;font:500 13px/1 'Inter';">Apple Pay</div>
+          <div style="background:rgba(255,255,255,0.08);color:var(--on-dark);padding:10px 20px;border-radius:999px;font:500 13px/1 'Inter';">Google Pay</div>
+          <div style="background:rgba(255,255,255,0.08);color:var(--on-dark);padding:10px 20px;border-radius:999px;font:500 13px/1 'Inter';">+ 100 more</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== MERCHANT DASHBOARD ===== -->
+<section class="dashboard-section">
+  <div class="wrap-wide">
+    <div class="section-head" style="text-align:center;max-width:760px;margin-left:auto;margin-right:auto;margin-bottom:48px;">
+      <span class="eyebrow">Admin</span>
+      <h2 class="display-md">A back office that scales with you.</h2>
+      <p>Orders, customers, inventory, marketing — everything in one workspace your whole team can use.</p>
+    </div>
+
+    <div class="dashboard-frame">
+      <aside class="dash-side">
+        <div class="dash-brand">
+          <span class="bag"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 4h-2v2h-4V4H8a2 2 0 0 0-2 2v14h12V6a2 2 0 0 0-2-2zm-7 4h6v1h-6V8z"/></svg></span>
+          <span>Aloe Studio</span>
+        </div>
+        <ul class="dash-nav">
+          <li><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12 12 4l9 8M5 10v10h14V10"/></svg></span>Home</li>
+          <li class="active"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/></svg></span>Orders<span class="badge">12</span></li>
+          <li><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>Products</li>
+          <li><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 4-7 8-7s8 3 8 7"/></svg></span>Customers</li>
+          <li><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v18H3z"/><path d="M9 17V9l5 4 5-4"/></svg></span>Marketing</li>
+          <li><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/></svg></span>Analytics</li>
+          <div class="dash-divider"></div>
+          <li class="dash-section-title" style="cursor:default;">Sales channels</li>
+          <li><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/></svg></span>Online Store</li>
+          <li><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 19h2"/></svg></span>Point of Sale</li>
+          <li><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2c3 3 4 6 4 10s-1 7-4 10c-3-3-4-6-4-10s1-7 4-10z"/></svg></span>Shop App</li>
+        </ul>
+      </aside>
+
+      <main class="dash-main">
+        <div class="dash-header">
+          <h2>Orders</h2>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-outline-light btn-sm">Export</button>
+            <button class="btn btn-primary-pill btn-sm">Create order</button>
+          </div>
+        </div>
+
+        <div class="dash-stats">
+          <div class="dash-stat-card">
+            <div class="lbl">Total orders</div>
+            <div class="num">2,847</div>
+            <div class="delta">↑ 12.4%</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="lbl">Conversion</div>
+            <div class="num">3.2%</div>
+            <div class="delta">↑ 0.4%</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="lbl">Avg order value</div>
+            <div class="num">$82.40</div>
+            <div class="delta down">↓ 1.1%</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="lbl">Sessions</div>
+            <div class="num">88,210</div>
+            <div class="delta">↑ 8.6%</div>
+          </div>
+        </div>
+
+        <div class="dash-chart-card">
+          <div class="dash-chart-title">
+            <h3>Sales over time</h3>
+            <span style="font:500 12px/1 'Inter';color:var(--shade-50);">Last 30 days · $234,820</span>
+          </div>
+          <div class="dash-chart">
+            <svg viewBox="0 0 600 180" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="cg" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#c1fbd4" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#c1fbd4" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 130 L40 110 L80 120 L120 90 L160 95 L200 70 L240 75 L280 60 L320 45 L360 55 L400 40 L440 30 L480 50 L520 35 L560 25 L600 30 L600 180 L0 180 Z" fill="url(#cg)"/>
+              <path d="M0 130 L40 110 L80 120 L120 90 L160 95 L200 70 L240 75 L280 60 L320 45 L360 55 L400 40 L440 30 L480 50 L520 35 L560 25 L600 30" fill="none" stroke="#0a8a3a" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="dash-orders-card">
+          <div class="head">
+            <div>Order</div><div>Customer</div><div>Status</div><div>Total</div><div></div>
+          </div>
+          <div class="row">
+            <div class="order-id">#3128</div>
+            <div>Alma Carrera</div>
+            <div><span class="dash-status">Paid</span></div>
+            <div>$148.00</div>
+            <div style="text-align:right;color:var(--shade-50);">→</div>
+          </div>
+          <div class="row">
+            <div class="order-id">#3127</div>
+            <div>Yuki Tanaka</div>
+            <div><span class="dash-status pending">Pending</span></div>
+            <div>$84.00</div>
+            <div style="text-align:right;color:var(--shade-50);">→</div>
+          </div>
+          <div class="row">
+            <div class="order-id">#3126</div>
+            <div>Marc Vandenberg</div>
+            <div><span class="dash-status">Paid</span></div>
+            <div>$220.00</div>
+            <div style="text-align:right;color:var(--shade-50);">→</div>
+          </div>
+          <div class="row">
+            <div class="order-id">#3125</div>
+            <div>Priya Anand</div>
+            <div><span class="dash-status cancelled">Cancelled</span></div>
+            <div>$36.00</div>
+            <div style="text-align:right;color:var(--shade-50);">→</div>
+          </div>
+          <div class="row">
+            <div class="order-id">#3124</div>
+            <div>Olu Adetola</div>
+            <div><span class="dash-status">Paid</span></div>
+            <div>$74.00</div>
+            <div style="text-align:right;color:var(--shade-50);">→</div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- PISTACHIO BAND -->
+<section class="section-light" style="padding-top:0;">
+  <div class="wrap-wide">
+    <div class="pistachio-band">
+      <div>
+        <span class="eyebrow">Shop App · marketplace reach</span>
+        <h3>50 million shoppers,<br>already shopping.</h3>
+        <p>The Shop app puts your storefront in front of millions of buyers who are already looking for products like yours. No new ads needed.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn btn-primary-pill">Get the Shop App</button>
+          <button class="btn" style="background:transparent;color:var(--ink);text-decoration:underline;">Learn more</button>
+        </div>
+      </div>
+      <div class="pistachio-mock">
+        <div class="pistachio-mock-header"><span></span><span></span><span></span></div>
+        <div class="pistachio-mock-row active"><span class="ico" style="background:var(--ink);"></span>Featured for you</div>
+        <div class="pistachio-mock-row"><span class="ico"></span>Following</div>
+        <div class="pistachio-mock-row"><span class="ico"></span>Categories</div>
+        <div class="pistachio-mock-row"><span class="ico"></span>Sale</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
+          <div style="aspect-ratio:1;background:var(--aloe-10);border-radius:6px;"></div>
+          <div style="aspect-ratio:1;background:#d9c5a8;border-radius:6px;"></div>
+          <div style="aspect-ratio:1;background:#a8b8c8;border-radius:6px;"></div>
+          <div style="aspect-ratio:1;background:#e8d4c8;border-radius:6px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 3-UP -->
+<section class="section-light" style="padding-top:0;">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <span class="eyebrow">Built for growth</span>
+      <h2 class="display-md">Everything you need.<br>Right where you need it.</h2>
+    </div>
+    <div class="feature-3up-light">
+      <div class="feature-light">
+        <span class="pill-tag">Inventory</span>
+        <h3>Track stock in real time.</h3>
+        <p>One inventory across every channel. Reserve, reorder, and route from a single source of truth.</p>
+        <a href="#">Inventory tools →</a>
+      </div>
+      <div class="feature-light">
+        <span class="pill-tag">Marketing</span>
+        <h3>Email, SMS, social — together.</h3>
+        <p>Targeted campaigns, automated flows, and analytics powered by your customer data.</p>
+        <a href="#">Marketing suite →</a>
+      </div>
+      <div class="feature-light">
+        <span class="pill-tag">Apps</span>
+        <h3>An app for every need.</h3>
+        <p>Over 8,000 verified apps to extend your store — shipping, accounting, design, fulfillment, support.</p>
+        <a href="#">Visit the App Store →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="wrap-wide">
+    <div class="pricing-head">
+      <span class="eyebrow">Pricing</span>
+      <h2 class="display-md">Start free.<br>Pay as you grow.</h2>
+      <p>Try Shopify free for 3 days, no credit card required. Choose the plan that fits when you're ready.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <h4>Starter</h4>
+        <div class="price-num"><span class="currency">$</span>5<span class="period">USD / month — for selling on social</span></div>
+        <ul>
+          <li>Shop product card on socials</li>
+          <li>Linkpop link-in-bio</li>
+          <li>Email & chat support</li>
+          <li>2.0% Shop Pay fees</li>
+        </ul>
+        <button class="btn btn-outline-light">Choose Starter</button>
+      </div>
+
+      <div class="price-card featured">
+        <h4>Basic</h4>
+        <div class="price-num"><span class="currency">$</span>29<span class="period">USD / month — most popular for new stores</span></div>
+        <ul>
+          <li>Full online store</li>
+          <li>2 staff accounts</li>
+          <li>4 inventory locations</li>
+          <li>24/7 support</li>
+          <li>2.9% + 30¢ online fees</li>
+        </ul>
+        <button class="btn btn-aloe" style="background:var(--ink);color:var(--on-primary);">Start free trial</button>
+      </div>
+
+      <div class="price-card">
+        <h4>Shopify</h4>
+        <div class="price-num"><span class="currency">$</span>79<span class="period">USD / month — growing brands</span></div>
+        <ul>
+          <li>Everything in Basic</li>
+          <li>5 staff accounts</li>
+          <li>Lower transaction fees</li>
+          <li>Professional reports</li>
+          <li>Abandoned cart recovery</li>
+        </ul>
+        <button class="btn btn-outline-light">Choose Shopify</button>
+      </div>
+
+      <div class="price-card">
+        <h4>Advanced</h4>
+        <div class="price-num"><span class="currency">$</span>299<span class="period">USD / month — scaling teams</span></div>
+        <ul>
+          <li>Everything in Shopify</li>
+          <li>15 staff accounts</li>
+          <li>Custom reports</li>
+          <li>Third-party calculated shipping</li>
+          <li>Lowest transaction rates</li>
+        </ul>
+        <button class="btn btn-outline-light">Choose Advanced</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="wrap-wide">
+    <span class="eyebrow" style="color:var(--link-cool-1);">Get started</span>
+    <h2 class="display-lg">Try Shopify free<br>for 3 days.</h2>
+    <p>No credit card. No commitment. Just a store, set up and ready to sell.</p>
+    <div class="cta-band-cta">
+      <button class="btn btn-outline-dark" style="background:var(--on-dark);color:var(--ink);border-color:var(--on-dark);">Start free trial</button>
+      <button class="btn btn-outline-dark">Talk to sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================
+     PART B — DESIGN SYSTEM
+     =================== -->
+<section class="ds-section">
+  <div class="wrap-wide">
+    <div class="ds-intro">
+      <span class="eyebrow">Design system</span>
+      <h2>Two canvases, one pill.</h2>
+      <p>Black for cinematic stories. Cream for transactional flows. Aloe and pistachio greens live only on the light track. Thin display weight (300) is the editorial signature; OpenType ss03 is on everywhere.</p>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span>Color</span><span>18 tokens · two-track palette</span></div>
+
+      <div class="color-group">
+        <h4>Brand &amp; Accent</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--primary)"></div><div class="color-meta"><div class="name">Primary / Ink</div><div class="hex">#000000</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--aloe-10)"></div><div class="color-meta"><div class="name">Aloe</div><div class="hex">#c1fbd4</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--pistachio-10)"></div><div class="color-meta"><div class="name">Pistachio</div><div class="hex">#d4f9e0</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--link-mint)"></div><div class="color-meta"><div class="name">Link Mint</div><div class="hex">#99b3ad</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Surface</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--canvas-night)"></div><div class="color-meta"><div class="name">Canvas Night</div><div class="hex">#000000</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--canvas-night-elevated)"></div><div class="color-meta"><div class="name">Night Elev.</div><div class="hex">#0a0a0a</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--surface-elevated-dark)"></div><div class="color-meta"><div class="name">Elev. Dark</div><div class="hex">#1e2c31</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--canvas-light);border-bottom:1px solid var(--hairline-light)"></div><div class="color-meta"><div class="name">Canvas Light</div><div class="hex">#ffffff</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--canvas-cream)"></div><div class="color-meta"><div class="name">Canvas Cream</div><div class="hex">#fbfbf5</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--hairline-light)"></div><div class="color-meta"><div class="name">Hairline Light</div><div class="hex">#e4e4e7</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Shade Ladder</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--shade-30)"></div><div class="color-meta"><div class="name">Shade-30</div><div class="hex">#d4d4d8</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--shade-40)"></div><div class="color-meta"><div class="name">Shade-40</div><div class="hex">#a1a1aa</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--shade-50)"></div><div class="color-meta"><div class="name">Shade-50</div><div class="hex">#71717a</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--shade-60)"></div><div class="color-meta"><div class="name">Shade-60</div><div class="hex">#52525b</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--shade-70)"></div><div class="color-meta"><div class="name">Shade-70</div><div class="hex">#3f3f46</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--hairline-dark)"></div><div class="color-meta"><div class="name">Hairline Dark</div><div class="hex">#1e2c31</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Cool Link Tones (footer / on-dark muted)</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--link-cool-1)"></div><div class="color-meta"><div class="name">Cool-1</div><div class="hex">#9dabad</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--link-cool-2)"></div><div class="color-meta"><div class="name">Cool-2</div><div class="hex">#9797a2</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--link-cool-3)"></div><div class="color-meta"><div class="name">Cool-3</div><div class="hex">#bdbdca</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span>Typography</span><span>Neue Haas Grotesk Display (Inter at thin) · Inter Variable</span></div>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Spec</th><th>Sample</th></tr></thead>
+        <tbody>
+          <tr><td class="token">display-xxl</td><td class="spec">96px · 330 · 1.0 · +2.4</td><td style="font:300 48px/1 'Inter';letter-spacing:1.2px;">Sell to anyone</td></tr>
+          <tr><td class="token">display-xl</td><td class="spec">70px · 330 · 1.0</td><td style="font:300 40px/1 'Inter';">From anywhere</td></tr>
+          <tr><td class="token">display-lg</td><td class="spec">55px · 330 · 1.16</td><td style="font:300 36px/1.16 'Inter';">Start free</td></tr>
+          <tr><td class="token">display-md</td><td class="spec">48px · 330 · 1.14</td><td style="font:300 32px/1.14 'Inter';">Two canvases</td></tr>
+          <tr><td class="token">heading-xl</td><td class="spec">28px · 500 · 1.28 · +0.42</td><td style="font:500 24px/1.28 'Inter';letter-spacing:0.36px;">Pricing tier</td></tr>
+          <tr><td class="token">heading-lg</td><td class="spec">24px · 400 · 1.14 · +0.36</td><td style="font:400 22px/1.14 'Inter';letter-spacing:0.36px;">Card title</td></tr>
+          <tr><td class="token">heading-md</td><td class="spec">20px · 500 · 1.4 · +0.3</td><td style="font:500 20px/1.4 'Inter';">Section sub-head</td></tr>
+          <tr><td class="token">body-lg</td><td class="spec">18px · 550 · 1.56</td><td style="font:600 18px/1.56 'Inter';">Lead paragraph.</td></tr>
+          <tr><td class="token">body-md</td><td class="spec">16px · 420 · 1.5</td><td style="font:400 16px/1.5 'Inter';">Default body sentence.</td></tr>
+          <tr><td class="token">caption</td><td class="spec">14px · 500 · 1.49 · +0.28</td><td style="font:500 14px/1.49 'Inter';letter-spacing:0.28px;">Helper copy</td></tr>
+          <tr><td class="token">micro</td><td class="spec">13px · 500 · 1.5 · -0.13</td><td style="font:500 13px/1.5 'Inter';letter-spacing:-0.13px;">Pricing fine print</td></tr>
+          <tr><td class="token">eyebrow-cap</td><td class="spec">12px · 400 · 1.2 · +0.72 · UP</td><td style="font:400 12px/1.2 'Inter';letter-spacing:0.72px;text-transform:uppercase;">Build a business</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span>Radius</span><span>Pill 9999px for all buttons</span></div>
+      <div class="radius-grid">
+        <div class="radius-tile"><div class="radius-box" style="border-radius:4px"></div><div class="name">xs</div><div class="val">4px · inputs</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:5px"></div><div class="name">sm</div><div class="val">5px</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:8px"></div><div class="name">md</div><div class="val">8px · cards-sm</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:12px"></div><div class="name">lg</div><div class="val">12px · pricing</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:20px"></div><div class="name">xl</div><div class="val">20px · hero photo</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:9999px"></div><div class="name">pill</div><div class="val">9999px · buttons</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span>Components</span><span>Buttons · inputs · cards · tags</span></div>
+
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div class="label">Buttons — pill hierarchy</div>
+          <div class="stack">
+            <button class="btn btn-primary-pill">Start free trial</button>
+            <button class="btn btn-aloe">Choose plan</button>
+            <button class="btn btn-outline-light">Log in</button>
+          </div>
+        </div>
+
+        <div class="comp-card" style="background: var(--canvas-night); color: var(--on-dark); border-color: var(--canvas-night);">
+          <div class="label" style="color: var(--link-cool-1);">On-dark pills</div>
+          <div class="stack">
+            <button class="btn btn-outline-dark">Talk to sales</button>
+            <button class="btn btn-aloe">Pay now</button>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Pill tags &amp; chips</div>
+          <div class="stack">
+            <span style="background:var(--aloe-10);color:var(--ink);padding:4px 12px;border-radius:999px;font:400 12px/1.2 'Inter';letter-spacing:0.72px;text-transform:uppercase;">Inventory</span>
+            <span style="background:var(--pistachio-10);color:var(--ink);padding:4px 12px;border-radius:999px;font:400 12px/1.2 'Inter';letter-spacing:0.72px;text-transform:uppercase;">Marketing</span>
+            <span style="background:var(--shade-30);color:var(--ink);padding:4px 12px;border-radius:999px;font:400 12px/1.2 'Inter';letter-spacing:0.72px;text-transform:uppercase;">Neutral</span>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Text input</div>
+          <div class="stack" style="flex-direction:column;align-items:stretch;gap:12px;">
+            <input class="input-demo" placeholder="store-name.myshopify.com" />
+            <input class="input-demo" placeholder="you@business.com" />
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Pricing card (default)</div>
+          <div style="background:var(--canvas-light);padding:24px;border-radius:12px;border:1px solid var(--hairline-light);">
+            <h4 style="font:500 22px/1.28 'Inter';letter-spacing:0.42px;margin:0 0 6px;">Basic</h4>
+            <div style="font:300 36px/1 'Inter';letter-spacing:-0.5px;margin:8px 0 4px;"><span style="font-size:18px;vertical-align:top;">$</span>29</div>
+            <div style="font:500 12px/1.5 'Inter';color:var(--shade-50);margin-bottom:16px;">USD / month</div>
+            <button class="btn btn-primary-pill" style="width:100%;">Start trial</button>
+          </div>
+        </div>
+
+        <div class="comp-card" style="background: var(--aloe-10); border-color: transparent;">
+          <div class="label">Pricing card (featured)</div>
+          <div>
+            <h4 style="font:500 22px/1.28 'Inter';letter-spacing:0.42px;margin:0 0 6px;">Featured</h4>
+            <div style="font:300 36px/1 'Inter';letter-spacing:-0.5px;margin:8px 0 4px;"><span style="font-size:18px;vertical-align:top;">$</span>79</div>
+            <div style="font:500 12px/1.5 'Inter';color:var(--shade-60);margin-bottom:16px;">Most popular</div>
+            <button class="btn btn-primary-pill" style="width:100%;">Choose plan</button>
+          </div>
+        </div>
+
+        <div class="comp-card" style="grid-column: span 2; padding: 0; overflow: hidden; background: var(--canvas-night); border-color: var(--canvas-night);">
+          <div style="padding: 24px; color: var(--on-dark);">
+            <div class="label" style="color: var(--link-cool-1);">Cinematic feature card</div>
+            <h3 style="font:300 32px/1.14 'Inter';margin:0 0 12px;color:var(--on-dark);">A checkout that converts.</h3>
+            <p style="font:400 14px/1.5 'Inter';color:var(--link-cool-3);max-width:480px;margin:0;">Shop Pay, Apple Pay, Google Pay — all the methods customers expect, all on one fast checkout.</p>
+          </div>
+          <div style="background: var(--canvas-night-elevated); padding: 20px; margin: 0 24px 24px; border-radius: 8px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);">
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--hairline-dark);font:400 13px/1.5 'Inter';color:var(--on-dark);"><span>Subtotal</span><span style="color:var(--aloe-10);">$140.00</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;font:500 14px/1.5 'Inter';color:var(--on-dark);"><span>Total</span><span style="color:var(--aloe-10);">$148.40</span></div>
+            <button class="btn btn-aloe" style="width:100%;margin-top:8px;">Pay with Shop Pay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap-wide">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#" style="color:var(--on-dark);">
+          <span class="bag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 4h-2v2h-4V4H8a2 2 0 0 0-2 2v14h12V6a2 2 0 0 0-2-2zm-7 4h6v1h-6V8z"/></svg>
+          </span>
+          <span>shopify</span>
+        </a>
+        <p style="color:var(--link-cool-1);font:400 14px/1.5 'Inter';margin-top:16px;max-width:280px;">A unified commerce platform for merchants of every size.</p>
+      </div>
+      <div>
+        <h5>Start</h5>
+        <ul>
+          <li><a href="#">Start a business</a></li>
+          <li><a href="#">Build an online store</a></li>
+          <li><a href="#">Sell on social</a></li>
+          <li><a href="#">In-person sales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sell</h5>
+        <ul>
+          <li><a href="#">Sell online</a></li>
+          <li><a href="#">Wholesale / B2B</a></li>
+          <li><a href="#">International</a></li>
+          <li><a href="#">Marketplaces</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="#">Help center</a></li>
+          <li><a href="#">Hire a partner</a></li>
+          <li><a href="#">Developers</a></li>
+          <li><a href="#">Investors</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 Shopify Inc. (inspired · generated for design study)</div>
+      <div>Neue Haas Grotesk · Aloe #c1fbd4 · Pill 9999px · Two-canvas system</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.shopify.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

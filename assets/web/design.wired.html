@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wired — The future is here. Read it first.</title>
+<meta name="description" content="WIRED illuminates how technology is changing every aspect of our lives — from culture to business, science to design.">
+<meta property="og:title" content="Wired — The future is here. Read it first.">
+<meta property="og:description" content="Long-form technology journalism. Culture, business, science, design.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* color */
+  --primary:#000000;
+  --on-primary:#ffffff;
+  --ink:#000000;
+  --ink-soft:#1a1a1a;
+  --body:#757575;
+  --hairline:#e0e0e0;
+  --canvas:#ffffff;
+  --canvas-soft:#f5f5f5;
+  --link:#057dbc;
+
+  /* radius */
+  --r-none:0;
+  --r-full:9999px;
+
+  /* spacing */
+  --s-xxs:2px; --s-xs:4px; --s-sm:8px; --s-md:12px;
+  --s-lg:16px; --s-xl:20px; --s-2xl:24px; --s-3xl:32px; --s-4xl:48px;
+
+  /* fonts */
+  --font-display:'DM Serif Display','Times New Roman',Georgia,serif;
+  --font-serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --font-sans:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:var(--font-sans);color:var(--ink);background:var(--canvas);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+/* ---------- type system ---------- */
+.display-hero{font-family:var(--font-display);font-weight:400;font-size:64px;line-height:.93;letter-spacing:-.5px}
+.display-lg{font-family:var(--font-display);font-weight:400;font-size:48px;line-height:1.05;letter-spacing:-.4px}
+.display-md{font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.1;letter-spacing:-.3px}
+.display-sm{font-family:var(--font-display);font-weight:400;font-size:26px;line-height:1.08}
+.display-xs{font-family:var(--font-sans);font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.28px}
+
+.body-serif-lg{font-family:var(--font-serif);font-weight:400;font-size:19px;line-height:1.47;letter-spacing:.108px}
+.body-serif-md{font-family:var(--font-serif);font-weight:400;font-size:17px;line-height:1.5;letter-spacing:.09px}
+
+.body-md{font-family:var(--font-sans);font-weight:400;font-size:17px;line-height:1.18}
+.body-md-strong{font-family:var(--font-sans);font-weight:700;font-size:17px;line-height:1.3;letter-spacing:-.144px}
+.body-sm{font-family:var(--font-sans);font-weight:400;font-size:14px;line-height:1.3;letter-spacing:.4px}
+.body-sm-strong{font-family:var(--font-sans);font-weight:700;font-size:14px;line-height:1.3;letter-spacing:.4px}
+
+.byline{font-family:var(--font-serif);font-weight:700;font-size:12.73px;line-height:2.2;letter-spacing:.108px;color:var(--body)}
+.caption{font-family:var(--font-sans);font-weight:400;font-size:12px;line-height:1.35}
+.btn-label{font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.3px;text-transform:uppercase}
+
+/* category eyebrow — uppercase sans, sometimes red bar */
+.eyebrow{font-family:var(--font-sans);font-weight:700;font-size:13px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:8px}
+.eyebrow.red{color:#d11}
+
+/* ---------- shell ---------- */
+.shell{max-width:1400px;margin:0 auto;padding:0 32px}
+
+/* ---------- masthead band ---------- */
+.utility-bar{background:var(--ink);color:#fff;font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:8px 32px;text-align:center;border-bottom:1px solid #000}
+.utility-bar span{margin:0 14px;opacity:.7}
+.utility-bar a{text-decoration:underline}
+
+.masthead{background:var(--canvas);border-bottom:1px solid var(--ink);padding:16px 32px}
+.masthead-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px}
+.masthead .left{display:flex;align-items:center;gap:18px}
+.masthead .menu-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.masthead .wordmark{font-family:var(--font-display);font-weight:400;font-size:48px;line-height:1;letter-spacing:-1px;text-align:center}
+.masthead .wordmark .crop{display:inline-block;font-style:italic}
+.masthead .right{display:flex;align-items:center;justify-content:flex-end;gap:14px}
+.masthead .right a{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.masthead .right a.subscribe{background:var(--ink);color:#fff;padding:10px 16px}
+
+.section-nav{background:var(--canvas);border-bottom:1px solid var(--hairline);padding:10px 32px;overflow-x:auto}
+.section-nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:28px;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.section-nav a{color:var(--ink);position:relative;padding:4px 0}
+.section-nav a:hover{color:#000}
+.section-nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-13px;height:3px;background:var(--ink)}
+
+/* ---------- HERO featured story ---------- */
+.cover-grid{padding:48px 32px 32px;border-bottom:1px solid var(--hairline)}
+.cover-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.4fr .9fr;gap:48px}
+.cover-feature{display:flex;flex-direction:column;gap:18px}
+.cover-img{aspect-ratio:16/10;background:linear-gradient(135deg,#0e0e0e 0%,#3a3a3a 60%,#7a7a7a 100%);position:relative;overflow:hidden}
+.cover-img::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 30% 70%,rgba(255,255,255,.15),transparent 50%),
+    radial-gradient(circle at 80% 25%,rgba(0,0,0,.6),transparent 50%);
+}
+.cover-img.alt{background:linear-gradient(160deg,#202020 0%,#7d7d7d 100%)}
+.cover-img.alt2{background:linear-gradient(135deg,#444 0%,#1a1a1a 60%,#000 100%)}
+.cover-img.warm{background:linear-gradient(135deg,#2a1d10 0%,#a45f2e 60%,#e6b896 100%)}
+.cover-img.tech{background:
+  radial-gradient(circle at 30% 50%,#5e7aff,#0a0a3a 60%),
+  linear-gradient(135deg,#000,#222)}
+.cover-img.bio{background:
+  radial-gradient(circle at 60% 40%,#1f5f3f,#0a2a18 60%),
+  linear-gradient(160deg,#0a2a18,#000)}
+
+.cover-feature .eyebrow{color:#d11;font-weight:700}
+.cover-feature h1{font-family:var(--font-display);font-weight:400;font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-.6px}
+.cover-feature .dek{font-family:var(--font-serif);font-weight:400;font-size:20px;line-height:1.4;color:var(--ink-soft);max-width:680px}
+.cover-feature .byline-row{display:flex;align-items:center;gap:14px;padding-top:8px}
+.cover-feature .byline-row .av{width:36px;height:36px;border-radius:50%;background:#ddd}
+.cover-feature .byline{color:var(--body);line-height:1.4}
+.cover-feature .byline b{color:var(--ink);font-weight:700}
+
+.cover-side{display:flex;flex-direction:column;gap:32px}
+.cover-side .item{display:flex;flex-direction:column;gap:8px;padding-bottom:24px;border-bottom:1px solid var(--hairline)}
+.cover-side .item:last-child{border-bottom:0;padding-bottom:0}
+.cover-side .item .thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#aaa,#333)}
+.cover-side .item.t2 .thumb{background:linear-gradient(135deg,#7a4e2a,#1a0e07)}
+.cover-side .item.t3 .thumb{background:linear-gradient(135deg,#3a4d5c,#0c1a25)}
+.cover-side .item .eyebrow{font-size:12px}
+.cover-side .item h3{font-family:var(--font-display);font-weight:400;font-size:24px;line-height:1.1;letter-spacing:-.25px}
+.cover-side .item .by{font-family:var(--font-serif);font-weight:700;font-size:12.73px;line-height:1.4;color:var(--body)}
+
+/* ---------- 3-up secondary grid ---------- */
+.secondary-grid{padding:32px 32px;border-bottom:1px solid var(--hairline)}
+.secondary-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.sec-card{display:flex;flex-direction:column;gap:10px}
+.sec-card .thumb{aspect-ratio:4/3;background:linear-gradient(135deg,#bbb,#444)}
+.sec-card.a .thumb{background:linear-gradient(135deg,#222,#777)}
+.sec-card.b .thumb{background:linear-gradient(160deg,#3e2a14,#a3724a)}
+.sec-card.c .thumb{background:linear-gradient(180deg,#1a1a3a,#5e6eff 70%,#9ecbff)}
+.sec-card .eyebrow{font-size:12px;letter-spacing:.08em}
+.sec-card h3{font-family:var(--font-display);font-weight:400;font-size:28px;line-height:1.05;letter-spacing:-.3px}
+.sec-card .by{font-family:var(--font-serif);font-weight:700;font-size:12.73px;color:var(--body);line-height:1.6}
+
+/* ---------- section: by category headline + columns ---------- */
+.section-band{padding:48px 32px;border-bottom:1px solid var(--ink)}
+.section-band .head{max-width:1400px;margin:0 auto 32px;display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:16px}
+.section-band .head h2{font-family:var(--font-display);font-weight:400;font-size:36px;line-height:1;letter-spacing:-.5px}
+.section-band .head a{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.section-band .grid-mag{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.mag-item{display:flex;flex-direction:column;gap:10px}
+.mag-item .thumb{aspect-ratio:1/1;background:linear-gradient(135deg,#aaa,#333)}
+.mag-item.x1 .thumb{background:linear-gradient(160deg,#cf9b6f,#3a1a07)}
+.mag-item.x2 .thumb{background:linear-gradient(160deg,#0a0a2a,#5e5eff)}
+.mag-item.x3 .thumb{background:linear-gradient(135deg,#3a0a0a,#a01a1a)}
+.mag-item.x4 .thumb{background:linear-gradient(135deg,#0f3a1a,#5ec07e)}
+.mag-item.x5 .thumb{background:linear-gradient(135deg,#262626,#888)}
+.mag-item.x6 .thumb{background:linear-gradient(135deg,#3b2c5a,#cab8ff)}
+.mag-item.x7 .thumb{background:linear-gradient(135deg,#000,#444)}
+.mag-item.x8 .thumb{background:linear-gradient(135deg,#5a3b00,#caa050)}
+.mag-item h3{font-family:var(--font-display);font-weight:400;font-size:22px;line-height:1.1;letter-spacing:-.2px}
+.mag-item .by{font-family:var(--font-serif);font-weight:700;font-size:12.73px;color:var(--body);line-height:1.4}
+
+/* ---------- big quote / pull section ---------- */
+.pull-band{padding:96px 32px;background:var(--canvas);border-bottom:1px solid var(--ink)}
+.pull-inner{max-width:1100px;margin:0 auto;text-align:center}
+.pull-inner .eyebrow{margin-bottom:24px}
+.pull-inner blockquote{font-family:var(--font-display);font-weight:400;font-size:clamp(36px,5vw,64px);line-height:1.02;letter-spacing:-.5px;margin-bottom:24px}
+.pull-inner blockquote::before{content:"\201C";color:#d11}
+.pull-inner cite{font-family:var(--font-serif);font-weight:700;font-size:14px;color:var(--body);letter-spacing:.04em;text-transform:uppercase;font-style:normal}
+
+/* ---------- bylined story stack ---------- */
+.story-stack{padding:48px 32px}
+.story-stack-inner{max-width:1100px;margin:0 auto}
+.story-stack h2{font-family:var(--font-display);font-weight:400;font-size:36px;line-height:1;letter-spacing:-.5px;padding-bottom:16px;border-bottom:2px solid var(--ink);margin-bottom:8px}
+.story-row{padding:24px 0;border-bottom:1px solid var(--hairline);display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}
+.story-row:hover{background:var(--canvas-soft)}
+.story-row .num{font-family:var(--font-display);font-size:48px;color:#d11;line-height:1}
+.story-row .col .eyebrow{font-size:12px;margin-bottom:6px}
+.story-row .col h3{font-family:var(--font-display);font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.3px;margin-bottom:6px}
+.story-row .col .dek{font-family:var(--font-serif);font-size:16px;color:var(--ink-soft);line-height:1.5;margin-bottom:8px}
+.story-row .col .by{font-family:var(--font-serif);font-weight:700;font-size:12.73px;color:var(--body);line-height:1.4}
+
+/* ---------- newsletter band ---------- */
+.newsletter{padding:64px 32px;border-top:1px solid var(--hairline);border-bottom:1px solid var(--ink)}
+.newsletter-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.newsletter h2{font-family:var(--font-display);font-weight:400;font-size:40px;line-height:1.02;letter-spacing:-.4px;margin-bottom:14px}
+.newsletter p{font-family:var(--font-serif);font-size:17px;line-height:1.5;color:var(--ink-soft)}
+.newsletter form{display:flex;gap:0}
+.newsletter input{flex:1;padding:14px 16px;border:2px solid var(--ink);font:inherit;font-size:16px;background:#fff}
+.btn-primary{background:var(--ink);color:#fff;padding:14px 24px;font-size:14px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;border:0}
+.btn-outline{background:transparent;color:var(--ink);padding:14px 24px;font-size:14px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;border:2px solid var(--ink)}
+
+/* ---------- DS section ---------- */
+.ds{background:var(--canvas);padding:96px 32px;border-top:2px solid var(--ink)}
+.ds-inner{max-width:1400px;margin:0 auto}
+.ds .eyebrow{margin-bottom:16px}
+.ds h2{font-family:var(--font-display);font-weight:400;font-size:64px;line-height:.95;letter-spacing:-.6px;margin-bottom:14px}
+.ds .ds-lead{font-family:var(--font-serif);font-size:19px;color:var(--ink-soft);max-width:680px;line-height:1.5;margin-bottom:64px;border-left:3px solid var(--ink);padding-left:18px}
+.ds-block{margin-bottom:64px}
+.ds-block .head-line{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:24px}
+.ds-block h3{font-family:var(--font-sans);font-weight:700;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.ds-block .head-line .ix{font-family:var(--font-serif);font-weight:700;font-size:14px;color:var(--body);font-style:italic}
+
+.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.color-card{border:1px solid var(--hairline);overflow:hidden}
+.color-swatch{height:80px}
+.color-meta{padding:14px;background:var(--canvas)}
+.color-meta .nm{font-family:var(--font-sans);font-size:14px;font-weight:700}
+.color-meta .hex{font-family:ui-monospace,monospace;font-size:12px;color:var(--body);margin-top:2px}
+.color-group{margin-bottom:24px}
+.color-group h4{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--body);margin-bottom:12px}
+
+.ds-table{width:100%;border-collapse:collapse;font-size:15px}
+.ds-table th,.ds-table td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--hairline);vertical-align:middle}
+.ds-table th{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--canvas)}
+.ds-table code{font-family:ui-monospace,monospace;font-size:12px;color:var(--body)}
+
+.radius-ladder{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:520px}
+.radius-cell{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:18px;border:1px solid var(--hairline)}
+.radius-cell .box{width:96px;height:96px;background:var(--ink)}
+.radius-cell .nm{font-family:var(--font-sans);font-size:13px;font-weight:700}
+.radius-cell .v{font-family:ui-monospace,monospace;font-size:11px;color:var(--body)}
+
+.comp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.comp-cell{padding:32px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);background:var(--canvas)}
+.comp-cell.dark{background:var(--ink);color:#fff}
+.comp-cell .nm{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--body);margin-bottom:18px}
+.comp-cell.dark .nm{color:rgba(255,255,255,.7)}
+.comp-cell .demo{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+
+/* ---------- footer ---------- */
+.footer{background:var(--ink);color:#fff;padding:64px 32px 32px}
+.footer-inner{max-width:1400px;margin:0 auto}
+.footer-wordmark{font-family:var(--font-display);font-size:64px;line-height:1;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:24px}
+.footer-cols{display:grid;grid-template-columns:repeat(5,1fr);gap:32px;margin-bottom:48px}
+.footer-col h5{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+.footer-col a{display:block;color:rgba(255,255,255,.65);font-size:14px;line-height:2;font-family:var(--font-sans);font-weight:400}
+.footer-col a:hover{color:#fff;text-decoration:underline}
+.footer-bottom{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.5);padding-top:24px;border-top:1px solid rgba(255,255,255,.2);flex-wrap:wrap;gap:14px;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+
+/* floating */
+.src-link{
+  position:fixed;right:18px;bottom:18px;z-index:50;
+  background:var(--ink);color:#fff;
+  font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:12px 16px;border:0;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  display:inline-flex;align-items:center;gap:6px
+}
+.src-link:hover{background:#222}
+
+/* link blue */
+.inline-link{color:var(--link);text-decoration:underline}
+
+/* responsive */
+@media (max-width:1024px){
+  .cover-inner,.newsletter-inner{grid-template-columns:1fr}
+  .secondary-inner{grid-template-columns:1fr 1fr}
+  .section-band .grid-mag{grid-template-columns:1fr 1fr}
+  .footer-cols{grid-template-columns:1fr 1fr 1fr}
+  .comp-grid{grid-template-columns:1fr}
+  .masthead-inner{grid-template-columns:1fr}
+  .masthead .left,.masthead .right{justify-content:center}
+  .masthead .wordmark{font-size:36px}
+  .display-hero{font-size:44px}
+  .ds h2{font-size:44px}
+  .story-row{grid-template-columns:50px 1fr}
+}
+@media (max-width:600px){
+  .secondary-inner{grid-template-columns:1fr}
+  .section-band .grid-mag{grid-template-columns:1fr}
+  .footer-cols{grid-template-columns:1fr 1fr}
+  .radius-ladder{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="utility-bar">
+  <span>Vol. 34</span>·<span>Issue 04</span>·<span>The Future Issue</span>·<a href="#">Subscribe from $1</a>
+</div>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="left">
+      <button class="menu-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        Menu
+      </button>
+      <a class="menu-btn" href="#">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        Search
+      </a>
+    </div>
+    <div class="wordmark">WIRED</div>
+    <div class="right">
+      <a href="#">Sign In</a>
+      <a class="subscribe" href="#">Subscribe</a>
+    </div>
+  </div>
+</header>
+
+<nav class="section-nav">
+  <div class="section-nav-inner">
+    <a href="#" class="active">Front Page</a>
+    <a href="#">Business</a>
+    <a href="#">Culture</a>
+    <a href="#">Gear</a>
+    <a href="#">Ideas</a>
+    <a href="#">Science</a>
+    <a href="#">Security</a>
+    <a href="#">Backchannel</a>
+    <a href="#">Newsletters</a>
+    <a href="#">Magazine</a>
+    <a href="#">Podcasts</a>
+    <a href="#">Video</a>
+  </div>
+</nav>
+
+<!-- COVER STORY GRID -->
+<section class="cover-grid">
+  <div class="cover-inner">
+    <article class="cover-feature">
+      <div class="cover-img tech"></div>
+      <span class="eyebrow red">★ Cover Story · The Future Issue</span>
+      <h1>Inside the lab racing to give every household a domestic robot.</h1>
+      <p class="dek">For six years, an unassuming startup in Cambridge has been training general-purpose humanoid robots on a million hours of video. Now they're betting the company on a $14,000 model that can fold your laundry. We spent a month inside.</p>
+      <div class="byline-row">
+        <div class="av" style="background:linear-gradient(135deg,#888,#222)"></div>
+        <div class="byline">By <b>Lauren Goode</b> &nbsp;·&nbsp; Photography by <b>Hiro Murai</b> &nbsp;·&nbsp; 11.20.2026 · 8:00 am</div>
+      </div>
+    </article>
+
+    <aside class="cover-side">
+      <article class="item t2">
+        <div class="thumb"></div>
+        <span class="eyebrow">Business</span>
+        <h3>OpenAI's quiet pivot to making chips.</h3>
+        <div class="by">By Will Knight · 6 hr ago</div>
+      </article>
+      <article class="item t3">
+        <div class="thumb"></div>
+        <span class="eyebrow">Science</span>
+        <h3>The mushroom that broke a synthetic-fibre factory's record.</h3>
+        <div class="by">By Matt Reynolds · 1 day ago</div>
+      </article>
+      <article class="item">
+        <div class="thumb" style="background:linear-gradient(160deg,#5a005a,#0a002a)"></div>
+        <span class="eyebrow">Security</span>
+        <h3>A teenager found a flaw in every cable car in Switzerland.</h3>
+        <div class="by">By Lily Hay Newman · 2 days ago</div>
+      </article>
+    </aside>
+  </div>
+</section>
+
+<!-- SECONDARY 3-UP -->
+<section class="secondary-grid">
+  <div class="secondary-inner">
+    <article class="sec-card a">
+      <div class="thumb"></div>
+      <span class="eyebrow">Culture</span>
+      <h3>The slow, deliberate death of the smartphone.</h3>
+      <div class="by">By Kate Knibbs · 4 hr ago</div>
+    </article>
+    <article class="sec-card b">
+      <div class="thumb"></div>
+      <span class="eyebrow">Gear</span>
+      <h3>I lived with five $300 mechanical keyboards. One ruined me.</h3>
+      <div class="by">By Boone Ashworth · 6 hr ago</div>
+    </article>
+    <article class="sec-card c">
+      <div class="thumb"></div>
+      <span class="eyebrow">Ideas</span>
+      <h3>How three lines of code became a $700 million company.</h3>
+      <div class="by">By Steven Levy · 8 hr ago</div>
+    </article>
+  </div>
+</section>
+
+<!-- BUSINESS SECTION -->
+<section class="section-band">
+  <div class="head" style="max-width:1400px;margin-left:auto;margin-right:auto">
+    <h2>Business</h2>
+    <a href="#">See all stories <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="grid-mag">
+    <article class="mag-item x1">
+      <div class="thumb"></div>
+      <span class="eyebrow">Anthropic</span>
+      <h3>Claude is starting to look like an operating system.</h3>
+      <div class="by">By Lauren Goode</div>
+    </article>
+    <article class="mag-item x2">
+      <div class="thumb"></div>
+      <span class="eyebrow">Nvidia</span>
+      <h3>Inside Jensen Huang's 90-hour weeks.</h3>
+      <div class="by">By Brian Barrett</div>
+    </article>
+    <article class="mag-item x3">
+      <div class="thumb"></div>
+      <span class="eyebrow">Antitrust</span>
+      <h3>What Big Tech's break-up year actually changed.</h3>
+      <div class="by">By Paresh Dave</div>
+    </article>
+    <article class="mag-item x4">
+      <div class="thumb"></div>
+      <span class="eyebrow">Climate Tech</span>
+      <h3>The $80 billion bet on direct-air carbon removal.</h3>
+      <div class="by">By Sandra Upson</div>
+    </article>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<section class="pull-band">
+  <div class="pull-inner">
+    <span class="eyebrow">From the Editor</span>
+    <blockquote>The future arrives unevenly. Our job is to point at the parts that are already here.</blockquote>
+    <cite>— Gilad Edelman, Editor-in-Chief</cite>
+  </div>
+</section>
+
+<!-- SCIENCE SECTION -->
+<section class="section-band">
+  <div class="head" style="max-width:1400px;margin-left:auto;margin-right:auto">
+    <h2>Science</h2>
+    <a href="#">See all stories <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="grid-mag">
+    <article class="mag-item x5">
+      <div class="thumb"></div>
+      <span class="eyebrow">Genetics</span>
+      <h3>A CRISPR therapy quietly cured 39 people of sickle cell.</h3>
+      <div class="by">By Emily Mullin</div>
+    </article>
+    <article class="mag-item x6">
+      <div class="thumb"></div>
+      <span class="eyebrow">Astrophysics</span>
+      <h3>Why JWST keeps finding things that shouldn't exist.</h3>
+      <div class="by">By Ramin Skibba</div>
+    </article>
+    <article class="mag-item x7">
+      <div class="thumb"></div>
+      <span class="eyebrow">Neuroscience</span>
+      <h3>The strange comfort of being read by a brain implant.</h3>
+      <div class="by">By Jessica Hamzelou</div>
+    </article>
+    <article class="mag-item x8">
+      <div class="thumb"></div>
+      <span class="eyebrow">Mathematics</span>
+      <h3>A 250-year-old proof, finally settled by an AI.</h3>
+      <div class="by">By Stephen Ornes</div>
+    </article>
+  </div>
+</section>
+
+<!-- LATEST STACK -->
+<section class="story-stack">
+  <div class="story-stack-inner">
+    <h2>Latest</h2>
+    <article class="story-row">
+      <div class="num">01</div>
+      <div class="col">
+        <span class="eyebrow">Backchannel</span>
+        <h3>The boring company that quietly runs the world's election infrastructure.</h3>
+        <p class="dek">It has no marketing department. Its CEO does no interviews. Its software counts a third of the world's votes. We finally got inside.</p>
+        <div class="by">By Andy Greenberg · 14 min read</div>
+      </div>
+    </article>
+    <article class="story-row">
+      <div class="num">02</div>
+      <div class="col">
+        <span class="eyebrow">Gear</span>
+        <h3>This $99 e-ink Kindle is so good it might end the iPad.</h3>
+        <p class="dek">After two months with the new Paperwhite Ultra, our reviewer made a decision he didn't expect: he sold the tablet.</p>
+        <div class="by">By Brenda Stolyar · 8 min read</div>
+      </div>
+    </article>
+    <article class="story-row">
+      <div class="num">03</div>
+      <div class="col">
+        <span class="eyebrow">Ideas</span>
+        <h3>Stop calling AI tools. They are colleagues now.</h3>
+        <p class="dek">A working theory about what changes when you stop treating language models as software and start treating them as the new junior on your team.</p>
+        <div class="by">By Virginia Heffernan · 12 min read</div>
+      </div>
+    </article>
+    <article class="story-row">
+      <div class="num">04</div>
+      <div class="col">
+        <span class="eyebrow">Culture</span>
+        <h3>The unlikely rebirth of zines, in the year of AI slop.</h3>
+        <p class="dek">A wave of young writers are paying for letterpress runs of 200, by hand, on purpose. We met them in Brooklyn.</p>
+        <div class="by">By Angela Watercutter · 6 min read</div>
+      </div>
+    </article>
+    <article class="story-row">
+      <div class="num">05</div>
+      <div class="col">
+        <span class="eyebrow">Security</span>
+        <h3>Inside the 72 hours that took down half of LATAM's banks.</h3>
+        <p class="dek">The breach started with a single misconfigured cloud bucket. The fallout reshaped how Latin America regulates fintech.</p>
+        <div class="by">By Lily Hay Newman · 18 min read</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <div>
+      <span class="eyebrow">Newsletter</span>
+      <h2 style="margin-top:14px">Get the Plaintext briefing. Three things, three days a week.</h2>
+      <p>Steven Levy's view from Silicon Valley, in your inbox Mon · Wed · Fri.</p>
+    </div>
+    <form onsubmit="event.preventDefault()">
+      <input type="email" placeholder="your@email.com" aria-label="email">
+      <button class="btn-primary" type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- =================== DESIGN SYSTEM =================== -->
+<section class="ds">
+  <div class="ds-inner">
+    <span class="eyebrow">Part B · Design system reference</span>
+    <h2>The Wired System.</h2>
+    <p class="ds-lead">Black on white. Three faces — a high-contrast display serif, a humanist serif body, a clean sans for structure. Square corners on every interactive shape. Hairlines for division, never shadow. The system below is exactly what the front page is built from.</p>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <div class="head-line">
+        <h3>Color</h3>
+        <span class="ix">i. Surface and ink</span>
+      </div>
+
+      <div class="color-group">
+        <h4>Brand & Ink</h4>
+        <div class="color-grid">
+          <div class="color-card"><div class="color-swatch" style="background:#000"></div><div class="color-meta"><div class="nm">Ink Black</div><div class="hex">#000000 · --primary</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#1a1a1a"></div><div class="color-meta"><div class="nm">Ink Soft</div><div class="hex">#1a1a1a</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#757575"></div><div class="color-meta"><div class="nm">Body</div><div class="hex">#757575 · meta / byline</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Surface</h4>
+        <div class="color-grid">
+          <div class="color-card"><div class="color-swatch" style="background:#fff;border-bottom:1px solid var(--hairline)"></div><div class="color-meta"><div class="nm">Canvas</div><div class="hex">#ffffff</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#f5f5f5"></div><div class="color-meta"><div class="nm">Canvas Soft</div><div class="hex">#f5f5f5</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#e0e0e0"></div><div class="color-meta"><div class="nm">Hairline</div><div class="hex">#e0e0e0 · 1px divider</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Inline Link Only</h4>
+        <div class="color-grid">
+          <div class="color-card"><div class="color-swatch" style="background:#057dbc"></div><div class="color-meta"><div class="nm">Link</div><div class="hex">#057dbc · article body only</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <div class="head-line">
+        <h3>Typography</h3>
+        <span class="ix">ii. Three faces, three roles</span>
+      </div>
+      <table class="ds-table">
+        <thead>
+          <tr><th style="width:160px">Token</th><th>Sample</th><th style="width:200px">Size · Weight · Face</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>display-hero</code></td><td><span class="display-hero" style="font-size:40px">A robot in every house</span></td><td>64 · 400 · Display Serif</td></tr>
+          <tr><td><code>display-lg</code></td><td><span class="display-lg" style="font-size:32px">Cover story headline</span></td><td>48 · 400 · Display Serif</td></tr>
+          <tr><td><code>display-md</code></td><td><span class="display-md">Section heading</span></td><td>32 · 400 · Display Serif</td></tr>
+          <tr><td><code>display-sm</code></td><td><span class="display-sm">Sub-section heading</span></td><td>26 · 400 · Display Serif</td></tr>
+          <tr><td><code>display-xs</code></td><td><span class="display-xs">CATEGORY CALLOUT</span></td><td>20 · 700 · Sans</td></tr>
+          <tr><td><code>body-serif-lg</code></td><td><span class="body-serif-lg">Lead paragraph of an article — humanist serif, 19 px, line-height 1.47.</span></td><td>19 · 400 · Body Serif</td></tr>
+          <tr><td><code>body-serif-md</code></td><td><span class="body-serif-md">Default article body. Comfortable reading width and tight tracking.</span></td><td>17 · 400 · Body Serif</td></tr>
+          <tr><td><code>body-md-strong</code></td><td><span class="body-md-strong">Bold sans for emphasis in structure.</span></td><td>17 · 700 · Sans</td></tr>
+          <tr><td><code>body-sm-strong</code></td><td><span class="body-sm-strong">NAV LINK · 14 · 700</span></td><td>14 · 700 · Sans · 0.4</td></tr>
+          <tr><td><code>byline</code></td><td><span class="byline">By Lauren Goode · 11.20.2026</span></td><td>12.73 · 700 · Body Serif</td></tr>
+          <tr><td><code>button-md</code></td><td><span class="btn-label">SUBSCRIBE</span></td><td>16 · 700 · Sans · uppercase</td></tr>
+        </tbody>
+      </table>
+      <p class="caption" style="margin-top:14px;color:var(--body);font-family:var(--font-serif);font-style:italic">Display Serif = DM Serif Display · Body Serif = Source Serif 4 · Sans = Inter. Substitutes for the proprietary WiredDisplay / BreveText / Apercu.</p>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <div class="head-line">
+        <h3>Radius</h3>
+        <span class="ix">iii. Two values. That's the system.</span>
+      </div>
+      <div class="radius-ladder">
+        <div class="radius-cell"><div class="box" style="border-radius:0"></div><div class="nm">none</div><div class="v">0px · every interactive shape</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:9999px"></div><div class="nm">full</div><div class="v">circle · share icons only</div></div>
+      </div>
+      <p class="caption" style="margin-top:18px;color:var(--body);font-family:var(--font-serif);font-style:italic">The brand never softens its rectangular geometry. Square corners are the printed-magazine signature.</p>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <div class="head-line">
+        <h3>Components</h3>
+        <span class="ix">iv. The full matrix</span>
+      </div>
+      <div class="comp-grid">
+        <div class="comp-cell">
+          <div class="nm">Buttons · light</div>
+          <div class="demo">
+            <button class="btn-primary">Subscribe</button>
+            <button class="btn-outline">Sign in</button>
+          </div>
+        </div>
+        <div class="comp-cell dark">
+          <div class="nm">Buttons · on ink</div>
+          <div class="demo">
+            <button class="btn-primary" style="background:#fff;color:#000">Subscribe</button>
+            <button style="background:transparent;color:#fff;padding:14px 24px;font-size:14px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;border:2px solid #fff">Sign in</button>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="nm">Text input · square</div>
+          <div class="demo" style="width:100%">
+            <input type="text" placeholder="your@email.com" style="width:100%;padding:14px 16px;border:2px solid var(--ink);font:inherit;font-size:16px;background:#fff">
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="nm">Inline link · article only</div>
+          <div class="demo">
+            <span class="body-serif-md">According to <a class="inline-link" href="#">a recent OpenAI filing</a>, the company spent more on inference than on training.</span>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="nm">Story row · hairline divider</div>
+          <div class="demo" style="width:100%;display:block">
+            <div style="padding:14px 0;border-bottom:1px solid var(--hairline)">
+              <span class="eyebrow" style="font-size:12px">Business</span>
+              <h3 style="font-family:var(--font-display);font-size:22px;line-height:1.1;margin-top:6px">OpenAI's quiet pivot to making chips.</h3>
+              <div class="by" style="font-family:var(--font-serif);font-weight:700;font-size:12.73px;color:var(--body);margin-top:6px">By Will Knight</div>
+            </div>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="nm">Category eyebrow</div>
+          <div class="demo">
+            <span class="eyebrow red">★ COVER STORY</span>
+            <span class="eyebrow">SCIENCE</span>
+            <span class="eyebrow">BACKCHANNEL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-wordmark">WIRED</div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Sections</h5>
+        <a href="#">Business</a><a href="#">Culture</a><a href="#">Gear</a><a href="#">Ideas</a><a href="#">Science</a><a href="#">Security</a>
+      </div>
+      <div class="footer-col">
+        <h5>More</h5>
+        <a href="#">Newsletters</a><a href="#">Podcasts</a><a href="#">Video</a><a href="#">Magazine</a><a href="#">Coupons</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="#">Tips</a><a href="#">Pitches</a><a href="#">Reprints</a><a href="#">FAQ</a><a href="#">Customer Care</a>
+      </div>
+      <div class="footer-col">
+        <h5>About</h5>
+        <a href="#">Editorial Team</a><a href="#">Press Center</a><a href="#">Advertise</a><a href="#">Careers</a>
+      </div>
+      <div class="footer-col">
+        <h5>Account</h5>
+        <a href="#">Subscribe</a><a href="#">Sign In</a><a href="#">My Account</a><a href="#">Newsletter Manager</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Condé Nast. Vol. 34, Issue 04.</span>
+      <span>Privacy · Cookies · CA Notice · Accessibility</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wired.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

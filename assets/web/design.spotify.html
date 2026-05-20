@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spotify — Design System Study</title>
+<meta name="description" content="A visual study of Spotify's design language: near-black cocoon, singular Spotify Green accent, pill-and-circle geometry, uppercase tracking. Marketing demo + design system reference." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Surface ladder */
+  --canvas: #121212;
+  --surface-1: #181818;
+  --surface-2: #1f1f1f;
+  --surface-card: #252525;
+  --surface-card-alt: #272727;
+  /* Accent (only functional) */
+  --accent: #1ed760;
+  --accent-border: #1db954;
+  --accent-hover: #1fdf64;
+  /* Text */
+  --ink: #ffffff;
+  --ink-bright: #fdfdfd;
+  --ink-soft: #cbcbcb;
+  --ink-muted: #b3b3b3;
+  --ink-dim: #7c7c7c;
+  /* Border */
+  --border: #4d4d4d;
+  --border-soft: #2a2a2a;
+  --border-bright: #7c7c7c;
+  /* Semantic */
+  --negative: #f3727f;
+  --warning: #ffa42b;
+  --announce: #539df5;
+  /* Shadow */
+  --shadow-heavy: rgba(0,0,0,0.5) 0px 8px 24px;
+  --shadow-medium: rgba(0,0,0,0.3) 0px 8px 8px;
+  --shadow-inset: rgb(18,18,18) 0px 1px 0px, rgb(124,124,124) 0px 0px 0px 1px inset;
+  /* Type */
+  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", helvetica, arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radii */
+  --r-min: 2px;
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-pill: 500px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* ====== Nav ====== */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(18,18,18,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1240px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.2px; font-size: 18px; }
+.brand-mark { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
+.brand-mark svg { width: 18px; height: 18px; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-pill { padding: 8px 16px; border-radius: var(--r-full); font-size: 14px; font-weight: 700; color: var(--ink-muted); transition: color .15s, background .15s; }
+.nav-pill:hover { color: var(--ink); }
+.nav-pill.active { color: var(--ink); background: var(--surface-2); }
+.nav-cta { display: flex; gap: 8px; align-items: center; }
+
+/* ====== Buttons ====== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; cursor: pointer; border: 0; transition: transform .12s ease, background .15s ease, color .15s ease, border-color .15s ease; }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--accent); color: #000; padding: 14px 32px; border-radius: var(--r-full); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; }
+.btn-primary:hover { background: var(--accent-hover); transform: scale(1.03); }
+.btn-pill { background: var(--surface-2); color: var(--ink); padding: 12px 24px; border-radius: var(--r-full); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; }
+.btn-pill:hover { background: #2a2a2a; }
+.btn-outline { background: transparent; color: var(--ink); padding: 12px 24px; border-radius: var(--r-full); border: 1px solid var(--border-bright); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; }
+.btn-outline:hover { border-color: var(--ink); transform: scale(1.03); }
+.btn-light { background: #eeeeee; color: #181818; padding: 12px 24px; border-radius: var(--r-pill); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; }
+.btn-sm { padding: 8px 16px; font-size: 12px; }
+.btn-circle { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: #000; display: grid; place-items: center; box-shadow: var(--shadow-heavy); }
+.btn-circle:hover { background: var(--accent-hover); transform: scale(1.06); }
+.btn-circle svg { width: 26px; height: 26px; }
+.btn-circle-sm { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #000; display: grid; place-items: center; }
+.btn-circle-sm svg { width: 18px; height: 18px; }
+.btn-ghost-circle { width: 36px; height: 36px; border-radius: 50%; background: var(--surface-2); color: var(--ink); display: grid; place-items: center; }
+.btn-ghost-circle:hover { background: #2a2a2a; }
+
+/* ====== Hero ====== */
+.hero { position: relative; padding: 80px 0 120px; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background:
+  radial-gradient(60% 50% at 80% 20%, rgba(30,215,96,0.18), transparent 65%),
+  radial-gradient(45% 40% at 15% 80%, rgba(83,157,245,0.10), transparent 70%),
+  linear-gradient(180deg, #181818 0%, #121212 65%);
+  z-index: -1;
+}
+.hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); padding: 6px 12px; border-radius: var(--r-full); background: rgba(30,215,96,0.10); border: 1px solid rgba(30,215,96,0.25); }
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.hero h1 { font-size: 72px; line-height: 1.02; letter-spacing: -2.4px; font-weight: 800; margin: 22px 0 18px; color: var(--ink-bright); }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lead { font-size: 17px; line-height: 1.55; color: var(--ink-muted); max-width: 520px; margin: 0 0 32px; }
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero-meta { margin-top: 36px; display: flex; gap: 28px; align-items: center; }
+.hero-meta-item { font-size: 12px; color: var(--ink-muted); display: flex; gap: 8px; align-items: center; }
+.hero-meta-item strong { color: var(--ink); font-weight: 700; font-size: 18px; letter-spacing: -0.4px; }
+
+/* Player mockup */
+.player {
+  background: linear-gradient(160deg, #2b2b2b 0%, #181818 60%);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-heavy);
+  padding: 22px;
+  position: relative;
+}
+.player::before { content: ""; position: absolute; inset: 0; border-radius: var(--r-lg); pointer-events: none; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+.player-now { display: flex; gap: 18px; align-items: flex-end; margin-bottom: 18px; }
+.album {
+  width: 132px; height: 132px; border-radius: var(--r-md); flex-shrink: 0;
+  background:
+    radial-gradient(80% 70% at 70% 30%, #ff8a3d, transparent 60%),
+    radial-gradient(70% 90% at 20% 80%, #4d2a8f, transparent 60%),
+    linear-gradient(155deg, #f3727f 0%, #6b1f8a 60%, #1f1f1f 100%);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.5);
+  position: relative; overflow: hidden;
+}
+.album::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 35%, rgba(255,255,255,0.18), transparent 35%); }
+.now-meta .tag { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 1.4px; font-weight: 700; }
+.now-meta h3 { font-size: 26px; line-height: 1.12; letter-spacing: -0.8px; font-weight: 800; margin: 6px 0 4px; color: var(--ink-bright); }
+.now-meta .artist { font-size: 13px; color: var(--ink-muted); }
+.player-controls { display: flex; align-items: center; justify-content: center; gap: 22px; padding: 12px 0 14px; }
+.ctrl-icon { color: var(--ink-muted); width: 20px; height: 20px; cursor: pointer; transition: color .15s; }
+.ctrl-icon:hover { color: var(--ink); }
+.progress { display: flex; align-items: center; gap: 12px; font-size: 11px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.progress-bar { flex: 1; height: 4px; background: #4d4d4d; border-radius: 999px; position: relative; overflow: hidden; }
+.progress-bar::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 42%; background: var(--ink); border-radius: 999px; }
+.progress-bar:hover::before { background: var(--accent); }
+.player-foot { display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-top: 18px; padding-top: 16px; border-top: 1px solid #2a2a2a; }
+.queue { display: flex; gap: 8px; }
+.queue-pill { padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: var(--r-full); font-size: 11px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 1.2px; }
+.volume { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink-muted); }
+.vol-bar { width: 80px; height: 4px; background: #4d4d4d; border-radius: 999px; position: relative; }
+.vol-bar::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 70%; background: var(--ink); border-radius: 999px; }
+
+/* ====== Section Header ====== */
+.section { padding: 96px 0; border-top: 1px solid var(--border-soft); }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+.section-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; }
+.section-title { font-size: 44px; line-height: 1.08; letter-spacing: -1.4px; font-weight: 800; margin: 0; color: var(--ink-bright); max-width: 720px; }
+.section-sub { font-size: 15px; color: var(--ink-muted); line-height: 1.55; max-width: 460px; margin: 0; }
+
+/* ====== Discover / Cards ====== */
+.discover-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.disc-card { background: var(--surface-1); border-radius: var(--r-lg); padding: 18px; transition: background .2s; position: relative; cursor: pointer; }
+.disc-card:hover { background: var(--surface-card); }
+.disc-card:hover .disc-play { opacity: 1; transform: translateY(0); }
+.disc-art { aspect-ratio: 1; border-radius: var(--r-md); margin-bottom: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+.disc-art-1 { background: radial-gradient(80% 80% at 30% 30%, #ffa42b, #f3727f 50%, #1b1b1b 100%); }
+.disc-art-2 { background: radial-gradient(85% 85% at 70% 20%, #539df5, #2d2a8f 55%, #0e0e2a 100%); }
+.disc-art-3 { background: radial-gradient(75% 80% at 50% 60%, #1ed760, #0f6b3c 55%, #1c1c1c 100%); }
+.disc-art-4 { background: radial-gradient(80% 80% at 25% 70%, #f3727f, #6b1f8a 60%, #11091a 100%); }
+.disc-art-5 { background: radial-gradient(80% 80% at 70% 40%, #cbcbcb, #6a6a6a 55%, #1a1a1a 100%); }
+.disc-art-6 { background: radial-gradient(80% 80% at 30% 40%, #ffd28a, #6e3a0d 60%, #181010 100%); }
+.disc-art-7 { background: radial-gradient(80% 80% at 60% 50%, #b39ddb, #3a1a6e 60%, #0a0420 100%); }
+.disc-art-8 { background: radial-gradient(80% 80% at 40% 60%, #80deea, #006064 60%, #04181b 100%); }
+.disc-play { position: absolute; right: 14px; bottom: 14px; opacity: 0; transform: translateY(8px); transition: opacity .18s, transform .18s; }
+.disc-title { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.2px; margin-bottom: 4px; }
+.disc-meta { font-size: 12px; color: var(--ink-muted); }
+
+/* ====== Feature dual ====== */
+.feature-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.feature-card { background: var(--surface-1); border-radius: var(--r-lg); padding: 36px; position: relative; overflow: hidden; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; }
+.feature-card.green { background: linear-gradient(135deg, #0f6b3c 0%, #1ed760 100%); color: #051a0c; }
+.feature-card.green .feature-title,
+.feature-card.green .feature-sub { color: #051a0c; }
+.feature-card.violet { background: linear-gradient(135deg, #4a154b 0%, #b62fff 100%); }
+.feature-card-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; opacity: 0.75; }
+.feature-title { font-size: 30px; line-height: 1.1; letter-spacing: -0.8px; font-weight: 800; margin: 12px 0 10px; color: var(--ink-bright); }
+.feature-sub { font-size: 14px; line-height: 1.55; color: var(--ink-muted); margin-bottom: 24px; max-width: 380px; }
+.feature-card.violet .feature-sub { color: rgba(255,255,255,0.78); }
+.feature-blob { position: absolute; right: -40px; bottom: -40px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,0.08); }
+
+/* ====== Pricing ====== */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 12px; }
+.plan { background: var(--surface-1); border-radius: var(--r-lg); padding: 28px; position: relative; transition: background .18s; }
+.plan:hover { background: var(--surface-card); }
+.plan.featured { background: linear-gradient(180deg, #103e22 0%, #0a2515 100%); border: 1px solid rgba(30,215,96,0.3); }
+.plan-badge { position: absolute; top: -10px; left: 28px; background: var(--accent); color: #000; padding: 4px 10px; border-radius: var(--r-full); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px; }
+.plan-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: var(--accent); margin-bottom: 6px; }
+.plan-title { font-size: 22px; font-weight: 800; letter-spacing: -0.6px; color: var(--ink-bright); margin-bottom: 4px; }
+.plan-price { display: flex; align-items: baseline; gap: 6px; margin: 14px 0 8px; }
+.plan-price .num { font-size: 38px; font-weight: 800; letter-spacing: -1.2px; color: var(--ink-bright); }
+.plan-price .per { font-size: 12px; color: var(--ink-muted); }
+.plan-blurb { font-size: 13px; color: var(--ink-muted); margin-bottom: 22px; line-height: 1.5; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
+.plan li { font-size: 13px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+.plan li svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--accent); margin-top: 3px; }
+.plan-cta { width: 100%; }
+
+/* ====== CTA Band ====== */
+.cta-band { background: linear-gradient(120deg, #1ed760 0%, #0a8d3e 100%); border-radius: var(--r-xl); padding: 56px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; color: #051a0c; }
+.cta-band h2 { font-size: 40px; line-height: 1.05; letter-spacing: -1.2px; margin: 0 0 8px; font-weight: 800; color: #051a0c; max-width: 620px; }
+.cta-band p { margin: 0; font-size: 15px; color: rgba(5,26,12,0.72); max-width: 540px; }
+.cta-band .btn-dark { background: #121212; color: #fff; }
+.cta-band .btn-dark:hover { background: #000; }
+
+/* ====== Footer ====== */
+footer { border-top: 1px solid var(--border-soft); padding: 64px 0 40px; background: #0c0c0c; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
+.foot-brand p { color: var(--ink-muted); font-size: 13px; line-height: 1.55; margin: 14px 0 22px; max-width: 280px; }
+.social { display: flex; gap: 10px; }
+.social a { width: 36px; height: 36px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-muted); transition: color .15s, background .15s; }
+.social a:hover { background: var(--surface-card); color: var(--ink); }
+.social svg { width: 16px; height: 16px; }
+.foot-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: var(--ink); margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); transition: color .12s; }
+.foot-col li a:hover { color: var(--ink); }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--border-soft); font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 14px; }
+
+/* ====== Design system reference (Part B) ====== */
+.ds-section { background: #0c0c0c; padding: 100px 0; border-top: 1px solid var(--border-soft); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 36px; letter-spacing: -1px; line-height: 1.08; margin: 0 0 8px; font-weight: 800; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-muted); font-size: 14px; max-width: 540px; line-height: 1.6; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface-2); border-radius: var(--r-full); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px; color: var(--ink-muted); transition: color .15s, background .15s; }
+.ds-source:hover { color: var(--ink); background: var(--surface-card); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border-soft); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 22px; font-weight: 800; letter-spacing: -0.4px; color: var(--ink-bright); margin: 0 0 8px; }
+.ds-desc { font-size: 13px; color: var(--ink-muted); margin: 0 0 24px; line-height: 1.5; max-width: 540px; }
+.ds-caption { font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink-muted); margin: 28px 0 12px; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: var(--surface-1); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 12px; font-weight: 700; color: var(--ink); letter-spacing: -0.2px; }
+.ds-sw .val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px 14px; border-bottom: 1px solid var(--border-soft); font-size: 13px; vertical-align: middle; }
+.ds-type-table th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--ink-muted); }
+.ds-type-table td { color: var(--ink-soft); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--accent); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; }
+.ds-radius-cell { background: var(--surface-1); padding: 16px 8px; text-align: center; }
+.ds-radius-box { width: 56px; height: 56px; background: linear-gradient(135deg, #1ed760 0%, #0f6b3c 100%); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 11px; font-weight: 700; color: var(--ink); }
+.ds-radius-val { font-size: 10px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: var(--surface-1); border-radius: var(--r-lg); padding: 22px; }
+.ds-card h5 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--accent); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-stack.center { align-items: center; }
+.ds-card-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.input-pill { background: var(--surface-2); border: 0; padding: 12px 18px; border-radius: var(--r-pill); color: var(--ink); font-size: 13px; font-family: inherit; width: 100%; box-shadow: var(--shadow-inset); outline: none; }
+.input-pill::placeholder { color: var(--ink-muted); }
+.input-pill:focus { box-shadow: rgb(18,18,18) 0px 1px 0px, var(--ink) 0px 0px 0px 1px inset; }
+.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: var(--r-min); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; }
+.tag-explicit { background: var(--ink-muted); color: #000; }
+.tag-new { background: var(--accent); color: #000; }
+.tag-pod { background: transparent; color: var(--ink-muted); border: 1px solid var(--border); }
+
+/* ====== Floating source link ====== */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: var(--surface-1); border: 1px solid var(--border); padding: 10px 18px; border-radius: var(--r-full); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px; color: var(--ink-muted); box-shadow: var(--shadow-medium); transition: color .15s, border-color .15s; }
+.src-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ====== Responsive ====== */
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero h1 { font-size: 52px; letter-spacing: -1.6px; }
+  .discover-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-dual { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .cta-band { flex-direction: column; align-items: flex-start; padding: 40px 28px; }
+  .cta-band h2 { font-size: 30px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(4, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 40px; letter-spacing: -1.2px; }
+  .section-title { font-size: 30px; letter-spacing: -1px; }
+  .discover-grid { grid-template-columns: 1fr 1fr; }
+  .ds-intro h2 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="#000"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.41a.7.7 0 01-.96.23c-2.64-1.61-5.96-1.97-9.88-1.08a.7.7 0 11-.31-1.37c4.28-.97 7.95-.55 10.91 1.26a.7.7 0 01.24.96zm1.22-2.73a.88.88 0 01-1.2.29c-3.02-1.86-7.63-2.4-11.21-1.31a.88.88 0 11-.51-1.68c4.08-1.24 9.17-.64 12.62 1.49.41.25.55.79.3 1.21zm.1-2.85c-3.62-2.15-9.59-2.35-13.05-1.3a1.05 1.05 0 11-.61-2.01c3.96-1.2 10.52-.97 14.68 1.5a1.05 1.05 0 11-1.02 1.81z"/></svg>
+      </span>
+      <span>Spotify</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-pill active" href="#">Home</a>
+      <a class="nav-pill" href="#">Search</a>
+      <a class="nav-pill" href="#">Your Library</a>
+      <a class="nav-pill" href="#">Premium</a>
+      <a class="nav-pill" href="#">Support</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-outline btn-sm" href="#">Sign Up</a>
+      <a class="btn btn-primary btn-sm" href="#">Log In</a>
+    </div>
+  </div>
+</div>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Premium · 1 month free</span>
+      <h1>Music for <em>everyone.</em> Sound for every mood.</h1>
+      <p class="lead">Millions of songs and podcasts. No credit card required. Try Premium free for a month and listen to an ad-free world that learns what you love.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#">Get Premium Free</a>
+        <a class="btn btn-outline" href="#">Learn More</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>574M</strong> Active listeners</div>
+        <div class="hero-meta-item"><strong>100M+</strong> Tracks</div>
+        <div class="hero-meta-item"><strong>180+</strong> Markets</div>
+      </div>
+    </div>
+
+    <div class="player" aria-label="Now playing mockup">
+      <div class="player-now">
+        <div class="album" role="img" aria-label="Album art"></div>
+        <div class="now-meta">
+          <div class="tag">Now Playing</div>
+          <h3>Midnight Drive</h3>
+          <div class="artist">Neon Carousel · Late Bloomer</div>
+        </div>
+      </div>
+      <div class="player-controls">
+        <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L4 12l6 6V6zm10 0v12l-6-6 6-6z"/></svg>
+        <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z"/></svg>
+        <button class="btn-circle" aria-label="Play">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2V6zm-2.5 6L5 6v12l8.5-6z"/></svg>
+        <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14 6l6 6-6 6V6zM4 6h2v12H4V6z"/></svg>
+      </div>
+      <div class="progress">
+        <span>1:42</span>
+        <div class="progress-bar"></div>
+        <span>4:03</span>
+      </div>
+      <div class="player-foot">
+        <div class="queue">
+          <span class="queue-pill">Queue</span>
+          <span class="queue-pill">Lyrics</span>
+          <span class="queue-pill">Devices</span>
+        </div>
+        <div class="volume">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4.03v8.06A4.5 4.5 0 0016.5 12z"/></svg>
+          <div class="vol-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DISCOVER ====== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Made for You</div>
+        <h2 class="section-title">Playlists shaped by every song you've ever loved.</h2>
+      </div>
+      <p class="section-sub">A daily refresh of mixes, throwbacks, and discoveries — built from your listening, your skips, and the rooms you keep coming back to.</p>
+    </div>
+
+    <div class="discover-grid">
+      <div class="disc-card">
+        <div class="disc-art disc-art-1">
+          <button class="disc-play btn-circle-sm" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="disc-title">Daily Mix 1</div>
+        <div class="disc-meta">The Weeknd, Dua Lipa, and more</div>
+      </div>
+      <div class="disc-card">
+        <div class="disc-art disc-art-2">
+          <button class="disc-play btn-circle-sm" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="disc-title">Release Radar</div>
+        <div class="disc-meta">Fresh from artists you follow</div>
+      </div>
+      <div class="disc-card">
+        <div class="disc-art disc-art-3">
+          <button class="disc-play btn-circle-sm" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="disc-title">Discover Weekly</div>
+        <div class="disc-meta">Your week. Your music.</div>
+      </div>
+      <div class="disc-card">
+        <div class="disc-art disc-art-4">
+          <button class="disc-play btn-circle-sm" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="disc-title">On Repeat</div>
+        <div class="disc-meta">Songs you can't stop playing</div>
+      </div>
+      <div class="disc-card">
+        <div class="disc-art disc-art-5">
+          <button class="disc-play btn-circle-sm" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="disc-title">Time Capsule</div>
+        <div class="disc-meta">Throwbacks made for you</div>
+      </div>
+      <div class="disc-card">
+        <div class="disc-art disc-art-6">
+          <button class="disc-play btn-circle-sm" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="disc-title">Mellow Mornings</div>
+        <div class="disc-meta">Slow start, soft landings</div>
+      </div>
+      <div class="disc-card">
+        <div class="disc-art disc-art-7">
+          <button class="disc-play btn-circle-sm" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="disc-title">Indie Pop Hour</div>
+        <div class="disc-meta">Quiet electricity</div>
+      </div>
+      <div class="disc-card">
+        <div class="disc-art disc-art-8">
+          <button class="disc-play btn-circle-sm" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="disc-title">Deep Focus</div>
+        <div class="disc-meta">Instrumentals for thinking</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FEATURE PAIR ====== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">What's New</div>
+        <h2 class="section-title">More than music — your whole audio universe.</h2>
+      </div>
+      <p class="section-sub">Podcasts, audiobooks, live sessions, and DJ — every kind of listening, gathered into a single ad-free experience.</p>
+    </div>
+
+    <div class="feature-dual">
+      <div class="feature-card green">
+        <div>
+          <span class="feature-card-tag">DJ · Powered by AI</span>
+          <h3 class="feature-title">Your personal DJ with a knack for what you need.</h3>
+          <p class="feature-sub">A radio-style stream of music picked for you, with smart commentary on artists you love — and ones you'd love if you only met them.</p>
+        </div>
+        <div>
+          <a class="btn btn-pill" style="background:#000;color:#fff;" href="#">Try DJ</a>
+        </div>
+        <div class="feature-blob"></div>
+      </div>
+      <div class="feature-card violet">
+        <div>
+          <span class="feature-card-tag">Podcasts · Originals</span>
+          <h3 class="feature-title">Shows that pull you closer than the page.</h3>
+          <p class="feature-sub">From overnight obsessions to longform investigations — exclusive originals and millions of episodes, in one place that remembers where you left off.</p>
+        </div>
+        <div>
+          <a class="btn btn-pill" href="#">Browse Podcasts</a>
+        </div>
+        <div class="feature-blob"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRICING ====== -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Premium Plans</div>
+        <h2 class="section-title">Pick the plan that hears you.</h2>
+      </div>
+      <p class="section-sub">All Premium plans include ad-free music, offline listening, and unlimited skips. Cancel anytime.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Individual</div>
+        <div class="plan-title">Premium</div>
+        <div class="plan-price"><span class="num">$10.99</span><span class="per">/mo after trial</span></div>
+        <div class="plan-blurb">For 1 account. Cancel anytime.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Ad-free music listening</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Download to listen offline</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Play songs in any order</li>
+        </ul>
+        <a class="btn btn-pill plan-cta" href="#">Try Free For 1 Month</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-name">Duo</div>
+        <div class="plan-title">Premium Duo</div>
+        <div class="plan-price"><span class="num">$14.99</span><span class="per">/mo after trial</span></div>
+        <div class="plan-blurb">For 2 accounts. Same address required.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>2 Premium accounts</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Duo Mix: a playlist for two</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Ad-free, offline, on-demand</li>
+        </ul>
+        <a class="btn btn-primary plan-cta" href="#">Try Free For 1 Month</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Family</div>
+        <div class="plan-title">Premium Family</div>
+        <div class="plan-price"><span class="num">$16.99</span><span class="per">/mo after trial</span></div>
+        <div class="plan-blurb">Up to 6 accounts. Family-safe.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Up to 6 Premium accounts</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Block explicit music</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Spotify Kids included</li>
+        </ul>
+        <a class="btn btn-pill plan-cta" href="#">Try Free For 1 Month</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA BAND ====== -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>One month free. Then you decide.</h2>
+        <p>No commitments. Cancel anytime. Premium recommends what you love next.</p>
+      </div>
+      <a class="btn btn-dark btn-pill" href="#">Start Free Trial</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DESIGN SYSTEM (Part B) ====== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>An interface that disappears so the music doesn't.</h2>
+        <p>Spotify's UI is a study in restraint — five shades of charcoal, one functional green, and a strict geometry of pills and circles. Below: the tokens behind the cocoon.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.spotify.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Near-black surfaces stacked by shade. Spotify Green appears only on functional surfaces — play controls, active states, primary CTAs. Album art provides every other color in the room.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1ed760"></div><div class="meta"><div class="name">Spotify Green</div><div class="val">#1ed760</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1db954"></div><div class="meta"><div class="name">Green Border</div><div class="val">#1db954</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#121212;border:1px solid #2a2a2a"></div><div class="meta"><div class="name">Near Black</div><div class="val">#121212</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#181818;border:1px solid #2a2a2a"></div><div class="meta"><div class="name">Dark Surface</div><div class="val">#181818</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1f1f1f;border:1px solid #2a2a2a"></div><div class="meta"><div class="name">Mid Dark</div><div class="val">#1f1f1f</div></div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="meta"><div class="name">White</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fdfdfd"></div><div class="meta"><div class="name">Light</div><div class="val">#fdfdfd</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#cbcbcb"></div><div class="meta"><div class="name">Near White</div><div class="val">#cbcbcb</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#b3b3b3"></div><div class="meta"><div class="name">Silver</div><div class="val">#b3b3b3</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#7c7c7c"></div><div class="meta"><div class="name">Light Border</div><div class="val">#7c7c7c</div></div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#252525"></div><div class="meta"><div class="name">Dark Card</div><div class="val">#252525</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#272727"></div><div class="meta"><div class="name">Mid Card</div><div class="val">#272727</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4d4d4d"></div><div class="meta"><div class="name">Border Gray</div><div class="val">#4d4d4d</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#eeeeee"></div><div class="meta"><div class="name">Light Surface</div><div class="val">#eeeeee</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000;border:1px solid #2a2a2a"></div><div class="meta"><div class="name">True Black</div><div class="val">#000000</div></div></div>
+      </div>
+
+      <div class="ds-caption">Semantic</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#f3727f"></div><div class="meta"><div class="name">Negative</div><div class="val">#f3727f</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffa42b"></div><div class="meta"><div class="name">Warning</div><div class="val">#ffa42b</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#539df5"></div><div class="meta"><div class="name">Announcement</div><div class="val">#539df5</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#b3b3b3"></div><div class="meta"><div class="name">Separator</div><div class="val">#b3b3b3</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#121212,#1f1f1f)"></div><div class="meta"><div class="name">Shadow Stack</div><div class="val">rgba(0,0,0,.5)</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">CircularSp family (SpotifyMixUI / SpotifyMixUITitle) — substituted here with Inter. Bold/regular binary hierarchy. Buttons stay uppercase with 1.4–2px tracking.</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--title-section</td><td class="sample" style="font-size:24px;font-weight:700">Section Title</td><td>24 / 1.50rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--heading-feature</td><td class="sample" style="font-size:18px;font-weight:600;line-height:1.3">Feature Heading</td><td>18 / 1.13rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--body-bold</td><td class="sample" style="font-size:16px;font-weight:700">Emphasized body</td><td>16 / 1.00rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:16px;font-weight:400">Standard body</td><td>16 / 1.00rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--button-upper</td><td class="sample" style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px">Play Now</td><td>14 / 0.88rem</td><td>700</td><td>1.4–2px</td></tr>
+          <tr><td class="token">--nav-active</td><td class="sample" style="font-size:14px;font-weight:700">Home</td><td>14 / 0.88rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--nav-inactive</td><td class="sample" style="font-size:14px;font-weight:400;color:#b3b3b3">Search</td><td>14 / 0.88rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--caption</td><td class="sample" style="font-size:14px;font-weight:400;color:#b3b3b3">3:42 · 2.1M plays</td><td>14 / 0.88rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--small-bold</td><td class="sample" style="font-size:12px;font-weight:700">EXPLICIT</td><td>12 / 0.75rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--badge</td><td class="sample" style="font-size:10.5px;font-weight:600;text-transform:capitalize">New</td><td>10.5 / 0.66rem</td><td>600</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Pill-and-circle geometry. Buttons land at 500px / 9999px; play controls at 50%; cards stay subtle at 6–8px.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Minimal</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Subtle</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Standard</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Comfort</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Medium</div><div class="ds-radius-val">10–20</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">Large</div><div class="ds-radius-val">100px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:500px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">500–9999</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Circle</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Pills, circles, and inset inputs — the tactile vocabulary of a music device translated to the screen.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Primary CTA</a>
+            <a class="btn btn-pill" href="#">Dark Pill</a>
+            <a class="btn btn-outline" href="#">Outlined Pill</a>
+            <a class="btn btn-light" href="#">Light Pill</a>
+            <div class="ds-card-row" style="margin-top:4px">
+              <button class="btn-circle" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="btn-circle-sm" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="btn-ghost-circle" aria-label="Like"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search for songs, artists, or podcasts" />
+            <input class="input-pill" placeholder="What do you want to play?" />
+            <div class="ds-card-row">
+              <span class="tag tag-explicit">Explicit</span>
+              <span class="tag tag-new">New</span>
+              <span class="tag tag-pod">Podcast</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#1f1f1f;border-radius:8px;padding:14px;width:100%;box-shadow:rgba(0,0,0,.3) 0 8px 8px">
+              <div style="width:64px;height:64px;border-radius:6px;margin-bottom:12px;background:radial-gradient(circle at 30% 30%,#1ed760,#0e3d22)"></div>
+              <div style="font-size:13px;font-weight:700">Discover Weekly</div>
+              <div style="font-size:11px;color:#b3b3b3;margin-top:2px">Your week. Your music.</div>
+            </div>
+            <div style="background:#181818;border-radius:8px;padding:12px;width:100%;display:flex;gap:10px;align-items:center">
+              <div style="width:40px;height:40px;border-radius:6px;background:radial-gradient(circle at 30% 30%,#f3727f,#6b1f8a)"></div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700;color:#fff">Midnight Drive</div>
+                <div style="font-size:11px;color:#b3b3b3">Neon Carousel</div>
+              </div>
+              <button class="btn-ghost-circle" aria-label="More" style="width:28px;height:28px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="#000"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.41a.7.7 0 01-.96.23c-2.64-1.61-5.96-1.97-9.88-1.08a.7.7 0 11-.31-1.37c4.28-.97 7.95-.55 10.91 1.26a.7.7 0 01.24.96zm1.22-2.73a.88.88 0 01-1.2.29c-3.02-1.86-7.63-2.4-11.21-1.31a.88.88 0 11-.51-1.68c4.08-1.24 9.17-.64 12.62 1.49.41.25.55.79.3 1.21zm.1-2.85c-3.62-2.15-9.59-2.35-13.05-1.3a1.05 1.05 0 11-.61-2.01c3.96-1.2 10.52-.97 14.68 1.5a1.05 1.05 0 11-1.02 1.81z"/></svg>
+          </span>
+          <span>Spotify</span>
+        </div>
+        <p>This is a design study — a self-contained homage to the Spotify visual language, built to demonstrate token systems, geometry, and voice. Not affiliated with Spotify AB.</p>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm12 3a1 1 0 110 2 1 1 0 010-2zm-7 2a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.92a8.2 8.2 0 01-2.36.65 4.13 4.13 0 001.8-2.27 8.2 8.2 0 01-2.6 1A4.1 4.1 0 0011.1 9.3a11.65 11.65 0 01-8.45-4.28 4.1 4.1 0 001.27 5.48 4.07 4.07 0 01-1.86-.51v.05a4.1 4.1 0 003.3 4.02 4.1 4.1 0 01-1.85.07 4.1 4.1 0 003.83 2.85A8.24 8.24 0 012 18.5 11.62 11.62 0 008.29 20.4c7.55 0 11.68-6.25 11.68-11.68 0-.18 0-.36-.01-.53A8.32 8.32 0 0022 5.92z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.2.33-2 2.04-2H17V2.14C16.66 2.1 15.46 2 14.07 2 11.15 2 9.13 3.78 9.13 7v3H6v4h3.13v8H13z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">For the Record</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Communities</h4>
+        <ul>
+          <li><a href="#">For Artists</a></li>
+          <li><a href="#">Developers</a></li>
+          <li><a href="#">Advertising</a></li>
+          <li><a href="#">Investors</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Useful Links</h4>
+        <ul>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Free Mobile App</a></li>
+          <li><a href="#">Premium</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Spotify Plans</h4>
+        <ul>
+          <li><a href="#">Premium Individual</a></li>
+          <li><a href="#">Premium Duo</a></li>
+          <li><a href="#">Premium Family</a></li>
+          <li><a href="#">Spotify Free</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Design Study · Tribute to Spotify's visual language</span>
+      <span>Legal · Privacy · Cookies · Accessibility</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.spotify.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

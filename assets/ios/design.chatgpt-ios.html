@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ChatGPT — iOS design spec</title>
+<meta name="description" content="ChatGPT iOS app design reference. #ffffff canvas, #10A37F OpenAI green, asymmetric bubble grammar, Söhne typography, conversational minimalism." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#ffffff; --surface-1:#F9F9F9; --surface-2:#F4F4F4; --surface-card:#FFFFFF; --surface-card-alt:#ECECEC;
+  --accent:#10A37F; --accent-border:#0E8C6C; --accent-hover:#0D8C6C;
+  --ink:#000000; --ink-soft:#2F2F2F; --ink-muted:#5D5D5D; --ink-dim:#8E8E8E;
+  --border:#ECECEC; --border-soft:#EFEFEF; --border-strong:#D9D9D9;
+  --negative:#E5484D; --warning:#F5A623; --announce:#4F46E5;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:6px; --r-lg:8px; --r-xl:14px; --r-bubble:22px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.2px;color:var(--ink)}
+.brand-mark{width:30px;height:30px;border-radius:50%;background:#000;display:grid;place-items:center}
+.brand-mark svg{width:18px;height:18px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-full);font-size:14px;font-weight:500;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink);background:var(--surface-1)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:#000;color:#fff;padding:11px 20px;border-radius:var(--r-lg)}
+.btn-primary:hover{background:#1A1A1A}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:10px 16px;border-radius:var(--r-lg)}
+.btn-outline{background:#fff;border:1px solid var(--border-strong);color:var(--ink);padding:10px 16px;border-radius:var(--r-lg)}
+.btn-light{background:var(--accent);color:#fff;padding:11px 20px;border-radius:var(--r-lg)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(16,163,127,.10),transparent 70%),radial-gradient(700px 500px at 80% 30%,rgba(0,0,0,.03),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-full);background:rgba(16,163,127,.10);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hero h1{font-size:clamp(44px,7vw,86px);line-height:1;letter-spacing:-2.4px;font-weight:700;margin-bottom:22px;color:var(--ink)}
+.hero h1 .gradient-word{background:linear-gradient(120deg,#10A37F,#1FB58A 60%,#0D8C6C);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.hero p{font-size:18px;line-height:1.55;color:var(--ink-muted);max-width:620px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;color:var(--ink);font-size:11px;display:flex;flex-direction:column;padding-top:52px;background:#fff}
+
+/* ========== SCREEN: CONVERSATION ========== */
+.cg-top{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 12px}
+.cg-top svg{width:20px;height:20px;stroke:#000;fill:none;stroke-width:2}
+.cg-top .cg-model{display:flex;align-items:center;gap:4px;font-size:14px;font-weight:600;color:var(--ink)}
+.cg-top .cg-model small{font-size:11px;color:var(--ink-dim);font-weight:500}
+.cg-body{flex:1;overflow:hidden;padding:0 14px;display:flex;flex-direction:column;gap:14px}
+.cg-msg-user{align-self:flex-end;max-width:78%;background:var(--surface-2);border-radius:22px;padding:10px 14px;font-size:13px;line-height:1.45;color:var(--ink)}
+.cg-msg-assist{align-self:flex-start;display:flex;gap:8px;max-width:92%}
+.cg-msg-assist .cg-av{width:24px;height:24px;border-radius:50%;background:#000;flex-shrink:0;display:grid;place-items:center}
+.cg-msg-assist .cg-av svg{width:14px;height:14px;fill:#fff}
+.cg-msg-assist .cg-text{font-size:13px;line-height:1.5;color:var(--ink)}
+.cg-msg-assist .cg-text p{margin-bottom:6px}
+.cg-code{background:#0D0D0D;color:#E5E5E5;border-radius:10px;padding:10px 12px;font-family:var(--font-mono);font-size:10px;line-height:1.5;margin-top:6px;position:relative}
+.cg-code .cg-code-head{display:flex;justify-content:space-between;color:#8E8E8E;font-size:9.5px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #2A2A2A}
+.cg-code .cg-code-copy{display:flex;align-items:center;gap:3px}
+.cg-input{margin:10px 12px 76px;background:#fff;border:1px solid var(--border-strong);border-radius:24px;padding:8px 8px 8px 12px;display:flex;align-items:center;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.cg-input .cg-attach{width:28px;height:28px;border-radius:50%;background:transparent;display:grid;place-items:center;flex-shrink:0}
+.cg-input .cg-attach svg{width:18px;height:18px;stroke:#000;fill:none;stroke-width:2}
+.cg-input .cg-placeholder{flex:1;font-size:13px;color:var(--ink-dim);font-weight:400}
+.cg-input .cg-mic{width:28px;height:28px;border-radius:50%;background:transparent;display:grid;place-items:center;flex-shrink:0}
+.cg-input .cg-mic svg{width:18px;height:18px;fill:#000}
+.cg-input .cg-send{width:32px;height:32px;border-radius:50%;background:#000;display:grid;place-items:center;flex-shrink:0}
+.cg-input .cg-send svg{width:16px;height:16px;fill:#fff}
+
+/* tab/bottom bar -- ChatGPT has none, use minimal bottom */
+.cg-home-ind{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:4px;border-radius:2px;background:#000;z-index:10}
+
+/* ========== SCREEN: SIDEBAR ========== */
+.cg-sidebar-bg{background:var(--surface-1)}
+.cg-sb-top{padding:6px 14px 12px;display:flex;justify-content:space-between;align-items:center}
+.cg-sb-top svg{width:20px;height:20px;stroke:#000;fill:none;stroke-width:2}
+.cg-sb-search{margin:0 14px 14px;background:#fff;border:1px solid var(--border-strong);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-dim)}
+.cg-sb-search svg{width:14px;height:14px;stroke:var(--ink-dim);fill:none;stroke-width:2}
+.cg-sb-newchat{margin:0 14px 14px;background:#fff;border:1px solid var(--border-strong);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);font-weight:500}
+.cg-sb-newchat svg{width:14px;height:14px;fill:#000}
+.cg-sb-sec{font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.4px;font-weight:600;padding:10px 16px 4px}
+.cg-sb-item{padding:8px 16px;font-size:13px;color:var(--ink);line-height:1.3;border-radius:6px}
+.cg-sb-item:hover{background:var(--surface-2)}
+.cg-account{position:absolute;bottom:8px;left:8px;right:8px;background:#fff;border:1px solid var(--border-strong);border-radius:12px;padding:8px;display:flex;align-items:center;gap:8px}
+.cg-account .cg-acct-av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#10A37F,#0D6B4F);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;flex-shrink:0}
+.cg-account .cg-acct-meta{flex:1;min-width:0}
+.cg-account .cg-acct-name{font-size:12px;font-weight:600;color:var(--ink)}
+.cg-account .cg-acct-pill{font-size:9.5px;background:var(--surface-2);color:var(--ink-muted);padding:2px 6px;border-radius:6px;display:inline-block;margin-top:1px}
+
+/* ========== SCREEN: NEW CHAT / EMPTY ========== */
+.cg-empty-bg{background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:78px}
+.cg-empty-logo{width:48px;height:48px;border-radius:50%;background:#000;display:grid;place-items:center;margin-bottom:10px}
+.cg-empty-logo svg{width:30px;height:30px;fill:#fff}
+.cg-empty-name{font-size:18px;font-weight:600;color:var(--ink);margin-bottom:22px}
+.cg-suggest-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px;width:100%}
+.cg-suggest{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px;min-height:72px;display:flex;flex-direction:column;gap:4px}
+.cg-suggest .cg-sg-ic{width:18px;height:18px}
+.cg-suggest .cg-sg-ic svg{width:18px;height:18px}
+.cg-suggest .cg-sg-t{font-size:11px;font-weight:600;color:var(--ink);line-height:1.25}
+.cg-suggest .cg-sg-s{font-size:10.5px;color:var(--ink-dim);line-height:1.3}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:600;color:var(--accent);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:700;letter-spacing:-1.6px;line-height:1.05;margin-bottom:18px;color:var(--ink)}
+.section-head p{font-size:17px;color:var(--ink-muted);line-height:1.55;max-width:600px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:#fff;border-radius:14px;padding:28px;border:1px solid var(--border)}
+.feat:hover{border-color:var(--border-strong)}
+.feat .feat-ic{width:36px;height:36px;border-radius:10px;background:rgba(16,163,127,.10);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--accent)}
+.feat h3{font-size:20px;font-weight:600;letter-spacing:-.3px;margin-bottom:10px;color:var(--ink)}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:1px 6px;border-radius:3px;color:var(--ink-soft)}
+
+/* iOS specific feature row */
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:700;letter-spacing:-.6px;margin-bottom:16px;color:var(--ink)}
+.ios-feat-text p{font-size:15px;color:var(--ink-muted);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:5px 10px;border-radius:6px;color:var(--ink-soft);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--surface-1);border-radius:18px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* Voice orb */
+.voice-stage{display:flex;flex-direction:column;align-items:center;gap:30px}
+.voice-orb{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#fff,#E5E5E5 40%,#1A1A1A 75%,#000 95%);box-shadow:0 20px 60px rgba(0,0,0,.25),inset 0 0 60px rgba(255,255,255,.4)}
+.voice-controls{display:flex;gap:18px}
+.voice-btn{width:54px;height:54px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;border:1px solid var(--border)}
+.voice-btn svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:2}
+.voice-btn.dismiss{background:#000}
+.voice-btn.dismiss svg{stroke:#fff}
+
+/* Vision attach */
+.attach-sheet{width:260px;background:#fff;border-radius:14px;padding:8px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.12)}
+.attach-row{display:flex;align-items:center;gap:12px;padding:12px 8px;border-bottom:1px solid var(--border)}
+.attach-row:last-child{border-bottom:0}
+.attach-row .a-ic{width:32px;height:32px;border-radius:8px;background:var(--surface-2);display:grid;place-items:center;flex-shrink:0}
+.attach-row .a-ic svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2}
+.attach-row .a-label{font-size:13px;font-weight:500;color:var(--ink)}
+
+/* Model picker */
+.model-sheet{width:260px;background:#fff;border-radius:14px;padding:6px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.12)}
+.model-row{display:flex;align-items:center;gap:10px;padding:12px;border-radius:8px}
+.model-row:hover{background:var(--surface-1)}
+.model-row .m-meta{flex:1}
+.model-row .m-name{font-size:13px;font-weight:600;color:var(--ink)}
+.model-row .m-desc{font-size:11px;color:var(--ink-dim)}
+.model-row .m-check{width:18px;height:18px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.model-row .m-check svg{width:11px;height:11px;fill:#fff}
+
+/* ========== DESIGN SYSTEM SECTION (Part B) ========== */
+.ds-section{padding:120px 0;background:#FAFAFA;border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-1.6px;line-height:1.05;margin:14px 0 14px;color:var(--ink)}
+.ds-intro p{font-size:16px;color:var(--ink-muted);max-width:560px;line-height:1.55}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--accent);border:1px solid var(--border-strong);padding:8px 14px;border-radius:var(--r-full);white-space:nowrap;background:#fff}
+.ds-source:hover{background:var(--surface-2)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px;color:var(--ink)}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.55;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+/* swatches */
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:10px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2;color:var(--ink)}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* type table */
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:var(--accent)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+/* radius */
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,#10A37F,#0B6B53);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:600;color:var(--ink)}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* components */
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-circle{width:44px;height:44px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;cursor:pointer}
+.btn-circle svg{width:20px;height:20px;fill:#fff}
+.btn-circle-sm{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center}
+.btn-circle-sm svg{width:16px;height:16px;fill:#fff}
+.btn-ghost-circle{width:36px;height:36px;border-radius:50%;background:transparent;color:var(--ink-muted);display:grid;place-items:center;border:1px solid var(--border)}
+.btn-ghost-circle:hover{color:var(--ink);background:var(--surface-1)}
+.input-pill{background:#fff;border:1px solid var(--border-strong);border-radius:24px;padding:11px 16px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-dim)}
+.input-pill:focus{border-color:var(--accent)}
+.tag{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:.2px}
+.tag-explicit{background:var(--surface-2);color:var(--ink)}
+.tag-new{background:rgba(16,163,127,.12);color:var(--accent)}
+.tag-pod{background:rgba(79,70,229,.10);color:var(--announce)}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:10px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:700;margin-top:6px;color:var(--ink);letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+/* ========== FOOTER ========== */
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.55}
+.foot a{color:var(--accent);font-weight:600}
+
+/* floating link */
+.float-link{position:fixed;bottom:18px;right:18px;background:#000;border:1px solid #000;color:#fff;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-full);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.float-link:hover{background:#1A1A1A}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- OpenAI knot SVG defined once for reuse -->
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="oai-logo" viewBox="0 0 24 24"><path d="M22.28 9.82a5.93 5.93 0 0 0-.51-4.87 6 6 0 0 0-6.46-2.87A6 6 0 0 0 4.98 4.2a5.93 5.93 0 0 0-3.97 2.88 6 6 0 0 0 .74 7.04 5.93 5.93 0 0 0 .51 4.87 6 6 0 0 0 6.46 2.87 5.99 5.99 0 0 0 4.52 2.02 6 6 0 0 0 5.72-4.13 5.93 5.93 0 0 0 3.97-2.87 6 6 0 0 0-.74-7.05zM13.27 21.5a4.46 4.46 0 0 1-2.85-1.03l.14-.08 4.74-2.74a.77.77 0 0 0 .39-.67v-6.69l2 1.16a.07.07 0 0 1 .04.05v5.55a4.47 4.47 0 0 1-4.46 4.45zM3.7 17.42a4.45 4.45 0 0 1-.53-2.98l.14.09 4.74 2.74a.77.77 0 0 0 .78 0l5.79-3.35v2.31a.07.07 0 0 1-.03.06l-4.8 2.76a4.46 4.46 0 0 1-6.09-1.63zM2.46 7.6a4.45 4.45 0 0 1 2.32-1.95v5.64a.77.77 0 0 0 .39.67l5.78 3.34-2 1.15a.07.07 0 0 1-.07 0l-4.8-2.78A4.46 4.46 0 0 1 2.46 7.6zm16.45 3.82-5.79-3.35 2-1.15a.07.07 0 0 1 .06 0l4.8 2.77a4.45 4.45 0 0 1-.67 8.04v-5.64a.77.77 0 0 0-.4-.67zm1.98-3-.13-.09-4.75-2.74a.77.77 0 0 0-.78 0l-5.78 3.35V6.63a.07.07 0 0 1 .03-.07L14.28 3.8a4.45 4.45 0 0 1 6.61 4.62zM9.96 13.39l-2-1.16a.07.07 0 0 1-.03-.05V6.63a4.45 4.45 0 0 1 7.32-3.41l-.14.08L10.37 6.04a.77.77 0 0 0-.39.67zm1.09-2.34 2.58-1.49 2.58 1.49v2.97l-2.58 1.49-2.58-1.49z"/></symbol>
+</defs></svg>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"><svg><use href="#oai-logo"/></svg></span>
+      ChatGPT <span style="font-weight:400;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Log In</a>
+      <a class="btn btn-light" href="#">Try ChatGPT Plus</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>A conversation,<br/>given <span class="gradient-word">no shape</span>.</h1>
+    <p>The ChatGPT iOS app, dissected. White canvas. One #10A37F green you almost never see. User on the right with a bubble, model on the left with nothing — just text and a single black mark.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- SIDEBAR -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="14" height="10" viewBox="0 0 18 14" fill="#000"><path d="M9 3c-2.4 0-4.6.9-6.3 2.4l1.6 1.6C5.6 5.8 7.2 5.2 9 5.2s3.4.6 4.7 1.8l1.6-1.6C13.6 3.9 11.4 3 9 3zm0 4c-1.4 0-2.7.5-3.6 1.4l1.6 1.6C7.5 9.4 8.2 9.2 9 9.2s1.5.2 2 .8l1.6-1.6C11.7 7.5 10.4 7 9 7zm0 4l-1.4 1.4c.4.4.9.6 1.4.6s1-.2 1.4-.6L9 11z"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr cg-sidebar-bg">
+            <div class="cg-sb-top">
+              <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M12 4v16M4 12h16"/></svg>
+            </div>
+            <div class="cg-sb-search">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+              <span>Search</span>
+            </div>
+            <div class="cg-sb-newchat">
+              <svg viewBox="0 0 24 24"><path d="M15.5 3.5l5 5L8 21H3v-5L15.5 3.5z"/></svg>
+              <span>New chat</span>
+            </div>
+            <div class="cg-sb-sec">Today</div>
+            <div class="cg-sb-item">SwiftUI sheet transitions</div>
+            <div class="cg-sb-item">Spotify dark theme tokens</div>
+            <div class="cg-sb-sec">Yesterday</div>
+            <div class="cg-sb-item">Refactor React useEffect chain</div>
+            <div class="cg-sb-item">Trip itinerary — Lisbon, 5d</div>
+            <div class="cg-sb-sec">Previous 7 Days</div>
+            <div class="cg-sb-item">Postgres query plan analysis</div>
+            <div class="cg-sb-item">Sourdough hydration ratios</div>
+            <div class="cg-account">
+              <div class="cg-acct-av">J</div>
+              <div class="cg-acct-meta">
+                <div class="cg-acct-name">Jiang Shu</div>
+                <div class="cg-acct-pill">Plus</div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5D5D5D" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">History · Drawer</div>
+      </div>
+
+      <!-- CONVERSATION (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="cg-top">
+              <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+              <div class="cg-model">ChatGPT <small>4o ▾</small></div>
+              <svg viewBox="0 0 24 24"><path d="M15.5 3.5l5 5L8 21H3v-5L15.5 3.5z"/></svg>
+            </div>
+            <div class="cg-body">
+              <div class="cg-msg-user">How do I center a div in CSS without flexbox?</div>
+              <div class="cg-msg-assist">
+                <div class="cg-av"><svg><use href="#oai-logo"/></svg></div>
+                <div class="cg-text">
+                  <p>You have a few options. The simplest one for a single element:</p>
+                  <div class="cg-code">
+                    <div class="cg-code-head"><span>css</span><span class="cg-code-copy">⧉ Copy</span></div>
+                    .parent &#123;<br/>
+                    &nbsp;&nbsp;display: grid;<br/>
+                    &nbsp;&nbsp;place-items: center;<br/>
+                    &#125;
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cg-input">
+              <div class="cg-attach"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+              <div class="cg-placeholder">Message ChatGPT</div>
+              <div class="cg-mic"><svg viewBox="0 0 24 24" fill="#000"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+              <div class="cg-send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="cg-home-ind"></div>
+          </div>
+        </div>
+        <div class="iphone-label">Conversation</div>
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr cg-empty-bg">
+            <div class="cg-empty-logo"><svg><use href="#oai-logo"/></svg></div>
+            <div class="cg-empty-name">ChatGPT 4o</div>
+            <div class="cg-suggest-grid">
+              <div class="cg-suggest">
+                <div class="cg-sg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#10A37F" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+                <div class="cg-sg-t">Help me plan</div>
+                <div class="cg-sg-s">a relaxing day</div>
+              </div>
+              <div class="cg-suggest">
+                <div class="cg-sg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg></div>
+                <div class="cg-sg-t">Explain something</div>
+                <div class="cg-sg-s">to a 6-year-old</div>
+              </div>
+              <div class="cg-suggest">
+                <div class="cg-sg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2"><path d="M4 6h16M4 12h12M4 18h8"/></svg></div>
+                <div class="cg-sg-t">Write a draft</div>
+                <div class="cg-sg-s">resignation letter</div>
+              </div>
+              <div class="cg-suggest">
+                <div class="cg-sg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#E5484D" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></div>
+                <div class="cg-sg-t">Make a list</div>
+                <div class="cg-sg-s">of weekend reads</div>
+              </div>
+            </div>
+            <div class="cg-input" style="margin-top:auto;margin-bottom:30px;width:calc(100% - 24px);align-self:center">
+              <div class="cg-attach"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+              <div class="cg-placeholder">Message ChatGPT</div>
+              <div class="cg-mic"><svg viewBox="0 0 24 24" fill="#000"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V21h2v-3.08A7 7 0 0019 11h-2z"/></svg></div>
+            </div>
+            <div class="cg-home-ind"></div>
+          </div>
+        </div>
+        <div class="iphone-label">New Chat</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. No chrome.</h2>
+      <p>Every ChatGPT screen earns its position by adding as little as possible — a white canvas, asymmetric bubble grammar, and a single black submit circle that quietly appears when there's text to send.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0zm5 0h10M12 7v10"/></svg></div>
+        <h3>Conversation</h3>
+        <p>User messages live on the right inside a <code>#F4F4F4</code> bubble at <code>22px</code> radius. Assistant replies have no bubble at all — just left-aligned markdown next to a small black avatar. The asymmetry is the grammar.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h12M4 18h8"/></svg></div>
+        <h3>History Drawer</h3>
+        <p>Sidebar lives on a <code>#F9F9F9</code> warm-gray. Today / Yesterday / Previous 7 Days as section labels — never UI cards, never tabs. The user row pins to the bottom with a tiny Plus badge.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+        <h3>New Chat</h3>
+        <p>Empty state is centered: black knot logo, model name, and 2×2 suggestion cards at <code>14px</code> radius. No hero copy, no marketing — just permission to start typing.</p>
+      </div>
+    </div>
+
+    <!-- iOS-specific feature blocks -->
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Voice Mode</div>
+          <h3>The whole screen becomes a microphone.</h3>
+          <p>Tap the voice icon and the conversation collapses into a single breathing orb — a graphite sphere with subtle inner glow that scales with your speech amplitude. Three controls below: mute, dismiss, end. Everything else is stripped away.</p>
+          <p>The orb's animation honors iOS Reduce Motion: it switches to a flat opacity pulse instead of a scale-breathe when set.</p>
+          <div class="ios-feat-tokens">
+            <code>orb: 200×200pt</code>
+            <code>shadow: y20 b60</code>
+            <code>amplitude: 0–1.0</code>
+            <code>fallback: opacity pulse</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="voice-stage">
+            <div class="voice-orb"></div>
+            <div class="voice-controls">
+              <button class="voice-btn"><svg viewBox="0 0 24 24"><path d="M3 3l18 18M9 9v3a3 3 0 005.12 2.12M15 9.34V6a3 3 0 00-5.94-.6"/></svg></button>
+              <button class="voice-btn"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+              <button class="voice-btn dismiss"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="attach-sheet">
+            <div class="attach-row">
+              <div class="a-ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M8 6l1.5-2h5L16 6"/></svg></div>
+              <div class="a-label">Camera</div>
+            </div>
+            <div class="attach-row">
+              <div class="a-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
+              <div class="a-label">Photos</div>
+            </div>
+            <div class="attach-row">
+              <div class="a-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div>
+              <div class="a-label">Files</div>
+            </div>
+            <div class="attach-row">
+              <div class="a-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+              <div class="a-label">Scan Document</div>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Vision Attach</div>
+          <h3>Anything iOS can see, ChatGPT can read.</h3>
+          <p>Tap the + on the input bar and an iOS-native action sheet lifts up: Camera, Photos, Files, Scan Document. Attached media gets a 64×64 thumbnail above the input, with a tiny ✕ to remove.</p>
+          <p>Scan Document uses VisionKit's document camera — the same one Apple Notes uses — so the corner-detection and perspective-correction feel exactly like the system.</p>
+          <div class="ios-feat-tokens">
+            <code>UIDocumentCameraVC</code>
+            <code>PHPicker</code>
+            <code>UIImagePicker</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Model Picker</div>
+          <h3>One tap, the whole roster.</h3>
+          <p>Tapping the "ChatGPT 4o ▾" header in the nav lifts a small floating sheet — not a full-screen modal. GPT-4o, GPT-4o mini, o1, o1 mini, each with a one-line use-case description. The currently selected model carries a single green check.</p>
+          <p>The sheet's corner radius is <code>14pt</code> matching iOS-native sheets; its shadow is softer to keep the focus on copy.</p>
+          <div class="ios-feat-tokens">
+            <code>sheet radius: 14pt</code>
+            <code>row height: 56pt</code>
+            <code>check: #10A37F</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual" style="background:linear-gradient(140deg,#F9F9F9,#ECECEC)">
+          <div class="model-sheet">
+            <div class="model-row">
+              <div class="m-meta">
+                <div class="m-name">GPT-4o</div>
+                <div class="m-desc">Newest and most advanced</div>
+              </div>
+              <div class="m-check"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="model-row">
+              <div class="m-meta">
+                <div class="m-name">GPT-4o mini</div>
+                <div class="m-desc">Faster for everyday tasks</div>
+              </div>
+            </div>
+            <div class="model-row">
+              <div class="m-meta">
+                <div class="m-name">o1</div>
+                <div class="m-desc">Best at reasoning</div>
+              </div>
+            </div>
+            <div class="model-row">
+              <div class="m-meta">
+                <div class="m-name">o1 mini</div>
+                <div class="m-desc">Faster reasoning</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>Almost no system. That is the system.</h2>
+        <p>ChatGPT's iOS app reaches for fewer tokens than almost any consumer app in the App Store. One green you barely see. One bubble color. A handful of grays. The point is that nothing is in the way.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.chatgpt-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">White canvas. Bubble background is barely-there gray. The OpenAI green appears only on confirms, model checkmarks, and the tiniest active states. Every other "color" is a shade of ink.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#10A37F"></div><div class="name">OpenAI Green</div><div class="val">#10A37F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0D8C6C"></div><div class="name">Green Hover</div><div class="val">#0D8C6C</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">True Ink</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #ECECEC"></div><div class="name">Canvas</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#212121"></div><div class="name">Dark Mode</div><div class="val">#212121</div></div>
+      </div>
+
+      <div class="ds-caption">Surfaces</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#F9F9F9;border:1px solid #ECECEC"></div><div class="name">Sidebar</div><div class="val">#F9F9F9</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F4F4F4;border:1px solid #ECECEC"></div><div class="name">User Bubble</div><div class="val">#F4F4F4</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ECECEC"></div><div class="name">Border Soft</div><div class="val">#ECECEC</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D9D9D9"></div><div class="name">Border Strong</div><div class="val">#D9D9D9</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0D0D0D"></div><div class="name">Code Block</div><div class="val">#0D0D0D</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Primary</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2F2F2F"></div><div class="name">Soft Ink</div><div class="val">#2F2F2F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5D5D5D"></div><div class="name">Muted</div><div class="val">#5D5D5D</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8E8E8E"></div><div class="name">Dim</div><div class="val">#8E8E8E</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#B4B4B4"></div><div class="name">Placeholder</div><div class="val">#B4B4B4</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#E5484D"></div><div class="name">Negative</div><div class="val">#E5484D</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F5A623"></div><div class="name">Warning</div><div class="val">#F5A623</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4F46E5"></div><div class="name">Announce</div><div class="val">#4F46E5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#10A37F,#0B6B53)"></div><div class="name">Confirm Grad</div><div class="val">extracted</div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(16,163,127,0.10)"></div><div class="name">Green Wash</div><div class="val">rgba 10%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Söhne family — substituted here with Inter. Conversational legibility over expression. Body sits at 16/1.5 for sustained reading. The model selector and section labels are the only places weight changes register.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Line</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display-empty</td><td class="sample" style="font-size:26px;font-weight:600;letter-spacing:-.6px">What can I help with?</td><td>26 / 1.63rem</td><td>600</td><td>1.2</td></tr>
+          <tr><td class="token">--model-title</td><td class="sample" style="font-size:18px;font-weight:600">ChatGPT 4o</td><td>18 / 1.13rem</td><td>600</td><td>1.2</td></tr>
+          <tr><td class="token">--msg-body</td><td class="sample" style="font-size:16px;font-weight:400;line-height:1.5">A conversation that disappears so the answer doesn't.</td><td>16 / 1.00rem</td><td>400</td><td>1.5</td></tr>
+          <tr><td class="token">--author-label</td><td class="sample" style="font-size:14px;font-weight:600">ChatGPT</td><td>14 / 0.88rem</td><td>600</td><td>1.3</td></tr>
+          <tr><td class="token">--bubble-body</td><td class="sample" style="font-size:15px;font-weight:400">How do I center a div?</td><td>15 / 0.94rem</td><td>400</td><td>1.45</td></tr>
+          <tr><td class="token">--code-mono</td><td class="sample" style="font-family:var(--font-mono);font-size:13px">place-items: center;</td><td>13 / 0.81rem</td><td>400</td><td>1.5</td></tr>
+          <tr><td class="token">--sidebar-section</td><td class="sample" style="font-size:11px;font-weight:600;text-transform:uppercase;color:#8E8E8E">Today</td><td>11 / 0.69rem</td><td>600</td><td>1.2</td></tr>
+          <tr><td class="token">--account-pill</td><td class="sample" style="font-size:10px;font-weight:600">Plus</td><td>10 / 0.63rem</td><td>600</td><td>1.2</td></tr>
+          <tr><td class="token">--input-placeholder</td><td class="sample" style="font-size:15px;color:#8E8E8E">Message ChatGPT</td><td>15 / 0.94rem</td><td>400</td><td>1.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">The user bubble's 22px corner is the most-seen radius in the app — bigger than the input pill, softer than any button. Buttons stay at 8px. The send button is a 50% black circle. Everything else hovers at 10–14px.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Minimal</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Item</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:10px"></div><div class="ds-radius-label">Code</div><div class="ds-radius-val">10px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:22px"></div><div class="ds-radius-label">Bubble</div><div class="ds-radius-val">22px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">Input</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Send</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Bubble max-width</div><div class="tk-val">78%</div><div class="tk-note">User bubble caps at 78% of viewport so it never reaches the assistant side.</div></div>
+        <div class="token-cell"><div class="tk-label">Avatar size</div><div class="tk-val">24×24pt</div><div class="tk-note">Small black knot. Sits 4pt above the message baseline.</div></div>
+        <div class="token-cell"><div class="tk-label">Send circle</div><div class="tk-val">32×32pt</div><div class="tk-note">Fades from gray to black the instant the textarea has content.</div></div>
+        <div class="token-cell"><div class="tk-label">Input radius</div><div class="tk-val">24pt</div><div class="tk-note">Grows in height as the textarea expands. Radius stays the same.</div></div>
+        <div class="token-cell"><div class="tk-label">Side padding</div><div class="tk-val">14pt</div><div class="tk-note">12pt on the input bar; 16pt on the sidebar.</div></div>
+        <div class="token-cell"><div class="tk-label">Sheet radius</div><div class="tk-val">14pt</div><div class="tk-note">All floating sheets (model picker, attach) share the same.</div></div>
+        <div class="token-cell"><div class="tk-label">Sidebar width</div><div class="tk-val">82%</div><div class="tk-note">Drawer overlay; the 18% trailing edge dims to rgba(0,0,0,0.4).</div></div>
+        <div class="token-cell"><div class="tk-label">Stream rate</div><div class="tk-val">~30 tok/s</div><div class="tk-note">Text streams character-by-character with a 1pt blinking cursor.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Buttons stay rectangular at 8px. The only true circle is the send. Inputs are pills. Tags are barely there.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Send</a>
+            <a class="btn btn-light" href="#">Upgrade to Plus</a>
+            <a class="btn btn-outline" href="#">Cancel</a>
+            <a class="btn btn-pill" href="#">Regenerate</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="btn-circle" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+              <button class="btn-circle-sm" aria-label="Confirm"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></button>
+              <button class="btn-ghost-circle" aria-label="Add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Message ChatGPT" />
+            <input class="input-pill" placeholder="Search" />
+            <div class="ds-card-row">
+              <span class="tag tag-explicit">Default</span>
+              <span class="tag tag-new">Plus</span>
+              <span class="tag tag-pod">o1</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Bubble + Reply</h5>
+          <div class="ds-card-stack">
+            <div style="align-self:flex-end;background:#F4F4F4;border-radius:22px;padding:10px 14px;font-size:13px;max-width:80%">How do I center a div?</div>
+            <div style="display:flex;gap:8px;align-self:flex-start">
+              <div style="width:22px;height:22px;border-radius:50%;background:#000;display:grid;place-items:center;flex-shrink:0"><svg width="13" height="13" fill="#fff"><use href="#oai-logo"/></svg></div>
+              <div style="font-size:13px;line-height:1.5">Use <code style="font-family:var(--font-mono);font-size:11px;background:#F4F4F4;padding:1px 5px;border-radius:3px">place-items: center</code> on the parent.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg><use href="#oai-logo"/></svg></span>
+      ChatGPT iOS
+    </div>
+    <p>Design reference. Not affiliated with OpenAI. Token values are derived from the public iOS app. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.chatgpt-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.chatgpt-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.chatgpt-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

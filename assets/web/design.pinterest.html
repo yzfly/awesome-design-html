@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pinspire — Inspired by Pinterest's design system</title>
+<meta name="description" content="A Pinterest-inspired marketing page: warm-cream chrome, masonry pin grid, fully-rounded pill buttons, single Pinterest-red CTA. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #e60023;
+  --primary-pressed: #cc001f;
+  --on-primary: #ffffff;
+  /* Ink */
+  --ink: #000000;
+  --ink-soft: #211922;
+  --body: #33332e;
+  --charcoal: #262622;
+  --mute: #62625b;
+  --ash: #91918c;
+  --stone: #c8c8c1;
+  /* Surfaces */
+  --canvas: #ffffff;
+  --surface-soft: #fbfbf9;
+  --surface-card: #f6f6f3;
+  --surface-elevated: #ffffff;
+  --secondary-bg: #e5e5e0;
+  --secondary-pressed: #c8c8c1;
+  --surface-dark: #262622;
+  --hairline: #dadad3;
+  --hairline-soft: #e5e5e0;
+  --on-dark: #ffffff;
+  --on-dark-mute: rgba(255,255,255,0.7);
+  /* Editorial accents */
+  --focus-outer: #435ee5;
+  --accent-pressed-blue: #617bff;
+  --accent-purple: #7e238b;
+  --accent-purple-deep: #6845ab;
+  --success-deep: #103c25;
+  --success-pale: #c7f0da;
+  /* Pin gradient blocks (CSS-rendered imagery) */
+  --pin-coral: #f7b89f;
+  --pin-rose: #e58da3;
+  --pin-mauve: #a06b8d;
+  --pin-sage: #b6c4a8;
+  --pin-olive: #6b7350;
+  --pin-mustard: #d6a04a;
+  --pin-clay: #b86650;
+  --pin-cream: #ead6b3;
+  --pin-navy: #2a3550;
+  --pin-blush: #f3d3c8;
+  --pin-plum: #5c2842;
+  --pin-teal: #3d6b6b;
+  /* Radius */
+  --r-none: 0;
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 32px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--primary); color: #fff; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Top nav ===== */
+.topnav {
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 64px; gap: 12px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 700; font-size: 22px; color: var(--primary);
+  letter-spacing: -0.6px;
+}
+.brand .glyph {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--primary); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 16px;
+  font-family: Georgia, serif; line-height: 1;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 8px; }
+.nav-links a {
+  font-size: 16px; font-weight: 600; color: var(--ink);
+  padding: 10px 14px; border-radius: var(--r-full);
+}
+.nav-links a:hover { background: var(--surface-card); }
+.search-bar {
+  flex: 1; max-width: 520px;
+  background: var(--surface-card);
+  border-radius: var(--r-full);
+  height: 48px;
+  display: flex; align-items: center;
+  padding: 0 20px; gap: 12px;
+  color: var(--ash); font-size: 16px;
+}
+.nav-right { display: flex; gap: 8px; align-items: center; }
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit;
+  font-size: 14px; font-weight: 700; line-height: 1;
+  border-radius: var(--r-md);
+  border: 0; cursor: pointer;
+  padding: 13px 16px; min-height: 40px;
+  transition: background .15s, transform .1s;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-pressed); }
+.btn-secondary { background: var(--secondary-bg); color: var(--ink); }
+.btn-secondary:hover { background: var(--secondary-pressed); }
+.btn-tertiary { background: transparent; color: var(--ink); }
+.btn-tertiary:hover { background: var(--surface-card); }
+.btn-on-image { background: var(--canvas); color: var(--ink); border-radius: var(--r-full); padding: 8px 14px; min-height: 0; }
+.btn-pill { border-radius: var(--r-full); }
+.btn-lg { font-size: 16px; padding: 16px 24px; min-height: 48px; }
+.icon-btn-circ {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--surface-card); color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; cursor: pointer;
+}
+
+/* ===== Typography ===== */
+.display-xl {
+  font-size: 70px; font-weight: 600; line-height: 1.1; letter-spacing: -1.2px;
+  color: var(--ink); margin: 0;
+}
+.display-lg {
+  font-size: 44px; font-weight: 700; line-height: 1.15; letter-spacing: -0.8px;
+  color: var(--ink); margin: 0;
+}
+.heading-xl {
+  font-size: 28px; font-weight: 700; line-height: 1.2; letter-spacing: -1.2px;
+  color: var(--ink); margin: 0;
+}
+.heading-lg { font-size: 22px; font-weight: 600; line-height: 1.25; color: var(--ink); margin: 0; }
+.heading-md { font-size: 18px; font-weight: 600; line-height: 1.3; color: var(--ink); margin: 0; }
+.body-md { font-size: 16px; line-height: 1.4; color: var(--body); }
+.body-strong { font-weight: 600; }
+.body-sm { font-size: 14px; line-height: 1.4; color: var(--mute); }
+.caption { font-size: 12px; font-weight: 500; color: var(--mute); }
+@media (max-width: 800px) {
+  .display-xl { font-size: 44px; letter-spacing: -0.8px; }
+  .display-lg { font-size: 32px; }
+  .heading-xl { font-size: 24px; }
+}
+
+/* ===== Hero ===== */
+section { padding: 64px 0; }
+.hero { padding: 56px 0 72px; background: var(--surface-soft); }
+.hero-inner { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+@media (max-width: 880px) { .hero-inner { grid-template-columns: 1fr; gap: 32px; } }
+.hero h1 { margin-bottom: 24px; }
+.hero p.lead { font-size: 18px; color: var(--charcoal); max-width: 500px; margin: 0 0 32px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ===== Masonry pin grid (CSS-rendered "imagery") ===== */
+.pin-grid {
+  column-count: 4;
+  column-gap: 8px;
+  break-inside: avoid;
+}
+@media (max-width: 1100px) { .pin-grid { column-count: 3; } }
+@media (max-width: 760px)  { .pin-grid { column-count: 2; } }
+@media (max-width: 420px)  { .pin-grid { column-count: 1; } }
+.pin {
+  break-inside: avoid;
+  margin: 0 0 8px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--surface-card);
+  position: relative;
+  display: block;
+}
+.pin .img {
+  display: block;
+  width: 100%;
+  border-radius: var(--r-md);
+  position: relative;
+}
+.pin.large .img, .pin.large { border-radius: var(--r-lg); }
+.pin .overlay {
+  position: absolute; left: 12px; bottom: 12px;
+  background: var(--canvas); color: var(--ink);
+  font-size: 12px; font-weight: 700; line-height: 1;
+  padding: 6px 12px; border-radius: var(--r-full);
+}
+.pin .save {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--primary); color: #fff;
+  font-size: 12px; font-weight: 700; line-height: 1;
+  padding: 8px 14px; border-radius: var(--r-full);
+}
+.pin .meta {
+  position: absolute; left: 12px; bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.92);
+  padding: 6px 10px 6px 6px; border-radius: var(--r-full);
+  font-size: 12px; font-weight: 700; color: var(--ink);
+}
+.pin .meta .av { width: 24px; height: 24px; border-radius: 50%; background: var(--pin-mauve); }
+
+/* Aspect blocks for pin imagery (CSS-rendered) */
+.img.ar-1-1 { aspect-ratio: 1 / 1; }
+.img.ar-3-4 { aspect-ratio: 3 / 4; }
+.img.ar-2-3 { aspect-ratio: 2 / 3; }
+.img.ar-4-5 { aspect-ratio: 4 / 5; }
+.img.ar-9-12 { aspect-ratio: 9 / 12; }
+.img.g-rose-coral { background: linear-gradient(160deg, var(--pin-rose) 0%, var(--pin-coral) 100%); }
+.img.g-clay-cream { background: linear-gradient(180deg, var(--pin-clay) 0%, var(--pin-cream) 100%); }
+.img.g-sage-olive { background: linear-gradient(160deg, var(--pin-sage) 0%, var(--pin-olive) 100%); }
+.img.g-mauve-plum { background: linear-gradient(180deg, var(--pin-mauve) 0%, var(--pin-plum) 100%); }
+.img.g-mustard-clay { background: linear-gradient(170deg, var(--pin-mustard) 0%, var(--pin-clay) 100%); }
+.img.g-blush { background: radial-gradient(circle at 30% 30%, var(--pin-blush) 0%, var(--pin-rose) 100%); }
+.img.g-navy-teal { background: linear-gradient(180deg, var(--pin-navy) 0%, var(--pin-teal) 100%); }
+.img.g-cream-mustard { background: linear-gradient(160deg, var(--pin-cream) 0%, var(--pin-mustard) 100%); }
+.img.g-coral-mustard { background: linear-gradient(170deg, var(--pin-coral) 0%, var(--pin-mustard) 100%); }
+.img.g-plum-rose { background: linear-gradient(180deg, var(--pin-plum) 0%, var(--pin-rose) 100%); }
+.img.g-teal-sage { background: linear-gradient(170deg, var(--pin-teal) 0%, var(--pin-sage) 100%); }
+.img.g-mauve-cream { background: linear-gradient(180deg, var(--pin-mauve) 0%, var(--pin-cream) 100%); }
+
+/* Filter chip strip */
+.chip-strip { display: flex; gap: 8px; flex-wrap: wrap; margin: 32px 0 24px; }
+.chip {
+  background: var(--surface-card); color: var(--ink);
+  font-weight: 700; font-size: 14px;
+  border-radius: var(--r-full);
+  padding: 8px 16px; border: 0; cursor: pointer;
+}
+.chip.active { background: var(--ink); color: var(--on-dark); }
+
+/* Feature row */
+.feature-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  padding: 64px 0;
+}
+.feature-row.reverse > div:first-child { order: 2; }
+@media (max-width: 880px) {
+  .feature-row, .feature-row.reverse { grid-template-columns: 1fr; gap: 32px; }
+  .feature-row.reverse > div:first-child { order: 0; }
+}
+.feature-text .eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 700; color: var(--primary);
+  text-transform: uppercase; letter-spacing: 0.6px;
+  margin-bottom: 16px;
+}
+.feature-text p { color: var(--body); max-width: 480px; margin: 16px 0 24px; }
+.feature-art {
+  background: var(--surface-card);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.feature-art .pin-stack {
+  position: absolute; inset: 32px;
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1.2fr 1fr; gap: 12px;
+}
+.feature-art .pin-stack .img {
+  border-radius: var(--r-md);
+  width: 100%; height: 100%;
+}
+
+/* Category tiles */
+.cat-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+@media (max-width: 880px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+.cat-tile {
+  background: var(--surface-card);
+  border-radius: var(--r-md);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.cat-tile .img { aspect-ratio: 1 / 1; width: 100%; border-radius: var(--r-md); position: relative; }
+.cat-tile .label { font-weight: 700; font-size: 16px; color: var(--ink); margin-top: 12px; }
+.cat-tile .img .pill {
+  position: absolute; left: 10px; bottom: 10px;
+  background: var(--canvas); color: var(--ink);
+  font-size: 12px; font-weight: 700; line-height: 1;
+  padding: 6px 10px; border-radius: var(--r-full);
+}
+
+/* Pricing-ish CTA block — Pinterest doesn't really do pricing; use Sign-up modal */
+.signup-band {
+  background: var(--surface-dark); color: var(--on-dark);
+  border-radius: var(--r-none);
+  padding: 64px 24px;
+  margin: 64px 0;
+}
+.signup-band .inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center;
+}
+@media (max-width: 880px) { .signup-band .inner { grid-template-columns: 1fr; } }
+.signup-band h2 { font-size: 44px; line-height: 1.1; letter-spacing: -0.8px; font-weight: 700; margin: 0 0 16px; }
+.signup-band p { color: var(--on-dark-mute); font-size: 18px; margin: 0; max-width: 460px; }
+.modal-card {
+  background: var(--canvas); color: var(--ink);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  max-width: 420px; margin-left: auto;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+}
+.modal-card .logo {
+  width: 40px; height: 40px; margin: 0 auto 16px;
+  background: var(--primary); color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: Georgia, serif; font-weight: 800; font-size: 24px;
+}
+.modal-card h3 { text-align: center; margin: 0 0 8px; font-size: 24px; font-weight: 600; }
+.modal-card .sub { text-align: center; color: var(--mute); font-size: 14px; margin: 0 0 24px; }
+.modal-card label { display: block; font-size: 14px; font-weight: 600; margin: 12px 0 6px; }
+.modal-card input {
+  width: 100%; height: 44px;
+  border: 1px solid var(--ash); border-radius: var(--r-md);
+  padding: 0 16px; font-size: 16px; font-family: inherit;
+  color: var(--ink); background: var(--canvas);
+}
+.modal-card input:focus { outline: 4px solid var(--focus-outer); outline-offset: 0; border-color: var(--ink); }
+.modal-card .submit { width: 100%; margin-top: 20px; }
+.modal-card .switch { text-align: center; font-size: 14px; margin: 16px 0 0; color: var(--mute); }
+.modal-card .switch a { color: var(--ink-soft); font-weight: 600; }
+
+/* ===== Footer ===== */
+footer { background: var(--canvas); border-top: 1px solid var(--hairline); padding: 48px 0 32px; }
+.footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 32px; }
+@media (max-width: 880px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+footer h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin: 0 0 12px; }
+footer ul { list-style: none; padding: 0; margin: 0; }
+footer li { margin: 8px 0; }
+footer a { font-size: 14px; color: var(--mute); }
+footer a:hover { color: var(--ink); }
+.footer-bottom {
+  border-top: 1px solid var(--hairline);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--mute); flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom .wordmark { color: var(--primary); font-weight: 700; font-size: 18px; letter-spacing: -0.4px; }
+
+/* ===== Source link ===== */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px;
+  background: var(--canvas); color: var(--ink);
+  border: 1px solid var(--hairline);
+  font-size: 14px; font-weight: 600;
+  padding: 10px 14px; border-radius: var(--r-full);
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.src-link:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ============= DS Section ============= */
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 28px; font-weight: 700; letter-spacing: -1.2px; color: var(--ink); margin: 0 0 16px; }
+.ds-caption {
+  font-size: 12px; font-weight: 700; color: var(--mute);
+  text-transform: uppercase; letter-spacing: 0.6px;
+  margin: 28px 0 12px;
+}
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px)  { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px)  { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--surface-card); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 80px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 13px; font-weight: 700; color: var(--ink); }
+.ds-sw .val { font-size: 12px; color: var(--mute); margin-top: 2px; }
+
+.ds-tints { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); margin-top: 12px; }
+@media (max-width: 800px) { .ds-tints { grid-template-columns: repeat(2, 1fr); } }
+.ds-tint { border-radius: var(--r-md); padding: 24px; aspect-ratio: 5/4; display: flex; flex-direction: column; justify-content: flex-end; color: var(--ink); }
+.ds-tint.dark { color: #fff; }
+.ds-tint .lab { font-weight: 700; font-size: 16px; }
+.ds-tint .v { font-size: 12px; opacity: 0.75; margin-top: 4px; }
+
+.ds-typescale { border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; background: var(--canvas); }
+.ds-tr { display: grid; grid-template-columns: 160px 240px 1fr; gap: 16px; padding: 16px 20px; border-top: 1px solid var(--hairline-soft); align-items: center; }
+.ds-tr:first-child { border-top: 0; }
+.ds-tok { font-weight: 700; font-size: 14px; color: var(--ink); }
+.ds-spec { font-size: 12px; color: var(--mute); font-family: ui-monospace, Menlo, monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 800px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 700px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { text-align: center; }
+.ds-rad .box { width: 80px; height: 80px; background: var(--surface-card); border: 1px solid var(--hairline); margin: 0 auto 8px; }
+.ds-rad .lab { font-size: 13px; font-weight: 700; color: var(--ink); }
+.ds-rad .vv { font-size: 12px; color: var(--mute); font-family: ui-monospace, monospace; }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 700px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-field-label { font-size: 12px; font-weight: 700; color: var(--mute); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+.ds-input { width: 100%; height: 44px; border: 1px solid var(--ash); border-radius: var(--r-md); padding: 0 16px; font-size: 16px; font-family: inherit; background: var(--canvas); }
+.ds-input.focused { outline: 4px solid var(--focus-outer); border-color: var(--ink); }
+.ds-card-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 880px) { .ds-card-row { grid-template-columns: 1fr; } }
+.ds-card-demo { padding: 24px; border-radius: var(--r-md); background: var(--canvas); border: 1px solid var(--hairline); }
+.ds-card-demo.cream { background: var(--surface-card); border-color: transparent; }
+.ds-card-demo.lg { border-radius: var(--r-lg); }
+
+</style>
+</head>
+<body>
+
+<!-- ============== TOP NAV ============== -->
+<header class="topnav"><div class="wrap"><div class="row">
+  <a href="#" class="brand">
+    <span class="glyph">P</span>
+    <span>Pinspire</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#">Explore</a>
+  </nav>
+  <div class="search-bar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <span>Search for ideas, fashion, recipes…</span>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="btn btn-tertiary">About</a>
+    <a href="#" class="btn btn-tertiary">Businesses</a>
+    <a href="#" class="btn btn-tertiary">Log in</a>
+    <a href="#" class="btn btn-primary">Sign up</a>
+  </div>
+</div></div></header>
+
+<!-- ============== PART A — Marketing ============== -->
+<!-- HERO -->
+<section class="hero"><div class="wrap"><div class="hero-inner">
+  <div>
+    <h1 class="display-xl">Create the life you love on&nbsp;<span style="color: var(--primary)">Pinspire</span>.</h1>
+    <p class="lead">From everyday outfits to once-in-a-lifetime spaces — discover the ideas that turn what you wonder about into the life you actually live.</p>
+    <div class="hero-ctas">
+      <a href="#signup" class="btn btn-primary btn-lg">Sign up</a>
+      <a href="#" class="btn btn-secondary btn-lg">Explore</a>
+    </div>
+  </div>
+  <div>
+    <div class="feature-art" style="background: var(--canvas); padding: 16px;">
+      <div class="pin-stack">
+        <div class="img g-rose-coral" style="grid-row: span 2;"></div>
+        <div class="img g-sage-olive"></div>
+        <div class="img g-mustard-clay"></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- FILTER CHIP STRIP + MASONRY -->
+<section><div class="wrap">
+  <div class="chip-strip">
+    <button class="chip active">All</button>
+    <button class="chip">Bold lip</button>
+    <button class="chip">Editorial makeup</button>
+    <button class="chip">Cherry red</button>
+    <button class="chip">Preppy look</button>
+    <button class="chip">Earthy space inspo</button>
+    <button class="chip">Slow-living kitchens</button>
+    <button class="chip">Coffee table styling</button>
+  </div>
+
+  <div class="pin-grid">
+    <div class="pin">
+      <div class="img g-rose-coral ar-2-3"></div>
+      <span class="overlay">Cherry red</span>
+    </div>
+    <div class="pin">
+      <div class="img g-cream-mustard ar-1-1"></div>
+      <span class="overlay">Mustard kitchen</span>
+    </div>
+    <div class="pin large">
+      <div class="img g-sage-olive ar-3-4"></div>
+      <span class="overlay">Earthy space inspo</span>
+    </div>
+    <div class="pin">
+      <div class="img g-mauve-plum ar-4-5"></div>
+      <div class="meta"><span class="av"></span><span>Maya · curated</span></div>
+    </div>
+
+    <div class="pin">
+      <div class="img g-coral-mustard ar-2-3"></div>
+      <span class="overlay">Preppy look</span>
+    </div>
+    <div class="pin">
+      <div class="img g-blush ar-1-1"></div>
+      <span class="overlay">Bold lip</span>
+    </div>
+    <div class="pin">
+      <div class="img g-clay-cream ar-3-4"></div>
+      <span class="overlay">Slow-living</span>
+    </div>
+    <div class="pin large">
+      <div class="img g-plum-rose ar-9-12"></div>
+      <span class="overlay">Editorial makeup</span>
+    </div>
+
+    <div class="pin">
+      <div class="img g-navy-teal ar-4-5"></div>
+      <span class="overlay">Deep dinner room</span>
+    </div>
+    <div class="pin">
+      <div class="img g-teal-sage ar-1-1"></div>
+      <span class="overlay">Sage walls</span>
+    </div>
+    <div class="pin">
+      <div class="img g-mustard-clay ar-2-3"></div>
+      <span class="overlay">Mustard sweater</span>
+    </div>
+    <div class="pin">
+      <div class="img g-mauve-cream ar-3-4"></div>
+      <div class="meta"><span class="av"></span><span>Saved by Jess</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FEATURE ROWS -->
+<section><div class="wrap">
+  <div class="feature-row">
+    <div class="feature-text">
+      <span class="eyebrow">Discover</span>
+      <h2 class="heading-xl">Bring your favorite ideas to life.</h2>
+      <p>Pinspire tiles your interests into a column-grid that preserves every image's natural aspect — square food shots, portrait fashion, tall interiors. The grid IS the discovery surface.</p>
+      <a href="#" class="btn btn-primary">Find your style</a>
+    </div>
+    <div class="feature-art">
+      <div class="pin-stack">
+        <div class="img g-rose-coral"></div>
+        <div class="img g-sage-olive"></div>
+        <div class="img g-mauve-plum" style="grid-column: span 2;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-row reverse">
+    <div class="feature-text">
+      <span class="eyebrow">Organize</span>
+      <h2 class="heading-xl">Boards: where your wonder goes to live.</h2>
+      <p>Pin first, organize later. Group images into boards so your tea-set obsession doesn't bleed into your dinner-party planning. Each pin keeps its full-bleed natural ratio — never cropped, never padded.</p>
+      <a href="#" class="btn btn-primary">Make a board</a>
+    </div>
+    <div class="feature-art" style="background: var(--surface-card);">
+      <div class="pin-stack" style="grid-template-rows: 1fr 1fr;">
+        <div class="img g-cream-mustard"></div>
+        <div class="img g-coral-mustard"></div>
+        <div class="img g-blush"></div>
+        <div class="img g-teal-sage"></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CATEGORY TILE GRID -->
+<section><div class="wrap">
+  <div style="max-width: 720px; margin: 0 0 32px;">
+    <span class="eyebrow" style="color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;">Browse popular</span>
+    <h2 class="heading-xl" style="margin: 16px 0;">Categories trending this week.</h2>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-tile"><div class="img g-clay-cream"><span class="pill">Earthy space inspo</span></div><div class="label">Home & living</div></div>
+    <div class="cat-tile"><div class="img g-rose-coral"><span class="pill">Bold lip</span></div><div class="label">Beauty</div></div>
+    <div class="cat-tile"><div class="img g-mustard-clay"><span class="pill">Sweater season</span></div><div class="label">Fashion</div></div>
+    <div class="cat-tile"><div class="img g-sage-olive"><span class="pill">Slow living</span></div><div class="label">Food & recipes</div></div>
+  </div>
+</div></section>
+
+<!-- SIGNUP BAND (dark CTA strip + modal-style card) -->
+<div id="signup" class="signup-band"><div class="inner">
+  <div>
+    <h2>Pinspire works better when it knows you.</h2>
+    <p>Sign up to save the pins you love, build boards that feel like your home, and have ideas surface before you even know to search for them.</p>
+  </div>
+  <div class="modal-card">
+    <div class="logo">P</div>
+    <h3>Welcome to Pinspire</h3>
+    <p class="sub">Find new ideas to try.</p>
+    <label>Email</label>
+    <input type="email" placeholder="hello@pinspire.com" />
+    <label>Password</label>
+    <input type="password" value="••••••••••" />
+    <button class="btn btn-primary submit">Continue</button>
+    <p class="switch">Already a member? <a href="#">Log in</a></p>
+  </div>
+</div></div>
+
+
+<!-- ============== PART B — Design System ============== -->
+<section><div class="wrap">
+  <div style="max-width: 720px; margin: 0 auto 48px; text-align: center;">
+    <span class="eyebrow" style="color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;">— Design system</span>
+    <h2 class="display-lg" style="margin: 16px 0;">Get out of the photograph's way.</h2>
+    <p class="body-md" style="color: var(--mute);">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.pinterest.html" target="_blank" rel="noopener" style="color: var(--ink-soft); font-weight: 600; border-bottom: 1px solid var(--ink-soft);">DESIGN.md</a>. A warm-cream chrome that recedes behind imagery. One Pinterest red. Two card radii (16 / 32). Pin Sans across every tier (Inter substitute).</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand & accent</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#e60023"></div><div class="meta"><div class="name">primary · Pinterest Red</div><div class="val">#e60023</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#cc001f"></div><div class="meta"><div class="name">primary-pressed</div><div class="val">#cc001f</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#435ee5"></div><div class="meta"><div class="name">focus-outer</div><div class="val">#435ee5</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#7e238b"></div><div class="meta"><div class="name">accent-purple</div><div class="val">#7e238b</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#617bff"></div><div class="meta"><div class="name">accent-blue</div><div class="val">#617bff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9e0a0a"></div><div class="meta"><div class="name">error</div><div class="val">#9e0a0a</div></div></div>
+    </div>
+
+    <p class="ds-caption">Surface — warm cream chrome</p>
+    <div class="ds-tints">
+      <div class="ds-tint" style="background: var(--canvas); border: 1px solid var(--hairline);"><div class="lab">canvas</div><div class="v">#ffffff · primary nav, modal, body</div></div>
+      <div class="ds-tint" style="background: var(--surface-soft);"><div class="lab">surface-soft</div><div class="v">#fbfbf9 · hero body wash</div></div>
+      <div class="ds-tint" style="background: var(--surface-card);"><div class="lab">surface-card</div><div class="v">#f6f6f3 · pin tile, category tile</div></div>
+      <div class="ds-tint" style="background: var(--secondary-bg);"><div class="lab">secondary-bg</div><div class="v">#e5e5e0 · button-secondary fill</div></div>
+      <div class="ds-tint" style="background: var(--hairline);"><div class="lab">hairline</div><div class="v">#dadad3 · 1px row dividers</div></div>
+      <div class="ds-tint" style="background: var(--stone);"><div class="lab">stone</div><div class="v">#c8c8c1 · disabled borders</div></div>
+      <div class="ds-tint dark" style="background: var(--surface-dark);"><div class="lab">surface-dark</div><div class="v">#262622 · hero CTA strip</div></div>
+      <div class="ds-tint dark" style="background: var(--ink);"><div class="lab">ink</div><div class="v">#000000 · headlines, button text</div></div>
+    </div>
+
+    <p class="ds-caption">Text</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">ink</div><div class="val">#000000</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#211922"></div><div class="meta"><div class="name">ink-soft</div><div class="val">#211922</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#33332e"></div><div class="meta"><div class="name">body</div><div class="val">#33332e</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#62625b"></div><div class="meta"><div class="name">mute</div><div class="val">#62625b</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#91918c"></div><div class="meta"><div class="name">ash</div><div class="val">#91918c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c8c8c1"></div><div class="meta"><div class="name">stone</div><div class="val">#c8c8c1</div></div></div>
+    </div>
+
+    <p class="ds-caption">Semantic</p>
+    <div class="ds-swatches" style="grid-template-columns: repeat(4, 1fr); max-width: 720px;">
+      <div class="ds-sw"><div class="chip" style="background:#103c25"></div><div class="meta"><div class="name">success-deep</div><div class="val">#103c25</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c7f0da"></div><div class="meta"><div class="name">success-pale</div><div class="val">#c7f0da</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9e0a0a"></div><div class="meta"><div class="name">error</div><div class="val">#9e0a0a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#cc001f"></div><div class="meta"><div class="name">error-deep</div><div class="val">#cc001f</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="body-sm" style="margin: 0 0 24px;">Pin Sans is proprietary; Inter (400/500/600/700) is the closest open-source substitute. Apply -1.2px tracking at display sizes regardless of substitute. The system has a steep size jump: display-xl drops directly to body-md with no intermediate tier on the home hero.</p>
+
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">70 / 600 / 1.10 / -1.2px</span><span class="ds-sam" style="font-size: 44px; font-weight: 600; line-height: 1.1; letter-spacing: -1.2px;">Create the life you love</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">44 / 700 / 1.15 / -0.8px</span><span class="ds-sam" style="font-size: 32px; font-weight: 700; line-height: 1.15; letter-spacing: -0.8px;">Where your content can thrive</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-xl</span><span class="ds-spec">28 / 700 / 1.20 / -1.2px</span><span class="ds-sam" style="font-size: 26px; font-weight: 700; line-height: 1.2; letter-spacing: -1.2px;">Bring your favorite ideas to life</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-lg</span><span class="ds-spec">22 / 600 / 1.25</span><span class="ds-sam" style="font-size: 22px; font-weight: 600; line-height: 1.25;">Welcome to Pinterest</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-md</span><span class="ds-spec">18 / 600 / 1.30</span><span class="ds-sam" style="font-size: 18px; font-weight: 600; line-height: 1.3;">In-grid pin label</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 / 400 / 1.40</span><span class="ds-sam" style="font-size: 16px; line-height: 1.4;">Default body. Hierarchy is from weight, not from color tint.</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-strong</span><span class="ds-spec">16 / 600 / 1.40</span><span class="ds-sam" style="font-size: 16px; font-weight: 600; line-height: 1.4;">Primary nav link, form label</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-sm</span><span class="ds-spec">14 / 400 / 1.40</span><span class="ds-sam" style="font-size: 14px; line-height: 1.4; color: var(--mute);">Footer copy, pin metadata, helper text.</span></div>
+      <div class="ds-tr"><span class="ds-tok">caption-md</span><span class="ds-spec">12 / 500 / 1.50</span><span class="ds-sam" style="font-size: 12px; font-weight: 500; line-height: 1.5;">Caption, link metadata</span></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">14 / 700 / 1.00</span><span class="ds-sam" style="font-size: 14px; font-weight: 700;">Sign up</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <p class="body-sm" style="margin: 0 0 24px;">Three values in active use: 16px on every interactive element + standard card, 32px on large pin cards + modals, pill for circular elements. There are no sharp-cornered buttons in the system.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius: 0;"></div><div class="lab">none</div><div class="vv">0 · footer, nav, sections</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 8px;"></div><div class="lab">sm</div><div class="vv">8 · rare</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 16px;"></div><div class="lab">md</div><div class="vv">16 · dominant</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 32px;"></div><div class="lab">lg</div><div class="vv">32 · large pin, modal</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 9999px;"></div><div class="lab">full</div><div class="vv">∞ · pills, avatars</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — 16px radius standard</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">button-primary</a>
+      <a href="#" class="btn btn-secondary">button-secondary</a>
+      <a href="#" class="btn btn-tertiary">button-tertiary</a>
+      <a href="#" class="btn btn-on-image" style="border: 1px solid var(--hairline);">button-pill-on-image</a>
+      <button class="icon-btn-circ" aria-label="next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+
+    <p class="ds-caption">Filter chips — flip fully inverted on selection</p>
+    <div class="ds-comp-row">
+      <button class="chip">Beauty makeup</button>
+      <button class="chip active">Lipstick</button>
+      <button class="chip">Editorial</button>
+      <button class="chip">Bold lip</button>
+      <button class="chip">Cherry red</button>
+    </div>
+
+    <p class="ds-caption">Inputs — double-ring focus signal</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input · default</label>
+        <input class="ds-input" placeholder="hello@pinspire.com" />
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="hello@pinspire.com" />
+      </div>
+    </div>
+
+    <p class="ds-caption">Search bar — pill, 48px tall</p>
+    <div style="max-width: 520px;">
+      <div class="search-bar" style="background: var(--surface-card);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <span>Search for ideas, fashion, recipes…</span>
+      </div>
+    </div>
+
+    <p class="ds-caption">Cards — pin tile is the load-bearing surface</p>
+    <div class="ds-card-row">
+      <div class="ds-card-demo" style="padding: 0; overflow: hidden;">
+        <div class="img g-rose-coral" style="aspect-ratio: 4 / 5;"></div>
+        <div style="padding: 12px 16px 16px;">
+          <span class="caption" style="color: var(--mute);">pin-card</span>
+          <p style="margin: 6px 0 0; font-weight: 600;">16px radius · 0 padding · image is the card</p>
+        </div>
+      </div>
+      <div class="ds-card-demo lg" style="padding: 0; overflow: hidden;">
+        <div class="img g-sage-olive" style="aspect-ratio: 4 / 5; border-radius: 0;">
+          <span style="position: absolute;"></span>
+        </div>
+        <div style="padding: 12px 16px 16px;">
+          <span class="caption" style="color: var(--mute);">pin-card-large</span>
+          <p style="margin: 6px 0 0; font-weight: 600;">32px radius · large feature pin</p>
+        </div>
+      </div>
+      <div class="ds-card-demo cream lg">
+        <span class="caption" style="color: var(--mute);">modal-card</span>
+        <p class="heading-md" style="margin: 8px 0 6px;">Welcome to Pinspire</p>
+        <p style="margin: 0 0 12px; color: var(--mute);">32px radius · 32px padding · scrim + ambient shadow.</p>
+        <a href="#" class="btn btn-primary">Continue</a>
+      </div>
+    </div>
+
+    <p class="ds-caption">Tags & overlays — pill family</p>
+    <div class="ds-comp-row">
+      <span class="btn btn-on-image" style="border: 1px solid var(--hairline); cursor: default;">Cherry red</span>
+      <span class="btn btn-on-image" style="border: 1px solid var(--hairline); cursor: default;">Preppy look</span>
+      <span class="btn btn-on-image" style="border: 1px solid var(--hairline); cursor: default;">Earthy space inspo</span>
+      <span class="chip">filter-chip</span>
+      <span class="chip active">filter-chip-active</span>
+      <span class="btn" style="background: var(--success-pale); color: var(--success-deep); border-radius: var(--r-full); cursor: default;">Success pale</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============== FOOTER ============== -->
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div>
+      <h4>Get the app</h4>
+      <ul><li><a href="#">iOS</a></li><li><a href="#">Android</a></li></ul>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul><li><a href="#">Explore</a></li><li><a href="#">Shop</a></li><li><a href="#">Users</a></li><li><a href="#">Collections</a></li><li><a href="#">Shopping</a></li></ul>
+    </div>
+    <div>
+      <h4>Pinspire for</h4>
+      <ul><li><a href="#">Creators</a></li><li><a href="#">Businesses</a></li><li><a href="#">Newsroom</a></li></ul>
+    </div>
+    <div>
+      <h4>About</h4>
+      <ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Help Center</a></li><li><a href="#">Brand guidelines</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="wordmark">Pinspire</span>
+    <span>© 2026 Pinspire · Get out of the photograph's way · Inspired by pinterest DESIGN.md</span>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.pinterest.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

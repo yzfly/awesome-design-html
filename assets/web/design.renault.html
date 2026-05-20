@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Renault — Inspired Design</title>
+<meta name="description" content="A Renault-inspired marketing page: high-contrast black & white canvas with Sunlight Yellow accent, square-cornered tiles, NouvelR-style display type. Photography-first automotive system. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  /* Brand */
+  --primary: #ffed00;
+  --primary-deep: #e6d200;
+  --on-primary: #000000;
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-soft: #f7f7f7;
+  --surface-dark: #000000;
+  --surface-deep: #111111;
+  --hairline: #f2f2f2;
+  --hairline-strong: #000000;
+  --divider-dark: rgba(255,255,255,0.16);
+  /* Text */
+  --ink: #000000;
+  --body: #222222;
+  --charcoal: #333333;
+  --mute: #666666;
+  --ash: #8a8a8a;
+  --stone: #c4c4c4;
+  --on-dark: #ffffff;
+  --on-dark-mute: rgba(255,255,255,0.72);
+  /* Semantic */
+  --error: #be6464;
+  --warning: #f0ad4e;
+  --success: #8dc572;
+  --info: #337ab7;
+  --link: #0000ee;
+  /* Radius */
+  --r-none: 0px;
+  --r-xs: 2px;
+  --r-sm: 3px;
+  --r-md: 4px;
+  --r-pill: 46px;
+  --r-full: 9999px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter Tight", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+::selection { background: var(--primary); color: var(--ink); }
+
+/* Layout */
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+
+/* Top nav */
+.topnav {
+  height: 60px;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 32px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 700; letter-spacing: 0; color: var(--ink);
+  font-size: 15px;
+}
+.brand .diamond {
+  width: 28px; height: 28px;
+  background: var(--ink);
+  display: inline-block;
+  transform: rotate(45deg);
+  position: relative;
+}
+.brand .diamond::after {
+  content: ""; position: absolute; inset: 4px;
+  background: var(--canvas);
+  clip-path: polygon(50% 8%, 92% 50%, 50% 92%, 8% 50%);
+}
+.nav-links { display: flex; gap: 4px; flex: 1; }
+.nav-links a {
+  color: var(--ink); padding: 6px 14px;
+  font: 700 14.4px/1 "Inter Tight", system-ui;
+  letter-spacing: 0.144px;
+}
+.nav-links a:hover { color: var(--mute); }
+.nav-right { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 0 24px;
+  border-radius: var(--r-xs);
+  font: 700 14.4px/1 "Inter Tight", system-ui;
+  letter-spacing: 0.144px;
+  border: 1px solid transparent;
+  cursor: pointer; text-transform: none;
+  background: transparent; color: var(--ink);
+  transition: background .15s, color .15s, border-color .15s;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-deep); }
+.btn-secondary-dark { background: var(--surface-dark); color: var(--on-dark); }
+.btn-secondary-dark:hover { background: var(--surface-deep); }
+.btn-outline-dark { background: var(--canvas); color: var(--ink); border-color: var(--hairline-strong); }
+.btn-outline-dark:hover { background: var(--surface-soft); }
+.btn-outline-light { background: var(--surface-dark); color: var(--on-dark); border-color: var(--on-dark); }
+.btn-outline-light:hover { background: var(--surface-deep); }
+.btn-pill {
+  background: var(--canvas); color: var(--ink);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-pill);
+  height: 36px; padding: 0 16px;
+  font: 600 13px/1.2 "Inter Tight", system-ui;
+  letter-spacing: 0.13px;
+}
+.btn-pill:hover { background: var(--ink); color: var(--on-dark); }
+.btn-icon-square {
+  background: var(--canvas); border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-xs); width: 40px; height: 40px;
+  padding: 0; display: inline-flex; align-items: center; justify-content: center;
+}
+.btn-icon-square:hover { background: var(--surface-soft); }
+.btn-sm { height: 40px; padding: 0 18px; font-size: 13px; }
+
+/* Type */
+.eyebrow {
+  font: 700 10px/1.45 "Inter Tight", system-ui;
+  letter-spacing: 1.5px;
+  color: var(--ink); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.display-xl { font: 700 clamp(40px, 6vw, 56px)/0.95 "Inter Tight", system-ui; letter-spacing: -0.5px; margin: 0; }
+.display-lg { font: 700 clamp(32px, 5vw, 40px)/0.95 "Inter Tight", system-ui; margin: 0; }
+.display-md { font: 700 32px/0.95 "Inter Tight", system-ui; margin: 0; }
+.heading-lg { font: 700 24px/0.95 "Inter Tight", system-ui; margin: 0; }
+.heading-md { font: 700 20px/0.95 "Inter Tight", system-ui; margin: 0; }
+.heading-sm { font: 700 18px/1.0 "Inter Tight", system-ui; margin: 0; }
+.subtitle { font: 600 19.2px/1.3 "Inter Tight", system-ui; color: var(--charcoal); }
+.body-lg { font: 400 18px/1.5 "Inter Tight", system-ui; color: var(--body); }
+.body-md { font: 400 16px/1.4 "Inter Tight", system-ui; color: var(--body); }
+.body-sm { font: 400 14px/1.57 "Inter Tight", system-ui; color: var(--charcoal); }
+.caption { font: 400 12px/1.4 "Inter Tight", system-ui; color: var(--mute); }
+
+/* —— HERO —— */
+.hero {
+  background: var(--surface-dark); color: var(--on-dark);
+  position: relative; overflow: hidden;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  min-height: 560px; align-items: center;
+}
+.hero-text { padding: 80px 24px 80px 0; max-width: 620px; margin-left: auto; }
+.hero h1 { color: var(--on-dark); margin-bottom: 20px; }
+.hero p { color: var(--on-dark-mute); margin: 0 0 32px; max-width: 460px; }
+.hero-art {
+  position: relative; height: 100%; min-height: 560px;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 60%, #ffed00 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 30% 70%, #ff4d8a 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 50% 30%, #6e4dff 0%, transparent 65%),
+    linear-gradient(135deg, #2a1340 0%, #000000 70%);
+}
+.hero-art::before {
+  /* car silhouette stand-in */
+  content: ""; position: absolute; left: 8%; right: 8%; bottom: 28%;
+  height: 110px;
+  background:
+    linear-gradient(180deg, #ffed00 0%, #d9c700 100%);
+  clip-path: polygon(0 60%, 8% 25%, 22% 5%, 70% 5%, 86% 25%, 100% 55%, 100% 100%, 0 100%);
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+}
+.hero-art::after {
+  content: ""; position: absolute; left: 10%; right: 10%; bottom: 22%;
+  height: 28px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4), transparent);
+  filter: blur(8px);
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--primary); color: var(--on-primary);
+  font: 700 10px/1.45 "Inter Tight", system-ui;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: var(--r-full);
+  margin-bottom: 24px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Sub-nav pills */
+.subnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  padding: 16px 0;
+}
+.subnav-row {
+  display: flex; gap: 8px; overflow-x: auto;
+  scrollbar-width: none;
+}
+.subnav-row::-webkit-scrollbar { display: none; }
+
+/* Promo tile grid */
+.promo-section { padding: 80px 0; background: var(--canvas); }
+.promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.promo-tile { padding: 32px; border-radius: var(--r-none); min-height: 340px; display: flex; flex-direction: column; justify-content: space-between; }
+.promo-tile h3 { margin: 0 0 12px; font: 700 24px/0.95 "Inter Tight", system-ui; }
+.promo-tile p { margin: 0 0 24px; font-size: 14px; line-height: 1.5; }
+.promo-tile-light { background: var(--canvas); color: var(--ink); border: 1px solid var(--hairline-strong); }
+.promo-tile-dark { background: var(--surface-dark); color: var(--on-dark); }
+.promo-tile-yellow { background: var(--primary); color: var(--on-primary); }
+.promo-art {
+  height: 180px; margin: -32px -32px 24px;
+  background-size: cover; background-position: center;
+}
+.promo-art.car-blue { background: linear-gradient(135deg, #4a6fa5 0%, #1a2a3f 100%); position: relative; }
+.promo-art.car-blue::after {
+  content: ""; position: absolute; left: 15%; right: 15%; bottom: 25%; height: 50px;
+  background: linear-gradient(180deg, #6a8fc5, #3a5a85);
+  clip-path: polygon(0 70%, 10% 20%, 30% 0, 70% 0, 90% 20%, 100% 70%, 100% 100%, 0 100%);
+}
+.promo-art.car-red { background: linear-gradient(135deg, #c0392b 0%, #4a0e08 100%); position: relative; }
+.promo-art.car-red::after {
+  content: ""; position: absolute; left: 15%; right: 15%; bottom: 25%; height: 50px;
+  background: linear-gradient(180deg, #e44d3a, #8a1c10);
+  clip-path: polygon(0 70%, 10% 20%, 30% 0, 70% 0, 90% 20%, 100% 70%, 100% 100%, 0 100%);
+}
+
+/* Vehicle range */
+.range-section { padding: 80px 0; background: var(--surface-soft); }
+.range-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 40px; gap: 24px; flex-wrap: wrap; }
+.range-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.v-card { background: var(--canvas); border-radius: var(--r-none); }
+.v-photo { aspect-ratio: 4/3; background: var(--canvas); position: relative; overflow: hidden; }
+.v-photo .badge-new {
+  position: absolute; left: 16px; bottom: 16px;
+  background: var(--primary); color: var(--on-primary);
+  font: 700 12px/1 "Inter Tight"; letter-spacing: 0.144px;
+  padding: 6px 14px; border-radius: var(--r-full);
+  text-transform: uppercase;
+}
+.v-meta { padding: 16px 0 8px; }
+.v-meta h4 { margin: 0 0 4px; font: 700 20px/0.95 "Inter Tight"; }
+.v-meta .sub { font-size: 14px; color: var(--mute); }
+.v-meta .price { font-size: 14px; color: var(--ink); margin-top: 8px; font-weight: 700; }
+/* car art variants */
+.car-art { width: 100%; height: 100%; position: relative; }
+.car-art::after {
+  content: ""; position: absolute; left: 8%; right: 8%; bottom: 22%; height: 38%;
+  clip-path: polygon(0 65%, 6% 30%, 18% 12%, 32% 4%, 68% 4%, 82% 12%, 94% 30%, 100% 60%, 100% 100%, 0 100%);
+}
+.car-art::before {
+  content: ""; position: absolute; left: 12%; right: 12%; bottom: 18%; height: 12%;
+  background: rgba(0,0,0,0.25); filter: blur(6px); border-radius: 50%;
+}
+.car-yellow { background: linear-gradient(135deg, #fff5a0 0%, #ffed00 60%, #d9c700 100%); }
+.car-yellow::after { background: linear-gradient(180deg, #ffed00, #c4a800); }
+.car-white { background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%); }
+.car-white::after { background: linear-gradient(180deg, #ffffff, #b8b8b8); }
+.car-black { background: linear-gradient(135deg, #444 0%, #111 100%); }
+.car-black::after { background: linear-gradient(180deg, #555, #000); }
+.car-blue2 { background: linear-gradient(135deg, #5e8fc8 0%, #1e3a5f 100%); }
+.car-blue2::after { background: linear-gradient(180deg, #6ea0d9, #1a3a5e); }
+
+/* Configurator section */
+.config-section { padding: 80px 0; background: var(--canvas); }
+.config-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; }
+.config-vis {
+  background: var(--surface-soft);
+  aspect-ratio: 4/3;
+  position: relative; overflow: hidden;
+  border-radius: var(--r-none);
+}
+.config-vis .car {
+  position: absolute; inset: auto 6% 18% 6%; height: 50%;
+  background: linear-gradient(135deg, #fff5a0 0%, #ffed00 60%, #d9c700 100%);
+  clip-path: polygon(0 65%, 6% 28%, 18% 10%, 32% 2%, 68% 2%, 82% 10%, 94% 28%, 100% 60%, 100% 100%, 0 100%);
+}
+.config-vis .shadow {
+  position: absolute; left: 10%; right: 10%; bottom: 14%; height: 20px;
+  background: rgba(0,0,0,0.25); filter: blur(10px); border-radius: 50%;
+}
+.config-rows { display: flex; flex-direction: column; }
+.config-row {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--hairline);
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.config-row:first-child { border-top: 1px solid var(--hairline); }
+.config-row .label { font: 400 16px/1.4 "Inter Tight"; color: var(--ink); }
+.config-row .value { font: 700 16px/1 "Inter Tight"; color: var(--ink); }
+.swatches { display: flex; gap: 12px; align-items: center; }
+.swatch {
+  width: 36px; height: 36px; border-radius: var(--r-full);
+  border: 1px solid var(--hairline-strong);
+  position: relative;
+}
+.swatch.active::after {
+  content: ""; position: absolute; inset: -4px;
+  border: 1px solid var(--ink); border-radius: var(--r-full);
+}
+.swatch-yellow { background: var(--primary); }
+.swatch-black { background: #000; }
+.swatch-white { background: #fff; }
+.swatch-red { background: #c0392b; }
+.swatch-blue { background: #2a4d7a; }
+
+/* Lifestyle band */
+.life-section { background: var(--surface-dark); color: var(--on-dark); padding: 100px 0; }
+.life-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+.life-art {
+  aspect-ratio: 4/3;
+  background:
+    radial-gradient(ellipse at top left, rgba(255,237,0,0.15), transparent 60%),
+    linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+  position: relative;
+  border-radius: var(--r-none);
+  overflow: hidden;
+}
+.life-art::after {
+  content: ""; position: absolute; inset: auto 5% 25% 5%; height: 35%;
+  background: linear-gradient(180deg, #4a4a4a, #1a1a1a);
+  clip-path: polygon(0 60%, 8% 22%, 22% 5%, 78% 5%, 92% 22%, 100% 55%, 100% 100%, 0 100%);
+  filter: drop-shadow(0 30px 30px rgba(255,237,0,0.1));
+}
+.life-text h2 { color: var(--on-dark); margin-bottom: 24px; }
+.life-text p { color: var(--on-dark-mute); margin: 0 0 32px; font-size: 18px; line-height: 1.5; }
+
+/* Lineup pricing */
+.price-section { padding: 80px 0; background: var(--surface-soft); }
+.price-head { text-align: center; margin-bottom: 48px; }
+.price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--hairline-strong); background: var(--hairline-strong); }
+.price-card { background: var(--canvas); padding: 40px 32px; }
+.price-card.featured { background: var(--surface-dark); color: var(--on-dark); }
+.price-card.featured h4 { color: var(--on-dark); }
+.price-card.featured .price { color: var(--primary); }
+.price-card.featured .pf-list li { color: var(--on-dark-mute); }
+.price-card h4 { font: 700 24px/0.95 "Inter Tight"; margin: 0 0 8px; }
+.price-card .price { font: 700 40px/0.95 "Inter Tight"; margin: 16px 0 4px; }
+.price-card .price-sub { font-size: 14px; color: var(--mute); margin-bottom: 32px; }
+.price-card.featured .price-sub { color: var(--on-dark-mute); }
+.pf-list { list-style: none; padding: 0; margin: 0 0 32px; }
+.pf-list li { padding: 8px 0; font-size: 14px; color: var(--body); border-bottom: 1px solid var(--hairline); }
+.price-card.featured .pf-list li { border-color: var(--divider-dark); }
+.price-card.featured .pf-list li { color: var(--on-dark-mute); }
+
+/* CTA band */
+.cta-band {
+  background: var(--primary); color: var(--on-primary);
+  padding: 80px 0; text-align: center;
+}
+.cta-band h2 { margin: 0 0 24px; max-width: 720px; margin-left: auto; margin-right: auto; }
+.cta-band p { font-size: 18px; max-width: 600px; margin: 0 auto 32px; }
+
+/* ===========================
+   PART B — Design System
+   =========================== */
+.ds-section { background: var(--canvas); padding: 100px 0 80px; border-top: 1px solid var(--hairline-strong); }
+.ds-intro { max-width: 720px; margin-bottom: 60px; }
+.ds-intro h2 { margin: 0 0 16px; }
+.ds-intro p { font-size: 18px; line-height: 1.5; color: var(--body); }
+.ds-block { margin-bottom: 64px; }
+.ds-block-title {
+  font: 700 10px/1.45 "Inter Tight"; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--mute);
+  border-bottom: 1px solid var(--hairline-strong);
+  padding-bottom: 8px; margin-bottom: 24px;
+  display: flex; justify-content: space-between; align-items: end;
+}
+.ds-block-title span { color: var(--mute); font-weight: 400; }
+
+/* Color grid */
+.color-group { margin-bottom: 32px; }
+.color-group h4 { font: 700 16px/1 "Inter Tight"; margin: 0 0 16px; color: var(--ink); }
+.color-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.color-tile {
+  border: 1px solid var(--hairline); padding: 0;
+  border-radius: var(--r-none); overflow: hidden;
+}
+.color-swatch { height: 80px; }
+.color-meta { padding: 10px 12px; font-size: 12px; }
+.color-meta .name { font-weight: 700; font-size: 13px; color: var(--ink); margin-bottom: 2px; }
+.color-meta .hex { color: var(--mute); font-family: "Inter", monospace; font-size: 11px; }
+
+/* Type table */
+.type-table { width: 100%; border-collapse: collapse; }
+.type-table th, .type-table td { text-align: left; padding: 16px 12px; border-bottom: 1px solid var(--hairline); vertical-align: middle; }
+.type-table th { font: 700 10px/1.45 "Inter Tight"; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mute); padding-top: 0; padding-bottom: 12px; }
+.type-table td.token { font-family: "Inter", monospace; font-size: 12px; color: var(--charcoal); width: 160px; }
+.type-table td.spec { font-family: "Inter", monospace; font-size: 12px; color: var(--mute); width: 220px; }
+.type-table td.sample { color: var(--ink); }
+
+/* Radius ladder */
+.radius-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.radius-tile { text-align: center; }
+.radius-box {
+  height: 80px; background: var(--ink);
+  margin-bottom: 12px;
+  border: 1px solid var(--hairline-strong);
+}
+.radius-tile .name { font: 700 13px/1 "Inter Tight"; color: var(--ink); margin-bottom: 2px; }
+.radius-tile .val { font-family: "Inter", monospace; font-size: 11px; color: var(--mute); }
+
+/* Component matrix */
+.comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.comp-card { border: 1px solid var(--hairline-strong); padding: 24px; }
+.comp-card .label {
+  font: 700 10px/1.45 "Inter Tight"; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--mute); margin-bottom: 16px;
+}
+.comp-card .stack { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+.input-demo {
+  background: var(--canvas); border: none;
+  border-bottom: 1px solid var(--hairline-strong);
+  height: 48px; padding: 12px 16px; width: 100%;
+  font: 400 16px/1.4 "Inter Tight"; outline: none;
+}
+.input-demo:focus { border-bottom-color: var(--ink); }
+
+.tag-demo {
+  display: inline-flex; align-items: center;
+  background: var(--primary); color: var(--on-primary);
+  padding: 6px 14px; border-radius: var(--r-full);
+  font: 700 12px/1 "Inter Tight"; letter-spacing: 0.144px;
+  text-transform: uppercase;
+}
+.tag-demo.dark { background: var(--ink); color: var(--on-dark); }
+.tag-demo.outline { background: var(--canvas); color: var(--ink); border: 1px solid var(--hairline-strong); }
+
+/* Footer */
+.footer {
+  background: var(--surface-dark); color: var(--on-dark);
+  padding: 64px 0 32px;
+}
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer h5 {
+  font: 700 12px/1.45 "Inter Tight"; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--on-dark);
+  margin: 0 0 16px;
+}
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer ul li { padding: 6px 0; }
+.footer ul li a { color: var(--on-dark-mute); font-size: 14px; }
+.footer ul li a:hover { color: var(--on-dark); }
+.footer-bottom {
+  border-top: 1px solid var(--divider-dark);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  font-size: 12px; color: var(--on-dark-mute);
+}
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--primary); color: var(--on-primary);
+  border: 1px solid var(--ink);
+  padding: 8px 14px; border-radius: var(--r-full);
+  font: 700 12px/1 "Inter Tight"; letter-spacing: 0.144px;
+  text-transform: uppercase;
+}
+.src-link:hover { background: var(--primary-deep); }
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-text { padding: 60px 0 40px; max-width: none; }
+  .hero-art { min-height: 320px; }
+  .promo-grid { grid-template-columns: 1fr; }
+  .range-grid { grid-template-columns: repeat(2, 1fr); }
+  .config-grid { grid-template-columns: 1fr; }
+  .life-grid { grid-template-columns: 1fr; gap: 40px; }
+  .price-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .color-grid { grid-template-columns: repeat(3, 1fr); }
+  .radius-grid { grid-template-columns: repeat(3, 1fr); }
+  .comp-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 599px) {
+  .range-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .color-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#"><span class="diamond"></span><span>RENAULT</span></a>
+    <div class="nav-links">
+      <a href="#">Modeller</a>
+      <a href="#">Hizmetler</a>
+      <a href="#">Renault Yaşamı</a>
+      <a href="#">MyRenault</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn-icon-square" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button class="btn btn-sm btn-outline-dark">EN / TR</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="hero-badge">Yeni</span>
+        <h1 class="display-xl">SCENIC<br>E-TECH<br>ELEKTRİKLİ</h1>
+        <p>620 km menzil. 22 dakikada hızlı şarj. Yeni Scenic ile elektrikli geleceğe adım atın — alışkanlıklarınızdan ödün vermeden.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary">Konfigüratörü başlat</button>
+          <button class="btn btn-outline-light">Detayları gör</button>
+        </div>
+      </div>
+      <div class="hero-art"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUB NAV -->
+<div class="subnav">
+  <div class="wrap subnav-row">
+    <button class="btn-pill">Modeller</button>
+    <button class="btn-pill">Servis &amp; randevu</button>
+    <button class="btn-pill">Kampanyalar</button>
+    <button class="btn-pill">Test sürüşü</button>
+    <button class="btn-pill">Renault Yaşamı</button>
+    <button class="btn-pill">Sahiplik geçişi</button>
+  </div>
+</div>
+
+<!-- PROMO TILES -->
+<section class="promo-section">
+  <div class="wrap">
+    <div style="margin-bottom: 40px;">
+      <span class="eyebrow">Keşfedin</span>
+      <h2 class="display-lg">Renault dünyasını keşfedin.</h2>
+    </div>
+    <div class="promo-grid">
+      <div class="promo-tile promo-tile-light">
+        <div>
+          <div class="promo-art car-blue"></div>
+          <h3>Hybrid araç modelleri</h3>
+          <p>Yakıt verimliliği ve elektrikli sürüş hissini bir arada sunan E-TECH hybrid teknolojisi.</p>
+        </div>
+        <button class="btn btn-outline-dark btn-sm" style="align-self:start">Modelleri gör</button>
+      </div>
+      <div class="promo-tile promo-tile-dark">
+        <div>
+          <div class="promo-art car-red"></div>
+          <h3>Ticari araç satış kampanyaları</h3>
+          <p>Trafic, Master ve Kangoo için işinize değer katan finansman fırsatları.</p>
+        </div>
+        <button class="btn btn-outline-light btn-sm" style="align-self:start">Kampanyalar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEHICLE RANGE -->
+<section class="range-section">
+  <div class="wrap">
+    <div class="range-head">
+      <div>
+        <span class="eyebrow">Tüm modeller</span>
+        <h2 class="display-lg">Binek araçlar.</h2>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-icon-square" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="btn-icon-square" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="range-grid">
+      <div class="v-card">
+        <div class="v-photo">
+          <div class="car-art car-yellow"></div>
+          <span class="badge-new">Yeni</span>
+        </div>
+        <div class="v-meta">
+          <h4>Renault 5 E-Tech</h4>
+          <div class="sub">100% Elektrikli · 410 km</div>
+          <div class="price">789.000 ₺'den başlayan</div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-photo">
+          <div class="car-art car-blue2"></div>
+        </div>
+        <div class="v-meta">
+          <h4>Megane E-Tech</h4>
+          <div class="sub">100% Elektrikli · 470 km</div>
+          <div class="price">1.299.000 ₺'den başlayan</div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-photo">
+          <div class="car-art car-white"></div>
+        </div>
+        <div class="v-meta">
+          <h4>Clio E-Tech</h4>
+          <div class="sub">Hybrid · 27 km/L</div>
+          <div class="price">849.000 ₺'den başlayan</div>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-photo">
+          <div class="car-art car-black"></div>
+        </div>
+        <div class="v-meta">
+          <h4>Austral E-Tech</h4>
+          <div class="sub">Full Hybrid SUV</div>
+          <div class="price">1.749.000 ₺'den başlayan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIGURATOR -->
+<section class="config-section">
+  <div class="wrap">
+    <div style="margin-bottom: 40px; max-width: 720px;">
+      <span class="eyebrow">Konfigüratör</span>
+      <h2 class="display-lg">Renault 5'i kendinize göre yapın.</h2>
+    </div>
+    <div class="config-grid">
+      <div class="config-vis">
+        <div class="car"></div>
+        <div class="shadow"></div>
+      </div>
+      <div class="config-rows">
+        <div class="config-row">
+          <span class="label">Kasa tipi</span>
+          <span class="value">Hatchback</span>
+        </div>
+        <div class="config-row">
+          <span class="label">Motor seçimi</span>
+          <span class="value">E-Tech 150 hp</span>
+        </div>
+        <div class="config-row">
+          <span class="label">Versiyon</span>
+          <span class="value">Iconic Cinq</span>
+        </div>
+        <div class="config-row">
+          <span class="label">Renk seçenekleri</span>
+          <div class="swatches">
+            <span class="swatch swatch-yellow active"></span>
+            <span class="swatch swatch-white"></span>
+            <span class="swatch swatch-black"></span>
+            <span class="swatch swatch-red"></span>
+            <span class="swatch swatch-blue"></span>
+          </div>
+        </div>
+        <div class="config-row">
+          <span class="label">Toplam</span>
+          <span class="value" style="font-size:24px;">1.089.000 ₺</span>
+        </div>
+        <div style="padding-top: 24px;">
+          <button class="btn btn-primary" style="width:100%">Hemen randevu al</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE BAND -->
+<section class="life-section">
+  <div class="wrap">
+    <div class="life-grid">
+      <div class="life-art"></div>
+      <div class="life-text">
+        <span class="eyebrow" style="color: var(--primary);">E-Tech serisi</span>
+        <h2 class="display-lg">Elektrikli sürüşün yeni dili.</h2>
+        <p>Renault E-Tech teknolojisi, şehrin içinde sessiz ve verimli — uzun yolda güçlü ve cömert. Şarj altyapısı, batarya garantisi ve özel finansman seçenekleri ile her şey hazır.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn btn-primary">E-Tech modelleri</button>
+          <button class="btn btn-outline-light">Şarj ağı</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / LINEUP -->
+<section class="price-section">
+  <div class="wrap">
+    <div class="price-head">
+      <span class="eyebrow">Servis paketleri</span>
+      <h2 class="display-lg">My Renault Servis.</h2>
+      <p class="subtitle" style="margin-top:16px;">Aracınız için 3 farklı bakım planı. Sabit fiyat, orijinal parça, yetkili servis.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <h4>Easy</h4>
+        <div class="price">2.490 ₺</div>
+        <div class="price-sub">12 ay / 15.000 km</div>
+        <ul class="pf-list">
+          <li>Periyodik bakım</li>
+          <li>Yağ ve filtre değişimi</li>
+          <li>Genel kontrol</li>
+          <li>Yol yardım 1 yıl</li>
+        </ul>
+        <button class="btn btn-outline-dark" style="width:100%">Seç</button>
+      </div>
+      <div class="price-card featured">
+        <h4>Comfort</h4>
+        <div class="price">4.890 ₺</div>
+        <div class="price-sub">24 ay / 30.000 km</div>
+        <ul class="pf-list">
+          <li>Tüm Easy avantajları</li>
+          <li>Fren bakımı dahil</li>
+          <li>Klima dezenfeksiyonu</li>
+          <li>Yol yardım 2 yıl</li>
+          <li>Ücretsiz lastik rotasyonu</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%">Seç</button>
+      </div>
+      <div class="price-card">
+        <h4>Premium</h4>
+        <div class="price">7.290 ₺</div>
+        <div class="price-sub">36 ay / 45.000 km</div>
+        <ul class="pf-list">
+          <li>Tüm Comfort avantajları</li>
+          <li>Batarya sağlık raporu</li>
+          <li>Akü değişim garantisi</li>
+          <li>Yol yardım 3 yıl</li>
+          <li>Yedek araç hizmeti</li>
+        </ul>
+        <button class="btn btn-outline-dark" style="width:100%">Seç</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2 class="display-lg">Test sürüşünüzü bugün planlayın.</h2>
+    <p>Size en yakın Renault bayisinde direksiyon sizin. Tek tıkla randevu alın, gerisini bize bırakın.</p>
+    <button class="btn btn-secondary-dark">Hemen randevu al</button>
+  </div>
+</section>
+
+<!-- ===================
+     PART B — DESIGN SYSTEM
+     =================== -->
+<section class="ds-section">
+  <div class="wrap">
+    <div class="ds-intro">
+      <span class="eyebrow">Design system</span>
+      <h2 class="display-md">Renault design tokens.</h2>
+      <p>Beyaz kanvas, siyah anlatı, tek Sunlight Yellow vurgusu. Square geometry, NouvelR display ve catalogue-grade hairline'lar. Her şey disipline ait.</p>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span style="color:var(--ink);font-weight:700;">Color</span><span>20 tokens · grouped</span></div>
+
+      <div class="color-group">
+        <h4>Brand &amp; Accent</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--primary)"></div><div class="color-meta"><div class="name">Sunlight</div><div class="hex">#ffed00</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--primary-deep)"></div><div class="color-meta"><div class="name">Sunlight Deep</div><div class="hex">#e6d200</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--ink)"></div><div class="color-meta"><div class="name">On-Primary</div><div class="hex">#000000</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Surface</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--canvas);border-bottom:1px solid var(--hairline)"></div><div class="color-meta"><div class="name">Canvas</div><div class="hex">#ffffff</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--surface-soft)"></div><div class="color-meta"><div class="name">Surface Soft</div><div class="hex">#f7f7f7</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--surface-dark)"></div><div class="color-meta"><div class="name">Surface Dark</div><div class="hex">#000000</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--surface-deep)"></div><div class="color-meta"><div class="name">Surface Deep</div><div class="hex">#111111</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--hairline)"></div><div class="color-meta"><div class="name">Hairline</div><div class="hex">#f2f2f2</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--hairline-strong)"></div><div class="color-meta"><div class="name">Hairline Strong</div><div class="hex">#000000</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Text</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--ink)"></div><div class="color-meta"><div class="name">Ink</div><div class="hex">#000000</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--body)"></div><div class="color-meta"><div class="name">Body</div><div class="hex">#222222</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--charcoal)"></div><div class="color-meta"><div class="name">Charcoal</div><div class="hex">#333333</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--mute)"></div><div class="color-meta"><div class="name">Mute</div><div class="hex">#666666</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--ash)"></div><div class="color-meta"><div class="name">Ash</div><div class="hex">#8a8a8a</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--stone)"></div><div class="color-meta"><div class="name">Stone</div><div class="hex">#c4c4c4</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Semantic</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--error)"></div><div class="color-meta"><div class="name">Error</div><div class="hex">#be6464</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--warning)"></div><div class="color-meta"><div class="name">Warning</div><div class="hex">#f0ad4e</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--success)"></div><div class="color-meta"><div class="name">Success</div><div class="hex">#8dc572</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--info)"></div><div class="color-meta"><div class="name">Info</div><div class="hex">#337ab7</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--link)"></div><div class="color-meta"><div class="name">Link</div><div class="hex">#0000ee</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span style="color:var(--ink);font-weight:700;">Typography</span><span>NouvelR · weight 400 / 600 / 700</span></div>
+      <table class="type-table">
+        <thead>
+          <tr><th>Token</th><th>Spec</th><th>Sample</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">display-xl</td><td class="spec">56px · 700 · 0.95</td><td class="sample" style="font:700 36px/0.95 'Inter Tight';">REVOLUTION</td></tr>
+          <tr><td class="token">display-lg</td><td class="spec">40px · 700 · 0.95</td><td class="sample" style="font:700 28px/0.95 'Inter Tight';">E-Tech serisi</td></tr>
+          <tr><td class="token">display-md</td><td class="spec">32px · 700 · 0.95</td><td class="sample" style="font:700 22px/0.95 'Inter Tight';">Konfigüratör</td></tr>
+          <tr><td class="token">heading-lg</td><td class="spec">24px · 700 · 0.95</td><td class="sample" style="font:700 20px/0.95 'Inter Tight';">Vehicle range</td></tr>
+          <tr><td class="token">heading-md</td><td class="spec">20px · 700 · 0.95</td><td class="sample" style="font:700 18px/0.95 'Inter Tight';">Card title</td></tr>
+          <tr><td class="token">subtitle</td><td class="spec">19.2px · 600 · 1.3</td><td class="sample" style="font:600 17px/1.3 'Inter Tight';">Hero subtitle lead.</td></tr>
+          <tr><td class="token">body-md</td><td class="spec">16px · 400 · 1.4</td><td class="sample">Default body sentence runs with comfortable rhythm.</td></tr>
+          <tr><td class="token">body-sm</td><td class="spec">14px · 400 · 1.57</td><td class="sample" style="font-size:14px;">Captions and metadata.</td></tr>
+          <tr><td class="token">button-md</td><td class="spec">14.4px · 700 · +0.144</td><td class="sample" style="font:700 14.4px/1 'Inter Tight'; letter-spacing:0.144px;">HEMEN RANDEVU AL</td></tr>
+          <tr><td class="token">overline</td><td class="spec">10px · 700 · UPPER</td><td class="sample" style="font:700 10px/1.45 'Inter Tight';letter-spacing:1.5px;text-transform:uppercase;">YENİ MODEL</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span style="color:var(--ink);font-weight:700;">Radius</span><span>Square geometry dominant · pill only for sub-nav</span></div>
+      <div class="radius-grid">
+        <div class="radius-tile"><div class="radius-box" style="border-radius:0"></div><div class="name">none</div><div class="val">0px</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:2px"></div><div class="name">xs</div><div class="val">2px · buttons</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:3px"></div><div class="name">sm</div><div class="val">3px</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:4px"></div><div class="name">md</div><div class="val">4px</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:46px"></div><div class="name">pill</div><div class="val">46px · sub-nav</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:9999px"></div><div class="name">full</div><div class="val">9999px · swatch</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span style="color:var(--ink);font-weight:700;">Components</span><span>Buttons · inputs · cards · tags</span></div>
+
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div class="label">Buttons — primary &amp; secondary</div>
+          <div class="stack">
+            <button class="btn btn-primary">Konfigüratör</button>
+            <button class="btn btn-secondary-dark">Modeller</button>
+            <button class="btn btn-outline-dark">Detaylar</button>
+          </div>
+        </div>
+        <div class="comp-card" style="background: var(--ink); color: var(--on-dark); border-color: var(--ink);">
+          <div class="label" style="color: var(--on-dark-mute);">Buttons — on dark</div>
+          <div class="stack">
+            <button class="btn btn-primary">Hemen al</button>
+            <button class="btn btn-outline-light">Daha fazla</button>
+            <button class="btn-icon-square" style="background:transparent;border-color:var(--on-dark);color:var(--on-dark)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Sub-nav pills</div>
+          <div class="stack">
+            <button class="btn-pill">Servis &amp; randevu</button>
+            <button class="btn-pill">Kampanyalar</button>
+            <button class="btn-pill">Test sürüşü</button>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Tags &amp; badges</div>
+          <div class="stack">
+            <span class="tag-demo">YENİ</span>
+            <span class="tag-demo dark">PROMO</span>
+            <span class="tag-demo outline">2024</span>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Text input</div>
+          <div class="stack" style="flex-direction:column;align-items:stretch;gap:16px;">
+            <input class="input-demo" placeholder="E-posta adresiniz" />
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-primary btn-sm">Gönder</button>
+              <button class="btn btn-outline-dark btn-sm">İptal</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Color swatches</div>
+          <div class="stack">
+            <span class="swatch swatch-yellow active"></span>
+            <span class="swatch swatch-black"></span>
+            <span class="swatch swatch-white"></span>
+            <span class="swatch swatch-red"></span>
+            <span class="swatch swatch-blue"></span>
+          </div>
+        </div>
+
+        <div class="comp-card" style="grid-column: span 2; padding: 0; border-color: var(--hairline-strong);">
+          <div style="display:grid;grid-template-columns: 1.4fr 1fr;">
+            <div style="aspect-ratio: 4/3; background: var(--surface-soft); position: relative; overflow: hidden;">
+              <div style="position:absolute;inset:auto 8% 22% 8%;height:45%;background:linear-gradient(135deg, #fff5a0, #ffed00 60%, #d9c700);clip-path: polygon(0 65%, 6% 28%, 18% 10%, 32% 2%, 68% 2%, 82% 10%, 94% 28%, 100% 60%, 100% 100%, 0 100%);"></div>
+            </div>
+            <div style="padding:24px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div class="label">Vehicle card</div>
+                <h4 style="font:700 24px/0.95 'Inter Tight';margin:0 0 6px;">Renault 5 E-Tech</h4>
+                <div style="font-size:14px;color:var(--mute);">100% Elektrikli · 410 km</div>
+              </div>
+              <div>
+                <div style="font:700 18px/0.95 'Inter Tight';margin-bottom:12px;">789.000 ₺</div>
+                <button class="btn btn-primary btn-sm" style="width:100%;">Konfigüratör</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#" style="color:var(--on-dark);"><span class="diamond" style="background:var(--on-dark);"></span><span>RENAULT</span></a>
+        <p style="color:var(--on-dark-mute);font-size:14px;margin-top:16px;max-width:280px;">Passion for life. 1898'den bu yana otomobil tutkusu.</p>
+      </div>
+      <div>
+        <h5>Modeller</h5>
+        <ul>
+          <li><a href="#">Renault 5 E-Tech</a></li>
+          <li><a href="#">Megane E-Tech</a></li>
+          <li><a href="#">Scenic E-Tech</a></li>
+          <li><a href="#">Clio</a></li>
+          <li><a href="#">Austral</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Hizmetler</h5>
+        <ul>
+          <li><a href="#">Servis randevusu</a></li>
+          <li><a href="#">Finansman</a></li>
+          <li><a href="#">Sigorta</a></li>
+          <li><a href="#">Yedek parça</a></li>
+          <li><a href="#">Yol yardım</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Renault Group</h5>
+        <ul>
+          <li><a href="#">Kurumsal</a></li>
+          <li><a href="#">Bayi ağı</a></li>
+          <li><a href="#">Kariyer</a></li>
+          <li><a href="#">Basın</a></li>
+          <li><a href="#">İletişim</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© Renault (inspired) · Generated for design study</div>
+      <div>NouvelR · Sunlight Yellow #ffed00 · 2px radius · Square tiles</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.renault.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

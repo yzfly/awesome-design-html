@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SpaceX — Inspired Design</title>
+<meta name="description" content="A SpaceX-inspired marketing page: pure black canvas, full-bleed CSS-rendered rocket and Mars photography stand-ins, uppercase D-DIN display with positive tracking, and a single ghost-pill CTA per band. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  /* Brand */
+  --primary: #000000;
+  --ink: #000000;
+  --on-primary: #ffffff;
+  --on-primary-mute: #f0f0fa;
+  /* Surfaces */
+  --canvas-night: #000000;
+  --canvas-night-soft: #0a0a0a;
+  --canvas-light: #ffffff;
+  --canvas-cool: #f0f0fa;
+  --hairline-on-dark: #3a3a3f;
+  --hairline-on-light: #e0e0e8;
+  --ink-mute: #5a5a5f;
+  --link-on-dark: #ffffff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", Arial, Verdana, sans-serif;
+  background: var(--canvas-night);
+  color: var(--on-primary);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.32px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(255,255,255,0.22); }
+
+/* D-DIN substitute: Barlow Condensed bold for display */
+.ddin {
+  font-family: "Barlow Condensed", "Arial Narrow", Arial, Verdana, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* —— Layout —— */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+.wrap-wide { max-width: 1400px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Type tokens —— */
+.display-xxl { font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(40px, 8vw, 80px); line-height: 0.95; letter-spacing: 1.6px; margin: 0; }
+.display-xl  { font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(34px, 5.4vw, 60px); line-height: 1.0; letter-spacing: 1.2px; margin: 0; }
+.display-lg  { font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(28px, 4vw, 48px); line-height: 1.05; letter-spacing: 0.96px; margin: 0; }
+.body-lg { font-size: 16px; line-height: 1.7; letter-spacing: 0.32px; font-weight: 400; }
+.body-md { font-size: 16px; line-height: 1.5; letter-spacing: 0.32px; font-weight: 400; }
+.micro-cap { font-size: 12px; line-height: 2; letter-spacing: 0.96px; text-transform: uppercase; font-weight: 400; }
+.button-cap { font-size: 13px; line-height: 1; letter-spacing: 1.17px; text-transform: uppercase; font-weight: 700; }
+.caption { font-size: 13px; line-height: 1.5; }
+
+/* —— Buttons (ghost pill, single per band) —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 18px 24px;
+  border-radius: 32px;
+  font-size: 13px; line-height: 1; letter-spacing: 1.17px; text-transform: uppercase; font-weight: 700;
+  border: 1px solid var(--on-primary);
+  cursor: pointer;
+  background: transparent; color: var(--on-primary);
+  transition: background .2s, color .2s, border-color .2s;
+  white-space: nowrap;
+}
+.btn-ghost-dark { background: transparent; color: var(--on-primary); border-color: var(--on-primary); }
+.btn-ghost-dark:hover { background: var(--on-primary); color: var(--ink); }
+.btn-ghost-light { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-ghost-light:hover { background: var(--ink); color: var(--on-primary); }
+.btn-filled-cool { background: var(--canvas-cool); color: var(--ink); border-color: var(--canvas-cool); }
+.btn-filled-cool:hover { background: var(--on-primary); border-color: var(--on-primary); }
+
+/* —— Top nav (overlay, fixed) —— */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+  padding: 24px 32px;
+  background: transparent;
+  color: var(--on-primary);
+  display: flex; align-items: center; gap: 32px;
+}
+.topnav .brand-wordmark {
+  font: 700 18px/1 "Barlow Condensed", Arial Narrow, sans-serif;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--on-primary);
+}
+.topnav nav { margin-left: auto; display: flex; gap: 28px; }
+.topnav nav a {
+  font-size: 11px; letter-spacing: 1.17px; text-transform: uppercase; font-weight: 700;
+  color: var(--on-primary);
+}
+.topnav nav a:hover { opacity: 0.7; }
+@media (max-width: 768px) {
+  .topnav nav { display: none; }
+  .topnav::after {
+    content: ""; width: 24px; height: 16px; margin-left: auto;
+    background: linear-gradient(to bottom, var(--on-primary) 2px, transparent 2px 7px, var(--on-primary) 7px 9px, transparent 9px 14px, var(--on-primary) 14px 16px);
+  }
+}
+
+/* —— Photo bands (CSS-rendered photography stand-ins) —— */
+.photo-band {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 96px 32px 96px;
+  overflow: hidden;
+  color: var(--on-primary);
+}
+.photo-band-mid { min-height: 720px; }
+.photo-band-tall { min-height: 100vh; }
+.photo-band .content { position: relative; z-index: 3; max-width: 1200px; margin: 0 auto; width: 100%; }
+.photo-band::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+}
+
+/* Variant: launch (Falcon 9 / Starship launch at twilight) */
+.bg-launch {
+  background: var(--canvas-night);
+}
+.bg-launch::before {
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 100%, rgba(255,180,80,0.32) 0%, rgba(255,140,40,0.18) 25%, transparent 60%),
+    radial-gradient(ellipse 30% 50% at 50% 95%, rgba(255,220,160,0.5) 0%, transparent 50%),
+    linear-gradient(180deg, #050810 0%, #0a0a14 30%, #1a0a10 70%, #0a0505 100%);
+}
+.bg-launch::after {
+  content: ""; position: absolute; z-index: 2;
+  left: 50%; bottom: 0; transform: translateX(-50%);
+  width: 80px; height: 70%;
+  background:
+    linear-gradient(180deg,
+      transparent 0%,
+      #d8d8e0 12%,
+      #ffffff 18%,
+      #ffffff 65%,
+      rgba(255,220,160,0.95) 72%,
+      rgba(255,160,60,0.85) 80%,
+      rgba(255,120,40,0.6) 90%,
+      transparent 100%);
+  filter: blur(2px);
+  border-radius: 40px 40px 0 0;
+}
+
+/* Stars dust */
+.bg-launch .stars {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6) 50%, transparent),
+    radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.5) 50%, transparent),
+    radial-gradient(1px 1px at 40% 50%, rgba(255,255,255,0.4) 50%, transparent),
+    radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,0.5) 50%, transparent),
+    radial-gradient(1px 1px at 10% 70%, rgba(255,255,255,0.5) 50%, transparent),
+    radial-gradient(1px 1px at 55% 25%, rgba(255,255,255,0.4) 50%, transparent),
+    radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.6) 50%, transparent),
+    radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.3) 50%, transparent);
+}
+
+/* Variant: Mars terrain */
+.bg-mars {
+  background: var(--canvas-night);
+}
+.bg-mars::before {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 80%, rgba(200,90,40,0.45) 0%, rgba(140,50,20,0.3) 40%, transparent 70%),
+    radial-gradient(ellipse 70% 30% at 50% 55%, rgba(255,160,100,0.25) 0%, transparent 70%),
+    linear-gradient(180deg, #100408 0%, #1a0810 35%, #3a1a10 65%, #0a0202 100%);
+}
+.bg-mars::after {
+  content: ""; position: absolute; z-index: 2;
+  inset: auto 0 0 0; height: 35%;
+  background:
+    radial-gradient(ellipse 50% 100% at 30% 100%, rgba(180,60,30,0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 100% at 75% 100%, rgba(140,40,20,0.8) 0%, transparent 65%),
+    linear-gradient(180deg, transparent 0%, rgba(100,30,15,0.5) 40%, rgba(50,15,8,0.95) 100%);
+}
+
+/* Variant: Falcon 9 on pad sunset */
+.bg-pad {
+  background: var(--canvas-night);
+}
+.bg-pad::before {
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 70%, rgba(255,140,60,0.35) 0%, transparent 60%),
+    linear-gradient(180deg, #0a1024 0%, #1a1428 30%, #4a2818 65%, #1a0a05 100%);
+}
+.bg-pad::after {
+  content: ""; position: absolute; z-index: 2;
+  left: 35%; bottom: 0; width: 30px; height: 75%;
+  background: linear-gradient(180deg, transparent 0%, #e0e0e8 8%, #ffffff 20%, #ffffff 90%, #b0b0c0 100%);
+  filter: blur(0.5px);
+}
+
+/* Variant: Dragon docking (space station) */
+.bg-dragon {
+  background: var(--canvas-night);
+}
+.bg-dragon::before {
+  background:
+    radial-gradient(circle at 70% 40%, rgba(80,140,200,0.18) 0%, transparent 50%),
+    radial-gradient(circle 90% 70% at 30% 100%, rgba(100,150,180,0.12) 0%, transparent 50%),
+    linear-gradient(135deg, #02040a 0%, #050810 50%, #000 100%);
+}
+.bg-dragon::after {
+  content: ""; position: absolute; z-index: 2;
+  left: 60%; top: 35%; width: 28%; height: 25%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #c0c8d0 0%, #4a5868 50%, #050810 90%);
+  box-shadow: 0 0 80px rgba(180,200,220,0.15);
+}
+
+/* Variant: Earth from orbit */
+.bg-orbit {
+  background: var(--canvas-night);
+}
+.bg-orbit::before {
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 100%, rgba(100,160,220,0.3) 0%, rgba(40,80,140,0.5) 35%, transparent 70%),
+    radial-gradient(ellipse 80% 30% at 50% 80%, rgba(255,220,180,0.18) 0%, transparent 60%),
+    linear-gradient(180deg, #000 0%, #020410 60%, #08182a 100%);
+}
+.bg-orbit::after {
+  content: ""; position: absolute; z-index: 2;
+  left: -10%; right: -10%; bottom: -30%; height: 60%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(80,140,200,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(60,120,80,0.4) 0%, transparent 50%),
+    linear-gradient(180deg, #2a4868 0%, #1a3858 60%, #051828 100%);
+}
+
+/* Hero band content */
+.hero-content { max-width: 700px; }
+.eyebrow {
+  font-size: 12px; letter-spacing: 0.96px; text-transform: uppercase; font-weight: 400;
+  color: var(--on-primary-mute); margin-bottom: 24px; display: block;
+  line-height: 2;
+}
+.hero-content .display-xxl { margin-bottom: 32px; }
+.hero-content .lead { font-size: 16px; line-height: 1.7; letter-spacing: 0.32px; max-width: 540px; margin: 0 0 40px; color: var(--on-primary-mute); }
+
+/* —— Mission stats overlay —— */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid var(--hairline-on-dark);
+  border-bottom: 1px solid var(--hairline-on-dark);
+  margin-top: 56px;
+}
+@media (max-width: 760px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+.stat-cell { padding: 24px 16px; border-right: 1px solid var(--hairline-on-dark); }
+.stat-cell:last-child { border-right: 0; }
+@media (max-width: 760px) { .stat-cell:nth-child(2n) { border-right: 0; } }
+.stat-cell .label { font-size: 11px; letter-spacing: 0.96px; text-transform: uppercase; color: var(--on-primary-mute); opacity: 0.7; margin-bottom: 8px; }
+.stat-cell .value { font: 700 36px/1 "Barlow Condensed", Arial Narrow, sans-serif; letter-spacing: 0.6px; }
+.stat-cell .unit { font-size: 12px; letter-spacing: 0.96px; text-transform: uppercase; opacity: 0.6; margin-top: 6px; }
+
+/* —— Mission tracker card —— */
+.mission-tracker {
+  background: var(--canvas-night-soft);
+  border: 1px solid var(--hairline-on-dark);
+  border-radius: 4px;
+  padding: 32px;
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px;
+  align-items: center;
+}
+@media (max-width: 880px) { .mission-tracker { grid-template-columns: 1fr; } }
+.mission-tracker .tag {
+  display: inline-block; padding: 4px 10px; border: 1px solid var(--on-primary);
+  font-size: 11px; letter-spacing: 1.17px; text-transform: uppercase; font-weight: 700;
+  margin-bottom: 16px;
+}
+.mission-tracker h3 { font: 700 clamp(28px, 4vw, 44px)/1.0 "Barlow Condensed", Arial Narrow, sans-serif; text-transform: uppercase; letter-spacing: 1.2px; margin: 0 0 12px; }
+.mission-tracker .desc { font-size: 14px; line-height: 1.7; color: var(--on-primary-mute); opacity: 0.85; margin: 0 0 24px; max-width: 420px; }
+.mission-tracker .countdown {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 380px;
+}
+.mission-tracker .countdown .unit {
+  background: var(--canvas-night); border: 1px solid var(--hairline-on-dark);
+  padding: 16px 8px; text-align: center; border-radius: 4px;
+}
+.mission-tracker .countdown .num { font: 700 28px/1 "Barlow Condensed", Arial Narrow, sans-serif; letter-spacing: 0.6px; }
+.mission-tracker .countdown .lbl { font-size: 10px; letter-spacing: 0.96px; text-transform: uppercase; opacity: 0.65; margin-top: 6px; }
+
+/* —— Vehicle card grid (light section on shop equivalent) —— */
+.vehicle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 880px) { .vehicle-grid { grid-template-columns: 1fr; } }
+.vehicle-card {
+  background: transparent; color: var(--on-primary);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  position: relative;
+}
+.vehicle-card .vc-art {
+  aspect-ratio: 4 / 3; position: relative; overflow: hidden;
+  background: var(--canvas-night-soft);
+}
+.vehicle-card .vc-art::before { content: ""; position: absolute; inset: 0; }
+.vehicle-card .vc-art.f9::before {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,200,150,0.2) 0%, transparent 60%),
+    linear-gradient(180deg, #0a0a14 0%, #1a1010 100%);
+}
+.vehicle-card .vc-art.f9::after {
+  content: ""; position: absolute;
+  left: 48%; top: 10%; bottom: 10%; width: 14px;
+  background: linear-gradient(180deg, #fff 0%, #e8e8f0 80%, #b0b0c0 100%);
+  filter: blur(0.3px);
+}
+.vehicle-card .vc-art.fh::before {
+  background: linear-gradient(180deg, #050810 0%, #1a1020 100%);
+}
+.vehicle-card .vc-art.fh::after {
+  content: ""; position: absolute;
+  left: 35%; top: 8%; bottom: 8%; width: 50px;
+  background:
+    linear-gradient(90deg, #d0d0d8 0%, #fff 30%, #fff 70%, #b0b0c0 100%);
+}
+.vehicle-card .vc-art.ss::before {
+  background:
+    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(255,140,60,0.45) 0%, transparent 60%),
+    linear-gradient(180deg, #04081a 0%, #1a0a14 100%);
+}
+.vehicle-card .vc-art.ss::after {
+  content: ""; position: absolute;
+  left: 40%; top: 6%; width: 80px; height: 88%;
+  background: linear-gradient(180deg, #e0e8f0 0%, #ffffff 50%, #d0d8e0 100%);
+  border-radius: 40px 40px 8px 8px;
+}
+.vehicle-card .vc-body { padding: 24px 0 0; }
+.vehicle-card .vc-eyebrow { font-size: 11px; letter-spacing: 0.96px; text-transform: uppercase; opacity: 0.65; margin-bottom: 8px; }
+.vehicle-card .vc-title { font: 700 28px/1 "Barlow Condensed", Arial Narrow, sans-serif; text-transform: uppercase; letter-spacing: 0.96px; margin: 0 0 12px; }
+.vehicle-card .vc-spec { font-size: 13px; line-height: 1.6; color: var(--on-primary-mute); opacity: 0.8; margin: 0 0 20px; }
+
+/* —— DS section (sits on canvas-light) —— */
+.ds-section {
+  background: var(--canvas-light); color: var(--ink);
+  padding: 96px 0;
+}
+.ds-section .wrap { max-width: 1200px; }
+.ds-section .eyebrow { color: var(--ink-mute); }
+.ds-section .display-lg { color: var(--ink); }
+.ds-section .body-lg { color: var(--ink-mute); }
+.ds-block { margin-bottom: 64px; }
+.ds-heading {
+  font: 700 22px/1 "Barlow Condensed", Arial Narrow, sans-serif;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  margin: 0 0 24px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--hairline-on-light);
+}
+.ds-caption { font-size: 11px; letter-spacing: 1.17px; text-transform: uppercase; font-weight: 700; color: var(--ink-mute); margin: 16px 0 12px; }
+
+.ds-sw-grid { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .ds-sw-grid { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { border: 1px solid var(--hairline-on-light); border-radius: 4px; overflow: hidden; background: var(--canvas-light); }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 10px 12px; border-top: 1px solid var(--hairline-on-light); }
+.ds-sw .name { font-size: 12px; font-weight: 500; letter-spacing: 0.4px; }
+.ds-sw .val { font-size: 11px; color: var(--ink-mute); margin-top: 2px; font-family: ui-monospace, monospace; }
+
+.ds-typescale { border: 1px solid var(--hairline-on-light); border-radius: 4px; overflow: hidden; background: var(--canvas-light); }
+.ds-tr { display: grid; grid-template-columns: 140px 240px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline-on-light); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font: 500 12px/1.4 ui-monospace, monospace; color: var(--ink); }
+.ds-spec { font: 400 12px/1.4 ui-monospace, monospace; color: var(--ink-mute); }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 8px; } .ds-sam { font-size: 28px !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(5, 1fr); max-width: 720px; }
+@media (max-width: 600px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-rad .box { width: 80px; height: 80px; background: var(--ink); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 880px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini { border-radius: 8px; padding: 24px; border: 1px solid var(--hairline-on-light); background: var(--canvas-light); }
+.ds-card-mini.dark { background: var(--canvas-night); color: var(--on-primary); border-color: var(--canvas-night); }
+.ds-card-mini.cool { background: var(--canvas-cool); }
+.ds-card-mini h4 { margin: 0 0 8px; font: 700 16px/1.2 "Barlow Condensed", Arial Narrow, sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+.ds-card-mini p { margin: 0; font-size: 13px; line-height: 1.6; opacity: 0.85; }
+
+/* Light-canvas shop button */
+.btn.btn-on-light { color: var(--ink); border-color: var(--ink); }
+.btn.btn-on-light:hover { background: var(--ink); color: var(--on-primary); }
+
+/* —— Footer —— */
+footer {
+  background: var(--canvas-night); color: var(--on-primary);
+  padding: 32px 24px;
+  border-top: 1px solid var(--hairline-on-dark);
+}
+.footer-top { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; padding-bottom: 24px; border-bottom: 1px solid var(--hairline-on-dark); }
+.footer-top .brand-wordmark { font: 700 24px/1 "Barlow Condensed", Arial Narrow, sans-serif; letter-spacing: 5px; text-transform: uppercase; }
+.footer-top nav { display: flex; gap: 28px; flex-wrap: wrap; }
+.footer-top nav a { font-size: 11px; letter-spacing: 1.17px; text-transform: uppercase; font-weight: 400; opacity: 0.85; }
+.footer-top nav a:hover { opacity: 1; }
+.footer-bottom { padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 11px; letter-spacing: 0.4px; color: var(--on-primary-mute); opacity: 0.6; }
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--on-primary); color: var(--ink);
+  padding: 12px 18px; border-radius: 32px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.17px; text-transform: uppercase;
+  border: 1px solid var(--on-primary);
+}
+.src-link:hover { background: transparent; color: var(--on-primary); }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="#" class="brand-wordmark" aria-label="SpaceX">SPACEX</a>
+  <nav>
+    <a href="#">Falcon 9</a>
+    <a href="#">Starship</a>
+    <a href="#">Dragon</a>
+    <a href="#">Human Spaceflight</a>
+    <a href="#">Mission</a>
+    <a href="#">Shop</a>
+  </nav>
+</header>
+
+<!-- HERO BAND — Launch -->
+<section class="photo-band photo-band-tall bg-launch">
+  <div class="stars"></div>
+  <div class="content">
+    <div class="hero-content">
+      <span class="eyebrow">Recent launch · Falcon 9 · Block 5</span>
+      <h1 class="display-xxl">Making humanity multiplanetary.</h1>
+      <p class="lead">SpaceX designs, manufactures and launches advanced rockets and spacecraft. The company was founded in 2002 to revolutionize space technology, with the ultimate goal of enabling people to live on other planets.</p>
+      <a href="#" class="btn btn-ghost-dark">Watch launch <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION TRACKER BAND -->
+<section class="photo-band photo-band-mid bg-pad">
+  <div class="content">
+    <div class="hero-content" style="max-width: 900px;">
+      <span class="eyebrow">Next launch · NET 2026.05.28</span>
+      <h2 class="display-xl">Starlink Group 8-12</h2>
+      <p class="lead">21 second-generation Starlink satellites to low-Earth orbit aboard Falcon 9 from SLC-40, Cape Canaveral. Booster B1078 attempting its 14th flight.</p>
+    </div>
+
+    <div class="mission-tracker">
+      <div>
+        <span class="tag">T-Minus</span>
+        <h3>Starlink 8-12</h3>
+        <p class="desc">Falcon 9 Block 5 · Cape Canaveral SLC-40 · 21 satellites · 53.2° inclination · ASDS drone-ship recovery.</p>
+        <a href="#" class="btn btn-ghost-dark">Watch live →</a>
+      </div>
+      <div class="countdown">
+        <div class="unit"><div class="num">07</div><div class="lbl">days</div></div>
+        <div class="unit"><div class="num">14</div><div class="lbl">hrs</div></div>
+        <div class="unit"><div class="num">22</div><div class="lbl">min</div></div>
+        <div class="unit"><div class="num">39</div><div class="lbl">sec</div></div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="label">Total launches</div>
+        <div class="value">487</div>
+        <div class="unit">since 2006</div>
+      </div>
+      <div class="stat-cell">
+        <div class="label">Total landings</div>
+        <div class="value">412</div>
+        <div class="unit">first-stage recovery</div>
+      </div>
+      <div class="stat-cell">
+        <div class="label">Total reflights</div>
+        <div class="value">368</div>
+        <div class="unit">flight-proven boosters</div>
+      </div>
+      <div class="stat-cell">
+        <div class="label">Crew launched</div>
+        <div class="value">62</div>
+        <div class="unit">astronauts to orbit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STARSHIP BAND -->
+<section class="photo-band photo-band-tall bg-mars">
+  <div class="content">
+    <div class="hero-content">
+      <span class="eyebrow">Vehicle · Starship</span>
+      <h2 class="display-xxl">A fully reusable transportation system.</h2>
+      <p class="lead">Starship is the most powerful launch vehicle ever developed. With a total mass of 5,000 metric tons and 16,700 metric tons of thrust at liftoff, Starship will carry up to 250 metric tons to low-Earth orbit and beyond.</p>
+      <a href="#" class="btn btn-ghost-dark">Vehicle specs →</a>
+    </div>
+  </div>
+</section>
+
+<!-- VEHICLE LINEUP BAND -->
+<section class="photo-band photo-band-mid bg-dragon">
+  <div class="content">
+    <div style="margin-bottom: 56px;">
+      <span class="eyebrow">Fleet</span>
+      <h2 class="display-xl" style="max-width: 700px;">Every vehicle in the lineup.</h2>
+    </div>
+
+    <div class="vehicle-grid">
+      <div class="vehicle-card">
+        <div class="vc-art f9"></div>
+        <div class="vc-body">
+          <div class="vc-eyebrow">Reusable · Block 5</div>
+          <h3 class="vc-title">Falcon 9</h3>
+          <p class="vc-spec">Two-stage rocket · 549 t mass · 8,300 kg to GTO · workhorse of the fleet with 380+ landings.</p>
+          <a href="#" class="btn btn-ghost-dark">Learn more →</a>
+        </div>
+      </div>
+      <div class="vehicle-card">
+        <div class="vc-art fh"></div>
+        <div class="vc-body">
+          <div class="vc-eyebrow">Heavy-lift · 27 engines</div>
+          <h3 class="vc-title">Falcon Heavy</h3>
+          <p class="vc-spec">Most powerful operational rocket by a factor of two · 63,800 kg to LEO · three Falcon 9 first-stages strapped together.</p>
+          <a href="#" class="btn btn-ghost-dark">Learn more →</a>
+        </div>
+      </div>
+      <div class="vehicle-card">
+        <div class="vc-art ss"></div>
+        <div class="vc-body">
+          <div class="vc-eyebrow">Next generation · Mars</div>
+          <h3 class="vc-title">Starship</h3>
+          <p class="vc-spec">Fully reusable super-heavy launch system · 250 t to LEO · designed to carry crew and cargo to the Moon and Mars.</p>
+          <a href="#" class="btn btn-ghost-dark">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / RIDESHARE BAND -->
+<section class="photo-band photo-band-mid bg-orbit">
+  <div class="content" style="text-align: center;">
+    <span class="eyebrow" style="display: inline-block;">Rideshare</span>
+    <h2 class="display-xl" style="max-width: 900px; margin: 0 auto 32px;">Book a ride to orbit. Starting at $300K per 50kg.</h2>
+    <p class="lead" style="margin: 0 auto 40px; text-align: center;">SpaceX's smallsat rideshare program flies dedicated and shared missions to sun-synchronous, mid-inclination, and GTO orbits — on a fixed cadence with online booking.</p>
+    <a href="#" class="btn btn-ghost-dark">Reserve payload</a>
+  </div>
+</section>
+
+<!-- ============================================================== -->
+<!-- PART B — DESIGN SYSTEM REFERENCE (canvas-light)                 -->
+<!-- ============================================================== -->
+<section class="ds-section"><div class="wrap">
+  <div style="margin-bottom: 64px;">
+    <span class="eyebrow" style="color: var(--ink-mute);">Design System</span>
+    <h2 class="display-lg" style="color: var(--ink); margin-top: 16px;">Black, white, and the photograph.</h2>
+    <p style="font-size: 16px; line-height: 1.7; max-width: 620px; margin: 16px 0 0; color: var(--ink-mute);">No accent colors. No drop shadows. No gradients on chrome. Photography is the design system; D-DIN uppercase is the voice. Source — <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.spacex.html" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">DESIGN.md</a>.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand — no accent</p>
+    <div class="ds-sw-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">canvas-night</div><div class="val">#000000</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0a0a0a"></div><div class="meta"><div class="name">canvas-night-soft</div><div class="val">#0a0a0a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff; border-bottom: 1px solid var(--hairline-on-light);"></div><div class="meta"><div class="name">canvas-light</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f0f0fa"></div><div class="meta"><div class="name">canvas-cool</div><div class="val">#f0f0fa</div></div></div>
+    </div>
+
+    <p class="ds-caption">Hairlines &amp; ink mutes</p>
+    <div class="ds-sw-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="ds-sw"><div class="chip" style="background:#3a3a3f"></div><div class="meta"><div class="name">hairline-on-dark</div><div class="val">#3a3a3f</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e0e0e8"></div><div class="meta"><div class="name">hairline-on-light</div><div class="val">#e0e0e8</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#5a5a5f"></div><div class="meta"><div class="name">ink-mute</div><div class="val">#5a5a5f</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f0f0fa"></div><div class="meta"><div class="name">on-primary-mute</div><div class="val">#f0f0fa</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption">D-DIN-Bold → Barlow Condensed fallback. Uppercase. Tight vertical leading. Positive horizontal tracking.</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xxl</span><span class="ds-spec">80 · w700 · 1.6px · 0.95</span><div class="ds-sam ddin" style="font-size:56px; line-height:0.95; letter-spacing:1.6px;">Making humanity multiplanetary</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">60 · w700 · 1.2px · 1.2</span><div class="ds-sam ddin" style="font-size:44px; letter-spacing:1.2px;">A fully reusable system</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">48 · w700 · 0.96px · 1.25</span><div class="ds-sam ddin" style="font-size:34px; letter-spacing:0.96px;">Section opener heading</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">16 · w400 · 0.32px · 1.7</span><div class="ds-sam" style="font-size:16px; line-height:1.7; letter-spacing:0.32px;">Marketing lead. Sits beneath display tiers and carries paragraph rhythm.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 · w400 · 0.32px · 1.5</span><div class="ds-sam" style="font-size:16px; letter-spacing:0.32px;">Default UI body for shop and editorial copy.</div></div>
+      <div class="ds-tr"><span class="ds-tok">button-cap</span><span class="ds-spec">13 · w700 · 1.17px · 0.94</span><div class="ds-sam" style="font-size:13px; font-weight:700; letter-spacing:1.17px; text-transform:uppercase;">RESERVE PAYLOAD</div></div>
+      <div class="ds-tr"><span class="ds-tok">micro-cap</span><span class="ds-spec">12 · w400 · 0.96px · 2.0</span><div class="ds-sam" style="font-size:12px; letter-spacing:0.96px; text-transform:uppercase; line-height:2;">NEXT LAUNCH · NET 2026.05.28</div></div>
+      <div class="ds-tr"><span class="ds-tok">caption</span><span class="ds-spec">13 · w400 · 0 · 1.5</span><div class="ds-sam" style="font-size:13px;">Helper / footer text and legal lines.</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius — pill for CTAs, flat for everything else</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">xs</span><span class="ds-spec">4 · inputs</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="ds-tok">sm</span><span class="ds-spec">8 · shop card</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="ds-tok">md</span><span class="ds-spec">16 · surface</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:32px"></div><span class="ds-tok">pill</span><span class="ds-spec">32 · CTAs</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">full</span><span class="ds-spec">∞ · play btn</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — ghost-outlined pill is the only marketing CTA</p>
+    <div class="ds-comp-row" style="background: var(--canvas-night); padding: 32px; border-radius: 8px;">
+      <a class="btn btn-ghost-dark">Watch launch</a>
+      <a class="btn btn-ghost-dark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Play video</a>
+      <a class="btn btn-ghost-dark">Reserve payload →</a>
+    </div>
+    <div class="ds-comp-row" style="margin-top: 12px;">
+      <a class="btn btn-on-light">Ghost · on light</a>
+      <a class="btn btn-filled-cool">Add to cart</a>
+    </div>
+
+    <p class="ds-caption">Card variants — flat, no shadow, the photograph carries depth</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-mini dark">
+        <h4>Photo-band card</h4>
+        <p>Full-bleed background with type overlaid. Padding 0. The photograph IS the card.</p>
+      </div>
+      <div class="ds-card-mini cool">
+        <h4>Shop product card</h4>
+        <p>Canvas-cool fill, 16px padding, 8px radius, hairline-on-light border. The only card that gets a true container treatment.</p>
+      </div>
+      <div class="ds-card-mini">
+        <h4>Footer / legal</h4>
+        <p>Canvas-light surface, micro-cap labels in uppercase. The only place body text lives on a light canvas.</p>
+      </div>
+    </div>
+
+    <p class="ds-caption">Mission-stat row — hairline borders, D-DIN numerals</p>
+    <div style="background: var(--canvas-night); border-radius: 8px; padding: 24px; color: var(--on-primary);">
+      <div class="stats-row" style="margin: 0;">
+        <div class="stat-cell">
+          <div class="label">Launches</div>
+          <div class="value">487</div>
+          <div class="unit">since 2006</div>
+        </div>
+        <div class="stat-cell">
+          <div class="label">Landings</div>
+          <div class="value">412</div>
+          <div class="unit">first stage</div>
+        </div>
+        <div class="stat-cell">
+          <div class="label">Reflights</div>
+          <div class="value">368</div>
+          <div class="unit">flight-proven</div>
+        </div>
+        <div class="stat-cell">
+          <div class="label">Crew</div>
+          <div class="value">62</div>
+          <div class="unit">to orbit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="footer-top">
+    <a href="#" class="brand-wordmark">SPACEX</a>
+    <nav>
+      <a href="#">Privacy</a>
+      <a href="#">Suppliers</a>
+      <a href="#">Careers</a>
+      <a href="#">Mission</a>
+      <a href="#">Updates</a>
+      <a href="#">Shop</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div>SPACE EXPLORATION TECHNOLOGIES CORP (INSPIRED STUDY) · GENERATED FOR DESIGN RESEARCH</div>
+    <div>Canvas #000 · D-DIN ↔ Barlow Condensed · Ghost pill 32px</div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.spacex.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

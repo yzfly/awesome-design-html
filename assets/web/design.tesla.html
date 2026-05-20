@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tesla — Design System Study</title>
+<meta name="description" content="A visual study of Tesla's design language: radical subtraction, single Electric Blue accent, full-viewport cinematic photography, 4px barely-rounded buttons. Marketing demo + design system reference." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* The one accent */
+  --electric-blue: #3E6AE1;
+  --electric-blue-hover: #325cc8;
+  /* Surfaces */
+  --white: #FFFFFF;
+  --light-ash: #F4F4F4;
+  --carbon-dark: #171A20;
+  --frosted: rgba(255, 255, 255, 0.75);
+  /* Text */
+  --ink-dark: #171A20;
+  --ink-body: #393C41;
+  --ink-tert: #5C5E62;
+  --ink-placeholder: #8E8E8E;
+  /* Borders */
+  --cloud: #EEEEEE;
+  --pale-silver: #D0D1D2;
+  /* Type */
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --font-text: "Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radius */
+  --r-sm: 4px;
+  --r-md: 12px;
+  --r-full: 50%;
+  /* Motion */
+  --t: 0.33s cubic-bezier(0.5, 0, 0, 0.75);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--white);
+  color: var(--ink-dark);
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+
+.container { max-width: 1383px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Nav ===== */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 16px 32px; transition: background-color var(--t); }
+.nav.scrolled { background: var(--frosted); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1383px; margin: 0 auto; }
+.wordmark { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: 4px; color: var(--ink-dark); }
+.nav-mid { display: flex; gap: 4px; }
+.nav-btn { background: transparent; border: 0; color: var(--ink-dark); font-size: 14px; font-weight: 500; padding: 4px 16px; min-height: 32px; border-radius: var(--r-sm); cursor: pointer; transition: background-color var(--t), color var(--t); }
+.nav-btn:hover { background: rgba(0,0,0,0.05); }
+.nav-right { display: flex; gap: 4px; align-items: center; }
+.icon-btn { background: transparent; border: 0; width: 32px; height: 32px; border-radius: var(--r-sm); display: grid; place-items: center; color: var(--ink-dark); cursor: pointer; transition: background-color var(--t); }
+.icon-btn:hover { background: rgba(0,0,0,0.05); }
+.icon-btn svg { width: 16px; height: 16px; }
+
+/* On dark hero, nav text is white */
+.nav.over-dark .nav-btn,
+.nav.over-dark .wordmark,
+.nav.over-dark .icon-btn { color: var(--white); }
+.nav.over-dark .nav-btn:hover,
+.nav.over-dark .icon-btn:hover { background: rgba(255,255,255,0.12); }
+
+/* ===== Buttons ===== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 500; padding: 4px 16px; min-height: 40px; min-width: 200px; border-radius: var(--r-sm); border: 3px solid transparent; cursor: pointer; transition: background-color var(--t), color var(--t), border-color var(--t), box-shadow 0.25s; }
+.btn-primary { background: var(--electric-blue); color: var(--white); }
+.btn-primary:hover { background: var(--electric-blue-hover); }
+.btn-secondary { background: var(--white); color: var(--ink-body); }
+.btn-secondary:hover { background: var(--light-ash); }
+.btn-on-dark-secondary { background: rgba(244,244,244,0.65); color: var(--ink-dark); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.btn-on-dark-secondary:hover { background: rgba(255,255,255,0.85); }
+
+/* ===== Hero (100vh full-bleed cinematic) ===== */
+.hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 144px 24px 96px; }
+.hero-bg { position: absolute; inset: 0; z-index: -1; }
+.hero-bg.dusk { background:
+  linear-gradient(180deg, rgba(23,26,32,0.0) 0%, rgba(23,26,32,0.0) 50%, rgba(23,26,32,0.4) 100%),
+  radial-gradient(80% 60% at 50% 30%, #c9d4e8 0%, #8298c0 35%, #4d6691 65%, #28324d 100%);
+}
+.hero-bg.dusk::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 36%; background:
+  linear-gradient(180deg, transparent 0%, #1a1f2c 20%, #0d1018 100%);
+}
+.hero-bg.dusk::after { content: ""; position: absolute; left: 50%; bottom: 22%; transform: translateX(-50%); width: min(900px, 80vw); height: 14vh; background:
+  radial-gradient(60% 50% at 50% 100%, rgba(255,255,255,0.18), transparent 70%);
+  filter: blur(6px);
+}
+.car-stage { position: absolute; left: 50%; bottom: 18%; transform: translateX(-50%); width: min(960px, 90vw); }
+.car-shadow { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); width: 92%; height: 28px; background: radial-gradient(50% 100% at 50% 50%, rgba(0,0,0,0.55), transparent 75%); filter: blur(4px); }
+.hero-top { text-align: center; }
+.hero-eyebrow { font-size: 22px; font-weight: 400; color: var(--electric-blue); margin-bottom: 8px; }
+.hero-title { font-family: var(--font-display); font-size: 40px; font-weight: 500; color: var(--white); line-height: 1.2; margin: 0; letter-spacing: normal; }
+.hero-sub { font-size: 14px; color: var(--white); margin: 6px 0 0; }
+.hero-sub a { text-decoration: underline; }
+.hero-bottom { display: flex; flex-direction: column; align-items: center; gap: 28px; width: 100%; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.carousel-dots { display: flex; gap: 12px; }
+.dot { width: 10px; height: 10px; border-radius: var(--r-full); background: rgba(255,255,255,0.5); cursor: pointer; transition: background var(--t); }
+.dot.active { background: var(--white); }
+.carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: var(--r-full); background: rgba(244,244,244,0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 0; cursor: pointer; display: grid; place-items: center; color: var(--ink-dark); transition: background var(--t); }
+.carousel-arrow:hover { background: rgba(255,255,255,0.9); }
+.carousel-arrow.left { left: 24px; }
+.carousel-arrow.right { right: 24px; }
+.carousel-arrow svg { width: 18px; height: 18px; }
+
+/* ===== Sub-hero (full viewport sections) ===== */
+.full-section { min-height: 100vh; padding: 144px 24px 96px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
+.full-section.light { background: var(--white); }
+.full-section.ash { background: var(--light-ash); }
+.full-section .hero-title.dark { color: var(--ink-dark); }
+.full-section .hero-sub.dark { color: var(--ink-body); }
+
+/* Studio car stage (light bg) */
+.studio-stage { width: min(1100px, 92vw); height: 50vh; position: relative; }
+.studio-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 16%; background: radial-gradient(50% 100% at 50% 100%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 70%); }
+
+/* Specs band */
+.specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; margin-top: 32px; max-width: 1100px; }
+.spec { text-align: center; }
+.spec-val { font-family: var(--font-display); font-size: 36px; font-weight: 500; color: var(--ink-dark); letter-spacing: -0.5px; }
+.spec-val sup { font-size: 14px; font-weight: 400; color: var(--ink-tert); margin-left: 4px; }
+.spec-label { font-size: 12px; font-weight: 500; color: var(--ink-tert); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.8px; }
+
+/* ===== Category cards (lower section) ===== */
+.cat-section { padding: 96px 24px; background: var(--white); }
+.cat-head { max-width: 1100px; margin: 0 auto 40px; }
+.cat-head h2 { font-family: var(--font-display); font-size: 36px; font-weight: 500; margin: 0 0 8px; letter-spacing: normal; }
+.cat-head p { font-size: 14px; color: var(--ink-body); margin: 0; max-width: 600px; }
+.cat-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; max-width: 1100px; margin: 0 auto; }
+.cat-card { aspect-ratio: 16/10; border-radius: var(--r-md); overflow: hidden; position: relative; cursor: pointer; }
+.cat-card.small { aspect-ratio: 5/4; }
+.cat-img-1 { background: linear-gradient(135deg, #6e8aae 0%, #2a3a5c 60%, #131923 100%); }
+.cat-img-2 { background: linear-gradient(135deg, #b3b8c2 0%, #5a6273 60%, #1e242e 100%); }
+.cat-img-3 { background: linear-gradient(135deg, #2e4172 0%, #1c2945 60%, #0c1322 100%); }
+.cat-img-4 { background: linear-gradient(135deg, #d5d8de 0%, #8e96a3 60%, #3a414f 100%); }
+.cat-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.25) 100%); }
+.cat-label { position: absolute; top: 20px; left: 24px; color: var(--white); font-size: 16px; font-weight: 500; z-index: 1; }
+.cat-meta { position: absolute; bottom: 20px; left: 24px; right: 24px; color: var(--white); z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; }
+.cat-meta strong { font-family: var(--font-display); font-size: 28px; font-weight: 500; letter-spacing: -0.3px; }
+.cat-cta { font-size: 14px; font-weight: 500; padding: 4px 14px; min-height: 32px; border-radius: var(--r-sm); background: rgba(244,244,244,0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: var(--ink-dark); display: inline-flex; align-items: center; }
+
+/* ===== Energy / inline section ===== */
+.energy { padding: 96px 24px; background: var(--white); border-top: 1px solid var(--cloud); }
+.energy-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.energy h2 { font-family: var(--font-display); font-size: 40px; font-weight: 500; line-height: 1.15; margin: 0 0 16px; }
+.energy p { font-size: 15px; color: var(--ink-body); line-height: 1.6; margin: 0 0 28px; max-width: 460px; }
+.energy-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.energy-visual { aspect-ratio: 4/3; border-radius: var(--r-md); background:
+  radial-gradient(80% 60% at 50% 40%, #f0f3f8 0%, #c2cad9 40%, #5d6a85 80%, #28324a 100%);
+  position: relative; overflow: hidden; display: grid; place-items: center;
+}
+.energy-visual svg { width: 60%; }
+
+/* ===== Chat bar (persistent) ===== */
+.chatbar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--cloud); z-index: 30; padding: 12px 24px; }
+.chat-inner { max-width: 1383px; margin: 0 auto; display: flex; gap: 16px; align-items: center; justify-content: space-between; }
+.chat-input { flex: 1; display: flex; gap: 10px; align-items: center; }
+.chat-input .chat-icon { width: 18px; height: 18px; color: var(--ink-tert); }
+.chat-label { font-size: 14px; font-weight: 500; color: var(--ink-dark); }
+.chat-placeholder { font-size: 14px; color: var(--ink-placeholder); }
+.chat-send { width: 32px; height: 32px; border: 1px solid var(--cloud); background: var(--white); border-radius: var(--r-sm); display: grid; place-items: center; cursor: pointer; color: var(--ink-body); }
+.chat-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--ink-dark); padding: 4px 14px; min-height: 32px; border-radius: var(--r-sm); transition: background var(--t); }
+.chat-cta:hover { background: var(--light-ash); }
+.chat-cta-icon { color: var(--electric-blue); }
+
+/* ===== Footer ===== */
+footer { background: var(--white); padding: 32px 24px 96px; border-top: 1px solid var(--cloud); }
+.foot-inner { max-width: 1383px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: center; font-size: 12px; color: var(--ink-tert); }
+.foot-inner a:hover { color: var(--ink-dark); }
+
+/* ===== Floating source link ===== */
+.src-link { position: fixed; right: 24px; bottom: 80px; z-index: 60; background: var(--white); border: 1px solid var(--cloud); padding: 8px 16px; border-radius: var(--r-sm); font-size: 13px; font-weight: 500; color: var(--ink-body); transition: color var(--t), border-color var(--t); }
+.src-link:hover { color: var(--electric-blue); border-color: var(--electric-blue); }
+
+/* ===== DESIGN SYSTEM (Part B) ===== */
+.ds-section { background: var(--light-ash); padding: 120px 24px 144px; }
+.ds-wrap { max-width: 1100px; margin: 0 auto; }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 64px; }
+.ds-eyebrow { font-size: 12px; font-weight: 500; color: var(--ink-tert); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.ds-intro h2 { font-family: var(--font-display); font-size: 36px; font-weight: 500; margin: 0 0 10px; line-height: 1.15; }
+.ds-intro p { font-size: 14px; color: var(--ink-body); line-height: 1.6; margin: 0; max-width: 520px; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--white); border: 1px solid var(--cloud); border-radius: var(--r-sm); font-size: 13px; font-weight: 500; color: var(--ink-body); transition: color var(--t), border-color var(--t); }
+.ds-source:hover { color: var(--electric-blue); border-color: var(--electric-blue); }
+.ds-block { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--cloud); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-family: var(--font-display); font-size: 24px; font-weight: 500; color: var(--ink-dark); margin: 0 0 8px; }
+.ds-desc { font-size: 13px; color: var(--ink-body); margin: 0 0 28px; max-width: 600px; line-height: 1.6; }
+.ds-caption { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-tert); margin: 28px 0 12px; }
+.ds-swatches { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
+.ds-sw { background: var(--white); border-radius: var(--r-sm); overflow: hidden; border: 1px solid var(--cloud); }
+.ds-sw .chip { height: 72px; }
+.ds-sw .meta { padding: 12px 14px; }
+.ds-sw .name { font-size: 13px; font-weight: 500; color: var(--ink-dark); }
+.ds-sw .val { font-size: 11px; color: var(--ink-tert); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--cloud); border-radius: var(--r-sm); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--cloud); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-tert); background: var(--light-ash); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--electric-blue); }
+.ds-type-table td.sample { color: var(--ink-dark); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.ds-radius-cell { background: var(--white); border: 1px solid var(--cloud); padding: 22px 14px; text-align: center; border-radius: var(--r-sm); }
+.ds-radius-box { width: 64px; height: 64px; background: var(--electric-blue); margin: 0 auto 12px; }
+.ds-radius-label { font-size: 13px; font-weight: 500; color: var(--ink-dark); }
+.ds-radius-val { font-size: 11px; color: var(--ink-tert); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.ds-card { background: var(--white); border: 1px solid var(--cloud); border-radius: var(--r-sm); padding: 26px; }
+.ds-card h5 { font-family: var(--font-display); font-size: 16px; font-weight: 500; color: var(--ink-dark); margin: 0 0 18px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: stretch; }
+.ds-input { background: var(--white); border: 1px solid var(--cloud); border-radius: var(--r-sm); padding: 10px 14px; font-size: 14px; font-family: inherit; color: var(--ink-dark); outline: none; transition: border-color var(--t); width: 100%; }
+.ds-input::placeholder { color: var(--ink-placeholder); }
+.ds-input:focus { border-color: var(--electric-blue); }
+.ds-tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: var(--r-sm); font-size: 11px; font-weight: 500; }
+.ds-tag-blue { background: var(--electric-blue); color: var(--white); }
+.ds-tag-outline { color: var(--ink-body); border: 1px solid var(--cloud); background: var(--white); }
+.ds-tag-dark { background: var(--carbon-dark); color: var(--white); }
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .nav { padding: 14px 16px; }
+  .nav-mid { display: none; }
+  .hero-title { font-size: 32px; }
+  .hero-actions { flex-direction: column; width: min(320px, 100%); }
+  .btn { width: 100%; min-width: 0; }
+  .specs { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .cat-grid { grid-template-columns: 1fr; }
+  .energy-inner { grid-template-columns: 1fr; gap: 40px; }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .ds-radius { grid-template-columns: repeat(2, 1fr); }
+  .chat-cta { display: none; }
+  .full-section { min-height: 0; padding: 96px 16px 64px; }
+}
+@media (max-width: 540px) {
+  .hero-title { font-size: 28px; }
+  .spec-val { font-size: 26px; }
+  .energy h2, .ds-intro h2, .cat-head h2 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Nav (over dark hero) ===== -->
+<header class="nav over-dark" id="topNav">
+  <div class="nav-inner">
+    <a class="wordmark" href="#">T E S L A</a>
+    <nav class="nav-mid">
+      <button class="nav-btn">Vehicles</button>
+      <button class="nav-btn">Energy</button>
+      <button class="nav-btn">Charging</button>
+      <button class="nav-btn">Discover</button>
+      <button class="nav-btn">Shop</button>
+    </nav>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="Help">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.7 1.5c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12" y2="17"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO 1 — dusk cinematic ===== -->
+<section class="hero">
+  <div class="hero-bg dusk"></div>
+
+  <!-- carousel arrows -->
+  <button class="carousel-arrow left" aria-label="Previous">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+  </button>
+  <button class="carousel-arrow right" aria-label="Next">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+  </button>
+
+  <div class="hero-top">
+    <div class="hero-eyebrow">0% APR Available</div>
+    <h1 class="hero-title">Model S</h1>
+    <p class="hero-sub">From $74,990 · <a href="#">After Estimated Savings</a></p>
+  </div>
+
+  <!-- car stage (SVG silhouette) -->
+  <div class="car-stage" aria-hidden="true">
+    <svg viewBox="0 0 960 220" width="100%">
+      <defs>
+        <linearGradient id="carBody" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#dde3ec"/>
+          <stop offset="0.55" stop-color="#8a96ab"/>
+          <stop offset="1" stop-color="#2a3140"/>
+        </linearGradient>
+        <linearGradient id="carGlass" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#1f2638"/>
+          <stop offset="1" stop-color="#0e131e"/>
+        </linearGradient>
+      </defs>
+      <!-- body -->
+      <path d="M60,160 C100,120 200,90 320,80 C440,70 560,70 660,90 C760,108 830,128 880,150 C905,160 920,170 920,180 C920,190 900,200 870,200 L80,200 C50,200 40,190 40,180 C40,172 48,168 60,160 Z" fill="url(#carBody)"/>
+      <!-- glass -->
+      <path d="M250,100 C320,80 480,76 580,86 C640,92 690,100 720,120 L640,138 L300,138 L260,118 Z" fill="url(#carGlass)"/>
+      <!-- bottom skirt -->
+      <path d="M60,180 L920,180 L900,200 L80,200 Z" fill="#0a0d14"/>
+      <!-- wheels -->
+      <circle cx="220" cy="195" r="32" fill="#0a0d14"/>
+      <circle cx="220" cy="195" r="20" fill="#2a2e38"/>
+      <circle cx="220" cy="195" r="8" fill="#0a0d14"/>
+      <circle cx="740" cy="195" r="32" fill="#0a0d14"/>
+      <circle cx="740" cy="195" r="20" fill="#2a2e38"/>
+      <circle cx="740" cy="195" r="8" fill="#0a0d14"/>
+      <!-- headlight glint -->
+      <ellipse cx="880" cy="135" rx="18" ry="4" fill="#fff" opacity="0.85"/>
+      <ellipse cx="880" cy="142" rx="22" ry="3" fill="#3E6AE1" opacity="0.7"/>
+    </svg>
+    <div class="car-shadow"></div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#">Order Now</a>
+      <a class="btn btn-on-dark-secondary" href="#">View Inventory</a>
+    </div>
+    <div class="carousel-dots" aria-label="Slide indicators">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HERO 2 — Model Y studio (light) ===== -->
+<section class="full-section light">
+  <div class="hero-top">
+    <h1 class="hero-title dark">Model Y</h1>
+    <p class="hero-sub dark">From $44,990 · After Estimated Savings</p>
+  </div>
+
+  <div class="studio-stage" aria-hidden="true">
+    <svg viewBox="0 0 1100 280" width="100%">
+      <defs>
+        <linearGradient id="suvBody" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#f1f3f6"/>
+          <stop offset="0.5" stop-color="#c8cdd6"/>
+          <stop offset="1" stop-color="#5a6172"/>
+        </linearGradient>
+        <linearGradient id="suvGlass" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#3a4356"/>
+          <stop offset="1" stop-color="#1a1f2c"/>
+        </linearGradient>
+      </defs>
+      <!-- body -->
+      <path d="M80,200 C120,150 240,100 380,90 C520,80 660,80 780,100 C880,118 970,140 1020,170 C1050,190 1060,210 1060,225 L40,225 C40,215 50,205 80,200 Z" fill="url(#suvBody)"/>
+      <!-- glass -->
+      <path d="M280,110 C360,90 540,86 660,96 C740,104 800,114 830,140 L730,160 L320,160 L290,138 Z" fill="url(#suvGlass)"/>
+      <!-- skirt -->
+      <path d="M40,210 L1060,210 L1040,235 L60,235 Z" fill="#171a20"/>
+      <!-- wheels -->
+      <circle cx="260" cy="225" r="40" fill="#171a20"/>
+      <circle cx="260" cy="225" r="26" fill="#3a414f"/>
+      <circle cx="260" cy="225" r="10" fill="#171a20"/>
+      <circle cx="860" cy="225" r="40" fill="#171a20"/>
+      <circle cx="860" cy="225" r="26" fill="#3a414f"/>
+      <circle cx="860" cy="225" r="10" fill="#171a20"/>
+      <!-- highlight stripe -->
+      <path d="M120,170 C300,135 700,130 920,160" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none"/>
+    </svg>
+    <div class="studio-floor"></div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="specs">
+      <div class="spec"><div class="spec-val">320 <sup>mi</sup></div><div class="spec-label">Range (EPA est.)</div></div>
+      <div class="spec"><div class="spec-val">3.5 <sup>s</sup></div><div class="spec-label">0–60 mph</div></div>
+      <div class="spec"><div class="spec-val">155 <sup>mph</sup></div><div class="spec-label">Top Speed</div></div>
+      <div class="spec"><div class="spec-val">$0 <sup></sup></div><div class="spec-label">Down at Signing</div></div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#">Order Now</a>
+      <a class="btn btn-secondary" href="#">Demo Drive</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Category cards (Sport Sedan / Midsize SUV / Compact / Premium) ===== -->
+<section class="cat-section">
+  <div class="cat-head">
+    <h2>Every model, one philosophy.</h2>
+    <p>From sport sedans to family SUVs, every Tesla shares the same uncompromised electric drivetrain, the same minimal interior, the same software that quietly improves itself.</p>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card cat-img-1">
+      <span class="cat-label">Sport Sedan</span>
+      <div class="cat-meta"><strong>Model S</strong><span class="cat-cta">Learn more →</span></div>
+    </div>
+    <div class="cat-card small cat-img-2">
+      <span class="cat-label">Midsize SUV</span>
+      <div class="cat-meta"><strong>Model Y</strong><span class="cat-cta">Order →</span></div>
+    </div>
+    <div class="cat-card small cat-img-3">
+      <span class="cat-label">Performance</span>
+      <div class="cat-meta"><strong>Model 3</strong><span class="cat-cta">Configure →</span></div>
+    </div>
+    <div class="cat-card cat-img-4">
+      <span class="cat-label">Premium SUV</span>
+      <div class="cat-meta"><strong>Model X</strong><span class="cat-cta">Learn more →</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Energy / Powerwall ===== -->
+<section class="energy">
+  <div class="energy-inner">
+    <div>
+      <h2>Power your home with sun.</h2>
+      <p>Solar panels and Powerwall work together day and night to power your home with clean energy. Pair with the Tesla app to see exactly where every watt comes from and where it goes.</p>
+      <div class="energy-actions">
+        <a class="btn btn-primary" href="#">Order Powerwall</a>
+        <a class="btn btn-secondary" href="#">Learn More</a>
+      </div>
+    </div>
+    <div class="energy-visual" aria-hidden="true">
+      <svg viewBox="0 0 320 220" fill="none">
+        <!-- house silhouette -->
+        <path d="M40,180 L40,110 L160,40 L280,110 L280,180 Z" fill="rgba(255,255,255,0.92)"/>
+        <rect x="140" y="135" width="40" height="45" fill="#171a20"/>
+        <rect x="70" y="120" width="30" height="22" fill="#3E6AE1"/>
+        <rect x="220" y="120" width="30" height="22" fill="#3E6AE1"/>
+        <!-- powerwall -->
+        <rect x="260" y="100" width="22" height="80" rx="3" fill="#171a20"/>
+        <rect x="263" y="106" width="16" height="4" rx="1" fill="#3E6AE1"/>
+        <!-- sun -->
+        <circle cx="60" cy="50" r="14" fill="#ffd28a"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM REFERENCE (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="ds-wrap">
+    <div class="ds-intro">
+      <div>
+        <div class="ds-eyebrow">Design System Reference</div>
+        <h2>Radical subtraction. One blue. All else white.</h2>
+        <p>Tesla's interface earns its calm through omission — no shadows, no gradients, no decorative color. Universal Sans, one accent blue, and 4px corners. Below: the tokens behind the silence.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.tesla.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A monochrome-plus-one palette: a single Electric Blue carries every primary interaction, six grays carry hierarchy, white carries everything else. Photography supplies the emotional color.</p>
+
+      <div class="ds-caption">Primary</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#3E6AE1"></div><div class="meta"><div class="name">Electric Blue</div><div class="val">#3E6AE1</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #eee"></div><div class="meta"><div class="name">Pure White</div><div class="val">#FFFFFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F4F4F4"></div><div class="meta"><div class="name">Light Ash</div><div class="val">#F4F4F4</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#171A20"></div><div class="meta"><div class="name">Carbon Dark</div><div class="val">#171A20</div></div></div>
+      </div>
+
+      <div class="ds-caption">Text Hierarchy</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#171A20"></div><div class="meta"><div class="name">Carbon Dark</div><div class="val">#171A20</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#393C41"></div><div class="meta"><div class="name">Graphite</div><div class="val">#393C41</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5C5E62"></div><div class="meta"><div class="name">Pewter</div><div class="val">#5C5E62</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8E8E8E"></div><div class="meta"><div class="name">Silver Fog</div><div class="val">#8E8E8E</div></div></div>
+      </div>
+
+      <div class="ds-caption">Borders & Surfaces</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#EEEEEE"></div><div class="meta"><div class="name">Cloud Gray</div><div class="val">#EEEEEE</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D0D1D2"></div><div class="meta"><div class="name">Pale Silver</div><div class="val">#D0D1D2</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(255,255,255,0.75);border:1px solid #eee"></div><div class="meta"><div class="name">Frosted Glass</div><div class="val">rgba(255,255,255,.75)</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(128,128,128,0.65)"></div><div class="meta"><div class="name">Overlay</div><div class="val">rgba(128,128,128,.65)</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Universal Sans Display + Universal Sans Text (substituted with Inter). Only weights 400 and 500. Letter-spacing stays at "normal" everywhere — Tesla trusts the typeface to speak for itself.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display-hero</td><td class="sample" style="font-size:40px;font-weight:500;line-height:1.2">Model Y</td><td>40px / 2.50rem</td><td>500</td><td>Universal Sans Display</td></tr>
+          <tr><td class="token">--promo</td><td class="sample" style="font-size:22px;font-weight:400;color:#3E6AE1">0% APR Available</td><td>22px / 1.38rem</td><td>400</td><td>Blue promo on hero</td></tr>
+          <tr><td class="token">--product-name</td><td class="sample" style="font-size:17px;font-weight:500">Model S Plaid</td><td>17px / 1.06rem</td><td>500</td><td>Nav panel model names</td></tr>
+          <tr><td class="token">--category-label</td><td class="sample" style="font-size:16px;font-weight:500">Sport Sedan</td><td>16px</td><td>500</td><td>Card overlay label</td></tr>
+          <tr><td class="token">--nav-item</td><td class="sample" style="font-size:14px;font-weight:500">Vehicles</td><td>14px / 0.88rem</td><td>500</td><td>Primary nav</td></tr>
+          <tr><td class="token">--button-label</td><td class="sample" style="font-size:14px;font-weight:500">Order Now</td><td>14px</td><td>500</td><td>CTA label</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:14px;font-weight:400;color:#393C41">Body text in Graphite at 14/400</td><td>14px / 0.88rem</td><td>400</td><td>Default copy</td></tr>
+          <tr><td class="token">--sub-link</td><td class="sample" style="font-size:14px;font-weight:400;color:#5C5E62">Learn · Order · Experience</td><td>14px</td><td>400</td><td>Tertiary links in Pewter</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">A minimal vocabulary: 4px on every interactive surface, ~12px on category cards, 50% on carousel dots. Sharp corners are the default everywhere else.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Sharp</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">~12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Dot</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">The full vocabulary: Primary blue CTA paired with secondary white, transparent nav buttons, and a transparent text-link variant. No shadows, no scale animations — every transition is a color shift over 0.33s.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" style="min-width:0" href="#">Order Now</a>
+            <a class="btn btn-secondary" style="min-width:0;border:1px solid #eee" href="#">View Inventory</a>
+            <button class="nav-btn" style="background:rgba(0,0,0,0.04);padding:6px 16px;min-height:36px;justify-content:flex-start">Vehicles</button>
+            <a href="#" style="font-size:14px;font-weight:400;color:#5C5E62;text-decoration:underline">Learn more</a>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button class="carousel-arrow" style="position:static;transform:none;width:36px;height:36px;border:1px solid #eee">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+              </button>
+              <span style="font-size:12px;color:var(--ink-tert)">Carousel control</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="ds-input" placeholder="Enter zip code" />
+            <input class="ds-input" placeholder="What's Dog Mode?" />
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+              <span class="ds-tag ds-tag-blue">New</span>
+              <span class="ds-tag ds-tag-outline">Pre-Owned</span>
+              <span class="ds-tag ds-tag-dark">Inventory</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;margin-top:6px">
+              <div style="display:flex;gap:8px;align-items:center">
+                <span class="dot active" style="background:#171A20"></span>
+                <span class="dot" style="background:#D0D1D2"></span>
+                <span class="dot" style="background:#D0D1D2"></span>
+              </div>
+              <span style="font-size:12px;color:var(--ink-tert)">Carousel indicator</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards & Surfaces</h5>
+          <div class="ds-card-stack">
+            <div style="aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg,#6e8aae,#2a3a5c);position:relative;overflow:hidden">
+              <span style="position:absolute;top:14px;left:18px;color:#fff;font-size:14px;font-weight:500">Sport Sedan</span>
+              <span style="position:absolute;bottom:14px;left:18px;color:#fff;font-size:18px;font-weight:500">Model S</span>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--cloud);border-radius:4px;padding:18px">
+              <div style="font-size:14px;font-weight:500;margin-bottom:4px">Model 3</div>
+              <div style="font-size:13px;color:var(--ink-tert);margin-bottom:14px">From $42,990 · After Estimated Savings</div>
+              <div style="display:flex;gap:18px">
+                <a href="#" style="font-size:13px;font-weight:400;color:#5C5E62;text-decoration:underline">Learn</a>
+                <a href="#" style="font-size:13px;font-weight:400;color:#5C5E62;text-decoration:underline">Order</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== Chat bar (persistent) ===== -->
+<div class="chatbar">
+  <div class="chat-inner">
+    <div class="chat-input">
+      <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <span class="chat-label">Ask a Question</span>
+      <span class="chat-placeholder">— What's Dog Mode?</span>
+    </div>
+    <button class="chat-send" aria-label="Send">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+    <a class="chat-cta" href="#">
+      <svg class="chat-cta-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Schedule a Drive Today
+    </a>
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="foot-inner">
+    <span>Design Study · Tribute to Tesla's visual language</span>
+    <a href="#">Tesla © 2026</a>
+    <a href="#">Privacy &amp; Legal</a>
+    <a href="#">Vehicle Recalls</a>
+    <a href="#">Contact</a>
+    <a href="#">News</a>
+    <a href="#">Get Updates</a>
+    <a href="#">Locations</a>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.tesla.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+<script>
+  // Nav scroll behavior: switch from over-dark transparent to scrolled frosted
+  (function(){
+    var nav = document.getElementById('topNav');
+    function onScroll(){
+      var y = window.scrollY || window.pageYOffset;
+      if (y > window.innerHeight - 80) {
+        nav.classList.add('scrolled');
+        nav.classList.remove('over-dark');
+      } else {
+        nav.classList.remove('scrolled');
+        nav.classList.add('over-dark');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
+
+</body>
+</html>

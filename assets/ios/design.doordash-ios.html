@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DoorDash — iOS design spec</title>
+<meta name="description" content="DoorDash iOS app design reference. White canvas, signature brand red, restaurant feed, group orders, live driver-tracking map." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#fff; --surface-1:#FAFAFA; --surface-2:#F4F4F4; --surface-tint:#FFE4E1;
+  --red:#FF3008; --red-deep:#D81F00; --red-soft:#FF7A60; --red-tint:#FFEEEA;
+  --ink:#191919; --ink-soft:#3A3A3A; --ink-muted:#767676; --ink-dim:#A6A6A6;
+  --border:#EAEAEA; --border-soft:#F2F2F2;
+  --confirm:#00B37E; --warning:#FFB020; --map-bg:#E9F0EA;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.3px}
+.brand-mark{width:34px;height:34px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-weight:900;font-style:italic;font-size:18px;font-family:var(--font-ui);transform:skewX(-8deg)}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:600;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.03)}
+.btn-primary{background:var(--red);color:#fff;padding:13px 24px;border-radius:var(--r-pill)}
+.btn-primary:hover{background:var(--red-deep)}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:11px 18px;border-radius:var(--r-pill)}
+.btn-outline{background:transparent;border:1.5px solid var(--ink);color:var(--ink);padding:11px 18px;border-radius:var(--r-pill)}
+.btn-light{background:#000;color:#fff;padding:12px 22px;border-radius:var(--r-pill)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#FFF5F2 50%,#fff 100%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(255,48,8,.08),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-pill);background:var(--red-tint);color:var(--red);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:1;letter-spacing:-2px;font-weight:900;margin-bottom:22px}
+.hero h1 .gradient-word{color:var(--red);font-style:italic}
+.hero p{font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(255,48,8,.18),0 0 0 1px rgba(0,0,0,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar.light{color:#fff}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.97}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.97}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+/* ========== SCREENS ========== */
+.scr{position:absolute;inset:0;font-size:11px;display:flex;flex-direction:column;background:#fff;color:var(--ink)}
+
+/* HOME (feed) */
+.dd-home-top{padding:54px 14px 8px;background:#fff;display:flex;align-items:center;justify-content:space-between}
+.dd-loc-chip{font-size:13px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:4px}
+.dd-loc-chip .city{}
+.dd-loc-chip .when{font-weight:600;color:var(--ink-muted);font-size:11px;margin-left:6px}
+.dd-loc-chip svg{width:14px;height:14px;fill:var(--ink)}
+.dd-top-actions{display:flex;gap:8px}
+.dd-top-actions .ic{width:32px;height:32px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center}
+.dd-top-actions .ic svg{width:14px;height:14px;fill:var(--ink)}
+.dd-chip-row{padding:6px 14px 10px;display:flex;gap:6px;overflow:hidden}
+.dd-chip{padding:6px 11px;border-radius:var(--r-pill);background:var(--surface-2);font-size:11px;font-weight:700;color:var(--ink);white-space:nowrap}
+.dd-chip.active{background:var(--ink);color:#fff}
+.dd-banner{margin:0 14px 14px;border-radius:14px;background:linear-gradient(120deg,var(--red),var(--red-deep));color:#fff;padding:14px;display:flex;align-items:center;justify-content:space-between}
+.dd-banner .t{font-size:13px;font-weight:800;letter-spacing:-.2px;line-height:1.2}
+.dd-banner .s{font-size:10.5px;color:rgba(255,255,255,.85);margin-top:3px}
+.dd-banner .ic{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;flex-shrink:0}
+.dd-banner .ic svg{width:18px;height:18px;fill:#fff}
+.dd-feed{flex:1;padding:0 14px 70px;overflow:hidden;display:flex;flex-direction:column;gap:14px}
+.dd-rest{border-radius:14px;overflow:hidden;background:#fff;position:relative}
+.dd-rest .photo{aspect-ratio:16/9;position:relative}
+.dd-rest .photo .heart{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center}
+.dd-rest .photo .heart svg{width:14px;height:14px;fill:none;stroke:var(--ink);stroke-width:2}
+.dd-rest .photo .badge{position:absolute;left:10px;top:10px;background:#fff;padding:4px 8px;border-radius:6px;font-size:9.5px;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:.4px}
+.dd-rest .meta{padding:8px 4px 0}
+.dd-rest .nm{font-size:14px;font-weight:700;color:var(--ink);line-height:1.2}
+.dd-rest .sub-row{font-size:10.5px;color:var(--ink-muted);margin-top:3px;display:flex;gap:5px;align-items:center}
+.dd-rest .sub-row .star{color:var(--ink);font-weight:700}
+.dd-rest .sub-row .dot-sep{color:var(--border)}
+.dd-rest .tags{display:flex;gap:5px;margin-top:5px}
+.dd-rest .tags span{font-size:9.5px;color:var(--ink-muted)}
+
+/* photo gradients */
+.fp-burger{background:radial-gradient(circle at 35% 35%,#f9c97c 0%,#b76a16 40%,#5c3209 100%)}
+.fp-poke{background:radial-gradient(circle at 30% 30%,#f9d0c6 0%,#df6244 50%,#7a2410 100%)}
+.fp-ramen{background:linear-gradient(160deg,#f4dab3 0%,#c4882f 50%,#5e3a0a 100%)}
+.fp-pizza{background:radial-gradient(circle at 40% 35%,#f7c570 0%,#c4441a 55%,#5c1a08 100%)}
+
+/* RESTAURANT MENU */
+.dd-r-hero{height:140px;position:relative}
+.dd-r-hero .back{position:absolute;top:54px;left:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center}
+.dd-r-hero .back svg{width:14px;height:14px;fill:var(--ink)}
+.dd-r-hero .right{position:absolute;top:54px;right:14px;display:flex;gap:6px}
+.dd-r-hero .right .ic{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center}
+.dd-r-hero .right .ic svg{width:14px;height:14px;fill:var(--ink)}
+.dd-r-info{padding:12px 14px 10px;border-bottom:1px solid var(--border)}
+.dd-r-info .nm{font-size:18px;font-weight:800;letter-spacing:-.3px;color:var(--ink)}
+.dd-r-info .row{font-size:11px;color:var(--ink-muted);margin-top:3px;display:flex;gap:6px;align-items:center}
+.dd-r-info .row .star{color:var(--ink);font-weight:700}
+.dd-r-info .group-pill{margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:var(--red-tint);color:var(--red);padding:6px 12px;border-radius:var(--r-pill);font-size:11px;font-weight:700}
+.dd-r-info .group-pill svg{width:12px;height:12px;fill:var(--red)}
+.dd-r-section{padding:14px 14px 10px}
+.dd-r-section .h{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:8px}
+.dd-r-section .item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-soft)}
+.dd-r-section .item .meta{flex:1;min-width:0}
+.dd-r-section .item .nm{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+.dd-r-section .item .ds{font-size:10.5px;color:var(--ink-muted);margin-top:3px;line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.dd-r-section .item .pr{font-size:11px;font-weight:700;color:var(--ink);margin-top:4px;font-feature-settings:"tnum"}
+.dd-r-section .item .pic{width:60px;height:60px;border-radius:8px;flex-shrink:0}
+
+/* ORDER TRACKING */
+.dd-map{height:200px;background:var(--map-bg);position:relative;overflow:hidden}
+.dd-map::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(120deg,transparent 30%,rgba(0,0,0,.06) 31%,transparent 32%),
+  linear-gradient(70deg,transparent 50%,rgba(0,0,0,.05) 51%,transparent 52%),
+  linear-gradient(150deg,transparent 65%,rgba(0,0,0,.05) 66%,transparent 67%)}
+.dd-map .route{position:absolute;top:60px;left:20px;width:220px;height:80px;border:none}
+.dd-map svg.path{position:absolute;top:50px;left:0;width:100%;height:120px}
+.dd-driver{position:absolute;top:90px;left:120px;width:34px;height:34px;border-radius:50%;background:var(--red);display:grid;place-items:center;box-shadow:0 6px 16px rgba(255,48,8,.45);z-index:5}
+.dd-driver svg{width:18px;height:18px;fill:#fff}
+.dd-pin{position:absolute;width:14px;height:14px;border-radius:50%;background:#000;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25);z-index:4}
+.dd-pin.start{top:62px;left:24px}
+.dd-pin.end{top:130px;right:30px}
+.dd-back-fab{position:absolute;top:54px;left:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;z-index:6}
+.dd-back-fab svg{width:14px;height:14px;fill:var(--ink)}
+.dd-track-body{flex:1;padding:14px 16px 70px;background:#fff;overflow:hidden}
+.dd-track-eta{font-size:22px;font-weight:800;letter-spacing:-.3px;color:var(--ink)}
+.dd-track-sub{font-size:11px;color:var(--ink-muted);margin-top:3px}
+.dd-timeline{margin-top:14px;display:flex;align-items:center;gap:0;padding:6px 0}
+.dd-timeline .step{flex:1;display:flex;flex-direction:column;align-items:center;font-size:8.5px;color:var(--ink-muted);font-weight:600;text-align:center;line-height:1.2}
+.dd-timeline .step .dot{width:14px;height:14px;border-radius:50%;background:var(--border);margin-bottom:4px}
+.dd-timeline .step.done .dot{background:var(--red)}
+.dd-timeline .step.active .dot{background:var(--red);box-shadow:0 0 0 4px var(--red-tint)}
+.dd-timeline .step.active{color:var(--red);font-weight:700}
+.dd-timeline .line{height:2px;background:var(--border);flex:1;margin-bottom:18px}
+.dd-timeline .line.done{background:var(--red)}
+.dd-driver-card{margin-top:16px;border:1px solid var(--border);border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px}
+.dd-driver-card .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FFB020,#FF7A60);display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;flex-shrink:0}
+.dd-driver-card .meta{flex:1}
+.dd-driver-card .nm{font-size:13px;font-weight:700;color:var(--ink)}
+.dd-driver-card .sub{font-size:10.5px;color:var(--ink-muted);margin-top:2px}
+.dd-driver-card .actions{display:flex;gap:6px}
+.dd-driver-card .actions .ic{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center}
+.dd-driver-card .actions .ic svg{width:14px;height:14px;fill:var(--ink)}
+
+/* tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:#fff;border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:flex-start;padding:9px 10px 0;z-index:10}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-muted);font-size:9px;font-weight:600}
+.tab.active{color:var(--red)}
+.tab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}
+.tab.active svg{fill:currentColor;stroke:currentColor}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--red);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.55;max-width:580px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:16px;padding:28px;border:1px solid var(--border)}
+.feat:hover{background:var(--red-tint)}
+.feat .feat-ic{width:38px;height:38px;border-radius:50%;background:var(--red-tint);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--red)}
+.feat h3{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-soft);line-height:1.6}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:1px 6px;border-radius:3px;color:var(--red);border:1px solid var(--border)}
+
+/* iOS-specific feature row */
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.65;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-1);padding:5px 10px;border-radius:4px;color:var(--red);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--surface-1);border-radius:16px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* Live tracking visual */
+.lt-stage{width:300px;display:flex;flex-direction:column;gap:14px}
+.lt-island{width:240px;height:38px;background:#000;border-radius:999px;display:flex;align-items:center;padding:0 8px;gap:8px;margin:0 auto;box-shadow:0 14px 36px rgba(0,0,0,.3)}
+.lt-island .av{width:24px;height:24px;border-radius:50%;background:var(--red);display:grid;place-items:center}
+.lt-island .av svg{width:12px;height:12px;fill:#fff}
+.lt-island .meta{flex:1;color:#fff;font-size:10.5px;line-height:1.1}
+.lt-island .meta b{font-weight:700;display:block;font-size:11px}
+.lt-island .meta .sub{color:rgba(255,255,255,.7);font-size:9.5px}
+.lt-island .eta{color:var(--red);font-weight:800;font-size:13px;font-feature-settings:"tnum"}
+.lt-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px}
+.lt-card .lt-row{display:flex;align-items:center;gap:0;margin-bottom:10px}
+.lt-card .dot{width:12px;height:12px;border-radius:50%;background:var(--red)}
+.lt-card .line{flex:1;height:2px;background:var(--red);margin:0 1px}
+.lt-card .dot-future{background:var(--border)}
+.lt-card .line-future{background:var(--border)}
+.lt-card .lt-status{font-size:13px;font-weight:800;color:var(--red)}
+.lt-card .lt-sub{font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* DashPass visual */
+.dp-card{width:300px;background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);border-radius:18px;padding:22px;color:#fff;position:relative;overflow:hidden}
+.dp-card::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.1)}
+.dp-card .badge{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;opacity:.9}
+.dp-card .title{font-size:24px;font-weight:900;letter-spacing:-.6px;margin-top:6px;line-height:1.05}
+.dp-card .perks{margin-top:14px;display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:600}
+.dp-card .perks span{display:flex;align-items:center;gap:6px}
+.dp-card .cta{margin-top:18px;background:#fff;color:var(--red);padding:10px 18px;border-radius:var(--r-pill);font-weight:800;font-size:13px;display:inline-flex}
+
+/* Group order visual */
+.go-stack{width:300px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
+.go-h{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.go-s{font-size:11px;color:var(--ink-muted);margin-bottom:14px}
+.go-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border-soft)}
+.go-row .av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:11px;flex-shrink:0}
+.go-row .nm{font-size:12px;font-weight:700;color:var(--ink);flex:1}
+.go-row .cart{font-size:11px;color:var(--ink-muted);font-feature-settings:"tnum"}
+.go-link{margin-top:14px;background:var(--red-tint);color:var(--red);padding:10px 12px;border-radius:8px;font-family:var(--font-mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
+
+/* ========== DESIGN SYSTEM SECTION (Part B) ========== */
+.ds-section{padding:120px 0;background:var(--surface-1);border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:580px;line-height:1.55}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--red);border:1px solid var(--red);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;background:#fff}
+.ds-source:hover{background:var(--red-tint)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.55;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:12px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px;border:1px solid var(--border)}
+.ds-sw .name{font-size:12px;font-weight:700;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:var(--red)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,var(--red),var(--red-deep));margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-circle{width:54px;height:54px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 16px rgba(255,48,8,.35)}
+.btn-circle svg{width:24px;height:24px;fill:currentColor}
+.btn-circle-sm{width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center}
+.btn-circle-sm svg{width:18px;height:18px;fill:currentColor}
+.btn-ghost-circle{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--ink);color:var(--ink);background:#fff;display:grid;place-items:center}
+.btn-ghost-circle svg{width:18px;height:18px;fill:currentColor}
+.input-pill{background:var(--surface-2);border:0;border-radius:var(--r-pill);padding:11px 16px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:.3px;text-transform:uppercase}
+.tag-dp{background:var(--red);color:#fff}
+.tag-new{background:#E8F8E8;color:var(--confirm)}
+.tag-deal{background:#FFF6E0;color:#876818}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:12px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:20px;font-weight:800;margin-top:6px;color:var(--ink);letter-spacing:-.3px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.45}
+
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.55}
+.foot a{color:var(--red);font-weight:700}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:var(--red);border:1px solid var(--red-deep);color:#fff;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 8px 24px rgba(255,48,8,.35)}
+.float-link:hover{background:var(--red-deep)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">D</span>
+      DoorDash <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Sign In</a>
+      <a class="btn btn-primary" href="#">Get DashPass</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Food, fast — and a map that <span class="gradient-word">moves with it.</span></h1>
+    <p>The DoorDash iOS app, dissected. White canvas. One brand red that means "go." Live Activity that follows your driver from kitchen to door.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- RESTAURANT MENU -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="dd-r-hero fp-poke">
+              <div class="back"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6V6z"/></svg></div>
+              <div class="right">
+                <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="2" fill="none"/></svg></div>
+                <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+              </div>
+            </div>
+            <div class="dd-r-info">
+              <div class="nm">Aloha Poke House</div>
+              <div class="row"><span class="star">★ 4.7</span><span>(1.2k+)</span><span>·</span><span>25–35 min</span><span>·</span><span>$$</span></div>
+              <div class="group-pill"><svg viewBox="0 0 24 24"><path d="M9 11a4 4 0 100-8 4 4 0 000 8zm6 2a3 3 0 100-6 3 3 0 000 6zM2 21a7 7 0 0114 0M14 21a5 5 0 0110 0"/></svg>Start Group Order</div>
+            </div>
+            <div class="dd-r-section" style="overflow:hidden;flex:1;padding-bottom:70px">
+              <div class="h">Most Popular</div>
+              <div class="item">
+                <div class="meta">
+                  <div class="nm">Spicy Tuna Bowl</div>
+                  <div class="ds">Sushi-grade tuna, sriracha aioli, edamame, sesame.</div>
+                  <div class="pr">€12.50</div>
+                </div>
+                <div class="pic fp-poke"></div>
+              </div>
+              <div class="item">
+                <div class="meta">
+                  <div class="nm">Salmon Yuzu Bowl</div>
+                  <div class="ds">Cured salmon, yuzu ponzu, avocado, pickled ginger.</div>
+                  <div class="pr">€13.80</div>
+                </div>
+                <div class="pic fp-burger"></div>
+              </div>
+              <div class="h" style="margin-top:14px">Bowls</div>
+              <div class="item">
+                <div class="meta">
+                  <div class="nm">Build Your Own</div>
+                  <div class="ds">Choose base, protein, mix-ins, and sauce.</div>
+                  <div class="pr">From €11.00</div>
+                </div>
+                <div class="pic fp-ramen"></div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 7h16v12H4zm5 4h6"/></svg>Grocery</div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 5h14v3H5zm0 6h14v3H5zm0 6h10v3H5z"/></svg>Orders</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0116 0"/></svg>Account</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Restaurant Menu</div>
+      </div>
+
+      <!-- HOME FEED (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="dd-home-top">
+              <div class="dd-loc-chip">
+                <span class="city">Lisbon</span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                <span class="when">· ASAP</span>
+              </div>
+              <div class="dd-top-actions">
+                <div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+            <div class="dd-chip-row">
+              <span class="dd-chip active">Fastest</span>
+              <span class="dd-chip">DashPass</span>
+              <span class="dd-chip">Top Rated</span>
+              <span class="dd-chip">Under €15</span>
+              <span class="dd-chip">Pickup</span>
+            </div>
+            <div class="dd-banner">
+              <div>
+                <div class="t">Free delivery on €15+</div>
+                <div class="s">DashPass members · today only</div>
+              </div>
+              <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h13l-3-3m3 3l-3 3"/></svg></div>
+            </div>
+            <div class="dd-feed">
+              <div class="dd-rest">
+                <div class="photo fp-burger">
+                  <div class="badge">DashPass</div>
+                  <div class="heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+                </div>
+                <div class="meta">
+                  <div class="nm">Burger Bar Lisboa</div>
+                  <div class="sub-row"><span class="star">★ 4.8</span><span class="dot-sep">·</span><span>(2.1k)</span><span class="dot-sep">·</span><span>20–30 min</span><span class="dot-sep">·</span><span>$$</span></div>
+                  <div class="tags"><span>Burgers</span><span>·</span><span>American</span></div>
+                </div>
+              </div>
+              <div class="dd-rest">
+                <div class="photo fp-poke">
+                  <div class="badge">5% off</div>
+                  <div class="heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+                </div>
+                <div class="meta">
+                  <div class="nm">Aloha Poke House</div>
+                  <div class="sub-row"><span class="star">★ 4.7</span><span class="dot-sep">·</span><span>(1.2k)</span><span class="dot-sep">·</span><span>25–35 min</span><span class="dot-sep">·</span><span>$$</span></div>
+                  <div class="tags"><span>Poke</span><span>·</span><span>Hawaiian</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 7h16v12H4zm5 4h6"/></svg>Grocery</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 5h14v3H5zm0 6h14v3H5zm0 6h10v3H5z"/></svg>Orders</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0116 0"/></svg>Account</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Restaurant Feed</div>
+      </div>
+
+      <!-- ORDER TRACKING -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="dd-map" style="margin-top:0;padding-top:0">
+              <svg class="path" viewBox="0 0 280 120" preserveAspectRatio="none">
+                <path d="M24 62 Q 90 30 140 80 T 250 130" stroke="#FF3008" stroke-width="3" stroke-dasharray="6 5" fill="none" stroke-linecap="round"/>
+              </svg>
+              <div class="dd-pin start"></div>
+              <div class="dd-pin end"></div>
+              <div class="dd-driver"><svg viewBox="0 0 24 24"><path d="M4 12h12l4 4-2 4H6l-2-4V12zm2-7l8 0v7H6zm0 0L4 12"/></svg></div>
+              <div class="dd-back-fab"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6V6z"/></svg></div>
+            </div>
+            <div class="dd-track-body">
+              <div class="dd-track-eta">ETA · 12 min</div>
+              <div class="dd-track-sub">Aloha Poke House · 2 items</div>
+              <div class="dd-timeline">
+                <div class="step done"><div class="dot"></div>Placed</div>
+                <div class="line done"></div>
+                <div class="step done"><div class="dot"></div>Confirmed</div>
+                <div class="line done"></div>
+                <div class="step active"><div class="dot"></div>Preparing</div>
+                <div class="line"></div>
+                <div class="step"><div class="dot"></div>On the way</div>
+                <div class="line"></div>
+                <div class="step"><div class="dot"></div>Delivered</div>
+              </div>
+              <div class="dd-driver-card">
+                <div class="av">M</div>
+                <div class="meta">
+                  <div class="nm">Miguel · Your Dasher</div>
+                  <div class="sub">★ 4.9 · Toyota Yaris · 12-AB-34</div>
+                </div>
+                <div class="actions">
+                  <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H8l-4 4z"/></svg></div>
+                  <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 4l3 5-2 2a12 12 0 006 6l2-2 5 3-2 4a18 18 0 01-15-15l3-3z"/></svg></div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 7h16v12H4zm5 4h6"/></svg>Grocery</div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 5h14v3H5zm0 6h14v3H5zm0 6h10v3H5z"/></svg>Orders</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0116 0"/></svg>Account</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Order Tracking</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One unmistakable red.</h2>
+      <p>Every DoorDash screen earns its position on an iPhone through the same rules — white feed, full-bleed restaurant hero photos, red CTAs and badges, and a map that follows you out the door.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>Home Feed</h3>
+        <p>Location chip top-left ("Lisbon · ASAP ▾"), filter chips below, then 16:9 restaurant cards with rating dot-separator metadata. Heart toggle top-right; DashPass badge top-left. Red banner anchors the top.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M5 2h14l-1 16-6 4-6-4z"/></svg></div>
+        <h3>Restaurant</h3>
+        <p>Hero photo fills the top quarter with a back-button bubble. Restaurant header carries rating + delivery time + price. "Start Group Order" sits as a pink-tinted CTA pill. Menu sections stack with thumbnails right.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0110 10c0 7-10 12-10 12S2 19 2 12A10 10 0 0112 2z"/></svg></div>
+        <h3>Tracking</h3>
+        <p>Top half is a map with the driver pin moving along a dashed red route. Bottom half is a 5-step timeline + Dasher contact card with Message/Call ghost-circles.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Live Activity</div>
+          <h3>Your driver, pinned to the lock screen.</h3>
+          <p>The moment a Dasher accepts, the Dynamic Island compacts the avatar on the left + ETA on the right. Long-press expands to a full route map. The status text updates from "Preparing" → "Picked up" → "Almost there" in real time without you opening the app.</p>
+          <p>ETA always uses tabular figures so the count down doesn't jiggle.</p>
+          <div class="ios-feat-tokens">
+            <code>ActivityKit: required</code>
+            <code>island: 240×38pt</code>
+            <code>eta: tnum</code>
+            <code>poll: 30s</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="lt-stage">
+            <div class="lt-island">
+              <div class="av"><svg viewBox="0 0 24 24"><path d="M4 12h12l4 4-2 4H6l-2-4V12zm2-7l8 0v7H6z"/></svg></div>
+              <div class="meta"><b>Miguel · 8 min</b><div class="sub">Almost at your door</div></div>
+              <div class="eta">8m</div>
+            </div>
+            <div class="lt-card">
+              <div class="lt-row">
+                <span class="dot"></span><span class="line"></span>
+                <span class="dot"></span><span class="line"></span>
+                <span class="dot"></span><span class="line line-future"></span>
+                <span class="dot dot-future"></span>
+              </div>
+              <div class="lt-status">On the way</div>
+              <div class="lt-sub">Driver picked up your order at 9:33 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual" style="background:#fff">
+          <div class="dp-card">
+            <div class="badge">DashPass</div>
+            <div class="title">$0 delivery<br/>on $15+</div>
+            <div class="perks">
+              <span>★ 5% back on eligible orders</span>
+              <span>★ No service fees on pickup</span>
+              <span>★ Cancel anytime</span>
+            </div>
+            <div class="cta">Start free month</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">DashPass Upsell</div>
+          <h3>One red gradient sells the whole subscription.</h3>
+          <p>The DashPass card is the only place DoorDash deploys a gradient — the brand red <code>#FF3008</code> bleeds into the deeper <code>#D81F00</code>, with a single decorative circle of white overlay. Sits inline in the home feed, in cart, and after every successful order.</p>
+          <p>CTA inverts to white-on-red to close the loop.</p>
+          <div class="ios-feat-tokens">
+            <code>gradient: 135deg</code>
+            <code>radius: 18pt</code>
+            <code>cta: white pill</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Group Order</div>
+          <h3>One link, four carts, zero "what do you want?"</h3>
+          <p>Tap "Start Group Order" inside any restaurant. DoorDash provisions a share URL and opens a participant tray — each person's avatar and their running cart total live in a single sheet. Host can lock the order; submission collapses into a single delivery.</p>
+          <p>Avatar colors auto-assign from a brand-safe palette (red, amber, slate, sage) — never two reds in a row.</p>
+          <div class="ios-feat-tokens">
+            <code>maxParticipants: 50</code>
+            <code>shareSheet: UIActivityViewController</code>
+            <code>haptic: success</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual" style="background:linear-gradient(140deg,#FFE4E1,#fff)">
+          <div class="go-stack">
+            <div class="go-h">Group Order · Aloha Poke</div>
+            <div class="go-s">3 friends · ends in 14 min</div>
+            <div class="go-row"><div class="av" style="background:#FF3008">J</div><div class="nm">Jiang · host</div><div class="cart">€14.20</div></div>
+            <div class="go-row"><div class="av" style="background:#FFB020">A</div><div class="nm">Ana</div><div class="cart">€11.50</div></div>
+            <div class="go-row"><div class="av" style="background:#3a5e51">M</div><div class="nm">Marco</div><div class="cart">€16.80</div></div>
+            <div class="go-row" style="border-bottom:0"><div class="av" style="background:#9D5116">R</div><div class="nm">Rita</div><div class="cart">— browsing</div></div>
+            <div class="go-link">
+              <span>doordash.app/g/xR4-9P</span>
+              <span style="background:var(--red);color:#fff;padding:4px 8px;border-radius:4px;font-size:9.5px">Share</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The whole vocabulary, in one place.</h2>
+        <p>Every token DoorDash's iOS app reaches for — surface ladder, type ramp, radius scale, components. One brand red carries the whole identity; everything else is white, gray, or food.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.doordash-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">White everywhere. Black for type. One brand red, one deeper red for gradient depth, one pink tint for soft surfaces. Confirm green only appears in success states; warning amber only on alerts.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FF3008"></div><div class="name">DoorDash Red</div><div class="val">#FF3008</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D81F00"></div><div class="name">Red Deep</div><div class="val">#D81F00</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF7A60"></div><div class="name">Red Soft</div><div class="val">#FF7A60</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFE4E1"></div><div class="name">Red Tint</div><div class="val">#FFE4E1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border:1px solid #EAEAEA"></div><div class="name">Canvas</div><div class="val">#FFFFFF</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#191919"></div><div class="name">Ink</div><div class="val">#191919</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3A3A3A"></div><div class="name">Body</div><div class="val">#3A3A3A</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#767676"></div><div class="name">Muted</div><div class="val">#767676</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#A6A6A6"></div><div class="name">Dim</div><div class="val">#A6A6A6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border:1px solid #EAEAEA"></div><div class="name">On-Red</div><div class="val">#FFFFFF</div></div>
+      </div>
+
+      <div class="ds-caption">Surface &amp; Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FAFAFA"></div><div class="name">Surface 1</div><div class="val">#FAFAFA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F4F4F4"></div><div class="name">Surface 2</div><div class="val">#F4F4F4</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EAEAEA"></div><div class="name">Border</div><div class="val">#EAEAEA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F2F2F2"></div><div class="name">Border Soft</div><div class="val">#F2F2F2</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E9F0EA"></div><div class="name">Map Base</div><div class="val">#E9F0EA</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#00B37E"></div><div class="name">Confirm</div><div class="val">#00B37E</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFB020"></div><div class="name">Warning</div><div class="val">#FFB020</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FF3008,#D81F00)"></div><div class="name">DashPass</div><div class="val">red gradient</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFF6E0"></div><div class="name">Deal Tint</div><div class="val">#FFF6E0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E8F8E8"></div><div class="name">Confirm Tint</div><div class="val">#E8F8E8</div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">TT Norms in production — Inter as the faithful sans substitute. Weights stay heavy (700 for restaurant names, 800 for hero titles). Price tags lock into tabular figures so dollar signs and decimals align across rows.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:28px;font-weight:900;letter-spacing:-.6px">Free delivery on €15+</td><td>28 / 1.75rem</td><td>900</td><td>-0.6px</td></tr>
+          <tr><td class="token">--restaurant-name</td><td class="sample" style="font-size:16px;font-weight:700">Burger Bar Lisboa</td><td>16 / 1.00rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--meta-row</td><td class="sample" style="font-size:11px;color:#767676">★ 4.8 · (2.1k) · 20–30 min · $$</td><td>11 / 0.69rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--price</td><td class="sample" style="font-size:14px;font-weight:700;font-feature-settings:'tnum'">€12.50</td><td>14 / 0.88rem</td><td>700 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--eta</td><td class="sample" style="font-size:22px;font-weight:800;color:#FF3008;font-feature-settings:'tnum'">ETA · 12 min</td><td>22 / 1.38rem</td><td>800 (tnum)</td><td>-0.3px</td></tr>
+          <tr><td class="token">--button-pill</td><td class="sample" style="font-size:14px;font-weight:700">Add to cart</td><td>14 / 0.88rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--chip</td><td class="sample" style="font-size:11px;font-weight:700">DashPass</td><td>11 / 0.69rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--tab-active</td><td class="sample" style="font-size:9px;font-weight:600;color:#FF3008">Orders</td><td>9 / 0.56rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--badge</td><td class="sample" style="font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px">DashPass</td><td>9.5 / 0.59rem</td><td>800</td><td>0.4px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Restaurant cards are 14–16px. Photos clip to 8–12px. Buttons are full pills. The driver pin is a circle. The map is full bleed — no radius at all.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Hairline</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Badge</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Item</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Photo</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:18px"></div><div class="ds-radius-label">DashPass</div><div class="ds-radius-val">18px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">∞</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Pin</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- iOS spec strip -->
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">5 tabs: Home, Search, Grocery, Orders, Account.</div></div>
+        <div class="token-cell"><div class="tk-label">Restaurant card</div><div class="tk-val">16:9</div><div class="tk-note">Photo aspect-ratio. Heart 30pt circle top-right.</div></div>
+        <div class="token-cell"><div class="tk-label">Map height</div><div class="tk-val">200pt</div><div class="tk-note">Edge-to-edge in tracking. Driver pin 34pt.</div></div>
+        <div class="token-cell"><div class="tk-label">Route stroke</div><div class="tk-val">3pt dashed</div><div class="tk-note">Red dashed line. 6-5 pattern animates.</div></div>
+        <div class="token-cell"><div class="tk-label">Timeline steps</div><div class="tk-val">5</div><div class="tk-note">Placed → Confirmed → Preparing → On way → Delivered.</div></div>
+        <div class="token-cell"><div class="tk-label">CTA height</div><div class="tk-val">44pt</div><div class="tk-note">Full pill. Always brand red except secondary outline.</div></div>
+        <div class="token-cell"><div class="tk-label">Live Activity</div><div class="tk-val">required</div><div class="tk-note">Order tracking enables ActivityKit instantly.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation</div><div class="tk-val">easeOut</div><div class="tk-note">0.3s for sheet present. Spring 0.5s for cart bounce.</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Pills, badges, and white restaurant cards — DoorDash's vocabulary is one menu, repeated.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Add to cart · €12.50</a>
+            <a class="btn btn-pill" href="#">Save for later</a>
+            <a class="btn btn-outline" href="#">Pickup</a>
+            <a class="btn btn-light" href="#">Get DashPass</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="btn-circle" aria-label="Order"><svg viewBox="0 0 24 24"><path d="M5 5h14v3H5zm0 6h14v3H5zm0 6h10v3H5z"/></svg></button>
+              <button class="btn-circle-sm" aria-label="Plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5"/></svg></button>
+              <button class="btn-ghost-circle" aria-label="Heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search for restaurants or dishes" />
+            <input class="input-pill" placeholder="Enter delivery address" />
+            <div class="ds-card-row">
+              <span class="tag tag-dp">DashPass</span>
+              <span class="tag tag-deal">5% off</span>
+              <span class="tag tag-new">New</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:14px;width:100%;overflow:hidden">
+              <div style="aspect-ratio:16/9;position:relative;background:radial-gradient(circle at 35% 35%,#f9c97c,#b76a16 50%,#5c3209)">
+                <div style="position:absolute;left:8px;top:8px;background:#fff;padding:3px 7px;border-radius:6px;font-size:9px;font-weight:800;letter-spacing:.4px;text-transform:uppercase">DashPass</div>
+              </div>
+              <div style="padding:10px 12px">
+                <div style="font-size:13px;font-weight:700">Burger Bar Lisboa</div>
+                <div style="font-size:10.5px;color:var(--ink-muted);margin-top:3px">★ 4.8 · 20–30 min · $$</div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,var(--red),var(--red-deep));border-radius:14px;padding:14px;color:#fff;width:100%">
+              <div style="font-size:9.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.85">DashPass</div>
+              <div style="font-size:15px;font-weight:800;margin-top:3px">€0 delivery on €15+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark">D</span>
+      DoorDash iOS
+    </div>
+    <p>Design reference. Not affiliated with DoorDash, Inc. Token values are derived from the public iOS app and DoorDash's brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.doordash-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.doordash-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.doordash-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

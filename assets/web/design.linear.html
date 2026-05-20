@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linear — Inspired Design</title>
+<meta name="description" content="A Linear-inspired marketing page: dark canvas, surface ladder, lavender accent, aggressive negative tracking. Product UI takes the lead. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  /* Brand */
+  --primary: #5e6ad2;
+  --primary-hover: #828fff;
+  --primary-focus: #5e69d1;
+  --on-primary: #ffffff;
+  /* Text */
+  --ink: #f7f8f8;
+  --ink-muted: #d0d6e0;
+  --ink-subtle: #8a8f98;
+  --ink-tertiary: #62666d;
+  /* Surfaces */
+  --canvas: #010102;
+  --surface-1: #0f1011;
+  --surface-2: #141516;
+  --surface-3: #18191a;
+  --surface-4: #191a1b;
+  --hairline: #23252a;
+  --hairline-strong: #34343a;
+  --hairline-tertiary: #3e3e44;
+  --inverse-canvas: #ffffff;
+  --inverse-ink: #000000;
+  --success: #27a644;
+  /* Priority palette (only inside product UI mock) */
+  --pri-urgent: #f2727f;
+  --pri-high: #f2994a;
+  --pri-medium: #d4be4d;
+  --pri-low: #5f8bd1;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "SF Pro Display", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.05px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(94,106,210,0.5); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--hairline-strong); border-radius: 4px; }
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+
+/* —— Layout —— */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top nav —— */
+.topnav {
+  height: 56px;
+  border-bottom: 1px solid var(--hairline);
+  background: rgba(1,1,2,0.85);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 24px; font-size: 14px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 500; letter-spacing: -0.2px; color: var(--ink);
+}
+.brand .logo {
+  width: 18px; height: 18px; border-radius: 4px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  display: inline-block;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 16px; }
+.nav-links a { color: var(--ink-subtle); padding: 8px 12px; border-radius: 6px; }
+.nav-links a:hover { color: var(--ink); background: var(--surface-1); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 32px; padding: 0 14px;
+  border-radius: 8px;
+  font: 500 14px/1.2 "Inter", system-ui;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent; color: var(--ink);
+  transition: background .15s, color .15s, border-color .15s, transform .1s;
+}
+.btn:focus-visible { outline: 2px solid var(--primary-focus); outline-offset: 2px; }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-primary:active { background: var(--primary-focus); }
+.btn-secondary { background: var(--surface-1); border-color: var(--hairline); color: var(--ink); }
+.btn-secondary:hover { background: var(--surface-2); border-color: var(--hairline-strong); }
+.btn-tertiary { background: transparent; color: var(--ink); }
+.btn-tertiary:hover { background: var(--surface-1); }
+.btn-inverse { background: var(--inverse-canvas); color: var(--inverse-ink); }
+.btn-inverse:hover { background: #efefef; }
+.btn-md { height: 36px; padding: 0 16px; }
+
+/* —— Type —— */
+.eyebrow {
+  font-size: 13px; font-weight: 500; line-height: 1.3;
+  letter-spacing: 0.4px;
+  color: var(--ink-subtle); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.display-xl {
+  font-weight: 600;
+  font-size: clamp(40px, 7.5vw, 80px);
+  line-height: 1.05;
+  letter-spacing: -3.0px;
+  margin: 0;
+}
+.display-lg { font-weight: 600; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.1; letter-spacing: -1.8px; margin: 0; }
+.display-md { font-weight: 600; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; letter-spacing: -1.0px; margin: 0; }
+.headline { font-weight: 600; font-size: 28px; line-height: 1.2; letter-spacing: -0.6px; margin: 0; }
+.card-title { font-weight: 500; font-size: 22px; line-height: 1.25; letter-spacing: -0.4px; margin: 0; }
+.subhead { font-weight: 400; font-size: 20px; line-height: 1.4; letter-spacing: -0.2px; color: var(--ink-muted); }
+.body-lg { font-size: 18px; line-height: 1.5; letter-spacing: -0.1px; color: var(--ink-muted); }
+.body { font-size: 16px; line-height: 1.5; color: var(--ink-muted); }
+.caption { font-size: 12px; line-height: 1.4; color: var(--ink-subtle); }
+
+/* —— Sections —— */
+section { padding: 96px 0; }
+section:first-of-type { padding-top: 80px; }
+.section-head { max-width: 640px; }
+.section-head .display-md { margin-bottom: 16px; }
+
+/* —— Hero —— */
+.hero { padding: 80px 0 64px; position: relative; }
+.hero .display-xl { max-width: 14ch; margin-bottom: 24px; }
+.hero .display-xl em { font-style: normal; color: var(--ink-tertiary); }
+.hero .lead { color: var(--ink-muted); font-size: 18px; line-height: 1.5; max-width: 540px; letter-spacing: -0.1px; margin-bottom: 32px; }
+.hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* —— Product screenshot panel (the protagonist) —— */
+.product-card {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 48px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+.product-frame {
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 480px;
+}
+@media (max-width: 760px) { .product-frame { grid-template-columns: 1fr; min-height: auto; } .product-side { display: none; } }
+
+.product-side {
+  background: var(--surface-1);
+  border-right: 1px solid var(--hairline);
+  padding: 16px 12px;
+  font-size: 13px;
+}
+.product-side .group { font-size: 11px; color: var(--ink-subtle); letter-spacing: 0.04em; text-transform: uppercase; margin: 16px 8px 6px; }
+.product-side .item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; color: var(--ink-muted); cursor: default; }
+.product-side .item:hover { background: var(--surface-2); }
+.product-side .item.active { background: var(--surface-2); color: var(--ink); }
+.product-side .item .badge { margin-left: auto; font-size: 11px; color: var(--ink-subtle); }
+.product-side .item .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-subtle); }
+.product-side .item .dot.lav { background: var(--primary); }
+
+.product-main { padding: 0; display: flex; flex-direction: column; }
+.product-toolbar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 13px; color: var(--ink-muted);
+}
+.product-toolbar .chip {
+  display: inline-flex; gap: 6px; align-items: center;
+  border: 1px solid var(--hairline); padding: 3px 9px; border-radius: 6px;
+  color: var(--ink-muted); font-size: 12px;
+}
+.product-toolbar .right { margin-left: auto; display: flex; gap: 6px; }
+
+.issue-row {
+  display: grid;
+  grid-template-columns: 22px 92px 1fr 90px 60px 80px;
+  align-items: center; gap: 12px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 13px;
+}
+.issue-row:hover { background: var(--surface-2); }
+.issue-row .pri { width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center; }
+.pri.urgent svg { color: var(--pri-urgent); }
+.pri.high svg { color: var(--pri-high); }
+.pri.med svg { color: var(--pri-medium); }
+.pri.low svg { color: var(--pri-low); }
+.issue-row .id { color: var(--ink-subtle); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; }
+.issue-row .title { color: var(--ink); font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.issue-row .status {
+  display: inline-flex; gap: 6px; align-items: center;
+  font-size: 12px; color: var(--ink-muted);
+}
+.status .sdot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ink-subtle); }
+.status.todo .sdot { background: transparent; }
+.status.inprog .sdot { background: radial-gradient(circle at 70% 30%, var(--primary) 50%, transparent 51%); border-color: var(--primary); }
+.status.done .sdot { background: var(--success); border-color: var(--success); }
+.status.canc .sdot { background: var(--ink-tertiary); border-color: var(--ink-tertiary); }
+.issue-row .due { color: var(--ink-subtle); font-size: 12px; }
+.issue-row .avatar {
+  width: 22px; height: 22px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary));
+  display: inline-flex; align-items: center; justify-content: center;
+  color: white; font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+}
+.avatar.b { background: linear-gradient(135deg, #6cb1d8, #4a82b3); }
+.avatar.c { background: linear-gradient(135deg, #d896c9, #a85f96); }
+.avatar.d { background: linear-gradient(135deg, #c4d18c, #8aa14c); }
+
+/* —— Customer logo marquee —— */
+.logos {
+  padding: 48px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  color: var(--ink-tertiary); font-size: 14px;
+}
+.logo-mark { font-weight: 500; font-size: 16px; letter-spacing: -0.3px; color: var(--ink-subtle); opacity: 0.7; }
+.logo-mark:hover { opacity: 1; color: var(--ink); }
+
+/* —— Feature grid —— */
+.feature-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 48px;
+}
+@media (max-width: 1024px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 760px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.feature-card .icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--surface-2); border: 1px solid var(--hairline);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--primary);
+}
+.feature-card h3 { font-weight: 500; font-size: 18px; letter-spacing: -0.3px; margin: 0; }
+.feature-card p { margin: 0; color: var(--ink-muted); font-size: 14px; line-height: 1.5; }
+.kbd {
+  display: inline-block; padding: 2px 6px; font-size: 11px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  background: var(--surface-3); border: 1px solid var(--hairline-strong); border-radius: 4px;
+  color: var(--ink-muted);
+}
+
+/* —— Testimonial —— */
+.testimonial {
+  background: var(--surface-1); border: 1px solid var(--hairline);
+  border-radius: 12px; padding: 32px;
+  display: flex; flex-direction: column; gap: 24px;
+  max-width: 720px; margin: 48px auto 0;
+}
+.testimonial blockquote { margin: 0; font-size: 22px; font-weight: 500; line-height: 1.4; letter-spacing: -0.4px; color: var(--ink); }
+.testimonial .author { display: flex; align-items: center; gap: 12px; }
+.testimonial .author .avatar { width: 40px; height: 40px; font-size: 14px; }
+.testimonial .author-meta { display: flex; flex-direction: column; }
+.testimonial .author-meta strong { font-size: 14px; font-weight: 500; color: var(--ink); }
+.testimonial .author-meta span { font-size: 13px; color: var(--ink-subtle); }
+
+/* —— Changelog —— */
+.changelog { margin-top: 48px; }
+.changelog-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.changelog-row:last-child { border-bottom: 0; }
+.changelog-row .meta { font-size: 13px; color: var(--ink-subtle); }
+.changelog-row .meta .ver { display: block; color: var(--ink); font-weight: 500; font-family: "JetBrains Mono", ui-monospace, monospace; margin-bottom: 4px; }
+.changelog-row h4 { margin: 0 0 8px; font-size: 18px; font-weight: 500; letter-spacing: -0.3px; }
+.changelog-row p { margin: 0 0 12px; color: var(--ink-muted); font-size: 14px; line-height: 1.5; }
+.tag-success {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 9999px;
+  padding: 2px 8px; font-size: 12px; color: var(--ink-muted);
+}
+.tag-success::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+
+/* —— Pricing —— */
+.pricing-tabs {
+  display: inline-flex; padding: 4px; background: var(--surface-1); border: 1px solid var(--hairline);
+  border-radius: 9999px; margin: 0 auto 32px; gap: 4px;
+}
+.pricing-tabs-wrap { display: flex; justify-content: center; }
+.pricing-tabs button {
+  background: transparent; border: 0; padding: 6px 14px;
+  border-radius: 9999px; color: var(--ink-subtle);
+  font: 500 14px/1.2 "Inter", system-ui; cursor: pointer;
+}
+.pricing-tabs button.active { background: var(--surface-2); color: var(--ink); }
+
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 1024px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--surface-1); border: 1px solid var(--hairline);
+  border-radius: 12px; padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tier-featured { background: var(--surface-2); border-color: var(--hairline-strong); position: relative; }
+.tier-featured::before {
+  content: "Recommended"; position: absolute; top: -10px; left: 24px;
+  background: var(--primary); color: var(--on-primary);
+  font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 9999px;
+}
+.tier h3 { font-weight: 500; font-size: 22px; letter-spacing: -0.4px; margin: 0; }
+.tier .price { font-weight: 600; font-size: 40px; line-height: 1; letter-spacing: -1px; }
+.tier .price .per { font-size: 14px; font-weight: 400; color: var(--ink-subtle); letter-spacing: 0; margin-left: 4px; }
+.tier .desc { color: var(--ink-muted); font-size: 14px; line-height: 1.5; min-height: 42px; }
+.tier ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; color: var(--ink-muted); display: flex; gap: 8px; align-items: flex-start; }
+.tier li svg { flex: none; margin-top: 2px; color: var(--primary); }
+.tier .cta-wrap { margin-top: auto; }
+
+/* —— CTA banner —— */
+.cta-banner {
+  background: var(--surface-1); border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 48px;
+  display: flex; gap: 32px; align-items: center; justify-content: space-between; flex-wrap: wrap;
+}
+.cta-banner h2 { margin: 0; font-size: 28px; font-weight: 600; line-height: 1.2; letter-spacing: -0.6px; max-width: 22ch; }
+.cta-banner p { margin: 0; color: var(--ink-muted); font-size: 15px; }
+
+/* —— Footer —— */
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: 64px 0 48px;
+  background: var(--canvas);
+}
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 2fr repeat(4, 1fr); }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 { font-size: 13px; font-weight: 500; color: var(--ink); margin: 0 0 16px; letter-spacing: -0.1px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-grid li a { font-size: 13px; color: var(--ink-subtle); }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--hairline); font-size: 12px; color: var(--ink-tertiary); }
+.brand-mini { max-width: 280px; display: flex; flex-direction: column; gap: 16px; }
+.brand-mini p { margin: 0; font-size: 13px; color: var(--ink-subtle); line-height: 1.5; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--surface-1); border: 1px solid var(--hairline);
+  padding: 6px 12px; border-radius: 9999px; font-size: 12px; color: var(--ink-subtle);
+}
+.src-link:hover { color: var(--ink); border-color: var(--hairline-strong); }
+
+/* —— Design system tokens section —— */
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 22px; font-weight: 500; letter-spacing: -0.4px; color: var(--ink); margin: 0 0 16px; }
+.ds-caption { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-subtle); margin: 28px 0 12px; }
+.ds-block .ds-caption:first-of-type { margin-top: 16px; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
+.ds-sw .chip { height: 52px; }
+.ds-sw .meta { padding: 8px 10px; }
+.ds-sw .name { font-size: 12px; font-weight: 500; color: var(--ink); letter-spacing: -0.2px; }
+.ds-sw .val { font-size: 10.5px; color: var(--ink-subtle); font-family: "JetBrains Mono", ui-monospace, monospace; margin-top: 2px; }
+
+.ds-ladder { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 800px) { .ds-ladder { grid-template-columns: repeat(3, 1fr); } }
+.ds-ladder .tile { border-radius: 8px; padding: 16px; min-height: 84px; border: 1px solid var(--hairline); display: flex; flex-direction: column; justify-content: space-between; }
+.ds-ladder .tile .lab { font-size: 11px; color: var(--ink-subtle); font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 500; }
+.ds-ladder .tile .v { font-size: 11px; color: var(--ink-muted); font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+.ds-typescale { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; }
+.ds-tr { display: grid; grid-template-columns: 130px 220px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 11px; color: var(--ink); font-family: "JetBrains Mono", ui-monospace, monospace; }
+.ds-spec { font-size: 11px; color: var(--ink-subtle); font-family: "JetBrains Mono", ui-monospace, monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(8, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--surface-2); border: 1px solid var(--hairline-strong); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input { height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--hairline); background: var(--surface-1); color: var(--ink); font-family: inherit; font-size: 14px; width: 100%; }
+.ds-input.focused { border-color: var(--primary-focus); box-shadow: 0 0 0 2px rgba(94,105,209,0.4); outline: none; }
+.ds-field-label { font-size: 11px; color: var(--ink-subtle); font-family: "JetBrains Mono", ui-monospace, monospace; margin-bottom: 6px; display: block; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini { border-radius: 12px; padding: 20px; border: 1px solid var(--hairline); background: var(--surface-1); display: flex; flex-direction: column; gap: 8px; }
+.ds-card-mini h4 { margin: 0; font-weight: 500; font-size: 16px; letter-spacing: -0.3px; color: var(--ink); }
+.ds-card-mini p { margin: 0; font-size: 13px; color: var(--ink-subtle); line-height: 1.5; }
+.ds-card-mini.featured { background: var(--surface-2); border-color: var(--hairline-strong); }
+.ds-card-mini.panel { background: var(--surface-1); border-radius: 16px; padding: 24px; }
+</style>
+</head>
+<body>
+
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#"><span class="logo"></span> Linear</a>
+  <nav class="nav-links">
+    <a href="#">Product</a>
+    <a href="#">Method</a>
+    <a href="#">Customers</a>
+    <a href="#">Changelog</a>
+    <a href="#">Pricing</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-tertiary">Log in</a>
+    <a href="#" class="btn btn-primary">Get started</a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Built for product teams that ship</p>
+  <h1 class="display-xl">Linear is a purpose-built tool for <em>planning and building products.</em></h1>
+  <p class="lead">Meet the system for modern software development. Streamline issues, projects, and product roadmaps in one connected workspace.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary btn-md">Get started</a>
+    <a href="#" class="btn btn-secondary btn-md">Open Linear ↗</a>
+  </div>
+
+  <!-- The protagonist: product UI screenshot -->
+  <div class="product-card">
+    <div class="product-frame">
+      <aside class="product-side">
+        <div class="item active"><span class="dot lav"></span>Inbox <span class="badge">14</span></div>
+        <div class="item"><span class="dot"></span>My issues</div>
+        <div class="group">Workspace</div>
+        <div class="item">Initiatives</div>
+        <div class="item">Projects</div>
+        <div class="item">Views</div>
+        <div class="group">Linear</div>
+        <div class="item">All issues <span class="badge">82</span></div>
+        <div class="item">Active <span class="badge">17</span></div>
+        <div class="item">Backlog <span class="badge">31</span></div>
+        <div class="group">Teams</div>
+        <div class="item"><span class="dot" style="background:#9d7ecf"></span>Design</div>
+        <div class="item"><span class="dot" style="background:#56b89b"></span>Engineering</div>
+        <div class="item"><span class="dot" style="background:#d4a04b"></span>Marketing</div>
+      </aside>
+      <main class="product-main">
+        <div class="product-toolbar">
+          <span style="color: var(--ink); font-weight: 500;">Active</span>
+          <span class="chip">Filter: Priority</span>
+          <span class="chip">Cycle 24</span>
+          <div class="right">
+            <span class="chip">Group · status</span>
+            <span class="chip">Sort · priority</span>
+          </div>
+        </div>
+
+        <div class="issue-row">
+          <span class="pri urgent"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="6" width="3" height="3" rx="1"/><rect x="5.5" y="3" width="3" height="6" rx="1"/><rect x="10" y="1" width="3" height="8" rx="1"/></svg></span>
+          <span class="id mono">ENG-2147</span>
+          <span class="title">Auth: rotate session tokens on password reset</span>
+          <span class="status inprog"><span class="sdot"></span>In Progress</span>
+          <span class="due">Today</span>
+          <span class="avatar">JS</span>
+        </div>
+        <div class="issue-row">
+          <span class="pri high"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="6" width="3" height="3" rx="1"/><rect x="5.5" y="3" width="3" height="6" rx="1"/><rect x="10" y="1" width="3" height="8" rx="1"/></svg></span>
+          <span class="id mono">DSGN-118</span>
+          <span class="title">Refine empty states across project view</span>
+          <span class="status inprog"><span class="sdot"></span>In Progress</span>
+          <span class="due">Mar 12</span>
+          <span class="avatar b">AL</span>
+        </div>
+        <div class="issue-row">
+          <span class="pri med"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="6" width="3" height="3" rx="1"/><rect x="5.5" y="3" width="3" height="6" rx="1"/><rect x="10" y="1" width="3" height="8" rx="1"/></svg></span>
+          <span class="id mono">ENG-2150</span>
+          <span class="title">Add tracing spans to SSE workspace stream</span>
+          <span class="status todo"><span class="sdot"></span>Todo</span>
+          <span class="due">Mar 14</span>
+          <span class="avatar c">MR</span>
+        </div>
+        <div class="issue-row">
+          <span class="pri low"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="6" width="3" height="3" rx="1"/><rect x="5.5" y="3" width="3" height="6" rx="1"/><rect x="10" y="1" width="3" height="8" rx="1"/></svg></span>
+          <span class="id mono">DSGN-122</span>
+          <span class="title">Migrate avatar gradient generator to oklab</span>
+          <span class="status done"><span class="sdot"></span>Done</span>
+          <span class="due">—</span>
+          <span class="avatar d">KH</span>
+        </div>
+        <div class="issue-row">
+          <span class="pri high"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="6" width="3" height="3" rx="1"/><rect x="5.5" y="3" width="3" height="6" rx="1"/><rect x="10" y="1" width="3" height="8" rx="1"/></svg></span>
+          <span class="id mono">MKT-44</span>
+          <span class="title">Draft Q2 changelog narrative</span>
+          <span class="status todo"><span class="sdot"></span>Todo</span>
+          <span class="due">Mar 18</span>
+          <span class="avatar">EW</span>
+        </div>
+        <div class="issue-row">
+          <span class="pri med"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="6" width="3" height="3" rx="1"/><rect x="5.5" y="3" width="3" height="6" rx="1"/><rect x="10" y="1" width="3" height="8" rx="1"/></svg></span>
+          <span class="id mono">ENG-2138</span>
+          <span class="title">Replace polling with WS in inbox bell</span>
+          <span class="status canc"><span class="sdot"></span>Canceled</span>
+          <span class="due">—</span>
+          <span class="avatar b">AL</span>
+        </div>
+      </main>
+    </div>
+  </div>
+</div></section>
+
+<div class="wrap">
+  <div class="logos">
+    <span class="logo-mark">amie</span>
+    <span class="logo-mark">remote</span>
+    <span class="logo-mark">supercell</span>
+    <span class="logo-mark">vercel</span>
+    <span class="logo-mark">cashapp</span>
+    <span class="logo-mark">scale ai</span>
+    <span class="logo-mark">runway</span>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Set the pace</p>
+    <h2 class="display-md">Designed to move at the speed of thought.</h2>
+    <p class="body-lg" style="margin-top: 16px;">Every interaction surface is built around a keyboard-first input model. The mouse is for when you can't help it.</p>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg></div>
+      <h3>Command menu</h3>
+      <p>Anything you can do, you can do from <span class="kbd">⌘K</span>. Issues, projects, settings — keyboard-first by design.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v6"/><path d="M5 10l-2 2 2 2"/><path d="M19 10l2 2-2 2"/><path d="M12 22V10"/></svg></div>
+      <h3>Cycles</h3>
+      <p>Lightweight time-boxed sprints with automatic rollover. Stop bike-shedding the sprint, start shipping it.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div>
+      <h3>Global at the core</h3>
+      <p>Realtime sync across web, desktop, and mobile. Your view stays right whichever surface you're on.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9l6 6M15 9l-6 6"/></svg></div>
+      <h3>Issue-first</h3>
+      <p>Every roadmap, milestone, and project comes back to a single, well-formed issue. The atomic unit of progress.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg></div>
+      <h3>Built for teams</h3>
+      <p>Roles, mentions, assignment, sub-issues — all the choreography a team needs without a project-management certification.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></div>
+      <h3>API + integrations</h3>
+      <p>GitHub, Figma, Slack, and a clean GraphQL API for everything else. Linear plays well with the rest of your stack.</p>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="testimonial">
+    <blockquote>"Linear is what every product team I've ever joined since 2010 thought it was buying when it bought Jira. We finally have a tool the engineering team chooses."</blockquote>
+    <div class="author">
+      <div class="avatar b">RS</div>
+      <div class="author-meta">
+        <strong>Rachel Steyn</strong>
+        <span>Head of Product, Loom</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Build page</p>
+    <h2 class="display-md">A changelog you'd actually read.</h2>
+    <p class="body-lg" style="margin-top: 16px;">Every change shipped on the platform, written by the team that built it.</p>
+  </div>
+
+  <div class="changelog">
+    <div class="changelog-row">
+      <div class="meta"><span class="ver">2025.18.0</span>Mar 12, 2026</div>
+      <div>
+        <h4>Inbox is now realtime <span class="tag-success" style="margin-left: 8px;">Shipped</span></h4>
+        <p>Replaced polling-based unread counts with a server-pushed channel. Inbox bell updates within 80ms of a new mention or comment. Available on web and desktop today; mobile rollout begins this week.</p>
+      </div>
+    </div>
+    <div class="changelog-row">
+      <div class="meta"><span class="ver">2025.17.4</span>Mar 6, 2026</div>
+      <div>
+        <h4>Cycle health: new at-a-glance row <span class="tag-success" style="margin-left: 8px;">Shipped</span></h4>
+        <p>A compact strip at the top of each cycle showing carry-over, in-flight, and at-risk counts. Tap the strip to drop into the at-risk view. Available to all teams on the Standard plan and above.</p>
+      </div>
+    </div>
+    <div class="changelog-row">
+      <div class="meta"><span class="ver">2025.17.0</span>Feb 28, 2026</div>
+      <div>
+        <h4>Initiatives → Projects mapping</h4>
+        <p>Initiatives now roll up across projects with a single source of truth for status. The transition is automatic for workspaces with the labeling convention already in place; everyone else gets a one-click migration in settings.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head" style="text-align: center; margin: 0 auto;">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="display-md">Built for teams of every size.</h2>
+  </div>
+  <div class="pricing-tabs-wrap" style="margin-top: 32px;">
+    <div class="pricing-tabs">
+      <button class="active">Monthly</button>
+      <button>Yearly · save 20%</button>
+    </div>
+  </div>
+
+  <div class="tiers">
+    <div class="tier">
+      <h3>Free</h3>
+      <div class="price">$0</div>
+      <div class="desc">Everything a small team needs to start shipping. Up to 250 issues, unlimited members.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>250 issues</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>2 teams</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Slack & GitHub</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>API access</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary btn-md" style="width: 100%;">Start free</a></div>
+    </div>
+    <div class="tier tier-featured">
+      <h3>Standard</h3>
+      <div class="price">$8<span class="per">/user · mo</span></div>
+      <div class="desc">For growing teams that want the full Linear method, including cycles and initiatives.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited issues + projects</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Cycles, initiatives, roadmaps</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Slack, GitHub, Figma, Sentry</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Guest access</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-primary btn-md" style="width: 100%;">Get started</a></div>
+    </div>
+    <div class="tier">
+      <h3>Plus</h3>
+      <div class="price">$14<span class="per">/user · mo</span></div>
+      <div class="desc">For organizations that need SSO, advanced security, and audit logs.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Everything in Standard</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SAML SSO + SCIM</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Audit logs + DLP</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary btn-md" style="width: 100%;">Contact sales</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="cta-banner">
+    <div>
+      <h2>Make the switch.</h2>
+      <p>Plays well with the tools you already use.</p>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <a href="#" class="btn btn-primary btn-md">Get started</a>
+      <a href="#" class="btn btn-secondary btn-md">Talk to sales</a>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head" style="margin-bottom: 48px;">
+    <p class="eyebrow">Design system</p>
+    <h2 class="display-md">The tokens behind every pixel.</h2>
+    <p class="body-lg" style="margin-top: 16px;">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.linear.html" target="_blank" rel="noopener" style="color: var(--primary);">DESIGN.md</a>. Single dark canvas, single chromatic accent, depth carried by surface ladder.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#5e6ad2"></div><div class="meta"><div class="name">primary</div><div class="val">#5e6ad2</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#828fff"></div><div class="meta"><div class="name">primary-hover</div><div class="val">#828fff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#5e69d1"></div><div class="meta"><div class="name">primary-focus</div><div class="val">#5e69d1</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#7a7fad"></div><div class="meta"><div class="name">brand-secure</div><div class="val">#7a7fad</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#27a644"></div><div class="meta"><div class="name">success</div><div class="val">#27a644</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#f7f8f8"></div><div class="meta"><div class="name">ink</div><div class="val">#f7f8f8</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#d0d6e0"></div><div class="meta"><div class="name">ink-muted</div><div class="val">#d0d6e0</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#8a8f98"></div><div class="meta"><div class="name">ink-subtle</div><div class="val">#8a8f98</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#62666d"></div><div class="meta"><div class="name">ink-tertiary</div><div class="val">#62666d</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="meta"><div class="name">on-primary</div><div class="val">#ffffff</div></div></div>
+    </div>
+
+    <p class="ds-caption">Surface ladder — depth without shadow</p>
+    <div class="ds-ladder">
+      <div class="tile" style="background:#010102;"><span class="lab">canvas</span><span class="v">#010102</span></div>
+      <div class="tile" style="background:#0f1011;"><span class="lab">surface-1</span><span class="v">#0f1011</span></div>
+      <div class="tile" style="background:#141516;"><span class="lab">surface-2</span><span class="v">#141516</span></div>
+      <div class="tile" style="background:#18191a;"><span class="lab">surface-3</span><span class="v">#18191a</span></div>
+      <div class="tile" style="background:#191a1b;"><span class="lab">surface-4</span><span class="v">#191a1b</span></div>
+    </div>
+
+    <p class="ds-caption">Hairlines</p>
+    <div class="ds-swatches" style="grid-template-columns: repeat(3, 1fr); max-width: 600px;">
+      <div class="ds-sw"><div class="chip" style="background:#23252a"></div><div class="meta"><div class="name">hairline</div><div class="val">#23252a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#34343a"></div><div class="meta"><div class="name">hairline-strong</div><div class="val">#34343a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#3e3e44"></div><div class="meta"><div class="name">hairline-tertiary</div><div class="val">#3e3e44</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption" style="margin-bottom: 16px;">Linear Display + Text (subbed Inter) · negative tracking on display · eyebrow uses positive tracking</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">80 · w600 · −3.0 · 1.05</span><div class="ds-sam" style="font-size:64px; font-weight:600; letter-spacing:-2.4px; line-height:1.05;">Built for product teams</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">56 · w600 · −1.8 · 1.10</span><div class="ds-sam" style="font-size:44px; font-weight:600; letter-spacing:-1.5px; line-height:1.1;">Move at the speed of thought</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">40 · w600 · −1.0 · 1.15</span><div class="ds-sam" style="font-size:32px; font-weight:600; letter-spacing:-0.8px; line-height:1.15;">A changelog you'd actually read</div></div>
+      <div class="ds-tr"><span class="ds-tok">headline</span><span class="ds-spec">28 · w600 · −0.6 · 1.20</span><div class="ds-sam" style="font-size:24px; font-weight:600; letter-spacing:-0.5px;">Make the switch.</div></div>
+      <div class="ds-tr"><span class="ds-tok">card-title</span><span class="ds-spec">22 · w500 · −0.4 · 1.25</span><div class="ds-sam" style="font-size:20px; font-weight:500; letter-spacing:-0.4px;">Command menu</div></div>
+      <div class="ds-tr"><span class="ds-tok">subhead</span><span class="ds-spec">20 · w400 · −0.2 · 1.40</span><div class="ds-sam" style="font-size:18px; font-weight:400; letter-spacing:-0.2px; color: var(--ink-muted);">Lead body, paired with display headlines.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body</span><span class="ds-spec">16 · w400 · −0.05 · 1.50</span><div class="ds-sam" style="font-size:16px; font-weight:400; letter-spacing:-0.05px; line-height:1.5; color: var(--ink-muted);">Default body. Used across cards, paragraphs, changelog.</div></div>
+      <div class="ds-tr"><span class="ds-tok">button</span><span class="ds-spec">14 · w500 · 0 · 1.20</span><div class="ds-sam" style="font-size:14px; font-weight:500; line-height:1.2;">Get started &nbsp;·&nbsp; Open Linear</div></div>
+      <div class="ds-tr"><span class="ds-tok">eyebrow</span><span class="ds-spec">13 · w500 · +0.4 · UPPER</span><div class="ds-sam" style="font-size:13px; font-weight:500; letter-spacing:0.4px; text-transform: uppercase; color: var(--ink-subtle);">SECTION EYEBROW · TAXONOMY</div></div>
+      <div class="ds-tr"><span class="ds-tok">mono</span><span class="ds-spec">13 · w400 · JetBrains Mono</span><div class="ds-sam mono" style="font-size:13px;">ENG-2147 · v2025.18.0 · cur_NfqW…M4Z</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">xs</span><span class="ds-spec">4</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:6px"></div><span class="ds-tok">sm</span><span class="ds-spec">6</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="ds-tok">md</span><span class="ds-spec">8 · btn</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:12px"></div><span class="ds-tok">lg</span><span class="ds-spec">12 · cards</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="ds-tok">xl</span><span class="ds-spec">16 · panels</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:24px"></div><span class="ds-tok">xxl</span><span class="ds-spec">24</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">pill</span><span class="ds-spec">∞ · tabs</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">full</span><span class="ds-spec">∞ · avatar</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — 8 / 14 padding · 8px radius · never pill</p>
+    <div class="ds-comp-row">
+      <a class="btn btn-primary btn-md">Primary lavender</a>
+      <a class="btn btn-md" style="background:var(--primary-hover);color:var(--on-primary);">Hover</a>
+      <a class="btn btn-md" style="background:var(--primary-focus);color:var(--on-primary);">Pressed</a>
+      <a class="btn btn-secondary btn-md">Secondary charcoal</a>
+      <a class="btn btn-tertiary btn-md">Tertiary plain</a>
+      <a class="btn btn-inverse btn-md">Inverse</a>
+    </div>
+
+    <p class="ds-caption">Inputs — surface-1 fill · hairline border · primary-focus ring</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="Search the workspace"/>
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="cycle:24 priority:high"/>
+      </div>
+    </div>
+
+    <p class="ds-caption">Pill tabs & status badges</p>
+    <div class="ds-comp-row">
+      <span style="display:inline-flex;padding:4px;background:var(--surface-1);border:1px solid var(--hairline);border-radius:9999px;gap:4px;">
+        <span style="padding:6px 14px;border-radius:9999px;font-size:14px;color:var(--ink-subtle);font-weight:500;">Monthly</span>
+        <span style="padding:6px 14px;border-radius:9999px;font-size:14px;color:var(--ink);font-weight:500;background:var(--surface-2);">Yearly</span>
+      </span>
+      <span class="tag-success">Shipped</span>
+      <span class="tag-success" style="background:var(--surface-2);">In progress</span>
+    </div>
+
+    <p class="ds-caption">Card variants — 12 / 16 px radius · surface-1 → 2 lift</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-mini">
+        <h4>feature-card</h4>
+        <p>Background surface-1 · 12px radius · hairline border. Default feature highlight.</p>
+      </div>
+      <div class="ds-card-mini featured">
+        <h4>pricing-card-featured</h4>
+        <p>Background surface-2 · hairline-strong border. The recommended tier — depth without color change.</p>
+      </div>
+      <div class="ds-card-mini panel">
+        <h4>product-screenshot-card</h4>
+        <p>Background surface-1 · 16px radius. The dominant card type — frames a high-fidelity app UI screenshot.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="brand-mini">
+      <a class="brand" href="#"><span class="logo"></span> Linear</a>
+      <p>A Linear-inspired single-page composition. Tokens and component spec sourced from awesome-design-md.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Method</a></li>
+        <li><a href="#">Integrations</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Status</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Customers</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Brand</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">API</a></li>
+        <li><a href="#">Guides</a></li>
+        <li><a href="#">Templates</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© Linear (inspired) · Generated for design study</div>
+    <div>Canvas #010102 · Lavender #5e6ad2 · Surface ladder · Radius 8/12/16</div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.linear.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

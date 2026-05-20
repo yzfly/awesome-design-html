@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Airtable — Inspired Design</title>
+<meta name="description" content="An Airtable-inspired marketing surface: white editorial canvas, near-black pill CTA, full-bleed coral / forest / cream signature cards, multi-color spreadsheet UI mockup with category chips. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;475;500;600;700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #181d26;
+  --primary-active: #0d1218;
+  --on-primary: #ffffff;
+  --link: #1b61c9;
+  --link-active: #1a3866;
+  --info: #254fad;
+  --info-border: #458fff;
+  --success: #006400;
+  --success-border: #39bf45;
+  /* Ink */
+  --ink: #181d26;
+  --body: #333840;
+  --muted: #41454d;
+  --border-strong: #9297a0;
+  --hairline: #dddddd;
+  --hairline-soft: #ececec;
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-soft: #f8fafc;
+  --surface-strong: #e0e2e6;
+  --surface-dark: #181d26;
+  --surface-dark-elevated: #1d1f25;
+  --pricing-ink: #1d1f25;
+  /* Signature */
+  --sig-coral: #aa2d00;
+  --sig-coral-deep: #7a1f00;
+  --sig-forest: #0a2e0e;
+  --sig-cream: #f5e9d4;
+  --sig-peach: #fcab79;
+  --sig-mint: #a8d8c4;
+  --sig-yellow: #f4d35e;
+  --sig-mustard: #d9a441;
+  /* Category palette for spreadsheet */
+  --cat-red: #f82b60;
+  --cat-orange: #ff6f2c;
+  --cat-yellow: #fcb400;
+  --cat-green: #20c933;
+  --cat-teal: #20d9d2;
+  --cat-blue: #2d7ff9;
+  --cat-purple: #8b46ff;
+  --cat-pink: #ff08c2;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter Tight", "Haas Grot Disp", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--canvas);
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(170,45,0,0.18); }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 64px; gap: 28px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; font-size: 18px; color: var(--ink); letter-spacing: -0.2px; }
+.brand .glyph { display: inline-flex; }
+.nav-links { display: flex; gap: 4px; margin-left: 8px; }
+.nav-links a { font-size: 14px; color: var(--ink); font-weight: 400; padding: 8px 12px; border-radius: 6px; }
+.nav-links a:hover { background: var(--surface-soft); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font: 500 16px/1.4 "Inter Tight", "Inter", system-ui;
+  letter-spacing: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-active); }
+.btn-secondary { background: var(--canvas); color: var(--ink); border-color: var(--hairline); }
+.btn-secondary:hover { border-color: var(--ink); }
+.btn-secondary-dark { background: var(--canvas); color: var(--ink); }
+.btn-sm { padding: 8px 14px; font-size: 14px; border-radius: 10px; }
+.btn-pill { border-radius: 9999px; padding: 12px 22px; }
+.btn-link { color: var(--link); padding: 0; background: none; font-weight: 500; }
+
+/* —— Hero —— */
+.hero { padding: 96px 0 80px; }
+.hero .eyebrow { font-size: 14px; font-weight: 500; letter-spacing: 0.16px; color: var(--muted); margin-bottom: 16px; }
+h1.hero-h {
+  font-family: "Inter Tight", system-ui;
+  font-size: 64px; font-weight: 400; line-height: 1.05;
+  color: var(--ink); letter-spacing: -1.5px;
+  margin: 0 0 22px; max-width: 880px;
+}
+.hero p.lede { font-size: 18px; color: var(--body); max-width: 640px; line-height: 1.5; margin: 0 0 32px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-meta { margin-top: 18px; font-size: 13px; color: var(--muted); }
+
+/* —— Logo strip —— */
+.logo-strip { padding: 40px 0 56px; border-bottom: 1px solid var(--hairline-soft); }
+.logo-strip .caption { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 22px; letter-spacing: 0.16px; }
+.logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 32px; align-items: center; opacity: 0.78; }
+.logo-cell { display: flex; align-items: center; justify-content: center; color: var(--muted); font-weight: 600; font-size: 16px; letter-spacing: -0.3px; }
+.logo-cell.serif { font-family: ui-serif, Georgia, "Times New Roman", serif; font-style: italic; font-weight: 500; font-size: 19px; }
+
+/* —— Spreadsheet UI mockup —— */
+.app-frame {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(20,25,40,0.06), 0 2px 6px rgba(20,25,40,0.04);
+  margin-top: 8px;
+}
+.app-titlebar {
+  height: 38px; display: flex; align-items: center; gap: 14px;
+  padding: 0 14px;
+  background: linear-gradient(180deg,#fafbfc,#f3f4f6);
+  border-bottom: 1px solid var(--hairline);
+  font-size: 13px; color: var(--body);
+}
+.app-titlebar .dots { display: flex; gap: 6px; }
+.app-titlebar .dots span { width: 11px; height: 11px; border-radius: 50%; }
+.app-titlebar .dots span:nth-child(1) { background: #ff5f56; }
+.app-titlebar .dots span:nth-child(2) { background: #ffbd2e; }
+.app-titlebar .dots span:nth-child(3) { background: #27c93f; }
+.app-titlebar .base-name { font-weight: 500; color: var(--ink); }
+.app-titlebar .base-tabs { display: flex; gap: 0; margin-left: 4px; }
+.app-titlebar .base-tab { padding: 6px 12px; font-size: 13px; color: var(--muted); border-radius: 6px 6px 0 0; }
+.app-titlebar .base-tab.active { background: var(--canvas); color: var(--ink); font-weight: 500; box-shadow: 0 -1px 0 var(--hairline) inset; }
+.app-titlebar .right { margin-left: auto; display: flex; gap: 8px; }
+.app-toolbar { height: 42px; display: flex; align-items: center; gap: 14px; padding: 0 14px; border-bottom: 1px solid var(--hairline); background: var(--canvas); font-size: 13px; }
+.app-toolbar .tool { color: var(--body); display: inline-flex; align-items: center; gap: 5px; padding: 5px 8px; border-radius: 6px; }
+.app-toolbar .tool.primary { color: var(--cat-blue); font-weight: 500; }
+.app-toolbar .divider { width: 1px; height: 18px; background: var(--hairline); }
+.app-toolbar .search { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--muted); }
+
+/* Spreadsheet grid */
+.sheet { display: grid; grid-template-columns: 38px 220px 140px 220px 140px 160px 1fr; font-size: 13px; }
+.sheet > div { border-right: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); padding: 9px 12px; background: var(--canvas); color: var(--ink); display: flex; align-items: center; gap: 8px; min-height: 38px; }
+.sheet .head { background: #f8fafc; color: var(--muted); font-weight: 500; font-size: 12px; letter-spacing: 0.2px; text-transform: uppercase; }
+.sheet .row-num { background: #fafbfc; color: var(--muted); justify-content: center; font-size: 12px; padding: 9px 6px; }
+.sheet .head svg { opacity: 0.55; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 9999px; font-size: 12px; font-weight: 500;
+  color: var(--ink); background: #ececec; line-height: 1.3;
+  white-space: nowrap;
+}
+.chip.red    { background: #fde2e7; color: #b00930; }
+.chip.orange { background: #ffe0cf; color: #9c3c00; }
+.chip.yellow { background: #fbeec1; color: #6a4e00; }
+.chip.green  { background: #cdf3d0; color: #0a6b18; }
+.chip.teal   { background: #c8f4f0; color: #00595e; }
+.chip.blue   { background: #d6e6ff; color: #1a4ea8; }
+.chip.purple { background: #e1d2ff; color: #4d1bad; }
+.chip.pink   { background: #ffd1ef; color: #8e0470; }
+.checkbox { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--border-strong); display: inline-block; flex: none; }
+.checkbox.on { background: var(--cat-blue); border-color: var(--cat-blue); position: relative; }
+.checkbox.on::after { content: ""; position: absolute; left: 3px; top: 1px; width: 4px; height: 7px; border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.avatar-mini { width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 600; }
+.bar { display: flex; align-items: center; gap: 8px; font-variant-numeric: tabular-nums; color: var(--body); }
+.bar .track { width: 70px; height: 6px; background: var(--hairline-soft); border-radius: 99px; overflow: hidden; }
+.bar .fill { display: block; height: 100%; }
+
+/* Sections */
+section { padding: 96px 0; }
+.section-eyebrow { font-size: 14px; font-weight: 500; letter-spacing: 0.16px; color: var(--muted); margin-bottom: 14px; text-transform: none; }
+h2 { font-family: "Inter Tight", system-ui; font-weight: 400; color: var(--ink); margin: 0; letter-spacing: -0.8px; }
+.h2-lg { font-size: 48px; line-height: 1.1; }
+.h2-md { font-size: 40px; line-height: 1.15; }
+.h2-sm { font-size: 32px; line-height: 1.2; }
+.title-lg { font-size: 24px; font-weight: 400; letter-spacing: 0.12px; line-height: 1.35; color: var(--ink); }
+.title-md { font-size: 20px; font-weight: 500; line-height: 1.4; color: var(--ink); }
+.title-sm { font-size: 18px; font-weight: 500; line-height: 1.4; color: var(--ink); }
+
+/* Signature cards */
+.sig {
+  padding: 56px;
+  border-radius: 12px;
+  color: #fff;
+  position: relative; overflow: hidden;
+}
+.sig.coral { background: var(--sig-coral); }
+.sig.forest { background: var(--sig-forest); }
+.sig.dark { background: var(--surface-dark); }
+.sig h3 { font-family: "Inter Tight", system-ui; font-weight: 400; font-size: 36px; line-height: 1.15; letter-spacing: -0.6px; margin: 0 0 16px; max-width: 620px; }
+.sig p { font-size: 16px; line-height: 1.55; color: rgba(255,255,255,0.85); max-width: 540px; margin: 0 0 28px; }
+
+/* Feature grid */
+.feat-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 24px; }
+.feat-card {
+  background: var(--surface-soft); border-radius: 12px; padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.feat-card .label { font-size: 13px; color: var(--muted); letter-spacing: 0.2px; text-transform: uppercase; font-weight: 500; }
+.feat-card h3 { font-family: "Inter Tight", system-ui; font-weight: 400; font-size: 28px; line-height: 1.2; letter-spacing: -0.4px; margin: 0; color: var(--ink); max-width: 460px; }
+.feat-card p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--body); max-width: 440px; }
+.feat-card .mini-ui { margin-top: 12px; border-radius: 10px; background: var(--canvas); border: 1px solid var(--hairline); padding: 16px; }
+
+/* Demo cards row */
+.demo-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.demo-card { border-radius: 10px; padding: 18px; min-height: 220px; display: flex; flex-direction: column; gap: 12px; color: var(--ink); position: relative; overflow: hidden; }
+.demo-card.peach { background: var(--sig-peach); }
+.demo-card.mint  { background: var(--sig-mint); }
+.demo-card.cream { background: var(--sig-cream); }
+.demo-card.yellow { background: var(--sig-yellow); }
+.demo-card .label { font-size: 12px; font-weight: 500; letter-spacing: 0.2px; text-transform: uppercase; color: rgba(24,29,38,0.7); }
+.demo-card .h { font-family: "Inter Tight", system-ui; font-weight: 400; font-size: 22px; line-height: 1.2; letter-spacing: -0.3px; color: var(--ink); }
+.demo-card .stat { font-size: 38px; font-family: "Inter Tight", system-ui; font-weight: 400; letter-spacing: -1px; color: var(--ink); line-height: 1; margin-top: auto; }
+.demo-card .legend { font-size: 12px; color: rgba(24,29,38,0.7); }
+
+/* Cream callout */
+.cream-callout {
+  background: var(--sig-cream); border-radius: 10px; padding: 36px 40px;
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: center;
+}
+.cream-callout h3 { font-family: "Inter Tight", system-ui; font-weight: 400; font-size: 32px; line-height: 1.2; letter-spacing: -0.5px; margin: 0; color: var(--ink); max-width: 420px; }
+.cream-callout .stat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+.cream-callout .stat-cell { background: rgba(255,255,255,0.55); border-radius: 8px; padding: 18px; }
+.cream-callout .stat-cell .big { font-family: "Inter Tight", system-ui; font-weight: 400; font-size: 36px; letter-spacing: -0.8px; color: var(--sig-coral); }
+.cream-callout .stat-cell .lbl { font-size: 13px; color: var(--body); margin-top: 4px; }
+
+/* Pricing */
+.pricing-shell { font-family: "Inter", system-ui; }
+.pricing-shell h2.pricing-h { font-family: "Inter", system-ui; font-weight: 475; font-size: 44.8px; letter-spacing: -0.6px; line-height: 1.1; color: var(--pricing-ink); }
+.pricing-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 40px; }
+.tier { background: var(--canvas); border-radius: 10px; padding: 28px 26px; display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--hairline-soft); }
+.tier.featured { background: var(--surface-soft); border-color: var(--surface-soft); }
+.tier h4 { font-family: "Inter", system-ui; font-weight: 475; font-size: 20px; margin: 0; color: var(--pricing-ink); letter-spacing: 0; }
+.tier .price { font-family: "Inter", system-ui; font-weight: 475; font-size: 36px; line-height: 1.1; color: var(--pricing-ink); letter-spacing: -0.4px; }
+.tier .price small { font-size: 14px; color: var(--muted); font-weight: 400; margin-left: 4px; }
+.tier ul { list-style: none; padding: 0; margin: 8px 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--body); }
+.tier ul li { display: flex; gap: 8px; align-items: flex-start; }
+.tier ul li svg { flex: none; color: var(--success); margin-top: 1px; }
+.tier .btn-pill { width: 100%; background: var(--canvas); color: var(--pricing-ink); border: 1px solid var(--hairline); }
+.tier.featured .btn-pill { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.tier .tag { font-size: 12px; color: var(--muted); }
+
+/* CTA band light */
+.cta-band {
+  background: var(--surface-strong); border-radius: 12px; padding: 56px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.cta-band h3 { font-family: "Inter Tight", system-ui; font-weight: 400; font-size: 32px; line-height: 1.15; letter-spacing: -0.5px; margin: 0; color: var(--ink); max-width: 540px; }
+
+/* —— Design system reference (Part B) —— */
+.ds { background: var(--surface-soft); border-top: 1px solid var(--hairline-soft); padding: 96px 0; }
+.ds h2.ds-h { font-family: "Inter Tight", system-ui; font-weight: 400; font-size: 40px; letter-spacing: -0.8px; line-height: 1.1; color: var(--ink); margin: 0 0 6px; }
+.ds .ds-sub { font-size: 15px; color: var(--body); margin-bottom: 40px; max-width: 640px; }
+.ds-block { background: var(--canvas); border-radius: 12px; padding: 32px; margin-bottom: 24px; border: 1px solid var(--hairline-soft); }
+.ds-block h3 { font-family: "Inter Tight", system-ui; font-weight: 400; font-size: 24px; margin: 0 0 4px; color: var(--ink); letter-spacing: -0.2px; }
+.ds-block .ds-block-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; letter-spacing: 0.16px; }
+.ds-group-title { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.4px; text-transform: uppercase; margin: 18px 0 10px; }
+.swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.sw { border-radius: 8px; overflow: hidden; border: 1px solid var(--hairline-soft); }
+.sw .chip-vis { height: 72px; }
+.sw .meta { padding: 10px 12px; font-size: 12px; }
+.sw .name { color: var(--ink); font-weight: 500; }
+.sw .hex { color: var(--muted); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; margin-top: 2px; }
+
+.type-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.type-table th, .type-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--hairline-soft); vertical-align: middle; }
+.type-table th { font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: 0.2px; text-transform: uppercase; }
+.type-table td.token { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); width: 180px; }
+.type-table td.sample { color: var(--ink); }
+
+.radius-ladder { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; }
+.radius-ladder .r-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.radius-ladder .r-box { width: 84px; height: 84px; background: var(--ink); }
+.radius-ladder .r-lbl { font-size: 12px; color: var(--muted); font-family: ui-monospace, monospace; }
+
+.comp-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.comp { border: 1px solid var(--hairline-soft); border-radius: 10px; padding: 20px; background: var(--canvas); }
+.comp .comp-name { font-size: 12px; color: var(--muted); letter-spacing: 0.2px; text-transform: uppercase; margin-bottom: 12px; }
+.comp .comp-vis { min-height: 70px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+/* Footer */
+.footer { background: var(--canvas); padding: 80px 0 56px; border-top: 1px solid var(--hairline); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 40px; }
+.footer-grid h4 { font-size: 14px; font-weight: 500; margin: 0 0 14px; color: var(--ink); }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 14px; color: var(--muted); }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-grid .brand p { margin: 14px 0 0; font-size: 13px; color: var(--muted); max-width: 280px; line-height: 1.55; }
+.footer-bottom { padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--hairline); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); border: 1px solid var(--hairline);
+  padding: 8px 14px; border-radius: 9999px; font-size: 12px; color: var(--muted);
+  box-shadow: 0 4px 14px rgba(15,15,15,0.07);
+}
+.src-link:hover { color: var(--ink); border-color: var(--ink); }
+
+@media (max-width: 1024px) {
+  .demo-row, .pricing-grid, .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .feat-grid, .cream-callout { grid-template-columns: 1fr; }
+  .comp-matrix { grid-template-columns: repeat(2, 1fr); }
+  .swatches { grid-template-columns: repeat(4, 1fr); }
+  .sheet { grid-template-columns: 38px 180px 130px 1fr; }
+  .sheet .col-hide { display: none; }
+  h1.hero-h { font-size: 44px; letter-spacing: -1px; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  .demo-row, .pricing-grid, .footer-grid, .comp-matrix, .swatches { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  section { padding: 64px 0; }
+  .hero { padding: 56px 0 40px; }
+  h1.hero-h { font-size: 36px; }
+  .sig { padding: 36px 28px; }
+  .sig h3 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top nav -->
+<header class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#">
+      <svg class="glyph" width="26" height="22" viewBox="0 0 200 170" fill="none" aria-hidden="true">
+        <path d="M90 4 L8 36 c-7 3 -7 13 0 16 l82 32 c6 2 14 2 20 0 l82 -32 c7 -3 7 -13 0 -16 L110 4 c-6 -2 -14 -2 -20 0 z" fill="#fcb400"/>
+        <path d="M104 96 l84 -33 v66 c0 4 -2 7 -6 8 l-78 30 z" fill="#18bfff"/>
+        <path d="M96 96 L12 63 v66 c0 4 2 7 6 8 l78 30 z" fill="#f82b60"/>
+        <rect x="100" y="100" width="6" height="68" fill="#fff" opacity="0.0"/>
+      </svg>
+      <span>Airtable</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Resources</a>
+      <a href="#">Enterprise</a>
+      <a href="#">Pricing</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-secondary btn-sm" href="#">Book demo</a>
+      <a class="btn btn-primary btn-sm" href="#">Sign up for free</a>
+      <a href="#" style="font-size:14px;color:var(--ink);padding:8px 4px;">Log in</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Airtable AI · The connected apps platform</div>
+    <h1 class="hero-h">The platform to build next‑gen apps.</h1>
+    <p class="lede">Move beyond rigid tools, complex code, and AI hype. Airtable's AI-native platform lets every team build the apps they need — without waiting on engineering.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#">Sign up for free</a>
+      <a class="btn btn-secondary" href="#">Book a demo</a>
+    </div>
+    <div class="hero-meta">Free for individuals · No credit card required</div>
+
+    <!-- Spreadsheet UI -->
+    <div style="margin-top:48px;">
+    <div class="app-frame">
+      <div class="app-titlebar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="base-name">Q3 Product Marketing</div>
+        <div class="base-tabs">
+          <div class="base-tab">Data</div>
+          <div class="base-tab active">Interface</div>
+          <div class="base-tab">Automations</div>
+          <div class="base-tab">Forms</div>
+        </div>
+        <div class="right">
+          <span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--cat-purple);color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:600;">SA</span>
+          <span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--cat-teal);color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:600;">JM</span>
+          <span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--cat-yellow);color:#000;align-items:center;justify-content:center;font-size:11px;font-weight:600;">RK</span>
+          <a class="btn btn-primary btn-sm" href="#" style="margin-left:8px;">Share</a>
+        </div>
+      </div>
+
+      <div class="app-toolbar">
+        <span class="tool primary">＋ Add view</span>
+        <span class="divider"></span>
+        <span class="tool">⊞ Grid view</span>
+        <span class="tool">Hide fields</span>
+        <span class="tool">Filter</span>
+        <span class="tool">Group</span>
+        <span class="tool">Sort</span>
+        <span class="tool">Color</span>
+        <span class="search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          Search…
+        </span>
+      </div>
+
+      <div class="sheet">
+        <div class="head row-num">#</div>
+        <div class="head">A · Project</div>
+        <div class="head">B · Status</div>
+        <div class="head col-hide">C · Owner</div>
+        <div class="head col-hide">D · Stage</div>
+        <div class="head col-hide">E · Progress</div>
+        <div class="head col-hide">F · Notes</div>
+
+        <div class="row-num">1</div>
+        <div><span class="checkbox on"></span> Launch Q3 newsletter</div>
+        <div><span class="chip green">● In progress</span></div>
+        <div class="col-hide"><span class="avatar-mini" style="background:var(--cat-purple);">SA</span> Sara A.</div>
+        <div class="col-hide"><span class="chip blue">Design</span></div>
+        <div class="col-hide"><span class="bar"><span class="track"><span class="fill" style="width:72%;background:var(--cat-green);"></span></span>72%</span></div>
+        <div class="col-hide" style="color:var(--muted);font-size:13px;">Final copy in review</div>
+
+        <div class="row-num">2</div>
+        <div><span class="checkbox on"></span> Customer interview guide</div>
+        <div><span class="chip yellow">◐ At risk</span></div>
+        <div class="col-hide"><span class="avatar-mini" style="background:var(--cat-teal);">JM</span> Joe M.</div>
+        <div class="col-hide"><span class="chip purple">Research</span></div>
+        <div class="col-hide"><span class="bar"><span class="track"><span class="fill" style="width:46%;background:var(--cat-yellow);"></span></span>46%</span></div>
+        <div class="col-hide" style="color:var(--muted);font-size:13px;">Waiting on legal review</div>
+
+        <div class="row-num">3</div>
+        <div><span class="checkbox"></span> Brand refresh — logo system</div>
+        <div><span class="chip red">▲ Blocked</span></div>
+        <div class="col-hide"><span class="avatar-mini" style="background:var(--cat-pink);">LK</span> Lena K.</div>
+        <div class="col-hide"><span class="chip pink">Marketing</span></div>
+        <div class="col-hide"><span class="bar"><span class="track"><span class="fill" style="width:18%;background:var(--cat-red);"></span></span>18%</span></div>
+        <div class="col-hide" style="color:var(--muted);font-size:13px;">Vendor briefed</div>
+
+        <div class="row-num">4</div>
+        <div><span class="checkbox on"></span> Pricing experiment v2</div>
+        <div><span class="chip blue">○ Planning</span></div>
+        <div class="col-hide"><span class="avatar-mini" style="background:var(--cat-yellow);color:#000;">RK</span> Ria K.</div>
+        <div class="col-hide"><span class="chip teal">Growth</span></div>
+        <div class="col-hide"><span class="bar"><span class="track"><span class="fill" style="width:24%;background:var(--cat-blue);"></span></span>24%</span></div>
+        <div class="col-hide" style="color:var(--muted);font-size:13px;">Define cohorts</div>
+
+        <div class="row-num">5</div>
+        <div><span class="checkbox on"></span> Webinar — AI in operations</div>
+        <div><span class="chip green">● Live</span></div>
+        <div class="col-hide"><span class="avatar-mini" style="background:var(--cat-orange);">TO</span> Tomi O.</div>
+        <div class="col-hide"><span class="chip orange">Lifecycle</span></div>
+        <div class="col-hide"><span class="bar"><span class="track"><span class="fill" style="width:100%;background:var(--cat-green);"></span></span>100%</span></div>
+        <div class="col-hide" style="color:var(--muted);font-size:13px;">218 registrants</div>
+
+        <div class="row-num">6</div>
+        <div><span class="checkbox"></span> Sales enablement deck</div>
+        <div><span class="chip yellow">◐ Drafting</span></div>
+        <div class="col-hide"><span class="avatar-mini" style="background:var(--cat-blue);">MN</span> Mae N.</div>
+        <div class="col-hide"><span class="chip purple">Research</span></div>
+        <div class="col-hide"><span class="bar"><span class="track"><span class="fill" style="width:58%;background:var(--cat-purple);"></span></span>58%</span></div>
+        <div class="col-hide" style="color:var(--muted);font-size:13px;">v3 sent for review</div>
+
+        <div class="row-num">7</div>
+        <div><span class="checkbox on"></span> Partner co‑marketing — Slack</div>
+        <div><span class="chip blue">○ Scheduled</span></div>
+        <div class="col-hide"><span class="avatar-mini" style="background:var(--cat-purple);">SA</span> Sara A.</div>
+        <div class="col-hide"><span class="chip pink">Marketing</span></div>
+        <div class="col-hide"><span class="bar"><span class="track"><span class="fill" style="width:34%;background:var(--cat-pink);"></span></span>34%</span></div>
+        <div class="col-hide" style="color:var(--muted);font-size:13px;">Kickoff Aug 14</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logo strip -->
+<section class="logo-strip" style="padding:0 0 64px;">
+  <div class="wrap">
+    <div class="caption">Trusted by 500,000+ teams building apps on Airtable</div>
+    <div class="logos">
+      <div class="logo-cell serif">Time</div>
+      <div class="logo-cell">NETFLIX</div>
+      <div class="logo-cell" style="font-family:ui-serif,Georgia,serif;font-weight:700;font-size:20px;">HBO</div>
+      <div class="logo-cell">Shopify</div>
+      <div class="logo-cell serif">Condé Nast</div>
+      <div class="logo-cell" style="font-weight:500;letter-spacing:1px;">amazon</div>
+    </div>
+  </div>
+</section>
+
+<!-- Coral signature -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="sig coral">
+      <div style="position:absolute;right:-60px;top:-60px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.08);"></div>
+      <div style="position:absolute;right:30px;bottom:-100px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+      <div style="font-size:14px;font-weight:500;letter-spacing:0.16px;opacity:0.85;margin-bottom:14px;">Build</div>
+      <h3>Production apps in prototype speed.</h3>
+      <p>Stand up real software in hours, not quarters. Drop your team into a connected interface, wire actions to AI, and ship to production — all on a single platform.</p>
+      <a class="btn btn-secondary-dark" href="#">Explore the platform</a>
+    </div>
+  </div>
+</section>
+
+<!-- Feature grid -->
+<section>
+  <div class="wrap">
+    <div class="section-eyebrow">The Airtable AI platform</div>
+    <h2 class="h2-lg" style="max-width:760px;">One platform. Every layer of your operating model.</h2>
+    <p style="margin-top:18px;font-size:17px;color:var(--body);max-width:660px;line-height:1.55;">Data, interfaces, workflows, and intelligence — connected by a shared schema and governed by a single permission model.</p>
+
+    <div class="feat-grid" style="margin-top:40px;">
+      <div class="feat-card" style="grid-row: span 2;">
+        <div class="label">Connected data</div>
+        <h3>A single source of truth that finally behaves like one.</h3>
+        <p>Bring rows from product, marketing, ops, and finance into linked tables. Airtable keeps every record in sync without a warehouse migration.</p>
+        <div class="mini-ui">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px;">
+            <div style="border:1px solid var(--hairline);border-radius:6px;padding:10px;"><div style="color:var(--muted);font-weight:500;text-transform:uppercase;font-size:11px;">Customers</div><div style="margin-top:8px;color:var(--ink);font-weight:500;">8,412 rows</div></div>
+            <div style="border:1px solid var(--hairline);border-radius:6px;padding:10px;"><div style="color:var(--muted);font-weight:500;text-transform:uppercase;font-size:11px;">Orders</div><div style="margin-top:8px;color:var(--ink);font-weight:500;">42,180 rows</div></div>
+            <div style="border:1px solid var(--hairline);border-radius:6px;padding:10px;"><div style="color:var(--muted);font-weight:500;text-transform:uppercase;font-size:11px;">Tickets</div><div style="margin-top:8px;color:var(--ink);font-weight:500;">1,206 rows</div></div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="chip blue">Linked</span><span class="chip green">Realtime</span><span class="chip purple">Governed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="label">Interfaces</div>
+        <h3>Custom apps without a frontend team.</h3>
+        <p>Drag-and-drop interfaces give every role exactly what they need — and nothing they don't.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="label">Automations</div>
+        <h3>Logic that runs when work shows up.</h3>
+        <p>Trigger Slack pings, route approvals, sync to Salesforce — without scripting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo card row -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-eyebrow">In production at the world's biggest brands</div>
+    <h2 class="h2-md" style="max-width:680px;">Built for the messy middle of the org chart.</h2>
+
+    <div class="demo-row" style="margin-top:40px;">
+      <div class="demo-card peach">
+        <div class="label">Marketing</div>
+        <div class="h">Campaign ops, end to end.</div>
+        <div class="legend">From brief to dashboard in one base.</div>
+        <div class="stat">12×</div>
+        <div class="legend">faster campaign turnaround</div>
+      </div>
+      <div class="demo-card mint">
+        <div class="label">Product</div>
+        <div class="h">Roadmap that talks to engineering.</div>
+        <div class="legend">Issues sync both ways with Linear.</div>
+        <div class="stat">3.4d</div>
+        <div class="legend">avg. cycle time saved per ticket</div>
+      </div>
+      <div class="demo-card cream">
+        <div class="label">Operations</div>
+        <div class="h">Vendor pipelines without sprawl.</div>
+        <div class="legend">Quotes, approvals, payments, audit trails.</div>
+        <div class="stat">$1.2M</div>
+        <div class="legend">recovered per year in spend leaks</div>
+      </div>
+      <div class="demo-card yellow">
+        <div class="label">HR</div>
+        <div class="h">Headcount planning, finally legible.</div>
+        <div class="legend">Roles linked to budgets, owners, calendars.</div>
+        <div class="stat">98%</div>
+        <div class="legend">of managers using the same source</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dark signature -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="sig dark">
+      <div style="font-size:14px;font-weight:500;letter-spacing:0.16px;opacity:0.7;margin-bottom:14px;">Airtable AI</div>
+      <h3>The path to 10× every person in your organization.</h3>
+      <p>Co-pilots wired into your real data, not a sandbox. Airtable AI runs against your live schema, knows your permission model, and writes back to the records your team already trusts.</p>
+      <a class="btn btn-secondary-dark" href="#">See AI in action</a>
+    </div>
+  </div>
+</section>
+
+<!-- Cream callout -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="cream-callout">
+      <div>
+        <div class="section-eyebrow" style="margin-bottom:10px;">By the numbers</div>
+        <h3>Real outcomes from teams who replaced 6 tools with one base.</h3>
+        <a class="btn btn-primary" style="margin-top:24px;" href="#">Read customer stories</a>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-cell"><div class="big">10×</div><div class="lbl">Faster process iteration</div></div>
+        <div class="stat-cell"><div class="big">62%</div><div class="lbl">Less manual data hand‑off</div></div>
+        <div class="stat-cell"><div class="big">300+</div><div class="lbl">Integrations available out of the box</div></div>
+        <div class="stat-cell"><div class="big">99.9%</div><div class="lbl">Uptime SLA for Enterprise</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Forest signature -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="sig forest">
+      <div style="font-size:14px;font-weight:500;letter-spacing:0.16px;opacity:0.85;margin-bottom:14px;">Enterprise</div>
+      <h3>Governance built in — not bolted on.</h3>
+      <p>Per-record permissions, SAML SSO, SCIM provisioning, audit logs, EU data residency. Airtable is the apps platform IT can stand behind without saying no.</p>
+      <a class="btn btn-secondary-dark" href="#">Talk to sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing-shell">
+  <div class="wrap">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="pricing-h" style="max-width:760px;">Start free. Scale when your team is ready.</h2>
+    <p style="margin-top:14px;font-size:16px;color:var(--body);max-width:560px;">No credit card. Upgrade only when collaboration or AI usage outgrows the free tier.</p>
+
+    <div class="pricing-grid">
+      <div class="tier">
+        <div>
+          <h4>Free</h4>
+          <div class="tag">For individuals starting out</div>
+        </div>
+        <div class="price">$0<small>/seat / month</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Unlimited bases</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1,000 records per base</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1 GB attachments</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 100 automation runs</li>
+        </ul>
+        <a class="btn btn-pill" href="#">Start free</a>
+      </div>
+
+      <div class="tier">
+        <div>
+          <h4>Team</h4>
+          <div class="tag">For collaborating squads</div>
+        </div>
+        <div class="price">$20<small>/seat / month</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 50,000 records / base</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Gantt & timeline views</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 25,000 automation runs</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Custom branded forms</li>
+        </ul>
+        <a class="btn btn-pill" href="#">Start trial</a>
+      </div>
+
+      <div class="tier featured">
+        <div>
+          <h4>Business</h4>
+          <div class="tag">Most popular for growing orgs</div>
+        </div>
+        <div class="price">$45<small>/seat / month</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 125,000 records / base</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Interfaces with permissions</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Airtable AI included</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> SAML SSO, admin panel</li>
+        </ul>
+        <a class="btn btn-pill" href="#">Start trial</a>
+      </div>
+
+      <div class="tier">
+        <div>
+          <h4>Enterprise Scale</h4>
+          <div class="tag">For complex orgs</div>
+        </div>
+        <div class="price">Custom</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 500,000+ records / base</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Enterprise Hub + audit logs</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> EU data residency</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Premium support</li>
+        </ul>
+        <a class="btn btn-pill" href="#">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA band light -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band">
+      <h3>Start building with Airtable.</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="#">Sign up for free</a>
+        <a class="btn btn-secondary" href="#">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     Part B — Design System Reference
+========================================================= -->
+<section class="ds">
+  <div class="wrap">
+    <div class="section-eyebrow">Design system reference</div>
+    <h2 class="ds-h">Tokens that hold the editorial canvas together.</h2>
+    <p class="ds-sub">Airtable's marketing surface relies on rhythm — a near-black ink, signature surfaces in coral / forest / cream, and a category-colored chip palette borrowed from the product UI itself.</p>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3>Color</h3>
+      <div class="ds-block-sub">Brand & accent · Surface · Text · Signature cards · Category chips</div>
+
+      <div class="ds-group-title">Brand & Ink</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--primary);"></div><div class="meta"><div class="name">primary</div><div class="hex">#181d26</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--primary-active);"></div><div class="meta"><div class="name">primary-active</div><div class="hex">#0d1218</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--body);"></div><div class="meta"><div class="name">body</div><div class="hex">#333840</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--muted);"></div><div class="meta"><div class="name">muted</div><div class="hex">#41454d</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--border-strong);"></div><div class="meta"><div class="name">border-strong</div><div class="hex">#9297a0</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--hairline);"></div><div class="meta"><div class="name">hairline</div><div class="hex">#dddddd</div></div></div>
+      </div>
+
+      <div class="ds-group-title">Surface</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--canvas);border-bottom:1px solid var(--hairline-soft);"></div><div class="meta"><div class="name">canvas</div><div class="hex">#ffffff</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-soft);"></div><div class="meta"><div class="name">surface-soft</div><div class="hex">#f8fafc</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-strong);"></div><div class="meta"><div class="name">surface-strong</div><div class="hex">#e0e2e6</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-dark);"></div><div class="meta"><div class="name">surface-dark</div><div class="hex">#181d26</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-dark-elevated);"></div><div class="meta"><div class="name">surface-dark-elev</div><div class="hex">#1d1f25</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--link);"></div><div class="meta"><div class="name">link</div><div class="hex">#1b61c9</div></div></div>
+      </div>
+
+      <div class="ds-group-title">Signature card surfaces</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--sig-coral);"></div><div class="meta"><div class="name">sig-coral</div><div class="hex">#aa2d00</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--sig-forest);"></div><div class="meta"><div class="name">sig-forest</div><div class="hex">#0a2e0e</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--sig-cream);"></div><div class="meta"><div class="name">sig-cream</div><div class="hex">#f5e9d4</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--sig-peach);"></div><div class="meta"><div class="name">sig-peach</div><div class="hex">#fcab79</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--sig-mint);"></div><div class="meta"><div class="name">sig-mint</div><div class="hex">#a8d8c4</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--sig-yellow);"></div><div class="meta"><div class="name">sig-yellow</div><div class="hex">#f4d35e</div></div></div>
+      </div>
+
+      <div class="ds-group-title">Category palette (in-product chips)</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--cat-red);"></div><div class="meta"><div class="name">cat-red</div><div class="hex">#f82b60</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--cat-orange);"></div><div class="meta"><div class="name">cat-orange</div><div class="hex">#ff6f2c</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--cat-yellow);"></div><div class="meta"><div class="name">cat-yellow</div><div class="hex">#fcb400</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--cat-green);"></div><div class="meta"><div class="name">cat-green</div><div class="hex">#20c933</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--cat-teal);"></div><div class="meta"><div class="name">cat-teal</div><div class="hex">#20d9d2</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--cat-blue);"></div><div class="meta"><div class="name">cat-blue</div><div class="hex">#2d7ff9</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--cat-purple);"></div><div class="meta"><div class="name">cat-purple</div><div class="hex">#8b46ff</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--cat-pink);"></div><div class="meta"><div class="name">cat-pink</div><div class="hex">#ff08c2</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <div class="ds-block-sub">Haas Grot Disp / Haas Grotesk for editorial. Inter Display for the pricing sub-system.</div>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Spec</th></tr></thead>
+        <tbody>
+          <tr><td class="token">display-xl</td><td class="sample" style="font-size:42px;font-weight:500;letter-spacing:-1px;line-height:1.1;">Editorial display</td><td>48 · 500 · 0</td></tr>
+          <tr><td class="token">display-lg</td><td class="sample" style="font-size:36px;font-weight:400;letter-spacing:-0.6px;line-height:1.2;">Homepage hero scale</td><td>40 · 400 · 0</td></tr>
+          <tr><td class="token">display-md</td><td class="sample" style="font-size:28px;font-weight:400;letter-spacing:-0.4px;line-height:1.2;">Section headlines</td><td>32 · 400 · 0</td></tr>
+          <tr><td class="token">title-lg</td><td class="sample title-lg">Body section title</td><td>24 · 400 · 0.12</td></tr>
+          <tr><td class="token">title-md</td><td class="sample title-md">Tab sub-title</td><td>20 · 400 · 0</td></tr>
+          <tr><td class="token">title-sm</td><td class="sample title-sm">Article card title</td><td>18 · 500 · 0</td></tr>
+          <tr><td class="token">body-md</td><td class="sample" style="font-size:14px;color:var(--body);">Default body text holds at 14 / 400 across the editorial system.</td><td>14 · 400 · 0</td></tr>
+          <tr><td class="token">pricing-display</td><td class="sample" style="font-family:'Inter',system-ui;font-size:36px;font-weight:475;letter-spacing:-0.4px;line-height:1.1;">$45 / seat / month</td><td>Inter · 44.8 · 475</td></tr>
+          <tr><td class="token">pricing-card-title</td><td class="sample" style="font-family:'Inter',system-ui;font-size:20px;font-weight:475;">Business</td><td>Inter · 20 · 475</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <div class="ds-block-sub">Hierarchy: lg for CTA & signature cards · md for content · sm for inputs · pill for the pricing sub-system only.</div>
+      <div class="radius-ladder">
+        <div class="r-cell"><div class="r-box" style="border-radius:2px;"></div><div class="r-lbl">xs · 2</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:6px;"></div><div class="r-lbl">sm · 6</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:10px;"></div><div class="r-lbl">md · 10</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:12px;"></div><div class="r-lbl">lg · 12</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:9999px;"></div><div class="r-lbl">pill · ∞</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3>Components</h3>
+      <div class="ds-block-sub">Default + active states only — the system never documents hover.</div>
+      <div class="comp-matrix">
+        <div class="comp"><div class="comp-name">button-primary</div><div class="comp-vis"><a class="btn btn-primary" href="#">Sign up for free</a></div></div>
+        <div class="comp"><div class="comp-name">button-secondary</div><div class="comp-vis"><a class="btn btn-secondary" href="#">Book a demo</a></div></div>
+        <div class="comp"><div class="comp-name">button-pricing-pill</div><div class="comp-vis"><a class="btn btn-pill" href="#" style="background:var(--canvas);border:1px solid var(--hairline);color:var(--pricing-ink);">Choose plan</a></div></div>
+        <div class="comp"><div class="comp-name">chip · status</div><div class="comp-vis"><span class="chip green">● In progress</span><span class="chip yellow">◐ At risk</span><span class="chip red">▲ Blocked</span></div></div>
+        <div class="comp"><div class="comp-name">chip · category</div><div class="comp-vis"><span class="chip blue">Design</span><span class="chip purple">Research</span><span class="chip pink">Marketing</span></div></div>
+        <div class="comp"><div class="comp-name">text-input</div><div class="comp-vis"><input style="border:1px solid var(--hairline);border-radius:6px;padding:10px 14px;font:14px Inter,system-ui;width:200px;color:var(--ink);background:var(--canvas);" placeholder="Search records…" /></div></div>
+        <div class="comp"><div class="comp-name">avatar-mini</div><div class="comp-vis"><span class="avatar-mini" style="background:var(--cat-purple);">SA</span><span class="avatar-mini" style="background:var(--cat-teal);">JM</span><span class="avatar-mini" style="background:var(--cat-yellow);color:#000;">RK</span></div></div>
+        <div class="comp"><div class="comp-name">progress bar</div><div class="comp-vis"><span class="bar"><span class="track"><span class="fill" style="width:72%;background:var(--cat-green);"></span></span>72%</span></div></div>
+        <div class="comp"><div class="comp-name">signature card · coral</div><div class="comp-vis"><div style="background:var(--sig-coral);color:#fff;padding:16px 18px;border-radius:8px;font-size:13px;line-height:1.4;">Production apps in prototype speed.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="brand">
+        <div style="display:inline-flex;align-items:center;gap:8px;font-weight:500;color:var(--ink);font-size:18px;">
+          <svg width="24" height="20" viewBox="0 0 200 170" fill="none"><path d="M90 4 L8 36 c-7 3 -7 13 0 16 l82 32 c6 2 14 2 20 0 l82 -32 c7 -3 7 -13 0 -16 L110 4 c-6 -2 -14 -2 -20 0 z" fill="#fcb400"/><path d="M104 96 l84 -33 v66 c0 4 -2 7 -6 8 l-78 30 z" fill="#18bfff"/><path d="M96 96 L12 63 v66 c0 4 2 7 6 8 l78 30 z" fill="#f82b60"/></svg>
+          Airtable
+        </div>
+        <p>The connected apps platform. Inspired marketing surface generated for design study.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul><li><a href="#">Bases</a></li><li><a href="#">Interfaces</a></li><li><a href="#">Automations</a></li><li><a href="#">AI</a></li></ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul><li><a href="#">Marketing</a></li><li><a href="#">Product</a></li><li><a href="#">Operations</a></li><li><a href="#">HR</a></li></ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul><li><a href="#">Templates</a></li><li><a href="#">Universe</a></li><li><a href="#">Docs</a></li><li><a href="#">Community</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Security</a></li><li><a href="#">Status</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© Airtable (inspired) · Generated for design study</div>
+      <div>Haas Grot · Ink #181d26 · Signature coral, forest, cream</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.airtable.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

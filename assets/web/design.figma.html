@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Figma — Inspired Design</title>
+<meta name="description" content="A Figma-inspired marketing page: monochrome black-and-white editorial frame interrupted by oversized pastel color blocks — lime, lilac, cream, mint, coral, navy. Pill CTAs only. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Mono core */
+  --primary: #000000;
+  --on-primary: #ffffff;
+  --ink: #000000;
+  --canvas: #ffffff;
+  --inverse-canvas: #000000;
+  --inverse-ink: #ffffff;
+  --on-inverse-soft: rgba(255,255,255,0.16);
+  --hairline: #e6e6e6;
+  --hairline-soft: #f1f1f1;
+  --surface-soft: #f7f7f5;
+  /* Color blocks (signature) */
+  --block-lime: #dceeb1;
+  --block-lilac: #c5b0f4;
+  --block-cream: #f4ecd6;
+  --block-pink: #efd4d4;
+  --block-mint: #c8e6cd;
+  --block-coral: #f3c9b6;
+  --block-navy: #1f1d3d;
+  /* Accent */
+  --accent-magenta: #ff3d8b;
+  --semantic-success: #1ea64a;
+  /* Radius */
+  --r-xs: 2px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-pill: 50px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "figmaSans Fallback", "SF Pro Display", system-ui, helvetica, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.45;
+  font-weight: 320;
+  font-feature-settings: "kern" 1, "ss01" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--block-lilac); color: var(--ink); }
+.mono { font-family: "JetBrains Mono", "figmaMono Fallback", "SF Mono", menlo, monospace; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Marquee strip (under nav) —— */
+.marquee-strip {
+  background: var(--inverse-canvas);
+  color: var(--inverse-ink);
+  height: 36px;
+  display: flex; align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.marquee-strip .track { display: inline-flex; gap: 48px; padding-left: 32px; }
+.marquee-strip .track span { display: inline-flex; align-items: center; gap: 48px; }
+.marquee-strip .track span::after { content: "●"; font-size: 8px; color: #666; }
+.marquee-strip .track span:last-child::after { display: none; }
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 56px; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.2px; }
+.brand .glyph { display: inline-block; width: 22px; height: 32px; }
+.nav-links { display: flex; gap: 4px; margin-left: 16px; }
+.nav-links a { font-size: 16px; color: var(--ink); font-weight: 330; padding: 8px 12px; border-radius: var(--r-full); }
+.nav-links a:hover { background: var(--surface-soft); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* —— Buttons (pill only) —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: "Inter", system-ui;
+  font-size: 20px; font-weight: 480; line-height: 1.4; letter-spacing: -0.1px;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  padding: 10px 20px;
+  transition: background .15s, transform .15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: #1a1a1a; }
+.btn-secondary { background: var(--canvas); color: var(--ink); padding: 8px 18px 10px; }
+.btn-secondary:hover { background: var(--surface-soft); }
+.btn-secondary-on-dark { background: transparent; color: var(--inverse-ink); border-color: rgba(255,255,255,0.32); }
+.btn-secondary-on-dark:hover { background: rgba(255,255,255,0.08); }
+.btn-on-block { background: var(--ink); color: var(--canvas); }
+.btn-magenta { background: var(--accent-magenta); color: var(--canvas); padding: 10px 18px; }
+.btn-magenta:hover { background: #e6357c; }
+.btn-text { padding: 8px 12px; border-radius: var(--r-full); font-weight: 480; font-size: 20px; }
+.btn-text:hover { background: var(--surface-soft); }
+.btn-sm { font-size: 16px; padding: 8px 16px; }
+
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: var(--r-full);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-soft);
+  color: var(--ink); border: 0; cursor: pointer;
+}
+.icon-btn.inverse { background: var(--on-inverse-soft); color: var(--inverse-ink); }
+
+/* —— Type roles —— */
+.display-xl { font-weight: 340; font-size: clamp(48px, 7vw, 86px); line-height: 1.00; letter-spacing: -1.72px; margin: 0; }
+.display-lg { font-weight: 340; font-size: clamp(40px, 5.2vw, 64px); line-height: 1.10; letter-spacing: -0.96px; margin: 0; }
+.headline { font-weight: 540; font-size: 26px; line-height: 1.35; letter-spacing: -0.26px; margin: 0; }
+.subhead { font-weight: 340; font-size: 26px; line-height: 1.35; letter-spacing: -0.26px; margin: 0; }
+.card-title { font-weight: 700; font-size: 24px; line-height: 1.45; margin: 0; }
+.body-lg { font-size: 20px; font-weight: 330; line-height: 1.40; letter-spacing: -0.14px; }
+.body { font-size: 18px; font-weight: 320; line-height: 1.45; letter-spacing: -0.26px; }
+.body-sm { font-size: 16px; font-weight: 330; line-height: 1.45; letter-spacing: -0.14px; }
+.link-emph { font-size: 20px; font-weight: 480; line-height: 1.40; letter-spacing: -0.1px; }
+.eyebrow { font-family: "JetBrains Mono", "SF Mono", monospace; font-size: 14px; font-weight: 400; line-height: 1.30; letter-spacing: 0.54px; text-transform: uppercase; color: var(--ink); }
+.caption { font-family: "JetBrains Mono", "SF Mono", monospace; font-size: 12px; font-weight: 400; line-height: 1.0; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink); }
+
+/* —— Hero —— */
+.hero { padding: 96px 0 64px; background: var(--canvas); }
+.hero .grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+@media (max-width: 960px) { .hero .grid { grid-template-columns: 1fr; gap: 32px; } }
+.hero .eyebrow { margin-bottom: 24px; }
+.hero h1 { margin: 0 0 24px; max-width: 14ch; }
+.hero p.lead { font-size: 22px; font-weight: 320; line-height: 1.4; letter-spacing: -0.2px; max-width: 36ch; margin: 0 0 32px; }
+.hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Hero collage: stacked pastel sticky-tile composition (the brand's collage feeling) */
+.collage { position: relative; height: 480px; }
+.tile { position: absolute; border-radius: var(--r-md); padding: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.tile h4 { font-family: "Inter", system-ui; font-weight: 700; font-size: 18px; margin: 0 0 8px; letter-spacing: -0.2px; }
+.tile p { font-size: 14px; font-weight: 330; line-height: 1.45; margin: 0; opacity: 0.8; }
+.tile.t1 { background: var(--block-lime); width: 220px; left: 0; top: 20px; transform: rotate(-3deg); }
+.tile.t2 { background: var(--block-lilac); width: 240px; left: 200px; top: 80px; transform: rotate(2deg); z-index: 2; }
+.tile.t3 { background: var(--block-cream); width: 200px; left: 60px; top: 220px; transform: rotate(-1deg); z-index: 1; }
+.tile.t4 { background: var(--block-coral); width: 200px; right: 0; top: 180px; transform: rotate(4deg); z-index: 3; }
+.tile.t5 { background: var(--block-mint); width: 160px; right: 60px; top: 340px; transform: rotate(-2deg); }
+.tile.t6 { background: var(--block-pink); width: 180px; left: 20px; top: 380px; transform: rotate(3deg); }
+.tile .cursor {
+  position: absolute; bottom: -8px; right: -8px;
+  background: var(--ink); color: var(--canvas);
+  font-size: 11px; font-weight: 500;
+  padding: 2px 6px; border-radius: 4px 4px 4px 0;
+  font-family: "Inter", sans-serif;
+}
+.tile .cursor.magenta { background: var(--accent-magenta); }
+.tile .cursor.lilac-on-dark { background: var(--block-navy); }
+@media (max-width: 960px) { .collage { height: 420px; max-width: 480px; margin: 0 auto; } }
+
+/* —— Section wrapper (vertical rhythm) —— */
+section { padding: 96px 0; }
+.section-tight { padding: 64px 0; }
+
+/* —— Color-block sections (the signature surface) —— */
+.color-block {
+  border-radius: var(--r-lg);
+  padding: 64px 48px;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 768px) { .color-block { border-radius: 0; margin-left: -32px; margin-right: -32px; padding: 48px 32px; } }
+.color-block .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+@media (max-width: 900px) { .color-block .grid { grid-template-columns: 1fr; } }
+.color-block .eyebrow { margin-bottom: 20px; opacity: 0.7; }
+.color-block .headline { margin-bottom: 16px; max-width: 22ch; }
+.color-block .subhead { max-width: 38ch; }
+.color-block.lime { background: var(--block-lime); }
+.color-block.lilac { background: var(--block-lilac); }
+.color-block.cream { background: var(--block-cream); }
+.color-block.coral { background: var(--block-coral); }
+.color-block.mint { background: var(--block-mint); }
+.color-block.navy { background: var(--block-navy); color: var(--inverse-ink); }
+.color-block.navy .eyebrow, .color-block.navy .headline, .color-block.navy .subhead { color: var(--inverse-ink); }
+.color-block.navy .icon-btn { background: var(--on-inverse-soft); color: var(--inverse-ink); }
+
+/* UI mock that sits inside color block */
+.ui-mock {
+  background: var(--canvas);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(0,0,0,0.04);
+  overflow: hidden;
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+}
+.ui-mock-head { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--hairline-soft); font-size: 11px; font-family: "JetBrains Mono", monospace; color: #666; }
+.ui-mock-head .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--hairline); }
+.ui-mock-head .dot.r { background: #ff5f57; }
+.ui-mock-head .dot.y { background: #febc2e; }
+.ui-mock-head .dot.g { background: #28c840; }
+.ui-mock-head .crumb { margin-left: 12px; color: #444; font-family: "Inter", sans-serif; font-size: 12px; }
+.ui-mock-body { padding: 16px; display: grid; gap: 8px; }
+.ui-mock-canvas {
+  background: var(--surface-soft);
+  border-radius: var(--r-sm);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  min-height: 200px;
+}
+.frame {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  padding: 10px;
+  display: flex; flex-direction: column; gap: 6px;
+  font-size: 11px;
+}
+.frame .frame-name { font-family: "JetBrains Mono", monospace; font-size: 10px; color: #888; letter-spacing: 0.4px; }
+.frame .layer-block { height: 16px; background: var(--hairline-soft); border-radius: 2px; }
+.frame .layer-block.pill { border-radius: 9999px; background: var(--ink); width: 60%; }
+.frame .layer-block.pill-w { border-radius: 9999px; background: var(--canvas); border: 1px solid var(--hairline); width: 50%; }
+.frame .layer-block.lime { background: var(--block-lime); height: 24px; }
+.frame .layer-block.lilac { background: var(--block-lilac); height: 24px; }
+.frame .layer-block.text { height: 8px; border-radius: 2px; background: var(--hairline); }
+.frame .layer-block.text-d { height: 12px; border-radius: 2px; background: #333; width: 80%; }
+
+/* —— Feature grid (illustration tiles) —— */
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr; } }
+.f-tile {
+  background: var(--surface-soft);
+  border-radius: var(--r-md);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+  min-height: 280px;
+}
+.f-tile .eyebrow { font-size: 12px; letter-spacing: 0.6px; margin-bottom: 12px; }
+.f-tile h3 { margin: 0; font-weight: 700; font-size: 22px; line-height: 1.3; letter-spacing: -0.2px; }
+.f-tile p { margin: 0; font-size: 16px; font-weight: 330; line-height: 1.45; opacity: 0.85; }
+.f-tile .vis { margin-top: auto; height: 120px; border-radius: var(--r-sm); background: var(--canvas); border: 1px solid var(--hairline); position: relative; overflow: hidden; padding: 12px; }
+.f-tile .vis .swatch-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.f-tile .vis .sw { width: 22px; height: 22px; border-radius: 4px; }
+.f-tile .vis .pill-row { display: flex; gap: 6px; margin-top: 8px; }
+.f-tile .vis .mini-pill { padding: 4px 10px; border-radius: 9999px; background: var(--ink); color: var(--canvas); font-size: 10px; font-weight: 500; }
+.f-tile .vis .mini-pill.w { background: var(--canvas); color: var(--ink); border: 1px solid var(--hairline); }
+.f-tile .vis .layer-stack { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.f-tile .vis .lr { height: 8px; background: var(--hairline-soft); border-radius: 2px; }
+
+/* —— Pricing —— */
+.pricing-tabs { display: inline-flex; padding: 4px; background: var(--surface-soft); border-radius: var(--r-pill); margin-bottom: 32px; }
+.pricing-tabs .tab { padding: 8px 18px; border-radius: var(--r-pill); font-family: "Inter"; font-size: 16px; font-weight: 480; letter-spacing: -0.1px; cursor: pointer; }
+.pricing-tabs .tab.active { background: var(--ink); color: var(--canvas); }
+
+.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1100px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.tier .tier-name { font-family: "Inter"; font-weight: 700; font-size: 24px; margin: 0; line-height: 1.45; }
+.tier .price { display: flex; align-items: baseline; gap: 4px; font-feature-settings: "tnum" 1; }
+.tier .price .num { font-size: 36px; font-weight: 540; letter-spacing: -0.5px; color: var(--ink); }
+.tier .price .per { font-size: 14px; opacity: 0.7; }
+.tier .desc { font-size: 16px; font-weight: 330; line-height: 1.45; opacity: 0.85; margin: 0; min-height: 48px; }
+.tier ul { padding: 0; margin: 8px 0 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.tier li { font-size: 14px; line-height: 1.45; font-weight: 330; display: flex; gap: 8px; align-items: start; }
+.tier li svg { flex: none; margin-top: 4px; color: var(--semantic-success); }
+.tier .cta-wrap { margin-top: auto; padding-top: 16px; }
+.tier .cta-wrap .btn { width: 100%; padding: 10px 20px; }
+
+/* Comparison */
+.compare {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  margin-top: 40px;
+  overflow: hidden;
+  background: var(--canvas);
+}
+.compare-row { display: grid; grid-template-columns: 2fr repeat(4, 1fr); padding: 16px 24px; border-bottom: 1px solid var(--hairline-soft); font-size: 16px; font-weight: 330; align-items: center; }
+.compare-row:last-child { border-bottom: 0; }
+.compare-row.head { background: var(--surface-soft); font-weight: 540; font-size: 14px; text-transform: uppercase; letter-spacing: 0.6px; font-family: "JetBrains Mono", monospace; }
+.check-glyph { width: 16px; height: 16px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; color: var(--semantic-success); }
+.no-glyph { color: #b8b8b8; }
+
+/* Promo banner (lilac) */
+.promo-banner-lilac {
+  background: var(--block-lilac);
+  border-radius: var(--r-md);
+  padding: 16px 24px;
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.promo-banner-lilac .label { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase; }
+.promo-banner-lilac .msg { font-size: 16px; font-weight: 330; flex: 1; min-width: 240px; }
+
+/* Templates grid */
+.tmpl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1100px) { .tmpl-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .tmpl-grid { grid-template-columns: 1fr; } }
+.tmpl {
+  background: var(--surface-soft);
+  border-radius: var(--r-md);
+  padding: 16px;
+  font-size: 14px;
+}
+.tmpl .thumb { aspect-ratio: 4/3; border-radius: var(--r-sm); margin-bottom: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+.tmpl .thumb.lime { background: var(--block-lime); }
+.tmpl .thumb.lilac { background: var(--block-lilac); }
+.tmpl .thumb.cream { background: var(--block-cream); }
+.tmpl .thumb.pink { background: var(--block-pink); }
+.tmpl .thumb.mint { background: var(--block-mint); }
+.tmpl .thumb.coral { background: var(--block-coral); }
+.tmpl .thumb .row { height: 8px; background: rgba(0,0,0,0.08); border-radius: 2px; }
+.tmpl .thumb .row.w { background: rgba(255,255,255,0.6); }
+.tmpl .thumb .row.short { width: 50%; }
+.tmpl .thumb .row.med { width: 75%; }
+.tmpl .thumb .pill-mock { padding: 2px 8px; background: var(--ink); color: var(--canvas); font-size: 9px; border-radius: 9999px; width: fit-content; font-family: "Inter"; }
+.tmpl .meta { display: flex; align-items: center; gap: 8px; }
+.tmpl .name { font-weight: 540; }
+.tmpl .author { font-family: "JetBrains Mono", monospace; font-size: 11px; opacity: 0.6; letter-spacing: 0.4px; }
+
+/* —— Footer —— */
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: 96px 0 48px;
+  background: var(--canvas);
+}
+.wordmark { font-weight: 700; font-size: clamp(64px, 10vw, 128px); line-height: 1; letter-spacing: -3px; margin: 0 0 48px; color: var(--ink); }
+.footer-grid { display: grid; gap: 32px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+.footer-grid h4 { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.6px; font-weight: 400; text-transform: uppercase; color: var(--ink); margin: 0 0 16px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 14px; color: var(--ink); opacity: 0.8; }
+.footer-grid li a:hover { opacity: 1; text-decoration: underline; }
+.footer-bottom { padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--hairline); font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.6px; text-transform: uppercase; color: #555; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); border: 1px solid var(--ink);
+  padding: 8px 16px; border-radius: var(--r-pill); font-size: 13px;
+  font-family: "Inter"; font-weight: 480;
+  color: var(--ink);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.src-link:hover { background: var(--ink); color: var(--canvas); }
+
+/* —— Design system tokens section —— */
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-family: "Inter"; font-size: 26px; font-weight: 540; letter-spacing: -0.26px; color: var(--ink); margin: 0 0 16px; }
+.ds-caption { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 400; letter-spacing: 0.6px; text-transform: uppercase; color: #555; margin: 28px 0 12px; }
+
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; background: var(--canvas); }
+.ds-sw .chip { height: 56px; }
+.ds-sw .meta { padding: 8px 10px; }
+.ds-sw .name { font-family: "Inter"; font-size: 12px; font-weight: 540; color: var(--ink); letter-spacing: -0.1px; }
+.ds-sw .val { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: #666; margin-top: 2px; }
+
+.ds-tints { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .ds-tints { grid-template-columns: repeat(2, 1fr); } }
+.ds-tint { border-radius: var(--r-lg); padding: 28px; min-height: 120px; display: flex; flex-direction: column; justify-content: space-between; color: var(--ink); }
+.ds-tint .lab { font-family: "Inter"; font-size: 18px; font-weight: 700; letter-spacing: -0.2px; }
+.ds-tint .v { font-family: "JetBrains Mono", monospace; font-size: 11px; opacity: 0.7; margin-top: 4px; }
+.ds-tint.navy { color: var(--inverse-ink); }
+
+.ds-typescale { border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; background: var(--canvas); }
+.ds-tr { display: grid; grid-template-columns: 180px 260px 1fr; align-items: baseline; gap: 24px; padding: 20px 24px; border-bottom: 1px solid var(--hairline-soft); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink); font-weight: 500; }
+.ds-spec { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #666; }
+.ds-sam { color: var(--ink); font-family: "Inter"; }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 24px !important; line-height: 1.2 !important; letter-spacing: -0.3px !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(7, 1fr); }
+@media (max-width: 900px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-rad .box { width: 72px; height: 72px; background: var(--ink); }
+.ds-rad .lab { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--ink); font-weight: 500; letter-spacing: 0.4px; }
+.ds-rad .vv { font-family: "JetBrains Mono", monospace; font-size: 10px; color: #666; }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; margin-top: 16px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input { height: 44px; padding: 12px 14px; border-radius: var(--r-md); border: 1px solid var(--hairline); background: var(--canvas); color: var(--ink); font-family: "Inter"; font-size: 18px; font-weight: 320; width: 100%; letter-spacing: -0.26px; }
+.ds-input.focused { border: 2px solid var(--ink); padding: 11px 13px; outline: none; }
+.ds-field-label { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #555; margin-bottom: 6px; display: block; letter-spacing: 0.4px; text-transform: uppercase; }
+
+.ds-card-row { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-top: 16px; }
+@media (max-width: 900px) { .ds-card-row { grid-template-columns: 1fr; } }
+.ds-card-demo { padding: 24px; border-radius: var(--r-md); }
+.ds-card-demo.template { background: var(--surface-soft); }
+.ds-card-demo.feature { background: var(--surface-soft); }
+.ds-card-demo.block { background: var(--block-lime); border-radius: var(--r-lg); padding: 32px; }
+.ds-card-demo h5 { font-family: "Inter"; font-weight: 700; font-size: 18px; margin: 0 0 8px; letter-spacing: -0.2px; }
+.ds-card-demo p { font-size: 14px; margin: 0; font-weight: 330; }
+
+.ds-pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.ds-pill { padding: 4px 10px; border-radius: 9999px; font-family: "Inter"; font-size: 13px; font-weight: 540; }
+.ds-pill.lime { background: var(--block-lime); color: var(--ink); }
+.ds-pill.lilac { background: var(--block-lilac); color: var(--ink); }
+.ds-pill.mint { background: var(--block-mint); color: var(--ink); }
+.ds-pill.pink { background: var(--block-pink); color: var(--ink); }
+.ds-pill.cream { background: var(--block-cream); color: var(--ink); }
+.ds-pill.coral { background: var(--block-coral); color: var(--ink); }
+.ds-pill.magenta { background: var(--accent-magenta); color: var(--canvas); }
+.ds-pill.ink { background: var(--ink); color: var(--canvas); }
+</style>
+</head>
+<body>
+
+<!-- Marquee strip (signature: thin black ribbon scrolling customer wordmarks) -->
+<div class="marquee-strip">
+  <div class="track">
+    <span>Loved by teams at</span>
+    <span>Stripe</span>
+    <span>Airbnb</span>
+    <span>GitHub</span>
+    <span>Pinterest</span>
+    <span>Vercel</span>
+    <span>Notion</span>
+    <span>Linear</span>
+    <span>Shopify</span>
+    <span>Discord</span>
+    <span>Loved by teams at</span>
+    <span>Stripe</span>
+    <span>Airbnb</span>
+    <span>GitHub</span>
+  </div>
+</div>
+
+<!-- Top nav -->
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#"><svg class="glyph" viewBox="0 0 22 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5.5 32a5.5 5.5 0 0 0 5.5-5.5V21H5.5a5.5 5.5 0 0 0 0 11Z" fill="#0acf83"/>
+    <path d="M0 15.5A5.5 5.5 0 0 1 5.5 10H11v11H5.5A5.5 5.5 0 0 1 0 15.5Z" fill="#a259ff"/>
+    <path d="M0 5.5A5.5 5.5 0 0 1 5.5 0H11v11H5.5A5.5 5.5 0 0 1 0 5.5Z" fill="#f24e1e"/>
+    <path d="M11 0h5.5a5.5 5.5 0 0 1 0 11H11V0Z" fill="#ff7262"/>
+    <path d="M22 15.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z" fill="#1abcfe"/>
+  </svg> Figmaze</a>
+  <nav class="nav-links">
+    <a href="#">Products</a>
+    <a href="#">Solutions</a>
+    <a href="#">Community</a>
+    <a href="#">Resources</a>
+    <a href="#">Pricing</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-text">Contact sales</a>
+    <a href="#" class="btn btn-text">Log in</a>
+    <a href="#" class="btn btn-secondary">Open in browser</a>
+    <a href="#" class="btn btn-primary">Get started — it's free</a>
+  </div>
+</div></header>
+
+<!-- HERO: white canvas, oversized display, collage of pastel tiles -->
+<section class="hero"><div class="wrap">
+  <div class="grid">
+    <div>
+      <p class="eyebrow">2026 Release · Auto-Layout 3.0</p>
+      <h1 class="display-xl">Where teams design, together.</h1>
+      <p class="lead">From early sketches to shipped product — Figmaze is one canvas for design files, brainstorms, slides, and prototypes. Built for every team that makes things.</p>
+      <div class="cta-row">
+        <a href="#" class="btn btn-primary">Get started — it's free</a>
+        <a href="#" class="btn btn-secondary">Watch the demo</a>
+      </div>
+    </div>
+    <div class="collage" aria-hidden="true">
+      <div class="tile t1">
+        <h4>Design system v2</h4>
+        <p>Tokens, components, variants — all in one library.</p>
+        <span class="cursor">Mira</span>
+      </div>
+      <div class="tile t2">
+        <h4>Auto-Layout 3.0</h4>
+        <p>Pixel-perfect layouts that respond to content, not the other way around.</p>
+        <span class="cursor magenta">Avery</span>
+      </div>
+      <div class="tile t3">
+        <h4>Slides for makers</h4>
+        <p>Pitch the work where the work lives.</p>
+      </div>
+      <div class="tile t4">
+        <h4>Dev Mode</h4>
+        <p>Hand-off without the handoff.</p>
+        <span class="cursor lilac-on-dark">Jun</span>
+      </div>
+      <div class="tile t5">
+        <h4>FigJam</h4>
+        <p>Whiteboard that thinks.</p>
+      </div>
+      <div class="tile t6">
+        <h4>Variables</h4>
+        <p>Light, dark, dense, default.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- White feature section (returns to canvas between blocks) -->
+<section class="section-tight"><div class="wrap">
+  <p class="eyebrow" style="text-align: center; margin-bottom: 24px;">— What you can ship</p>
+  <h2 class="display-lg" style="text-align: center; max-width: 18ch; margin: 0 auto 56px;">One file. Every step of the work.</h2>
+
+  <div class="feature-grid">
+    <div class="f-tile">
+      <span class="eyebrow">01 · Design</span>
+      <h3>From wireframe to pixel.</h3>
+      <p>Vector tools that feel native, components that scale, and variables that ship the same file to light, dark, and every breakpoint between.</p>
+      <div class="vis">
+        <div class="swatch-row">
+          <span class="sw" style="background:#000"></span>
+          <span class="sw" style="background:#dceeb1"></span>
+          <span class="sw" style="background:#c5b0f4"></span>
+          <span class="sw" style="background:#efd4d4"></span>
+          <span class="sw" style="background:#c8e6cd"></span>
+          <span class="sw" style="background:#f3c9b6"></span>
+        </div>
+        <div class="layer-stack">
+          <div class="lr" style="width: 60%;"></div>
+          <div class="lr" style="width: 80%;"></div>
+          <div class="lr" style="width: 45%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-tile">
+      <span class="eyebrow">02 · Brainstorm</span>
+      <h3>FigJam is the whiteboard.</h3>
+      <p>Sticky notes, voting, timers, and AI that drafts the affinity map while you're still talking.</p>
+      <div class="vis">
+        <div class="pill-row">
+          <span class="mini-pill" style="background: var(--block-pink); color: var(--ink);">User pains</span>
+          <span class="mini-pill" style="background: var(--block-lime); color: var(--ink);">Ideas</span>
+          <span class="mini-pill" style="background: var(--block-cream); color: var(--ink);">Themes</span>
+        </div>
+        <div class="layer-stack">
+          <div class="lr" style="width: 70%;"></div>
+          <div class="lr" style="width: 50%;"></div>
+          <div class="lr" style="width: 90%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-tile">
+      <span class="eyebrow">03 · Develop</span>
+      <h3>Dev Mode keeps engineers honest.</h3>
+      <p>Inspect spec, copy production-ready code, and ship variants without bouncing between files.</p>
+      <div class="vis" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #444;">
+        <div style="opacity: 0.6;">// Button.tsx</div>
+        <div>borderRadius: <span style="color: var(--accent-magenta)">50</span>;</div>
+        <div>padding: <span style="color: var(--accent-magenta)">10px 20px</span>;</div>
+        <div>background: <span style="color: var(--accent-magenta)">#000</span>;</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- LIME color block: systems story -->
+<section><div class="wrap">
+  <div class="color-block lime">
+    <div class="grid">
+      <div>
+        <p class="eyebrow">— Systems</p>
+        <h2 class="headline" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.6px; font-weight: 540;">A design system isn't a library. It's a contract.</h2>
+        <p class="subhead" style="margin: 24px 0 32px;">Tokens, components, variants — written once, consumed everywhere. From Figmaze to your codebase, no copy-paste in between.</p>
+        <a href="#" class="btn btn-on-block">Explore systems</a>
+      </div>
+      <div class="ui-mock">
+        <div class="ui-mock-head">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="crumb">Design System / Components / Button</span>
+        </div>
+        <div class="ui-mock-body">
+          <div class="ui-mock-canvas">
+            <div class="frame">
+              <span class="frame-name">Button / Primary</span>
+              <div class="layer-block pill"></div>
+              <div class="layer-block text-d"></div>
+              <div class="layer-block text" style="width: 60%;"></div>
+            </div>
+            <div class="frame">
+              <span class="frame-name">Button / Secondary</span>
+              <div class="layer-block pill-w"></div>
+              <div class="layer-block text-d"></div>
+              <div class="layer-block text" style="width: 50%;"></div>
+            </div>
+            <div class="frame">
+              <span class="frame-name">Color / Lime</span>
+              <div class="layer-block lime"></div>
+              <div class="layer-block text" style="width: 70%;"></div>
+            </div>
+            <div class="frame">
+              <span class="frame-name">Color / Lilac</span>
+              <div class="layer-block lilac"></div>
+              <div class="layer-block text" style="width: 70%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- NAVY color block: ship products story (the only inverse surface above the footer) -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="color-block navy">
+    <div class="grid">
+      <div>
+        <p class="eyebrow">— Ship products</p>
+        <h2 class="headline" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.6px; font-weight: 540;">From the first frame to the production commit.</h2>
+        <p class="subhead" style="margin: 24px 0 32px;">Dev Mode turns the file engineers used to ignore into the source of truth they actually open. Tokens, specs, code — read directly from the design.</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#" class="btn btn-primary" style="background: var(--canvas); color: var(--ink);">Try Dev Mode</a>
+          <a href="#" class="btn btn-secondary-on-dark">See it in action</a>
+        </div>
+      </div>
+      <div class="ui-mock" style="background: #2a2848; color: var(--inverse-ink);">
+        <div class="ui-mock-head" style="border-bottom-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="crumb" style="color: rgba(255,255,255,0.85)">Dev Mode · Button / Primary</span>
+        </div>
+        <div class="ui-mock-body">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6; color: rgba(255,255,255,0.85);">
+            <div style="color: rgba(255,255,255,0.5)">/* Tokens */</div>
+            <div>--primary: <span style="color: var(--accent-magenta)">#000000</span>;</div>
+            <div>--on-primary: <span style="color: var(--accent-magenta)">#ffffff</span>;</div>
+            <div>--r-pill: <span style="color: var(--accent-magenta)">50px</span>;</div>
+            <div style="height: 8px;"></div>
+            <div style="color: rgba(255,255,255,0.5)">/* Spec */</div>
+            <div>padding: <span style="color: var(--accent-magenta)">10px 20px</span>;</div>
+            <div>font: <span style="color: var(--accent-magenta)">480 20px/1.4 Inter</span>;</div>
+            <div>letter-spacing: <span style="color: var(--accent-magenta)">-0.1px</span>;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CORAL color block: developer / API story -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="color-block coral">
+    <div class="grid">
+      <div>
+        <p class="eyebrow">— For developers</p>
+        <h2 class="headline" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.6px; font-weight: 540;">Plug Figmaze into anything you build.</h2>
+        <p class="subhead" style="margin: 24px 0 32px;">A REST API, a webhook system, and SDKs in TypeScript, Python, and Go. Pull design tokens at build time. Stream comments into your tracker. Make the file feel like an endpoint.</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#" class="btn btn-on-block">Read the docs</a>
+          <a href="#" class="btn btn-secondary" style="background: var(--canvas);">Browse plugins</a>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center; justify-content: center;">
+        <div class="icon-btn">→</div>
+        <div class="ui-mock" style="flex: 1; max-width: 400px;">
+          <div class="ui-mock-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="crumb">api.figmaze.com</span></div>
+          <div class="ui-mock-body" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; color: #333;">
+            <div><span style="color: var(--accent-magenta);">GET</span> /v1/files/:key/styles</div>
+            <div style="opacity: 0.6;">→ 200 OK</div>
+            <div>{ "tokens": [</div>
+            <div>&nbsp;&nbsp;{ "name": "block-lime",</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;"value": <span style="color: var(--accent-magenta)">"#dceeb1"</span> },</div>
+            <div>&nbsp;&nbsp;{ "name": "r-pill",</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;"value": <span style="color: var(--accent-magenta)">"50px"</span> }</div>
+            <div>] }</div>
+          </div>
+        </div>
+        <div class="icon-btn">←</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- White template grid -->
+<section><div class="wrap">
+  <p class="eyebrow" style="text-align: center; margin-bottom: 24px;">— Explore what people are making</p>
+  <h2 class="display-lg" style="text-align: center; max-width: 16ch; margin: 0 auto 56px;">A community of 4M+ designers.</h2>
+
+  <div class="tmpl-grid">
+    <div class="tmpl">
+      <div class="thumb lime">
+        <div class="pill-mock">FigJam · Retro</div>
+        <div class="row med"></div>
+        <div class="row short"></div>
+        <div class="row med w"></div>
+      </div>
+      <div class="meta">
+        <div>
+          <div class="name">Retro template</div>
+          <div class="author">@noa.designs · 4.2k uses</div>
+        </div>
+      </div>
+    </div>
+    <div class="tmpl">
+      <div class="thumb lilac">
+        <div class="pill-mock">Design · System</div>
+        <div class="row med w"></div>
+        <div class="row short w"></div>
+        <div class="row med w"></div>
+      </div>
+      <div class="meta">
+        <div>
+          <div class="name">Atomic system starter</div>
+          <div class="author">@kit · 2.1k uses</div>
+        </div>
+      </div>
+    </div>
+    <div class="tmpl">
+      <div class="thumb cream">
+        <div class="pill-mock">Slides · Pitch</div>
+        <div class="row med"></div>
+        <div class="row short"></div>
+      </div>
+      <div class="meta">
+        <div>
+          <div class="name">Pitch deck — Series A</div>
+          <div class="author">@anya · 8.7k uses</div>
+        </div>
+      </div>
+    </div>
+    <div class="tmpl">
+      <div class="thumb coral">
+        <div class="pill-mock">Mobile · App</div>
+        <div class="row short w"></div>
+        <div class="row med"></div>
+        <div class="row med w"></div>
+      </div>
+      <div class="meta">
+        <div>
+          <div class="name">iOS 26 component kit</div>
+          <div class="author">@riley · 12.4k uses</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Pricing on lime -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="color-block lime">
+    <div style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+      <p class="eyebrow">— Pricing</p>
+      <h2 class="headline" style="font-size: 48px; line-height: 1.05; letter-spacing: -0.6px; font-weight: 540; margin: 16px 0;">Pick a seat. Get to work.</h2>
+      <p class="subhead">Starter is free forever. Paid plans start at $12 per editor.</p>
+      <div class="pricing-tabs" style="margin-top: 32px;">
+        <span class="tab active">Monthly</span>
+        <span class="tab">Annual · 2 months free</span>
+      </div>
+    </div>
+
+    <div class="tiers">
+      <div class="tier">
+        <h3 class="tier-name">Starter</h3>
+        <p class="price"><span class="num">$0</span></p>
+        <p class="desc">For individuals exploring the canvas.</p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>3 design files</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited FigJam</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Community access</li>
+        </ul>
+        <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="border: 1px solid var(--ink);">Get started</a></div>
+      </div>
+      <div class="tier" style="border: 2px solid var(--ink); position: relative;">
+        <span style="position: absolute; top: -14px; left: 24px; background: var(--ink); color: var(--canvas); font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 10px; border-radius: 9999px; letter-spacing: 0.4px; text-transform: uppercase;">Most picked</span>
+        <h3 class="tier-name">Professional</h3>
+        <p class="price"><span class="num">$12</span><span class="per">/editor · mo</span></p>
+        <p class="desc">For teams shipping together.</p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited files</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Team libraries</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Dev Mode</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Version history</li>
+        </ul>
+        <div class="cta-wrap"><a href="#" class="btn btn-primary">Choose Professional</a></div>
+      </div>
+      <div class="tier">
+        <h3 class="tier-name">Organization</h3>
+        <p class="price"><span class="num">$45</span><span class="per">/editor · mo</span></p>
+        <p class="desc">For one connected design org.</p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Org-wide libraries</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Design system analytics</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SSO + SCIM</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Branching & merging</li>
+        </ul>
+        <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="border: 1px solid var(--ink);">Choose Organization</a></div>
+      </div>
+      <div class="tier">
+        <h3 class="tier-name">Enterprise</h3>
+        <p class="price"><span class="num">Custom</span></p>
+        <p class="desc">For the largest design operations.</p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Dedicated CSM</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Custom contracts</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Audit log API</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Premium support</li>
+        </ul>
+        <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="border: 1px solid var(--ink);">Contact sales</a></div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="compare-row head"><div>Feature</div><div>Starter</div><div>Professional</div><div>Organization</div><div>Enterprise</div></div>
+      <div class="compare-row"><div>Design files</div><div>3</div><div>Unlimited</div><div>Unlimited</div><div>Unlimited</div></div>
+      <div class="compare-row"><div>Editors</div><div>1</div><div>Up to 100</div><div>Up to 500</div><div>Unlimited</div></div>
+      <div class="compare-row"><div>Dev Mode</div><div><span class="no-glyph">—</span></div><div><span class="check-glyph">✓</span></div><div><span class="check-glyph">✓</span></div><div><span class="check-glyph">✓</span></div></div>
+      <div class="compare-row"><div>Branching</div><div><span class="no-glyph">—</span></div><div><span class="no-glyph">—</span></div><div><span class="check-glyph">✓</span></div><div><span class="check-glyph">✓</span></div></div>
+      <div class="compare-row"><div>SAML SSO</div><div><span class="no-glyph">—</span></div><div><span class="no-glyph">—</span></div><div><span class="check-glyph">✓</span></div><div><span class="check-glyph">✓</span></div></div>
+      <div class="compare-row"><div>Audit log API</div><div><span class="no-glyph">—</span></div><div><span class="no-glyph">—</span></div><div><span class="no-glyph">—</span></div><div><span class="check-glyph">✓</span></div></div>
+    </div>
+
+    <div class="promo-banner-lilac" style="margin-top: 40px;">
+      <span class="label">Release Notes</span>
+      <span class="msg">Auto-Layout 3.0 ships next month. Save your spot at our launch event.</span>
+      <a href="#" class="btn btn-magenta">Save your spot</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============== DESIGN SYSTEM SECTION (Part B) ============== -->
+<section><div class="wrap">
+  <div style="max-width: 720px; margin: 0 auto 48px; text-align: center;">
+    <p class="eyebrow">— Design system</p>
+    <h2 class="display-lg" style="margin: 16px 0;">The tokens behind every pill.</h2>
+    <p class="body-lg" style="opacity: 0.8;">Source:
+      <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.figma.html" target="_blank" rel="noopener" style="border-bottom: 1px solid var(--ink);">DESIGN.md</a>.
+      Monochrome system core. Oversized pastel color blocks. Pill is the only CTA shape. figmaSans (Inter sub) at fine weight increments (320, 330, 340, 480, 540, 700).
+    </p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">System core — monochrome</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">primary · ink</div><div class="val">#000000</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff; border-bottom: 1px solid var(--hairline)"></div><div class="meta"><div class="name">canvas · on-primary</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f7f7f5"></div><div class="meta"><div class="name">surface-soft</div><div class="val">#f7f7f5</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e6e6e6"></div><div class="meta"><div class="name">hairline</div><div class="val">#e6e6e6</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f1f1f1"></div><div class="meta"><div class="name">hairline-soft</div><div class="val">#f1f1f1</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ff3d8b"></div><div class="meta"><div class="name">accent-magenta</div><div class="val">#ff3d8b</div></div></div>
+    </div>
+
+    <p class="ds-caption">Color blocks — the signature surface</p>
+    <div class="ds-tints">
+      <div class="ds-tint" style="background: var(--block-lime);"><div class="lab">block-lime</div><div class="v">#dceeb1 · systems · FAQ · contact</div></div>
+      <div class="ds-tint" style="background: var(--block-lilac);"><div class="lab">block-lilac</div><div class="v">#c5b0f4 · /design hero · promo banner</div></div>
+      <div class="ds-tint" style="background: var(--block-cream);"><div class="lab">block-cream</div><div class="v">#f4ecd6 · FigJam strip · template grid</div></div>
+      <div class="ds-tint" style="background: var(--block-pink);"><div class="lab">block-pink</div><div class="v">#efd4d4 · FigJam pastel</div></div>
+      <div class="ds-tint" style="background: var(--block-mint);"><div class="lab">block-mint</div><div class="v">#c8e6cd · FigJam pastel</div></div>
+      <div class="ds-tint" style="background: var(--block-coral);"><div class="lab">block-coral</div><div class="v">#f3c9b6 · home "ship products"</div></div>
+      <div class="ds-tint navy" style="background: var(--block-navy);"><div class="lab">block-navy</div><div class="v" style="opacity: 0.7">#1f1d3d · inverse story block</div></div>
+      <div class="ds-tint" style="background: var(--inverse-canvas); color: var(--inverse-ink);"><div class="lab">inverse-canvas</div><div class="v" style="opacity: 0.7">#000000 · footer · marquee</div></div>
+    </div>
+
+    <p class="ds-caption">Semantic</p>
+    <div class="ds-swatches" style="grid-template-columns: repeat(2, 1fr); max-width: 480px;">
+      <div class="ds-sw"><div class="chip" style="background:#1ea64a"></div><div class="meta"><div class="name">semantic-success</div><div class="val">#1ea64a · check glyph</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:rgba(0,0,0,0.6)"></div><div class="meta"><div class="name">overlay-scrim</div><div class="val">#000 @ 60%</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="body-sm" style="opacity: 0.8; margin: 0 0 24px;">figmaSans is exercised at unusually fine variable weight increments — Inter is the open-source substitute, with line-heights nudged ~0.02 down to compensate for taller x-height. figmaMono (JetBrains Mono sub) is reserved for eyebrows and captions, always uppercase, positive tracking.</p>
+
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">86px · 340 · 1.00 · -1.72px</span><span class="ds-sam" style="font-size: 56px; font-weight: 340; line-height: 1.00; letter-spacing: -1.4px;">Where teams design</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">64px · 340 · 1.10 · -0.96px</span><span class="ds-sam" style="font-size: 44px; font-weight: 340; line-height: 1.10; letter-spacing: -0.8px;">Section opener</span></div>
+      <div class="ds-tr"><span class="ds-tok">headline</span><span class="ds-spec">26px · 540 · 1.35 · -0.26px</span><span class="ds-sam" style="font-size: 26px; font-weight: 540; line-height: 1.35; letter-spacing: -0.26px;">A system isn't a library.</span></div>
+      <div class="ds-tr"><span class="ds-tok">subhead</span><span class="ds-spec">26px · 340 · 1.35 · -0.26px</span><span class="ds-sam" style="font-size: 26px; font-weight: 340; line-height: 1.35; letter-spacing: -0.26px;">Weight, not size, carries hierarchy.</span></div>
+      <div class="ds-tr"><span class="ds-tok">card-title</span><span class="ds-spec">24px · 700 · 1.45 · 0</span><span class="ds-sam" style="font-size: 24px; font-weight: 700; line-height: 1.45;">Pricing tier title</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">20px · 330 · 1.40 · -0.14px</span><span class="ds-sam" style="font-size: 20px; font-weight: 330; line-height: 1.40; letter-spacing: -0.14px;">Lead copy on the hero band.</span></div>
+      <div class="ds-tr"><span class="ds-tok">body</span><span class="ds-spec">18px · 320 · 1.45 · -0.26px</span><span class="ds-sam" style="font-size: 18px; font-weight: 320; line-height: 1.45; letter-spacing: -0.26px;">Default body. Black at weight 320.</span></div>
+      <div class="ds-tr"><span class="ds-tok">link · button</span><span class="ds-spec">20px · 480 · 1.40 · -0.10px</span><span class="ds-sam" style="font-size: 20px; font-weight: 480; line-height: 1.40; letter-spacing: -0.10px;">Get started — it's free</span></div>
+      <div class="ds-tr"><span class="ds-tok">eyebrow · mono</span><span class="ds-spec">18px · 400 · 1.30 · 0.54px</span><span class="ds-sam mono" style="font-size: 16px; font-weight: 400; line-height: 1.30; letter-spacing: 0.54px; text-transform: uppercase;">— Section eyebrow</span></div>
+      <div class="ds-tr"><span class="ds-tok">caption · mono</span><span class="ds-spec">12px · 400 · 1.00 · 0.60px</span><span class="ds-sam mono" style="font-size: 12px; font-weight: 400; line-height: 1.00; letter-spacing: 0.6px; text-transform: uppercase;">FOOTER COLUMN HEAD</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <p class="body-sm" style="opacity: 0.8; margin: 0 0 24px;">Pill (`r-pill`) is the only button shape. Circle (`r-full`) is the only icon-button shape. Square buttons read as a different brand.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius: 2px;"></div><div class="lab">xs</div><div class="vv">2px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 6px;"></div><div class="lab">sm</div><div class="vv">6px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 8px;"></div><div class="lab">md</div><div class="vv">8px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 24px;"></div><div class="lab">lg</div><div class="vv">24px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 32px;"></div><div class="lab">xl</div><div class="vv">32px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 50px;"></div><div class="lab">pill</div><div class="vv">50px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 9999px;"></div><div class="lab">full</div><div class="vv">9999px</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — pill only</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">button-primary</a>
+      <a href="#" class="btn btn-secondary" style="border: 1px solid var(--hairline);">button-secondary</a>
+      <a href="#" class="btn btn-text">button-tertiary-text</a>
+      <a href="#" class="btn btn-magenta">button-magenta-promo</a>
+      <span class="icon-btn" aria-label="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </div>
+
+    <p class="ds-caption">Buttons on inverse canvas</p>
+    <div class="ds-comp-row" style="background: var(--ink); padding: 24px; border-radius: var(--r-md);">
+      <a href="#" class="btn btn-primary" style="background: var(--canvas); color: var(--ink);">button-primary (inverse)</a>
+      <a href="#" class="btn btn-secondary-on-dark">button-secondary-on-dark</a>
+      <span class="icon-btn inverse" aria-label="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </div>
+
+    <p class="ds-caption">Inputs — focus is the ring, not the fill</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input · default</label>
+        <input class="ds-input" placeholder="hello@figmaze.com" />
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="hello@figmaze.com" />
+      </div>
+    </div>
+
+    <p class="ds-caption">Cards & surfaces</p>
+    <div class="ds-card-row">
+      <div class="ds-card-demo template">
+        <span class="eyebrow" style="font-size: 11px;">template-card</span>
+        <h5 style="margin-top: 12px;">Surface-soft tile</h5>
+        <p style="opacity: 0.8;">8px radius. Hosts template thumbnails on the white canvas.</p>
+      </div>
+      <div class="ds-card-demo" style="background: var(--canvas); border: 1px solid var(--hairline);">
+        <span class="eyebrow" style="font-size: 11px;">pricing-card</span>
+        <h5 style="margin-top: 12px;">White + hairline</h5>
+        <p style="opacity: 0.8;">24px radius. Stroked, not shadowed — color is the depth device.</p>
+      </div>
+      <div class="ds-card-demo block">
+        <span class="eyebrow" style="font-size: 11px;">color-block-section</span>
+        <h5 style="margin-top: 12px;">Lime poster</h5>
+        <p style="opacity: 0.8;">24px radius. 48px interior padding. Full-bleed below 768px.</p>
+      </div>
+    </div>
+
+    <p class="ds-caption">Tags & badges — pill family</p>
+    <div class="ds-pill-row">
+      <span class="ds-pill lime">block-lime</span>
+      <span class="ds-pill lilac">block-lilac</span>
+      <span class="ds-pill mint">block-mint</span>
+      <span class="ds-pill pink">block-pink</span>
+      <span class="ds-pill cream">block-cream</span>
+      <span class="ds-pill coral">block-coral</span>
+      <span class="ds-pill ink">selected · ink</span>
+      <span class="ds-pill magenta">promo · magenta</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- Footer: white canvas with display wordmark in top-left -->
+<footer><div class="wrap">
+  <p class="wordmark">Figmaze</p>
+  <div class="footer-grid">
+    <div>
+      <h4>Product</h4>
+      <ul><li><a href="#">Design</a></li><li><a href="#">FigJam</a></li><li><a href="#">Slides</a></li><li><a href="#">Dev Mode</a></li><li><a href="#">Variables</a></li></ul>
+    </div>
+    <div>
+      <h4>Solutions</h4>
+      <ul><li><a href="#">For design teams</a></li><li><a href="#">For engineering</a></li><li><a href="#">For product</a></li><li><a href="#">For marketing</a></li></ul>
+    </div>
+    <div>
+      <h4>Community</h4>
+      <ul><li><a href="#">Explore</a></li><li><a href="#">Templates</a></li><li><a href="#">Plugins</a></li><li><a href="#">Widgets</a></li></ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul><li><a href="#">Help center</a></li><li><a href="#">Blog</a></li><li><a href="#">Best practices</a></li><li><a href="#">Config</a></li></ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">News</a></li><li><a href="#">Contact</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Figmaze Inc. · Made on the canvas, not above it.</span>
+    <span>Inspired by figma DESIGN.md · awesome-design-md</span>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.figma.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

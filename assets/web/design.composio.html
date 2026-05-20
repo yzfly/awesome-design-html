@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Composio — Inspired Design</title>
+<meta name="description" content="A Composio-inspired marketing page and design-system reference: near-black canvas, deep electric blue voltage (#0007cd), 2x2 terminal mockup hero, abcDiatype-style sans, toolkit grid for AI agent integrations. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  --primary: #0007cd;
+  --primary-active: #0005a3;
+  --primary-glow: #1a26ff;
+  --ink: #ffffff;
+  --body: #a8a8a8;
+  --body-strong: #ffffff;
+  --muted: #888888;
+  --muted-soft: #666666;
+  --hairline: #222222;
+  --hairline-soft: #1a1a1a;
+  --hairline-strong: #333333;
+  --canvas: #0f0f0f;
+  --canvas-deep: #000000;
+  --surface-card: #181818;
+  --surface-card-elevated: #222222;
+  --surface-strong: #2a2a2a;
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  --accent-cyan: #00d4ff;
+  --accent-violet: #7b3aed;
+  --error: #ff4d4d;
+  --success: #33d17a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  background: var(--canvas);
+  color: var(--body-strong);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(0,7,205,0.5); color: #fff; }
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* Top nav */
+.topnav {
+  height: 64px;
+  background: rgba(15,15,15,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 28px; font-size: 14px; font-weight: 500; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; color: var(--ink); letter-spacing: -0.02em; }
+.brand-mark {
+  width: 26px; height: 26px;
+  background: var(--primary);
+  border-radius: 6px;
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 16px rgba(0,7,205,0.5);
+}
+.brand-mark::before, .brand-mark::after {
+  content: ""; position: absolute;
+  background: var(--ink);
+  border-radius: 1px;
+}
+.brand-mark::before { width: 12px; height: 2px; }
+.brand-mark::after { width: 2px; height: 12px; }
+
+.nav-links { display: flex; align-items: center; gap: 24px; color: var(--body); }
+.nav-links a:hover { color: var(--body-strong); }
+.spacer { flex: 1; }
+.nav-cta { display: flex; align-items: center; gap: 10px; }
+.gh-stars {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--body-strong);
+}
+.gh-stars .star { color: #facc15; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 14px; font-weight: 500; line-height: 1;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  height: 40px;
+  transition: background 150ms ease, box-shadow 150ms ease;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); box-shadow: 0 0 0 0 rgba(0,7,205,0); }
+.btn-primary:hover { background: var(--primary-active); box-shadow: 0 0 24px rgba(0,7,205,0.5); }
+.btn-secondary { background: var(--surface-card-elevated); color: var(--body-strong); }
+.btn-secondary:hover { background: var(--surface-strong); }
+.btn-outline { background: transparent; color: var(--body-strong); border: 1px solid var(--hairline-strong); padding: 9px 17px; }
+.btn-outline:hover { border-color: var(--body); }
+
+/* Hero */
+.hero { position: relative; padding: 96px 0 48px; text-align: center; overflow: hidden; }
+.hero-glow {
+  position: absolute; left: 50%; top: 40%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(closest-side, rgba(26,38,255,0.55), rgba(0,7,205,0.18) 40%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-inner { position: relative; z-index: 2; max-width: 920px; margin: 0 auto; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 9999px;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.88px;
+  color: var(--body-strong); text-transform: uppercase;
+}
+.eyebrow .tag {
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+.hero h1 {
+  font-size: clamp(40px, 6.4vw, 72px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 24px 0 20px;
+}
+.hero h1 .blue { color: var(--primary-glow); }
+.hero .sub { font-size: 18px; color: var(--body); max-width: 600px; margin: 0 auto 32px; }
+.hero-ctas { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* Terminal mockup grid 2x2 (signature) */
+.terminal-wrap {
+  position: relative;
+  padding: 0 0 96px;
+}
+.terminal-wrap::before {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 500px;
+  background: radial-gradient(closest-side, rgba(26,38,255,0.4), transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+}
+.terminal-grid {
+  position: relative;
+  z-index: 2;
+  background: var(--canvas-deep);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 16px;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 24px 80px rgba(0,7,205,0.18);
+}
+.term-pane {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 20px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  min-height: 200px;
+  overflow: hidden;
+}
+.term-head {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hairline);
+}
+.term-head .ico { width: 14px; height: 14px; color: var(--muted); }
+.term-head .ttl { font-family: "Inter", sans-serif; font-size: 12px; color: var(--muted); font-weight: 500; }
+.term-head .dot { width: 6px; height: 6px; border-radius: 9999px; background: var(--success); display: inline-block; margin-left: auto; }
+.term-body { color: var(--body); }
+.term-body .cmt { color: var(--muted-soft); }
+.term-body .key { color: var(--accent-cyan); }
+.term-body .str { color: var(--success); }
+.term-body .fn { color: var(--primary-glow); }
+.term-body .pn { color: #facc15; }
+.term-body .ws { color: var(--body-strong); }
+.term-body .arrow { color: var(--primary-glow); }
+.term-body div { white-space: nowrap; overflow-x: auto; }
+
+/* Section heads */
+.section { padding: 96px 0; position: relative; }
+.section-deep { background: var(--canvas-deep); }
+.sec-head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+.sec-head .lbl { display: inline-block; font-size: 11px; font-weight: 600; color: var(--primary-glow); text-transform: uppercase; letter-spacing: 0.88px; }
+.sec-head h2 {
+  font-size: 44px; font-weight: 500; line-height: 1.1; letter-spacing: -0.025em;
+  margin: 12px 0 14px; color: var(--ink);
+}
+.sec-head p { font-size: 17px; color: var(--body); margin: 0; }
+
+/* Feature 3-up */
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.feat-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 28px;
+  transition: border-color 150ms ease;
+  position: relative;
+  overflow: hidden;
+}
+.feat-card:hover { border-color: var(--hairline-strong); }
+.feat-card .ic {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  background: var(--surface-card-elevated);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  color: var(--primary-glow);
+}
+.feat-card h3 { font-size: 18px; font-weight: 600; margin: 0 0 8px; color: var(--ink); }
+.feat-card p { font-size: 14px; color: var(--body); margin: 0; }
+
+/* Toolkit grid */
+.toolkit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.toolkit-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex; flex-direction: column;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+.toolkit-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.toolkit-icon {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  background: var(--surface-card-elevated);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  font-weight: 700; font-size: 18px;
+}
+.toolkit-card h4 { font-size: 16px; font-weight: 600; margin: 0 0 4px; color: var(--ink); }
+.toolkit-card p { font-size: 13px; color: var(--body); margin: 0; }
+
+/* Spotlight card */
+.spotlight-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 56px 48px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  margin-top: 32px;
+}
+.spotlight-card .glow {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(closest-side, rgba(26,38,255,0.4), transparent 70%);
+  filter: blur(40px);
+}
+.spotlight-card h3 {
+  font-size: 36px; font-weight: 500; line-height: 1.1; letter-spacing: -0.025em;
+  margin: 0 0 16px; position: relative; z-index: 2;
+}
+.spotlight-card p {
+  position: relative; z-index: 2;
+  font-size: 16px; color: var(--body); margin: 0 0 28px; max-width: 56ch; margin-left: auto; margin-right: auto;
+}
+.spotlight-card .ctas { position: relative; z-index: 2; display: inline-flex; gap: 12px; }
+
+/* Code block sample */
+.code-sample {
+  background: var(--canvas-deep);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 20px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--body);
+  overflow-x: auto;
+}
+.code-sample .cmt { color: var(--muted-soft); }
+.code-sample .key { color: var(--accent-cyan); }
+.code-sample .str { color: var(--success); }
+.code-sample .fn { color: var(--primary-glow); }
+
+/* CTA band */
+.cta-band {
+  position: relative;
+  text-align: center;
+  padding: 120px 0;
+  overflow: hidden;
+}
+.cta-band::before {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; height: 600px;
+  background: radial-gradient(closest-side, rgba(26,38,255,0.4), transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+}
+.cta-band h2 {
+  position: relative; z-index: 2;
+  font-size: 44px; font-weight: 500; line-height: 1.08; letter-spacing: -0.025em; margin: 0 0 16px;
+}
+.cta-band p { position: relative; z-index: 2; font-size: 18px; color: var(--body); margin: 0 0 32px; }
+.cta-band .ctas { position: relative; z-index: 2; display: inline-flex; gap: 12px; }
+
+/* Design system */
+.ds { padding: 96px 0; background: var(--canvas); border-top: 1px solid var(--hairline); }
+.ds-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.ds-head .lbl { font-size: 11px; font-weight: 600; color: var(--primary-glow); text-transform: uppercase; letter-spacing: 0.88px; }
+.ds-head h2 { font-size: 40px; font-weight: 500; letter-spacing: -0.025em; margin: 12px 0; }
+.ds-head p { color: var(--body); font-size: 16px; }
+
+.ds-section { margin-bottom: 56px; }
+.ds-section h3 {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.88px;
+  color: var(--body-strong); text-transform: uppercase;
+  margin: 0 0 20px; padding-bottom: 12px; border-bottom: 1px solid var(--hairline);
+}
+
+.color-grp { margin-bottom: 24px; }
+.color-grp .gh { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+.color-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.swatch {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 14px;
+}
+.swatch .chip { height: 56px; border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.06); }
+.swatch .nm { font-size: 13px; font-weight: 600; color: var(--ink); }
+.swatch .hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--body); margin-top: 4px; }
+
+.type-table { width: 100%; background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; border-collapse: separate; border-spacing: 0; }
+.type-table th, .type-table td { padding: 14px 18px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--hairline); }
+.type-table th { font-weight: 600; color: var(--body); text-transform: uppercase; letter-spacing: 0.5px; font-size: 12px; background: var(--canvas); }
+.type-table tr:last-child td { border-bottom: 0; }
+.type-table .sample { color: var(--ink); }
+.type-table .meta { font-family: "JetBrains Mono", monospace; color: var(--body); }
+
+.radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+.radius-cell { background: var(--surface-card); border: 1px solid var(--hairline); padding: 18px; border-radius: 12px; text-align: center; }
+.radius-cell .box { height: 64px; background: var(--primary); margin-bottom: 12px; box-shadow: 0 0 24px rgba(0,7,205,0.4); }
+.radius-cell .nm { font-size: 13px; font-weight: 600; color: var(--ink); }
+.radius-cell .val { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--body); margin-top: 2px; }
+
+.comp-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.comp-cell {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 24px;
+}
+.comp-cell .lbl { font-size: 11px; font-weight: 600; letter-spacing: 0.88px; color: var(--body); text-transform: uppercase; margin-bottom: 16px; }
+.comp-cell .demo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.input-demo { background: var(--surface-card); border: 1px solid var(--hairline-strong); border-radius: 8px; padding: 11px 16px; height: 44px; font-size: 16px; color: var(--ink); width: 100%; outline: none; font-family: inherit; }
+.input-demo:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,7,205,0.3); }
+.badge {
+  display: inline-block;
+  background: var(--surface-card-elevated);
+  color: var(--body-strong);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.88px; text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+.badge.live { background: rgba(51,209,122,0.15); color: var(--success); }
+.badge.new { background: var(--primary); color: var(--on-primary); }
+
+/* Footer */
+.footer { background: var(--canvas); padding: 64px 32px 32px; border-top: 1px solid var(--hairline); }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 32px; }
+.foot-grid h5 { font-size: 11px; font-weight: 600; letter-spacing: 0.88px; color: var(--body-strong); text-transform: uppercase; margin: 0 0 16px; }
+.foot-grid ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot-grid li a { font-size: 14px; color: var(--body); }
+.foot-grid li a:hover { color: var(--ink); }
+.foot-tag { font-size: 16px; color: var(--body); max-width: 32ch; margin: 16px 0 20px; }
+.foot-legal { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--hairline); font-size: 13px; color: var(--body); }
+
+/* floating link */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px; z-index: 80;
+  background: var(--primary); color: var(--on-primary);
+  padding: 10px 16px; border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  box-shadow: 0 0 24px rgba(0,7,205,0.5);
+}
+.src-link:hover { background: var(--primary-active); }
+
+@media (max-width: 1024px) {
+  .toolkit-grid { grid-template-columns: repeat(2, 1fr); }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .feat-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .terminal-grid { grid-template-columns: 1fr; }
+  .toolkit-grid { grid-template-columns: 1fr; }
+  .comp-matrix { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 40px; }
+  .sec-head h2, .ds-head h2, .cta-band h2 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="wrap row">
+    <a href="#" class="brand"><span class="brand-mark" aria-hidden></span> Composio</a>
+    <nav class="nav-links">
+      <a href="#">Product</a>
+      <a href="#">Toolkits</a>
+      <a href="#">Docs</a>
+      <a href="#">Pricing</a>
+      <a href="#">Customers</a>
+      <a href="#">Blog</a>
+    </nav>
+    <span class="spacer"></span>
+    <div class="nav-cta">
+      <span class="gh-stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1 .8-.2 1.7-.3 2.5-.3s1.7.1 2.5.3c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg>
+        <span class="star">★</span>
+        <span>14.2k</span>
+      </span>
+      <a href="#" class="btn btn-outline">Sign in</a>
+      <a href="#" class="btn btn-primary">Get started</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="tag">NEW</span> 250+ toolkits, one auth layer</span>
+    <h1>The tool-use<br/>layer for your<br/><span class="blue">AI agents.</span></h1>
+    <p class="sub">Composio gives agents authenticated access to 250+ apps — Slack, GitHub, Stripe, Linear, Gmail — with managed OAuth, rate-limits, and per-user scopes.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary">Get started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#" class="btn btn-outline">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL MOCKUP 2x2 -->
+<section class="terminal-wrap">
+  <div class="wrap">
+    <div class="terminal-grid">
+      <div class="term-pane">
+        <div class="term-head">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span class="ttl">agent.py</span>
+          <span class="dot"></span>
+        </div>
+        <div class="term-body">
+          <div><span class="key">from</span> <span class="ws">composio</span> <span class="key">import</span> <span class="ws">Composio</span></div>
+          <div>&nbsp;</div>
+          <div><span class="ws">tools</span> = <span class="fn">composio.get_tools</span>(</div>
+          <div>&nbsp;&nbsp;<span class="ws">user_id</span>=<span class="str">"alice@acme.com"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="ws">toolkits</span>=[<span class="str">"slack"</span>, <span class="str">"github"</span>],</div>
+          <div>)</div>
+          <div>&nbsp;</div>
+          <div><span class="cmt"># auth, rate-limits handled</span></div>
+          <div><span class="ws">result</span> = <span class="fn">agent.run</span>(<span class="ws">tools</span>=<span class="ws">tools</span>)</div>
+        </div>
+      </div>
+      <div class="term-pane">
+        <div class="term-head">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          <span class="ttl">output.log</span>
+          <span class="dot"></span>
+        </div>
+        <div class="term-body">
+          <div><span class="cmt">[12:08:14] connecting to composio...</span></div>
+          <div><span class="cmt">[12:08:14] auth check </span><span class="str">ok</span></div>
+          <div><span class="cmt">[12:08:15] loading 28 tools</span></div>
+          <div><span class="arrow">→</span> <span class="ws">slack.send_message</span></div>
+          <div>&nbsp;&nbsp;&nbsp;<span class="ws">channel</span>: <span class="str">"#eng"</span></div>
+          <div>&nbsp;&nbsp;&nbsp;<span class="ws">text</span>: <span class="str">"deploy green ✅"</span></div>
+          <div><span class="str">✓ sent in 142ms</span></div>
+          <div><span class="arrow">→</span> <span class="ws">github.create_issue</span></div>
+          <div><span class="str">✓ #3221 created</span></div>
+        </div>
+      </div>
+      <div class="term-pane">
+        <div class="term-head">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <span class="ttl">trace.json</span>
+          <span class="dot"></span>
+        </div>
+        <div class="term-body">
+          <div><span class="ws">{</span></div>
+          <div>&nbsp;&nbsp;<span class="key">"trace_id"</span>: <span class="str">"trc_8f3..."</span>,</div>
+          <div>&nbsp;&nbsp;<span class="key">"agent"</span>: <span class="str">"ops-bot"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="key">"calls"</span>: <span class="pn">12</span>,</div>
+          <div>&nbsp;&nbsp;<span class="key">"latency_ms"</span>: <span class="pn">1842</span>,</div>
+          <div>&nbsp;&nbsp;<span class="key">"tokens"</span>: <span class="pn">4_521</span>,</div>
+          <div>&nbsp;&nbsp;<span class="key">"cost_usd"</span>: <span class="pn">0.0184</span></div>
+          <div><span class="ws">}</span></div>
+        </div>
+      </div>
+      <div class="term-pane">
+        <div class="term-head">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0-18 0z"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+          <span class="ttl">$ composio</span>
+          <span class="dot"></span>
+        </div>
+        <div class="term-body">
+          <div><span class="muted">$ </span><span class="ws">composio</span> <span class="fn">toolkit</span> ls</div>
+          <div><span class="ws">slack</span>            <span class="cmt">28 actions</span></div>
+          <div><span class="ws">github</span>           <span class="cmt">42 actions</span></div>
+          <div><span class="ws">linear</span>           <span class="cmt">19 actions</span></div>
+          <div><span class="ws">notion</span>           <span class="cmt">31 actions</span></div>
+          <div><span class="ws">stripe</span>           <span class="cmt">24 actions</span></div>
+          <div><span class="ws">gmail</span>            <span class="cmt">14 actions</span></div>
+          <div><span class="cmt"># 244 more, run `--all`</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE TRIPLET -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="lbl">Why Composio</span>
+      <h2>Authenticated tool-use,<br/>solved.</h2>
+      <p>Stop writing OAuth flows, rate-limit retries, and per-user token storage. Compose tools — we run the plumbing.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>Managed auth</h3>
+        <p>OAuth flows, refresh tokens, per-user credential storage — handled. Bring your client IDs, ship without storing secrets.</p>
+      </div>
+      <div class="feat-card">
+        <div class="ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor"/></svg>
+        </div>
+        <h3>250+ toolkits</h3>
+        <p>Slack, GitHub, Stripe, Linear, Notion, Salesforce — every integration your agent will reach for, with consistent schemas.</p>
+      </div>
+      <div class="feat-card">
+        <div class="ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 12 8 12 11 5 17 19 20 12 21 12"/></svg>
+        </div>
+        <h3>Built-in observability</h3>
+        <p>Every tool call is traced, logged, and replayable. Debug agent runs without rebuilding your tracing layer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLKITS -->
+<section class="section section-deep">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="lbl">Toolkits</span>
+      <h2>Connect to anything your<br/>agent might need.</h2>
+      <p>250+ apps with consistent action schemas — and an SDK to add your own.</p>
+    </div>
+    <div class="toolkit-grid">
+      <div class="toolkit-card">
+        <div class="toolkit-icon" style="background:rgba(74,21,75,0.35);color:#e01e5a;">#</div>
+        <h4>Slack</h4>
+        <p>28 actions · channels, DMs, search</p>
+      </div>
+      <div class="toolkit-card">
+        <div class="toolkit-icon" style="background:#ffffff14;color:#fff;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1 .8-.2 1.7-.3 2.5-.3s1.7.1 2.5.3c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg>
+        </div>
+        <h4>GitHub</h4>
+        <p>42 actions · issues, PRs, CI</p>
+      </div>
+      <div class="toolkit-card">
+        <div class="toolkit-icon" style="background:rgba(99,91,255,0.18);color:#635bff;">$</div>
+        <h4>Stripe</h4>
+        <p>24 actions · customers, invoices</p>
+      </div>
+      <div class="toolkit-card">
+        <div class="toolkit-icon" style="background:rgba(94,106,210,0.18);color:#5e6ad2;">⌘</div>
+        <h4>Linear</h4>
+        <p>19 actions · issues, projects</p>
+      </div>
+      <div class="toolkit-card">
+        <div class="toolkit-icon" style="background:#ffffff14;color:#fff;">N</div>
+        <h4>Notion</h4>
+        <p>31 actions · pages, databases</p>
+      </div>
+      <div class="toolkit-card">
+        <div class="toolkit-icon" style="background:rgba(234,67,53,0.18);color:#ea4335;">M</div>
+        <h4>Gmail</h4>
+        <p>14 actions · send, search, label</p>
+      </div>
+      <div class="toolkit-card">
+        <div class="toolkit-icon" style="background:rgba(0,164,153,0.18);color:#00a499;">⬢</div>
+        <h4>HubSpot</h4>
+        <p>22 actions · contacts, deals</p>
+      </div>
+      <div class="toolkit-card">
+        <div class="toolkit-icon" style="background:rgba(255,154,0,0.18);color:#ff9a00;">+</div>
+        <h4>244 more</h4>
+        <p>See full registry →</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPOTLIGHT CARD + CODE -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="lbl">Drop-in SDK</span>
+      <h2>Three lines, twenty apps.</h2>
+    </div>
+    <div class="code-sample">
+<span class="cmt"># Python — works with OpenAI, Anthropic, LangGraph, CrewAI, ADK</span>
+<span class="key">from</span> composio <span class="key">import</span> Composio
+<span class="key">from</span> openai <span class="key">import</span> OpenAI
+
+composio = <span class="fn">Composio</span>(api_key=<span class="str">"comp_..."</span>)
+openai = <span class="fn">OpenAI</span>()
+
+tools = composio.<span class="fn">get_tools</span>(
+    user_id=<span class="str">"alice@acme.com"</span>,
+    toolkits=[<span class="str">"slack"</span>, <span class="str">"linear"</span>, <span class="str">"github"</span>],
+)
+
+response = openai.chat.completions.<span class="fn">create</span>(
+    model=<span class="str">"gpt-5"</span>,
+    tools=tools,
+    messages=[{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: <span class="str">"file last week's bugs as a Linear cycle"</span>}],
+)
+    </div>
+    <div class="spotlight-card">
+      <span class="glow"></span>
+      <h3>Build agents that actually do work.</h3>
+      <p>Composio handles auth, rate-limits, retries and traces. You write three lines of Python.</p>
+      <div class="ctas">
+        <a href="#" class="btn btn-primary">Get an API key</a>
+        <a href="#" class="btn btn-outline">View toolkit registry</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Wire your agents to<br/>everything your team uses.</h2>
+    <p>Free for the first 10,000 tool calls. No credit card.</p>
+    <div class="ctas">
+      <a href="#" class="btn btn-primary">Get started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#" class="btn btn-outline">Book a demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM REFERENCE -->
+<section class="ds" id="design-system">
+  <div class="wrap">
+    <div class="ds-head">
+      <span class="lbl">Design system</span>
+      <h2>The reference.</h2>
+      <p>Tokens, type, components — the dark dev-tool chrome.</p>
+    </div>
+
+    <div class="ds-section">
+      <h3>Color</h3>
+
+      <div class="color-grp">
+        <div class="gh">Brand &amp; Voltage</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#0007cd;box-shadow:0 0 16px rgba(0,7,205,0.5);"></div><div class="nm">primary · Composio Blue</div><div class="hex">#0007cd</div></div>
+          <div class="swatch"><div class="chip" style="background:#0005a3;"></div><div class="nm">primary-active</div><div class="hex">#0005a3</div></div>
+          <div class="swatch"><div class="chip" style="background:#1a26ff;"></div><div class="nm">primary-glow</div><div class="hex">#1a26ff</div></div>
+        </div>
+      </div>
+
+      <div class="color-grp">
+        <div class="gh">Surface ladder (brightness-step elevation)</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#000000;"></div><div class="nm">canvas-deep</div><div class="hex">#000000</div></div>
+          <div class="swatch"><div class="chip" style="background:#0f0f0f;"></div><div class="nm">canvas</div><div class="hex">#0f0f0f</div></div>
+          <div class="swatch"><div class="chip" style="background:#181818;"></div><div class="nm">surface-card</div><div class="hex">#181818</div></div>
+          <div class="swatch"><div class="chip" style="background:#222222;"></div><div class="nm">surface-card-elevated</div><div class="hex">#222222</div></div>
+          <div class="swatch"><div class="chip" style="background:#2a2a2a;"></div><div class="nm">surface-strong</div><div class="hex">#2a2a2a</div></div>
+        </div>
+      </div>
+
+      <div class="color-grp">
+        <div class="gh">Text &amp; Semantic</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#ffffff;"></div><div class="nm">ink / body-strong</div><div class="hex">#ffffff</div></div>
+          <div class="swatch"><div class="chip" style="background:#a8a8a8;"></div><div class="nm">body</div><div class="hex">#a8a8a8</div></div>
+          <div class="swatch"><div class="chip" style="background:#888888;"></div><div class="nm">muted</div><div class="hex">#888888</div></div>
+          <div class="swatch"><div class="chip" style="background:#00d4ff;"></div><div class="nm">accent-cyan</div><div class="hex">#00d4ff</div></div>
+          <div class="swatch"><div class="chip" style="background:#33d17a;"></div><div class="nm">success</div><div class="hex">#33d17a</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <h3>Typography</h3>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Spec</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>display-mega</td>
+            <td class="sample" style="font-size:44px;font-weight:500;line-height:1.05;letter-spacing:-1.32px;">The tool-use layer.</td>
+            <td class="meta">Inter · 72 / 500 · -2.16px</td>
+          </tr>
+          <tr>
+            <td>display-lg</td>
+            <td class="sample" style="font-size:32px;font-weight:500;line-height:1.1;letter-spacing:-0.96px;">Authenticated tool-use, solved.</td>
+            <td class="meta">Inter · 44 / 500 · -1.32px</td>
+          </tr>
+          <tr>
+            <td>title-md</td>
+            <td class="sample" style="font-size:18px;font-weight:600;">Managed auth</td>
+            <td class="meta">Inter · 18 / 600</td>
+          </tr>
+          <tr>
+            <td>body-md</td>
+            <td class="sample">Stop writing OAuth flows and rate-limit retries.</td>
+            <td class="meta">Inter · 16 / 400 · 1.5</td>
+          </tr>
+          <tr>
+            <td>caption-uppercase</td>
+            <td class="sample" style="font-size:11px;font-weight:600;letter-spacing:0.88px;text-transform:uppercase;color:var(--primary-glow);">Why Composio</td>
+            <td class="meta">Inter · 11 / 600 · +0.88px</td>
+          </tr>
+          <tr>
+            <td>code</td>
+            <td class="sample mono" style="font-size:13px;">composio.get_tools(user_id=...)</td>
+            <td class="meta">JetBrains Mono · 13 / 400</td>
+          </tr>
+          <tr>
+            <td>button</td>
+            <td class="sample" style="font-size:14px;font-weight:500;">Get started</td>
+            <td class="meta">Inter · 14 / 500 · 1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-section">
+      <h3>Radius</h3>
+      <div class="radius-grid">
+        <div class="radius-cell"><div class="box" style="border-radius:4px;"></div><div class="nm">xs</div><div class="val">4px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:6px;"></div><div class="nm">sm</div><div class="val">6px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:8px;"></div><div class="nm">md · CTA</div><div class="val">8px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:12px;"></div><div class="nm">lg · toolkit cards</div><div class="val">12px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:16px;"></div><div class="nm">xl · feature cards</div><div class="val">16px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:9999px;"></div><div class="nm">pill · badges</div><div class="val">9999px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <h3>Components</h3>
+      <div class="comp-matrix">
+        <div class="comp-cell">
+          <div class="lbl">Buttons</div>
+          <div class="demo">
+            <a href="#" class="btn btn-primary">Get started</a>
+            <a href="#" class="btn btn-secondary">Docs</a>
+            <a href="#" class="btn btn-outline">Sign in</a>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Badges</div>
+          <div class="demo">
+            <span class="badge new">NEW</span>
+            <span class="badge live">LIVE</span>
+            <span class="badge">BETA</span>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Toolkit card</div>
+          <div class="demo" style="display:block;">
+            <div class="toolkit-card">
+              <div class="toolkit-icon" style="background:rgba(99,91,255,0.18);color:#635bff;">$</div>
+              <h4>Stripe</h4>
+              <p>24 actions · customers, invoices</p>
+            </div>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Text input</div>
+          <div class="demo">
+            <input class="input-demo" placeholder="api.composio.dev" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="brand"><span class="brand-mark" aria-hidden></span> Composio</a>
+        <p class="foot-tag">The tool-use layer for AI agents. 250+ apps, one auth.</p>
+        <div style="display:flex;gap:10px;">
+          <a href="#" style="width:32px;height:32px;border-radius:8px;background:var(--surface-card);border:1px solid var(--hairline);display:inline-flex;align-items:center;justify-content:center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h3l-7 8 8 12h-6l-5-7-5 7H3l8-9L3 2h7l4 6 4-6z"/></svg>
+          </a>
+          <a href="#" style="width:32px;height:32px;border-radius:8px;background:var(--surface-card);border:1px solid var(--hairline);display:inline-flex;align-items:center;justify-content:center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1 .8-.2 1.7-.3 2.5-.3s1.7.1 2.5.3c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul><li><a href="#">Toolkits</a></li><li><a href="#">SDK</a></li><li><a href="#">Auth</a></li><li><a href="#">Observability</a></li></ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul><li><a href="#">Docs</a></li><li><a href="#">API reference</a></li><li><a href="#">Cookbook</a></li><li><a href="#">Changelog</a></li></ul>
+      </div>
+      <div>
+        <h5>Solutions</h5>
+        <ul><li><a href="#">Sales agents</a></li><li><a href="#">DevOps</a></li><li><a href="#">Support</a></li><li><a href="#">Enterprise</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 Composio Inc. — Inspired demo. Not affiliated.</span>
+      <span class="mono">SOC 2 · GDPR · HIPAA</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.composio.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

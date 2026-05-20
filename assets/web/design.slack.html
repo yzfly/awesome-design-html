@@ -1,0 +1,1472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Slacc — Inspired Design</title>
+<meta name="description" content="A Slack-inspired marketing page: deep aubergine primary, cream-lavender pastel-mesh hero, floating product UI mockups, pill CTAs at 90px radius. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #4a154b;
+  --primary-deep: #481a54;
+  --primary-press: #611f69;
+  --primary-tint: #592466;
+  --on-primary: #ffffff;
+  /* Text */
+  --ink: #1d1d1d;
+  --ink-mute: #696969;
+  --on-aubergine-mute: #d9bdde;
+  /* Links */
+  --link-blue: #1264a3;
+  --link-hover: #3860be;
+  /* Surface */
+  --canvas: #ffffff;
+  --canvas-cream: #f4ede4;
+  --canvas-lavender: #f9f0ff;
+  --surface-aubergine: #4a154b;
+  --hairline: #e6e6e6;
+  --hairline-strong: #000000;
+  /* Semantic */
+  --semantic-error: #cc4117;
+  --semantic-success: #007a5a;
+  /* Mesh accents (Slack's pastel mesh) */
+  --mesh-peach: #ffe2cc;
+  --mesh-lavender: #ece1ff;
+  --mesh-dusty-green: #d9eed4;
+  --mesh-rose: #fde8de;
+  --mesh-yellow: #fff2c4;
+  /* Radii */
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-xxl: 48px;
+  --r-pill: 90px;
+  /* Shadows */
+  --shadow-float: rgba(0,0,0,0.1) 0 5px 20px 0;
+  --shadow-mockup: rgba(0,0,0,0.1) 0 0 32px 0;
+  --shadow-toast: rgba(0,0,0,0.2) 0 1px 10px 0;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Salesforce Sans", system-ui, -apple-system, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+::selection { background: rgba(74,21,75,0.22); }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; position: relative; }
+
+/* —— Top nav (light) —— */
+.topnav {
+  background: var(--canvas);
+  position: relative;
+  z-index: 20;
+}
+.topnav .row {
+  display: flex; align-items: center; gap: 32px;
+  padding: 16px 0;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 22px; color: var(--ink);
+  letter-spacing: -0.3px;
+}
+.brand .glyph {
+  width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 16px; }
+.nav-links a {
+  font-size: 15px; font-weight: 500; color: var(--ink);
+  padding: 8px 14px; border-radius: var(--r-md);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.nav-links a:hover { background: var(--canvas-lavender); }
+.nav-links a .chev { font-size: 10px; opacity: 0.6; margin-top: 1px; }
+.nav-right { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+.nav-link-blue { color: var(--link-blue); font-size: 15px; font-weight: 500; padding: 10px 14px; }
+.nav-link-blue:hover { text-decoration: underline; }
+
+/* —— Pill buttons (signature 90px radius) —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: var(--r-pill);
+  padding: 14px 28px;
+  font: 700 16px/1.38 "Inter", system-ui, sans-serif;
+  letter-spacing: 0.2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .15s, color .15s, border-color .15s, box-shadow .15s;
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.btn-primary:hover { background: var(--primary-press); }
+.btn-secondary {
+  background: var(--canvas-lavender);
+  color: var(--ink);
+  padding: 10px 30px;
+}
+.btn-secondary:hover { background: #efe1ff; }
+.btn-outline-aubergine {
+  background: var(--canvas);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 12px 26px;
+}
+.btn-outline-aubergine:hover { background: var(--primary); color: var(--on-primary); }
+.btn-outline-on-aubergine {
+  background: transparent;
+  color: var(--on-primary);
+  border: 2px solid var(--on-primary);
+  padding: 12px 26px;
+}
+.btn-outline-on-aubergine:hover { background: var(--on-primary); color: var(--primary); }
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 18px;
+  line-height: 1.0;
+}
+.btn-sm {
+  padding: 10px 22px;
+  font-size: 14.4px;
+  letter-spacing: 0.144px;
+}
+
+/* —— Pastel mesh hero (signature) —— */
+.hero-wrap { position: relative; overflow: hidden; }
+.mesh {
+  position: absolute; inset: -40px;
+  background-color: var(--canvas-cream);
+  background-image:
+    radial-gradient(48% 60% at 8% 22%, var(--mesh-peach) 0%, transparent 60%),
+    radial-gradient(40% 55% at 30% 70%, var(--mesh-lavender) 0%, transparent 60%),
+    radial-gradient(46% 60% at 58% 30%, var(--mesh-rose) 0%, transparent 60%),
+    radial-gradient(40% 55% at 82% 65%, var(--mesh-dusty-green) 0%, transparent 60%),
+    radial-gradient(40% 55% at 96% 22%, var(--mesh-yellow) 0%, transparent 60%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+}
+.hero {
+  position: relative; z-index: 2;
+  padding: 96px 0 0;
+  text-align: center;
+}
+.hero .eyebrow {
+  display: inline-block;
+  background: var(--canvas-cream);
+  color: var(--ink);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  margin: 0 0 24px;
+}
+.hero h1 {
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.12;
+  letter-spacing: -0.768px;
+  margin: 0 auto 24px; max-width: 18ch;
+  color: var(--ink);
+}
+.hero h1 em { font-style: normal; color: var(--primary); }
+.hero .lead {
+  font-size: 18px; line-height: 1.55; color: var(--ink);
+  letter-spacing: -0.0216px;
+  max-width: 580px; margin: 0 auto 32px;
+}
+.hero .cta-row {
+  display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 64px;
+}
+.hero .cta-row .btn-primary { box-shadow: var(--shadow-float); }
+
+/* —— Floating product UI mockup (signature) —— */
+.mockup-wrap {
+  position: relative; z-index: 2;
+  max-width: 1100px; margin: 0 auto;
+  padding-bottom: 96px;
+}
+.mockup {
+  background: var(--canvas);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-mockup);
+  overflow: hidden;
+  text-align: left;
+}
+.mockup-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 13px;
+}
+.mockup-head .traffic { display: inline-flex; gap: 6px; margin-right: 8px; }
+.mockup-head .traffic .dot { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,0.28); }
+.mockup-head .workspace {
+  display: inline-flex; gap: 8px; align-items: center;
+  font-weight: 600; font-size: 14px;
+}
+.mockup-head .workspace .ws-glyph {
+  width: 20px; height: 20px; border-radius: 4px;
+  background: linear-gradient(135deg, #ffd96a, #ff6f7a 60%, #ff64c8);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: white;
+}
+.mockup-head .search {
+  margin-left: auto;
+  background: rgba(255,255,255,0.12);
+  border-radius: var(--r-md);
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--on-aubergine-mute);
+  display: inline-flex; align-items: center; gap: 8px;
+  min-width: 320px;
+}
+
+.mockup-body { display: grid; grid-template-columns: 240px 1fr; min-height: 480px; }
+@media (max-width: 800px) { .mockup-body { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+.sidebar {
+  background: var(--primary-deep);
+  color: var(--on-aubergine-mute);
+  padding: 16px 0;
+  font-size: 14px;
+}
+.sidebar .sec { padding: 4px 16px; }
+.sidebar .sec-head {
+  display: flex; align-items: center; gap: 6px;
+  padding: 12px 16px 4px;
+  font-size: 12px; font-weight: 600;
+  color: var(--on-aubergine-mute);
+  text-transform: capitalize;
+}
+.sidebar .item {
+  padding: 4px 16px; font-size: 14px;
+  color: var(--on-aubergine-mute);
+  display: flex; align-items: center; gap: 8px;
+  line-height: 1.6;
+}
+.sidebar .item.active {
+  background: var(--primary-press);
+  color: var(--on-primary);
+  font-weight: 700;
+}
+.sidebar .item .pip {
+  width: 16px; opacity: 0.7; text-align: center;
+}
+.sidebar .item .badge {
+  margin-left: auto; background: #cc4117; color: white;
+  font-size: 11px; font-weight: 700;
+  padding: 1px 6px; border-radius: var(--r-pill);
+}
+
+.thread {
+  background: var(--canvas);
+  padding: 0;
+  display: flex; flex-direction: column;
+}
+.thread-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--hairline);
+}
+.thread-head .ch { font-size: 16px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+.thread-head .ch .star { color: var(--ink-mute); }
+.thread-head .members {
+  margin-left: auto; display: inline-flex;
+}
+.thread-head .members .a {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--canvas-cream);
+  border: 2px solid var(--canvas);
+  margin-left: -6px;
+  font-size: 10px; font-weight: 700; color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.thread-head .members .a.b { background: var(--mesh-lavender); }
+.thread-head .members .a.c { background: var(--mesh-rose); }
+.thread-head .members .a.d { background: var(--mesh-dusty-green); }
+
+.msgs { padding: 16px 24px; display: flex; flex-direction: column; gap: 18px; flex: 1; }
+.msg { display: grid; grid-template-columns: 40px 1fr; gap: 12px; }
+.msg .avatar {
+  width: 40px; height: 40px; border-radius: var(--r-md);
+  background: linear-gradient(135deg, #ffd96a, #ff64c8);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 14px;
+}
+.msg.b .avatar { background: linear-gradient(135deg, #7b3ff2, #4a154b); }
+.msg.c .avatar { background: linear-gradient(135deg, #2a9d99, #1aae39); }
+.msg .top { display: flex; align-items: baseline; gap: 8px; }
+.msg .name { font-weight: 700; color: var(--ink); font-size: 15px; }
+.msg .time { color: var(--ink-mute); font-size: 12px; }
+.msg .body { font-size: 15px; line-height: 1.5; color: var(--ink); margin-top: 2px; }
+.msg .body code {
+  background: var(--canvas-cream);
+  border: 1px solid var(--hairline);
+  padding: 1px 6px;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 13px;
+  border-radius: var(--r-sm);
+}
+.msg .body .link { color: var(--link-blue); text-decoration: underline; }
+.msg .body .canvas-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 8px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  padding: 8px 12px;
+  border-radius: var(--r-md);
+  font-size: 13px;
+  color: var(--link-blue);
+  font-weight: 500;
+}
+.msg .reacts { display: flex; gap: 6px; margin-top: 8px; }
+.msg .react {
+  background: var(--canvas-lavender);
+  border: 1px solid #d8c0e8;
+  border-radius: var(--r-pill);
+  padding: 2px 8px;
+  font-size: 12px; color: var(--ink);
+  display: inline-flex; gap: 4px; align-items: center;
+  font-weight: 600;
+}
+.msg .react .n { color: var(--primary); }
+
+.composer {
+  padding: 12px 24px 18px;
+  border-top: 1px solid var(--hairline);
+}
+.composer .field {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  font-size: 14px; color: var(--ink-mute);
+  display: flex; align-items: center;
+}
+.composer .send {
+  margin-left: auto;
+  width: 28px; height: 28px; border-radius: var(--r-sm);
+  background: var(--semantic-success); color: white;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* —— Sections —— */
+section { padding: 96px 0; position: relative; }
+.section-head { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+.section-head .eyebrow {
+  display: inline-block;
+  background: var(--canvas-cream);
+  color: var(--ink);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  margin-bottom: 16px;
+}
+.section-head h2 {
+  font-size: clamp(28px, 4.4vw, 50px);
+  font-weight: 700; line-height: 1.12; letter-spacing: -0.6px;
+  margin: 0 0 16px; color: var(--ink);
+}
+.section-head p {
+  font-size: 18px; line-height: 1.55;
+  color: var(--ink); letter-spacing: -0.0216px;
+  margin: 0 auto; max-width: 600px;
+}
+.section-head p a { color: var(--link-blue); text-decoration: underline; }
+
+/* —— Feature alternating split —— */
+.feature-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 96px;
+}
+.feature-split:last-child { margin-bottom: 0; }
+.feature-split.flip > .feature-text { order: 2; }
+@media (max-width: 900px) {
+  .feature-split { grid-template-columns: 1fr; gap: 32px; }
+  .feature-split.flip > .feature-text { order: 0; }
+}
+.feature-text .eyebrow {
+  display: inline-block;
+  background: var(--canvas-cream);
+  color: var(--ink);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  margin-bottom: 16px;
+}
+.feature-text h3 {
+  font-size: clamp(28px, 3.4vw, 40px); font-weight: 700;
+  line-height: 1.12; letter-spacing: -0.4px;
+  margin: 0 0 16px; color: var(--ink);
+}
+.feature-text p {
+  font-size: 18px; line-height: 1.55; color: var(--ink);
+  letter-spacing: -0.0216px;
+  margin: 0 0 16px;
+}
+.feature-text a.inline { color: var(--link-blue); font-weight: 500; }
+.feature-text a.inline:hover { color: var(--link-hover); text-decoration: underline; }
+.feature-mockup {
+  background: var(--canvas);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-mockup);
+  padding: 16px;
+  position: relative;
+}
+.feature-mockup.cream { background: var(--canvas-cream); }
+.feature-mockup.lavender { background: var(--canvas-lavender); }
+
+/* Mini Slack mockups inside feature splits */
+.mini-mockup {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: 16px;
+  font-size: 14px;
+  position: relative;
+}
+.mini-mockup + .mini-mockup { margin-top: 12px; }
+.mini-mockup .h {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-bottom: 8px;
+}
+.mini-mockup .h .av {
+  width: 28px; height: 28px; border-radius: var(--r-sm);
+  background: linear-gradient(135deg, #ffd96a, #ff64c8);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 12px;
+}
+.mini-mockup .h .name { font-weight: 700; color: var(--ink); }
+.mini-mockup .h .time { color: var(--ink-mute); font-size: 12px; }
+.mini-mockup .body { color: var(--ink); font-size: 14px; line-height: 1.5; }
+.mini-mockup .toolbar {
+  position: absolute; top: -16px; right: 24px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-toast);
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 6px;
+  font-size: 14px;
+}
+.mini-mockup .toolbar .tb {
+  padding: 4px 6px; border-radius: var(--r-sm);
+  font-size: 14px;
+}
+.mini-mockup .toolbar .tb:hover { background: var(--canvas-lavender); }
+
+.huddle {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: 14px;
+  margin-top: 12px;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 12px;
+  align-items: center;
+}
+.huddle .hud-av {
+  width: 36px; height: 36px; border-radius: var(--r-md);
+  background: linear-gradient(135deg, var(--primary), var(--primary-press));
+  display: inline-flex; align-items: center; justify-content: center;
+  color: white; font-size: 18px;
+}
+.huddle .info .t { font-weight: 700; color: var(--ink); font-size: 14px; }
+.huddle .info .s { color: var(--ink-mute); font-size: 13px; }
+.huddle .ctrls { display: inline-flex; gap: 6px; }
+.huddle .ctrls .c {
+  width: 32px; height: 32px; border-radius: var(--r-pill);
+  background: var(--semantic-success); color: white;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.huddle .ctrls .c.x { background: var(--semantic-error); }
+
+.canvas-doc {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: 24px;
+}
+.canvas-doc h5 { font-size: 18px; font-weight: 700; color: var(--ink); margin: 0 0 12px; letter-spacing: -0.3px; }
+.canvas-doc .row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 0;
+  font-size: 14px; color: var(--ink);
+  border-bottom: 1px solid var(--hairline);
+}
+.canvas-doc .row:last-child { border-bottom: 0; }
+.canvas-doc .row .check {
+  width: 16px; height: 16px; border-radius: var(--r-xs);
+  border: 1.5px solid var(--ink-mute);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: none;
+}
+.canvas-doc .row .check.on { background: var(--primary); border-color: var(--primary); color: white; font-size: 11px; }
+.canvas-doc .row.done { color: var(--ink-mute); text-decoration: line-through; }
+.canvas-doc .row .owner { margin-left: auto; font-size: 12px; color: var(--ink-mute); }
+
+/* —— Stats row (aubergine display numerals) —— */
+.stats {
+  background: var(--canvas-cream);
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+@media (max-width: 800px) { .stats-grid { grid-template-columns: 1fr; } }
+.stat-card {
+  background: var(--canvas);
+  border-radius: var(--r-xl);
+  padding: 32px;
+  text-align: left;
+}
+.stat-card .n {
+  font-size: 50px; font-weight: 700;
+  letter-spacing: -0.6px; line-height: 1.12;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.stat-card .l {
+  font-size: 18px; line-height: 1.55; color: var(--ink);
+  letter-spacing: -0.0216px;
+  margin: 0 0 12px;
+}
+.stat-card .s {
+  font-size: 14px; color: var(--ink-mute);
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+}
+
+/* —— Pricing —— */
+.pricing-grid {
+  display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1100px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .pricing-grid { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.tier.featured {
+  background: var(--surface-aubergine);
+  color: var(--on-primary);
+  border: 0;
+  position: relative;
+}
+.tier.featured .feat-pill {
+  position: absolute; top: -14px; left: 32px;
+  background: var(--canvas-lavender);
+  color: var(--primary);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+}
+.tier .eyebrow {
+  display: inline-block;
+  background: var(--canvas-cream);
+  color: var(--ink);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  align-self: flex-start;
+}
+.tier.featured .eyebrow { background: var(--primary-press); color: var(--on-aubergine-mute); }
+.tier .nm { font-size: 24px; font-weight: 700; letter-spacing: -0.096px; margin: 0; }
+.tier .pr {
+  display: flex; align-items: baseline; gap: 6px; margin: 0;
+}
+.tier .pr .num { font-size: 32px; font-weight: 700; letter-spacing: -0.256px; }
+.tier .pr .per { font-size: 14px; opacity: 0.7; }
+.tier .desc { font-size: 14px; line-height: 1.5; margin: 0; min-height: 60px; opacity: 0.85; }
+.tier ul { list-style: none; padding: 0; margin: 8px 0 24px; display: flex; flex-direction: column; gap: 8px; }
+.tier li { font-size: 14px; display: flex; align-items: start; gap: 8px; line-height: 1.5; }
+.tier li svg { flex: none; margin-top: 4px; }
+.tier .cta-wrap { margin-top: auto; }
+.tier .cta-wrap .btn { width: 100%; }
+
+/* —— Closing aubergine band (signature) —— */
+.aubergine-band {
+  background: var(--surface-aubergine);
+  color: var(--on-primary);
+  border-radius: var(--r-xl);
+  padding: 80px 64px;
+  margin: 0 32px 64px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.aubergine-band::before, .aubergine-band::after {
+  content: ""; position: absolute;
+  width: 460px; height: 460px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+.aubergine-band::before {
+  background: var(--mesh-rose);
+  left: -120px; top: -120px;
+}
+.aubergine-band::after {
+  background: var(--mesh-lavender);
+  right: -100px; bottom: -160px;
+}
+.aubergine-band .inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+.aubergine-band h2 {
+  font-size: clamp(32px, 5vw, 58px); font-weight: 600;
+  letter-spacing: -0.464px; line-height: 1.25;
+  margin: 0 0 24px;
+}
+.aubergine-band p {
+  font-size: 18px; line-height: 1.55; color: var(--on-aubergine-mute);
+  letter-spacing: -0.0216px;
+  margin: 0 auto 32px; max-width: 540px;
+}
+.aubergine-band .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* —— Footer (aubergine) —— */
+footer {
+  background: var(--surface-aubergine);
+  color: var(--on-primary);
+  padding: 64px 0 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.4fr repeat(5, 1fr);
+  gap: 32px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--primary-tint);
+}
+@media (max-width: 1000px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 {
+  font-size: 14px; font-weight: 700; color: var(--on-primary);
+  margin: 0 0 16px; letter-spacing: 0.1px;
+}
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 14px; color: var(--on-aubergine-mute); line-height: 1.43; }
+.footer-grid li a:hover { color: var(--on-primary); text-decoration: underline; }
+.footer-brand .brand-line { color: var(--on-primary); }
+.footer-brand p { font-size: 13px; color: var(--on-aubergine-mute); margin: 16px 0 0; line-height: 1.5; max-width: 280px; }
+.legal-band {
+  padding-top: 24px;
+  display: flex; align-items: center; gap: 24px;
+  font-size: 14px; color: var(--on-aubergine-mute);
+  flex-wrap: wrap;
+}
+.legal-band .right { margin-left: auto; display: inline-flex; gap: 16px; }
+.legal-band a { color: var(--on-aubergine-mute); }
+.legal-band a:hover { color: var(--on-primary); text-decoration: underline; }
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas-lavender); color: var(--primary);
+  padding: 8px 16px; border-radius: var(--r-pill);
+  font-size: 13px; font-weight: 700;
+  box-shadow: var(--shadow-float);
+  border: 1px solid #d8c0e8;
+}
+.src-link:hover { background: var(--canvas); color: var(--primary-press); }
+
+/* —— DS section (signature: reuses brand styling) —— */
+.ds-section {
+  background: var(--canvas-cream);
+  padding: 96px 0;
+  position: relative;
+  overflow: hidden;
+}
+.ds-section .mesh { inset: -40px; opacity: 0.7; }
+
+.ds-intro { text-align: center; margin-bottom: 64px; max-width: 720px; margin-left: auto; margin-right: auto; position: relative; z-index: 2; }
+.ds-intro h2 {
+  font-size: 50px; font-weight: 700; letter-spacing: -0.6px;
+  line-height: 1.12; margin: 0 0 16px;
+  color: var(--ink);
+}
+.ds-intro p {
+  font-size: 18px; line-height: 1.55; color: var(--ink);
+  letter-spacing: -0.0216px; margin: 0;
+}
+.ds-intro a { color: var(--link-blue); text-decoration: underline; }
+
+.ds-block {
+  background: var(--canvas);
+  border-radius: var(--r-xl);
+  padding: 48px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  box-shadow: var(--shadow-mockup);
+}
+.ds-block h3 {
+  font-size: 32px; font-weight: 700; letter-spacing: -0.256px;
+  margin: 0 0 12px; color: var(--ink);
+}
+.ds-block > p {
+  font-size: 16px; color: var(--ink-mute); line-height: 1.55; margin: 0 0 24px;
+}
+.ds-caption {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+  text-transform: uppercase; color: var(--ink-mute);
+  margin: 32px 0 16px;
+}
+.ds-block .ds-caption:first-of-type { margin-top: 0; }
+
+.ds-swatches {
+  display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 900px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 500px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--canvas);
+}
+.ds-sw .chip { height: 72px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 13px; color: var(--ink); font-weight: 700; }
+.ds-sw .val { font-size: 11px; color: var(--ink-mute); font-family: ui-monospace, Menlo, monospace; margin-top: 2px; }
+
+.ds-typescale {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.ds-tr {
+  display: grid; grid-template-columns: 160px 240px 1fr;
+  align-items: baseline; gap: 24px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hairline);
+}
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 12px; color: var(--ink); font-family: ui-monospace, Menlo, monospace; font-weight: 700; }
+.ds-spec { font-size: 11px; color: var(--ink-mute); font-family: ui-monospace, Menlo, monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(7, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--primary); }
+.ds-rad .lab { font-size: 12px; font-family: ui-monospace, Menlo, monospace; color: var(--ink); font-weight: 700; }
+.ds-rad .vv { font-size: 11px; font-family: ui-monospace, Menlo, monospace; color: var(--ink-mute); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-comp-row + .ds-comp-row { margin-top: 16px; }
+.ds-on-aubergine {
+  background: var(--surface-aubergine); padding: 24px;
+  border-radius: var(--r-lg);
+}
+
+.ds-input {
+  width: 100%; height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  color: var(--ink);
+  font: 400 16px/1.55 inherit;
+}
+.ds-input.focused {
+  border-width: 2px; border-color: var(--primary);
+  padding: 9px 11px; outline: none;
+  box-shadow: inset 0 0 0 1px var(--primary-tint);
+}
+.ds-input-pair { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; max-width: 640px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-field-label {
+  font-size: 12px; font-weight: 700; color: var(--ink);
+  margin-bottom: 6px; display: block;
+  font-family: ui-monospace, Menlo, monospace;
+}
+
+.ds-pill {
+  background: var(--canvas-cream); color: var(--ink);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+  text-transform: uppercase;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.ds-pill.lavender { background: var(--canvas-lavender); }
+.ds-pill.solid { background: var(--primary); color: var(--on-primary); }
+.ds-pill.green { background: var(--mesh-dusty-green); color: var(--semantic-success); }
+
+.ds-cards-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+@media (max-width: 900px) { .ds-cards-row { grid-template-columns: 1fr; } }
+.ds-mini-card {
+  background: var(--canvas-cream); color: var(--ink);
+  border-radius: var(--r-xl); padding: 32px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ds-mini-card.aubergine { background: var(--surface-aubergine); color: var(--on-primary); }
+.ds-mini-card.white { background: var(--canvas); border: 1px solid var(--hairline); }
+.ds-mini-card .lab { font-size: 16px; font-weight: 700; }
+.ds-mini-card .v { font-size: 12px; opacity: 0.75; font-family: ui-monospace, Menlo, monospace; }
+.ds-mini-card .body { font-size: 14px; line-height: 1.55; opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#">
+    <svg class="glyph" viewBox="0 0 32 32" aria-hidden="true">
+      <rect x="2" y="14" width="6" height="6" rx="3" fill="#36c5f0"/>
+      <rect x="12" y="14" width="6" height="6" rx="3" fill="#2eb67d"/>
+      <rect x="14" y="2" width="6" height="6" rx="3" fill="#ecb22e"/>
+      <rect x="24" y="12" width="6" height="6" rx="3" fill="#e01e5a"/>
+      <rect x="14" y="24" width="6" height="6" rx="3" fill="#ecb22e"/>
+      <rect x="24" y="14" width="6" height="6" rx="3" fill="#e01e5a"/>
+      <rect x="14" y="14" width="6" height="6" rx="3" fill="#4a154b"/>
+    </svg>
+    slacc
+  </a>
+  <nav class="nav-links">
+    <a href="#">Features <span class="chev">▾</span></a>
+    <a href="#">Solutions <span class="chev">▾</span></a>
+    <a href="#">Enterprise</a>
+    <a href="#">Resources <span class="chev">▾</span></a>
+    <a href="#">Pricing</a>
+  </nav>
+  <div class="nav-right">
+    <a class="nav-link-blue" href="#">Sign in</a>
+    <a class="btn btn-outline-aubergine btn-sm" href="#">Talk to sales</a>
+    <a class="btn btn-primary btn-sm" href="#">Try for free</a>
+  </div>
+</div></header>
+
+<!-- Hero with pastel mesh -->
+<div class="hero-wrap">
+  <div class="mesh"></div>
+  <section class="hero"><div class="wrap">
+    <span class="eyebrow">New · Slacc AI</span>
+    <h1>Where work <em>happens</em> — and gets done.</h1>
+    <p class="lead">Channels keep your team on the same page. Huddles drop you into the conversation. Canvases turn talk into work. The productivity platform that pulls four tools into one.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary btn-lg" href="#">Try for free</a>
+      <a class="btn btn-outline-aubergine btn-lg" href="#">Talk to sales</a>
+    </div>
+  </div></section>
+
+  <!-- Floating product UI mockup -->
+  <div class="wrap mockup-wrap">
+    <div class="mockup">
+      <div class="mockup-head">
+        <span class="traffic"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+        <span class="workspace"><span class="ws-glyph">R</span> Ramp HQ</span>
+        <span class="search">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="5"/><line x1="11" y1="11" x2="14.5" y2="14.5"/></svg>
+          Search Ramp HQ
+        </span>
+      </div>
+
+      <div class="mockup-body">
+        <aside class="sidebar">
+          <div class="sec">
+            <div class="item active"><span class="pip">#</span> launch-q2 <span class="badge">12</span></div>
+          </div>
+          <div class="sec-head">Channels</div>
+          <div class="sec">
+            <div class="item"><span class="pip">#</span> general</div>
+            <div class="item"><span class="pip">#</span> design-review</div>
+            <div class="item"><span class="pip">#</span> growth</div>
+            <div class="item"><span class="pip">#</span> incidents <span class="badge">3</span></div>
+            <div class="item"><span class="pip">#</span> hiring</div>
+            <div class="item"><span class="pip">#</span> proj-finn-ai</div>
+          </div>
+          <div class="sec-head">Direct messages</div>
+          <div class="sec">
+            <div class="item"><span class="pip">●</span> Mira Singh</div>
+            <div class="item"><span class="pip">●</span> Jamie Kao</div>
+            <div class="item"><span class="pip">○</span> Avi Loeb</div>
+            <div class="item"><span class="pip">○</span> Kira Halsey</div>
+          </div>
+          <div class="sec-head">Huddles</div>
+          <div class="sec">
+            <div class="item">🎧 Quick sync · 3</div>
+          </div>
+        </aside>
+
+        <main class="thread">
+          <div class="thread-head">
+            <span class="ch"><span style="color: var(--ink-mute); font-weight: 400;">#</span> launch-q2 <span class="star">★</span></span>
+            <span style="color: var(--ink-mute); font-size: 13px; margin-left: 12px;">14 members · Apr 12 release window</span>
+            <span class="members">
+              <span class="a">JK</span><span class="a b">MS</span><span class="a c">AL</span><span class="a d">KH</span>
+            </span>
+          </div>
+          <div class="msgs">
+            <div class="msg">
+              <div class="avatar">JK</div>
+              <div>
+                <div class="top"><span class="name">Jamie Kao</span><span class="time">10:24 AM</span></div>
+                <div class="body">Pulled the Q2 launch plan into a canvas. Anyone can comment, but please drop a 👀 once you've read your section.<div class="canvas-pill">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="12" height="12" rx="2"/><line x1="2" y1="6" x2="14" y2="6"/></svg>
+                  Q2 Launch Plan · Canvas
+                </div></div>
+                <div class="reacts">
+                  <span class="react">👀 <span class="n">7</span></span>
+                  <span class="react">🚀 <span class="n">3</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="msg b">
+              <div class="avatar">MS</div>
+              <div>
+                <div class="top"><span class="name">Mira Singh</span><span class="time">10:31 AM</span></div>
+                <div class="body">Took a pass on the eng section. <code>audit-log v2</code> slipped two weeks; updated the dates in the doc. Tagging <a class="link" href="#">@avi-loeb</a> on the SSE-trace dependency.</div>
+                <div class="reacts">
+                  <span class="react">✅ <span class="n">4</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="msg c">
+              <div class="avatar">AL</div>
+              <div>
+                <div class="top"><span class="name">Avi Loeb</span><span class="time">10:42 AM</span></div>
+                <div class="body">Got it. Spinning up a huddle in 5 — anyone on the audit-log thread feel free to drop in.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 0 24px;">
+            <div class="huddle">
+              <div class="hud-av">🎧</div>
+              <div class="info">
+                <div class="t">Huddle: audit-log v2 sync</div>
+                <div class="s">Avi, Mira, Jamie · 3 in huddle · "Pinning the dates"</div>
+              </div>
+              <div class="ctrls">
+                <span class="c">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2a3 3 0 0 0-3 3v3a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM4 8a4 4 0 0 0 8 0h-1a3 3 0 0 1-6 0H4zm4 5.5v1H6v1h4v-1H8v-1z"/></svg>
+                </span>
+                <span class="c x">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M4.7 4.3a1 1 0 0 1 1.4 0L8 6.2l1.9-1.9a1 1 0 0 1 1.4 1.4L9.4 7.6l1.9 1.9a1 1 0 1 1-1.4 1.4L8 9l-1.9 1.9a1 1 0 1 1-1.4-1.4l1.9-1.9-1.9-1.9a1 1 0 0 1 0-1.4z"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="composer">
+            <div class="field">
+              <span>Message #launch-q2</span>
+              <span class="send">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 8l12-6-4 14-2-6-6-2z"/></svg>
+              </span>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Feature splits -->
+<section><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">One place for everything</span>
+    <h2>Built for the way your team actually works.</h2>
+    <p>Slacc isn't another inbox. It's the place where your channels, your project canvases, and your standup huddles live next to each other — and where Slacc AI knows what you're working on.</p>
+  </div>
+
+  <!-- Feature: Channels -->
+  <div class="feature-split">
+    <div class="feature-text">
+      <span class="eyebrow">Channels</span>
+      <h3>Organize work into a place, not an inbox.</h3>
+      <p>Channels are dedicated spaces for every project, topic, and team. Pin the doc, archive when it's done. No more reply-all, no more "wait, where was that file again?"</p>
+      <p><a class="inline" href="#">Learn about channels →</a></p>
+    </div>
+    <div class="feature-mockup cream">
+      <div class="mini-mockup">
+        <div class="toolbar">
+          <span class="tb">🚀</span><span class="tb">👍</span><span class="tb">👀</span><span class="tb">💯</span><span class="tb">···</span>
+        </div>
+        <div class="h">
+          <span class="av">JK</span>
+          <div>
+            <div class="name">Jamie Kao</div>
+            <span class="time">10:24 AM in #launch-q2</span>
+          </div>
+        </div>
+        <div class="body">Spec landed. The plan: ship cycle-health strip on Tuesday, then onboarding email sequence the week after. Anything I should re-sequence?</div>
+      </div>
+      <div class="mini-mockup">
+        <div class="h">
+          <span class="av" style="background: linear-gradient(135deg, #7b3ff2, #4a154b);">MS</span>
+          <div>
+            <div class="name">Mira Singh</div>
+            <span class="time">10:31 AM</span>
+          </div>
+        </div>
+        <div class="body">Looks good — let's swap the onboarding email and audit-log v2 since v2 is on the critical path for Acme.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature: Huddles (flip) -->
+  <div class="feature-split flip">
+    <div class="feature-text">
+      <span class="eyebrow">Huddles</span>
+      <h3>Drop into the conversation, not the calendar.</h3>
+      <p>Huddles are lightweight, audio-first calls inside the channel you're already in. No invites, no scheduling — just hit the headphones and pull the right people in.</p>
+      <p><a class="inline" href="#">See how huddles work →</a></p>
+    </div>
+    <div class="feature-mockup lavender">
+      <div class="huddle">
+        <div class="hud-av">🎧</div>
+        <div class="info">
+          <div class="t">Quick design review</div>
+          <div class="s">Mira, Kira, Avi · 3 in huddle · 12 min</div>
+        </div>
+        <div class="ctrls">
+          <span class="c">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2a3 3 0 0 0-3 3v3a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/></svg>
+          </span>
+          <span class="c" style="background: var(--primary);">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6"/></svg>
+          </span>
+        </div>
+      </div>
+      <div class="mini-mockup" style="margin-top: 16px;">
+        <div class="h">
+          <span class="av" style="background: linear-gradient(135deg, #ffd96a, #ff6f7a);">KH</span>
+          <div><div class="name">Kira Halsey</div><span class="time">in huddle · 2 min ago</span></div>
+        </div>
+        <div class="body">Sharing my screen — quick look at the empty state proposals before we ship.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature: Canvas -->
+  <div class="feature-split">
+    <div class="feature-text">
+      <span class="eyebrow">Canvas</span>
+      <h3>Turn the talk into the work.</h3>
+      <p>Canvases live inside channels and DMs. Draft a spec, build an onboarding doc, run a project tracker — all next to the people who'll execute on it. When the channel changes, the canvas stays the source of truth.</p>
+      <p><a class="inline" href="#">Explore canvases →</a></p>
+    </div>
+    <div class="feature-mockup">
+      <div class="canvas-doc">
+        <h5>Q2 Launch Plan · Canvas</h5>
+        <div class="row">
+          <span class="check on">✓</span>
+          <span class="done">Spec audit-log v2 schema</span>
+          <span class="owner">Mira</span>
+        </div>
+        <div class="row">
+          <span class="check on">✓</span>
+          <span class="done">Rotate session tokens on reset</span>
+          <span class="owner">Jamie</span>
+        </div>
+        <div class="row">
+          <span class="check"></span>
+          <span>Refine empty states (project view)</span>
+          <span class="owner">Avi</span>
+        </div>
+        <div class="row">
+          <span class="check"></span>
+          <span>Add tracing spans to SSE stream</span>
+          <span class="owner">Kira</span>
+        </div>
+        <div class="row">
+          <span class="check"></span>
+          <span>Draft onboarding email sequence</span>
+          <span class="owner">Mira</span>
+        </div>
+        <div class="row">
+          <span class="check"></span>
+          <span>Migrate avatar gradient to oklab</span>
+          <span class="owner">Avi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature: AI (flip) -->
+  <div class="feature-split flip">
+    <div class="feature-text">
+      <span class="eyebrow">Slacc AI</span>
+      <h3>Search, summarize, catch up — without leaving the channel.</h3>
+      <p>Slacc AI knows what your team has been talking about. Ask "What did we decide on audit-log v2?" and get an answer with citations. Catch up on a busy channel in 30 seconds, not 30 minutes.</p>
+      <p><a class="inline" href="#">Try Slacc AI →</a></p>
+    </div>
+    <div class="feature-mockup cream">
+      <div class="mini-mockup">
+        <div class="h">
+          <span class="av" style="background: linear-gradient(135deg, #ffd96a, #ff64c8 60%, #7b3ff2);">AI</span>
+          <div><div class="name">Slacc AI</div><span class="time">Catch up · #launch-q2 · 18 hrs</span></div>
+        </div>
+        <div class="body">
+          The team locked the Apr 12 launch date. <strong>Audit-log v2 slipped two weeks</strong> and now blocks the Acme rollout. Jamie opened a huddle Tuesday afternoon to align on the new sequence — onboarding email and v2 swapped order. Mira owns the spec; Avi owns the SSE-trace dep.
+          <div class="canvas-pill" style="margin-top: 12px;">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="3 6 13 6" stroke-linecap="round"/><polyline points="3 10 9 10" stroke-linecap="round"/></svg>
+            Cited from 4 messages and 1 canvas
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Stats / proof -->
+<section class="stats"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">By the numbers</span>
+    <h2>Teams that run on Slacc move faster.</h2>
+    <p>Across 2,000+ surveyed customers, here's what changed in the first three months on Slacc.</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="n">90%</div>
+      <div class="l">say Slacc improved how they collaborate.</div>
+      <div class="s">Source: 2026 Slacc customer survey</div>
+    </div>
+    <div class="stat-card">
+      <div class="n">43%</div>
+      <div class="l">drop in internal email volume in the first month.</div>
+      <div class="s">Avg. across 1,200 Business+ workspaces</div>
+    </div>
+    <div class="stat-card">
+      <div class="n">87%</div>
+      <div class="l">of teams ship their next launch on schedule.</div>
+      <div class="s">vs. 61% before adopting Slacc</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Pricing -->
+<section><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Plans</span>
+    <h2>Pick a plan that fits.</h2>
+    <p>Free forever for small teams. Pro adds searchable history and group huddles. Business+ adds SSO and 24/7 support. Enterprise Grid scales to the whole company.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="tier">
+      <span class="eyebrow">Free</span>
+      <h3 class="nm">Free</h3>
+      <p class="pr"><span class="num">$0</span></p>
+      <p class="desc">For small teams trying out Slacc with limited history and one-to-one huddles.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>90 days of history</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>10 integrations</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>1:1 huddles</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Canvases (1 per channel)</li>
+      </ul>
+      <div class="cta-wrap"><a class="btn btn-outline-aubergine" href="#">Get started</a></div>
+    </div>
+
+    <div class="tier featured">
+      <span class="feat-pill">Most popular</span>
+      <span class="eyebrow">Pro</span>
+      <h3 class="nm">Pro</h3>
+      <p class="pr"><span class="num">$8.75</span><span class="per">/user · mo</span></p>
+      <p class="desc">For small businesses who need everything to work — full history, group huddles, Slacc AI search.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--on-aubergine-mute)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Full message history</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--on-aubergine-mute)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Group huddles + screen share</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--on-aubergine-mute)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Slacc AI · search + summarize</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--on-aubergine-mute)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited integrations</li>
+      </ul>
+      <div class="cta-wrap"><a class="btn" href="#" style="background: var(--canvas); color: var(--primary);">Try Pro free</a></div>
+    </div>
+
+    <div class="tier">
+      <span class="eyebrow">Business+</span>
+      <h3 class="nm">Business+</h3>
+      <p class="pr"><span class="num">$15</span><span class="per">/user · mo</span></p>
+      <p class="desc">For growing companies — SAML SSO, 99.99% uptime, 24/7 support, advanced retention.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SAML SSO + SCIM</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>99.99% uptime SLA</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>24/7 support · 4h response</li>
+      </ul>
+      <div class="cta-wrap"><a class="btn btn-outline-aubergine" href="#">Choose Business+</a></div>
+    </div>
+
+    <div class="tier">
+      <span class="eyebrow">Enterprise</span>
+      <h3 class="nm">Enterprise Grid</h3>
+      <p class="pr"><span class="num">Custom</span></p>
+      <p class="desc">For regulated industries and global org charts — multiple workspaces, EKM, audit logs, data residency.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Everything in Business+</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Enterprise Key Management</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Cross-workspace search</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--semantic-success)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Dedicated success manager</li>
+      </ul>
+      <div class="cta-wrap"><a class="btn btn-outline-aubergine" href="#">Talk to sales</a></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Design system section (signature) -->
+<section class="ds-section">
+  <div class="mesh"></div>
+  <div class="wrap">
+    <div class="ds-intro">
+      <h2>The tokens behind the page.</h2>
+      <p>Sourced from <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.slack.html" target="_blank" rel="noopener">DESIGN.md</a>. Aubergine primary, cream-lavender hero, pill 90px buttons, blue inline links — the brand's chromatic monotheism.</p>
+    </div>
+
+    <div class="ds-block">
+      <h3>Color</h3>
+      <p>One brand voltage: aubergine. Inline links shift to a saturated blue — the only chromatic departure from the aubergine-and-cream world.</p>
+
+      <p class="ds-caption">Brand · aubergine + tints</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#4a154b"></div><div class="meta"><div class="name">primary · aubergine</div><div class="val">#4a154b</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#481a54"></div><div class="meta"><div class="name">primary-deep</div><div class="val">#481a54</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#611f69"></div><div class="meta"><div class="name">primary-press</div><div class="val">#611f69</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#592466"></div><div class="meta"><div class="name">primary-tint</div><div class="val">#592466</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#d9bdde"></div><div class="meta"><div class="name">on-aubergine-mute</div><div class="val">#d9bdde</div></div></div>
+      </div>
+
+      <p class="ds-caption">Link blue · the only chromatic departure</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1264a3"></div><div class="meta"><div class="name">link-blue</div><div class="val">#1264a3</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3860be"></div><div class="meta"><div class="name">link-hover</div><div class="val">#3860be</div></div></div>
+      </div>
+
+      <p class="ds-caption">Surface · cream-lavender atmospherics</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff; border-bottom: 1px solid var(--hairline);"></div><div class="meta"><div class="name">canvas</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f4ede4"></div><div class="meta"><div class="name">canvas-cream</div><div class="val">#f4ede4</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f9f0ff"></div><div class="meta"><div class="name">canvas-lavender</div><div class="val">#f9f0ff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e6e6e6"></div><div class="meta"><div class="name">hairline</div><div class="val">#e6e6e6</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">hairline-strong</div><div class="val">#000000</div></div></div>
+      </div>
+
+      <p class="ds-caption">Text + semantic</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1d1d1d"></div><div class="meta"><div class="name">ink</div><div class="val">#1d1d1d</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#696969"></div><div class="meta"><div class="name">ink-mute</div><div class="val">#696969</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#cc4117"></div><div class="meta"><div class="name">semantic-error</div><div class="val">#cc4117</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#007a5a"></div><div class="meta"><div class="name">semantic-success</div><div class="val">#007a5a</div></div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <p>Inter substitutes for the proprietary Avant Garde + Sans pair. Negative tracking pulls display sizes into editorial density; body relaxes to 1.55 leading.</p>
+      <div class="ds-typescale">
+        <div class="ds-tr"><span class="ds-tok">display-xxl</span><span class="ds-spec">64 · w700 · −0.77 · 1.12</span><div class="ds-sam" style="font-size:48px; font-weight:700; letter-spacing:-0.58px; line-height:1.12;">Where work happens.</div></div>
+        <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">58 · w600 · −0.46 · 1.25</span><div class="ds-sam" style="font-size:42px; font-weight:600; letter-spacing:-0.34px; line-height:1.25;">Built for the way teams work.</div></div>
+        <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">50 · w700 · −0.6 · 1.12</span><div class="ds-sam" style="font-size:36px; font-weight:700; letter-spacing:-0.43px; line-height:1.12; color: var(--primary);">90%</div></div>
+        <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">32 · w700 · −0.26 · 1.25</span><div class="ds-sam" style="font-size:26px; font-weight:700; letter-spacing:-0.21px; line-height:1.25;">Turn the talk into the work.</div></div>
+        <div class="ds-tr"><span class="ds-tok">heading-lg</span><span class="ds-spec">24 · w700 · −0.10 · 1.33</span><div class="ds-sam" style="font-size:22px; font-weight:700; letter-spacing:-0.09px; line-height:1.33;">Pricing tier name</div></div>
+        <div class="ds-tr"><span class="ds-tok">heading-md</span><span class="ds-spec">22 · w600 · 0 · 1.40</span><div class="ds-sam" style="font-size:20px; font-weight:600; line-height:1.4;">Sub-section heading</div></div>
+        <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">18 · w400 · −0.02 · 1.55</span><div class="ds-sam" style="font-size:18px; font-weight:400; line-height:1.55;">Marketing body lead. Slightly relaxed.</div></div>
+        <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 · w400 · 0 · 1.55</span><div class="ds-sam" style="font-size:16px; font-weight:400; line-height:1.55;">Default body. Generous reading.</div></div>
+        <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">16 · w700 · +0.2 · 1.38</span><div class="ds-sam" style="font-size:16px; font-weight:700; letter-spacing:0.2px;">Try For Free · Talk to Sales</div></div>
+        <div class="ds-tr"><span class="ds-tok">caption</span><span class="ds-spec">14 · w400 · +0.1 · 1.43</span><div class="ds-sam" style="font-size:14px; font-weight:400; letter-spacing:0.1px; color: var(--ink-mute);">Helper text · footnote · 14px</div></div>
+        <div class="ds-tr"><span class="ds-tok">micro-cap</span><span class="ds-spec">12 · w700 · +0.96 · UPPER</span><div class="ds-sam" style="font-size:12px; font-weight:700; letter-spacing:0.96px; text-transform:uppercase;">eyebrow · all-caps · 12/700</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Radius — pill for every button, never a square</h3>
+      <p>Buttons hit 90px pill radius. Cards live at 16px (`rounded.xl`). The 48px `xxl` is reserved for stat badge backdrops.</p>
+      <div class="ds-radius">
+        <div class="ds-rad"><div class="box" style="border-radius:2px"></div><span class="lab">xs</span><span class="vv">2 · tag</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="lab">sm</span><span class="vv">4 · input</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="lab">md</span><span class="vv">8 · chip</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:12px"></div><span class="lab">lg</span><span class="vv">12 · mockup</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="lab">xl</span><span class="vv">16 · card</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:48px"></div><span class="lab">xxl</span><span class="vv">48 · badge</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="lab">pill</span><span class="vv">90 · button</span></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Components</h3>
+
+      <p class="ds-caption">Buttons — pill 90px radius · over-padded 28–30px horizontal</p>
+      <div class="ds-comp-row">
+        <a class="btn btn-primary" href="#">Try For Free</a>
+        <a class="btn btn-primary" href="#" style="background: var(--primary-press);">Pressed</a>
+        <a class="btn btn-secondary" href="#">Sign in</a>
+        <a class="btn btn-outline-aubergine" href="#">Talk to sales</a>
+      </div>
+
+      <p class="ds-caption">On-aubergine variants</p>
+      <div class="ds-on-aubergine">
+        <div class="ds-comp-row">
+          <a class="btn btn-outline-on-aubergine" href="#">Watch the demo</a>
+          <a class="btn" href="#" style="background: var(--canvas); color: var(--primary);">Try For Free</a>
+          <a style="color: var(--on-primary); text-decoration: underline; font-size: 16px; font-weight: 400;" href="#">Inline link on aubergine</a>
+        </div>
+      </div>
+
+      <p class="ds-caption">Inputs — 44px height · 4px radius · aubergine focus border</p>
+      <div class="ds-input-pair">
+        <div>
+          <label class="ds-field-label">text-input</label>
+          <input class="ds-input" placeholder="you@slacc.com"/>
+        </div>
+        <div>
+          <label class="ds-field-label">text-input · focused</label>
+          <input class="ds-input focused" value="mira@slacc.com"/>
+        </div>
+      </div>
+
+      <p class="ds-caption">Pills &amp; eyebrows — 12px all-caps with 0.96px tracking</p>
+      <div class="ds-comp-row">
+        <span class="ds-pill">New · Slacc AI</span>
+        <span class="ds-pill lavender">Most popular</span>
+        <span class="ds-pill solid">Featured tier</span>
+        <span class="ds-pill green">Free forever</span>
+        <a style="color: var(--link-blue); font-size: 16px; text-decoration: underline;" href="#">An inline link</a>
+      </div>
+
+      <p class="ds-caption">Cards — pricing (white) · featured aubergine · cream feature</p>
+      <div class="ds-cards-row">
+        <div class="ds-mini-card white">
+          <div class="lab">card-pricing</div>
+          <div class="v">canvas + 16px radius + hairline</div>
+          <div class="body">Default pricing tier. White surface, rounded-xl, 32px padding.</div>
+        </div>
+        <div class="ds-mini-card aubergine">
+          <div class="lab">card-pricing-featured</div>
+          <div class="v">surface-aubergine + 16px radius</div>
+          <div class="body">The featured tier inverts to aubergine — the brand's signature pricing choice.</div>
+        </div>
+        <div class="ds-mini-card">
+          <div class="lab">card-feature-cream</div>
+          <div class="v">canvas-cream + 16px radius</div>
+          <div class="body">Feature card on the cream track. Holds product UI floats and copy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Closing aubergine band -->
+<div class="wrap"><div class="aubergine-band">
+  <div class="inner">
+    <h2>Bring your team to Slacc.</h2>
+    <p>It takes about three minutes to start a workspace. The first 90 days are on us.</p>
+    <div class="cta-row">
+      <a class="btn" href="#" style="background: var(--canvas); color: var(--primary);">Try for free</a>
+      <a class="btn btn-outline-on-aubergine" href="#">Talk to sales</a>
+    </div>
+  </div>
+</div></div>
+
+<!-- Aubergine footer -->
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand brand-line" href="#">
+        <svg class="glyph" viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="2" y="14" width="6" height="6" rx="3" fill="#d9bdde"/>
+          <rect x="12" y="14" width="6" height="6" rx="3" fill="#d9bdde"/>
+          <rect x="14" y="2" width="6" height="6" rx="3" fill="#d9bdde"/>
+          <rect x="24" y="12" width="6" height="6" rx="3" fill="#d9bdde"/>
+          <rect x="14" y="14" width="6" height="6" rx="3" fill="#ffffff"/>
+        </svg>
+        slacc
+      </a>
+      <p>A Slack-inspired single-page composition. Tokens and component spec sourced from awesome-design-md.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Channels</a></li>
+        <li><a href="#">Huddles</a></li>
+        <li><a href="#">Canvas</a></li>
+        <li><a href="#">Slacc AI</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Solutions</h4>
+      <ul>
+        <li><a href="#">Engineering</a></li>
+        <li><a href="#">Sales</a></li>
+        <li><a href="#">Marketing</a></li>
+        <li><a href="#">IT</a></li>
+        <li><a href="#">Customer service</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Slacc Blog</a></li>
+        <li><a href="#">Customer stories</a></li>
+        <li><a href="#">Status</a></li>
+        <li><a href="#">Developer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Newsroom</a></li>
+        <li><a href="#">Trust</a></li>
+        <li><a href="#">Investors</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get started</h4>
+      <ul>
+        <li><a href="#">Try for free</a></li>
+        <li><a href="#">Talk to sales</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Download apps</a></li>
+        <li><a href="#">Sign in</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal-band">
+    <span>© 2026 Slacc (inspired). All rights reserved.</span>
+    <div class="right">
+      <a href="#">Privacy &amp; Terms</a>
+      <a href="#">Cookie preferences</a>
+      <a href="#">Change region · English (US)</a>
+    </div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.slack.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

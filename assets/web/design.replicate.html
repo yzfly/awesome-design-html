@@ -1,0 +1,1091 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Replicate — Inspired Design</title>
+<meta name="description" content="A Replicate-inspired marketing page: cream canvas, hot-orange stamp, oversized rb-freigeist-neue display, dark code wells, full-rounded interactive shapes. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #ea2804;
+  --primary-deep: #c01f00;
+  --on-primary: #ffffff;
+  --hero-glow: #ff6a3d;
+  --hero-pink: #f4a8a0;
+  --link: #ea2804;
+  /* Text */
+  --ink: #202020;
+  --body: #3a3a3a;
+  --charcoal: #575757;
+  --mute: #646464;
+  --ash: #8d8d8d;
+  --stone: #bbbbbb;
+  --on-dark: #fcfcfc;
+  --on-dark-mute: rgba(252,252,252,0.72);
+  /* Surface */
+  --canvas: #f9f7f3;
+  --surface-bone: #f3f0e8;
+  --surface-card: #ffffff;
+  --surface-dark: #202020;
+  --surface-deep: #000000;
+  --hairline: rgba(32,32,32,0.12);
+  --hairline-strong: #202020;
+  --divider-dark: rgba(255,255,255,0.2);
+  --badge-success: #2b9a66;
+  --github-dark: #24292e;
+  --ring-focus: rgba(59,130,246,0.5);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--primary); color: var(--on-primary); }
+
+/* Display family — Bricolage Grotesque substitutes rb-freigeist-neue */
+.display, h1, h2, h3 {
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  font-weight: 700;
+  line-height: 1.0;
+}
+.mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+/* Layout */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.wrap-wide { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) {
+  .wrap, .wrap-wide { padding: 0 20px; }
+}
+
+/* Nav */
+.top-nav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+  height: 60px;
+}
+.nav-inner { height: 100%; display: flex; align-items: center; gap: 24px; }
+.logo {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 18px; letter-spacing: -0.3px;
+}
+.logo-orb {
+  width: 26px; height: 26px; border-radius: 9999px;
+  background: var(--primary);
+  display: inline-block;
+}
+.nav-center { display: flex; gap: 6px; margin-left: 24px; }
+.nav-center a {
+  font-size: 14px; font-weight: 600; color: var(--ink);
+  padding: 6px 12px; border-radius: 9999px;
+}
+.nav-center a:hover { background: var(--surface-bone); }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 44px; padding: 0 24px;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 16px; font-weight: 600; line-height: 1;
+  cursor: pointer; border: 1px solid transparent;
+  transition: background .15s ease, color .15s ease, transform .1s ease;
+  text-decoration: none;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-deep); }
+.btn-dark { background: var(--surface-dark); color: var(--on-dark); }
+.btn-dark:hover { background: #000; }
+.btn-outline { background: var(--surface-card); color: var(--ink); border-color: var(--hairline-strong); }
+.btn-outline:hover { background: var(--surface-bone); }
+.btn-ghost { background: var(--canvas); color: var(--ink); height: 36px; padding: 0 16px; font-size: 14px; }
+.btn-ghost:hover { background: var(--surface-bone); }
+.btn-sm { height: 36px; font-size: 14px; padding: 0 16px; }
+.btn-github { background: var(--github-dark); color: var(--on-dark); }
+.btn-github:hover { filter: brightness(1.1); }
+
+/* Hero */
+.hero {
+  position: relative;
+  background: var(--primary);
+  color: var(--on-dark);
+  padding: 120px 32px 96px;
+  overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(60% 80% at 80% 20%, var(--hero-glow) 0%, transparent 60%),
+    radial-gradient(50% 60% at 20% 80%, var(--hero-pink) 0%, transparent 65%),
+    radial-gradient(80% 100% at 50% 100%, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,0,0,0.18);
+  padding: 6px 14px; border-radius: 9999px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0;
+  color: var(--on-dark); margin-bottom: 28px;
+}
+.hero-dot { width: 6px; height: 6px; border-radius: 9999px; background: #fff; }
+.hero h1 {
+  font-size: clamp(48px, 11vw, 128px);
+  letter-spacing: -3px;
+  line-height: 1.0;
+  margin: 0 0 28px;
+  max-width: 1120px;
+  font-weight: 700;
+}
+.hero p {
+  font-size: 20px; font-weight: 500;
+  max-width: 640px;
+  margin: 0 0 32px;
+  color: var(--on-dark);
+  line-height: 1.4;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero .btn-primary { background: #fff; color: var(--ink); }
+.hero .btn-primary:hover { background: var(--surface-bone); }
+.hero .btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.55); }
+.hero .btn-outline:hover { background: rgba(255,255,255,0.12); }
+
+/* Hero illustration / tinkerer placeholder */
+.hero-illust {
+  margin-top: 56px;
+  background: rgba(0,0,0,0.16);
+  border-radius: 10px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.hero-illust .ink {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 30px; font-weight: 600;
+  letter-spacing: -0.5px; line-height: 1.2;
+}
+.hero-illust .meta { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.tag {
+  font-size: 12px; font-weight: 500;
+  padding: 4px 10px; border-radius: 9999px;
+  background: rgba(255,255,255,0.18); color: #fff;
+}
+@media (max-width: 720px) {
+  .hero { padding: 80px 20px 64px; }
+  .hero-illust { grid-template-columns: 1fr; }
+}
+
+/* Section */
+section { padding: 96px 0; }
+section.tight { padding: 64px 0; }
+.section-head { margin-bottom: 56px; max-width: 880px; }
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+  display: inline-block;
+}
+h2.section-title {
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: 700;
+  letter-spacing: -1.8px;
+  line-height: 1.0;
+  margin: 0 0 20px;
+}
+.section-lede {
+  font-size: 18px; color: var(--body);
+  max-width: 640px;
+  line-height: 1.56;
+}
+
+/* Model grid */
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1100px) { .model-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 820px) { .model-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .model-grid { grid-template-columns: 1fr; } }
+.model-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.model-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(32,32,32,0.08); }
+.thumb {
+  aspect-ratio: 1/1;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f3f0e8, #e8e3d6);
+  position: relative;
+  overflow: hidden;
+}
+.thumb.t1 { background: linear-gradient(135deg, #f4a8a0, #ff6a3d); }
+.thumb.t2 { background: radial-gradient(circle at 30% 30%, #ffd, #ffcf9c, #ea2804); }
+.thumb.t3 { background: linear-gradient(135deg, #202020, #575757); }
+.thumb.t4 { background: linear-gradient(135deg, #2b9a66, #f3f0e8); }
+.thumb svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.model-meta { display: flex; flex-direction: column; gap: 4px; }
+.model-owner { font-size: 14px; color: var(--charcoal); font-family: "JetBrains Mono", monospace; }
+.model-name {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 20px; font-weight: 700;
+  letter-spacing: -0.3px; line-height: 1.1;
+  color: var(--ink);
+}
+.model-desc { font-size: 14px; color: var(--charcoal); line-height: 1.43; }
+.model-row { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+.badge {
+  font-size: 12px; font-weight: 500;
+  padding: 4px 10px; border-radius: 9999px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.badge-status { background: var(--badge-success); color: var(--on-dark); }
+.badge-tag { background: var(--canvas); color: var(--ink); border: 1px solid var(--hairline); }
+.live-dot { width: 6px; height: 6px; border-radius: 9999px; background: #fff; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* How it works — dark band */
+.dark-band {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  padding: 96px 0;
+}
+.dark-band h2.section-title { color: var(--on-dark); }
+.dark-band .section-lede { color: var(--on-dark-mute); }
+.dark-band .eyebrow { color: var(--on-dark-mute); }
+.code-split {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px;
+  align-items: center;
+}
+@media (max-width: 980px) { .code-split { grid-template-columns: 1fr; } }
+.code-split .narrative h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 38px; font-weight: 700;
+  letter-spacing: -1px; line-height: 1.0;
+  margin: 0 0 20px;
+  color: var(--on-dark);
+}
+.code-split .narrative p {
+  font-size: 18px; color: var(--on-dark-mute);
+  line-height: 1.56; margin: 0 0 16px;
+}
+.code-split .narrative ol { padding-left: 24px; color: var(--on-dark-mute); font-size: 16px; }
+.code-split .narrative ol li { margin-bottom: 8px; }
+
+.code-block {
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--divider-dark);
+}
+.code-tabs {
+  display: flex; gap: 4px;
+  padding: 12px 12px 0;
+  border-bottom: 1px solid var(--divider-dark);
+}
+.code-tab {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; line-height: 1.5;
+  padding: 6px 12px; border-radius: 4px;
+  color: var(--on-dark-mute);
+  cursor: pointer;
+}
+.code-tab.active {
+  color: var(--on-dark);
+  border-bottom: 2px solid var(--primary);
+  margin-bottom: -1px;
+  padding-bottom: 7px;
+}
+.code-body {
+  padding: 24px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px; line-height: 1.55;
+  color: var(--on-dark);
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+.code-body .cm { color: var(--ash); }
+.code-body .ky { color: var(--hero-glow); }
+.code-body .st { color: #b5e8a8; }
+.code-body .fn { color: #f4a8a0; }
+.code-body .nm { color: #ffd9a0; }
+
+/* Pricing */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-top: 56px;
+}
+@media (max-width: 980px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-tier {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.pricing-tier.featured {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  border-color: var(--surface-dark);
+}
+.pricing-tier h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 48px; font-weight: 700;
+  letter-spacing: -1px; line-height: 1.0;
+  margin: 0;
+}
+.pricing-price {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 30px; font-weight: 600;
+  letter-spacing: -0.5px; line-height: 1.2;
+}
+.pricing-price small { font-size: 14px; color: var(--charcoal); font-weight: 500; font-family: "Inter", sans-serif; letter-spacing: 0; }
+.pricing-tier.featured .pricing-price small { color: var(--on-dark-mute); }
+.pricing-desc { font-size: 14px; color: var(--charcoal); }
+.pricing-tier.featured .pricing-desc { color: var(--on-dark-mute); }
+.pricing-list { list-style: none; padding: 0; margin: 8px 0 16px; font-size: 14px; line-height: 1.7; }
+.pricing-list li { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-top: 1px solid var(--hairline); }
+.pricing-tier.featured .pricing-list li { border-top-color: var(--divider-dark); }
+.pricing-list li::before { content: "✓"; color: var(--primary); font-weight: 700; }
+.pricing-tier.featured .pricing-list li::before { color: var(--hero-glow); }
+.pricing-cta { margin-top: auto; }
+.pricing-tier.featured .btn-outline { background: transparent; color: var(--on-dark); border-color: var(--on-dark); }
+
+/* Hero band CTA stripe */
+.cta-stripe {
+  background: var(--canvas);
+  padding: 160px 0;
+  text-align: center;
+}
+.cta-stripe h2 {
+  font-size: clamp(48px, 10vw, 128px);
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 1.0;
+  margin: 0 0 32px;
+}
+.cta-stripe .accent { color: var(--primary); }
+.cta-stripe-cta { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* Contributor mosaic */
+.contrib-strip {
+  background: var(--surface-bone);
+  padding: 48px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.contrib-strip .row {
+  display: flex; gap: 12px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px;
+}
+.avatar {
+  width: 40px; height: 40px; border-radius: 9999px;
+  background: var(--surface-card); border: 1px solid var(--hairline);
+  flex-shrink: 0;
+  background-size: cover; background-position: center;
+}
+.avatar.a1 { background: linear-gradient(135deg, #ff6a3d, #ea2804); }
+.avatar.a2 { background: linear-gradient(135deg, #2b9a66, #145e3f); }
+.avatar.a3 { background: linear-gradient(135deg, #f4a8a0, #c01f00); }
+.avatar.a4 { background: linear-gradient(135deg, #575757, #202020); }
+.avatar.a5 { background: linear-gradient(135deg, #f3f0e8, #bbbbbb); }
+.avatar.a6 { background: linear-gradient(135deg, #ffd9a0, #ff6a3d); }
+.avatar.a7 { background: linear-gradient(135deg, #b5e8a8, #2b9a66); }
+.avatar.a8 { background: linear-gradient(135deg, #f4a8a0, #ea2804); }
+.contrib-caption {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--charcoal);
+  margin-bottom: 16px;
+  text-transform: uppercase; letter-spacing: 1.2px;
+}
+
+/* DS section */
+.ds-section { background: var(--surface-bone); padding: 96px 0; }
+.ds-row { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding: 32px 0; border-top: 1px solid var(--hairline); }
+.ds-row:last-child { border-bottom: 1px solid var(--hairline); }
+.ds-row > h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 30px; font-weight: 700;
+  letter-spacing: -0.5px; line-height: 1.0; margin: 0;
+}
+.ds-row .ds-sub {
+  font-size: 14px; color: var(--charcoal); margin-top: 8px;
+  font-family: "JetBrains Mono", monospace;
+}
+@media (max-width: 820px) { .ds-row { grid-template-columns: 1fr; } }
+
+.color-group { margin-bottom: 32px; }
+.color-group:last-child { margin-bottom: 0; }
+.color-group h4 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--charcoal);
+  margin: 0 0 12px;
+}
+.color-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+}
+.swatch {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.chip {
+  height: 56px; border-radius: 8px;
+  border: 1px solid var(--hairline);
+}
+.chip-label { font-size: 14px; font-weight: 600; letter-spacing: -0.2px; }
+.chip-hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--charcoal); }
+
+/* Type ladder */
+.type-row {
+  display: grid; grid-template-columns: 220px 80px 1fr;
+  gap: 24px; align-items: baseline;
+  padding: 16px 0; border-top: 1px solid var(--hairline);
+}
+.type-row:first-of-type { border-top: 0; }
+.type-token { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--charcoal); }
+.type-size { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--charcoal); text-align: right; }
+.type-sample {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -1px;
+}
+.type-sample.body { font-family: "Inter", sans-serif; font-weight: 400; line-height: 1.5; letter-spacing: 0; }
+.type-sample.mono { font-family: "JetBrains Mono", monospace; font-weight: 400; }
+@media (max-width: 720px) {
+  .type-row { grid-template-columns: 1fr; gap: 4px; }
+  .type-size { text-align: left; }
+}
+
+/* Radius ladder */
+.radius-row {
+  display: flex; flex-wrap: wrap; gap: 20px;
+}
+.radius-card {
+  flex: 1 1 130px;
+  text-align: center;
+}
+.radius-tile {
+  height: 80px;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  margin-bottom: 8px;
+}
+.radius-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--charcoal);
+}
+
+/* Components matrix */
+.comp-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 720px) { .comp-matrix { grid-template-columns: 1fr; } }
+.comp-cell {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 24px;
+}
+.comp-cell h5 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--charcoal);
+  margin: 0 0 16px;
+}
+.comp-stack { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.comp-stack.row { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px; }
+
+.input-pill {
+  height: 44px; padding: 0 20px;
+  border-radius: 9999px;
+  border: 1px solid var(--hairline);
+  background: var(--surface-card);
+  color: var(--ink);
+  font-size: 16px;
+  font-family: inherit;
+  min-width: 240px;
+}
+.input-pill:focus { outline: 3px solid var(--ring-focus); }
+
+.ds-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--charcoal);
+  margin-top: 24px;
+  border-bottom: 1px solid var(--hairline-strong);
+  padding-bottom: 2px;
+}
+
+/* Footer */
+.footer {
+  background: var(--surface-deep);
+  color: var(--on-dark);
+  padding: 64px 32px;
+}
+.footer-inner { max-width: 1280px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 32px;
+}
+@media (max-width: 820px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+.footer-brand h4 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 30px; font-weight: 700;
+  letter-spacing: -0.5px; margin: 0 0 12px;
+  color: #fff;
+}
+.footer-brand p { font-size: 14px; color: var(--on-dark-mute); max-width: 280px; line-height: 1.5; }
+.footer-col h5 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--on-dark-mute);
+  margin: 0 0 12px;
+}
+.footer-col a { display: block; font-size: 14px; color: var(--on-dark); padding: 4px 0; }
+.footer-col a:hover { color: var(--hero-glow); }
+.footer-bottom {
+  margin-top: 64px; padding-top: 24px;
+  border-top: 1px solid var(--divider-dark);
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--on-dark-mute);
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* Floating DESIGN.md link */
+.floating-design-link {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--surface-dark); color: var(--on-dark);
+  padding: 10px 18px;
+  border-radius: 9999px;
+  font-size: 13px; font-weight: 600;
+  z-index: 50;
+  border: 1px solid var(--divider-dark);
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.floating-design-link:hover { background: var(--primary); border-color: var(--primary); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#">
+      <span class="logo-orb"></span>
+      <span>replicate</span>
+    </a>
+    <div class="nav-center">
+      <a href="#">Explore</a>
+      <a href="#">Pricing</a>
+      <a href="#">Docs</a>
+      <a href="#">Blog</a>
+      <a href="#">Changelog</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="btn btn-ghost">Sign in</a>
+      <a href="#" class="btn btn-primary btn-sm">Sign in with GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow"><span class="hero-dot"></span>Run open-source AI · 1.7M+ developers</span>
+    <h1>Run AI<br>with one<br>line of code.</h1>
+    <p>Replicate is the easiest way to run open-source machine learning models in the cloud. Pay only for the compute you use.</p>
+    <div class="hero-cta">
+      <a href="#" class="btn btn-primary">Get started</a>
+      <a href="#" class="btn btn-outline">Read the docs</a>
+    </div>
+    <div class="hero-illust">
+      <div>
+        <div class="ink">flux-pro · running</div>
+        <div class="meta">
+          <span class="tag">text-to-image</span>
+          <span class="tag">FLUX.1 [pro]</span>
+          <span class="tag">black-forest-labs</span>
+          <span class="tag">v1.3</span>
+        </div>
+      </div>
+      <svg viewBox="0 0 240 160" width="100%" height="auto" aria-hidden="true">
+        <defs>
+          <linearGradient id="oo" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity=".15"/>
+          </linearGradient>
+        </defs>
+        <rect x="6" y="6" width="228" height="148" rx="10" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.25)"/>
+        <circle cx="60" cy="80" r="34" fill="url(#oo)"/>
+        <rect x="110" y="48" width="110" height="14" rx="4" fill="rgba(255,255,255,0.4)"/>
+        <rect x="110" y="70" width="86" height="10" rx="4" fill="rgba(255,255,255,0.25)"/>
+        <rect x="110" y="88" width="100" height="10" rx="4" fill="rgba(255,255,255,0.25)"/>
+        <rect x="110" y="118" width="56" height="22" rx="11" fill="#fff"/>
+        <text x="138" y="133" font-family="Inter" font-size="11" font-weight="700" fill="#ea2804">RUN ▸</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTOR STRIP -->
+<div class="contrib-strip">
+  <div class="wrap">
+    <div class="contrib-caption">+ 47k contributors building together</div>
+    <div class="row" aria-hidden="true">
+      <span class="avatar a1"></span><span class="avatar a2"></span><span class="avatar a3"></span>
+      <span class="avatar a4"></span><span class="avatar a5"></span><span class="avatar a6"></span>
+      <span class="avatar a7"></span><span class="avatar a8"></span><span class="avatar a1"></span>
+      <span class="avatar a3"></span><span class="avatar a5"></span><span class="avatar a7"></span>
+      <span class="avatar a2"></span><span class="avatar a4"></span><span class="avatar a6"></span>
+      <span class="avatar a8"></span>
+    </div>
+  </div>
+</div>
+
+<!-- EXPLORE / MODEL GRID -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">// Explore models</span>
+      <h2 class="section-title">Thousands of models,<br>one API.</h2>
+      <p class="section-lede">Generate images, edit video, transcribe speech, build agents — every model on Replicate ships behind the same predictable HTTP endpoint.</p>
+    </div>
+    <div class="model-grid">
+      <article class="model-card">
+        <div class="thumb t1"></div>
+        <div class="model-meta">
+          <span class="model-owner">black-forest-labs</span>
+          <span class="model-name">flux-pro</span>
+        </div>
+        <p class="model-desc">State-of-the-art text-to-image with painterly fidelity.</p>
+        <div class="model-row">
+          <span class="badge badge-status"><span class="live-dot"></span>running</span>
+          <span class="badge badge-tag">image</span>
+        </div>
+      </article>
+      <article class="model-card">
+        <div class="thumb t2"></div>
+        <div class="model-meta">
+          <span class="model-owner">meta</span>
+          <span class="model-name">llama-3-70b</span>
+        </div>
+        <p class="model-desc">High-quality instruction-tuned 70B chat model.</p>
+        <div class="model-row">
+          <span class="badge badge-status"><span class="live-dot"></span>running</span>
+          <span class="badge badge-tag">chat</span>
+        </div>
+      </article>
+      <article class="model-card">
+        <div class="thumb t3"></div>
+        <div class="model-meta">
+          <span class="model-owner">openai</span>
+          <span class="model-name">whisper-v3</span>
+        </div>
+        <p class="model-desc">Multilingual speech-to-text with word-level timestamps.</p>
+        <div class="model-row">
+          <span class="badge badge-status"><span class="live-dot"></span>running</span>
+          <span class="badge badge-tag">audio</span>
+        </div>
+      </article>
+      <article class="model-card">
+        <div class="thumb t4"></div>
+        <div class="model-meta">
+          <span class="model-owner">stability-ai</span>
+          <span class="model-name">sdxl-lightning</span>
+        </div>
+        <p class="model-desc">Fast image synthesis in four denoise steps.</p>
+        <div class="model-row">
+          <span class="badge badge-status"><span class="live-dot"></span>running</span>
+          <span class="badge badge-tag">image</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS — DARK BAND -->
+<section class="dark-band">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">// How it works</span>
+      <h2 class="section-title">Run any model<br>in three lines.</h2>
+    </div>
+    <div class="code-split">
+      <div class="narrative">
+        <h3>Pick a model, run a prediction.</h3>
+        <p>No infra to provision. No Docker images to push. No GPUs to babysit. Pass inputs to the model slug, await the result.</p>
+        <ol>
+          <li>Find a model on Explore.</li>
+          <li>Copy its slug + version.</li>
+          <li>Call <span class="mono" style="color:#ff6a3d">replicate.run()</span> from Python, Node, or HTTP.</li>
+        </ol>
+      </div>
+      <div class="code-block">
+        <div class="code-tabs">
+          <span class="code-tab active">Python</span>
+          <span class="code-tab">Node.js</span>
+          <span class="code-tab">cURL</span>
+          <span class="code-tab">HTTP</span>
+        </div>
+<div class="code-body"><span class="cm"># pip install replicate</span>
+<span class="ky">import</span> replicate
+
+output = replicate.<span class="fn">run</span>(
+    <span class="st">"black-forest-labs/flux-pro"</span>,
+    input={
+        <span class="nm">"prompt"</span>: <span class="st">"a cat reading a zine in the rain"</span>,
+        <span class="nm">"aspect_ratio"</span>: <span class="st">"4:3"</span>,
+        <span class="nm">"output_format"</span>: <span class="st">"webp"</span>,
+    },
+)
+
+<span class="ky">print</span>(output)
+<span class="cm"># https://replicate.delivery/yhqm/...png</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCALE FEATURE -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">// Scale on Replicate</span>
+      <h2 class="section-title">Production AI without<br>the babysitting.</h2>
+      <p class="section-lede">Autoscale to thousands of GPUs, queue spikes gracefully, pay only for compute used per second. Replicate handles the cold-start so your inference looks instant.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <div class="comp-cell" style="padding:32px">
+        <span class="eyebrow">Cold start</span>
+        <div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:56px;letter-spacing:-1.2px;line-height:1;margin:8px 0">≤ 2s</div>
+        <p style="color:var(--charcoal);font-size:14px;margin:0">Warm boot any model on demand.</p>
+      </div>
+      <div class="comp-cell" style="padding:32px">
+        <span class="eyebrow">Autoscale</span>
+        <div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:56px;letter-spacing:-1.2px;line-height:1;margin:8px 0">0 → 1k</div>
+        <p style="color:var(--charcoal);font-size:14px;margin:0">GPUs spin up per request.</p>
+      </div>
+      <div class="comp-cell" style="padding:32px">
+        <span class="eyebrow">Billing</span>
+        <div style="font-family:'Bricolage Grotesque';font-weight:700;font-size:56px;letter-spacing:-1.2px;line-height:1;margin:8px 0">per s</div>
+        <p style="color:var(--charcoal);font-size:14px;margin:0">Pay only for what you use.</p>
+      </div>
+    </div>
+  </div>
+  <style>@media (max-width:820px){section .wrap > div[style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr !important;}}</style>
+</section>
+
+<!-- PRICING -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">// Pricing</span>
+      <h2 class="section-title">Pay only for<br>what you run.</h2>
+      <p class="section-lede">No seats, no minimums. The free tier covers exploration; production scales by the second.</p>
+    </div>
+    <div class="pricing-grid">
+      <article class="pricing-tier">
+        <h3>Free</h3>
+        <div class="pricing-price">$0<small> /month</small></div>
+        <p class="pricing-desc">For hackers, hobbyists, and weekend ideas.</p>
+        <ul class="pricing-list">
+          <li>Try every public model</li>
+          <li>$10 trial credit</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#" class="btn btn-outline pricing-cta">Sign up free</a>
+      </article>
+      <article class="pricing-tier featured">
+        <h3>Pro</h3>
+        <div class="pricing-price">Per-second<small> compute</small></div>
+        <p class="pricing-desc">For teams shipping AI into production.</p>
+        <ul class="pricing-list">
+          <li>Autoscaling GPUs</li>
+          <li>Deploy private models</li>
+          <li>Priority cold-starts</li>
+          <li>Webhook + streaming APIs</li>
+        </ul>
+        <a href="#" class="btn btn-primary pricing-cta">Start building</a>
+      </article>
+      <article class="pricing-tier">
+        <h3>Enterprise</h3>
+        <div class="pricing-price">Custom<small> · let's talk</small></div>
+        <p class="pricing-desc">For organizations with bespoke compute needs.</p>
+        <ul class="pricing-list">
+          <li>Dedicated capacity</li>
+          <li>SLA + SOC 2</li>
+          <li>Single-tenant deployments</li>
+          <li>Onboarding engineer</li>
+        </ul>
+        <a href="#" class="btn btn-outline pricing-cta">Talk to sales</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIPE -->
+<section class="cta-stripe">
+  <div class="wrap">
+    <h2>Imagine what you<br>can <span class="accent">build.</span></h2>
+    <div class="cta-stripe-cta">
+      <a href="#" class="btn btn-primary">Get started</a>
+      <a href="#" class="btn btn-github">Sign in with GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PART B — DESIGN SYSTEM REFERENCE ─── -->
+<section class="ds-section" id="design-system">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">// Design system reference</span>
+      <h2 class="section-title">Tokens, by the<br>workbench.</h2>
+      <p class="section-lede">An honest look at the building blocks — cream canvas, hot-orange stamp, three families, full-rounded interactives. No surprises, no second accent.</p>
+      <a class="ds-link mono" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.replicate.html" target="_blank" rel="noopener">→ Read the full DESIGN.md</a>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-row">
+      <div>
+        <h3>Color</h3>
+        <div class="ds-sub">grouped &amp; named</div>
+      </div>
+      <div>
+        <div class="color-group">
+          <h4>Brand &amp; Accent</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#ea2804"></div><span class="chip-label">primary</span><span class="chip-hex">#ea2804</span></div>
+            <div class="swatch"><div class="chip" style="background:#c01f00"></div><span class="chip-label">primary-deep</span><span class="chip-hex">#c01f00</span></div>
+            <div class="swatch"><div class="chip" style="background:#ff6a3d"></div><span class="chip-label">hero-glow</span><span class="chip-hex">#ff6a3d</span></div>
+            <div class="swatch"><div class="chip" style="background:#f4a8a0"></div><span class="chip-label">hero-pink</span><span class="chip-hex">#f4a8a0</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Surface</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#f9f7f3"></div><span class="chip-label">canvas</span><span class="chip-hex">#f9f7f3</span></div>
+            <div class="swatch"><div class="chip" style="background:#f3f0e8"></div><span class="chip-label">surface-bone</span><span class="chip-hex">#f3f0e8</span></div>
+            <div class="swatch"><div class="chip" style="background:#ffffff"></div><span class="chip-label">surface-card</span><span class="chip-hex">#ffffff</span></div>
+            <div class="swatch"><div class="chip" style="background:#202020"></div><span class="chip-label">surface-dark</span><span class="chip-hex">#202020</span></div>
+            <div class="swatch"><div class="chip" style="background:#000000"></div><span class="chip-label">surface-deep</span><span class="chip-hex">#000000</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Text</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#202020"></div><span class="chip-label">ink</span><span class="chip-hex">#202020</span></div>
+            <div class="swatch"><div class="chip" style="background:#3a3a3a"></div><span class="chip-label">body</span><span class="chip-hex">#3a3a3a</span></div>
+            <div class="swatch"><div class="chip" style="background:#575757"></div><span class="chip-label">charcoal</span><span class="chip-hex">#575757</span></div>
+            <div class="swatch"><div class="chip" style="background:#8d8d8d"></div><span class="chip-label">ash</span><span class="chip-hex">#8d8d8d</span></div>
+            <div class="swatch"><div class="chip" style="background:#bbbbbb"></div><span class="chip-label">stone</span><span class="chip-hex">#bbbbbb</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Semantic</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#2b9a66"></div><span class="chip-label">badge-success</span><span class="chip-hex">#2b9a66</span></div>
+            <div class="swatch"><div class="chip" style="background:#ea2804"></div><span class="chip-label">link</span><span class="chip-hex">#ea2804</span></div>
+            <div class="swatch"><div class="chip" style="background:#24292e"></div><span class="chip-label">github-dark</span><span class="chip-hex">#24292e</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="ds-row">
+      <div>
+        <h3>Type</h3>
+        <div class="ds-sub">three families</div>
+      </div>
+      <div>
+        <div class="type-row">
+          <span class="type-token">display-xxl</span>
+          <span class="type-size">128 / -3</span>
+          <span class="type-sample" style="font-size:64px;letter-spacing:-2px">Run AI</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">display-xl</span>
+          <span class="type-size">72 / -1.8</span>
+          <span class="type-sample" style="font-size:48px;letter-spacing:-1.4px">How it works</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">display-lg</span>
+          <span class="type-size">48 / -1</span>
+          <span class="type-sample" style="font-size:36px;letter-spacing:-0.8px">Pricing tier</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">heading-md</span>
+          <span class="type-size">24 / -0.35</span>
+          <span class="type-sample" style="font-family:'Inter';font-weight:600;font-size:24px;letter-spacing:-0.35px;line-height:1.3">Model card title</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">body-lg</span>
+          <span class="type-size">18 / 0</span>
+          <span class="type-sample body" style="font-size:18px">Marketing prose stays at weight 400 — emphasis comes from family swap, not weight.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">body-md</span>
+          <span class="type-size">16 / 0</span>
+          <span class="type-sample body" style="font-size:16px">Default running text on cream canvas.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">code-md</span>
+          <span class="type-size">14 / 0</span>
+          <span class="type-sample mono" style="font-size:14px">replicate.run("owner/model", input={...})</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">caption</span>
+          <span class="type-size">12 / 0</span>
+          <span class="type-sample body" style="font-size:12px;color:var(--charcoal)">Footer disclosure · 12px / 400</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-row">
+      <div>
+        <h3>Radius</h3>
+        <div class="ds-sub">none → md → full</div>
+      </div>
+      <div>
+        <div class="radius-row">
+          <div class="radius-card"><div class="radius-tile" style="border-radius:0"></div><span class="radius-label">none / 0</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:4px"></div><span class="radius-label">xs / 4</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:6px"></div><span class="radius-label">sm / 6</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:10px"></div><span class="radius-label">md / 10</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:16px"></div><span class="radius-label">lg / 16</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:9999px;height:44px;margin-top:18px"></div><span class="radius-label">full / 9999</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-row">
+      <div>
+        <h3>Components</h3>
+        <div class="ds-sub">a working matrix</div>
+      </div>
+      <div>
+        <div class="comp-matrix">
+          <div class="comp-cell">
+            <h5>Buttons</h5>
+            <div class="comp-stack row">
+              <a class="btn btn-primary">Run model</a>
+              <a class="btn btn-dark">Get started</a>
+              <a class="btn btn-outline">Read docs</a>
+              <a class="btn btn-ghost">Sub-action</a>
+              <a class="btn btn-github">GitHub</a>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>Badges &amp; pills</h5>
+            <div class="comp-stack row">
+              <span class="badge badge-status"><span class="live-dot"></span>running</span>
+              <span class="badge badge-tag">text-to-image</span>
+              <span class="badge badge-tag">audio</span>
+              <span class="badge badge-tag">v1.3</span>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>Input · pill text-input</h5>
+            <input class="input-pill" placeholder="Search models, e.g. flux" />
+          </div>
+          <div class="comp-cell">
+            <h5>Model card</h5>
+            <article class="model-card" style="max-width:260px;border-color:var(--hairline)">
+              <div class="thumb t1"></div>
+              <div class="model-meta">
+                <span class="model-owner">black-forest-labs</span>
+                <span class="model-name">flux-pro</span>
+              </div>
+              <div class="model-row">
+                <span class="badge badge-status"><span class="live-dot"></span>running</span>
+                <span class="badge badge-tag">image</span>
+              </div>
+            </article>
+          </div>
+          <div class="comp-cell" style="grid-column:1/-1">
+            <h5>Code block</h5>
+            <div class="code-block" style="border-color:transparent">
+              <div class="code-tabs">
+                <span class="code-tab active">Python</span>
+                <span class="code-tab">Node</span>
+                <span class="code-tab">cURL</span>
+              </div>
+<div class="code-body"><span class="cm"># surface-dark, JetBrains Mono, code-md 14/1.43</span>
+output = replicate.<span class="fn">run</span>(<span class="st">"meta/llama-3-70b-instruct"</span>, input={<span class="nm">"prompt"</span>: <span class="st">"hello, model"</span>})</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>replicate</h4>
+        <p>Open-source models, one API. Inspired tribute, not affiliated with Replicate, Inc.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <a href="#">Explore</a><a href="#">Pricing</a><a href="#">Docs</a><a href="#">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h5>Models</h5>
+        <a href="#">Image</a><a href="#">Video</a><a href="#">Audio</a><a href="#">Text</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="#">GitHub</a><a href="#">Discord</a><a href="#">Status</a><a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Inspired tribute · awesome-design-md</span>
+      <span class="mono">design.replicate.html</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.replicate.html" target="_blank" rel="noopener">
+  <span class="mono">View DESIGN.md</span>
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

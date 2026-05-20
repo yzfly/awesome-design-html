@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Binance — Inspired Design</title>
+<meta name="description" content="A Binance-inspired trading platform marketing page: near-black canvas, yellow CTA voltage, dense markets table with green/red price cells, BinancePlex-style tabular mono numbers, light footer reset. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #fcd535;
+  --primary-active: #f0b90b;
+  --primary-disabled: #3a3a1f;
+  --on-primary: #181a20;
+  /* Canvas dark */
+  --canvas-dark: #0b0e11;
+  --surface-card-dark: #1e2329;
+  --surface-elevated-dark: #2b3139;
+  /* Canvas light */
+  --canvas-light: #ffffff;
+  --surface-soft-light: #fafafa;
+  --surface-strong-light: #f5f5f5;
+  /* Text */
+  --ink: #181a20;
+  --body: #eaecef;
+  --muted: #707a8a;
+  --muted-strong: #929aa5;
+  --on-dark: #ffffff;
+  /* Hairline */
+  --hairline-on-dark: #2b3139;
+  --hairline-on-light: #eaecef;
+  --border-strong: #cdd1d6;
+  /* Trading semantics */
+  --up: #0ecb81;
+  --down: #f6465d;
+  /* Other */
+  --accent-turquoise: #2dbdb6;
+  --info: #3b82f6;
+  /* Radius */
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-pill: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--canvas-dark);
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+.plex { font-family: "IBM Plex Sans", "Inter", sans-serif; font-feature-settings: "tnum"; letter-spacing: 0; }
+.up { color: var(--up); }
+.down { color: var(--down); }
+
+/* Type scale */
+.hero-display { font-size: 64px; font-weight: 700; line-height: 1.1; letter-spacing: -1px; }
+.display-lg   { font-size: 48px; font-weight: 700; line-height: 1.1; letter-spacing: -.5px; }
+.display-md   { font-size: 40px; font-weight: 600; line-height: 1.15; letter-spacing: -.3px; }
+.display-sm   { font-size: 32px; font-weight: 600; line-height: 1.2; }
+.title-lg     { font-size: 24px; font-weight: 600; line-height: 1.3; }
+.title-md     { font-size: 20px; font-weight: 600; line-height: 1.35; }
+.title-sm     { font-size: 16px; font-weight: 600; line-height: 1.4; }
+.number-display { font-size: 40px; font-weight: 700; line-height: 1.1; letter-spacing: -.3px; }
+.number-md { font-size: 16px; font-weight: 500; }
+.number-sm { font-size: 14px; font-weight: 500; }
+.body-md { font-size: 14px; font-weight: 400; line-height: 1.5; }
+.body-sm { font-size: 13px; font-weight: 400; line-height: 1.5; }
+.caption { font-size: 12px; font-weight: 500; line-height: 1.4; }
+
+/* Layout */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 80px 0; }
+
+/* Nav (dark) */
+.nav { background: var(--canvas-dark); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--hairline-on-dark); }
+.nav-row { display: flex; align-items: center; height: 64px; max-width: 1280px; margin: 0 auto; padding: 0 24px; gap: 24px; }
+.brand-mark { display: flex; align-items: center; gap: 6px; }
+.brand-name { font-size: 24px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+.brand-glyph svg { color: var(--primary); }
+.nav-links { display: flex; gap: 22px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--on-dark); }
+.nav-links a:hover { color: var(--primary); }
+.nav-right { margin-left: auto; display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--muted); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit; font-size: 14px; font-weight: 600; line-height: 1;
+  border-radius: var(--r-md);
+  padding: 12px 24px; height: 40px;
+  border: 0; cursor: pointer; transition: background .15s ease, color .15s ease;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-active); }
+.btn-primary-pill { border-radius: var(--r-pill); padding: 14px 32px; height: 48px; font-size: 15px; }
+.btn-sec-on-dark { background: var(--surface-card-dark); color: var(--on-dark); }
+.btn-sec-on-dark:hover { background: var(--surface-elevated-dark); }
+.btn-sec-on-light { background: var(--canvas-light); color: var(--ink); border: 1px solid var(--hairline-on-light); }
+.btn-tertiary { background: transparent; color: var(--body); padding: 8px 12px; height: auto; }
+.btn-tertiary:hover { color: var(--primary); }
+.btn-up { background: var(--up); color: #fff; border-radius: var(--r-sm); padding: 8px 20px; height: 36px; }
+.btn-down { background: var(--down); color: #fff; border-radius: var(--r-sm); padding: 8px 20px; height: 36px; }
+.btn-subscribe { background: var(--primary); color: var(--on-primary); height: 28px; padding: 6px 16px; font-size: 13px; border-radius: var(--r-sm); }
+
+/* Hero */
+.hero { background: var(--canvas-dark); padding: 80px 0 60px; position: relative; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: start; }
+.hero h1 { margin: 0 0 16px; }
+.hero h1 .yellow { color: var(--primary); display: block; }
+.hero .sub { color: var(--muted-strong); font-size: 16px; max-width: 480px; margin-bottom: 24px; }
+.hero-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface-card-dark);
+  border: 1px solid var(--hairline-on-dark);
+  border-radius: var(--r-lg);
+  padding: 6px 6px 6px 16px;
+  height: 56px;
+  margin-bottom: 16px;
+  max-width: 520px;
+}
+.hero-search input {
+  background: transparent; color: var(--on-dark); border: 0; outline: 0;
+  font: inherit; flex: 1; font-size: 14px;
+}
+.hero-trust-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px;
+  max-width: 520px;
+}
+.trust-badge {
+  background: var(--surface-card-dark);
+  border-radius: var(--r-lg);
+  padding: 16px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.trust-badge .yellow-label { color: var(--primary); font-weight: 700; font-size: 14px; }
+.trust-badge .lbl { color: var(--muted-strong); font-size: 12px; }
+
+/* Markets table card (centerpiece) */
+.markets-card {
+  background: var(--surface-card-dark);
+  border-radius: var(--r-xl);
+  padding: 24px;
+}
+.markets-tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+.markets-tab {
+  font-size: 14px; font-weight: 600; color: var(--muted-strong);
+  padding: 6px 12px; border-radius: var(--r-md); cursor: pointer;
+}
+.markets-tab.active { color: var(--on-dark); background: var(--surface-elevated-dark); }
+.market-row {
+  display: grid; grid-template-columns: 32px 1.2fr 1fr 1fr auto;
+  gap: 12px; align-items: center; padding: 12px 0;
+  border-top: 1px solid var(--hairline-on-dark);
+}
+.market-row.header {
+  border-top: 0; color: var(--muted); font-size: 12px;
+  padding-bottom: 8px; padding-top: 0;
+}
+.market-row.header > div { font-weight: 500; }
+.coin-icon {
+  width: 28px; height: 28px; border-radius: var(--r-pill);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 12px; color: #fff;
+}
+.pair .ticker { font-weight: 600; color: var(--on-dark); }
+.pair .quote { color: var(--muted); font-size: 12px; }
+.cell-price { font-family: "IBM Plex Sans", sans-serif; font-feature-settings: "tnum"; font-weight: 500; color: var(--on-dark); }
+.cell-change { font-family: "IBM Plex Sans", sans-serif; font-feature-settings: "tnum"; font-weight: 500; }
+.row-cta { display: flex; gap: 4px; justify-content: flex-end; }
+
+/* Stat callout band ("FUNDS ARE SAFU") */
+.safu {
+  background: var(--canvas-dark);
+  padding: 100px 0;
+  text-align: center;
+  border-top: 1px solid var(--hairline-on-dark);
+  border-bottom: 1px solid var(--hairline-on-dark);
+}
+.safu h2 { color: var(--primary); margin: 0 0 56px; }
+.safu-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 960px; margin: 0 auto; }
+.safu-stats .stat .num { color: var(--primary); }
+.safu-stats .stat .lbl { color: var(--muted-strong); font-size: 14px; margin-top: 8px; }
+
+/* Feature grid (3-up trust block) */
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.feature-card {
+  background: var(--surface-card-dark);
+  border-radius: var(--r-xl);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.feature-card h3 { margin: 0; color: var(--on-dark); font-size: 20px; font-weight: 600; }
+.feature-card p { margin: 0; color: var(--muted-strong); font-size: 14px; }
+.feature-card .icon {
+  width: 48px; height: 48px; border-radius: var(--r-lg);
+  background: var(--surface-elevated-dark); color: var(--primary);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* Buy crypto light band */
+.buy-band { background: var(--canvas-light); color: var(--ink); padding: 100px 0; }
+.buy-band h2 { color: var(--ink); }
+.buy-band .body-md { color: var(--ink); }
+.buy-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+.buy-card {
+  background: var(--canvas-light);
+  border: 1px solid var(--hairline-on-light);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+.buy-card .head-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.buy-card .head-row .lbl { font-size: 13px; color: var(--muted); }
+.buy-amount-input {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface-strong-light);
+  border-radius: var(--r-md);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.buy-amount-input .num {
+  font-family: "IBM Plex Sans", sans-serif; font-feature-settings: "tnum";
+  font-size: 28px; font-weight: 700; color: var(--ink);
+  border: 0; background: transparent; outline: 0; width: 100%;
+}
+.buy-currency-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--canvas-light); border: 1px solid var(--hairline-on-light);
+  border-radius: var(--r-md); padding: 8px 12px;
+  font-weight: 600; font-size: 14px;
+  flex-shrink: 0;
+}
+.fee-line { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; color: var(--muted); }
+.fee-line .val { color: var(--ink); font-family: "IBM Plex Sans", sans-serif; font-feature-settings: "tnum"; font-weight: 500; }
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+.step-card { background: var(--surface-strong-light); border-radius: var(--r-lg); padding: 24px; }
+.step-card .step-num {
+  width: 36px; height: 36px; border-radius: var(--r-pill);
+  background: var(--primary); color: var(--on-primary);
+  font-weight: 700; display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.step-card h3 { margin: 0 0 8px; color: var(--ink); font-size: 16px; }
+.step-card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* CTA band */
+.cta-band { background: var(--canvas-dark); padding: 80px 0; }
+.cta-card {
+  background: var(--surface-card-dark);
+  border-radius: var(--r-xl);
+  padding: 48px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.cta-card h2 { margin: 0; color: var(--on-dark); max-width: 640px; }
+
+/* DS section */
+.ds {
+  background: var(--canvas-dark);
+  color: var(--on-dark);
+  padding: 100px 0;
+  border-top: 1px solid var(--hairline-on-dark);
+}
+.ds-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 56px; }
+.ds-head h2 { margin: 0; color: var(--on-dark); }
+.ds-head .ds-meta { color: var(--muted); font-size: 14px; }
+.ds-head .ds-meta a { color: var(--primary); font-weight: 600; }
+.ds-block { margin-bottom: 64px; }
+.ds-block h3 { margin: 0 0 24px; font-size: 18px; font-weight: 600; color: var(--on-dark); }
+.ds-sublabel { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 16px 0 12px; }
+
+.swatch-group { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 16px; }
+.swatch { background: var(--surface-card-dark); border-radius: var(--r-md); padding: 12px; }
+.swatch .chip { height: 56px; border-radius: var(--r-sm); margin-bottom: 10px; border: 1px solid var(--hairline-on-dark); }
+.swatch .tok { font-size: 12px; font-weight: 600; color: var(--on-dark); }
+.swatch .hex { font-family: "IBM Plex Sans", sans-serif; font-feature-settings: "tnum"; font-size: 11px; color: var(--muted); }
+
+.ds-type { border: 1px solid var(--hairline-on-dark); border-radius: var(--r-xl); overflow: hidden; }
+.ds-type-row {
+  display: grid; grid-template-columns: 160px 220px 1fr; gap: 24px; align-items: center;
+  padding: 18px 24px; border-top: 1px solid var(--hairline-on-dark);
+}
+.ds-type-row:first-child { border-top: 0; }
+.ds-type-row .tok { font-family: "IBM Plex Sans", sans-serif; font-size: 12px; font-weight: 600; color: var(--primary); }
+.ds-type-row .spec { font-family: "IBM Plex Sans", sans-serif; font-size: 11px; color: var(--muted); }
+.ds-type-row .sam { color: var(--on-dark); }
+
+.ds-rad-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.ds-rad { text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--surface-card-dark); border: 1px solid var(--hairline-on-dark); }
+.ds-rad .tok { font-family: "IBM Plex Sans", sans-serif; font-size: 12px; font-weight: 600; color: var(--on-dark); }
+.ds-rad .spec { font-family: "IBM Plex Sans", sans-serif; font-size: 11px; color: var(--muted); }
+
+.ds-comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.ds-comp-block {
+  background: var(--surface-card-dark);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.ds-comp-block .label { font-family: "IBM Plex Sans", sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input {
+  appearance: none; background: var(--surface-elevated-dark); border: 1px solid var(--hairline-on-dark);
+  border-radius: var(--r-lg); padding: 10px 16px; height: 40px; font: inherit; color: var(--on-dark); width: 100%;
+}
+
+/* Light footer (page reset) */
+footer { background: var(--surface-soft-light); color: var(--ink); padding: 64px 0 32px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(5, 1fr); gap: 32px; }
+.footer-grid h4 { margin: 0 0 16px; font-size: 13px; color: var(--ink); font-weight: 600; }
+.footer-grid ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid a { color: var(--muted); font-size: 13px; }
+.footer-grid a:hover { color: var(--ink); }
+.legal { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hairline-on-light); color: var(--muted); font-size: 12px; }
+
+/* Floating */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px; z-index: 100;
+  background: var(--primary); color: var(--on-primary);
+  padding: 10px 18px; border-radius: var(--r-md);
+  font-size: 13px; font-weight: 700;
+  box-shadow: 0 8px 24px rgba(252, 213, 53, 0.2);
+}
+.src-link:hover { background: var(--primary-active); }
+
+@media (max-width: 900px) {
+  .hero-grid, .buy-grid, .ds-comp-grid, .cta-card { grid-template-columns: 1fr; }
+  .feature-grid, .safu-stats, .steps-grid, .hero-trust-row { grid-template-columns: 1fr 1fr; }
+  .swatch-group { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .hero-display { font-size: 40px; }
+  .display-lg { font-size: 36px; }
+  .market-row { grid-template-columns: 32px 1fr auto; }
+  .market-row .cell-change, .market-row .row-cta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ Nav ============ -->
+<nav class="nav">
+  <div class="nav-row">
+    <div class="brand-mark">
+      <span class="brand-glyph">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 7.41 5.59 9 7l3-3 3 3 1.59-1.41L12 1zM4.59 9.41 1 13l3.59 3.59L6.18 15 4 13l2.18-2L4.59 9.41zm14.82 0L17.82 11 20 13l-2.18 2 1.59 1.59L23 13l-3.59-3.59zM12 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 7-3 3 3 3 3-3-3-3z"/></svg>
+      </span>
+      <span class="brand-name">BINANCE</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">Buy Crypto</a>
+      <a href="#">Markets</a>
+      <a href="#">Trade</a>
+      <a href="#">Futures</a>
+      <a href="#">Earn</a>
+      <a href="#">Square</a>
+      <a href="#">More</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="btn btn-tertiary" style="color: var(--on-dark);">Log In</a>
+      <a href="#" class="btn btn-primary">Sign Up</a>
+      <span style="color: var(--muted); border-left: 1px solid var(--hairline-on-dark); padding-left: 12px;">EN · USD</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ Hero ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1 class="hero-display">
+          <span class="yellow plex">316,258,026</span>
+          USERS TRUST&nbsp;US
+        </h1>
+        <p class="sub">The world's largest crypto exchange by trading volume. Discover, buy, and trade 350+ cryptocurrencies with the lowest fees in the industry.</p>
+        <div class="hero-search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--muted);"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input placeholder="Search currencies (BTC, ETH, SOL...)" />
+          <a href="#" class="btn btn-primary btn-primary-pill" style="height: 44px;">Sign Up</a>
+        </div>
+        <div class="hero-trust-row">
+          <div class="trust-badge"><span class="yellow-label">No.1</span><span class="lbl">Customer Service</span></div>
+          <div class="trust-badge"><span class="yellow-label">No.1</span><span class="lbl">Trading Volume</span></div>
+          <div class="trust-badge"><span class="yellow-label">No.1</span><span class="lbl">Lowest Fees</span></div>
+        </div>
+      </div>
+
+      <div class="markets-card">
+        <div class="markets-tabs">
+          <div class="markets-tab active">Popular</div>
+          <div class="markets-tab">New listing</div>
+          <div class="markets-tab">Top gainers</div>
+          <div class="markets-tab">24h volume</div>
+        </div>
+        <div class="market-row header">
+          <div></div><div>Pair</div><div>Last Price</div><div>24h Change</div><div style="text-align:right;">Action</div>
+        </div>
+        <div class="market-row">
+          <span class="coin-icon" style="background: #f7931a;">₿</span>
+          <div class="pair"><span class="ticker">BTC</span><span class="quote"> / USDT</span></div>
+          <div class="cell-price plex">79,065.04</div>
+          <div class="cell-change plex up">+0.45%</div>
+          <div class="row-cta"><a class="btn btn-up">Buy</a><a class="btn btn-down">Sell</a></div>
+        </div>
+        <div class="market-row">
+          <span class="coin-icon" style="background: #627eea;">Ξ</span>
+          <div class="pair"><span class="ticker">ETH</span><span class="quote"> / USDT</span></div>
+          <div class="cell-price plex">3,478.12</div>
+          <div class="cell-change plex up">+1.84%</div>
+          <div class="row-cta"><a class="btn btn-up">Buy</a><a class="btn btn-down">Sell</a></div>
+        </div>
+        <div class="market-row">
+          <span class="coin-icon" style="background: #f0b90b;">B</span>
+          <div class="pair"><span class="ticker">BNB</span><span class="quote"> / USDT</span></div>
+          <div class="cell-price plex">612.40</div>
+          <div class="cell-change plex up">+2.21%</div>
+          <div class="row-cta"><a class="btn btn-up">Buy</a><a class="btn btn-down">Sell</a></div>
+        </div>
+        <div class="market-row">
+          <span class="coin-icon" style="background: #14f195;">◎</span>
+          <div class="pair"><span class="ticker">SOL</span><span class="quote"> / USDT</span></div>
+          <div class="cell-price plex">148.91</div>
+          <div class="cell-change plex down">−0.42%</div>
+          <div class="row-cta"><a class="btn btn-up">Buy</a><a class="btn btn-down">Sell</a></div>
+        </div>
+        <div class="market-row">
+          <span class="coin-icon" style="background: #2775ca;">$</span>
+          <div class="pair"><span class="ticker">USDC</span><span class="quote"> / USDT</span></div>
+          <div class="cell-price plex">1.0001</div>
+          <div class="cell-change plex up">+0.01%</div>
+          <div class="row-cta"><a class="btn btn-up">Buy</a><a class="btn btn-down">Sell</a></div>
+        </div>
+        <div class="market-row">
+          <span class="coin-icon" style="background: #d70083;">D</span>
+          <div class="pair"><span class="ticker">DOGE</span><span class="quote"> / USDT</span></div>
+          <div class="cell-price plex">0.1842</div>
+          <div class="cell-change plex up">+5.74%</div>
+          <div class="row-cta"><a class="btn btn-up">Buy</a><a class="btn btn-down">Sell</a></div>
+        </div>
+        <div class="market-row">
+          <span class="coin-icon" style="background: #345d9d;">A</span>
+          <div class="pair"><span class="ticker">ADA</span><span class="quote"> / USDT</span></div>
+          <div class="cell-price plex">0.4218</div>
+          <div class="cell-change plex down">−1.13%</div>
+          <div class="row-cta"><a class="btn btn-up">Buy</a><a class="btn btn-down">Sell</a></div>
+        </div>
+        <div style="margin-top: 16px; text-align: center;">
+          <a href="#" style="color: var(--primary); font-size: 13px; font-weight: 600;">View 350+ Markets →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUNDS ARE SAFU band ============ -->
+<section class="safu">
+  <div class="wrap">
+    <h2 class="display-lg">FUNDS ARE SAFU.</h2>
+    <div class="safu-stats">
+      <div class="stat">
+        <div class="number-display plex">$1.32B</div>
+        <div class="lbl">Insurance fund (SAFU) backing every user</div>
+      </div>
+      <div class="stat">
+        <div class="number-display plex">15,000 BTC</div>
+        <div class="lbl">Held in cold storage at all times</div>
+      </div>
+      <div class="stat">
+        <div class="number-display plex">$429,423,449</div>
+        <div class="lbl">Recovered &amp; returned to users since 2017</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Trust feature grid ============ -->
+<section class="section">
+  <div class="wrap">
+    <h2 class="display-md" style="color: var(--on-dark); max-width: 720px;">Built for traders who don't have time for downtime.</h2>
+    <p class="body-md" style="color: var(--muted-strong); max-width: 600px; margin-top: 12px;">
+      99.99% uptime, sub-millisecond matching engine, and 1.4 million orders processed per second per pair.
+    </p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-3 3"/></svg>
+        </span>
+        <h3>Deep liquidity, tight spreads</h3>
+        <p>$76B average daily volume across 350+ pairs. Spreads start at 0.01% on BTC/USDT.</p>
+        <a href="#" style="color: var(--primary); font-size: 13px; font-weight: 600;">View spot markets →</a>
+      </div>
+      <div class="feature-card">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        <h3>Institutional-grade security</h3>
+        <p>Multi-signature cold storage, hardware-key 2FA, and ISO 27001 / SOC 2 Type II compliance.</p>
+        <a href="#" style="color: var(--primary); font-size: 13px; font-weight: 600;">Security overview →</a>
+      </div>
+      <div class="feature-card">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v6"/></svg>
+        </span>
+        <h3>Trade on the go</h3>
+        <p>iOS &amp; Android apps with full order book, charts, and a one-tap convert mode. 5.0 stars · 1M+ reviews.</p>
+        <a href="#" style="color: var(--primary); font-size: 13px; font-weight: 600;">Download app →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Light: Buy Crypto band ============ -->
+<section class="buy-band">
+  <div class="wrap">
+    <div class="buy-grid">
+      <div>
+        <h2 class="display-md" style="margin-bottom: 16px;">Buy crypto in seconds.</h2>
+        <p class="body-md" style="color: var(--muted); max-width: 480px; margin-bottom: 24px;">
+          Card, bank transfer, or P2P. From your first $10 to your billionth, the same rate, the same custody, the same exchange.
+        </p>
+        <a href="#" class="btn btn-primary btn-primary-pill">Buy Crypto Now</a>
+      </div>
+      <div class="buy-card">
+        <div class="head-row"><span class="lbl">You spend</span><span class="lbl">Max</span></div>
+        <div class="buy-amount-input">
+          <input class="num" value="500.00" />
+          <span class="buy-currency-chip">
+            <span style="width: 18px; height: 18px; border-radius: 50%; background: #1c8a4d; color: #fff; display:inline-flex; align-items:center; justify-content:center; font-size: 10px;">$</span>
+            USD
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+        </div>
+        <div class="head-row" style="margin-bottom: 12px;"><span class="lbl">You receive</span><span class="lbl plex" style="color: var(--ink);">1 BTC ≈ $79,065.04</span></div>
+        <div class="buy-amount-input">
+          <input class="num plex" value="0.00632" />
+          <span class="buy-currency-chip">
+            <span style="width: 18px; height: 18px; border-radius: 50%; background: #f7931a; color: #fff; display:inline-flex; align-items:center; justify-content:center; font-size: 10px;">₿</span>
+            BTC
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+        </div>
+        <div class="fee-line"><span>Transaction fee · 0.10%</span><span class="val">$0.50</span></div>
+        <div class="fee-line"><span>Slippage · est.</span><span class="val">≤ 0.02%</span></div>
+        <a href="#" class="btn btn-primary" style="width: 100%; height: 48px; margin-top: 12px;">Continue</a>
+      </div>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-num">1</span>
+        <h3>Enter amount</h3>
+        <p>Choose how much crypto you want to buy in your local currency. No minimums, no commitments.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">2</span>
+        <h3>Confirm order</h3>
+        <p>Review your transaction. Locked rate for 30 seconds, no slippage if you confirm in time.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">3</span>
+        <h3>Receive crypto</h3>
+        <p>Your crypto lands in your spot wallet immediately. Trade, withdraw, or stake — your move.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Dark CTA band ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-card">
+      <h2 class="display-sm">Secure, low-fee trading on&nbsp;Binance.</h2>
+      <a href="#" class="btn btn-primary btn-primary-pill">Get started</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESIGN SYSTEM ============ -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-head">
+      <div>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary);">Design system</span>
+        <h2 class="display-md" style="margin-top: 12px;">Tokens, type, components.</h2>
+      </div>
+      <div class="ds-meta">Sourced from <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.binance.html" target="_blank">awesome-design-md / binance</a></div>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3>Color</h3>
+
+      <div class="ds-sublabel">Brand &amp; Canvas</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#fcd535;"></div><div class="tok">primary</div><div class="hex">#fcd535</div></div>
+        <div class="swatch"><div class="chip" style="background:#f0b90b;"></div><div class="tok">primary-active</div><div class="hex">#f0b90b</div></div>
+        <div class="swatch"><div class="chip" style="background:#3a3a1f;"></div><div class="tok">primary-disabled</div><div class="hex">#3a3a1f</div></div>
+        <div class="swatch"><div class="chip" style="background:#0b0e11;"></div><div class="tok">canvas-dark</div><div class="hex">#0b0e11</div></div>
+        <div class="swatch"><div class="chip" style="background:#1e2329;"></div><div class="tok">surface-card-dark</div><div class="hex">#1e2329</div></div>
+        <div class="swatch"><div class="chip" style="background:#2b3139;"></div><div class="tok">surface-elevated-dark</div><div class="hex">#2b3139</div></div>
+      </div>
+
+      <div class="ds-sublabel">Light Mode (transactional)</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#ffffff;"></div><div class="tok">canvas-light</div><div class="hex">#ffffff</div></div>
+        <div class="swatch"><div class="chip" style="background:#fafafa;"></div><div class="tok">surface-soft-light</div><div class="hex">#fafafa</div></div>
+        <div class="swatch"><div class="chip" style="background:#f5f5f5;"></div><div class="tok">surface-strong-light</div><div class="hex">#f5f5f5</div></div>
+        <div class="swatch"><div class="chip" style="background:#eaecef;"></div><div class="tok">hairline-on-light</div><div class="hex">#eaecef</div></div>
+        <div class="swatch"><div class="chip" style="background:#cdd1d6;"></div><div class="tok">border-strong</div><div class="hex">#cdd1d6</div></div>
+        <div class="swatch"><div class="chip" style="background:#181a20;"></div><div class="tok">ink</div><div class="hex">#181a20</div></div>
+      </div>
+
+      <div class="ds-sublabel">Trading Semantics &amp; Text</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#0ecb81;"></div><div class="tok">trading-up</div><div class="hex">#0ecb81</div></div>
+        <div class="swatch"><div class="chip" style="background:#f6465d;"></div><div class="tok">trading-down</div><div class="hex">#f6465d</div></div>
+        <div class="swatch"><div class="chip" style="background:#707a8a;"></div><div class="tok">muted</div><div class="hex">#707a8a</div></div>
+        <div class="swatch"><div class="chip" style="background:#929aa5;"></div><div class="tok">muted-strong</div><div class="hex">#929aa5</div></div>
+        <div class="swatch"><div class="chip" style="background:#2dbdb6;"></div><div class="tok">accent-turquoise</div><div class="hex">#2dbdb6</div></div>
+        <div class="swatch"><div class="chip" style="background:#3b82f6;"></div><div class="tok">info-ring</div><div class="hex">#3b82f6</div></div>
+      </div>
+    </div>
+
+    <!-- Type -->
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <div class="ds-type">
+        <div class="ds-type-row"><span class="tok">hero-display</span><span class="spec">64 · w700 · -1 · 1.1</span><div class="sam hero-display" style="font-size: 40px;">316M users trust us</div></div>
+        <div class="ds-type-row"><span class="tok">display-lg</span><span class="spec">48 · w700 · -.5 · 1.1</span><div class="sam display-lg" style="font-size: 36px;">FUNDS ARE SAFU</div></div>
+        <div class="ds-type-row"><span class="tok">display-md</span><span class="spec">40 · w600 · -.3 · 1.15</span><div class="sam display-md" style="font-size: 32px;">Section heads.</div></div>
+        <div class="ds-type-row"><span class="tok">title-lg</span><span class="spec">24 · w600 · 0 · 1.3</span><div class="sam title-lg">Sub-section title.</div></div>
+        <div class="ds-type-row"><span class="tok">number-display</span><span class="spec">40 · w700 · plex · tnum</span><div class="sam number-display plex" style="font-size: 32px; color: var(--primary);">$429,423,449</div></div>
+        <div class="ds-type-row"><span class="tok">number-md</span><span class="spec">16 · w500 · plex</span><div class="sam number-md plex">79,065.04 USDT</div></div>
+        <div class="ds-type-row"><span class="tok">body-md</span><span class="spec">14 · w400 · 0 · 1.5</span><div class="sam body-md">Default running text — BinanceNova substitute (Inter 400).</div></div>
+        <div class="ds-type-row"><span class="tok">button</span><span class="spec">14 · w600</span><div class="sam" style="font-size:14px; font-weight: 600; color: var(--on-dark);">Sign Up · Buy · Sell</div></div>
+      </div>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <div class="ds-rad-row">
+        <div class="ds-rad"><div class="box" style="border-radius:2px;"></div><span class="tok">xs</span><span class="spec">2</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:4px;"></div><span class="tok">sm</span><span class="spec">4 · trading btn</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:6px;"></div><span class="tok">md</span><span class="spec">6 · primary btn</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:8px;"></div><span class="tok">lg</span><span class="spec">8 · input · card</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:12px;"></div><span class="tok">xl</span><span class="spec">12 · elevated</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:9999px;"></div><span class="tok">pill</span><span class="spec">9999 · feature CTA</span></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3>Components</h3>
+      <div class="ds-comp-grid">
+        <div class="ds-comp-block">
+          <span class="label">Buttons — yellow + trading colors</span>
+          <div class="ds-comp-row">
+            <a class="btn btn-primary">Primary</a>
+            <a class="btn btn-primary" style="background: var(--primary-active);">Active</a>
+            <a class="btn btn-primary btn-primary-pill">Sign Up</a>
+          </div>
+          <div class="ds-comp-row">
+            <a class="btn btn-sec-on-dark">Secondary dark</a>
+            <a class="btn btn-tertiary" style="color: var(--on-dark);">Tertiary text</a>
+          </div>
+          <div class="ds-comp-row">
+            <a class="btn btn-up">Buy / Long</a>
+            <a class="btn btn-down">Sell / Short</a>
+            <a class="btn btn-subscribe">Subscribe</a>
+          </div>
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Inputs — 40px tall, dark surface</span>
+          <input class="ds-input" placeholder="Search currencies" />
+          <input class="ds-input" value="BTC/USDT" />
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Badges</span>
+          <div class="ds-comp-row">
+            <span class="btn-subscribe" style="display:inline-flex; padding: 4px 10px; height: auto; font-size: 11px;">New</span>
+            <span class="btn-subscribe" style="display:inline-flex; padding: 4px 10px; height: auto; font-size: 11px; background: var(--surface-elevated-dark); color: var(--primary);">No.1</span>
+            <span class="btn-subscribe" style="display:inline-flex; padding: 4px 10px; height: auto; font-size: 11px; background: rgba(14,203,129,0.16); color: var(--up);">+ 24H</span>
+            <span class="btn-subscribe" style="display:inline-flex; padding: 4px 10px; height: auto; font-size: 11px; background: rgba(246,70,93,0.16); color: var(--down);">− 24H</span>
+          </div>
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Numbers — IBM Plex Sans, tnum</span>
+          <div style="display: flex; gap: 24px; align-items: baseline; flex-wrap: wrap;">
+            <div class="plex" style="font-size: 32px; font-weight: 700; color: var(--primary);">79,065.04</div>
+            <div class="plex up" style="font-size: 18px; font-weight: 500;">+0.45%</div>
+            <div class="plex down" style="font-size: 18px; font-weight: 500;">−1.13%</div>
+          </div>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px;">
+            <div class="plex" style="color: var(--muted);">24h vol</div>
+            <div class="plex" style="color: var(--on-dark);">$76.2B</div>
+            <div class="plex" style="color: var(--muted);">·</div>
+            <div class="plex" style="color: var(--on-dark);">350+ pairs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Light Footer (page reset) ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand-mark" style="margin-bottom: 16px;">
+          <span class="brand-glyph">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-active);"><path d="M12 1 7.41 5.59 9 7l3-3 3 3 1.59-1.41L12 1zM4.59 9.41 1 13l3.59 3.59L6.18 15 4 13l2.18-2L4.59 9.41zm14.82 0L17.82 11 20 13l-2.18 2 1.59 1.59L23 13l-3.59-3.59zM12 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 7-3 3 3 3 3-3-3-3z"/></svg>
+          </span>
+          <span style="font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: -0.4px;">BINANCE</span>
+        </div>
+        <p style="color: var(--muted); font-size: 13px; max-width: 280px; margin: 0;">A Binance-inspired single-page composition. Tokens and component spec sourced from awesome-design-md.</p>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <ul><li><a href="#">Square</a></li><li><a href="#">Blog</a></li><li><a href="#">Research</a></li><li><a href="#">Telegram</a></li></ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul><li><a href="#">About us</a></li><li><a href="#">Careers</a></li><li><a href="#">Announcements</a></li><li><a href="#">News</a></li></ul>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul><li><a href="#">Exchange</a></li><li><a href="#">Buy Crypto</a></li><li><a href="#">Pay</a></li><li><a href="#">Academy</a></li></ul>
+      </div>
+      <div>
+        <h4>Business</h4>
+        <ul><li><a href="#">Listing</a></li><li><a href="#">Institutional</a></li><li><a href="#">VIP Services</a></li><li><a href="#">Labs</a></li></ul>
+      </div>
+      <div>
+        <h4>Service</h4>
+        <ul><li><a href="#">Support Center</a></li><li><a href="#">Trading Rules</a></li><li><a href="#">Fees</a></li><li><a href="#">API</a></li></ul>
+      </div>
+    </div>
+    <div class="legal">
+      © Binance (inspired) &middot; Generated for design study &middot; BinanceNova (sub. Inter) + BinancePlex (sub. IBM Plex Sans) &middot; Yellow #fcd535 &middot; Trading up #0ecb81 / down #f6465d.
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.binance.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

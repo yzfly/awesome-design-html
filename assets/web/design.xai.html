@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>xAI — Inspired Design</title>
+<meta name="description" content="An xAI-inspired marketing page and design system reference: strict near-black canvas, white outline pills, Universal Sans display with negative tracking, mono uppercase eyebrows. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  --primary: #ffffff;
+  --on-primary: #0a0a0a;
+  --ink: #ffffff;
+  --ink-hover: #fafaf7;
+  --body: #dadbdf;
+  --body-mid: #7d8187;
+  --mute: #7d8187;
+  --hairline: #212327;
+  --hairline-soft: rgba(255,255,255,0.10);
+  --hairline-bright: rgba(255,255,255,0.22);
+  --canvas: #0a0a0a;
+  --canvas-soft: #1a1c20;
+  --canvas-card: #191919;
+  --canvas-mid: #363a3f;
+  --accent-sunset: #ff7a17;
+  --accent-sunset-soft: #ffc285;
+  --accent-dusk: #7c3aed;
+  --accent-twilight: #c4b5fd;
+  --accent-breeze: #a0c3ec;
+  --accent-midnight: #0d1726;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(255,255,255,0.18); }
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Monaco, monospace; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Top nav */
+.topnav {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(10,10,10,0.78);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline);
+}
+.topnav .row { display: flex; align-items: center; gap: 24px; height: 64px; font-size: 14px; }
+.brand {
+  font-size: 26px; font-weight: 400; letter-spacing: -0.04em;
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+}
+.brand-x {
+  display: inline-block; transform: translateY(-1px);
+}
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 14px; color: var(--ink); }
+.nav-links a:hover { opacity: 0.7; }
+.spacer { flex: 1; }
+.nav-cta { display: flex; align-items: center; gap: 10px; }
+
+/* Buttons — pills */
+.btn-pill {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 14px; font-weight: 400; line-height: 20px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--hairline-bright);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit; cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+.btn-pill:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.36); }
+.btn-pill.sm { padding: 6px 12px; font-size: 13px; }
+.btn-pill.solid { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.btn-pill.solid:hover { background: var(--ink-hover); border-color: var(--ink-hover); }
+
+/* Hero band */
+.hero {
+  padding: 96px 0 80px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; right: -10%; top: -20%;
+  width: 60%; height: 100%;
+  background:
+    radial-gradient(closest-side, rgba(255,122,23,0.18), transparent 70%),
+    radial-gradient(closest-side, rgba(124,58,237,0.16), transparent 70%);
+  background-size: 70% 70%, 60% 60%;
+  background-position: 30% 40%, 70% 70%;
+  background-repeat: no-repeat;
+  filter: blur(40px);
+  pointer-events: none;
+}
+.eyebrow-mono {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; line-height: 20px;
+  letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.75;
+}
+.h-hero {
+  font-size: 96px; line-height: 96px;
+  letter-spacing: -0.025em;
+  font-weight: 400; margin: 28px 0 24px;
+  max-width: 14ch;
+}
+.h-sub {
+  font-size: 18px; line-height: 28px;
+  color: var(--body); max-width: 60ch;
+  margin: 0 0 36px;
+}
+.hero-actions { display: flex; gap: 12px; align-items: center; }
+
+/* Section divider */
+.divider { border-top: 1px solid var(--hairline); }
+
+/* Content band */
+.section { padding: 96px 0; }
+.section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; margin-bottom: 56px; }
+.h-section {
+  font-size: 48px; line-height: 48px; letter-spacing: -0.025em;
+  font-weight: 400; margin: 16px 0 0; max-width: 18ch;
+}
+.section-sub {
+  font-size: 18px; line-height: 28px; color: var(--body);
+  max-width: 52ch;
+}
+
+/* Product/feature cards */
+.feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.feat-card {
+  background: var(--canvas-card);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 18px;
+  min-height: 320px;
+}
+.feat-card .label { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--body-mid); }
+.feat-card h3 {
+  font-size: 32px; line-height: 36px; letter-spacing: -0.02em;
+  font-weight: 400; margin: 0;
+}
+.feat-card p { font-size: 16px; line-height: 24px; color: var(--body); margin: 0; }
+.feat-card .illus {
+  height: 120px;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+  background: var(--accent-midnight);
+  position: relative; overflow: hidden;
+}
+.illus.grok {
+  background:
+    radial-gradient(80% 60% at 30% 40%, rgba(255,122,23,0.42), transparent 70%),
+    radial-gradient(60% 80% at 80% 70%, rgba(124,58,237,0.32), transparent 70%),
+    var(--accent-midnight);
+}
+.illus.voice {
+  background:
+    radial-gradient(40% 80% at 30% 50%, rgba(196,181,253,0.32), transparent 70%),
+    radial-gradient(60% 80% at 80% 50%, rgba(160,195,236,0.34), transparent 70%),
+    var(--accent-midnight);
+}
+.illus.api {
+  background:
+    radial-gradient(50% 100% at 30% 50%, rgba(255,194,133,0.32), transparent 70%),
+    radial-gradient(50% 100% at 75% 50%, rgba(255,122,23,0.32), transparent 70%),
+    var(--accent-midnight);
+}
+.illus.research {
+  background:
+    radial-gradient(50% 80% at 50% 50%, rgba(160,195,236,0.32), transparent 70%),
+    var(--accent-midnight);
+}
+.illus svg { position: absolute; inset: 0; margin: auto; }
+.feat-card .actions { margin-top: auto; }
+
+/* Grok playground mockup */
+.grok-mockup {
+  background: var(--canvas-card);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  margin-top: 56px;
+  overflow: hidden;
+}
+.grok-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--hairline);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--body-mid);
+}
+.grok-head .pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 9999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--hairline);
+  color: var(--ink); font-size: 11px;
+}
+.grok-body { display: grid; grid-template-columns: 280px 1fr; min-height: 420px; }
+.grok-side {
+  padding: 18px;
+  border-right: 1px solid var(--hairline);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.grok-side .head { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--body-mid); padding: 8px; }
+.grok-side .row { padding: 10px 12px; border-radius: 8px; font-size: 14px; color: var(--body); display: flex; align-items: center; gap: 10px; }
+.grok-side .row.active { background: var(--canvas-soft); color: var(--ink); }
+.grok-side .row .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-sunset); }
+.grok-chat {
+  padding: 22px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.msg {
+  display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: flex-start;
+}
+.msg .av {
+  width: 30px; height: 30px; border-radius: 9999px;
+  background: var(--canvas-soft); border: 1px solid var(--hairline);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--ink);
+}
+.msg .bubble {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+  background: var(--canvas);
+  font-size: 14px; line-height: 22px;
+  color: var(--body);
+}
+.msg.user .av { background: var(--accent-midnight); color: var(--accent-breeze); }
+.msg.grok .av { background: linear-gradient(135deg, var(--accent-sunset), var(--accent-dusk)); border: 0; }
+.msg.grok .bubble { background: var(--canvas-card); color: var(--ink); }
+.msg.grok .bubble b { font-weight: 500; }
+.chat-input {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 9999px;
+  background: var(--canvas-soft);
+  margin-top: auto;
+}
+.chat-input input {
+  flex: 1; background: transparent; border: 0; outline: none;
+  color: var(--ink); font-size: 14px; font-family: inherit;
+}
+.chat-input input::placeholder { color: var(--body-mid); }
+.chat-input .send {
+  width: 32px; height: 32px; border-radius: 9999px;
+  background: var(--ink); color: var(--on-primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+
+/* Numbers / Specs */
+.specs {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  padding: 56px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.spec .label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--body-mid); margin-bottom: 8px; }
+.spec .val { font-size: 48px; line-height: 48px; letter-spacing: -0.025em; font-feature-settings: "tnum"; }
+.spec .sub { font-size: 13px; color: var(--body-mid); margin-top: 6px; }
+
+/* Pricing / CTA */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+.tier {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 28px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tier.featured { background: var(--ink); color: var(--on-primary); border: 0; }
+.tier.featured .label, .tier.featured .desc, .tier.featured li { color: var(--on-primary); }
+.tier .name { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--body-mid); }
+.tier.featured .name { color: rgba(0,0,0,0.6); }
+.tier .price { font-size: 56px; line-height: 56px; letter-spacing: -0.025em; font-feature-settings: "tnum"; }
+.tier .price small { font-size: 14px; letter-spacing: 0; color: var(--body-mid); margin-left: 4px; }
+.tier.featured .price small { color: rgba(0,0,0,0.55); }
+.tier .desc { font-size: 14px; color: var(--body); }
+.tier ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: 14px; }
+.tier li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: start; }
+.tier li svg { color: var(--accent-sunset); margin-top: 2px; }
+.tier.featured li svg { color: var(--on-primary); }
+
+/* ───── DS section ───── */
+.ds { padding: 112px 0; }
+.ds-intro { margin-bottom: 64px; max-width: 720px; }
+.ds-intro h2 { font-size: 64px; line-height: 64px; letter-spacing: -0.03em; font-weight: 400; margin: 18px 0; }
+.ds-intro p { color: var(--body); }
+.ds-intro a { color: var(--ink); border-bottom: 1px solid var(--hairline-bright); padding-bottom: 1px; }
+.ds-block { padding: 56px 0; border-top: 1px solid var(--hairline); }
+.ds-block-head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; margin-bottom: 36px; align-items: baseline; }
+.ds-label { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--body-mid); }
+.ds-block-head h3 { font-size: 32px; line-height: 36px; letter-spacing: -0.02em; font-weight: 400; margin: 0; }
+
+.color-group { margin-bottom: 28px; }
+.color-cap { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--body-mid); padding-bottom: 12px; border-bottom: 1px solid var(--hairline); margin-bottom: 18px; }
+.swatch-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.swatch { display: flex; flex-direction: column; gap: 8px; }
+.swatch .chip { height: 84px; border-radius: 8px; border: 1px solid var(--hairline); }
+.swatch .name { font-size: 13px; color: var(--ink); }
+.swatch .hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--body-mid); letter-spacing: 0.4px; }
+
+/* Type table */
+.type-table { display: grid; gap: 0; }
+.type-row {
+  display: grid;
+  grid-template-columns: 200px 220px 1fr;
+  gap: 24px; align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.type-tok { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--ink); }
+.type-spec { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--body-mid); }
+
+/* Radius ladder */
+.radius-row { display: flex; gap: 24px; align-items: end; flex-wrap: wrap; }
+.radius-cell { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.radius-box {
+  width: 96px; height: 96px;
+  background: var(--canvas-card); border: 1px solid var(--hairline);
+}
+.radius-cell .nm { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink); }
+.radius-cell .val { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--body-mid); }
+
+/* Components matrix */
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.comp-card { background: var(--canvas-card); border: 1px solid var(--hairline); border-radius: 8px; padding: 28px; }
+.comp-card h4 { font-size: 18px; font-weight: 400; margin: 0 0 6px; }
+.comp-card .desc { font-size: 13px; color: var(--body-mid); margin-bottom: 18px; }
+.comp-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.input {
+  width: 100%;
+  background: var(--canvas-soft);
+  color: var(--ink); font-size: 14px; font-family: inherit;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 11px 14px;
+}
+.input:focus, .input.focused { outline: none; border-color: var(--hairline-bright); background: var(--canvas-card); }
+.label-form { display: block; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--body-mid); margin-bottom: 6px; }
+
+.badge {
+  display: inline-flex; align-items: center; padding: 3px 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase;
+  border-radius: 9999px;
+  border: 1px solid var(--hairline);
+  background: var(--canvas-card); color: var(--ink);
+}
+.badge.solid { background: var(--ink); color: var(--on-primary); border-color: var(--ink); }
+.badge.sunset { background: rgba(255,122,23,0.16); color: var(--accent-sunset-soft); border-color: rgba(255,122,23,0.35); }
+.badge.dusk { background: rgba(124,58,237,0.16); color: var(--accent-twilight); border-color: rgba(124,58,237,0.35); }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--hairline);
+  padding: 64px 0 32px;
+}
+.foot-grid {
+  display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 48px;
+  padding-bottom: 48px;
+}
+.foot-grid h5 { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--body-mid); margin: 0 0 16px; }
+.foot-grid ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: 14px; }
+.foot-grid a { color: var(--body); }
+.foot-grid a:hover { color: var(--ink); }
+.foot-bottom {
+  border-top: 1px solid var(--hairline);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--body-mid);
+}
+.foot-wordmark {
+  font-size: 22vw; line-height: 0.95; letter-spacing: -0.06em;
+  color: rgba(255,255,255,0.03);
+  font-weight: 400;
+  padding: 32px 0;
+  text-align: center;
+  user-select: none;
+}
+
+/* Floating */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas-card); color: var(--ink);
+  font-size: 12px; padding: 10px 16px; border-radius: 9999px;
+  border: 1px solid var(--hairline-bright);
+}
+.src-link:hover { background: var(--canvas-soft); }
+
+@media (max-width: 1024px) {
+  .h-hero { font-size: 64px; line-height: 64px; letter-spacing: -0.025em; }
+  .section-head, .feat-grid, .pricing-grid, .grok-body, .ds-block-head, .foot-grid { grid-template-columns: 1fr; }
+  .specs { grid-template-columns: 1fr 1fr; }
+  .swatch-row { grid-template-columns: repeat(3, 1fr); }
+  .comp-grid { grid-template-columns: 1fr; }
+  .type-row { grid-template-columns: 1fr; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#"><span class="brand-x">𝕏</span>AI</a>
+    <nav class="nav-links">
+      <a href="#">Company</a>
+      <a href="#">Grok</a>
+      <a href="#">Research</a>
+      <a href="#">Careers</a>
+      <a href="#">News</a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="nav-cta">
+      <a class="btn-pill sm" href="#">Sign in</a>
+      <a class="btn-pill sm solid" href="#">Try Grok</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow-mono">ANNOUNCEMENT · GROK 3</div>
+    <h1 class="h-hero">Understand the universe.</h1>
+    <p class="h-sub">xAI builds artificial intelligence to accelerate human scientific discovery. We are guided by our mission to advance our collective understanding of the universe.</p>
+    <div class="hero-actions">
+      <a class="btn-pill" href="#">Read announcement</a>
+      <a class="btn-pill" href="#">Try Grok →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Specs strip -->
+<section class="wrap">
+  <div class="specs">
+    <div class="spec"><div class="label">CONTEXT</div><div class="val">1M</div><div class="sub">tokens · 8× the previous frontier</div></div>
+    <div class="spec"><div class="label">TPU CLUSTER</div><div class="val">200K</div><div class="sub">H100s · Memphis Colossus</div></div>
+    <div class="spec"><div class="label">LATENCY</div><div class="val">86<span style="font-size:24px;">ms</span></div><div class="sub">first-token, p50, US-East</div></div>
+    <div class="spec"><div class="label">BENCH AVG</div><div class="val">92.3</div><div class="sub">across MMLU · GPQA · HMMT</div></div>
+  </div>
+</section>
+
+<!-- FEATURE CARDS -->
+<section class="wrap section">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow-mono">PRODUCTS</div>
+      <h2 class="h-section">From a model to an entire stack.</h2>
+    </div>
+    <p class="section-sub">Grok for conversation. Voice for natural interfaces. The API for production. The Macroscope for understanding our largest training runs.</p>
+  </div>
+
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="illus grok">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="20" stroke="white" stroke-opacity="0.4" stroke-width="1"/>
+          <circle cx="32" cy="32" r="6" fill="#ff7a17"/>
+        </svg>
+      </div>
+      <div class="label">GROK 3</div>
+      <h3>The most capable Grok yet.</h3>
+      <p>Reasoning trained on a curated curriculum spanning math, code, and the open web. Available in the Grok app, on X, and via API.</p>
+      <div class="actions"><a class="btn-pill sm" href="#">Read announcement</a></div>
+    </div>
+    <div class="feat-card">
+      <div class="illus voice">
+        <svg width="120" height="48" viewBox="0 0 120 48" fill="none">
+          <path d="M4 24 Q14 8, 24 24 T44 24 T64 24 T84 24 T104 24 T120 24" stroke="white" stroke-opacity="0.5" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="label">GROK VOICE</div>
+      <h3>Custom voices for any product.</h3>
+      <p>Sub-300ms latency, expressive prosody, and voice cloning under tight consent gates. Ship voice agents that don't sound like dictation.</p>
+      <div class="actions"><a class="btn-pill sm" href="#">Listen to samples</a></div>
+    </div>
+    <div class="feat-card">
+      <div class="illus api">
+        <svg width="120" height="56" viewBox="0 0 120 56" fill="none">
+          <rect x="10" y="10" width="100" height="6" rx="3" fill="white" fill-opacity="0.3"/>
+          <rect x="10" y="22" width="70" height="6" rx="3" fill="white" fill-opacity="0.2"/>
+          <rect x="10" y="34" width="85" height="6" rx="3" fill="#ff7a17" fill-opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="label">API</div>
+      <h3>Production-ready inference.</h3>
+      <p>Drop-in compatible with the OpenAI client. Streaming, tool calls, structured outputs, multi-region. Pay only for tokens you use.</p>
+      <div class="actions"><a class="btn-pill sm" href="#">Read the docs</a></div>
+    </div>
+    <div class="feat-card">
+      <div class="illus research">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="40" stroke="white" stroke-opacity="0.18" stroke-width="1"/>
+          <circle cx="50" cy="50" r="28" stroke="white" stroke-opacity="0.28" stroke-width="1"/>
+          <circle cx="50" cy="50" r="16" stroke="white" stroke-opacity="0.4" stroke-width="1"/>
+          <circle cx="50" cy="50" r="4" fill="#a0c3ec"/>
+        </svg>
+      </div>
+      <div class="label">RESEARCH</div>
+      <h3>The Macroscope.</h3>
+      <p>Tools for understanding what large models learn. Open notebooks on interpretability, evals, and the long-tail of reasoning failures.</p>
+      <div class="actions"><a class="btn-pill sm" href="#">Read papers</a></div>
+    </div>
+  </div>
+
+  <!-- Grok mockup -->
+  <div class="grok-mockup">
+    <div class="grok-head">
+      <span style="color:var(--ink);">GROK PLAYGROUND</span>
+      <span class="pill"><span style="width:6px;height:6px;border-radius:9999px;background:var(--accent-sunset);"></span> grok-3</span>
+      <span style="margin-left:auto;">SESSION · 0xA17C</span>
+    </div>
+    <div class="grok-body">
+      <div class="grok-side">
+        <div class="head">CONVERSATIONS</div>
+        <div class="row active"><span class="dot"></span> Probing dark matter halos</div>
+        <div class="row">Refactor pytest fixtures</div>
+        <div class="row">Genome alignment search</div>
+        <div class="row">Q3 board narrative</div>
+        <div class="head" style="margin-top:14px;">MODELS</div>
+        <div class="row" style="font-family:'JetBrains Mono',monospace;font-size:12px;">grok-3 · base</div>
+        <div class="row" style="font-family:'JetBrains Mono',monospace;font-size:12px;">grok-3 · reasoning</div>
+        <div class="row" style="font-family:'JetBrains Mono',monospace;font-size:12px;">grok-3 · vision</div>
+      </div>
+      <div class="grok-chat">
+        <div class="msg user">
+          <div class="av">𝐔</div>
+          <div class="bubble">If a galaxy's rotation curve is flat out to 50 kpc, what's the minimum dark-matter halo mass we should expect, and which models are still consistent at that radius?</div>
+        </div>
+        <div class="msg grok">
+          <div class="av">⊛</div>
+          <div class="bubble">
+            <b>Quick estimate:</b> for a flat curve at ~220 km/s out to 50 kpc, enclosed mass scales as M(r) = v² r / G — giving roughly <b>5.6 × 10¹¹ M☉</b> within that radius.
+            <br><br>
+            <b>Models still consistent:</b> standard ΛCDM NFW halos with concentration c ≈ 8–12 fit cleanly. SIDM remains viable but predicts a slightly cored profile inside ~3 kpc. MOND-only solutions struggle past ~30 kpc here without an additional dark component.
+          </div>
+        </div>
+        <div class="chat-input">
+          <input placeholder="Ask Grok anything…" />
+          <span class="send">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="wrap section divider">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow-mono">PRICING</div>
+      <h2 class="h-section">Pay per token. Nothing else.</h2>
+    </div>
+    <p class="section-sub">Three plans. No volume tiers, no marketing seats. Build a prototype on the Free tier, scale to production without re-architecting.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="tier">
+      <div class="name">FREE</div>
+      <div class="price">$0<small>/mo</small></div>
+      <div class="desc">For builders, hobbyists, and academia.</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> 100k tokens · Grok 3</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Community forum</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Standard latency</li>
+      </ul>
+      <a class="btn-pill" href="#" style="margin-top:auto;">Start free</a>
+    </div>
+    <div class="tier featured">
+      <div class="name">PRO</div>
+      <div class="price">$30<small>/mo</small></div>
+      <div class="desc">For builders shipping production agents.</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> 10M tokens · all models</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Grok Voice · 200 minutes</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Priority queue</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Email support</li>
+      </ul>
+      <a class="btn-pill solid" href="#" style="margin-top:auto;">Sign up now</a>
+    </div>
+    <div class="tier">
+      <div class="name">ENTERPRISE</div>
+      <div class="price">Custom</div>
+      <div class="desc">For teams and regulated workloads.</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Dedicated GPU capacity</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> SOC 2 Type II, HIPAA</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Fine-tuning & evals</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Dedicated CSM</li>
+      </ul>
+      <a class="btn-pill" href="#" style="margin-top:auto;">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── DS section ───────── -->
+<section class="ds divider">
+  <div class="wrap">
+    <div class="ds-intro">
+      <div class="eyebrow-mono">DESIGN SYSTEM · V.ALPHA</div>
+      <h2>The system in the open.</h2>
+      <p>Tokens and primitives behind the xAI marketing surface — colors grouped by role, the Universal-Sans-and-Geist-Mono ladder, the radius scale, and the canonical component set. Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.xai.html" target="_blank" rel="noopener">DESIGN.md</a>. Single near-black canvas. Pill is the brand.</p>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">01 · Color</div>
+        <h3>One canvas. One ink. Sunset and dusk live in illustrations only.</h3>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Brand & Text</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#ffffff;"></div><div class="name">primary / ink</div><div class="hex">#ffffff</div></div>
+          <div class="swatch"><div class="chip" style="background:#fafaf7;"></div><div class="name">ink-hover</div><div class="hex">#fafaf7</div></div>
+          <div class="swatch"><div class="chip" style="background:#dadbdf;"></div><div class="name">body</div><div class="hex">#dadbdf</div></div>
+          <div class="swatch"><div class="chip" style="background:#7d8187;"></div><div class="name">body-mid / mute</div><div class="hex">#7d8187</div></div>
+          <div class="swatch"><div class="chip" style="background:#0a0a0a;"></div><div class="name">on-primary</div><div class="hex">#0a0a0a</div></div>
+          <div class="swatch"><div class="chip" style="background:#212327;"></div><div class="name">hairline</div><div class="hex">#212327</div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Surface</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#0a0a0a;"></div><div class="name">canvas</div><div class="hex">#0a0a0a</div></div>
+          <div class="swatch"><div class="chip" style="background:#1a1c20;"></div><div class="name">canvas-soft</div><div class="hex">#1a1c20</div></div>
+          <div class="swatch"><div class="chip" style="background:#191919;"></div><div class="name">canvas-card</div><div class="hex">#191919</div></div>
+          <div class="swatch"><div class="chip" style="background:#363a3f;"></div><div class="name">canvas-mid</div><div class="hex">#363a3f</div></div>
+          <div class="swatch"><div class="chip" style="background:#0d1726;"></div><div class="name">accent-midnight</div><div class="hex">#0d1726</div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Accent (illustrations only)</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#ff7a17;"></div><div class="name">sunset</div><div class="hex">#ff7a17</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffc285;"></div><div class="name">sunset-soft</div><div class="hex">#ffc285</div></div>
+          <div class="swatch"><div class="chip" style="background:#7c3aed;"></div><div class="name">dusk</div><div class="hex">#7c3aed</div></div>
+          <div class="swatch"><div class="chip" style="background:#c4b5fd;"></div><div class="name">twilight</div><div class="hex">#c4b5fd</div></div>
+          <div class="swatch"><div class="chip" style="background:#a0c3ec;"></div><div class="name">breeze</div><div class="hex">#a0c3ec</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">02 · Typography</div>
+        <h3>Weight 400 only. Negative tracking is the emphasis. Mono uppercase eyebrows.</h3>
+      </div>
+      <div class="type-table">
+        <div class="type-row"><div class="type-tok">display-xl</div><div class="type-spec">96 / 96 / -2.4 / 400</div><div style="font-size: 64px; line-height: 64px; letter-spacing: -0.025em;">Understand the universe.</div></div>
+        <div class="type-row"><div class="type-tok">display-lg</div><div class="type-spec">72 / 72 / -1.8 / 400</div><div style="font-size: 52px; line-height: 52px; letter-spacing: -0.025em;">The frontier model.</div></div>
+        <div class="type-row"><div class="type-tok">display-md</div><div class="type-spec">48 / 48 / -1.2 / 400</div><div style="font-size: 40px; line-height: 40px; letter-spacing: -0.025em;">Section headlines</div></div>
+        <div class="type-row"><div class="type-tok">display-sm</div><div class="type-spec">32 / 36 / -0.6 / 400</div><div style="font-size: 28px; line-height: 32px; letter-spacing: -0.02em;">Card cluster heading</div></div>
+        <div class="type-row"><div class="type-tok">display-xs</div><div class="type-spec">20 / 28 / 0 / 400</div><div style="font-size: 20px; line-height: 28px;">Inline display sizing</div></div>
+        <div class="type-row"><div class="type-tok">body-lg</div><div class="type-spec">18 / 28 / 0 / 400</div><div style="font-size: 18px; line-height: 28px;">Lead paragraph. Plenty of measure.</div></div>
+        <div class="type-row"><div class="type-tok">body-md</div><div class="type-spec">16 / 24 / 0 / 400</div><div style="font-size: 16px; line-height: 24px;">Default body copy.</div></div>
+        <div class="type-row"><div class="type-tok">body-sm</div><div class="type-spec">14 / 20 / 0 / 400</div><div style="font-size: 14px; line-height: 20px; color: var(--body);">Secondary body and captions.</div></div>
+        <div class="type-row"><div class="type-tok">caption-mono</div><div class="type-spec">Mono / 14 / 1.4 / UPPER</div><div class="mono" style="font-size: 14px; line-height: 20px; letter-spacing: 1.4px; text-transform: uppercase;">SECTION EYEBROW</div></div>
+        <div class="type-row"><div class="type-tok">caption-mono-sm</div><div class="type-spec">Mono / 12 / 1.2 / UPPER</div><div class="mono" style="font-size: 12px; line-height: 16px; letter-spacing: 1.2px; text-transform: uppercase;">SMALL LABEL</div></div>
+        <div class="type-row"><div class="type-tok">button-md</div><div class="type-spec">14 / 20 / 0 / 400</div><div style="font-size: 14px;">Read announcement</div></div>
+      </div>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">03 · Radius</div>
+        <h3>Two values. Cards get 8px. Everything interactive is a pill.</h3>
+      </div>
+      <div class="radius-row">
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 0;"></div><div class="nm">none</div><div class="val">0</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 8px;"></div><div class="nm">sm</div><div class="val">8px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 9999px;"></div><div class="nm">pill</div><div class="val">9999</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 9999px; width: 96px;"></div><div class="nm">full</div><div class="val">9999</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">04 · Components</div>
+        <h3>White outline pills carry every action. Hairline borders carry every elevation.</h3>
+      </div>
+      <div class="comp-grid">
+
+        <div class="comp-card">
+          <h4>Buttons</h4>
+          <div class="desc">Outline pill is canonical. One filled white pill exists, for sign-up only.</div>
+          <div class="comp-row">
+            <a class="btn-pill" href="#">Read announcement</a>
+            <a class="btn-pill" href="#">Try Grok →</a>
+            <a class="btn-pill sm" href="#">Sign in</a>
+          </div>
+          <div class="comp-row">
+            <a class="btn-pill solid" href="#">Sign up now</a>
+            <a class="btn-pill sm solid" href="#">Get access</a>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Inputs</h4>
+          <div class="desc">canvas-soft fill, 8px radius, hairline border, brighter on focus.</div>
+          <div style="display:grid; gap:12px;">
+            <div>
+              <label class="label-form">EMAIL</label>
+              <input class="input" placeholder="you@xai.example" />
+            </div>
+            <div>
+              <label class="label-form">QUERY (FOCUSED)</label>
+              <input class="input focused" value="grok-3 + 1m context" />
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Cards</h4>
+          <div class="desc">canvas-card fill, 8px radius, 1px hairline. No shadows.</div>
+          <div style="background: var(--canvas-card); border: 1px solid var(--hairline); border-radius: 8px; padding: 20px;">
+            <div class="eyebrow-mono" style="font-size:11px; letter-spacing:1.2px;">PRODUCT · GROK</div>
+            <div style="font-size: 22px; margin-top: 8px; letter-spacing: -0.02em;">The most capable Grok.</div>
+            <div style="font-size: 14px; color: var(--body); margin-top: 8px;">Reasoning trained on a curated curriculum.</div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Badges</h4>
+          <div class="desc">Hairline outline by default. Tinted variants reserved for product moments.</div>
+          <div class="comp-row">
+            <span class="badge">DEFAULT</span>
+            <span class="badge solid">SHIPPED</span>
+            <span class="badge sunset">PREVIEW</span>
+            <span class="badge dusk">RESEARCH</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wordmark -->
+<div class="wrap">
+  <div class="foot-wordmark">𝕏AI</div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#"><span class="brand-x">𝕏</span>AI</a>
+        <div style="margin-top: 16px; max-width: 32ch; color: var(--body); font-size: 14px;">Building artificial intelligence to accelerate human scientific discovery.</div>
+      </div>
+      <div>
+        <h5>COMPANY</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">News</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+      <div>
+        <h5>PRODUCTS</h5>
+        <ul><li><a href="#">Grok</a></li><li><a href="#">Voice</a></li><li><a href="#">API</a></li><li><a href="#">Macroscope</a></li></ul>
+      </div>
+      <div>
+        <h5>RESEARCH</h5>
+        <ul><li><a href="#">Publications</a></li><li><a href="#">Open source</a></li><li><a href="#">Evals</a></li><li><a href="#">Safety</a></li></ul>
+      </div>
+      <div>
+        <h5>LEGAL</h5>
+        <ul><li><a href="#">Terms</a></li><li><a href="#">Privacy</a></li><li><a href="#">Trust</a></li><li><a href="#">Acceptable use</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 xAI Corp · Inspired demo. Not affiliated.</span>
+      <span class="mono">v.3.0 · COMMIT 0xA17C</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.xai.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

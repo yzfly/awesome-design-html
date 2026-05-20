@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kiln — Inspired by Clay's design system</title>
+<meta name="description" content="A Clay-inspired marketing page: cream canvas, dark-navy primary CTAs, saturated single-color feature cards (pink, teal, lavender, peach, ochre), claymation-style illustrations, sales workflow centerpiece. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #0a0a0a;
+  --primary-active: #1f1f1f;
+  --primary-disabled: #e5e5e5;
+  --on-primary: #ffffff;
+  /* Ink */
+  --ink: #0a0a0a;
+  --body: #3a3a3a;
+  --body-strong: #1a1a1a;
+  --muted: #6a6a6a;
+  --muted-soft: #9a9a9a;
+  --hairline: #e5e5e5;
+  --hairline-soft: #f0f0f0;
+  /* Cream canvas family — non-negotiable */
+  --canvas: #fffaf0;
+  --surface-soft: #faf5e8;
+  --surface-card: #f5f0e0;
+  --surface-strong: #ebe6d6;
+  --surface-dark: #0a1a1a;
+  --surface-dark-elevated: #1a2a2a;
+  --on-dark: #ffffff;
+  --on-dark-soft: #a0a0a0;
+  /* Brand colors */
+  --brand-pink: #ff4d8b;
+  --brand-teal: #1a3a3a;
+  --brand-lavender: #b8a4ed;
+  --brand-peach: #ffb084;
+  --brand-ochre: #e8b94a;
+  --brand-mint: #a4d4c5;
+  --brand-coral: #ff6b5a;
+  /* Semantic */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  /* Radius */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 9999px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--canvas);
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--brand-peach); color: var(--ink); }
+.display {
+  font-family: "Fraunces", "Inter", serif;
+  font-weight: 500;
+  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144;
+  color: var(--ink);
+}
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Top nav ===== */
+.topnav {
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 64px; gap: 24px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 600; font-size: 20px; color: var(--ink);
+  letter-spacing: -0.5px;
+}
+.brand .glyph {
+  width: 28px; height: 28px;
+  background: var(--brand-peach);
+  border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: "Fraunces", serif;
+  font-weight: 600; font-size: 18px; color: var(--ink);
+  line-height: 1;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 12px; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--ink);
+  padding: 8px 12px; border-radius: var(--r-md);
+}
+.nav-links a:hover { background: var(--surface-card); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.nav-right a.txt { font-size: 14px; font-weight: 500; color: var(--ink); padding: 8px 12px; }
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit;
+  font-size: 14px; font-weight: 600; line-height: 1;
+  border-radius: var(--r-md);
+  border: 0; cursor: pointer;
+  padding: 12px 20px; min-height: 44px;
+  transition: background .15s, transform .1s;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-active); }
+.btn-secondary { background: var(--canvas); color: var(--ink); border: 1px solid var(--hairline); }
+.btn-secondary:hover { background: var(--surface-card); }
+.btn-on-color { background: var(--canvas); color: var(--ink); }
+.btn-text { background: transparent; padding: 12px 0; }
+.btn-lg { font-size: 15px; padding: 16px 24px; min-height: 52px; }
+
+/* ===== Typography ===== */
+.display-xl { font-family: "Fraunces", "Inter", serif; font-weight: 500; font-size: clamp(44px, 7vw, 72px); line-height: 1.0; letter-spacing: -2.5px; color: var(--ink); margin: 0; font-variation-settings: "SOFT" 100, "opsz" 144; }
+.display-lg { font-family: "Fraunces", "Inter", serif; font-weight: 500; font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -2px; color: var(--ink); margin: 0; font-variation-settings: "SOFT" 100, "opsz" 144; }
+.display-md { font-family: "Fraunces", "Inter", serif; font-weight: 500; font-size: 40px; line-height: 1.1; letter-spacing: -1px; color: var(--ink); margin: 0; font-variation-settings: "SOFT" 100, "opsz" 144; }
+.display-sm { font-family: "Fraunces", "Inter", serif; font-weight: 500; font-size: 32px; line-height: 1.15; letter-spacing: -0.5px; color: var(--ink); margin: 0; font-variation-settings: "SOFT" 100, "opsz" 144; }
+.title-lg { font-size: 24px; font-weight: 600; line-height: 1.3; letter-spacing: -0.3px; color: var(--ink); margin: 0; }
+.title-md { font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--ink); margin: 0; }
+.body-md { font-size: 16px; line-height: 1.55; color: var(--body); }
+.body-sm { font-size: 14px; line-height: 1.55; color: var(--body); }
+.caption-up { font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+.caption { font-size: 13px; font-weight: 500; line-height: 1.4; color: var(--muted); }
+
+@media (max-width: 768px) {
+  .display-md { font-size: 32px; }
+}
+
+/* ===== Sections ===== */
+section { padding: 96px 0; }
+
+/* ===== Hero ===== */
+.hero { padding: 64px 0 96px; }
+.hero-inner {
+  display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: center;
+}
+@media (max-width: 880px) { .hero-inner { grid-template-columns: 1fr; gap: 32px; } }
+.hero h1 { margin: 0 0 24px; }
+.hero .lead { font-size: 20px; color: var(--body-strong); max-width: 520px; margin: 0 0 32px; line-height: 1.5; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-illust {
+  background: var(--surface-soft);
+  border-radius: var(--r-xl);
+  aspect-ratio: 1 / 1;
+  position: relative; overflow: hidden;
+  padding: 32px;
+}
+.claymation-scene {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.claymation-mountains {
+  position: absolute; inset: 0;
+  overflow: hidden;
+}
+.claymation-mountains::before {
+  content: "";
+  position: absolute; bottom: -10%; left: -5%; right: -5%; height: 60%;
+  background:
+    radial-gradient(ellipse at 25% 100%, var(--brand-peach) 0%, var(--brand-peach) 22%, transparent 22%),
+    radial-gradient(ellipse at 50% 100%, var(--brand-ochre) 0%, var(--brand-ochre) 28%, transparent 28%),
+    radial-gradient(ellipse at 75% 100%, var(--brand-pink) 0%, var(--brand-pink) 24%, transparent 24%);
+}
+.claymation-mountains::after {
+  content: "";
+  position: absolute; top: 20%; left: 20%;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--brand-lavender);
+  box-shadow: 0 8px 16px rgba(184, 164, 237, 0.4);
+}
+.claymation-mascot {
+  position: absolute; bottom: 18%; left: 50%;
+  transform: translateX(-50%);
+  width: 110px; height: 130px;
+  background: var(--brand-coral);
+  border-radius: 55px 55px 40px 40px;
+  z-index: 2;
+}
+.claymation-mascot::before {
+  content: "";
+  position: absolute; top: 35px; left: 25px;
+  width: 14px; height: 14px;
+  background: var(--ink);
+  border-radius: 50%;
+  box-shadow: 46px 0 0 var(--ink);
+}
+.claymation-mascot::after {
+  content: "";
+  position: absolute; top: 70px; left: 50%; transform: translateX(-50%);
+  width: 30px; height: 16px;
+  background: var(--ink);
+  border-radius: 0 0 15px 15px;
+}
+
+/* ===== Sales workflow mockup (centerpiece B) ===== */
+.workflow-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 0;
+  overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.workflow-toolbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-soft);
+}
+.workflow-toolbar .tab {
+  font-size: 13px; font-weight: 500;
+  padding: 6px 12px; border-radius: var(--r-pill);
+  color: var(--muted);
+  cursor: pointer;
+}
+.workflow-toolbar .tab.on { background: var(--canvas); color: var(--ink); }
+.workflow-toolbar .right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.run-pill {
+  background: var(--brand-pink); color: #fff;
+  font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: var(--r-pill);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.run-pill .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.workflow-table {
+  font-size: 13px;
+}
+.workflow-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.workflow-table th {
+  background: var(--surface-soft);
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--muted);
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--hairline);
+}
+.workflow-table th .col-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.workflow-table th .col-tag::before {
+  content: ""; width: 8px; height: 8px; border-radius: 2px;
+}
+.workflow-table th.tag-source .col-tag::before { background: var(--brand-lavender); }
+.workflow-table th.tag-claygent .col-tag::before { background: var(--brand-pink); }
+.workflow-table th.tag-data .col-tag::before { background: var(--brand-ochre); }
+.workflow-table th.tag-email .col-tag::before { background: var(--brand-teal); }
+
+.workflow-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--hairline-soft);
+  font-size: 13px; color: var(--ink);
+  vertical-align: top;
+}
+.workflow-table tr:last-child td { border-bottom: 0; }
+.workflow-table .av {
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.workflow-table .av .av-c {
+  width: 24px; height: 24px; border-radius: 50%;
+  flex: none;
+  background: var(--brand-lavender);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink); font-weight: 600; font-size: 11px;
+}
+.workflow-table .av-c.a2 { background: var(--brand-peach); }
+.workflow-table .av-c.a3 { background: var(--brand-mint); }
+.workflow-table .av-c.a4 { background: var(--brand-ochre); }
+.workflow-table .av-c.a5 { background: var(--brand-coral); color: #fff; }
+.workflow-table .av .name { font-size: 13px; font-weight: 500; }
+.workflow-table .av .role { font-size: 11px; color: var(--muted); display: block; line-height: 1.3; }
+.workflow-table .status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600;
+  padding: 4px 10px; border-radius: var(--r-pill);
+}
+.status.s-enriched { background: rgba(34, 197, 94, 0.12); color: var(--success); }
+.status.s-running { background: rgba(184, 164, 237, 0.2); color: #6b53b8; }
+.status.s-sent { background: rgba(26, 58, 58, 0.1); color: var(--brand-teal); }
+.workflow-table .email-prev {
+  font-size: 12px; color: var(--muted); line-height: 1.4;
+  max-width: 280px;
+}
+.workflow-table .email-prev strong { color: var(--ink); display: block; font-weight: 600; }
+.workflow-table .signal {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  background: var(--surface-card);
+  border-radius: var(--r-pill);
+  margin-right: 4px;
+}
+
+/* ===== Feature cards ===== */
+.feature-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
+}
+@media (max-width: 1024px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+.fc {
+  border-radius: var(--r-xl);
+  padding: 32px;
+  min-height: 360px;
+  display: flex; flex-direction: column;
+  color: var(--ink);
+  position: relative; overflow: hidden;
+}
+.fc.span2 { grid-column: span 2; }
+@media (max-width: 1024px) { .fc.span2 { grid-column: span 2; } }
+@media (max-width: 600px) { .fc.span2 { grid-column: span 1; } }
+.fc .eyebrow {
+  font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  opacity: 0.75;
+  margin-bottom: 12px;
+}
+.fc h3 {
+  font-family: "Fraunces", "Inter", serif; font-weight: 500;
+  font-size: 28px; line-height: 1.15; letter-spacing: -0.8px;
+  margin: 0 0 12px;
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+.fc p { font-size: 15px; line-height: 1.5; margin: 0 0 auto; opacity: 0.85; max-width: 380px; }
+.fc.pink { background: var(--brand-pink); color: var(--on-primary); }
+.fc.teal { background: var(--brand-teal); color: var(--on-dark); }
+.fc.lavender { background: var(--brand-lavender); color: var(--ink); }
+.fc.peach { background: var(--brand-peach); color: var(--ink); }
+.fc.ochre { background: var(--brand-ochre); color: var(--ink); }
+.fc.cream { background: var(--surface-card); color: var(--ink); }
+
+/* Tiny UI fragments embedded in cards */
+.ui-frag {
+  background: rgba(255,255,255,0.18);
+  border-radius: var(--r-md);
+  padding: 12px;
+  font-size: 12px; line-height: 1.4;
+  margin-top: 20px;
+}
+.fc.lavender .ui-frag, .fc.peach .ui-frag, .fc.ochre .ui-frag, .fc.cream .ui-frag { background: rgba(255,255,255,0.6); }
+.ui-frag .row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); }
+.ui-frag .row:last-child { border-bottom: 0; }
+.fc.pink .ui-frag .row, .fc.teal .ui-frag .row { border-bottom-color: rgba(255,255,255,0.2); }
+.ui-frag .row .k { font-weight: 600; }
+
+/* Claymation thumbnails inside feature cards */
+.clay-thumb {
+  width: 100%; aspect-ratio: 16 / 9;
+  background: rgba(255,255,255,0.2);
+  border-radius: var(--r-md);
+  margin-top: 16px;
+  position: relative; overflow: hidden;
+}
+.fc.lavender .clay-thumb, .fc.peach .clay-thumb, .fc.ochre .clay-thumb { background: rgba(255,255,255,0.45); }
+.clay-thumb::before {
+  content: "";
+  position: absolute; bottom: 0; left: 0; right: 0; height: 60%;
+  background:
+    radial-gradient(ellipse at 20% 100%, var(--brand-peach) 0%, var(--brand-peach) 28%, transparent 28%),
+    radial-gradient(ellipse at 55% 100%, var(--brand-ochre) 0%, var(--brand-ochre) 32%, transparent 32%),
+    radial-gradient(ellipse at 85% 100%, var(--brand-pink) 0%, var(--brand-pink) 26%, transparent 26%);
+}
+.clay-thumb::after {
+  content: "";
+  position: absolute; top: 18%; right: 22%;
+  width: 28px; height: 28px;
+  background: var(--brand-mint);
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ===== Testimonials ===== */
+.test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 880px) { .test-grid { grid-template-columns: 1fr; } }
+.test {
+  background: var(--surface-card);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+.test .quote {
+  font-size: 17px; line-height: 1.45; color: var(--ink);
+  margin: 0 0 20px; font-weight: 500;
+}
+.test .who { display: flex; align-items: center; gap: 12px; }
+.test .av { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-lavender); }
+.test .av.a2 { background: var(--brand-peach); }
+.test .av.a3 { background: var(--brand-mint); }
+.test .who .name { font-weight: 600; font-size: 14px; color: var(--ink); }
+.test .who .role { font-size: 13px; color: var(--muted); }
+
+/* ===== Pricing ===== */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+@media (max-width: 880px) { .pricing-grid { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 32px;
+}
+.tier.featured {
+  background: var(--brand-teal);
+  color: var(--on-dark);
+  border-color: transparent;
+}
+.tier.featured h3, .tier.featured .price, .tier.featured li { color: var(--on-dark); }
+.tier.featured .desc, .tier.featured .price small { color: var(--on-dark-soft); }
+.tier h3 { font-family: "Fraunces", serif; font-weight: 500; font-size: 28px; letter-spacing: -0.6px; margin: 0 0 8px; font-variation-settings: "SOFT" 100, "opsz" 144; }
+.tier .desc { font-size: 14px; color: var(--muted); margin: 0 0 20px; min-height: 42px; }
+.tier .price { font-family: "Fraunces", serif; font-weight: 500; font-size: 40px; line-height: 1; letter-spacing: -1.5px; margin: 0 0 4px; }
+.tier .price small { font-size: 14px; color: var(--muted); font-family: "Inter", sans-serif; font-weight: 400; }
+.tier .cta { margin: 20px 0; }
+.tier .cta .btn { width: 100%; }
+.tier ul { list-style: none; padding: 0; margin: 0; }
+.tier li {
+  font-size: 14px; padding: 8px 0;
+  display: flex; align-items: flex-start; gap: 10px;
+  line-height: 1.4;
+}
+.tier li::before {
+  content: "✓"; flex: none;
+  color: var(--success);
+  font-weight: 700; font-size: 14px;
+}
+.tier.featured li::before { color: var(--brand-mint); }
+
+/* CTA band */
+.cta-band {
+  background: var(--surface-soft);
+  border-radius: var(--r-xl);
+  padding: 80px;
+  text-align: center;
+  margin: 0 0 32px;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 768px) { .cta-band { padding: 48px 32px; } }
+.cta-band h2 { margin: 0 0 16px; }
+.cta-band p { color: var(--body); max-width: 540px; margin: 0 auto 32px; font-size: 18px; }
+.cta-band .mountains {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
+  background:
+    radial-gradient(ellipse at 15% 100%, var(--brand-peach) 0%, var(--brand-peach) 12%, transparent 12%),
+    radial-gradient(ellipse at 40% 100%, var(--brand-ochre) 0%, var(--brand-ochre) 14%, transparent 14%),
+    radial-gradient(ellipse at 70% 100%, var(--brand-pink) 0%, var(--brand-pink) 10%, transparent 10%),
+    radial-gradient(ellipse at 90% 100%, var(--brand-lavender) 0%, var(--brand-lavender) 12%, transparent 12%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Logo wall */
+.logo-wall {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 32px;
+  align-items: center; justify-items: center;
+  padding: 32px 0;
+}
+@media (max-width: 768px) { .logo-wall { grid-template-columns: repeat(3, 1fr); } }
+.logo-wall .logo {
+  font-size: 18px; font-weight: 600; color: var(--muted);
+  letter-spacing: -0.4px;
+}
+
+/* ===== Footer (cream, not dark) ===== */
+footer {
+  background: var(--surface-soft);
+  padding: 80px 24px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.footer-mountains {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 40px;
+  background:
+    radial-gradient(ellipse at 10% 100%, var(--brand-peach) 0%, var(--brand-peach) 16%, transparent 16%),
+    radial-gradient(ellipse at 30% 100%, var(--brand-ochre) 0%, var(--brand-ochre) 18%, transparent 18%),
+    radial-gradient(ellipse at 55% 100%, var(--brand-pink) 0%, var(--brand-pink) 14%, transparent 14%),
+    radial-gradient(ellipse at 80% 100%, var(--brand-lavender) 0%, var(--brand-lavender) 16%, transparent 16%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.footer-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 32px; margin-bottom: 48px; position: relative; z-index: 1; }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-brand .wm { font-family: "Fraunces", serif; font-weight: 500; font-size: 32px; letter-spacing: -1px; color: var(--ink); margin: 0; font-variation-settings: "SOFT" 100, "opsz" 144; }
+.footer-brand p { font-size: 14px; color: var(--body); margin: 12px 0 0; max-width: 240px; line-height: 1.55; }
+footer h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin: 0 0 16px; }
+footer ul { list-style: none; padding: 0; margin: 0; }
+footer li { margin: 6px 0; }
+footer a { font-size: 14px; color: var(--body); }
+footer a:hover { color: var(--ink); }
+.footer-bottom {
+  border-top: 1px solid var(--hairline);
+  padding-top: 24px;
+  display: flex; justify-content: space-between;
+  font-size: 13px; color: var(--muted);
+  flex-wrap: wrap; gap: 12px;
+  position: relative; z-index: 1;
+}
+
+/* ===== Source link ===== */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px;
+  background: var(--brand-pink); color: #fff;
+  border: 0;
+  font-size: 13px; font-weight: 600;
+  padding: 10px 16px; border-radius: var(--r-md);
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(255, 77, 139, 0.3);
+}
+.src-link:hover { background: var(--primary); color: var(--brand-pink); }
+
+/* ============= DS section ============= */
+.ds-block { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading {
+  font-family: "Fraunces", serif; font-weight: 500;
+  font-size: 36px; letter-spacing: -1px;
+  color: var(--ink); margin: 0 0 16px; line-height: 1.15;
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+.ds-caption {
+  font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--muted);
+  margin: 32px 0 12px;
+}
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px)  { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px)  { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--canvas); border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--hairline); }
+.ds-sw .chip { height: 70px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 12px; color: var(--muted); margin-top: 2px; font-family: ui-monospace, Menlo, monospace; }
+
+.ds-tints { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-top: 12px; }
+@media (max-width: 800px) { .ds-tints { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .ds-tints { grid-template-columns: 1fr; } }
+.ds-tint {
+  border-radius: var(--r-xl);
+  padding: 28px;
+  aspect-ratio: 5 / 4;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  color: var(--ink);
+}
+.ds-tint.dark { color: #fff; }
+.ds-tint .lab { font-family: "Fraunces", serif; font-weight: 500; font-size: 22px; letter-spacing: -0.5px; font-variation-settings: "SOFT" 100, "opsz" 144; }
+.ds-tint .v { font-size: 12px; opacity: 0.85; margin-top: 4px; font-family: ui-monospace, monospace; }
+
+.ds-typescale { border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; background: var(--canvas); }
+.ds-tr { display: grid; grid-template-columns: 180px 240px 1fr; gap: 16px; padding: 18px 24px; border-top: 1px solid var(--hairline-soft); align-items: center; }
+.ds-tr:first-child { border-top: 0; }
+.ds-tok { font-weight: 600; font-size: 14px; color: var(--ink); }
+.ds-spec { font-size: 12px; color: var(--muted); font-family: ui-monospace, Menlo, monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 800px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 700px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { text-align: center; }
+.ds-rad .box { width: 72px; height: 72px; background: var(--brand-peach); margin: 0 auto 8px; }
+.ds-rad .lab { font-size: 13px; font-weight: 600; color: var(--ink); }
+.ds-rad .vv { font-size: 11px; color: var(--muted); font-family: ui-monospace, monospace; }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 700px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-field-label { font-size: 12px; font-weight: 600; color: var(--muted); display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.ds-input { width: 100%; height: 44px; border: 1px solid var(--hairline); border-radius: var(--r-md); padding: 0 16px; font-size: 16px; font-family: inherit; background: var(--canvas); color: var(--ink); }
+.ds-input.focused { border: 2px solid var(--ink); outline: 0; padding: 0 15px; }
+.ds-card-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 880px) { .ds-card-row { grid-template-columns: 1fr; } }
+
+.ds-tabs { display: inline-flex; background: var(--surface-card); border-radius: var(--r-pill); padding: 4px; }
+.ds-tabs .t { padding: 6px 14px; border-radius: var(--r-pill); font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; }
+.ds-tabs .t.on { background: var(--canvas); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+
+.ds-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.ds-badge {
+  font-size: 13px; font-weight: 500;
+  background: var(--surface-card); color: var(--ink);
+  padding: 4px 12px; border-radius: var(--r-pill);
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============== TOP NAV ============== -->
+<header class="topnav"><div class="wrap"><div class="row">
+  <a href="#" class="brand">
+    <span class="glyph">K</span>
+    <span>Kiln</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#">Product</a>
+    <a href="#">Solutions</a>
+    <a href="#">Resources</a>
+    <a href="#">Pricing</a>
+    <a href="#">Customers</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="txt">Sign in</a>
+    <a href="#" class="btn btn-primary">Try free</a>
+  </div>
+</div></div></header>
+
+<!-- ============== PART A — Marketing ============== -->
+<!-- HERO -->
+<section class="hero"><div class="wrap"><div class="hero-inner">
+  <div>
+    <h1 class="display-xl">Go to market with unique data.</h1>
+    <p class="lead">Kiln is the GTM-data platform. Stack 100+ sources, run AI agents over them, and ship enriched lead lists into your CRM without writing a single line of code.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary btn-lg">Try free</a>
+      <a href="#" class="btn btn-secondary btn-lg">Watch demo →</a>
+    </div>
+    <p class="caption" style="margin-top: 20px;">No credit card · 1,000 free credits</p>
+  </div>
+  <div class="hero-illust">
+    <div class="claymation-mountains"></div>
+    <div class="claymation-scene">
+      <div class="claymation-mascot"></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- LOGO WALL -->
+<section style="padding: 16px 0 64px;"><div class="wrap">
+  <p class="caption-up" style="text-align: center; margin-bottom: 24px;">— Powering GTM teams at</p>
+  <div class="logo-wall">
+    <span class="logo">Anthropic</span>
+    <span class="logo">Notion</span>
+    <span class="logo">Ramp</span>
+    <span class="logo">Vercel</span>
+    <span class="logo">Linear</span>
+    <span class="logo">Loom</span>
+  </div>
+</div></section>
+
+<!-- SALES WORKFLOW MOCKUP (centerpiece B) -->
+<section style="padding-top: 32px;"><div class="wrap">
+  <div style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+    <p class="caption-up">— Lead enrichment</p>
+    <h2 class="display-md" style="margin: 16px 0;">Build a list. Run an agent. Ship to CRM.</h2>
+    <p class="body-md" style="font-size: 18px;">Every row is a person. Every column is an agent step. Kiln runs your AI playbook across the table in parallel.</p>
+  </div>
+
+  <div class="workflow-card">
+    <div class="workflow-toolbar">
+      <span class="tab">All leads</span>
+      <span class="tab on">Series A SaaS · 124</span>
+      <span class="tab">PLG-fit · 87</span>
+      <span class="tab">Enterprise · 42</span>
+      <div class="right">
+        <span class="run-pill"><span class="dot"></span>Running · 8 of 124</span>
+        <a href="#" class="btn btn-primary" style="padding: 8px 16px; min-height: 36px; font-size: 13px;">Push to CRM</a>
+      </div>
+    </div>
+    <div class="workflow-table">
+      <table>
+        <thead>
+          <tr>
+            <th class="tag-source"><span class="col-tag">Lead</span></th>
+            <th class="tag-claygent"><span class="col-tag">Claygent · enrich</span></th>
+            <th class="tag-data"><span class="col-tag">Signals found</span></th>
+            <th class="tag-email"><span class="col-tag">Sequencer · email 1</span></th>
+            <th><span class="col-tag" style="color: var(--muted);">Status</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="av"><span class="av-c">SK</span><div><span class="name">Sasha Kim</span><span class="role">VP Sales · Lumen</span></div></div></td>
+            <td>Series A · 42 employees · raised $18M from a16z 3 mo ago. Founder is ex-Stripe.</td>
+            <td><span class="signal">Hiring SDR</span><span class="signal">Job post Apr 4</span></td>
+            <td class="email-prev"><strong>Saw the SDR JD</strong>Noticed you're hiring an SDR right after the a16z round. Built Kiln to give them a 100-person prospect list on day one…</td>
+            <td><span class="status s-sent">Sent · opened</span></td>
+          </tr>
+          <tr>
+            <td><div class="av"><span class="av-c a2">RD</span><div><span class="name">Rohan Das</span><span class="role">Head of GTM · Mosaic</span></div></div></td>
+            <td>Series B · 80 employees · pre-IPO playbook. Posted about RevOps on LinkedIn last week.</td>
+            <td><span class="signal">RevOps post</span><span class="signal">Hiring AE</span></td>
+            <td class="email-prev"><strong>Your RevOps post</strong>The piece on the 5-stage funnel resonated — we built Kiln so RevOps stops being the bottleneck for outbound…</td>
+            <td><span class="status s-enriched">Enriched</span></td>
+          </tr>
+          <tr>
+            <td><div class="av"><span class="av-c a3">LP</span><div><span class="name">Lina Park</span><span class="role">CEO · Pencil AI</span></div></div></td>
+            <td>Seed · 12 employees · ex-Airtable. Just shipped Pencil 2.0.</td>
+            <td><span class="signal">Product launch</span><span class="signal">PH #1</span></td>
+            <td class="email-prev"><strong>Pencil 2.0 ship 🎉</strong>The launch hit #1 on PH last Tuesday. Most founders we work with at that stage…</td>
+            <td><span class="status s-running">Running</span></td>
+          </tr>
+          <tr>
+            <td><div class="av"><span class="av-c a4">JM</span><div><span class="name">Jules Marin</span><span class="role">Growth · Beam</span></div></div></td>
+            <td>Series A · 28 employees · Stripe customer. Recently joined from Notion.</td>
+            <td><span class="signal">New role · 14d</span></td>
+            <td class="email-prev"><strong>From Notion to Beam</strong>You went from a self-serve flywheel to a sales-led one — that's the exact transition Kiln helps RevOps make…</td>
+            <td><span class="status s-running">Running</span></td>
+          </tr>
+          <tr>
+            <td><div class="av"><span class="av-c a5">DG</span><div><span class="name">Devon Gray</span><span class="role">VP Marketing · Cinder</span></div></div></td>
+            <td>Series A · 64 employees · pricing page rebuild last week.</td>
+            <td><span class="signal">Pricing update</span></td>
+            <td class="email-prev"><strong>Re: the new pricing page</strong>Saw the rebuild. Subscription tier landing is sharp — Kiln helps your AEs find the 200 accounts most likely to land there…</td>
+            <td><span class="status s-enriched">Enriched</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div></section>
+
+<!-- FEATURE CARDS -->
+<section><div class="wrap">
+  <div style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+    <p class="caption-up">— Why Kiln</p>
+    <h2 class="display-md" style="margin: 16px 0;">Six tools, one canvas.</h2>
+  </div>
+
+  <div class="feature-grid">
+    <div class="fc pink">
+      <span class="eyebrow">Sequencer</span>
+      <h3>Outbound that doesn't feel outbound.</h3>
+      <p>Personalize 500 emails in parallel using signals enriched on the same canvas. No paste-and-pray, no spreadsheet of mail-merges.</p>
+      <div class="ui-frag">
+        <div class="row"><span class="k">Email 1</span><span>Day 0 · 78% opened</span></div>
+        <div class="row"><span class="k">Email 2</span><span>Day 3 · 41% opened</span></div>
+        <div class="row"><span class="k">LinkedIn</span><span>Day 7 · 22% replied</span></div>
+      </div>
+    </div>
+    <div class="fc lavender">
+      <span class="eyebrow">Claygent</span>
+      <h3>AI agents on every row.</h3>
+      <p>Drop a Claygent onto your table and ask it to research, qualify, write — anything you'd do manually.</p>
+      <div class="clay-thumb"></div>
+    </div>
+    <div class="fc teal">
+      <span class="eyebrow">Data stack</span>
+      <h3>100+ sources, one row.</h3>
+      <p>Apollo, ZoomInfo, Clearbit, LinkedIn — stack them, fall through on misses, and let Kiln route to whichever has the freshest signal.</p>
+      <div class="ui-frag">
+        <div class="row"><span class="k">Apollo</span><span style="color: var(--brand-mint);">✓ 1,204 hits</span></div>
+        <div class="row"><span class="k">Clearbit</span><span style="color: var(--brand-mint);">✓ 982 hits</span></div>
+        <div class="row"><span class="k">LinkedIn</span><span style="color: var(--brand-peach);">⟳ 1,210 hits</span></div>
+      </div>
+    </div>
+    <div class="fc peach">
+      <span class="eyebrow">CRM sync</span>
+      <h3>Pushes into Salesforce, HubSpot, Attio.</h3>
+      <p>One toggle. Field mapping, dedup, and write-back. The CRM stays the source of truth — Kiln just makes it useful.</p>
+    </div>
+    <div class="fc ochre">
+      <span class="eyebrow">Experts</span>
+      <h3>Hire a Kiln expert.</h3>
+      <p>200+ certified consultants who build playbooks for your team. Book a session, ship in a week.</p>
+    </div>
+    <div class="fc cream">
+      <span class="eyebrow">University</span>
+      <h3>Free 4-week bootcamp.</h3>
+      <p>Learn the playbook from the operators who built it. Cohorts of 200, live every quarter.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- TESTIMONIALS -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+    <p class="caption-up">— Customers</p>
+    <h2 class="display-md" style="margin: 16px 0;">GTM teams that ship.</h2>
+  </div>
+
+  <div class="test-grid">
+    <div class="test">
+      <p class="quote">"Kiln let our 3-person GTM team prospect like a 30-person one. The sequencer + Claygent combo is what changed our pipeline."</p>
+      <div class="who">
+        <span class="av"></span>
+        <div><div class="name">Maya Chen</div><div class="role">Head of GTM · Loom</div></div>
+      </div>
+    </div>
+    <div class="test">
+      <p class="quote">"Spreadsheets and Apollo couldn't keep up. Now we run 8 segments in parallel and the AEs only see the rows that matter."</p>
+      <div class="who">
+        <span class="av a2"></span>
+        <div><div class="name">Theo Park</div><div class="role">VP Sales · Mosaic</div></div>
+      </div>
+    </div>
+    <div class="test">
+      <p class="quote">"Kiln is the only tool my RevOps team protects. Touch their canvas at your own risk."</p>
+      <div class="who">
+        <span class="av a3"></span>
+        <div><div class="name">Anita Rao</div><div class="role">COO · Pencil AI</div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PRICING -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div style="text-align: center; max-width: 720px; margin: 0 auto 32px;">
+    <p class="caption-up">— Pricing</p>
+    <h2 class="display-md" style="margin: 16px 0;">Pay for what you enrich.</h2>
+    <p class="body-md" style="font-size: 18px;">Credits roll over. Cancel anytime. No seat licensing.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="tier">
+      <h3>Starter</h3>
+      <p class="desc">For founders running outbound themselves.</p>
+      <p class="price">$0<small> / mo</small></p>
+      <div class="cta"><a href="#" class="btn btn-secondary">Get started</a></div>
+      <ul>
+        <li>1,000 credits / mo</li>
+        <li>Claygent · 50 runs</li>
+        <li>3 sequencer campaigns</li>
+        <li>CSV export</li>
+      </ul>
+    </div>
+    <div class="tier featured">
+      <h3>Pro</h3>
+      <p class="desc">For GTM teams shipping pipeline weekly.</p>
+      <p class="price">$149<small style="color: var(--on-dark-soft);"> / mo</small></p>
+      <div class="cta"><a href="#" class="btn btn-on-color">Choose Pro</a></div>
+      <ul>
+        <li>50,000 credits / mo</li>
+        <li>Unlimited Claygent runs</li>
+        <li>Unlimited sequencer campaigns</li>
+        <li>CRM sync · Salesforce / HubSpot</li>
+        <li>Sub-account workspaces</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <h3>Enterprise</h3>
+      <p class="desc">For RevOps teams at scale.</p>
+      <p class="price" style="font-size: 28px;">Custom</p>
+      <div class="cta"><a href="#" class="btn btn-secondary">Talk to sales</a></div>
+      <ul>
+        <li>Unlimited credits</li>
+        <li>SSO + SCIM</li>
+        <li>Audit log · DLP</li>
+        <li>Dedicated expert</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA BAND (cream, illustrated) -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="cta-band">
+    <h2 class="display-md" style="margin: 0 0 16px;">Turn your growth ideas into reality today.</h2>
+    <p>Join 4,000+ GTM teams running their outbound on Kiln.</p>
+    <a href="#" class="btn btn-primary btn-lg">Try free →</a>
+    <div class="mountains"></div>
+  </div>
+</div></section>
+
+
+<!-- ============== PART B — Design System ============== -->
+<section><div class="wrap">
+  <div style="max-width: 720px; margin: 0 auto 48px; text-align: center;">
+    <p class="caption-up">— Design system</p>
+    <h2 class="display-lg" style="margin: 16px 0;">Cream canvas. Six saturated cards. One mountain at the bottom.</h2>
+    <p class="body-md" style="font-size: 18px;">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.clay.html" target="_blank" rel="noopener" style="color: var(--ink); border-bottom: 1px solid var(--ink);">DESIGN.md</a>. Cream canvas (#fffaf0) — the warm tint is non-negotiable. Plain Black display (Fraunces with SOFT axis as substitute). Six saturated feature cards. No dark footer.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand colors — six saturated feature cards</p>
+    <div class="ds-tints">
+      <div class="ds-tint" style="background: var(--brand-pink); color: #fff;"><div class="lab">brand-pink</div><div class="v">#ff4d8b · sequencer / outbound</div></div>
+      <div class="ds-tint dark" style="background: var(--brand-teal);"><div class="lab">brand-teal</div><div class="v">#1a3a3a · featured pricing</div></div>
+      <div class="ds-tint" style="background: var(--brand-lavender);"><div class="lab">brand-lavender</div><div class="v">#b8a4ed · AI agent</div></div>
+      <div class="ds-tint" style="background: var(--brand-peach);"><div class="lab">brand-peach</div><div class="v">#ffb084 · SaaS warmth</div></div>
+      <div class="ds-tint" style="background: var(--brand-ochre);"><div class="lab">brand-ochre</div><div class="v">#e8b94a · community / experts</div></div>
+      <div class="ds-tint" style="background: var(--surface-card); border: 1px solid var(--hairline);"><div class="lab">surface-card</div><div class="v">#f5f0e0 · cream card</div></div>
+    </div>
+
+    <p class="ds-caption">Cream canvas family — the warm chrome</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#fffaf0"></div><div class="meta"><div class="name">canvas</div><div class="val">#fffaf0</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#faf5e8"></div><div class="meta"><div class="name">surface-soft</div><div class="val">#faf5e8</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f5f0e0"></div><div class="meta"><div class="name">surface-card</div><div class="val">#f5f0e0</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ebe6d6"></div><div class="meta"><div class="name">surface-strong</div><div class="val">#ebe6d6</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0a1a1a"></div><div class="meta"><div class="name">surface-dark</div><div class="val">#0a1a1a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1a2a2a"></div><div class="meta"><div class="name">surface-dark-elevated</div><div class="val">#1a2a2a</div></div></div>
+    </div>
+
+    <p class="ds-caption">Accent palette — used inside illustrations</p>
+    <div class="ds-swatches" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="ds-sw"><div class="chip" style="background:#a4d4c5"></div><div class="meta"><div class="name">brand-mint</div><div class="val">#a4d4c5</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ff6b5a"></div><div class="meta"><div class="name">brand-coral</div><div class="val">#ff6b5a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#22c55e"></div><div class="meta"><div class="name">success</div><div class="val">#22c55e</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ef4444"></div><div class="meta"><div class="name">error</div><div class="val">#ef4444</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#0a0a0a"></div><div class="meta"><div class="name">ink · primary</div><div class="val">#0a0a0a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1a1a1a"></div><div class="meta"><div class="name">body-strong</div><div class="val">#1a1a1a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#3a3a3a"></div><div class="meta"><div class="name">body</div><div class="val">#3a3a3a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#6a6a6a"></div><div class="meta"><div class="name">muted</div><div class="val">#6a6a6a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9a9a9a"></div><div class="meta"><div class="name">muted-soft</div><div class="val">#9a9a9a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e5e5e5"></div><div class="meta"><div class="name">hairline</div><div class="val">#e5e5e5</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="body-md" style="margin: 0 0 24px;">Plain Black is Clay's licensed display face — Fraunces (variable, SOFT axis at 100) is the open-source substitute that carries the rounded character. Display weight stays at 500 — going to 700 reads as bombastic. Inter handles body, UI, and buttons. Mixing the two between roles is a system violation.</p>
+
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">72 / 500 / 1.0 / -2.5px · Plain Black</span><span class="ds-sam display" style="font-size: 44px; line-height: 1.0; letter-spacing: -2px;">Go to market</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">56 / 500 / 1.05 / -2px</span><span class="ds-sam display" style="font-size: 36px; line-height: 1.05; letter-spacing: -1.6px;">Section opener</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">40 / 500 / 1.1 / -1px</span><span class="ds-sam display" style="font-size: 32px; line-height: 1.1; letter-spacing: -0.9px;">Sub-section opener</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-sm</span><span class="ds-spec">32 / 500 / 1.15 / -0.5px</span><span class="ds-sam display" style="font-size: 28px; line-height: 1.15; letter-spacing: -0.5px;">Feature card title</span></div>
+      <div class="ds-tr"><span class="ds-tok">title-lg</span><span class="ds-spec">24 / 600 / 1.3 / -0.3px · Inter</span><span class="ds-sam" style="font-size: 24px; font-weight: 600; line-height: 1.3; letter-spacing: -0.3px;">Pricing plan name</span></div>
+      <div class="ds-tr"><span class="ds-tok">title-md</span><span class="ds-spec">18 / 600 / 1.4 · Inter</span><span class="ds-sam" style="font-size: 18px; font-weight: 600; line-height: 1.4;">Card title</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 / 400 / 1.55 · Inter</span><span class="ds-sam" style="font-size: 16px; line-height: 1.55;">Default body. Plain Black for headlines, Inter for everything else.</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-sm</span><span class="ds-spec">14 / 400 / 1.55</span><span class="ds-sam" style="font-size: 14px; line-height: 1.55; color: var(--muted);">Footer body, fine print.</span></div>
+      <div class="ds-tr"><span class="ds-tok">caption-uppercase</span><span class="ds-spec">12 / 600 / 1.4 / 1.5px</span><span class="ds-sam" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted);">— FEATURED · SECTION LABEL</span></div>
+      <div class="ds-tr"><span class="ds-tok">button</span><span class="ds-spec">14 / 600 / 1.0 · Inter</span><span class="ds-sam" style="font-size: 14px; font-weight: 600;">Try free</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <p class="body-md" style="margin: 0 0 24px;">Generous radius matches the rounded display type. 12px on buttons + inputs, 16px on standard content cards + pricing tiers, 24px on saturated feature cards.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius: 6px;"></div><div class="lab">xs</div><div class="vv">6 · small badges</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 8px;"></div><div class="lab">sm</div><div class="vv">8 · small buttons</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 12px;"></div><div class="lab">md</div><div class="vv">12 · CTA, inputs</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 16px;"></div><div class="lab">lg</div><div class="vv">16 · content cards</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 24px;"></div><div class="lab">xl</div><div class="vv">24 · feature cards</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 9999px;"></div><div class="lab">pill</div><div class="vv">∞ · tabs, badges</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — 12px radius, never pill (except tabs)</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">button-primary</a>
+      <a href="#" class="btn btn-secondary">button-secondary</a>
+      <a href="#" class="btn btn-text" style="text-decoration: underline; text-underline-offset: 4px;">button-text-link</a>
+      <a href="#" class="btn btn-primary" style="background: var(--primary-disabled); color: var(--muted); cursor: not-allowed;">button-disabled</a>
+    </div>
+
+    <p class="ds-caption">Buttons on saturated cards</p>
+    <div class="ds-comp-row" style="background: var(--brand-pink); padding: 24px; border-radius: var(--r-xl);">
+      <a href="#" class="btn btn-on-color">button-on-color</a>
+      <a href="#" class="btn" style="background: transparent; color: #fff; text-decoration: underline; text-underline-offset: 4px;">text-link · on color</a>
+    </div>
+
+    <p class="ds-caption">Inputs — focus thickens border to ink</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input · default</label>
+        <input class="ds-input" placeholder="hello@kiln.run" />
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="hello@kiln.run" />
+      </div>
+    </div>
+
+    <p class="ds-caption">Tabs — pill-shaped, cream-card active</p>
+    <div class="ds-comp-row">
+      <div class="ds-tabs">
+        <span class="t on">Outbound</span>
+        <span class="t">Enrichment</span>
+        <span class="t">AI agents</span>
+        <span class="t">CRM</span>
+      </div>
+    </div>
+
+    <p class="ds-caption">Badges & pills</p>
+    <div class="ds-badges">
+      <span class="ds-badge">badge-pill</span>
+      <span class="ds-badge" style="background: var(--brand-pink); color: #fff;">on pink</span>
+      <span class="ds-badge" style="background: var(--brand-lavender);">on lavender</span>
+      <span class="ds-badge" style="background: var(--brand-teal); color: #fff;">on teal</span>
+      <span class="ds-badge" style="background: var(--brand-peach);">on peach</span>
+      <span class="ds-badge" style="background: var(--brand-ochre);">on ochre</span>
+    </div>
+
+    <p class="ds-caption">Cards — cycle the palette, never repeat in a row</p>
+    <div class="ds-card-row">
+      <div class="fc pink" style="min-height: 240px; padding: 24px;">
+        <span class="eyebrow">feature-card-pink</span>
+        <h3 style="font-size: 22px; letter-spacing: -0.5px;">Hot pink · 24px radius</h3>
+        <p style="font-size: 13px;">Used for sequencer / outbound features. White text.</p>
+      </div>
+      <div class="fc lavender" style="min-height: 240px; padding: 24px;">
+        <span class="eyebrow">feature-card-lavender</span>
+        <h3 style="font-size: 22px; letter-spacing: -0.5px;">Lavender · AI agent</h3>
+        <p style="font-size: 13px;">Used for Claygent / AI-agent features. Ink text.</p>
+      </div>
+      <div class="fc cream" style="min-height: 240px; padding: 24px;">
+        <span class="eyebrow">feature-card-cream</span>
+        <h3 style="font-size: 22px; letter-spacing: -0.5px;">Cream · low-emphasis</h3>
+        <p style="font-size: 13px;">When a feature doesn't warrant saturated voltage.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+
+<!-- ============== FOOTER (cream, not dark) ============== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="wm">Kiln</p>
+        <p>Go to market with unique data. Cream throughout — even the footer.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul><li><a href="#">Sequencer</a></li><li><a href="#">Claygent</a></li><li><a href="#">Data stack</a></li><li><a href="#">CRM sync</a></li></ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul><li><a href="#">University</a></li><li><a href="#">Templates</a></li><li><a href="#">Playbooks</a></li><li><a href="#">Blog</a></li></ul>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <ul><li><a href="#">Experts</a></li><li><a href="#">Events</a></li><li><a href="#">Slack</a></li><li><a href="#">Discord</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Kiln · Built on cream, not on dark</span>
+      <span>Inspired by clay DESIGN.md · awesome-design-md</span>
+    </div>
+  </div>
+  <div class="footer-mountains"></div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.clay.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

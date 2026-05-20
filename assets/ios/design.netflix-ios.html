@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Netflix — iOS design spec</title>
+<meta name="description" content="Netflix iOS app design reference. Pure black canvas, #E50914 red, artwork-embedded titles, Top 10 giant outlined numerals, profile picker bouncy zoom." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#000; --surface-1:#141414; --surface-2:#181818; --surface-card:#1f1f1f; --surface-card-alt:#262626;
+  --nf-red:#E50914; --nf-red-dim:#b00710;
+  --ink:#fff; --ink-soft:#f5f5f5; --ink-muted:#a3a3a3; --ink-dim:#737373;
+  --border:#303030; --border-soft:#1a1a1a;
+  --negative:#E50914; --warning:#ffa42b; --announce:#54B9C5;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:0; --r-sm:2px; --r-md:4px; --r-lg:6px; --r-xl:8px; --r-pill:500px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.3px}
+.brand-mark{width:22px;height:30px;display:grid;place-items:center;position:relative}
+.brand-mark .nletter{font-weight:900;font-size:26px;color:var(--nf-red);font-family:"Bebas Neue","Arial Narrow",Impact,sans-serif;letter-spacing:-2px;line-height:1;text-shadow:1px 0 0 var(--nf-red-dim),2px 0 2px rgba(229,9,20,.4)}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-md);font-size:14px;font-weight:600;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.04)}
+.btn-primary{background:var(--nf-red);color:#fff;padding:12px 22px;border-radius:var(--r-md)}
+.btn-primary:hover{background:#f6121d}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:10px 18px;border-radius:var(--r-md)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 18px;border-radius:var(--r-md)}
+.btn-light{background:#fff;color:#000;padding:12px 22px;border-radius:var(--r-md)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(229,9,20,.16),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-md);background:rgba(229,9,20,.14);color:var(--nf-red);font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--nf-red)}
+.hero h1{font-size:clamp(44px,7vw,90px);line-height:.95;letter-spacing:-2.4px;font-weight:900;margin-bottom:22px}
+.hero h1 .gradient-word{color:var(--nf-red)}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#000}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#fff;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;color:#fff;font-size:11px;display:flex;flex-direction:column}
+
+/* ========== SCREEN: HOME ========== */
+.nf-home{position:absolute;inset:0;background:#000;overflow:hidden}
+.nf-top{position:absolute;top:54px;left:0;right:0;padding:0 14px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.nf-top .lg{font-family:"Bebas Neue","Arial Narrow",Impact,sans-serif;font-size:32px;font-weight:900;color:var(--nf-red);letter-spacing:-3px;line-height:1;text-shadow:1px 0 0 var(--nf-red-dim)}
+.nf-top .acts{display:flex;gap:10px}
+.nf-top .acts svg{width:18px;height:18px;fill:#fff}
+.nf-cats{position:absolute;top:90px;left:0;right:0;padding:0 14px;display:flex;gap:8px;z-index:5;font-size:11.5px;font-weight:500;color:#fff}
+.nf-cats span{padding:4px 10px;border-radius:20px;border:1px solid #3a3a3a}
+.nf-hero{position:absolute;top:130px;left:14px;right:14px;aspect-ratio:2/3;border-radius:4px;background:linear-gradient(180deg,#0a1929 0%,#26133a 40%,#570a1a 100%);overflow:hidden;display:flex;align-items:flex-end;padding:14px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.nf-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(255,200,100,.18),transparent 50%),radial-gradient(circle at 30% 80%,rgba(229,9,20,.25),transparent 50%)}
+.nf-hero-inner{position:relative;z-index:1;width:100%}
+.nf-hero-title{font-family:"Bebas Neue","Arial Narrow",Impact,sans-serif;font-size:32px;font-weight:900;letter-spacing:-1px;line-height:.9;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6);margin-bottom:6px}
+.nf-hero-meta{display:flex;align-items:center;gap:6px;margin-bottom:8px;font-size:10.5px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.nf-hero-meta .match{color:#46d369;font-weight:700}
+.nf-hero-meta .yr{color:rgba(255,255,255,.85)}
+.nf-hero-tags{display:flex;gap:4px;margin-bottom:10px;font-size:10px;color:rgba(255,255,255,.85)}
+.nf-hero-tags span{padding:1px 5px;background:rgba(0,0,0,.4);border-radius:2px}
+.nf-hero-btns{display:flex;gap:6px}
+.nf-hero-btns .play{flex:1;background:#fff;color:#000;padding:6px 0;border-radius:4px;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:5px}
+.nf-hero-btns .play svg{width:11px;height:11px;fill:#000}
+.nf-hero-btns .list{flex:1;background:rgba(110,110,110,.6);color:#fff;padding:6px 0;border-radius:4px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px}
+.nf-hero-btns .list svg{width:11px;height:11px;stroke:#fff;fill:none}
+
+.nf-feed{position:absolute;top:430px;bottom:62px;left:0;right:0;overflow:hidden}
+.nf-sec{padding:6px 0 14px}
+.nf-sec-title{font-size:13px;font-weight:800;padding:0 14px;margin-bottom:6px;letter-spacing:-.3px}
+.nf-row{display:flex;gap:6px;overflow:hidden;padding:0 14px}
+.nf-tile{flex-shrink:0;width:78px;aspect-ratio:2/3;border-radius:4px;background:linear-gradient(135deg,#1a3a5a,#0a0e1a);position:relative;overflow:hidden}
+.nf-tile.t-prog::after{content:"";position:absolute;bottom:0;left:0;height:3px;width:60%;background:var(--nf-red)}
+.nf-tile.t1{background:linear-gradient(135deg,#570a1a,#1a0508)}
+.nf-tile.t2{background:linear-gradient(135deg,#0a3a5a,#021024)}
+.nf-tile.t3{background:linear-gradient(135deg,#3a0a5a,#0a0218)}
+.nf-tile.t4{background:linear-gradient(135deg,#5a3a0a,#1a1004)}
+.nf-tile.t5{background:linear-gradient(135deg,#0a5a3a,#021a10)}
+/* Top 10 row */
+.nf-top10{display:flex;gap:0;overflow:hidden;padding:0 14px;align-items:center}
+.nf-top10-item{display:flex;align-items:flex-end;flex-shrink:0;margin-right:-8px}
+.nf-top10-num{font-family:"Bebas Neue","Arial Narrow",Impact,sans-serif;font-size:90px;font-weight:900;line-height:.85;color:#000;-webkit-text-stroke:1.5px #4a4a4a;letter-spacing:-6px;margin-right:-12px;position:relative;z-index:1}
+.nf-top10-thumb{width:54px;aspect-ratio:2/3;border-radius:3px;background:linear-gradient(135deg,#570a1a,#1a0508);position:relative;z-index:2}
+
+/* tab bar */
+.nf-tab{position:absolute;bottom:0;left:0;right:0;height:62px;background:rgba(0,0,0,.95);display:flex;justify-content:space-around;align-items:flex-start;padding:8px 8px 0;z-index:10;border-top:1px solid #1a1a1a;backdrop-filter:blur(20px)}
+.nf-tab .tb{display:flex;flex-direction:column;align-items:center;gap:3px;color:#a3a3a3;font-size:9.5px;font-weight:500}
+.nf-tab .tb.active{color:#fff;font-weight:600}
+.nf-tab .tb svg{width:20px;height:20px;fill:currentColor}
+.nf-tab .tb .av{width:20px;height:20px;border-radius:3px;background:linear-gradient(135deg,#570a1a,#E50914)}
+
+/* ========== SCREEN: SEARCH ========== */
+.nf-search-top{position:absolute;top:50px;left:0;right:0;padding:6px 14px;z-index:5}
+.nf-search-input{display:flex;align-items:center;gap:8px;background:#2a2a2a;border-radius:4px;padding:8px 12px;font-size:13px;color:#a3a3a3}
+.nf-search-input svg{width:14px;height:14px;fill:#a3a3a3}
+.nf-search-title{padding:14px 14px 8px;font-size:15px;font-weight:800;position:absolute;top:96px;left:0;right:0;z-index:5}
+.nf-search-grid{position:absolute;top:140px;bottom:62px;left:0;right:0;padding:0 14px;overflow:hidden;display:flex;flex-direction:column;gap:4px}
+.nf-search-card{display:flex;background:#2a2a2a;border-radius:3px;overflow:hidden;height:64px}
+.nf-search-card .img{width:114px;height:100%;background:linear-gradient(135deg,#570a1a,#1a0508);flex-shrink:0;position:relative}
+.nf-search-card .img.s2{background:linear-gradient(135deg,#0a3a5a,#021024)}
+.nf-search-card .img.s3{background:linear-gradient(135deg,#3a0a5a,#0a0218)}
+.nf-search-card .img.s4{background:linear-gradient(135deg,#5a3a0a,#1a1004)}
+.nf-search-card .img.s5{background:linear-gradient(135deg,#0a5a3a,#021a10)}
+.nf-search-card .name{flex:1;padding:0 12px;display:flex;align-items:center;font-size:13px;font-weight:600;color:#fff}
+.nf-search-card .ic{padding-right:12px;display:grid;place-items:center}
+.nf-search-card .ic svg{width:24px;height:24px;fill:#fff}
+
+/* ========== SCREEN: PROFILES ========== */
+.nf-prof{position:absolute;inset:0;background:#000;display:flex;flex-direction:column}
+.nf-prof-top{padding:60px 0 0;text-align:center}
+.nf-prof-top h2{font-size:20px;font-weight:600;color:#fff;margin-bottom:36px}
+.nf-prof-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 36px}
+.nf-prof-card{display:flex;flex-direction:column;align-items:center;gap:10px}
+.nf-prof-avatar{width:84px;height:84px;border-radius:4px;background:linear-gradient(135deg,#facc15,#a16207);display:grid;place-items:center;color:#000;font-size:36px;font-weight:900}
+.nf-prof-avatar.p2{background:linear-gradient(135deg,#3b82f6,#1e3a8a);color:#fff}
+.nf-prof-avatar.p3{background:linear-gradient(135deg,#10b981,#022c1f);color:#fff}
+.nf-prof-avatar.p4{background:linear-gradient(135deg,#ef4444,#7f1d1d);color:#fff}
+.nf-prof-avatar.add{background:transparent;border:1.5px solid #737373;color:#737373;font-size:48px;font-weight:300}
+.nf-prof-name{font-size:13px;color:#a3a3a3;font-weight:500}
+.nf-prof-edit{margin-top:36px;text-align:center}
+.nf-prof-edit button{background:transparent;border:1px solid #737373;padding:8px 18px;border-radius:0;color:#a3a3a3;font-size:13px;font-weight:500}
+
+/* ========== FEATURES ========== */
+.section{padding:120px 0;border-top:1px solid var(--border-soft)}
+.section-eyebrow{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;color:var(--nf-red);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.4px;line-height:1.02;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:4px;padding:28px;border:1px solid var(--border-soft)}
+.feat:hover{background:var(--surface-2)}
+.feat .feat-ic{width:36px;height:36px;border-radius:4px;background:rgba(229,9,20,.18);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--nf-red)}
+.feat h3{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:rgba(255,255,255,.06);padding:1px 6px;border-radius:3px;color:var(--ink-soft)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:900;letter-spacing:-.8px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:5px 10px;border-radius:3px;color:var(--ink-soft);border:1px solid var(--border-soft)}
+.ios-feat-visual{background:var(--surface-1);border-radius:4px;padding:40px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* Top 10 anatomy */
+.top10-anat{display:flex;align-items:flex-end;gap:0}
+.top10-anat .big-num{font-family:"Bebas Neue","Arial Narrow",Impact,sans-serif;font-size:200px;font-weight:900;line-height:.85;color:#000;-webkit-text-stroke:3px #5a5a5a;letter-spacing:-12px;margin-right:-24px;position:relative;z-index:1}
+.top10-anat .big-thumb{width:120px;aspect-ratio:2/3;border-radius:4px;background:linear-gradient(135deg,#570a1a,#1a0508);position:relative;z-index:2;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.top10-anat .big-thumb::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(255,200,100,.18),transparent 50%)}
+
+/* download circle */
+.dl-stage{display:flex;flex-direction:column;align-items:center;gap:18px}
+.dl-ring{position:relative;width:80px;height:80px}
+.dl-ring svg{transform:rotate(-90deg)}
+.dl-ring circle{fill:none;stroke-width:6}
+.dl-ring .bg{stroke:#3a3a3a}
+.dl-ring .fg{stroke:var(--nf-red);stroke-dasharray:235;stroke-dashoffset:80;stroke-linecap:round}
+.dl-ring .pct{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:14px}
+.dl-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-align:center}
+
+/* profile switch */
+.ps-stage{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:300px}
+.ps-card{display:flex;flex-direction:column;align-items:center;gap:8px}
+.ps-card .av{width:66px;height:66px;border-radius:4px;display:grid;place-items:center;font-size:28px;font-weight:900;color:#000;transition:transform .25s}
+.ps-card.zoom .av{transform:scale(1.18)}
+.ps-card .nm{font-size:11px;color:var(--ink-muted)}
+
+/* ========== DS ========== */
+.ds-section{padding:120px 0;background:#0a0a0a;border-top:1px solid var(--border-soft)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border-soft);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.4px;line-height:1.02;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--nf-red);border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-md);white-space:nowrap}
+.ds-source:hover{background:var(--surface-2)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border-soft)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:var(--surface-1);border-radius:4px;padding:10px;border:1px solid var(--border-soft)}
+.ds-sw .chip{height:64px;border-radius:3px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border-soft);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+.ds-type-table td.token{color:var(--nf-red)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:#fff}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:var(--nf-red);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:var(--surface-1);border-radius:4px;padding:22px;border:1px solid var(--border-soft)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-pill{background:#2a2a2a;border:0;border-radius:4px;padding:11px 14px;color:#fff;font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:#a3a3a3}
+.tag{font-size:10.5px;font-weight:700;padding:3px 8px;letter-spacing:.4px;text-transform:uppercase}
+.tag-new{background:var(--nf-red);color:#fff}
+.tag-top10{background:#fff;color:#000}
+.tag-hd{background:transparent;color:#a3a3a3;border:1px solid #a3a3a3;padding:2px 7px}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:var(--surface-1);border-radius:4px;padding:18px;border:1px solid var(--border-soft)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:900;margin-top:6px;color:#fff;letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border-soft);background:#0a0a0a}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.5}
+.foot a{color:var(--nf-red);font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#000;border:1px solid var(--border);color:var(--nf-red);font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-md);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.float-link:hover{background:var(--surface-2)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"><span class="nletter">N</span></span>
+      Netflix <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Sign In</a>
+      <a class="btn btn-primary" href="#">Get Started</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>The black screen the world <span class="gradient-word">queues</span> up.</h1>
+    <p>Netflix's iOS app, dissected. Pure black canvas. A single Netflix Red. Artwork that carries its own title. And those impossible, page-tall numerals on Top 10.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- SEARCH -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="nf-search-top">
+              <div class="nf-search-input">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>
+                Search games, shows, movies
+              </div>
+            </div>
+            <div class="nf-search-title">Top Searches</div>
+            <div class="nf-search-grid">
+              <div class="nf-search-card"><div class="img"></div><div class="name">Stranger Things</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+              <div class="nf-search-card"><div class="img s2"></div><div class="name">The Crown</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+              <div class="nf-search-card"><div class="img s3"></div><div class="name">Wednesday</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+              <div class="nf-search-card"><div class="img s4"></div><div class="name">Breaking Bad</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+              <div class="nf-search-card"><div class="img s5"></div><div class="name">Squid Game</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+              <div class="nf-search-card"><div class="img"></div><div class="name">Money Heist</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="nf-tab">
+              <div class="tb"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><path d="M5 4l14 8-14 8z"/></svg>New & Hot</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tb active"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2"/></svg>My Netflix</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Search</div>
+      </div>
+
+      <!-- HOME (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="nf-home"></div>
+          <div class="scr">
+            <div class="nf-top">
+              <div class="lg">N</div>
+              <div class="acts">
+                <svg viewBox="0 0 24 24"><path d="M3 6h13v8H3zm17 1l-3 2v2l3 2V7z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M5 8l4 8 4-8 4 8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="1.8"/></svg>
+              </div>
+            </div>
+            <div class="nf-cats">
+              <span>TV Shows</span>
+              <span>Movies</span>
+              <span>Categories ▾</span>
+            </div>
+            <div class="nf-hero">
+              <div class="nf-hero-inner">
+                <div class="nf-hero-title">STRANGER<br/>THINGS</div>
+                <div class="nf-hero-meta"><span class="match">97% Match</span><span class="yr">· 2024 · TV-14</span></div>
+                <div class="nf-hero-tags"><span>Sci-Fi</span><span>Thriller</span><span>Mystery</span></div>
+                <div class="nf-hero-btns">
+                  <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Play</div>
+                  <div class="list"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.2"/></svg>My List</div>
+                </div>
+              </div>
+            </div>
+            <div class="nf-feed">
+              <div class="nf-sec">
+                <div class="nf-sec-title">Top 10 in your country</div>
+                <div class="nf-top10">
+                  <div class="nf-top10-item"><div class="nf-top10-num">1</div><div class="nf-top10-thumb"></div></div>
+                  <div class="nf-top10-item"><div class="nf-top10-num">2</div><div class="nf-top10-thumb" style="background:linear-gradient(135deg,#0a3a5a,#021024)"></div></div>
+                  <div class="nf-top10-item"><div class="nf-top10-num">3</div><div class="nf-top10-thumb" style="background:linear-gradient(135deg,#3a0a5a,#0a0218)"></div></div>
+                </div>
+              </div>
+              <div class="nf-sec">
+                <div class="nf-sec-title">Continue Watching</div>
+                <div class="nf-row">
+                  <div class="nf-tile t1 t-prog"></div>
+                  <div class="nf-tile t2 t-prog" style="--w:30%"></div>
+                  <div class="nf-tile t3 t-prog"></div>
+                  <div class="nf-tile t4 t-prog"></div>
+                </div>
+              </div>
+            </div>
+            <div class="nf-tab">
+              <div class="tb active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><path d="M5 4l14 8-14 8z"/></svg>New & Hot</div>
+              <div class="tb"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tb"><div class="av"></div>My Netflix</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Home</div>
+      </div>
+
+      <!-- PROFILES -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="nf-prof">
+            <div class="nf-prof-top">
+              <h2>Who's watching?</h2>
+            </div>
+            <div class="nf-prof-grid">
+              <div class="nf-prof-card">
+                <div class="nf-prof-avatar">J</div>
+                <div class="nf-prof-name">Jiang Shu</div>
+              </div>
+              <div class="nf-prof-card">
+                <div class="nf-prof-avatar p2">M</div>
+                <div class="nf-prof-name">Maya</div>
+              </div>
+              <div class="nf-prof-card">
+                <div class="nf-prof-avatar p3">K</div>
+                <div class="nf-prof-name">Kai</div>
+              </div>
+              <div class="nf-prof-card">
+                <div class="nf-prof-avatar add">+</div>
+                <div class="nf-prof-name">Add Profile</div>
+              </div>
+            </div>
+            <div class="nf-prof-edit">
+              <button>Edit Profiles</button>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Profiles</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. Pure black. One red.</h2>
+      <p>Every Netflix screen is a black void with artwork on it. There are no soft pills, no pastels, no warm grays. The chrome disappears so the poster can be the message.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>Home</h3>
+        <p>2:3 hero poster with title burned into the artwork. White Play and outlined My List buttons share width. Rows below hold Top 10 (with the giant numerals), Continue Watching (with red progress), and Trending.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg></div>
+        <h3>Search</h3>
+        <p>Single 4pt-radius input bar; below it a vertical stack of horizontal 16:9 cards with the artwork on the left and title text right-aligned to a play affordance.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2"/></svg></div>
+        <h3>Profile Picker</h3>
+        <p>4 square (84×84, 4pt radius) avatars in a 2-column grid plus a hollow "+ Add Profile" slot. Tapping fires a bouncy 1.0 → 1.18 → 1.0 zoom before the home screen loads.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Top 10 ranked card</div>
+          <h3>The numeral is the artwork.</h3>
+          <p>Each Top 10 cell is a 2:3 poster with a transparent <code>#000</code>-fill, <code>#5a5a5a</code>-stroked numeral planted to its left, scaled to <code>200px</code> in Bebas Neue style. The poster sits on top with a -24pt horizontal overlap.</p>
+          <p>The numeral never gets a fill color — it's always a hollow extrusion against the black canvas. The single most identifiable shape Netflix ever shipped.</p>
+          <div class="ios-feat-tokens">
+            <code>numeral: 200pt</code>
+            <code>stroke: 3pt #5A5A5A</code>
+            <code>poster: 2:3</code>
+            <code>overlap: -24pt</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="top10-anat">
+            <div class="big-num">1</div>
+            <div class="big-thumb"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="dl-stage">
+            <div class="dl-ring">
+              <svg width="80" height="80" viewBox="0 0 80 80">
+                <circle class="bg" cx="40" cy="40" r="37"/>
+                <circle class="fg" cx="40" cy="40" r="37"/>
+              </svg>
+              <div class="pct">65%</div>
+            </div>
+            <div class="dl-label">Downloading · 240MB / 370MB · Wi-Fi only</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Downloads</div>
+          <h3>The plane mode pact.</h3>
+          <p>Tapping the download glyph on a title turns it into a circular progress ring — <code>#3a3a3a</code> track, <code>#E50914</code> fill, 6pt stroke, animated from <code>strokeDashoffset</code>. When complete, the ring snaps to a filled red circle with a white check.</p>
+          <p>Downloads only resume on Wi-Fi unless the user explicitly toggles cellular. The completed state lives forever in the My Netflix → Downloads tab.</p>
+          <div class="ios-feat-tokens">
+            <code>ring: 80pt</code>
+            <code>stroke: 6pt</code>
+            <code>track: #3A3A3A</code>
+            <code>fill: #E50914</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Profile switch</div>
+          <h3>A bounce, then the curtain rises.</h3>
+          <p>Tap a profile avatar and Netflix runs a 0.25s spring scale (<code>1.0 → 1.18 → 1.0</code>) on the cell, then crossfades to the home screen with that profile's recommendations already loaded behind the splash.</p>
+          <p>This single bounce — paired with the iconic ta-dum — is Netflix's signature transition. It exists nowhere else in the app.</p>
+          <div class="ios-feat-tokens">
+            <code>scale: 1.18x</code>
+            <code>duration: 250ms</code>
+            <code>curve: spring</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="ps-stage">
+            <div class="ps-card zoom">
+              <div class="av" style="background:linear-gradient(135deg,#facc15,#a16207)">J</div>
+              <div class="nm">Jiang Shu</div>
+            </div>
+            <div class="ps-card">
+              <div class="av" style="background:linear-gradient(135deg,#3b82f6,#1e3a8a);color:#fff">M</div>
+              <div class="nm">Maya</div>
+            </div>
+            <div class="ps-card">
+              <div class="av" style="background:linear-gradient(135deg,#10b981,#022c1f);color:#fff">K</div>
+              <div class="nm">Kai</div>
+            </div>
+            <div class="ps-card">
+              <div class="av" style="background:transparent;border:1.5px solid #737373;color:#737373">+</div>
+              <div class="nm">Add</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The vocabulary of one red, one black.</h2>
+        <p>Netflix's iOS app token set: pure black canvas, the unrepentant <code>#E50914</code>, a strict gray ladder, and a 4pt corner radius that almost never bends.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.netflix-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A pure-black canvas, a single brand red, and a tight neutral ladder. No warm tones, no pastels, no soft pills — every color carries weight.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#E50914"></div><div class="name">Netflix Red</div><div class="val">#E50914</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#B00710"></div><div class="name">Red Dim</div><div class="val">#B00710</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000;border:1px solid #1a1a1a"></div><div class="name">True Black</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF"></div><div class="name">Pure White</div><div class="val">#FFFFFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#46d369"></div><div class="name">Match Green</div><div class="val">#46D369</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#fff"></div><div class="name">Ink</div><div class="val">#FFFFFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f5f5f5;border:1px solid #1a1a1a"></div><div class="name">Soft</div><div class="val">#F5F5F5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#a3a3a3"></div><div class="name">Muted</div><div class="val">#A3A3A3</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#737373"></div><div class="name">Dim</div><div class="val">#737373</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5a5a5a"></div><div class="name">Top 10 Stroke</div><div class="val">#5A5A5A</div></div>
+      </div>
+
+      <div class="ds-caption">Surface</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#141414;border:1px solid #2a2a2a"></div><div class="name">Surface 1</div><div class="val">#141414</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#181818;border:1px solid #2a2a2a"></div><div class="name">Surface 2</div><div class="val">#181818</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1f1f1f"></div><div class="name">Card</div><div class="val">#1F1F1F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#262626"></div><div class="name">Card Alt</div><div class="val">#262626</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#303030"></div><div class="name">Border</div><div class="val">#303030</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#E50914"></div><div class="name">Progress / CTA</div><div class="val">#E50914</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#46d369"></div><div class="name">% Match</div><div class="val">#46D369</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#54B9C5"></div><div class="name">Premium</div><div class="val">#54B9C5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(110,110,110,.6);border:1px solid #2a2a2a"></div><div class="name">My List Btn</div><div class="val">gray/.60</div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(0,0,0,.78);border:1px solid #2a2a2a"></div><div class="name">Tag Pill</div><div class="val">black/.78</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Netflix Sans in production — substituted with Inter. Heavy 800–900 for everything title-related; bodies stay at 400–500. Bebas Neue stands in for the iconic compressed title and Top 10 numerals.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--hero-title</td><td class="sample" style="font-family:'Bebas Neue','Arial Narrow',Impact,sans-serif;font-size:32px;font-weight:900;letter-spacing:-1px;line-height:.9">STRANGER THINGS</td><td>32 / 2.00rem</td><td>900 cmp</td><td>-1px</td></tr>
+          <tr><td class="token">--top10-numeral</td><td class="sample" style="font-family:'Bebas Neue','Arial Narrow',Impact,sans-serif;font-size:60px;font-weight:900;-webkit-text-stroke:2px #5a5a5a;color:transparent;letter-spacing:-4px;line-height:1">3</td><td>200 / 12.5rem</td><td>900 stroked</td><td>-12px</td></tr>
+          <tr><td class="token">--screen-title</td><td class="sample" style="font-size:20px;font-weight:800;letter-spacing:-.4px">Who's watching?</td><td>20 / 1.25rem</td><td>800</td><td>-0.4px</td></tr>
+          <tr><td class="token">--row-title</td><td class="sample" style="font-size:15px;font-weight:800;letter-spacing:-.3px">Top 10 in your country</td><td>15 / 0.94rem</td><td>800</td><td>-0.3px</td></tr>
+          <tr><td class="token">--btn-play</td><td class="sample" style="font-size:13px;font-weight:700;background:#fff;color:#000;padding:6px 14px;border-radius:4px;display:inline-block">▶ Play</td><td>13 / 0.81rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--meta-line</td><td class="sample" style="font-size:12px;color:#fff"><span style="color:#46d369;font-weight:700">97% Match</span> · 2024 · TV-14</td><td>12 / 0.75rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--tab-label</td><td class="sample" style="font-size:9.5px;font-weight:500;color:#a3a3a3">New & Hot</td><td>9.5 / 0.59rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--profile-name</td><td class="sample" style="font-size:13px;color:#a3a3a3;font-weight:500">Jiang Shu</td><td>13 / 0.81rem</td><td>500</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">4pt is the law. Thumbnails 4pt, buttons 4pt, search input 4pt, profile avatars 4pt. The only exceptions: 3pt on Top 10 tiles (tighter to read against the stroke), 50% on circular icons, and 38pt on the phone screen mask.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Square</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Tag</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:3px"></div><div class="ds-radius-label">Top10</div><div class="ds-radius-val">3px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Standard</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Modal</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Max</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:38px"></div><div class="ds-radius-label">Screen</div><div class="ds-radius-val">38px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Icon</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants Home, Search, Downloads, and the Profile picker agree on.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">4 tabs. Active tab is white + 600.</div></div>
+        <div class="token-cell"><div class="tk-label">Hero poster</div><div class="tk-val">2:3</div><div class="tk-note">Artwork-embedded title. 12pt internal padding.</div></div>
+        <div class="token-cell"><div class="tk-label">Top 10 numeral</div><div class="tk-val">200pt</div><div class="tk-note">Bebas Neue compressed. Hollow + 3pt stroke.</div></div>
+        <div class="token-cell"><div class="tk-label">Row tile width</div><div class="tk-val">78pt</div><div class="tk-note">2:3 ratio. 6pt horizontal gap.</div></div>
+        <div class="token-cell"><div class="tk-label">Progress bar</div><div class="tk-val">3pt</div><div class="tk-note">Continue Watching. Bottom edge, red fill.</div></div>
+        <div class="token-cell"><div class="tk-label">Avatar tile</div><div class="tk-val">84pt</div><div class="tk-note">Square, 4pt radius. 18pt grid gutter.</div></div>
+        <div class="token-cell"><div class="tk-label">Profile bounce</div><div class="tk-val">1.18x</div><div class="tk-note">Spring scale on tap, 250ms.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation curve</div><div class="tk-val">spring</div><div class="tk-note">damping .85, response .35.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Square corners, weighted typography, the white Play button as the brightest object on every screen.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-light" href="#"><svg width="11" height="11" viewBox="0 0 24 24" fill="#000"><path d="M8 5v14l11-7z"/></svg>Play</a>
+            <a class="btn btn-pill" href="#"><svg width="11" height="11" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.2"/></svg>My List</a>
+            <a class="btn btn-primary" href="#">Get Netflix</a>
+            <a class="btn btn-outline" href="#">Edit Profiles</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <div style="position:relative;width:42px;height:42px"><svg width="42" height="42" viewBox="0 0 42 42" style="transform:rotate(-90deg)"><circle cx="21" cy="21" r="18" fill="none" stroke="#3a3a3a" stroke-width="3"/><circle cx="21" cy="21" r="18" fill="none" stroke="#E50914" stroke-width="3" stroke-dasharray="113" stroke-dashoffset="40" stroke-linecap="round"/></svg></div>
+              <button style="width:36px;height:36px;border-radius:50%;background:#E50914;color:#fff;display:grid;place-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M5 12l5 5L20 7" stroke="#fff" stroke-width="3" fill="none"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search games, shows, movies" />
+            <input class="input-pill" placeholder="Enter PIN to switch profile" />
+            <div class="ds-card-row">
+              <span class="tag tag-new">New Episode</span>
+              <span class="tag tag-top10">#1 in TV</span>
+              <span class="tag tag-hd">4K UHD</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="width:100%;display:flex;background:#262626;border-radius:3px;overflow:hidden;height:60px">
+              <div style="width:100px;background:linear-gradient(135deg,#570a1a,#1a0508);flex-shrink:0"></div>
+              <div style="flex:1;padding:0 12px;display:flex;align-items:center;font-size:13px;font-weight:600">Stranger Things</div>
+              <div style="padding:0 12px;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div style="width:100%;aspect-ratio:2/3;max-width:120px;background:linear-gradient(180deg,#0a1929,#570a1a);border-radius:4px;position:relative;overflow:hidden">
+              <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:#E50914;width:60%"></div>
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Bebas Neue','Arial Narrow',Impact,sans-serif;font-weight:900;font-size:16px;text-align:center;line-height:.9">STRANGER<br/>THINGS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><span class="nletter">N</span></span>
+      Netflix iOS
+    </div>
+    <p>Design reference. Not affiliated with Netflix, Inc. Tokens are derived from the public iOS app and Netflix's published brand guidance. Source spec at <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.netflix-ios.html" target="_blank" rel="noopener">this reference</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.netflix-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.netflix-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

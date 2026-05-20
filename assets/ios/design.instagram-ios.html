@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Instagram — iOS design spec</title>
+<meta name="description" content="Instagram iOS app design reference. White canvas, signature gradient (#f09433 → #bc1888), Instagram Red likes, circular story rings, edge-to-edge media." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Grand+Hotel&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#ffffff; --canvas-soft:#fafafa;
+  --ink:#000000; --ink-2:#262626; --ink-soft:#737373; --ink-muted:#8e8e8e; --ink-dim:#c7c7c7;
+  --border:#dbdbdb; --border-soft:#efefef;
+  --like:#ED4956; --like-soft:#FF3040;
+  --link:#00376b; --link-bright:#0095F6;
+  --story-gradient:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+  --story-gradient-soft:linear-gradient(45deg,#fdc468 0%,#fe6cb7 100%);
+  --gradient-text:linear-gradient(120deg,#f09433,#dc2743 45%,#bc1888);
+  --shadow-card:0 1px 0 rgba(0,0,0,0.04);
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",helvetica,arial,sans-serif;
+  --font-logo:"Grand Hotel",cursive;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:6px; --r-lg:8px; --r-xl:12px; --r-2xl:20px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.2px}
+.brand-mark{width:30px;height:30px;border-radius:9px;background:var(--story-gradient);display:grid;place-items:center}
+.brand-mark svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2}
+.brand-logo{font-family:var(--font-logo);font-size:26px;font-weight:400;color:var(--ink);letter-spacing:.5px;line-height:1}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:600;color:var(--ink-soft)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:#f5f5f5}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s, opacity .15s}
+.btn:hover{opacity:.85}
+.btn-primary{background:var(--link-bright);color:#fff;padding:11px 22px;border-radius:8px}
+.btn-gradient{background:var(--story-gradient);color:#fff;padding:11px 22px;border-radius:8px}
+.btn-ghost{background:transparent;color:var(--ink);padding:11px 22px;border-radius:8px}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 20px;border-radius:8px}
+.btn-pill-light{background:#f5f5f5;color:var(--ink);padding:9px 16px;border-radius:8px}
+.btn-dark{background:var(--ink);color:#fff;padding:11px 22px;border-radius:8px}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-100px;left:-100px;width:600px;height:600px;background:var(--story-gradient);opacity:.08;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero::after{content:"";position:absolute;top:-150px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,#fdc468,transparent 70%);opacity:.4;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--r-pill);background:rgba(220,39,67,.10);color:#dc2743;font-size:12px;font-weight:600;letter-spacing:.5px;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--story-gradient)}
+.hero h1{font-size:clamp(44px,7vw,84px);line-height:1;letter-spacing:-2.6px;font-weight:800;margin-bottom:22px}
+.hero h1 .gradient-word{background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:560px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.08)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#fff}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.status-bar.dark{color:#fff}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+/* ===== SCREEN COMMON ===== */
+.scr{position:absolute;inset:0;color:var(--ink);display:flex;flex-direction:column;padding-top:52px;background:#fff}
+
+/* ===== SCREEN: FEED ===== */
+.feed-header{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 10px;border-bottom:1px solid var(--border-soft)}
+.feed-header .logo{font-family:var(--font-logo);font-size:24px;color:var(--ink);line-height:1}
+.feed-header .actions{display:flex;gap:16px}
+.feed-header .actions svg{width:22px;height:22px;stroke:var(--ink);stroke-width:1.8;fill:none}
+.feed-header .actions .heart{stroke:var(--ink)}
+.stories-tray{display:flex;gap:14px;padding:12px 14px;overflow:hidden;border-bottom:1px solid var(--border-soft)}
+.story{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0}
+.story .ring{width:56px;height:56px;border-radius:50%;padding:2px;background:var(--story-gradient);display:grid;place-items:center}
+.story .ring.viewed{background:#dbdbdb;padding:1.5px}
+.story .ring.own{background:#dbdbdb;padding:1.5px;position:relative}
+.story .ring.own::after{content:"+";position:absolute;bottom:-2px;right:-2px;width:18px;height:18px;background:var(--link-bright);color:#fff;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font-size:13px;font-weight:700;line-height:1}
+.story .av{width:100%;height:100%;border-radius:50%;border:2px solid #fff;background-size:cover;background-position:center}
+.story .name{font-size:10px;font-weight:500;max-width:60px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+/* avatar swatches */
+.av-1{background:linear-gradient(135deg,#ff6b35,#7a1f4a)}
+.av-2{background:linear-gradient(135deg,#0095F6,#073b4c)}
+.av-3{background:linear-gradient(135deg,#fdc468,#dc2743)}
+.av-4{background:linear-gradient(135deg,#06d6a0,#118ab2)}
+.av-5{background:linear-gradient(135deg,#bc1888,#3a0e0a)}
+.av-6{background:linear-gradient(135deg,#fdc468,#fe6cb7)}
+.av-7{background:linear-gradient(135deg,#264653,#e9c46a)}
+.av-8{background:linear-gradient(135deg,#a8dadc,#1d3557)}
+
+.post{border-bottom:1px solid var(--border-soft)}
+.post-head{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.post-head .ring{width:32px;height:32px;border-radius:50%;padding:1.5px;background:var(--story-gradient);display:grid;place-items:center;flex-shrink:0}
+.post-head .av{width:100%;height:100%;border-radius:50%;border:1.5px solid #fff}
+.post-head .meta{flex:1;min-width:0}
+.post-head .name{font-size:12px;font-weight:600;display:flex;align-items:center;gap:3px;line-height:1.1}
+.post-head .verified{width:11px;height:11px;fill:var(--link-bright)}
+.post-head .sub{font-size:10px;color:var(--ink-2);line-height:1.2}
+.post-head .more{padding:4px;cursor:pointer}
+.post-head .more svg{width:16px;height:16px;fill:var(--ink)}
+.post-image{width:100%;aspect-ratio:1;background-size:cover;background-position:center}
+.post-image.image-1{background:linear-gradient(135deg,#ff9e80 0%,#ff6b35 30%,#dc2743 70%,#7a1f4a 100%)}
+.post-image.image-2{background:linear-gradient(160deg,#fdc468 0%,#fe6cb7 50%,#bc1888 100%)}
+.post-actions{display:flex;justify-content:space-between;padding:10px 14px 6px}
+.post-actions .left{display:flex;gap:14px}
+.post-actions svg{width:22px;height:22px;stroke:var(--ink);stroke-width:1.8;fill:none}
+.post-actions .liked{fill:var(--like);stroke:var(--like)}
+.post-meta{padding:0 14px}
+.post-meta .likes{font-size:12px;font-weight:600;margin-bottom:4px}
+.post-meta .caption{font-size:12px;line-height:1.35}
+.post-meta .caption strong{font-weight:600;margin-right:4px}
+.post-meta .more-cap{color:var(--ink-muted);cursor:pointer}
+.post-meta .comments{font-size:11px;color:var(--ink-muted);margin-top:5px}
+.post-meta .time{font-size:9.5px;color:var(--ink-muted);margin-top:5px;text-transform:uppercase;padding-bottom:10px;letter-spacing:.2px}
+
+/* Tab bar (light) */
+.ig-tab{position:absolute;bottom:0;left:0;right:0;height:62px;background:#fff;display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--border-soft);z-index:10}
+.ig-tab .t{padding:10px;cursor:pointer}
+.ig-tab .t svg{width:24px;height:24px;stroke:var(--ink);stroke-width:1.8;fill:none}
+.ig-tab .t.active svg{fill:var(--ink)}
+.ig-tab .av-mini{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ink)}
+
+/* ===== SCREEN: REELS ===== */
+.scr-reels{background:#000;color:#fff}
+.reels-video{position:absolute;inset:0;background:linear-gradient(180deg,#dc2743 0%,#7a1f4a 50%,#220a14 100%)}
+.reels-video::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(0,0,0,0) 0%,rgba(0,0,0,0.45) 100%)}
+.reels-top{position:absolute;top:52px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;z-index:5}
+.reels-top .ttl{font-size:17px;font-weight:700;color:#fff}
+.reels-top svg{width:22px;height:22px;fill:#fff}
+.reels-side{position:absolute;right:10px;bottom:130px;display:flex;flex-direction:column;align-items:center;gap:20px;z-index:5}
+.reels-side .av-ring{width:42px;height:42px;border-radius:50%;padding:1.5px;background:var(--story-gradient);position:relative}
+.reels-side .av-ring .av{width:100%;height:100%;border-radius:50%;border:1.5px solid #000}
+.reels-side .av-ring .follow{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);background:var(--link-bright);color:#fff;border-radius:6px;font-size:8.5px;font-weight:700;padding:1px 5px;border:1.5px solid #000}
+.reels-side .ico-stack{display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff}
+.reels-side .ico-stack svg{width:26px;height:26px;fill:#fff;stroke:#fff;stroke-width:1.5}
+.reels-side .ico-stack svg.outline{fill:none}
+.reels-side .ico-stack .ct{font-size:11px;font-weight:600;line-height:1}
+.reels-side .audio-disc{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#fdc468,#dc2743);border:1.5px solid #fff;display:grid;place-items:center}
+.reels-side .audio-disc::after{content:"";width:7px;height:7px;border-radius:50%;background:#000}
+
+.reels-overlay{position:absolute;bottom:80px;left:0;right:80px;padding:14px 16px;z-index:5;color:#fff}
+.reels-overlay .user{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.reels-overlay .av-mini{width:28px;height:28px;border-radius:50%}
+.reels-overlay .uname{font-size:13px;font-weight:600;display:flex;align-items:center;gap:3px}
+.reels-overlay .verified{width:11px;height:11px;fill:var(--link-bright)}
+.reels-overlay .follow-btn{margin-left:6px;padding:4px 12px;border:1px solid #fff;border-radius:6px;background:transparent;color:#fff;font-size:11px;font-weight:600;cursor:pointer}
+.reels-overlay .cap{font-size:12px;line-height:1.35;margin-bottom:7px;max-width:200px}
+.reels-overlay .audio-row{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500}
+.reels-overlay .audio-row svg{width:11px;height:11px;fill:#fff}
+
+.ig-tab.dark{background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));border-top:0}
+.ig-tab.dark .t svg{stroke:#fff}
+.ig-tab.dark .t.active svg{fill:#fff;stroke:#fff}
+.ig-tab.dark .av-mini{border-color:#fff}
+
+/* ===== SCREEN: PROFILE ===== */
+.scr-prof{padding-top:52px;display:flex;flex-direction:column}
+.prof-header-bar{display:flex;align-items:center;justify-content:space-between;padding:6px 14px 12px}
+.prof-header-bar .pname{font-size:17px;font-weight:700;display:flex;align-items:center;gap:5px}
+.prof-header-bar .pname svg{width:14px;height:14px;fill:var(--ink);stroke:var(--ink);stroke-width:0}
+.prof-header-bar .pname-arrow{width:14px;height:14px;fill:var(--ink)}
+.prof-header-bar .actions{display:flex;gap:14px}
+.prof-header-bar .actions svg{width:22px;height:22px;stroke:var(--ink);stroke-width:1.8;fill:none}
+
+.prof-row{display:flex;align-items:center;gap:24px;padding:0 14px 12px}
+.prof-row .av-big{width:80px;height:80px;border-radius:50%;background:var(--av-1);border:2px solid #fff;flex-shrink:0;position:relative}
+.prof-row .av-big::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:var(--story-gradient);z-index:-1}
+.prof-row .av-big-wrap{position:relative;flex-shrink:0;display:inline-block}
+.prof-stats{display:flex;flex:1;justify-content:space-around;text-align:center}
+.prof-stats .n{font-size:16px;font-weight:700;line-height:1.1}
+.prof-stats .l{font-size:11px;color:var(--ink-2);margin-top:1px}
+
+.prof-bio{padding:0 14px 12px}
+.prof-bio .dname{font-size:12px;font-weight:600;line-height:1.3}
+.prof-bio .tag{font-size:11px;color:var(--ink-muted)}
+.prof-bio .desc{font-size:12px;line-height:1.35;margin-top:3px}
+.prof-bio .link{font-size:12px;color:var(--link);font-weight:600;margin-top:3px}
+
+.prof-actions{display:flex;gap:6px;padding:0 14px 12px}
+.prof-actions .a{flex:1;padding:7px 0;background:#efefef;border-radius:8px;font-size:12px;font-weight:600;text-align:center}
+.prof-actions .a.primary{background:var(--link-bright);color:#fff}
+
+.prof-highlights{display:flex;gap:14px;padding:8px 14px 14px;overflow:hidden}
+.prof-highlight{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0}
+.prof-highlight .ring{width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:#f5f5f5;display:grid;place-items:center}
+.prof-highlight .ring.add{font-size:24px;color:var(--ink-muted);font-weight:300}
+.prof-highlight .name{font-size:10px;font-weight:400}
+
+.prof-tabs{display:flex;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);padding:10px 0}
+.prof-tabs .pt{flex:1;display:grid;place-items:center;padding:6px 0}
+.prof-tabs .pt svg{width:20px;height:20px;stroke:var(--ink);stroke-width:1.8;fill:none}
+.prof-tabs .pt.active svg{stroke:var(--ink);fill:var(--ink)}
+
+.prof-grid{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px}
+.prof-grid .cell{aspect-ratio:1;background-size:cover;background-position:center}
+.grid-1{background:linear-gradient(135deg,#ff9e80,#dc2743)}
+.grid-2{background:linear-gradient(135deg,#fdc468,#fe6cb7)}
+.grid-3{background:linear-gradient(160deg,#06d6a0,#073b4c)}
+.grid-4{background:linear-gradient(160deg,#bc1888,#3a0e0a)}
+.grid-5{background:linear-gradient(135deg,#0095F6,#1d3557)}
+.grid-6{background:linear-gradient(135deg,#264653,#e9c46a)}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border-soft)}
+.section-eyebrow{font-size:12px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:800;letter-spacing:-1.4px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--canvas-soft);border-radius:12px;padding:28px;border:1px solid var(--border-soft)}
+.feat:hover{background:#f5f5f5}
+.feat .feat-ic{width:36px;height:36px;border-radius:9px;background:var(--story-gradient);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;stroke:#fff;stroke-width:2;fill:none}
+.feat h3{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-soft);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:#f0f0f0;padding:1px 6px;border-radius:3px;color:var(--ink-2)}
+
+/* iOS feat rows */
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:50px 0;border-top:1px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:5px 10px;border-radius:6px;color:var(--ink-2);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--canvas-soft);border-radius:14px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* Like burst visual */
+.like-burst{display:flex;flex-direction:column;align-items:center;gap:24px}
+.like-burst .row{display:flex;gap:24px;align-items:center}
+.like-cell{display:flex;flex-direction:column;align-items:center;gap:8px}
+.like-cell .icon-box{width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.like-cell .icon-box svg{width:30px;height:30px;stroke:var(--ink);stroke-width:1.8;fill:none}
+.like-cell .icon-box.tapped svg{fill:var(--like);stroke:var(--like);transform:scale(1.08)}
+.like-cell .label{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted)}
+
+/* Stories ring set */
+.ring-set{display:flex;flex-direction:column;align-items:center;gap:20px}
+.ring-row{display:flex;gap:18px;align-items:flex-end}
+.ring-demo{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ring-demo .r{width:60px;height:60px;border-radius:50%;padding:2.5px;display:grid;place-items:center}
+.ring-demo .r.unviewed{background:var(--story-gradient)}
+.ring-demo .r.viewed{background:#dbdbdb;padding:1.5px}
+.ring-demo .r.live{background:linear-gradient(45deg,#ff3040 0%,#dc2743 100%);padding:2.5px;position:relative}
+.ring-demo .r.live::after{content:"LIVE";position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);background:linear-gradient(45deg,#ff3040,#dc2743);color:#fff;font-size:8.5px;font-weight:800;padding:1px 5px;border-radius:3px;letter-spacing:.4px;border:1.5px solid #fff}
+.ring-demo .av{width:100%;height:100%;border-radius:50%;border:2px solid #fff}
+.ring-demo .l{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted)}
+
+/* Verified blue check anatomy */
+.verified-stack{display:flex;flex-direction:column;gap:14px;width:300px}
+.verified-row{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#fff;border-radius:10px;border:1px solid var(--border-soft);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.verified-row .av{width:36px;height:36px;border-radius:50%;flex-shrink:0}
+.verified-row .v-meta{flex:1;min-width:0}
+.verified-row .v-name{font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px}
+.verified-row .v-name svg{width:13px;height:13px;fill:var(--link-bright)}
+.verified-row .v-sub{font-size:11px;color:var(--ink-muted)}
+.verified-row .follow{padding:5px 12px;background:var(--link-bright);color:#fff;border-radius:6px;font-size:11px;font-weight:600;border:0;cursor:pointer}
+.verified-row .follow.following{background:#efefef;color:var(--ink)}
+
+/* ========== DESIGN SYSTEM (Part B) ========== */
+.ds-section{padding:120px 0;background:var(--canvas-soft);border-top:1px solid var(--border-soft)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1.4px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--ink-2);border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;background:#fff}
+.ds-source:hover{background:#fff;border-color:var(--ink-muted)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-soft);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:10px;padding:10px;border:1px solid var(--border-soft)}
+.ds-sw .chip{height:64px;border-radius:6px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-muted);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px;background:var(--canvas-soft)}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+.ds-type-table tr:last-child td{border-bottom:0}
+.ds-type-table td.token{color:#dc2743}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:var(--story-gradient);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:12px;padding:22px;border:1px solid var(--border-soft)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-light{background:#efefef;border:0;border-radius:8px;padding:10px 14px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-light::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:6px;letter-spacing:.2px}
+.tag-blue{background:rgba(0,149,246,.12);color:var(--link-bright)}
+.tag-red{background:rgba(237,73,86,.12);color:var(--like)}
+.tag-warm{background:rgba(220,39,67,.10);color:#dc2743}
+
+/* iOS-specific token strip */
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:8px;padding:18px;border:1px solid var(--border-soft)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:var(--ink);letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-soft);margin-top:6px;line-height:1.4}
+
+/* ========== FOOTER ========== */
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-soft);line-height:1.5}
+.foot a{color:#dc2743;font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#fff;border:1px solid var(--border);color:#dc2743;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.float-link:hover{background:#f5f5f5}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+      </span>
+      <span class="brand-logo">Instagram</span>
+      <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px;align-self:flex-end;padding-bottom:5px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#">Log In</a>
+      <a class="btn btn-primary" href="#">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Media first.<br/>Chrome <span class="gradient-word">last.</span></h1>
+    <p>The Instagram iOS app, dissected. White canvas, black ink, one signature gradient. Photography is the protagonist — the interface stays out of its way.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gradient" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- REELS -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="reels-video"></div>
+          <div class="status-bar dark">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/></svg>
+            </div>
+          </div>
+
+          <div class="reels-top">
+            <div class="ttl">Reels</div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 6l-3 6h6l-3 6M5 12h2M17 12h2"/></svg>
+          </div>
+
+          <div class="reels-side">
+            <div class="av-ring"><div class="av av-3"></div><span class="follow">+</span></div>
+            <div class="ico-stack">
+              <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+              <span class="ct">218k</span>
+            </div>
+            <div class="ico-stack">
+              <svg class="outline" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#fff" stroke-width="1.8" fill="none"/></svg>
+              <span class="ct">3,402</span>
+            </div>
+            <div class="ico-stack">
+              <svg class="outline" viewBox="0 0 24 24"><path d="M4 12L20 4l-4 16-4-7-8-1z" stroke="#fff" stroke-width="1.8" fill="none"/></svg>
+              <span class="ct">1.1k</span>
+            </div>
+            <div class="ico-stack">
+              <svg class="outline" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2" fill="#fff"/><circle cx="12" cy="12" r="2" fill="#fff"/><circle cx="19" cy="12" r="2" fill="#fff"/></svg>
+            </div>
+            <div class="audio-disc"></div>
+          </div>
+
+          <div class="reels-overlay">
+            <div class="user">
+              <div class="av-mini av-3"></div>
+              <span class="uname">sunsetstudio<svg class="verified" viewBox="0 0 24 24"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg></span>
+              <button class="follow-btn">Follow</button>
+            </div>
+            <div class="cap">When the golden hour hits at exactly the right second 🌅 #goldenhour #cinematic</div>
+            <div class="audio-row">
+              <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12-2a3 3 0 11-6 0 3 3 0 016 0z" stroke="#fff" stroke-width="1.8" fill="none"/></svg>
+              <span>sunsetstudio · Original audio</span>
+            </div>
+          </div>
+
+          <div class="ig-tab dark">
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/></svg></div>
+            <div class="t active"><svg viewBox="0 0 24 24" fill="#fff" stroke="#fff"><polygon points="22 12 16 5 16 19"/><rect x="2" y="5" width="14" height="14" rx="2" fill="none"/></svg></div>
+            <div class="t"><div class="av-mini"></div></div>
+          </div>
+        </div>
+        <div class="iphone-label">Reels</div>
+      </div>
+
+      <!-- FEED (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="feed-header">
+              <span class="logo">Instagram</span>
+              <div class="actions">
+                <svg viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+            </div>
+
+            <div class="stories-tray">
+              <div class="story">
+                <div class="ring own"><div class="av av-3"></div></div>
+                <div class="name">Your story</div>
+              </div>
+              <div class="story">
+                <div class="ring"><div class="av av-1"></div></div>
+                <div class="name">marie_kn</div>
+              </div>
+              <div class="story">
+                <div class="ring"><div class="av av-4"></div></div>
+                <div class="name">jane.doe</div>
+              </div>
+              <div class="story">
+                <div class="ring viewed"><div class="av av-5"></div></div>
+                <div class="name">_alex.r</div>
+              </div>
+              <div class="story">
+                <div class="ring"><div class="av av-7"></div></div>
+                <div class="name">nikodi</div>
+              </div>
+            </div>
+
+            <div class="post">
+              <div class="post-head">
+                <div class="ring"><div class="av av-1"></div></div>
+                <div class="meta">
+                  <div class="name">marie_kn<svg class="verified" viewBox="0 0 24 24"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg></div>
+                  <div class="sub">Lisbon, Portugal</div>
+                </div>
+                <div class="more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
+              </div>
+              <div class="post-image image-1"></div>
+              <div class="post-actions">
+                <div class="left">
+                  <svg class="liked" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M4 12L20 4l-4 16-4-7-8-1z"/></svg>
+                </div>
+                <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </div>
+              <div class="post-meta">
+                <div class="likes">12,482 likes</div>
+                <div class="caption"><strong>marie_kn</strong>Magic hour over the Tagus 🌅 <span class="more-cap">more</span></div>
+                <div class="comments">View all 218 comments</div>
+                <div class="time">2 HOURS AGO</div>
+              </div>
+            </div>
+          </div>
+          <div class="ig-tab">
+            <div class="t active"><svg viewBox="0 0 24 24" fill="#000"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><polygon points="22 12 16 5 16 19"/><rect x="2" y="5" width="14" height="14" rx="2"/></svg></div>
+            <div class="t"><div class="av-mini av-3" style="background:linear-gradient(135deg,#fdc468,#dc2743)"></div></div>
+          </div>
+        </div>
+        <div class="iphone-label">Feed</div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-prof">
+            <div class="prof-header-bar">
+              <div class="pname"><span style="border:1px solid var(--border);border-radius:4px;font-size:9px;padding:1px 4px;font-weight:600;margin-right:3px">🔒</span>jiang.shu <svg class="pname-arrow" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="actions">
+                <svg viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+              </div>
+            </div>
+
+            <div class="prof-row">
+              <div class="av-big-wrap">
+                <div class="av-big" style="background:linear-gradient(135deg,#fdc468,#dc2743)"></div>
+              </div>
+              <div class="prof-stats">
+                <div><div class="n">142</div><div class="l">posts</div></div>
+                <div><div class="n">8,402</div><div class="l">followers</div></div>
+                <div><div class="n">312</div><div class="l">following</div></div>
+              </div>
+            </div>
+
+            <div class="prof-bio">
+              <div class="dname">Jiang Shu · 江树</div>
+              <div class="tag">Writer · Designer</div>
+              <div class="desc">Building things that respect the reader's time. Lisbon → Tokyo.</div>
+              <div class="link">yzfly.com</div>
+            </div>
+
+            <div class="prof-actions">
+              <div class="a primary">Follow</div>
+              <div class="a">Message</div>
+              <div class="a" style="flex:0 0 36px"><svg width="14" height="14" viewBox="0 0 24 24" style="margin:auto;stroke:#000;stroke-width:2;fill:none"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm14-3v6m-3-3h6"/></svg></div>
+            </div>
+
+            <div class="prof-highlights">
+              <div class="prof-highlight"><div class="ring add">+</div><div class="name">New</div></div>
+              <div class="prof-highlight"><div class="ring" style="background:var(--grid-2);background:linear-gradient(135deg,#fdc468,#fe6cb7)"></div><div class="name">2024</div></div>
+              <div class="prof-highlight"><div class="ring" style="background:linear-gradient(135deg,#06d6a0,#073b4c)"></div><div class="name">Tokyo</div></div>
+              <div class="prof-highlight"><div class="ring" style="background:linear-gradient(135deg,#bc1888,#3a0e0a)"></div><div class="name">Books</div></div>
+            </div>
+
+            <div class="prof-tabs">
+              <div class="pt active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6"/><rect x="11" y="3" width="6" height="6"/><rect x="3" y="11" width="6" height="6"/><rect x="11" y="11" width="6" height="6"/></svg></div>
+              <div class="pt"><svg viewBox="0 0 24 24"><polygon points="22 12 16 5 16 19"/><rect x="2" y="5" width="14" height="14" rx="2"/></svg></div>
+              <div class="pt"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z"/></svg></div>
+            </div>
+
+            <div class="prof-grid">
+              <div class="cell grid-1"></div>
+              <div class="cell grid-2"></div>
+              <div class="cell grid-3"></div>
+              <div class="cell grid-4"></div>
+              <div class="cell grid-5"></div>
+              <div class="cell grid-6"></div>
+              <div class="cell grid-1"></div>
+              <div class="cell grid-3"></div>
+              <div class="cell grid-2"></div>
+            </div>
+          </div>
+          <div class="ig-tab">
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><polygon points="22 12 16 5 16 19"/><rect x="2" y="5" width="14" height="14" rx="2"/></svg></div>
+            <div class="t active"><div class="av-mini" style="background:linear-gradient(135deg,#fdc468,#dc2743);border-color:#000;border-width:2px"></div></div>
+          </div>
+        </div>
+        <div class="iphone-label">Profile</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One gradient that signs the work.</h2>
+      <p>Instagram's app puts photography in the spotlight by reducing the interface to a vocabulary of three things: white space, black ink, and one signature gradient reserved for story rings, brand logo, and creative CTAs.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>Feed</h3>
+        <p>Header logo in Billabong script. Stories tray scrolls horizontally, gradient ring on unviewed, gray on viewed. Posts are edge-to-edge media with a slim metadata strip. The like heart is the only red on the screen — <code>#ED4956</code>.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><polygon points="22 12 16 5 16 19"/><rect x="2" y="5" width="14" height="14" rx="2"/></svg></div>
+        <h3>Reels</h3>
+        <p>Full-screen 9:16 video. All chrome lives in two corridors: a right-side action stack and a left-bottom metadata overlay. Tab bar fades into a dark gradient so it never competes with the footage.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+        <h3>Profile</h3>
+        <p>Avatar with optional gradient ring (if active story). Three-column grid of square thumbnails, 2px gutter. Highlights tray sits between bio and tabs — circular covers, single-word names, lowercase.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Story Rings</div>
+          <h3>One ring, three states, one mood.</h3>
+          <p>The story ring is Instagram's most recognizable component. Unviewed wears the brand gradient (45°, five stops). Viewed drops to a single gray. Live swaps to a red gradient with a "LIVE" pill anchored at the bottom edge.</p>
+          <p>Ring stroke = 2.5pt. Avatar always carries a 2pt white border between itself and the ring so the gradient doesn't bleed onto skin.</p>
+          <div class="ios-feat-tokens">
+            <code>angle: 45°</code>
+            <code>stops: 5</code>
+            <code>stroke: 2.5pt</code>
+            <code>inner border: 2pt #fff</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="ring-set">
+            <div class="ring-row">
+              <div class="ring-demo">
+                <div class="r unviewed"><div class="av av-1"></div></div>
+                <div class="l">unviewed</div>
+              </div>
+              <div class="ring-demo">
+                <div class="r viewed"><div class="av av-4"></div></div>
+                <div class="l">viewed</div>
+              </div>
+              <div class="ring-demo">
+                <div class="r live"><div class="av av-5"></div></div>
+                <div class="l">live</div>
+              </div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-align:center;line-height:1.5">linear-gradient(45deg, #f09433, #e6683c,<br/>#dc2743, #cc2366, #bc1888)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="like-burst">
+            <div class="row">
+              <div class="like-cell">
+                <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+                <div class="label">resting</div>
+              </div>
+              <svg width="32" height="20" viewBox="0 0 32 20" fill="none" stroke="var(--ink-muted)" stroke-width="1.5"><path d="M0 10h28m-4-4l4 4-4 4"/></svg>
+              <div class="like-cell">
+                <div class="icon-box tapped"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+                <div class="label">tapped</div>
+              </div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-align:center;line-height:1.5;max-width:260px">Spring(.55, 0.65) scale 1 → 1.2 → 1<br/>Stroke→fill in 180ms · selection haptic</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Like animation</div>
+          <h3>A heart that flexes when it changes its mind.</h3>
+          <p>The like button has one job: communicate that the tap registered. Tap fills the heart with <code>#ED4956</code> over 180ms, scales 1 → 1.2 → 1 on a spring curve, fires a selection haptic, and bumps the like count.</p>
+          <p>Double-tap on the image fires the same animation plus a centered burst overlay (white heart, 80pt, fades 0.4s).</p>
+          <div class="ios-feat-tokens">
+            <code>fill: #ED4956</code>
+            <code>scale: 1.2x</code>
+            <code>spring: 0.55, 0.65</code>
+            <code>haptic: selection</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Verified Badge</div>
+          <h3>Blue means the account is who it says it is.</h3>
+          <p>The verified check is a single SVG glyph — saw-toothed circle with an embedded check — rendered in <code>#0095F6</code>. It sits inline with the username, 1pt of negative space between glyph baseline and the username's x-height.</p>
+          <p>The badge never resizes relative to the username; it scales with the text token. Never tinted, never outlined, never gray.</p>
+          <div class="ios-feat-tokens">
+            <code>color: #0095F6</code>
+            <code>size: 14×14 (next to 14pt name)</code>
+            <code>position: inline-baseline</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="verified-stack">
+            <div class="verified-row">
+              <div class="av av-1"></div>
+              <div class="v-meta">
+                <div class="v-name">marie_kn <svg viewBox="0 0 24 24"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg></div>
+                <div class="v-sub">Marie · Photographer</div>
+              </div>
+              <button class="follow">Follow</button>
+            </div>
+            <div class="verified-row">
+              <div class="av av-4"></div>
+              <div class="v-meta">
+                <div class="v-name">jane.doe <svg viewBox="0 0 24 24"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg></div>
+                <div class="v-sub">Followed by you</div>
+              </div>
+              <button class="follow following">Following</button>
+            </div>
+            <div class="verified-row">
+              <div class="av av-7"></div>
+              <div class="v-meta">
+                <div class="v-name">nikodi</div>
+                <div class="v-sub">Suggested for you</div>
+              </div>
+              <button class="follow">Follow</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>White, black, and one famous gradient.</h2>
+        <p>Every token Instagram's iOS app reaches for — surface ladder, type ramp, radius scale, components. The brand gradient is reserved real estate; everything else is monochromatic so the photography can speak.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.instagram-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A monochromatic chassis (white → black through five grays) holds the brand gradient in five sacred places: app logo, story ring, primary CTA on creator surfaces, the like burst, the verified check.</p>
+
+      <div class="ds-caption">Brand Gradient (5 stops)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#f09433"></div><div class="name">Sun</div><div class="val">#f09433</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e6683c"></div><div class="name">Coral</div><div class="val">#e6683c</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#dc2743"></div><div class="name">Crimson</div><div class="val">#dc2743</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#cc2366"></div><div class="name">Magenta</div><div class="val">#cc2366</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#bc1888"></div><div class="name">Plum</div><div class="val">#bc1888</div></div>
+      </div>
+
+      <div class="ds-caption">Ink (text + icon)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Ink Primary</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#262626"></div><div class="name">Ink 2</div><div class="val">#262626</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#737373"></div><div class="name">Ink Soft</div><div class="val">#737373</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8e8e8e"></div><div class="name">Ink Muted</div><div class="val">#8e8e8e</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#c7c7c7"></div><div class="name">Ink Dim</div><div class="val">#c7c7c7</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #efefef"></div><div class="name">Canvas</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fafafa;border:1px solid #efefef"></div><div class="name">Canvas Soft</div><div class="val">#fafafa</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#efefef"></div><div class="name">Surface 2</div><div class="val">#efefef</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#dbdbdb"></div><div class="name">Border</div><div class="val">#dbdbdb</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#efefef"></div><div class="name">Border Soft</div><div class="val">#efefef</div></div>
+      </div>
+
+      <div class="ds-caption">Functional</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ED4956"></div><div class="name">Like Red</div><div class="val">#ED4956</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF3040"></div><div class="name">Live Red</div><div class="val">#FF3040</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0095F6"></div><div class="name">Action Blue</div><div class="val">#0095F6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#00376b"></div><div class="name">Link Blue</div><div class="val">#00376b</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFDC80"></div><div class="name">Story Highlight</div><div class="val">#FFDC80</div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">SF Pro Text on iOS (substituted with Inter here). The Instagram wordmark uses a custom Billabong-derived script (substituted with Grand Hotel). Everything else is system — usernames in SemiBold 14, captions in Regular 14, metadata in Regular 12 with all-caps timestamps.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--logo</td><td class="sample" style="font-family:var(--font-logo);font-size:28px;line-height:1">Instagram</td><td>28 (display)</td><td>Script</td><td>+0.5px</td></tr>
+          <tr><td class="token">--screen-title</td><td class="sample" style="font-size:17px;font-weight:700">Reels</td><td>17 / 1.06rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--username</td><td class="sample" style="font-size:14px;font-weight:600">marie_kn</td><td>14 / 0.88rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--caption</td><td class="sample" style="font-size:14px;font-weight:400"><strong style="font-weight:600">marie_kn</strong> Magic hour over the Tagus 🌅</td><td>14 / 0.88rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--meta</td><td class="sample" style="font-size:12px;font-weight:400;color:#737373">View all 218 comments</td><td>12 / 0.75rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--timestamp</td><td class="sample" style="font-size:10px;font-weight:400;color:#8e8e8e;text-transform:uppercase;letter-spacing:.2px">2 HOURS AGO</td><td>10 / 0.63rem</td><td>400</td><td>0.2px UPPER</td></tr>
+          <tr><td class="token">--button</td><td class="sample" style="font-size:14px;font-weight:600;color:#0095F6">Follow</td><td>14 / 0.88rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--story-name</td><td class="sample" style="font-size:11px;font-weight:400">Your story</td><td>11 / 0.69rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--bio</td><td class="sample" style="font-size:12px;font-weight:400">Writer · Designer · Lisbon</td><td>12 / 0.75rem</td><td>400</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Square media (photos and grid thumbnails sit at 0 radius — Instagram trusts the medium). Buttons land at 8px. Story rings, avatars, and reaction discs are all perfectly circular (50%). The brand mark itself is the only "soft square" — 9px on a 30px icon.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Media</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Min</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Tag</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9px"></div><div class="ds-radius-label">App Icon</div><div class="ds-radius-val">9px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:38px"></div><div class="ds-radius-label">Sheet</div><div class="ds-radius-val">38px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Avatar</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- iOS Spec Strip -->
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Story ring stroke</div><div class="tk-val">2.5pt</div><div class="tk-note">Gradient on unviewed, single gray on viewed.</div></div>
+        <div class="token-cell"><div class="tk-label">Story avatar</div><div class="tk-val">56pt</div><div class="tk-note">Plus 2pt white inner border, plus 2.5pt ring = 65pt total.</div></div>
+        <div class="token-cell"><div class="tk-label">Feed post artwork</div><div class="tk-val">1:1</div><div class="tk-note">Edge-to-edge. 4:5 portrait is allowed; 9:16 routes to Reels.</div></div>
+        <div class="token-cell"><div class="tk-label">Profile grid gutter</div><div class="tk-val">2pt</div><div class="tk-note">3 columns, no inset. Single-pixel separator on legacy.</div></div>
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">5 icons + 34pt home indicator safe area.</div></div>
+        <div class="token-cell"><div class="tk-label">Action icon stroke</div><div class="tk-val">1.8pt</div><div class="tk-note">Outlined glyphs throughout. Fills only on tap states.</div></div>
+        <div class="token-cell"><div class="tk-label">Like burst overlay</div><div class="tk-val">80pt</div><div class="tk-note">Centered, 0.4s fade. Double-tap only.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation curve</div><div class="tk-val">spring</div><div class="tk-note">0.55 response, 0.65 damping. iOS UIView.animate(.spring).</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Outlined glyphs that turn solid on tap. Pills that wear black for primary, blue for follow, gray for secondary, gradient for creator surfaces.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Follow</a>
+            <a class="btn btn-dark" href="#">Get Started</a>
+            <a class="btn btn-gradient" href="#">Create Reel</a>
+            <a class="btn btn-pill-light" href="#">Following</a>
+            <a class="btn btn-outline" href="#">Message</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-light" placeholder="Search" />
+            <input class="input-light" placeholder="Add a comment for marie_kn..." />
+            <div class="ds-card-row">
+              <span class="tag tag-warm">#goldenhour</span>
+              <span class="tag tag-blue">@jane.doe</span>
+              <span class="tag tag-red">Liked</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#fff;border:1px solid var(--border-soft);border-radius:14px;padding:14px;width:100%;display:flex;gap:10px;align-items:center">
+              <div class="ring" style="width:42px;height:42px;border-radius:50%;padding:1.5px;background:var(--story-gradient);display:grid;place-items:center;flex-shrink:0"><div class="av av-1" style="width:100%;height:100%;border-radius:50%;border:1.5px solid #fff"></div></div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:600;display:flex;gap:4px;align-items:center">marie_kn <svg width="11" height="11" viewBox="0 0 24 24" fill="#0095F6"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg></div>
+                <div style="font-size:11px;color:#737373">Followed by jane.doe</div>
+              </div>
+              <button class="btn btn-primary" style="padding:5px 12px;font-size:11px">Follow</button>
+            </div>
+            <div style="background:#fff;border:1px solid var(--border-soft);border-radius:14px;padding:14px;width:100%">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+                <span style="font-size:12px;font-weight:600">Suggestions for you</span>
+                <span style="font-size:11px;color:#0095F6;font-weight:600">See All</span>
+              </div>
+              <div style="display:flex;gap:8px">
+                <div class="av av-4" style="width:36px;height:36px;border-radius:50%"></div>
+                <div class="av av-5" style="width:36px;height:36px;border-radius:50%"></div>
+                <div class="av av-7" style="width:36px;height:36px;border-radius:50%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg></span>
+      <span class="brand-logo">Instagram</span>
+      <span style="font-weight:500;color:var(--ink-muted);font-size:13px;align-self:flex-end;padding-bottom:5px">iOS</span>
+    </div>
+    <p>Design reference. Not affiliated with Meta Platforms, Inc. Token values are derived from the public iOS app and Instagram's published brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.instagram-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill-light" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.instagram-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.instagram-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mistral AI — Inspired Design</title>
+<meta name="description" content="A Mistral AI-inspired marketing page and design-system reference: atmospheric sunset gradient hero, cream-yellow surfaces, near-serif display, signature sunset stripe band. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  /* Sunset spectrum */
+  --primary: #fa520f;
+  --primary-deep: #cc3a05;
+  --on-primary: #ffffff;
+  --sun-300: #ffd06a;
+  --sun-500: #ffb83e;
+  --sun-700: #ffa110;
+  --sun-800: #ff8105;
+  --sun-900: #ff8a00;
+  --yellow-sat: #ffd900;
+  /* Cream */
+  --cream: #fff8e0;
+  --cream-light: #fffaeb;
+  --cream-deeper: #fff0c2;
+  --beige-deep: #e6d5a8;
+  /* Text */
+  --ink: #1f1f1f;
+  --ink-tint: #3d3d3d;
+  --charcoal: #2c2c2c;
+  --slate: #4a4a4a;
+  --steel: #6a6a6a;
+  --stone: #8a8a8a;
+  --muted: #a8a8a8;
+  /* Surface */
+  --canvas: #ffffff;
+  --surface: #fafafa;
+  --hairline: #e5e5e5;
+  --hairline-soft: #ededed;
+  --hairline-strong: #c7c7c7;
+  --surface-code: #1c1c1e;
+  --on-dark: #ffffff;
+  --link: #fa520f;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, "Helvetica Neue", Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: -0.16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(250,82,15,0.22); }
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+.editorial { font-family: "DM Serif Display", "PP Editorial Old", "Times New Roman", Georgia, serif; font-weight: 400; }
+
+/* Layout */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* Promo banner */
+.promo {
+  background: var(--ink);
+  color: var(--on-dark);
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px; font-weight: 500;
+}
+.promo a { color: var(--on-dark); text-decoration: underline; text-underline-offset: 3px; margin-left: 10px; }
+
+/* Nav */
+.topnav {
+  height: 64px;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline-soft);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 28px; font-size: 14px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 500; color: var(--ink); font-size: 15px;
+}
+.brand-mark {
+  display: inline-block; width: 28px; height: 22px;
+  background: linear-gradient(180deg, var(--sun-300) 0%, var(--sun-700) 50%, var(--primary) 100%);
+  border-radius: 3px;
+  position: relative;
+}
+.brand-mark::after {
+  content: ""; position: absolute; left: 2px; right: 2px; top: 2px; bottom: 2px;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--sun-500) 60%, var(--primary-deep) 100%);
+  border-radius: 2px;
+}
+.brand-wm { letter-spacing: 0.5px; font-weight: 500; }
+.brand-wm::after { content: "_"; color: var(--primary); }
+.nav-links { display: flex; align-items: center; gap: 24px; color: var(--ink); font-size: 14px; }
+.nav-links a:hover { color: var(--primary); }
+.spacer { flex: 1; }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+.contact-sales { color: var(--ink); font-size: 14px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 14px; font-weight: 500; line-height: 1.3;
+  padding: 12px 22px; border-radius: 8px; border: 1px solid transparent;
+  cursor: pointer; transition: opacity 120ms, background 120ms;
+  font-family: inherit;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-deep); }
+.btn-dark { background: var(--ink); color: var(--on-dark); }
+.btn-cream { background: var(--cream); color: var(--ink); border-color: var(--beige-deep); }
+.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--hairline-strong); }
+.btn-on-cream { background: var(--canvas); color: var(--ink); border-color: var(--beige-deep); }
+.btn-link {
+  background: transparent; color: var(--primary); padding: 0;
+  font-size: 14px; font-weight: 500;
+  border: 0;
+}
+.btn-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Hero */
+.hero {
+  position: relative;
+  padding: 96px 0 120px;
+  background:
+    radial-gradient(120% 100% at 80% 30%, rgba(255,184,62,0.55) 0%, transparent 60%),
+    radial-gradient(80% 90% at 95% 80%, rgba(250,82,15,0.42) 0%, transparent 65%),
+    linear-gradient(180deg, var(--cream-light) 0%, var(--cream) 100%);
+  overflow: hidden;
+}
+.hero::after {
+  content: ""; position: absolute; right: 0; bottom: 0; width: 60%; height: 70%;
+  background:
+    radial-gradient(40% 60% at 80% 100%, rgba(28,28,30,0.32) 0%, transparent 65%),
+    radial-gradient(50% 80% at 70% 100%, rgba(204,58,5,0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px;
+  align-items: center;
+}
+.eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink-tint);
+}
+.h-hero {
+  font-size: 84px; line-height: 1.05; letter-spacing: -1.5px;
+  margin: 20px 0 24px;
+  color: var(--ink);
+}
+.h-hero em { font-style: italic; color: var(--primary-deep); }
+.h-sub {
+  font-size: 18px; line-height: 1.5; color: var(--ink-tint);
+  max-width: 52ch; margin: 0 0 32px;
+}
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+/* Mountain illustration */
+.mountain {
+  position: relative;
+  width: 100%; aspect-ratio: 5 / 6;
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #ffd06a 0%, #ffb83e 25%, #ff8105 55%, #cc3a05 78%, #5a1a0f 100%);
+  box-shadow: 0 20px 60px rgba(204,58,5,0.32);
+}
+.mountain::before {
+  content: ""; position: absolute; top: 18%; right: 12%;
+  width: 90px; height: 90px; border-radius: 50%;
+  background: radial-gradient(circle, #ffe9a8 0%, #ffd06a 40%, transparent 80%);
+  filter: blur(0.5px);
+}
+.peak {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+  background:
+    /* far ridge */
+    linear-gradient(180deg, transparent 55%, #3d1f10 56%, #2a1208 100%) no-repeat;
+}
+.peak::before, .peak::after {
+  content: ""; position: absolute; bottom: 0;
+  background: linear-gradient(180deg, #5a1a0f 0%, #1a0805 100%);
+}
+.peak::before {
+  width: 0; height: 0;
+  left: 5%;
+  border-left: 200px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 200px solid #2a1208;
+}
+.peak::after {
+  width: 0; height: 0;
+  right: 0%;
+  border-left: 160px solid transparent;
+  border-right: 240px solid transparent;
+  border-bottom: 280px solid #1a0805;
+}
+.peak-mid {
+  position: absolute; bottom: 0;
+  width: 0; height: 0;
+  left: 35%;
+  border-left: 180px solid transparent;
+  border-right: 160px solid transparent;
+  border-bottom: 240px solid #3d1f10;
+}
+
+/* Logo strip */
+.logo-strip {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.logo-strip .label { text-align: center; color: var(--steel); font-size: 14px; margin-bottom: 28px; }
+.logos {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  color: var(--steel); font-weight: 500; font-size: 18px;
+}
+.logos span { letter-spacing: -0.2px; }
+.logos .serif { font-family: "DM Serif Display", serif; font-style: italic; font-weight: 400; }
+
+/* Section */
+.section { padding: 96px 0; }
+.section-head { margin-bottom: 56px; max-width: 760px; }
+.section-head .eyebrow { color: var(--primary-deep); }
+.h-section {
+  font-size: 52px; line-height: 1.15; letter-spacing: -0.5px;
+  font-weight: 400; margin: 16px 0 18px;
+}
+.lead { font-size: 18px; line-height: 1.5; color: var(--ink-tint); max-width: 60ch; }
+
+/* Le Studio feature panel */
+.studio {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center;
+  padding: 56px;
+  background: var(--cream-light);
+  border-radius: 16px;
+  border: 1px solid var(--beige-deep);
+}
+.studio h2 { font-size: 44px; line-height: 1.1; letter-spacing: -0.5px; margin: 14px 0 16px; }
+.studio p { color: var(--ink-tint); margin: 0 0 28px; }
+.studio-actions { display: flex; gap: 12px; }
+.code-mockup {
+  background: var(--surface-code);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 24px -4px rgba(0,0,0,0.16);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+.code-header {
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+}
+.code-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+.code-tab { margin-left: auto; font-size: 11px; padding: 3px 10px; background: rgba(255,255,255,0.06); border-radius: 4px; color: rgba(255,255,255,0.8); }
+.code-body {
+  padding: 18px;
+  font-size: 13px; line-height: 1.6;
+  color: var(--on-dark);
+}
+.code-body .ln { color: rgba(255,255,255,0.32); display: inline-block; width: 24px; text-align: right; margin-right: 14px; }
+.k { color: #ff9a52; } /* keyword */
+.s { color: #ffd06a; } /* string */
+.c { color: rgba(255,255,255,0.4); } /* comment */
+.f { color: #ffb83e; } /* func */
+.v { color: #cae6ff; } /* var */
+
+/* Stats row */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px; }
+.stat .num { font-size: 56px; line-height: 1.1; letter-spacing: -1px; font-feature-settings: "tnum"; color: var(--ink); }
+.stat .lab { font-size: 14px; color: var(--steel); margin-top: 6px; }
+
+/* 3-up feature tiles */
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.feat-tile {
+  background: var(--canvas);
+  border-radius: 12px;
+  border: 1px solid var(--hairline-soft);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: box-shadow 160ms ease;
+}
+.feat-tile:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+.feat-icon-tile {
+  width: 44px; height: 44px;
+  background: var(--cream);
+  border: 1px solid var(--beige-deep);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary);
+}
+.feat-tile h3 { font-size: 22px; font-weight: 500; line-height: 1.3; margin: 0; letter-spacing: -0.2px; }
+.feat-tile p { font-size: 15px; line-height: 1.55; color: var(--steel); margin: 0; }
+.feat-tile a { color: var(--primary); font-weight: 500; font-size: 14px; margin-top: auto; }
+
+/* Pricing */
+.pricing { background: var(--surface); padding: 96px 0; }
+.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
+.tier {
+  background: var(--canvas);
+  border-radius: 12px;
+  border: 1px solid var(--hairline-soft);
+  padding: 28px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.tier.featured {
+  background: var(--cream);
+  border: 2px solid var(--primary);
+}
+.tier-name { font-size: 14px; font-weight: 600; color: var(--steel); letter-spacing: 0.5px; text-transform: uppercase; }
+.tier-price { font-family: "DM Serif Display", serif; font-size: 48px; line-height: 1; letter-spacing: -1px; color: var(--ink); }
+.tier-price .per { font-family: "Inter", sans-serif; font-size: 14px; color: var(--steel); margin-left: 4px; letter-spacing: 0; }
+.tier-desc { font-size: 14px; color: var(--steel); }
+.tier ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.tier li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; font-size: 14px; line-height: 1.5; align-items: start; }
+.tier li svg { color: var(--primary); margin-top: 3px; }
+.tier .btn { width: 100%; }
+.tier .badge-orange {
+  display: inline-flex; align-items: center; padding: 3px 10px;
+  font-size: 12px; font-weight: 600; border-radius: 9999px;
+  background: var(--primary); color: var(--on-primary);
+  align-self: flex-start;
+}
+
+/* CTA banner cream */
+.cta-cream {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 72px 56px;
+  text-align: center;
+  margin: 56px 0;
+  border: 1px solid var(--beige-deep);
+}
+.cta-cream h2 {
+  font-family: "DM Serif Display", serif; font-weight: 400;
+  font-size: 56px; line-height: 1.1; letter-spacing: -0.5px;
+  margin: 0 0 16px;
+}
+.cta-cream p { color: var(--ink-tint); margin: 0 0 32px; font-size: 18px; }
+.cta-cream .row { display: flex; gap: 12px; justify-content: center; }
+
+/* ───────── DS section ───────── */
+.ds {
+  background: var(--canvas);
+  padding: 112px 0;
+}
+.ds-intro { margin-bottom: 64px; max-width: 760px; }
+.ds-intro .mono { font-size: 12px; color: var(--steel); letter-spacing: 0.5px; }
+.ds-intro h2 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 64px; line-height: 1.05; letter-spacing: -1px; margin: 16px 0; }
+.ds-intro a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.ds-block { padding: 56px 0; border-top: 1px solid var(--hairline-soft); }
+.ds-block-head {
+  display: grid; grid-template-columns: 220px 1fr; gap: 32px; margin-bottom: 36px;
+  align-items: baseline;
+}
+.ds-label { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--steel); letter-spacing: 0.5px; text-transform: uppercase; }
+.ds-block-head h3 { font-size: 28px; line-height: 1.25; font-weight: 500; margin: 0; letter-spacing: -0.2px; }
+
+.color-group { margin-bottom: 32px; }
+.color-cap { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--steel); letter-spacing: 0.5px; text-transform: uppercase; padding-bottom: 12px; border-bottom: 1px solid var(--hairline-soft); margin-bottom: 18px; }
+.swatch-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.swatch { display: flex; flex-direction: column; gap: 8px; }
+.swatch .chip { height: 84px; border-radius: 8px; border: 1px solid var(--hairline-soft); }
+.swatch .name { font-size: 13px; font-weight: 500; }
+.swatch .hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--steel); letter-spacing: 0.4px; }
+
+/* Type table */
+.type-table { display: grid; gap: 0; }
+.type-row {
+  display: grid;
+  grid-template-columns: 200px 200px 1fr;
+  gap: 24px; align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.type-tok { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--ink); }
+.type-spec { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--steel); }
+
+/* Radius ladder */
+.radius-row { display: flex; gap: 20px; align-items: end; flex-wrap: wrap; }
+.radius-cell { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.radius-box {
+  width: 96px; height: 96px;
+  background: var(--cream);
+  border: 1px solid var(--beige-deep);
+}
+.radius-cell .nm { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink); }
+.radius-cell .val { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--steel); }
+
+/* Components matrix */
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.comp-card { background: var(--canvas); border: 1px solid var(--hairline-soft); border-radius: 12px; padding: 28px; }
+.comp-card h4 { font-size: 18px; font-weight: 500; margin: 0 0 6px; }
+.comp-card .desc { font-size: 13px; color: var(--steel); margin-bottom: 18px; }
+.comp-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.input {
+  width: 100%; padding: 10px 14px; height: 44px;
+  border-radius: 8px; border: 1px solid var(--hairline-strong);
+  background: var(--canvas); color: var(--ink); font-size: 16px; font-family: inherit;
+}
+.input:focus { outline: none; border: 2px solid var(--primary); padding: 9px 13px; }
+.input.focused { border: 2px solid var(--primary); padding: 9px 13px; }
+.label-form { display: block; font-size: 13px; color: var(--steel); margin-bottom: 6px; }
+
+.badge {
+  display: inline-flex; align-items: center; padding: 4px 10px;
+  font-size: 12px; font-weight: 600; border-radius: 9999px;
+}
+.badge.orange { background: var(--primary); color: var(--on-primary); }
+.badge.cream { background: var(--cream-deeper); color: var(--ink); }
+.badge.dark { background: var(--ink); color: var(--on-dark); }
+
+.pill-tab {
+  display: inline-flex; align-items: center;
+  padding: 6px 14px; border-radius: 9999px;
+  background: var(--canvas); color: var(--steel);
+  border: 1px solid var(--hairline);
+  font-size: 14px; font-weight: 500;
+}
+.pill-tab.active { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+
+/* Sunset stripe — THE signature */
+.sunset-stripe {
+  height: 32px;
+  background: linear-gradient(90deg,
+    var(--primary) 0%,
+    var(--sun-800) 22%,
+    var(--sun-700) 44%,
+    var(--sun-500) 60%,
+    var(--yellow-sat) 78%,
+    var(--cream) 100%);
+}
+
+/* Footer */
+.footer {
+  background: var(--cream);
+  padding: 72px 0 32px;
+}
+.foot-grid {
+  display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 56px;
+  padding-bottom: 48px; border-bottom: 1px solid var(--beige-deep);
+}
+.foot-brand .editorial { font-size: 32px; line-height: 1.1; margin: 12px 0 8px; }
+.foot-brand .small { font-size: 14px; color: var(--steel); max-width: 30ch; }
+.foot-grid h5 { font-size: 13px; font-weight: 600; margin: 0 0 16px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink); }
+.foot-grid ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.foot-grid a { color: var(--primary); font-size: 14px; }
+.foot-grid a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-size: 13px; color: var(--steel); }
+
+/* Float link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--ink); color: var(--on-dark);
+  font-size: 12px; padding: 10px 16px; border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+.src-link:hover { background: var(--primary); }
+
+@media (max-width: 1024px) {
+  .h-hero { font-size: 56px; letter-spacing: -1px; }
+  .hero-grid, .studio, .feat-grid, .tiers, .ds-block-head, .foot-grid { grid-template-columns: 1fr; }
+  .feat-grid, .tiers { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .swatch-row { grid-template-columns: repeat(3, 1fr); }
+  .type-row { grid-template-columns: 1fr; gap: 8px; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .cta-cream h2, .ds-intro h2 { font-size: 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Promo banner -->
+<div class="promo">
+  Mistral Medium 3.5 is live with vibe-remote agents.
+  <a href="#">Read the announcement →</a>
+</div>
+
+<!-- Top nav -->
+<header class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#">
+      <span class="brand-mark" aria-hidden></span>
+      <span class="brand-wm">MISTRAL AI</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#">Products</a>
+      <a href="#">Solutions</a>
+      <a href="#">Research</a>
+      <a href="#">Customers</a>
+      <a href="#">Company</a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="nav-cta">
+      <a class="contact-sales" href="#">Contact sales</a>
+      <a class="btn btn-dark" href="#">Try Le Studio</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">FRONTIER AI · OPEN BY DEFAULT</div>
+      <h1 class="h-hero editorial">Frontier AI. <em>In your hands.</em></h1>
+      <p class="h-sub">Open-weight foundation models, Le Studio for building agents, and inference that runs anywhere — from your laptop to a sovereign cloud. Made in Europe. Released to everyone.</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="#">Try Le Studio</a>
+        <a class="btn btn-secondary" href="#">Read the models</a>
+      </div>
+    </div>
+    <div class="mountain" aria-hidden>
+      <div class="peak">
+        <div class="peak-mid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logo strip -->
+<section class="wrap logo-strip">
+  <div class="label">Backed by the institutions building Europe's AI future.</div>
+  <div class="logos">
+    <span class="serif">BNP Paribas</span>
+    <span>SNCF</span>
+    <span class="serif">CMA CGM</span>
+    <span>OVHcloud</span>
+    <span class="serif">Veolia</span>
+    <span>Schneider</span>
+    <span class="serif">Orange</span>
+  </div>
+</section>
+
+<!-- Le Studio -->
+<section class="wrap section">
+  <div class="section-head">
+    <div class="eyebrow">LE STUDIO · BUILD WITH MISTRAL</div>
+    <h2 class="h-section editorial">A workshop for the new <em>agent economy</em>.</h2>
+    <p class="lead">Compose models, retrieval, tools, and your own data in one place. Ship to production with the same code you used to prototype.</p>
+  </div>
+
+  <div class="studio">
+    <div>
+      <div class="eyebrow">VIBE-REMOTE AGENTS</div>
+      <h2 class="editorial">From prompt to production in one console.</h2>
+      <p>Wire up Mistral Medium 3.5, your private data sources, and the tools your team already uses. Deploy as an HTTP endpoint or a remote agent your applications can call.</p>
+      <div class="studio-actions">
+        <a class="btn btn-primary" href="#">Open Le Studio</a>
+        <a class="btn btn-on-cream" href="#">View docs</a>
+      </div>
+    </div>
+    <div class="code-mockup">
+      <div class="code-header">
+        <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
+        <span style="font-size:11px;">agent.py — mistral · le-studio</span>
+        <span class="code-tab">PYTHON</span>
+      </div>
+      <div class="code-body">
+        <div><span class="ln">1</span><span class="c"># vibe-remote agent · mistral medium 3.5</span></div>
+        <div><span class="ln">2</span><span class="k">from</span> <span class="v">mistralai</span> <span class="k">import</span> <span class="f">Mistral</span>, <span class="f">Agent</span></div>
+        <div><span class="ln">3</span></div>
+        <div><span class="ln">4</span><span class="v">client</span> = <span class="f">Mistral</span>(<span class="v">api_key</span>=<span class="v">os</span>.<span class="f">getenv</span>(<span class="s">"MISTRAL_API_KEY"</span>))</div>
+        <div><span class="ln">5</span></div>
+        <div><span class="ln">6</span><span class="v">agent</span> = <span class="f">Agent</span>(</div>
+        <div><span class="ln">7</span>&nbsp;&nbsp;<span class="v">model</span>=<span class="s">"mistral-medium-3.5"</span>,</div>
+        <div><span class="ln">8</span>&nbsp;&nbsp;<span class="v">tools</span>=[<span class="f">web_search</span>(), <span class="f">code_interpreter</span>()],</div>
+        <div><span class="ln">9</span>&nbsp;&nbsp;<span class="v">memory</span>=<span class="s">"persistent"</span>,</div>
+        <div><span class="ln">10</span>)</div>
+        <div><span class="ln">11</span></div>
+        <div><span class="ln">12</span><span class="v">reply</span> = <span class="v">agent</span>.<span class="f">run</span>(<span class="s">"Summarize today's regulatory news for compliance."</span>)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num editorial">75%</div><div class="lab">Faster inference vs. comparable frontier models</div></div>
+    <div class="stat"><div class="num editorial">80%</div><div class="lab">Reduction in production token costs</div></div>
+    <div class="stat"><div class="num editorial">100%</div><div class="lab">Of weights released under permissive license</div></div>
+  </div>
+</section>
+
+<!-- Feature tiles -->
+<section class="wrap section" style="padding-top: 0;">
+  <div class="section-head">
+    <div class="eyebrow">CAPABILITIES</div>
+    <h2 class="h-section editorial">A platform that meets you where <em>you build</em>.</h2>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-tile">
+      <div class="feat-icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+      </div>
+      <h3>Le Chat</h3>
+      <p>Conversational assistant with web, document, and image understanding — available on desktop, mobile, and the web. Free and open.</p>
+      <a href="#">Try Le Chat →</a>
+    </div>
+    <div class="feat-tile">
+      <div class="feat-icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 18l8-12 4 6 4-3v9z"/><circle cx="17" cy="6" r="2"/></svg>
+      </div>
+      <h3>Open weights</h3>
+      <p>Mistral 7B, Mixtral, Codestral, Pixtral, and Mistral Small — released under Apache 2.0 with full weights and recipe.</p>
+      <a href="#">View the models →</a>
+    </div>
+    <div class="feat-tile">
+      <div class="feat-icon-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V7l9-4z"/></svg>
+      </div>
+      <h3>Sovereign deployment</h3>
+      <p>Run on our cloud, the hyperscaler of your choice, or fully on-premise. EU residency by default. SOC 2, ISO 27001.</p>
+      <a href="#">Deployment guide →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">PRICING</div>
+      <h2 class="h-section editorial">Pay for the work, not the platform.</h2>
+      <p class="lead">Token-based pricing on the API; flat seats on Le Studio. Free open-weights for self-hosters. No throughput surcharge.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-name">Free</div>
+        <div class="tier-price editorial">€0<span class="per">/mo</span></div>
+        <div class="tier-desc">Open weights and the free Le Chat tier. Forever.</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Mistral 7B & Mixtral weights</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Le Chat — unlimited</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Community Discord</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Get started</a>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Pro</div>
+        <div class="tier-price editorial">€18<span class="per">/mo</span></div>
+        <div class="tier-desc">For builders shipping side-projects and small apps.</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> 1M tokens / month included</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Le Studio — 1 workspace</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Email support</li>
+        </ul>
+        <a class="btn btn-dark" href="#">Start Pro</a>
+      </div>
+      <div class="tier featured">
+        <span class="badge-orange">MOST POPULAR</span>
+        <div class="tier-name">Team</div>
+        <div class="tier-price editorial">€120<span class="per">/mo</span></div>
+        <div class="tier-desc">For teams running production agents.</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> 10M tokens / month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Le Studio — unlimited</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Fine-tuning included</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Priority support</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Start Team</a>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Enterprise</div>
+        <div class="tier-price editorial">Custom</div>
+        <div class="tier-desc">Sovereign deployment, custom SLAs, dedicated capacity.</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> On-prem or EU sovereign cloud</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Custom fine-tunes & evals</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5L20 7"/></svg> Dedicated solutions team</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA cream -->
+<section class="wrap">
+  <div class="cta-cream">
+    <div class="eyebrow" style="color: var(--primary-deep);">THE NEXT CHAPTER</div>
+    <h2>The next chapter of AI is yours.</h2>
+    <p>Open weights. European values. Ship anywhere.</p>
+    <div class="row">
+      <a class="btn btn-primary" href="#">Start building</a>
+      <a class="btn btn-on-cream" href="#">Talk to sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── PART B: DESIGN SYSTEM ────────── -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-intro">
+      <div class="mono">DESIGN SYSTEM · v.alpha</div>
+      <h2>The atelier.</h2>
+      <p>Tokens and primitives behind the Mistral surface — colors grouped by role, the editorial-and-Inter type ladder, radii, and the canonical component set. Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mistral.html" target="_blank" rel="noopener">DESIGN.md</a>. Sunset palette, cream surfaces, sober 8-12px geometry, and the closing stripe.</p>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">01 · Color</div>
+        <h3>Sunset orange, cream-yellow surface, near-black ink — no extra accents.</h3>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Brand & Sunset</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#fa520f;"></div><div class="name">primary</div><div class="hex">#fa520f</div></div>
+          <div class="swatch"><div class="chip" style="background:#cc3a05;"></div><div class="name">primary-deep</div><div class="hex">#cc3a05</div></div>
+          <div class="swatch"><div class="chip" style="background:#ff8105;"></div><div class="name">sunshine-800</div><div class="hex">#ff8105</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffa110;"></div><div class="name">sunshine-700</div><div class="hex">#ffa110</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffb83e;"></div><div class="name">sunshine-500</div><div class="hex">#ffb83e</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffd900;"></div><div class="name">yellow-sat</div><div class="hex">#ffd900</div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Cream / Neutral Warm</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#fff8e0;"></div><div class="name">cream</div><div class="hex">#fff8e0</div></div>
+          <div class="swatch"><div class="chip" style="background:#fffaeb;"></div><div class="name">cream-light</div><div class="hex">#fffaeb</div></div>
+          <div class="swatch"><div class="chip" style="background:#fff0c2;"></div><div class="name">cream-deeper</div><div class="hex">#fff0c2</div></div>
+          <div class="swatch"><div class="chip" style="background:#e6d5a8;"></div><div class="name">beige-deep</div><div class="hex">#e6d5a8</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffe295;"></div><div class="name">block-5</div><div class="hex">#ffe295</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffd06a;"></div><div class="name">sunshine-300</div><div class="hex">#ffd06a</div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Surface & Hairline</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#ffffff;"></div><div class="name">canvas</div><div class="hex">#ffffff</div></div>
+          <div class="swatch"><div class="chip" style="background:#fafafa;"></div><div class="name">surface</div><div class="hex">#fafafa</div></div>
+          <div class="swatch"><div class="chip" style="background:#1c1c1e;"></div><div class="name">surface-code</div><div class="hex">#1c1c1e</div></div>
+          <div class="swatch"><div class="chip" style="background:#e5e5e5;"></div><div class="name">hairline</div><div class="hex">#e5e5e5</div></div>
+          <div class="swatch"><div class="chip" style="background:#ededed;"></div><div class="name">hairline-soft</div><div class="hex">#ededed</div></div>
+          <div class="swatch"><div class="chip" style="background:#c7c7c7;"></div><div class="name">hairline-strong</div><div class="hex">#c7c7c7</div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Text</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#1f1f1f;"></div><div class="name">ink</div><div class="hex">#1f1f1f</div></div>
+          <div class="swatch"><div class="chip" style="background:#3d3d3d;"></div><div class="name">ink-tint</div><div class="hex">#3d3d3d</div></div>
+          <div class="swatch"><div class="chip" style="background:#4a4a4a;"></div><div class="name">slate</div><div class="hex">#4a4a4a</div></div>
+          <div class="swatch"><div class="chip" style="background:#6a6a6a;"></div><div class="name">steel</div><div class="hex">#6a6a6a</div></div>
+          <div class="swatch"><div class="chip" style="background:#8a8a8a;"></div><div class="name">stone</div><div class="hex">#8a8a8a</div></div>
+          <div class="swatch"><div class="chip" style="background:#a8a8a8;"></div><div class="name">muted</div><div class="hex">#a8a8a8</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">02 · Typography</div>
+        <h3>Near-serif display for the editorial voice. Inter for everything else.</h3>
+      </div>
+      <div class="type-table">
+        <div class="type-row"><div class="type-tok">hero-display</div><div class="type-spec">Editorial / 84 / -1.5</div><div class="editorial" style="font-size: 60px; line-height: 1.05; letter-spacing: -1.2px;">Frontier AI. <em>In your hands.</em></div></div>
+        <div class="type-row"><div class="type-tok">display-lg</div><div class="type-spec">Editorial / 64 / -1</div><div class="editorial" style="font-size: 48px; line-height: 1.1; letter-spacing: -0.8px;">The next chapter is yours.</div></div>
+        <div class="type-row"><div class="type-tok">heading-1</div><div class="type-spec">Editorial / 52 / -0.5</div><div class="editorial" style="font-size: 40px; line-height: 1.15; letter-spacing: -0.4px;">Get in touch with the team.</div></div>
+        <div class="type-row"><div class="type-tok">stat-display</div><div class="type-spec">Editorial / 56 / -1</div><div class="editorial" style="font-size: 40px; line-height: 1.1; letter-spacing: -0.8px;">75%</div></div>
+        <div class="type-row"><div class="type-tok">heading-2</div><div class="type-spec">Inter / 36 / 500 / -0.5</div><div style="font-size: 30px; line-height: 1.2; font-weight: 500; letter-spacing: -0.4px;">A workshop for agents.</div></div>
+        <div class="type-row"><div class="type-tok">heading-3</div><div class="type-spec">Inter / 28 / 500</div><div style="font-size: 24px; line-height: 1.25; font-weight: 500;">Le Studio</div></div>
+        <div class="type-row"><div class="type-tok">heading-4</div><div class="type-spec">Inter / 22 / 500</div><div style="font-size: 20px; line-height: 1.3; font-weight: 500;">Vibe-remote agents</div></div>
+        <div class="type-row"><div class="type-tok">subtitle</div><div class="type-spec">Inter / 18 / 400</div><div style="font-size: 17px; line-height: 1.5;">Hero subtitle and lead body copy.</div></div>
+        <div class="type-row"><div class="type-tok">body-md</div><div class="type-spec">Inter / 16 / 400</div><div style="font-size: 16px; line-height: 1.55;">Default body paragraph. Generous leading for editorial readability.</div></div>
+        <div class="type-row"><div class="type-tok">body-sm</div><div class="type-spec">Inter / 14 / 400</div><div style="font-size: 14px; line-height: 1.5; color: var(--steel);">Secondary body and caption text.</div></div>
+        <div class="type-row"><div class="type-tok">button-md</div><div class="type-spec">Inter / 14 / 500</div><div style="font-size: 14px; line-height: 1.3; font-weight: 500;">Try Le Studio</div></div>
+        <div class="type-row"><div class="type-tok">micro-uppercase</div><div class="type-spec">Inter / 11 / 600 / 1px</div><div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--steel);">FRONTIER AI · OPEN BY DEFAULT</div></div>
+        <div class="type-row"><div class="type-tok">code-md</div><div class="type-spec">JetBrains Mono / 14</div><div class="mono" style="font-size: 14px;">agent = Mistral().agent("medium-3.5")</div></div>
+      </div>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">03 · Radius</div>
+        <h3>Sober and editorial — 8px buttons, 12px cards. No pills (except badges).</h3>
+      </div>
+      <div class="radius-row">
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 4px;"></div><div class="nm">xs</div><div class="val">4px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 6px;"></div><div class="nm">sm</div><div class="val">6px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 8px;"></div><div class="nm">md</div><div class="val">8px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 12px;"></div><div class="nm">lg</div><div class="val">12px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 16px;"></div><div class="nm">xl</div><div class="val">16px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 20px;"></div><div class="nm">xxl</div><div class="val">20px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 9999px;"></div><div class="nm">full</div><div class="val">9999</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">04 · Components</div>
+        <h3>Orange CTAs. Cream form panels. Dark code blocks. Round badges only.</h3>
+      </div>
+      <div class="comp-grid">
+
+        <div class="comp-card">
+          <h4>Buttons</h4>
+          <div class="desc">Orange primary, dark on cream, outline secondary, link.</div>
+          <div class="comp-row">
+            <a class="btn btn-primary" href="#">Try Le Studio</a>
+            <a class="btn btn-dark" href="#">Sign in</a>
+            <a class="btn btn-cream" href="#">View docs</a>
+          </div>
+          <div class="comp-row">
+            <a class="btn btn-secondary" href="#">Outline</a>
+            <a class="btn-link" href="#">Inline link →</a>
+            <a class="btn btn-primary" style="background: var(--primary-deep);" href="#">Primary · pressed</a>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Inputs</h4>
+          <div class="desc">44px height, 8px radius, 2px orange focus ring.</div>
+          <div style="display:grid; gap:12px;">
+            <div>
+              <label class="label-form">Work email</label>
+              <input class="input" placeholder="you@company.com" />
+            </div>
+            <div>
+              <label class="label-form">Use case (focused)</label>
+              <input class="input focused" value="Production agent on EU data" />
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Cards</h4>
+          <div class="desc">12px radius, hairline border. Cream variant for featured panels.</div>
+          <div style="display:grid; gap: 12px;">
+            <div style="background: var(--canvas); border: 1px solid var(--hairline-soft); border-radius: 12px; padding: 20px;">
+              <div style="font-size: 18px; font-weight: 500; margin-bottom: 4px;">card-base</div>
+              <div style="font-size: 14px; color: var(--steel);">White surface, 1px hairline-soft border.</div>
+            </div>
+            <div style="background: var(--cream); border: 1px solid var(--beige-deep); border-radius: 12px; padding: 20px;">
+              <div style="font-size: 18px; font-weight: 500; margin-bottom: 4px;">card-cream</div>
+              <div style="font-size: 14px; color: var(--ink-tint);">Cream surface, beige-deep border.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Badges & tabs</h4>
+          <div class="desc">Pills reserved for badges and tab nav. Underline tabs for content.</div>
+          <div class="comp-row">
+            <span class="badge orange">NEW</span>
+            <span class="badge cream">Beta</span>
+            <span class="badge dark">v1.0</span>
+          </div>
+          <div class="comp-row">
+            <span class="pill-tab active">Le Chat</span>
+            <span class="pill-tab">Le Studio</span>
+            <span class="pill-tab">API</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE Signature: sunset stripe ── -->
+<div class="sunset-stripe" aria-hidden></div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#">
+          <span class="brand-mark" aria-hidden></span>
+          <span class="brand-wm">MISTRAL AI</span>
+        </a>
+        <div class="editorial">Open. Sovereign. Frontier.</div>
+        <div class="small">Made in Paris. Released to everyone. Building AI infrastructure for the next chapter.</div>
+      </div>
+      <div>
+        <h5>Why Mistral</h5>
+        <ul><li><a href="#">Open weights</a></li><li><a href="#">Sovereignty</a></li><li><a href="#">Research</a></li><li><a href="#">Customers</a></li></ul>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul><li><a href="#">Le Chat</a></li><li><a href="#">Le Studio</a></li><li><a href="#">Models</a></li><li><a href="#">Pricing</a></li></ul>
+      </div>
+      <div>
+        <h5>Build</h5>
+        <ul><li><a href="#">Documentation</a></li><li><a href="#">API reference</a></li><li><a href="#">Cookbook</a></li><li><a href="#">Status</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">News</a></li><li><a href="#">Legal</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Mistral AI · Inspired demo. Not affiliated.</span>
+      <span class="mono" style="font-size:12px;">Made in 🇫🇷  ·  EN / FR</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mistral.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

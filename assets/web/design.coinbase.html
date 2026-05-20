@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Coinbase — Inspired Design</title>
+<meta name="description" content="A Coinbase-inspired institutional-crypto marketing page: bright white canvas, Coinbase Blue pill CTAs, full-bleed dark editorial hero with floating product mockups, tabular mono prices. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #0052ff;
+  --primary-active: #003ecc;
+  --primary-disabled: #a8b8cc;
+  --on-primary: #ffffff;
+  --accent-yellow: #f4b000;
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-soft: #f7f7f7;
+  --surface-strong: #eef0f3;
+  --surface-dark: #0a0b0d;
+  --surface-dark-elevated: #16181c;
+  /* Hairline */
+  --hairline: #dee1e6;
+  --hairline-soft: #eef0f3;
+  /* Text */
+  --ink: #0a0b0d;
+  --body: #5b616e;
+  --muted: #7c828a;
+  --muted-soft: #a8acb3;
+  --on-dark: #ffffff;
+  --on-dark-soft: #a8acb3;
+  /* Trading semantics */
+  --up: #05b169;
+  --down: #cf202f;
+  /* Radius */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 100px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+.mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 500; font-feature-settings: "tnum"; letter-spacing: 0; }
+.up { color: var(--up); }
+.down { color: var(--down); }
+
+/* — Layout — */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; }
+.section.tight { padding: 72px 0; }
+
+/* — Display ladder (CoinbaseDisplay → Inter 400 with -1.5% letter-spacing) — */
+.display-mega { font-size: 80px; font-weight: 400; line-height: 1.0; letter-spacing: -2px; }
+.display-xl   { font-size: 64px; font-weight: 400; line-height: 1.0; letter-spacing: -1.6px; }
+.display-lg   { font-size: 52px; font-weight: 400; line-height: 1.0; letter-spacing: -1.3px; }
+.display-md   { font-size: 44px; font-weight: 400; line-height: 1.09; letter-spacing: -1px; }
+.display-sm   { font-size: 36px; font-weight: 400; line-height: 1.11; letter-spacing: -0.5px; }
+.title-lg     { font-size: 32px; font-weight: 400; line-height: 1.13; letter-spacing: -0.4px; }
+.title-md     { font-size: 18px; font-weight: 600; line-height: 1.33; }
+.title-sm     { font-size: 16px; font-weight: 600; line-height: 1.25; }
+.body-md      { font-size: 16px; font-weight: 400; line-height: 1.5; }
+.body-strong  { font-size: 16px; font-weight: 700; line-height: 1.5; }
+.body-sm      { font-size: 14px; font-weight: 400; line-height: 1.5; }
+.caption      { font-size: 13px; font-weight: 400; line-height: 1.5; }
+.caption-strong { font-size: 12px; font-weight: 600; line-height: 1.5; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* — Nav (light) — */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.nav-row {
+  display: flex; align-items: center; height: 64px;
+  max-width: 1200px; margin: 0 auto; padding: 0 24px; gap: 32px;
+}
+.brand-mark { display: flex; align-items: center; gap: 8px; }
+.brand-logo {
+  width: 28px; height: 28px; border-radius: var(--r-full);
+  background: var(--primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff;
+}
+.brand-name { font-size: 20px; font-weight: 500; letter-spacing: -0.3px; }
+.nav-links { display: flex; gap: 24px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); }
+.nav-links a:hover { color: var(--body); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* — Buttons (pill geometry) — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit; font-size: 16px; font-weight: 600; line-height: 1.15;
+  border-radius: var(--r-pill); padding: 12px 20px; height: 44px;
+  border: 0; cursor: pointer; transition: background .15s ease, color .15s ease;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-active); }
+.btn-secondary-light { background: var(--surface-strong); color: var(--ink); }
+.btn-secondary-dark { background: var(--surface-dark-elevated); color: var(--on-dark); }
+.btn-outline-dark { background: transparent; color: var(--on-dark); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4); }
+.btn-tertiary { background: transparent; color: var(--primary); padding-left: 0; padding-right: 0; height: auto; }
+.btn-tertiary:hover { color: var(--primary-active); }
+.btn-pill-cta { height: 56px; padding: 16px 32px; font-size: 16px; }
+.btn-disabled { background: var(--primary-disabled); color: var(--on-primary); cursor: not-allowed; }
+
+/* — Badges — */
+.badge-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--surface-strong); color: var(--ink);
+  font-size: 12px; font-weight: 600; line-height: 1.5;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border-radius: var(--r-pill);
+  padding: 4px 12px;
+}
+
+/* — Hero (DARK band) — */
+.hero-dark {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  padding: 96px 0 120px;
+  overflow: hidden;
+  position: relative;
+}
+.hero-dark .wrap { position: relative; }
+.hero-grid {
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center;
+}
+.hero-eyebrow { color: var(--on-dark-soft); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; }
+.hero-h1 { margin: 16px 0 24px; }
+.hero-sub { color: var(--on-dark-soft); font-size: 18px; line-height: 1.5; max-width: 480px; }
+.hero-cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+
+/* Floating product-UI cards on dark */
+.mockup-stack { position: relative; min-height: 460px; }
+.mockup-card {
+  background: var(--surface-dark-elevated);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.mockup-card.main {
+  position: absolute; left: 0; right: 40px; top: 30px;
+  z-index: 2;
+}
+.mockup-card.side {
+  position: absolute; right: 0; bottom: 0;
+  width: 280px; z-index: 3;
+  background: var(--canvas); color: var(--ink);
+  transform: rotate(-1.5deg);
+}
+.mockup-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px;
+}
+.mockup-card.side .mockup-header { border-bottom-color: var(--hairline); }
+.portfolio-amount { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 32px; letter-spacing: -0.5px; }
+.portfolio-change { font-family: "JetBrains Mono", monospace; font-size: 14px; }
+.asset-row {
+  display: grid; grid-template-columns: 32px 1fr auto auto; gap: 12px;
+  align-items: center; padding: 12px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.mockup-card.side .asset-row { border-top-color: var(--hairline); }
+.asset-row:first-of-type { border-top: 0; }
+.asset-icon {
+  width: 32px; height: 32px; border-radius: var(--r-full);
+  background: var(--surface-strong);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: var(--ink);
+}
+.asset-name { font-size: 14px; font-weight: 600; }
+.asset-ticker { font-size: 12px; color: var(--on-dark-soft); }
+.mockup-card.side .asset-ticker { color: var(--muted); }
+.asset-price { font-family: "JetBrains Mono", monospace; font-size: 14px; font-weight: 500; }
+.asset-change { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 500; }
+
+/* — Section: 3-up feature cards — */
+.eyebrow-section { color: var(--muted); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; }
+.section-head { margin: 12px 0 56px; max-width: 720px; }
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feature-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.feature-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+.feature-icon {
+  width: 48px; height: 48px; border-radius: var(--r-full);
+  background: var(--surface-strong);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--primary);
+}
+.feature-card h3 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.33; }
+.feature-card p { margin: 0; color: var(--body); font-size: 15px; line-height: 1.5; }
+.feature-link { color: var(--primary); font-weight: 600; font-size: 15px; display: inline-flex; gap: 4px; }
+
+/* — Section: light asset list — */
+.section.soft-band { background: var(--surface-soft); }
+.split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
+.asset-list-card {
+  background: var(--canvas); border-radius: var(--r-xl);
+  border: 1px solid var(--hairline);
+  padding: 24px;
+}
+.list-tabs { display: flex; gap: 6px; margin-bottom: 8px; }
+.list-tab {
+  font-size: 13px; font-weight: 600; padding: 8px 14px;
+  border-radius: var(--r-pill); cursor: pointer;
+  background: transparent; color: var(--body);
+}
+.list-tab.active { background: var(--surface-strong); color: var(--ink); }
+.asset-list-card .asset-row { grid-template-columns: 32px 1fr auto auto; border-top: 1px solid var(--hairline); }
+.asset-list-card .asset-row:first-of-type { border-top: 1px solid var(--hairline); }
+.asset-list-card .asset-ticker { color: var(--muted); }
+.asset-list-card .asset-price { color: var(--ink); }
+
+/* — Pricing — */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.tier {
+  background: var(--canvas); border-radius: var(--r-xl);
+  border: 1px solid var(--hairline);
+  padding: 32px; display: flex; flex-direction: column; gap: 24px;
+}
+.tier.featured { background: var(--surface-dark); color: var(--on-dark); border-color: var(--surface-dark); }
+.tier h3 { margin: 0; font-size: 24px; font-weight: 400; letter-spacing: -0.4px; }
+.tier .price { font-family: "JetBrains Mono", monospace; font-size: 44px; font-weight: 600; line-height: 1; letter-spacing: -1px; }
+.tier .price small { font-family: "Inter", sans-serif; font-size: 14px; color: var(--body); font-weight: 400; }
+.tier.featured .price small { color: var(--on-dark-soft); }
+.tier ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.tier li { font-size: 15px; display: flex; gap: 10px; align-items: flex-start; color: var(--body); }
+.tier.featured li { color: var(--on-dark-soft); }
+.tier li svg { color: var(--primary); flex: 0 0 auto; margin-top: 2px; }
+.tier.featured li svg { color: var(--on-dark); }
+.tier .tier-cta { margin-top: auto; }
+
+/* — CTA band — */
+.cta-band {
+  background: var(--surface-dark); color: var(--on-dark);
+  padding: 96px 0; text-align: center;
+}
+.cta-band h2 { margin: 0 auto 16px; max-width: 760px; }
+.cta-band p { margin: 0 auto 32px; max-width: 520px; color: var(--on-dark-soft); font-size: 18px; }
+.cta-band .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* — DS Section — */
+.ds-section { background: var(--canvas); border-top: 1px solid var(--hairline); padding: 96px 0; }
+.ds-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 48px; }
+.ds-head h2 { margin: 0; font-size: 44px; font-weight: 400; letter-spacing: -1px; line-height: 1.09; }
+.ds-head .ds-meta { color: var(--muted); font-size: 14px; }
+.ds-head .ds-meta a { color: var(--primary); font-weight: 600; }
+.ds-block { margin-bottom: 64px; }
+.ds-block h3 { margin: 0 0 24px; font-size: 18px; font-weight: 600; letter-spacing: 0; }
+.ds-sublabel { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 24px 0 12px; }
+
+/* Color swatches grouped */
+.swatch-group { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.swatch {
+  background: var(--canvas); border: 1px solid var(--hairline);
+  border-radius: var(--r-lg); padding: 16px;
+}
+.swatch .chip { height: 64px; border-radius: var(--r-md); margin-bottom: 12px; border: 1px solid var(--hairline-soft); }
+.swatch .tok { font-size: 13px; font-weight: 600; }
+.swatch .hex { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--muted); }
+
+/* Type scale */
+.ds-type { border: 1px solid var(--hairline); border-radius: var(--r-xl); overflow: hidden; }
+.ds-type-row {
+  display: grid; grid-template-columns: 160px 220px 1fr; gap: 24px; align-items: center;
+  padding: 18px 24px; border-top: 1px solid var(--hairline);
+}
+.ds-type-row:first-child { border-top: 0; }
+.ds-type-row .tok { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink); font-weight: 600; }
+.ds-type-row .spec { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted); }
+.ds-type-row .sam { color: var(--ink); }
+
+/* Radius ladder */
+.ds-rad-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.ds-rad {
+  text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center;
+}
+.ds-rad .box { width: 80px; height: 80px; background: var(--surface-strong); border: 1px solid var(--hairline); }
+.ds-rad .tok { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; }
+.ds-rad .spec { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted); }
+
+/* Components matrix */
+.ds-comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.ds-comp-block {
+  border: 1px solid var(--hairline); border-radius: var(--r-xl); padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.ds-comp-block .label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input {
+  appearance: none; border: 1px solid var(--hairline); height: 48px;
+  border-radius: var(--r-md); padding: 14px 16px; font: inherit; color: var(--ink);
+  background: var(--canvas); width: 100%;
+}
+.ds-input.focused { border-color: var(--primary); border-width: 2px; padding: 13px 15px; }
+.ds-search-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surface-strong); border-radius: var(--r-pill);
+  height: 44px; padding: 12px 20px; font-size: 14px; color: var(--body);
+}
+.ds-num-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: baseline; }
+.ds-num { font-family: "JetBrains Mono", monospace; font-weight: 500; }
+
+/* — Footer — */
+footer { background: var(--canvas); padding: 64px 0 32px; border-top: 1px solid var(--hairline); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(5, 1fr); gap: 32px; }
+.footer-grid h4 { margin: 0 0 16px; font-size: 13px; font-weight: 600; }
+.footer-grid ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid a { color: var(--body); font-size: 14px; }
+.footer-grid a:hover { color: var(--ink); }
+.legal-band { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hairline-soft); color: var(--muted); font-size: 13px; }
+.brand-mini .brand-mark { margin-bottom: 16px; }
+.brand-mini small { color: var(--body); font-size: 13px; line-height: 1.5; display: block; max-width: 280px; }
+
+/* — Floating DESIGN.md link — */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px; z-index: 100;
+  background: var(--surface-dark); color: var(--on-dark);
+  padding: 10px 18px; border-radius: var(--r-pill);
+  font-size: 13px; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.src-link:hover { background: var(--surface-dark-elevated); }
+
+@media (max-width: 900px) {
+  .hero-grid, .split, .pricing-grid, .ds-comp-grid { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .swatch-group { grid-template-columns: repeat(2, 1fr); }
+  .display-mega { font-size: 48px; letter-spacing: -1px; }
+  .display-md { font-size: 32px; }
+  .mockup-card.main { right: 0; }
+  .mockup-card.side { width: 80%; right: 0; bottom: -20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ Top Nav ============ -->
+<nav class="nav">
+  <div class="nav-row">
+    <div class="brand-mark">
+      <span class="brand-logo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><rect x="8" y="8" width="8" height="8" rx="1" fill="white"/></svg>
+      </span>
+      <span class="brand-name">coinbase</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">Cryptocurrencies</a>
+      <a href="#">Individuals</a>
+      <a href="#">Businesses</a>
+      <a href="#">Institutions</a>
+      <a href="#">Developers</a>
+      <a href="#">Company</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="btn btn-tertiary" style="font-size:14px;">Sign in</a>
+      <a href="#" class="btn btn-primary" style="height:40px; padding:10px 18px; font-size:14px;">Sign up</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ Hero: dark band with floating mockups ============ -->
+<section class="hero-dark">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-eyebrow">Coinbase &middot; Trusted by 110M+</span>
+        <h1 class="display-mega hero-h1">Trade crypto on the most trusted exchange.</h1>
+        <p class="hero-sub">A regulated home for digital assets — institutional security, retail simplicity. Buy, sell, and hold 240+ assets with confidence.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary btn-pill-cta">Get started</a>
+          <a href="#" class="btn btn-outline-dark btn-pill-cta">See markets</a>
+        </div>
+      </div>
+      <div class="mockup-stack">
+        <!-- Main dark mockup -->
+        <div class="mockup-card main">
+          <div class="mockup-header">
+            <div>
+              <div style="font-size:12px; color:var(--on-dark-soft); margin-bottom:4px;">Portfolio balance</div>
+              <div class="portfolio-amount">$182,401.27</div>
+              <div class="portfolio-change up">+ $4,182.04 &middot; +2.34% today</div>
+            </div>
+            <span class="badge-pill" style="background:rgba(5,177,105,0.16); color: var(--up);">+ 24H</span>
+          </div>
+          <div class="asset-row">
+            <span class="asset-icon" style="background:rgba(244,176,0,0.18); color: var(--accent-yellow);">B</span>
+            <div><div class="asset-name">Bitcoin</div><div class="asset-ticker">BTC</div></div>
+            <div class="asset-price">$67,182.40</div>
+            <div class="asset-change up">+1.84%</div>
+          </div>
+          <div class="asset-row">
+            <span class="asset-icon" style="background:rgba(0,82,255,0.18); color: var(--primary);">E</span>
+            <div><div class="asset-name">Ethereum</div><div class="asset-ticker">ETH</div></div>
+            <div class="asset-price">$3,478.12</div>
+            <div class="asset-change up">+2.71%</div>
+          </div>
+          <div class="asset-row">
+            <span class="asset-icon" style="background:rgba(255,255,255,0.08); color: var(--on-dark);">S</span>
+            <div><div class="asset-name">Solana</div><div class="asset-ticker">SOL</div></div>
+            <div class="asset-price">$148.91</div>
+            <div class="asset-change down">−0.42%</div>
+          </div>
+          <div class="asset-row">
+            <span class="asset-icon" style="background:rgba(255,255,255,0.08); color: var(--on-dark);">U</span>
+            <div><div class="asset-name">USD Coin</div><div class="asset-ticker">USDC</div></div>
+            <div class="asset-price">$1.0001</div>
+            <div class="asset-change up">+0.01%</div>
+          </div>
+        </div>
+        <!-- Side light card -->
+        <div class="mockup-card side">
+          <div class="mockup-header" style="padding-bottom:12px; margin-bottom:12px;">
+            <div>
+              <div style="font-size:11px; color: var(--muted);">Recurring buy</div>
+              <div style="font-size:18px; font-weight:600;">$200 / week</div>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--primary);"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+          </div>
+          <div class="asset-row" style="padding:6px 0;">
+            <span class="asset-icon" style="background:rgba(244,176,0,0.18); color: var(--accent-yellow); width:24px; height:24px; font-size:12px;">B</span>
+            <div style="font-size:13px;"><div class="asset-name" style="font-size:13px;">BTC</div></div>
+            <div></div>
+            <div class="asset-change up" style="font-size:12px;">60%</div>
+          </div>
+          <div class="asset-row" style="padding:6px 0;">
+            <span class="asset-icon" style="background:rgba(0,82,255,0.18); color: var(--primary); width:24px; height:24px; font-size:12px;">E</span>
+            <div style="font-size:13px;"><div class="asset-name" style="font-size:13px;">ETH</div></div>
+            <div></div>
+            <div class="asset-change up" style="font-size:12px;">30%</div>
+          </div>
+          <div class="asset-row" style="padding:6px 0;">
+            <span class="asset-icon" style="background:var(--surface-strong); color: var(--ink); width:24px; height:24px; font-size:12px;">S</span>
+            <div style="font-size:13px;"><div class="asset-name" style="font-size:13px;">SOL</div></div>
+            <div></div>
+            <div class="asset-change up" style="font-size:12px;">10%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3-up feature grid ============ -->
+<section class="section">
+  <div class="wrap">
+    <div>
+      <span class="badge-pill">Why coinbase</span>
+      <h2 class="display-lg section-head" style="margin-top:16px;">Built for the world's most demanding financial users.</h2>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card">
+        <span class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        <h3>Institutional-grade custody</h3>
+        <p>98% of customer assets held in offline cold storage. Insured by Coinbase's own custody insurance program.</p>
+        <a href="#" class="feature-link">Security overview →</a>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-3 3"/></svg>
+        </span>
+        <h3>Markets that never sleep</h3>
+        <p>Spot, derivatives, and on-chain. Trade 240+ assets with deep liquidity and tight spreads, 24 / 7 / 365.</p>
+        <a href="#" class="feature-link">View markets →</a>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v6"/></svg>
+        </span>
+        <h3>One regulated platform</h3>
+        <p>Publicly traded (NASDAQ&nbsp;:&nbsp;COIN). Licensed across the United States and EU. Built to outlast the cycle.</p>
+        <a href="#" class="feature-link">Regulatory →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Soft band: live markets ============ -->
+<section class="section soft-band">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="badge-pill">Live markets</span>
+        <h2 class="display-md section-head" style="margin:16px 0 24px;">Watch the market, then act on it.</h2>
+        <p style="color: var(--body); font-size: 18px; line-height: 1.5; max-width: 440px;">
+          Real-time prices on every asset Coinbase lists. Set price alerts, dollar-cost average, or place advanced orders from the same view.
+        </p>
+        <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#" class="btn btn-primary">Open Explore</a>
+          <a href="#" class="btn btn-secondary-light">Set a price alert</a>
+        </div>
+      </div>
+      <div class="asset-list-card">
+        <div class="list-tabs">
+          <div class="list-tab active">Trending</div>
+          <div class="list-tab">Top gainers</div>
+          <div class="list-tab">New listings</div>
+        </div>
+        <div class="asset-row">
+          <span class="asset-icon" style="background:rgba(244,176,0,0.18); color: var(--accent-yellow);">B</span>
+          <div><div class="asset-name">Bitcoin <span style="color:var(--muted); font-weight:400;">BTC</span></div></div>
+          <div class="asset-price">$67,182.40</div>
+          <div class="asset-change up">+1.84%</div>
+        </div>
+        <div class="asset-row">
+          <span class="asset-icon" style="background:rgba(0,82,255,0.18); color: var(--primary);">E</span>
+          <div><div class="asset-name">Ethereum <span style="color:var(--muted); font-weight:400;">ETH</span></div></div>
+          <div class="asset-price">$3,478.12</div>
+          <div class="asset-change up">+2.71%</div>
+        </div>
+        <div class="asset-row">
+          <span class="asset-icon">S</span>
+          <div><div class="asset-name">Solana <span style="color:var(--muted); font-weight:400;">SOL</span></div></div>
+          <div class="asset-price">$148.91</div>
+          <div class="asset-change down">−0.42%</div>
+        </div>
+        <div class="asset-row">
+          <span class="asset-icon">A</span>
+          <div><div class="asset-name">Avalanche <span style="color:var(--muted); font-weight:400;">AVAX</span></div></div>
+          <div class="asset-price">$32.04</div>
+          <div class="asset-change up">+5.21%</div>
+        </div>
+        <div class="asset-row">
+          <span class="asset-icon">L</span>
+          <div><div class="asset-name">Chainlink <span style="color:var(--muted); font-weight:400;">LINK</span></div></div>
+          <div class="asset-price">$14.78</div>
+          <div class="asset-change down">−1.13%</div>
+        </div>
+        <div class="asset-row">
+          <span class="asset-icon">M</span>
+          <div><div class="asset-name">Polygon <span style="color:var(--muted); font-weight:400;">MATIC</span></div></div>
+          <div class="asset-price">$0.5821</div>
+          <div class="asset-change up">+0.94%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Pricing ============ -->
+<section class="section">
+  <div class="wrap">
+    <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <span class="badge-pill">Pricing</span>
+      <h2 class="display-lg" style="margin: 16px 0 16px;">A plan for every kind of trader.</h2>
+      <p style="color: var(--body); font-size: 18px;">From your first $100 to your billionth, the same custody, the same liquidity, the same access.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="tier">
+        <div>
+          <h3>Retail</h3>
+          <div class="caption" style="color: var(--muted); margin-top: 4px;">For individual investors</div>
+        </div>
+        <div class="price">0.60<small> % &middot; spot fee</small></div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>240+ assets, instant buys</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Recurring buy schedules</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>$0 self-custody wallet</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>24/7 customer support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary-light tier-cta">Open account</a>
+      </div>
+      <div class="tier featured">
+        <div>
+          <h3>Advanced Trade</h3>
+          <div class="caption" style="color: var(--on-dark-soft); margin-top: 4px;">For active traders</div>
+        </div>
+        <div class="price">0.00<small> % &middot; maker, from</small></div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Limit, stop, and bracket orders</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Deep order book &amp; charts</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Volume-tier fee schedule</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>API access + WebSocket feeds</li>
+        </ul>
+        <a href="#" class="btn btn-primary tier-cta">Start advanced</a>
+      </div>
+      <div class="tier">
+        <div>
+          <h3>Institutional</h3>
+          <div class="caption" style="color: var(--muted); margin-top: 4px;">For funds and corporates</div>
+        </div>
+        <div class="price">Prime<small> &nbsp;&middot; custom pricing</small></div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Coinbase Custody (qualified)</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Prime brokerage &amp; financing</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Dedicated coverage team</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>OTC desk &amp; algo execution</li>
+        </ul>
+        <a href="#" class="btn btn-secondary-light tier-cta">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Dark CTA band ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2 class="display-md">Take control of your money.</h2>
+    <p>Get started in minutes — verify your identity, fund your account, place your first order.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary btn-pill-cta">Get started</a>
+      <a href="#" class="btn btn-outline-dark btn-pill-cta">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESIGN SYSTEM SECTION ============ -->
+<section class="ds-section">
+  <div class="wrap">
+    <div class="ds-head">
+      <div>
+        <span class="badge-pill">Design system</span>
+        <h2 style="margin-top:16px;">Tokens, type, and components.</h2>
+      </div>
+      <div class="ds-meta">
+        Sourced from <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.coinbase.html" target="_blank">awesome-design-md / coinbase</a>
+      </div>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3>Color</h3>
+
+      <div class="ds-sublabel">Brand &amp; Accent</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#0052ff;"></div><div class="tok">primary</div><div class="hex">#0052ff</div></div>
+        <div class="swatch"><div class="chip" style="background:#003ecc;"></div><div class="tok">primary-active</div><div class="hex">#003ecc</div></div>
+        <div class="swatch"><div class="chip" style="background:#a8b8cc;"></div><div class="tok">primary-disabled</div><div class="hex">#a8b8cc</div></div>
+        <div class="swatch"><div class="chip" style="background:#f4b000;"></div><div class="tok">accent-yellow</div><div class="hex">#f4b000</div></div>
+      </div>
+
+      <div class="ds-sublabel">Surface</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#ffffff;"></div><div class="tok">canvas</div><div class="hex">#ffffff</div></div>
+        <div class="swatch"><div class="chip" style="background:#f7f7f7;"></div><div class="tok">surface-soft</div><div class="hex">#f7f7f7</div></div>
+        <div class="swatch"><div class="chip" style="background:#eef0f3;"></div><div class="tok">surface-strong</div><div class="hex">#eef0f3</div></div>
+        <div class="swatch"><div class="chip" style="background:#0a0b0d;"></div><div class="tok">surface-dark</div><div class="hex">#0a0b0d</div></div>
+      </div>
+
+      <div class="ds-sublabel">Text</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#0a0b0d;"></div><div class="tok">ink</div><div class="hex">#0a0b0d</div></div>
+        <div class="swatch"><div class="chip" style="background:#5b616e;"></div><div class="tok">body</div><div class="hex">#5b616e</div></div>
+        <div class="swatch"><div class="chip" style="background:#7c828a;"></div><div class="tok">muted</div><div class="hex">#7c828a</div></div>
+        <div class="swatch"><div class="chip" style="background:#a8acb3;"></div><div class="tok">muted-soft</div><div class="hex">#a8acb3</div></div>
+      </div>
+
+      <div class="ds-sublabel">Trading Semantics</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#05b169;"></div><div class="tok">semantic-up</div><div class="hex">#05b169</div></div>
+        <div class="swatch"><div class="chip" style="background:#cf202f;"></div><div class="tok">semantic-down</div><div class="hex">#cf202f</div></div>
+        <div class="swatch"><div class="chip" style="background:#dee1e6;"></div><div class="tok">hairline</div><div class="hex">#dee1e6</div></div>
+        <div class="swatch"><div class="chip" style="background:#16181c;"></div><div class="tok">surface-dark-elevated</div><div class="hex">#16181c</div></div>
+      </div>
+    </div>
+
+    <!-- Type -->
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <div class="ds-type">
+        <div class="ds-type-row"><span class="tok">display-mega</span><span class="spec">80 · w400 · −2 · 1.0</span><div class="sam display-mega">Trade with confidence.</div></div>
+        <div class="ds-type-row"><span class="tok">display-xl</span><span class="spec">64 · w400 · −1.6 · 1.0</span><div class="sam display-xl">Subsidiary heroes.</div></div>
+        <div class="ds-type-row"><span class="tok">display-lg</span><span class="spec">52 · w400 · −1.3 · 1.0</span><div class="sam display-lg">Section headlines.</div></div>
+        <div class="ds-type-row"><span class="tok">display-md</span><span class="spec">44 · w400 · −1 · 1.09</span><div class="sam display-md">CTA-band headline.</div></div>
+        <div class="ds-type-row"><span class="tok">title-md</span><span class="spec">18 · w600 · 0 · 1.33</span><div class="sam title-md">Component title</div></div>
+        <div class="ds-type-row"><span class="tok">body-md</span><span class="spec">16 · w400 · 0 · 1.5</span><div class="sam body-md">Default running body text — slightly cool gray.</div></div>
+        <div class="ds-type-row"><span class="tok">number-display</span><span class="spec">18 · w500 · mono</span><div class="sam mono" style="font-size:18px;">$67,182.40 &middot; +1.84%</div></div>
+        <div class="ds-type-row"><span class="tok">caption-strong</span><span class="spec">12 · w600 · upper</span><div class="sam caption-strong">INSTITUTIONAL · REGULATED</div></div>
+      </div>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <div class="ds-rad-row">
+        <div class="ds-rad"><div class="box" style="border-radius:4px;"></div><span class="tok">xs</span><span class="spec">4</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:8px;"></div><span class="tok">sm</span><span class="spec">8</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:12px;"></div><span class="tok">md</span><span class="spec">12 · input</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:16px;"></div><span class="tok">lg</span><span class="spec">16</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:24px;"></div><span class="tok">xl</span><span class="spec">24 · card</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:100px;"></div><span class="tok">pill</span><span class="spec">100 · button</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:9999px;"></div><span class="tok">full</span><span class="spec">9999 · icon</span></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3>Components</h3>
+      <div class="ds-comp-grid">
+        <div class="ds-comp-block">
+          <span class="label">Buttons — pill, 44 / 56 height</span>
+          <div class="ds-comp-row">
+            <a class="btn btn-primary">Primary pill</a>
+            <a class="btn btn-primary" style="background: var(--primary-active);">Pressed</a>
+            <a class="btn btn-disabled">Disabled</a>
+          </div>
+          <div class="ds-comp-row">
+            <a class="btn btn-secondary-light">Secondary light</a>
+            <a class="btn btn-tertiary">Tertiary link</a>
+          </div>
+          <div class="ds-comp-row">
+            <a class="btn btn-primary btn-pill-cta">Get started</a>
+          </div>
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Inputs — 12 / 14·16 padding, ink-soft hairline</span>
+          <input class="ds-input" placeholder="card@example.com"/>
+          <input class="ds-input focused" value="ava@coinbase.com"/>
+          <div class="ds-search-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            Search assets
+          </div>
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Tags &amp; badges</span>
+          <div class="ds-comp-row">
+            <span class="badge-pill">Institutional</span>
+            <span class="badge-pill" style="background: rgba(0,82,255,0.10); color: var(--primary);">Regulated</span>
+            <span class="badge-pill" style="background: rgba(5,177,105,0.14); color: var(--up);">+ 24H</span>
+            <span class="badge-pill" style="background: rgba(207,32,47,0.10); color: var(--down);">− 24H</span>
+          </div>
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Numbers — JetBrains Mono, tnum</span>
+          <div class="ds-num-row">
+            <div class="ds-num" style="font-size: 32px;">$67,182.40</div>
+            <div class="ds-num up" style="font-size: 18px;">+1.84%</div>
+            <div class="ds-num down" style="font-size: 18px;">−0.42%</div>
+          </div>
+          <div class="ds-num-row">
+            <div class="ds-num" style="font-size: 14px; color: var(--muted);">24h vol</div>
+            <div class="ds-num" style="font-size: 14px;">$8.21B</div>
+            <div class="ds-num" style="font-size: 14px; color: var(--muted);">·</div>
+            <div class="ds-num" style="font-size: 14px;">Market cap $1.32T</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="brand-mini">
+        <div class="brand-mark">
+          <span class="brand-logo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><rect x="8" y="8" width="8" height="8" rx="1" fill="white"/></svg>
+          </span>
+          <span class="brand-name">coinbase</span>
+        </div>
+        <small>A Coinbase-inspired single-page composition. Tokens and component spec sourced from awesome-design-md.</small>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Jobs</a></li><li><a href="#">Affiliates</a></li><li><a href="#">Newsroom</a></li></ul>
+      </div>
+      <div>
+        <h4>Learn</h4>
+        <ul><li><a href="#">Browse crypto</a></li><li><a href="#">Tutorials</a></li><li><a href="#">Market updates</a></li><li><a href="#">Glossary</a></li></ul>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul><li><a href="#">Individuals</a></li><li><a href="#">Businesses</a></li><li><a href="#">Developers</a></li><li><a href="#">Institutions</a></li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li><a href="#">Help Center</a></li><li><a href="#">Contact us</a></li><li><a href="#">Account funding</a></li><li><a href="#">Crypto support</a></li></ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul><li><a href="#">Privacy</a></li><li><a href="#">User agreement</a></li><li><a href="#">Cookie policy</a></li><li><a href="#">Disclosures</a></li></ul>
+      </div>
+    </div>
+    <div class="legal-band">
+      © Coinbase (inspired) &middot; Generated for design study &middot; CoinbaseDisplay (sub. Inter 400) &middot; Coinbase Blue #0052ff &middot; Pill 100 &middot; tnum mono on prices.
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.coinbase.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

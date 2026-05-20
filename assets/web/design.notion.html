@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notion — Inspired Design</title>
+<meta name="description" content="A Notion-inspired marketing page: deep navy hero band with sticky-note dots, purple rectangular CTA, pastel feature cards, kanban mockup. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #5645d4;
+  --primary-pressed: #4534b3;
+  --primary-deep: #3a2a99;
+  --on-primary: #ffffff;
+  --brand-navy: #0a1530;
+  --brand-navy-deep: #070f24;
+  --brand-navy-mid: #1a2a52;
+  --link-blue: #0075de;
+  /* Brand color spectrum */
+  --brand-orange: #dd5b00;
+  --brand-orange-deep: #793400;
+  --brand-pink: #ff64c8;
+  --brand-pink-deep: #a02e6d;
+  --brand-purple: #7b3ff2;
+  --brand-purple-800: #391c57;
+  --brand-teal: #2a9d99;
+  --brand-green: #1aae39;
+  --brand-yellow: #f5d75e;
+  --brand-brown: #523410;
+  /* Card tints */
+  --tint-peach: #ffe8d4;
+  --tint-rose: #fde0ec;
+  --tint-mint: #d9f3e1;
+  --tint-lavender: #e6e0f5;
+  --tint-sky: #dcecfa;
+  --tint-yellow: #fef7d6;
+  --tint-yellow-bold: #f9e79f;
+  --tint-cream: #f8f5e8;
+  --tint-gray: #f0eeec;
+  /* Surface */
+  --canvas: #ffffff;
+  --surface: #f6f5f4;
+  --surface-soft: #fafaf9;
+  --hairline: #e5e3df;
+  --hairline-soft: #ede9e4;
+  --hairline-strong: #c8c4be;
+  /* Text */
+  --ink-deep: #000000;
+  --ink: #1a1a1a;
+  --charcoal: #37352f;
+  --slate: #5d5b54;
+  --steel: #787671;
+  --stone: #a4a097;
+  --muted: #bbb8b1;
+  --on-dark: #ffffff;
+  --on-dark-muted: #a4a097;
+  /* Semantic */
+  --success: #1aae39;
+  --warning: #dd5b00;
+  --error: #e03131;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Notion Sans", -apple-system, system-ui, "Segoe UI", Helvetica, sans-serif;
+  background: var(--canvas);
+  color: var(--charcoal);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(86,69,212,0.25); }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Promo banner above nav —— */
+.promo-banner {
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px; font-weight: 500;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.promo-banner a { color: var(--link-blue); margin-left: 6px; font-weight: 500; }
+.promo-banner a:hover { text-decoration: underline; }
+.promo-banner strong { font-weight: 600; }
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 64px; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.3px; }
+.brand .glyph {
+  width: 26px; height: 26px; border-radius: 5px;
+  background: var(--ink); color: white;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px; letter-spacing: -0.5px;
+  font-family: ui-serif, Georgia, serif;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 16px; }
+.nav-links a { font-size: 14px; color: var(--charcoal); font-weight: 500; padding: 8px 12px; border-radius: 6px; }
+.nav-links a:hover { background: var(--surface); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font: 500 14px/1.3 "Inter", system-ui;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  transition: background .15s, border-color .15s, color .15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-pressed); }
+.btn-dark { background: var(--ink-deep); color: var(--on-dark); }
+.btn-dark:hover { background: #2a2a2a; }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--hairline-strong); }
+.btn-secondary:hover { background: var(--surface); }
+.btn-on-dark { background: var(--on-dark); color: var(--ink); }
+.btn-on-dark:hover { background: #efefef; }
+.btn-secondary-on-dark { background: transparent; color: var(--on-dark); border-color: var(--on-dark-muted); }
+.btn-secondary-on-dark:hover { background: rgba(255,255,255,0.08); }
+.btn-ghost { background: transparent; color: var(--ink); padding: 8px 12px; border-radius: 6px; }
+.btn-ghost:hover { background: var(--surface); }
+.btn-link { background: transparent; color: var(--link-blue); padding: 0; border: 0; font-weight: 500; }
+.btn-link:hover { text-decoration: underline; }
+
+/* —— Type —— */
+.hero-display { font-weight: 600; font-size: clamp(40px, 6.4vw, 80px); line-height: 1.05; letter-spacing: -2px; }
+.display-lg { font-weight: 600; font-size: clamp(36px, 4.4vw, 56px); line-height: 1.1; letter-spacing: -1px; }
+.h1 { font-weight: 600; font-size: clamp(32px, 3.8vw, 48px); line-height: 1.15; letter-spacing: -0.5px; }
+.h2 { font-weight: 600; font-size: clamp(28px, 2.8vw, 36px); line-height: 1.2; letter-spacing: -0.5px; }
+.h3 { font-weight: 600; font-size: 28px; line-height: 1.25; }
+.h4 { font-weight: 600; font-size: 22px; line-height: 1.3; }
+.h5 { font-weight: 600; font-size: 18px; line-height: 1.4; }
+.subtitle { font-weight: 400; font-size: 18px; line-height: 1.5; color: var(--slate); }
+.body-md { font-size: 16px; line-height: 1.55; }
+.body-sm { font-size: 14px; line-height: 1.5; color: var(--slate); }
+
+/* —— Hero band (signature) —— */
+.hero-band {
+  background: var(--brand-navy);
+  color: var(--on-dark);
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 64px;
+  text-align: center;
+}
+.hero-band .hero-display { color: var(--on-dark); margin: 0 auto 24px; max-width: 18ch; position: relative; z-index: 2; }
+.hero-band .subtitle { color: var(--on-dark-muted); max-width: 560px; margin: 0 auto 32px; position: relative; z-index: 2; }
+.hero-band .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2; margin-bottom: 64px; }
+
+/* Decorative sticky-note dots (signature) */
+.deco { position: absolute; pointer-events: none; z-index: 1; }
+.dot { position: absolute; border-radius: 50%; }
+.dot.d1 { top: 80px; left: 8%; width: 14px; height: 14px; background: var(--brand-pink); }
+.dot.d2 { top: 130px; left: 18%; width: 10px; height: 10px; background: var(--brand-yellow); }
+.dot.d3 { top: 200px; left: 6%; width: 16px; height: 16px; background: var(--brand-teal); }
+.dot.d4 { top: 60px; left: 28%; width: 8px; height: 8px; background: var(--brand-green); }
+.dot.d5 { top: 170px; left: 92%; width: 18px; height: 18px; background: var(--brand-orange); }
+.dot.d6 { top: 90px; left: 80%; width: 12px; height: 12px; background: var(--brand-purple); }
+.dot.d7 { top: 240px; left: 88%; width: 10px; height: 10px; background: var(--brand-pink); }
+.dot.d8 { top: 50px; left: 70%; width: 8px; height: 8px; background: var(--brand-yellow); }
+.dot.d9 { top: 280px; left: 12%; width: 6px; height: 6px; background: var(--brand-green); }
+.dot.d10 { top: 320px; left: 95%; width: 8px; height: 8px; background: var(--brand-teal); }
+/* Mesh wires */
+.wire { position: absolute; stroke-width: 1.2; fill: none; opacity: 0.5; }
+.wire.w1 { top: 90px; left: -40px; }
+.wire.w2 { top: 180px; right: -20px; }
+
+/* —— Workspace mockup card (kanban) —— */
+.workspace-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  box-shadow: rgba(15,15,15,0.20) 0 24px 48px -8px, rgba(15,15,15,0.05) 0 4px 12px;
+  margin: 32px auto 0;
+  max-width: 1100px;
+  text-align: left;
+  position: relative; z-index: 3;
+  color: var(--charcoal);
+  overflow: hidden;
+}
+.workspace-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 13px; color: var(--slate);
+}
+.workspace-head .crumb { color: var(--slate); }
+.workspace-head .crumb b { color: var(--ink); font-weight: 600; }
+.workspace-head .tabs { display: inline-flex; margin-left: 16px; gap: 0; }
+.workspace-head .tab { padding: 8px 12px; font-size: 13px; color: var(--slate); border-bottom: 2px solid transparent; font-weight: 500; }
+.workspace-head .tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+.workspace-head .right { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--slate); }
+.workspace-head .right .avatar-row { display: flex; }
+.workspace-head .right .avatar { width: 22px; height: 22px; border-radius: 50%; border: 2px solid white; margin-left: -6px; background: var(--brand-purple); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+.avatar.b { background: var(--brand-orange); }
+.avatar.c { background: var(--brand-teal); }
+.avatar.d { background: var(--brand-pink); }
+
+.kanban {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 20px;
+  background: var(--surface-soft);
+}
+@media (max-width: 900px) { .kanban { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .kanban { grid-template-columns: 1fr; } }
+.kcol { background: transparent; }
+.kcol-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--charcoal); }
+.kcol-head .badge {
+  font-size: 11px; padding: 2px 6px; border-radius: 4px;
+  color: var(--charcoal); font-weight: 500;
+}
+.kcol-head .badge-todo { background: var(--tint-yellow-bold); color: #6d4c00; }
+.kcol-head .badge-doing { background: var(--tint-sky); color: #00497a; }
+.kcol-head .badge-review { background: var(--tint-rose); color: var(--brand-pink-deep); }
+.kcol-head .badge-done { background: var(--tint-mint); color: #117026; }
+.kcol-head .count { margin-left: auto; color: var(--steel); font-weight: 400; font-size: 12px; }
+
+.kcard {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.kcard h5 { margin: 0 0 6px; font-size: 14px; font-weight: 500; color: var(--charcoal); line-height: 1.3; }
+.kcard .meta { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.kcard .tag { font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+.tag-purple { background: var(--tint-lavender); color: var(--brand-purple-800); }
+.tag-orange { background: var(--tint-peach); color: var(--brand-orange-deep); }
+.tag-green { background: var(--tint-mint); color: #117026; }
+.tag-pink { background: var(--tint-rose); color: var(--brand-pink-deep); }
+.tag-blue { background: var(--tint-sky); color: #00497a; }
+.kcard .meta-right { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--steel); font-size: 12px; }
+.kcard .meta-right .avatar { width: 18px; height: 18px; font-size: 9px; }
+.kcard .progress { height: 4px; background: var(--hairline-soft); border-radius: 4px; margin-top: 8px; overflow: hidden; }
+.kcard .progress .bar { height: 100%; background: var(--brand-teal); border-radius: 4px; }
+
+/* —— Sections —— */
+section { padding: 96px 0; }
+.section-soft { background: var(--surface-soft); }
+.section-head { max-width: 720px; margin: 0 auto 48px; text-align: center; }
+.section-head .h2 { margin: 0 0 16px; }
+.section-head .subtitle { margin: 0; color: var(--slate); }
+
+/* —— Pastel feature grid —— */
+.feature-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr; } }
+.f-card {
+  border-radius: 12px;
+  padding: 32px;
+  color: var(--charcoal);
+  display: flex; flex-direction: column; gap: 16px;
+  min-height: 320px;
+}
+.f-card.peach { background: var(--tint-peach); }
+.f-card.rose { background: var(--tint-rose); }
+.f-card.mint { background: var(--tint-mint); }
+.f-card.lavender { background: var(--tint-lavender); }
+.f-card.sky { background: var(--tint-sky); }
+.f-card.cream { background: var(--tint-cream); }
+.f-card h3 { font-weight: 600; font-size: 24px; line-height: 1.25; letter-spacing: -0.3px; margin: 0; }
+.f-card p { font-size: 15px; color: var(--charcoal); line-height: 1.55; margin: 0; opacity: 0.8; }
+.f-card .illust {
+  margin-top: auto;
+  background: rgba(255,255,255,0.55);
+  border-radius: 8px; padding: 16px;
+  font-size: 13px; color: var(--charcoal);
+}
+.f-card .illust strong { display: block; margin-bottom: 4px; font-weight: 600; }
+.f-card .illust em { font-style: normal; color: var(--steel); }
+
+/* —— Bold yellow banner —— */
+.yellow-banner {
+  background: var(--tint-yellow-bold);
+  border-radius: 16px;
+  padding: 64px;
+  display: grid; gap: 32px; grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  color: var(--charcoal);
+}
+@media (max-width: 900px) { .yellow-banner { grid-template-columns: 1fr; padding: 40px; } }
+.yellow-banner h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 600; line-height: 1.1; letter-spacing: -0.5px; margin: 0 0 16px; color: var(--charcoal); }
+.yellow-banner p { font-size: 17px; line-height: 1.55; margin: 0 0 28px; color: var(--charcoal); opacity: 0.8; }
+.yellow-banner .ai-mock {
+  background: white; border-radius: 8px; padding: 24px;
+  box-shadow: rgba(15,15,15,0.06) 0 6px 16px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.ai-mock .row {
+  display: flex; gap: 12px; align-items: start;
+  padding: 8px 0;
+}
+.ai-mock .row + .row { border-top: 1px solid var(--hairline-soft); }
+.ai-mock .ai-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--brand-pink));
+  flex: none;
+}
+.ai-mock .ai-text { font-size: 13px; line-height: 1.5; color: var(--charcoal); }
+.ai-mock .ai-text b { display: block; font-weight: 600; margin-bottom: 2px; }
+.ai-mock .ai-text em { font-style: normal; color: var(--steel); }
+
+/* —— Stats row —— */
+.stat-row {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 48px;
+}
+.stat-row h2 { margin: 0 0 8px; font-size: 32px; font-weight: 600; letter-spacing: -0.5px; }
+.stat-row p { margin: 0 0 32px; color: var(--slate); font-size: 16px; }
+.stat-grid { display: grid; gap: 32px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 800px) { .stat-grid { grid-template-columns: 1fr; } }
+.stat .num { font-weight: 600; font-size: 48px; line-height: 1; letter-spacing: -1px; color: var(--ink); }
+.stat .label { color: var(--slate); font-size: 14px; margin-top: 6px; }
+.stat .bar { height: 6px; border-radius: 3px; background: var(--hairline); overflow: hidden; margin-top: 16px; }
+.stat .bar .fill { height: 100%; border-radius: 3px; }
+.stat .bar .fill.purple { background: var(--primary); }
+.stat .bar .fill.pink { background: var(--brand-pink); }
+.stat .bar .fill.teal { background: var(--brand-teal); }
+
+/* —— Testimonial —— */
+.test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .test-grid { grid-template-columns: 1fr; } }
+.test-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.test-card blockquote { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.4; color: var(--ink); }
+.test-card .author { display: flex; align-items: center; gap: 10px; margin-top: auto; }
+.test-card .author .avatar { width: 36px; height: 36px; }
+.test-card .who strong { display: block; font-size: 14px; font-weight: 600; color: var(--ink); }
+.test-card .who span { font-size: 13px; color: var(--steel); }
+
+/* —— Pricing —— */
+.tiers {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1100px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tier-featured {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  position: relative;
+}
+.badge-popular {
+  position: absolute; top: -12px; left: 32px;
+  background: var(--primary); color: var(--on-primary);
+  font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 9999px;
+}
+.tier .tier-name { font-size: 24px; font-weight: 600; letter-spacing: -0.3px; margin: 0; }
+.tier .price { display: flex; align-items: baseline; gap: 6px; margin: 0; }
+.tier .price .num { font-size: 36px; font-weight: 600; letter-spacing: -0.5px; color: var(--ink); }
+.tier .price .per { font-size: 14px; color: var(--steel); }
+.tier .desc { font-size: 14px; color: var(--slate); line-height: 1.5; min-height: 42px; margin: 0; }
+.tier ul { padding: 0; margin: 8px 0 24px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; color: var(--charcoal); display: flex; align-items: start; gap: 8px; }
+.tier li svg { flex: none; margin-top: 3px; color: var(--primary); }
+.tier .cta-wrap { margin-top: auto; }
+
+/* —— Comparison strip —— */
+.compare {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  margin-top: 32px;
+  overflow: hidden;
+}
+.compare-row { display: grid; grid-template-columns: 1.8fr repeat(4, 1fr); padding: 16px 24px; border-bottom: 1px solid var(--hairline-soft); font-size: 14px; }
+.compare-row:last-child { border: 0; }
+.compare-row.head { background: var(--surface); font-weight: 600; font-size: 13px; color: var(--ink); }
+.compare-row .col span { color: var(--slate); }
+.compare-row .yes { color: var(--brand-green); font-weight: 600; }
+.compare-row .no { color: var(--stone); }
+
+/* —— Footer —— */
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: 96px 0 48px;
+  background: var(--canvas);
+}
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 1.6fr repeat(5, 1fr); }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.footer-grid h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin: 0 0 16px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 14px; color: var(--slate); }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-brand p { margin: 16px 0 0; font-size: 13px; color: var(--slate); line-height: 1.5; max-width: 240px; }
+.footer-bottom { padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--hairline); font-size: 13px; color: var(--steel); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); border: 1px solid var(--hairline);
+  padding: 6px 12px; border-radius: 9999px; font-size: 12px; color: var(--steel);
+  box-shadow: rgba(15,15,15,0.05) 0 4px 12px;
+}
+.src-link:hover { color: var(--ink); }
+
+/* —— Design system tokens section —— */
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 24px; font-weight: 600; letter-spacing: -0.3px; color: var(--ink); margin: 0 0 16px; }
+.ds-caption { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); margin: 28px 0 12px; }
+.ds-block .ds-caption:first-of-type { margin-top: 16px; }
+
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
+.ds-sw .chip { height: 48px; }
+.ds-sw .meta { padding: 8px 10px; }
+.ds-sw .name { font-size: 12px; font-weight: 500; color: var(--ink); }
+.ds-sw .val { font-size: 10.5px; color: var(--steel); font-family: ui-monospace, Menlo, monospace; margin-top: 2px; }
+
+.ds-tints { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .ds-tints { grid-template-columns: repeat(2, 1fr); } }
+.ds-tint { border-radius: 12px; padding: 24px; min-height: 100px; display: flex; flex-direction: column; justify-content: space-between; color: var(--charcoal); }
+.ds-tint .lab { font-size: 14px; font-weight: 600; }
+.ds-tint .v { font-size: 11px; font-family: ui-monospace, Menlo, monospace; opacity: 0.7; margin-top: 4px; }
+
+.ds-typescale { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; }
+.ds-tr { display: grid; grid-template-columns: 140px 220px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline-soft); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 12px; color: var(--ink); font-family: ui-monospace, Menlo, monospace; font-weight: 500; }
+.ds-spec { font-size: 11px; color: var(--steel); font-family: ui-monospace, Menlo, monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 24px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(8, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--surface); border: 1px solid var(--hairline); }
+.ds-rad .lab { font-size: 11px; color: var(--ink); font-family: ui-monospace, Menlo, monospace; font-weight: 500; }
+.ds-rad .vv { font-size: 11px; color: var(--steel); font-family: ui-monospace, Menlo, monospace; }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-on-dark { background: var(--brand-navy); padding: 24px; border-radius: 12px; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input { height: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--hairline-strong); background: var(--canvas); color: var(--ink); font-family: inherit; font-size: 16px; width: 100%; }
+.ds-input.focused { border: 2px solid var(--primary); outline: none; padding: 0 13px; }
+.ds-input.search { background: var(--surface); border-color: var(--hairline); color: var(--steel); padding-left: 36px; background-image: linear-gradient(transparent,transparent); }
+.ds-field-label { font-size: 11px; color: var(--steel); font-family: ui-monospace, Menlo, monospace; margin-bottom: 6px; display: block; font-weight: 500; }
+
+.ds-badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; font-size: 13px; font-weight: 600; color: var(--on-primary); }
+.ds-tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 6px; font-size: 13px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="promo-banner">
+  <strong>Developers:</strong> Get a first look at our new Developer Platform on May 13.
+  <a href="#">Save your seat →</a>
+</div>
+
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#"><span class="glyph">N</span> Notian</a>
+  <nav class="nav-links">
+    <a href="#">Product</a>
+    <a href="#">AI</a>
+    <a href="#">Solutions</a>
+    <a href="#">Resources</a>
+    <a href="#">Enterprise</a>
+    <a href="#">Pricing</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-ghost">Request a demo</a>
+    <a href="#" class="btn btn-ghost">Log in</a>
+    <a href="#" class="btn btn-primary">Get Notian free</a>
+  </div>
+</div></header>
+
+<section class="hero-band">
+  <!-- Decorative dots -->
+  <span class="deco dot d1"></span><span class="deco dot d2"></span><span class="deco dot d3"></span>
+  <span class="deco dot d4"></span><span class="deco dot d5"></span><span class="deco dot d6"></span>
+  <span class="deco dot d7"></span><span class="deco dot d8"></span><span class="deco dot d9"></span>
+  <span class="deco dot d10"></span>
+  <!-- Mesh wires -->
+  <svg class="deco wire w1" width="280" height="180" viewBox="0 0 280 180" stroke="#ff64c8">
+    <path d="M0,120 C70,40 140,160 210,80 S320,40 360,120" />
+  </svg>
+  <svg class="deco wire w2" width="280" height="180" viewBox="0 0 280 180" stroke="#1aae39">
+    <path d="M280,40 C200,140 140,20 80,120 S0,40 -40,120" />
+  </svg>
+
+  <div class="wrap">
+    <h1 class="hero-display">Meet the workspace<br/>that ships work.</h1>
+    <p class="subtitle">Docs, projects, knowledge base, and AI — connected. Replace four tools with one Notian workspace your team will actually keep open.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Get Notian free</a>
+      <a href="#" class="btn btn-secondary-on-dark">Request a demo</a>
+    </div>
+
+    <!-- Workspace mockup card (kanban) -->
+    <div class="workspace-card">
+      <div class="workspace-head">
+        <span class="crumb">🏠 Ramp HQ / <b>Q2 Roadmap</b></span>
+        <div class="tabs">
+          <span class="tab">Table</span>
+          <span class="tab active">Board</span>
+          <span class="tab">Calendar</span>
+          <span class="tab">Timeline</span>
+        </div>
+        <div class="right">
+          <div class="avatar-row">
+            <span class="avatar">JS</span>
+            <span class="avatar b">AL</span>
+            <span class="avatar c">MR</span>
+            <span class="avatar d">KH</span>
+            <span class="avatar" style="background: var(--steel)">+4</span>
+          </div>
+          <span style="margin-left: 12px;">Share</span>
+          <span>···</span>
+        </div>
+      </div>
+
+      <div class="kanban">
+        <div class="kcol">
+          <div class="kcol-head"><span class="badge badge-todo">To do</span><span class="count">3</span></div>
+          <div class="kcard">
+            <h5>Spec audit-log v2 schema</h5>
+            <div class="meta"><span class="tag tag-purple">Compliance</span><span class="tag tag-blue">Backend</span><div class="meta-right"><span>Mar 14</span><span class="avatar c">MR</span></div></div>
+          </div>
+          <div class="kcard">
+            <h5>Draft onboarding email sequence</h5>
+            <div class="meta"><span class="tag tag-pink">Growth</span><div class="meta-right"><span>Mar 18</span><span class="avatar">EW</span></div></div>
+          </div>
+          <div class="kcard">
+            <h5>Replace polling in inbox bell</h5>
+            <div class="meta"><span class="tag tag-blue">Backend</span><div class="meta-right"><span>Mar 22</span><span class="avatar b">AL</span></div></div>
+          </div>
+        </div>
+
+        <div class="kcol">
+          <div class="kcol-head"><span class="badge badge-doing">In progress</span><span class="count">4</span></div>
+          <div class="kcard">
+            <h5>Rotate session tokens on reset</h5>
+            <div class="meta"><span class="tag tag-purple">Security</span><div class="meta-right"><span>Today</span><span class="avatar">JS</span></div></div>
+            <div class="progress"><div class="bar" style="width: 70%;"></div></div>
+          </div>
+          <div class="kcard">
+            <h5>Refine empty states (project view)</h5>
+            <div class="meta"><span class="tag tag-green">Design</span><div class="meta-right"><span>Mar 12</span><span class="avatar b">AL</span></div></div>
+            <div class="progress"><div class="bar" style="width: 40%;"></div></div>
+          </div>
+          <div class="kcard">
+            <h5>Add tracing spans to SSE stream</h5>
+            <div class="meta"><span class="tag tag-blue">Backend</span><span class="tag tag-orange">Observability</span><div class="meta-right"><span>Mar 14</span><span class="avatar c">MR</span></div></div>
+            <div class="progress"><div class="bar" style="width: 25%;"></div></div>
+          </div>
+        </div>
+
+        <div class="kcol">
+          <div class="kcol-head"><span class="badge badge-review">In review</span><span class="count">2</span></div>
+          <div class="kcard">
+            <h5>Migrate avatar gradient to oklab</h5>
+            <div class="meta"><span class="tag tag-green">Design</span><div class="meta-right"><span class="avatar d">KH</span></div></div>
+          </div>
+          <div class="kcard">
+            <h5>Draft Q2 changelog narrative</h5>
+            <div class="meta"><span class="tag tag-pink">Growth</span><span class="tag tag-purple">Docs</span><div class="meta-right"><span class="avatar">EW</span></div></div>
+          </div>
+        </div>
+
+        <div class="kcol">
+          <div class="kcol-head"><span class="badge badge-done">Done</span><span class="count">12</span></div>
+          <div class="kcard">
+            <h5>Ship cycle health strip</h5>
+            <div class="meta"><span class="tag tag-blue">Backend</span><div class="meta-right"><span class="avatar c">MR</span></div></div>
+          </div>
+          <div class="kcard">
+            <h5>Initiative → Project mapping</h5>
+            <div class="meta"><span class="tag tag-purple">Platform</span><div class="meta-right"><span class="avatar b">AL</span></div></div>
+          </div>
+          <div class="kcard">
+            <h5>Realtime inbox notifications</h5>
+            <div class="meta"><span class="tag tag-blue">Backend</span><div class="meta-right"><span class="avatar">JS</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pastel feature cards -->
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="h2">Bring all your work together.</p>
+    <p class="subtitle">A single source of truth for docs, projects, knowledge, and the AI that ties them together.</p>
+  </div>
+
+  <div class="feature-grid">
+    <div class="f-card peach">
+      <span style="font-size: 28px;">📝</span>
+      <h3>Docs that just work.</h3>
+      <p>Pages so clean your team will write the wiki you've been meaning to maintain. Block-by-block, drag-and-drop, real-time.</p>
+      <div class="illust">
+        <strong># Engineering wiki</strong>
+        <em>Last edited by Ava · 4 min ago</em>
+      </div>
+    </div>
+    <div class="f-card sky">
+      <span style="font-size: 28px;">📅</span>
+      <h3>Calendar built in.</h3>
+      <p>Native calendar with two-way Google sync. Drag a meeting onto a project page and notes follow it automatically.</p>
+      <div class="illust">
+        <strong>Today · Tuesday, May 20</strong>
+        <em>3 meetings · 2 focus blocks</em>
+      </div>
+    </div>
+    <div class="f-card mint">
+      <span style="font-size: 28px;">💬</span>
+      <h3>Comments where you work.</h3>
+      <p>Discussions live next to the page they're about. No more "let me find that Slack thread" — the thread is the doc.</p>
+      <div class="illust">
+        <strong>"Looks good, ship it."</strong>
+        <em>Mira · on the v2 spec</em>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Bold yellow banner -->
+<section class="section-soft"><div class="wrap">
+  <div class="yellow-banner">
+    <div>
+      <span class="tag tag-orange" style="display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 13px; font-weight: 600;">New · Notian AI</span>
+      <h2 style="margin-top: 16px;">Ask your on-demand assistants.</h2>
+      <p>Pull up any doc, summarize any project, or draft a status update — without leaving the page you're on. Trained on your workspace, scoped to your permissions.</p>
+      <a href="#" class="btn btn-dark">Try Notian AI</a>
+    </div>
+    <div class="ai-mock">
+      <div class="row">
+        <div class="ai-icon"></div>
+        <div class="ai-text"><b>Summarize the Q2 roadmap</b><em>Just now</em></div>
+      </div>
+      <div class="row">
+        <div class="ai-icon" style="background: linear-gradient(135deg, var(--brand-teal), var(--brand-green));"></div>
+        <div class="ai-text"><b>Drafting summary…</b>Three initiatives are at risk; six are on track. The audit-log v2 launch slipped two weeks. Roadmap doc updated with the latest dates from the cycle board.</div>
+      </div>
+      <div class="row">
+        <div class="ai-icon" style="background: linear-gradient(135deg, var(--brand-orange), var(--brand-pink));"></div>
+        <div class="ai-text"><b>Send to #team-leads</b><em>via Slack</em></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Stats -->
+<section><div class="wrap">
+  <div class="stat-row">
+    <h2>More productivity. Fewer tools.</h2>
+    <p>Teams who consolidate on Notian replace an average of 4.2 separate tools — and report a 38% drop in context-switching.</p>
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="num">4.2×</div>
+        <div class="label">Tools replaced per team</div>
+        <div class="bar"><div class="fill purple" style="width: 84%;"></div></div>
+      </div>
+      <div class="stat">
+        <div class="num">38%</div>
+        <div class="label">Drop in context switching</div>
+        <div class="bar"><div class="fill pink" style="width: 60%;"></div></div>
+      </div>
+      <div class="stat">
+        <div class="num">2.4h</div>
+        <div class="label">Saved per person, weekly</div>
+        <div class="bar"><div class="fill teal" style="width: 70%;"></div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Testimonials -->
+<section class="section-soft"><div class="wrap">
+  <div class="section-head">
+    <p class="h2">Teams who write on Notian.</p>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <blockquote>"Notian is where our team's brain lives. The day we moved off three other tools was the day half my recurring meetings dissolved."</blockquote>
+      <div class="author">
+        <span class="avatar" style="width:36px;height:36px;font-size:14px;background:var(--brand-purple);">JK</span>
+        <div class="who"><strong>Jamie Kao</strong><span>Head of Operations, Ramp</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <blockquote>"It feels less like a tool and more like a way to think with your team. The blocks are addictive. We've stopped writing docs anywhere else."</blockquote>
+      <div class="author">
+        <span class="avatar b" style="width:36px;height:36px;font-size:14px;">MS</span>
+        <div class="who"><strong>Mira Singh</strong><span>VP Product, Linear</span></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <blockquote>"We replaced Confluence, Jira boards, and three Slack channels with one Notian workspace. Onboarding new engineers used to take a week — now it's an afternoon."</blockquote>
+      <div class="author">
+        <span class="avatar c" style="width:36px;height:36px;font-size:14px;">RT</span>
+        <div class="who"><strong>Rae Tanaka</strong><span>Eng Lead, Figma</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Pricing -->
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="h2">Pricing that scales with you.</p>
+    <p class="subtitle">Free forever for individuals. Paid plans start at $8 / user / month.</p>
+  </div>
+  <div class="tiers">
+    <div class="tier">
+      <h3 class="tier-name">Free</h3>
+      <p class="price"><span class="num">$0</span></p>
+      <p class="desc">For individuals organizing their personal work.</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited pages</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>10 guests</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Slack + GitHub</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>7-day page history</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="width: 100%;">Get started</a></div>
+    </div>
+    <div class="tier tier-featured">
+      <span class="badge-popular">Most popular</span>
+      <h3 class="tier-name">Plus</h3>
+      <p class="price"><span class="num">$8</span><span class="per">/user · mo</span></p>
+      <p class="desc">For small teams that need to organize work together.</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Everything in Free</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>100 guests</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Custom websites</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>30-day history</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-primary" style="width: 100%;">Get Plus</a></div>
+    </div>
+    <div class="tier">
+      <h3 class="tier-name">Business</h3>
+      <p class="price"><span class="num">$15</span><span class="per">/user · mo</span></p>
+      <p class="desc">For growing companies running their work on Notian.</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Everything in Plus</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Private teamspaces</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SAML SSO</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>90-day history</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="width: 100%;">Choose Business</a></div>
+    </div>
+    <div class="tier">
+      <h3 class="tier-name">Enterprise</h3>
+      <p class="price"><span class="num">Custom</span></p>
+      <p class="desc">Advanced controls, audit logs, and dedicated support.</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Everything in Business</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SCIM provisioning</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Audit log</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Customer success</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="width: 100%;">Contact sales</a></div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-row head">
+      <div>Feature</div><div>Free</div><div>Plus</div><div>Business</div><div>Enterprise</div>
+    </div>
+    <div class="compare-row">
+      <div>Pages & blocks</div><div class="yes">✓</div><div class="yes">✓</div><div class="yes">✓</div><div class="yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div>Guests</div><div>10</div><div>100</div><div>250</div><div>Unlimited</div>
+    </div>
+    <div class="compare-row">
+      <div>Page history</div><div>7 days</div><div>30 days</div><div>90 days</div><div>Forever</div>
+    </div>
+    <div class="compare-row">
+      <div>SAML SSO</div><div class="no">—</div><div class="no">—</div><div class="yes">✓</div><div class="yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div>SCIM provisioning</div><div class="no">—</div><div class="no">—</div><div class="no">—</div><div class="yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div>Audit log</div><div class="no">—</div><div class="no">—</div><div class="no">—</div><div class="yes">✓</div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="h2">The tokens behind every pixel.</p>
+    <p class="subtitle">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.notion.html" target="_blank" rel="noopener" style="color: var(--link-blue);">DESIGN.md</a>. Purple primary, navy hero band, multi-color brand spectrum, pastel card tints.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand primary</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#5645d4"></div><div class="meta"><div class="name">primary</div><div class="val">#5645d4</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#4534b3"></div><div class="meta"><div class="name">primary-pressed</div><div class="val">#4534b3</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#3a2a99"></div><div class="meta"><div class="name">primary-deep</div><div class="val">#3a2a99</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0a1530"></div><div class="meta"><div class="name">brand-navy</div><div class="val">#0a1530</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1a2a52"></div><div class="meta"><div class="name">brand-navy-mid</div><div class="val">#1a2a52</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0075de"></div><div class="meta"><div class="name">link-blue</div><div class="val">#0075de</div></div></div>
+    </div>
+
+    <p class="ds-caption">Brand spectrum — echoes live database properties</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ff64c8"></div><div class="meta"><div class="name">brand-pink</div><div class="val">#ff64c8</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#dd5b00"></div><div class="meta"><div class="name">brand-orange</div><div class="val">#dd5b00</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#7b3ff2"></div><div class="meta"><div class="name">brand-purple</div><div class="val">#7b3ff2</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#2a9d99"></div><div class="meta"><div class="name">brand-teal</div><div class="val">#2a9d99</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1aae39"></div><div class="meta"><div class="name">brand-green</div><div class="val">#1aae39</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f5d75e"></div><div class="meta"><div class="name">brand-yellow</div><div class="val">#f5d75e</div></div></div>
+    </div>
+
+    <p class="ds-caption">Card tints — the signature pastel palette</p>
+    <div class="ds-tints">
+      <div class="ds-tint" style="background:#ffe8d4;"><div class="lab">tint-peach</div><div class="v">#ffe8d4</div></div>
+      <div class="ds-tint" style="background:#fde0ec;"><div class="lab">tint-rose</div><div class="v">#fde0ec</div></div>
+      <div class="ds-tint" style="background:#d9f3e1;"><div class="lab">tint-mint</div><div class="v">#d9f3e1</div></div>
+      <div class="ds-tint" style="background:#e6e0f5;"><div class="lab">tint-lavender</div><div class="v">#e6e0f5</div></div>
+      <div class="ds-tint" style="background:#dcecfa;"><div class="lab">tint-sky</div><div class="v">#dcecfa</div></div>
+      <div class="ds-tint" style="background:#fef7d6;"><div class="lab">tint-yellow</div><div class="v">#fef7d6</div></div>
+      <div class="ds-tint" style="background:#f9e79f;"><div class="lab">tint-yellow-bold</div><div class="v">#f9e79f · high-emphasis banner</div></div>
+      <div class="ds-tint" style="background:#f8f5e8;"><div class="lab">tint-cream</div><div class="v">#f8f5e8</div></div>
+    </div>
+
+    <p class="ds-caption">Surface & text</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid var(--hairline)"></div><div class="meta"><div class="name">canvas</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f6f5f4"></div><div class="meta"><div class="name">surface</div><div class="val">#f6f5f4</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#fafaf9"></div><div class="meta"><div class="name">surface-soft</div><div class="val">#fafaf9</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e5e3df"></div><div class="meta"><div class="name">hairline</div><div class="val">#e5e3df</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c8c4be"></div><div class="meta"><div class="name">hairline-strong</div><div class="val">#c8c4be</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1a1a1a"></div><div class="meta"><div class="name">ink</div><div class="val">#1a1a1a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#37352f"></div><div class="meta"><div class="name">charcoal</div><div class="val">#37352f</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#5d5b54"></div><div class="meta"><div class="name">slate</div><div class="val">#5d5b54</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#787671"></div><div class="meta"><div class="name">steel</div><div class="val">#787671</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#a4a097"></div><div class="meta"><div class="name">stone</div><div class="val">#a4a097</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1aae39"></div><div class="meta"><div class="name">success</div><div class="val">#1aae39</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e03131"></div><div class="meta"><div class="name">error</div><div class="val">#e03131</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption" style="margin-bottom: 16px;">Notion Sans (subbed Inter) · humanist-geometric · tight hero leading (1.05)</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">hero-display</span><span class="ds-spec">80 · w600 · −2 · 1.05</span><div class="ds-sam" style="font-size:60px; font-weight:600; letter-spacing:-1.6px; line-height:1.05;">Meet the workspace that ships.</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">56 · w600 · −1 · 1.10</span><div class="ds-sam" style="font-size:44px; font-weight:600; letter-spacing:-1px; line-height:1.1;">Bring all your work together.</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-1</span><span class="ds-spec">48 · w600 · −0.5 · 1.15</span><div class="ds-sam" style="font-size:36px; font-weight:600; letter-spacing:-0.5px; line-height:1.15;">Pricing that scales with you.</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-2</span><span class="ds-spec">36 · w600 · −0.5 · 1.20</span><div class="ds-sam" style="font-size:28px; font-weight:600; letter-spacing:-0.5px; line-height:1.2;">Ask your on-demand assistants.</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-3</span><span class="ds-spec">28 · w600 · 0 · 1.25</span><div class="ds-sam" style="font-size:24px; font-weight:600; line-height:1.25;">Docs that just work.</div></div>
+      <div class="ds-tr"><span class="ds-tok">subtitle</span><span class="ds-spec">18 · w400 · 0 · 1.50</span><div class="ds-sam" style="font-size:18px; font-weight:400; line-height:1.5; color: var(--slate);">Replace four tools with one Notian workspace your team will actually keep open.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 · w400 · 0 · 1.55</span><div class="ds-sam" style="font-size:16px; font-weight:400; line-height:1.55; color: var(--charcoal);">Default body text. Generous 1.55 line-height for documentation readability.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-sm-medium</span><span class="ds-spec">14 · w500 · 0 · 1.50</span><div class="ds-sam" style="font-size:14px; font-weight:500; line-height:1.5;">Active sidebar, button labels, tab text</div></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">14 · w500 · 0 · 1.30</span><div class="ds-sam" style="font-size:14px; font-weight:500; line-height:1.3;">Get Notian free &nbsp;·&nbsp; Request a demo</div></div>
+      <div class="ds-tr"><span class="ds-tok">caption-bold</span><span class="ds-spec">13 · w600 · 0 · 1.40</span><div class="ds-sam" style="font-size:13px; font-weight:600;">BADGE LABEL · TAG TEXT</div></div>
+      <div class="ds-tr"><span class="ds-tok">micro-uppercase</span><span class="ds-spec">11 · w600 · +1 · UPPER</span><div class="ds-sam" style="font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color: var(--steel);">EYEBROW · ALL-CAPS · 1PX TRACKING</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius — sober editorial geometry, never pill buttons</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="lab">xs</span><span class="vv">4 · chips</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:6px"></div><span class="lab">sm</span><span class="vv">6 · tags</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="lab">md</span><span class="vv">8 · buttons</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:12px"></div><span class="lab">lg</span><span class="vv">12 · cards</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="lab">xl</span><span class="vv">16</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:20px"></div><span class="lab">xxl</span><span class="vv">20</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:24px"></div><span class="lab">xxxl</span><span class="vv">24</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="lab">full</span><span class="vv">∞ · tabs</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — 10 / 18 padding · 8px radius · rectangular (not pill)</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">Primary purple</a>
+      <a href="#" class="btn" style="background:var(--primary-pressed);color:var(--on-primary);">Pressed</a>
+      <a href="#" class="btn btn-dark">Dark</a>
+      <a href="#" class="btn btn-secondary">Secondary outline</a>
+      <a href="#" class="btn btn-ghost">Ghost</a>
+      <a href="#" class="btn btn-link">Link blue</a>
+    </div>
+
+    <p class="ds-caption">On-dark buttons (used on hero band)</p>
+    <div class="ds-on-dark">
+      <div class="ds-comp-row">
+        <a href="#" class="btn btn-primary">Primary purple</a>
+        <a href="#" class="btn btn-on-dark">On-dark white</a>
+        <a href="#" class="btn btn-secondary-on-dark">Outline on-dark</a>
+      </div>
+    </div>
+
+    <p class="ds-caption">Inputs — 44px height · 8 radius · 2px primary focus border</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="you@notian.com"/>
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="ava@notian.com"/>
+      </div>
+      <div>
+        <label class="ds-field-label">search-pill</label>
+        <input class="ds-input search" placeholder="🔎 &nbsp; Search 1,284 pages…"/>
+      </div>
+      <div>
+        <label class="ds-field-label">disabled</label>
+        <input class="ds-input" disabled value="Locked field" style="opacity:0.55;cursor:not-allowed;"/>
+      </div>
+    </div>
+
+    <p class="ds-caption">Pill tabs & segmented tabs</p>
+    <div class="ds-comp-row">
+      <span style="display:inline-flex;gap:6px;">
+        <span style="padding:6px 14px;border-radius:9999px;font-size:14px;color:var(--steel);font-weight:500;border:1px solid var(--hairline);">Free</span>
+        <span style="padding:6px 14px;border-radius:9999px;font-size:14px;color:var(--on-dark);font-weight:500;background:var(--ink-deep);border:1px solid var(--ink-deep);">Plus</span>
+        <span style="padding:6px 14px;border-radius:9999px;font-size:14px;color:var(--steel);font-weight:500;border:1px solid var(--hairline);">Business</span>
+      </span>
+      <span style="display:inline-flex;gap:0;">
+        <span style="padding:8px 14px;font-size:14px;color:var(--ink);font-weight:500;border-bottom:2px solid var(--ink);">Overview</span>
+        <span style="padding:8px 14px;font-size:14px;color:var(--steel);font-weight:500;border-bottom:2px solid transparent;">Features</span>
+        <span style="padding:8px 14px;font-size:14px;color:var(--steel);font-weight:500;border-bottom:2px solid transparent;">Pricing</span>
+      </span>
+    </div>
+
+    <p class="ds-caption">Badges — solid (status) + soft tag (feature)</p>
+    <div class="ds-comp-row">
+      <span class="ds-badge" style="background:var(--primary);">Most popular</span>
+      <span class="ds-badge" style="background:var(--brand-pink);">Pink</span>
+      <span class="ds-badge" style="background:var(--brand-orange);">Orange</span>
+      <span class="ds-tag" style="background:var(--tint-lavender);color:var(--brand-purple-800);">Purple tag</span>
+      <span class="ds-tag" style="background:var(--tint-peach);color:var(--brand-orange-deep);">Orange tag</span>
+      <span class="ds-tag" style="background:var(--tint-mint);color:#117026;">Mint tag</span>
+      <span class="ds-tag" style="background:var(--tint-sky);color:#00497a;">Sky tag</span>
+    </div>
+
+    <p class="ds-caption">Card variants — 12 radius, 32 padding</p>
+    <div class="ds-tints" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="ds-tint" style="background:var(--canvas); border: 1px solid var(--hairline); min-height: 130px;">
+        <div class="lab" style="font-size: 16px;">card-base</div>
+        <div class="v">canvas + hairline border. The default content card.</div>
+      </div>
+      <div class="ds-tint" style="background:var(--surface); border: 2px solid var(--primary); min-height: 130px;">
+        <div class="lab" style="font-size: 16px;">pricing-card-featured</div>
+        <div class="v">Surface + 2px purple border. The recommended pricing tier.</div>
+      </div>
+      <div class="ds-tint" style="background:var(--tint-yellow-bold); min-height: 130px;">
+        <div class="lab" style="font-size: 16px;">card-feature-yellow-bold</div>
+        <div class="v">Bold yellow tint banner card. Highest-emphasis content section.</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="#"><span class="glyph">N</span> Notian</a>
+      <p>A Notion-inspired single-page composition. Tokens and component spec sourced from awesome-design-md.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Docs</a></li><li><a href="#">AI</a></li><li><a href="#">Projects</a></li><li><a href="#">Calendar</a></li><li><a href="#">Sites</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Download</h4>
+      <ul>
+        <li><a href="#">iOS</a></li><li><a href="#">Android</a></li><li><a href="#">Mac</a></li><li><a href="#">Windows</a></li><li><a href="#">Web Clipper</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Help & support</a></li><li><a href="#">Pricing</a></li><li><a href="#">Blog</a></li><li><a href="#">API docs</a></li><li><a href="#">Community</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Notian for</h4>
+      <ul>
+        <li><a href="#">Enterprise</a></li><li><a href="#">Small business</a></li><li><a href="#">Personal</a></li><li><a href="#">Startups</a></li><li><a href="#">Education</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Security</a></li><li><a href="#">Status</a></li><li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© Notian (inspired) · Generated for design study</div>
+    <div>Notion-Sans · Purple #5645d4 · Pastel tints · 8/12 radius</div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.notion.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

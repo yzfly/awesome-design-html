@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WhatsApp — iOS design spec</title>
+<meta name="description" content="WhatsApp iOS app design reference. #25D366 brand green, #DCF8C6 outgoing bubble, end-to-end encrypted, blue double-check read receipts." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#ffffff; --canvas-soft:#f7f8fa; --chat-bg:#ECE5DD;
+  --brand:#25D366; --brand-dark:#128C7E; --brand-deep:#075E54; --brand-soft:#DCF8C6;
+  --link:#34B7F1; --link-deep:#0086CB;
+  --ink:#000000; --ink-2:#3B4A54; --ink-soft:#54656F; --ink-muted:#667781; --ink-dim:#8696A0;
+  --border:#E9EDEF; --border-soft:#F0F2F5;
+  --warning:#FFD700; --negative:#EA4335;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:6px; --r-bubble:7.5px; --r-lg:8px; --r-xl:12px; --r-2xl:18px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.2px}
+.brand-mark{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center}
+.brand-mark svg{width:18px;height:18px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:600;color:var(--ink-soft)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:#f5f5f5}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:opacity .15s, transform .12s, background .15s}
+.btn:hover{opacity:.9}
+.btn-primary{background:var(--brand);color:#fff;padding:11px 22px;border-radius:8px}
+.btn-deep{background:var(--brand-deep);color:#fff;padding:11px 22px;border-radius:8px}
+.btn-ghost{background:transparent;color:var(--ink);padding:11px 22px;border-radius:8px}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 20px;border-radius:8px}
+.btn-pill-light{background:var(--border-soft);color:var(--ink);padding:9px 16px;border-radius:8px}
+
+/* HERO */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-100px;left:-100px;width:600px;height:600px;background:radial-gradient(circle,var(--brand),transparent 70%);opacity:.10;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:50px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,var(--link),transparent 70%);opacity:.10;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--r-pill);background:rgba(37,211,102,.12);color:var(--brand-deep);font-size:12px;font-weight:600;letter-spacing:.5px;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--brand)}
+.hero h1{font-size:clamp(44px,7vw,84px);line-height:1;letter-spacing:-2.4px;font-weight:800;margin-bottom:22px}
+.hero h1 .gradient-word{background:linear-gradient(120deg,var(--brand),var(--brand-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:560px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* iPHONE */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.08)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#fff}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;letter-spacing:-.2px;color:#000}
+.status-bar.light{color:#fff}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;padding-top:52px;display:flex;flex-direction:column;background:var(--canvas);color:var(--ink)}
+
+/* CHATS LIST */
+.wa-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 14px;border-bottom:1px solid var(--border-soft)}
+.wa-header .ttl{font-size:22px;font-weight:700;color:var(--brand-deep)}
+.wa-header .actions{display:flex;gap:14px}
+.wa-header .actions svg{width:18px;height:18px;stroke:var(--brand-deep);stroke-width:2;fill:none}
+.wa-search{padding:8px 14px;border-bottom:1px solid var(--border-soft)}
+.wa-search-input{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--border-soft);border-radius:10px;font-size:12.5px;color:var(--ink-muted)}
+.wa-search-input svg{width:13px;height:13px;fill:var(--ink-muted)}
+.wa-chips{display:flex;gap:6px;padding:10px 14px;overflow:hidden;border-bottom:1px solid var(--border-soft)}
+.wa-chip{padding:5px 11px;border-radius:9999px;background:var(--border-soft);font-size:11px;font-weight:600;color:var(--ink-soft);white-space:nowrap}
+.wa-chip.active{background:#d4f7df;color:var(--brand-deep)}
+.wa-chats{flex:1;overflow:hidden}
+.wa-chat{display:flex;gap:11px;padding:10px 14px;border-bottom:1px solid var(--border-soft);align-items:center}
+.wa-chat .av{width:44px;height:44px;border-radius:50%;flex-shrink:0;background-size:cover}
+.av-1{background:linear-gradient(135deg,#FF8A65,#E64A19)}
+.av-2{background:linear-gradient(135deg,#42A5F5,#1565C0)}
+.av-3{background:linear-gradient(135deg,#9CCC65,#558B2F)}
+.av-4{background:linear-gradient(135deg,#AB47BC,#6A1B9A)}
+.av-5{background:linear-gradient(135deg,#FFCA28,#FF6F00)}
+.av-6{background:linear-gradient(135deg,#26A69A,#00695C)}
+.av-7{background:linear-gradient(135deg,#EF5350,#B71C1C)}
+.wa-chat .meta{flex:1;min-width:0}
+.wa-chat .nm{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:3px}
+.wa-chat .name{font-size:13px;font-weight:600;line-height:1.1;color:var(--ink)}
+.wa-chat .time{font-size:10.5px;color:var(--ink-muted);flex-shrink:0;font-feature-settings:"tnum"}
+.wa-chat .time.unread-time{color:var(--brand)}
+.wa-chat .prv{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.wa-chat .preview{font-size:12px;color:var(--ink-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.25;display:flex;align-items:center;gap:3px}
+.wa-chat .preview svg.checks{width:13px;height:9px;flex-shrink:0;fill:var(--link)}
+.wa-chat .preview svg.check{width:11px;height:9px;flex-shrink:0;fill:var(--ink-muted)}
+.wa-chat .badge{background:var(--brand);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:9999px;min-width:18px;text-align:center;font-feature-settings:"tnum"}
+.wa-chat .muted{width:13px;height:13px;color:var(--ink-muted);fill:var(--ink-muted)}
+.wa-chat .pin{width:11px;height:11px;fill:var(--ink-muted)}
+
+/* CHAT THREAD */
+.scr-chat-bg{background:#ECE5DD;position:relative}
+.scr-chat-bg::before{content:"";position:absolute;inset:52px 0 70px;background-image:radial-gradient(circle at 10% 20%,rgba(0,0,0,.025) 1px,transparent 1px),radial-gradient(circle at 70% 60%,rgba(0,0,0,.02) 1px,transparent 1px);background-size:24px 24px;opacity:.6;pointer-events:none}
+.chat-header{display:flex;align-items:center;gap:10px;padding:6px 12px 8px;background:var(--brand-deep);color:#fff;border-bottom:1px solid rgba(0,0,0,.1);position:relative;z-index:2}
+.chat-header .back{padding:2px}
+.chat-header .back svg{width:18px;height:18px;stroke:#fff;stroke-width:2.4;fill:none}
+.chat-header .av{width:32px;height:32px;border-radius:50%;flex-shrink:0}
+.chat-header .meta{flex:1;min-width:0;line-height:1.2}
+.chat-header .name{font-size:13px;font-weight:600}
+.chat-header .status{font-size:10px;color:rgba(255,255,255,.85)}
+.chat-header .icons{display:flex;gap:14px}
+.chat-header .icons svg{width:18px;height:18px;stroke:#fff;stroke-width:1.8;fill:none}
+.chat-body{flex:1;padding:14px 10px 8px;overflow:hidden;display:flex;flex-direction:column;gap:7px;position:relative;z-index:1}
+.date-pill{align-self:center;background:rgba(225,245,232,.92);color:var(--ink-soft);font-size:10px;font-weight:500;padding:4px 11px;border-radius:8px;margin:2px 0;box-shadow:0 1px 1px rgba(0,0,0,.04)}
+.e2e-pill{align-self:center;background:rgba(255,243,196,.95);color:#856404;font-size:9.5px;font-weight:500;padding:5px 11px;border-radius:8px;text-align:center;max-width:80%;line-height:1.3;box-shadow:0 1px 1px rgba(0,0,0,.04);display:flex;align-items:center;gap:5px}
+.e2e-pill svg{width:9px;height:9px;fill:#856404;flex-shrink:0}
+.bubble{max-width:78%;padding:5px 8px 4px;border-radius:7.5px;font-size:12px;line-height:1.32;position:relative;box-shadow:0 1px 0.5px rgba(0,0,0,.13);word-wrap:break-word}
+.bubble.in{align-self:flex-start;background:#fff;border-top-left-radius:0}
+.bubble.out{align-self:flex-end;background:var(--brand-soft);border-top-right-radius:0}
+.bubble .time-meta{display:inline-flex;align-items:center;gap:2px;font-size:9px;color:rgba(0,0,0,.45);float:right;margin-left:8px;margin-top:5px;line-height:1;font-feature-settings:"tnum"}
+.bubble .time-meta svg.cks{width:12px;height:9px;fill:var(--link)}
+.voice-bubble{align-self:flex-end;background:var(--brand-soft);border-radius:7.5px;border-top-right-radius:0;padding:6px 8px;display:flex;align-items:center;gap:6px;max-width:78%;box-shadow:0 1px 0.5px rgba(0,0,0,.13)}
+.voice-bubble .play{width:22px;height:22px;border-radius:50%;background:var(--brand-deep);display:grid;place-items:center;flex-shrink:0}
+.voice-bubble .play svg{width:10px;height:10px;fill:#fff;margin-left:1px}
+.voice-bubble .wave{flex:1;display:flex;gap:1.5px;align-items:center;height:16px}
+.voice-bubble .wave span{width:2px;background:var(--brand-deep);border-radius:1px;opacity:.35}
+.voice-bubble .wave span.played{opacity:1}
+.voice-bubble .dur{font-size:9px;color:var(--brand-deep);font-feature-settings:"tnum"}
+.chat-input{display:flex;align-items:center;gap:8px;padding:7px 8px 7px;background:#F0F2F5;border-top:1px solid var(--border-soft);position:relative;z-index:2}
+.chat-input .ic{padding:6px}
+.chat-input .ic svg{width:18px;height:18px;stroke:var(--ink-soft);stroke-width:1.8;fill:none}
+.chat-input .input{flex:1;background:#fff;border-radius:18px;padding:7px 10px;font-size:12px;color:var(--ink-muted);box-shadow:0 1px 1px rgba(0,0,0,.04)}
+.chat-input .mic{width:32px;height:32px;border-radius:50%;background:var(--brand-deep);display:grid;place-items:center;flex-shrink:0}
+.chat-input .mic svg{width:14px;height:14px;fill:#fff}
+
+/* STATUS */
+.status-screen{padding:6px 0 0}
+.status-screen .my-status{display:flex;align-items:center;gap:11px;padding:10px 16px;border-bottom:1px solid var(--border-soft)}
+.status-screen .my-status .av-wrap{position:relative;width:46px;height:46px}
+.status-screen .my-status .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#FFCA28,#FF6F00)}
+.status-screen .my-status .add{position:absolute;bottom:-2px;right:-2px;width:18px;height:18px;border-radius:50%;background:var(--brand);border:2px solid #fff;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;line-height:1}
+.status-screen .my-status .meta{flex:1}
+.status-screen .my-status .name{font-size:13px;font-weight:600}
+.status-screen .my-status .sub{font-size:11px;color:var(--ink-muted)}
+.status-screen .hd{padding:10px 14px 6px;font-size:11px;font-weight:600;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.6px;background:var(--border-soft)}
+.status-screen .row{display:flex;align-items:center;gap:11px;padding:10px 14px;border-bottom:1px solid var(--border-soft)}
+.status-screen .row .ring{width:46px;height:46px;border-radius:50%;padding:2.5px;flex-shrink:0;display:grid;place-items:center}
+.status-screen .row .ring.unviewed{background:var(--brand)}
+.status-screen .row .ring.viewed{background:#c4c4c4}
+.status-screen .row .av{width:100%;height:100%;border-radius:50%;border:1.5px solid #fff}
+.status-screen .row .nm{font-size:13px;font-weight:600}
+.status-screen .row .tm{font-size:10.5px;color:var(--ink-muted)}
+
+/* TAB BAR */
+.wa-tab{position:absolute;bottom:0;left:0;right:0;height:62px;background:#F7F8FA;display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--border);z-index:10}
+.wa-tab .t{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink-muted);font-size:9.5px;font-weight:500}
+.wa-tab .t svg{width:22px;height:22px;stroke:var(--ink-muted);stroke-width:1.6;fill:none}
+.wa-tab .t.active{color:var(--brand-deep)}
+.wa-tab .t.active svg{stroke:var(--brand-deep);fill:rgba(37,211,102,.16)}
+
+/* SECTIONS */
+.section{padding:120px 0;border-top:1px solid var(--border-soft)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--brand);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:800;letter-spacing:-1.4px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--canvas-soft);border-radius:12px;padding:28px;border:1px solid var(--border-soft)}
+.feat:hover{background:#f0f2f5}
+.feat .feat-ic{width:36px;height:36px;border-radius:50%;background:rgba(37,211,102,.18);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;stroke:var(--brand-deep);stroke-width:2;fill:none}
+.feat h3{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-soft);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:1px 6px;border-radius:3px;color:var(--brand-deep);border:1px solid var(--border)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:50px 0;border-top:1px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:5px 10px;border-radius:6px;color:var(--brand-deep);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--canvas-soft);border-radius:14px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* E2E lock visual */
+.e2e-stack{display:flex;flex-direction:column;align-items:center;gap:20px;width:300px}
+.e2e-lock{width:80px;height:80px;border-radius:50%;background:rgba(37,211,102,.16);display:grid;place-items:center}
+.e2e-lock svg{width:36px;height:36px;fill:var(--brand-deep)}
+.e2e-stack .bubble-demo{width:100%;background:rgba(255,243,196,.95);color:#856404;font-size:10.5px;padding:7px 12px;border-radius:8px;text-align:center;line-height:1.4;display:flex;align-items:center;gap:6px;justify-content:center}
+.e2e-stack .bubble-demo svg{width:10px;height:10px;fill:#856404;flex-shrink:0}
+
+/* Voice waveform visual */
+.voice-stack{display:flex;flex-direction:column;gap:14px;width:320px}
+.voice-demo{background:var(--brand-soft);border-radius:7.5px;padding:9px 12px;display:flex;align-items:center;gap:8px;box-shadow:0 1px 0.5px rgba(0,0,0,.13)}
+.voice-demo .play{width:30px;height:30px;border-radius:50%;background:var(--brand-deep);display:grid;place-items:center;flex-shrink:0}
+.voice-demo .play svg{width:14px;height:14px;fill:#fff;margin-left:2px}
+.voice-demo .wave{flex:1;display:flex;gap:2px;align-items:center;height:20px}
+.voice-demo .wave span{width:2.5px;background:var(--brand-deep);border-radius:1px;opacity:.35}
+.voice-demo .wave span.played{opacity:1}
+.voice-demo .dur{font-size:10px;color:var(--brand-deep);font-feature-settings:"tnum";font-weight:600}
+
+/* Read receipts demo */
+.receipts-stack{display:flex;flex-direction:column;gap:14px;width:320px}
+.receipt-row{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#fff;border-radius:10px;border:1px solid var(--border-soft);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.receipt-row .check-ic{width:34px;height:34px;border-radius:50%;background:var(--border-soft);display:grid;place-items:center;flex-shrink:0}
+.receipt-row .check-ic svg{width:18px;height:14px}
+.receipt-row .check-ic.sent svg{fill:var(--ink-muted)}
+.receipt-row .check-ic.delivered svg{fill:var(--ink-muted)}
+.receipt-row .check-ic.read svg{fill:var(--link)}
+.receipt-row .meta{flex:1}
+.receipt-row .lab{font-size:13px;font-weight:700}
+.receipt-row .spec{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted)}
+
+/* DESIGN SYSTEM */
+.ds-section{padding:120px 0;background:var(--canvas-soft);border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1.4px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--brand-deep);border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;background:#fff}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-soft);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:10px;padding:10px;border:1px solid var(--border-soft)}
+.ds-sw .chip{height:64px;border-radius:6px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-muted);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px;background:var(--canvas-soft)}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+.ds-type-table tr:last-child td{border-bottom:0}
+.ds-type-table td.token{color:var(--brand-deep)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,var(--brand),var(--brand-deep));margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:12px;padding:22px;border:1px solid var(--border-soft)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-light{background:var(--border-soft);border:0;border-radius:18px;padding:10px 14px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-light::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:6px}
+.tag-green{background:rgba(37,211,102,.16);color:var(--brand-deep)}
+.tag-blue{background:rgba(52,183,241,.16);color:var(--link-deep)}
+.tag-warn{background:rgba(255,215,0,.22);color:#856404}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:8px;padding:18px;border:1px solid var(--border-soft)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:var(--brand-deep);letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-soft);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-soft);line-height:1.5}
+.foot a{color:var(--brand-deep);font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#fff;border:1px solid var(--border);color:var(--brand-deep);font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.4 1.3 4.9L2 22l5.3-1.3c1.4.8 3.1 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+      </span>
+      WhatsApp <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#">Log In</a>
+      <a class="btn btn-primary" href="#">Get WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Encryption is a <span class="gradient-word">color.</span><br/>So is read.</h1>
+    <p>The WhatsApp iOS app, dissected. One green that means action, one green-tint that means "you sent it," one blue that means "they saw it." The chat does the rest.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- STATUS -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/></svg>
+            </div>
+          </div>
+          <div class="scr status-screen">
+            <div class="wa-header">
+              <div class="ttl">Updates</div>
+              <div class="actions">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>
+              </div>
+            </div>
+
+            <div class="my-status">
+              <div class="av-wrap">
+                <div class="av"></div>
+                <span class="add">+</span>
+              </div>
+              <div class="meta">
+                <div class="name">My status</div>
+                <div class="sub">Tap to add status update</div>
+              </div>
+            </div>
+
+            <div class="hd">Recent updates</div>
+            <div class="row">
+              <div class="ring unviewed"><div class="av av-1"></div></div>
+              <div style="flex:1"><div class="nm">Marie</div><div class="tm">10 minutes ago</div></div>
+            </div>
+            <div class="row">
+              <div class="ring unviewed"><div class="av av-2"></div></div>
+              <div style="flex:1"><div class="nm">João</div><div class="tm">28 minutes ago</div></div>
+            </div>
+            <div class="row">
+              <div class="ring unviewed"><div class="av av-3"></div></div>
+              <div style="flex:1"><div class="nm">Family group</div><div class="tm">1 hour ago</div></div>
+            </div>
+
+            <div class="hd">Viewed updates</div>
+            <div class="row">
+              <div class="ring viewed"><div class="av av-4"></div></div>
+              <div style="flex:1"><div class="nm">Akira</div><div class="tm">Today, 8:14 AM</div></div>
+            </div>
+            <div class="row">
+              <div class="ring viewed"><div class="av av-5"></div></div>
+              <div style="flex:1"><div class="nm">Studio team</div><div class="tm">Yesterday, 9:02 PM</div></div>
+            </div>
+          </div>
+          <div class="wa-tab">
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chats</div>
+            <div class="t active"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Updates</div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm14 10v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></svg>Communities</div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>Calls</div>
+          </div>
+        </div>
+        <div class="iphone-label">Status / Updates</div>
+      </div>
+
+      <!-- CHATS LIST (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="wa-header">
+              <div class="ttl">Chats</div>
+              <div class="actions">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="3"/><path d="M2 6h4l2-3h8l2 3h4v14H2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>
+              </div>
+            </div>
+            <div class="wa-search">
+              <div class="wa-search-input">
+                <svg viewBox="0 0 24 24"><path d="M11 18a7 7 0 100-14 7 7 0 000 14zM21 21l-4-4"/></svg>
+                Ask Meta AI or Search
+              </div>
+            </div>
+            <div class="wa-chips">
+              <div class="wa-chip active">All</div>
+              <div class="wa-chip">Unread</div>
+              <div class="wa-chip">Favourites</div>
+              <div class="wa-chip">Groups</div>
+            </div>
+            <div class="wa-chats">
+              <div class="wa-chat">
+                <div class="av av-1"></div>
+                <div class="meta">
+                  <div class="nm"><div class="name">Marie Kn.</div><div class="time unread-time">10:42</div></div>
+                  <div class="prv">
+                    <div class="preview">Magic hour shots ready 📸</div>
+                    <div class="badge">3</div>
+                  </div>
+                </div>
+              </div>
+              <div class="wa-chat">
+                <div class="av av-2"></div>
+                <div class="meta">
+                  <div class="nm"><div class="name">João Silva</div><div class="time">10:18</div></div>
+                  <div class="prv">
+                    <div class="preview"><svg class="checks" viewBox="0 0 16 11"><path d="M11.4 0L6 5.4 5.6 5l5.4-5L11.4 0zM5.4 5.4L0 0l.6-.6L6 4.8l-.6.6zm5.4-5l-5.4 5.4-.6-.6L10.2-.2l.6.6z"/></svg>Saw your message about the studio</div>
+                  </div>
+                </div>
+              </div>
+              <div class="wa-chat">
+                <div class="av av-3"></div>
+                <div class="meta">
+                  <div class="nm"><div class="name">Family 👨‍👩‍👧</div><div class="time">9:51</div></div>
+                  <div class="prv">
+                    <div class="preview">Mom: We're coming tomorrow at...</div>
+                    <svg class="muted" viewBox="0 0 24 24"><path d="M16 10v2a4 4 0 11-8 0v-2m4 4v3M9 21h6M3 3l18 18" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="wa-chat">
+                <div class="av av-4"></div>
+                <div class="meta">
+                  <div class="nm"><div class="name">Akira</div><div class="time">Yesterday</div></div>
+                  <div class="prv">
+                    <div class="preview"><svg class="check" viewBox="0 0 11 11" fill="currentColor"><path d="M9 1L4 8 1.5 5.5"/></svg>Voice message · 0:42</div>
+                  </div>
+                </div>
+              </div>
+              <div class="wa-chat">
+                <div class="av av-5"></div>
+                <div class="meta">
+                  <div class="nm"><div class="name">Studio team</div><div class="time">Yesterday</div></div>
+                  <div class="prv">
+                    <div class="preview"><svg class="checks" viewBox="0 0 16 11"><path d="M11.4 0L6 5.4 5.6 5l5.4-5L11.4 0zM5.4 5.4L0 0l.6-.6L6 4.8l-.6.6zm5.4-5l-5.4 5.4-.6-.6L10.2-.2l.6.6z"/></svg>~ Pedro: Approved 👍</div>
+                  </div>
+                </div>
+              </div>
+              <div class="wa-chat">
+                <div class="av av-6"></div>
+                <div class="meta">
+                  <div class="nm"><div class="name">Travel ✈️</div><div class="time">Mon</div></div>
+                  <div class="prv">
+                    <div class="preview">📍 Pinned · Itinerary updated</div>
+                    <svg class="pin" viewBox="0 0 16 16"><path d="M8 1l1 4h4l-3 3 1 4-3-2-3 2 1-4-3-3h4z"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wa-tab">
+            <div class="t active"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chats</div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>Updates</div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z"/></svg>Communities</div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>Calls</div>
+          </div>
+        </div>
+        <div class="iphone-label">Chats list</div>
+      </div>
+
+      <!-- CHAT THREAD -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar light">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-chat-bg" style="padding-top:48px">
+            <div class="chat-header">
+              <div class="back"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></div>
+              <div class="av av-1"></div>
+              <div class="meta">
+                <div class="name">Marie Kn.</div>
+                <div class="status">online</div>
+              </div>
+              <div class="icons">
+                <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
+              </div>
+            </div>
+            <div class="chat-body">
+              <div class="date-pill">Today</div>
+              <div class="e2e-pill">
+                <svg viewBox="0 0 24 24"><path d="M19 11h-1V7a6 6 0 00-12 0v4H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2zM8 7a4 4 0 018 0v4H8V7z"/></svg>
+                Messages and calls are end-to-end encrypted.
+              </div>
+              <div class="bubble in">Did you get the shots from the studio? <span class="time-meta">10:14</span></div>
+              <div class="bubble out">Yes! Just finished editing. <span class="time-meta">10:18 <svg class="cks" viewBox="0 0 16 11"><path d="M11.4 0L6 5.4 5.6 5l5.4-5L11.4 0zM5.4 5.4L0 0l.6-.6L6 4.8l-.6.6zm5.4-5l-5.4 5.4-.6-.6L10.2-.2l.6.6z"/></svg></span></div>
+              <div class="bubble out">Sending them now ✨ <span class="time-meta">10:18 <svg class="cks" viewBox="0 0 16 11"><path d="M11.4 0L6 5.4 5.6 5l5.4-5L11.4 0zM5.4 5.4L0 0l.6-.6L6 4.8l-.6.6zm5.4-5l-5.4 5.4-.6-.6L10.2-.2l.6.6z"/></svg></span></div>
+              <div class="bubble in">😍😍😍 <span class="time-meta">10:38</span></div>
+              <div class="voice-bubble">
+                <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                <div class="wave"><span class="played" style="height:5px"></span><span class="played" style="height:9px"></span><span class="played" style="height:13px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:5px"></span><span style="height:14px"></span><span style="height:9px"></span><span style="height:7px"></span><span style="height:12px"></span><span style="height:6px"></span><span style="height:10px"></span><span style="height:4px"></span><span style="height:8px"></span></div>
+                <span class="dur">0:42</span>
+              </div>
+              <div class="bubble in">Magic hour shots ready 📸 <span class="time-meta">10:42</span></div>
+            </div>
+            <div class="chat-input">
+              <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg></div>
+              <div class="input">Type a message</div>
+              <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 016 0v3a3 3 0 01-6 0V9z"/></svg></div>
+              <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="3"/><path d="M2 6h4l2-3h8l2 3h4v14H2z"/></svg></div>
+              <div class="mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="13" rx="3"/><path d="M19 11v1a7 7 0 01-14 0v-1M12 19v4M8 23h8" stroke="#fff" stroke-width="2" fill="none"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Chat thread</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. Two greens. One blue tick.</h2>
+      <p>Every WhatsApp screen earns its position on an iPhone through the same rules — paper-white chat canvas, conversation-tinted bubbles, action green for new things, and a deep teal header that grounds the room.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h3>Chats list</h3>
+        <p>Vertical list with 44pt avatars, name + preview + timestamp. Unread count in <code>#25D366</code> pill aligned right. Mute icon replaces the badge when notifications are off. Pinned chats sort to top.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M19 11h-1V7a6 6 0 00-12 0v4H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2z"/></svg></div>
+        <h3>Chat thread</h3>
+        <p>Deep teal header. Wallpaper-tinted canvas <code>#ECE5DD</code>. Incoming white bubble, outgoing <code>#DCF8C6</code> green-tint. Date separators as floating pills. E2E lock notice as a yellow pill on entry.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Status / Updates</h3>
+        <p>Story ring style — green ring on unviewed, gray on viewed. "My status" with + plus chip in <code>#25D366</code> circle. Below: recent (chronological) and viewed sections, separated by a quiet gray header bar.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">End-to-end encryption</div>
+          <h3>A yellow pill, every time you open the room.</h3>
+          <p>Every new chat opens with an encryption notice in a soft warning-yellow pill — a tap reveals the security code modal. The pill never appears mid-conversation; it lives at the top, anchoring the thread to a guarantee.</p>
+          <p>The lock glyph carries through to the chat info screen, where verifying via QR code is one tap away.</p>
+          <div class="ios-feat-tokens">
+            <code>bg: #FFF3C4</code>
+            <code>ink: #856404</code>
+            <code>radius: 8px</code>
+            <code>position: top-of-thread</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="e2e-stack">
+            <div class="e2e-lock">
+              <svg viewBox="0 0 24 24"><path d="M19 11h-1V7a6 6 0 00-12 0v4H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2zM8 7a4 4 0 018 0v4H8V7z"/></svg>
+            </div>
+            <div class="bubble-demo">
+              <svg viewBox="0 0 24 24"><path d="M19 11h-1V7a6 6 0 00-12 0v4H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2z"/></svg>
+              Messages and calls are end-to-end encrypted.
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-align:center">Signal Protocol · Curve25519 · AES-256</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="voice-stack">
+            <div class="voice-demo">
+              <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <div class="wave">
+                <span class="played" style="height:6px"></span><span class="played" style="height:11px"></span><span class="played" style="height:15px"></span><span class="played" style="height:8px"></span><span class="played" style="height:13px"></span><span style="height:6px"></span><span style="height:16px"></span><span style="height:10px"></span><span style="height:7px"></span><span style="height:13px"></span><span style="height:5px"></span><span style="height:11px"></span><span style="height:8px"></span><span style="height:14px"></span><span style="height:6px"></span><span style="height:9px"></span>
+              </div>
+              <span class="dur">0:18 / 0:42</span>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-align:center;line-height:1.5">Hold mic to record · slide left to cancel<br/>Auto-transcribe in 6 languages (iOS 17+)</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Voice messages</div>
+          <h3>A waveform that listens with you.</h3>
+          <p>Voice messages render as a real waveform — sampled from the actual audio, not a placeholder. The bar darkens as playback advances. Speed-up (1x → 1.5x → 2x) replaces the play icon during playback.</p>
+          <p>Transcription (iOS 17+) appears below the waveform in a quoted style, available even before the recipient hears it.</p>
+          <div class="ios-feat-tokens">
+            <code>bars: real PCM</code>
+            <code>color: #075E54</code>
+            <code>played alpha: 1.0</code>
+            <code>unplayed alpha: 0.35</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Read receipts</div>
+          <h3>Single → double → blue. A status ladder that doesn't lie.</h3>
+          <p>One gray check = sent to server. Two gray checks = delivered to recipient's device. Two BLUE checks = read. The ladder is rigorously enforced — there is no half-state, no animation between steps, no ambiguity.</p>
+          <p>Recipients can disable read receipts globally, which makes their last check stay gray. Groups disable read receipts when ≥ 32 members.</p>
+          <div class="ios-feat-tokens">
+            <code>sent: #54656F</code>
+            <code>delivered: #54656F</code>
+            <code>read: #34B7F1</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="receipts-stack">
+            <div class="receipt-row">
+              <div class="check-ic sent"><svg viewBox="0 0 11 11"><path d="M9 1L4 8 1.5 5.5"/></svg></div>
+              <div class="meta"><div class="lab">Sent</div><div class="spec">single gray check · uploaded</div></div>
+            </div>
+            <div class="receipt-row">
+              <div class="check-ic delivered"><svg viewBox="0 0 16 11"><path d="M11.4 0L6 5.4 5.6 5l5.4-5L11.4 0zM5.4 5.4L0 0l.6-.6L6 4.8l-.6.6zm5.4-5l-5.4 5.4-.6-.6L10.2-.2l.6.6z"/></svg></div>
+              <div class="meta"><div class="lab">Delivered</div><div class="spec">double gray · on device</div></div>
+            </div>
+            <div class="receipt-row">
+              <div class="check-ic read"><svg viewBox="0 0 16 11"><path d="M11.4 0L6 5.4 5.6 5l5.4-5L11.4 0zM5.4 5.4L0 0l.6-.6L6 4.8l-.6.6zm5.4-5l-5.4 5.4-.6-.6L10.2-.2l.6.6z"/></svg></div>
+              <div class="meta"><div class="lab">Read</div><div class="spec">double blue · #34B7F1</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>Two greens, one blue, paper-white canvas.</h2>
+        <p>Every token WhatsApp's iOS app reaches for — surface ladder, type ramp, radius scale, components. The bubbles are the lowest-radius non-pill element in the entire app — the corner says "this is the seam where two people meet."</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.whatsapp-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A two-green system — action green (<code>#25D366</code>) for new things, and conversation green (<code>#DCF8C6</code>) for what you've sent. Deep teal grounds the chat header. Blue means "they saw it." Everything else is paper.</p>
+
+      <div class="ds-caption">Brand Greens</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#25D366"></div><div class="name">Action</div><div class="val">#25D366</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#128C7E"></div><div class="name">Mid Teal</div><div class="val">#128C7E</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#075E54"></div><div class="name">Deep Teal</div><div class="val">#075E54</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#DCF8C6"></div><div class="name">Bubble Out</div><div class="val">#DCF8C6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ECE5DD"></div><div class="name">Wallpaper</div><div class="val">#ECE5DD</div></div>
+      </div>
+
+      <div class="ds-caption">Ink</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Ink Primary</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3B4A54"></div><div class="name">Ink 2</div><div class="val">#3B4A54</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#54656F"></div><div class="name">Ink Soft</div><div class="val">#54656F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#667781"></div><div class="name">Ink Muted</div><div class="val">#667781</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8696A0"></div><div class="name">Ink Dim</div><div class="val">#8696A0</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #efefef"></div><div class="name">Canvas</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F7F8FA;border:1px solid #efefef"></div><div class="name">Canvas Soft</div><div class="val">#F7F8FA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F0F2F5"></div><div class="name">Surface 2</div><div class="val">#F0F2F5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E9EDEF"></div><div class="name">Border</div><div class="val">#E9EDEF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EFF1F4"></div><div class="name">Hairline</div><div class="val">#EFF1F4</div></div>
+      </div>
+
+      <div class="ds-caption">Functional</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#34B7F1"></div><div class="name">Read Blue</div><div class="val">#34B7F1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0086CB"></div><div class="name">Link</div><div class="val">#0086CB</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EA4335"></div><div class="name">Negative</div><div class="val">#EA4335</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFD700"></div><div class="name">Warning</div><div class="val">#FFD700</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFF3C4"></div><div class="name">E2E Pill</div><div class="val">#FFF3C4</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">SF Pro Text on iOS (substituted with Inter here). Contact names 16/600. Message body 16/400. Timestamps 12 muted right-aligned. Numbers tabular for unread counts and timestamps.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--header-title</td><td class="sample" style="font-size:22px;font-weight:700;color:var(--brand-deep)">Chats</td><td>22 / 1.38rem</td><td>700</td><td>-0.4px</td></tr>
+          <tr><td class="token">--contact-name</td><td class="sample" style="font-size:16px;font-weight:600">Marie Kn.</td><td>16 / 1.00rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--message-body</td><td class="sample" style="font-size:16px;font-weight:400">Magic hour shots ready</td><td>16 / 1.00rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--preview</td><td class="sample" style="font-size:14px;font-weight:400;color:var(--ink-muted)">Saw your message about the studio</td><td>14 / 0.88rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--timestamp</td><td class="sample" style="font-size:12px;font-weight:400;color:var(--ink-muted);font-feature-settings:'tnum'">10:42</td><td>12 / 0.75rem</td><td>400 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--badge</td><td class="sample" style="font-size:11px;font-weight:700;color:#fff;background:var(--brand);padding:1px 6px;border-radius:9999px;font-feature-settings:'tnum'">3</td><td>11 / 0.69rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--bubble-time</td><td class="sample" style="font-size:11px;font-weight:400;color:#54656F99;font-feature-settings:'tnum'">10:18</td><td>11 / 0.69rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--e2e-notice</td><td class="sample" style="font-size:12px;color:#856404">Messages are end-to-end encrypted</td><td>12 / 0.75rem</td><td>400</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">The chat bubble lives at 7.5px — sharp enough to feel like ink on paper, soft enough to feel friendly. Avatars are perfect circles. The mic FAB is the only "extruded" element with elevated shadow.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Min</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Tile</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:7.5px"></div><div class="ds-radius-label">Bubble</div><div class="ds-radius-val">7.5px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:18px"></div><div class="ds-radius-label">Input</div><div class="ds-radius-val">18px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">9999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Avatar</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Avatar size</div><div class="tk-val">44pt</div><div class="tk-note">Chats list. Drops to 32pt in chat header, 46pt in Status.</div></div>
+        <div class="token-cell"><div class="tk-label">Bubble corner cut</div><div class="tk-val">0pt</div><div class="tk-note">Sender-side corner is 0 — the "speech tail" anchor. Other 3 corners 7.5pt.</div></div>
+        <div class="token-cell"><div class="tk-label">Chat header height</div><div class="tk-val">56pt</div><div class="tk-note">Always deep teal #075E54. Always shows last-seen.</div></div>
+        <div class="token-cell"><div class="tk-label">Wallpaper</div><div class="tk-val">#ECE5DD</div><div class="tk-note">Default. User can swap to solid, gradient, or photo per chat.</div></div>
+        <div class="token-cell"><div class="tk-label">Mic FAB</div><div class="tk-val">32pt</div><div class="tk-note">Hold to record. Slide left to cancel. Slide up to lock recording.</div></div>
+        <div class="token-cell"><div class="tk-label">Read receipt timing</div><div class="tk-val">≤ 2s</div><div class="tk-note">Server roundtrip from delivered → read.</div></div>
+        <div class="token-cell"><div class="tk-label">Date separator</div><div class="tk-val">10pt</div><div class="tk-note">Centered pill in chat. Renders "Today", "Yesterday", or DD MMM YYYY.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation curve</div><div class="tk-val">easeOut</div><div class="tk-note">0.22s. Sheet presentations use spring (0.5 response, 0.8 damping).</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">The vocabulary of a conversation app: pills for status, bubbles for content, circles for people.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Send</a>
+            <a class="btn btn-deep" href="#">Start chat</a>
+            <a class="btn btn-pill-light" href="#">Cancel</a>
+            <a class="btn btn-outline" href="#">Block</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button style="width:48px;height:48px;border-radius:50%;background:var(--brand-deep);display:grid;place-items:center;border:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><rect x="9" y="3" width="6" height="13" rx="3"/><path d="M19 11v1a7 7 0 01-14 0v-1" stroke="#fff" stroke-width="2" fill="none"/></svg></button>
+              <button style="width:48px;height:48px;border-radius:50%;background:var(--brand);display:grid;place-items:center;border:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="#fff" stroke-width="2" fill="none"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-light" placeholder="Ask Meta AI or Search" />
+            <input class="input-light" placeholder="Type a message" />
+            <div class="ds-card-row">
+              <span class="tag tag-green">Unread (3)</span>
+              <span class="tag tag-blue">Read</span>
+              <span class="tag tag-warn">E2E</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Bubbles</h5>
+          <div class="ds-card-stack" style="background:#ECE5DD;border-radius:10px;padding:14px;width:100%;gap:8px">
+            <div style="align-self:flex-start;background:#fff;border-radius:7.5px;border-top-left-radius:0;padding:5px 8px 4px;font-size:13px;max-width:80%;box-shadow:0 1px 0.5px rgba(0,0,0,.13)">Did you get the shots? <span style="font-size:10px;color:#54656F99;margin-left:6px">10:14</span></div>
+            <div style="align-self:flex-end;background:#DCF8C6;border-radius:7.5px;border-top-right-radius:0;padding:5px 8px 4px;font-size:13px;max-width:80%;box-shadow:0 1px 0.5px rgba(0,0,0,.13);display:flex;align-items:flex-end;gap:6px">Sending now ✨ <span style="font-size:10px;color:#54656F99;display:inline-flex;align-items:center;gap:2px">10:18 <svg width="12" height="9" viewBox="0 0 16 11" fill="#34B7F1"><path d="M11.4 0L6 5.4 5.6 5l5.4-5L11.4 0zM5.4 5.4L0 0l.6-.6L6 4.8l-.6.6z"/></svg></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.4 1.3 4.9L2 22l5.3-1.3c1.4.8 3.1 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></span>
+      WhatsApp iOS
+    </div>
+    <p>Design reference. Not affiliated with Meta Platforms, Inc. Token values are derived from the public iOS app and WhatsApp's published brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.whatsapp-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill-light" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.whatsapp-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.whatsapp-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

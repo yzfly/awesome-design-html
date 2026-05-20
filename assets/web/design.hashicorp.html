@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HashiCorp — Inspired Design</title>
+<meta name="description" content="A HashiCorp-inspired marketing page: near-black canvas, per-product chromatic identity, hashicorpSans-feel Inter, 8px CTAs, charcoal cards over surface lift. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #000000;
+  --on-primary: #ffffff;
+  --accent-blue: #2b89ff;
+  /* Text */
+  --ink: #ffffff;
+  --ink-muted: #b2b6bd;
+  --ink-subtle: #656a76;
+  /* Surface */
+  --canvas: #000000;
+  --surface-1: #15181e;
+  --surface-2: #1f232b;
+  --surface-3: #3b3d45;
+  --hairline: #3b3d45;
+  --hairline-soft: #252830;
+  --inverse-canvas: #ffffff;
+  --inverse-ink: #000000;
+  /* Per-product identity */
+  --p-terraform: #7b42bc;
+  --p-terraform-bright: #911ced;
+  --p-vault: #ffcf25;
+  --p-consul: #e62b1e;
+  --p-waypoint: #14c6cb;
+  --p-waypoint-deep: #12b6bb;
+  --p-vagrant: #1868f2;
+  --p-nomad: #00ca8e;
+  --p-boundary: #f24c53;
+  /* Semantic */
+  --success: #00ca8e;
+  --warning: #ffcf25;
+  --error: #e62b1e;
+  --visited: #a737ff;
+  --blue-7: #101a59;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", helvetica, arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent-blue); color: #fff; }
+
+/* Layout */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .wrap { padding: 0 20px; } }
+
+/* Eyebrow — hashicorpSans signature */
+.eyebrow {
+  font-size: 12px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--ink-muted);
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+/* Nav */
+.top-nav {
+  background: var(--canvas);
+  height: 64px;
+  border-bottom: 1px solid var(--hairline-soft);
+  position: sticky; top: 0; z-index: 30;
+}
+.nav-inner { height: 100%; display: flex; align-items: center; gap: 24px; }
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 16px; font-weight: 700; letter-spacing: -0.3px;
+  color: var(--ink);
+}
+.nav-center { display: flex; gap: 4px; margin-left: 24px; }
+.nav-center a {
+  font-size: 14px; font-weight: 500; color: var(--ink-muted);
+  padding: 8px 12px; border-radius: 6px;
+}
+.nav-center a:hover { color: var(--ink); background: var(--surface-1); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+/* Buttons — 8px radius */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px; font-weight: 600; line-height: 1.29;
+  cursor: pointer; border: 1px solid transparent;
+  transition: background .15s ease, color .15s ease;
+  text-decoration: none;
+}
+.btn-primary { background: var(--inverse-canvas); color: var(--inverse-ink); }
+.btn-primary:hover { background: #e9eaec; }
+.btn-secondary { background: var(--surface-2); color: var(--ink); }
+.btn-secondary:hover { background: var(--surface-3); }
+.btn-tertiary { background: transparent; color: var(--ink); border-color: var(--hairline); }
+.btn-tertiary:hover { background: var(--surface-1); }
+.btn-terraform { background: var(--p-terraform); color: #fff; }
+.btn-vault { background: var(--p-vault); color: var(--inverse-ink); }
+.btn-waypoint { background: var(--p-waypoint); color: var(--inverse-ink); }
+.btn-consul { background: var(--p-consul); color: #fff; }
+.btn-nomad { background: var(--p-nomad); color: var(--inverse-ink); }
+.btn-vagrant { background: var(--p-vagrant); color: #fff; }
+.btn-boundary { background: var(--p-boundary); color: #fff; }
+
+/* Pill */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--surface-1);
+  color: var(--ink-muted);
+  border: 1px solid var(--hairline);
+  padding: 4px 10px; border-radius: 9999px;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.2px;
+}
+.pill-dot { width: 8px; height: 8px; border-radius: 9999px; }
+
+/* Hero */
+.hero { padding: 96px 0 64px; position: relative; }
+.hero-inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+@media (max-width: 980px) { .hero-inner { grid-template-columns: 1fr; } }
+.hero h1 {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 700;
+  line-height: 1.17;
+  letter-spacing: -2.5px;
+  margin: 0 0 24px;
+}
+.hero h1 .accent-terraform { color: var(--p-terraform); }
+.hero p {
+  font-size: 18px; font-weight: 500; line-height: 1.69;
+  color: var(--ink-muted);
+  max-width: 540px;
+  margin: 0 0 28px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.hero-trust {
+  font-size: 13px; color: var(--ink-subtle);
+  letter-spacing: 0.2px;
+}
+.hero-trust strong { color: var(--ink); font-weight: 600; }
+
+/* Hero 3D product card — Terraform cube */
+.hero-art {
+  background: linear-gradient(160deg, var(--p-terraform) 0%, #4d2879 80%);
+  border-radius: 16px;
+  aspect-ratio: 4/3;
+  padding: 40px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.hero-art::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.18), transparent 60%);
+  pointer-events: none;
+}
+.hero-art .pill { background: rgba(0,0,0,0.35); border-color: rgba(255,255,255,0.2); color: #fff; }
+.hero-art .pill-dot { background: var(--p-vault); }
+.hero-art-cube {
+  position: relative; z-index: 1;
+  width: 200px; height: 200px; margin: 0 auto;
+}
+.hero-art h3 {
+  font-size: 22px; font-weight: 600; letter-spacing: -0.4px; line-height: 1.18;
+  margin: 0; color: #fff;
+}
+.hero-art p { color: rgba(255,255,255,0.85); font-size: 14px; margin: 8px 0 0; line-height: 1.71; }
+
+/* Sections */
+section { padding: 96px 0; }
+.section-head { margin-bottom: 56px; max-width: 880px; }
+h2.section-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -1.6px;
+  margin: 0 0 16px;
+}
+.section-lede {
+  font-size: 20px; font-weight: 500; line-height: 1.35;
+  letter-spacing: -0.2px;
+  color: var(--ink-muted);
+  max-width: 640px;
+}
+
+/* Product cards — per-product chromatic identity */
+.product-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+@media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) { .product-grid { grid-template-columns: 1fr; } }
+.pcard {
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 280px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  position: relative; overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+.pcard.surf { background: var(--surface-1); }
+.pcard.terraform { background: linear-gradient(140deg, var(--p-terraform), #5d2f8f 80%); color: #fff; border: 0; }
+.pcard.vault { background: linear-gradient(140deg, var(--p-vault), #d1a800 90%); color: var(--inverse-ink); border: 0; }
+.pcard.waypoint { background: linear-gradient(140deg, var(--p-waypoint), var(--p-waypoint-deep) 90%); color: var(--inverse-ink); border: 0; }
+.pcard.consul { background: linear-gradient(140deg, var(--p-consul), #a31c12 90%); color: #fff; border: 0; }
+.pcard.nomad { background: linear-gradient(140deg, var(--p-nomad), #018a62 90%); color: var(--inverse-ink); border: 0; }
+.pcard.vagrant { background: linear-gradient(140deg, var(--p-vagrant), #0d4abf 90%); color: #fff; border: 0; }
+.pcard.boundary { background: linear-gradient(140deg, var(--p-boundary), #b5363a 90%); color: #fff; border: 0; }
+.pcard h3 {
+  font-size: 22px; font-weight: 600; letter-spacing: -0.4px; line-height: 1.18;
+  margin: 0;
+}
+.pcard p { font-size: 14px; line-height: 1.71; margin: 8px 0 0; opacity: 0.9; }
+.pcard .pcard-pill {
+  align-self: flex-start;
+  background: rgba(0,0,0,0.28);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 9999px;
+  padding: 4px 10px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.pcard.vault .pcard-pill,
+.pcard.waypoint .pcard-pill,
+.pcard.nomad .pcard-pill { background: rgba(0,0,0,0.4); }
+.pcard.surf .pcard-pill { background: var(--surface-3); color: var(--ink-muted); border-color: var(--hairline); }
+.pcard .pcard-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+}
+.pcard.vault .pcard-icon, .pcard.waypoint .pcard-icon, .pcard.nomad .pcard-icon { background: rgba(0,0,0,0.18); }
+.pcard.surf .pcard-icon { background: var(--surface-2); }
+
+/* Feature cards */
+.feature-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+@media (max-width: 980px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 24px;
+}
+.feature-card h3 {
+  font-size: 22px; font-weight: 600; letter-spacing: -0.4px; line-height: 1.18;
+  margin: 0 0 8px;
+}
+.feature-card p { color: var(--ink-muted); font-size: 14px; line-height: 1.71; margin: 0; }
+.feature-card .ico { width: 40px; height: 40px; border-radius: 8px; background: var(--surface-2); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: var(--accent-blue); }
+
+/* Dashboard mockup centerpiece */
+.dash-band {
+  background: var(--surface-1);
+  border-top: 1px solid var(--hairline-soft);
+  border-bottom: 1px solid var(--hairline-soft);
+  padding: 96px 0;
+}
+.dash-mockup {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 56px;
+}
+.dash-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--hairline-soft);
+  background: var(--surface-1);
+  font-size: 13px; color: var(--ink-muted);
+}
+.dash-dot { width: 10px; height: 10px; border-radius: 9999px; background: var(--surface-3); }
+.dash-tabs { display: flex; gap: 4px; margin-left: 16px; }
+.dash-tab { font-size: 12px; padding: 4px 10px; border-radius: 6px; color: var(--ink-muted); }
+.dash-tab.active { background: var(--surface-2); color: var(--ink); }
+.dash-body { display: grid; grid-template-columns: 220px 1fr; min-height: 380px; }
+@media (max-width: 820px) { .dash-body { grid-template-columns: 1fr; } }
+.dash-side {
+  background: var(--surface-1);
+  border-right: 1px solid var(--hairline-soft);
+  padding: 20px 12px;
+}
+.dash-side h6 {
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--ink-subtle); margin: 0 0 8px; padding: 0 8px;
+}
+.side-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px; border-radius: 6px;
+  font-size: 13px; color: var(--ink-muted);
+}
+.side-row.active { background: var(--surface-2); color: var(--ink); }
+.side-pip { width: 8px; height: 8px; border-radius: 9999px; }
+.dash-main { padding: 24px; }
+.dash-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+@media (max-width: 820px) { .dash-stat-row { grid-template-columns: repeat(2,1fr); } }
+.dash-stat {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 14px;
+}
+.dash-stat .k { font-size: 11px; color: var(--ink-subtle); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;}
+.dash-stat .v { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; }
+.dash-stat .v.purple { color: var(--p-terraform-bright); }
+.dash-stat .v.yellow { color: var(--p-vault); }
+.dash-stat .v.cyan { color: var(--p-waypoint); }
+.dash-stat .v.green { color: var(--p-nomad); }
+.dash-chart {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 14px;
+  height: 200px;
+  position: relative;
+}
+.dash-chart .ch-title { font-size: 13px; color: var(--ink-muted); }
+.dash-chart svg { width: 100%; height: 150px; margin-top: 8px;}
+
+/* Pricing */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  margin-top: 56px;
+}
+@media (max-width: 980px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 32px;
+}
+.pricing-card.featured { background: var(--surface-2); }
+.pricing-card h3 {
+  font-size: 28px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.21;
+  margin: 0 0 8px;
+}
+.pricing-card .price {
+  font-size: 40px; font-weight: 600; letter-spacing: -1px; line-height: 1.19;
+  margin: 12px 0;
+}
+.pricing-card .price small {
+  font-size: 14px; font-weight: 500; color: var(--ink-muted); letter-spacing: 0;
+}
+.pricing-card p { color: var(--ink-muted); font-size: 14px; margin: 0 0 16px; line-height: 1.71;}
+.pricing-card ul { list-style: none; padding: 0; margin: 16px 0 24px; font-size: 14px; }
+.pricing-card ul li { padding: 8px 0; border-top: 1px solid var(--hairline-soft); display: flex; gap: 10px; color: var(--ink-muted); line-height: 1.71;}
+.pricing-card ul li::before { content: "→"; color: var(--accent-blue); font-weight: 700; }
+
+/* CTA banner */
+.cta-banner {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: 48px;
+  display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+}
+@media (max-width: 820px) { .cta-banner { grid-template-columns: 1fr; } }
+.cta-banner h3 {
+  font-size: 28px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.21;
+  margin: 0 0 8px;
+}
+.cta-banner p { color: var(--ink-muted); font-size: 16px; margin: 0; }
+
+/* ─── DS section ─── */
+.ds-section { padding: 96px 0; background: var(--canvas); }
+.ds-section h2.section-title { color: var(--ink); }
+.ds-row { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding: 40px 0; border-top: 1px solid var(--hairline-soft); }
+.ds-row > h3 {
+  font-size: 28px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.21; margin: 0;
+}
+.ds-sub { font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-subtle); margin-top: 8px; }
+@media (max-width: 820px) { .ds-row { grid-template-columns: 1fr; } }
+
+.color-group { margin-bottom: 32px; }
+.color-group:last-child { margin-bottom: 0; }
+.color-group h4 {
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--ink-muted); margin: 0 0 12px;
+}
+.color-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.swatch {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.chip {
+  height: 56px; border-radius: 6px;
+  border: 1px solid var(--hairline);
+}
+.chip-label { font-size: 14px; font-weight: 600; color: var(--ink); }
+.chip-hex { font-size: 12px; color: var(--ink-muted); font-feature-settings: "tnum"; letter-spacing: 0.2px; }
+
+.type-row {
+  display: grid; grid-template-columns: 200px 80px 1fr;
+  gap: 24px; align-items: baseline;
+  padding: 16px 0; border-top: 1px solid var(--hairline-soft);
+}
+.type-row:first-of-type { border-top: 0; }
+.type-token { font-size: 12px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; }
+.type-size { font-size: 12px; color: var(--ink-subtle); text-align: right; }
+.type-sample { color: var(--ink); }
+@media (max-width: 720px) { .type-row { grid-template-columns: 1fr; gap: 6px; } .type-size { text-align: left; } }
+
+.radius-row { display: flex; flex-wrap: wrap; gap: 16px; }
+.radius-card { flex: 1 1 130px; text-align: center; }
+.radius-tile {
+  height: 70px;
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  margin-bottom: 8px;
+}
+.radius-label { font-size: 12px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.6px; }
+
+.comp-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 720px) { .comp-matrix { grid-template-columns: 1fr; } }
+.comp-cell { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; }
+.comp-cell h5 {
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--ink-muted); margin: 0 0 16px;
+}
+.comp-stack { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input-rect {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  border-radius: 8px; padding: 10px 14px;
+  font-family: inherit; font-size: 16px; font-weight: 500;
+  width: 100%;
+}
+.input-rect:focus { outline: none; border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(43,137,255,0.18); }
+
+.ds-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--ink-muted);
+  margin-top: 24px;
+  text-transform: uppercase; letter-spacing: 0.6px;
+  border-bottom: 1px solid var(--hairline); padding-bottom: 2px;
+}
+
+/* Footer */
+.footer {
+  background: var(--canvas);
+  padding: 64px 32px;
+  border-top: 1px solid var(--hairline-soft);
+}
+.footer-inner { max-width: 1280px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 32px;
+}
+@media (max-width: 820px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+.footer-brand h4 {
+  font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin: 0 0 12px;
+}
+.footer-brand p { font-size: 14px; color: var(--ink-muted); line-height: 1.71; max-width: 280px; }
+.footer-col h5 {
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--ink-subtle); margin: 0 0 12px;
+}
+.footer-col a { display: block; font-size: 14px; color: var(--ink-muted); padding: 5px 0; }
+.footer-col a:hover { color: var(--ink); }
+.footer-bottom {
+  margin-top: 56px; padding-top: 24px;
+  border-top: 1px solid var(--hairline-soft);
+  display: flex; justify-content: space-between;
+  font-size: 13px; color: var(--ink-subtle); flex-wrap: wrap; gap: 12px; letter-spacing: 0.2px;
+}
+
+/* Floating DESIGN.md */
+.floating-design-link {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--surface-2); color: var(--ink);
+  padding: 10px 18px; border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  z-index: 50; border: 1px solid var(--hairline);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.floating-design-link:hover { background: var(--surface-3); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2 L22 7.5 V16.5 L12 22 L2 16.5 V7.5 Z" fill="none" stroke="#fff" stroke-width="2"/>
+        <path d="M8 8 H16 V16 H8 Z" fill="#fff"/>
+      </svg>
+      HashiCorp
+    </a>
+    <div class="nav-center">
+      <a href="#">Infrastructure</a>
+      <a href="#">Security</a>
+      <a href="#">Networking</a>
+      <a href="#">Resources</a>
+      <a href="#">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="btn btn-secondary">Sign in</a>
+      <a href="#" class="btn btn-primary">Sign up</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">INFRASTRUCTURE CLOUD</span>
+        <h1>The infrastructure cloud, with <span class="accent-terraform">Terraform</span> at its core.</h1>
+        <p>Provision, secure, connect, and run any infrastructure for any application. A unified platform for cloud and on-premises, anchored on one workflow.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary">Try HCP free</a>
+          <a href="#" class="btn btn-tertiary">Talk to sales</a>
+        </div>
+        <p class="hero-trust">Trusted by <strong>4,400+</strong> organizations · <strong>50%</strong> of the Fortune 500</p>
+      </div>
+      <div class="hero-art">
+        <span class="pill"><span class="pill-dot"></span>TERRAFORM · v1.10</span>
+        <svg class="hero-art-cube" viewBox="0 0 220 220" aria-hidden="true">
+          <defs>
+            <linearGradient id="cubeTop" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#c89eff"/>
+              <stop offset="100%" stop-color="#7b42bc"/>
+            </linearGradient>
+            <linearGradient id="cubeLeft" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#7b42bc"/>
+              <stop offset="100%" stop-color="#4a256e"/>
+            </linearGradient>
+            <linearGradient id="cubeRight" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#911ced"/>
+              <stop offset="100%" stop-color="#5a1099"/>
+            </linearGradient>
+          </defs>
+          <polygon points="110,30 190,75 110,120 30,75" fill="url(#cubeTop)" stroke="rgba(255,255,255,0.5)"/>
+          <polygon points="30,75 110,120 110,200 30,155" fill="url(#cubeLeft)" stroke="rgba(255,255,255,0.3)"/>
+          <polygon points="190,75 110,120 110,200 190,155" fill="url(#cubeRight)" stroke="rgba(255,255,255,0.3)"/>
+        </svg>
+        <div>
+          <h3>One workflow, every cloud.</h3>
+          <p>terraform plan · terraform apply · drift-free.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SPECTRUM -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">PRODUCT PORTFOLIO</span>
+      <h2 class="section-title">Eight tools, one platform.</h2>
+      <p class="section-lede">Each HashiCorp tool owns a colour. Read a section's accent at a glance — purple means Terraform, yellow means Vault, cyan means Waypoint.</p>
+    </div>
+    <div class="product-grid">
+      <article class="pcard terraform">
+        <span class="pcard-pill">Terraform</span>
+        <div class="pcard-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2 L22 7 V17 L12 22 L2 17 V7 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div>
+          <h3>Provision infrastructure as code.</h3>
+          <p>Declare, plan, and apply — repeatable infra across every cloud you ship to.</p>
+        </div>
+      </article>
+      <article class="pcard vault">
+        <span class="pcard-pill">Vault</span>
+        <div class="pcard-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <h3>Manage secrets and protect identity.</h3>
+          <p>One API for secrets, encryption, keys, and machine identity at any scale.</p>
+        </div>
+      </article>
+      <article class="pcard waypoint">
+        <span class="pcard-pill">Waypoint</span>
+        <div class="pcard-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 4 L20 4 L20 14 L12 22 L4 14 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div>
+          <h3>Application delivery, paved roads.</h3>
+          <p>Build, deploy, release with a single workflow — engineered to remove glue code.</p>
+        </div>
+      </article>
+      <article class="pcard consul">
+        <span class="pcard-pill">Consul</span>
+        <div class="pcard-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <h3>Connect services, anywhere.</h3>
+          <p>Service mesh and discovery across multi-cloud, multi-runtime, multi-region.</p>
+        </div>
+      </article>
+      <article class="pcard nomad">
+        <span class="pcard-pill">Nomad</span>
+        <div class="pcard-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div>
+          <h3>Orchestrate any workload.</h3>
+          <p>Containers, batch jobs, legacy binaries — scheduled across one cluster.</p>
+        </div>
+      </article>
+      <article class="pcard boundary">
+        <span class="pcard-pill">Boundary</span>
+        <div class="pcard-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8 V5 a4 4 0 0 1 8 0 V8" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div>
+          <h3>Zero-trust privileged access.</h3>
+          <p>Identity-based access to hosts and services without managing VPNs.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD MOCKUP BAND -->
+<section class="dash-band">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">UNIFIED OBSERVABILITY</span>
+      <h2 class="section-title">One pane.<br>Every product.</h2>
+      <p class="section-lede">HCP unifies Terraform runs, Vault tokens, Consul mesh health, and Nomad allocations into one operator console.</p>
+    </div>
+    <div class="dash-mockup">
+      <div class="dash-header">
+        <span class="dash-dot"></span><span class="dash-dot"></span><span class="dash-dot"></span>
+        <span style="margin-left:8px">app.hashicorp.cloud / overview</span>
+        <div class="dash-tabs">
+          <span class="dash-tab active">Overview</span>
+          <span class="dash-tab">Runs</span>
+          <span class="dash-tab">Policies</span>
+          <span class="dash-tab">Audit</span>
+        </div>
+      </div>
+      <div class="dash-body">
+        <aside class="dash-side">
+          <h6>Products</h6>
+          <div class="side-row active"><span class="side-pip" style="background:var(--p-terraform-bright)"></span>Terraform</div>
+          <div class="side-row"><span class="side-pip" style="background:var(--p-vault)"></span>Vault</div>
+          <div class="side-row"><span class="side-pip" style="background:var(--p-waypoint)"></span>Waypoint</div>
+          <div class="side-row"><span class="side-pip" style="background:var(--p-consul)"></span>Consul</div>
+          <div class="side-row"><span class="side-pip" style="background:var(--p-nomad)"></span>Nomad</div>
+          <div class="side-row"><span class="side-pip" style="background:var(--p-boundary)"></span>Boundary</div>
+          <h6 style="margin-top:20px">Workspaces</h6>
+          <div class="side-row">payments-prod</div>
+          <div class="side-row">ml-platform</div>
+          <div class="side-row">edge-network</div>
+        </aside>
+        <main class="dash-main">
+          <div class="dash-stat-row">
+            <div class="dash-stat"><div class="k">Active runs</div><div class="v purple">147</div></div>
+            <div class="dash-stat"><div class="k">Secrets vaulted</div><div class="v yellow">2.8k</div></div>
+            <div class="dash-stat"><div class="k">Mesh nodes</div><div class="v cyan">412</div></div>
+            <div class="dash-stat"><div class="k">SLA · 30d</div><div class="v green">99.99%</div></div>
+          </div>
+          <div class="dash-chart">
+            <div class="ch-title">terraform apply · last 24h</div>
+            <svg viewBox="0 0 600 130" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="grad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#911ced" stop-opacity="0.5"/>
+                  <stop offset="100%" stop-color="#911ced" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,100 L50,90 L100,75 L150,80 L200,55 L250,60 L300,40 L350,48 L400,32 L450,42 L500,28 L550,30 L600,18 L600,130 L0,130 Z" fill="url(#grad)"/>
+              <path d="M0,100 L50,90 L100,75 L150,80 L200,55 L250,60 L300,40 L350,48 L400,32 L450,42 L500,28 L550,30 L600,18" fill="none" stroke="#911ced" stroke-width="2"/>
+              <g font-size="10" fill="#656a76">
+                <text x="0" y="125">00:00</text>
+                <text x="200" y="125">08:00</text>
+                <text x="400" y="125">16:00</text>
+                <text x="560" y="125">24:00</text>
+              </g>
+            </svg>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE GRID -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">PLATFORM PRINCIPLES</span>
+      <h2 class="section-title">Engineered for the operator.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4 H20 V20 H4 Z"/><path d="M4 10 H20 M10 4 V20"/></svg></div>
+        <h3>Policy as code.</h3>
+        <p>Sentinel and OPA enforce guardrails at plan time — never apply a non-compliant change.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12 H21 M12 3 a14 14 0 0 1 0 18 a14 14 0 0 1 0 -18"/></svg></div>
+        <h3>Multi-cloud, native.</h3>
+        <p>AWS, Azure, GCP, on-prem — one workflow without vendor-specific glue code.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12 L10 18 L20 6"/></svg></div>
+        <h3>Drift-free state.</h3>
+        <p>Remote state with locking, audit, and continuous reconciliation against live infra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">PRICING</span>
+      <h2 class="section-title">Start free.<br>Pay as you scale.</h2>
+    </div>
+    <div class="pricing-grid">
+      <article class="pricing-card">
+        <h3>Free</h3>
+        <div class="price">$0<small> /month</small></div>
+        <p>Up to 500 managed resources. Perfect for solo operators and learning.</p>
+        <ul>
+          <li>Public registry</li>
+          <li>State backend</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#" class="btn btn-tertiary">Start free</a>
+      </article>
+      <article class="pricing-card featured">
+        <h3>Standard</h3>
+        <div class="price">$0.00014<small> /resource·hour</small></div>
+        <p>For teams running production workloads with policy &amp; collaboration.</p>
+        <ul>
+          <li>Sentinel policies</li>
+          <li>RBAC + SSO</li>
+          <li>Audit log retention</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Try HCP</a>
+      </article>
+      <article class="pricing-card">
+        <h3>Plus</h3>
+        <div class="price">Custom<small> · annual</small></div>
+        <p>For platform teams with compliance, regional residency, and dedicated capacity.</p>
+        <ul>
+          <li>FedRAMP-ready posture</li>
+          <li>Private networking</li>
+          <li>Dedicated support engineer</li>
+          <li>SOC 2 + HIPAA</li>
+        </ul>
+        <a href="#" class="btn btn-tertiary">Talk to sales</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-banner">
+      <div>
+        <h3>Bring infra-as-code to your team.</h3>
+        <p>Try HCP free with no credit card. Spin up Terraform, Vault, and Boundary in minutes.</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="#" class="btn btn-primary">Try HCP free</a>
+        <a href="#" class="btn btn-tertiary">Read docs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PART B — DESIGN SYSTEM REFERENCE ─── -->
+<section class="ds-section" id="design-system">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">DESIGN SYSTEM</span>
+      <h2 class="section-title">Tokens, by HashiCorp.</h2>
+      <p class="section-lede">A black canvas, charcoal lift, seven product accents. Engineered hierarchy carries every page.</p>
+      <a class="ds-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.hashicorp.html" target="_blank" rel="noopener">→ READ THE FULL DESIGN.MD</a>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-row">
+      <div>
+        <h3>Color</h3>
+        <div class="ds-sub">grouped &amp; named</div>
+      </div>
+      <div>
+        <div class="color-group">
+          <h4>Surface</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#000"></div><span class="chip-label">canvas</span><span class="chip-hex">#000000</span></div>
+            <div class="swatch"><div class="chip" style="background:#15181e"></div><span class="chip-label">surface-1</span><span class="chip-hex">#15181e</span></div>
+            <div class="swatch"><div class="chip" style="background:#1f232b"></div><span class="chip-label">surface-2</span><span class="chip-hex">#1f232b</span></div>
+            <div class="swatch"><div class="chip" style="background:#3b3d45"></div><span class="chip-label">surface-3</span><span class="chip-hex">#3b3d45</span></div>
+            <div class="swatch"><div class="chip" style="background:#ffffff"></div><span class="chip-label">inverse-canvas</span><span class="chip-hex">#ffffff</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Text</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#ffffff"></div><span class="chip-label">ink</span><span class="chip-hex">#ffffff</span></div>
+            <div class="swatch"><div class="chip" style="background:#b2b6bd"></div><span class="chip-label">ink-muted</span><span class="chip-hex">#b2b6bd</span></div>
+            <div class="swatch"><div class="chip" style="background:#656a76"></div><span class="chip-label">ink-subtle</span><span class="chip-hex">#656a76</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Per-product identity</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#7b42bc"></div><span class="chip-label">terraform</span><span class="chip-hex">#7b42bc</span></div>
+            <div class="swatch"><div class="chip" style="background:#911ced"></div><span class="chip-label">terraform-bright</span><span class="chip-hex">#911ced</span></div>
+            <div class="swatch"><div class="chip" style="background:#ffcf25"></div><span class="chip-label">vault</span><span class="chip-hex">#ffcf25</span></div>
+            <div class="swatch"><div class="chip" style="background:#e62b1e"></div><span class="chip-label">consul</span><span class="chip-hex">#e62b1e</span></div>
+            <div class="swatch"><div class="chip" style="background:#14c6cb"></div><span class="chip-label">waypoint</span><span class="chip-hex">#14c6cb</span></div>
+            <div class="swatch"><div class="chip" style="background:#1868f2"></div><span class="chip-label">vagrant</span><span class="chip-hex">#1868f2</span></div>
+            <div class="swatch"><div class="chip" style="background:#00ca8e"></div><span class="chip-label">nomad</span><span class="chip-hex">#00ca8e</span></div>
+            <div class="swatch"><div class="chip" style="background:#f24c53"></div><span class="chip-label">boundary</span><span class="chip-hex">#f24c53</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Semantic &amp; accent</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#2b89ff"></div><span class="chip-label">accent-blue</span><span class="chip-hex">#2b89ff</span></div>
+            <div class="swatch"><div class="chip" style="background:#00ca8e"></div><span class="chip-label">success</span><span class="chip-hex">#00ca8e</span></div>
+            <div class="swatch"><div class="chip" style="background:#ffcf25"></div><span class="chip-label">warning</span><span class="chip-hex">#ffcf25</span></div>
+            <div class="swatch"><div class="chip" style="background:#e62b1e"></div><span class="chip-label">error</span><span class="chip-hex">#e62b1e</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="ds-row">
+      <div>
+        <h3>Type</h3>
+        <div class="ds-sub">hashicorpSans · weight contrast</div>
+      </div>
+      <div>
+        <div class="type-row">
+          <span class="type-token">display-xl</span><span class="type-size">80 / -2.5</span>
+          <span class="type-sample" style="font-size:48px;font-weight:700;line-height:1.17;letter-spacing:-1.6px">Engineered for operators.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">display-lg</span><span class="type-size">56 / -1.6</span>
+          <span class="type-sample" style="font-size:36px;font-weight:700;line-height:1.18;letter-spacing:-1px">Section opener headline.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">display-md</span><span class="type-size">40 / -1</span>
+          <span class="type-sample" style="font-size:30px;font-weight:600;line-height:1.19;letter-spacing:-0.8px">Sub-section headline.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">headline</span><span class="type-size">28 / -0.6</span>
+          <span class="type-sample" style="font-size:22px;font-weight:600;line-height:1.21;letter-spacing:-0.4px">Pricing tier · CTA banner head.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">body-lg</span><span class="type-size">18 / 0</span>
+          <span class="type-sample" style="font-size:18px;font-weight:500;line-height:1.69">Relaxed body type at 1.69 — the proportional gap to display IS the brand voice.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">body</span><span class="type-size">16 / 0</span>
+          <span class="type-sample" style="font-size:16px;font-weight:500;line-height:1.5">Default body type at weight 500.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">caption</span><span class="type-size">13 / 0.2</span>
+          <span class="type-sample" style="font-size:13px;font-weight:500;letter-spacing:0.2px;color:var(--ink-muted)">Comparison meta · 13 / 500 / 0.2px tracking.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">eyebrow</span><span class="type-size">12 / 0.6</span>
+          <span class="type-sample" style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:var(--ink-muted)">UPPERCASE SECTION HEADER</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-row">
+      <div>
+        <h3>Radius</h3>
+        <div class="ds-sub">8px is the rule</div>
+      </div>
+      <div>
+        <div class="radius-row">
+          <div class="radius-card"><div class="radius-tile" style="border-radius:4px"></div><span class="radius-label">XS · 4</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:6px"></div><span class="radius-label">SM · 6</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:8px"></div><span class="radius-label">MD · 8</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:12px"></div><span class="radius-label">LG · 12</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:16px"></div><span class="radius-label">XL · 16</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:24px"></div><span class="radius-label">XXL · 24</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:9999px;height:40px;margin-top:15px"></div><span class="radius-label">PILL</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-row">
+      <div>
+        <h3>Components</h3>
+        <div class="ds-sub">working matrix</div>
+      </div>
+      <div>
+        <div class="comp-matrix">
+          <div class="comp-cell">
+            <h5>BUTTONS · CORE</h5>
+            <div class="comp-stack">
+              <a class="btn btn-primary">Sign up</a>
+              <a class="btn btn-secondary">Sign in</a>
+              <a class="btn btn-tertiary">Read docs</a>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>BUTTONS · PER-PRODUCT</h5>
+            <div class="comp-stack">
+              <a class="btn btn-terraform">Terraform</a>
+              <a class="btn btn-vault">Vault</a>
+              <a class="btn btn-waypoint">Waypoint</a>
+              <a class="btn btn-consul">Consul</a>
+              <a class="btn btn-nomad">Nomad</a>
+              <a class="btn btn-vagrant">Vagrant</a>
+              <a class="btn btn-boundary">Boundary</a>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>PILLS</h5>
+            <div class="comp-stack">
+              <span class="pill"><span class="pill-dot" style="background:var(--p-terraform-bright)"></span>TERRAFORM</span>
+              <span class="pill"><span class="pill-dot" style="background:var(--p-vault)"></span>VAULT</span>
+              <span class="pill"><span class="pill-dot" style="background:var(--p-waypoint)"></span>WAYPOINT</span>
+              <span class="pill"><span class="pill-dot" style="background:var(--p-nomad)"></span>NOMAD</span>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>TEXT INPUT</h5>
+            <input class="input-rect" placeholder="Search workspaces, runs, secrets…" />
+          </div>
+          <div class="comp-cell" style="grid-column:1/-1">
+            <h5>FEATURE CARD</h5>
+            <div class="feature-grid" style="margin-top:0">
+              <div class="feature-card">
+                <div class="ico">▣</div>
+                <h3>Hairline + surface lift.</h3>
+                <p>Cards lift via surface change, not shadow. 1px hairline edge is the brand's signature.</p>
+              </div>
+              <div class="feature-card" style="border-color:var(--accent-blue)">
+                <div class="ico" style="background:rgba(43,137,255,0.18);color:#fff;">→</div>
+                <h3>Focused state.</h3>
+                <p>Accent-blue ring on focused inputs and selected cards. No drop shadow on dark.</p>
+              </div>
+              <article class="pcard terraform" style="min-height:auto;padding:24px">
+                <span class="pcard-pill">PRODUCT CARD</span>
+                <h3 style="margin-top:8px">Terraform identity surface.</h3>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>HashiCorp</h4>
+        <p>Infrastructure cloud — provision, secure, connect, run. Inspired tribute, not affiliated with HashiCorp, Inc.</p>
+      </div>
+      <div class="footer-col">
+        <h5>PRODUCTS</h5>
+        <a href="#">Terraform</a><a href="#">Vault</a><a href="#">Consul</a><a href="#">Nomad</a><a href="#">Boundary</a>
+      </div>
+      <div class="footer-col">
+        <h5>RESOURCES</h5>
+        <a href="#">Docs</a><a href="#">Tutorials</a><a href="#">Whitepapers</a><a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h5>COMPANY</h5>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>LEGAL</h5>
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Trust</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 INSPIRED TRIBUTE · AWESOME-DESIGN-MD</span>
+      <span>DESIGN.HASHICORP.HTML</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.hashicorp.html" target="_blank" rel="noopener">
+  View DESIGN.md
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

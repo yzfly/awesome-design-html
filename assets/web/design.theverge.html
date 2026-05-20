@@ -1,0 +1,1240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Verge — Inspired Design</title>
+<meta name="description" content="A Verge-inspired editorial tribute: canvas-black, acid-mint and ultraviolet hazard accents, Manuka-style 107px display via Archivo Black, mono uppercase labels, StoryStream timeline, color-block story tiles. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;500;700&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand hazards */
+  --mint: #3cffd0;
+  --mint-border: #309875;
+  --ultraviolet: #5200ff;
+  --purple-rule: #3d00bf;
+  /* Link */
+  --link-hover: #3860be;
+  --focus-cyan: #1eaedb;
+  /* Surface */
+  --canvas: #131313;
+  --slate: #2d2d2d;
+  --image-frame: #313131;
+  --white: #ffffff;
+  --absolute-black: #000000;
+  /* Text */
+  --primary-text: #ffffff;
+  --muted-text: #e9e9e9;
+  --secondary-text: #949494;
+  --inverted-text: #131313;
+  --dim-gray: #8c8c8c;
+  /* Color-block tile fills */
+  --tile-yellow: #ffe34d;
+  --tile-pink: #ff7eb6;
+  --tile-orange: #ff7a3a;
+  --tile-blue: #4d8aff;
+  --tile-purple: #b95eff;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  background: var(--canvas);
+  color: var(--primary-text);
+  font-size: 16px;
+  line-height: 1.60;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; transition: color 150ms ease; }
+a:hover { color: var(--link-hover); }
+::selection { background: var(--mint); color: var(--absolute-black); }
+
+.mono { font-family: "Space Mono", "Courier New", monospace; }
+.serif { font-family: "Newsreader", Georgia, serif; }
+
+.display {
+  font-family: "Archivo Black", Impact, "Helvetica Neue", sans-serif;
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: 1.07px;
+  text-transform: none;
+}
+
+.kicker {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--secondary-text);
+}
+.kicker-mint { color: var(--mint); }
+.eyebrow-thin {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 300;
+  font-size: 19px;
+  text-transform: uppercase;
+  letter-spacing: 1.9px;
+  line-height: 1.2;
+  color: var(--white);
+}
+.tag {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+.tag-mint { background: var(--mint); color: var(--absolute-black); }
+.tag-violet { background: var(--ultraviolet); color: var(--white); }
+.tag-white { background: var(--white); color: var(--absolute-black); }
+.tag-yellow { background: var(--tile-yellow); color: var(--absolute-black); }
+
+/* Layout */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+.wrap-narrow { max-width: 980px; margin: 0 auto; padding: 0 48px; }
+@media (max-width: 760px) {
+  .wrap, .wrap-narrow { padding: 0 20px; }
+}
+
+/* Nav */
+.top-nav {
+  border-bottom: 1px solid var(--image-frame);
+  padding: 14px 0;
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+}
+.nav-inner { display: flex; align-items: center; gap: 24px; }
+.brand-mini {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  color: var(--white);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.brand-mini::before {
+  content: "▲";
+  color: var(--mint);
+  font-size: 14px;
+}
+.nav-cats { display: flex; gap: 20px; margin-left: 12px; }
+.nav-cats a {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--white);
+}
+.nav-cats a.active {
+  box-shadow: 0px -1px 0px 0px inset var(--mint);
+  padding-bottom: 2px;
+}
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+@media (max-width: 900px) { .nav-cats { display: none; } }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 10px 24px;
+  border-radius: 24px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+.btn-primary { background: var(--mint); color: var(--absolute-black); border-color: var(--mint); }
+.btn-primary:hover { background: rgba(255,255,255,0.2); color: var(--absolute-black); border-color: #c2c2c2; }
+.btn-secondary { background: var(--slate); color: var(--muted-text); border-color: var(--slate); }
+.btn-secondary:hover { background: rgba(255,255,255,0.2); color: var(--absolute-black); border-color: #c2c2c2; }
+.btn-outline-mint { background: transparent; color: var(--mint); border-color: var(--mint); border-radius: 40px; }
+.btn-outline-mint:hover { background: var(--mint); color: var(--absolute-black); }
+.btn-outline-violet { background: transparent; color: var(--white); border-color: var(--ultraviolet); border-radius: 30px; }
+.btn-outline-violet:hover { background: var(--ultraviolet); color: var(--white); }
+
+/* Masthead — massive wordmark */
+.masthead {
+  padding: 36px 0 32px;
+  border-bottom: 1px solid var(--image-frame);
+}
+.masthead-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+  align-items: flex-end;
+}
+@media (max-width: 980px) { .masthead-grid { grid-template-columns: 1fr; } }
+.wordmark {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(56px, 12vw, 160px);
+  line-height: 0.82;
+  letter-spacing: 1.07px;
+  color: var(--white);
+  margin: 0;
+}
+.wordmark .va { color: var(--mint); }
+.masthead-meta {
+  display: flex; flex-direction: column; gap: 14px;
+  padding-bottom: 10px;
+}
+.masthead-meta .eyebrow-thin { color: var(--white); }
+.masthead-meta .deck {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 19px;
+  line-height: 1.35;
+  color: var(--muted-text);
+  letter-spacing: -0.16px;
+}
+.masthead-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Lead Hero — color-block feature row */
+.lead-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 18px;
+  padding: 40px 0 16px;
+}
+@media (max-width: 980px) { .lead-row { grid-template-columns: 1fr; } }
+
+.lead-hero {
+  background: var(--mint);
+  color: var(--absolute-black);
+  border-radius: 24px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+}
+.lead-hero .lh-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.lead-hero h1 {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(40px, 5.6vw, 78px);
+  line-height: 0.92;
+  letter-spacing: 0.5px;
+  margin: 0;
+  color: var(--absolute-black);
+}
+.lead-hero .lh-meta { display: flex; gap: 16px; align-items: center; font-family: "Space Mono", monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--absolute-black); flex-wrap: wrap; }
+.lead-art {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0c1a3b 0%, #5200ff 50%, #ff7eb6 100%);
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.lead-side { display: flex; flex-direction: column; gap: 18px; }
+.lead-card-vio {
+  background: var(--ultraviolet);
+  color: var(--white);
+  border-radius: 24px;
+  padding: 28px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+.lead-card-vio h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: 0.32px;
+  font-weight: 400;
+  margin: 0;
+}
+.lead-card-dark {
+  background: var(--canvas);
+  border: 1px solid var(--white);
+  border-radius: 24px;
+  padding: 28px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+.lead-card-dark h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.00;
+  margin: 0;
+  color: var(--white);
+}
+.lead-card-dark:hover h2 { color: var(--link-hover); }
+
+/* ─── StoryStream timeline ─── */
+.section {
+  padding: 64px 0;
+  border-top: 1px solid var(--image-frame);
+}
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; margin-bottom: 28px; flex-wrap: wrap;
+}
+.section-head .left { max-width: 720px; }
+.section-head h2 {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 0.92;
+  letter-spacing: 0.5px;
+  margin: 10px 0 0;
+}
+.section-head p {
+  max-width: 360px;
+  font-size: 15px;
+  color: var(--secondary-text);
+  margin: 0;
+}
+
+.stream-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  align-items: flex-start;
+}
+@media (max-width: 980px) { .stream-layout { grid-template-columns: 1fr; } }
+
+.stream {
+  position: relative;
+  padding-left: 96px;
+}
+.stream::before {
+  content: "";
+  position: absolute;
+  left: 80px; top: 8px; bottom: 8px;
+  width: 1px;
+  background-image: linear-gradient(180deg, var(--purple-rule) 50%, transparent 50%);
+  background-size: 1px 8px;
+  background-repeat: repeat-y;
+}
+.stream-item {
+  position: relative;
+  margin-bottom: 14px;
+  background: var(--canvas);
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  padding: 22px 24px;
+  transition: border-color 150ms ease;
+}
+.stream-item:hover { border-color: var(--mint); }
+.stream-item:hover h3 { color: var(--link-hover); }
+.stream-item .ts {
+  position: absolute;
+  left: -96px;
+  top: 26px;
+  width: 72px;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: var(--secondary-text);
+  text-align: right;
+}
+.stream-item .stk {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.stream-item h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 8px;
+  color: var(--white);
+}
+.stream-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted-text);
+}
+.stream-item .by {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--secondary-text);
+}
+
+/* Color block break tiles inside stream */
+.stream-block {
+  border-radius: 24px;
+  padding: 28px;
+  margin-bottom: 14px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 200px;
+  justify-content: space-between;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.stream-block.b-mint { background: var(--mint); color: var(--absolute-black); border-color: var(--mint-border); }
+.stream-block.b-violet { background: var(--ultraviolet); color: var(--white); border-color: rgba(255,255,255,0.15); }
+.stream-block.b-yellow { background: var(--tile-yellow); color: var(--absolute-black); }
+.stream-block.b-pink { background: var(--tile-pink); color: var(--absolute-black); }
+.stream-block.b-orange { background: var(--tile-orange); color: var(--absolute-black); }
+.stream-block.b-white { background: var(--white); color: var(--absolute-black); }
+.stream-block .ts {
+  position: absolute;
+  left: -96px;
+  top: 32px;
+  width: 72px;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: var(--secondary-text);
+  text-align: right;
+}
+.stream-block h3 {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 36px;
+  line-height: 0.92;
+  letter-spacing: 0.4px;
+  margin: 0;
+}
+.stream-block .meta {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Sidebar */
+.side-rail { display: flex; flex-direction: column; gap: 16px; }
+.side-card {
+  background: var(--slate);
+  border-radius: 20px;
+  padding: 22px;
+  border: 1px solid var(--image-frame);
+}
+.side-card h4 {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--mint);
+  margin: 0 0 16px;
+}
+.side-card .item {
+  padding: 12px 0;
+  border-top: 1px solid var(--image-frame);
+  font-size: 14px;
+  color: var(--white);
+  line-height: 1.35;
+}
+.side-card .item:first-of-type { border-top: none; padding-top: 0; }
+.side-card .item .by { font-family: "Space Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--secondary-text); margin-bottom: 4px; }
+.side-card .item:hover { color: var(--link-hover); }
+
+/* Subscribe block */
+.subscribe {
+  background: var(--canvas);
+  border: 1px solid var(--ultraviolet);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.subscribe h4 {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 28px;
+  line-height: 0.95;
+  margin: 0;
+  color: var(--white);
+}
+.subscribe p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--secondary-text);
+  line-height: 1.5;
+}
+.subscribe .btn { align-self: flex-start; }
+
+/* Reviews / pricing-style cards row */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) { .review-grid { grid-template-columns: 1fr; } }
+.review-card {
+  background: var(--canvas);
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 280px;
+}
+.review-card.featured { background: var(--mint); color: var(--absolute-black); border-color: var(--mint-border); }
+.review-card.featured h3, .review-card.featured .score { color: var(--absolute-black); }
+.review-card .score {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 80px;
+  line-height: 0.9;
+  letter-spacing: 0.5px;
+  color: var(--white);
+}
+.review-card .out-of {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.review-card h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--white);
+}
+.review-card p.serif {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0;
+  letter-spacing: -0.16px;
+}
+.review-card .by {
+  margin-top: auto;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--secondary-text);
+}
+.review-card.featured .by { color: rgba(0,0,0,0.55); }
+
+/* Subscribe-CTA section */
+.sub-cta {
+  border-top: 1px solid var(--image-frame);
+  padding: 96px 0;
+  text-align: center;
+}
+.sub-cta h2 {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(56px, 10vw, 120px);
+  line-height: 0.85;
+  letter-spacing: 1px;
+  margin: 0 auto 24px;
+  max-width: 1100px;
+  color: var(--white);
+}
+.sub-cta h2 .mint { color: var(--mint); }
+.sub-cta p {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 19px;
+  color: var(--muted-text);
+  margin: 0 auto 28px;
+  max-width: 600px;
+  letter-spacing: -0.16px;
+}
+
+/* ─── DS REFERENCE ─── */
+.ds {
+  background: var(--canvas);
+  padding: 96px 0;
+  border-top: 1px solid var(--mint);
+}
+.ds-head { margin-bottom: 56px; max-width: 880px; }
+.ds-head h2 {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.88;
+  letter-spacing: 0.8px;
+  margin: 14px 0 16px;
+  color: var(--white);
+}
+.ds-head h2 .mint { color: var(--mint); }
+.ds-head p {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--muted-text);
+  letter-spacing: -0.16px;
+  margin: 0;
+  max-width: 720px;
+}
+.ds-block { margin-bottom: 64px; }
+.ds-block h3 {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--mint);
+  margin: 0 0 24px;
+}
+
+.color-group { margin-bottom: 28px; }
+.color-group-label {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--secondary-text);
+  margin-bottom: 14px;
+}
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+}
+.swatch {
+  background: var(--canvas);
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.swatch-chip {
+  height: 56px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.swatch-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+.swatch-hex {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--secondary-text);
+}
+
+.type-table, .comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.type-table th, .type-table td,
+.comp-table th, .comp-table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--image-frame);
+  color: var(--muted-text);
+  vertical-align: middle;
+}
+.type-table th, .comp-table th {
+  color: var(--mint);
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: var(--slate);
+}
+.type-table .preview { color: var(--white); }
+.type-table tr:last-child td, .comp-table tr:last-child td { border-bottom: none; }
+
+.radius-ladder {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+.radius-cell {
+  border: 1px solid var(--white);
+  background: var(--canvas);
+  padding: 22px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  border-radius: 20px;
+}
+.radius-vis {
+  width: 80px; height: 80px;
+  background: var(--mint);
+}
+.radius-cell .v {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 18px;
+  color: var(--white);
+}
+.radius-cell .lbl {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--secondary-text);
+  text-align: center;
+}
+
+/* Footer */
+.foot {
+  background: var(--canvas);
+  border-top: 1px solid var(--image-frame);
+  padding: 60px 0 36px;
+}
+.foot-top {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
+  margin-bottom: 40px; flex-wrap: wrap;
+}
+.foot-wm {
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.85;
+  letter-spacing: 0.8px;
+  margin: 0;
+}
+.foot-wm .va { color: var(--mint); }
+.foot-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+@media (max-width: 880px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+.foot-col h5 {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--mint);
+  margin: 0 0 16px;
+}
+.foot-col a {
+  display: block;
+  font-size: 13px;
+  color: var(--muted-text);
+  margin-bottom: 9px;
+}
+.foot-bottom {
+  display: flex; justify-content: space-between; padding-top: 24px;
+  border-top: 1px solid var(--image-frame);
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--secondary-text);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Floating link */
+.floating-design-link {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 99;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--mint);
+  color: var(--absolute-black);
+  padding: 10px 18px;
+  border-radius: 40px;
+  border: 1px solid var(--mint-border);
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition: all 150ms ease;
+}
+.floating-design-link:hover { background: rgba(255,255,255,0.2); color: var(--absolute-black); border-color: #c2c2c2; }
+
+.i { width: 16px; height: 16px; display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a class="brand-mini" href="#">The Verge</a>
+      <div class="nav-cats">
+        <a class="active" href="#">Tech</a>
+        <a href="#">Reviews</a>
+        <a href="#">Science</a>
+        <a href="#">Creators</a>
+        <a href="#">Entertainment</a>
+        <a href="#">Video</a>
+        <a href="#">Podcasts</a>
+      </div>
+      <div class="nav-right">
+        <a href="#" class="mono" style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--white)">Sign in</a>
+        <a class="btn btn-primary" href="#">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="masthead-grid">
+      <h1 class="wordmark">The<br>Ver<span class="va">▲</span>e</h1>
+      <div class="masthead-meta">
+        <span class="kicker kicker-mint">Issue 03 · 21.05.2026</span>
+        <div class="masthead-tags">
+          <span class="tag tag-mint">FRONT PAGE</span>
+          <span class="tag tag-violet">FEATURE</span>
+          <span class="tag tag-white">DAILY</span>
+        </div>
+        <p class="deck serif">Technology, science, art, and culture &mdash; with hazard tape on it. A new edition every morning.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- LEAD ROW -->
+<div class="wrap">
+  <div class="lead-row">
+    <article class="lead-hero">
+      <div class="lh-top">
+        <span class="tag tag-violet">EXCLUSIVE</span>
+        <span class="kicker" style="color:rgba(0,0,0,0.55)">21 MAY · 09:14 EDT</span>
+      </div>
+      <div>
+        <span class="kicker" style="color:rgba(0,0,0,0.6)">FEATURE / TECH</span>
+        <h1 style="margin-top:8px">The 200-mile commute is officially a software product now.</h1>
+      </div>
+      <div class="lead-art"></div>
+      <div class="lh-meta">
+        <span>By J. Holloway</span>
+        <span>14 min read</span>
+        <span>↗ Continue</span>
+      </div>
+    </article>
+
+    <aside class="lead-side">
+      <article class="lead-card-vio">
+        <span class="kicker" style="color:rgba(255,255,255,0.75)">CULTURE / NIGHT</span>
+        <h2>Inside the club where the synthesizers boot Linux.</h2>
+        <div class="kicker" style="color:rgba(255,255,255,0.85)">By M. Choi · 19 MIN</div>
+      </article>
+      <article class="lead-card-dark">
+        <span class="kicker kicker-mint">SCIENCE / OPEN</span>
+        <h2>An open-weights climate model just out-predicted the agencies.</h2>
+        <div class="kicker">By A. Park · 8 MIN</div>
+      </article>
+    </aside>
+  </div>
+</div>
+
+<!-- STORY STREAM -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <span class="kicker kicker-mint">STORYSTREAM</span>
+        <h2>Live updates &mdash; 21 May.</h2>
+      </div>
+      <p>Newsroom feed in chronological order. Every entry stamped, every post a permalink. No infinite scroll cosmetics &mdash; this is the git log.</p>
+    </div>
+
+    <div class="stream-layout">
+
+      <div class="stream">
+
+        <article class="stream-item">
+          <span class="ts mono">21 MAY<br>10:42 EDT</span>
+          <div class="stk">
+            <span class="tag tag-mint">AI</span>
+            <span class="kicker kicker-mint">REPORTING</span>
+          </div>
+          <h3>OpenLabs releases a 32B model — the weights are CC-BY, the demo is on a Game Boy.</h3>
+          <p>The fine-print buried in the model card hints at training on a 1.4T token mix scraped from public-domain newsprint.</p>
+          <div class="by">
+            <span>By J. Holloway</span><span>3 MIN</span><span>↗ READ</span>
+          </div>
+        </article>
+
+        <article class="stream-block b-violet">
+          <span class="ts mono">21 MAY<br>10:15 EDT</span>
+          <span class="kicker" style="color:rgba(255,255,255,0.85)">FEATURE / POLICY</span>
+          <h3>Inside the room where the EU wrote its open-weights rule.</h3>
+          <span class="meta">By M. Choi · 22 MIN ↗</span>
+        </article>
+
+        <article class="stream-item">
+          <span class="ts mono">21 MAY<br>09:48 EDT</span>
+          <div class="stk">
+            <span class="tag tag-yellow">HARDWARE</span>
+          </div>
+          <h3>Framework ships its 16″ refresh — the bezel is still wider than your faith in repair.</h3>
+          <p>Same socketed mainboard, 14% better thermals, a controversial new keyboard tray.</p>
+          <div class="by"><span>By S. Park</span><span>5 MIN</span><span>↗</span></div>
+        </article>
+
+        <article class="stream-block b-yellow">
+          <span class="ts mono">21 MAY<br>09:30 EDT</span>
+          <span class="kicker" style="color:rgba(0,0,0,0.6)">REVIEW</span>
+          <h3>A nine-out-of-ten week for the cheap thing.</h3>
+          <span class="meta">By L. Diaz · 14 MIN ↗</span>
+        </article>
+
+        <article class="stream-item">
+          <span class="ts mono">21 MAY<br>08:55 EDT</span>
+          <div class="stk">
+            <span class="tag tag-violet">CREATORS</span>
+            <span class="kicker">CULTURE</span>
+          </div>
+          <h3>The first creator union finally has a contract — and a strike clause.</h3>
+          <p>Eleven creators, two collectives, one platform. The whole document is 18 pages.</p>
+          <div class="by"><span>By R. Adeyemi</span><span>9 MIN</span><span>↗</span></div>
+        </article>
+
+        <article class="stream-block b-mint">
+          <span class="ts mono">21 MAY<br>08:12 EDT</span>
+          <span class="kicker" style="color:rgba(0,0,0,0.6)">SPONSORED</span>
+          <h3>Subscribe to The Verge — get the Friday Brief.</h3>
+          <span class="meta">Membership · From $7 / mo ↗</span>
+        </article>
+
+        <article class="stream-item">
+          <span class="ts mono">21 MAY<br>07:36 EDT</span>
+          <div class="stk">
+            <span class="tag tag-white">SCIENCE</span>
+          </div>
+          <h3>The Mars rover sent back a panorama. It looks like a screenshot of 2008 Photoshop.</h3>
+          <p>JPL releases the un-stitched RAW frames. We rebuilt the panorama in Affinity.</p>
+          <div class="by"><span>By A. Park</span><span>4 MIN</span><span>↗</span></div>
+        </article>
+
+      </div>
+
+      <aside class="side-rail">
+        <div class="side-card">
+          <h4>Most read · Today</h4>
+          <div class="item">
+            <div class="by">REVIEWS</div>
+            The cheap thing that finally felt like the expensive thing.
+          </div>
+          <div class="item">
+            <div class="by">AI</div>
+            What 32B open weights actually unlock for indie devs.
+          </div>
+          <div class="item">
+            <div class="by">CULTURE</div>
+            A guided tour of the club where the synths run Linux.
+          </div>
+          <div class="item">
+            <div class="by">FEATURE</div>
+            The 200-mile commute, productized.
+          </div>
+        </div>
+
+        <div class="subscribe">
+          <span class="kicker" style="color:var(--mint)">JOIN THE STREAM</span>
+          <h4>Pay for the journalism. Skip the ads.</h4>
+          <p>Verge+ gives you ad-free reading, every podcast a week early, and the Friday Brief in your inbox.</p>
+          <a class="btn btn-outline-violet" href="#">Become a member</a>
+        </div>
+
+        <div class="side-card">
+          <h4>Newsletters</h4>
+          <div class="item"><div class="by">DAILY · 7AM</div>The Verge — top five.</div>
+          <div class="item"><div class="by">WEEKLY · FRI</div>Installer — the apps we used.</div>
+          <div class="item"><div class="by">MONTHLY</div>Decoder — Nilay&rsquo;s long read.</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <span class="kicker kicker-mint">REVIEWS / 21 MAY</span>
+        <h2>The verdict desk.</h2>
+      </div>
+      <p>Scores out of ten, in serif type because somebody has to do it properly.</p>
+    </div>
+    <div class="review-grid">
+      <article class="review-card">
+        <span class="tag tag-violet">PHONE</span>
+        <h3>Pixel 11 Pro Fold</h3>
+        <div><span class="score">8.4</span><br><span class="out-of" style="color:var(--secondary-text)">/ 10</span></div>
+        <p class="serif">Hinge finally feels permanent. Camera bar still arrives in the room four steps ahead of you.</p>
+        <div class="by">By J. Holloway · 12 MIN</div>
+      </article>
+
+      <article class="review-card featured">
+        <span class="tag tag-white">BEST IN CLASS</span>
+        <h3 style="color:var(--absolute-black)">Framework Laptop 16 — 2026</h3>
+        <div><span class="score">9.1</span><br><span class="out-of">/ 10</span></div>
+        <p class="serif">Three years in. The bezel is wider than the optimism, and the optimism is still considerable.</p>
+        <div class="by">By S. Park · 16 MIN</div>
+      </article>
+
+      <article class="review-card">
+        <span class="tag tag-mint">AUDIO</span>
+        <h3>Sonos Era 400 II</h3>
+        <div><span class="score">7.6</span><br><span class="out-of" style="color:var(--secondary-text)">/ 10</span></div>
+        <p class="serif">App is forgiven. Spatial audio is unsettlingly convincing in a 12&times;9 room.</p>
+        <div class="by">By L. Diaz · 8 MIN</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SUB CTA -->
+<section class="sub-cta">
+  <div class="wrap-narrow">
+    <h2>Read <span class="mint">louder.</span></h2>
+    <p class="serif">Verge+ membership: ad-free reading, every podcast a week early, the Friday Brief in your inbox &mdash; and a strong opinion about the chiptune section.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-primary" href="#">Subscribe — $7/mo</a>
+      <a class="btn btn-outline-mint" href="#">Compare plans</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DS REFERENCE ─── -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-head">
+      <span class="kicker kicker-mint">DS / REFERENCE</span>
+      <h2>Hazard tape, <span class="mint">applied carefully.</span></h2>
+      <p class="serif">Eight radii, two display registers, four hazard accents on a canvas that never goes light. The Verge&rsquo;s system is loud because every element is restrained except the one that needs to shout.</p>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <h3>// Color</h3>
+
+      <div class="color-group">
+        <div class="color-group-label">Primary Hazards</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#3cffd0"></div><span class="swatch-name">Jelly Mint</span><span class="swatch-hex">#3cffd0</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#5200ff"></div><span class="swatch-name">Verge Ultraviolet</span><span class="swatch-hex">#5200ff</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#309875"></div><span class="swatch-name">Console Mint Border</span><span class="swatch-hex">#309875</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#3d00bf"></div><span class="swatch-name">Purple Rule</span><span class="swatch-hex">#3d00bf</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-group-label">Surface &amp; Canvas</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#131313"></div><span class="swatch-name">Canvas Black</span><span class="swatch-hex">#131313</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#2d2d2d"></div><span class="swatch-name">Surface Slate</span><span class="swatch-hex">#2d2d2d</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#313131"></div><span class="swatch-name">Image Frame</span><span class="swatch-hex">#313131</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#ffffff"></div><span class="swatch-name">Hazard White</span><span class="swatch-hex">#ffffff</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#000000"></div><span class="swatch-name">Absolute Black</span><span class="swatch-hex">#000000</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-group-label">Text &amp; Interactive</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#949494"></div><span class="swatch-name">Secondary Text</span><span class="swatch-hex">#949494</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#e9e9e9"></div><span class="swatch-name">Muted Text</span><span class="swatch-hex">#e9e9e9</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#8c8c8c"></div><span class="swatch-name">Dim Gray</span><span class="swatch-hex">#8c8c8c</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#3860be"></div><span class="swatch-name">Deep Link Blue</span><span class="swatch-hex">#3860be</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#1eaedb"></div><span class="swatch-name">Focus Cyan</span><span class="swatch-hex">#1eaedb</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-group-label">Story-Tile Accent Palette</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#ffe34d"></div><span class="swatch-name">Tile Yellow</span><span class="swatch-hex">#ffe34d</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#ff7eb6"></div><span class="swatch-name">Tile Pink</span><span class="swatch-hex">#ff7eb6</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#ff7a3a"></div><span class="swatch-name">Tile Orange</span><span class="swatch-hex">#ff7a3a</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#4d8aff"></div><span class="swatch-name">Tile Blue</span><span class="swatch-hex">#4d8aff</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#b95eff"></div><span class="swatch-name">Tile Purple</span><span class="swatch-hex">#b95eff</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="ds-block">
+      <h3>// Typography — display, sans, mono, serif</h3>
+      <table class="type-table">
+        <thead>
+          <tr><th>Role</th><th>Family</th><th>Size</th><th>Weight</th><th>Line ht.</th><th>Tracking</th><th>Preview</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Hero Wordmark</td><td>Manuka / Archivo Black</td><td>107px</td><td>900</td><td>0.80–0.95</td><td>1.07px</td><td class="preview display" style="font-size:30px;line-height:0.9">The Verge</td></tr>
+          <tr><td>Secondary Display</td><td>Manuka / Archivo Black</td><td>90px</td><td>900</td><td>0.80–0.95</td><td>—</td><td class="preview display" style="font-size:26px;line-height:0.9">Read louder</td></tr>
+          <tr><td>Tertiary Display</td><td>Manuka / Archivo Black</td><td>60px</td><td>900</td><td>0.80–0.95</td><td>—</td><td class="preview display" style="font-size:22px;line-height:0.9">Hazard tape</td></tr>
+          <tr><td>Large Headline</td><td>PolySans / Space Grotesk</td><td>34px</td><td>700</td><td>1.00</td><td>—</td><td class="preview" style="font-size:18px;font-weight:700">Live updates</td></tr>
+          <tr><td>Heading Wide</td><td>PolySans / Space Grotesk</td><td>32px</td><td>400</td><td>1.10</td><td>0.32px</td><td class="preview" style="font-size:17px;font-weight:400;letter-spacing:0.32px">Inside the room</td></tr>
+          <tr><td>Heading Medium</td><td>PolySans / Space Grotesk</td><td>24px</td><td>700</td><td>1.00</td><td>—</td><td class="preview" style="font-size:16px;font-weight:700">Story tile</td></tr>
+          <tr><td>Thin Capitalized Eyebrow</td><td>PolySans / Space Grotesk</td><td>19px</td><td>300</td><td>1.20</td><td>1.9px</td><td class="preview" style="font-size:12px;font-weight:300;text-transform:uppercase;letter-spacing:1.9px">A fashion whisper</td></tr>
+          <tr><td>Body</td><td>PolySans / Space Grotesk</td><td>16px</td><td>500</td><td>1.60</td><td>—</td><td class="preview" style="font-size:14px">Long-form reading body.</td></tr>
+          <tr><td>Mono Button Label</td><td>PolySans Mono / Space Mono</td><td>12px</td><td>600</td><td>2.00</td><td>1.5px</td><td class="preview mono" style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px">SUBSCRIBE</td></tr>
+          <tr><td>Mono Timestamp</td><td>PolySans Mono / Space Mono</td><td>11px</td><td>500</td><td>1.20</td><td>1.1px</td><td class="preview mono" style="font-size:10px;text-transform:uppercase;letter-spacing:1.1px">21 MAY · 09:14</td></tr>
+          <tr><td>Serif Body</td><td>FK Roman / Newsreader</td><td>16px</td><td>400</td><td>1.30</td><td>-0.16px</td><td class="preview serif" style="font-size:14px">A print-voice pull.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3>// Radius — eight discrete steps</h3>
+      <div class="radius-ladder">
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:2px"></div><span class="v">2px</span><span class="lbl">INPUTS<br>TYPEWRITER TAGS</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:3px"></div><span class="v">3px</span><span class="lbl">INLINE IMAGES</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:4px"></div><span class="v">4px</span><span class="lbl">NESTED IMAGES<br>SMALL BUTTONS</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:20px"></div><span class="v">20px</span><span class="lbl">PILL CARDS<br>COLOR BLOCKS</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:24px"></div><span class="v">24px</span><span class="lbl">FEATURE TILES<br>PRIMARY PILL</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:30px"></div><span class="v">30px</span><span class="lbl">LARGE PROMOS</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:40px"></div><span class="v">40px</span><span class="lbl">OUTLINED CTAS</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:50%"></div><span class="v">50%</span><span class="lbl">AVATARS<br>ICON BUTTONS</span></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3>// Components — pills, blocks, timeline</h3>
+      <table class="comp-table">
+        <thead>
+          <tr><th>Component</th><th>Background</th><th>Border</th><th>Radius</th><th>Sample</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary — Jelly Mint pill</td>
+            <td>#3cffd0</td>
+            <td>none</td>
+            <td>24px</td>
+            <td><a class="btn btn-primary" href="#">Subscribe</a></td>
+          </tr>
+          <tr>
+            <td>Secondary — Dark slate pill</td>
+            <td>#2d2d2d</td>
+            <td>none</td>
+            <td>24px</td>
+            <td><a class="btn btn-secondary" href="#">Sign in</a></td>
+          </tr>
+          <tr>
+            <td>Outlined — Mint</td>
+            <td>transparent</td>
+            <td>1px #3cffd0</td>
+            <td>40px</td>
+            <td><a class="btn btn-outline-mint" href="#">Compare plans</a></td>
+          </tr>
+          <tr>
+            <td>Outlined — Ultraviolet</td>
+            <td>transparent</td>
+            <td>1px #5200ff</td>
+            <td>30px</td>
+            <td><a class="btn btn-outline-violet" href="#">Join the stream</a></td>
+          </tr>
+          <tr>
+            <td>Pill Tag — mint</td>
+            <td>#3cffd0</td>
+            <td>none</td>
+            <td>20px</td>
+            <td><span class="tag tag-mint">AI</span></td>
+          </tr>
+          <tr>
+            <td>Pill Tag — ultraviolet</td>
+            <td>#5200ff</td>
+            <td>none</td>
+            <td>20px</td>
+            <td><span class="tag tag-violet">EXCLUSIVE</span></td>
+          </tr>
+          <tr>
+            <td>StoryStream tile</td>
+            <td>#131313</td>
+            <td>1px #ffffff</td>
+            <td>20px</td>
+            <td><span style="display:inline-block;background:#131313;border:1px solid #ffffff;border-radius:20px;padding:10px 18px;font-size:12px;color:var(--white)">Timeline entry</span></td>
+          </tr>
+          <tr>
+            <td>Color-block tile</td>
+            <td>#3cffd0</td>
+            <td>none</td>
+            <td>24px</td>
+            <td><span style="display:inline-block;background:#3cffd0;border-radius:24px;padding:10px 18px;font-size:12px;color:#000;font-weight:700">Featured story</span></td>
+          </tr>
+          <tr>
+            <td>Active nav (mint underline)</td>
+            <td>transparent</td>
+            <td>0px -1px 0 inset #3cffd0</td>
+            <td>—</td>
+            <td><span class="mono" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--white);box-shadow:0px -1px 0px 0px inset #3cffd0;padding-bottom:2px">Tech</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <h2 class="foot-wm">The Ver<span class="va">▲</span>e</h2>
+      <span class="kicker kicker-mint">Vox Media · est. 2011</span>
+    </div>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h5>// Editorial</h5>
+        <a href="#">Tech</a><a href="#">Reviews</a><a href="#">Science</a><a href="#">Entertainment</a>
+      </div>
+      <div class="foot-col">
+        <h5>// Series</h5>
+        <a href="#">Decoder</a><a href="#">Installer</a><a href="#">Vergecast</a><a href="#">StoryStream</a>
+      </div>
+      <div class="foot-col">
+        <h5>// Subscribe</h5>
+        <a href="#">Verge+</a><a href="#">Newsletter</a><a href="#">RSS</a><a href="#">Podcasts</a>
+      </div>
+      <div class="foot-col">
+        <h5>// Company</h5>
+        <a href="#">About</a><a href="#">Ethics</a><a href="#">Careers</a><a href="#">Press</a>
+      </div>
+      <div class="foot-col">
+        <h5>// Legal</h5>
+        <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Cookies</a><a href="#">Accessibility</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 INSPIRED TRIBUTE · AWESOME-DESIGN-MD</span>
+      <span>DESIGN.THEVERGE.HTML</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.theverge.html" target="_blank" rel="noopener">
+  <span>View DESIGN.md</span>
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

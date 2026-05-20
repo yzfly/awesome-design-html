@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Discord — iOS design spec</title>
+<meta name="description" content="Discord iOS app design reference. #2B2D31 dark canvas, #5865F2 Blurple, role-colored usernames, server-rail navigation, voice-tile metaphor." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#313338; --bg-deep:#2B2D31; --bg-rail:#1E1F22; --bg-hover:#404249; --surface-1:#383A40; --surface-2:#42464D;
+  --accent:#5865F2; --accent-hover:#4752C4; --accent-soft:#404EED;
+  --ink:#ffffff; --ink-soft:#DBDEE1; --ink-muted:#B5BAC1; --ink-dim:#80848E;
+  --border:#3F4147; --border-soft:#2B2D31;
+  --online:#23A559; --idle:#F0B232; --dnd:#F23F43; --offline:#80848E;
+  --mention-blue:#00B0F4; --link:#00A8FC; --yellow-bg:rgba(240,178,50,.12);
+  --role-red:#F23F43; --role-green:#23A559; --role-blurple:#5865F2; --role-yellow:#F0B232; --role-pink:#EB459E;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg-deep);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(43,45,49,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.2px}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);display:grid;place-items:center;box-shadow:0 4px 12px rgba(88,101,242,.3)}
+.brand-mark svg{width:22px;height:22px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink);background:var(--surface-1)}
+.nav-pill.active{color:var(--ink);background:var(--surface-1)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.03)}
+.btn-primary{background:var(--accent);color:#fff;padding:12px 22px;border-radius:8px}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-pill{background:var(--surface-1);color:var(--ink);padding:10px 18px;border-radius:8px}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 18px;border-radius:8px}
+.btn-light{background:#fff;color:#000;padding:12px 22px;border-radius:8px}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(88,101,242,.22),transparent 70%),radial-gradient(700px 500px at 80% 30%,rgba(235,69,158,.10),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-full);background:rgba(88,101,242,.16);color:#A9B0FF;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:.95;letter-spacing:-2.2px;font-weight:900;margin-bottom:22px}
+.hero h1 .gradient-word{background:linear-gradient(120deg,#5865F2,#EB459E 50%,#F0B232);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#fff;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;color:#fff;font-size:11px;display:flex;flex-direction:column;padding-top:48px}
+
+/* ========== SHARED: SERVER RAIL ========== */
+.dc-frame{flex:1;display:flex;overflow:hidden}
+.server-rail{width:46px;background:var(--bg-rail);display:flex;flex-direction:column;align-items:center;padding:6px 0;gap:6px;flex-shrink:0}
+.server-pill{position:relative;width:34px;display:flex;justify-content:center}
+.server-pill .indicator{position:absolute;left:-9px;top:50%;transform:translateY(-50%);width:3px;height:8px;background:var(--ink);border-radius:0 2px 2px 0;opacity:0}
+.server-pill.active .indicator{opacity:1;height:30px}
+.server-pill.has-unread .indicator{opacity:1;height:14px}
+.server-icon{width:34px;height:34px;border-radius:50%;background:var(--surface-1);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--ink);transition:border-radius .15s}
+.server-pill.active .server-icon{border-radius:10px}
+.server-icon.dc{background:var(--accent)}
+.server-icon.dc svg{width:18px;height:18px;fill:#fff}
+.server-icon.s1{background:linear-gradient(135deg,#EB459E,#F23F43)}
+.server-icon.s2{background:linear-gradient(135deg,#23A559,#0F7836)}
+.server-icon.s3{background:linear-gradient(135deg,#F0B232,#E89A1A)}
+.server-icon.s4{background:linear-gradient(135deg,#5865F2,#404EED)}
+.server-icon.add{background:var(--surface-1);color:var(--role-green);font-size:18px;font-weight:400}
+.server-divider{width:32px;height:2px;background:var(--bg-hover);border-radius:1px;margin:2px 0}
+
+/* ========== SHARED: STATUS DOT ========== */
+.status-dot{position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border-radius:50%;border:2.5px solid var(--canvas);background:var(--online)}
+.status-dot.idle{background:var(--idle)}
+.status-dot.dnd{background:var(--dnd)}
+.status-dot.offline{background:var(--offline)}
+
+/* ========== SCREEN 1: CHANNEL ========== */
+.scr-channel{background:var(--canvas);padding-top:0}
+.scr-channel .scr-inner{position:absolute;top:48px;left:0;right:0;bottom:0;display:flex;flex-direction:column}
+.channel-content{flex:1;display:flex;overflow:hidden}
+.channel-tree{width:96px;background:var(--bg-deep);display:flex;flex-direction:column;padding:8px 6px;flex-shrink:0;overflow:hidden}
+.channel-tree .ct-name{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:6px;padding:0 4px}
+.channel-tree .ct-cat{font-size:8.5px;font-weight:700;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.4px;padding:6px 4px 3px;display:flex;align-items:center;gap:3px}
+.channel-tree .ct-cat svg{width:7px;height:7px;fill:currentColor}
+.ct-row{display:flex;align-items:center;gap:4px;padding:3px 4px;border-radius:4px;font-size:10.5px;color:var(--ink-muted);font-weight:500}
+.ct-row.active{background:var(--bg-hover);color:var(--ink)}
+.ct-row.unread{color:var(--ink);font-weight:600}
+.ct-row svg{width:11px;height:11px;fill:currentColor;flex-shrink:0}
+.channel-main{flex:1;display:flex;flex-direction:column;background:var(--canvas);overflow:hidden}
+.channel-head{padding:6px 10px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border-soft)}
+.channel-head .ch-hash{color:var(--ink-dim);font-size:14px;font-weight:600}
+.channel-head .ch-nm{font-size:12px;font-weight:600;color:var(--ink);flex:1}
+.channel-head svg{width:14px;height:14px;fill:var(--ink-muted)}
+.dc-msgs{flex:1;overflow:hidden;padding:8px 6px;display:flex;flex-direction:column;gap:8px}
+.dc-msg{display:flex;gap:7px;align-items:flex-start}
+.dc-msg .av{width:28px;height:28px;border-radius:50%;flex-shrink:0;position:relative}
+.dc-msg .av .status-dot{width:9px;height:9px;border-width:2px}
+.dc-msg .body{flex:1;min-width:0}
+.dc-msg .head{display:flex;align-items:baseline;gap:5px;margin-bottom:1px}
+.dc-msg .uname{font-size:11px;font-weight:600}
+.dc-msg .time{font-size:8.5px;color:var(--ink-dim);font-weight:500}
+.dc-msg .text{font-size:11px;color:var(--ink-soft);line-height:1.35;word-break:break-word}
+.dc-msg .text .mention{color:var(--mention-blue);background:var(--yellow-bg);padding:0 3px;border-radius:3px;font-weight:600}
+.dc-msg .text .ch-mention{color:var(--mention-blue);font-weight:600}
+.dc-msg .reacts{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
+.dc-react{padding:1px 6px 1px 4px;border-radius:8px;background:rgba(88,101,242,.12);border:1px solid rgba(88,101,242,.5);font-size:9.5px;font-weight:600;color:#A9B0FF;display:flex;align-items:center;gap:3px}
+.dc-react.alt{background:var(--surface-1);border-color:transparent;color:var(--ink-muted)}
+.dc-mention-row{background:linear-gradient(90deg,rgba(240,178,50,.10),rgba(240,178,50,.0));border-left:2px solid var(--idle);padding-left:5px}
+.av-orange{background:linear-gradient(135deg,#FF885E,#F23F43)}
+.av-green{background:linear-gradient(135deg,#23A559,#0F7836)}
+.av-blurple{background:linear-gradient(135deg,#5865F2,#404EED)}
+.av-pink{background:linear-gradient(135deg,#EB459E,#A845B7)}
+.av-yellow{background:linear-gradient(135deg,#F0B232,#E89A1A)}
+
+/* dc input + tab bar */
+.dc-input{padding:6px 8px;display:flex;gap:6px;align-items:center;border-top:1px solid var(--border-soft);background:var(--canvas)}
+.dc-input .plus{width:24px;height:24px;border-radius:50%;background:var(--surface-1);display:grid;place-items:center;flex-shrink:0;color:var(--ink-muted);font-size:14px;font-weight:300}
+.dc-input .field{flex:1;background:var(--surface-1);border-radius:8px;padding:6px 9px;font-size:10.5px;color:var(--ink-muted);display:flex;align-items:center;justify-content:space-between}
+.dc-input .field .ico-row{display:flex;gap:6px}
+.dc-input svg{width:13px;height:13px;fill:var(--ink-muted)}
+.dc-input .send{width:24px;height:24px;border-radius:50%;background:var(--accent);display:grid;place-items:center;flex-shrink:0}
+.dc-input .send svg{fill:#fff;width:12px;height:12px}
+
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:56px;background:var(--bg-rail);display:flex;justify-content:space-around;align-items:center;padding:0 8px;z-index:10;border-top:1px solid var(--border)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink-dim);font-size:9px;font-weight:500;flex:1}
+.tab.active{color:var(--ink)}
+.tab svg{width:22px;height:22px;fill:currentColor}
+
+/* ========== SCREEN 2: DMs ========== */
+.scr-dm{background:var(--canvas);padding-top:0}
+.dm-pane{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--canvas)}
+.dm-head{padding:8px 10px 6px;display:flex;justify-content:space-between;align-items:center}
+.dm-head .dh-title{font-size:14px;font-weight:700}
+.dm-head .dh-act{width:24px;height:24px;border-radius:50%;background:var(--surface-1);display:grid;place-items:center}
+.dm-head svg{width:13px;height:13px;fill:var(--ink-muted)}
+.dm-friends-btn{margin:0 8px 8px;background:var(--surface-1);border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--ink-soft)}
+.dm-friends-btn svg{width:14px;height:14px;fill:currentColor}
+.dm-friends-btn .count{margin-left:auto;background:var(--accent);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:9px}
+.dm-list{padding:0 6px;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.dm-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px}
+.dm-row.active{background:var(--bg-hover)}
+.dm-row .av{width:30px;height:30px;border-radius:50%;flex-shrink:0;position:relative}
+.dm-row .meta{flex:1;min-width:0}
+.dm-row .nm{font-size:12px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dm-row .sub{font-size:10px;color:var(--ink-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dm-row .badge{background:var(--dnd);color:#fff;min-width:16px;height:16px;border-radius:8px;font-size:9.5px;font-weight:700;padding:0 5px;display:grid;place-items:center;flex-shrink:0}
+
+/* ========== SCREEN 3: VOICE ========== */
+.scr-voice{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--canvas) 100%);padding-top:0}
+.voice-pane{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.voice-head{padding:6px 10px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:6px}
+.voice-head svg{width:14px;height:14px;fill:var(--online)}
+.voice-head .vh-name{font-size:12px;font-weight:600}
+.voice-head .vh-cnt{font-size:10px;color:var(--ink-muted);margin-left:auto}
+.voice-grid{flex:1;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;overflow:hidden;align-content:flex-start}
+.voice-tile{aspect-ratio:1;background:var(--bg-rail);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;padding:6px}
+.voice-tile.speaking{box-shadow:0 0 0 2px var(--online)}
+.voice-tile .av{width:42px;height:42px;border-radius:50%}
+.voice-tile .nm{font-size:9.5px;font-weight:600;color:var(--ink);text-overflow:ellipsis;overflow:hidden;white-space:nowrap;max-width:100%}
+.voice-tile .activity{position:absolute;bottom:5px;left:5px;background:rgba(0,0,0,.5);font-size:8px;color:var(--ink-soft);padding:1px 5px;border-radius:9px;font-weight:500}
+.voice-tile .muted-ic{position:absolute;top:5px;right:5px;width:14px;height:14px;background:var(--dnd);border-radius:50%;display:grid;place-items:center}
+.voice-tile .muted-ic svg{width:8px;height:8px;fill:#fff}
+.voice-controls{padding:8px 12px;display:flex;justify-content:space-around;align-items:center;background:var(--bg-rail);border-radius:12px;margin:6px 8px}
+.voice-controls .vc-btn{width:38px;height:38px;border-radius:50%;background:var(--surface-1);display:grid;place-items:center;color:#fff}
+.voice-controls .vc-btn.danger{background:var(--dnd)}
+.voice-controls .vc-btn svg{width:18px;height:18px;fill:#fff}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:#A9B0FF;margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--bg-deep);border-radius:12px;padding:28px;border:1px solid var(--border)}
+.feat:hover{background:var(--surface-1)}
+.feat .feat-ic{width:36px;height:36px;border-radius:9px;background:rgba(88,101,242,.18);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--accent)}
+.feat h3{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:rgba(88,101,242,.12);padding:1px 6px;border-radius:3px;color:#A9B0FF}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-1);padding:5px 10px;border-radius:6px;color:var(--ink-soft);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--bg-deep);border-radius:16px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* role color visual */
+.role-stack{display:flex;flex-direction:column;gap:10px;width:320px}
+.role-row{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:var(--surface-1);border-radius:8px}
+.role-row .av{width:32px;height:32px;border-radius:50%}
+.role-row .uname{font-size:13px;font-weight:700}
+.role-row .ttl{font-size:12px;color:var(--ink-soft);margin-top:1px}
+.role-row .badge{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:5px;vertical-align:1px;color:#fff}
+
+/* status ring visual */
+.status-stack{display:flex;flex-direction:column;gap:16px;align-items:center}
+.status-row-vis{display:flex;gap:18px}
+.status-cell{display:flex;flex-direction:column;align-items:center;gap:6px}
+.status-cell .av{width:64px;height:64px;border-radius:50%;position:relative}
+.status-cell .av .status-dot{width:18px;height:18px;border-width:4px;bottom:0;right:0}
+.status-cell .lbl{font-size:11px;font-weight:600;color:var(--ink-soft)}
+
+/* reaction picker */
+.react-stack{display:flex;flex-direction:column;gap:12px;width:280px}
+.react-picker{background:var(--bg-deep);border:1px solid var(--border);border-radius:12px;padding:10px}
+.react-picker .rp-row{display:flex;gap:8px;justify-content:space-around;font-size:22px;margin-bottom:6px}
+.react-picker .rp-search{background:var(--surface-1);border-radius:6px;padding:6px 8px;font-size:11px;color:var(--ink-muted);display:flex;align-items:center;gap:6px}
+.react-picker .rp-search svg{width:11px;height:11px;fill:var(--ink-muted)}
+.react-target{background:var(--surface-1);border-radius:8px;padding:9px 11px;display:flex;gap:8px;align-items:flex-start}
+.react-target .av{width:28px;height:28px;border-radius:50%;flex-shrink:0}
+.react-target .uname{font-size:11px;font-weight:700;color:var(--role-green)}
+.react-target .txt{font-size:11.5px;color:var(--ink-soft);margin-top:1px}
+.react-target .reacts-mini{display:flex;gap:4px;margin-top:5px}
+.react-target .reacts-mini span{padding:1px 6px;border-radius:8px;background:rgba(88,101,242,.12);border:1px solid rgba(88,101,242,.5);font-size:10px;color:#A9B0FF;font-weight:600}
+
+/* ========== DESIGN SYSTEM ========== */
+.ds-section{padding:120px 0;background:var(--bg-rail);border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:#A9B0FF;border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-full);white-space:nowrap}
+.ds-source:hover{background:var(--surface-1)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:var(--bg-deep);border-radius:10px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:#A9B0FF}
+.ds-type-table td.sample{font-family:var(--font-ui);color:#fff}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,var(--accent),#404EED);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:var(--bg-deep);border-radius:12px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-pill{background:var(--surface-1);border:0;border-radius:8px;padding:11px 14px;color:#fff;font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.2px}
+.tag-online{background:var(--online);color:#fff}
+.tag-idle{background:var(--idle);color:#000}
+.tag-dnd{background:var(--dnd);color:#fff}
+.tag-bot{background:var(--accent);color:#fff}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:var(--bg-deep);border-radius:10px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:#fff;letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border);background:var(--bg-rail)}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.5}
+.foot a{color:#A9B0FF;font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:var(--accent);border:0;color:#fff;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-full);z-index:99;box-shadow:0 10px 24px rgba(88,101,242,.4)}
+.float-link:hover{background:var(--accent-hover)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M19.5 4.5A17 17 0 0015 3l-.4 1a14 14 0 00-5.2 0L9 3a17 17 0 00-4.5 1.5C2 8 1 11 1.5 14c1.7 1.4 3.4 2.3 5 2.8l1-1.5c-.8-.3-1.6-.7-2.3-1.2.2-.1.4-.3.6-.4 3.6 1.6 7.6 1.6 11.2 0l.6.4c-.7.5-1.5.9-2.3 1.2l1 1.5c1.6-.5 3.3-1.4 5-2.8.5-3-.5-6-3-9.5zM8.5 12.5c-1 0-1.8-1-1.8-2s.8-2 1.8-2 1.8 1 1.8 2-.8 2-1.8 2zm7 0c-1 0-1.8-1-1.8-2s.8-2 1.8-2 1.8 1 1.8 2-.8 2-1.8 2z"/></svg></span>
+      Discord <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Download</a>
+      <a class="btn btn-primary" href="#">Open Discord</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Where it's safe<br/>to talk, kinda <span class="gradient-word">loud</span>.</h1>
+    <p>The Discord iOS app, dissected. A dark canvas built around the server rail. Blurple is the only system color. Role tints, role tints everywhere.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- DMs -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-dm">
+            <div class="dc-frame">
+              <div class="server-rail">
+                <div class="server-pill"><span class="indicator"></span><div class="server-icon dc"><svg viewBox="0 0 24 24"><path d="M19.5 4.5A17 17 0 0015 3l-.4 1a14 14 0 00-5.2 0L9 3a17 17 0 00-4.5 1.5C2 8 1 11 1.5 14c1.7 1.4 3.4 2.3 5 2.8l1-1.5c-.8-.3-1.6-.7-2.3-1.2 5.7 2.7 11.7 2.7 17.4 0-.7.5-1.5.9-2.3 1.2l1 1.5c1.6-.5 3.3-1.4 5-2.8.5-3-.5-6-3-9.5z"/></svg></div></div>
+                <div class="server-divider"></div>
+                <div class="server-pill active"><span class="indicator"></span><div class="server-icon s1">DZ</div></div>
+                <div class="server-pill has-unread"><span class="indicator"></span><div class="server-icon s2">RN</div></div>
+                <div class="server-pill"><span class="indicator"></span><div class="server-icon s3">CS</div></div>
+                <div class="server-pill"><span class="indicator"></span><div class="server-icon s4">AI</div></div>
+                <div class="server-pill"><span class="indicator"></span><div class="server-icon add">+</div></div>
+              </div>
+              <div class="dm-pane">
+                <div class="dm-head">
+                  <div class="dh-title">Direct Messages</div>
+                  <div class="dh-act"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5"/></svg></div>
+                </div>
+                <div class="dm-friends-btn">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0116 0"/></svg>
+                  Friends
+                  <span class="count">3</span>
+                </div>
+                <div class="dm-list">
+                  <div class="dm-row active">
+                    <div class="av av-pink"><span class="status-dot"></span></div>
+                    <div class="meta"><div class="nm">@marie</div><div class="sub">typing...</div></div>
+                  </div>
+                  <div class="dm-row">
+                    <div class="av av-blurple"><span class="status-dot idle"></span></div>
+                    <div class="meta"><div class="nm">@danielx</div><div class="sub">sent a gif</div></div>
+                    <div class="badge">2</div>
+                  </div>
+                  <div class="dm-row">
+                    <div class="av av-orange"><span class="status-dot dnd"></span></div>
+                    <div class="meta"><div class="nm">@kira</div><div class="sub">do not disturb</div></div>
+                  </div>
+                  <div class="dm-row">
+                    <div class="av av-green"><span class="status-dot offline"></span></div>
+                    <div class="meta"><div class="nm">@cosmo</div><div class="sub">offline · 2d</div></div>
+                  </div>
+                  <div class="dm-row">
+                    <div class="av av-yellow"><span class="status-dot"></span></div>
+                    <div class="meta"><div class="nm">@penny</div><div class="sub">In voice · #lounge</div></div>
+                  </div>
+                  <div class="dm-row">
+                    <div class="av av-blurple"><span class="status-dot offline"></span></div>
+                    <div class="meta"><div class="nm">study-group (4)</div><div class="sub">a: see you tonight</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 4h18v16H3z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="9" r="1.5"/><circle cx="14" cy="9" r="1.5"/></svg>Servers</div>
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M21 12c0 5-4 9-9 9-1.5 0-2.9-.4-4.2-1L3 21l1.2-4.8C3.4 15 3 13.5 3 12a9 9 0 1118 0z"/></svg>DMs</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0116 0"/></svg>You</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Direct Messages</div>
+      </div>
+
+      <!-- CHANNEL (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-channel">
+            <div class="scr-inner">
+              <div class="channel-content">
+                <div class="server-rail">
+                  <div class="server-pill"><span class="indicator"></span><div class="server-icon dc"><svg viewBox="0 0 24 24"><path d="M19.5 4.5A17 17 0 0015 3l-.4 1a14 14 0 00-5.2 0L9 3a17 17 0 00-4.5 1.5C2 8 1 11 1.5 14c1.7 1.4 3.4 2.3 5 2.8l1-1.5c-.8-.3-1.6-.7-2.3-1.2 5.7 2.7 11.7 2.7 17.4 0-.7.5-1.5.9-2.3 1.2l1 1.5c1.6-.5 3.3-1.4 5-2.8.5-3-.5-6-3-9.5z"/></svg></div></div>
+                  <div class="server-divider"></div>
+                  <div class="server-pill active"><span class="indicator"></span><div class="server-icon s1">DZ</div></div>
+                  <div class="server-pill has-unread"><span class="indicator"></span><div class="server-icon s2">RN</div></div>
+                  <div class="server-pill"><span class="indicator"></span><div class="server-icon s3">CS</div></div>
+                </div>
+                <div class="channel-tree">
+                  <div class="ct-name">design-zone</div>
+                  <div class="ct-cat"><svg viewBox="0 0 10 10"><path d="M2 3l3 3 3-3"/></svg> INFO</div>
+                  <div class="ct-row"><svg viewBox="0 0 16 16"><path d="M5 1l-.7 3H1v2h3l-.5 4H1v2h2.2L2.5 15h2l.5-3h4l-.5 3h2l.5-3H14v-2h-2.7l.5-4H15V4h-3.2L12.5 1h-2l-.5 3h-4l.5-3z"/></svg> rules</div>
+                  <div class="ct-row"><svg viewBox="0 0 16 16"><path d="M5 1l-.7 3H1v2h3l-.5 4H1v2h2.2L2.5 15h2l.5-3h4l-.5 3h2l.5-3H14v-2h-2.7l.5-4H15V4h-3.2L12.5 1h-2l-.5 3h-4l.5-3z"/></svg> welcome</div>
+                  <div class="ct-cat"><svg viewBox="0 0 10 10"><path d="M2 3l3 3 3-3"/></svg> TEXT</div>
+                  <div class="ct-row unread"><svg viewBox="0 0 16 16"><path d="M5 1l-.7 3H1v2h3l-.5 4H1v2h2.2L2.5 15h2l.5-3h4l-.5 3h2l.5-3H14v-2h-2.7l.5-4H15V4h-3.2L12.5 1h-2l-.5 3h-4l.5-3z"/></svg> general</div>
+                  <div class="ct-row active"><svg viewBox="0 0 16 16"><path d="M5 1l-.7 3H1v2h3l-.5 4H1v2h2.2L2.5 15h2l.5-3h4l-.5 3h2l.5-3H14v-2h-2.7l.5-4H15V4h-3.2L12.5 1h-2l-.5 3h-4l.5-3z"/></svg> figma-talk</div>
+                  <div class="ct-row"><svg viewBox="0 0 16 16"><path d="M5 1l-.7 3H1v2h3l-.5 4H1v2h2.2L2.5 15h2l.5-3h4l-.5 3h2l.5-3H14v-2h-2.7l.5-4H15V4h-3.2L12.5 1h-2l-.5 3h-4l.5-3z"/></svg> showcase</div>
+                  <div class="ct-cat"><svg viewBox="0 0 10 10"><path d="M2 3l3 3 3-3"/></svg> VOICE</div>
+                  <div class="ct-row"><svg viewBox="0 0 16 16"><path d="M3 6v4l-2 2V4l2 2zM5 4h7v8H5zm9 1.5l3-2v9l-3-2z"/></svg> lounge</div>
+                  <div class="ct-row"><svg viewBox="0 0 16 16"><path d="M3 6v4l-2 2V4l2 2zM5 4h7v8H5zm9 1.5l3-2v9l-3-2z"/></svg> deep-work</div>
+                </div>
+                <div class="channel-main">
+                  <div class="channel-head">
+                    <span class="ch-hash">#</span>
+                    <span class="ch-nm">figma-talk</span>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0116 0"/></svg>
+                  </div>
+                  <div class="dc-msgs">
+                    <div class="dc-msg">
+                      <div class="av av-pink"></div>
+                      <div class="body">
+                        <div class="head"><span class="uname" style="color:var(--role-red)">marie</span><span class="badge" style="background:var(--role-red);color:#fff;font-size:7.5px;font-weight:700;padding:1px 4px;border-radius:3px">ADMIN</span><span class="time">10:32</span></div>
+                        <div class="text">heads up — we're moving the auto-layout review to Thursday 3pm.</div>
+                        <div class="reacts">
+                          <span class="dc-react">👍 4</span>
+                          <span class="dc-react alt">🔥 2</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dc-msg">
+                      <div class="av av-green"></div>
+                      <div class="body">
+                        <div class="head"><span class="uname" style="color:var(--role-green)">daniel</span><span class="time">10:34</span></div>
+                        <div class="text">works for me. <span class="ch-mention">#showcase</span> looks ready too</div>
+                      </div>
+                    </div>
+                    <div class="dc-msg dc-mention-row">
+                      <div class="av av-blurple"></div>
+                      <div class="body">
+                        <div class="head"><span class="uname" style="color:var(--role-blurple)">cosmo</span><span class="time">10:36</span></div>
+                        <div class="text"><span class="mention">@jiang-shu</span> the variants you posted are 🔥. quick question on tokens.</div>
+                        <div class="reacts">
+                          <span class="dc-react">🚀 6</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dc-msg">
+                      <div class="av av-yellow"></div>
+                      <div class="body">
+                        <div class="head"><span class="uname" style="color:var(--role-yellow)">penny</span><span class="badge" style="background:var(--accent);color:#fff;font-size:7.5px;padding:1px 4px;border-radius:3px">BOT</span><span class="time">10:38</span></div>
+                        <div class="text">Reminder set for Thursday 3:00 PM — auto-layout review.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dc-input">
+                    <div class="plus">+</div>
+                    <div class="field"><span>Message #figma-talk</span><div class="ico-row"><svg viewBox="0 0 24 24"><path d="M9 11h6m-3-3v6" stroke="currentColor" stroke-width="2"/></svg><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg></div></div>
+                    <div class="send"><svg viewBox="0 0 24 24"><path d="M3 12l18-9-4 18-5-6-9-3z"/></svg></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M3 4h18v16H3z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="9" r="1.5"/><circle cx="14" cy="9" r="1.5"/></svg>Servers</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M21 12c0 5-4 9-9 9-1.5 0-2.9-.4-4.2-1L3 21l1.2-4.8C3.4 15 3 13.5 3 12a9 9 0 1118 0z"/></svg>DMs</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0116 0"/></svg>You</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">#figma-talk</div>
+      </div>
+
+      <!-- VOICE -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-voice">
+            <div class="voice-pane">
+              <div class="voice-head">
+                <svg viewBox="0 0 24 24"><path d="M3 6v4l-2 2V4l2 2zM5 4h7v8H5z"/></svg>
+                <span class="vh-name">lounge</span>
+                <span class="vh-cnt">4 in voice</span>
+              </div>
+              <div class="voice-grid">
+                <div class="voice-tile speaking">
+                  <div class="av av-pink"></div>
+                  <div class="nm">marie</div>
+                  <div class="activity">🎮 Valorant</div>
+                </div>
+                <div class="voice-tile">
+                  <div class="av av-green"></div>
+                  <div class="nm">daniel</div>
+                  <div class="muted-ic"><svg viewBox="0 0 12 12"><path d="M3 3l6 6M3 9l6-6" stroke="#fff" stroke-width="2"/></svg></div>
+                </div>
+                <div class="voice-tile speaking">
+                  <div class="av av-blurple"></div>
+                  <div class="nm">cosmo</div>
+                  <div class="activity">📝 VS Code</div>
+                </div>
+                <div class="voice-tile">
+                  <div class="av av-yellow"></div>
+                  <div class="nm">penny</div>
+                </div>
+              </div>
+              <div class="voice-controls">
+                <div class="vc-btn"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3zm7 11a7 7 0 01-14 0M12 19v3"/></svg></div>
+                <div class="vc-btn"><svg viewBox="0 0 24 24"><path d="M5 9v6h4l5 4V5l-5 4z"/></svg></div>
+                <div class="vc-btn"><svg viewBox="0 0 24 24"><path d="M4 17l4-4-4-4v8zm6-12v14l8-7-8-7z"/></svg></div>
+                <div class="vc-btn danger"><svg viewBox="0 0 24 24"><path d="M21 16l-3-3a14 14 0 00-12 0l-3 3 2 2 4-2v-2a10 10 0 016 0v2l4 2 2-2z"/></svg></div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M3 4h18v16H3z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="9" r="1.5"/><circle cx="14" cy="9" r="1.5"/></svg>Servers</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M21 12c0 5-4 9-9 9-1.5 0-2.9-.4-4.2-1L3 21l1.2-4.8C3.4 15 3 13.5 3 12a9 9 0 1118 0z"/></svg>DMs</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0116 0"/></svg>You</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Voice Channel</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One unmistakable Blurple.</h2>
+      <p>Discord on iOS lives in a dark canvas. The server rail is the spine. Every conversation is one tap into a server, then one tap into a channel — depth in a 390pt screen.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 4h18v16H3z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="9" r="1.5"/><circle cx="14" cy="9" r="1.5"/></svg></div>
+        <h3>Servers / Channel</h3>
+        <p>The 46pt server rail anchors the left edge. Active server: rounded square + 30pt white indicator. Channels tree at 96pt. Usernames render in role color: <code>admin = red</code>, <code>mod = green</code>, <code>bot = blurple</code>.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21 12c0 5-4 9-9 9-1.5 0-2.9-.4-4.2-1L3 21l1.2-4.8C3.4 15 3 13.5 3 12a9 9 0 1118 0z"/></svg></div>
+        <h3>Direct Messages</h3>
+        <p>Same server rail; the DM list takes the place of the channel tree. Status dots ride the avatar's bottom-right with a 2.5pt cutout. Unread chips in red <code>#F23F43</code>.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 6v4l-2 2V4l2 2zM5 4h7v8H5z"/></svg></div>
+        <h3>Voice Channel</h3>
+        <p>2-column tile grid. Speaking tiles get a 2pt green outline. Activity strings ride bottom-left: <code>Playing Valorant</code>. Bottom dock = mute / deafen / video / disconnect.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Role Colors</div>
+          <h3>Usernames carry the org chart.</h3>
+          <p>Discord encodes hierarchy in color. The same message becomes red when sent by an admin, green by a mod, blurple by a bot, yellow by a custom role. Roles compose — the top role wins.</p>
+          <p>Role color appears on the username, the role badge pill, and (if configured) the member list border.</p>
+          <div class="ios-feat-tokens">
+            <code>admin: #F23F43</code>
+            <code>mod: #23A559</code>
+            <code>bot: #5865F2</code>
+            <code>yellow: #F0B232</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="role-stack">
+            <div class="role-row">
+              <div class="av av-pink"></div>
+              <div>
+                <span class="uname" style="color:var(--role-red)">marie</span>
+                <span class="badge" style="background:var(--role-red)">ADMIN</span>
+                <div class="ttl">heads up — moving review to Thursday.</div>
+              </div>
+            </div>
+            <div class="role-row">
+              <div class="av av-green"></div>
+              <div>
+                <span class="uname" style="color:var(--role-green)">daniel</span>
+                <span class="badge" style="background:var(--role-green)">MOD</span>
+                <div class="ttl">works for me.</div>
+              </div>
+            </div>
+            <div class="role-row">
+              <div class="av av-blurple"></div>
+              <div>
+                <span class="uname" style="color:var(--role-blurple)">cosmo</span>
+                <div class="ttl">the variants look great.</div>
+              </div>
+            </div>
+            <div class="role-row">
+              <div class="av av-yellow"></div>
+              <div>
+                <span class="uname" style="color:var(--role-yellow)">penny</span>
+                <span class="badge" style="background:var(--accent)">BOT</span>
+                <div class="ttl">Reminder set for Thursday 3pm.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="status-stack">
+            <div class="status-row-vis">
+              <div class="status-cell"><div class="av av-pink"><span class="status-dot"></span></div><div class="lbl">Online</div></div>
+              <div class="status-cell"><div class="av av-green"><span class="status-dot idle"></span></div><div class="lbl">Idle</div></div>
+            </div>
+            <div class="status-row-vis">
+              <div class="status-cell"><div class="av av-blurple"><span class="status-dot dnd"></span></div><div class="lbl">Do Not Disturb</div></div>
+              <div class="status-cell"><div class="av av-yellow"><span class="status-dot offline"></span></div><div class="lbl">Offline</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Status Ring</div>
+          <h3>A 4pt cutout that says everything.</h3>
+          <p>Status sits at 11pt on small avatars, 18pt on profile cards. The dot is solid-fill — green / yellow / red / gray — and the avatar mask carries a notch underneath so the dot reads as cut-out, not overlaid.</p>
+          <p>Custom statuses replace the dot with an emoji at the same 18×18 mask. Streaming uses the purple variant.</p>
+          <div class="ios-feat-tokens">
+            <code>online: #23A559</code>
+            <code>idle: #F0B232</code>
+            <code>dnd: #F23F43</code>
+            <code>offline: #80848E</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Reaction Picker</div>
+          <h3>Long-press becomes a feeling.</h3>
+          <p>Long-press any message and Discord lifts a Blurple-edged picker over the chat. Frequently used emoji float to the top row. Custom server emoji appear in their own tab.</p>
+          <p>Reactions render below the message as chip pills, outlined Blurple when you've reacted, gray-outlined when you haven't.</p>
+          <div class="ios-feat-tokens">
+            <code>picker: 12px radius</code>
+            <code>chip: 8px radius</code>
+            <code>active: #5865F2 border</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="react-stack">
+            <div class="react-target">
+              <div class="av av-green"></div>
+              <div>
+                <div><span class="uname">daniel</span></div>
+                <div class="txt">works for me. <span style="color:var(--mention-blue)">#showcase</span> looks ready too</div>
+                <div class="reacts-mini">
+                  <span>👍 4</span>
+                  <span>🔥 2</span>
+                  <span>🚀 6</span>
+                </div>
+              </div>
+            </div>
+            <div class="react-picker">
+              <div class="rp-row">
+                <span>😀</span><span>😂</span><span>❤️</span><span>👍</span><span>🔥</span><span>🚀</span>
+              </div>
+              <div class="rp-search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>
+                Find the perfect reaction
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The whole vocabulary, in one place.</h2>
+        <p>Every token Discord's iOS app reaches for — dark surface ladder, role colors, status palette, radius. Light mode exists, but dark is canonical.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.discord-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Four shades of near-black, one Blurple, four status dots, five role colors. That's the whole brief.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#5865F2"></div><div class="name">Blurple</div><div class="val">#5865F2</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4752C4"></div><div class="name">Blurple Hover</div><div class="val">#4752C4</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#404EED"></div><div class="name">Blurple Deep</div><div class="val">#404EED</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#A9B0FF"></div><div class="name">Blurple Soft</div><div class="val">#A9B0FF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#00B0F4"></div><div class="name">Mention Blue</div><div class="val">#00B0F4</div></div>
+      </div>
+
+      <div class="ds-caption">Surface (dark canonical)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1E1F22"></div><div class="name">Rail BG</div><div class="val">#1E1F22</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2B2D31"></div><div class="name">Deep BG</div><div class="val">#2B2D31</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#313338"></div><div class="name">Chat BG</div><div class="val">#313338</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#383A40"></div><div class="name">Surface 1</div><div class="val">#383A40</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#404249"></div><div class="name">Hover</div><div class="val">#404249</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="name">White</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#DBDEE1"></div><div class="name">Ink Soft</div><div class="val">#DBDEE1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#B5BAC1"></div><div class="name">Muted</div><div class="val">#B5BAC1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#80848E"></div><div class="name">Dim</div><div class="val">#80848E</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3F4147"></div><div class="name">Border</div><div class="val">#3F4147</div></div>
+      </div>
+
+      <div class="ds-caption">Status & Roles</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#23A559"></div><div class="name">Online / Mod</div><div class="val">#23A559</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F0B232"></div><div class="name">Idle</div><div class="val">#F0B232</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F23F43"></div><div class="name">DND / Admin</div><div class="val">#F23F43</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EB459E"></div><div class="name">Pink Role</div><div class="val">#EB459E</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#80848E"></div><div class="name">Offline</div><div class="val">#80848E</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">gg sans / Ginto Nord on device — Inter as substitute. Tight tracking on display, regular weight on body. Usernames always 600. Channel names sentence-case in <code>#</code>.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--server-name</td><td class="sample" style="font-size:18px;font-weight:700">design-zone</td><td>18 / 1.13rem</td><td>700</td><td>top of tree</td></tr>
+          <tr><td class="token">--channel-name</td><td class="sample" style="font-size:16px;font-weight:600"># figma-talk</td><td>16 / 1.00rem</td><td>600</td><td>head bar</td></tr>
+          <tr><td class="token">--username</td><td class="sample" style="font-size:16px;font-weight:600;color:#23A559">daniel</td><td>16 / 1.00rem</td><td>600</td><td>role-tinted</td></tr>
+          <tr><td class="token">--message-body</td><td class="sample" style="font-size:16px;font-weight:400;color:#DBDEE1">works for me</td><td>16 / 1.00rem</td><td>400</td><td>line 1.375</td></tr>
+          <tr><td class="token">--timestamp</td><td class="sample" style="font-size:12px;font-weight:500;color:#80848E">10:34 AM</td><td>12 / 0.75rem</td><td>500</td><td>tnum</td></tr>
+          <tr><td class="token">--role-badge</td><td class="sample" style="font-size:10px;font-weight:700;background:#F23F43;color:#fff;padding:2px 5px;border-radius:3px;display:inline-block">ADMIN</td><td>10 / 0.63rem</td><td>700</td><td>solid fill</td></tr>
+          <tr><td class="token">--ct-row</td><td class="sample" style="font-size:14px;font-weight:500;color:#B5BAC1">general</td><td>14 / 0.88rem</td><td>500</td><td>600 if unread</td></tr>
+          <tr><td class="token">--ct-cat</td><td class="sample" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#80848E">TEXT CHANNELS</td><td>11 / 0.69rem</td><td>700</td><td>category</td></tr>
+          <tr><td class="token">--mention</td><td class="sample" style="font-size:16px;font-weight:600;color:#00B0F4;background:rgba(240,178,50,.12);padding:1px 4px;border-radius:3px;display:inline-block">@jiang-shu</td><td>16 / 1.00rem</td><td>600</td><td>highlights row</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Server icons morph 50% → 16px on selection. Channel rows stay at 4px. Buttons at 8px. Modals at 16px. Avatars are always perfect circles.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Minimal</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Row</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:10px"></div><div class="ds-radius-label">Server Active</div><div class="ds-radius-val">10px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">Modal</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">9999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Avatar</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">Anchors across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Server rail</div><div class="tk-val">72pt</div><div class="tk-note">Server icons render at 48pt. Indicator pill 4pt wide.</div></div>
+        <div class="token-cell"><div class="tk-label">Channel tree</div><div class="tk-val">240pt</div><div class="tk-note">Drawer width on phone; row height 32pt.</div></div>
+        <div class="token-cell"><div class="tk-label">Avatar size</div><div class="tk-val">40pt</div><div class="tk-note">28pt in DM list, 64pt on profile, 11pt status dot.</div></div>
+        <div class="token-cell"><div class="tk-label">Message gap</div><div class="tk-val">16pt</div><div class="tk-note">Stack between distinct authors; 4pt within author run.</div></div>
+        <div class="token-cell"><div class="tk-label">Mention bg</div><div class="tk-val">14%</div><div class="tk-note">#F0B232 at 14% opacity, 2pt left border.</div></div>
+        <div class="token-cell"><div class="tk-label">Tab bar</div><div class="tk-val">83pt</div><div class="tk-note">Five tabs on phone; rail BG fill #1E1F22.</div></div>
+        <div class="token-cell"><div class="tk-label">Status dot</div><div class="tk-val">11pt</div><div class="tk-note">2.5pt notch cut from host avatar.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation</div><div class="tk-val">spring</div><div class="tk-note">0.3s easeInOut. Server-icon morph on selection.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Pills, role badges, status dots, message rows. The atom is the message row — everything else is a wrapper.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Join Server</a>
+            <a class="btn btn-pill" href="#">Send Friend Request</a>
+            <a class="btn btn-outline" href="#">Cancel</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button style="width:44px;height:44px;border-radius:50%;background:var(--accent);display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="3"/></svg></button>
+              <button style="width:38px;height:38px;border-radius:50%;background:var(--dnd);display:grid;place-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M21 16l-3-3a14 14 0 00-12 0l-3 3 2 2 4-2v-2a10 10 0 016 0v2l4 2 2-2z"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Status & Roles</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Message #figma-talk" />
+            <div class="ds-card-row">
+              <span class="tag tag-online">Online</span>
+              <span class="tag tag-idle">Idle</span>
+              <span class="tag tag-dnd">Do Not Disturb</span>
+              <span class="tag tag-bot">BOT</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Message Row</h5>
+          <div class="ds-card-stack" style="width:100%">
+            <div style="display:flex;gap:10px;width:100%">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#EB459E,#F23F43);flex-shrink:0;position:relative"><span style="position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border-radius:50%;border:2.5px solid #2B2D31;background:#23A559"></span></div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--role-red)">marie <span style="background:var(--role-red);font-size:9px;font-weight:700;color:#fff;padding:1px 5px;border-radius:3px">ADMIN</span> <span style="color:var(--ink-dim);font-size:10px;font-weight:500;margin-left:3px">10:32</span></div>
+                <div style="font-size:13px;color:var(--ink-soft);margin-top:2px">heads up — moving the review.</div>
+                <div style="display:flex;gap:5px;margin-top:6px"><span style="padding:1px 6px;border-radius:8px;background:rgba(88,101,242,.12);border:1px solid rgba(88,101,242,.5);font-size:10px;color:#A9B0FF;font-weight:600">👍 4</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M19.5 4.5A17 17 0 0015 3l-.4 1a14 14 0 00-5.2 0L9 3a17 17 0 00-4.5 1.5C2 8 1 11 1.5 14c1.7 1.4 3.4 2.3 5 2.8l1-1.5c-.8-.3-1.6-.7-2.3-1.2 5.7 2.7 11.7 2.7 17.4 0-.7.5-1.5.9-2.3 1.2l1 1.5c1.6-.5 3.3-1.4 5-2.8.5-3-.5-6-3-9.5z" fill="#fff"/></svg></span>
+      Discord iOS
+    </div>
+    <p>Design reference. Not affiliated with Discord Inc. Token values derived from the public iOS app and Discord's published brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.discord-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.discord-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.discord-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

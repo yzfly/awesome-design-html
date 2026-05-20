@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stripe — Inspired Design</title>
+<meta name="description" content="A Stripe-inspired marketing page: gradient mesh hero, Sohne-thin display, indigo pill CTAs, tabular numerics. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #533afd;
+  --primary-deep: #4434d4;
+  --primary-press: #2e2b8c;
+  --primary-soft: #665efd;
+  --primary-subdued: #b9b9f9;
+  --brand-dark-900: #1c1e54;
+  --ruby: #ea2261;
+  --magenta: #f96bee;
+  --lemon: #f5b85a;
+  /* Surface */
+  --canvas: #ffffff;
+  --canvas-soft: #f6f9fc;
+  --canvas-cream: #f5e9d4;
+  --hairline: #e3e8ee;
+  --hairline-input: #a8c3de;
+  /* Text */
+  --ink: #0d253d;
+  --ink-secondary: #273951;
+  --ink-mute: #64748d;
+  --ink-mute-2: #61718a;
+  --on-primary: #ffffff;
+  /* Shadows */
+  --shadow-1: 0 1px 3px rgba(0,55,112,.08);
+  --shadow-2: 0 8px 24px rgba(0,55,112,.08), 0 2px 6px rgba(0,55,112,.04);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "SF Pro Display", system-ui, -apple-system, sans-serif;
+  font-weight: 300;
+  font-feature-settings: "ss01";
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+::selection { background: color-mix(in srgb, var(--primary) 25%, transparent); }
+.tabular { font-feature-settings: "ss01", "tnum"; letter-spacing: -0.42px; }
+
+/* —— Gradient mesh —— */
+.mesh-wrap { position: absolute; inset: 0 0 auto 0; height: 720px; overflow: hidden; z-index: 0; pointer-events: none; }
+.mesh {
+  position: absolute; inset: -60px; filter: blur(70px); opacity: 1;
+  background-color: #fbe9d2;
+  background-image:
+    radial-gradient(46% 65% at 8% 30%, #f5e9d4 0%, transparent 65%),
+    radial-gradient(38% 55% at 26% 55%, #ffc89a 0%, transparent 60%),
+    radial-gradient(40% 60% at 48% 38%, #d6c8ff 0%, transparent 60%),
+    radial-gradient(38% 55% at 62% 60%, #665efd 0%, transparent 60%),
+    radial-gradient(36% 55% at 80% 30%, #f96bee 0%, transparent 65%),
+    radial-gradient(40% 60% at 96% 60%, #ea2261 0%, transparent 60%);
+}
+/* Fade mesh to white at the bottom for clean handoff */
+.mesh-wrap::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 240px;
+  background: linear-gradient(to bottom, transparent, var(--canvas));
+}
+
+/* —— Layout —— */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+.body-lg { font-size: 16px; line-height: 1.5; }
+.body-md { font-size: 15px; line-height: 1.4; }
+.caption { font-size: 13px; line-height: 1.4; font-weight: 400; letter-spacing: -0.39px; color: var(--ink-mute); }
+.micro-cap { font-size: 10px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; line-height: 1.15; }
+
+/* —— Nav —— */
+.navbar { position: relative; z-index: 5; }
+.nav-row {
+  display: flex; align-items: center; gap: 24px;
+  padding: 20px 0;
+}
+.logo { font-weight: 400; font-size: 22px; letter-spacing: -0.4px; }
+.nav-links { display: flex; gap: 24px; margin-left: 32px; }
+.nav-links a { font-size: 15px; color: var(--ink); font-weight: 400; }
+.nav-links a:hover { color: var(--primary); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.signin { font-size: 15px; padding: 8px 12px; }
+.signin:hover { color: var(--primary); }
+
+/* —— Pill buttons (signature) —— */
+.pill {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font: 400 16px/1 "Inter", system-ui, sans-serif;
+  font-feature-settings: "ss01";
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pill-primary { background: var(--primary); color: var(--on-primary); }
+.pill-primary:hover { background: var(--primary-deep); }
+.pill-primary:active { background: var(--primary-press); }
+.pill-secondary { background: var(--canvas); color: var(--primary); border-color: var(--primary); }
+.pill-secondary:hover { background: var(--primary-subdued); }
+.pill-on-dark { background: var(--brand-dark-900); color: var(--on-primary); }
+.pill-on-dark:hover { background: #2a2c63; }
+.pill-sm { padding: 6px 12px; font-size: 14px; }
+
+.tag-soft {
+  display: inline-block; padding: 4px 8px; border-radius: 9999px;
+  background: var(--primary-subdued); color: var(--primary-deep);
+  font-size: 10px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; line-height: 1.15;
+}
+
+/* —— Hero —— */
+.hero {
+  position: relative; z-index: 2;
+  padding: 16px 0 120px;
+}
+.hero .eyebrow {
+  font-size: 13px; font-weight: 400; letter-spacing: -0.39px;
+  color: var(--ink-secondary); margin: 56px 0 24px;
+}
+.hero .eyebrow strong { color: var(--primary); font-weight: 400; }
+.display-xxl {
+  font-weight: 300;
+  font-size: clamp(40px, 6.8vw, 80px);
+  line-height: 1.0;
+  letter-spacing: -2.4px;
+  margin: 0 0 32px; max-width: 16ch;
+  color: var(--ink);
+}
+.display-xxl em { font-style: normal; background: linear-gradient(90deg, var(--ruby), var(--primary)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lead { font-size: 18px; font-weight: 300; line-height: 1.5; color: var(--ink-secondary); max-width: 540px; margin-bottom: 32px; }
+.hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* —— Logo strip —— */
+.logos {
+  border-top: 1px solid var(--hairline);
+  padding: 32px 0;
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+  position: relative;
+}
+.logos-label { font-size: 13px; color: var(--ink-mute); letter-spacing: -0.39px; }
+.logo-strip { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; opacity: 0.65; flex: 1; justify-content: space-between; }
+.logo-mark { font-weight: 500; font-size: 18px; color: var(--ink-secondary); letter-spacing: -0.4px; }
+.logo-mark.serif { font-family: "Times New Roman", serif; font-style: italic; }
+
+/* —— Feature grid —— */
+.section { padding: 96px 0; position: relative; }
+.section-soft { background: var(--canvas-soft); }
+.section-eyebrow { font-size: 13px; letter-spacing: -0.39px; color: var(--primary); margin-bottom: 16px; font-weight: 400; }
+.section-head h2 { font-weight: 300; font-size: clamp(28px, 4.4vw, 48px); line-height: 1.15; letter-spacing: -0.96px; margin: 0 0 16px; max-width: 22ch; }
+.section-head p { font-size: 17px; color: var(--ink-secondary); max-width: 560px; line-height: 1.5; margin: 0 0 48px; }
+
+.feature-grid {
+  display: grid; gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow-1);
+  display: flex; flex-direction: column; gap: 12px;
+  min-height: 240px;
+}
+.feature-card .stat {
+  font-weight: 300; font-size: 48px; line-height: 1; letter-spacing: -0.96px;
+  font-feature-settings: "ss01", "tnum";
+  color: var(--ink);
+}
+.feature-card .stat .unit { color: var(--ink-mute); font-size: 24px; margin-left: 4px; letter-spacing: -0.5px; }
+.feature-card h3 { font-weight: 400; font-size: 22px; letter-spacing: -0.22px; line-height: 1.2; margin: 0; }
+.feature-card p { font-size: 15px; color: var(--ink-secondary); margin: 0; line-height: 1.5; }
+.feature-card .indigo-line { width: 32px; height: 2px; background: var(--primary); border-radius: 2px; margin-bottom: 8px; }
+
+/* —— Dashboard composite —— */
+.composite {
+  display: grid;
+  grid-template-columns: 1.05fr 1.4fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+@media (max-width: 900px) { .composite { grid-template-columns: 1fr; } }
+.panel {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+}
+.panel-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 13px; color: var(--ink-mute);
+  letter-spacing: -0.39px;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28c840; }
+
+/* IDE panel */
+.ide { display: flex; flex-direction: column; }
+.ide pre { margin: 0; padding: 20px 24px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; line-height: 1.7; color: var(--ink); background: var(--canvas); overflow-x: auto; }
+.ide .k { color: var(--ruby); }
+.ide .s { color: #1b7a51; }
+.ide .v { color: var(--primary); }
+.ide .c { color: var(--ink-mute); }
+.ide .n { color: var(--ink-secondary); }
+
+/* Table panel */
+.tbl { padding: 8px 0; }
+.tbl-row { display: grid; grid-template-columns: 1fr 110px 90px 90px; padding: 12px 24px; align-items: center; font-feature-settings: "ss01", "tnum"; letter-spacing: -0.2px; }
+.tbl-row + .tbl-row { border-top: 1px solid var(--hairline); }
+.tbl-head { color: var(--ink-mute); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; padding: 16px 24px 8px; border-top: 0; }
+.tbl-row .amt { text-align: right; font-weight: 400; letter-spacing: -0.42px; }
+.tbl-row .name { display: flex; flex-direction: column; gap: 2px; }
+.tbl-row .name strong { font-weight: 400; font-size: 15px; }
+.tbl-row .name span { font-size: 12px; color: var(--ink-mute); }
+.tbl-row .status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-mute); }
+.tbl-row .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #21c97e; }
+.tbl-row .status.failed::before { background: var(--ruby); }
+.tbl-row .status.pending::before { background: var(--lemon); }
+
+/* —— Cream band —— */
+.cream-card {
+  background: var(--canvas-cream);
+  border-radius: 12px;
+  padding: 64px;
+  display: grid; gap: 32px;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+}
+@media (max-width: 900px) { .cream-card { grid-template-columns: 1fr; padding: 40px; } }
+.cream-card h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 300; line-height: 1.1; letter-spacing: -0.8px; margin: 0 0 16px; }
+.cream-card p { color: var(--ink-secondary); font-size: 17px; line-height: 1.5; margin: 0 0 28px; }
+.cream-card .pill { margin-right: 8px; }
+.cream-illust {
+  background: linear-gradient(135deg, #ffd9a8 0%, #f5b85a 60%, #ea2261 110%);
+  aspect-ratio: 4 / 3; border-radius: 8px;
+  display: flex; align-items: end; padding: 24px;
+  color: white; font-size: 13px; letter-spacing: -0.4px; font-weight: 400;
+}
+
+/* —— Pricing —— */
+.tiers {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1100px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .tiers { grid-template-columns: 1fr; } }
+
+.tier {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: var(--shadow-1);
+}
+.tier .tier-name { font-weight: 400; font-size: 22px; letter-spacing: -0.22px; }
+.tier .price { font-weight: 300; font-size: 32px; line-height: 1; letter-spacing: -0.64px; font-feature-settings: "ss01", "tnum"; }
+.tier .price .per { color: var(--ink-mute); font-size: 14px; margin-left: 4px; letter-spacing: -0.42px; }
+.tier .desc { color: var(--ink-secondary); font-size: 14px; line-height: 1.5; min-height: 42px; }
+.tier ul { padding: 0; margin: 16px 0 24px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; color: var(--ink-secondary); line-height: 1.4; display: flex; gap: 8px; align-items: start; }
+.tier li::before { content: ""; flex: none; width: 14px; height: 14px; margin-top: 3px; border-radius: 50%; background: var(--primary-subdued); position: relative; }
+.tier .cta-wrap { margin-top: auto; }
+.tier-featured {
+  background: var(--brand-dark-900);
+  color: var(--on-primary);
+  border-color: transparent;
+  position: relative;
+}
+.tier-featured .price, .tier-featured .tier-name { color: var(--on-primary); }
+.tier-featured .desc, .tier-featured li, .tier-featured .price .per { color: #aab1cc; }
+.tier-featured li::before { background: var(--primary-soft); }
+.tier-featured .badge {
+  position: absolute; top: 24px; right: 24px;
+  background: rgba(102,94,253,0.18); color: #ccc7ff;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 8px; border-radius: 9999px;
+}
+
+/* —— Footer —— */
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: 64px 0;
+  background: var(--canvas);
+}
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 1.4fr repeat(4, 1fr); }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 { font-size: 13px; font-weight: 400; letter-spacing: -0.39px; color: var(--ink); margin: 0 0 16px; }
+.footer-grid ul { padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 13px; color: var(--ink-mute); letter-spacing: -0.39px; }
+.footer-grid li a:hover { color: var(--primary); }
+.footer-bottom {
+  margin-top: 48px; padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  font-size: 12px; color: var(--ink-mute); letter-spacing: -0.36px;
+}
+.brand-mini { display: flex; flex-direction: column; gap: 16px; max-width: 240px; }
+.brand-mini small { color: var(--ink-mute); font-size: 13px; line-height: 1.5; letter-spacing: -0.39px; font-weight: 400; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 10;
+  background: var(--canvas); border: 1px solid var(--hairline);
+  padding: 6px 12px; border-radius: 9999px;
+  font-size: 12px; color: var(--ink-mute); box-shadow: var(--shadow-1);
+}
+.src-link:hover { color: var(--primary); }
+
+/* —— Design system tokens section —— */
+.ds-block { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading {
+  font-size: 22px; font-weight: 300; letter-spacing: -0.22px;
+  color: var(--ink); margin: 0 0 16px;
+}
+.ds-caption {
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-mute); margin: 28px 0 12px;
+}
+.ds-block .ds-caption:first-of-type { margin-top: 16px; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
+.ds-sw .chip { height: 52px; }
+.ds-sw .meta { padding: 8px 10px; }
+.ds-sw .name { font-size: 12px; font-weight: 400; color: var(--ink); letter-spacing: -0.2px; }
+.ds-sw .val { font-size: 10px; color: var(--ink-mute); font-family: ui-monospace, Menlo, monospace; margin-top: 2px; font-feature-settings: "tnum"; }
+
+.ds-typescale { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; }
+.ds-tr { display: grid; grid-template-columns: 130px 220px 1fr; align-items: baseline; gap: 24px; padding: 20px 24px; border-bottom: 1px solid var(--hairline); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 11px; color: var(--ink); font-family: ui-monospace, Menlo, monospace; font-feature-settings: "tnum"; }
+.ds-spec { font-size: 11px; color: var(--ink-mute); font-family: ui-monospace, Menlo, monospace; font-feature-settings: "tnum"; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 8px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 700px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-rad .box { width: 72px; height: 72px; background: var(--canvas); border: 1px solid var(--hairline); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input {
+  height: 40px; padding: 0 12px; border-radius: 6px;
+  border: 1px solid var(--hairline-input);
+  background: var(--canvas); color: var(--ink);
+  font-family: inherit; font-size: 15px; font-weight: 300;
+  width: 100%;
+}
+.ds-input.focused { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(83,58,253,0.18); outline: none; }
+.ds-field-label { font-size: 11px; color: var(--ink-mute); font-family: ui-monospace, Menlo, monospace; margin-bottom: 6px; display: block; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini { border-radius: 12px; padding: 24px; border: 1px solid var(--hairline); background: var(--canvas); display: flex; flex-direction: column; gap: 8px; }
+.ds-card-mini h4 { margin: 0; font-weight: 300; font-size: 18px; letter-spacing: -0.2px; }
+.ds-card-mini p { margin: 0; font-size: 13px; color: var(--ink-mute); letter-spacing: -0.39px; line-height: 1.5; }
+.ds-card-mini.cream { background: var(--canvas-cream); border-color: rgba(0,0,0,0.06); }
+.ds-card-mini.dark { background: var(--brand-dark-900); color: var(--on-primary); border-color: transparent; }
+.ds-card-mini.dark p { color: #aab1cc; }
+</style>
+</head>
+<body>
+
+<div class="mesh-wrap"><div class="mesh"></div></div>
+
+<header class="navbar"><div class="wrap nav-row">
+  <a class="logo" href="#">stripi</a>
+  <nav class="nav-links">
+    <a href="#">Products</a>
+    <a href="#">Solutions</a>
+    <a href="#">Developers</a>
+    <a href="#">Resources</a>
+    <a href="#">Pricing</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="signin">Sign in</a>
+    <a href="#" class="pill pill-primary">Contact sales →</a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow"><strong>Financial infrastructure</strong> to grow your revenue</p>
+  <h1 class="display-xxl">Payments for <em>the new economy.</em></h1>
+  <p class="lead">Join millions of companies that use Stripi to accept payments online and in person, embed financial services, power custom revenue models, and build a more profitable business.</p>
+  <div class="cta-row">
+    <a href="#" class="pill pill-primary">Start now →</a>
+    <a href="#" class="pill pill-secondary">Contact sales</a>
+  </div>
+</div></section>
+
+<div class="wrap">
+  <div class="logos">
+    <span class="logos-label">Trusted by businesses of every size</span>
+    <div class="logo-strip">
+      <span class="logo-mark">amazon</span>
+      <span class="logo-mark serif">Shopify</span>
+      <span class="logo-mark">Google</span>
+      <span class="logo-mark">slack</span>
+      <span class="logo-mark serif">salesforce</span>
+      <span class="logo-mark">Atlassian</span>
+      <span class="logo-mark serif">BMW</span>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-eyebrow">A unified platform</p>
+      <h2>One stack to power every payment in your business.</h2>
+      <p>Stripi handles billions of dollars every year for ambitious companies, with the latency and reliability of a single global API surface.</p>
+    </div>
+
+    <div class="composite">
+      <div class="panel ide">
+        <div class="panel-head"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span style="margin-left: 12px;">checkout.rb</span></div>
+<pre><span class="c"># Create a Stripi checkout session</span>
+<span class="k">session</span> = <span class="v">Stripi::Checkout::Session</span>.<span class="n">create</span>(
+  <span class="n">mode:</span>          <span class="s">"subscription"</span>,
+  <span class="n">success_url:</span>   <span class="s">"https://example.com/ok"</span>,
+  <span class="n">cancel_url:</span>    <span class="s">"https://example.com/cancel"</span>,
+  <span class="n">line_items:</span> [{
+    <span class="n">price:</span>     <span class="s">"price_1QHwPro200ABCDEF"</span>,
+    <span class="n">quantity:</span>  <span class="v">1</span>,
+  }],
+  <span class="n">automatic_tax:</span> { <span class="n">enabled:</span> <span class="v">true</span> },
+)
+
+<span class="k">redirect_to</span> session.<span class="n">url</span>, <span class="n">status:</span> <span class="v">303</span></pre>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><span style="font-weight: 400; color: var(--ink); font-size: 14px;">Recent transactions</span><span style="margin-left: auto;">USD</span></div>
+        <div class="tbl">
+          <div class="tbl-row tbl-head">
+            <span>Customer</span><span>Amount</span><span>Method</span><span>Status</span>
+          </div>
+          <div class="tbl-row">
+            <div class="name"><strong>Ava Carter</strong><span>cus_NfqW…M4Z</span></div>
+            <span class="amt">$1,284.50</span>
+            <span class="caption">Visa · 4242</span>
+            <span class="status">Succeeded</span>
+          </div>
+          <div class="tbl-row">
+            <div class="name"><strong>Lin Wei</strong><span>cus_Pa1J…Tk7</span></div>
+            <span class="amt">¥8,900.00</span>
+            <span class="caption">Alipay</span>
+            <span class="status">Succeeded</span>
+          </div>
+          <div class="tbl-row">
+            <div class="name"><strong>Hiro Tanaka</strong><span>cus_Rt9S…Q08</span></div>
+            <span class="amt">¥48,300</span>
+            <span class="caption">SEPA · DE89</span>
+            <span class="status pending">Pending</span>
+          </div>
+          <div class="tbl-row">
+            <div class="name"><strong>Sofía Pérez</strong><span>cus_Lk04…N1A</span></div>
+            <span class="amt">€640.00</span>
+            <span class="caption">Mastercard · 1170</span>
+            <span class="status">Succeeded</span>
+          </div>
+          <div class="tbl-row">
+            <div class="name"><strong>Mona Howard</strong><span>cus_Bn7D…X2C</span></div>
+            <span class="amt">$12.95</span>
+            <span class="caption">ACH · ****6789</span>
+            <span class="status failed">Failed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-eyebrow">Built for scale</p>
+      <h2>Numbers that compound.</h2>
+      <p>A platform engineered to clear money at the speed of the rest of your stack — measured in milliseconds, not days.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="indigo-line"></div>
+        <div class="stat">99.999<span class="unit">% uptime</span></div>
+        <h3>Always on, by design.</h3>
+        <p>Multi-region active-active infrastructure keeps payments clearing through outages your providers never have to mention.</p>
+      </div>
+      <div class="feature-card">
+        <div class="indigo-line"></div>
+        <div class="stat">3.4<span class="unit">B requests/day</span></div>
+        <h3>One global API.</h3>
+        <p>Same shape of request whether you're in São Paulo, Singapore, or Stockholm. No regional shims, no edge gateways to manage.</p>
+      </div>
+      <div class="feature-card">
+        <div class="indigo-line"></div>
+        <div class="stat">142<span class="unit">ms p50</span></div>
+        <h3>Latency you can promise.</h3>
+        <p>p50 142ms · p95 380ms · p99 870ms — visible per-route in the dashboard, with SLAs you can quote back to your customers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cream-card">
+      <div>
+        <span class="tag-soft">Spotlight</span>
+        <h2 style="margin-top: 16px;">Same money. Eighty currencies.</h2>
+        <p>One ledger, one settlement file, one reporting surface. Pricing engines, tax engines, dispute engines — all running quietly underneath, so the rest of your team can think about products and customers.</p>
+        <a href="#" class="pill pill-primary">See multi-currency →</a>
+        <a href="#" class="pill pill-secondary" style="margin-left: 8px;">Read the docs</a>
+      </div>
+      <div class="cream-illust">"We replaced four vendors with one Stripi integration."</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-eyebrow">Pricing</p>
+      <h2>Pay for what you process.</h2>
+      <p>No setup fees, no monthly minimums, no hidden costs. Same pricing every month.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-name">Starter</div>
+        <div class="price">2.9<span class="per">% + 30¢</span></div>
+        <p class="desc">For small teams accepting their first online card payments.</p>
+        <ul>
+          <li>All payment methods</li>
+          <li>Dashboard + receipts</li>
+          <li>Hosted checkout</li>
+          <li>Up to $80k / month</li>
+        </ul>
+        <div class="cta-wrap"><a href="#" class="pill pill-secondary">Start free</a></div>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Growth</div>
+        <div class="price">2.7<span class="per">% + 30¢</span></div>
+        <p class="desc">For scaling businesses that need richer reporting and tax tools.</p>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Automatic tax (40+ regions)</li>
+          <li>Radar fraud rules</li>
+          <li>Sub-account branding</li>
+        </ul>
+        <div class="cta-wrap"><a href="#" class="pill pill-secondary">Start free</a></div>
+      </div>
+      <div class="tier tier-featured">
+        <span class="badge">Most chosen</span>
+        <div class="tier-name">Scale</div>
+        <div class="price">Custom</div>
+        <p class="desc">Volume pricing and dedicated support for high-throughput businesses.</p>
+        <ul>
+          <li>Everything in Growth</li>
+          <li>Interchange-plus pricing</li>
+          <li>SLA 99.99% uptime</li>
+          <li>Solutions architect</li>
+        </ul>
+        <div class="cta-wrap"><a href="#" class="pill pill-on-dark" style="background:white;color:var(--brand-dark-900)">Contact sales</a></div>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Enterprise</div>
+        <div class="price">Custom</div>
+        <p class="desc">For platforms processing billions, with custom contracts and audit support.</p>
+        <ul>
+          <li>Everything in Scale</li>
+          <li>Dedicated infrastructure</li>
+          <li>PCI Level 1, SOC 2 II</li>
+          <li>24×7 executive support</li>
+        </ul>
+        <div class="cta-wrap"><a href="#" class="pill pill-secondary">Talk to us</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section"><div class="wrap">
+  <div class="section-head" style="margin-bottom: 56px;">
+    <p class="section-eyebrow">Design system</p>
+    <h2>The tokens behind every pixel.</h2>
+    <p>Every color, character, and curve on this page comes from a documented token set. Below are the canonical values, rendered in their own voice — sourced directly from the brand's <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.stripe.html" target="_blank" rel="noopener" style="color: var(--primary);">DESIGN.md</a>.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand & Accent</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#533afd"></div><div class="meta"><div class="name">primary</div><div class="val">#533afd</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#4434d4"></div><div class="meta"><div class="name">primary-deep</div><div class="val">#4434d4</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#2e2b8c"></div><div class="meta"><div class="name">primary-press</div><div class="val">#2e2b8c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#665efd"></div><div class="meta"><div class="name">primary-soft</div><div class="val">#665efd</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#b9b9f9"></div><div class="meta"><div class="name">primary-subdued</div><div class="val">#b9b9f9</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1c1e54"></div><div class="meta"><div class="name">brand-dark-900</div><div class="val">#1c1e54</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ea2261"></div><div class="meta"><div class="name">ruby</div><div class="val">#ea2261</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f96bee"></div><div class="meta"><div class="name">magenta</div><div class="val">#f96bee</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f5b85a"></div><div class="meta"><div class="name">lemon</div><div class="val">#f5b85a</div></div></div>
+    </div>
+
+    <p class="ds-caption">Surface</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid var(--hairline)"></div><div class="meta"><div class="name">canvas</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f6f9fc"></div><div class="meta"><div class="name">canvas-soft</div><div class="val">#f6f9fc</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f5e9d4"></div><div class="meta"><div class="name">canvas-cream</div><div class="val">#f5e9d4</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e3e8ee"></div><div class="meta"><div class="name">hairline</div><div class="val">#e3e8ee</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#a8c3de"></div><div class="meta"><div class="name">hairline-input</div><div class="val">#a8c3de</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#0d253d"></div><div class="meta"><div class="name">ink</div><div class="val">#0d253d</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#273951"></div><div class="meta"><div class="name">ink-secondary</div><div class="val">#273951</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#64748d"></div><div class="meta"><div class="name">ink-mute</div><div class="val">#64748d</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#61718a"></div><div class="meta"><div class="name">ink-mute-2</div><div class="val">#61718a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid var(--hairline)"></div><div class="meta"><div class="name">on-primary</div><div class="val">#ffffff</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption" style="margin-bottom: 16px;">Sohne (subbed Inter) · weight 300 · ss01 globally · tnum on money</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xxl</span><span class="ds-spec">56 · w300 · −1.4 · 1.03</span><div class="ds-sam" style="font-size:56px; font-weight:300; letter-spacing:-1.4px; line-height:1.03;">Payments for the new economy</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">32 · w300 · −0.64 · 1.1</span><div class="ds-sam" style="font-size:32px; font-weight:300; letter-spacing:-0.64px; line-height:1.1;">One stack, every payment</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-lg</span><span class="ds-spec">22 · w300 · −0.22 · 1.1</span><div class="ds-sam" style="font-size:22px; font-weight:300; letter-spacing:-0.22px; line-height:1.1;">Same money. Eighty currencies.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">16 · w300 · 0 · 1.4</span><div class="ds-sam" style="font-size:16px; font-weight:300; line-height:1.4;">Marketing lead body. Editorial density at thin weight is the brand's signature.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-tabular</span><span class="ds-spec">14 · w300 · −0.42 · tnum</span><div class="ds-sam tabular" style="font-size:14px; font-weight:300; letter-spacing:-0.42px;">$1,284.50 · ¥8,900.00 · €640.00 · 142ms p50</div></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">16 · w400 · 0 · 1.0</span><div class="ds-sam" style="font-size:16px; font-weight:400; line-height:1;">Start now &nbsp;·&nbsp; Contact sales</div></div>
+      <div class="ds-tr"><span class="ds-tok">caption</span><span class="ds-spec">13 · w400 · −0.39 · 1.4</span><div class="ds-sam" style="font-size:13px; font-weight:400; letter-spacing:-0.39px; color:var(--ink-mute)">Helper text, table labels, footer columns</div></div>
+      <div class="ds-tr"><span class="ds-tok">micro-cap</span><span class="ds-spec">10 · w400 · +0.1 · UPPER</span><div class="ds-sam" style="font-size:10px; font-weight:400; letter-spacing:0.16em; text-transform:uppercase;">EYEBROW · ALL-CAPS · TAXONOMY</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">xs</span><span class="ds-spec">4</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:6px"></div><span class="ds-tok">sm</span><span class="ds-spec">6 · input</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="ds-tok">md</span><span class="ds-spec">8</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:12px"></div><span class="ds-tok">lg</span><span class="ds-spec">12 · cards</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="ds-tok">xl</span><span class="ds-spec">16</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">pill</span><span class="ds-spec">9999 · buttons</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — pill, 8 / 16 padding · the dominant CTA</p>
+    <div class="ds-comp-row">
+      <a href="#" class="pill pill-primary">Primary pill</a>
+      <a href="#" class="pill pill-primary" style="background:var(--primary-press);">Pressed</a>
+      <a href="#" class="pill pill-secondary">Secondary outline</a>
+      <a href="#" class="pill pill-on-dark">On-dark</a>
+      <a href="#" class="pill" style="background:var(--hairline);color:var(--ink-mute);cursor:not-allowed;">Disabled</a>
+    </div>
+
+    <p class="ds-caption">Inputs — 8 / 12 padding, 6px radius, ink-input hairline</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="card@example.com"/>
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="ava@stripi.com"/>
+      </div>
+    </div>
+
+    <p class="ds-caption">Tags & pills</p>
+    <div class="ds-comp-row">
+      <span class="tag-soft">PILL TAG SOFT</span>
+      <span class="tag-soft" style="background:var(--canvas-cream);color:#7a4e10">CREAM TINT</span>
+      <span class="tag-soft" style="background:rgba(234,34,97,0.15);color:#a8154c">RUBY TINT</span>
+    </div>
+
+    <p class="ds-caption">Card variants — 12px radius, 32 padding, hairline border</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-mini">
+        <h4>card-feature-light</h4>
+        <p>Background canvas · level-1 shadow on hover. The default feature card on the marketing canvas.</p>
+      </div>
+      <div class="ds-card-mini cream">
+        <h4>card-cream-band</h4>
+        <p>Warm interlude — background canvas-cream. Used to break up indigo / white rhythm with warmth.</p>
+      </div>
+      <div class="ds-card-mini dark">
+        <h4>card-pricing-featured</h4>
+        <p>Inverted dark featured pricing tier — background brand-dark-900, white text. Distinctive featured-tier choice.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="brand-mini">
+      <div class="logo">stripi</div>
+      <small>A Stripe-inspired single-page composition. Tokens and component spec sourced from awesome-design-md.</small>
+    </div>
+    <div>
+      <h4>Products</h4>
+      <ul>
+        <li><a href="#">Payments</a></li>
+        <li><a href="#">Connect</a></li>
+        <li><a href="#">Billing</a></li>
+        <li><a href="#">Tax</a></li>
+        <li><a href="#">Radar</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Solutions</h4>
+      <ul>
+        <li><a href="#">E-commerce</a></li>
+        <li><a href="#">Marketplaces</a></li>
+        <li><a href="#">SaaS</a></li>
+        <li><a href="#">Platforms</a></li>
+        <li><a href="#">Embedded finance</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Developers</h4>
+      <ul>
+        <li><a href="#">API reference</a></li>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">Guides</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Status</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Customers</a></li>
+        <li><a href="#">Newsroom</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Partners</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© Stripi (inspired) · Generated for design study</div>
+    <div>Sohne (sub. Inter) · Indigo #533afd · Pill 9999px · ss01 + tnum</div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.stripe.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

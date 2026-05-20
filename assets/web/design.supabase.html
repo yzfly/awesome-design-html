@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Supabaze — Inspired Design</title>
+<meta name="description" content="A Supabaze-inspired marketing page: white canvas, single emerald CTA, monochrome typography, composited Postgres dashboard mockups. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand — single chromatic event */
+  --primary: #3ecf8e;
+  --primary-deep: #24b47e;
+  --primary-soft: #4ade80;
+  /* Ink ladder */
+  --ink: #171717;
+  --ink-secondary: #212121;
+  --ink-mute: #707070;
+  --ink-mute-2: #9a9a9a;
+  --ink-faint: #b2b2b2;
+  --on-primary: #171717;
+  --on-dark: #ffffff;
+  /* Surfaces */
+  --canvas: #ffffff;
+  --canvas-soft: #fafafa;
+  --canvas-night: #1c1c1c;
+  --canvas-night-soft: #202020;
+  /* Hairlines */
+  --hairline: #dfdfdf;
+  --hairline-strong: #c7c7c7;
+  --hairline-cool: #ededed;
+  --hairline-cool-2: #efefef;
+  --hairline-cool-3: #d4d4d4;
+  /* Accents — chart/integration only, never system */
+  --accent-purple: #6b01c2;
+  --accent-violet: #644fc1;
+  --accent-purple-soft: #eddbf9;
+  --accent-yellow: #ffdb13;
+  --accent-tomato: #ff2201;
+  --accent-pink: #c7007e;
+  --accent-indigo: #054cff;
+  --accent-crimson: #e2005a;
+  /* Radius */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Circular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "ss01" 1, "cv11" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(62,207,142,0.30); color: var(--ink); }
+.mono { font-family: "JetBrains Mono", "SF Mono", Menlo, Monaco, Consolas, monospace; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top nav (white, single emerald CTA on right) —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline-cool);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 64px; gap: 24px; padding: 16px 0; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; font-size: 18px; color: var(--ink); letter-spacing: -0.4px; }
+.brand .glyph { display: inline-flex; width: 22px; height: 24px; }
+.nav-links { display: flex; gap: 24px; margin-left: 32px; }
+.nav-links a { font-size: 14px; color: var(--ink); font-weight: 500; }
+.nav-links a:hover { color: var(--ink-mute); }
+.nav-right { margin-left: auto; display: flex; gap: 16px; align-items: center; }
+
+/* —— Buttons (6px radius, never pill) —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit;
+  font-size: 14px; font-weight: 500; line-height: 1.0;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--ink);
+  transition: background .15s, border-color .15s, transform .12s;
+  text-decoration: none;
+  white-space: nowrap;
+  height: 36px;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-deep); }
+.btn-secondary { background: var(--canvas); color: var(--ink); border-color: var(--hairline-strong); }
+.btn-secondary:hover { background: var(--canvas-soft); border-color: var(--hairline-cool-3); }
+.btn-on-dark { background: var(--canvas-night); color: var(--on-dark); }
+.btn-on-dark:hover { background: var(--canvas-night-soft); }
+.btn-secondary-on-dark { background: transparent; color: var(--on-dark); border-color: rgba(255,255,255,0.2); }
+.btn-secondary-on-dark:hover { background: rgba(255,255,255,0.06); }
+.btn-link { background: transparent; color: var(--ink); padding: 0; height: auto; text-decoration: underline; text-decoration-color: var(--hairline-strong); text-underline-offset: 4px; }
+.btn-link:hover { text-decoration-color: var(--ink); }
+.btn-lg { font-size: 14px; padding: 12px 20px; height: 44px; }
+
+/* —— Type roles —— */
+.display-xxl { font-weight: 500; font-size: clamp(40px, 5.6vw, 64px); line-height: 1.1; letter-spacing: -1.92px; margin: 0; }
+.display-xl { font-weight: 500; font-size: clamp(32px, 4.2vw, 48px); line-height: 1.1; letter-spacing: -1.44px; margin: 0; }
+.display-lg { font-weight: 500; font-size: clamp(28px, 3.2vw, 36px); line-height: 1.15; letter-spacing: -0.72px; margin: 0; }
+.display-md { font-weight: 500; font-size: 28px; line-height: 1.2; letter-spacing: -0.42px; margin: 0; }
+.heading-lg { font-weight: 500; font-size: 22px; line-height: 1.2; margin: 0; }
+.heading-md { font-weight: 500; font-size: 18px; line-height: 1.4; margin: 0; }
+.body-lg { font-size: 18px; line-height: 1.55; font-weight: 400; }
+.body-md { font-size: 16px; line-height: 1.5; }
+.caption { font-size: 13px; line-height: 1.45; color: var(--ink-mute); }
+.micro { font-size: 12px; line-height: 1.45; }
+
+/* —— Hero —— */
+.hero { padding: 96px 0 64px; background: var(--canvas); }
+.hero h1 { max-width: 16ch; margin: 0 auto 24px; text-align: center; }
+.hero p.lead { max-width: 640px; margin: 0 auto 40px; text-align: center; color: var(--ink-mute); font-size: 20px; font-weight: 400; line-height: 1.55; }
+.hero .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+.hero .start-cmd { display: inline-flex; align-items: center; gap: 0; background: var(--canvas-night); border-radius: var(--r-md); padding: 0; margin: 0 auto; max-width: 540px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.hero .start-cmd .prompt { font-family: "JetBrains Mono", monospace; color: var(--on-dark); padding: 12px 16px; font-size: 13px; opacity: 0.95; flex: 1; }
+.hero .start-cmd .prompt span { color: var(--primary-soft); }
+.hero .start-cmd .copy-btn { background: var(--canvas-night-soft); color: var(--on-dark); padding: 12px 16px; font-size: 12px; font-family: inherit; font-weight: 500; border: 0; border-left: 1px solid #2a2a2a; cursor: pointer; }
+.hero .start-cmd .copy-btn:hover { background: #2a2a2a; }
+
+/* Hero composited dashboard mockup */
+.hero-mockup {
+  margin-top: 56px;
+  position: relative;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mockup-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.10);
+}
+.mockup-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px;
+  background: var(--canvas-soft);
+  border-bottom: 1px solid var(--hairline-cool);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--ink-mute);
+}
+.mockup-bar .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--hairline-strong); }
+.mockup-bar .dot.r { background: #ff5f57; }
+.mockup-bar .dot.y { background: #febc2e; }
+.mockup-bar .dot.g { background: var(--primary); }
+.mockup-bar .crumb { margin-left: 12px; }
+.mockup-bar .crumb b { color: var(--ink); font-weight: 500; }
+.mockup-body { display: grid; grid-template-columns: 240px 1fr; min-height: 420px; }
+@media (max-width: 800px) { .mockup-body { grid-template-columns: 1fr; min-height: auto; } .mockup-side { display: none; } }
+.mockup-side {
+  background: var(--canvas-soft);
+  border-right: 1px solid var(--hairline-cool);
+  padding: 16px 12px;
+  font-size: 13px;
+}
+.mockup-side .group { display: flex; flex-direction: column; gap: 2px; margin-bottom: 16px; }
+.mockup-side .group-head { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-mute-2); padding: 4px 8px; font-weight: 500; }
+.mockup-side .item { padding: 6px 8px; border-radius: var(--r-xs); color: var(--ink); display: flex; align-items: center; gap: 8px; font-weight: 400; }
+.mockup-side .item.active { background: var(--hairline-cool); font-weight: 500; }
+.mockup-side .item .ic { width: 14px; height: 14px; opacity: 0.7; }
+.mockup-main { padding: 20px 24px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.mockup-main .toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.mockup-main .toolbar .pill { padding: 4px 10px; border: 1px solid var(--hairline); border-radius: var(--r-full); font-size: 12px; color: var(--ink); background: var(--canvas); font-weight: 500; }
+.mockup-main .toolbar .pill.act { background: var(--canvas-night); color: var(--on-dark); border-color: var(--canvas-night); }
+.mockup-main .toolbar .pill.green-dot::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); margin-right: 6px; vertical-align: middle; }
+.tbl { border: 1px solid var(--hairline-cool); border-radius: var(--r-md); overflow: hidden; font-size: 12px; font-family: "JetBrains Mono", monospace; }
+.tbl-head, .tbl-row { display: grid; grid-template-columns: 60px 1.4fr 1fr 1fr 100px; padding: 10px 14px; align-items: center; gap: 12px; }
+.tbl-head { background: var(--canvas-soft); font-weight: 500; color: var(--ink-mute); font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 1px solid var(--hairline-cool); }
+.tbl-row { border-bottom: 1px solid var(--hairline-cool-2); }
+.tbl-row:last-child { border-bottom: 0; }
+.tbl-row .id { color: var(--ink-mute); }
+.tbl-row .role { padding: 2px 8px; background: var(--canvas-soft); border-radius: var(--r-full); font-size: 11px; color: var(--ink); border: 1px solid var(--hairline-cool); width: fit-content; font-family: inherit; }
+.tbl-row .role.green { background: rgba(62,207,142,0.12); color: var(--primary-deep); border-color: rgba(62,207,142,0.4); }
+.tbl-row .role.purple { background: var(--accent-purple-soft); color: var(--accent-purple); border-color: var(--accent-purple-soft); }
+.tbl-row .stamp { color: var(--ink-mute); }
+
+/* Logo wall */
+.logo-wall {
+  padding: 48px 0 32px;
+  border-bottom: 1px solid var(--hairline-cool);
+}
+.logo-wall .label { text-align: center; font-size: 13px; color: var(--ink-mute); margin: 0 0 24px; font-weight: 500; }
+.logos { display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap; }
+.logos span { font-family: inherit; font-weight: 600; font-size: 18px; color: var(--ink-mute); letter-spacing: -0.4px; opacity: 0.85; }
+
+/* —— Sections —— */
+section { padding: 96px 0; }
+.section-tight { padding: 64px 0; }
+.section-soft { background: var(--canvas-soft); }
+.section-dark { background: var(--canvas-night); color: var(--on-dark); }
+.section-head { max-width: 720px; margin: 0 auto 56px; text-align: center; }
+.section-head .eyebrow { display: inline-block; padding: 4px 12px; background: rgba(62,207,142,0.12); color: var(--primary-deep); border-radius: var(--r-full); font-size: 12px; font-weight: 500; margin-bottom: 16px; }
+.section-head h2 { margin: 0 0 16px; }
+.section-head p { margin: 0; color: var(--ink-mute); font-size: 18px; line-height: 1.55; }
+
+/* —— Feature pillars (4-up) —— */
+.pillar-grid { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) { .pillar-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .pillar-grid { grid-template-columns: 1fr; } }
+.pillar {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color .15s, transform .15s;
+}
+.pillar:hover { border-color: var(--hairline-strong); transform: translateY(-2px); }
+.pillar .ic { width: 32px; height: 32px; color: var(--primary-deep); }
+.pillar h3 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -0.2px; }
+.pillar p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
+.pillar .learn { font-size: 14px; font-weight: 500; color: var(--ink); display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; }
+.pillar .learn::after { content: "→"; }
+
+/* —— Code + copy section —— */
+.dual-feature {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+@media (max-width: 900px) { .dual-feature { grid-template-columns: 1fr; gap: 32px; } }
+.dual-feature.flip { direction: rtl; }
+.dual-feature.flip > * { direction: ltr; }
+.dual-feature .copy h2 { margin: 0 0 16px; }
+.dual-feature .copy p { color: var(--ink-mute); font-size: 17px; line-height: 1.55; margin: 0 0 16px; }
+.dual-feature .copy ul { padding: 0; margin: 16px 0 24px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.dual-feature .copy li { font-size: 15px; color: var(--ink); display: flex; gap: 10px; align-items: flex-start; }
+.dual-feature .copy li svg { flex: none; margin-top: 4px; color: var(--primary-deep); }
+
+.code-card {
+  background: var(--canvas-night);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.code-card .tabs { display: flex; background: var(--canvas-night-soft); border-bottom: 1px solid #2a2a2a; padding: 8px 8px 0; gap: 4px; }
+.code-card .tab { padding: 8px 14px; font-family: "JetBrains Mono", monospace; font-size: 12px; color: rgba(255,255,255,0.55); border-radius: var(--r-sm) var(--r-sm) 0 0; cursor: pointer; }
+.code-card .tab.act { background: var(--canvas-night); color: var(--on-dark); }
+.code-card pre {
+  margin: 0; padding: 24px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; line-height: 1.6;
+  color: var(--on-dark); overflow: auto;
+}
+.code-card .kw { color: #d4ade5; }
+.code-card .fn { color: var(--primary-soft); }
+.code-card .str { color: #e7e7a8; }
+.code-card .com { color: #6b7280; }
+.code-card .var { color: #79c4ff; }
+.code-card .punct { color: #888; }
+
+/* Sql query result inline */
+.result-strip {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--canvas-night-soft);
+  border-top: 1px solid #2a2a2a;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+.result-strip .ok { color: var(--primary); }
+.result-strip .ms { color: rgba(255,255,255,0.5); margin-left: auto; }
+
+/* —— Stats —— */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+  padding: 48px 0;
+  border-top: 1px solid var(--hairline-cool);
+  border-bottom: 1px solid var(--hairline-cool);
+}
+@media (max-width: 800px) { .stats-row { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+.stat .num { font-weight: 500; font-size: 40px; line-height: 1; letter-spacing: -1px; color: var(--ink); font-feature-settings: "tnum" 1; }
+.stat .lbl { font-size: 14px; color: var(--ink-mute); margin-top: 8px; }
+
+/* —— Integrations strip —— */
+.integ-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+@media (max-width: 1000px) { .integ-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 600px) { .integ-grid { grid-template-columns: repeat(2, 1fr); } }
+.integ {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--canvas);
+  transition: border-color .15s, transform .15s;
+  min-height: 64px;
+}
+.integ:hover { border-color: var(--hairline-strong); transform: translateY(-1px); }
+.integ .ic { width: 24px; height: 24px; border-radius: 6px; flex: none; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; font-size: 11px; font-family: "JetBrains Mono", monospace; }
+.integ .name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.integ .sub { font-size: 11px; color: var(--ink-mute-2); font-family: "JetBrains Mono", monospace; }
+
+/* —— Pricing —— */
+.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1100px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tier.featured {
+  background: var(--canvas-night);
+  border-color: var(--canvas-night);
+  color: var(--on-dark);
+}
+.tier.featured .desc, .tier.featured .price .per { color: rgba(255,255,255,0.55); }
+.tier.featured li { color: rgba(255,255,255,0.9); }
+.tier.featured li svg { color: var(--primary); }
+.tier.featured .tier-name { color: var(--on-dark); }
+.tier.featured .price .num { color: var(--on-dark); }
+.tier.featured .badge-pop { background: var(--primary); color: var(--on-primary); }
+.tier .tier-name { font-size: 22px; font-weight: 500; margin: 0; letter-spacing: -0.2px; }
+.tier .price { display: flex; align-items: baseline; gap: 6px; font-feature-settings: "tnum" 1; }
+.tier .price .num { font-size: 36px; font-weight: 500; letter-spacing: -0.6px; color: var(--ink); }
+.tier .price .per { font-size: 14px; color: var(--ink-mute); }
+.tier .desc { font-size: 14px; line-height: 1.55; color: var(--ink-mute); margin: 0; min-height: 42px; }
+.tier ul { padding: 0; margin: 8px 0 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; line-height: 1.45; color: var(--ink); display: flex; gap: 8px; align-items: flex-start; }
+.tier li svg { flex: none; margin-top: 3px; color: var(--primary-deep); }
+.tier .cta-wrap { margin-top: auto; padding-top: 16px; }
+.tier .cta-wrap .btn { width: 100%; }
+.badge-pop {
+  display: inline-block; font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: var(--r-full);
+  background: rgba(62,207,142,0.18); color: var(--primary-deep);
+  width: fit-content;
+}
+
+/* —— Footer —— */
+footer {
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline-cool);
+  padding: 64px 0 32px;
+}
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 1.6fr repeat(5, 1fr); }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.footer-grid h4 { font-size: 13px; font-weight: 500; color: var(--ink); margin: 0 0 16px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 13px; color: var(--ink-mute); }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-brand { display: flex; flex-direction: column; gap: 12px; }
+.footer-brand p { margin: 0; font-size: 13px; color: var(--ink-mute); line-height: 1.55; max-width: 260px; }
+.footer-bottom { padding-top: 32px; margin-top: 40px; border-top: 1px solid var(--hairline-cool); font-size: 12px; color: var(--ink-mute); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); border: 1px solid var(--hairline-strong);
+  padding: 8px 14px; border-radius: var(--r-sm); font-size: 12px; font-weight: 500;
+  color: var(--ink);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.src-link:hover { background: var(--canvas-night); color: var(--on-dark); border-color: var(--canvas-night); }
+
+/* —— Design system tokens section —— */
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--hairline-cool); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 24px; font-weight: 500; letter-spacing: -0.4px; color: var(--ink); margin: 0 0 16px; }
+.ds-caption { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); margin: 28px 0 12px; font-family: "JetBrains Mono", monospace; }
+
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { border: 1px solid var(--hairline-cool); border-radius: var(--r-md); overflow: hidden; background: var(--canvas); }
+.ds-sw .chip { height: 52px; }
+.ds-sw .meta { padding: 8px 10px; }
+.ds-sw .name { font-size: 12px; font-weight: 500; color: var(--ink); }
+.ds-sw .val { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--ink-mute); margin-top: 2px; }
+
+.ds-typescale { border: 1px solid var(--hairline-cool); border-radius: var(--r-lg); overflow: hidden; background: var(--canvas); }
+.ds-tr { display: grid; grid-template-columns: 160px 240px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline-cool-2); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink); font-weight: 500; }
+.ds-spec { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--ink-mute); }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; letter-spacing: -0.4px !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(2, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 72px; height: 72px; background: var(--canvas-night); border: 1px solid var(--canvas-night); }
+.ds-rad .lab { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--ink); font-weight: 500; }
+.ds-rad .vv { font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--ink-mute); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-on-dark-block { background: var(--canvas-night); padding: 24px; border-radius: var(--r-lg); }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; margin-top: 16px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input { height: 40px; padding: 8px 12px; border-radius: var(--r-sm); border: 1px solid var(--hairline); background: var(--canvas); color: var(--ink); font-family: inherit; font-size: 14px; width: 100%; }
+.ds-input.focused { border: 2px solid var(--primary-deep); outline: none; padding: 7px 11px; }
+.ds-field-label { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--ink-mute); margin-bottom: 6px; display: block; letter-spacing: 0.4px; text-transform: uppercase; font-weight: 500; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-top: 16px; }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-demo { padding: 24px; border-radius: var(--r-lg); }
+.ds-card-demo.light { background: var(--canvas); border: 1px solid var(--hairline); }
+.ds-card-demo.dark { background: var(--canvas-night); color: var(--on-dark); }
+.ds-card-demo.code-demo { background: var(--canvas-night); color: var(--on-dark); font-family: "JetBrains Mono", monospace; font-size: 13px; line-height: 1.6; }
+.ds-card-demo h5 { font-size: 16px; font-weight: 500; margin: 0 0 8px; letter-spacing: -0.2px; }
+.ds-card-demo p { font-size: 13px; margin: 0; line-height: 1.5; }
+.ds-card-demo.light p { color: var(--ink-mute); }
+.ds-card-demo.dark p { color: rgba(255,255,255,0.6); }
+
+.ds-pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+.ds-pill { padding: 2px 8px; border-radius: var(--r-full); font-size: 12px; font-weight: 500; }
+.ds-pill.green { background: var(--primary); color: var(--on-primary); }
+.ds-pill.soft { background: var(--canvas-soft); color: var(--ink); border: 1px solid var(--hairline-cool); }
+.ds-pill.dot::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); margin-right: 6px; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<!-- Top nav -->
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#">
+    <svg class="glyph" viewBox="0 0 109 113" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M63.7 110.3c-2.8 3.5-8.4 1.6-8.5-2.9L53.8 65h36.6c6.6 0 10.4 7.7 6.3 12.9l-32.9 32.4z" fill="#3ecf8e"/>
+      <path d="M45.3 2.7c2.8-3.5 8.4-1.6 8.5 2.9L55.2 48H18.6c-6.6 0-10.4-7.7-6.3-12.9L45.3 2.7z" fill="#24b47e"/>
+    </svg>
+    Supabaze
+  </a>
+  <nav class="nav-links">
+    <a href="#">Product</a>
+    <a href="#">Developers</a>
+    <a href="#">Enterprise</a>
+    <a href="#">Pricing</a>
+    <a href="#">Docs</a>
+    <a href="#">Blog</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-link">Sign In</a>
+    <a href="#" class="btn btn-primary">Start your project</a>
+  </div>
+</div></header>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <h1 class="display-xxl">Build in a weekend.<br/>Scale to millions.</h1>
+  <p class="lead">Supabaze is the open-source Firebase alternative. A dedicated Postgres database, authentication, instant APIs, edge functions, realtime, storage, and embeddings — all behind one client SDK.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary btn-lg">Start your project</a>
+    <a href="#" class="btn btn-secondary btn-lg">Request a demo</a>
+  </div>
+  <div class="start-cmd">
+    <div class="prompt"><span>$</span> npx create-supabaze-app@latest my-app</div>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <!-- Composited dashboard mockup -->
+  <div class="hero-mockup">
+    <div class="mockup-card">
+      <div class="mockup-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="crumb">supabaze.com/dashboard/projects/<b>nimbus-prod</b>/auth/users</span>
+      </div>
+      <div class="mockup-body">
+        <aside class="mockup-side">
+          <div class="group">
+            <div class="group-head">Database</div>
+            <div class="item"><span class="ic">▾</span>Tables</div>
+            <div class="item"><span class="ic">▸</span>SQL editor</div>
+            <div class="item"><span class="ic">▸</span>Functions</div>
+            <div class="item"><span class="ic">▸</span>Replication</div>
+          </div>
+          <div class="group">
+            <div class="group-head">Auth</div>
+            <div class="item active"><span class="ic">●</span>Users</div>
+            <div class="item"><span class="ic">·</span>Providers</div>
+            <div class="item"><span class="ic">·</span>Policies</div>
+            <div class="item"><span class="ic">·</span>Email templates</div>
+          </div>
+          <div class="group">
+            <div class="group-head">Storage</div>
+            <div class="item"><span class="ic">·</span>Buckets</div>
+            <div class="item"><span class="ic">·</span>Policies</div>
+          </div>
+          <div class="group">
+            <div class="group-head">Vector</div>
+            <div class="item"><span class="ic">·</span>Collections</div>
+            <div class="item"><span class="ic">·</span>Indexes</div>
+          </div>
+        </aside>
+        <div class="mockup-main">
+          <div class="toolbar">
+            <span class="pill green-dot act">All users · 12,847</span>
+            <span class="pill">Confirmed · 11,902</span>
+            <span class="pill">Pending · 945</span>
+            <span class="pill" style="margin-left: auto;">+ Invite user</span>
+            <span class="pill" style="background: var(--primary); color: var(--on-primary); border-color: var(--primary);">Add user</span>
+          </div>
+          <div class="tbl">
+            <div class="tbl-head"><span>uid</span><span>email</span><span>role</span><span>last seen</span><span>provider</span></div>
+            <div class="tbl-row"><span class="id">a47e1c</span><span>mira@ramp.io</span><span class="role green">admin</span><span class="stamp">2m ago</span><span class="stamp">github</span></div>
+            <div class="tbl-row"><span class="id">b13d8f</span><span>jun@frame.io</span><span class="role purple">writer</span><span class="stamp">14m ago</span><span class="stamp">google</span></div>
+            <div class="tbl-row"><span class="id">c920ee</span><span>noa@linear.app</span><span class="role">viewer</span><span class="stamp">1h ago</span><span class="stamp">email</span></div>
+            <div class="tbl-row"><span class="id">d80c54</span><span>kit@vercel.com</span><span class="role green">admin</span><span class="stamp">3h ago</span><span class="stamp">github</span></div>
+            <div class="tbl-row"><span class="id">e7f3b2</span><span>riley@figma.com</span><span class="role">viewer</span><span class="stamp">yesterday</span><span class="stamp">apple</span></div>
+            <div class="tbl-row"><span class="id">f44a11</span><span>avery@stripe.com</span><span class="role purple">writer</span><span class="stamp">2d ago</span><span class="stamp">github</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Logo wall -->
+<div class="logo-wall"><div class="wrap">
+  <p class="label">Trusted by ambitious teams worldwide</p>
+  <div class="logos">
+    <span>1Password</span><span>Mozilla</span><span>GitHub</span><span>PwC</span><span>Cal.com</span><span>Resend</span><span>Loops</span>
+  </div>
+</div></div>
+
+<!-- Pillars -->
+<section><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Postgres, made painless</span>
+    <h2 class="display-xl">Everything you need to build a product.</h2>
+    <p>A complete backend in a weekend. Dedicated Postgres database, instant REST and GraphQL APIs, authentication, edge functions, realtime subscriptions, file storage, and vector embeddings.</p>
+  </div>
+
+  <div class="pillar-grid">
+    <div class="pillar">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6"/></svg>
+      <h3>Postgres database</h3>
+      <p>A dedicated Postgres database per project. Every project is a full Postgres database — no proprietary query language, no surprise lock-in.</p>
+      <a href="#" class="learn">Learn more </a>
+    </div>
+    <div class="pillar">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L4 6v6c0 5 3.5 9.4 8 10 4.5-.6 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+      <h3>Authentication</h3>
+      <p>Email, magic link, OAuth, SSO. Row-level security policies live in the database, so the backend can never disagree with the rules.</p>
+      <a href="#" class="learn">Learn more </a>
+    </div>
+    <div class="pillar">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <h3>Edge functions</h3>
+      <p>TypeScript on Deno, deployed to 35+ regions. Cold starts under 50ms. Logs and traces native to the platform.</p>
+      <a href="#" class="learn">Learn more </a>
+    </div>
+    <div class="pillar">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.07 7.07l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.07-7.07l4.24-4.24"/></svg>
+      <h3>Realtime</h3>
+      <p>Subscribe to Postgres changes over WebSockets. Build presence, broadcast, and multiplayer features without a separate pub-sub layer.</p>
+      <a href="#" class="learn">Learn more </a>
+    </div>
+    <div class="pillar">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <h3>Storage</h3>
+      <p>S3-compatible object storage with image transformations on the edge. Signed URLs, RLS-aware buckets, and one-line client uploads.</p>
+      <a href="#" class="learn">Learn more </a>
+    </div>
+    <div class="pillar">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      <h3>Vector embeddings</h3>
+      <p>pgvector built in. Store embeddings next to your data, query them with SQL, and skip the second-database problem entirely.</p>
+      <a href="#" class="learn">Learn more </a>
+    </div>
+    <div class="pillar">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <h3>Instant APIs</h3>
+      <p>REST and GraphQL APIs auto-generated from your schema. Add a column, ship a new endpoint — no codegen step.</p>
+      <a href="#" class="learn">Learn more </a>
+    </div>
+    <div class="pillar">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <h3>Branching</h3>
+      <p>Preview branches per Git PR. Each branch is a real Postgres database with seed data — review schema changes before they hit prod.</p>
+      <a href="#" class="learn">Learn more </a>
+    </div>
+  </div>
+</div></section>
+
+<!-- Dual feature: SQL editor -->
+<section class="section-soft"><div class="wrap">
+  <div class="section-head" style="margin-bottom: 48px;">
+    <span class="eyebrow">SQL Editor</span>
+    <h2 class="display-xl">Just write SQL.</h2>
+    <p>No ORM. No abstraction layer. No vendor query language to learn. The same SQL you'd write against any Postgres database — and the editor knows your schema.</p>
+  </div>
+
+  <div class="dual-feature">
+    <div class="copy">
+      <h3 class="display-lg">Pick a table. Build the query. Ship the API.</h3>
+      <p>The visual editor and SQL editor are two views of the same canvas. Auto-completion knows your column types, your enums, your row-level security policies — and warns you before a policy blocks the read.</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Schema-aware completion + linting</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>One-click "save as" — turn a query into a function</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>RLS preview — see exactly what a given user can read</li>
+      </ul>
+      <a href="#" class="btn btn-primary">Open the SQL editor</a>
+    </div>
+    <div class="code-card">
+      <div class="tabs">
+        <span class="tab act">query.sql</span>
+        <span class="tab">policies.sql</span>
+        <span class="tab">migration_017.sql</span>
+      </div>
+      <pre><span class="com">-- Find power users with sub-100ms p50 latency</span>
+<span class="kw">select</span>
+  <span class="var">u</span>.email,
+  <span class="fn">count</span>(<span class="var">s</span>.id) <span class="kw">as</span> sessions,
+  <span class="fn">percentile_cont</span>(<span class="str">0.5</span>) <span class="kw">within group</span> (
+    <span class="kw">order by</span> <span class="var">s</span>.latency_ms
+  ) <span class="kw">as</span> p50
+<span class="kw">from</span> <span class="var">auth.users</span> u
+<span class="kw">join</span> <span class="var">public.sessions</span> s <span class="kw">on</span> <span class="var">s</span>.user_id = <span class="var">u</span>.id
+<span class="kw">where</span> <span class="var">s</span>.created_at &gt; <span class="fn">now</span>() - <span class="kw">interval</span> <span class="str">'7 days'</span>
+<span class="kw">group by</span> <span class="var">u</span>.email
+<span class="kw">having</span> <span class="fn">count</span>(<span class="var">s</span>.id) &gt; <span class="str">10</span>
+<span class="kw">order by</span> p50 <span class="kw">asc</span>
+<span class="kw">limit</span> <span class="str">25</span>;</pre>
+      <div class="result-strip">
+        <span class="ok">●</span> 25 rows returned
+        <span class="ms">128 ms</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Dual feature flipped: Auth -->
+<section><div class="wrap">
+  <div class="dual-feature flip">
+    <div class="copy">
+      <h3 class="display-lg">Authentication that respects the database.</h3>
+      <p>Row-level security is not an afterthought — it's the only way Supabaze authorizes data access. The same policy that gates a SELECT also gates the auto-generated API. The backend can never disagree with itself.</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Email, magic link, OAuth, SSO, anonymous, passkeys</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>RLS policies enforced in Postgres, not the SDK</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>JWT-based — works with every Postgres client</li>
+      </ul>
+      <a href="#" class="btn btn-primary">Read the auth guide</a>
+    </div>
+    <div class="code-card">
+      <div class="tabs">
+        <span class="tab act">app.ts</span>
+        <span class="tab">policies.sql</span>
+      </div>
+      <pre><span class="com">// One client, every backend feature</span>
+<span class="kw">import</span> { createClient } <span class="kw">from</span> <span class="str">"@supabaze/supabaze-js"</span>;
+
+<span class="kw">const</span> sb = <span class="fn">createClient</span>(url, anonKey);
+
+<span class="com">// Sign in with GitHub</span>
+<span class="kw">await</span> sb.auth.<span class="fn">signInWithOAuth</span>({
+  provider: <span class="str">"github"</span>,
+  options: { redirectTo: <span class="str">"/dashboard"</span> }
+});
+
+<span class="com">// Query is RLS-aware automatically</span>
+<span class="kw">const</span> { data: posts } = <span class="kw">await</span> sb
+  .<span class="fn">from</span>(<span class="str">"posts"</span>)
+  .<span class="fn">select</span>(<span class="str">"id, title, author:auth.users(email)"</span>)
+  .<span class="fn">eq</span>(<span class="str">"published"</span>, <span class="kw">true</span>)
+  .<span class="fn">order</span>(<span class="str">"created_at"</span>, { ascending: <span class="kw">false</span> })
+  .<span class="fn">limit</span>(<span class="str">10</span>);</pre>
+      <div class="result-strip">
+        <span class="ok">●</span> 200 OK · 10 rows
+        <span class="ms">42 ms</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row" style="margin-top: 80px;">
+    <div class="stat"><div class="num">1.7M+</div><div class="lbl">Databases launched</div></div>
+    <div class="stat"><div class="num">99.99%</div><div class="lbl">SLA on Team plan</div></div>
+    <div class="stat"><div class="num">35</div><div class="lbl">Edge regions</div></div>
+    <div class="stat"><div class="num">&lt; 50ms</div><div class="lbl">Cold start p50</div></div>
+  </div>
+</div></section>
+
+<!-- Integrations -->
+<section class="section-tight"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Integrations</span>
+    <h2 class="display-lg">The Postgres ecosystem, plus your stack.</h2>
+    <p>Bring your own ORM, your own CI, your own AI provider. Supabaze is a Postgres database, so anything that speaks Postgres works on day one.</p>
+  </div>
+
+  <div class="integ-grid">
+    <div class="integ"><span class="ic" style="background:#6b01c2">D</span><span class="name">Drizzle ORM</span></div>
+    <div class="integ"><span class="ic" style="background:#171717">P</span><span class="name">Prisma</span></div>
+    <div class="integ"><span class="ic" style="background:#054cff">K</span><span class="name">Kysely</span></div>
+    <div class="integ"><span class="ic" style="background:#3ecf8e; color: #171717;">SB</span><span class="name">supabaze-js</span></div>
+    <div class="integ"><span class="ic" style="background:#ff2201">R</span><span class="name">Resend</span></div>
+    <div class="integ"><span class="ic" style="background:#171717">▲</span><span class="name">Vercel</span></div>
+    <div class="integ"><span class="ic" style="background:#000">N</span><span class="name">Next.js</span></div>
+    <div class="integ"><span class="ic" style="background:#42b883">V</span><span class="name">Vue · Nuxt</span></div>
+    <div class="integ"><span class="ic" style="background:#644fc1">S</span><span class="name">SvelteKit</span></div>
+    <div class="integ"><span class="ic" style="background:#3ecf8e; color: #171717;">D</span><span class="name">Deno Deploy</span></div>
+    <div class="integ"><span class="ic" style="background:#c7007e">O</span><span class="name">OpenAI</span></div>
+    <div class="integ"><span class="ic" style="background:#fa6e39">C</span><span class="name">Anthropic</span></div>
+  </div>
+</div></section>
+
+<!-- Pricing -->
+<section><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="display-xl">Predictable. Honest. Open.</h2>
+    <p>Start free. Pay for what you use. No seat minimums, no procurement gates until you genuinely need them.</p>
+  </div>
+
+  <div class="tiers">
+    <div class="tier">
+      <h3 class="tier-name">Free</h3>
+      <p class="price"><span class="num">$0</span></p>
+      <p class="desc">For hobby projects and weekend experiments.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>500 MB database</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>2 free projects</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>50K monthly active users</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Community support</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary">Get started free</a></div>
+    </div>
+    <div class="tier featured">
+      <span class="badge-pop">Most popular</span>
+      <h3 class="tier-name">Pro</h3>
+      <p class="price"><span class="num">$25</span><span class="per">/project · mo</span></p>
+      <p class="desc">For production apps with real traffic.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>8 GB database included</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>100K MAU + $0.00325 / MAU</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Daily backups · 7-day PITR</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Email support</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-primary">Choose Pro</a></div>
+    </div>
+    <div class="tier">
+      <h3 class="tier-name">Team</h3>
+      <p class="price"><span class="num">$599</span><span class="per">/org · mo</span></p>
+      <p class="desc">For companies running on Postgres.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SOC 2 · HIPAA-ready</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SSO · audit logs</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>99.99% SLA</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary">Choose Team</a></div>
+    </div>
+    <div class="tier">
+      <h3 class="tier-name">Enterprise</h3>
+      <p class="price"><span class="num">Custom</span></p>
+      <p class="desc">For the largest workloads and procurement reviews.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Dedicated infrastructure</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Custom regions + BYOC</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Solutions engineer</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>99.99% uptime SLO</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary">Contact sales</a></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============== DESIGN SYSTEM SECTION (Part B) ============== -->
+<section class="section-soft"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Design system</span>
+    <h2 class="display-xl">A monochrome system with one chromatic event.</h2>
+    <p>Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.supabase.html" target="_blank" rel="noopener" style="text-decoration: underline;">DESIGN.md</a>. White canvas commitment. Single emerald primary. Circular-style display at weight 500 with negative tracking. 6px square-ish button radii.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand — single chromatic event</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#3ecf8e"></div><div class="meta"><div class="name">primary</div><div class="val">#3ecf8e</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#24b47e"></div><div class="meta"><div class="name">primary-deep</div><div class="val">#24b47e · pressed</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#4ade80"></div><div class="meta"><div class="name">primary-soft</div><div class="val">#4ade80 · chart</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#171717"></div><div class="meta"><div class="name">ink · on-primary</div><div class="val">#171717</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff; border-bottom: 1px solid var(--hairline);"></div><div class="meta"><div class="name">canvas · on-dark</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1c1c1c"></div><div class="meta"><div class="name">canvas-night</div><div class="val">#1c1c1c · code</div></div></div>
+    </div>
+
+    <p class="ds-caption">Ink ladder — weight, not hue, carries hierarchy</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#171717"></div><div class="meta"><div class="name">ink</div><div class="val">#171717</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#212121"></div><div class="meta"><div class="name">ink-secondary</div><div class="val">#212121</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#707070"></div><div class="meta"><div class="name">ink-mute</div><div class="val">#707070</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9a9a9a"></div><div class="meta"><div class="name">ink-mute-2</div><div class="val">#9a9a9a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#b2b2b2"></div><div class="meta"><div class="name">ink-faint</div><div class="val">#b2b2b2</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#fafafa; border-bottom: 1px solid var(--hairline);"></div><div class="meta"><div class="name">canvas-soft</div><div class="val">#fafafa</div></div></div>
+    </div>
+
+    <p class="ds-caption">Hairlines — the brand's chrome</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#dfdfdf"></div><div class="meta"><div class="name">hairline</div><div class="val">#dfdfdf</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c7c7c7"></div><div class="meta"><div class="name">hairline-strong</div><div class="val">#c7c7c7</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ededed"></div><div class="meta"><div class="name">hairline-cool</div><div class="val">#ededed</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#efefef"></div><div class="meta"><div class="name">hairline-cool-2</div><div class="val">#efefef</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#d4d4d4"></div><div class="meta"><div class="name">hairline-cool-3</div><div class="val">#d4d4d4</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#202020"></div><div class="meta"><div class="name">canvas-night-soft</div><div class="val">#202020 · nested chrome</div></div></div>
+    </div>
+
+    <p class="ds-caption">Accents — reserved for chart points and integration logos only</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#6b01c2"></div><div class="meta"><div class="name">accent-purple</div><div class="val">#6b01c2</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#644fc1"></div><div class="meta"><div class="name">accent-violet</div><div class="val">#644fc1</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#054cff"></div><div class="meta"><div class="name">accent-indigo</div><div class="val">#054cff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c7007e"></div><div class="meta"><div class="name">accent-pink</div><div class="val">#c7007e</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ff2201"></div><div class="meta"><div class="name">accent-tomato</div><div class="val">#ff2201</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffdb13"></div><div class="meta"><div class="name">accent-yellow</div><div class="val">#ffdb13</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="body-md" style="color: var(--ink-mute); margin: 0 0 24px;">Circular is the proprietary humanist sans. Inter at weight 500 is the open-source substitute used here. System mono for every code block — Menlo / Monaco / Consolas. Body never exceeds weight 500; the engineered mid-weight is the brand.</p>
+
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xxl</span><span class="ds-spec">64px · 500 · 1.1 · -1.92px</span><span class="ds-sam" style="font-size: 44px; font-weight: 500; line-height: 1.1; letter-spacing: -1.3px;">Build in a weekend</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">48px · 500 · 1.1 · -1.44px</span><span class="ds-sam" style="font-size: 36px; font-weight: 500; line-height: 1.1; letter-spacing: -1px;">Predictable. Honest. Open.</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">36px · 500 · 1.15 · -0.72px</span><span class="ds-sam" style="font-size: 28px; font-weight: 500; line-height: 1.15; letter-spacing: -0.5px;">Just write SQL.</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">28px · 500 · 1.2 · -0.42px</span><span class="ds-sam" style="font-size: 22px; font-weight: 500; line-height: 1.2; letter-spacing: -0.3px;">Card title</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-lg</span><span class="ds-spec">22px · 500 · 1.2 · 0</span><span class="ds-sam" style="font-size: 22px; font-weight: 500; line-height: 1.2;">Compact heading</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">18px · 400 · 1.55 · 0</span><span class="ds-sam" style="font-size: 18px; font-weight: 400; line-height: 1.55;">Marketing body lead text.</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16px · 400 · 1.5 · 0</span><span class="ds-sam" style="font-size: 16px; font-weight: 400; line-height: 1.5;">Default UI body. Reads as engineered, not decorative.</span></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">14px · 500 · 1.0 · 0</span><span class="ds-sam" style="font-size: 14px; font-weight: 500; line-height: 1.0;">Start your project</span></div>
+      <div class="ds-tr"><span class="ds-tok">caption</span><span class="ds-spec">13px · 400 · 1.45 · 0</span><span class="ds-sam" style="font-size: 13px; font-weight: 400; line-height: 1.45;">Helper text, footnote.</span></div>
+      <div class="ds-tr"><span class="ds-tok">code</span><span class="ds-spec">14px · 400 · 1.5 · 0 · mono</span><span class="ds-sam mono" style="font-size: 14px; font-weight: 400; line-height: 1.5;">select * from auth.users limit 10;</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <p class="body-md" style="color: var(--ink-mute); margin: 0 0 24px;">Buttons live at <span class="mono">r-sm</span> (6px) — square-ish, never pill. Cards live at <span class="mono">r-lg</span> (12px). Pills (<span class="mono">r-full</span>) are reserved for tags and avatars.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius: 4px;"></div><div class="lab">xs</div><div class="vv">4px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 6px;"></div><div class="lab">sm</div><div class="vv">6px · buttons</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 8px;"></div><div class="lab">md</div><div class="vv">8px · inputs</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 12px;"></div><div class="lab">lg</div><div class="vv">12px · cards</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 16px;"></div><div class="lab">xl</div><div class="vv">16px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 9999px;"></div><div class="lab">full</div><div class="vv">9999px · pills</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons on white canvas</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">button-primary-green</a>
+      <a href="#" class="btn btn-secondary">button-secondary-outline</a>
+      <a href="#" class="btn btn-link">button-link</a>
+    </div>
+
+    <p class="ds-caption">Buttons on canvas-night — code-block CTAs</p>
+    <div class="ds-on-dark-block">
+      <div class="ds-comp-row">
+        <a href="#" class="btn btn-primary">button-primary-green</a>
+        <a href="#" class="btn btn-on-dark">button-on-dark</a>
+        <a href="#" class="btn btn-secondary-on-dark">button-secondary-on-dark</a>
+      </div>
+    </div>
+
+    <p class="ds-caption">Inputs — focus is a 2px emerald ring</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input · default</label>
+        <input class="ds-input" placeholder="hello@supabaze.com" />
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="hello@supabaze.com" />
+      </div>
+    </div>
+
+    <p class="ds-caption">Cards & containers</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-demo light">
+        <h5>card-feature-light</h5>
+        <p>White canvas + 1px hairline. 12px radius. The default container — flat, calm, never shadowed at rest.</p>
+      </div>
+      <div class="ds-card-demo dark">
+        <h5>card-pricing-featured</h5>
+        <p>Inverted dark fill for the featured pricing tier. Green is reserved for buttons, not the surface.</p>
+      </div>
+      <div class="ds-card-demo code-demo">
+        <div style="color: rgba(255,255,255,0.5)">// code-block</div>
+        <div><span style="color: #d4ade5;">select</span> <span style="color: var(--primary-soft)">count(*)</span></div>
+        <div><span style="color: #d4ade5;">from</span> <span style="color: #79c4ff">auth.users</span>;</div>
+        <div style="color: rgba(255,255,255,0.5); margin-top: 8px;">→ 12,847</div>
+      </div>
+    </div>
+
+    <p class="ds-caption">Tags & pills</p>
+    <div class="ds-pill-row">
+      <span class="ds-pill green">pill-tag-green</span>
+      <span class="ds-pill soft">pill-tag-soft</span>
+      <span class="ds-pill soft dot">live · with-dot</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- Footer -->
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="#">
+        <svg class="glyph" viewBox="0 0 109 113" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M63.7 110.3c-2.8 3.5-8.4 1.6-8.5-2.9L53.8 65h36.6c6.6 0 10.4 7.7 6.3 12.9l-32.9 32.4z" fill="#3ecf8e"/>
+          <path d="M45.3 2.7c2.8-3.5 8.4-1.6 8.5 2.9L55.2 48H18.6c-6.6 0-10.4-7.7-6.3-12.9L45.3 2.7z" fill="#24b47e"/>
+        </svg>
+        Supabaze
+      </a>
+      <p>The open-source Firebase alternative. Postgres at the core, every backend feature on top, one client SDK across them all.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul><li><a href="#">Database</a></li><li><a href="#">Auth</a></li><li><a href="#">Edge functions</a></li><li><a href="#">Realtime</a></li><li><a href="#">Storage</a></li><li><a href="#">Vector</a></li></ul>
+    </div>
+    <div>
+      <h4>Developers</h4>
+      <ul><li><a href="#">Documentation</a></li><li><a href="#">API reference</a></li><li><a href="#">CLI</a></li><li><a href="#">Status</a></li><li><a href="#">Roadmap</a></li></ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul><li><a href="#">Blog</a></li><li><a href="#">Customer stories</a></li><li><a href="#">Changelog</a></li><li><a href="#">Open source</a></li></ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Security</a></li></ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul><li><a href="#">Terms</a></li><li><a href="#">Privacy</a></li><li><a href="#">DPA</a></li><li><a href="#">Sub-processors</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Supabaze Inc. · Built on Postgres, in the open.</span>
+    <span>Inspired by supabase DESIGN.md · awesome-design-md</span>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.supabase.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Together AI — Inspired Design</title>
+<meta name="description" content="A Together AI-inspired marketing page and design system reference: alternating dark-navy and white bands, three-color orange-magenta-periwinkle gradient ribbon, uppercase mono labels, giant wordmark sign-off. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --primary: #000000;
+  --on-primary: #ffffff;
+  --ink: #000000;
+  --body: #959494;
+  --hairline: #ebebeb;
+  --hairline-strong: #d4d4d4;
+  --canvas: #ffffff;
+  --canvas-dark: #010120;
+  --surface-dark-soft: #313641;
+  --surface-dark-bord: #26263a;
+  --on-dark: #ffffff;
+  --on-dark-muted: #b6b6c4;
+  --accent-orange: #fc4c02;
+  --accent-magenta: #ef2cc1;
+  --accent-periwinkle: #bdbbff;
+  --accent-mint: #c8f6f9;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, "Helvetica Neue", Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: -0.16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(252,76,2,0.22); }
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* Eyebrow / button typography */
+.mono-eye {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.55px; text-transform: uppercase;
+}
+.mono-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.08px; text-transform: uppercase;
+}
+
+/* Top nav (over dark) */
+.topnav {
+  background: var(--canvas-dark); color: var(--on-dark);
+  position: sticky; top: 0; z-index: 30;
+  border-bottom: 1px solid var(--surface-dark-bord);
+}
+.topnav .row { display: flex; align-items: center; gap: 28px; height: 64px; font-size: 14px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--on-dark); font-weight: 500; font-size: 16px;
+  letter-spacing: -0.3px;
+}
+.brand-mark {
+  display: inline-block; width: 22px; height: 22px; border-radius: 4px;
+  background: conic-gradient(from 220deg at 50% 50%,
+    var(--accent-orange) 0deg,
+    var(--accent-magenta) 130deg,
+    var(--accent-periwinkle) 260deg,
+    var(--accent-orange) 360deg);
+}
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { font-size: 14px; color: var(--on-dark); }
+.nav-links a:hover { opacity: 0.7; }
+.spacer { flex: 1; }
+.nav-cta { display: flex; align-items: center; gap: 10px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer; font-family: "JetBrains Mono", monospace;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.08px; text-transform: uppercase;
+  transition: opacity 140ms ease;
+}
+.btn:hover { opacity: 0.86; }
+.btn-primary { background: var(--ink); color: var(--on-primary); }
+.btn-mint { background: var(--accent-mint); color: var(--ink); }
+.btn-white { background: var(--canvas); color: var(--ink); }
+.btn-ghost-dark { background: var(--surface-dark-soft); color: var(--on-dark); }
+.btn-outline { background: var(--canvas); color: var(--ink); border-color: var(--hairline-strong); border-radius: 3.25px; }
+
+/* HERO — dark band with gradient ribbon */
+.hero-dark {
+  background: var(--canvas-dark);
+  color: var(--on-dark);
+  padding: 80px 0 96px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px;
+  align-items: center; position: relative; z-index: 1;
+}
+.hero-dark .mono-eye { color: var(--on-dark-muted); margin-bottom: 24px; display: inline-block; }
+.h-hero {
+  font-size: 64px; line-height: 70.4px; letter-spacing: -1.92px;
+  font-weight: 500; margin: 0 0 24px; max-width: 14ch;
+}
+.h-sub {
+  font-size: 18px; line-height: 23.4px; letter-spacing: -0.18px;
+  color: var(--on-dark-muted); max-width: 52ch; margin: 0 0 32px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* Hero ribbon — THE signature */
+.ribbon {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+.ribbon-blob {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(45% 40% at 80% 30%, rgba(252,76,2,0.92), transparent 70%),
+    radial-gradient(50% 50% at 35% 65%, rgba(239,44,193,0.78), transparent 72%),
+    radial-gradient(50% 40% at 80% 85%, rgba(189,187,255,0.85), transparent 70%);
+  filter: blur(8px);
+}
+.ribbon svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.hero-badges { display: flex; gap: 8px; margin-top: 28px; flex-wrap: wrap; }
+.badge-on-dark {
+  display: inline-flex; align-items: center; padding: 4px 10px;
+  background: var(--surface-dark-soft); color: var(--on-dark);
+  border-radius: 4px; font-size: 12px; gap: 6px;
+}
+.badge-on-dark .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-mint); }
+
+/* Logo strip on dark */
+.trust-dark {
+  background: var(--canvas-dark);
+  padding: 0 0 64px;
+  text-align: center;
+}
+.trust-dark .label { color: var(--on-dark-muted); font-size: 13px; margin-bottom: 28px; }
+.logos {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  color: var(--on-dark-muted); font-weight: 500;
+  opacity: 0.85;
+}
+.logos span { font-size: 18px; letter-spacing: -0.3px; }
+
+/* White section */
+.section { padding: 80px 0; background: var(--canvas); }
+.section-head { margin-bottom: 56px; max-width: 880px; }
+.h-section {
+  font-size: 40px; line-height: 48px; letter-spacing: -0.8px;
+  font-weight: 500; margin: 14px 0 16px;
+}
+.section-sub {
+  font-size: 18px; line-height: 23.4px; letter-spacing: -0.18px;
+  color: var(--body); max-width: 64ch;
+}
+
+/* Stats tinted */
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.stat-tile {
+  border-radius: 4px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.stat-tile.mint { background: var(--accent-mint); }
+.stat-tile.peri { background: var(--accent-periwinkle); }
+.stat-tile.peach { background: #ffd5b8; }
+.stat-tile .num { font-size: 40px; line-height: 48px; letter-spacing: -0.8px; font-weight: 500; font-feature-settings: "tnum"; }
+.stat-tile .num small { font-size: 18px; letter-spacing: 0; color: var(--body); }
+.stat-tile .label { color: var(--body); font-size: 14px; }
+
+/* Research band — dark, 3-up cards */
+.research-dark {
+  background: var(--canvas-dark);
+  color: var(--on-dark);
+  padding: 80px 0;
+}
+.research-dark .mono-eye { color: var(--on-dark-muted); }
+.research-dark .h-section { color: var(--on-dark); }
+.research-dark .section-sub { color: var(--on-dark-muted); }
+.research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.research-card {
+  background: var(--canvas-dark);
+  border: 1px solid var(--surface-dark-bord);
+  border-radius: 4px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-height: 220px;
+}
+.research-card .mono-eye { color: var(--on-dark-muted); }
+.research-card h3 { font-size: 22px; line-height: 25.3px; letter-spacing: -0.22px; font-weight: 500; margin: 0; color: var(--on-dark); }
+.research-card p { font-size: 14px; line-height: 19.6px; color: var(--on-dark-muted); margin: 0; }
+.research-card .meta { display: flex; align-items: center; gap: 12px; margin-top: auto; font-size: 12px; color: var(--on-dark-muted); }
+.research-card .meta .pill {
+  background: var(--surface-dark-soft); padding: 3px 8px; border-radius: 4px;
+  font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase;
+}
+
+/* Code editor mockup */
+.platform-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center;
+}
+.platform-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; padding: 6px; background: var(--hairline); border-radius: 8px; width: max-content; }
+.platform-tabs .tab { padding: 8px 18px; border-radius: 6px; font-size: 14px; font-weight: 500; color: var(--body); cursor: pointer; }
+.platform-tabs .tab.active { background: var(--canvas); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+.code-editor {
+  background: var(--canvas-dark);
+  border-radius: 4px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 12px 32px -8px rgba(1,1,32,0.18);
+}
+.code-editor-head {
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid var(--surface-dark-bord);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.5px; color: var(--on-dark-muted);
+}
+.code-editor-head .lbl { background: var(--surface-dark-soft); padding: 3px 8px; border-radius: 3px; color: var(--on-dark); }
+.code-editor-body {
+  padding: 22px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; line-height: 1.7;
+  color: var(--on-dark);
+}
+.code-editor-body .ln { display: inline-block; width: 26px; text-align: right; margin-right: 14px; color: rgba(255,255,255,0.3); }
+.k { color: var(--accent-periwinkle); }
+.s { color: #f6d0a0; }
+.c { color: rgba(255,255,255,0.4); }
+.f { color: #ffb38a; }
+.v { color: #ffd6f1; }
+.n { color: #c8f6f9; }
+
+/* Pricing data table */
+.pricing-wrap { padding: 80px 0; background: var(--canvas); }
+.pricing-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 24px; }
+.pricing-tabs .stab {
+  padding: 8px 16px;
+  border-radius: 3.25px;
+  font-size: 14px;
+  color: var(--body); cursor: pointer;
+  border: 1px solid var(--hairline);
+  background: var(--canvas);
+}
+.pricing-tabs .stab.active { background: var(--ink); color: var(--on-primary); border-color: var(--ink); }
+.pricing-toggle {
+  display: inline-flex; padding: 4px; background: var(--hairline); border-radius: 4px;
+}
+.pricing-toggle .seg {
+  font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 3px; cursor: pointer; color: var(--body);
+}
+.pricing-toggle .seg.active { background: var(--ink); color: var(--on-dark); }
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+  font-family: inherit;
+}
+.price-table th, .price-table td {
+  text-align: left; padding: 14px 16px;
+  border-bottom: 1px solid var(--hairline);
+}
+.price-table th {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.55px; text-transform: uppercase;
+  color: var(--body); background: var(--hairline);
+}
+.price-table tr:last-child td { border-bottom: 0; }
+.price-table td .model { display: flex; align-items: center; gap: 12px; }
+.price-table td .model-ic {
+  width: 28px; height: 28px; border-radius: 4px;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-magenta), var(--accent-periwinkle));
+  flex-shrink: 0;
+}
+.price-table td .mname { font-weight: 500; font-size: 15px; }
+.price-table td .sub { font-size: 12px; color: var(--body); }
+.price-table td.price { font-family: "JetBrains Mono", monospace; font-feature-settings: "tnum"; font-size: 14px; color: var(--ink); }
+.price-table td .unit { color: var(--body); margin-left: 4px; font-size: 12px; }
+
+/* Article cards */
+.articles { padding: 80px 0; background: var(--canvas); }
+.article-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+.article {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.article-thumb {
+  width: 100%; aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-magenta) 50%, var(--accent-periwinkle) 100%);
+  position: relative; overflow: hidden;
+}
+.article-thumb.alt {
+  background: linear-gradient(135deg, var(--canvas-dark) 0%, var(--accent-magenta) 80%, var(--accent-periwinkle) 100%);
+}
+.article-thumb::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(60% 80% at 20% 30%, rgba(255,255,255,0.34), transparent 60%);
+}
+.article .mono-eye { color: var(--body); }
+.article h3 { font-size: 22px; line-height: 25.3px; letter-spacing: -0.22px; font-weight: 500; margin: 0; }
+.article p { font-size: 14px; line-height: 19.6px; color: var(--body); margin: 0; }
+.article .byline { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.5px; color: var(--body); }
+
+/* ─── DS section ─── */
+.ds { padding: 96px 0; background: var(--canvas); }
+.ds-intro { margin-bottom: 64px; max-width: 880px; }
+.ds-intro h2 { font-size: 56px; line-height: 1.05; letter-spacing: -1.5px; font-weight: 500; margin: 16px 0 16px; }
+.ds-intro p { color: var(--body); font-size: 18px; line-height: 23.4px; letter-spacing: -0.18px; }
+.ds-intro a { color: var(--accent-magenta); border-bottom: 1px solid currentColor; }
+.ds-block { padding: 56px 0; border-top: 1px solid var(--hairline); }
+.ds-block-head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: baseline; margin-bottom: 36px; }
+.ds-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.55px; text-transform: uppercase; color: var(--body); }
+.ds-block-head h3 { font-size: 28px; line-height: 32.2px; letter-spacing: -0.42px; font-weight: 500; margin: 0; }
+
+.color-group { margin-bottom: 28px; }
+.color-cap {
+  font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.55px;
+  text-transform: uppercase; color: var(--body);
+  padding-bottom: 12px; border-bottom: 1px solid var(--hairline); margin-bottom: 18px;
+}
+.swatch-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.swatch { display: flex; flex-direction: column; gap: 8px; }
+.swatch .chip { height: 84px; border-radius: 4px; border: 1px solid var(--hairline); }
+.swatch .name { font-size: 13px; font-weight: 500; }
+.swatch .hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--body); letter-spacing: 0.4px; }
+
+/* Type table */
+.type-table { display: grid; }
+.type-row {
+  display: grid;
+  grid-template-columns: 220px 220px 1fr;
+  gap: 24px; align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.type-tok { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--ink); }
+.type-spec { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--body); }
+
+/* Radius row */
+.radius-row { display: flex; gap: 24px; align-items: end; flex-wrap: wrap; }
+.radius-cell { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.radius-box {
+  width: 96px; height: 96px;
+  background: var(--accent-mint);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.radius-cell .nm { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink); }
+.radius-cell .val { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--body); }
+
+/* Components matrix */
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.comp-card { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 4px; padding: 28px; }
+.comp-card h4 { font-size: 18px; font-weight: 500; margin: 0 0 6px; }
+.comp-card .desc { font-size: 13px; color: var(--body); margin-bottom: 18px; }
+.comp-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.input {
+  width: 100%; padding: 12px 14px;
+  border-radius: 4px; border: 1px solid var(--hairline-strong);
+  background: var(--canvas); color: var(--ink); font-size: 16px; font-family: inherit;
+}
+.input:focus, .input.focused { outline: none; border-color: var(--ink); }
+.label-form { display: block; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.55px; text-transform: uppercase; color: var(--body); margin-bottom: 6px; }
+
+.tag {
+  display: inline-flex; align-items: center; padding: 3px 10px;
+  font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.55px;
+  text-transform: uppercase; border-radius: 4px;
+  background: var(--hairline); color: var(--ink);
+}
+.tag.dark { background: var(--canvas-dark); color: var(--on-dark); }
+.tag.mint { background: var(--accent-mint); color: var(--ink); }
+.tag.gradient {
+  background: linear-gradient(90deg, var(--accent-orange), var(--accent-magenta), var(--accent-periwinkle));
+  color: var(--on-dark);
+}
+
+/* Wordmark banner */
+.wordmark-band {
+  background: var(--canvas);
+  text-align: center;
+  padding: 24px 0 0;
+  overflow: hidden;
+}
+.wordmark-band .mark {
+  font-size: 22vw;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  color: var(--hairline);
+  font-weight: 500;
+  user-select: none;
+  display: block;
+}
+
+/* Footer */
+.footer { padding: 56px 0 32px; background: var(--canvas); border-top: 1px solid var(--hairline); }
+.foot-grid {
+  display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 48px;
+  padding-bottom: 40px;
+}
+.foot-grid h5 {
+  font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.55px;
+  text-transform: uppercase; color: var(--body); margin: 0 0 16px;
+}
+.foot-grid ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 14px; }
+.foot-grid a { color: var(--ink); }
+.foot-grid a:hover { color: var(--accent-magenta); }
+.foot-bottom {
+  border-top: 1px solid var(--hairline); padding-top: 20px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--body);
+}
+
+/* Floating */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--ink); color: var(--on-dark);
+  font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.55px; text-transform: uppercase;
+  padding: 10px 16px; border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+}
+.src-link:hover { background: var(--surface-dark-soft); }
+.chat-orb {
+  position: fixed; right: 24px; bottom: 64px; z-index: 50;
+  width: 44px; height: 44px; border-radius: 9999px;
+  background: var(--ink); color: var(--on-dark);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 10px rgba(1,1,32,0.18);
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .h-hero { font-size: 44px; line-height: 1.1; letter-spacing: -1px; }
+  .hero-grid, .platform-grid, .stats-row, .research-grid, .article-grid, .foot-grid, .ds-block-head, .comp-grid { grid-template-columns: 1fr; }
+  .swatch-row { grid-template-columns: repeat(3, 1fr); }
+  .type-row { grid-template-columns: 1fr; gap: 6px; }
+  .price-table { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top nav -->
+<header class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#"><span class="brand-mark" aria-hidden></span> together.ai</a>
+    <nav class="nav-links">
+      <a href="#">Products</a>
+      <a href="#">Models</a>
+      <a href="#">Pricing</a>
+      <a href="#">Research</a>
+      <a href="#">Customers</a>
+      <a href="#">Docs</a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="nav-cta">
+      <a href="#" style="color:var(--on-dark); font-size:14px;">Contact sales</a>
+      <a class="btn btn-primary" style="background: var(--canvas); color: var(--ink);" href="#">Sign in</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO DARK -->
+<section class="hero-dark">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="mono-eye">THE AI NATIVE CLOUD</span>
+      <h1 class="h-hero">Build what's next on the AI Native Cloud.</h1>
+      <p class="h-sub">Train, fine-tune, and serve open-source models on the fastest inference stack — at 10× lower cost than the hyperscalers. From a hosted endpoint to a dedicated GPU cluster.</p>
+      <div class="hero-actions">
+        <a class="btn btn-mint" href="#">Get started now</a>
+        <a class="btn btn-white" href="#">Talk to engineers</a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge-on-dark"><span class="dot"></span> Available in 14 regions</span>
+        <span class="badge-on-dark">SOC 2 · HIPAA</span>
+        <span class="badge-on-dark">H100 · H200 · B200</span>
+      </div>
+    </div>
+
+    <div class="ribbon" aria-hidden>
+      <div class="ribbon-blob"></div>
+      <svg viewBox="0 0 400 400" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fc4c02"/>
+            <stop offset="50%" stop-color="#ef2cc1"/>
+            <stop offset="100%" stop-color="#bdbbff"/>
+          </linearGradient>
+          <linearGradient id="rg2" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#bdbbff" stop-opacity="0.85"/>
+            <stop offset="50%" stop-color="#ef2cc1" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#fc4c02" stop-opacity="0.85"/>
+          </linearGradient>
+        </defs>
+        <path d="M 40 220 C 80 80, 220 60, 340 140 S 360 320, 200 360 S 0 320, 40 220 Z"
+              fill="url(#rg1)" opacity="0.86"/>
+        <path d="M 80 260 C 140 160, 260 140, 320 220 S 280 340, 200 340 S 40 320, 80 260 Z"
+              fill="url(#rg2)" opacity="0.55"/>
+        <path d="M 120 280 C 160 220, 240 220, 280 260 S 240 320, 200 320 S 100 320, 120 280 Z"
+              fill="#fff" opacity="0.18"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Trust logos on dark -->
+<section class="trust-dark">
+  <div class="wrap">
+    <div class="label">AI natives build on Together AI</div>
+    <div class="logos">
+      <span>SALESFORCE</span>
+      <span>NEXUSFLOW</span>
+      <span>DUOLINGO</span>
+      <span>ARCEE.AI</span>
+      <span>WASHINGTON POST</span>
+      <span>ZOOM</span>
+      <span>PIKA</span>
+    </div>
+  </div>
+</section>
+
+<!-- Stats tinted tiles -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono-eye" style="color: var(--body);">THE PLATFORM</span>
+      <h2 class="h-section">The Together AI Platform.</h2>
+      <p class="section-sub">Full-stack infrastructure for AI workloads — from serverless inference to dedicated training clusters. Drop-in compatible with the OpenAI client. No vendor lock-in.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-tile mint">
+        <div class="num">10<small>×</small></div>
+        <div class="label">Lower inference cost vs. hyperscaler endpoints</div>
+      </div>
+      <div class="stat-tile peri">
+        <div class="num">200+</div>
+        <div class="label">Open-source models · serverless and dedicated</div>
+      </div>
+      <div class="stat-tile peach">
+        <div class="num">99.9<small>%</small></div>
+        <div class="label">Uptime SLA · enterprise tier</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full-stack feature with code editor -->
+<section class="section" style="padding-top: 0;">
+  <div class="wrap">
+    <div class="platform-tabs">
+      <span class="tab active">Inference</span>
+      <span class="tab">Fine-tuning</span>
+      <span class="tab">GPU Clusters</span>
+      <span class="tab">Evaluations</span>
+    </div>
+    <div class="platform-grid">
+      <div>
+        <span class="mono-eye" style="color: var(--body);">SERVERLESS INFERENCE</span>
+        <h2 class="h-section">One API. Two hundred models.</h2>
+        <p class="section-sub">Llama, Mistral, Qwen, DeepSeek, Stable Diffusion, FLUX, and every major open-source release — behind a single endpoint that's drop-in compatible with the OpenAI client. Pay only for the tokens you use.</p>
+        <div style="display:flex; gap:12px; margin-top: 32px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="#">Read the docs</a>
+          <a class="btn btn-outline" href="#">View model catalog</a>
+        </div>
+      </div>
+      <div class="code-editor">
+        <div class="code-editor-head">
+          <span class="lbl">PYTHON</span>
+          <span>inference.py — together / serverless</span>
+        </div>
+        <div class="code-editor-body">
+          <div><span class="ln">1</span><span class="c"># Drop-in compatible with the OpenAI client</span></div>
+          <div><span class="ln">2</span><span class="k">from</span> <span class="v">together</span> <span class="k">import</span> <span class="f">Together</span></div>
+          <div><span class="ln">3</span></div>
+          <div><span class="ln">4</span><span class="v">client</span> = <span class="f">Together</span>()</div>
+          <div><span class="ln">5</span></div>
+          <div><span class="ln">6</span><span class="v">response</span> = <span class="v">client</span>.<span class="v">chat</span>.<span class="v">completions</span>.<span class="f">create</span>(</div>
+          <div><span class="ln">7</span>&nbsp;&nbsp;<span class="v">model</span>=<span class="s">"meta-llama/Llama-3.3-70B-Instruct-Turbo"</span>,</div>
+          <div><span class="ln">8</span>&nbsp;&nbsp;<span class="v">messages</span>=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"Hello"</span>}],</div>
+          <div><span class="ln">9</span>&nbsp;&nbsp;<span class="v">stream</span>=<span class="n">True</span>,</div>
+          <div><span class="ln">10</span>)</div>
+          <div><span class="ln">11</span></div>
+          <div><span class="ln">12</span><span class="k">for</span> <span class="v">chunk</span> <span class="k">in</span> <span class="v">response</span>:</div>
+          <div><span class="ln">13</span>&nbsp;&nbsp;<span class="f">print</span>(<span class="v">chunk</span>.<span class="v">choices</span>[<span class="n">0</span>].<span class="v">delta</span>.<span class="v">content</span> <span class="k">or</span> <span class="s">""</span>, <span class="v">end</span>=<span class="s">""</span>)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Research band dark -->
+<section class="research-dark">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono-eye">RESEARCH</span>
+      <h2 class="h-section">Grounded in cutting-edge research.</h2>
+      <p class="section-sub">The team behind FlashAttention, RedPajama, and the Together Inference Engine. We publish what we ship, and we ship what scales.</p>
+    </div>
+    <div class="research-grid">
+      <div class="research-card">
+        <span class="mono-eye">INFERENCE</span>
+        <h3>The Together Inference Engine</h3>
+        <p>An end-to-end stack that delivers 3-4× higher throughput than vLLM on the same hardware, with sub-100ms first-token latency on Llama 3.3 70B.</p>
+        <div class="meta"><span class="pill">v3.2</span><span>GA · Dec '25</span></div>
+      </div>
+      <div class="research-card">
+        <span class="mono-eye">DATA</span>
+        <h3>RedPajama-v2</h3>
+        <p>30T tokens of curated pretraining data with full provenance. Used to train Mistral, Mixtral, and a generation of open-source frontier models.</p>
+        <div class="meta"><span class="pill">DATASET</span><span>30 trillion tokens</span></div>
+      </div>
+      <div class="research-card">
+        <span class="mono-eye">ATTENTION</span>
+        <h3>FlashAttention-3</h3>
+        <p>The H100-optimized attention kernel that ships in every major training and inference framework. Open source, MIT-licensed.</p>
+        <div class="meta"><span class="pill">PAPER</span><span>NeurIPS '24</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-wrap">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono-eye" style="color: var(--body);">PRICING</span>
+      <h2 class="h-section">Transparent per-token pricing.</h2>
+      <p class="section-sub">Pay only for what you generate. No volume tiers, no marketing seats. Switch to a dedicated endpoint when you outgrow serverless.</p>
+    </div>
+
+    <div style="display:flex; gap: 24px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+      <div class="pricing-tabs">
+        <span class="stab active">TEXT</span>
+        <span class="stab">VISION</span>
+        <span class="stab">IMAGE</span>
+        <span class="stab">AUDIO</span>
+        <span class="stab">VIDEO</span>
+      </div>
+      <div class="pricing-toggle">
+        <span class="seg active">STANDARD</span>
+        <span class="seg">WHOLESALE</span>
+      </div>
+    </div>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>MODEL</th>
+          <th>CONTEXT</th>
+          <th>INPUT</th>
+          <th>OUTPUT</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="model"><div class="model-ic"></div><div><div class="mname">Llama 3.3 70B Instruct Turbo</div><div class="sub">meta-llama / 70B</div></div></div></td>
+          <td>128K</td>
+          <td class="price">$0.88<span class="unit">/ 1M tok</span></td>
+          <td class="price">$0.88<span class="unit">/ 1M tok</span></td>
+          <td><span class="mono-eye" style="color: var(--ink);">ON-DEMAND</span></td>
+        </tr>
+        <tr>
+          <td><div class="model"><div class="model-ic"></div><div><div class="mname">DeepSeek V3</div><div class="sub">deepseek-ai / 671B MoE</div></div></div></td>
+          <td>64K</td>
+          <td class="price">$1.25<span class="unit">/ 1M tok</span></td>
+          <td class="price">$1.25<span class="unit">/ 1M tok</span></td>
+          <td><span class="mono-eye" style="color: var(--ink);">ON-DEMAND</span></td>
+        </tr>
+        <tr>
+          <td><div class="model"><div class="model-ic"></div><div><div class="mname">Mixtral 8×22B Instruct</div><div class="sub">mistralai / 141B MoE</div></div></div></td>
+          <td>64K</td>
+          <td class="price">$1.20<span class="unit">/ 1M tok</span></td>
+          <td class="price">$1.20<span class="unit">/ 1M tok</span></td>
+          <td><span class="mono-eye" style="color: var(--ink);">ON-DEMAND</span></td>
+        </tr>
+        <tr>
+          <td><div class="model"><div class="model-ic"></div><div><div class="mname">Qwen 2.5 72B Instruct</div><div class="sub">alibaba / 72B</div></div></div></td>
+          <td>32K</td>
+          <td class="price">$0.90<span class="unit">/ 1M tok</span></td>
+          <td class="price">$0.90<span class="unit">/ 1M tok</span></td>
+          <td><span class="mono-eye" style="color: var(--ink);">ON-DEMAND</span></td>
+        </tr>
+        <tr>
+          <td><div class="model"><div class="model-ic"></div><div><div class="mname">Llama 3.1 8B Instruct Turbo</div><div class="sub">meta-llama / 8B</div></div></div></td>
+          <td>128K</td>
+          <td class="price">$0.18<span class="unit">/ 1M tok</span></td>
+          <td class="price">$0.18<span class="unit">/ 1M tok</span></td>
+          <td><span class="mono-eye" style="color: var(--ink);">ON-DEMAND</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex; gap: 12px; margin-top: 40px; align-items: center;">
+      <a class="btn btn-primary" href="#">Get started now</a>
+      <a class="btn btn-outline" href="#">View full catalog</a>
+      <span style="font-size: 13px; color: var(--body); margin-left: 12px;">All prices in USD. Wholesale tier available for 50M+ tokens/mo.</span>
+    </div>
+  </div>
+</section>
+
+<!-- Articles / What's new -->
+<section class="articles">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono-eye" style="color: var(--body);">WHAT'S NEW</span>
+      <h2 class="h-section">From the Together blog.</h2>
+    </div>
+    <div class="article-grid">
+      <div class="article">
+        <div class="article-thumb"></div>
+        <span class="mono-eye">INFERENCE</span>
+        <h3>The Together Inference Engine v3.2 — sub-100ms first-token latency on Llama 3.3 70B.</h3>
+        <p>How we cut tail latency on the most-served open model by 38% with speculative decoding, prefix caching, and a redesigned scheduler.</p>
+        <div class="byline">BY THE INFRA TEAM · 2026-04-12</div>
+      </div>
+      <div class="article">
+        <div class="article-thumb alt"></div>
+        <span class="mono-eye">CUSTOMERS</span>
+        <h3>How Pika ships frontier video models on 4,096 H200s.</h3>
+        <p>A look inside Pika's training pipeline — 32-node clusters, gradient checkpointing, and the schedule that lets the research team prioritize without breaking SRE budgets.</p>
+        <div class="byline">CASE STUDY · 2026-03-28</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── DS section ───────── -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-intro">
+      <span class="mono-eye" style="color: var(--body);">DESIGN SYSTEM · V.ALPHA</span>
+      <h2>The system in the open.</h2>
+      <p>Tokens and primitives behind the Together surface — colors grouped by role, the display-sans + uppercase-mono ladder, the lightly-rounded radius scale, and the canonical component set. Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.together.html" target="_blank" rel="noopener">DESIGN.md</a>. Dark hero, white middle, gradient ribbon as the single piece of chrome.</p>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">01 · Color</div>
+        <h3>Black CTA. Dark-light alternating bands. Three-stop gradient as decoration.</h3>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Brand & Gradient</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#000000;"></div><div class="name">primary / ink</div><div class="hex">#000000</div></div>
+          <div class="swatch"><div class="chip" style="background:#fc4c02;"></div><div class="name">accent-orange</div><div class="hex">#fc4c02</div></div>
+          <div class="swatch"><div class="chip" style="background:#ef2cc1;"></div><div class="name">accent-magenta</div><div class="hex">#ef2cc1</div></div>
+          <div class="swatch"><div class="chip" style="background:#bdbbff;"></div><div class="name">accent-periwinkle</div><div class="hex">#bdbbff</div></div>
+          <div class="swatch"><div class="chip" style="background:#c8f6f9;"></div><div class="name">accent-mint</div><div class="hex">#c8f6f9</div></div>
+          <div class="swatch"><div class="chip" style="background: linear-gradient(135deg, #fc4c02, #ef2cc1, #bdbbff);"></div><div class="name">brand gradient</div><div class="hex">3-stop</div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Surface</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#ffffff;"></div><div class="name">canvas</div><div class="hex">#ffffff</div></div>
+          <div class="swatch"><div class="chip" style="background:#010120;"></div><div class="name">canvas-dark</div><div class="hex">#010120</div></div>
+          <div class="swatch"><div class="chip" style="background:#313641;"></div><div class="name">surface-dark-soft</div><div class="hex">#313641</div></div>
+          <div class="swatch"><div class="chip" style="background:#26263a;"></div><div class="name">surface-dark-bord</div><div class="hex">#26263a</div></div>
+          <div class="swatch"><div class="chip" style="background:#ebebeb;"></div><div class="name">hairline</div><div class="hex">#ebebeb</div></div>
+          <div class="swatch"><div class="chip" style="background:#d4d4d4;"></div><div class="name">hairline-strong</div><div class="hex">#d4d4d4</div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-cap">Text</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip" style="background:#000000;"></div><div class="name">ink</div><div class="hex">#000000</div></div>
+          <div class="swatch"><div class="chip" style="background:#959494;"></div><div class="name">body</div><div class="hex">#959494</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffffff; border-color:#d4d4d4;"></div><div class="name">on-dark</div><div class="hex">#ffffff</div></div>
+          <div class="swatch"><div class="chip" style="background:#b6b6c4;"></div><div class="name">on-dark-muted</div><div class="hex">#b6b6c4</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">02 · Typography</div>
+        <h3>Display sans for narrative. Uppercase mono for every label.</h3>
+      </div>
+      <div class="type-table">
+        <div class="type-row"><div class="type-tok">display-xxl</div><div class="type-spec">64 / 500 / -1.92</div><div style="font-size: 48px; line-height: 1.1; letter-spacing: -1.44px; font-weight: 500;">Build what's next on the AI Native Cloud.</div></div>
+        <div class="type-row"><div class="type-tok">display-xl</div><div class="type-spec">40 / 500 / -0.8</div><div style="font-size: 36px; line-height: 48px; letter-spacing: -0.72px; font-weight: 500;">The Together AI Platform.</div></div>
+        <div class="type-row"><div class="type-tok">display-lg</div><div class="type-spec">28 / 500 / -0.42</div><div style="font-size: 26px; line-height: 32px; letter-spacing: -0.4px; font-weight: 500;">Grounded in cutting-edge research.</div></div>
+        <div class="type-row"><div class="type-tok">display-md</div><div class="type-spec">22 / 500 / -0.22</div><div style="font-size: 22px; line-height: 25.3px; letter-spacing: -0.22px; font-weight: 500;">Card titles, research-card headings.</div></div>
+        <div class="type-row"><div class="type-tok">body-lg</div><div class="type-spec">18 / 400 / -0.18</div><div style="font-size: 18px; line-height: 23.4px; letter-spacing: -0.18px;">Lead paragraphs sit slightly larger than body.</div></div>
+        <div class="type-row"><div class="type-tok">body-md</div><div class="type-spec">16 / 400 / -0.16</div><div style="font-size: 16px; line-height: 20.8px; letter-spacing: -0.16px;">Default body paragraph copy.</div></div>
+        <div class="type-row"><div class="type-tok">body-md-strong</div><div class="type-spec">16 / 500 / -0.16</div><div style="font-size: 16px; line-height: 20.8px; letter-spacing: -0.16px; font-weight: 500;">Bolded inline body emphasis.</div></div>
+        <div class="type-row"><div class="type-tok">mono-caps-button</div><div class="type-spec">Mono / 16 / 500 / 0.08</div><div class="mono" style="font-size: 14px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500;">GET STARTED NOW</div></div>
+        <div class="type-row"><div class="type-tok">mono-caps-eyebrow</div><div class="type-spec">Mono / 11 / 500 / 0.55</div><div class="mono" style="font-size: 11px; letter-spacing: 0.55px; text-transform: uppercase; font-weight: 500;">SECTION EYEBROW</div></div>
+        <div class="type-row"><div class="type-tok">caption</div><div class="type-spec">14 / 400 / 0</div><div style="font-size: 14px; line-height: 19.6px;">Caption for fine print.</div></div>
+        <div class="type-row"><div class="type-tok">mono-caption</div><div class="type-spec">Mono / 10 / 400 / 0.05</div><div class="mono" style="font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase;">BY THE INFRA TEAM · 2026-04-12</div></div>
+      </div>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">03 · Radius</div>
+        <h3>4px is the canonical radius. Pills only for the chat orb.</h3>
+      </div>
+      <div class="radius-row">
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 0;"></div><div class="nm">none</div><div class="val">0</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 3.25px;"></div><div class="nm">xs</div><div class="val">3.25</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 4px;"></div><div class="nm">sm</div><div class="val">4px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 8px;"></div><div class="nm">md</div><div class="val">8px</div></div>
+        <div class="radius-cell"><div class="radius-box" style="border-radius: 9999px;"></div><div class="nm">full</div><div class="val">9999</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <div class="ds-block-head">
+        <div class="ds-label">04 · Components</div>
+        <h3>Black CTA pill. Mint and white reserved for hero. Hairline cards.</h3>
+      </div>
+      <div class="comp-grid">
+
+        <div class="comp-card">
+          <h4>Buttons</h4>
+          <div class="desc">Mono uppercase labels. Black is the canonical CTA. Mint and white live in hero contexts.</div>
+          <div class="comp-row">
+            <a class="btn btn-primary" href="#">Get started now</a>
+            <a class="btn btn-outline" href="#">View docs</a>
+          </div>
+          <div class="comp-row" style="background: var(--canvas-dark); padding: 14px; border-radius: 4px;">
+            <a class="btn btn-mint" href="#">Get started</a>
+            <a class="btn btn-white" href="#">Talk to engineers</a>
+            <a class="btn btn-ghost-dark" href="#">Read more</a>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Inputs</h4>
+          <div class="desc">4px radius, hairline-strong border. Inverts to ink border on focus.</div>
+          <div style="display:grid; gap:12px;">
+            <div>
+              <label class="label-form">WORK EMAIL</label>
+              <input class="input" placeholder="you@company.com" />
+            </div>
+            <div>
+              <label class="label-form">USE CASE (FOCUSED)</label>
+              <input class="input focused" value="Production inference on Llama 3.3 70B" />
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Cards</h4>
+          <div class="desc">Hairline 4px on white. Surface-dark-bord 4px on dark. No shadows.</div>
+          <div style="display:grid; gap:12px;">
+            <div style="background: var(--canvas); border: 1px solid var(--hairline); border-radius: 4px; padding: 18px;">
+              <span class="mono-eye" style="color: var(--body);">ARTICLE-CARD</span>
+              <div style="font-size: 18px; line-height: 1.25; margin-top: 8px; font-weight: 500;">Light surface, hairline border.</div>
+              <div style="font-size: 13px; color: var(--body); margin-top: 6px;">Used for testimonials and blog cards.</div>
+            </div>
+            <div style="background: var(--canvas-dark); border: 1px solid var(--surface-dark-bord); border-radius: 4px; padding: 18px; color: var(--on-dark);">
+              <span class="mono-eye" style="color: var(--on-dark-muted);">RESEARCH-CARD</span>
+              <div style="font-size: 18px; line-height: 1.25; margin-top: 8px; font-weight: 500;">Dark surface on the research band.</div>
+              <div style="font-size: 13px; color: var(--on-dark-muted); margin-top: 6px;">Mono eyebrow + display headline + body.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <h4>Tags & badges</h4>
+          <div class="desc">All caps mono. Light hairline default. Gradient tag is the brand chrome at chip scale.</div>
+          <div class="comp-row">
+            <span class="tag">DEFAULT</span>
+            <span class="tag dark">ON-DEMAND</span>
+            <span class="tag mint">NEW</span>
+            <span class="tag gradient">FRONTIER</span>
+          </div>
+          <div class="comp-row" style="margin-top: 12px;">
+            <div class="pricing-toggle">
+              <span class="seg active">STANDARD</span>
+              <span class="seg">WHOLESALE</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Giant wordmark band -->
+<div class="wordmark-band">
+  <span class="mark">together.ai</span>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" style="color: var(--ink);" href="#"><span class="brand-mark" aria-hidden></span> together.ai</a>
+        <div style="margin-top: 16px; max-width: 30ch; color: var(--body); font-size: 14px;">The AI Native Cloud — open-source models, inference, and training infrastructure for builders.</div>
+      </div>
+      <div>
+        <h5>PRODUCTS</h5>
+        <ul><li><a href="#">Inference</a></li><li><a href="#">Fine-tuning</a></li><li><a href="#">GPU Clusters</a></li><li><a href="#">Evaluations</a></li></ul>
+      </div>
+      <div>
+        <h5>MODELS</h5>
+        <ul><li><a href="#">Llama family</a></li><li><a href="#">Mistral · Mixtral</a></li><li><a href="#">DeepSeek</a></li><li><a href="#">Image · Video</a></li></ul>
+      </div>
+      <div>
+        <h5>RESOURCES</h5>
+        <ul><li><a href="#">Documentation</a></li><li><a href="#">Blog</a></li><li><a href="#">Research</a></li><li><a href="#">Status</a></li></ul>
+      </div>
+      <div>
+        <h5>COMPANY</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Together AI · Inspired demo. Not affiliated.</span>
+      <span class="mono" style="font-size:11px; letter-spacing: 0.55px;">SOC 2 · ISO 27001 · HIPAA · GDPR</span>
+    </div>
+  </div>
+</footer>
+
+<div class="chat-orb" aria-label="Chat">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12c0 4.5-4 8-9 8a10 10 0 0 1-4-0.8L3 21l1.2-4.4A8 8 0 0 1 3 12c0-4.5 4-8 9-8s9 3.5 9 8z"/></svg>
+</div>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.together.html" target="_blank" rel="noopener">VIEW DESIGN.MD ↗</a>
+
+</body>
+</html>
