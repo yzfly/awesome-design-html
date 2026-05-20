@@ -1,0 +1,1357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bugatti — Inspired Design</title>
+<meta name="description" content="A Bugatti-inspired marketing page: pure black canvas, three-family typography trinity (Saira Condensed display, EB Garamond serif body, JetBrains Mono buttons), wide-tracked uppercase, transparent pill CTAs, austere luxury automotive. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;500&family=EB+Garamond:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #ffffff;
+  --ink: #ffffff;
+  --on-primary: #000000;
+  --on-dark: #ffffff;
+  --on-photo: #ffffff;
+  /* Text */
+  --body: #cccccc;
+  --body-strong: #e6e6e6;
+  --muted: #999999;
+  --muted-soft: #666666;
+  /* Hairlines */
+  --hairline: #262626;
+  --hairline-strong: #3a3a3a;
+  /* Surfaces */
+  --canvas: #000000;
+  --surface-soft: #0d0d0d;
+  --surface-card: #141414;
+  --surface-elevated: #1f1f1f;
+  /* Single non-mono accent */
+  --link: #c3d9f3;
+  /* Semantic */
+  --warning: #d4a017;
+  --success: #5fa657;
+  /* Radius */
+  --r-none: 0px;
+  --r-pill: 9999px;
+  --r-full: 9999px;
+  /* Spacing */
+  --s-xxs: 4px; --s-xs: 8px; --s-sm: 12px; --s-md: 16px;
+  --s-lg: 24px; --s-xl: 40px; --s-xxl: 64px; --s-section: 120px;
+  /* Type families */
+  --f-display: "Saira Condensed", -apple-system, BlinkMacSystemFont, sans-serif;
+  --f-serif: "EB Garamond", Garamond, "Times New Roman", serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--f-serif);
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: #fff; color: #000; }
+.num { font-variant-numeric: tabular-nums; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top Nav — transparent, overlaid —— */
+.top-nav {
+  position: absolute; top: 0; left: 0; right: 0;
+  z-index: 30;
+  height: 56px;
+  background: transparent;
+}
+.nav-inner {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 24px;
+}
+.nav-left, .nav-right {
+  display: flex; align-items: center;
+  font-family: var(--f-mono);
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink);
+  gap: 24px;
+}
+.nav-left { justify-content: flex-start; }
+.nav-right { justify-content: flex-end; }
+.nav-left a, .nav-right a { color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.wordmark {
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 14px 32px;
+  font-family: var(--f-mono);
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease;
+}
+.btn:hover { background: var(--ink); color: var(--canvas); }
+.btn-icon {
+  width: 40px; height: 40px; padding: 0;
+  border-radius: var(--r-full);
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.btn-icon:hover { background: var(--ink); color: var(--canvas); }
+.text-link {
+  font-family: var(--f-mono);
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.text-link:hover { opacity: 0.7; }
+
+/* —— Hero photo band —— */
+.hero {
+  position: relative;
+  background: var(--canvas);
+  min-height: 100vh;
+  overflow: hidden;
+}
+.hero-photo {
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 70%, rgba(80,70,60,0.12) 0%, transparent 55%),
+    linear-gradient(180deg, #0a0a0a 0%, #050505 60%, #000 100%);
+}
+.hero-photo::before {
+  content: ""; position: absolute;
+  left: 6%; right: 6%; bottom: 22%; height: 30%;
+  background: linear-gradient(180deg, #4a4540 0%, #1a1714 80%, #050404 100%);
+  border-radius: 75% 75% 22% 22% / 100% 100% 35% 35%;
+  filter: blur(1.5px);
+  box-shadow: 0 -30px 100px -20px rgba(180,160,140,0.06);
+}
+.hero-photo::after {
+  content: ""; position: absolute;
+  left: 14%; right: 14%; bottom: 13%; height: 3%;
+  background: rgba(0,0,0,0.85);
+  filter: blur(14px);
+  border-radius: 50%;
+}
+.hero-photo .car-wh {
+  position: absolute; bottom: 19%;
+  width: 10%; aspect-ratio: 1; border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #000 25%, #1a1a1a 50%, #3a3a3a 60%, #1a1a1a 80%);
+  border: 2px solid #000;
+  z-index: 2;
+}
+.hero-photo .car-wh.l { left: 19%; }
+.hero-photo .car-wh.r { right: 19%; }
+.hero-photo .gleam {
+  position: absolute; top: 10%; right: 10%;
+  width: 40%; height: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.04) 0%, transparent 65%);
+  transform: rotate(-20deg);
+}
+.hero-photo .vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+}
+
+.hero-content {
+  position: absolute; top: 40%; left: 0; right: 0;
+  transform: translateY(-50%);
+  z-index: 3;
+  text-align: center;
+  padding: 0 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--body);
+  margin-bottom: 32px;
+}
+.hero h1 {
+  font-family: var(--f-display);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin: 0 0 32px;
+}
+.hero h1 .line2 { display: block; font-size: 56px; letter-spacing: 3px; }
+.hero-sub {
+  font-family: var(--f-serif);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--body);
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.5;
+}
+.hero-cta-wrap {
+  display: flex; justify-content: center;
+}
+
+.hero-credit {
+  position: absolute; left: 32px; bottom: 32px;
+  z-index: 3;
+  font-family: var(--f-mono);
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted-soft);
+}
+.hero-coords {
+  position: absolute; right: 32px; bottom: 32px;
+  z-index: 3;
+  font-family: var(--f-mono);
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted-soft);
+  text-align: right;
+}
+
+/* Career callout (floats over hero) */
+.career-callout {
+  position: absolute;
+  right: 32px; top: 88px;
+  z-index: 3;
+  width: 320px;
+  background: var(--surface-card);
+  padding: 16px;
+  border: 1px solid var(--hairline);
+}
+.career-callout .thumb {
+  width: 100%; aspect-ratio: 16/10;
+  background: linear-gradient(135deg, #2a2520 0%, #050404 100%);
+  margin-bottom: 16px;
+  position: relative;
+}
+.career-callout .thumb::after {
+  content: ""; position: absolute; inset: 30% 25%;
+  background: radial-gradient(ellipse, rgba(180,160,140,0.15) 0%, transparent 70%);
+}
+.career-callout p {
+  font-family: var(--f-serif);
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--body);
+  margin: 0 0 16px;
+  line-height: 1.4;
+}
+.career-callout .link {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+@media (max-width: 1000px) {
+  .career-callout { display: none; }
+  .hero h1 { font-size: 36px; letter-spacing: 2.5px; }
+  .hero h1 .line2 { font-size: 32px; letter-spacing: 2px; }
+  .nav-left, .nav-right { font-size: 11px; gap: 12px; }
+}
+
+/* —— Section —— */
+.section {
+  padding: var(--s-section) 32px;
+}
+.section-head {
+  max-width: 1280px; margin: 0 auto var(--s-xxl);
+  text-align: center;
+}
+.section-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.section h2 {
+  font-family: var(--f-display);
+  font-size: 48px; font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.15;
+  margin: 0 0 24px;
+  color: var(--ink);
+}
+.section-sub {
+  font-family: var(--f-serif);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--body);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* —— Model showcase grid (2-up sparse) —— */
+.model-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1280px; margin: 0 auto;
+}
+.model-photo-card {
+  background: var(--canvas);
+  display: flex; flex-direction: column;
+}
+.mp-photo {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #181614 0%, #050505 100%);
+}
+.mp-photo.tone-blue {
+  background:
+    radial-gradient(ellipse at 50% 70%, rgba(60,90,130,0.18) 0%, transparent 55%),
+    linear-gradient(135deg, #0a1622 0%, #050505 100%);
+}
+.mp-photo.tone-warm {
+  background:
+    radial-gradient(ellipse at 50% 70%, rgba(120,90,60,0.18) 0%, transparent 55%),
+    linear-gradient(135deg, #1c1612 0%, #050505 100%);
+}
+.mp-photo .silhouette {
+  position: absolute;
+  left: 6%; right: 6%; bottom: 22%; height: 34%;
+  background: linear-gradient(180deg, #4a4540 0%, #1a1714 80%, #050404 100%);
+  border-radius: 70% 70% 22% 22% / 100% 100% 30% 30%;
+  filter: blur(1.5px);
+}
+.mp-photo.tone-blue .silhouette { background: linear-gradient(180deg, #3a4a60 0%, #050a14 100%); }
+.mp-photo .wh {
+  position: absolute; bottom: 16%;
+  width: 10%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, #000 25%, #2a2a2a 55%, #050505 80%);
+  border: 2px solid #000;
+}
+.mp-photo .wh.l { left: 17%; } .mp-photo .wh.r { right: 17%; }
+.mp-photo .photo-id {
+  position: absolute; left: 16px; bottom: 16px;
+  font-family: var(--f-mono);
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.model-card-body { text-align: left; }
+.mp-tag {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.mp-name {
+  font-family: var(--f-display);
+  font-size: 32px; font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ink);
+  margin: 0 0 16px;
+  line-height: 1.1;
+}
+.mp-desc {
+  font-family: var(--f-serif);
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--body);
+  margin: 0 0 24px;
+  line-height: 1.5;
+  max-width: 500px;
+}
+@media (max-width: 900px) {
+  .model-showcase { grid-template-columns: 1fr; gap: 64px; }
+}
+
+/* —— Spec section —— */
+.spec-section {
+  background: var(--canvas);
+  padding: var(--s-section) 32px;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.spec-section-inner {
+  max-width: 1280px; margin: 0 auto;
+  text-align: center;
+}
+.spec-section h2 {
+  font-family: var(--f-display);
+  font-size: 48px; font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+.spec-section .sub {
+  font-family: var(--f-serif);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--body);
+  max-width: 560px;
+  margin: 0 auto 80px;
+}
+.spec-table {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  text-align: left;
+  border-top: 1px solid var(--hairline);
+}
+.spec-cell {
+  padding: 40px 24px 40px 0;
+  border-bottom: 1px solid var(--hairline);
+  border-right: 1px solid var(--hairline);
+}
+.spec-cell:nth-child(4n) { border-right: 0; padding-right: 0; }
+.spec-cell:nth-child(n+5) { padding-bottom: 0; border-bottom: 0; }
+.spec-cell:nth-child(-n+4) { padding-top: 40px; }
+.spec-value {
+  font-family: var(--f-display);
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 12px;
+  padding-left: 24px;
+}
+.spec-cell:first-child .spec-value,
+.spec-cell:nth-child(4n+1) .spec-value { padding-left: 0; }
+.spec-value .unit {
+  font-family: var(--f-mono);
+  font-size: 14px; font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin-left: 6px;
+}
+.spec-label {
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted);
+  padding-left: 24px;
+}
+.spec-cell:first-child .spec-label,
+.spec-cell:nth-child(4n+1) .spec-label { padding-left: 0; }
+@media (max-width: 800px) {
+  .spec-table { grid-template-columns: repeat(2, 1fr); }
+  .spec-cell:nth-child(2n) { border-right: 0; }
+  .spec-cell:nth-child(2n+1) { border-right: 1px solid var(--hairline); }
+  .spec-cell { padding: 32px 16px; }
+  .spec-value { padding-left: 16px; }
+  .spec-cell:nth-child(odd) .spec-value, .spec-cell:nth-child(odd) .spec-label { padding-left: 0; }
+  .spec-label { padding-left: 16px; }
+}
+
+/* —— Newsroom 2-up —— */
+.newsroom-band {
+  padding: var(--s-section) 32px;
+}
+.newsroom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.newsroom-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  padding: 24px;
+}
+.nr-thumb {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #181614 0%, #050505 100%);
+  margin-bottom: 24px;
+  position: relative;
+}
+.nr-thumb.t2 { background: linear-gradient(135deg, #0a1218 0%, #050505 100%); }
+.nr-thumb::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 70%, rgba(180,160,140,0.1) 0%, transparent 60%);
+}
+.nr-date {
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.nr-title {
+  font-family: var(--f-display);
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+.nr-excerpt {
+  font-family: var(--f-serif);
+  font-size: 15px;
+  color: var(--body);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+.nr-link {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+@media (max-width: 900px) {
+  .newsroom-grid { grid-template-columns: 1fr; }
+}
+
+/* —— Career listings —— */
+.careers-band {
+  padding: var(--s-section) 32px;
+  border-top: 1px solid var(--hairline);
+}
+.careers-band-inner {
+  max-width: 1280px; margin: 0 auto;
+}
+.careers-band .section-head { margin-bottom: 64px; }
+.career-row {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--hairline);
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 32px;
+  align-items: center;
+  transition: padding-left .2s ease;
+}
+.career-row:hover { padding-left: 16px; }
+.career-row .title {
+  font-family: var(--f-display);
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+.career-row .dept, .career-row .loc {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted);
+}
+.career-row .arrow {
+  font-family: var(--f-mono);
+  font-size: 18px;
+  color: var(--ink);
+}
+.careers-band .footer-link-row {
+  text-align: center; margin-top: 64px;
+}
+
+/* —— CTA band (pre-footer) —— */
+.cta-band {
+  position: relative;
+  padding: 0;
+  background: var(--canvas);
+}
+.cta-band-photo {
+  position: relative;
+  min-height: 500px;
+  background:
+    radial-gradient(ellipse at 50% 60%, rgba(120,90,60,0.18) 0%, transparent 55%),
+    linear-gradient(180deg, #0a0907 0%, #000 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.cta-band-photo::before {
+  content: ""; position: absolute;
+  left: 12%; right: 12%; bottom: 22%; height: 28%;
+  background: linear-gradient(180deg, #4a4540 0%, #1a1714 80%, #050404 100%);
+  border-radius: 70% 70% 22% 22% / 100% 100% 30% 30%;
+  filter: blur(2px);
+}
+.cta-band-photo .wh {
+  position: absolute; bottom: 16%;
+  width: 9%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, #000 25%, #2a2a2a 55%, #050505 80%);
+  border: 2px solid #000;
+}
+.cta-band-photo .wh.l { left: 22%; } .cta-band-photo .wh.r { right: 22%; }
+.cta-band-photo .vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.65) 100%);
+}
+.cta-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 80px 32px;
+  max-width: 720px;
+}
+.cta-content h2 {
+  font-family: var(--f-display);
+  font-size: 40px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.15;
+  margin: 0 0 32px;
+}
+.cta-content .sub {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--body);
+  margin: 0 auto 32px;
+  max-width: 460px;
+}
+
+/* —— Footer —— */
+.footer {
+  background: var(--canvas);
+  color: var(--muted);
+  padding: 64px 32px 32px;
+  border-top: 1px solid var(--hairline);
+}
+.footer-inner { max-width: 1280px; margin: 0 auto; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: 48px;
+  margin-bottom: 64px;
+}
+.footer h5 {
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer ul li { padding: 6px 0; }
+.footer ul li a {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted);
+}
+.footer ul li a:hover { color: var(--ink); }
+.footer-intro .wm-large {
+  font-family: var(--f-display);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.footer-intro p {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--body);
+  margin: 16px 0 0; max-width: 260px;
+  line-height: 1.5;
+}
+.footer-bottom {
+  text-align: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
+}
+.footer-bottom .wordmark-bot {
+  font-family: var(--f-display);
+  font-size: 18px; font-weight: 400;
+  letter-spacing: 8px;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.footer-bottom .copy {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted-soft);
+}
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ════════════════════════════════════════════ */
+/*           DESIGN SYSTEM REFERENCE             */
+/* ════════════════════════════════════════════ */
+.ds-section { background: var(--canvas); padding: 120px 32px; border-top: 1px solid var(--hairline); }
+.ds-intro { max-width: 1280px; margin: 0 auto 80px; text-align: center; }
+.ds-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 24px;
+}
+.ds-intro h2 {
+  font-family: var(--f-display);
+  font-size: 48px; font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0 0 24px;
+}
+.ds-intro p {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 16px; color: var(--body);
+  max-width: 720px; margin: 0 auto;
+  line-height: 1.6;
+}
+.ds-block {
+  max-width: 1280px; margin: 0 auto 96px;
+}
+.ds-block h3 {
+  font-family: var(--f-display);
+  font-size: 24px; font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink); margin: 0 0 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--hairline);
+}
+.ds-block h4 {
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin: 32px 0 16px;
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.swatch {
+  border: 1px solid var(--hairline);
+  background: var(--canvas);
+}
+.swatch-chip { height: 80px; }
+.swatch-meta { padding: 16px; }
+.swatch-name {
+  font-family: var(--f-mono);
+  font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink); margin-bottom: 6px;
+}
+.swatch-hex {
+  font-family: var(--f-mono);
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.type-table {
+  width: 100%; border-collapse: collapse;
+}
+.type-table th, .type-table td {
+  text-align: left; padding: 24px 16px;
+  border-bottom: 1px solid var(--hairline);
+  vertical-align: middle;
+}
+.type-table th {
+  font-family: var(--f-mono);
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+}
+.type-token {
+  font-family: var(--f-mono); font-size: 11px;
+  color: var(--ink); letter-spacing: 1.5px; text-transform: uppercase;
+}
+.type-spec {
+  font-family: var(--f-mono); font-size: 11px;
+  color: var(--muted); letter-spacing: 1px;
+}
+.type-family {
+  font-family: var(--f-mono); font-size: 10px;
+  color: var(--muted-soft); letter-spacing: 1px; text-transform: uppercase;
+}
+.type-sample-disp-xl {
+  font-family: var(--f-display); font-size: 40px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 4px; line-height: 1.1;
+}
+.type-sample-disp-lg {
+  font-family: var(--f-display); font-size: 32px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 3px;
+}
+.type-sample-disp-md {
+  font-family: var(--f-display); font-size: 24px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 2px;
+}
+.type-sample-wordmark {
+  font-family: var(--f-display); font-size: 14px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 6px;
+}
+.type-sample-body {
+  font-family: var(--f-serif); font-size: 16px; font-style: italic;
+}
+.type-sample-mono {
+  font-family: var(--f-mono); font-size: 12px;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+.radius-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 600px;
+}
+.radius-item { text-align: center; }
+.radius-square {
+  width: 100%; aspect-ratio: 1;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  margin-bottom: 12px;
+}
+.radius-name {
+  font-family: var(--f-mono);
+  font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.radius-val {
+  font-family: var(--f-mono);
+  font-size: 10px; color: var(--muted);
+}
+
+.comp-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+}
+.comp-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  padding: 32px;
+}
+.comp-card h5 {
+  font-family: var(--f-mono);
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted); margin: 0 0 24px;
+  font-weight: 400;
+}
+.comp-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 16px; }
+.comp-row:last-child { margin-bottom: 0; }
+.demo-input {
+  width: 100%; max-width: 320px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--hairline-strong);
+  color: var(--ink);
+  padding: 12px 0;
+  font-family: var(--f-serif);
+  font-size: 16px;
+  font-style: italic;
+  height: 44px;
+}
+.demo-input:focus { outline: 0; border-bottom-color: var(--ink); border-bottom-width: 2px; }
+.demo-input::placeholder { color: var(--muted); }
+@media (max-width: 800px) {
+  .comp-grid { grid-template-columns: 1fr; }
+}
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  border-radius: var(--r-pill);
+  padding: 10px 18px;
+  font-family: var(--f-mono);
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.src-link:hover { background: var(--ink); color: var(--canvas); }
+</style>
+</head>
+<body>
+
+<!-- ╔══ HERO (with overlaid nav) ══╗ -->
+<section class="hero">
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <a href="#">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          Menu
+        </a>
+      </div>
+      <div class="wordmark">BUGATTI</div>
+      <div class="nav-right">
+        <a href="#">
+          Store
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero-photo">
+    <div class="gleam"></div>
+    <div class="car-wh l"></div>
+    <div class="car-wh r"></div>
+    <div class="vignette"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">— Hommage to a visionary —</div>
+      <h1>Tourbillon<span class="line2">A symphony in v16.</span></h1>
+      <p class="hero-sub">Naturally aspirated 8.3-litre V16, three electric motors, a hand-crafted cockpit conceived as a haute-horlogerie movement. Limited to 250 examples. Production begins 2026.</p>
+      <div class="hero-cta-wrap">
+        <a class="btn" href="#">Discover Tourbillon</a>
+      </div>
+    </div>
+    <div class="career-callout">
+      <div class="thumb"></div>
+      <p>"Are you ready for a new adventure? We are looking for the artisans of tomorrow."</p>
+      <a class="link" href="#">Explore opportunities →</a>
+    </div>
+    <div class="hero-credit">Photo · Molsheim Atelier · 11.2025</div>
+    <div class="hero-coords">48°32'N · 7°29'E<br/>Molsheim · Alsace</div>
+  </div>
+</section>
+
+<!-- ╔══ MODEL SHOWCASE ══╗ -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">— The Collection —</div>
+    <h2>An automotive heritage,<br/>one model at a time.</h2>
+    <p class="section-sub">Every Bugatti is the product of 25,000 hours of work by 14 dedicated artisans at the Molsheim atelier, where each chassis is hand-finished, hand-signed, and individually validated.</p>
+  </div>
+
+  <div class="model-showcase">
+    <div class="model-photo-card">
+      <div class="mp-photo tone-warm">
+        <div class="silhouette"></div>
+        <div class="wh l"></div><div class="wh r"></div>
+        <div class="photo-id">EXP_TOURBILLON_004 · MOLSHEIM</div>
+      </div>
+      <div class="model-card-body">
+        <div class="mp-tag">V16 · Hybrid · 2026</div>
+        <h3 class="mp-name">Tourbillon</h3>
+        <p class="mp-desc">A naturally-aspirated 8.3L V16 paired with three electric motors. 1,800 hp. A cockpit conceived as a movement of haute horlogerie — every needle machined, no screens.</p>
+        <a class="text-link" href="#">Discover →</a>
+      </div>
+    </div>
+    <div class="model-photo-card">
+      <div class="mp-photo">
+        <div class="silhouette"></div>
+        <div class="wh l"></div><div class="wh r"></div>
+        <div class="photo-id">EXP_W16M_018 · TRACK</div>
+      </div>
+      <div class="model-card-body">
+        <div class="mp-tag">W16 · Coachbuilt · 2024</div>
+        <h3 class="mp-name">W16 Mistral</h3>
+        <p class="mp-desc">The final celebration of the legendary 8.0L quad-turbo W16. Open-top roadster. Production limited to 99 units, each sold before the model was publicly revealed.</p>
+        <a class="text-link" href="#">Discover →</a>
+      </div>
+    </div>
+    <div class="model-photo-card">
+      <div class="mp-photo tone-blue">
+        <div class="silhouette"></div>
+        <div class="wh l"></div><div class="wh r"></div>
+        <div class="photo-id">EXP_CHIRON_2092 · ARCHIVE</div>
+      </div>
+      <div class="model-card-body">
+        <div class="mp-tag">W16 · Hyper sports · 2016—2024</div>
+        <h3 class="mp-name">Chiron</h3>
+        <p class="mp-desc">1,500 hp. 490 km/h verified by Andy Wallace at Ehra-Lessien. The benchmark by which all hypercars are now measured. The Pur Sport, Super Sport and Profilée close the cycle.</p>
+        <a class="text-link" href="#">Discover →</a>
+      </div>
+    </div>
+    <div class="model-photo-card">
+      <div class="mp-photo tone-warm">
+        <div class="silhouette"></div>
+        <div class="wh l"></div><div class="wh r"></div>
+        <div class="photo-id">EXP_DIVO_06 · ATELIER</div>
+      </div>
+      <div class="model-card-body">
+        <div class="mp-tag">W16 · Coachbuilt · 2018</div>
+        <h3 class="mp-name">Divo</h3>
+        <p class="mp-desc">Named after Albert Divo, the racing driver who won the Targa Florio twice for Bugatti. A coachbuilt Chiron optimised for lateral g-forces. 40 units. All delivered.</p>
+        <a class="text-link" href="#">Discover →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══ TOURBILLON SPECS ══╗ -->
+<section class="spec-section">
+  <div class="spec-section-inner">
+    <div class="section-eyebrow" style="margin-bottom: 24px;">— Tourbillon · Technical Data —</div>
+    <h2>Engineering as art.</h2>
+    <p class="sub">An 8.3-litre V16 mated to three electric motors. A monocoque carved from a single piece of carbon fibre. 1,800 hp engineered without compromise.</p>
+    <div class="spec-table">
+      <div class="spec-cell">
+        <div class="spec-value num">1,800<span class="unit">hp</span></div>
+        <div class="spec-label">Combined Output</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-value num">8.3<span class="unit">l</span></div>
+        <div class="spec-label">V16 · Naturally Aspirated</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-value num">9,000<span class="unit">rpm</span></div>
+        <div class="spec-label">Redline</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-value num">2.0<span class="unit">s</span></div>
+        <div class="spec-label">0—100 km/h</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-value num">5.0<span class="unit">s</span></div>
+        <div class="spec-label">0—200 km/h</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-value num">25.0<span class="unit">s</span></div>
+        <div class="spec-label">0—400 km/h</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-value num">445<span class="unit">km/h</span></div>
+        <div class="spec-label">V-Max Top Speed</div>
+      </div>
+      <div class="spec-cell">
+        <div class="spec-value num">250</div>
+        <div class="spec-label">Production · Units</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══ NEWSROOM ══╗ -->
+<section class="newsroom-band">
+  <div class="section-head">
+    <div class="section-eyebrow">— Newsroom · From Molsheim —</div>
+    <h2>The chronicle.</h2>
+    <p class="section-sub">Official communications, atelier dispatches, and conversations with the artisans of Molsheim. Published in eight languages.</p>
+  </div>
+  <div class="newsroom-grid">
+    <div class="newsroom-card">
+      <div class="nr-thumb"></div>
+      <div class="nr-date">12. November 2025 · Molsheim</div>
+      <h4 class="nr-title">Tourbillon enters dynamic testing phase</h4>
+      <p class="nr-excerpt">The first prototype of the Tourbillon completed its inaugural dynamic test at the Ehra-Lessien proving ground. Chief development driver Andy Wallace reports that the V16 character "is unlike anything that has come before — and the silence of the electric phase only deepens it."</p>
+      <a class="nr-link" href="#">Read full release →</a>
+    </div>
+    <div class="newsroom-card">
+      <div class="nr-thumb t2"></div>
+      <div class="nr-date">04. November 2025 · Geneva</div>
+      <h4 class="nr-title">Bugatti reveals the F.K.P. Hommage Sur Mesure programme</h4>
+      <p class="nr-excerpt">A new dimension of personalisation, in which each owner can collaborate directly with the Sur Mesure atelier — from the choice of carbon weave to the engraving of a personal monogram into the gear selector, hand-machined in Strasbourg.</p>
+      <a class="nr-link" href="#">Read full release →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══ CAREERS ══╗ -->
+<section class="careers-band">
+  <div class="careers-band-inner">
+    <div class="section-head">
+      <div class="section-eyebrow">— Bugatti Atelier · Open Positions —</div>
+      <h2>Become an artisan.</h2>
+      <p class="section-sub">14 artisans hand-finish every Bugatti. We are now welcoming a new generation of master craftsmen, engineers and designers to the Molsheim atelier.</p>
+    </div>
+    <div class="career-row">
+      <div class="title">Senior Composite Engineer — Carbon Monocoque</div>
+      <div class="dept">Engineering</div>
+      <div class="loc">Molsheim</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="career-row">
+      <div class="title">Master Leather Artisan — Sur Mesure</div>
+      <div class="dept">Atelier</div>
+      <div class="loc">Molsheim</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="career-row">
+      <div class="title">Powertrain Calibration Engineer — V16 Programme</div>
+      <div class="dept">Engineering</div>
+      <div class="loc">Molsheim · Berlin</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="career-row">
+      <div class="title">Production Quality Specialist — Final Assembly</div>
+      <div class="dept">Atelier</div>
+      <div class="loc">Molsheim</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="career-row">
+      <div class="title">Brand Communications Lead — APAC</div>
+      <div class="dept">Brand</div>
+      <div class="loc">Singapore</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="career-row">
+      <div class="title">Watchmaker — Cockpit Instrumentation</div>
+      <div class="dept">Atelier</div>
+      <div class="loc">Molsheim · La Chaux-de-Fonds</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="footer-link-row">
+      <a class="btn" href="#">View All Opportunities</a>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══ CTA BAND ══╗ -->
+<section class="cta-band">
+  <div class="cta-band-photo">
+    <div class="wh l"></div><div class="wh r"></div>
+    <div class="vignette"></div>
+    <div class="cta-content">
+      <h2>Discover<br/>Bugatti.</h2>
+      <p class="sub">Request a private appointment at one of our authorised partners. Our specialists will introduce you to the current model line, with no obligation.</p>
+      <a class="btn" href="#">Request a Private Appointment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!--           DESIGN SYSTEM REFERENCE              -->
+<!-- ════════════════════════════════════════════ -->
+
+<section class="ds-section">
+  <div class="ds-intro">
+    <div class="ds-eyebrow">— Design System Reference —</div>
+    <h2>The Bugatti language.</h2>
+    <p>An austere luxury-automotive interface. Pure black canvas. No accent colour. Three custom typefaces in rigid trinity: Display (uppercase wide-tracked, here substituted with Saira Condensed), Text Regular (serif body, here EB Garamond), Monospace (buttons, captions, nav, here JetBrains Mono). Tokens below are extracted from the brand's <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.bugatti.html" target="_blank" rel="noopener" style="color: var(--link);">DESIGN.md</a>.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3>Color · Total Monochrome</h3>
+
+    <h4>Brand & Accent</h4>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-chip" style="background:#ffffff;"></div><div class="swatch-meta"><div class="swatch-name">primary · ink</div><div class="swatch-hex">#FFFFFF</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#c3d9f3;"></div><div class="swatch-meta"><div class="swatch-name">link (the only non-mono colour)</div><div class="swatch-hex">#C3D9F3</div></div></div>
+    </div>
+
+    <h4>Surface — almost imperceptibly different from black</h4>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-chip" style="background:#000000;"></div><div class="swatch-meta"><div class="swatch-name">canvas</div><div class="swatch-hex">#000000</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#0d0d0d;"></div><div class="swatch-meta"><div class="swatch-name">surface-soft</div><div class="swatch-hex">#0D0D0D</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#141414;"></div><div class="swatch-meta"><div class="swatch-name">surface-card</div><div class="swatch-hex">#141414</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#1f1f1f;"></div><div class="swatch-meta"><div class="swatch-name">surface-elevated</div><div class="swatch-hex">#1F1F1F</div></div></div>
+    </div>
+
+    <h4>Text & Hairlines</h4>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-chip" style="background:#ffffff;"></div><div class="swatch-meta"><div class="swatch-name">on-dark</div><div class="swatch-hex">#FFFFFF</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#e6e6e6;"></div><div class="swatch-meta"><div class="swatch-name">body-strong</div><div class="swatch-hex">#E6E6E6</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#cccccc;"></div><div class="swatch-meta"><div class="swatch-name">body</div><div class="swatch-hex">#CCCCCC</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#999999;"></div><div class="swatch-meta"><div class="swatch-name">muted</div><div class="swatch-hex">#999999</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#666666;"></div><div class="swatch-meta"><div class="swatch-name">muted-soft</div><div class="swatch-hex">#666666</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#3a3a3a;"></div><div class="swatch-meta"><div class="swatch-name">hairline-strong</div><div class="swatch-hex">#3A3A3A</div></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#262626;"></div><div class="swatch-meta"><div class="swatch-name">hairline</div><div class="swatch-hex">#262626</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3>Typography · The trinity</h3>
+    <p style="font-family: var(--f-serif); font-style: italic; font-size: 16px; color: var(--body); margin: -16px 0 32px; line-height: 1.6;">A rigid, three-family system. Bugatti Display (substituted with Saira Condensed) for all uppercase headlines and the wordmark. Bugatti Text Regular (substituted with EB Garamond) for body in serif italic — the literary voice. Bugatti Monospace (substituted with JetBrains Mono) for buttons, captions, navigation. Never bold — emphasis comes from size, tracking, case and family — never weight.</p>
+    <table class="type-table">
+      <thead><tr><th>Token</th><th>Family</th><th>Spec</th><th style="width: 50%;">Sample</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="type-token">display-xl</td>
+          <td class="type-family">Saira Condensed</td>
+          <td class="type-spec">64 / 400 / 4px</td>
+          <td><span class="type-sample-disp-xl">Tourbillon</span></td>
+        </tr>
+        <tr>
+          <td class="type-token">display-lg</td>
+          <td class="type-family">Saira Condensed</td>
+          <td class="type-spec">48 / 400 / 3px</td>
+          <td><span class="type-sample-disp-lg">Section</span></td>
+        </tr>
+        <tr>
+          <td class="type-token">display-md</td>
+          <td class="type-family">Saira Condensed</td>
+          <td class="type-spec">32 / 400 / 2px</td>
+          <td><span class="type-sample-disp-md">Sub-section</span></td>
+        </tr>
+        <tr>
+          <td class="type-token">wordmark</td>
+          <td class="type-family">Saira Condensed</td>
+          <td class="type-spec">14 / 400 / 6px</td>
+          <td><span class="type-sample-wordmark">BUGATTI</span></td>
+        </tr>
+        <tr>
+          <td class="type-token">body-md</td>
+          <td class="type-family">EB Garamond serif</td>
+          <td class="type-spec">16 / 400 / 0</td>
+          <td><span class="type-sample-body">Default body — set in serif italic, the literary voice.</span></td>
+        </tr>
+        <tr>
+          <td class="type-token">caption-up</td>
+          <td class="type-family">JetBrains Mono</td>
+          <td class="type-spec">11 / 400 / 2px</td>
+          <td><span class="type-sample-mono">Photo caption · metadata</span></td>
+        </tr>
+        <tr>
+          <td class="type-token">button</td>
+          <td class="type-family">JetBrains Mono</td>
+          <td class="type-spec">14 / 400 / 2.5px</td>
+          <td><a class="btn" style="height: 40px; padding: 10px 24px;">Discover Tourbillon</a></td>
+        </tr>
+        <tr>
+          <td class="type-token">nav-link</td>
+          <td class="type-family">JetBrains Mono</td>
+          <td class="type-spec">12 / 400 / 2px</td>
+          <td><span class="type-sample-mono">Menu · Store · Atelier</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ds-block">
+    <h3>Radius · Binary</h3>
+    <p style="font-family: var(--f-serif); font-style: italic; font-size: 16px; color: var(--body); margin: -16px 0 32px;">No 4px, no 8px, no 12px in between. Cards, photos, inputs — rectangular at 0px. Buttons — pill. The two are absolute.</p>
+    <div class="radius-row">
+      <div class="radius-item"><div class="radius-square" style="border-radius:0;"></div><div class="radius-name">none</div><div class="radius-val">0px — cards, photos, inputs</div></div>
+      <div class="radius-item"><div class="radius-square" style="border-radius:9999px;"></div><div class="radius-name">pill</div><div class="radius-val">9999px — buttons</div></div>
+      <div class="radius-item"><div class="radius-square" style="border-radius:50%;"></div><div class="radius-name">full</div><div class="radius-val">9999px — icon buttons</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3>Components</h3>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <h5>— Buttons —</h5>
+        <div class="comp-row"><a class="btn">Discover Tourbillon</a></div>
+        <div class="comp-row">
+          <button class="btn-icon" aria-label="Prev">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="btn-icon" aria-label="Next">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="comp-row">
+          <a class="text-link" href="#">Request appointment →</a>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h5>— Input (underline only) —</h5>
+        <input class="demo-input" type="text" placeholder="Enter your name" />
+        <div style="height: 16px;"></div>
+        <input class="demo-input" type="email" placeholder="your@email.com" />
+      </div>
+      <div class="comp-card">
+        <h5>— Spec cell —</h5>
+        <div style="padding-top: 12px;">
+          <div class="spec-value num" style="padding: 0; font-size: 32px;">1,800<span class="unit">hp</span></div>
+          <div class="spec-label" style="padding: 0; margin-top: 8px;">Combined Output</div>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h5>— Career listing row —</h5>
+        <div class="career-row" style="border-bottom: 0; padding: 8px 0; grid-template-columns: 1fr auto;">
+          <div class="title">Master Leather Artisan</div>
+          <div class="arrow">→</div>
+        </div>
+        <div class="career-row" style="border-bottom: 0; padding: 8px 0; grid-template-columns: 1fr auto auto auto;">
+          <div class="dept">Atelier</div>
+          <div class="loc">Molsheim</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══ FOOTER ══╗ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-intro">
+        <div class="wm-large">EB</div>
+        <p>Ettore Bugatti's atelier · Molsheim, Alsace · founded 1909. The Bugatti automobile carries the founder's monogram on every wheel.</p>
+      </div>
+      <div>
+        <h5>Bugatti</h5>
+        <ul>
+          <li><a href="#">Heritage</a></li>
+          <li><a href="#">Atelier</a></li>
+          <li><a href="#">Sur Mesure</a></li>
+          <li><a href="#">News</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Models</h5>
+        <ul>
+          <li><a href="#">Tourbillon</a></li>
+          <li><a href="#">W16 Mistral</a></li>
+          <li><a href="#">Chiron</a></li>
+          <li><a href="#">Heritage Cars</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Owners</h5>
+        <ul>
+          <li><a href="#">La Maison Pur Sang</a></li>
+          <li><a href="#">Owners Programme</a></li>
+          <li><a href="#">Certified Pre-Owned</a></li>
+          <li><a href="#">Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="wordmark-bot">BUGATTI</div>
+      <div class="copy">© Bugatti-inspired · Molsheim · generated for design study · monochrome &amp; photography only</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.bugatti.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

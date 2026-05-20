@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Zapier — Inspired Design</title>
+<meta name="description" content="A Zapier-inspired marketing surface: warm-cream canvas, deep coffee ink, single saturated orange CTA, and a full workflow chain mockup (trigger → filter → action → action) with app logo nodes. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #ff4f00;
+  --on-primary: #fffefb;
+  --ink: #201515;
+  --ink-soft: #2f2a26;
+  --ink-mid: #36342e;
+  --body: #605d52;
+  --body-mid: #939084;
+  --mute: #c5c0b1;
+  --canvas: #fffefb;
+  --canvas-soft: #f8f4f0;
+  /* App brand stamps for nodes (illustrative) */
+  --app-slack: #4a154b;
+  --app-gmail: #ea4335;
+  --app-sheets: #0f9d58;
+  --app-notion: #000000;
+  --app-stripe: #635bff;
+  --app-hubspot: #ff7a59;
+  --app-airtable: #fcb400;
+  --app-discord: #5865f2;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Degular Display", system-ui, -apple-system, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(255,79,0,0.2); }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* Eyebrow */
+.eyebrow {
+  display: inline-block;
+  font-family: "Inter", system-ui; font-weight: 500;
+  font-size: 14px; letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.eyebrow::before { content: "● "; color: var(--primary); }
+
+/* Display headlines — Degular-approximation with Inter 500 + tight tracking */
+.display, h1, h2, h3 {
+  font-family: "Inter", system-ui;
+  letter-spacing: -0.4px;
+}
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--canvas-soft);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 68px; gap: 28px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 20px; color: var(--ink); letter-spacing: -0.4px; }
+.brand .glyph {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--primary); display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 18px;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 8px; }
+.nav-links a { font-size: 16px; color: var(--ink); font-weight: 500; padding: 8px 12px; border-radius: 6px; }
+.nav-links a:hover { background: var(--canvas-soft); }
+.nav-right { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font: 600 18px/1.2 "Inter", system-ui;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: #e64500; }
+.btn-secondary { background: var(--ink); color: var(--on-primary); }
+.btn-tertiary { background: var(--canvas); color: var(--ink); border-color: var(--ink); }
+.btn-tertiary:hover { background: var(--canvas-soft); }
+.btn-sm { padding: 10px 16px; font-size: 14px; border-radius: 10px; }
+.btn-text {
+  background: transparent; color: var(--ink); padding: 8px 0;
+  font-size: 14.4px; font-weight: 700; letter-spacing: 0.144px; gap: 6px;
+}
+.btn-text::after { content: "→"; }
+
+/* —— Hero —— */
+.hero { padding: 88px 0 56px; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+h1.hero-h {
+  font: 500 64px/1 "Inter", system-ui;
+  letter-spacing: -2px;
+  color: var(--ink);
+  margin: 0 0 24px;
+}
+h1.hero-h em { font-style: italic; font-weight: 500; color: var(--primary); }
+.hero p.lede {
+  font: 400 20px/1.5 "Inter", system-ui;
+  letter-spacing: -0.2px; color: var(--body); margin: 0 0 28px; max-width: 520px;
+}
+.hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-meta { margin-top: 22px; font-size: 14px; color: var(--body-mid); display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* —— Workflow chain (Zap) —— */
+.zap {
+  background: var(--canvas-soft);
+  border-radius: 16px;
+  padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.zap-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  font-size: 13px;
+}
+.zap-header .pill {
+  padding: 4px 12px; background: var(--canvas); border: 1px solid var(--mute);
+  border-radius: 9999px; color: var(--ink-mid); font-weight: 500;
+}
+.zap-header .title { font-weight: 600; color: var(--ink); font-size: 15px; }
+.zap-header .toggle {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--ink); font-weight: 500;
+}
+.zap-header .toggle .sw {
+  width: 32px; height: 18px; border-radius: 9999px; background: var(--primary);
+  position: relative;
+}
+.zap-header .toggle .sw::after {
+  content: ""; position: absolute; right: 2px; top: 2px;
+  width: 14px; height: 14px; border-radius: 50%; background: #fff;
+}
+
+.step {
+  background: var(--canvas);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: grid; grid-template-columns: 48px 1fr auto; gap: 14px;
+  align-items: center;
+  border: 1px solid transparent;
+}
+.step.active { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255,79,0,0.08); }
+.step .app {
+  width: 48px; height: 48px; border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 17px; flex: none;
+}
+.app.slack { background: var(--app-slack); }
+.app.gmail { background: var(--app-gmail); }
+.app.sheets { background: var(--app-sheets); }
+.app.notion { background: var(--app-notion); }
+.app.stripe { background: var(--app-stripe); }
+.app.hubspot { background: var(--app-hubspot); }
+.app.airtable { background: var(--app-airtable); }
+.app.filter { background: var(--canvas-soft); color: var(--ink); border: 1.5px dashed var(--ink); font-size: 18px; }
+.app.delay { background: var(--canvas-soft); color: var(--ink); border: 1.5px dashed var(--body-mid); font-size: 18px; }
+
+.step .body { display: flex; flex-direction: column; gap: 4px; }
+.step .lbl { font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: var(--body-mid); }
+.step .name { font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -0.1px; }
+.step .desc { font-size: 13px; color: var(--body); }
+.step .badge {
+  font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 9999px;
+  background: var(--canvas-soft); color: var(--ink);
+}
+.step .badge.ok { background: rgba(15,157,88,0.10); color: var(--app-sheets); }
+.step .badge.queued { background: rgba(255,79,0,0.10); color: var(--primary); }
+.step .badge.draft { background: rgba(99,91,255,0.10); color: var(--app-stripe); }
+
+.connector { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.connector .line { width: 2px; height: 18px; background: var(--mute); }
+.connector .plus {
+  width: 22px; height: 22px; border-radius: 50%; background: var(--canvas);
+  border: 1.5px solid var(--mute); display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--ink); font-weight: 500;
+}
+.connector.active .line { background: var(--primary); }
+.connector.active .plus { border-color: var(--primary); color: var(--primary); background: rgba(255,79,0,0.06); }
+
+.zap-footer {
+  margin-top: 10px;
+  display: flex; gap: 14px; align-items: center; justify-content: space-between;
+  font-size: 13px; color: var(--body-mid);
+}
+.zap-footer .run-stats { display: inline-flex; gap: 16px; }
+.zap-footer .run-stats b { color: var(--ink); }
+
+/* Logo strip */
+.logo-strip { padding: 56px 0; border-top: 1px solid var(--canvas-soft); border-bottom: 1px solid var(--canvas-soft); }
+.logo-strip .caption { font-size: 14px; color: var(--body-mid); text-align: center; margin-bottom: 24px; }
+.logos { display: grid; grid-template-columns: repeat(6,1fr); gap: 24px; align-items: center; opacity: 0.85; }
+.logo-cell { color: var(--body); font-weight: 700; font-size: 18px; text-align: center; letter-spacing: -0.3px; }
+
+/* Sections */
+section { padding: 96px 0; }
+.section-lede { font: 400 20px/1.5 "Inter", system-ui; letter-spacing: -0.2px; color: var(--body); max-width: 640px; margin: 18px 0 0; }
+h2.h2 { font: 500 56px/1.04 "Inter", system-ui; letter-spacing: -1.7px; margin: 0; color: var(--ink); }
+h2.h2-md { font: 500 48px/1.04 "Inter", system-ui; letter-spacing: -1.3px; margin: 0; color: var(--ink); }
+h3.h3 { font: 600 24px/1.2 "Inter", system-ui; letter-spacing: -0.6px; margin: 0; color: var(--ink); }
+
+/* App library grid (signature element) */
+.app-lib { margin-top: 48px; background: var(--canvas-soft); border-radius: 16px; padding: 36px; }
+.app-lib .lib-h { display: flex; align-items: end; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+.app-lib .lib-h h3 { font-size: 28px; font-weight: 500; letter-spacing: -0.6px; }
+.app-lib .lib-h .meta { font-size: 14px; color: var(--body); }
+.app-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; }
+.app-tile {
+  aspect-ratio: 1; background: var(--canvas); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  font-weight: 700; font-size: 18px; letter-spacing: -0.3px;
+  position: relative; overflow: hidden;
+}
+.app-tile .badge {
+  position: absolute; top: 6px; right: 6px; background: var(--primary); color: #fff;
+  font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 9999px; letter-spacing: 0.3px;
+}
+
+/* Feature row */
+.feat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 48px; }
+.feat-card {
+  background: var(--canvas-soft);
+  border-radius: 12px;
+  padding: 36px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.feat-card.dark { background: var(--ink); color: var(--on-primary); }
+.feat-card h3 { font-size: 32px; line-height: 1.1; font-weight: 500; letter-spacing: -0.9px; margin: 0; max-width: 460px; }
+.feat-card p { margin: 0; font-size: 17px; line-height: 1.5; color: var(--body); }
+.feat-card.dark p { color: rgba(255,254,251,0.78); }
+.feat-card .lbl { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; color: var(--body-mid); }
+.feat-card.dark .lbl { color: rgba(255,254,251,0.65); }
+
+/* AI Agent illustration block (inside feature card) */
+.agent-flow {
+  background: var(--canvas); border-radius: 10px; padding: 18px;
+  font-size: 13px; display: flex; flex-direction: column; gap: 10px;
+}
+.agent-flow .a-step { display: flex; gap: 10px; align-items: center; }
+.agent-flow .a-step .ic {
+  width: 28px; height: 28px; border-radius: 8px; background: var(--primary);
+  color: #fff; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; font-size: 13px;
+}
+.agent-flow .a-step .txt { flex: 1; }
+.agent-flow .a-step .txt b { color: var(--ink); font-weight: 600; }
+.agent-flow .a-step .txt span { color: var(--body); display: block; font-size: 12px; }
+.agent-flow .a-step.muted .ic { background: var(--canvas-soft); color: var(--ink); border: 1.5px dashed var(--mute); }
+
+/* Table chrome inside dark card */
+.dark-table { background: rgba(255,254,251,0.05); border-radius: 8px; padding: 14px; font-size: 13px; }
+.dark-table .t-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,254,251,0.08); }
+.dark-table .t-row:last-child { border-bottom: 0; }
+.dark-table .pill {
+  font-size: 11px; padding: 2px 10px; border-radius: 9999px; font-weight: 600;
+}
+.dark-table .pill.ok { background: rgba(0,217,34,0.18); color: #6deb7a; }
+.dark-table .pill.run { background: rgba(255,79,0,0.18); color: #ff8a4d; }
+
+/* Use cases pill grid */
+.uc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+.uc-card { background: var(--canvas); border: 1px solid var(--mute); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.uc-card .tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 10px; background: var(--canvas-soft); color: var(--ink); border-radius: 9999px; align-self: flex-start; }
+.uc-card h4 { font-size: 22px; font-weight: 500; letter-spacing: -0.5px; margin: 0; color: var(--ink); }
+.uc-card p { font-size: 15px; color: var(--body); margin: 0; line-height: 1.5; }
+.uc-card .mini-flow { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.uc-card .mini-app {
+  width: 32px; height: 32px; border-radius: 8px; color: #fff; font-weight: 700; font-size: 13px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.uc-card .arr { color: var(--body-mid); font-size: 14px; }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 48px; }
+.tier { background: var(--canvas); border: 1px solid var(--ink); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.tier.featured { background: var(--ink); color: var(--on-primary); }
+.tier .name { font: 500 24px/1 "Inter", system-ui; letter-spacing: -0.5px; color: var(--ink); }
+.tier.featured .name { color: var(--on-primary); }
+.tier .price { font: 500 44px/1 "Inter", system-ui; letter-spacing: -1.4px; color: var(--ink); }
+.tier.featured .price { color: var(--on-primary); }
+.tier .price small { font-size: 14px; font-weight: 400; color: var(--body); margin-left: 4px; }
+.tier.featured .price small { color: rgba(255,254,251,0.7); }
+.tier .tag { font-size: 14px; color: var(--body); }
+.tier.featured .tag { color: rgba(255,254,251,0.78); }
+.tier ul { list-style: none; padding: 0; margin: 6px 0; display: flex; flex-direction: column; gap: 10px; font-size: 15px; color: var(--body); }
+.tier.featured ul { color: rgba(255,254,251,0.78); }
+.tier ul li { display: flex; gap: 8px; align-items: flex-start; }
+.tier ul li svg { color: var(--primary); flex: none; margin-top: 4px; }
+.tier .featured-flag { position: absolute; top: -10px; right: 16px; background: var(--primary); color: #fff; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; }
+.tier .btn { width: 100%; }
+.tier.featured .btn-primary { background: var(--canvas); color: var(--ink); }
+
+/* CTA */
+.cta-band {
+  background: var(--canvas-soft); border-radius: 16px; padding: 64px 56px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.cta-band h3 { font: 500 44px/1.05 "Inter"; letter-spacing: -1.4px; color: var(--ink); margin: 0; max-width: 620px; }
+
+/* —— DS reference (Part B) —— */
+.ds { background: var(--canvas-soft); padding: 96px 0; border-top: 1px solid var(--mute); }
+.ds h2 { font: 500 48px/1.04 "Inter", system-ui; letter-spacing: -1.5px; margin: 0 0 8px; }
+.ds .ds-sub { font-size: 17px; color: var(--body); max-width: 660px; margin-bottom: 36px; }
+.ds-block { background: var(--canvas); border-radius: 12px; padding: 32px; margin-bottom: 22px; border: 1px solid var(--mute); }
+.ds-block h3 { font: 600 22px/1.1 "Inter", system-ui; letter-spacing: -0.4px; margin: 0 0 4px; color: var(--ink); }
+.ds-block .ds-block-sub { font-size: 14px; color: var(--body-mid); margin-bottom: 18px; }
+.ds-group-title { font-size: 11px; font-weight: 600; color: var(--body-mid); letter-spacing: 0.8px; text-transform: uppercase; margin: 18px 0 10px; }
+.swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.sw { border-radius: 8px; overflow: hidden; border: 1px solid var(--mute); }
+.sw .chip-vis { height: 72px; }
+.sw .meta { padding: 10px 12px; font-size: 12px; }
+.sw .name { color: var(--ink); font-weight: 600; }
+.sw .hex { color: var(--body-mid); font-family: ui-monospace, monospace; font-size: 11px; margin-top: 2px; }
+
+.type-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.type-table th, .type-table td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--canvas-soft); vertical-align: middle; }
+.type-table th { font-size: 11px; color: var(--body-mid); font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; }
+.type-table td.token { font-family: ui-monospace, monospace; font-size: 12px; color: var(--body-mid); width: 180px; }
+
+.radius-ladder { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; }
+.radius-ladder .r-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.radius-ladder .r-box { width: 84px; height: 84px; background: var(--primary); }
+.radius-ladder .r-lbl { font-size: 12px; color: var(--body-mid); font-family: ui-monospace, monospace; }
+
+.comp-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.comp { border: 1px solid var(--mute); border-radius: 10px; padding: 22px; background: var(--canvas); }
+.comp .comp-name { font-size: 11px; font-weight: 600; color: var(--body-mid); letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 14px; }
+.comp .comp-vis { min-height: 60px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+/* Footer (dark coffee) */
+.footer { background: var(--ink); color: var(--canvas-soft); padding: 88px 0 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 40px; }
+.footer .brand { color: var(--on-primary); margin-bottom: 18px; }
+.footer-grid h4 { font-size: 14px; font-weight: 600; margin: 0 0 14px; color: var(--on-primary); letter-spacing: 0.4px; text-transform: uppercase; }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 15px; color: var(--canvas-soft); opacity: 0.7; }
+.footer-grid li a:hover { opacity: 1; }
+.footer-brand p { font-size: 14px; color: var(--canvas-soft); opacity: 0.7; margin: 0; max-width: 320px; line-height: 1.5; }
+.footer-bottom { padding-top: 30px; margin-top: 48px; border-top: 1px solid rgba(248,244,240,0.12); font-size: 13px; color: var(--canvas-soft); opacity: 0.6; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); border: 1px solid var(--mute);
+  padding: 8px 14px; border-radius: 9999px; font-size: 12px; color: var(--body);
+  box-shadow: 0 4px 14px rgba(32,21,21,0.08);
+}
+.src-link:hover { color: var(--ink); border-color: var(--ink); }
+
+@media (max-width: 1024px) {
+  .hero-grid, .feat-row { grid-template-columns: 1fr; }
+  .pricing-grid, .uc-grid { grid-template-columns: repeat(2,1fr); }
+  .app-grid { grid-template-columns: repeat(4, 1fr); }
+  .comp-matrix { grid-template-columns: repeat(2, 1fr); }
+  .swatches { grid-template-columns: repeat(4, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  h1.hero-h { font-size: 48px; letter-spacing: -1.5px; }
+  h2.h2 { font-size: 42px; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  .pricing-grid, .uc-grid, .footer-grid, .comp-matrix, .swatches { grid-template-columns: 1fr; }
+  .app-grid { grid-template-columns: repeat(4, 1fr); }
+  .nav-links { display: none; }
+  section { padding: 64px 0; }
+  .hero { padding: 56px 0 40px; }
+  h1.hero-h { font-size: 36px; letter-spacing: -1px; }
+  h2.h2 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top nav -->
+<header class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#">
+      <span class="glyph">⚡</span>
+      <span>Zapier</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#">Products</a>
+      <a href="#">Solutions</a>
+      <a href="#">Templates</a>
+      <a href="#">Resources</a>
+      <a href="#">Pricing</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#" style="font-size:15px;color:var(--ink);font-weight:500;padding:8px 6px;">Contact sales</a>
+      <a href="#" style="font-size:15px;color:var(--ink);font-weight:500;padding:8px 6px;">Log in</a>
+      <a class="btn btn-primary btn-sm" href="#">Start free</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Workflow Automation</span>
+        <h1 class="hero-h">Automate <em>without limits.</em></h1>
+        <p class="lede">Move data between 8,000+ apps, route requests, schedule reminders, and run AI agents — all without writing code. Build a Zap once, run it forever.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#">Start free with email</a>
+          <a class="btn btn-tertiary" href="#">Book a demo</a>
+        </div>
+        <div class="hero-meta">
+          <span>Free forever for up to 100 tasks</span>
+          <span>·</span>
+          <span>No credit card needed</span>
+        </div>
+      </div>
+
+      <!-- Workflow chain (Zap) -->
+      <div class="zap">
+        <div class="zap-header">
+          <span class="pill">Customer onboarding</span>
+          <span class="title">New Stripe → Notion + Slack + Gmail</span>
+          <span class="toggle">On <span class="sw"></span></span>
+        </div>
+
+        <div class="step active">
+          <div class="app stripe">S</div>
+          <div class="body">
+            <span class="lbl">Trigger · Stripe</span>
+            <span class="name">New customer subscription</span>
+            <span class="desc">Plan: Pro · MRR ≥ $50</span>
+          </div>
+          <span class="badge ok">Live</span>
+        </div>
+        <div class="connector active"><span class="line"></span><span class="plus">+</span><span class="line"></span></div>
+
+        <div class="step">
+          <div class="app filter">⏷</div>
+          <div class="body">
+            <span class="lbl">Filter</span>
+            <span class="name">Only continue if MRR ≥ $50</span>
+            <span class="desc">Plan = "Pro" OR "Team"</span>
+          </div>
+          <span class="badge ok">Match</span>
+        </div>
+        <div class="connector"><span class="line"></span><span class="plus">+</span><span class="line"></span></div>
+
+        <div class="step">
+          <div class="app notion">N</div>
+          <div class="body">
+            <span class="lbl">Action · Notion</span>
+            <span class="name">Create page in CRM database</span>
+            <span class="desc">Title: {{customer.name}} · Status: Onboarding</span>
+          </div>
+          <span class="badge ok">Created</span>
+        </div>
+        <div class="connector"><span class="line"></span><span class="plus">+</span><span class="line"></span></div>
+
+        <div class="step">
+          <div class="app slack">#</div>
+          <div class="body">
+            <span class="lbl">Action · Slack</span>
+            <span class="name">Send channel message</span>
+            <span class="desc">To #wins · "🎉 New Pro: {{customer.name}}"</span>
+          </div>
+          <span class="badge ok">Sent</span>
+        </div>
+        <div class="connector"><span class="line"></span><span class="plus">+</span><span class="line"></span></div>
+
+        <div class="step">
+          <div class="app gmail">M</div>
+          <div class="body">
+            <span class="lbl">Action · Gmail</span>
+            <span class="name">Send welcome email</span>
+            <span class="desc">Template: "Welcome to Pro" · From founder@</span>
+          </div>
+          <span class="badge queued">Queued</span>
+        </div>
+
+        <div class="zap-footer">
+          <div class="run-stats"><span>Runs today <b>1,284</b></span> <span>Success rate <b>99.4%</b></span></div>
+          <span style="color:var(--primary);font-weight:600;">View task history →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- App library grid -->
+    <div class="app-lib">
+      <div class="lib-h">
+        <h3>Plays well with 8,000+ apps.</h3>
+        <div class="meta">From the tools your team already uses to the ones IT hasn't sanctioned yet.</div>
+      </div>
+      <div class="app-grid">
+        <div class="app-tile slack">#</div>
+        <div class="app-tile gmail">M</div>
+        <div class="app-tile sheets">G</div>
+        <div class="app-tile notion">N</div>
+        <div class="app-tile stripe">S</div>
+        <div class="app-tile hubspot">H</div>
+        <div class="app-tile airtable" style="color:#000;">A</div>
+        <div class="app-tile discord">D</div>
+        <div class="app-tile" style="background:#0a66c2;">in</div>
+        <div class="app-tile" style="background:#1da1f2;">𝕏</div>
+        <div class="app-tile" style="background:#ff0000;">▶</div>
+        <div class="app-tile" style="background:#5e6ad2;">L</div>
+        <div class="app-tile" style="background:#0061ff;">D</div>
+        <div class="app-tile" style="background:#181717;">Gh</div>
+        <div class="app-tile" style="background:#06a0c8;">As</div>
+        <div class="app-tile" style="background:var(--canvas-soft);color:var(--ink);font-size:14px;font-weight:600;">+7,985<span class="badge">Live</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logo strip -->
+<section class="logo-strip" style="padding:48px 0;">
+  <div class="wrap">
+    <div class="caption">Powering the back-of-house at</div>
+    <div class="logos">
+      <div class="logo-cell">Spotify</div>
+      <div class="logo-cell">Asana</div>
+      <div class="logo-cell">Canva</div>
+      <div class="logo-cell">Hims</div>
+      <div class="logo-cell">Brex</div>
+      <div class="logo-cell">Webflow</div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature row -->
+<section style="padding-top:80px;">
+  <div class="wrap">
+    <span class="eyebrow">Build with Zapier</span>
+    <h2 class="h2" style="max-width:780px;">Three primitives. Infinite workflows.</h2>
+    <p class="section-lede">Triggers, filters, and actions — the same three pieces that already wire your team's tools together, now visual and shareable.</p>
+
+    <div class="feat-row">
+      <div class="feat-card">
+        <span class="lbl">Zaps</span>
+        <h3>Multi-step workflows in plain English.</h3>
+        <p>Drag a trigger, branch on conditions, fan out to multiple actions. Zapier handles the retries, the rate limits, and the auth tokens behind the scenes.</p>
+        <div class="agent-flow">
+          <div class="a-step"><span class="ic">⚡</span><span class="txt"><b>When</b> a new lead lands in HubSpot…<span>Lead score &gt; 60</span></span></div>
+          <div class="a-step muted"><span class="ic">⏷</span><span class="txt"><b>Filter</b> by region — only US & EU<span>Routing rule v3</span></span></div>
+          <div class="a-step"><span class="ic">✦</span><span class="txt"><b>Then</b> append a row to the Airtable pipeline base<span>Plus a Slack ping to #sales</span></span></div>
+        </div>
+      </div>
+
+      <div class="feat-card dark">
+        <span class="lbl">AI Agents</span>
+        <h3>AI that does the work — not just talks about it.</h3>
+        <p>Build an agent that reads incoming tickets, drafts replies in your tone, and runs the right Zap to close the loop. No chatbot UI required.</p>
+        <div class="dark-table">
+          <div class="t-row"><span>Agent · Refund triage</span><span class="pill ok">passed</span><span style="opacity:0.7;">2s</span></div>
+          <div class="t-row"><span>Agent · Customer reply drafter</span><span class="pill run">running</span><span style="opacity:0.7;">4s</span></div>
+          <div class="t-row"><span>Agent · Lead enrichment</span><span class="pill ok">passed</span><span style="opacity:0.7;">1s</span></div>
+          <div class="t-row"><span>Agent · Invoice categorizer</span><span class="pill ok">passed</span><span style="opacity:0.7;">3s</span></div>
+        </div>
+        <a class="btn-text" href="#" style="color:var(--on-primary);">Explore AI Agents</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Use cases -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <span class="eyebrow">Built for every department</span>
+    <h2 class="h2-md">Recipes for the work nobody wants to do twice.</h2>
+
+    <div class="uc-grid">
+      <div class="uc-card">
+        <span class="tag">Sales</span>
+        <div class="mini-flow">
+          <span class="mini-app hubspot">H</span><span class="arr">→</span>
+          <span class="mini-app slack">#</span><span class="arr">→</span>
+          <span class="mini-app airtable" style="color:#000;">A</span>
+        </div>
+        <h4>Route new leads to the right rep.</h4>
+        <p>HubSpot lead → score in Zapier → Slack ping + Airtable row. No more lost intros.</p>
+      </div>
+      <div class="uc-card">
+        <span class="tag">Customer Success</span>
+        <div class="mini-flow">
+          <span class="mini-app stripe">S</span><span class="arr">→</span>
+          <span class="mini-app filter" style="background:var(--canvas-soft);color:var(--ink);border:1.5px dashed var(--ink);">⏷</span><span class="arr">→</span>
+          <span class="mini-app gmail">M</span>
+        </div>
+        <h4>Onboard high-value customers automatically.</h4>
+        <p>Stripe Pro subscription → filter by MRR → send welcome series in Gmail.</p>
+      </div>
+      <div class="uc-card">
+        <span class="tag">Marketing</span>
+        <div class="mini-flow">
+          <span class="mini-app" style="background:#1da1f2;">𝕏</span><span class="arr">→</span>
+          <span class="mini-app sheets">G</span><span class="arr">→</span>
+          <span class="mini-app notion">N</span>
+        </div>
+        <h4>Track brand mentions across the web.</h4>
+        <p>Twitter / X mentions → log to Sheets → flag the best for Notion social calendar.</p>
+      </div>
+      <div class="uc-card">
+        <span class="tag">Operations</span>
+        <div class="mini-flow">
+          <span class="mini-app gmail">M</span><span class="arr">→</span>
+          <span class="mini-app filter" style="background:var(--canvas-soft);color:var(--ink);border:1.5px dashed var(--ink);">⏷</span><span class="arr">→</span>
+          <span class="mini-app sheets">G</span>
+        </div>
+        <h4>Turn email receipts into expense reports.</h4>
+        <p>Inbox attachment → OCR via Zapier → append to monthly expense Sheet.</p>
+      </div>
+      <div class="uc-card">
+        <span class="tag">Product</span>
+        <div class="mini-flow">
+          <span class="mini-app" style="background:#5e6ad2;">L</span><span class="arr">→</span>
+          <span class="mini-app slack">#</span><span class="arr">→</span>
+          <span class="mini-app notion">N</span>
+        </div>
+        <h4>Sync Linear → Slack → Notion changelog.</h4>
+        <p>Linear status change → Slack channel update → auto-append to public changelog.</p>
+      </div>
+      <div class="uc-card">
+        <span class="tag">HR</span>
+        <div class="mini-flow">
+          <span class="mini-app" style="background:#181717;">Gh</span><span class="arr">→</span>
+          <span class="mini-app airtable" style="color:#000;">A</span><span class="arr">→</span>
+          <span class="mini-app gmail">M</span>
+        </div>
+        <h4>New hire? Bring everyone along.</h4>
+        <p>GitHub team add → Airtable HRIS sync → welcome email + 30-day check-in scheduled.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="h2-md">Start free. Pay only when you scale.</h2>
+    <p class="section-lede">Every plan includes unlimited Zaps. You're charged on tasks — the actual work Zapier does for you.</p>
+
+    <div class="pricing-grid">
+      <div class="tier">
+        <div class="name">Free</div>
+        <div class="tag">For individuals exploring automation</div>
+        <div class="price">$0<small>/mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 100 tasks / month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 5 single-step Zaps</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 15-minute update window</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Access to all 8,000+ apps</li>
+        </ul>
+        <a class="btn btn-tertiary" href="#">Get started free</a>
+      </div>
+
+      <div class="tier">
+        <div class="name">Pro</div>
+        <div class="tag">For makers shipping their own systems</div>
+        <div class="price">$19.99<small>/mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 750 tasks / month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Unlimited multi-step Zaps</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 2-minute update window</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Filters, paths, webhooks</li>
+        </ul>
+        <a class="btn btn-tertiary" href="#">Start 14-day trial</a>
+      </div>
+
+      <div class="tier featured">
+        <span class="featured-flag">Most popular</span>
+        <div class="name">Team</div>
+        <div class="tag">For teams collaborating on automations</div>
+        <div class="price">$69<small>/mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 2,000 tasks / month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Unlimited users</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Shared folders + app connections</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Premier support</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Try Team free</a>
+      </div>
+
+      <div class="tier">
+        <div class="name">Enterprise</div>
+        <div class="tag">For org-wide automation programs</div>
+        <div class="price">Custom</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Volume task pricing</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> SAML SSO + SCIM</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Annual security review</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Named CSM + 99.9% SLA</li>
+        </ul>
+        <a class="btn btn-tertiary" href="#">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band">
+      <h3>Build the workflow your team has been doing by hand.</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="#">Start free</a>
+        <a class="btn btn-tertiary" href="#">Browse 6,000+ templates</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     Part B — Design System Reference
+========================================================= -->
+<section class="ds">
+  <div class="wrap">
+    <span class="eyebrow">Design system reference</span>
+    <h2>Tokens that hold the warm canvas together.</h2>
+    <p class="ds-sub">Zapier's voice is warm-cream, deep-coffee, and one saturated orange. The palette is small on purpose — the brand sells confidence, not options.</p>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3>Color</h3>
+      <div class="ds-block-sub">Primary orange · Coffee ink ladder · Warm cream surface</div>
+
+      <div class="ds-group-title">Brand</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--primary);"></div><div class="meta"><div class="name">primary</div><div class="hex">#ff4f00</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--on-primary);border-bottom:1px solid var(--mute);"></div><div class="meta"><div class="name">on-primary</div><div class="hex">#fffefb</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--canvas);border-bottom:1px solid var(--mute);"></div><div class="meta"><div class="name">canvas</div><div class="hex">#fffefb</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--canvas-soft);"></div><div class="meta"><div class="name">canvas-soft</div><div class="hex">#f8f4f0</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--mute);"></div><div class="meta"><div class="name">mute</div><div class="hex">#c5c0b1</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--body-mid);"></div><div class="meta"><div class="name">body-mid</div><div class="hex">#939084</div></div></div>
+      </div>
+
+      <div class="ds-group-title">Ink ladder (coffee-warm)</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--ink);"></div><div class="meta"><div class="name">ink</div><div class="hex">#201515</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--ink-soft);"></div><div class="meta"><div class="name">ink-soft</div><div class="hex">#2f2a26</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--ink-mid);"></div><div class="meta"><div class="name">ink-mid</div><div class="hex">#36342e</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--body);"></div><div class="meta"><div class="name">body</div><div class="hex">#605d52</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:#d6d2c7;"></div><div class="meta"><div class="name">muted</div><div class="hex">#d6d2c7</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:#e64500;"></div><div class="meta"><div class="name">primary-active</div><div class="hex">#e64500</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <div class="ds-block-sub">Degular Display (hero, eyebrow) + Inter (everything else). Sentence-case headlines.</div>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Spec</th></tr></thead>
+        <tbody>
+          <tr><td class="token">display-xl</td><td style="font-weight:500;font-size:48px;letter-spacing:-1.6px;line-height:1;color:var(--ink);">Hero headline</td><td>Degular · 56 · 500</td></tr>
+          <tr><td class="token">display-lg</td><td style="font-weight:500;font-size:40px;letter-spacing:-1.2px;line-height:1;color:var(--ink);">Section headline</td><td>Degular · 48 · 500</td></tr>
+          <tr><td class="token">display-md</td><td style="font-weight:500;font-size:28px;letter-spacing:1px;line-height:1.15;text-transform:none;color:var(--ink);">Sub-section heading</td><td>Degular · 32 · 500 · +1</td></tr>
+          <tr><td class="token">display-sub-sm</td><td style="font-weight:600;font-size:24px;letter-spacing:-0.6px;color:var(--ink);">Inter card titles</td><td>Inter · 24 · 600</td></tr>
+          <tr><td class="token">eyebrow-uppercase</td><td style="font-size:14px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--ink);">WORKFLOW AUTOMATION</td><td>Degular · 14 · 500 · +1</td></tr>
+          <tr><td class="token">body-lg</td><td style="font-size:20px;letter-spacing:-0.2px;color:var(--body);">Lead paragraphs at 20px / 400.</td><td>Inter · 20 · 400 · -0.2</td></tr>
+          <tr><td class="token">body-md</td><td style="font-size:18px;color:var(--body);">Default body holds at 18 / 400.</td><td>Inter · 18 · 400</td></tr>
+          <tr><td class="token">button-md</td><td style="font-size:18px;font-weight:600;color:var(--ink);">Start free</td><td>Inter · 18 · 600</td></tr>
+          <tr><td class="token">button-sm</td><td style="font-size:14.4px;font-weight:700;letter-spacing:0.144px;color:var(--ink);">CONTACT SALES</td><td>Inter · 14.4 · 700</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <div class="ds-block-sub">md (12) for buttons + cards — the brand's middle-radius signature. Pill reserved for status badges.</div>
+      <div class="radius-ladder">
+        <div class="r-cell"><div class="r-box" style="border-radius:0;"></div><div class="r-lbl">none · 0</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:6px;"></div><div class="r-lbl">sm · 6</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:12px;"></div><div class="r-lbl">md · 12</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:9999px;"></div><div class="r-lbl">pill · ∞</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3>Components</h3>
+      <div class="ds-block-sub">Default + active states only.</div>
+      <div class="comp-matrix">
+        <div class="comp"><div class="comp-name">button-primary</div><div class="comp-vis"><a class="btn btn-primary" href="#">Start free</a></div></div>
+        <div class="comp"><div class="comp-name">button-secondary</div><div class="comp-vis"><a class="btn btn-secondary" href="#">Book a demo</a></div></div>
+        <div class="comp"><div class="comp-name">button-tertiary</div><div class="comp-vis"><a class="btn btn-tertiary" href="#">Browse templates</a></div></div>
+        <div class="comp"><div class="comp-name">badge-pill</div><div class="comp-vis"><span style="background:var(--canvas-soft);color:var(--ink);padding:4px 12px;border-radius:9999px;font-size:13px;font-weight:500;">Trigger</span><span style="background:var(--primary);color:#fff;padding:4px 12px;border-radius:9999px;font-size:13px;font-weight:500;">Live</span></div></div>
+        <div class="comp"><div class="comp-name">text-input</div><div class="comp-vis"><input style="border:1px solid var(--ink);border-radius:6px;padding:10px 14px;font:16px Inter;width:200px;background:var(--canvas);color:var(--ink);" placeholder="you@company.com"/></div></div>
+        <div class="comp"><div class="comp-name">card · cream</div><div class="comp-vis"><div style="background:var(--canvas-soft);padding:14px 18px;border-radius:12px;font-size:14px;color:var(--ink);width:200px;line-height:1.4;">Filter by region — only US &amp; EU</div></div></div>
+        <div class="comp"><div class="comp-name">card · dark coffee</div><div class="comp-vis"><div style="background:var(--ink);color:var(--on-primary);padding:14px 18px;border-radius:12px;font-size:14px;width:200px;line-height:1.4;">AI Agents do the work, not just talk.</div></div></div>
+        <div class="comp"><div class="comp-name">pricing · featured</div><div class="comp-vis"><div style="background:var(--ink);color:var(--on-primary);padding:14px 18px;border-radius:12px;font-size:13px;line-height:1.4;width:180px;"><b style="font-size:16px;display:block;margin-bottom:2px;">Team</b><span style="color:rgba(255,254,251,0.7);">$69 / mo</span></div></div></div>
+        <div class="comp"><div class="comp-name">app-node</div><div class="comp-vis"><span class="mini-app slack" style="width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;display:inline-flex;align-items:center;justify-content:center;background:var(--app-slack);">#</span><span class="mini-app stripe" style="width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;display:inline-flex;align-items:center;justify-content:center;background:var(--app-stripe);">S</span><span class="mini-app notion" style="width:36px;height:36px;border-radius:8px;color:#fff;font-weight:700;display:inline-flex;align-items:center;justify-content:center;background:var(--app-notion);">N</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer (dark coffee) -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom:14px;color:#fff;">
+          <span class="glyph">⚡</span>
+          <span>Zapier</span>
+        </div>
+        <p>Automation without limits. Inspired marketing surface generated for design study.</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul><li><a href="#">Zaps</a></li><li><a href="#">Tables</a></li><li><a href="#">Interfaces</a></li><li><a href="#">AI Agents</a></li></ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul><li><a href="#">For sales</a></li><li><a href="#">For marketing</a></li><li><a href="#">For ops</a></li><li><a href="#">Enterprise</a></li></ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul><li><a href="#">Templates</a></li><li><a href="#">App directory</a></li><li><a href="#">Blog</a></li><li><a href="#">Help center</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© Zapier (inspired) · Generated for design study</div>
+      <div>Degular Display · Orange #ff4f00 · Coffee ink #201515</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.zapier.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

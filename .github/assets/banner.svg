@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 480" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Awesome Design HTML — 113 brand-themed single-file HTML design references">
+  <defs>
+    <linearGradient id="canvas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdfcfc"/>
+      <stop offset="100%" stop-color="#f1eeee"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="22%" r="70%">
+      <stop offset="0%" stop-color="#3ECF8E" stop-opacity="0.32"/>
+      <stop offset="45%" stop-color="#3ECF8E" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#3ECF8E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowLeft" cx="15%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#ffb84c" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffb84c" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Brand gradients -->
+    <linearGradient id="stripeG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a5b4fc"/><stop offset="55%" stop-color="#635bff"/><stop offset="100%" stop-color="#322dd9"/>
+    </linearGradient>
+    <linearGradient id="claudeG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f1ea"/><stop offset="100%" stop-color="#d97757"/>
+    </linearGradient>
+    <linearGradient id="igG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/>
+    </linearGradient>
+    <linearGradient id="tinderG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fe3c72"/><stop offset="100%" stop-color="#ff655b"/>
+    </linearGradient>
+    <linearGradient id="spotifyG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1ed760"/><stop offset="100%" stop-color="#121212"/>
+    </linearGradient>
+    <linearGradient id="linearG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0c"/><stop offset="55%" stop-color="#1a1a22"/><stop offset="100%" stop-color="#5e6ad2"/>
+    </linearGradient>
+    <linearGradient id="duoG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58cc02"/><stop offset="100%" stop-color="#3c8a02"/>
+    </linearGradient>
+    <linearGradient id="supabaseG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3ecf8e"/><stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="cursorG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000"/><stop offset="50%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background layers -->
+  <rect width="1280" height="480" fill="url(#canvas)"/>
+  <rect width="1280" height="480" fill="url(#glow)"/>
+  <rect width="1280" height="480" fill="url(#glowLeft)"/>
+
+  <!-- LEFT: Title block -->
+  <g transform="translate(80, 80)">
+    <!-- Eyebrow pill -->
+    <g>
+      <rect x="0" y="0" width="240" height="32" rx="16" fill="#ffffff" fill-opacity="0.7" stroke="#3ECF8E" stroke-opacity="0.40"/>
+      <circle cx="16" cy="16" r="4" fill="#3ECF8E"/>
+      <text x="28" y="21" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="11" font-weight="700" fill="#1aa539" letter-spacing="1.4">CLAUDE CODE SKILL · v1.0</text>
+    </g>
+
+    <!-- Main title -->
+    <text x="0" y="118" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif" font-size="68" font-weight="800" fill="#201d1d" letter-spacing="-2.5">Awesome Design HTML</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="160" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#424245" letter-spacing="-0.2">The 113-brand vocabulary your AI agent has been missing.</text>
+
+    <!-- Stat line -->
+    <g transform="translate(0, 200)">
+      <text x="0" y="0" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14" fill="#646262">
+        <tspan font-weight="700" fill="#3ECF8E" font-size="20">91</tspan>
+        <tspan dx="6">webpages</tspan>
+        <tspan dx="14" font-weight="300" fill="#9a9898">·</tspan>
+        <tspan dx="14" font-weight="700" fill="#007AFF" font-size="20">22</tspan>
+        <tspan dx="6">iOS apps</tspan>
+        <tspan dx="14" font-weight="300" fill="#9a9898">·</tspan>
+        <tspan dx="14" font-weight="700" fill="#201d1d" font-size="20">MIT</tspan>
+        <tspan dx="6">licensed</tspan>
+      </text>
+    </g>
+
+    <!-- Install command "terminal" -->
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="660" height="44" rx="10" fill="#1d1d1f"/>
+      <rect x="0" y="0" width="660" height="44" rx="10" fill="#ffffff" fill-opacity="0.02"/>
+      <text x="18" y="29" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700" fill="#3ECF8E">$</text>
+      <text x="36" y="29" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="500" fill="#fdfcfc">Please install this Claude Code skill: github.com/yzfly/awesome-design-html</text>
+      <rect x="640" y="11" width="10" height="22" rx="2" fill="#3ECF8E" opacity="0.7"/>
+    </g>
+
+    <!-- Tag under terminal -->
+    <text x="0" y="312" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" fill="#9a9898" letter-spacing="0.5">↑ Copy. Paste in Claude Code. Done.</text>
+  </g>
+
+  <!-- RIGHT: 3x3 brand grid -->
+  <g transform="translate(870, 75)">
+    <!-- Row 1 -->
+    <g>
+      <rect x="0" y="0" width="104" height="104" rx="22" fill="url(#claudeG)"/>
+      <rect x="0" y="0" width="104" height="104" rx="22" fill="#ffffff" fill-opacity="0.0" stroke="#000" stroke-opacity="0.04"/>
+      <text x="52" y="60" text-anchor="middle" font-family="ui-serif, Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" fill="#5a2e0c" letter-spacing="-0.3">Claude</text>
+    </g>
+    <g>
+      <rect x="120" y="0" width="104" height="104" rx="22" fill="url(#stripeG)"/>
+      <text x="172" y="60" text-anchor="middle" font-family="-apple-system, 'Inter', sans-serif" font-size="17" font-weight="700" fill="#ffffff" letter-spacing="-0.3">Stripe</text>
+    </g>
+    <g>
+      <rect x="240" y="0" width="104" height="104" rx="22" fill="url(#linearG)"/>
+      <text x="292" y="60" text-anchor="middle" font-family="-apple-system, 'Inter', sans-serif" font-size="17" font-weight="700" fill="#ffffff" letter-spacing="-0.3">Linear</text>
+    </g>
+
+    <!-- Row 2 -->
+    <g>
+      <rect x="0" y="120" width="104" height="104" rx="22" fill="url(#spotifyG)"/>
+      <text x="52" y="180" text-anchor="middle" font-family="-apple-system, 'Inter', sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="-0.3">Spotify</text>
+    </g>
+    <g>
+      <rect x="120" y="120" width="104" height="104" rx="22" fill="url(#igG)"/>
+      <text x="172" y="180" text-anchor="middle" font-family="-apple-system, 'Inter', sans-serif" font-size="14" font-weight="700" fill="#ffffff" letter-spacing="-0.3">Instagram</text>
+    </g>
+    <g>
+      <rect x="240" y="120" width="104" height="104" rx="22" fill="url(#tinderG)"/>
+      <text x="292" y="180" text-anchor="middle" font-family="-apple-system, 'Inter', sans-serif" font-size="17" font-weight="700" fill="#ffffff" letter-spacing="-0.3">Tinder</text>
+    </g>
+
+    <!-- Row 3 -->
+    <g>
+      <rect x="0" y="240" width="104" height="104" rx="22" fill="url(#duoG)"/>
+      <text x="52" y="300" text-anchor="middle" font-family="-apple-system, 'Inter', sans-serif" font-size="15" font-weight="800" fill="#ffffff" letter-spacing="-0.3">Duolingo</text>
+    </g>
+    <g>
+      <rect x="120" y="240" width="104" height="104" rx="22" fill="#fdfcfc" stroke="#dbdbdb" stroke-width="1"/>
+      <text x="172" y="300" text-anchor="middle" font-family="-apple-system, 'Inter', sans-serif" font-size="17" font-weight="700" fill="#201d1d" letter-spacing="-0.3">Notion</text>
+    </g>
+    <g>
+      <rect x="240" y="240" width="104" height="104" rx="22" fill="url(#supabaseG)"/>
+      <text x="292" y="300" text-anchor="middle" font-family="-apple-system, 'Inter', sans-serif" font-size="15" font-weight="700" fill="#ffffff" letter-spacing="-0.3">Supabase</text>
+    </g>
+  </g>
+
+  <!-- Bottom strip -->
+  <text x="640" y="455" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" fill="#9a9898" letter-spacing="3.5">+ 104 MORE  ·  CLAUDE READS THEM ALL</text>
+</svg>

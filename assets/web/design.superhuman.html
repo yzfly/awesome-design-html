@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Superhuman — The fastest email experience ever made</title>
+<meta name="description" content="Superhuman is the fastest email experience ever made. AI that drafts, snippets that scale, keyboard shortcuts for everything.">
+<meta property="og:title" content="Superhuman — The fastest email experience ever made">
+<meta property="og:description" content="AI-native inbox built for high-performing teams. 4 hours saved every week, every person.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;460;500;540;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* color tokens */
+  --primary:#1b1938;
+  --primary-deep:#0e0c1f;
+  --on-primary:#ffffff;
+  --ink:#292827;
+  --ink-mute:#73706d;
+  --ink-faint:#9a9794;
+  --canvas:#ffffff;
+  --canvas-soft:#fafaf8;
+  --surface-violet-soft:#c9b4fa;
+  --surface-teal-deep:#0e3030;
+  --surface-teal-mid:#155555;
+  --hairline:#e8e4dd;
+  --hairline-dark:#3f3a52;
+  --on-dark-mute:#bcbac9;
+  --on-dark-faint:#5a5772;
+
+  /* radius */
+  --r-xs:4px;
+  --r-sm:6px;
+  --r-md:8px;
+  --r-lg:12px;
+  --r-xl:16px;
+  --r-full:9999px;
+
+  /* spacing */
+  --s-xxs:2px; --s-xs:4px; --s-sm:8px; --s-md:12px;
+  --s-lg:16px; --s-xl:24px; --s-xxl:32px; --s-huge:64px;
+
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:var(--font);color:var(--ink);background:var(--canvas);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+/* typography classes — mid-weights are the signature */
+.display-xxl{font-size:64px;font-weight:540;line-height:.96;letter-spacing:-1.5px;font-variation-settings:"wght" 540}
+.display-xl{font-size:48px;font-weight:460;line-height:.96;letter-spacing:-1.32px;font-variation-settings:"wght" 460}
+.display-lg{font-size:28px;font-weight:540;line-height:1.14;letter-spacing:-.63px;font-variation-settings:"wght" 540}
+.display-md{font-size:22px;font-weight:460;line-height:1.1;letter-spacing:-.315px;font-variation-settings:"wght" 460}
+.heading-lg{font-size:20px;font-weight:460;line-height:1.2;letter-spacing:-.4px}
+.body-lg{font-size:18px;font-weight:540;line-height:1.5;letter-spacing:-.135px}
+.body-md{font-size:16px;font-weight:460;line-height:1.5}
+.body-strong{font-size:18.72px;font-weight:700;line-height:1.5}
+.caption{font-size:14px;font-weight:460;line-height:1.4;color:var(--ink-mute)}
+.micro{font-size:12px;font-weight:540;line-height:1.4;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-mute)}
+
+/* shell */
+.shell{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:30;background:var(--primary);color:var(--on-primary)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1280px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:18px;letter-spacing:-.3px}
+.brand-mark{width:26px;height:26px;border-radius:6px;background:linear-gradient(135deg,#c9b4fa,#7b6bff);display:grid;place-items:center;color:#1b1938;font-weight:700}
+.nav-links{display:flex;gap:28px;font-size:14px;color:var(--on-dark-mute)}
+.nav-links a:hover{color:#fff}
+.btn-pill{background:var(--surface-violet-soft);color:var(--primary);padding:10px 18px;border-radius:var(--r-full);font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.btn-pill:hover{filter:brightness(.96)}
+
+/* hero — half-bleed portrait + violet sky */
+.hero{position:relative;overflow:hidden;background:var(--primary);color:var(--on-primary);isolation:isolate}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(900px 600px at 80% 30%, rgba(201,180,250,.55), transparent 60%),
+    radial-gradient(700px 500px at 95% 80%, rgba(123,168,255,.35), transparent 65%),
+    radial-gradient(1100px 700px at 20% 90%, rgba(80,60,160,.4), transparent 70%),
+    linear-gradient(180deg,#0e0c1f 0%,#1b1938 60%,#22204a 100%);
+  z-index:-1
+}
+.hero-inner{max-width:1280px;margin:0 auto;padding:80px 24px 120px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid rgba(255,255,255,.18);border-radius:var(--r-full);font-size:12px;font-weight:540;letter-spacing:.04em;text-transform:uppercase;color:var(--on-dark-mute);margin-bottom:24px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#c9b4fa}
+.hero h1{margin-bottom:20px}
+.hero p.lead{color:var(--on-dark-mute);font-size:19px;line-height:1.45;max-width:520px;margin-bottom:32px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-secondary-dark{padding:12px 20px;border-radius:var(--r-md);font-size:14px;font-weight:540;color:#fff;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.04)}
+.hero-meta{margin-top:36px;display:flex;gap:32px;color:var(--on-dark-mute);font-size:13px}
+.hero-meta b{color:#fff;display:block;font-size:24px;font-weight:540;letter-spacing:-.5px}
+
+/* portrait + inbox mockup */
+.portrait-frame{position:relative;aspect-ratio:5/6;border-radius:var(--r-xl);overflow:hidden;background:linear-gradient(160deg,#3a2f6b,#1b1938 60%,#0e0c1f);box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.portrait-frame::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 70% 30%,rgba(255,180,220,.35),transparent 45%),
+    radial-gradient(circle at 30% 70%,rgba(120,180,255,.3),transparent 55%);
+}
+.portrait-silhouette{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;color:rgba(255,255,255,.92)}
+.portrait-silhouette svg{width:78%;height:auto;filter:drop-shadow(0 -10px 40px rgba(0,0,0,.35))}
+
+/* keyboard overlay floating card */
+.kbd-overlay{position:absolute;left:-30px;bottom:36px;background:rgba(14,12,31,.9);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);padding:16px 20px;color:#fff;display:flex;flex-direction:column;gap:10px;min-width:280px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.kbd-overlay .micro{color:var(--on-dark-mute)}
+.kbd-row{display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.kbd-row .label{color:#cfcde5}
+.kbd-keys{display:inline-flex;gap:4px}
+kbd{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:5px;font-family:var(--font-mono);font-size:11px;font-weight:500;color:#fff}
+
+/* logo strip */
+.logo-strip{padding:32px 24px;background:var(--primary);border-top:1px solid var(--hairline-dark)}
+.logo-strip-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;color:var(--on-dark-faint);font-size:13px;letter-spacing:.02em}
+.logos{display:flex;gap:36px;flex-wrap:wrap;align-items:center}
+.logos span{font-size:18px;font-weight:540;color:var(--on-dark-mute);letter-spacing:-.3px;opacity:.9}
+
+/* section base */
+section.band{padding:96px 0;background:var(--canvas)}
+section.band.alt{background:var(--canvas-soft)}
+.section-head{max-width:760px;margin:0 auto 48px;text-align:center}
+.section-head .micro{margin-bottom:16px}
+.section-head h2{margin-bottom:16px}
+.section-head p{color:var(--ink-mute);font-size:18px;line-height:1.55}
+
+/* inbox mockup section */
+.inbox-section .mock{
+  max-width:1100px;margin:0 auto;border-radius:var(--r-xl);overflow:hidden;
+  border:1px solid var(--hairline);background:#fff;
+  box-shadow:0 30px 80px -30px rgba(27,25,56,.25),0 4px 16px rgba(27,25,56,.06);
+}
+.mock-window-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--canvas-soft);border-bottom:1px solid var(--hairline)}
+.mock-window-bar .dots{display:flex;gap:6px}
+.mock-window-bar .dots span{width:11px;height:11px;border-radius:50%;background:#dcd6cd}
+.mock-window-bar .url{margin-left:12px;font-family:var(--font-mono);font-size:12px;color:var(--ink-mute)}
+.mock-grid{display:grid;grid-template-columns:200px 320px 1fr;min-height:480px}
+.mock-sidebar{background:var(--canvas-soft);border-right:1px solid var(--hairline);padding:18px 12px;display:flex;flex-direction:column;gap:6px}
+.mock-sidebar .group{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);padding:8px 10px 4px}
+.mock-sidebar .item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--r-sm);font-size:13px;color:var(--ink)}
+.mock-sidebar .item .icon{width:14px;height:14px;color:var(--ink-mute)}
+.mock-sidebar .item.active{background:#fff;border:1px solid var(--hairline);font-weight:540}
+.mock-sidebar .item .count{margin-left:auto;font-size:11px;color:var(--ink-mute)}
+.mock-sidebar .item.active .count{color:var(--primary)}
+.mock-list{border-right:1px solid var(--hairline);overflow:hidden}
+.mock-list-head{padding:14px 18px;border-bottom:1px solid var(--hairline);font-size:14px;font-weight:540;display:flex;align-items:center;justify-content:space-between}
+.mail-row{display:flex;gap:10px;padding:14px 18px;border-bottom:1px solid var(--hairline);cursor:pointer}
+.mail-row:hover{background:var(--canvas-soft)}
+.mail-row.active{background:#f3f0ff;border-left:3px solid var(--primary);padding-left:15px}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#c9b4fa,#1b1938);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:600;flex-shrink:0}
+.mail-row .meta{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.mail-row .who{font-size:13px;font-weight:540;color:var(--ink);display:flex;justify-content:space-between}
+.mail-row .who time{color:var(--ink-faint);font-size:11px;font-weight:460}
+.mail-row .subj{font-size:13px;color:var(--ink);font-weight:540;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail-row .snip{font-size:12px;color:var(--ink-mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.mock-detail{padding:24px}
+.mock-detail .subj-big{font-size:20px;font-weight:540;letter-spacing:-.3px;margin-bottom:6px}
+.mock-detail .from-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--hairline);margin-bottom:18px}
+.mock-detail .from-row .who{font-size:13px;font-weight:540}
+.mock-detail .from-row .who small{display:block;color:var(--ink-mute);font-weight:460}
+.mock-detail .body{font-size:14px;line-height:1.65;color:var(--ink)}
+.mock-detail .body p{margin-bottom:12px}
+.ai-suggestion{margin-top:20px;border:1px dashed #c9b4fa;border-radius:var(--r-md);padding:14px 16px;background:#faf7ff}
+.ai-suggestion .head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:540;color:var(--primary);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.ai-suggestion .draft{font-size:13px;color:var(--ink);line-height:1.55}
+.ai-suggestion .actions{display:flex;gap:8px;margin-top:10px}
+.chip-action{font-size:12px;font-weight:540;padding:6px 12px;border-radius:var(--r-full);background:#fff;border:1px solid var(--hairline)}
+
+/* feature pill tabs */
+.feature-tabs{display:flex;justify-content:center;gap:8px;margin:0 auto 36px;flex-wrap:wrap;max-width:780px}
+.pill-tab{background:#fff;color:var(--ink);font-size:13px;font-weight:540;padding:8px 16px;border-radius:var(--r-full);border:1px solid var(--hairline);cursor:pointer}
+.pill-tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* feature rows */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.feat-card{background:var(--canvas-soft);padding:24px;border-radius:var(--r-md);border:1px solid var(--hairline)}
+.feat-card .icon-box{width:36px;height:36px;border-radius:var(--r-sm);background:var(--primary);color:#fff;display:grid;place-items:center;margin-bottom:14px}
+.feat-card h3{font-size:18px;font-weight:540;letter-spacing:-.2px;margin-bottom:8px}
+.feat-card p{font-size:14px;line-height:1.55;color:var(--ink-mute)}
+
+/* split feature row */
+.split{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.split + .split{margin-top:96px}
+.split.reverse>:first-child{order:2}
+.split .copy h3{font-size:32px;line-height:1.05;letter-spacing:-.7px;font-weight:540;margin-bottom:16px}
+.split .copy p{color:var(--ink-mute);font-size:17px;line-height:1.6;margin-bottom:24px}
+.split .copy ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.split .copy li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.split .copy li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--primary);margin-top:8px;flex-shrink:0}
+.visual-card{background:linear-gradient(160deg,#1b1938,#0e0c1f);border-radius:var(--r-xl);padding:28px;color:#fff;min-height:340px;position:relative;overflow:hidden}
+.visual-card::after{
+  content:"";position:absolute;inset:auto -10% -30% -10%;height:60%;
+  background:radial-gradient(ellipse at center,rgba(201,180,250,.4),transparent 60%);
+  filter:blur(20px);pointer-events:none
+}
+.visual-card .micro{color:var(--on-dark-mute)}
+.shortcut-panel{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:18px}
+.sc-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-sm);font-size:13px}
+.sc-row .label{color:#cfcde5}
+
+.snippet-card{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:20px;max-width:480px;font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--ink);box-shadow:0 8px 32px rgba(27,25,56,.08)}
+.snippet-card .tag{display:inline-block;padding:2px 8px;background:#1b1938;color:#fff;border-radius:var(--r-xs);font-family:var(--font);font-size:11px;font-weight:540;margin-bottom:12px}
+.snippet-card var{color:var(--primary);font-style:normal;background:rgba(27,25,56,.06);padding:1px 4px;border-radius:3px}
+
+/* pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.price-card{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:32px;display:flex;flex-direction:column;gap:16px}
+.price-card.featured{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.price-card .plan{font-size:14px;font-weight:540;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-mute)}
+.price-card.featured .plan{color:var(--on-dark-mute)}
+.price-card .price{display:flex;align-items:baseline;gap:6px}
+.price-card .price b{font-size:48px;font-weight:540;letter-spacing:-1.3px;line-height:1}
+.price-card .price span{font-size:14px;color:var(--ink-mute)}
+.price-card.featured .price span{color:var(--on-dark-mute)}
+.price-card .desc{font-size:14px;line-height:1.5;color:var(--ink-mute);min-height:42px}
+.price-card.featured .desc{color:var(--on-dark-mute)}
+.price-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:8px 0 16px}
+.price-card li{font-size:14px;display:flex;gap:8px;align-items:flex-start;line-height:1.45}
+.price-card li svg{flex-shrink:0;margin-top:3px;color:var(--primary)}
+.price-card.featured li svg{color:var(--surface-violet-soft)}
+.btn-primary-dark{background:var(--primary);color:var(--on-primary);padding:12px 20px;border-radius:var(--r-md);font-size:14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center;border:1px solid var(--primary)}
+.btn-primary-dark:hover{background:var(--primary-deep)}
+.btn-outline-light{background:var(--canvas);color:var(--ink);padding:12px 20px;border-radius:var(--r-md);font-size:14px;font-weight:700;border:1px solid var(--hairline-dark);display:inline-flex;align-items:center;justify-content:center}
+.price-card.featured .btn-primary-dark{background:#fff;color:var(--primary);border-color:#fff}
+
+/* closing teal band */
+.teal-band{background:var(--surface-teal-deep);color:var(--on-primary);padding:120px 24px;text-align:center}
+.teal-band-inner{max-width:760px;margin:0 auto}
+.teal-band h2{font-size:48px;font-weight:540;line-height:1.04;letter-spacing:-1.3px;margin-bottom:18px}
+.teal-band p{color:#a4c2c2;font-size:18px;line-height:1.5;margin-bottom:32px}
+.btn-on-teal{background:var(--canvas);color:var(--surface-teal-deep);padding:14px 24px;border-radius:var(--r-md);font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.btn-on-teal:hover{filter:brightness(.96)}
+
+/* DS section */
+.ds{background:var(--canvas);padding:96px 24px;border-top:1px solid var(--hairline)}
+.ds-inner{max-width:1200px;margin:0 auto}
+.ds h2{font-size:36px;font-weight:540;letter-spacing:-.8px;margin-bottom:8px}
+.ds .ds-lead{color:var(--ink-mute);font-size:17px;max-width:680px;line-height:1.55;margin-bottom:48px}
+.ds-block{margin-bottom:64px}
+.ds-block h3{font-size:14px;font-weight:540;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:20px}
+.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.color-card{border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden}
+.color-swatch{height:80px}
+.color-meta{padding:12px 14px;background:var(--canvas)}
+.color-meta .nm{font-size:13px;font-weight:540}
+.color-meta .hex{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);margin-top:2px}
+.color-group{margin-bottom:24px}
+.color-group h4{font-size:12px;font-weight:540;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+
+.ds-table{width:100%;border-collapse:collapse;font-size:14px}
+.ds-table th,.ds-table td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--hairline)}
+.ds-table th{font-size:12px;font-weight:540;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-mute);background:var(--canvas-soft)}
+.ds-table .sample{font-weight:540}
+.ds-table code{font-family:var(--font-mono);font-size:12px;color:var(--ink-mute)}
+
+.radius-ladder{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.radius-cell{display:flex;flex-direction:column;align-items:center;gap:10px}
+.radius-cell .box{width:80px;height:80px;background:var(--primary)}
+.radius-cell .nm{font-size:12px;font-weight:540}
+.radius-cell .v{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)}
+
+.comp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.comp-cell{border:1px solid var(--hairline);border-radius:var(--r-lg);padding:24px;background:var(--canvas)}
+.comp-cell .nm{font-size:12px;font-weight:540;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
+.comp-cell .demo{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.comp-cell.dark{background:var(--primary)}
+.comp-cell.dark .nm{color:var(--on-dark-mute)}
+.comp-cell.teal{background:var(--surface-teal-deep)}
+.comp-cell.teal .nm{color:#a4c2c2}
+
+/* footer */
+.footer{background:var(--canvas);padding:64px 24px 32px;border-top:1px solid var(--hairline)}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:32px;margin-bottom:48px}
+.footer-col h5{font-size:12px;font-weight:540;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
+.footer-col a{display:block;color:var(--ink-mute);font-size:14px;line-height:2;text-decoration:none}
+.footer-col a:hover{color:var(--ink)}
+.footer-brand .brand{color:var(--ink);margin-bottom:14px}
+.footer-brand p{font-size:13px;color:var(--ink-mute);line-height:1.55;max-width:280px}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;font-size:13px;color:var(--ink-mute)}
+
+/* floating design.md link */
+.src-link{
+  position:fixed;right:18px;bottom:18px;z-index:50;
+  background:var(--primary);color:#fff;
+  font-size:12px;font-weight:540;padding:10px 14px;
+  border-radius:var(--r-md);border:1px solid var(--hairline-dark);
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  display:inline-flex;align-items:center;gap:6px
+}
+.src-link:hover{background:var(--primary-deep)}
+
+/* responsive */
+@media (max-width:960px){
+  .hero-inner{grid-template-columns:1fr;padding:64px 24px 80px}
+  .display-xxl{font-size:44px}
+  .mock-grid{grid-template-columns:1fr}
+  .mock-sidebar,.mock-list{display:none}
+  .feat-grid,.pricing-grid{grid-template-columns:1fr}
+  .split,.split.reverse>:first-child{grid-template-columns:1fr;gap:24px}
+  .split.reverse>:first-child{order:initial}
+  .nav-links{display:none}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .radius-ladder{grid-template-columns:repeat(3,1fr)}
+  .comp-grid{grid-template-columns:1fr}
+  .teal-band h2{font-size:34px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <span class="brand-mark">S</span>
+      <span>Superhuman</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Product</a>
+      <a href="#">AI</a>
+      <a href="#">Teams</a>
+      <a href="#">Pricing</a>
+      <a href="#">Sign in</a>
+    </div>
+    <a class="btn-pill" href="#">Get Superhuman <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow"><span class="dot"></span>Now with Superhuman AI</span>
+      <h1 class="display-xxl">Reply 2× faster.<br>Save 4 hours a&nbsp;week.</h1>
+      <p class="lead">Superhuman is the fastest email experience ever made. Built for high-performing teams who treat their inbox as a craft, not a chore.</p>
+      <div class="hero-actions">
+        <a class="btn-pill" href="#">Get Superhuman <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn-secondary-dark" href="#">Watch the demo</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>4 hrs</b>saved every week</div>
+        <div><b>2×</b>faster replies</div>
+        <div><b>72%</b>less inbox anxiety</div>
+      </div>
+    </div>
+    <div class="portrait-frame">
+      <div class="portrait-silhouette">
+        <!-- abstract twilight portrait silhouette -->
+        <svg viewBox="0 0 220 280" fill="currentColor" aria-hidden="true">
+          <ellipse cx="110" cy="78" rx="44" ry="50" opacity=".85"/>
+          <path d="M22 280 C 30 180, 60 142, 110 142 C 160 142, 190 180, 198 280 Z" opacity=".82"/>
+          <path d="M86 80 q 12 -22 28 -22" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
+      <div class="kbd-overlay">
+        <span class="micro">Keyboard, anywhere</span>
+        <div class="kbd-row"><span class="label">Compose</span><span class="kbd-keys"><kbd>C</kbd></span></div>
+        <div class="kbd-row"><span class="label">Reply</span><span class="kbd-keys"><kbd>R</kbd></span></div>
+        <div class="kbd-row"><span class="label">Snooze</span><span class="kbd-keys"><kbd>H</kbd></span></div>
+        <div class="kbd-row"><span class="label">Mark done</span><span class="kbd-keys"><kbd>E</kbd></span></div>
+        <div class="kbd-row"><span class="label">AI draft</span><span class="kbd-keys"><kbd>⌘</kbd><kbd>J</kbd></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="logo-strip">
+  <div class="logo-strip-inner">
+    <span>Used at the world's most ambitious teams</span>
+    <div class="logos">
+      <span>Stripe</span><span>OpenAI</span><span>Notion</span><span>Vercel</span><span>Linear</span><span>Airbnb</span>
+    </div>
+  </div>
+</div>
+
+<!-- inbox UI mockup -->
+<section class="band inbox-section">
+  <div class="shell">
+    <div class="section-head">
+      <div class="micro">Built for keyboard-first work</div>
+      <h2 class="display-xl">An inbox that moves<br>at the speed of thought.</h2>
+      <p>Triage hundreds of messages without lifting your hands off the keys. Every shortcut is one keystroke away.</p>
+    </div>
+
+    <div class="feature-tabs">
+      <button class="pill-tab active">Inbox</button>
+      <button class="pill-tab">AI</button>
+      <button class="pill-tab">Snippets</button>
+      <button class="pill-tab">Calendar</button>
+      <button class="pill-tab">Reminders</button>
+      <button class="pill-tab">Split Inboxes</button>
+    </div>
+
+    <div class="mock">
+      <div class="mock-window-bar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <span class="url">superhuman.com / inbox</span>
+      </div>
+      <div class="mock-grid">
+        <aside class="mock-sidebar">
+          <div class="group">Personal</div>
+          <div class="item active">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M3 7l2-2h14l2 2"/></svg>
+            Inbox <span class="count">12</span>
+          </div>
+          <div class="item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l7 5 7-5M5 18h14a2 2 0 002-2V8L12 13 3 8v8a2 2 0 002 2z"/></svg>
+            Done <span class="count">832</span>
+          </div>
+          <div class="item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Snoozed <span class="count">6</span>
+          </div>
+          <div class="group">Splits</div>
+          <div class="item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M5 21v-2a4 4 0 014-4h6a4 4 0 014 4v2"/></svg>
+            VIPs <span class="count">2</span>
+          </div>
+          <div class="item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 012-2h8l6 6v10a2 2 0 01-2 2H6a2 2 0 01-2-2zM14 3v6h6"/></svg>
+            News <span class="count">48</span>
+          </div>
+          <div class="item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+            Team digests <span class="count">3</span>
+          </div>
+        </aside>
+
+        <div class="mock-list">
+          <div class="mock-list-head">
+            <span>Inbox</span>
+            <span class="micro">12 unread</span>
+          </div>
+          <div class="mail-row active">
+            <div class="avatar">EK</div>
+            <div class="meta">
+              <div class="who">Elena Kim <time>2m</time></div>
+              <div class="subj">Re: Series B narrative — quick thought</div>
+              <div class="snip">Had a thought on the way the funnel slide is framed. Two options worth…</div>
+            </div>
+          </div>
+          <div class="mail-row">
+            <div class="avatar" style="background:linear-gradient(135deg,#7da9ff,#1b1938)">MN</div>
+            <div class="meta">
+              <div class="who">Marco Núñez <time>14m</time></div>
+              <div class="subj">PR draft — would love your sharp eye</div>
+              <div class="snip">Pasting v3 below. Tightened the lede; the call-to-action is the part I'm…</div>
+            </div>
+          </div>
+          <div class="mail-row">
+            <div class="avatar" style="background:linear-gradient(135deg,#c9b4fa,#5a5772)">YT</div>
+            <div class="meta">
+              <div class="who">Yuki Tanaka <time>1h</time></div>
+              <div class="subj">Calendar — proposing Thursday 3pm PT</div>
+              <div class="snip">Confirming with the partners now; happy to flex if Thursday becomes…</div>
+            </div>
+          </div>
+          <div class="mail-row">
+            <div class="avatar" style="background:linear-gradient(135deg,#7be6c0,#155555)">DR</div>
+            <div class="meta">
+              <div class="who">Daniela Rocha <time>3h</time></div>
+              <div class="subj">Q3 OKRs — final review for sign-off</div>
+              <div class="snip">Two open items remain: pricing experiment scope, and the launch date for…</div>
+            </div>
+          </div>
+          <div class="mail-row">
+            <div class="avatar" style="background:linear-gradient(135deg,#ffd285,#73706d)">JP</div>
+            <div class="meta">
+              <div class="who">Jonas Pillai <time>Yesterday</time></div>
+              <div class="subj">Design crit — Tuesday recap</div>
+              <div class="snip">Great session. Top three notes from the room, in priority order, with…</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mock-detail">
+          <div class="subj-big">Re: Series B narrative — quick thought</div>
+          <div class="from-row">
+            <div class="avatar">EK</div>
+            <div class="who">Elena Kim<small>elena@kim.partners — to me, 2 minutes ago</small></div>
+          </div>
+          <div class="body">
+            <p>Read the deck three times. The product story is sharp; the funnel slide is the one I keep stopping on. The framing is "growth", but the metric you're proudest of is retention. Lead with that.</p>
+            <p>Two phrasings to test:</p>
+            <p style="padding-left:14px;border-left:2px solid var(--hairline);color:var(--ink-mute)">"What we're building keeps people once they arrive." → confident, retention-first.</p>
+          </div>
+          <div class="ai-suggestion">
+            <div class="head">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
+              Superhuman AI · drafted in your voice
+            </div>
+            <div class="draft">"Elena — totally fair. Going to reframe the funnel slide around retention and re-send tonight. Two pulls I'd love your eye on…"</div>
+            <div class="actions">
+              <button class="chip-action">Use draft <kbd style="margin-left:6px">⌘↵</kbd></button>
+              <button class="chip-action">Make it shorter</button>
+              <button class="chip-action">More casual</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- feature grid -->
+<section class="band alt">
+  <div class="shell">
+    <div class="section-head">
+      <div class="micro">The fastest workflow in email</div>
+      <h2 class="display-xl">Everything that slowed you<br>down — gone.</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h2M11 10h2M15 10h2M7 14h10"/></svg>
+        </div>
+        <h3>Command palette</h3>
+        <p>One shortcut, every action. Open the palette and your hands stay where they are.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
+        </div>
+        <h3>AI in your voice</h3>
+        <p>Drafts that sound like you, summaries that don't lie, and a triage queue that knows what you care about.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 01-4 4H8l-5 3V6a4 4 0 014-4h10a4 4 0 014 4z"/></svg>
+        </div>
+        <h3>Snippets that scale</h3>
+        <p>Reusable replies with variables and shared team libraries. Type two letters; send a paragraph.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <h3>Reminders, built in</h3>
+        <p>Send-later, follow-up nudges, and read-receipts that respect everyone's time.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h6v6H3zM15 5h6v6h-6zM3 13h6v6H3zM15 13h6v6h-6z"/></svg>
+        </div>
+        <h3>Split Inboxes</h3>
+        <p>VIPs, newsletters, calendar invites — each in their own lane. Triage by category, not chronology.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        </div>
+        <h3>Calendar woven in</h3>
+        <p>Propose times that respect your real availability — and book in a single keystroke.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- alternating splits -->
+<section class="band">
+  <div class="shell">
+    <div class="split">
+      <div class="copy">
+        <span class="micro" style="margin-bottom:14px;display:inline-block">⌘K · Command palette</span>
+        <h3>Every action is a&nbsp;keystroke.</h3>
+        <p>Superhuman's command palette puts every action — compose, snooze, schedule, summarize — one shortcut away. Learn the muscle memory in a day; keep it for a career.</p>
+        <ul>
+          <li>30+ shortcuts memorized in your onboarding</li>
+          <li>Custom bindings per person, per team</li>
+          <li>Works in compose, reply, and triage modes</li>
+        </ul>
+      </div>
+      <div class="visual-card">
+        <span class="micro">Press <kbd>⌘</kbd> <kbd>K</kbd></span>
+        <div class="shortcut-panel">
+          <div class="sc-row"><span class="label">Compose</span><kbd>C</kbd></div>
+          <div class="sc-row"><span class="label">Reply all</span><kbd>A</kbd></div>
+          <div class="sc-row"><span class="label">Snooze</span><kbd>H</kbd></div>
+          <div class="sc-row"><span class="label">Mark done</span><kbd>E</kbd></div>
+          <div class="sc-row"><span class="label">Star</span><kbd>S</kbd></div>
+          <div class="sc-row"><span class="label">Search</span><kbd>/</kbd></div>
+          <div class="sc-row"><span class="label">Next inbox</span><kbd>G</kbd></div>
+          <div class="sc-row"><span class="label">AI draft</span><kbd>⌘</kbd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split reverse">
+      <div class="copy">
+        <span class="micro" style="margin-bottom:14px;display:inline-block">Snippets · Type ;intro</span>
+        <h3>Write less. Send the same care.</h3>
+        <p>Variables, tone, attachments, follow-ups — bake your best emails into a snippet once and reuse them forever. Share the library with your team so the whole org sounds like you on your best day.</p>
+        <ul>
+          <li>Variables for name, company, last meeting</li>
+          <li>Shared team libraries with usage analytics</li>
+          <li>Snippet-to-AI: turn a draft into a snippet in one tap</li>
+        </ul>
+      </div>
+      <div>
+        <div class="snippet-card">
+          <span class="tag">;intro-warm</span>
+          Hi <var>{{first_name}}</var>,<br><br>
+          Great to be connected through <var>{{intro_via}}</var>. I run <var>{{my_company}}</var> — we help teams like <var>{{their_company}}</var> reply 2× faster.<br><br>
+          Got 20 minutes next week? Here's my calendar: <var>{{cal_link}}</var><br><br>
+          — <var>{{my_first_name}}</var>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- pricing -->
+<section class="band alt">
+  <div class="shell">
+    <div class="section-head">
+      <div class="micro">Pricing</div>
+      <h2 class="display-xl">Pick a plan worth<br>your team's attention.</h2>
+      <p>One product. Three plans. No add-ons, no per-feature pricing, no surprises.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="plan">Starter</div>
+        <div class="price"><b>$25</b><span>/ user / month</span></div>
+        <div class="desc">For individuals who treat their inbox as a craft.</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Keyboard shortcuts</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Send later, reminders</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>5 snippets</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Email & web app</li>
+        </ul>
+        <a class="btn-primary-dark" href="#">Start free trial</a>
+      </div>
+      <div class="price-card featured">
+        <div class="plan">Business · most popular</div>
+        <div class="price"><b>$40</b><span>/ user / month</span></div>
+        <div class="desc">For teams who reply in minutes, not hours.</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Everything in Starter</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Superhuman AI — drafts, summaries</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Shared snippet libraries</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Split Inboxes</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Team analytics</li>
+        </ul>
+        <a class="btn-primary-dark" href="#">Start free trial</a>
+      </div>
+      <div class="price-card">
+        <div class="plan">Enterprise</div>
+        <div class="price"><b>Custom</b></div>
+        <div class="desc">For organizations with security, scale, and compliance needs.</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Everything in Business</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>SSO, SCIM, audit logs</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Dedicated CSM</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Custom AI training</li>
+        </ul>
+        <a class="btn-outline-light" href="#">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- closing teal band -->
+<section class="teal-band">
+  <div class="teal-band-inner">
+    <h2>Your inbox, at the speed it should always have been.</h2>
+    <p>Join the teams at Stripe, OpenAI, Notion, and Vercel who got their week back.</p>
+    <a class="btn-on-teal" href="#">Get Superhuman <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<!-- =================== Design System Reference =================== -->
+<section class="ds">
+  <div class="ds-inner">
+    <div class="micro">Part B · Design system reference</div>
+    <h2 style="margin-top:12px">The Superhuman system, in one quiet page.</h2>
+    <p class="ds-lead">Three canvases, one display sans, sub-default weights, rounded-rectangle CTAs, and a single teal interlude. The tokens here are exactly what Part A is built from.</p>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <h3>Color</h3>
+
+      <div class="color-group">
+        <h4>Brand & Accent</h4>
+        <div class="color-grid">
+          <div class="color-card"><div class="color-swatch" style="background:#1b1938"></div><div class="color-meta"><div class="nm">Primary Indigo Navy</div><div class="hex">#1b1938 · --primary</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#0e0c1f"></div><div class="color-meta"><div class="nm">Indigo Deep</div><div class="hex">#0e0c1f · --primary-deep</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#c9b4fa"></div><div class="color-meta"><div class="nm">Surface Violet Soft</div><div class="hex">#c9b4fa · hero pill</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#0e3030"></div><div class="color-meta"><div class="nm">Surface Teal Deep</div><div class="hex">#0e3030 · closing CTA</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#155555"></div><div class="color-meta"><div class="nm">Surface Teal Mid</div><div class="hex">#155555</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Surface</h4>
+        <div class="color-grid">
+          <div class="color-card"><div class="color-swatch" style="background:#fff;border-bottom:1px solid var(--hairline)"></div><div class="color-meta"><div class="nm">Canvas</div><div class="hex">#ffffff</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#fafaf8"></div><div class="color-meta"><div class="nm">Canvas Soft</div><div class="hex">#fafaf8</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#e8e4dd"></div><div class="color-meta"><div class="nm">Hairline</div><div class="hex">#e8e4dd</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#3f3a52"></div><div class="color-meta"><div class="nm">Hairline Dark</div><div class="hex">#3f3a52</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Text</h4>
+        <div class="color-grid">
+          <div class="color-card"><div class="color-swatch" style="background:#292827"></div><div class="color-meta"><div class="nm">Ink</div><div class="hex">#292827 · body</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#73706d"></div><div class="color-meta"><div class="nm">Ink Mute</div><div class="hex">#73706d</div></div></div>
+          <div class="color-card"><div class="color-swatch" style="background:#9a9794"></div><div class="color-meta"><div class="nm">Ink Faint</div><div class="hex">#9a9794</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <table class="ds-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size · Weight · Tracking</th></tr></thead>
+        <tbody>
+          <tr><td><code>display-xxl</code></td><td><span class="sample display-xxl" style="font-size:32px">Reply faster.</span></td><td>64 · 540 · 0</td></tr>
+          <tr><td><code>display-xl</code></td><td><span class="sample display-xl" style="font-size:28px">Everything that slowed you down — gone.</span></td><td>48 · 460 · -1.32</td></tr>
+          <tr><td><code>display-lg</code></td><td><span class="sample display-lg">An inbox that moves at the speed of thought.</span></td><td>28 · 540 · -.63</td></tr>
+          <tr><td><code>display-md</code></td><td><span class="sample display-md">Command palette, in your voice.</span></td><td>22 · 460 · -.315</td></tr>
+          <tr><td><code>heading-lg</code></td><td><span class="sample heading-lg">Snippets that scale</span></td><td>20 · 460 · -.4</td></tr>
+          <tr><td><code>body-lg</code></td><td><span class="sample body-lg">Marketing lead paragraphs read at this size.</span></td><td>18 · 540 · -.135</td></tr>
+          <tr><td><code>body-md</code></td><td><span class="sample body-md">Default UI body and product copy.</span></td><td>16 · 460 · 0</td></tr>
+          <tr><td><code>caption</code></td><td><span class="sample caption">Helper text, footnotes, byline meta.</span></td><td>14 · 460 · 0</td></tr>
+          <tr><td><code>micro</code></td><td><span class="sample micro">Eyebrow · uppercase</span></td><td>12 · 540 · .04em</td></tr>
+        </tbody>
+      </table>
+      <p class="caption" style="margin-top:14px">Sub-default weights (460 / 540 / 600) are the brand's typographic warmth signature. Inter Variable substitutes for the proprietary Super Sans VF.</p>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <div class="radius-ladder">
+        <div class="radius-cell"><div class="box" style="border-radius:4px"></div><div class="nm">xs</div><div class="v">4px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:6px"></div><div class="nm">sm</div><div class="v">6px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:8px"></div><div class="nm">md</div><div class="v">8px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:12px"></div><div class="nm">lg</div><div class="v">12px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:16px"></div><div class="nm">xl</div><div class="v">16px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:9999px"></div><div class="nm">full</div><div class="v">pill</div></div>
+      </div>
+      <p class="caption" style="margin-top:16px">Buttons sit at <code>md</code> 8 px (rounded rectangle). Pills are hero-only.</p>
+    </div>
+
+    <!-- COMPONENTS MATRIX -->
+    <div class="ds-block">
+      <h3>Components</h3>
+      <div class="comp-grid">
+        <div class="comp-cell">
+          <div class="nm">Buttons · light</div>
+          <div class="demo">
+            <button class="btn-primary-dark">Get Superhuman</button>
+            <button class="btn-outline-light">Watch demo</button>
+          </div>
+        </div>
+        <div class="comp-cell dark">
+          <div class="nm">Buttons · on indigo</div>
+          <div class="demo">
+            <button class="btn-pill">Get Superhuman</button>
+            <button class="btn-secondary-dark">Watch demo</button>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="nm">Text input</div>
+          <div class="demo" style="width:100%">
+            <input type="text" placeholder="you@team.com" style="width:100%;padding:10px 12px;border:1px solid var(--hairline);border-radius:var(--r-sm);font:inherit;font-size:14px;color:var(--ink);background:#fff">
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="nm">Pill tabs</div>
+          <div class="demo">
+            <button class="pill-tab active">Inbox</button>
+            <button class="pill-tab">AI</button>
+            <button class="pill-tab">Snippets</button>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="nm">Pricing tier</div>
+          <div class="demo" style="width:100%;display:block">
+            <div class="price-card" style="padding:20px">
+              <div class="plan">Starter</div>
+              <div class="price"><b style="font-size:32px">$25</b><span>/ mo</span></div>
+              <div class="caption">For individuals.</div>
+            </div>
+          </div>
+        </div>
+        <div class="comp-cell teal">
+          <div class="nm">Teal closing band</div>
+          <div class="demo" style="width:100%">
+            <div style="color:#fff;font-size:18px;font-weight:540;letter-spacing:-.3px;margin-bottom:12px">Your inbox, at the speed it should be.</div>
+            <button class="btn-on-teal">Get Superhuman</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col footer-brand">
+      <div class="brand"><span class="brand-mark">S</span><span style="color:var(--ink)">Superhuman</span></div>
+      <p>The fastest email experience ever made. Built for high-performing teams.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <a href="#">Features</a>
+      <a href="#">AI</a>
+      <a href="#">Snippets</a>
+      <a href="#">Calendar</a>
+    </div>
+    <div class="footer-col">
+      <h5>Teams</h5>
+      <a href="#">For VCs</a>
+      <a href="#">For Founders</a>
+      <a href="#">For Sales</a>
+      <a href="#">For Recruiters</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+      <a href="#">Press</a>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <a href="#">Help</a>
+      <a href="#">Status</a>
+      <a href="#">Security</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Superhuman Labs</span>
+    <span>Made with care in San Francisco</span>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.superhuman.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>awesome-design-html — 113 brand-themed single-page designs</title>
+<meta name="description" content="113 brand-themed single-file HTML design references: 91 marketing webpages (incl. 20 China showcase) + 22 iOS app mockups. A Claude Code skill by 云中江树." />
+<meta property="og:title" content="awesome-design-html" />
+<meta property="og:description" content="113 brand-themed single-page HTML designs · 91 web + 22 iOS · A Claude Code skill" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://code.jiangshu.ai/awesome-design-html/" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  /* ===== OpenCode warm canvas + ink ===== */
+  --canvas:           #fdfcfc;
+  --canvas-tile:      #f8f7f7;
+  --canvas-card:      #f1eeee;
+  --ink:              #201d1d;
+  --ink-deep:         #0f0000;
+  --body:             #424245;
+  --mute:             #646262;
+  --stone:            #6e6e73;
+  --ash:              #9a9898;
+  --hairline:         rgba(15,0,0,0.12);
+  --hairline-strong:  #646262;
+  /* dark band — Apple tile rhythm */
+  --canvas-dark:      #1d1d1f;
+  --canvas-dark-2:    #272729;
+  --canvas-dark-3:    #302c2c;
+  --on-dark:          #fdfcfc;
+  --on-dark-mute:     #9a9898;
+  --on-dark-deep:     #6e6e73;
+  /* ===== Supabase electric green — the ONLY accent ===== */
+  --green:            #3ECF8E;
+  --green-deep:       #24b47e;
+  --green-soft:       rgba(62,207,142,.10);
+  --green-glow:       rgba(62,207,142,.25);
+  /* ===== Apple product shadow ===== */
+  --shadow-card:      0 1px 0 rgba(15,0,0,0.04), 0 4px 14px rgba(15,0,0,0.06);
+  --shadow-card-h:    0 1px 0 rgba(15,0,0,0.06), 0 10px 30px rgba(15,0,0,0.14);
+  --shadow-card-dark: 0 1px 0 rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.4);
+  /* radius */
+  --r-min:4px; --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:20px; --r-pill:9999px;
+  /* fonts — OpenCode mono everywhere */
+  --font-mono: "IBM Plex Mono","JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Courier New",monospace;
+  --font-sans: "IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Inter",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-mono);-webkit-font-smoothing:antialiased;font-feature-settings:"calt" off,"liga" off,"tnum" on}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--green);color:var(--ink-deep)}
+
+/* ===== NAV ===== */
+.nav{position:sticky;top:0;z-index:50;background:rgba(253,252,252,.86);backdrop-filter:blur(20px);border-bottom:1px solid var(--hairline)}
+.nav-inner{max-width:1480px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;letter-spacing:-.3px}
+.brand-mark{width:28px;height:28px;border-radius:6px;background:var(--ink-deep);display:grid;place-items:center;color:var(--green);font-weight:700;font-size:14px;font-family:var(--font-mono)}
+.brand-name{font-family:var(--font-mono);font-weight:600}
+.brand-name::before{content:"["; color:var(--ash); margin-right:1px}
+.brand-name::after{content:"]"; color:var(--ash); margin-left:1px}
+.nav-right{display:flex;align-items:center;gap:10px}
+.lang-toggle{display:flex;background:var(--canvas-tile);border:1px solid var(--hairline);border-radius:6px;padding:2px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.5px}
+.lang-toggle button{padding:5px 9px;border-radius:4px;color:var(--mute);transition:all .15s}
+.lang-toggle button.active{background:var(--ink-deep);color:var(--canvas)}
+.gh-link{display:inline-flex;align-items:center;gap:6px;background:var(--canvas-tile);border:1px solid var(--hairline);padding:7px 12px;border-radius:6px;font-size:12px;font-weight:500;color:var(--ink);font-family:var(--font-mono);transition:all .15s}
+.gh-link:hover{background:var(--canvas-card);border-color:var(--hairline-strong)}
+.gh-link svg{width:13px;height:13px;fill:currentColor}
+
+/* ===== HERO TILE ===== */
+.hero{padding:80px 28px 56px;max-width:1480px;margin:0 auto;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse,var(--green-soft),transparent 65%);pointer-events:none;filter:blur(40px)}
+.hero-inner{position:relative;max-width:920px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:4px;background:var(--green-soft);border:1px solid rgba(62,207,142,.30);color:var(--green-deep);font-size:11px;font-weight:600;letter-spacing:.6px;margin-bottom:24px;font-family:var(--font-mono);text-transform:uppercase}
+.hero-eyebrow .marker{color:var(--green);font-weight:700}
+.hero h1{font-size:clamp(36px,5.5vw,68px);line-height:1.05;letter-spacing:-2px;font-weight:600;font-family:var(--font-mono);margin-bottom:20px;color:var(--ink-deep);max-width:18ch}
+.hero h1 .acc{color:var(--green-deep)}
+.hero h1 .punct{color:var(--ash);font-weight:300}
+.hero .lead{font-size:16px;line-height:1.55;color:var(--body);max-width:64ch;margin-bottom:36px;font-family:var(--font-mono)}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:6px;font-weight:500;font-size:13px;cursor:pointer;border:1px solid transparent;text-decoration:none;font-family:var(--font-mono);letter-spacing:-.2px;transition:transform .12s,background .15s,border-color .15s,box-shadow .15s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--ink-deep);color:var(--canvas);border-color:var(--ink-deep)}
+.btn-primary:hover{background:#000}
+.btn-secondary{background:transparent;color:var(--ink);border-color:var(--hairline-strong)}
+.btn-secondary:hover{background:var(--canvas-tile);border-color:var(--ink)}
+.btn-green{background:var(--green);color:var(--ink-deep);border-color:var(--green)}
+.btn-green:hover{background:var(--green-deep);border-color:var(--green-deep)}
+.cta-meta{color:var(--stone);font-size:12px;margin-left:6px;font-family:var(--font-mono)}
+
+/* ===== HERO STAT TILES (Apple style) ===== */
+.stat-tiles{max-width:1480px;margin:0 auto 80px;padding:0 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat-tile{background:var(--canvas-tile);border:1px solid var(--hairline);border-radius:14px;padding:22px 22px;display:flex;flex-direction:column;gap:6px;transition:transform .18s,box-shadow .18s;cursor:default}
+.stat-tile:hover{transform:translateY(-2px);box-shadow:var(--shadow-card)}
+.stat-tile .label{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--stone);font-weight:500;font-family:var(--font-mono)}
+.stat-tile .n{font-size:38px;font-weight:600;letter-spacing:-1.5px;color:var(--ink-deep);font-family:var(--font-mono);line-height:1;font-feature-settings:"tnum" on}
+.stat-tile .sub{font-size:12px;color:var(--mute);font-family:var(--font-mono);margin-top:auto;padding-top:14px}
+.stat-tile .marker{color:var(--green);margin-right:5px;font-weight:700}
+
+/* ===== DARK TILE (Apple band) ===== */
+.dark-band{background:var(--canvas-dark);color:var(--on-dark);padding:90px 28px;position:relative;overflow:hidden}
+.dark-band::before{content:"";position:absolute;top:50%;left:0;transform:translateY(-50%);width:300px;height:300px;background:radial-gradient(circle,var(--green-glow),transparent 60%);filter:blur(60px);pointer-events:none}
+.dark-inner{max-width:1280px;margin:0 auto;position:relative}
+.dark-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:18px}
+.dark-band h2{font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-1.4px;font-weight:500;font-family:var(--font-mono);margin-bottom:50px;max-width:22ch;color:var(--on-dark)}
+.dark-band h2 .acc{color:var(--green)}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feat{padding:0;display:flex;flex-direction:column;gap:12px}
+.feat .feat-num{font-family:var(--font-mono);font-size:11px;color:var(--green);font-weight:500;letter-spacing:1px}
+.feat h3{font-size:18px;font-weight:600;letter-spacing:-.5px;font-family:var(--font-mono);color:var(--on-dark)}
+.feat p{font-size:13.5px;line-height:1.6;color:var(--on-dark-mute);font-family:var(--font-mono);max-width:38ch}
+.feat code{background:var(--canvas-dark-3);padding:1px 5px;border-radius:3px;color:var(--green);font-size:12px}
+
+/* ===== HOW TO USE BAND (parchment) ===== */
+.use-band{background:var(--canvas-tile);padding:90px 28px;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);position:relative;overflow:hidden}
+.use-band::before{content:"";position:absolute;top:0;right:-100px;width:400px;height:400px;background:radial-gradient(circle,var(--green-soft),transparent 65%);filter:blur(50px);pointer-events:none}
+.use-inner{max-width:1280px;margin:0 auto;position:relative}
+.use-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:4px;background:var(--canvas);border:1px solid var(--hairline);color:var(--green-deep);font-size:11px;font-weight:600;letter-spacing:.6px;margin-bottom:18px;font-family:var(--font-mono);text-transform:uppercase}
+.use-eyebrow .marker{color:var(--green);font-weight:700}
+.use-band h2{font-size:clamp(28px,4vw,48px);line-height:1.05;letter-spacing:-1.4px;font-weight:500;font-family:var(--font-mono);color:var(--ink-deep);max-width:22ch}
+.use-band h2 .acc{color:var(--green-deep)}
+.use-lead{font-size:15.5px;line-height:1.6;color:var(--body);max-width:62ch;margin:24px 0 50px;font-family:var(--font-mono)}
+.use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:50px}
+.use-step{background:var(--canvas);border:1px solid var(--hairline);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px;transition:transform .15s,box-shadow .15s}
+.use-step:hover{transform:translateY(-2px);box-shadow:var(--shadow-card-h)}
+.step-num{font-family:var(--font-mono);font-size:11px;color:var(--green-deep);letter-spacing:1.5px;font-weight:600}
+.step-num::before{content:"// step "}
+.step-title{font-family:var(--font-mono);font-size:16px;font-weight:600;letter-spacing:-.4px;color:var(--ink-deep)}
+.step-terminal{background:var(--ink-deep);border-radius:8px;overflow:hidden;border:1px solid var(--canvas-dark-3)}
+.term-bar{background:var(--canvas-dark-3);padding:7px 10px;display:flex;align-items:center;gap:5px;border-bottom:1px solid #111}
+.term-bar .dot{width:9px;height:9px;border-radius:50%}
+.term-bar .dot.r{background:#ff5f57}
+.term-bar .dot.y{background:#febc2e}
+.term-bar .dot.g{background:#28c840}
+.term-bar .term-title{font-family:var(--font-mono);font-size:10.5px;color:var(--on-dark-deep);margin-left:8px;letter-spacing:.4px}
+.copy-btn{margin-left:auto;background:var(--green-soft);color:var(--green);border:1px solid rgba(62,207,142,.35);font-family:var(--font-mono);font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;transition:all .15s}
+.copy-btn:hover{background:var(--green);color:var(--ink-deep);border-color:var(--green)}
+.copy-btn.copied{background:var(--green);color:var(--ink-deep);border-color:var(--green)}
+.install-line{user-select:all}
+.term-body{padding:12px 14px;font-family:var(--font-mono);font-size:11.5px;line-height:1.55;color:var(--on-dark);min-height:130px}
+.term-line{margin-bottom:6px;word-break:break-word}
+.term-line .prompt{color:var(--green);margin-right:6px;font-weight:600}
+.term-line .kw{color:#ffaa66;background:rgba(255,170,102,.08);padding:0 4px;border-radius:3px}
+.term-line.ok .prompt{color:var(--green)}
+.term-msg{display:flex;flex-direction:column;gap:3px;margin-bottom:14px}
+.term-msg .msg-label{font-size:9.5px;letter-spacing:1.2px;font-weight:600;color:var(--on-dark-deep)}
+.term-msg.user .msg-label{color:var(--green)}
+.term-msg.ai .msg-label{color:#ffaa66}
+.term-msg .msg-text{color:var(--on-dark);line-height:1.5}
+.step-note{font-family:var(--font-mono);font-size:12px;color:var(--mute);line-height:1.5}
+.use-prompts{background:var(--canvas);border:1px solid var(--hairline);border-radius:14px;padding:22px 24px}
+.prompts-label{font-family:var(--font-mono);font-size:11px;letter-spacing:1.4px;color:var(--stone);text-transform:uppercase;margin-bottom:14px;font-weight:600}
+.prompts-list{display:flex;flex-wrap:wrap;gap:8px}
+.prompt-chip{font-family:var(--font-mono);font-size:12.5px;color:var(--ink);background:var(--canvas-tile);border:1px solid var(--hairline);padding:7px 12px;border-radius:6px;cursor:default;transition:border-color .15s,background .15s}
+.prompt-chip:hover{border-color:var(--green);background:var(--green-soft);color:var(--green-deep)}
+
+/* ===== TOOLBAR ===== */
+.toolbar{position:sticky;top:57px;z-index:40;background:rgba(253,252,252,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--hairline);padding:14px 28px}
+.toolbar-inner{max-width:1480px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.filter-pills{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.section-label{font-family:var(--font-mono);font-size:10.5px;letter-spacing:1.6px;color:var(--stone);text-transform:uppercase;font-weight:600;margin-right:8px}
+.section-label .marker{color:var(--green);margin-right:4px}
+.fp{padding:6px 12px;border-radius:6px;background:transparent;border:1px solid var(--hairline);font-size:11.5px;font-weight:500;color:var(--mute);font-family:var(--font-mono);letter-spacing:-.1px;transition:all .15s}
+.fp:hover{background:var(--canvas-tile);color:var(--ink);border-color:var(--hairline-strong)}
+.fp.active{background:var(--ink-deep);color:var(--canvas);border-color:var(--ink-deep)}
+.fp .ct{font-family:var(--font-mono);font-weight:400;color:var(--ash);margin-left:4px;font-size:10.5px;font-feature-settings:"tnum" on}
+.fp.active .ct{color:rgba(253,252,252,.6)}
+.search{flex:1;min-width:180px;max-width:300px;background:var(--canvas-tile);border:1px solid var(--hairline);border-radius:6px;padding:7px 12px;color:var(--ink);font-family:var(--font-mono);font-size:12.5px;outline:none;transition:border-color .15s;margin-left:auto}
+.search:focus{border-color:var(--green);background:var(--canvas)}
+.search::placeholder{color:var(--ash)}
+
+/* ===== GALLERY ===== */
+.gallery{max-width:1480px;margin:0 auto;padding:48px 28px 100px}
+.gallery-head{margin-bottom:30px;display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.gallery-head .ttl{font-family:var(--font-mono);font-size:13px;color:var(--stone);letter-spacing:.5px}
+.gallery-head .ttl .marker{color:var(--green);margin-right:6px;font-weight:700}
+.gallery-head .ttl strong{color:var(--ink);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;border:1px solid var(--hairline);background:var(--canvas);transition:transform .18s,box-shadow .18s,border-color .18s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-card-h);border-color:transparent}
+.card-hero{aspect-ratio:4/3;padding:20px;position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.card-platform{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.45);backdrop-filter:blur(10px);padding:3px 8px;border-radius:4px;font-size:9.5px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;font-family:var(--font-mono);z-index:2;border:1px solid rgba(255,255,255,.1);color:#fff}
+.card.light .card-platform{background:rgba(255,255,255,.65);color:var(--ink-deep);border-color:rgba(0,0,0,.06)}
+.card-name{font-size:24px;font-weight:500;letter-spacing:-.8px;line-height:1.05;z-index:1;position:relative;font-family:var(--font-mono);word-break:break-word;max-width:14ch}
+.card-cat{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1.2px;opacity:.8;font-family:var(--font-mono);z-index:1;position:relative}
+.card-cat::before{content:"// "}
+.card.dark .card-name,.card.dark .card-cat{color:#fff}
+.card.light .card-name,.card.light .card-cat{color:#000}
+.card-foot{padding:13px 16px;background:var(--canvas);border-top:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:54px}
+.card-tag{font-size:11.5px;color:var(--mute);line-height:1.4;flex:1;font-family:var(--font-mono);font-weight:400}
+.card-arrow{color:var(--green-deep);flex-shrink:0;transition:transform .15s}
+.card:hover .card-arrow{color:var(--green);transform:translateX(3px)}
+.card-arrow svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+.empty{padding:80px 0;text-align:center;color:var(--stone);font-family:var(--font-mono)}
+.empty .em-num{font-size:32px;margin-bottom:14px;color:var(--ash);letter-spacing:-1px}
+
+/* ===== FOOTER ===== */
+footer{background:var(--canvas-dark);color:var(--on-dark);padding:60px 28px;border-top:1px solid var(--canvas-dark-3)}
+.foot{max-width:1480px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:start;flex-wrap:wrap}
+.foot-brand{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-weight:600;font-size:13px;color:var(--on-dark)}
+.foot-brand .brand-mark{background:var(--green);color:var(--ink-deep)}
+.foot-mid p{font-size:12px;color:var(--on-dark-mute);line-height:1.6;max-width:560px;font-family:var(--font-mono)}
+.foot-mid p a{color:var(--green);font-weight:500}
+.foot-mid p a:hover{color:#fff;text-decoration:underline}
+.foot-mid .credit{margin-top:14px;font-size:11.5px;color:var(--on-dark-deep)}
+.foot-links{display:flex;flex-direction:column;gap:8px;font-size:12px;font-family:var(--font-mono);color:var(--on-dark-mute)}
+.foot-links a{display:inline-flex;align-items:center;gap:5px}
+.foot-links a:hover{color:var(--green)}
+.foot-links a::before{content:"→";color:var(--green);font-weight:500;margin-right:2px;opacity:.5;transition:opacity .15s}
+.foot-links a:hover::before{opacity:1}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:920px){
+  .stat-tiles{grid-template-columns:repeat(2,1fr)}
+  .feature-grid{grid-template-columns:1fr;gap:32px}
+  .use-band{padding:60px 20px}
+  .use-grid{grid-template-columns:1fr;gap:14px}
+  .use-step{padding:20px}
+  .hero{padding:50px 20px 30px}
+  .hero h1{font-size:36px;letter-spacing:-1.2px}
+  .stat-tiles{margin-bottom:50px;padding:0 20px}
+  .stat-tile{padding:18px}
+  .stat-tile .n{font-size:32px}
+  .dark-band{padding:60px 24px}
+  .toolbar{padding:10px 16px}
+  .toolbar-inner{gap:8px}
+  .filter-pills{gap:4px}
+  .fp{padding:5px 10px;font-size:11px}
+  .search{margin-left:0;max-width:none;flex:1 0 100%;order:99}
+  .gallery{padding:30px 16px 60px}
+  .grid{grid-template-columns:1fr 1fr;gap:10px}
+  .card-hero{padding:14px;aspect-ratio:3/2}
+  .card-name{font-size:18px}
+  .nav-inner{padding:12px 16px}
+  .footer{padding:40px 20px}
+  .foot{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">$_</span>
+      <span class="brand-name">awesome-design-html</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="zh">中</button>
+      </div>
+      <a class="gh-link" href="https://github.com/yzfly/awesome-design-html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58V20.6c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.74.08-.74 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.41 1.02.01 2.04.14 3 .41 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.56 21.79 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span data-en="GitHub" data-zh="GitHub">GitHub</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="marker">●</span>
+      <span data-en="CLAUDE CODE SKILL · v1.0" data-zh="CLAUDE CODE 技能 · v1.0">CLAUDE CODE SKILL · v1.0</span>
+    </div>
+    <h1>
+      <span data-en="113 brand designs," data-zh="113 个品牌设计,">113 brand designs,</span><br/>
+      <span class="acc" data-en="ready to read" data-zh="即开即用">ready to read</span><span class="punct">.</span>
+    </h1>
+    <p class="lead" data-en="Single-file HTML references for marketing pages and iOS apps. Hand the GitHub link to Claude Code and it'll design Stripe-mesh heroes, Linear-dark surfaces, Spotify Now-Playing screens — without guessing."
+       data-zh="单文件 HTML 设计参考库,涵盖网页营销页 + iOS app 仿真。把仓库链接给 Claude Code,它就能做出 Stripe 的霓虹 hero、Linear 的暗色 UI、Spotify 的播放器界面——不再靠猜。">
+      Single-file HTML references for marketing pages and iOS apps. Hand the GitHub link to Claude Code and it'll design Stripe-mesh heroes, Linear-dark surfaces, Spotify Now-Playing screens — without guessing.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#gallery">
+        <span data-en="Browse gallery" data-zh="浏览画廊">Browse gallery</span>
+        <span>↓</span>
+      </a>
+      <a class="btn btn-secondary" href="https://github.com/yzfly/awesome-design-html#-install-in-claude-code" target="_blank">
+        <span data-en="Install in Claude Code" data-zh="安装到 Claude Code">Install in Claude Code</span>
+        <span>→</span>
+      </a>
+      <span class="cta-meta" data-en="macOS · Linux · Windows · MIT" data-zh="macOS · Linux · Windows · MIT 协议">macOS · Linux · Windows · MIT</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STAT TILES (Apple style) ===== -->
+<div class="stat-tiles">
+  <div class="stat-tile">
+    <div class="label" data-en="// total brands" data-zh="// 品牌总数">// total brands</div>
+    <div class="n"><span class="marker">●</span>113</div>
+    <div class="sub" data-en="91 web + 22 iOS · 20 China" data-zh="91 网页 + 22 iOS · 20 中国">91 web + 22 iOS · 20 China</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label" data-en="// marketing pages" data-zh="// 营销网页">// marketing pages</div>
+    <div class="n">91</div>
+    <div class="sub" data-en="incl. 20 China showcase" data-zh="含 20 中国大厂展示">incl. 20 China showcase</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label" data-en="// iOS app mockups" data-zh="// iOS app 仿真">// iOS app mockups</div>
+    <div class="n">22</div>
+    <div class="sub" data-en="3 iPhone frames + design system + iOS spec" data-zh="3 个 iPhone 框架 + 设计系统 + iOS 规格">3 iPhone frames + design system + iOS spec</div>
+  </div>
+  <div class="stat-tile">
+    <div class="label" data-en="// license" data-zh="// 协议">// license</div>
+    <div class="n">MIT</div>
+    <div class="sub" data-en="commercial-friendly · attribution preserved" data-zh="可商用 · 保留归属">commercial-friendly · attribution preserved</div>
+  </div>
+</div>
+
+<!-- ===== DARK BAND (Apple tile rhythm) ===== -->
+<section class="dark-band">
+  <div class="dark-inner">
+    <div class="dark-eyebrow">
+      <span>● </span>
+      <span data-en="WHY THIS EXISTS" data-zh="为什么做这个">WHY THIS EXISTS</span>
+    </div>
+    <h2 data-en="Brand-faithful tokens." data-zh="真实品牌 token,">Brand-faithful tokens.<br/><span class="acc" data-en="Not generic templates." data-zh="不是通用模板。">Not generic templates.</span></h2>
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-num">01 / 03</div>
+        <h3 data-en="Actual hex values" data-zh="真实色值">Actual hex values</h3>
+        <p data-en="Stripe's mesh isn't a generic blue gradient. Linear's canvas isn't 'dark mode'. We extracted the exact tokens, so Claude doesn't have to guess."
+           data-zh="Stripe 的网格不是泛蓝渐变,Linear 的画布也不是『暗黑模式』。我们抽出来的是精确的 token,让 Claude 不用瞎猜。">
+          Stripe's mesh isn't a generic blue gradient. Linear's canvas isn't 'dark mode'. We extracted the exact tokens, so Claude doesn't have to guess.
+        </p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">02 / 03</div>
+        <h3 data-en="Real typography ramps" data-zh="真实字体阶梯">Real typography ramps</h3>
+        <p data-en="Negative letter-spacing where the brand calls for it (Linear -3px). Tabular figures where money is shown (Coinbase, Robinhood). The font ladder is the brand."
+           data-zh="该用负字距的地方就用 (Linear -3px)。涉及金钱数字的地方就用 tabular figures (Coinbase, Robinhood)。字体阶梯就是品牌。">
+          Negative letter-spacing where the brand calls for it (Linear -3px). Tabular figures where money is shown (Coinbase, Robinhood). The font ladder is the brand.
+        </p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">03 / 03</div>
+        <h3 data-en="Hero archetypes intact" data-zh="保留 hero 范式">Hero archetypes intact</h3>
+        <p data-en="Spotify's 9999px pill buttons. Notion's pastel cards. Duolingo's 3D chunky shadows. WhatsApp's 0px sender-corner bubble. Non-negotiable identifiers."
+           data-zh="Spotify 的 9999px 药丸按钮、Notion 的 pastel 卡片、Duolingo 的立体阴影、WhatsApp 发送方一角不圆——都是无可替代的品牌识别符。">
+          Spotify's 9999px pill buttons. Notion's pastel cards. Duolingo's 3D chunky shadows. WhatsApp's 0px sender-corner bubble. Non-negotiable identifiers.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW TO USE (parchment tile) ===== -->
+<section class="use-band">
+  <div class="use-inner">
+    <div class="use-eyebrow">
+      <span class="marker">●</span>
+      <span data-en="HOW IT WORKS" data-zh="怎么用">HOW IT WORKS</span>
+    </div>
+    <h2 data-en="Install once." data-zh="装一次。">Install once.<br/><span class="acc" data-en="Then just talk." data-zh="然后正常对话即可。">Then just talk.</span></h2>
+    <p class="use-lead" data-en="No commands, no syntax, no slash-prefix. The skill auto-loads when you mention a brand name. Claude reads the matching reference file, pulls the actual tokens, and applies them — automatically."
+       data-zh="不需要命令,不需要语法,不需要斜杠前缀。当你提到某个品牌名,这个 skill 会自动加载。Claude 读取对应的参考文件,抽出真实的 design token,自动应用——你完全不用操心 skill 内部怎么工作。">
+      No commands, no syntax, no slash-prefix. The skill auto-loads when you mention a brand name. Claude reads the matching reference file, pulls the actual tokens, and applies them — automatically.
+    </p>
+
+    <div class="use-grid">
+      <!-- Step 1: install (AI-native — copy one line) -->
+      <div class="use-step">
+        <div class="step-num">01</div>
+        <div class="step-title" data-en="Copy one line. Paste in Claude Code." data-zh="复制一句话。粘贴给 Claude Code。">Copy one line. Paste in Claude Code.</div>
+        <div class="step-terminal">
+          <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">claude code</span><button class="copy-btn" id="copyInstall" title="Copy" aria-label="Copy install prompt">copy</button></div>
+          <div class="term-body">
+            <div class="term-msg user"><span class="msg-label">YOU</span><span class="msg-text install-line" id="installLine">Please install this Claude Code skill for me: https://github.com/yzfly/awesome-design-html</span></div>
+            <div class="term-msg ai"><span class="msg-label">CLAUDE</span><span class="msg-text" data-en="Cloning to ~/.claude/skills/awesome-design-html · skill loaded · ready." data-zh="正在克隆到 ~/.claude/skills/awesome-design-html · skill 已加载 · 就绪。">Cloning to ~/.claude/skills/awesome-design-html · skill loaded · ready.</span></div>
+          </div>
+        </div>
+        <div class="step-note" data-en="That's it. No command-line. No syntax. Claude does the clone." data-zh="就这一步。不用敲命令。不用任何语法。Claude 自己 clone。">That's it. No command-line. No syntax. Claude does the clone.</div>
+      </div>
+
+      <!-- Step 2: chat -->
+      <div class="use-step">
+        <div class="step-num">02</div>
+        <div class="step-title" data-en="Talk like always" data-zh="像平时一样对话">Talk like always</div>
+        <div class="step-terminal">
+          <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">conversation</span></div>
+          <div class="term-body">
+            <div class="term-msg user"><span class="msg-label">YOU</span><span class="msg-text" data-en="Make a Linear-style product page" data-zh="做个 Linear 风格的产品页">Make a Linear-style product page</span></div>
+            <div class="term-msg ai"><span class="msg-label">CLAUDE</span><span class="msg-text" data-en="Reading assets/web/design.linear.html · applying #5e6ad2 lavender accent + -3px letter-spacing…" data-zh="正在读取 assets/web/design.linear.html · 应用 #5e6ad2 薰衣草色 + -3px 字距…">Reading assets/web/design.linear.html · applying #5e6ad2 lavender accent + -3px letter-spacing…</span></div>
+          </div>
+        </div>
+        <div class="step-note" data-en="The skill is auto-triggered — you don't say '/skill' or anything." data-zh="Skill 自动触发——你不用敲 /skill,也不用任何前缀。">The skill is auto-triggered — you don't say '/skill' or anything.</div>
+      </div>
+
+      <!-- Step 3: results -->
+      <div class="use-step">
+        <div class="step-num">03</div>
+        <div class="step-title" data-en="Get the real thing" data-zh="拿到真的东西">Get the real thing</div>
+        <div class="step-terminal">
+          <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">output</span></div>
+          <div class="term-body">
+            <div class="term-line ok"><span class="prompt">✓</span> hero: <span class="kw">#010102</span> canvas</div>
+            <div class="term-line ok"><span class="prompt">✓</span> accent: <span class="kw">#5e6ad2</span> (lavender)</div>
+            <div class="term-line ok"><span class="prompt">✓</span> display: Inter Display, <span class="kw">-3px</span> tracking</div>
+            <div class="term-line ok"><span class="prompt">✓</span> buttons: 6px radius (not pill)</div>
+            <div class="term-line ok"><span class="prompt">✓</span> shadow: none on dark canvas — hairlines only</div>
+          </div>
+        </div>
+        <div class="step-note" data-en="Brand-faithful. Not a generic gradient. Not 'dark mode'." data-zh="忠于品牌。不是泛蓝渐变。不是『暗色模式』。">Brand-faithful. Not a generic gradient. Not 'dark mode'.</div>
+      </div>
+    </div>
+
+    <!-- Try prompts -->
+    <div class="use-prompts">
+      <div class="prompts-label" data-en="// MORE EXAMPLES TO TRY" data-zh="// 更多可以试的例子">// MORE EXAMPLES TO TRY</div>
+      <div class="prompts-list">
+        <div class="prompt-chip" data-en='"Mimic Stripe hero gradient mesh"' data-zh='"做个 Stripe 风格的渐变 hero"'>"Mimic Stripe hero gradient mesh"</div>
+        <div class="prompt-chip" data-en='"Show me a Spotify Now Playing iPhone mockup"' data-zh='"做个 Spotify Now Playing 的 iPhone 仿真"'>"Show me a Spotify Now Playing iPhone mockup"</div>
+        <div class="prompt-chip" data-en='"Notion-flavor pastel cards"' data-zh='"Notion 那种 pastel 卡片"'>"Notion-flavor pastel cards"</div>
+        <div class="prompt-chip" data-en='"Duolingo-style chunky 3D buttons"' data-zh='"Duolingo 那种立体阴影按钮"'>"Duolingo-style chunky 3D buttons"</div>
+        <div class="prompt-chip" data-en='"Make me a Tinder swipe deck mockup"' data-zh='"做个 Tinder 的滑卡 mockup"'>"Make me a Tinder swipe deck mockup"</div>
+        <div class="prompt-chip" data-en='"Cursor-style dark IDE landing"' data-zh='"Cursor 风格的暗色 IDE 落地页"'>"Cursor-style dark IDE landing"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOOLBAR ===== -->
+<div class="toolbar" id="gallery">
+  <div class="toolbar-inner">
+    <span class="section-label"><span class="marker">●</span> <span data-en="GALLERY" data-zh="画廊">GALLERY</span></span>
+    <div class="filter-pills" id="filters">
+      <button class="fp active" data-filter="all" data-en="All" data-zh="全部">All <span class="ct">113</span></button>
+      <button class="fp" data-filter="web" data-en="Web" data-zh="网页">Web <span class="ct">91</span></button>
+      <button class="fp" data-filter="ios" data-en="iOS" data-zh="iOS">iOS <span class="ct">22</span></button>
+      <button class="fp" data-filter="china" data-en="🇨🇳 China" data-zh="🇨🇳 中国大厂">🇨🇳 China <span class="ct">20</span></button>
+      <button class="fp" data-filter="ai" data-en="AI" data-zh="AI">AI</button>
+      <button class="fp" data-filter="dev" data-en="Dev" data-zh="开发">Dev</button>
+      <button class="fp" data-filter="saas" data-en="SaaS" data-zh="效率">SaaS</button>
+      <button class="fp" data-filter="fintech" data-en="Fintech" data-zh="金融">Fintech</button>
+      <button class="fp" data-filter="auto" data-en="Auto" data-zh="汽车">Auto</button>
+      <button class="fp" data-filter="social" data-en="Social" data-zh="社交">Social</button>
+      <button class="fp" data-filter="media" data-en="Media" data-zh="媒体">Media</button>
+    </div>
+    <input class="search" id="search" placeholder='Search… try "spotify"' />
+  </div>
+</div>
+
+<!-- ===== GALLERY ===== -->
+<main class="gallery">
+  <div class="gallery-head">
+    <div class="ttl"><span class="marker">●</span> <span data-en="Showing" data-zh="显示">Showing</span> <strong id="count">113</strong> <span data-en="of 113 demos · click to open" data-zh="个 / 共 113 · 点击打开">of 113 demos · click to open</span></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">
+    <div class="em-num">[ no matches ]</div>
+    <p data-en="Try a different search keyword." data-zh="换个关键词试试。">Try a different search keyword.</p>
+  </div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <span class="brand-mark">$_</span>
+      <span>awesome-design-html</span>
+    </div>
+    <div class="foot-mid">
+      <p>
+        <span data-en="A Claude Code skill that gives Claude a 113-brand vocabulary." data-zh="一个让 Claude 拥有 113 个品牌词汇的 Claude Code 技能。">A Claude Code skill that gives Claude a 113-brand vocabulary.</span>
+        <span data-en=" MIT licensed. Based on " data-zh=" MIT 协议。改自 "> MIT licensed. Based on </span>
+        <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank">VoltAgent/awesome-design-md</a>
+        <span data-en=" + " data-zh=" + "> + </span>
+        <a href="https://github.com/Meliwat/awesome-ios-design-md" target="_blank">Meliwat/awesome-ios-design-md</a>.
+      </p>
+      <div class="credit">
+        <span data-en="Designed in Apple tile rhythm + Supabase green + OpenCode mono. Made by " data-zh="Apple 节奏 + Supabase 绿 + OpenCode mono 字体。作者 ">Designed in Apple tile rhythm + Supabase green + OpenCode mono. Made by </span>
+        <a href="https://github.com/yzfly" target="_blank" style="color:var(--green);font-weight:500">云中江树</a>.
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="https://github.com/yzfly/awesome-design-html" target="_blank">GitHub</a>
+      <a href="https://github.com/yzfly/awesome-design-html#readme" target="_blank" data-en="README" data-zh="文档">README</a>
+      <a href="https://github.com/yzfly/awesome-design-html/blob/main/LICENSE" target="_blank">LICENSE</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== Copy install line =====
+(function(){
+  const btn = document.getElementById('copyInstall');
+  const line = document.getElementById('installLine');
+  if (!btn || !line) return;
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(line.textContent.trim());
+      const orig = btn.textContent;
+      btn.textContent = 'copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+    } catch (e) {
+      // fallback for older browsers
+      const r = document.createRange(); r.selectNode(line);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(r);
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+      btn.textContent = 'copied';
+      setTimeout(() => { btn.textContent = 'copy'; }, 1600);
+    }
+  });
+})();
+
+// ===== BRAND DATA =====
+const brands = [
+  // ===== Tier 1 — PREMIUM AI + iOS · global flagships =====
+  { slug:'claude',     name:'Claude',     platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#f4f1ea 0%,#d97757 50%,#5a2e0c)',              dark:false, en:'Editorial warm · serif tradition', zh:'文学暖色 · 衬线传统' },
+  { slug:'chatgpt-ios',     name:'ChatGPT',     platform:'ios', cat:'ai',           bg:'linear-gradient(135deg,#10a37f 0%,#0a8169 100%)',           dark:true,  en:'AI chat · OpenAI green', zh:'AI 对话 · OpenAI 绿' },
+  { slug:'supabase',   name:'Supabase',   platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#3ecf8e 0%,#000 100%)',                        dark:true,  en:'Open Postgres · electric green', zh:'开源 Postgres · 电绿' },
+  { slug:'opencode',   name:'OpenCode',   platform:'web', cat:'dev',       bg:'linear-gradient(135deg,#fdfcfc 0%,#f1eeee 100%)',                     dark:false, en:'Open-source coding · warm cream + mono', zh:'开源编程 · 暖白 + 等宽' },
+  { slug:'cursor',     name:'Cursor',     platform:'web', cat:'dev',       bg:'linear-gradient(180deg,#000 0%,#0a0a0a 50%,#fff)',                    dark:true,  en:'AI IDE · dark hero + light below', zh:'AI 编辑器 · 黑→白' },
+  { slug:'tinder-ios',      name:'Tinder',      platform:'ios', cat:'dating',       bg:'linear-gradient(135deg,#fe3c72 0%,#ff655b 100%)',           dark:true,  en:'Dating · swipe deck + flame', zh:'约会 · 滑卡 + 火焰' },
+  { slug:'duolingo-ios',    name:'Duolingo',    platform:'ios', cat:'misc',         bg:'linear-gradient(135deg,#58cc02 0%,#3c8a02 100%)',           dark:true,  en:'Language · chunky 3D buttons', zh:'语言学习 · 立体阴影按钮' },
+  { slug:'instagram-ios',   name:'Instagram',   platform:'ios', cat:'social',       bg:'linear-gradient(45deg,#f09433 0%,#dc2743 50%,#bc1888 100%)',dark:true,  en:'Social · story ring gradient', zh:'社交 · 故事环渐变' },
+  { slug:'stripe',     name:'Stripe',     platform:'web', cat:'fintech',   bg:'linear-gradient(135deg,#a5b4fc 0%,#7b8cf2 35%,#635bff 70%,#322dd9)', dark:true,  en:'Mesh gradient · payments OG', zh:'霓虹网格 · 支付祖师爷' },
+  { slug:'notion',     name:'Notion',     platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#fff 0%,#fbf7f0 50%,#ffe4d0)',                 dark:false, en:'Pastel tints · plain serifs', zh:'柔色淡彩 · 朴实衬线' },
+  { slug:'linear',     name:'Linear',     platform:'web', cat:'dev',       bg:'linear-gradient(140deg,#0a0a0c 0%,#1a1a22 70%,#5e6ad2)',              dark:true,  en:'Pitch-black canvas · lavender accent', zh:'纯黑画布 · 薰衣草高光' },
+  { slug:'figma',      name:'Figma',      platform:'web', cat:'dev',       bg:'linear-gradient(135deg,#f24e1e 0%,#a259ff 50%,#0acf83)',              dark:true,  en:'Multi-hue tool palette', zh:'多彩工具色' },
+
+  // ===== Tier 2 — premium light + AI flagships =====
+  { slug:'apple',      name:'Apple',      platform:'web', cat:'enterprise',bg:'linear-gradient(180deg,#fff 0%,#f5f5f7 100%)',                        dark:false, en:'Monochrome · product tile rhythm', zh:'极简灰白 · 产品矩阵节奏' },
+  { slug:'mistral',    name:'Mistral',    platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#ff7000 0%,#f54101 50%,#fff)',                 dark:true,  en:'Editorial mosaic · gradient strokes', zh:'编辑风马赛克 · 渐变笔触' },
+  { slug:'vercel',     name:'Vercel',     platform:'web', cat:'dev',       bg:'linear-gradient(135deg,#fff 0%,#f5f5f5 50%,#000)',                    dark:false, en:'Geometric minimal · sharp corners', zh:'几何极简 · 锐利棱角' },
+  { slug:'cohere',     name:'Cohere',     platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#ff7759 0%,#dd4f1c 100%)',                     dark:true,  en:'Enterprise AI · burnt orange', zh:'企业 AI · 烧橙色' },
+  { slug:'spotify-ios',     name:'Spotify',     platform:'ios', cat:'music',        bg:'linear-gradient(135deg,#1ed760 0%,#121212 100%)',           dark:true,  en:'Music · Now Playing dynamic gradient', zh:'音乐 · 动态渐变 Now Playing' },
+  { slug:'apple-music-ios', name:'Apple Music', platform:'ios', cat:'music',        bg:'linear-gradient(135deg,#fa233b 0%,#fb5c74 100%)',           dark:true,  en:'Music · pink-red lyric sync', zh:'音乐 · 粉红色歌词同步' },
+  { slug:'snapchat-ios',    name:'Snapchat',    platform:'ios', cat:'social',       bg:'linear-gradient(135deg,#fffc00 0%,#fff200 100%)',           dark:false, en:'Camera-first · yellow chrome', zh:'相机优先 · 黄色界面' },
+  { slug:'spotify',    name:'Spotify',    platform:'web', cat:'consumer',  bg:'linear-gradient(135deg,#1ed760 0%,#121212 100%)',                     dark:true,  en:'Music · functional green + black', zh:'音乐 · 功能绿 + 黑' },
+  { slug:'elevenlabs', name:'ElevenLabs', platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#fff 0%,#000 100%)',                           dark:false, en:'Voice AI · stark monochrome', zh:'语音 AI · 黑白极简' },
+  { slug:'raycast',    name:'Raycast',    platform:'web', cat:'dev',       bg:'linear-gradient(135deg,#ff6363 0%,#ff3838 50%,#0a0a0c)',              dark:true,  en:'Red command palette glow', zh:'红色命令面板光晕' },
+  { slug:'warp',       name:'Warp',       platform:'web', cat:'dev',       bg:'linear-gradient(135deg,#1a0033 0%,#6a00ff 60%,#ff0080)',              dark:true,  en:'AI terminal · neon dark', zh:'AI 终端 · 霓虹暗色' },
+  { slug:'airbnb-ios',      name:'Airbnb',      platform:'ios', cat:'travel',       bg:'linear-gradient(135deg,#ff5a5f 0%,#fc642d 100%)',           dark:true,  en:'Stays · category scroller', zh:'民宿 · 分类轮播' },
+  { slug:'airbnb',     name:'Airbnb',     platform:'web', cat:'consumer',  bg:'linear-gradient(135deg,#ff5a5f 0%,#fc642d 100%)',                     dark:true,  en:'Rausch coral · warm cards', zh:'Rausch 珊瑚红 · 暖色卡片' },
+  { slug:'discord-ios',     name:'Discord',     platform:'ios', cat:'messaging',    bg:'linear-gradient(135deg,#5865f2 0%,#2b2d31 100%)',           dark:true,  en:'Servers · Blurple + role colors', zh:'社区 · 紫蓝 + 角色色' },
+  { slug:'lovable',    name:'Lovable',    platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#ff6b9d 0%,#ee4d8b 50%,#c61b6e)',              dark:true,  en:'AI builder · playful pink', zh:'AI 建站 · 俏皮粉' },
+  { slug:'threads-ios',     name:'Threads',     platform:'ios', cat:'social',       bg:'linear-gradient(180deg,#000 0%,#0a0a0a 100%)',              dark:true,  en:'Text-only · zero accent · hairline', zh:'纯文字 · 零高光 · 发丝线' },
+
+  // ===== Tier 3 — other AI · dev · iOS =====
+  { slug:'xai',        name:'xAI',        platform:'web', cat:'ai',        bg:'linear-gradient(180deg,#000 0%,#0a0a0a 100%)',                        dark:true,  en:'Zero accents · pure black/white', zh:'零高光 · 纯黑白' },
+  { slug:'ollama',     name:'Ollama',     platform:'web', cat:'ai',        bg:'linear-gradient(180deg,#fff 0%,#f9f9f9 50%,#000)',                    dark:false, en:'Local LLM · friendly llama', zh:'本地大模型 · 友好羊驼' },
+  { slug:'together',   name:'Together',   platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#f5f5f5 0%,#0e2a47 100%)',                     dark:false, en:'Inference platform · academic blue', zh:'推理平台 · 学术蓝' },
+  { slug:'runwayml',   name:'Runway',     platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#000 0%,#1a1a1a 100%)',                        dark:true,  en:'Generative video · cinematic dark', zh:'AI 视频 · 电影感暗色' },
+  { slug:'minimax',    name:'MiniMax',    platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#000 0%,#fff 100%)',                           dark:true,  en:'Multimodal AI · brutalist', zh:'多模态 AI · 粗野主义' },
+  { slug:'voltagent',  name:'VoltAgent',  platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#fde047 0%,#000 100%)',                        dark:false, en:'AI agent framework · electric yellow', zh:'AI Agent 框架 · 电黄' },
+  { slug:'framer',     name:'Framer',     platform:'web', cat:'dev',       bg:'linear-gradient(135deg,#0099ff 0%,#0066ff 50%,#000)',                 dark:true,  en:'Design tool · electric blue', zh:'设计工具 · 电光蓝' },
+  { slug:'sanity',     name:'Sanity',     platform:'web', cat:'dev',       bg:'linear-gradient(135deg,#f03e2f 0%,#9d0e0d 100%)',                     dark:true,  en:'Headless CMS · crimson', zh:'无头 CMS · 深红' },
+  { slug:'notion-ios',      name:'Notion',      platform:'ios', cat:'productivity', bg:'linear-gradient(135deg,#fff 0%,#f7f6f3 100%)',              dark:false, en:'Block editor · slash commands', zh:'块编辑器 · 斜杠命令' },
+  { slug:'x-twitter-ios',   name:'X',           platform:'ios', cat:'social',       bg:'linear-gradient(180deg,#000 0%,#0a0a0a 100%)',              dark:true,  en:'Timeline · pure black, no orange', zh:'时间线 · 纯黑 · 无橙色' },
+  { slug:'resend',     name:'Resend',     platform:'web', cat:'infra',     bg:'linear-gradient(180deg,#fff 0%,#fafafa 100%)',                        dark:false, en:'Email API · editorial light', zh:'邮件 API · 文学浅色' },
+  { slug:'mintlify',   name:'Mintlify',   platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#10b981 0%,#059669 100%)',                     dark:true,  en:'Docs · fresh mint green', zh:'文档工具 · 薄荷绿' },
+  { slug:'mongodb',    name:'MongoDB',    platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#00ed64 0%,#001e2b 100%)',                     dark:true,  en:'NoSQL DB · neon leaf', zh:'NoSQL 数据库 · 霓虹叶绿' },
+  { slug:'clickhouse', name:'ClickHouse', platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#fff200 0%,#ffd900 100%)',                     dark:false, en:'OLAP DB · canary yellow', zh:'OLAP 数据库 · 金丝雀黄' },
+  { slug:'posthog',    name:'PostHog',    platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#1d4aff 0%,#000 100%)',                        dark:true,  en:'Product analytics · neon blue', zh:'产品分析 · 霓虹蓝' },
+  { slug:'sentry',     name:'Sentry',     platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#181225 0%,#6c5fc7 100%)',                     dark:true,  en:'Error tracking · purple shield', zh:'错误监控 · 紫色盾' },
+  { slug:'replicate',  name:'Replicate',  platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#fff 0%,#000 100%)',                           dark:false, en:'Model hosting · stark mono', zh:'模型托管 · 极简黑白' },
+  { slug:'composio',   name:'Composio',   platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#fff 0%,#6366f1 100%)',                        dark:false, en:'Agent tools · purple gradient', zh:'Agent 工具 · 紫渐变' },
+  { slug:'hashicorp',  name:'HashiCorp',  platform:'web', cat:'infra',     bg:'linear-gradient(135deg,#000 0%,#0c1024 100%)',                        dark:true,  en:'Infrastructure · midnight navy', zh:'基础设施 · 午夜海军蓝' },
+  { slug:'telegram-ios',    name:'Telegram',    platform:'ios', cat:'messaging',    bg:'linear-gradient(135deg,#229ed9 0%,#0088cc 100%)',           dark:true,  en:'Chat · paper plane blue', zh:'聊天 · 纸飞机蓝' },
+  { slug:'whatsapp-ios',    name:'WhatsApp',    platform:'ios', cat:'messaging',    bg:'linear-gradient(135deg,#25d366 0%,#075e54 100%)',           dark:true,  en:'Chat · two greens · blue ✓✓', zh:'聊天 · 双绿 + 蓝双勾' },
+  { slug:'netflix-ios',     name:'Netflix',     platform:'ios', cat:'video',        bg:'linear-gradient(180deg,#e50914 0%,#000 100%)',              dark:true,  en:'Streaming · Top 10 ranked numerals', zh:'流媒体 · 排行榜大数字' },
+
+  // ===== Tier 4 — 🇨🇳 中国大厂 · CHINA SHOWCASE (FRESH 2026) =====
+  { slug:'feishu',        name:'飞书',         platform:'web', cat:'saas',     bg:'linear-gradient(135deg,#3370ff 0%,#1d4ed8 100%)',                          dark:true,  en:'All-in-one workspace by ByteDance',         zh:'字节跳动 · 一体化协作平台' },
+  { slug:'douyin',        name:'抖音',         platform:'web', cat:'media',    bg:'linear-gradient(135deg,#fe2c55 0%,#0a0a0a 50%,#25f4ee 100%)',              dark:true,  en:'Short video · RGB anaglyph',                zh:'短视频 · RGB 错位 logo' },
+  { slug:'doubao',        name:'豆包',         platform:'web', cat:'ai',       bg:'linear-gradient(135deg,#7b5bff 0%,#5538dc 100%)',                          dark:true,  en:'Your friendly AI by ByteDance',             zh:'字节 AI · 你的 AI 朋友' },
+  { slug:'aliyun',        name:'阿里云',       platform:'web', cat:'infra',    bg:'linear-gradient(135deg,#ff6a00 0%,#cc5500 100%)',                          dark:true,  en:'No.1 cloud in China',                       zh:'为了无法计算的价值' },
+  { slug:'dingtalk',      name:'钉钉',         platform:'web', cat:'saas',     bg:'linear-gradient(135deg,#1a87ff 0%,#0a4fd1 100%)',                          dark:true,  en:'21B users · enterprise messaging',          zh:'让进步发生 · 21 亿用户' },
+  { slug:'alipay',        name:'支付宝',       platform:'web', cat:'fintech',  bg:'linear-gradient(135deg,#1677ff 0%,#0050b3 100%)',                          dark:true,  en:'12B users · super app',                     zh:'让生活更简单 · 12 亿用户' },
+  { slug:'tencent-cloud', name:'腾讯云',       platform:'web', cat:'infra',    bg:'linear-gradient(135deg,#006eff 0%,#0050c8 100%)',                          dark:true,  en:'Industry internet · Tencent',               zh:'腾讯 · 产业互联网' },
+  { slug:'wechat',        name:'微信',         platform:'web', cat:'saas',     bg:'linear-gradient(135deg,#07c160 0%,#05a856 100%)',                          dark:true,  en:'1.3B DAU · a lifestyle',                    zh:'13 亿日活 · 一个生活方式' },
+  { slug:'yuque',         name:'语雀',         platform:'web', cat:'saas',     bg:'linear-gradient(135deg,#31cc79 0%,#1faa5f 100%)',                          dark:true,  en:'Document for thinkers · Alibaba',           zh:'文档 · 思考者的协作工具' },
+  { slug:'xiaomi',        name:'小米',         platform:'web', cat:'consumer', bg:'linear-gradient(135deg,#ff6900 0%,#cc5500 100%)',                          dark:true,  en:'For the fans · phones & IoT',               zh:'为发烧而生 · 手机 · IoT' },
+  { slug:'mihoyo',        name:'米哈游',       platform:'web', cat:'gaming',   bg:'linear-gradient(135deg,#7b5bff 0%,#ff7ab6 100%)',                          dark:true,  en:'Tech otaku saves the world',                zh:'技术宅拯救世界 · 原神 · 星铁' },
+  { slug:'deepseek',      name:'DeepSeek',     platform:'web', cat:'ai',       bg:'linear-gradient(135deg,#4d6bfe 0%,#2e4ad6 100%)',                          dark:true,  en:'Open-source frontier AI · 蓝鲸',            zh:'探索未至之境 · 开源前沿' },
+  { slug:'kimi',          name:'Kimi',         platform:'web', cat:'ai',       bg:'linear-gradient(135deg,#5538dc 0%,#a88bff 100%)',                          dark:true,  en:'2M-token context · Moonshot',               zh:'长文本 AI · 月之暗面' },
+  { slug:'wenxin',        name:'文心一言',     platform:'web', cat:'ai',       bg:'linear-gradient(135deg,#2932e1 0%,#5163ff 50%,#8e63ff 100%)',              dark:true,  en:'Knowledge-enhanced LLM · Baidu',            zh:'百度 · ERNIE 大模型' },
+  { slug:'qwen',          name:'通义千问',     platform:'web', cat:'ai',       bg:'linear-gradient(135deg,#615ced 0%,#c44cff 100%)',                          dark:true,  en:'Open-source king · Alibaba',                zh:'阿里 · 开源标杆' },
+  { slug:'bilibili',      name:'哔哩哔哩',     platform:'web', cat:'media',    bg:'linear-gradient(135deg,#fb7299 0%,#00a1d6 100%)',                          dark:true,  en:'Gen-Z community · ACG hub',                 zh:'Z 世代社区 · 二次元天堂' },
+  { slug:'xiaomi-ev',     name:'小米汽车',     platform:'web', cat:'auto',     bg:'linear-gradient(135deg,#0a0a0a 0%,#7a0a16 60%,#e1162b 100%)',              dark:true,  en:'SU7 Ultra · 1548 PS',                       zh:'SU7 Ultra · 跑车性能' },
+  { slug:'nio',           name:'蔚来',         platform:'web', cat:'auto',     bg:'linear-gradient(135deg,#00bfff 0%,#0085ff 60%,#0a0a14 100%)',              dark:true,  en:'NIO House · premium EV',                    zh:'NIO House · 高端电车' },
+  { slug:'li-auto',       name:'理想',         platform:'web', cat:'auto',     bg:'linear-gradient(135deg,#2a7e3f 0%,#1d5c2a 100%)',                          dark:true,  en:'Family EV · MEGA / L9',                     zh:'移动的家 · 家庭场景' },
+  { slug:'zeekr',         name:'极氪',         platform:'web', cat:'auto',     bg:'linear-gradient(135deg,#0a0a0a 0%,#1a2a4a 60%,#0061ff 100%)',              dark:true,  en:'001 FR · luxury minimalist',                zh:'极简几何 · 豪华电车' },
+
+  // ===== Tier 5 — consumer iOS + SaaS =====
+  { slug:'youtube-ios',     name:'YouTube',     platform:'ios', cat:'video',        bg:'linear-gradient(135deg,#ff0000 0%,#9e0000 100%)',           dark:true,  en:'Video · 16:9 cards + Shorts', zh:'视频 · 16:9 卡片 + Shorts' },
+  { slug:'tiktok-ios',      name:'TikTok',      platform:'ios', cat:'video',        bg:'linear-gradient(135deg,#fe2c55 0%,#000 50%,#25f4ee 100%)',  dark:true,  en:'Short video · RGB anaglyph logo', zh:'短视频 · RGB 色差 logo' },
+  { slug:'hinge-ios',       name:'Hinge',       platform:'ios', cat:'dating',       bg:'linear-gradient(135deg,#fff 0%,#5d3f92 100%)',              dark:false, en:'Dating · prompt cards · violet', zh:'约会 · 提示卡 · 紫罗兰' },
+  { slug:'starbucks-ios',   name:'Starbucks',   platform:'ios', cat:'food',         bg:'linear-gradient(135deg,#006241 0%,#1e3932 100%)',           dark:true,  en:'Coffee · star reward arc', zh:'咖啡 · 星币圆弧进度' },
+  { slug:'doordash-ios',    name:'DoorDash',    platform:'ios', cat:'food',         bg:'linear-gradient(135deg,#ff3008 0%,#cc2406 100%)',           dark:true,  en:'Delivery · scarlet kangaroo', zh:'外卖 · 猩红袋鼠' },
+  { slug:'robinhood-ios',   name:'Robinhood',   platform:'ios', cat:'fintech',      bg:'linear-gradient(135deg,#00c805 0%,#ff5000 100%)',           dark:true,  en:'Trading · green up / orange down', zh:'交易 · 涨绿 / 跌橙' },
+  { slug:'uber-ios',        name:'Uber',        platform:'ios', cat:'travel',       bg:'linear-gradient(180deg,#000 0%,#1a1a1a 100%)',              dark:true,  en:'Ride · map-first · pill buttons', zh:'打车 · 地图优先 · 药丸按钮' },
+  { slug:'airtable',   name:'Airtable',   platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#ff6b35 0%,#ffc107 50%,#18bfff)',              dark:true,  en:'Database meets spreadsheet', zh:'数据库 × 表格' },
+  { slug:'cal',        name:'Cal.com',    platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#000 0%,#1a1a1a 50%,#fff)',                    dark:true,  en:'Open scheduling · monospace', zh:'开源日历 · 等宽字体' },
+  { slug:'intercom',   name:'Intercom',   platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#0057ff 0%,#003eb3 50%,#000)',                 dark:true,  en:'Customer messaging · cobalt', zh:'客户消息 · 钴蓝' },
+  { slug:'miro',       name:'Miro',       platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#fff200 0%,#ffec00 50%,#000)',                 dark:false, en:'Whiteboard yellow · sticky notes', zh:'白板黄 · 便利贴' },
+  { slug:'slack',      name:'Slack',      platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#4a154b 0%,#36c5f0 50%,#ecb22e 100%)',         dark:true,  en:'Four-color hash bouquet', zh:'四色井号花束' },
+  { slug:'superhuman', name:'Superhuman', platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#1a1a1a 0%,#a855f7 100%)',                     dark:true,  en:'Fast email · purple gradient', zh:'极速邮件 · 紫色渐变' },
+  { slug:'webflow',    name:'Webflow',    platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#4353ff 0%,#1d2bf0 100%)',                     dark:true,  en:'Visual web builder · royal blue', zh:'可视化建站 · 皇家蓝' },
+  { slug:'zapier',     name:'Zapier',     platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#ff4a00 0%,#cc3a00 100%)',                     dark:true,  en:'Automation orange · zap glyph', zh:'自动化橙 · 闪电符' },
+  { slug:'clay',       name:'Clay',       platform:'web', cat:'saas',      bg:'linear-gradient(135deg,#ffd6a5 0%,#ff8eb0 50%,#a0c4ff 100%)',         dark:false, en:'Sales prospecting · pastel mosaic', zh:'销售开发 · 柔色拼贴' },
+  { slug:'ibm',        name:'IBM',        platform:'web', cat:'enterprise',bg:'linear-gradient(135deg,#0530ad 0%,#001d6c 100%)',                     dark:true,  en:'Enterprise · IBM Plex blue', zh:'企业 · IBM Plex 蓝' },
+  { slug:'meta',       name:'Meta',       platform:'web', cat:'enterprise',bg:'linear-gradient(135deg,#0064e0 0%,#0046a3 100%)',                     dark:true,  en:'Platform · gradient blue infinity', zh:'平台 · 渐变蓝无穷符' },
+  { slug:'nvidia',     name:'NVIDIA',     platform:'web', cat:'enterprise',bg:'linear-gradient(135deg,#76b900 0%,#1a1a1a 100%)',                     dark:true,  en:'GPU compute · neon leaf', zh:'GPU 算力 · 霓虹叶' },
+  { slug:'expo',       name:'Expo',       platform:'web', cat:'enterprise',bg:'linear-gradient(135deg,#000 0%,#1a1a1a 100%)',                        dark:true,  en:'React Native · pitch black', zh:'React Native · 纯黑' },
+
+  // ===== Tier 6 — fintech + consumer =====
+  { slug:'coinbase',   name:'Coinbase',   platform:'web', cat:'fintech',   bg:'linear-gradient(135deg,#0052ff 0%,#003ad6 100%)',                     dark:true,  en:'Crypto · institutional blue', zh:'加密 · 机构蓝' },
+  { slug:'revolut',    name:'Revolut',    platform:'web', cat:'fintech',   bg:'linear-gradient(135deg,#000 0%,#0066ff 100%)',                        dark:true,  en:'Neobank · black & vivid blue', zh:'新型银行 · 黑 + 鲜蓝' },
+  { slug:'wise',       name:'Wise',       platform:'web', cat:'fintech',   bg:'linear-gradient(135deg,#9fe870 0%,#163300 100%)',                     dark:false, en:'Money transfer · forest + lime', zh:'跨境汇款 · 森林 + 青柠' },
+  { slug:'binance',    name:'Binance',    platform:'web', cat:'fintech',   bg:'linear-gradient(135deg,#f3ba2f 0%,#000 100%)',                        dark:true,  en:'Crypto exchange · binance gold', zh:'加密交易所 · 币安金' },
+  { slug:'kraken',     name:'Kraken',     platform:'web', cat:'fintech',   bg:'linear-gradient(135deg,#5841d8 0%,#3b2db8 100%)',                     dark:true,  en:'Crypto exchange · pro purple', zh:'加密交易所 · 专业紫' },
+  { slug:'mastercard', name:'Mastercard', platform:'web', cat:'fintech',   bg:'linear-gradient(135deg,#eb001b 0%,#ff5f00 50%,#f79e1b 100%)',         dark:true,  en:'Payments · interlocking circles', zh:'支付 · 交叠圆环' },
+  { slug:'starbucks',  name:'Starbucks',  platform:'web', cat:'consumer',  bg:'linear-gradient(135deg,#006241 0%,#1e3932 100%)',                     dark:true,  en:'Coffee · forest green siren', zh:'咖啡 · 森林绿美人鱼' },
+  { slug:'nike',       name:'Nike',       platform:'web', cat:'consumer',  bg:'linear-gradient(135deg,#fff 0%,#000 100%)',                           dark:false, en:'Swoosh · just do it', zh:'勾型 · 标语硬核' },
+  { slug:'pinterest',  name:'Pinterest',  platform:'web', cat:'consumer',  bg:'linear-gradient(135deg,#e60023 0%,#a8081e 100%)',                     dark:true,  en:'Vision board · scarlet', zh:'视觉收藏 · 猩红' },
+  { slug:'shopify',    name:'Shopify',    platform:'web', cat:'consumer',  bg:'linear-gradient(135deg,#96bf48 0%,#5e8e3e 100%)',                     dark:true,  en:'Commerce · olive green', zh:'电商 · 橄榄绿' },
+  { slug:'uber',       name:'Uber',       platform:'web', cat:'consumer',  bg:'linear-gradient(180deg,#000 0%,#1a1a1a 100%)',                        dark:true,  en:'Mobility · sans-serif noir', zh:'出行 · 极简黑无衬线' },
+  { slug:'tesla',      name:'Tesla',      platform:'web', cat:'auto',      bg:'linear-gradient(180deg,#1a1a1a 0%,#000 100%)',                        dark:true,  en:'EV · stark mono · cinematic', zh:'电动车 · 极简黑 · 电影感' },
+  { slug:'bmw',        name:'BMW',        platform:'web', cat:'auto',      bg:'linear-gradient(135deg,#0066b1 0%,#001a33 100%)',                     dark:true,  en:'Luxury sedan · imperial blue', zh:'豪华轿车 · 帝国蓝' },
+
+  // ===== Tier 7 — auto · gaming · media =====
+  { slug:'ferrari',    name:'Ferrari',    platform:'web', cat:'auto',      bg:'linear-gradient(135deg,#ff2800 0%,#a31000 100%)',                     dark:true,  en:'F1 red · prancing horse', zh:'法拉利红 · 跃马' },
+  { slug:'lamborghini',name:'Lambo',      platform:'web', cat:'auto',      bg:'linear-gradient(135deg,#1a1a1a 0%,#ffc107 100%)',                     dark:true,  en:'Italian supercar · black + gold', zh:'意式超跑 · 黑 + 金' },
+  { slug:'bmw-m',      name:'BMW M',      platform:'web', cat:'auto',      bg:'linear-gradient(90deg,#0066b1 0%,#ffffff 33%,#cc0000 66%,#000 100%)', dark:true,  en:'Motorsport · racing tricolor', zh:'高性能 · 赛车三色' },
+  { slug:'bugatti',    name:'Bugatti',    platform:'web', cat:'auto',      bg:'linear-gradient(135deg,#0a0a0c 0%,#0c1421 100%)',                     dark:true,  en:'Hypercar · cobalt obsidian', zh:'超跑 · 钴蓝黑曜石' },
+  { slug:'renault',    name:'Renault',    platform:'web', cat:'auto',      bg:'linear-gradient(135deg,#ffd200 0%,#1a1a1a 100%)',                     dark:true,  en:'French auto · diamond yellow', zh:'法系车 · 钻石黄' },
+  { slug:'playstation',name:'PlayStation',platform:'web', cat:'gaming',    bg:'linear-gradient(135deg,#0070d1 0%,#003791 100%)',                     dark:true,  en:'Gaming · PS blue', zh:'游戏 · PS 蓝' },
+  { slug:'spacex',     name:'SpaceX',     platform:'web', cat:'gaming',    bg:'linear-gradient(180deg,#000 0%,#0a0a0c 100%)',                        dark:true,  en:'Aerospace · cosmic black', zh:'航天 · 宇宙黑' },
+  { slug:'vodafone',   name:'Vodafone',   platform:'web', cat:'gaming',    bg:'linear-gradient(135deg,#e60000 0%,#a30000 100%)',                     dark:true,  en:'Telecom · signal red', zh:'通信 · 信号红' },
+  { slug:'theverge',   name:'The Verge',  platform:'web', cat:'media',     bg:'linear-gradient(135deg,#5200ff 0%,#fff200 100%)',                     dark:true,  en:'Tech editorial · purple + acid', zh:'科技编辑 · 紫 + 酸黄' },
+  { slug:'wired',      name:'Wired',      platform:'web', cat:'media',     bg:'linear-gradient(135deg,#000 0%,#fff 100%)',                           dark:true,  en:'Tech magazine · brutalist serif', zh:'科技杂志 · 粗野衬线' },
+];
+
+// ===== STATE =====
+let lang = 'en';
+let activeFilter = 'all';
+let searchQuery = '';
+
+const grid = document.getElementById('grid');
+const empty = document.getElementById('empty');
+const searchInput = document.getElementById('search');
+const countEl = document.getElementById('count');
+
+function fileHref(b) {
+  if (b.platform === 'ios') return `assets/ios/design.${b.slug}.html`;
+  return `assets/web/design.${b.slug}.html`;
+}
+
+function render() {
+  const q = searchQuery.toLowerCase().trim();
+  const filtered = brands.filter(b => {
+    if (activeFilter === 'web' || activeFilter === 'ios') {
+      if (b.platform !== activeFilter) return false;
+    } else if (activeFilter === 'china') {
+      const chinaSlugs = ['feishu', 'douyin', 'doubao', 'aliyun', 'dingtalk', 'alipay', 'tencent-cloud', 'wechat', 'yuque', 'xiaomi', 'mihoyo', 'deepseek', 'kimi', 'wenxin', 'qwen', 'bilibili', 'xiaomi-ev', 'nio', 'li-auto', 'zeekr'];
+      if (!chinaSlugs.includes(b.slug)) return false;
+    } else if (activeFilter !== 'all') {
+      const catMap = {
+        ai: ['ai'],
+        dev: ['dev'],
+        saas: ['saas','productivity'],
+        fintech: ['fintech'],
+        auto: ['auto'],
+        social: ['social','messaging'],
+        media: ['media','video','music']
+      };
+      const cats = catMap[activeFilter] || [activeFilter];
+      if (!cats.includes(b.cat)) return false;
+    }
+    if (q) {
+      const hay = (b.name + ' ' + b.slug + ' ' + b.cat + ' ' + b.en + ' ' + b.zh).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  countEl.textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+  } else {
+    grid.style.display = '';
+    empty.style.display = 'none';
+  }
+
+  grid.innerHTML = filtered.map(b => `
+    <a class="card ${b.dark ? 'dark' : 'light'}" href="${fileHref(b)}" target="_blank">
+      <div class="card-hero" style="background:${b.bg}">
+        <div class="card-platform">${b.platform === 'ios' ? 'iOS' : 'Web'}</div>
+        <div class="card-cat">${b.cat}</div>
+        <div class="card-name">${b.name}</div>
+      </div>
+      <div class="card-foot">
+        <div class="card-tag" data-en="${b.en}" data-zh="${b.zh}">${lang === 'zh' ? b.zh : b.en}</div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      </div>
+    </a>
+  `).join('');
+}
+
+// ===== EVENTS =====
+document.querySelectorAll('.lang-toggle button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.lang-toggle button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    lang = b.dataset.lang;
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = el.dataset[lang] || el.dataset.en;
+    });
+    searchInput.placeholder = lang === 'zh' ? '搜索… 试试 "spotify"' : 'Search… try "spotify"';
+    render();
+  });
+});
+
+document.querySelectorAll('.fp').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.fp').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    activeFilter = b.dataset.filter;
+    render();
+  });
+});
+
+searchInput.addEventListener('input', e => {
+  searchQuery = e.target.value;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

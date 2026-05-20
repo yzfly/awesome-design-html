@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>理想汽车 Li Auto — Design System Study</title>
+<meta name="description" content="理想汽车 L9 / L8 / L7 / MEGA 设计语言研究: 白底温暖, 理想绿主调, 圆润友好, 家庭场景叙事, 增程式智能电动车. 营销 Demo + 设计系统参考." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Brand */
+  --li-green: #2A7E3F;
+  --li-green-deep: #1F5F2F;
+  --li-green-light: #4DA065;
+  --li-green-soft: #E8F4EC;
+  --li-orange: #FF7A45;
+  --li-orange-soft: #FFEDDE;
+  /* Surfaces */
+  --black: #1A1F1B;
+  --warm-50: #FBFAF7;
+  --warm-100: #F5F3EE;
+  --warm-200: #EAE6DE;
+  --warm-300: #D6D2C7;
+  --white: #FFFFFF;
+  /* Text */
+  --text-dark: #1A1F1B;
+  --text-body: #4A5052;
+  --text-tert: #828A8C;
+  --text-light: rgba(255,255,255,0.92);
+  /* Type */
+  --font-display: "Inter", "Noto Sans SC", "PingFang SC", -apple-system, sans-serif;
+  --font-text: "Noto Sans SC", "Inter", "PingFang SC", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radius */
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-full: 999px;
+  /* Motion */
+  --t: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--warm-50);
+  color: var(--text-dark);
+  font-family: var(--font-text);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Nav ===== */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; padding: 16px 32px; transition: background var(--t), box-shadow var(--t); }
+.nav.scrolled { background: rgba(251,250,247,0.92); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 1px 0 rgba(0,0,0,0.04); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 32px; height: 32px; border-radius: 8px; background: var(--li-green); display: grid; place-items: center; color: var(--white); font-family: var(--font-display); font-weight: 800; font-size: 16px; }
+.brand-text { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.5px; }
+.brand-text .cn { font-family: var(--font-text); margin-left: 4px; }
+.nav-mid { display: flex; gap: 4px; }
+.nav-btn { background: transparent; border: 0; color: var(--text-dark); font-size: 14px; font-weight: 500; padding: 8px 16px; min-height: 36px; border-radius: var(--r-full); cursor: pointer; transition: color var(--t), background var(--t); }
+.nav-btn:hover { background: var(--warm-100); color: var(--li-green); }
+.nav-right { display: flex; gap: 8px; align-items: center; }
+.icon-btn { background: transparent; border: 0; width: 38px; height: 38px; border-radius: var(--r-full); display: grid; place-items: center; color: var(--text-dark); cursor: pointer; transition: background var(--t); }
+.icon-btn:hover { background: var(--warm-100); }
+.icon-btn svg { width: 18px; height: 18px; }
+
+/* ===== Buttons ===== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 600; padding: 0 24px; min-height: 46px; min-width: 160px; border-radius: 12px; border: 1px solid transparent; cursor: pointer; transition: background var(--t), color var(--t), border-color var(--t), transform 0.15s; }
+.btn:active { transform: scale(0.98); }
+.btn-green { background: var(--li-green); color: var(--white); }
+.btn-green:hover { background: var(--li-green-deep); }
+.btn-orange { background: var(--li-orange); color: var(--white); }
+.btn-orange:hover { background: #ee6633; }
+.btn-outline { background: transparent; color: var(--text-dark); border-color: var(--text-dark); }
+.btn-outline:hover { background: var(--text-dark); color: var(--white); }
+.btn-light { background: var(--white); color: var(--text-dark); border-color: var(--warm-200); }
+.btn-light:hover { border-color: var(--li-green); color: var(--li-green); }
+
+/* ===== Hero ===== */
+.hero { position: relative; min-height: 100vh; padding: 130px 24px 80px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; align-items: center; background:
+  radial-gradient(140% 80% at 50% 0%, #f4f9f6 0%, #fbfaf7 60%, #fbfaf7 100%);
+}
+.hero::before { content: ""; position: absolute; left: 50%; top: 25%; width: 100%; height: 70%; transform: translateX(-50%); background: radial-gradient(50% 40% at 50% 50%, rgba(42,126,63,0.08), transparent 70%); pointer-events: none; }
+.hero-top { text-align: center; position: relative; z-index: 2; max-width: 920px; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: var(--r-full); background: var(--li-green-soft); color: var(--li-green); font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 22px; }
+.hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--li-green); }
+.hero-title { font-family: var(--font-display); font-size: clamp(38px, 6vw, 72px); font-weight: 800; color: var(--text-dark); line-height: 1.1; margin: 0 0 20px; letter-spacing: -1.5px; }
+.hero-title .green { color: var(--li-green); }
+.hero-sub { font-size: 17px; color: var(--text-body); margin: 0 auto; max-width: 600px; line-height: 1.6; }
+.hero-stage { width: min(1100px, 95vw); position: relative; z-index: 2; }
+.hero-bottom { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; max-width: 1100px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+/* Model tabs */
+.model-tabs { display: flex; gap: 6px; padding: 6px; background: var(--white); border-radius: var(--r-full); border: 1px solid var(--warm-200); }
+.model-tab { padding: 10px 22px; border-radius: var(--r-full); font-size: 14px; font-weight: 600; color: var(--text-body); cursor: pointer; transition: background var(--t), color var(--t); border: 0; background: transparent; }
+.model-tab:hover { color: var(--li-green); }
+.model-tab.active { background: var(--li-green); color: var(--white); }
+
+/* ===== Section base ===== */
+.section { padding: 120px 24px; position: relative; }
+.section.light { background: var(--warm-50); }
+.section.white { background: var(--white); }
+.section.green { background: var(--li-green); color: var(--white); }
+.section.dark { background: var(--black); color: var(--white); }
+.section-head { max-width: 1100px; margin: 0 auto 64px; }
+.section-head.center { text-align: center; }
+.section-head.center .section-desc { margin-left: auto; margin-right: auto; }
+.section-eyebrow { display: inline-block; font-size: 12px; font-weight: 600; color: var(--li-green); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
+.section.green .section-eyebrow { color: rgba(255,255,255,0.7); }
+.section-title { font-family: var(--font-display); font-size: clamp(34px, 4.5vw, 56px); font-weight: 800; color: var(--text-dark); line-height: 1.1; letter-spacing: -1.5px; margin: 0 0 16px; }
+.section.green .section-title, .section.dark .section-title { color: var(--white); }
+.section-desc { font-size: 16px; color: var(--text-body); max-width: 640px; line-height: 1.65; margin: 0; }
+.section.green .section-desc, .section.dark .section-desc { color: rgba(255,255,255,0.82); }
+
+/* ===== Spec strip ===== */
+.spec-row { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 48px 0; background: var(--white); border-radius: var(--r-lg); border: 1px solid var(--warm-200); }
+.spec-cell { text-align: center; padding: 0 24px; border-right: 1px solid var(--warm-200); }
+.spec-cell:last-child { border-right: 0; }
+.spec-val { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 48px); font-weight: 800; color: var(--li-green); letter-spacing: -1px; line-height: 1; }
+.spec-val .unit { font-size: 14px; font-weight: 500; color: var(--text-tert); margin-left: 4px; }
+.spec-label { font-size: 13px; color: var(--text-body); margin-top: 12px; font-weight: 500; }
+
+/* ===== Family scene hero card ===== */
+.scene { max-width: 1240px; margin: 0 auto; background: linear-gradient(135deg, #e8f4ec 0%, #d3e9da 100%); border-radius: var(--r-xl); padding: 64px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.scene-left h2 { font-family: var(--font-display); font-size: 40px; font-weight: 800; color: var(--text-dark); margin: 0 0 16px; letter-spacing: -1.5px; line-height: 1.1; }
+.scene-left h2 .accent { color: var(--li-green); }
+.scene-left p { font-size: 15px; color: var(--text-body); line-height: 1.65; margin: 0 0 28px; }
+.scene-feats { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 14px; }
+.scene-feats li { font-size: 14px; color: var(--text-body); display: flex; gap: 12px; align-items: flex-start; }
+.scene-feats .ico { width: 22px; height: 22px; border-radius: 6px; background: var(--li-green); color: var(--white); display: grid; place-items: center; flex-shrink: 0; }
+.scene-feats .ico svg { width: 12px; height: 12px; }
+.scene-illu { background: var(--white); border-radius: var(--r-lg); aspect-ratio: 4/3; display: grid; place-items: center; padding: 32px; }
+.scene-illu svg { width: 100%; }
+
+/* ===== Feature grid (rounded warm cards) ===== */
+.feat-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.feat-card { background: var(--white); border-radius: var(--r-lg); padding: 36px 32px; transition: transform var(--t), box-shadow var(--t); border: 1px solid transparent; }
+.feat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(42,126,63,0.08); border-color: var(--li-green-soft); }
+.feat-card.green-card { background: var(--li-green); color: var(--white); }
+.feat-card.orange-card { background: linear-gradient(135deg, var(--li-orange) 0%, #e85a2a 100%); color: var(--white); }
+.feat-card.dark-card { background: var(--black); color: var(--white); }
+.feat-ico { width: 52px; height: 52px; border-radius: var(--r-md); background: var(--li-green-soft); color: var(--li-green); display: grid; place-items: center; margin-bottom: 24px; }
+.feat-ico svg { width: 24px; height: 24px; }
+.feat-card.green-card .feat-ico, .feat-card.orange-card .feat-ico, .feat-card.dark-card .feat-ico { background: rgba(255,255,255,0.18); color: var(--white); }
+.feat-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; margin: 0 0 10px; letter-spacing: -0.5px; }
+.feat-card p { font-size: 14px; line-height: 1.65; opacity: 0.85; margin: 0 0 22px; }
+.feat-card .feat-meta { display: flex; align-items: baseline; gap: 8px; padding-top: 22px; border-top: 1px solid var(--warm-100); }
+.feat-card.green-card .feat-meta, .feat-card.orange-card .feat-meta, .feat-card.dark-card .feat-meta { border-top-color: rgba(255,255,255,0.18); }
+.feat-meta strong { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
+.feat-meta span { font-size: 13px; opacity: 0.7; }
+
+/* ===== Model selector ===== */
+.models { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.model-card { background: var(--white); border-radius: var(--r-lg); padding: 28px 24px; transition: transform var(--t), box-shadow var(--t); border: 1px solid var(--warm-200); display: flex; flex-direction: column; }
+.model-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(42,126,63,0.08); border-color: var(--li-green); }
+.model-tag { display: inline-block; padding: 4px 10px; background: var(--li-green-soft); color: var(--li-green); font-size: 11px; font-weight: 600; border-radius: var(--r-full); margin-bottom: 14px; width: fit-content; }
+.model-name { font-family: var(--font-display); font-size: 28px; font-weight: 800; letter-spacing: -1px; color: var(--text-dark); margin: 0 0 6px; }
+.model-desc { font-size: 13px; color: var(--text-tert); margin-bottom: 18px; line-height: 1.5; }
+.model-mockup { aspect-ratio: 4/2.6; background: var(--warm-100); border-radius: var(--r-md); margin-bottom: 18px; display: grid; place-items: center; padding: 16px; }
+.model-mockup svg { width: 100%; height: 100%; }
+.model-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 20px; }
+.model-price .amount { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: var(--text-dark); letter-spacing: -0.5px; }
+.model-price .unit { font-size: 13px; color: var(--text-body); }
+.model-feats { list-style: none; padding: 0; margin: 0 0 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.model-feats li { font-size: 12px; color: var(--text-body); display: flex; gap: 8px; align-items: center; }
+.model-feats svg { width: 12px; height: 12px; color: var(--li-green); flex-shrink: 0; }
+
+/* ===== Trust band (green) ===== */
+.trust { background: var(--li-green); color: var(--white); padding: 100px 24px; text-align: center; }
+.trust-eyebrow { display: inline-block; font-size: 12px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+.trust-title { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 56px; }
+.trust-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+.trust-num { font-family: var(--font-display); font-size: 52px; font-weight: 800; color: var(--white); letter-spacing: -1.5px; line-height: 1; }
+.trust-num .unit { font-size: 20px; color: rgba(255,255,255,0.7); margin-left: 4px; font-weight: 600; }
+.trust-label { font-size: 13px; color: rgba(255,255,255,0.82); margin-top: 14px; line-height: 1.5; }
+
+/* ===== DESIGN SYSTEM ===== */
+.ds-section { background: var(--warm-100); padding: 120px 24px 144px; }
+.ds-wrap { max-width: 1280px; margin: 0 auto; }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 64px; }
+.ds-eyebrow { font-size: 12px; font-weight: 600; color: var(--li-green); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; }
+.ds-intro h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); font-weight: 800; margin: 0 0 12px; line-height: 1.1; color: var(--text-dark); letter-spacing: -1.5px; }
+.ds-intro p { font-size: 15px; color: var(--text-body); line-height: 1.65; margin: 0; max-width: 560px; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--li-green); color: var(--white); border-radius: 12px; font-size: 13px; font-weight: 600; transition: background var(--t); }
+.ds-source:hover { background: var(--li-green-deep); }
+.ds-block { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--warm-200); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: var(--text-dark); margin: 0 0 8px; letter-spacing: -0.5px; }
+.ds-desc { font-size: 14px; color: var(--text-body); margin: 0 0 28px; max-width: 620px; line-height: 1.65; }
+.ds-caption { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tert); margin: 32px 0 14px; }
+.ds-swatches { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
+.ds-sw { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--warm-200); }
+.ds-sw .chip { height: 84px; }
+.ds-sw .meta { padding: 12px 14px; }
+.ds-sw .name { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.ds-sw .val { font-size: 11px; color: var(--text-tert); font-family: var(--font-mono); margin-top: 2px; }
+.ds-type-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--warm-200); border-radius: 12px; overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--warm-200); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-tert); background: var(--warm-50); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--li-green); }
+.ds-radius { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.ds-radius-cell { background: var(--white); border: 1px solid var(--warm-200); padding: 22px 14px; text-align: center; border-radius: 12px; }
+.ds-radius-box { width: 64px; height: 64px; background: var(--li-green); margin: 0 auto 12px; }
+.ds-radius-label { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.ds-radius-val { font-size: 11px; color: var(--text-tert); font-family: var(--font-mono); margin-top: 2px; }
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.ds-card { background: var(--white); border: 1px solid var(--warm-200); border-radius: var(--r-md); padding: 26px; }
+.ds-card h5 { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-dark); margin: 0 0 18px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; }
+.ds-input { background: var(--white); border: 1px solid var(--warm-200); border-radius: 12px; padding: 12px 16px; font-size: 14px; font-family: inherit; color: var(--text-dark); outline: none; transition: border-color var(--t); width: 100%; }
+.ds-input:focus { border-color: var(--li-green); }
+.ds-tag { display: inline-flex; align-items: center; padding: 5px 12px; border-radius: var(--r-full); font-size: 11px; font-weight: 600; }
+.ds-tag-green { background: var(--li-green); color: var(--white); }
+.ds-tag-soft { background: var(--li-green-soft); color: var(--li-green); }
+.ds-tag-orange { background: var(--li-orange); color: var(--white); }
+.ds-tag-outline { background: var(--white); color: var(--text-body); border: 1px solid var(--warm-200); }
+
+/* ===== Footer ===== */
+footer { background: var(--white); padding: 64px 24px 40px; border-top: 1px solid var(--warm-200); }
+.foot-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--warm-200); }
+.foot-col h4 { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--text-dark); margin: 0 0 16px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot-col a { font-size: 13px; color: var(--text-body); transition: color var(--t); }
+.foot-col a:hover { color: var(--li-green); }
+.foot-brand-mark { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.foot-brand-mark .m { width: 36px; height: 36px; border-radius: 10px; background: var(--li-green); display: grid; place-items: center; color: #fff; font-weight: 800; font-family: var(--font-display); }
+.foot-brand-mark .t { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.5px; }
+.foot-brand-desc { font-size: 13px; color: var(--text-body); line-height: 1.65; max-width: 340px; margin: 0; }
+.foot-bottom { max-width: 1280px; margin: 32px auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--text-tert); }
+
+/* ===== Floating source link ===== */
+.src-link { position: fixed; right: 24px; bottom: 24px; z-index: 60; background: var(--li-green); color: var(--white); padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 600; transition: background var(--t), transform var(--t); box-shadow: 0 12px 32px rgba(42,126,63,0.32); }
+.src-link:hover { background: var(--text-dark); transform: translateY(-2px); }
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .nav { padding: 12px 16px; }
+  .nav-mid { display: none; }
+  .spec-row { grid-template-columns: repeat(2, 1fr); padding: 32px 0; }
+  .spec-cell { border-right: 0; border-bottom: 1px solid var(--warm-200); padding: 16px; }
+  .spec-cell:nth-child(2) { border-right: 0; }
+  .spec-cell:nth-last-child(-n+2) { border-bottom: 0; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .models { grid-template-columns: 1fr 1fr; }
+  .trust-grid { grid-template-columns: 1fr 1fr; }
+  .scene { grid-template-columns: 1fr; padding: 40px 28px; }
+  .ds-swatches, .ds-radius { grid-template-columns: repeat(2, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .section { padding: 80px 16px; }
+  .models, .trust-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<header class="nav" id="topNav">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <span class="brand-mark">L</span>
+      <span class="brand-text">LI AUTO<span class="cn">· 理想</span></span>
+    </a>
+    <nav class="nav-mid">
+      <button class="nav-btn">L9</button>
+      <button class="nav-btn">L8</button>
+      <button class="nav-btn">L7</button>
+      <button class="nav-btn">L6</button>
+      <button class="nav-btn">MEGA</button>
+      <button class="nav-btn">充电</button>
+      <button class="nav-btn">服务</button>
+      <button class="nav-btn">门店</button>
+    </nav>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="搜索">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <a class="btn btn-green" href="#" style="min-width:0;padding:0 20px;min-height:40px;font-size:13px;border-radius:10px">预约试驾</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-eyebrow"><span class="dot"></span>家庭旗舰 SUV · L9 上市</div>
+    <h1 class="hero-title">创造<span class="green">移动的家</span><br/>创造幸福的家</h1>
+    <p class="hero-sub">六座大空间 · 三屏车机 · 双冰箱 · 后排娱乐屏 · 增程式无续航焦虑 · 智能驾驶全场景守护.</p>
+  </div>
+
+  <div class="hero-stage" aria-hidden="true">
+    <svg viewBox="0 0 1100 300" width="100%">
+      <defs>
+        <linearGradient id="l9Body" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#f8faf9"/>
+          <stop offset="0.55" stop-color="#d8e3dc"/>
+          <stop offset="1" stop-color="#8da099"/>
+        </linearGradient>
+        <linearGradient id="l9Glass" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#2a3530"/>
+          <stop offset="1" stop-color="#0e1410"/>
+        </linearGradient>
+      </defs>
+      <!-- ground -->
+      <ellipse cx="550" cy="270" rx="450" ry="12" fill="rgba(42,126,63,0.14)" filter="blur(8px)"/>
+      <!-- L9 SUV body (taller, larger) -->
+      <path d="M70,224 C110,180 220,140 360,128 C500,118 660,118 800,130 C920,142 1010,170 1040,210 L1040,250 C1040,260 1030,268 1015,268 L85,268 C65,268 55,260 55,250 Z" fill="url(#l9Body)"/>
+      <!-- roof high -->
+      <path d="M250,128 C310,70 470,58 580,58 C690,58 760,72 820,128 L760,150 L300,150 Z" fill="url(#l9Body)"/>
+      <!-- glass large panorama -->
+      <path d="M275,128 C335,80 470,68 575,68 C675,68 740,80 800,128 L750,140 L325,140 Z" fill="url(#l9Glass)"/>
+      <!-- side door cuts (3 rows) -->
+      <path d="M380,140 L380,232" stroke="rgba(141,160,153,0.6)" stroke-width="0.6"/>
+      <path d="M560,140 L560,232" stroke="rgba(141,160,153,0.6)" stroke-width="0.6"/>
+      <path d="M740,140 L740,232" stroke="rgba(141,160,153,0.6)" stroke-width="0.6"/>
+      <!-- highlight -->
+      <path d="M120,206 C300,184 700,180 980,206" stroke="rgba(255,255,255,0.6)" stroke-width="1" fill="none"/>
+      <!-- wheels -->
+      <g>
+        <circle cx="240" cy="252" r="48" fill="#1A1F1B"/>
+        <circle cx="240" cy="252" r="36" fill="#2c352f"/>
+        <g stroke="#d6d2c7" stroke-width="2.2" fill="none">
+          <line x1="240" y1="220" x2="240" y2="284"/>
+          <line x1="208" y1="252" x2="272" y2="252"/>
+          <line x1="218" y1="230" x2="262" y2="274"/>
+          <line x1="262" y1="230" x2="218" y2="274"/>
+        </g>
+        <circle cx="240" cy="252" r="6" fill="#2A7E3F"/>
+      </g>
+      <g>
+        <circle cx="860" cy="252" r="48" fill="#1A1F1B"/>
+        <circle cx="860" cy="252" r="36" fill="#2c352f"/>
+        <g stroke="#d6d2c7" stroke-width="2.2" fill="none">
+          <line x1="860" y1="220" x2="860" y2="284"/>
+          <line x1="828" y1="252" x2="892" y2="252"/>
+          <line x1="838" y1="230" x2="882" y2="274"/>
+          <line x1="882" y1="230" x2="838" y2="274"/>
+        </g>
+        <circle cx="860" cy="252" r="6" fill="#2A7E3F"/>
+      </g>
+      <!-- front lightbar (signature) -->
+      <rect x="1010" y="180" width="38" height="3" rx="1.5" fill="#2A7E3F"/>
+      <rect x="1010" y="188" width="38" height="2" rx="1" fill="#4DA065"/>
+      <!-- LI logo -->
+      <g transform="translate(525,222)">
+        <rect width="50" height="20" rx="4" fill="#fff"/>
+        <text x="25" y="14" text-anchor="middle" fill="#2A7E3F" font-family="Inter" font-size="11" font-weight="800">LI L9</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-actions">
+      <a class="btn btn-green" href="#">预约试驾</a>
+      <a class="btn btn-outline" href="#">立即配置</a>
+    </div>
+    <div class="model-tabs">
+      <button class="model-tab">MEGA</button>
+      <button class="model-tab active">L9</button>
+      <button class="model-tab">L8</button>
+      <button class="model-tab">L7</button>
+      <button class="model-tab">L6</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Spec strip ===== -->
+<section class="section light" style="padding-top:64px;padding-bottom:64px">
+  <div class="spec-row">
+    <div class="spec-cell">
+      <div class="spec-val">1315<span class="unit">km</span></div>
+      <div class="spec-label">CLTC 综合续航</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">6<span class="unit">座</span></div>
+      <div class="spec-label">超大家庭空间</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">5.3<span class="unit">s</span></div>
+      <div class="spec-label">0-100 km/h</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">508<span class="unit">TOPS</span></div>
+      <div class="spec-label">AD Max 算力</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Family scene block ===== -->
+<section class="section white">
+  <div class="scene">
+    <div class="scene-left">
+      <h2>这, 是<span class="accent">六口之家</span><br/>都满意的车</h2>
+      <p>从孩子到老人, 从城市通勤到长途旅行, 理想 L9 重新定义了"家用六座 SUV". 不再是凑合, 而是让每个人都能舒展, 都能笑出声.</p>
+      <ul class="scene-feats">
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> 第二排独立航空座椅 · 通风加热按摩</li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> 双冰箱 · 后排 15.7 寸娱乐屏 · 21 扬声器</li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> 第三排成人可坐 · 一键放倒 1080 L 储物</li>
+        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> 双腔空气悬架 · 后排晕车感大幅降低</li>
+      </ul>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-green" href="#">了解 L9</a>
+        <a class="btn btn-light" href="#">VR 看车</a>
+      </div>
+    </div>
+    <div class="scene-illu" aria-hidden="true">
+      <svg viewBox="0 0 320 240" fill="none">
+        <!-- car interior 6-seat top view illustration -->
+        <rect x="40" y="20" width="240" height="200" rx="40" fill="#f5f3ee" stroke="#2A7E3F" stroke-width="2"/>
+        <!-- dashboard / front -->
+        <rect x="60" y="30" width="200" height="32" rx="10" fill="#1A1F1B"/>
+        <rect x="80" y="40" width="40" height="12" rx="2" fill="#2A7E3F"/>
+        <rect x="140" y="40" width="80" height="12" rx="2" fill="#4DA065"/>
+        <!-- row 1 seats -->
+        <rect x="68" y="80" width="52" height="40" rx="14" fill="#fff" stroke="#d6d2c7" stroke-width="1.5"/>
+        <rect x="200" y="80" width="52" height="40" rx="14" fill="#fff" stroke="#d6d2c7" stroke-width="1.5"/>
+        <!-- row 2 captains -->
+        <rect x="68" y="130" width="52" height="40" rx="14" fill="#fff" stroke="#2A7E3F" stroke-width="1.8"/>
+        <rect x="200" y="130" width="52" height="40" rx="14" fill="#fff" stroke="#2A7E3F" stroke-width="1.8"/>
+        <!-- center screen between row 2 -->
+        <rect x="140" y="138" width="40" height="22" rx="3" fill="#2A7E3F"/>
+        <text x="160" y="153" text-anchor="middle" fill="#fff" font-family="Inter" font-size="8" font-weight="700">15.7"</text>
+        <!-- row 3 bench -->
+        <rect x="68" y="180" width="184" height="28" rx="10" fill="#fff" stroke="#d6d2c7" stroke-width="1.5"/>
+        <line x1="130" y1="184" x2="130" y2="204" stroke="#d6d2c7" stroke-width="1"/>
+        <line x1="190" y1="184" x2="190" y2="204" stroke="#d6d2c7" stroke-width="1"/>
+        <!-- fridge -->
+        <rect x="150" y="80" width="20" height="40" rx="3" fill="#2A7E3F"/>
+        <rect x="153" y="84" width="14" height="2" rx="1" fill="#fff"/>
+        <!-- icon legend -->
+        <circle cx="290" cy="40" r="6" fill="#FF7A45"/>
+        <circle cx="290" cy="120" r="6" fill="#2A7E3F"/>
+        <circle cx="290" cy="200" r="6" fill="#4DA065"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Feature grid ===== -->
+<section class="section light">
+  <div class="section-head center">
+    <span class="section-eyebrow">理想全场景</span>
+    <h2 class="section-title">为家庭出行<br/>提供全场景解决方案</h2>
+    <p class="section-desc">不是 racing, 不是性能, 是回家. 理想致力于通过智能与电气化, 让每一次出行, 都成为家庭幸福的延伸.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card green-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/><line x1="9" y1="20" x2="9" y2="14"/><line x1="15" y1="20" x2="15" y2="14"/></svg>
+      </div>
+      <h3>移动的家</h3>
+      <p>六座 / 七座 SUV 与 MEGA MPV, 二排航空座椅, 三排成人可坐. 让家庭出行不再是妥协.</p>
+      <div class="feat-meta"><strong>6座</strong><span>家庭旗舰 · L9 / L8 / MEGA</span></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>增程式 · 无焦虑</h3>
+      <p>纯电优先, 增程兜底. 城市纯电通勤, 长途无忧加油, 综合续航 1300+ km, 一次出发, 一路到家.</p>
+      <div class="feat-meta"><strong>1315</strong><span>km · CLTC 综合续航</span></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>AD Max · 智能驾驶</h3>
+      <p>双 Orin-X + 激光雷达, 城市 NOA 全国可用. 守护每一次接送孩子, 每一次长途旅行.</p>
+      <div class="feat-meta"><strong>508</strong><span>TOPS · 端到端大模型</span></div>
+    </div>
+    <div class="feat-card orange-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <h3>理想同学 · 智能座舱</h3>
+      <p>三屏交互, 多模态大模型, 真正听懂中文家庭语境. 喊一声"理想同学", 全家都能用.</p>
+      <div class="feat-meta"><strong>Mind GPT</strong><span>自研车载大模型</span></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <h3>安全 · 全家放心</h3>
+      <p>全方位 9 安全气囊, 2000MPa 笼式车身, 中保研 G+ 评级. 把家人保护好, 才是最高指标.</p>
+      <div class="feat-meta"><strong>C-NCAP</strong><span>五星 · 中保研 G+</span></div>
+    </div>
+    <div class="feat-card dark-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      </div>
+      <h3>5C 超充 · MEGA 平台</h3>
+      <p>800V 高压平台, 12 分钟补能 500 km. 服务区咖啡还没喝完, 已经能继续上路.</p>
+      <div class="feat-meta"><strong>12min</strong><span>补能 500km · 5C 倍率</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Model selector ===== -->
+<section class="section white">
+  <div class="section-head center">
+    <span class="section-eyebrow">车型矩阵</span>
+    <h2 class="section-title">总有一款 · 适合你的家</h2>
+  </div>
+  <div class="models">
+    <div class="model-card">
+      <div class="model-tag">MPV · 旗舰家庭</div>
+      <h3 class="model-name">MEGA</h3>
+      <div class="model-desc">800V 超充 MPV, 700km 纯电.</div>
+      <div class="model-mockup">
+        <svg viewBox="0 0 200 80" fill="none">
+          <rect x="20" y="20" width="160" height="44" rx="14" fill="#e8f4ec"/>
+          <rect x="36" y="26" width="40" height="20" rx="3" fill="#2A7E3F" opacity="0.8"/>
+          <rect x="84" y="26" width="80" height="20" rx="3" fill="#2A7E3F" opacity="0.4"/>
+          <circle cx="50" cy="68" r="9" fill="#1A1F1B"/>
+          <circle cx="150" cy="68" r="9" fill="#1A1F1B"/>
+        </svg>
+      </div>
+      <div class="model-price"><span class="amount">55.98</span><span class="unit">万起</span></div>
+      <ul class="model-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 700km 纯电续航</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 5C 超充 12 分钟补能</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 七座 · 商务旗舰</li>
+      </ul>
+      <a class="btn btn-light" href="#" style="width:100%">了解 MEGA</a>
+    </div>
+    <div class="model-card">
+      <div class="model-tag">SUV · 全尺寸旗舰</div>
+      <h3 class="model-name">L9</h3>
+      <div class="model-desc">六座大五座 SUV, 1315km.</div>
+      <div class="model-mockup">
+        <svg viewBox="0 0 200 80" fill="none">
+          <path d="M22 60 C30 38 50 26 100 24 C150 26 170 38 178 60 L178 66 C178 70 174 72 168 72 L32 72 C26 72 22 70 22 66 Z" fill="#e8f4ec"/>
+          <path d="M50 24 C70 12 130 12 150 24 L130 36 L70 36 Z" fill="#2A7E3F" opacity="0.4"/>
+          <circle cx="55" cy="68" r="9" fill="#1A1F1B"/>
+          <circle cx="145" cy="68" r="9" fill="#1A1F1B"/>
+        </svg>
+      </div>
+      <div class="model-price"><span class="amount">40.98</span><span class="unit">万起</span></div>
+      <ul class="model-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 增程 1315 km 续航</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 双冰箱 + 21 扬声器</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> AD Max 智驾</li>
+      </ul>
+      <a class="btn btn-green" href="#" style="width:100%">了解 L9</a>
+    </div>
+    <div class="model-card">
+      <div class="model-tag">SUV · 家庭旗舰</div>
+      <h3 class="model-name">L8</h3>
+      <div class="model-desc">六座家庭 SUV, 智能旗舰.</div>
+      <div class="model-mockup">
+        <svg viewBox="0 0 200 80" fill="none">
+          <path d="M24 60 C32 40 52 28 100 26 C148 28 168 40 176 60 L176 66 C176 70 172 72 166 72 L34 72 C28 72 24 70 24 66 Z" fill="#e8f4ec"/>
+          <path d="M52 26 C72 14 128 14 148 26 L130 36 L70 36 Z" fill="#2A7E3F" opacity="0.36"/>
+          <circle cx="55" cy="68" r="8" fill="#1A1F1B"/>
+          <circle cx="145" cy="68" r="8" fill="#1A1F1B"/>
+        </svg>
+      </div>
+      <div class="model-price"><span class="amount">35.98</span><span class="unit">万起</span></div>
+      <ul class="model-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1315 km 综合续航</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 二排独立座椅</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 三屏车机 + AD Max</li>
+      </ul>
+      <a class="btn btn-light" href="#" style="width:100%">了解 L8</a>
+    </div>
+    <div class="model-card">
+      <div class="model-tag">SUV · 五座入门</div>
+      <h3 class="model-name">L7</h3>
+      <div class="model-desc">五座家庭 SUV, 智能舒享.</div>
+      <div class="model-mockup">
+        <svg viewBox="0 0 200 80" fill="none">
+          <path d="M26 60 C34 42 54 30 100 28 C146 30 166 42 174 60 L174 66 C174 70 170 72 164 72 L36 72 C30 72 26 70 26 66 Z" fill="#e8f4ec"/>
+          <path d="M54 28 C74 16 126 16 146 28 L128 36 L72 36 Z" fill="#2A7E3F" opacity="0.3"/>
+          <circle cx="55" cy="68" r="8" fill="#1A1F1B"/>
+          <circle cx="145" cy="68" r="8" fill="#1A1F1B"/>
+        </svg>
+      </div>
+      <div class="model-price"><span class="amount">30.18</span><span class="unit">万起</span></div>
+      <ul class="model-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1315 km 综合续航</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 五座大空间</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 理想同学 AI 座舱</li>
+      </ul>
+      <a class="btn btn-light" href="#" style="width:100%">了解 L7</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Trust band ===== -->
+<section class="trust">
+  <div class="trust-eyebrow">用户认可 · 数据见证</div>
+  <h2 class="trust-title">中国家庭 · 共同的选择</h2>
+  <div class="trust-grid">
+    <div>
+      <div class="trust-num">#1</div>
+      <div class="trust-label">中国新势力 月销冠军</div>
+    </div>
+    <div>
+      <div class="trust-num">100<span class="unit">万+</span></div>
+      <div class="trust-label">累计交付用户 · 30 万 + 老车主复购</div>
+    </div>
+    <div>
+      <div class="trust-num">500<span class="unit">+</span></div>
+      <div class="trust-label">零售门店 · 服务覆盖全国 200 + 城市</div>
+    </div>
+    <div>
+      <div class="trust-num">98<span class="unit">%</span></div>
+      <div class="trust-label">车主满意度 · 推荐意愿 NPS 行业领先</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM REFERENCE (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="ds-wrap">
+    <div class="ds-intro">
+      <div>
+        <div class="ds-eyebrow">Design System Reference</div>
+        <h2>温暖白底 · 理想绿 · 圆润友好.</h2>
+        <p>理想汽车的视觉语言: 暖白基底 + 理想绿 (#2A7E3F) 主调 + 暖橙 secondary, 强圆角 12-32px, 圆润柔和, 强调家的温度与场景感. 拒绝跑车科技, 拥抱家庭温度.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.li-auto.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">理想色板: 深绿 (家庭, 自然, 稳重) + 暖橙 (情感 highlight) + 暖白基底. 不使用冷蓝 / 大红 / 纯黑, 所有色彩传达"家"的温度.</p>
+
+      <div class="ds-caption">品牌主色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#2A7E3F"></div><div class="meta"><div class="name">Li Green</div><div class="val">#2A7E3F</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1F5F2F"></div><div class="meta"><div class="name">Green Deep</div><div class="val">#1F5F2F</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4DA065"></div><div class="meta"><div class="name">Green Light</div><div class="val">#4DA065</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF7A45"></div><div class="meta"><div class="name">Warm Orange</div><div class="val">#FF7A45</div></div></div>
+      </div>
+
+      <div class="ds-caption">暖色基底</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FBFAF7"></div><div class="meta"><div class="name">Warm 50</div><div class="val">#FBFAF7</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F5F3EE"></div><div class="meta"><div class="name">Warm 100</div><div class="val">#F5F3EE</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EAE6DE"></div><div class="meta"><div class="name">Warm 200</div><div class="val">#EAE6DE</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1A1F1B"></div><div class="meta"><div class="name">Ink Warm Black</div><div class="val">#1A1F1B</div></div></div>
+      </div>
+
+      <div class="ds-caption">柔和调色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#E8F4EC"></div><div class="meta"><div class="name">Green Soft</div><div class="val">#E8F4EC</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFEDDE"></div><div class="meta"><div class="name">Orange Soft</div><div class="val">#FFEDDE</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#2A7E3F,#4DA065)"></div><div class="meta"><div class="name">Green Gradient</div><div class="val">deep → light</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FF7A45,#ee6633)"></div><div class="meta"><div class="name">Orange Gradient</div><div class="val">accent</div></div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">PingFang SC + Inter. 重量 700-800, 字距 -1.5px 让大字保持力度而不失温和. 中文为主, 中文字号普遍偏大, 营造亲和力.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display-hero</td><td style="font-family:'Noto Sans SC';font-size:40px;font-weight:800;letter-spacing:-1.5px;line-height:1.1">创造移动的家</td><td>56-72px</td><td>800</td><td>Hero 中文 slogan</td></tr>
+          <tr><td class="token">--accent-title</td><td style="font-family:'Noto Sans SC';font-size:32px;font-weight:800;color:#2A7E3F;letter-spacing:-1px">六口之家都满意</td><td>40px</td><td>800</td><td>绿色 accent 标题</td></tr>
+          <tr><td class="token">--spec-num</td><td style="font-family:Inter;font-size:36px;font-weight:800;color:#2A7E3F;letter-spacing:-1px">1315<span style="font-size:14px;color:#828A8C;margin-left:4px;font-weight:500">km</span></td><td>36-48px</td><td>800</td><td>规格数据</td></tr>
+          <tr><td class="token">--section-title</td><td style="font-size:24px;font-weight:800;letter-spacing:-0.5px">为家庭出行 提供全场景方案</td><td>32-48px</td><td>800</td><td>section 标题</td></tr>
+          <tr><td class="token">--card-title</td><td style="font-size:18px;font-weight:700">理想同学 · 智能座舱</td><td>22px</td><td>700</td><td>卡片标题</td></tr>
+          <tr><td class="token">--body</td><td style="font-size:15px;color:#4A5052;line-height:1.65">让每一次出行 都成为家庭幸福的延伸.</td><td>15-16px</td><td>400</td><td>正文, line-height 1.65</td></tr>
+          <tr><td class="token">--eyebrow</td><td style="font-size:11px;color:#2A7E3F;font-weight:600;text-transform:uppercase;letter-spacing:2px">FOR FAMILY</td><td>12px</td><td>600</td><td>绿色提示</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">圆角语言友好温和. 按钮 12px, 卡片 16-24px, 大型场景容器 32px, 胶囊全圆角. 不使用 4px 等锋利尺寸.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">SM</div><div class="ds-radius-val">12px · 按钮</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">MD</div><div class="ds-radius-val">16px · 卡片</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">LG</div><div class="ds-radius-val">24px · 大卡</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">Full</div><div class="ds-radius-val">胶囊 / Tab</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">主 CTA 绿色 12px 圆角. 次 CTA 暖橙或描边. Tab 切换是理想标志性组件, 用于车型 selector. 全部组件保持圆润温暖.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-green" style="min-width:0" href="#">预约试驾</a>
+            <a class="btn btn-orange" style="min-width:0" href="#">查询门店</a>
+            <a class="btn btn-outline" style="min-width:0" href="#">立即配置</a>
+            <a class="btn btn-light" style="min-width:0" href="#">VR 看车</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Tabs & Tags</h5>
+          <div class="ds-card-stack">
+            <div class="model-tabs" style="background:#fff;padding:5px">
+              <button class="model-tab active" style="padding:8px 16px;font-size:13px">L9</button>
+              <button class="model-tab" style="padding:8px 16px;font-size:13px">L8</button>
+              <button class="model-tab" style="padding:8px 16px;font-size:13px">L7</button>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <span class="ds-tag ds-tag-green">家庭旗舰</span>
+              <span class="ds-tag ds-tag-soft">六座</span>
+              <span class="ds-tag ds-tag-orange">AD Max</span>
+              <span class="ds-tag ds-tag-outline">增程</span>
+            </div>
+            <input class="ds-input" placeholder="输入手机号预约试驾" />
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Spec Cell</h5>
+          <div style="background:#fff;border:1px solid #EAE6DE;border-radius:16px;padding:24px;text-align:center">
+            <div style="font-family:Inter;font-size:36px;font-weight:800;letter-spacing:-1px;color:#2A7E3F">1315<span style="font-size:14px;color:#828A8C;margin-left:4px;font-weight:500">km</span></div>
+            <div style="margin-top:12px;font-size:13px;color:#4A5052">CLTC 综合续航 · 一次出发到家</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-col">
+      <div class="foot-brand-mark">
+        <span class="m">L</span>
+        <span class="t">LI AUTO · 理想</span>
+      </div>
+      <p class="foot-brand-desc">创造移动的家, 创造幸福的家. 让每一次出行, 都成为家庭温暖的延伸.</p>
+    </div>
+    <div class="foot-col">
+      <h4>车型</h4>
+      <ul>
+        <li><a href="#">理想 MEGA</a></li>
+        <li><a href="#">理想 L9</a></li>
+        <li><a href="#">理想 L8</a></li>
+        <li><a href="#">理想 L7 / L6</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>购车</h4>
+      <ul>
+        <li><a href="#">立即配置</a></li>
+        <li><a href="#">预约试驾</a></li>
+        <li><a href="#">查询门店</a></li>
+        <li><a href="#">金融方案</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>服务</h4>
+      <ul>
+        <li><a href="#">5C 超充网络</a></li>
+        <li><a href="#">售后服务</a></li>
+        <li><a href="#">车主社区</a></li>
+        <li><a href="#">理想商城</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>关于</h4>
+      <ul>
+        <li><a href="#">关于理想</a></li>
+        <li><a href="#">新闻动态</a></li>
+        <li><a href="#">加入我们</a></li>
+        <li><a href="#">投资者关系</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>Design Study · Tribute to Li Auto's visual language</span>
+    <span>© 2026 理想汽车 Li Auto Inc.</span>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.li-auto.html" target="_blank" rel="noopener">View source ↗</a>
+
+<script>
+  (function(){
+    var nav = document.getElementById('topNav');
+    function onScroll(){
+      var y = window.scrollY || window.pageYOffset;
+      if (y > 40) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>

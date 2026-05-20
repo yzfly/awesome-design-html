@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Expo — Inspired Design</title>
+<meta name="description" content="An Expo-inspired marketing page: pure white canvas, sky-blue atmospheric wash behind the hero, pure black 8px pill CTAs, Inter 600 display + 400 body, JetBrains Mono on every code surface, MacBook + iPhone device-mockup chrome. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #000000;
+  --primary-active: #1a1a1a;
+  --text-link: #0d74ce;
+  --text-link-secondary: #476cff;
+  --accent-link-bright: #47c2ff;
+
+  /* Surface */
+  --canvas: #ffffff;
+  --canvas-soft: #fafafa;
+  --surface-card: #ffffff;
+  --surface-strong: #f0f0f3;
+  --surface-dark: #171717;
+  --surface-dark-elevated: #1a1a1a;
+
+  /* Hairlines */
+  --hairline: #f0f0f3;
+  --hairline-soft: #f5f5f7;
+  --hairline-strong: #dcdee0;
+
+  /* Text */
+  --ink: #171717;
+  --body: #60646c;
+  --body-strong: #171717;
+  --muted: #999999;
+  --muted-soft: #cccccc;
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  --on-dark-soft: #b0b4ba;
+
+  /* Sky */
+  --sky-light: #cfe7ff;
+  --sky-mid: #a8c8e8;
+
+  /* Semantic */
+  --accent-warning: #ab6400;
+  --accent-preview: #8145b5;
+  --success: #16a34a;
+  --error: #eb8e90;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: var(--canvas);
+  color: var(--body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--text-link); color: #fff; }
+
+/* Layout */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .wrap { padding: 0 20px; } }
+
+/* Eyebrow / badge-pill */
+.eyebrow {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.88px;
+  color: var(--body);
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.badge-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surface-strong);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.88px;
+}
+.badge-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+
+/* Top nav */
+.top-nav {
+  background: var(--canvas);
+  height: 64px;
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.nav-inner { height: 100%; display: flex; align-items: center; gap: 32px; }
+.logo {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 18px; font-weight: 600; letter-spacing: -0.3px;
+  color: var(--ink);
+}
+.logo svg { display: block; }
+.nav-center { display: flex; gap: 4px; }
+.nav-center a {
+  font-size: 14px; font-weight: 500;
+  color: var(--ink);
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+.nav-center a:hover { background: var(--surface-strong); }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+/* Buttons — 8px radius */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; border: 1px solid transparent;
+  transition: background .12s ease, border-color .12s ease;
+  text-decoration: none;
+  height: 40px;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-active); }
+.btn-secondary {
+  background: var(--surface-card);
+  color: var(--ink);
+  border-color: var(--hairline-strong);
+  padding: 9px 17px;
+}
+.btn-secondary:hover { background: var(--surface-strong); }
+.btn-tertiary {
+  background: transparent;
+  color: var(--text-link);
+}
+.btn-tertiary:hover { color: #0a5fae; }
+
+/* Sections */
+section { padding: 96px 0; }
+@media (max-width: 720px) { section { padding: 64px 0; } }
+
+.section-head { max-width: 760px; margin-bottom: 56px; }
+.section-title {
+  font-size: 36px; font-weight: 600;
+  line-height: 1.15; letter-spacing: -1.08px;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+.section-lede {
+  font-size: 18px; line-height: 1.5;
+  color: var(--body);
+  margin: 0;
+}
+
+/* HERO */
+.hero {
+  padding: 96px 0 64px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  background:
+    radial-gradient(1100px 600px at 50% -120px, var(--sky-light) 0%, rgba(207,231,255,0.65) 30%, rgba(255,255,255,0) 65%),
+    var(--canvas);
+}
+.hero::before {
+  /* soft sky-blue mid wash */
+  content: '';
+  position: absolute;
+  left: 50%; top: -200px;
+  transform: translateX(-50%);
+  width: 1400px; height: 600px;
+  background: radial-gradient(closest-side at 50% 30%, var(--sky-mid) 0%, rgba(168,200,232,0) 70%);
+  filter: blur(40px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 2; max-width: 880px; margin: 0 auto; }
+.hero h1 {
+  font-size: 64px; font-weight: 600;
+  line-height: 1.05; letter-spacing: -1.92px;
+  color: var(--ink);
+  margin: 24px 0 24px;
+}
+@media (max-width: 720px) { .hero h1 { font-size: 36px; letter-spacing: -1px; } }
+.hero p.lede {
+  font-size: 18px; line-height: 1.5;
+  color: var(--body);
+  margin: 0 auto 32px;
+  max-width: 620px;
+}
+.hero-cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* Device-mockup centerpiece */
+.device-stage {
+  position: relative;
+  margin: 72px auto 0;
+  max-width: 1080px;
+  padding: 0 20px;
+}
+.macbook {
+  background: linear-gradient(180deg, #fafafa 0%, #ececec 100%);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 16px 16px 14px 14px;
+  padding: 18px 18px 14px;
+  box-shadow:
+    0 30px 60px -20px rgba(13, 116, 206, 0.25),
+    0 12px 30px -10px rgba(0,0,0,0.12);
+  position: relative;
+}
+.macbook::after {
+  content: '';
+  position: absolute;
+  left: -3.5%; right: -3.5%;
+  bottom: -10px; height: 10px;
+  background: linear-gradient(180deg, #d8d8d8 0%, #b8b8b8 100%);
+  border-radius: 0 0 16px 16px;
+  z-index: -1;
+}
+.mac-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 0 12px;
+}
+.mac-bar .dot { width: 12px; height: 12px; border-radius: 50%; background: #d4d4d4; }
+.mac-bar .dot.r { background: #fc7060; }
+.mac-bar .dot.y { background: #fcc83c; }
+.mac-bar .dot.g { background: #2ace3c; }
+.mac-bar .url {
+  margin-left: 12px;
+  background: var(--surface-strong);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--body);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.mac-screen {
+  background: var(--canvas);
+  border-radius: 8px;
+  display: grid; grid-template-columns: 200px 1fr;
+  min-height: 360px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+@media (max-width: 720px) { .mac-screen { grid-template-columns: 1fr; min-height: 280px; } }
+.eas-side {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  padding: 18px 14px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.eas-side .eas-logo { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #fff; }
+.eas-side .eas-logo .e {
+  width: 20px; height: 20px; border-radius: 5px;
+  background: linear-gradient(135deg, #4f7af2, #0d74ce);
+  color: #fff; font-size: 11px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.eas-side a {
+  font-size: 12px; color: var(--on-dark-soft);
+  padding: 6px 8px; border-radius: 6px;
+}
+.eas-side a.on { background: rgba(255,255,255,0.08); color: var(--on-dark); }
+.eas-side .grp {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.6px;
+  color: rgba(255,255,255,0.4);
+  padding: 8px;
+  margin-top: 4px;
+}
+.eas-main { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.eas-head { display: flex; justify-content: space-between; align-items: center; }
+.eas-head h4 { margin: 0; font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.3px; }
+.eas-head .actions { display: flex; gap: 8px; }
+.eas-pill {
+  background: var(--surface-strong);
+  color: var(--ink);
+  font-size: 11px; font-weight: 500;
+  padding: 4px 10px; border-radius: 9999px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.eas-pill.ok::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+.eas-build-row {
+  display: grid; grid-template-columns: 60px 1fr 100px 80px;
+  gap: 12px; align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  font-size: 12px;
+}
+.eas-build-row .id { font-family: "JetBrains Mono", monospace; font-weight: 500; color: var(--ink); }
+.eas-build-row .branch { color: var(--body); }
+.eas-build-row .status { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
+.eas-build-row .status.ok { color: var(--success); }
+.eas-build-row .status.run { color: var(--text-link); }
+.eas-build-row .dur { color: var(--muted); text-align: right; font-family: "JetBrains Mono", monospace; }
+@media (max-width: 720px) { .eas-build-row { grid-template-columns: 1fr 1fr; } }
+
+/* iPhone overlay */
+.iphone {
+  position: absolute;
+  right: -28px; bottom: -64px;
+  width: 220px;
+  background: #0a0a0a;
+  border-radius: 36px;
+  padding: 8px;
+  box-shadow:
+    0 30px 60px -20px rgba(0,0,0,0.35),
+    0 0 0 1px #1a1a1a;
+}
+@media (max-width: 900px) { .iphone { right: 0; bottom: -40px; width: 180px; } }
+@media (max-width: 540px) { .iphone { position: relative; right: auto; bottom: auto; margin: -24px auto 0; } }
+.iphone-screen {
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 60%);
+  border-radius: 28px;
+  padding: 24px 14px 16px;
+  position: relative;
+  min-height: 380px;
+}
+.iphone-screen::before {
+  content: '';
+  position: absolute; top: 12px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 22px;
+  background: #0a0a0a;
+  border-radius: 12px;
+}
+.iphone-screen .app-head {
+  margin-top: 28px;
+  display: flex; align-items: center; gap: 10px;
+}
+.iphone-screen .app-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+  color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 16px;
+  letter-spacing: -0.3px;
+}
+.iphone-screen .app-meta { display: flex; flex-direction: column; gap: 1px; }
+.iphone-screen .app-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.iphone-screen .app-sub { font-size: 11px; color: var(--muted); }
+
+.iphone-screen .hero-card {
+  margin-top: 14px;
+  background: var(--surface-strong);
+  border-radius: 12px;
+  padding: 14px;
+  min-height: 90px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.iphone-screen .hero-card .t {
+  font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.2;
+}
+.iphone-screen .row {
+  margin-top: 10px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.iphone-screen .row .item {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 11px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.iphone-screen .row .item .lbl { color: var(--body); }
+.iphone-screen .row .item .val { font-family: "JetBrains Mono", monospace; color: var(--ink); font-weight: 500; }
+.iphone-screen .pill-cta {
+  margin-top: 12px;
+  background: var(--primary); color: var(--on-primary);
+  border-radius: 9999px;
+  text-align: center;
+  font-size: 12px; font-weight: 500;
+  padding: 10px;
+}
+
+/* WORKFLOW STEPS */
+.workflow-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .workflow-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .workflow-row { grid-template-columns: 1fr; } }
+.workflow-step {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 12px;
+  padding: 20px;
+}
+.workflow-step .step-head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+}
+.workflow-step .step-icon {
+  width: 32px; height: 32px;
+  background: var(--surface-strong);
+  border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
+}
+.workflow-step .step-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+.workflow-step h4 { margin: 0 0 8px; font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--ink); letter-spacing: -0.3px; }
+.workflow-step p { margin: 0; font-size: 14px; color: var(--body); }
+
+/* CODE BLOCK + IDE */
+.code-section { background: var(--canvas-soft); padding: 96px 0; }
+.code-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; }
+@media (max-width: 900px) { .code-grid { grid-template-columns: 1fr; } }
+.code-block {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  border-radius: 12px;
+  padding: 20px;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow: auto;
+  position: relative;
+}
+.code-block .cb-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: var(--on-dark-soft);
+}
+.code-block .cb-head .dot { width: 10px; height: 10px; border-radius: 50%; background: #444; }
+.code-block .cb-head .dot.r { background: #fc7060; }
+.code-block .cb-head .dot.y { background: #fcc83c; }
+.code-block .cb-head .dot.g { background: #2ace3c; }
+.code-block pre { margin: 0; white-space: pre; }
+.code-block .c-prompt { color: #b0b4ba; }
+.code-block .c-fn { color: #47c2ff; }
+.code-block .c-kw { color: #ff8975; }
+.code-block .c-str { color: #98e892; }
+.code-block .c-comment { color: #6a6a6a; }
+.code-block .c-out { color: #cfcfcf; }
+.code-block .c-ok { color: #98e892; }
+
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  min-height: 460px;
+}
+.pricing-card.featured {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  border-color: var(--surface-dark);
+}
+.pricing-card h3 { margin: 0; font-size: 22px; font-weight: 600; color: var(--ink); letter-spacing: -0.5px; }
+.pricing-card.featured h3 { color: var(--on-dark); }
+.pricing-card .price {
+  font-size: 48px; font-weight: 600; line-height: 1.05;
+  letter-spacing: -1.44px;
+  color: var(--ink);
+}
+.pricing-card.featured .price { color: var(--on-dark); }
+.pricing-card .price small { font-size: 14px; font-weight: 400; color: var(--body); letter-spacing: 0; }
+.pricing-card.featured .price small { color: var(--on-dark-soft); }
+.pricing-card p { margin: 0; font-size: 14px; color: var(--body); }
+.pricing-card.featured p { color: var(--on-dark-soft); }
+.pricing-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.pricing-card ul li {
+  font-size: 14px; padding-left: 24px; position: relative;
+  color: var(--ink);
+}
+.pricing-card.featured ul li { color: var(--on-dark); }
+.pricing-card ul li::before {
+  content: '✓';
+  position: absolute; left: 0; top: 0;
+  color: var(--success);
+  font-weight: 600;
+}
+.pricing-card .cta { margin-top: auto; }
+
+/* CTA BAND */
+.cta-band {
+  text-align: center;
+  padding: 96px 0;
+  background: var(--canvas);
+}
+.cta-band h2 {
+  font-size: 48px; font-weight: 600;
+  line-height: 1.1; letter-spacing: -1.44px;
+  color: var(--ink);
+  margin: 0 0 24px;
+}
+@media (max-width: 720px) { .cta-band h2 { font-size: 32px; letter-spacing: -1px; } }
+.cta-band p { font-size: 18px; color: var(--body); margin: 0 auto 32px; max-width: 540px; }
+
+/* ─── DESIGN SYSTEM SECTION ─── */
+.ds-section { background: var(--canvas-soft); border-top: 1px solid var(--hairline); padding: 96px 0; }
+.ds-section .section-title { font-size: 48px; letter-spacing: -1.44px; }
+.ds-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 16px;
+  color: var(--text-link); font-size: 14px; font-weight: 500;
+}
+.ds-row {
+  background: var(--canvas);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 16px;
+  display: grid; grid-template-columns: 240px 1fr;
+  gap: 40px;
+}
+@media (max-width: 900px) { .ds-row { grid-template-columns: 1fr; gap: 16px; padding: 28px; } }
+.ds-row h3 {
+  font-size: 22px; font-weight: 600;
+  line-height: 1.25; letter-spacing: -0.5px;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.ds-sub { font-size: 13px; color: var(--body); }
+
+.color-group { margin-bottom: 24px; }
+.color-group h4 { margin: 0 0 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.88px; color: var(--body); }
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.swatch { display: flex; flex-direction: column; gap: 6px; }
+.swatch .chip { height: 64px; border-radius: 8px; border: 1px solid var(--hairline-strong); }
+.swatch .chip-label { font-size: 13px; font-weight: 500; color: var(--ink); }
+.swatch .chip-hex { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--body); }
+
+/* Type table */
+.type-table { display: flex; flex-direction: column; border: 1px solid var(--hairline-strong); border-radius: 12px; overflow: hidden; }
+.type-row {
+  display: grid; grid-template-columns: 180px 130px 80px 1fr;
+  gap: 24px; align-items: baseline;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hairline);
+}
+.type-row:last-child { border-bottom: 0; }
+@media (max-width: 720px) { .type-row { grid-template-columns: 1fr; } }
+.type-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+.type-meta { font-size: 12px; font-family: "JetBrains Mono", monospace; color: var(--body); }
+.t-mega { font-size: 48px; font-weight: 600; line-height: 1.05; letter-spacing: -1.44px; color: var(--ink); }
+.t-xl { font-size: 36px; font-weight: 600; line-height: 1.15; letter-spacing: -1.08px; color: var(--ink); }
+.t-md { font-size: 22px; font-weight: 600; line-height: 1.25; letter-spacing: -0.5px; color: var(--ink); }
+.t-title { font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--ink); }
+.t-body { font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--ink); }
+.t-code { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--ink); }
+.t-cap { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.88px; color: var(--ink); }
+
+/* Radius ladder */
+.radius-row { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
+.radius-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.radius-tile .box { width: 88px; height: 88px; background: var(--surface-strong); border: 1px solid var(--hairline-strong); }
+.radius-tile .val { font-size: 13px; font-weight: 500; color: var(--ink); }
+.radius-tile .lab { font-size: 12px; color: var(--body); }
+.r-xs .box { border-radius: 4px; }
+.r-sm .box { border-radius: 6px; }
+.r-md .box { border-radius: 8px; }
+.r-lg .box { border-radius: 12px; }
+.r-xl .box { border-radius: 16px; }
+.r-xxl .box { border-radius: 24px; }
+.r-pill .box { border-radius: 9999px; width: 160px; }
+
+/* Components matrix */
+.comp-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .comp-matrix { grid-template-columns: 1fr; } }
+.comp-cell {
+  background: var(--canvas);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.comp-cell h5 { margin: 0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.88px; color: var(--body); }
+.comp-stack { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.input-row {
+  width: 100%; height: 44px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 8px;
+  padding: 0 16px;
+  font: inherit; font-size: 14px;
+  color: var(--ink);
+}
+.input-row:focus { outline: 0; border: 2px solid var(--ink); }
+.eco-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.eco-tile {
+  width: 64px; height: 64px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--body);
+}
+
+/* FOOTER */
+.footer {
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline);
+  padding: 64px 48px;
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr repeat(5, 1fr);
+  gap: 32px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--hairline);
+}
+@media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+.footer-brand h4 { margin: 0 0 12px; font-size: 18px; font-weight: 600; color: var(--ink); letter-spacing: -0.3px; }
+.footer-brand p { margin: 0; font-size: 14px; color: var(--body); max-width: 280px; }
+.footer-col h5 { color: var(--ink); font-size: 13px; font-weight: 600; margin: 0 0 12px; }
+.footer-col a { display: block; color: var(--body); font-size: 14px; padding: 6px 0; }
+.footer-col a:hover { color: var(--ink); }
+.footer-bottom {
+  padding-top: 24px;
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  font-size: 13px; color: var(--body);
+}
+
+/* Floating DESIGN.md */
+.floating-design-link {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--primary); color: #fff;
+  padding: 10px 18px; border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  z-index: 50;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+.floating-design-link:hover { background: var(--primary-active); }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="nav-inner wrap">
+    <a class="logo" href="#" aria-label="Expo home">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <polygon points="12,2 22,20 14,20 12,16 10,20 2,20" fill="#171717"/>
+      </svg>
+      <span>Expo</span>
+    </a>
+    <div class="nav-center">
+      <a href="#">Tools</a>
+      <a href="#">Workflows</a>
+      <a href="#">EAS</a>
+      <a href="#">Pricing</a>
+      <a href="#">Docs</a>
+      <a href="#">Showcase</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-secondary" href="#">Sign in</a>
+      <a class="btn btn-primary" href="#">Get started →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="badge-pill"><span class="dot"></span>EAS UPDATE NOW GA</span>
+      <h1>Build one app.<br/>Ship it everywhere.</h1>
+      <p class="lede">Expo is the fastest way to build, deploy, and iterate on universal React Native apps — on iOS, Android, and the web from a single codebase.</p>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" href="#">Get started</a>
+        <a class="btn btn-secondary" href="#">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          npx create-expo-app
+        </a>
+      </div>
+    </div>
+
+    <!-- Device-mockup composite -->
+    <div class="device-stage">
+      <div class="macbook">
+        <div class="mac-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="url">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            expo.dev/accounts/acme/projects/rover/builds
+          </span>
+        </div>
+        <div class="mac-screen">
+          <aside class="eas-side">
+            <div class="eas-logo"><span class="e">E</span>EAS</div>
+            <a class="on" href="#">▣ Builds</a>
+            <a href="#">▣ Updates</a>
+            <a href="#">▣ Submissions</a>
+            <a href="#">▣ Workflows</a>
+            <a href="#">▣ Insights</a>
+            <span class="grp">Project</span>
+            <a href="#">▣ Settings</a>
+            <a href="#">▣ Members</a>
+            <a href="#">▣ Secrets</a>
+          </aside>
+          <div class="eas-main">
+            <div class="eas-head">
+              <h4>Builds</h4>
+              <div class="actions">
+                <span class="eas-pill ok">All green</span>
+                <span class="eas-pill" style="font-family:'JetBrains Mono',monospace;">main</span>
+              </div>
+            </div>
+            <div class="eas-build-row">
+              <span class="id">#1284</span>
+              <span class="branch">feat/onboarding-v3 · iOS · release</span>
+              <span class="status ok">● Success</span>
+              <span class="dur">4m 18s</span>
+            </div>
+            <div class="eas-build-row">
+              <span class="id">#1283</span>
+              <span class="branch">main · Android · release</span>
+              <span class="status ok">● Success</span>
+              <span class="dur">3m 52s</span>
+            </div>
+            <div class="eas-build-row">
+              <span class="id">#1282</span>
+              <span class="branch">main · iOS · preview</span>
+              <span class="status run">◐ Running</span>
+              <span class="dur">02:14</span>
+            </div>
+            <div class="eas-build-row">
+              <span class="id">#1281</span>
+              <span class="branch">chore/upgrade-rn-0.78 · iOS · release</span>
+              <span class="status ok">● Success</span>
+              <span class="dur">4m 04s</span>
+            </div>
+            <div class="eas-build-row">
+              <span class="id">#1280</span>
+              <span class="branch">main · Android · preview</span>
+              <span class="status ok">● Success</span>
+              <span class="dur">3m 41s</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- iPhone overlay -->
+      <div class="iphone" aria-label="Expo Go running the rover app">
+        <div class="iphone-screen">
+          <div class="app-head">
+            <div class="app-icon">R</div>
+            <div class="app-meta">
+              <span class="app-name">Rover</span>
+              <span class="app-sub">Expo Go · preview</span>
+            </div>
+          </div>
+          <div class="hero-card">
+            <span class="t">Welcome back,<br/>江树.</span>
+            <span style="font-size:11px;color:var(--body);">3 active builds · 2 updates pending</span>
+          </div>
+          <div class="row">
+            <div class="item"><span class="lbl">Latest build</span><span class="val">#1284</span></div>
+            <div class="item"><span class="lbl">Bundle size</span><span class="val">2.8 MB</span></div>
+            <div class="item"><span class="lbl">Runtime</span><span class="val">SDK 53</span></div>
+          </div>
+          <div class="pill-cta">Open in Expo Go →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW STEPS -->
+<section style="padding-top: 144px;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">WORKFLOWS</span>
+      <h2 class="section-title">Get your app on every device.</h2>
+      <p class="section-lede">From the first line of code to the App Store, Expo handles every step — without leaving the terminal or your editor.</p>
+    </div>
+    <div class="workflow-row">
+      <div class="workflow-step">
+        <div class="step-head">
+          <div class="step-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <span class="step-num">01</span>
+        </div>
+        <h4>Create</h4>
+        <p>Scaffold a universal app in seconds with <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--surface-strong);padding:1px 6px;border-radius:4px;">create-expo-app</code>.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="step-head">
+          <div class="step-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <span class="step-num">02</span>
+        </div>
+        <h4>Develop</h4>
+        <p>Hot-reload on iOS, Android, and web simultaneously with Expo Go or a dev client.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="step-head">
+          <div class="step-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4z"/><path d="M2 20h20"/></svg></div>
+          <span class="step-num">03</span>
+        </div>
+        <h4>Build</h4>
+        <p>EAS Build compiles native binaries in the cloud — no Xcode or Android Studio required.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="step-head">
+          <div class="step-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3l9 9-9 9"/></svg></div>
+          <span class="step-num">04</span>
+        </div>
+        <h4>Submit &amp; update</h4>
+        <p>Ship to the App Store + Google Play, then push instant JS updates with EAS Update.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CODE + IDE SECTION -->
+<section class="code-section">
+  <div class="wrap">
+    <div class="code-grid">
+      <div>
+        <span class="eyebrow">DEVELOPER ERGONOMICS</span>
+        <h2 class="section-title">One command.<br/>Three platforms.</h2>
+        <p class="section-lede" style="margin-bottom:24px;">JetBrains Mono on every code surface. The terminal is part of the brand voice — and the surface where most developers first meet Expo.</p>
+        <p style="margin:0;font-size:16px;line-height:1.5;color:var(--body);">Learn more in the <a style="color:var(--text-link);text-decoration:underline;" href="#">Getting started guide</a> or browse the <a style="color:var(--text-link);text-decoration:underline;" href="#">Expo API reference</a>.</p>
+      </div>
+      <div class="code-block" role="img" aria-label="Terminal showing create-expo-app">
+        <div class="cb-head">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span>~/projects · zsh</span>
+        </div>
+<pre><span class="c-prompt">$</span> <span class="c-fn">npx</span> create-expo-app rover --template tabs
+<span class="c-comment"># ✔ Downloading template ... (3.2s)</span>
+<span class="c-comment"># ✔ Installing packages ...   (12.4s)</span>
+<span class="c-comment"># ✔ Initialized rover/ on Node 22.4.0</span>
+
+<span class="c-prompt">$</span> <span class="c-fn">cd</span> rover && <span class="c-fn">npx</span> expo start
+<span class="c-out">› Metro waiting on </span><span class="c-str">exp://192.168.1.42:8081</span>
+<span class="c-out">› Press </span><span class="c-kw">i</span><span class="c-out"> open iOS · </span><span class="c-kw">a</span><span class="c-out"> Android · </span><span class="c-kw">w</span><span class="c-out"> web</span>
+
+<span class="c-prompt">$</span> <span class="c-fn">eas</span> build --platform ios --profile preview
+<span class="c-ok">✔ Build queued — #1284</span>
+<span class="c-out">  https://expo.dev/accounts/acme/projects/rover/builds/1284</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">PRICING</span>
+      <h2 class="section-title">Free to start.<br/>Predictable to scale.</h2>
+    </div>
+    <div class="pricing-grid">
+      <article class="pricing-card">
+        <h3>Free</h3>
+        <div class="price">$0<small> / month</small></div>
+        <p>For indie developers and side projects. Public projects, community support.</p>
+        <ul>
+          <li>30 EAS Builds / month</li>
+          <li>EAS Update for OTA</li>
+          <li>Community Discord support</li>
+          <li>Public projects only</li>
+        </ul>
+        <div class="cta"><a class="btn btn-secondary" href="#">Start free</a></div>
+      </article>
+      <article class="pricing-card featured">
+        <h3>Production</h3>
+        <div class="price">$99<small> / month</small></div>
+        <p>For teams shipping to the App Store and Google Play. Private projects, priority builds.</p>
+        <ul>
+          <li>Unlimited builds (fair use)</li>
+          <li>Priority build queue</li>
+          <li>Private projects</li>
+          <li>Member analytics &amp; insights</li>
+          <li>Email support</li>
+        </ul>
+        <div class="cta"><a class="btn btn-primary" style="background:#fff;color:#171717;" href="#">Start 14-day trial</a></div>
+      </article>
+      <article class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">Custom<small> · annual</small></div>
+        <p>For platform teams running mission-critical apps with compliance and SLA.</p>
+        <ul>
+          <li>SOC 2 + SAML SSO</li>
+          <li>Dedicated build hardware</li>
+          <li>Custom support SLA</li>
+          <li>Self-hosted EAS option</li>
+        </ul>
+        <div class="cta"><a class="btn btn-secondary" href="#">Talk to sales</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Start building today.</h2>
+    <p>Run one command and you're in the editor. The first build is free, and so is the next thousand on the free plan.</p>
+    <a class="btn btn-primary" href="#">Get started →</a>
+  </div>
+</section>
+
+<!-- ─── PART B — DESIGN SYSTEM REFERENCE ─── -->
+<section class="ds-section" id="design-system">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">DESIGN SYSTEM</span>
+      <h2 class="section-title">Tokens, by Expo.</h2>
+      <p class="section-lede">A pure white canvas with a sky-blue hero wash, black 8px CTAs, Inter at 600 for display, and JetBrains Mono on every code surface. Compact, editorial, developer-ergonomic.</p>
+      <a class="ds-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.expo.html" target="_blank" rel="noopener">Read the full DESIGN.md →</a>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-row">
+      <div>
+        <h3>Color</h3>
+        <div class="ds-sub">grouped &amp; named</div>
+      </div>
+      <div>
+        <div class="color-group">
+          <h4>Brand &amp; accent</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#000000"></div><span class="chip-label">primary</span><span class="chip-hex">#000000</span></div>
+            <div class="swatch"><div class="chip" style="background:#1a1a1a"></div><span class="chip-label">primary-active</span><span class="chip-hex">#1a1a1a</span></div>
+            <div class="swatch"><div class="chip" style="background:#0d74ce"></div><span class="chip-label">text-link</span><span class="chip-hex">#0d74ce</span></div>
+            <div class="swatch"><div class="chip" style="background:#476cff"></div><span class="chip-label">text-link-secondary</span><span class="chip-hex">#476cff</span></div>
+            <div class="swatch"><div class="chip" style="background:#47c2ff"></div><span class="chip-label">accent-link-bright</span><span class="chip-hex">#47c2ff</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Surface</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#ffffff"></div><span class="chip-label">canvas</span><span class="chip-hex">#ffffff</span></div>
+            <div class="swatch"><div class="chip" style="background:#fafafa"></div><span class="chip-label">canvas-soft</span><span class="chip-hex">#fafafa</span></div>
+            <div class="swatch"><div class="chip" style="background:#f0f0f3"></div><span class="chip-label">surface-strong</span><span class="chip-hex">#f0f0f3</span></div>
+            <div class="swatch"><div class="chip" style="background:#171717"></div><span class="chip-label">surface-dark</span><span class="chip-hex">#171717</span></div>
+            <div class="swatch"><div class="chip" style="background:#1a1a1a"></div><span class="chip-label">surface-dark-elevated</span><span class="chip-hex">#1a1a1a</span></div>
+            <div class="swatch"><div class="chip" style="background:#dcdee0"></div><span class="chip-label">hairline-strong</span><span class="chip-hex">#dcdee0</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Atmospheric backdrop</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#cfe7ff"></div><span class="chip-label">gradient-sky-light</span><span class="chip-hex">#cfe7ff</span></div>
+            <div class="swatch"><div class="chip" style="background:#a8c8e8"></div><span class="chip-label">gradient-sky-mid</span><span class="chip-hex">#a8c8e8</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Text</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#171717"></div><span class="chip-label">ink</span><span class="chip-hex">#171717</span></div>
+            <div class="swatch"><div class="chip" style="background:#60646c"></div><span class="chip-label">body</span><span class="chip-hex">#60646c</span></div>
+            <div class="swatch"><div class="chip" style="background:#999999"></div><span class="chip-label">muted</span><span class="chip-hex">#999999</span></div>
+            <div class="swatch"><div class="chip" style="background:#b0b4ba"></div><span class="chip-label">on-dark-soft</span><span class="chip-hex">#b0b4ba</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Semantic</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#16a34a"></div><span class="chip-label">success</span><span class="chip-hex">#16a34a</span></div>
+            <div class="swatch"><div class="chip" style="background:#ab6400"></div><span class="chip-label">accent-warning</span><span class="chip-hex">#ab6400</span></div>
+            <div class="swatch"><div class="chip" style="background:#8145b5"></div><span class="chip-label">accent-preview</span><span class="chip-hex">#8145b5</span></div>
+            <div class="swatch"><div class="chip" style="background:#eb8e90"></div><span class="chip-label">error</span><span class="chip-hex">#eb8e90</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-row">
+      <div>
+        <h3>Typography</h3>
+        <div class="ds-sub">Inter for prose · JetBrains Mono on every code surface</div>
+      </div>
+      <div>
+        <div class="type-table">
+          <div class="type-row">
+            <span class="type-name">display-mega</span>
+            <span class="type-meta">64 / 600 / -1.92</span>
+            <span class="type-meta">1.05</span>
+            <span class="type-sample t-mega">Build one app.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">display-lg</span>
+            <span class="type-meta">36 / 600 / -1.08</span>
+            <span class="type-meta">1.15</span>
+            <span class="type-sample t-xl">Get your app on every device.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">display-sm</span>
+            <span class="type-meta">22 / 600 / -0.5</span>
+            <span class="type-meta">1.25</span>
+            <span class="type-sample t-md">Card group title.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">title-md</span>
+            <span class="type-meta">18 / 600 / 0</span>
+            <span class="type-meta">1.4</span>
+            <span class="type-sample t-title">Component title.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">body-md</span>
+            <span class="type-meta">16 / 400 / 0</span>
+            <span class="type-meta">1.5</span>
+            <span class="type-sample t-body">Default body — Inter at 400 carries the prose.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">code</span>
+            <span class="type-meta">13 / 400 / 0</span>
+            <span class="type-meta">1.5</span>
+            <span class="type-sample t-code">npx create-expo-app rover --template tabs</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">caption-uppercase</span>
+            <span class="type-meta">11 / 600 / 0.88</span>
+            <span class="type-meta">1.4</span>
+            <span class="type-sample t-cap">SECTION LABEL · BADGE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-row">
+      <div>
+        <h3>Radius</h3>
+        <div class="ds-sub">Compact developer dialect — 8px CTAs, 12px cards</div>
+      </div>
+      <div>
+        <div class="radius-row">
+          <div class="radius-tile r-xs"><div class="box"></div><span class="val">xs</span><span class="lab">4px</span></div>
+          <div class="radius-tile r-sm"><div class="box"></div><span class="val">sm</span><span class="lab">6px</span></div>
+          <div class="radius-tile r-md"><div class="box"></div><span class="val">md</span><span class="lab">8px · CTA · input</span></div>
+          <div class="radius-tile r-lg"><div class="box"></div><span class="val">lg</span><span class="lab">12px · card</span></div>
+          <div class="radius-tile r-xl"><div class="box"></div><span class="val">xl</span><span class="lab">16px · device card</span></div>
+          <div class="radius-tile r-xxl"><div class="box"></div><span class="val">xxl</span><span class="lab">24px</span></div>
+          <div class="radius-tile r-pill"><div class="box"></div><span class="val">pill</span><span class="lab">9999px · badge only</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-row">
+      <div>
+        <h3>Components</h3>
+        <div class="ds-sub">Buttons · inputs · cards · ecosystem tiles</div>
+      </div>
+      <div>
+        <div class="comp-matrix">
+          <div class="comp-cell">
+            <h5>Buttons</h5>
+            <div class="comp-stack">
+              <a class="btn btn-primary" href="#">Get started</a>
+              <a class="btn btn-secondary" href="#">Sign in</a>
+            </div>
+            <div class="comp-stack">
+              <a class="btn-tertiary" href="#">Inline text link →</a>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>Text input</h5>
+            <input class="input-row" placeholder="you@example.com"/>
+            <span style="font-size:12px;color:var(--body);">Focus thickens the border to 2px ink.</span>
+          </div>
+          <div class="comp-cell">
+            <h5>Badges</h5>
+            <div class="comp-stack">
+              <span class="badge-pill"><span class="dot"></span>GA</span>
+              <span class="badge-pill" style="background:#fff4e0;color:var(--accent-warning);">BETA</span>
+              <span class="badge-pill" style="background:#f1e5ff;color:var(--accent-preview);">PREVIEW</span>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>Ecosystem tiles</h5>
+            <div class="eco-row">
+              <span class="eco-tile">TS</span>
+              <span class="eco-tile">React</span>
+              <span class="eco-tile">Sentry</span>
+              <span class="eco-tile">Vercel</span>
+              <span class="eco-tile">Supabase</span>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>Feature card (dark variant)</h5>
+            <div style="background:var(--surface-dark);color:var(--on-dark);border-radius:12px;padding:24px;">
+              <h4 style="margin:0 0 8px;font-size:18px;font-weight:600;letter-spacing:-0.3px;">EAS Update</h4>
+              <p style="margin:0;font-size:14px;color:var(--on-dark-soft);">Push JS-only updates over the air — no App Store review.</p>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>Code block</h5>
+            <div class="code-block" style="padding:14px;font-size:11px;">
+              <div class="cb-head" style="margin-bottom:8px;padding-bottom:8px;">
+                <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              </div>
+<pre><span class="c-prompt">$</span> <span class="c-fn">eas</span> update --branch main
+<span class="c-ok">✔ Update published</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>Expo</h4>
+        <p>An inspired tribute to Expo's React Native developer-platform brand. Not affiliated with 650 Industries, Inc.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Tools</h5>
+        <a href="#">Expo Go</a><a href="#">Expo CLI</a><a href="#">Snack</a><a href="#">Orbit</a>
+      </div>
+      <div class="footer-col">
+        <h5>EAS</h5>
+        <a href="#">Build</a><a href="#">Update</a><a href="#">Submit</a><a href="#">Workflows</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="#">Docs</a><a href="#">API reference</a><a href="#">Blog</a><a href="#">Showcase</a>
+      </div>
+      <div class="footer-col">
+        <h5>Community</h5>
+        <a href="#">Discord</a><a href="#">GitHub</a><a href="#">YouTube</a><a href="#">Forums</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Inspired tribute · awesome-design-md</span>
+      <span>design.expo.html</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.expo.html" target="_blank" rel="noopener">
+  View DESIGN.md
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

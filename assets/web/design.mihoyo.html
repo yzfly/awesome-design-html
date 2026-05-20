@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>米哈游 miHoYo / HoYoverse — 设计语言研究</title>
+<meta name="description" content="米哈游视觉语言的设计研究：紫粉渐变网格 + 二次元美学、多彩克制、圆润 12-16px 圆角、技术宅拯救世界叙事。营销 demo + 设计系统参考。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-1: #FAF7FF;
+  --surface-2: #F0EAFF;
+  --surface-card: #ffffff;
+  --surface-dark: #1A0F36;
+  /* Brand */
+  --hy-purple: #7B5BFF;
+  --hy-purple-deep: #5A3FFF;
+  --hy-purple-soft: #E5DCFF;
+  --hy-purple-fog: #F4EEFF;
+  --hy-pink: #FF7AB6;
+  --hy-pink-soft: #FFCFE5;
+  --hy-blue: #5BBFFF;
+  --hy-blue-soft: #C5E8FF;
+  --hy-mint: #5BFFC5;
+  --hy-gold: #FFD15B;
+  /* Text */
+  --ink: #1A0F36;
+  --ink-bright: #0A0420;
+  --ink-soft: #4A3B6E;
+  --ink-muted: #8478A6;
+  --ink-dim: #BFB6D6;
+  /* Border */
+  --border: #E8E2F5;
+  --border-soft: #F2EFFA;
+  /* Shadow */
+  --shadow-glow: 0 8px 32px rgba(123,91,255,0.15);
+  --shadow-heavy: 0 16px 48px rgba(123,91,255,0.25);
+  --shadow-card: 0 4px 20px rgba(123,91,255,0.10);
+  /* Type */
+  --font-ui: "Inter", "PingFang SC", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radii */
+  --r-min: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-2xl: 32px;
+  --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.90); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1200px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--ink-bright); }
+.brand-mark { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(135deg, var(--hy-purple) 0%, var(--hy-pink) 100%); display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 14px; box-shadow: var(--shadow-glow); }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link { padding: 8px 14px; font-size: 14px; font-weight: 600; color: var(--ink-soft); border-radius: var(--r-pill); transition: all .18s; }
+.nav-link:hover { color: var(--hy-purple-deep); background: var(--hy-purple-fog); }
+.nav-link.active { color: var(--hy-purple-deep); background: var(--hy-purple-fog); }
+.nav-cta { display: flex; gap: 8px; align-items: center; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; cursor: pointer; border: 2px solid transparent; transition: all .2s ease; font-weight: 600; }
+.btn-primary { background: linear-gradient(135deg, var(--hy-purple) 0%, var(--hy-purple-deep) 100%); color: #fff; padding: 12px 28px; border-radius: var(--r-pill); font-size: 14px; box-shadow: 0 4px 16px rgba(123,91,255,0.30); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(123,91,255,0.45); }
+.btn-pink { background: linear-gradient(135deg, var(--hy-pink) 0%, #FF5BA0 100%); color: #fff; padding: 12px 28px; border-radius: var(--r-pill); font-size: 14px; box-shadow: 0 4px 16px rgba(255,122,182,0.30); }
+.btn-pink:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,122,182,0.45); }
+.btn-outline { background: #fff; color: var(--hy-purple-deep); padding: 12px 26px; border-radius: var(--r-pill); border-color: var(--hy-purple); font-size: 14px; }
+.btn-outline:hover { background: var(--hy-purple-fog); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--ink-soft); padding: 8px 16px; border-radius: var(--r-pill); font-size: 14px; }
+.btn-ghost:hover { color: var(--hy-purple-deep); background: var(--hy-purple-fog); }
+.btn-sm { padding: 8px 18px; font-size: 13px; }
+.btn-lg { padding: 14px 32px; font-size: 15px; }
+
+/* Hero */
+.hero { position: relative; padding: 100px 0 100px; overflow: hidden; }
+.hero-bg {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(55% 50% at 80% 25%, rgba(255,122,182,0.35), transparent 60%),
+    radial-gradient(45% 40% at 15% 75%, rgba(91,191,255,0.30), transparent 65%),
+    radial-gradient(40% 35% at 50% 50%, rgba(123,91,255,0.20), transparent 65%),
+    linear-gradient(180deg, #FAF7FF 0%, #F0EAFF 100%);
+}
+.hero-bg::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(123,91,255,0.10) 1px, transparent 0); background-size: 32px 32px; mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.4), transparent 70%); }
+.hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; position: relative; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--hy-purple-deep); padding: 6px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--hy-purple-soft); box-shadow: 0 2px 8px rgba(123,91,255,0.12); }
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--hy-pink); box-shadow: 0 0 8px var(--hy-pink); }
+.hero h1 { font-size: 72px; line-height: 1.05; letter-spacing: -2px; font-weight: 900; margin: 22px 0 18px; color: var(--ink-bright); }
+.hero h1 em { font-style: normal; background: linear-gradient(120deg, var(--hy-purple) 0%, var(--hy-pink) 50%, #FFB05B 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p.lead { font-size: 17px; line-height: 1.7; color: var(--ink-soft); max-width: 500px; margin: 0 0 32px; font-weight: 500; }
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero-meta { margin-top: 44px; display: flex; gap: 36px; }
+.hero-meta-item strong { display: block; color: var(--hy-purple-deep); font-weight: 800; font-size: 24px; letter-spacing: -0.4px; }
+.hero-meta-item span { font-size: 12px; color: var(--ink-muted); margin-top: 2px; display: block; font-weight: 500; }
+
+/* Character silhouette */
+.char-stage { position: relative; height: 520px; display: grid; place-items: center; }
+.char-bg { position: absolute; width: 420px; height: 420px; border-radius: 50%; background: conic-gradient(from 180deg at 50% 50%, var(--hy-pink), var(--hy-purple), var(--hy-blue), var(--hy-pink)); filter: blur(40px); opacity: 0.55; animation: spin 18s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.char-card { position: relative; width: 320px; height: 480px; background: linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(244,238,255,0.95) 100%); backdrop-filter: blur(20px); border: 2px solid #fff; border-radius: var(--r-2xl); box-shadow: var(--shadow-heavy); padding: 24px; display: flex; flex-direction: column; }
+.char-portrait { flex: 1; border-radius: var(--r-xl); background:
+  radial-gradient(60% 60% at 50% 35%, var(--hy-pink-soft) 0%, transparent 60%),
+  radial-gradient(80% 80% at 50% 100%, var(--hy-purple-soft) 0%, transparent 60%),
+  linear-gradient(180deg, #FFF4F9 0%, #EFE3FF 100%);
+  position: relative; overflow: hidden;
+}
+.char-portrait svg { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 240px; height: 320px; }
+.char-portrait .star { position: absolute; font-size: 16px; opacity: 0.5; color: var(--hy-gold); }
+.char-portrait .star:nth-child(1) { top: 20px; left: 30px; }
+.char-portrait .star:nth-child(2) { top: 50px; right: 28px; }
+.char-portrait .star:nth-child(3) { top: 120px; left: 18px; }
+.char-meta { margin-top: 16px; }
+.char-name { font-size: 22px; font-weight: 800; color: var(--ink-bright); letter-spacing: -0.3px; }
+.char-sub { font-size: 12px; color: var(--ink-muted); margin-top: 4px; font-weight: 500; }
+.char-stats { display: flex; gap: 8px; margin-top: 12px; }
+.char-stat { flex: 1; padding: 8px; background: var(--hy-purple-fog); border-radius: var(--r-md); text-align: center; }
+.char-stat strong { display: block; font-size: 14px; font-weight: 800; color: var(--hy-purple-deep); }
+.char-stat span { display: block; font-size: 10px; color: var(--ink-muted); margin-top: 2px; }
+
+/* Section */
+.section { padding: 100px 0; }
+.section-alt { background: var(--surface-1); }
+.section-dark { background: var(--surface-dark); color: #fff; }
+.section-head { text-align: center; margin-bottom: 64px; max-width: 720px; margin-left: auto; margin-right: auto; }
+.section-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; color: var(--hy-purple-deep); margin-bottom: 14px; padding: 4px 14px; background: var(--hy-purple-fog); border-radius: 999px; letter-spacing: 1px; text-transform: uppercase; }
+.section-dark .section-eyebrow { background: rgba(123,91,255,0.20); color: #C4B5FF; }
+.section-title { font-size: 44px; line-height: 1.12; letter-spacing: -1.2px; font-weight: 800; margin: 0 0 16px; color: var(--ink-bright); }
+.section-dark .section-title { color: #fff; }
+.section-sub { font-size: 16px; color: var(--ink-soft); line-height: 1.75; }
+.section-dark .section-sub { color: rgba(255,255,255,0.75); }
+
+/* Games grid */
+.games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.game-card {
+  background: linear-gradient(160deg, #fff 0%, var(--hy-purple-fog) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .25s ease;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.game-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-heavy); }
+.game-card::before {
+  content: ""; position: absolute; right: -60px; bottom: -60px; width: 240px; height: 240px;
+  border-radius: 50%; opacity: 0.35;
+  background: radial-gradient(circle, var(--hy-pink) 0%, transparent 65%);
+}
+.game-card.g1::before { background: radial-gradient(circle, var(--hy-blue) 0%, transparent 65%); }
+.game-card.g2::before { background: radial-gradient(circle, var(--hy-pink) 0%, transparent 65%); }
+.game-card.g3::before { background: radial-gradient(circle, var(--hy-purple) 0%, transparent 65%); }
+.game-card.g4::before { background: radial-gradient(circle, var(--hy-gold) 0%, transparent 65%); }
+.game-card.g5::before { background: radial-gradient(circle, var(--hy-mint) 0%, transparent 65%); }
+.game-card.g6::before { background: radial-gradient(circle, var(--hy-pink) 0%, transparent 65%); }
+.game-tag { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); border-radius: var(--r-pill); font-size: 11px; font-weight: 700; color: var(--hy-purple-deep); position: relative; }
+.game-icon { width: 56px; height: 56px; border-radius: var(--r-lg); background: linear-gradient(135deg, var(--hy-purple) 0%, var(--hy-pink) 100%); display: grid; place-items: center; color: #fff; margin: 16px 0 14px; box-shadow: var(--shadow-glow); position: relative; }
+.game-icon svg { width: 28px; height: 28px; stroke-width: 2; }
+.game-card.g2 .game-icon { background: linear-gradient(135deg, var(--hy-pink) 0%, #FF5BA0 100%); }
+.game-card.g3 .game-icon { background: linear-gradient(135deg, var(--hy-purple) 0%, #4A2FFF 100%); }
+.game-card.g4 .game-icon { background: linear-gradient(135deg, var(--hy-gold) 0%, #FF9D5B 100%); }
+.game-card.g5 .game-icon { background: linear-gradient(135deg, var(--hy-mint) 0%, #5BFFAA 100%); color: #1A0F36; }
+.game-card.g6 .game-icon { background: linear-gradient(135deg, var(--hy-blue) 0%, var(--hy-purple) 100%); }
+.game-card h3 { font-size: 22px; font-weight: 800; margin: 0 0 6px; color: var(--ink-bright); letter-spacing: -0.4px; position: relative; }
+.game-card p { font-size: 13px; color: var(--ink-soft); margin: 0 0 18px; line-height: 1.6; position: relative; font-weight: 500; }
+.game-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: var(--hy-purple-deep); position: relative; }
+.game-link:hover { gap: 8px; transition: gap .15s; }
+
+/* Stats - dark mode */
+.stat-wrap { background: var(--surface-dark); padding: 100px 0; position: relative; overflow: hidden; }
+.stat-wrap::before { content: ""; position: absolute; inset: 0; background:
+  radial-gradient(40% 60% at 20% 30%, rgba(123,91,255,0.30), transparent 60%),
+  radial-gradient(40% 60% at 80% 70%, rgba(255,122,182,0.20), transparent 60%);
+}
+.stat-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; align-items: center; position: relative; }
+.stat-inner h2 { font-size: 40px; line-height: 1.15; letter-spacing: -1.2px; margin: 0; font-weight: 800; color: #fff; }
+.stat-inner h2 em { font-style: normal; background: linear-gradient(120deg, #FF7AB6 0%, #7B5BFF 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat-cell { background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.10); backdrop-filter: blur(20px); border-radius: var(--r-lg); padding: 24px 18px; text-align: center; }
+.stat-cell strong { display: block; font-size: 36px; font-weight: 900; letter-spacing: -1px; line-height: 1; background: linear-gradient(135deg, #FF7AB6 0%, #7B5BFF 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stat-cell span { display: block; font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 10px; font-weight: 500; }
+
+/* Community / HoYoLab */
+.community { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.com-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: 40px; position: relative; overflow: hidden; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; }
+.com-card.purple { background: linear-gradient(135deg, var(--hy-purple) 0%, var(--hy-purple-deep) 100%); color: #fff; border: 0; }
+.com-card.purple h3, .com-card.purple p { color: #fff; }
+.com-card.purple p { opacity: 0.85; }
+.com-card h3 { font-size: 28px; font-weight: 800; margin: 0 0 12px; letter-spacing: -0.6px; color: var(--ink-bright); }
+.com-card p { font-size: 14px; color: var(--ink-soft); margin: 0 0 24px; max-width: 360px; line-height: 1.7; }
+.com-vis { margin-top: 20px; height: 100px; border-radius: var(--r-md); background: linear-gradient(135deg, var(--hy-purple-fog) 0%, var(--hy-pink-soft) 100%); display: grid; place-items: center; }
+.com-card.purple .com-vis { background: rgba(255,255,255,0.10); }
+
+/* CTA */
+.cta-band { position: relative; padding: 80px 56px; border-radius: var(--r-2xl); background: linear-gradient(135deg, #7B5BFF 0%, #FF7AB6 100%); color: #fff; overflow: hidden; text-align: center; }
+.cta-band::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0); background-size: 32px 32px; mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5), transparent 70%); }
+.cta-band h2 { font-size: 44px; line-height: 1.15; letter-spacing: -1px; margin: 0 0 14px; font-weight: 900; position: relative; }
+.cta-band p { margin: 0 auto 32px; font-size: 16px; opacity: 0.92; max-width: 520px; position: relative; }
+.cta-band .btn { position: relative; }
+
+/* Footer */
+footer { background: var(--surface-dark); color: rgba(255,255,255,0.75); padding: 64px 0 32px; position: relative; overflow: hidden; }
+footer::before { content: ""; position: absolute; top: 0; right: 0; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(123,91,255,0.20), transparent 70%); }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; position: relative; }
+.foot-brand p { font-size: 13px; line-height: 1.75; margin: 14px 0 22px; max-width: 280px; color: rgba(255,255,255,0.65); }
+.foot-brand .brand { color: #fff; }
+.foot-col h4 { font-size: 13px; font-weight: 700; color: #fff; margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: rgba(255,255,255,0.65); transition: color .12s; }
+.foot-col li a:hover { color: var(--hy-pink); }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.10); font-size: 12px; color: rgba(255,255,255,0.5); flex-wrap: wrap; gap: 14px; position: relative; }
+
+/* Design System Part B */
+.ds-section { background: #fff; padding: 100px 0; border-top: 1px solid var(--border-soft); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 36px; letter-spacing: -1px; line-height: 1.2; margin: 0 0 10px; font-weight: 800; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-soft); font-size: 14px; max-width: 540px; line-height: 1.75; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--hy-purple-fog); border: 1px solid var(--hy-purple-soft); border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--hy-purple-deep); transition: all .15s; }
+.ds-source:hover { background: var(--hy-purple); color: #fff; border-color: var(--hy-purple); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border-soft); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 24px; font-weight: 800; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.3px; }
+.ds-desc { font-size: 13px; color: var(--ink-soft); margin: 0 0 24px; line-height: 1.7; max-width: 580px; }
+.ds-caption { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--ink-muted); text-transform: uppercase; margin: 28px 0 12px; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 12px; font-weight: 700; color: var(--ink); }
+.ds-sw .val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border-soft); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: var(--ink-muted); text-transform: uppercase; background: var(--surface-1); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--hy-purple-deep); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.ds-radius-cell { background: var(--surface-1); padding: 18px 8px; text-align: center; border-radius: 12px; }
+.ds-radius-box { width: 56px; height: 56px; background: linear-gradient(135deg, var(--hy-purple) 0%, var(--hy-pink) 100%); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 12px; font-weight: 700; color: var(--ink); }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: var(--surface-1); border-radius: var(--r-lg); padding: 24px; }
+.ds-card h5 { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--hy-purple-deep); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input { background: #fff; border: 1.5px solid var(--border); padding: 11px 16px; border-radius: var(--r-pill); color: var(--ink); font-size: 13px; font-family: inherit; width: 100%; outline: none; transition: all .15s; }
+.input:focus { border-color: var(--hy-purple); box-shadow: 0 0 0 4px rgba(123,91,255,0.12); }
+.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.tag-purple { background: var(--hy-purple-fog); color: var(--hy-purple-deep); }
+.tag-pink { background: var(--hy-pink-soft); color: #C4458C; }
+.tag-blue { background: var(--hy-blue-soft); color: #1A7ECC; }
+.tag-gold { background: #FFF0CC; color: #C4861F; }
+
+/* Floating source */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: linear-gradient(135deg, var(--hy-purple) 0%, var(--hy-pink) 100%); color: #fff; padding: 10px 20px; border-radius: 999px; font-size: 12px; font-weight: 700; box-shadow: var(--shadow-glow); transition: all .18s; }
+.src-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-heavy); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero h1 { font-size: 44px; letter-spacing: -1.4px; }
+  .char-stage { height: 480px; }
+  .games-grid { grid-template-columns: 1fr; }
+  .community { grid-template-columns: 1fr; }
+  .stat-inner { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .cta-band h2 { font-size: 28px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">m</span>
+      <span>米哈游</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link active" href="#">首页</a>
+      <a class="nav-link" href="#">游戏</a>
+      <a class="nav-link" href="#">HoYoLab</a>
+      <a class="nav-link" href="#">招贤</a>
+      <a class="nav-link" href="#">关于</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#">通行证</a>
+      <a class="btn btn-primary btn-sm" href="#">立即下载</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>HoYoFEST 2026 全球玩家庆典开启</span>
+      <h1>技术宅,<br/><em>拯救世界。</em></h1>
+      <p class="lead">我们是一群相信热爱可以改变世界的人,致力于为全球玩家创造打破次元壁的虚拟世界。让每一段冒险,都成为玩家一生的回忆。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#">探索游戏世界</a>
+        <a class="btn btn-outline btn-lg" href="#">加入 HoYoLab</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>2亿+</strong><span>全球注册玩家</span></div>
+        <div class="hero-meta-item"><strong>180+</strong><span>覆盖国家与地区</span></div>
+        <div class="hero-meta-item"><strong>#1</strong><span>AppStore 收入榜首</span></div>
+      </div>
+    </div>
+
+    <div class="char-stage" aria-label="角色卡示意">
+      <div class="char-bg"></div>
+      <div class="char-card">
+        <div class="char-portrait">
+          <span class="star">✦</span>
+          <span class="star">✧</span>
+          <span class="star">✦</span>
+          <svg viewBox="0 0 200 280" fill="none">
+            <!-- 抽象动漫人物剪影 -->
+            <defs>
+              <linearGradient id="charG" x1="0" y1="0" x2="0" y2="280">
+                <stop offset="0%" stop-color="#7B5BFF"/>
+                <stop offset="60%" stop-color="#FF7AB6"/>
+                <stop offset="100%" stop-color="#FFD15B"/>
+              </linearGradient>
+            </defs>
+            <!-- 飘逸头发 -->
+            <path d="M60 60 Q40 30 70 18 Q100 5 130 18 Q160 30 140 60 Q170 100 150 160 Q140 180 130 170 L130 100 Q100 80 70 100 L70 170 Q60 180 50 160 Q30 100 60 60Z" fill="url(#charG)" opacity="0.9"/>
+            <!-- 身躯 -->
+            <path d="M75 160 Q70 200 80 240 L120 240 Q130 200 125 160 Q110 170 100 170 Q90 170 75 160Z" fill="url(#charG)" opacity="0.75"/>
+            <!-- 装饰星 -->
+            <path d="M100 110 L104 122 L116 122 L106 130 L110 142 L100 134 L90 142 L94 130 L84 122 L96 122 Z" fill="#fff" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="char-meta">
+          <div class="char-name">星穹列车 · 三月七</div>
+          <div class="char-sub">冰属性 · 五星 · 同行者</div>
+          <div class="char-stats">
+            <div class="char-stat"><strong>2400</strong><span>HP</span></div>
+            <div class="char-stat"><strong>520</strong><span>ATK</span></div>
+            <div class="char-stat"><strong>380</strong><span>DEF</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">OUR GAMES</span>
+      <h2 class="section-title">虚拟世界,<br/>等你出发。</h2>
+      <p class="section-sub">每一款米哈游作品,都是我们对游戏艺术与技术的极致探索 — 从提瓦特大陆,到星穹列车,再到新艾利都。</p>
+    </div>
+
+    <div class="games-grid">
+      <div class="game-card g1">
+        <span class="game-tag">开放世界 RPG</span>
+        <div class="game-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <h3>原神</h3>
+        <p>七国大陆,自由探索。和你的旅伴一起,在提瓦特书写属于你的史诗。</p>
+        <a class="game-link" href="#">进入提瓦特 →</a>
+      </div>
+
+      <div class="game-card g2">
+        <span class="game-tag">回合制策略</span>
+        <div class="game-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8 12 2"/></svg>
+        </div>
+        <h3>崩坏:星穹铁道</h3>
+        <p>登上星穹列车,踏上银河旅途。一段跨越星海的冒险,从这里开始。</p>
+        <a class="game-link" href="#">登上列车 →</a>
+      </div>
+
+      <div class="game-card g3">
+        <span class="game-tag">都市动作</span>
+        <div class="game-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>绝区零</h3>
+        <p>都市奇幻动作游戏。在新艾利都的霓虹之下,与你的代理人组成最强队伍。</p>
+        <a class="game-link" href="#">进入空洞 →</a>
+      </div>
+
+      <div class="game-card g4">
+        <span class="game-tag">3D 动作</span>
+        <div class="game-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>崩坏3</h3>
+        <p>女武神战斗的次元起点。在崩坏的世界里,守护文明的最后一束光。</p>
+        <a class="game-link" href="#">召集女武神 →</a>
+      </div>
+
+      <div class="game-card g5">
+        <span class="game-tag">玩家社区</span>
+        <div class="game-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>HoYoLab</h3>
+        <p>玩家共建的官方社区。在这里分享攻略、寻找队友、获取最新资讯。</p>
+        <a class="game-link" href="#">进入社区 →</a>
+      </div>
+
+      <div class="game-card g6">
+        <span class="game-tag">即将上线</span>
+        <div class="game-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>HoYoPlay 平台</h3>
+        <p>一站式启动器,集合米哈游所有游戏。下载、更新、社区,触手可及。</p>
+        <a class="game-link" href="#">下载平台 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stat-wrap">
+  <div class="container">
+    <div class="stat-inner">
+      <h2>用<em>热爱</em>,<br/>连接全世界的玩家。</h2>
+      <div class="stat-grid">
+        <div class="stat-cell"><strong>2亿+</strong><span>全球注册玩家</span></div>
+        <div class="stat-cell"><strong>180+</strong><span>覆盖国家与地区</span></div>
+        <div class="stat-cell"><strong>#1</strong><span>AppStore 收入</span></div>
+        <div class="stat-cell"><strong>6000+</strong><span>米哈游成员</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">COMMUNITY</span>
+      <h2 class="section-title">跨越次元的归属感</h2>
+      <p class="section-sub">在米哈游的世界里,每一位玩家都是这个故事的共同创作者。</p>
+    </div>
+
+    <div class="community">
+      <div class="com-card">
+        <div>
+          <span class="game-tag" style="color:var(--hy-pink);background:var(--hy-pink-soft);">玩家共创</span>
+          <h3 style="margin-top:14px;">HoYoLab 同人创作</h3>
+          <p>提瓦特漫画家、星穹画师、新艾利都摄影师 — 玩家用画笔和镜头,延展我们的世界观。</p>
+        </div>
+        <div class="com-vis">
+          <svg width="200" height="60" viewBox="0 0 200 60" fill="none">
+            <circle cx="30" cy="30" r="18" fill="#FF7AB6" opacity="0.7"/>
+            <circle cx="70" cy="30" r="18" fill="#7B5BFF" opacity="0.7"/>
+            <circle cx="110" cy="30" r="18" fill="#5BBFFF" opacity="0.7"/>
+            <circle cx="150" cy="30" r="18" fill="#FFD15B" opacity="0.7"/>
+          </svg>
+        </div>
+        <a class="btn btn-outline btn-sm" href="#">浏览作品集</a>
+      </div>
+
+      <div class="com-card purple">
+        <div>
+          <span class="game-tag" style="background:rgba(255,255,255,0.20);color:#fff;">官方活动</span>
+          <h3 style="margin-top:14px;">HoYoFEST 全球玩家庆典</h3>
+          <p>从上海到东京,从洛杉矶到巴黎 — 我们带着提瓦特、星穹列车与新艾利都的角色们,走进每一座城市。</p>
+        </div>
+        <div class="com-vis">
+          <svg width="200" height="60" viewBox="0 0 200 60" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <path d="M20 40 L50 15 L80 40 L110 15 L140 40 L170 15"/>
+            <circle cx="50" cy="15" r="3" fill="#fff"/>
+            <circle cx="110" cy="15" r="3" fill="#fff"/>
+            <circle cx="170" cy="15" r="3" fill="#fff"/>
+          </svg>
+        </div>
+        <a class="btn btn-sm" href="#" style="background:#fff;color:var(--hy-purple-deep);">查看排期</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2>愿你出走半生,<br/>归来仍是少年。</h2>
+      <p>加入我们,一起为全球玩家创造打破次元壁的虚拟世界 — 不管你是程序、美术、策划,还是同样相信热爱的人。</p>
+      <a class="btn btn-lg" href="#" style="background:#fff;color:var(--hy-purple-deep);">加入米哈游 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM Part B -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <span class="section-eyebrow">设计系统参考</span>
+        <h2>多彩二次元,但克制精致</h2>
+        <p>米哈游的视觉语言以紫粉渐变作为情感锚点,辅以蓝、金、薄荷点缀次元感。 圆角偏大(12–32px),呈现圆润可爱;但版式严格遵循栅格,避免廉价同人风。</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mihoyo.html" target="_blank" rel="noopener">查看 DESIGN.md ↗</a>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3 class="ds-heading">色彩</h3>
+      <p class="ds-desc">紫色为主,粉色为辅,蓝/金/薄荷为点缀。每种颜色都有明确的"角色定位"— 紫色是技术,粉色是情感,金色是稀有,薄荷是新鲜。</p>
+
+      <div class="ds-caption">品牌主色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#7B5BFF"></div><div class="meta"><div class="name">米哈游紫</div><div class="val">#7B5BFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5A3FFF"></div><div class="meta"><div class="name">深紫</div><div class="val">#5A3FFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF7AB6"></div><div class="meta"><div class="name">二次元粉</div><div class="val">#FF7AB6</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5BBFFF"></div><div class="meta"><div class="name">星空蓝</div><div class="val">#5BBFFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#7B5BFF,#FF7AB6)"></div><div class="meta"><div class="name">主渐变</div><div class="val">linear-gradient</div></div></div>
+      </div>
+
+      <div class="ds-caption">点缀色 · 角色稀有度</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FFD15B"></div><div class="meta"><div class="name">五星金</div><div class="val">#FFD15B</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5BFFC5"></div><div class="meta"><div class="name">薄荷绿</div><div class="val">#5BFFC5</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E5DCFF"></div><div class="meta"><div class="name">浅紫</div><div class="val">#E5DCFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFCFE5"></div><div class="meta"><div class="name">浅粉</div><div class="val">#FFCFE5</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#C5E8FF"></div><div class="meta"><div class="name">浅蓝</div><div class="val">#C5E8FF</div></div></div>
+      </div>
+
+      <div class="ds-caption">文字与背景</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0A0420"></div><div class="meta"><div class="name">主标题</div><div class="val">#0A0420</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1A0F36"></div><div class="meta"><div class="name">正文</div><div class="val">#1A0F36</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4A3B6E"></div><div class="meta"><div class="name">辅助</div><div class="val">#4A3B6E</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8478A6"></div><div class="meta"><div class="name">弱化</div><div class="val">#8478A6</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#BFB6D6"></div><div class="meta"><div class="name">禁用</div><div class="val">#BFB6D6</div></div></div>
+      </div>
+
+      <div class="ds-caption">背景与分隔</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #E8E2F5"></div><div class="meta"><div class="name">底色</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FAF7FF;border:1px solid #E8E2F5"></div><div class="meta"><div class="name">弱底</div><div class="val">#FAF7FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F4EEFF;border:1px solid #E8E2F5"></div><div class="meta"><div class="name">紫雾</div><div class="val">#F4EEFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F0EAFF;border:1px solid #E8E2F5"></div><div class="meta"><div class="name">紫纸</div><div class="val">#F0EAFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1A0F36"></div><div class="meta"><div class="name">深空</div><div class="val">#1A0F36</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">字体</h3>
+      <p class="ds-desc">中文 Noto Sans SC 优先,西文 Inter。 主标题大量使用 800–900 字重 + 紫粉渐变文字效果,营造游戏宣传海报感。</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>样例</th><th>字号</th><th>字重</th><th>效果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--hero-display</td><td class="sample" style="font-size:36px;font-weight:900;letter-spacing:-1.4px">技术宅拯救世界</td><td>72 / 56 / 36</td><td>900</td><td>负字距 + 渐变</td></tr>
+          <tr><td class="token">--hero-gradient</td><td class="sample" style="font-size:36px;font-weight:900;background:linear-gradient(120deg,#7B5BFF,#FF7AB6);-webkit-background-clip:text;background-clip:text;color:transparent;">拯救世界</td><td>72 / 36</td><td>900</td><td>紫粉渐变</td></tr>
+          <tr><td class="token">--section-title</td><td class="sample" style="font-size:30px;font-weight:800;letter-spacing:-1px">虚拟世界等你出发</td><td>44 / 30</td><td>800</td><td>-1.2 ~ -1px</td></tr>
+          <tr><td class="token">--card-title</td><td class="sample" style="font-size:22px;font-weight:800;letter-spacing:-0.4px">崩坏:星穹铁道</td><td>22</td><td>800</td><td>-0.4px</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:15px;font-weight:500">正文段落,500 字重</td><td>15</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--btn</td><td class="sample" style="font-size:14px;font-weight:600">进入提瓦特</td><td>13–15</td><td>600–700</td><td>normal</td></tr>
+          <tr><td class="token">--tag</td><td class="sample" style="font-size:11px;font-weight:700;letter-spacing:0.3px;color:#5A3FFF">开放世界 RPG</td><td>11</td><td>700</td><td>0.3–1px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">圆角</h3>
+      <p class="ds-desc">圆润是米哈游的视觉关键 — 按钮 999px,卡片 16–24px,大型容器 32px。 所有边角都向"可爱、亲和"的方向倾斜。</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">最小</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">输入</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:32px"></div><div class="ds-radius-label">大卡</div><div class="ds-radius-val">24–32px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">胶囊</div><div class="ds-radius-val">999px</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">组件</h3>
+      <p class="ds-desc">所有交互元素都使用胶囊形状,呼应"角色立绘"的圆润气质。 主按钮使用紫粉渐变 + 发光阴影,营造游戏 UI 的氛围感。</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>按钮</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">紫色主按钮</a>
+            <a class="btn btn-pink" href="#">粉色按钮</a>
+            <a class="btn btn-outline" href="#">描边按钮</a>
+            <a class="btn btn-ghost" href="#">幽灵按钮</a>
+            <a class="btn btn-primary btn-lg" href="#">大号 CTA →</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>输入与标签</h5>
+          <div class="ds-card-stack">
+            <input class="input" placeholder="搜索角色或攻略" />
+            <input class="input" placeholder="UID / 玩家昵称" />
+            <div class="ds-card-row">
+              <span class="tag tag-purple">主线</span>
+              <span class="tag tag-pink">同行者</span>
+              <span class="tag tag-blue">冰属性</span>
+              <span class="tag tag-gold">★ 五星</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>角色卡</h5>
+          <div class="ds-card-stack" style="width:100%">
+            <div style="background:linear-gradient(160deg,#fff 0%,#F4EEFF 100%);border:1.5px solid #E8E2F5;border-radius:16px;padding:18px;width:100%;box-shadow:var(--shadow-card);">
+              <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
+                <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#7B5BFF,#FF7AB6);display:grid;place-items:center;color:#fff;font-weight:800;font-size:18px;">星</div>
+                <div>
+                  <div style="font-size:15px;font-weight:800;color:#0A0420;">三月七</div>
+                  <div style="font-size:11px;color:#8478A6;">星穹列车 · 同行者</div>
+                </div>
+              </div>
+              <div class="ds-card-row">
+                <span class="tag tag-blue">冰</span>
+                <span class="tag tag-gold">★★★★★</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark">m</span>
+          <span>米哈游</span>
+        </div>
+        <p>本站为米哈游视觉语言的设计学习样本,旨在展示其紫粉渐变美学与"技术宅拯救世界"的产品哲学。与 miHoYo / HoYoverse 无任何隶属关系。</p>
+      </div>
+      <div class="foot-col">
+        <h4>游戏</h4>
+        <ul>
+          <li><a href="#">原神</a></li>
+          <li><a href="#">崩坏:星穹铁道</a></li>
+          <li><a href="#">绝区零</a></li>
+          <li><a href="#">崩坏3</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>社区</h4>
+        <ul>
+          <li><a href="#">HoYoLab</a></li>
+          <li><a href="#">HoYoFEST</a></li>
+          <li><a href="#">官方周边</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>支持</h4>
+        <ul>
+          <li><a href="#">客户服务</a></li>
+          <li><a href="#">使用条款</a></li>
+          <li><a href="#">隐私政策</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#">关于米哈游</a></li>
+          <li><a href="#">招贤纳士</a></li>
+          <li><a href="#">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计学习作品 · 致敬米哈游视觉语言</span>
+      <span>沪 ICP · 文化经营许可 · 网络出版许可</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mihoyo.html" target="_blank" rel="noopener">查看源码 ↗</a>
+
+</body>
+</html>

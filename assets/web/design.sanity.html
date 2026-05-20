@@ -1,0 +1,1283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sanity — Inspired Design</title>
+<meta name="description" content="A Sanity-inspired marketing tribute: near-black canvas, achromatic gray ramp, coral-red CTA, electric-blue hover state, dev-tool studio mockup with two-pane content + code. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --sanity-black: #0b0b0b;
+  --pure-black: #000000;
+  --sanity-red: #f36458;
+  --electric-blue: #0052ef;
+  --light-blue: #55beff;
+  --pale-blue: #afe3ff;
+  --neon-green: #19d600;
+  --gpc-green: #37cd84;
+  --magenta: #f502ff;
+  --error-red: #dd0000;
+  /* Surface */
+  --dark-gray: #212121;
+  --medium-dark: #353535;
+  --white: #ffffff;
+  --light-gray: #ededed;
+  /* Text */
+  --silver: #b9b9b9;
+  --medium-gray: #797979;
+  --charcoal: #212121;
+  --near-black-text: #0b0b0b;
+  /* Border */
+  --border-dark: #0b0b0b;
+  --border-subtle: #212121;
+  --border-medium: #353535;
+  --border-light: #ffffff;
+  --border-orange: #ff5500;
+  /* Focus */
+  --focus-ring: #0052ef;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Space Grotesk", "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--sanity-black);
+  color: var(--white);
+  font-size: 16px;
+  line-height: 1.50;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01" 1;
+}
+a { color: inherit; text-decoration: none; transition: color 150ms ease; }
+::selection { background: var(--electric-blue); color: var(--white); }
+.mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; }
+
+.display {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 400;
+  line-height: 1.00;
+  letter-spacing: -4.48px;
+}
+.h-section {
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.08;
+  letter-spacing: -1.68px;
+}
+.h-card {
+  font-weight: 425;
+  font-size: 24px;
+  line-height: 1.24;
+  letter-spacing: -0.24px;
+}
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--medium-gray);
+  font-weight: 500;
+}
+
+/* Layout */
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
+.wrap-narrow { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 760px) {
+  .wrap, .wrap-narrow { padding: 0 16px; }
+}
+
+/* Nav */
+.top-nav {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(11, 11, 11, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 14px 0;
+}
+.nav-inner { display: flex; align-items: center; gap: 28px; }
+.logo {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-mark {
+  width: 22px; height: 22px;
+  background: var(--white);
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+}
+.logo-mark::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--sanity-black);
+}
+.logo-mark::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--white);
+  z-index: 2;
+}
+.nav-center { display: flex; gap: 22px; margin-left: 8px; }
+.nav-center a {
+  font-size: 15px;
+  color: var(--silver);
+  letter-spacing: -0.15px;
+}
+.nav-center a:hover { color: var(--electric-blue); }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 99999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 150ms ease;
+  letter-spacing: -0.15px;
+}
+.btn-primary { background: var(--sanity-red); color: var(--white); }
+.btn-primary:hover { background: var(--electric-blue); color: var(--white); }
+.btn-secondary { background: var(--sanity-black); color: var(--silver); border-color: var(--border-subtle); }
+.btn-secondary:hover { background: var(--electric-blue); color: var(--white); border-color: var(--electric-blue); }
+.btn-outlined { background: var(--white); color: var(--near-black-text); border-color: var(--near-black-text); }
+.btn-outlined:hover { background: var(--electric-blue); color: var(--white); border-color: var(--electric-blue); }
+.btn-ghost {
+  background: var(--dark-gray);
+  color: var(--silver);
+  border: 1px solid var(--dark-gray);
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 13px;
+}
+.btn-ghost:hover { background: var(--electric-blue); color: var(--white); border-color: var(--electric-blue); }
+.btn-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--silver);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  padding: 5px 10px;
+  letter-spacing: 0;
+}
+.btn-label:hover { background: var(--electric-blue); color: var(--white); border-color: var(--electric-blue); }
+
+/* HERO */
+.hero { padding: 96px 0 80px; position: relative; overflow: hidden; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 1024px) { .hero-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--dark-gray);
+  border: 1px solid var(--border-medium);
+  border-radius: 99999px;
+  padding: 6px 12px;
+  margin-bottom: 24px;
+}
+.hero-eyebrow .dot { width: 6px; height: 6px; background: var(--neon-green); border-radius: 50%; }
+.hero-eyebrow .label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--silver);
+  font-weight: 500;
+}
+.hero h1 {
+  font-size: clamp(56px, 9vw, 112px);
+  line-height: 1.00;
+  letter-spacing: clamp(-2px, -0.04em, -4.48px);
+  font-weight: 400;
+  margin: 0 0 28px;
+  color: var(--white);
+}
+.hero h1 .accent { color: var(--silver); }
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.50;
+  color: var(--silver);
+  letter-spacing: -0.18px;
+  max-width: 520px;
+  margin: 0 0 32px;
+}
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Studio mockup — two-pane content + code */
+.studio {
+  background: var(--dark-gray);
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.studio-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  background: var(--sanity-black);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.studio-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--medium-dark); }
+.studio-dot.r { background: var(--sanity-red); }
+.studio-dot.g { background: var(--neon-green); opacity: 0.7; }
+.studio-bar .path {
+  margin-left: 10px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  color: var(--medium-gray);
+  letter-spacing: 0;
+}
+.studio-body {
+  display: grid;
+  grid-template-columns: 220px 1fr 1fr;
+  min-height: 380px;
+}
+@media (max-width: 780px) { .studio-body { grid-template-columns: 1fr; } }
+
+.studio-side {
+  background: var(--sanity-black);
+  border-right: 1px solid var(--border-subtle);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.side-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--medium-gray);
+  padding: 8px 8px 6px;
+  font-weight: 600;
+}
+.side-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px;
+  font-size: 13px;
+  color: var(--silver);
+  border-radius: 4px;
+  letter-spacing: -0.1px;
+}
+.side-item.active { background: var(--dark-gray); color: var(--white); }
+.side-item:hover { color: var(--electric-blue); }
+.side-item .glyph {
+  width: 14px; height: 14px; border-radius: 3px;
+  background: var(--medium-dark);
+  display: inline-block; flex-shrink: 0;
+}
+.side-item.active .glyph { background: var(--sanity-red); }
+
+.studio-content {
+  padding: 18px 18px;
+  background: var(--dark-gray);
+  border-right: 1px solid var(--border-subtle);
+}
+.content-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 8px;
+}
+.content-head .ttl { font-size: 14px; font-weight: 500; color: var(--white); }
+.content-head .status {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--gpc-green);
+  font-weight: 500;
+}
+.field { margin-bottom: 12px; }
+.field-lbl {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--medium-gray);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.field-input {
+  background: var(--sanity-black);
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: var(--white);
+  font-family: inherit;
+  letter-spacing: -0.13px;
+}
+.field-input.focused {
+  border-color: var(--electric-blue);
+  box-shadow: 0 0 0 2px rgba(0, 82, 239, 0.25);
+}
+.field-textarea {
+  min-height: 64px;
+  font-size: 12px;
+  color: var(--silver);
+  line-height: 1.5;
+}
+.field-tags {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.tag {
+  background: var(--medium-dark);
+  border-radius: 99999px;
+  padding: 3px 9px;
+  font-size: 11px;
+  color: var(--silver);
+}
+.tag.green { background: rgba(25, 214, 0, 0.18); color: var(--neon-green); }
+
+.studio-code {
+  background: var(--sanity-black);
+  padding: 14px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--silver);
+  overflow: hidden;
+}
+.code-lines { display: flex; flex-direction: column; }
+.code-row { display: flex; gap: 14px; }
+.code-row .ln {
+  color: var(--medium-gray);
+  flex-shrink: 0;
+  width: 18px;
+  text-align: right;
+  user-select: none;
+}
+.code-row .txt { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.k { color: var(--magenta); }
+.s { color: var(--neon-green); }
+.t { color: var(--light-blue); }
+.c { color: var(--medium-gray); font-style: italic; }
+.p { color: var(--sanity-red); }
+
+/* Trust */
+.trust {
+  padding: 56px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.trust-row {
+  display: flex; align-items: center; gap: 48px;
+  justify-content: space-between; flex-wrap: wrap;
+}
+.trust-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--medium-gray);
+}
+.trust-logos {
+  display: flex; gap: 40px; align-items: center; flex-wrap: wrap;
+}
+.trust-logo {
+  font-size: 16px; font-weight: 500;
+  color: var(--silver);
+  letter-spacing: -0.2px;
+}
+
+/* Sections */
+.section {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 32px; margin-bottom: 48px; flex-wrap: wrap;
+}
+.section-head .left { max-width: 720px; }
+.section-head h2 { margin: 12px 0 0; }
+.section-head p {
+  max-width: 380px;
+  font-size: 16px;
+  color: var(--silver);
+  margin: 0;
+  letter-spacing: -0.16px;
+}
+
+/* Feature cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1000px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--dark-gray);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 150ms ease;
+}
+.feature-card:hover { border-color: var(--border-medium); }
+.feature-card .ic {
+  width: 36px; height: 36px;
+  background: var(--medium-dark);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--neon-green);
+}
+.feature-card h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 425;
+  line-height: 1.20;
+  letter-spacing: -0.22px;
+  color: var(--white);
+}
+.feature-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--silver);
+  letter-spacing: -0.14px;
+}
+.feature-card .tag-row { margin-top: 6px; }
+.feature-tag {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--medium-gray);
+  font-weight: 500;
+}
+
+/* Pipeline / Two-col mockup */
+.pipeline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+@media (max-width: 900px) { .pipeline { grid-template-columns: 1fr; } }
+.pipeline-card {
+  background: var(--dark-gray);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 28px;
+}
+.pipeline-card h3 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 425;
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+}
+.pipeline-card p {
+  font-size: 15px;
+  color: var(--silver);
+  margin: 0 0 18px;
+  letter-spacing: -0.15px;
+}
+.bullets { list-style: none; padding: 0; margin: 0; }
+.bullets li {
+  padding: 10px 0;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 14px;
+  color: var(--silver);
+  display: flex; align-items: flex-start; gap: 10px;
+  letter-spacing: -0.14px;
+}
+.bullets li:first-child { border-top: none; }
+.bullets li .check {
+  color: var(--neon-green);
+  font-family: "IBM Plex Mono", monospace;
+  flex-shrink: 0;
+}
+.code-block {
+  margin-top: 16px;
+  background: var(--sanity-black);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--silver);
+  overflow-x: auto;
+}
+
+/* Pricing */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+.plan {
+  background: var(--dark-gray);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 28px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.plan-feature { border-color: var(--sanity-red); }
+.plan .plan-tag {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--medium-gray);
+  font-weight: 500;
+}
+.plan-feature .plan-tag { color: var(--sanity-red); }
+.plan h3 {
+  font-size: 28px;
+  font-weight: 425;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0;
+  color: var(--white);
+}
+.plan-price {
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -1.14px;
+  color: var(--white);
+}
+.plan-price small {
+  font-size: 13px;
+  color: var(--silver);
+  font-weight: 400;
+  letter-spacing: -0.13px;
+}
+.plan ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+.plan li {
+  font-size: 14px;
+  color: var(--silver);
+  letter-spacing: -0.14px;
+  padding-left: 18px;
+  position: relative;
+}
+.plan li::before {
+  content: "→"; position: absolute; left: 0; top: 0;
+  color: var(--medium-gray);
+}
+.plan .btn { justify-content: center; margin-top: auto; }
+
+/* Final CTA */
+.final-cta {
+  padding: 120px 0;
+  text-align: center;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.final-cta h2 {
+  font-size: clamp(48px, 7vw, 84px);
+  line-height: 1.0;
+  letter-spacing: -2.4px;
+  font-weight: 400;
+  margin: 0 auto;
+  max-width: 900px;
+  color: var(--white);
+}
+.final-cta p {
+  margin: 24px auto 32px;
+  font-size: 17px;
+  color: var(--silver);
+  max-width: 540px;
+  letter-spacing: -0.17px;
+}
+
+/* DS Reference */
+.ds {
+  background: var(--pure-black);
+  padding: 96px 0;
+  border-top: 1px solid var(--border-medium);
+}
+.ds-head { margin-bottom: 56px; max-width: 720px; }
+.ds-head h2 {
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -1.4px;
+  font-weight: 400;
+  margin: 12px 0 16px;
+  color: var(--white);
+}
+.ds-head p {
+  font-size: 15px;
+  color: var(--silver);
+  letter-spacing: -0.15px;
+  margin: 0;
+}
+.ds-block { margin-bottom: 64px; }
+.ds-block h3 {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--medium-gray);
+  font-weight: 600;
+  margin: 0 0 24px;
+}
+.color-group { margin-bottom: 24px; }
+.color-group-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--medium-gray);
+  margin-bottom: 12px;
+}
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+}
+.swatch {
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 14px;
+  background: var(--dark-gray);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.swatch-chip {
+  height: 52px;
+  border-radius: 3px;
+  border: 1px solid var(--border-subtle);
+}
+.swatch-name { font-size: 13px; color: var(--white); font-weight: 500; letter-spacing: -0.13px; }
+.swatch-hex {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--silver);
+}
+
+.type-table, .comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.type-table th, .type-table td,
+.comp-table th, .comp-table td {
+  text-align: left;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--silver);
+  vertical-align: middle;
+  letter-spacing: -0.13px;
+}
+.type-table th, .comp-table th {
+  color: var(--medium-gray);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 500;
+  background: var(--dark-gray);
+}
+.type-table .preview { color: var(--white); }
+.type-table tr:last-child td, .comp-table tr:last-child td { border-bottom: none; }
+
+.radius-ladder {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+.radius-cell {
+  border: 1px solid var(--border-subtle);
+  background: var(--dark-gray);
+  padding: 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  border-radius: 6px;
+}
+.radius-vis {
+  width: 80px; height: 80px;
+  background: var(--sanity-red);
+}
+.radius-cell .v {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--white);
+  letter-spacing: 0.4px;
+  font-weight: 500;
+}
+.radius-cell .lbl {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  color: var(--medium-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+/* Footer */
+.foot {
+  background: var(--sanity-black);
+  padding: 80px 0 36px;
+  border-top: 1px solid var(--border-subtle);
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+@media (max-width: 880px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+.foot-brand { color: var(--silver); font-size: 14px; max-width: 280px; letter-spacing: -0.14px; }
+.foot-brand .logo { margin-bottom: 14px; }
+.foot-col h5 {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--white);
+  margin: 0 0 16px;
+  font-weight: 600;
+}
+.foot-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--silver);
+  margin-bottom: 10px;
+  letter-spacing: -0.14px;
+}
+.foot-col a:hover { color: var(--electric-blue); }
+.foot-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--medium-gray);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Floating link */
+.floating-design-link {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 99;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--sanity-red);
+  color: var(--white);
+  padding: 9px 16px;
+  border-radius: 99999px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+  transition: background 150ms ease;
+}
+.floating-design-link:hover { background: var(--electric-blue); }
+
+.i { width: 16px; height: 16px; display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a class="logo" href="#">
+        <span class="logo-mark"></span>
+        <span>Sanity</span>
+      </a>
+      <div class="nav-center">
+        <a href="#">Product</a>
+        <a href="#">Solutions</a>
+        <a href="#">Developers</a>
+        <a href="#">Customers</a>
+        <a href="#">Pricing</a>
+        <a href="#">Docs</a>
+      </div>
+      <div class="nav-right">
+        <a href="#" style="font-size:14px;color:var(--silver)">Sign in</a>
+        <a class="btn btn-primary" href="#">Get started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        <span class="label">v3.49 — Live Studio shipping today</span>
+      </div>
+      <h1 class="display">Content is&nbsp;<span class="accent">structured</span></h1>
+      <p class="hero-sub">Sanity is the headless content operating system for teams who treat content like code. Real-time collaborative Studio, GROQ queries, and APIs that ship as fast as you do.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#">Get started — free</a>
+        <a class="btn btn-secondary" href="#">$ npm create sanity@latest</a>
+      </div>
+    </div>
+
+    <!-- Studio mockup -->
+    <div class="studio">
+      <div class="studio-bar">
+        <span class="studio-dot r"></span>
+        <span class="studio-dot"></span>
+        <span class="studio-dot g"></span>
+        <span class="path mono">studio.sanity.io / production / schema</span>
+      </div>
+      <div class="studio-body">
+        <aside class="studio-side">
+          <span class="side-label">Content</span>
+          <div class="side-item"><span class="glyph"></span> Author</div>
+          <div class="side-item active"><span class="glyph"></span> Article</div>
+          <div class="side-item"><span class="glyph"></span> Page</div>
+          <div class="side-item"><span class="glyph"></span> Product</div>
+          <span class="side-label" style="margin-top:10px">System</span>
+          <div class="side-item"><span class="glyph"></span> Datasets</div>
+          <div class="side-item"><span class="glyph"></span> Webhooks</div>
+        </aside>
+        <div class="studio-content">
+          <div class="content-head">
+            <span class="ttl">Article — Editing</span>
+            <span class="status mono">● PUBLISHED</span>
+          </div>
+          <div class="field">
+            <div class="field-lbl mono">TITLE</div>
+            <div class="field-input focused">Content is structured</div>
+          </div>
+          <div class="field">
+            <div class="field-lbl mono">SLUG</div>
+            <div class="field-input" style="color:var(--silver)">/blog/content-is-structured</div>
+          </div>
+          <div class="field">
+            <div class="field-lbl mono">EXCERPT</div>
+            <div class="field-input field-textarea">Why we believe the content layer of every product belongs in a queryable, typed graph &mdash; not a CMS template.</div>
+          </div>
+          <div class="field">
+            <div class="field-lbl mono">TAGS</div>
+            <div class="field-tags">
+              <span class="tag green">launch</span>
+              <span class="tag">cms</span>
+              <span class="tag">groq</span>
+              <span class="tag">v3</span>
+            </div>
+          </div>
+        </div>
+        <div class="studio-code">
+          <div class="code-lines mono">
+            <div class="code-row"><span class="ln">1</span><span class="txt"><span class="k">export default</span> <span class="t">defineType</span>({</span></div>
+            <div class="code-row"><span class="ln">2</span><span class="txt">&nbsp;&nbsp;<span class="p">name</span>: <span class="s">'article'</span>,</span></div>
+            <div class="code-row"><span class="ln">3</span><span class="txt">&nbsp;&nbsp;<span class="p">type</span>: <span class="s">'document'</span>,</span></div>
+            <div class="code-row"><span class="ln">4</span><span class="txt">&nbsp;&nbsp;<span class="p">fields</span>: [</span></div>
+            <div class="code-row"><span class="ln">5</span><span class="txt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t">defineField</span>({ <span class="p">name</span>: <span class="s">'title'</span> }),</span></div>
+            <div class="code-row"><span class="ln">6</span><span class="txt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t">defineField</span>({ <span class="p">name</span>: <span class="s">'slug'</span> }),</span></div>
+            <div class="code-row"><span class="ln">7</span><span class="txt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t">defineField</span>({ <span class="p">name</span>: <span class="s">'excerpt'</span> }),</span></div>
+            <div class="code-row"><span class="ln">8</span><span class="txt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t">defineField</span>({ <span class="p">name</span>: <span class="s">'body'</span> }),</span></div>
+            <div class="code-row"><span class="ln">9</span><span class="txt">&nbsp;&nbsp;],</span></div>
+            <div class="code-row"><span class="ln">10</span><span class="txt">})</span></div>
+            <div class="code-row"><span class="ln">11</span><span class="txt">&nbsp;</span></div>
+            <div class="code-row"><span class="ln">12</span><span class="txt"><span class="c">// query.groq</span></span></div>
+            <div class="code-row"><span class="ln">13</span><span class="txt"><span class="k">await</span> <span class="t">client</span>.<span class="t">fetch</span>(<span class="s">`*[_type=='article']`</span>)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-row">
+      <span class="trust-label">Powering content for</span>
+      <div class="trust-logos">
+        <span class="trust-logo">Figma</span>
+        <span class="trust-logo">PUMA</span>
+        <span class="trust-logo">National Geographic</span>
+        <span class="trust-logo">Sonos</span>
+        <span class="trust-logo">Skims</span>
+        <span class="trust-logo">Loom</span>
+        <span class="trust-logo">Vercel</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE GRID -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <span class="eyebrow">SECTION_01 / PLATFORM</span>
+        <h2 class="h-section">Structured, real-time, schema-driven. The CMS that thinks like a database.</h2>
+      </div>
+      <p>Three pillars that turn a content team into an engineering org &mdash; without making the editors feel like engineers.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/></svg>
+        </span>
+        <span class="feature-tag mono">PLATFORM_01</span>
+        <h3>Structured content engine</h3>
+        <p>Define your schema in code. Every field, every reference, every variant gets a typed contract that flows from Studio to your frontend with zero glue.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="ic" style="color:var(--electric-blue)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h16"/><circle cx="20" cy="12" r="2"/></svg>
+        </span>
+        <span class="feature-tag mono">PLATFORM_02</span>
+        <h3>GROQ &mdash; query content like an API</h3>
+        <p>One open-source query language, projected against your schema. Sub-50ms reads at the edge, no over-fetch, no GraphQL ceremony.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="ic" style="color:var(--sanity-red)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18"/></svg>
+        </span>
+        <span class="feature-tag mono">PLATFORM_03</span>
+        <h3>Live Studio, multiplayer by default</h3>
+        <p>Twelve editors in one document. Realtime presence, comments tied to fields, branch previews &mdash; the Figma model for content.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE / TWO-CARD MOCKUP -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <span class="eyebrow">SECTION_02 / DEVELOPERS</span>
+        <h2 class="h-section">From schema to production in one&nbsp;deploy.</h2>
+      </div>
+      <p>Sanity is the only headless CMS where the editor surface is generated from your TypeScript &mdash; not the other way around.</p>
+    </div>
+
+    <div class="pipeline">
+      <div class="pipeline-card">
+        <h3>Studio is generated from your code</h3>
+        <p>Write a schema once. The editing experience &mdash; with validation, presence, previews and references &mdash; appears for free.</p>
+        <ul class="bullets">
+          <li><span class="check mono">→</span> TypeScript-first schemas with full inference</li>
+          <li><span class="check mono">→</span> 60+ official inputs (block content, portable text, references)</li>
+          <li><span class="check mono">→</span> Custom inputs as React components</li>
+          <li><span class="check mono">→</span> Per-document permissions and workflow states</li>
+        </ul>
+      </div>
+      <div class="pipeline-card">
+        <h3>Query at the edge with GROQ</h3>
+        <p>One query, one round-trip, exactly the shape your component needs.</p>
+<div class="code-block mono"><span class="c">// fetch the homepage hero</span>
+<span class="k">const</span> hero = <span class="k">await</span> client.<span class="t">fetch</span>(<span class="s">`</span>
+<span class="s">  *[_type == "page" &amp;&amp; slug.current == "home"][0]{</span>
+<span class="s">    title,</span>
+<span class="s">    "hero": hero{ headline, cta }</span>
+<span class="s">  }</span>
+<span class="s">`</span>)
+<span class="c">// → 38ms p99 from the edge</span></div>
+        <div style="margin-top:14px"><a class="btn btn-outlined" href="#">View GROQ docs →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="left">
+        <span class="eyebrow">SECTION_03 / PLANS</span>
+        <h2 class="h-section">Pricing that scales with content, not with seats.</h2>
+      </div>
+      <p>Free for solo developers, transparent for teams, custom only when you need it.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <span class="plan-tag mono">PLAN_FREE</span>
+        <h3>Developer</h3>
+        <div class="plan-price">$0<small>&nbsp;/ forever</small></div>
+        <ul>
+          <li>3 users, 2 datasets</li>
+          <li>10k documents, 5GB assets</li>
+          <li>100k API requests / mo</li>
+          <li>Live Studio + GROQ</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Start free</a>
+      </div>
+
+      <div class="plan plan-feature">
+        <span class="plan-tag mono">PLAN_GROWTH</span>
+        <h3>Growth</h3>
+        <div class="plan-price">$15<small>&nbsp;/ user / mo</small></div>
+        <ul>
+          <li>Unlimited datasets</li>
+          <li>1M documents, 50GB assets</li>
+          <li>500k API requests / mo</li>
+          <li>Content history (30 days)</li>
+          <li>Webhooks + scheduled publishing</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Choose Growth</a>
+      </div>
+
+      <div class="plan">
+        <span class="plan-tag mono">PLAN_ENTERPRISE</span>
+        <h3>Enterprise</h3>
+        <div class="plan-price">Custom<small>&nbsp;/ contact</small></div>
+        <ul>
+          <li>SSO + audit log + RBAC</li>
+          <li>Dedicated infrastructure</li>
+          <li>99.99% SLA, 24/7 support</li>
+          <li>Custom retention &amp; residency</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrap-narrow">
+    <h2 class="display" style="letter-spacing:-2.4px">Structure your&nbsp;content.</h2>
+    <p>Spin up a Studio, query with GROQ, and ship in the next hour. No credit card. No demo to schedule.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-primary" href="#">Get started — free</a>
+      <a class="btn btn-secondary" href="#">$ npm create sanity@latest</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DESIGN SYSTEM REFERENCE ─── -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-head">
+      <span class="eyebrow">DS_REF / 00</span>
+      <h2>The achromatic system underneath the canvas.</h2>
+      <p>A pure-neutral gray ramp punctured by coral CTA, electric-blue interaction, and neon-green status. Depth lives in surface color &mdash; not shadow.</p>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <h3>Color</h3>
+
+      <div class="color-group">
+        <div class="color-group-label">Primary Brand</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#0b0b0b"></div><span class="swatch-name">Sanity Black</span><span class="swatch-hex">#0b0b0b</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#000000"></div><span class="swatch-name">Pure Black</span><span class="swatch-hex">#000000</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#f36458"></div><span class="swatch-name">Sanity Red</span><span class="swatch-hex">#f36458</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-group-label">Accent &amp; Interactive</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#0052ef"></div><span class="swatch-name">Electric Blue</span><span class="swatch-hex">#0052ef</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#55beff"></div><span class="swatch-name">Light Blue</span><span class="swatch-hex">#55beff</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#afe3ff"></div><span class="swatch-name">Pale Blue</span><span class="swatch-hex">#afe3ff</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#19d600"></div><span class="swatch-name">Neon Green</span><span class="swatch-hex">#19d600</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#f502ff"></div><span class="swatch-name">Magenta</span><span class="swatch-hex">#f502ff</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-group-label">Surface &amp; Neutrals</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#212121"></div><span class="swatch-name">Dark Gray</span><span class="swatch-hex">#212121</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#353535"></div><span class="swatch-name">Medium Dark</span><span class="swatch-hex">#353535</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#797979"></div><span class="swatch-name">Medium Gray</span><span class="swatch-hex">#797979</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#b9b9b9"></div><span class="swatch-name">Silver</span><span class="swatch-hex">#b9b9b9</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#ededed"></div><span class="swatch-name">Light Gray</span><span class="swatch-hex">#ededed</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#ffffff"></div><span class="swatch-name">Pure White</span><span class="swatch-hex">#ffffff</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <div class="color-group-label">Semantic</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="swatch-chip" style="background:#dd0000"></div><span class="swatch-name">Error Red</span><span class="swatch-hex">#dd0000</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#37cd84"></div><span class="swatch-name">GPC Green</span><span class="swatch-hex">#37cd84</span></div>
+          <div class="swatch"><div class="swatch-chip" style="background:#0052ef"></div><span class="swatch-name">Focus Ring Blue</span><span class="swatch-hex">#0052ef</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="ds-block">
+      <h3>Typography — sans + mono, narrow weight band</h3>
+      <table class="type-table">
+        <thead>
+          <tr><th>Role</th><th>Family</th><th>Size</th><th>Weight</th><th>Line ht.</th><th>Tracking</th><th>Preview</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Display / Hero</td><td>Space Grotesk</td><td>112px</td><td>400</td><td>1.00</td><td>-4.48px</td><td class="preview" style="font-size:24px;font-weight:400;letter-spacing:-1px">Structured</td></tr>
+          <tr><td>Hero Secondary</td><td>Space Grotesk</td><td>72px</td><td>400</td><td>1.05</td><td>-2.88px</td><td class="preview" style="font-size:22px;font-weight:400;letter-spacing:-0.85px">Structured</td></tr>
+          <tr><td>Section Heading</td><td>Space Grotesk</td><td>48px</td><td>400</td><td>1.08</td><td>-1.68px</td><td class="preview" style="font-size:20px;font-weight:400;letter-spacing:-0.7px">Structured</td></tr>
+          <tr><td>Heading Medium</td><td>Space Grotesk</td><td>32px</td><td>425</td><td>1.24</td><td>-0.32px</td><td class="preview" style="font-size:18px;font-weight:500;letter-spacing:-0.18px">Structured</td></tr>
+          <tr><td>Body Large</td><td>Space Grotesk</td><td>18px</td><td>400</td><td>1.50</td><td>-0.18px</td><td class="preview" style="font-size:15px">Real-time content workspace</td></tr>
+          <tr><td>Body</td><td>Space Grotesk</td><td>16px</td><td>400</td><td>1.50</td><td>normal</td><td class="preview" style="font-size:14px">Real-time content workspace</td></tr>
+          <tr><td>Caption</td><td>Space Grotesk</td><td>13px</td><td>400-500</td><td>1.40</td><td>-0.13px</td><td class="preview" style="font-size:12px">Caption metadata</td></tr>
+          <tr><td>Micro Label</td><td>Space Grotesk</td><td>11px</td><td>600</td><td>1.0</td><td>normal (UC)</td><td class="preview mono" style="font-size:10px;text-transform:uppercase;letter-spacing:0.7px">PLATFORM_01</td></tr>
+          <tr><td>Code Body</td><td>IBM Plex Mono</td><td>15px</td><td>400</td><td>1.50</td><td>normal</td><td class="preview mono" style="font-size:12px">defineType({ ... })</td></tr>
+          <tr><td>Code Micro</td><td>IBM Plex Mono</td><td>11px</td><td>500</td><td>1.30</td><td>0.7px (UC)</td><td class="preview mono" style="font-size:10px;text-transform:uppercase;letter-spacing:0.7px">DS_REF / 00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3>Radius — 3px → 12px → pill (no in-between)</h3>
+      <div class="radius-ladder">
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:3px"></div><span class="v">3px</span><span class="lbl">XS · Inputs</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:5px"></div><span class="v">5px</span><span class="lbl">SM · Ghost buttons</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:6px"></div><span class="v">6px</span><span class="lbl">MD · Cards</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:12px"></div><span class="v">12px</span><span class="lbl">LG · Feature</span></div>
+        <div class="radius-cell"><div class="radius-vis" style="border-radius:99999px"></div><span class="v">∞</span><span class="lbl">PILL · Primary CTA</span></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3>Components — pill primary, surface depth, blue hover</h3>
+      <table class="comp-table">
+        <thead>
+          <tr><th>Component</th><th>Background</th><th>Border</th><th>Radius</th><th>Sample</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary CTA (pill)</td>
+            <td>#f36458</td>
+            <td>none</td>
+            <td>99999px</td>
+            <td><a class="btn btn-primary" href="#">Get started</a></td>
+          </tr>
+          <tr>
+            <td>Secondary (dark pill)</td>
+            <td>#0b0b0b</td>
+            <td>1px #212121</td>
+            <td>99999px</td>
+            <td><a class="btn btn-secondary" href="#">$ npm install</a></td>
+          </tr>
+          <tr>
+            <td>Outlined (light pill)</td>
+            <td>#ffffff</td>
+            <td>1px #0b0b0b</td>
+            <td>99999px</td>
+            <td><a class="btn btn-outlined" href="#">View docs</a></td>
+          </tr>
+          <tr>
+            <td>Ghost / Subtle</td>
+            <td>#212121</td>
+            <td>1px #212121</td>
+            <td>5px</td>
+            <td><a class="btn btn-ghost" href="#">Settings</a></td>
+          </tr>
+          <tr>
+            <td>Uppercase Label</td>
+            <td>transparent</td>
+            <td>1px #212121</td>
+            <td>5px</td>
+            <td><a class="btn btn-label" href="#">PUBLISHED</a></td>
+          </tr>
+          <tr>
+            <td>Dark Card</td>
+            <td>#212121</td>
+            <td>1px #353535</td>
+            <td>6px</td>
+            <td><span style="display:inline-block;background:#212121;border:1px solid #353535;border-radius:6px;padding:8px 14px;font-size:12px;color:var(--silver)">Card surface</span></td>
+          </tr>
+          <tr>
+            <td>Input (focused)</td>
+            <td>#0b0b0b</td>
+            <td>1px #0052ef + 2px ring</td>
+            <td>3px</td>
+            <td><span class="field-input focused" style="display:inline-block;font-size:12px;min-width:160px">Editable field</span></td>
+          </tr>
+          <tr>
+            <td>Mono tag</td>
+            <td>transparent</td>
+            <td>none</td>
+            <td>—</td>
+            <td><span class="mono" style="font-size:11px;text-transform:uppercase;letter-spacing:0.7px;color:var(--medium-gray)">DS_REF / 00</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#">
+          <span class="logo-mark"></span>
+          <span>Sanity</span>
+        </a>
+        <p>The content operating system. Structured, real-time, queryable &mdash; built for teams that ship.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Product</h5>
+        <a href="#">Studio</a><a href="#">GROQ</a><a href="#">APIs</a><a href="#">Live</a>
+      </div>
+      <div class="foot-col">
+        <h5>Developers</h5>
+        <a href="#">Docs</a><a href="#">Guides</a><a href="#">Reference</a><a href="#">Changelog</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Press</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Security</a><a href="#">DPA</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 — Inspired tribute · awesome-design-md</span>
+      <span>design.sanity.html</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.sanity.html" target="_blank" rel="noopener">
+  <span>View DESIGN.md</span>
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

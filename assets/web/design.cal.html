@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cal.com — Inspired Design</title>
+<meta name="description" content="A Cal.com-inspired marketing surface: white canvas with custom Cal Sans-style display headlines, black primary CTAs, light-gray feature cards, calendar week-view + booking confirmation flow, and a dark navy footer that closes the page." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #111111;
+  --primary-active: #242424;
+  --primary-disabled: #e5e7eb;
+  --on-primary: #ffffff;
+  --brand-accent: #3b82f6;
+  /* Ink */
+  --ink: #111111;
+  --body: #374151;
+  --muted: #6b7280;
+  --muted-soft: #898989;
+  --hairline: #e5e7eb;
+  --hairline-soft: #f3f4f6;
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-soft: #f8f9fa;
+  --surface-card: #f5f5f5;
+  --surface-strong: #e5e7eb;
+  --surface-dark: #101010;
+  --surface-dark-elev: #1a1a1a;
+  --on-dark: #ffffff;
+  --on-dark-soft: #a1a1aa;
+  /* Semantic + badge pastels */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --badge-orange: #fb923c;
+  --badge-pink: #ec4899;
+  --badge-violet: #8b5cf6;
+  --badge-emerald: #34d399;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--canvas);
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(17,17,17,0.12); }
+
+/* Cal Sans approximation using Inter 600 + condensed tracking */
+.cal-sans {
+  font-family: "Inter", system-ui;
+  font-weight: 600;
+  font-feature-settings: "ss01", "cv11";
+}
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top nav —— */
+.topnav {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 64px; gap: 28px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.5px; }
+.brand .glyph { width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 4px; margin-left: 8px; }
+.nav-links a { font-size: 14px; color: var(--ink); font-weight: 500; padding: 8px 12px; border-radius: 6px; }
+.nav-links a:hover { background: var(--surface-card); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font: 600 14px/1 "Inter", system-ui;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-active); }
+.btn-secondary { background: var(--canvas); color: var(--ink); border-color: var(--hairline); }
+.btn-secondary:hover { border-color: var(--ink); }
+.btn-on-dark { background: var(--canvas); color: var(--ink); }
+.btn-text { background: transparent; color: var(--ink); padding: 8px 12px; }
+
+/* nav-pill-group */
+.pill-group {
+  display: inline-flex; gap: 0; padding: 4px;
+  background: var(--surface-soft); border-radius: 9999px; border: 1px solid var(--hairline);
+}
+.pill-group a {
+  font-size: 13px; font-weight: 500; padding: 7px 14px; border-radius: 9999px;
+  color: var(--muted);
+}
+.pill-group a.active { background: var(--canvas); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+
+/* —— Hero —— */
+.hero { padding: 96px 0 80px; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; background: var(--surface-card); border-radius: 9999px;
+  font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 22px;
+  border: 1px solid var(--hairline);
+}
+.hero-eyebrow .dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
+h1.hero-h {
+  font: 600 64px/1.05 "Inter", system-ui;
+  letter-spacing: -2.5px;
+  color: var(--ink);
+  margin: 0 0 20px;
+}
+h1.hero-h em { font-style: italic; font-weight: 500; color: var(--ink); }
+.hero p.lede { font-size: 18px; line-height: 1.5; color: var(--body); margin: 0 0 28px; max-width: 520px; }
+.hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-meta { display: flex; gap: 16px; align-items: center; margin-top: 22px; font-size: 13px; color: var(--muted); }
+.avatar-stack { display: inline-flex; }
+.avatar-stack .av { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--canvas); margin-left: -8px; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 600; }
+.avatar-stack .av:first-child { margin-left: 0; }
+
+/* —— Calendar booking widget —— */
+.booker {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 12px 36px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.booker-hd { display: flex; align-items: center; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--hairline); }
+.booker-hd .av { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--badge-pink), var(--badge-violet)); display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; font-size: 14px; }
+.booker-hd .who { font-size: 14px; }
+.booker-hd .name { color: var(--muted); font-weight: 500; }
+.booker-hd .title { color: var(--ink); font-weight: 600; font-size: 16px; }
+.booker-hd .meta { margin-left: auto; display: flex; gap: 12px; font-size: 13px; color: var(--muted); }
+.booker-hd .meta span { display: inline-flex; gap: 5px; align-items: center; }
+
+.booker-bd { display: grid; grid-template-columns: 1.3fr 1fr; }
+.cal-side { padding: 20px 22px; border-right: 1px solid var(--hairline); }
+.cal-month { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.cal-month .m { font-weight: 600; color: var(--ink); font-size: 14px; }
+.cal-month .arrows { display: inline-flex; gap: 6px; }
+.cal-month button { width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--hairline); background: var(--canvas); cursor: pointer; color: var(--ink); }
+
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; font-size: 13px;
+}
+.cal-grid .dow { color: var(--muted); text-align: center; padding: 4px 0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+.cal-grid .day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; color: var(--ink); font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.cal-grid .day.dim { color: var(--muted-soft); }
+.cal-grid .day.avail { background: var(--surface-card); cursor: pointer; }
+.cal-grid .day.today { outline: 1px solid var(--ink); }
+.cal-grid .day.selected { background: var(--ink); color: var(--on-primary); }
+.cal-grid .day.busy { color: var(--muted); text-decoration: line-through; }
+
+.slots-side { padding: 20px 22px; }
+.slots-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.slots-hd .lbl { font-weight: 600; color: var(--ink); font-size: 14px; }
+.slots-hd .tz { font-size: 12px; color: var(--muted); }
+.slots { display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow: hidden; }
+.slot { display: flex; gap: 8px; }
+.slot button {
+  flex: 1; padding: 11px; border-radius: 8px; border: 1px solid var(--hairline);
+  background: var(--canvas); color: var(--ink); font-size: 14px; font-weight: 500;
+  cursor: pointer;
+}
+.slot button.confirm { background: var(--ink); color: var(--on-primary); border-color: var(--ink); }
+.slot button:hover:not(.confirm) { border-color: var(--ink); }
+
+/* Logo strip */
+.logo-strip { padding: 56px 0; border-top: 1px solid var(--hairline-soft); border-bottom: 1px solid var(--hairline-soft); }
+.logo-strip .caption { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 22px; }
+.logos { display: grid; grid-template-columns: repeat(6,1fr); gap: 32px; align-items: center; opacity: 0.7; }
+.logo-cell { color: var(--muted); font-weight: 600; font-size: 15px; letter-spacing: -0.2px; text-align: center; }
+
+/* Sections */
+section { padding: 96px 0; }
+.section-eyebrow { display: inline-flex; gap: 6px; align-items: center; padding: 4px 10px; background: var(--surface-card); border-radius: 9999px; font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 18px; }
+h2.h2 { font: 600 48px/1.1 "Inter", system-ui; letter-spacing: -1.5px; color: var(--ink); margin: 0; }
+h2.h2-md { font: 600 36px/1.15 "Inter", system-ui; letter-spacing: -1px; color: var(--ink); margin: 0; }
+h3.h3 { font: 600 28px/1.2 "Inter", system-ui; letter-spacing: -0.5px; color: var(--ink); margin: 0; }
+.lede2 { font-size: 18px; color: var(--body); margin: 14px 0 0; max-width: 640px; line-height: 1.5; }
+
+/* Feature grid */
+.feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 48px; }
+.feat-card { background: var(--surface-card); border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 14px; }
+.feat-card .ic { width: 40px; height: 40px; border-radius: 8px; background: var(--canvas); display: inline-flex; align-items: center; justify-content: center; color: var(--ink); border: 1px solid var(--hairline); }
+.feat-card h4 { font-family: "Inter", system-ui; font-weight: 600; font-size: 18px; margin: 0; color: var(--ink); letter-spacing: -0.2px; }
+.feat-card p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--body); }
+
+/* Product mockup row */
+.product-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+.pm-card { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+.pm-card h4 { font: 600 22px/1.3 "Inter", system-ui; letter-spacing: -0.4px; margin: 0; color: var(--ink); }
+.pm-card p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--body); }
+
+/* Workflow editor mock */
+.wf {
+  background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: 10px;
+  padding: 16px; display: flex; flex-direction: column; gap: 8px; margin-top: 4px;
+}
+.wf-step { display: flex; gap: 10px; align-items: center; padding: 10px 12px; background: var(--canvas); border: 1px solid var(--hairline); border-radius: 8px; font-size: 13px; color: var(--ink); }
+.wf-step .badge { width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 600; flex: none; }
+.wf-step .name { font-weight: 500; }
+.wf-step .desc { color: var(--muted); }
+.wf-line { height: 12px; width: 1px; background: var(--hairline); margin-left: 24px; }
+
+/* Integrations grid mock */
+.int-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 8px; }
+.int-cell { aspect-ratio: 1; border: 1px solid var(--hairline); border-radius: 10px; background: var(--canvas); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--ink); }
+
+/* Testimonials */
+.t-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 40px; }
+.t-card { background: var(--surface-card); border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 16px; }
+.t-card .quote { font-size: 16px; line-height: 1.55; color: var(--ink); }
+.t-card .who { display: flex; gap: 12px; align-items: center; }
+.t-card .av { width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; font-size: 13px; }
+.t-card .name { font-size: 14px; color: var(--ink); font-weight: 600; }
+.t-card .role { font-size: 12px; color: var(--muted); }
+.t-card .stars { color: var(--badge-orange); font-size: 13px; letter-spacing: 1px; }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 40px; }
+.tier { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.tier.featured { background: var(--surface-dark); border-color: var(--surface-dark); color: var(--on-dark); }
+.tier .name { font: 600 20px/1 "Inter", system-ui; letter-spacing: -0.3px; color: var(--ink); }
+.tier.featured .name { color: var(--on-dark); }
+.tier .price { font: 600 36px/1 "Inter", system-ui; letter-spacing: -1px; color: var(--ink); }
+.tier.featured .price { color: var(--on-dark); }
+.tier .price small { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+.tier.featured .price small { color: var(--on-dark-soft); }
+.tier .tag { font-size: 13px; color: var(--muted); }
+.tier.featured .tag { color: var(--on-dark-soft); }
+.tier ul { list-style: none; padding: 0; margin: 4px 0 8px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: var(--body); }
+.tier.featured ul { color: var(--on-dark-soft); }
+.tier ul li { display: flex; gap: 8px; align-items: flex-start; }
+.tier ul li svg { flex: none; margin-top: 2px; color: var(--success); }
+.tier.featured ul li svg { color: var(--badge-emerald); }
+.tier .btn { width: 100%; }
+.tier.featured .btn-primary { background: var(--canvas); color: var(--ink); }
+.badge-featured { position: absolute; top: -10px; right: 16px; background: var(--badge-orange); color: #fff; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; }
+.tier { position: relative; }
+
+/* CTA */
+.cta-band { background: var(--surface-card); border-radius: 12px; padding: 64px 48px; text-align: center; }
+.cta-band h3 { font: 600 36px/1.15 "Inter", system-ui; letter-spacing: -1px; color: var(--ink); margin: 0 0 14px; }
+.cta-band p { margin: 0 0 22px; color: var(--body); font-size: 16px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.cta-band .ctas { display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+/* —— DS reference (Part B) —— */
+.ds { background: var(--surface-soft); padding: 96px 0; border-top: 1px solid var(--hairline); }
+.ds h2 { font: 600 40px/1.1 "Inter", system-ui; letter-spacing: -1.2px; color: var(--ink); margin: 0 0 8px; }
+.ds .ds-sub { font-size: 15px; color: var(--body); max-width: 640px; margin-bottom: 36px; }
+.ds-block { background: var(--canvas); border-radius: 12px; padding: 32px; margin-bottom: 22px; border: 1px solid var(--hairline); }
+.ds-block h3 { font: 600 22px/1 "Inter", system-ui; letter-spacing: -0.3px; margin: 0 0 4px; color: var(--ink); }
+.ds-block .ds-block-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+.ds-group-title { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.6px; text-transform: uppercase; margin: 18px 0 10px; }
+.swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.sw { border-radius: 10px; overflow: hidden; border: 1px solid var(--hairline); }
+.sw .chip-vis { height: 72px; }
+.sw .meta { padding: 10px 12px; font-size: 12px; }
+.sw .name { color: var(--ink); font-weight: 600; }
+.sw .hex { color: var(--muted); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; margin-top: 2px; }
+
+.type-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.type-table th, .type-table td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--hairline); vertical-align: middle; }
+.type-table th { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+.type-table td.token { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--muted); width: 160px; }
+
+.radius-ladder { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; }
+.radius-ladder .r-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.radius-ladder .r-box { width: 84px; height: 84px; background: var(--ink); }
+.radius-ladder .r-lbl { font-size: 12px; color: var(--muted); font-family: "JetBrains Mono", monospace; }
+
+.comp-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.comp { border: 1px solid var(--hairline); border-radius: 10px; padding: 20px; background: var(--canvas); }
+.comp .comp-name { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 14px; }
+.comp .comp-vis { min-height: 60px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+/* Footer (dark) */
+.footer { background: var(--surface-dark); color: var(--on-dark-soft); padding: 80px 0 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 40px; }
+.footer .brand { color: var(--on-dark); margin-bottom: 18px; }
+.footer .brand .glyph { background: var(--on-dark); color: var(--ink); }
+.footer-grid h4 { font-size: 13px; font-weight: 600; margin: 0 0 12px; color: var(--on-dark); letter-spacing: 0.3px; text-transform: uppercase; }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 14px; color: var(--on-dark-soft); }
+.footer-grid li a:hover { color: var(--on-dark); }
+.footer-brand p { font-size: 14px; color: var(--on-dark-soft); margin: 0; max-width: 280px; line-height: 1.5; }
+.footer-bottom { padding-top: 30px; margin-top: 48px; border-top: 1px solid var(--surface-dark-elev); font-size: 13px; color: var(--on-dark-soft); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); border: 1px solid var(--hairline);
+  padding: 8px 14px; border-radius: 9999px; font-size: 12px; color: var(--muted);
+  box-shadow: 0 4px 14px rgba(15,15,15,0.07);
+}
+.src-link:hover { color: var(--ink); border-color: var(--ink); }
+
+@media (max-width: 1024px) {
+  .hero-grid, .product-row, .booker-bd { grid-template-columns: 1fr; }
+  .feat-grid, .t-grid { grid-template-columns: repeat(2,1fr); }
+  .pricing-grid { grid-template-columns: repeat(2,1fr); }
+  .comp-matrix { grid-template-columns: repeat(2, 1fr); }
+  .swatches { grid-template-columns: repeat(4, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  h1.hero-h { font-size: 48px; letter-spacing: -1.5px; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  .feat-grid, .t-grid, .pricing-grid, .comp-matrix, .swatches, .footer-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  section { padding: 64px 0; }
+  .hero { padding: 56px 0 40px; }
+  h1.hero-h { font-size: 36px; letter-spacing: -1px; }
+  h2.h2 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top nav -->
+<header class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#">
+      <span class="glyph">Cal</span>
+      <span>Cal.com</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#">Product</a>
+      <a href="#">Solutions</a>
+      <a href="#">Resources</a>
+      <a href="#">Pricing</a>
+      <a href="#">Enterprise</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#" style="font-size:14px;color:var(--ink);padding:8px 6px;font-weight:500;">Sign in</a>
+      <a class="btn btn-primary" href="#">Sign up free</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow"><span class="dot"></span> Cal.com 5.0 · Now with AI scheduling</div>
+        <h1 class="hero-h">The better way to <em>schedule</em> your meetings.</h1>
+        <p class="lede">Cal.com is the open scheduling infrastructure. Pick your hours, share one link, and let bookings flow into the calendar you already use.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#">Get started — it's free</a>
+          <a class="btn btn-secondary" href="#">Book a demo</a>
+        </div>
+        <div class="hero-meta">
+          <div class="avatar-stack">
+            <span class="av" style="background:var(--badge-pink);">A</span>
+            <span class="av" style="background:var(--badge-violet);">M</span>
+            <span class="av" style="background:var(--badge-emerald);">J</span>
+            <span class="av" style="background:var(--badge-orange);">L</span>
+          </div>
+          <span>Loved by 300,000+ teams</span>
+          <span style="color:var(--badge-orange);">★★★★★ 4.9</span>
+        </div>
+      </div>
+
+      <!-- Booking widget -->
+      <div class="booker">
+        <div class="booker-hd">
+          <div class="av">PE</div>
+          <div class="who">
+            <div class="name">Peter Ellis</div>
+            <div class="title">30 min — Product intro</div>
+          </div>
+          <div class="meta">
+            <span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+              30m
+            </span>
+            <span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="m7 11 0-4a5 5 0 0 1 10 0v4"/></svg>
+              Zoom
+            </span>
+          </div>
+        </div>
+        <div class="booker-bd">
+          <div class="cal-side">
+            <div class="cal-month">
+              <div class="m">May 2026</div>
+              <div class="arrows">
+                <button>‹</button><button>›</button>
+              </div>
+            </div>
+            <div class="cal-grid">
+              <div class="dow">Mo</div><div class="dow">Tu</div><div class="dow">We</div><div class="dow">Th</div><div class="dow">Fr</div><div class="dow">Sa</div><div class="dow">Su</div>
+              <div class="day dim">27</div><div class="day dim">28</div><div class="day dim">29</div><div class="day dim">30</div><div class="day avail">1</div><div class="day busy">2</div><div class="day busy">3</div>
+              <div class="day avail">4</div><div class="day avail">5</div><div class="day avail">6</div><div class="day avail">7</div><div class="day avail">8</div><div class="day busy">9</div><div class="day busy">10</div>
+              <div class="day avail">11</div><div class="day avail">12</div><div class="day avail">13</div><div class="day avail">14</div><div class="day avail">15</div><div class="day busy">16</div><div class="day busy">17</div>
+              <div class="day avail">18</div><div class="day avail">19</div><div class="day selected">20</div><div class="day avail">21</div><div class="day avail">22</div><div class="day busy">23</div><div class="day busy">24</div>
+              <div class="day avail">25</div><div class="day avail">26</div><div class="day avail">27</div><div class="day avail">28</div><div class="day avail">29</div><div class="day busy">30</div><div class="day busy">31</div>
+            </div>
+          </div>
+          <div class="slots-side">
+            <div class="slots-hd">
+              <div class="lbl">Wed, May 20</div>
+              <div class="tz">GMT-7</div>
+            </div>
+            <div class="slots">
+              <div class="slot"><button>09:00</button></div>
+              <div class="slot"><button>09:30</button><button class="confirm">Confirm</button></div>
+              <div class="slot"><button>10:30</button></div>
+              <div class="slot"><button>13:00</button></div>
+              <div class="slot"><button>14:30</button></div>
+              <div class="slot"><button>16:00</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logo strip -->
+<section class="logo-strip" style="padding:48px 0;">
+  <div class="wrap">
+    <div class="caption">Powering scheduling for teams at</div>
+    <div class="logos">
+      <div class="logo-cell">Vercel</div>
+      <div class="logo-cell">Supabase</div>
+      <div class="logo-cell">Loom</div>
+      <div class="logo-cell">Linear</div>
+      <div class="logo-cell">Deel</div>
+      <div class="logo-cell">Stripe</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section>
+  <div class="wrap">
+    <div class="pill-group" style="margin-bottom: 28px;">
+      <a class="active" href="#">Personal</a>
+      <a href="#">Teams</a>
+      <a href="#">Enterprise</a>
+    </div>
+    <h2 class="h2" style="max-width:720px;">Your all‑purpose scheduling app.</h2>
+    <p class="lede2">Whether you're booking client calls, demoing the product, or coordinating across timezones — Cal.com adapts to your workflow without bending your calendar.</p>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h4>One link, every meeting type</h4>
+        <p>Configure 30-min intros, 60-min deep dives, group sessions, round-robin routing — all behind one personal scheduling URL.</p>
+      </div>
+      <div class="feat-card">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h4>Smart availability that respects your day</h4>
+        <p>Cal.com checks Google, Outlook, iCloud, and Notion calendars in real time. No double bookings. No buffers you forgot to set.</p>
+      </div>
+      <div class="feat-card">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+        </div>
+        <h4>Workflows that follow up for you</h4>
+        <p>Reminders, SMS, conditional routing, post-meeting surveys. Build the email cadence once, ship it for every booking.</p>
+      </div>
+    </div>
+
+    <!-- Product mockup row -->
+    <div class="product-row">
+      <div class="pm-card">
+        <h4>Build a workflow in 60 seconds.</h4>
+        <p>Drag triggers, conditions, and actions. Send a Slack ping, attach a brief, or auto-cancel after a no-show — without leaving the booking page.</p>
+        <div class="wf">
+          <div class="wf-step"><span class="badge" style="background:var(--badge-violet);">⚡</span><div><div class="name">Trigger</div><div class="desc">New booking confirmed</div></div></div>
+          <div class="wf-line"></div>
+          <div class="wf-step"><span class="badge" style="background:var(--badge-orange);">⊕</span><div><div class="name">Send email</div><div class="desc">"Looking forward — here's the agenda"</div></div></div>
+          <div class="wf-line"></div>
+          <div class="wf-step"><span class="badge" style="background:var(--badge-emerald);">✓</span><div><div class="name">SMS reminder</div><div class="desc">24 hours before · personal phone</div></div></div>
+          <div class="wf-line"></div>
+          <div class="wf-step"><span class="badge" style="background:var(--badge-pink);">⊞</span><div><div class="name">Post to Slack</div><div class="desc">#sales-meetings — channel</div></div></div>
+        </div>
+      </div>
+
+      <div class="pm-card">
+        <h4>Plugged into every tool you already use.</h4>
+        <p>Native integrations with calendars, conferencing, CRMs, and payments. Cal.com sits between your tools — never replaces them.</p>
+        <div class="int-grid">
+          <div class="int-cell"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg></div>
+          <div class="int-cell" style="font-size:9px;">Google</div>
+          <div class="int-cell" style="font-size:9px;">Outlook</div>
+          <div class="int-cell" style="font-size:9px;">Zoom</div>
+          <div class="int-cell" style="font-size:9px;">Meet</div>
+          <div class="int-cell" style="font-size:9px;">Teams</div>
+          <div class="int-cell" style="font-size:9px;">Stripe</div>
+          <div class="int-cell" style="font-size:9px;">Notion</div>
+          <div class="int-cell" style="font-size:9px;">HubSpot</div>
+          <div class="int-cell" style="font-size:9px;">Slack</div>
+          <div class="int-cell" style="font-size:9px;">Linear</div>
+          <div class="int-cell" style="font-size:9px;">+90</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section style="background:var(--canvas);padding-top:0;">
+  <div class="wrap">
+    <div class="section-eyebrow">Loved by</div>
+    <h2 class="h2-md" style="max-width:680px;">Booked by 1.4M+ professionals every week.</h2>
+    <div class="t-grid">
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"We rolled Cal.com out to our entire customer success team in an afternoon. Round-robin routing alone saved us ~12 hours a week."</div>
+        <div class="who">
+          <div class="av" style="background:linear-gradient(135deg,var(--badge-orange),var(--badge-pink));">SR</div>
+          <div><div class="name">Sasha Reyes</div><div class="role">Head of CS · Notable</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"The booking page actually looks like our product — not someone else's SaaS template. That's the part no other tool got right."</div>
+        <div class="who">
+          <div class="av" style="background:linear-gradient(135deg,var(--badge-violet),var(--badge-emerald));">JK</div>
+          <div><div class="name">Jordan Khoury</div><div class="role">Design Lead · Crateful</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote">"We hosted Cal.com on our own infra in two hours. Privacy-first scheduling — finally something we can hand a regulated customer."</div>
+        <div class="who">
+          <div class="av" style="background:linear-gradient(135deg,var(--badge-emerald),var(--badge-orange));">MA</div>
+          <div><div class="name">Mira A.</div><div class="role">Infra Eng · Vault Labs</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="h2-md">Start free. Upgrade when your team shows up.</h2>
+    <p class="lede2">No credit card required. Self-host the open-source edition any time.</p>
+
+    <div class="pricing-grid">
+      <div class="tier">
+        <div class="name">Free</div>
+        <div class="tag">For individuals</div>
+        <div class="price">$0<small>/mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Unlimited 1:1 event types</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Personal cal.com/you URL</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Workflow basics</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Self-hosted option</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Get started</a>
+      </div>
+      <div class="tier featured">
+        <span class="badge-featured">Most popular</span>
+        <div class="name">Teams</div>
+        <div class="tag">For collaborating teams</div>
+        <div class="price">$12<small>/user / mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Round-robin & collective events</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Advanced workflows + SMS</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Salesforce, HubSpot routing</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Removed Cal.com branding</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Start 14-day trial</a>
+      </div>
+      <div class="tier">
+        <div class="name">Organizations</div>
+        <div class="tag">For larger orgs</div>
+        <div class="price">$37<small>/user / mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Unlimited teams & workspaces</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Custom domain + SSO</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Advanced reporting & insights</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Start trial</a>
+      </div>
+      <div class="tier">
+        <div class="name">Enterprise</div>
+        <div class="tag">Custom contracts</div>
+        <div class="price">Custom</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> SAML / SCIM provisioning</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> SOC 2 / HIPAA / GDPR</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 99.99% uptime SLA</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Named CSM</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band">
+      <h3>Smarter, simpler scheduling.</h3>
+      <p>Join 300,000+ teams who replaced calendar tag and back-and-forth with one shareable link.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#">Get started — it's free</a>
+        <a class="btn btn-secondary" href="#">Self‑host on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     Part B — Design System Reference
+========================================================= -->
+<section class="ds">
+  <div class="wrap">
+    <div class="section-eyebrow">Design system reference</div>
+    <h2>Tokens that keep Cal.com clean.</h2>
+    <p class="ds-sub">A near-monochrome system where voltage comes from custom Cal Sans-style display type and product UI fragments shown directly inside cards.</p>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3>Color</h3>
+      <div class="ds-block-sub">Ink + Surface ladder · Dark closing surface · Badge pastels</div>
+
+      <div class="ds-group-title">Ink & primary</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--primary);"></div><div class="meta"><div class="name">primary</div><div class="hex">#111111</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--primary-active);"></div><div class="meta"><div class="name">primary-active</div><div class="hex">#242424</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--body);"></div><div class="meta"><div class="name">body</div><div class="hex">#374151</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--muted);"></div><div class="meta"><div class="name">muted</div><div class="hex">#6b7280</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--muted-soft);"></div><div class="meta"><div class="name">muted-soft</div><div class="hex">#898989</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--brand-accent);"></div><div class="meta"><div class="name">brand-accent</div><div class="hex">#3b82f6</div></div></div>
+      </div>
+
+      <div class="ds-group-title">Surface</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--canvas);border-bottom:1px solid var(--hairline);"></div><div class="meta"><div class="name">canvas</div><div class="hex">#ffffff</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-soft);"></div><div class="meta"><div class="name">surface-soft</div><div class="hex">#f8f9fa</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-card);"></div><div class="meta"><div class="name">surface-card</div><div class="hex">#f5f5f5</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-strong);"></div><div class="meta"><div class="name">surface-strong</div><div class="hex">#e5e7eb</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-dark);"></div><div class="meta"><div class="name">surface-dark</div><div class="hex">#101010</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--surface-dark-elev);"></div><div class="meta"><div class="name">dark-elev</div><div class="hex">#1a1a1a</div></div></div>
+      </div>
+
+      <div class="ds-group-title">Badge pastels</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--badge-orange);"></div><div class="meta"><div class="name">badge-orange</div><div class="hex">#fb923c</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--badge-pink);"></div><div class="meta"><div class="name">badge-pink</div><div class="hex">#ec4899</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--badge-violet);"></div><div class="meta"><div class="name">badge-violet</div><div class="hex">#8b5cf6</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--badge-emerald);"></div><div class="meta"><div class="name">badge-emerald</div><div class="hex">#34d399</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--success);"></div><div class="meta"><div class="name">success</div><div class="hex">#10b981</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--error);"></div><div class="meta"><div class="name">error</div><div class="hex">#ef4444</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <div class="ds-block-sub">Cal Sans (display, weight 600, negative tracking) + Inter (everything else).</div>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Spec</th></tr></thead>
+        <tbody>
+          <tr><td class="token">display-xl</td><td class="cal-sans" style="font-size:54px;letter-spacing:-2px;line-height:1.05;">The better way</td><td>Cal Sans · 64 · 600 · -2px</td></tr>
+          <tr><td class="token">display-lg</td><td class="cal-sans" style="font-size:40px;letter-spacing:-1.5px;line-height:1.1;">Section heads</td><td>Cal Sans · 48 · 600</td></tr>
+          <tr><td class="token">display-md</td><td class="cal-sans" style="font-size:30px;letter-spacing:-1px;">Sub-section heads</td><td>Cal Sans · 36 · 600</td></tr>
+          <tr><td class="token">display-sm</td><td class="cal-sans" style="font-size:24px;letter-spacing:-0.5px;">CTA-band heads</td><td>Cal Sans · 28 · 600</td></tr>
+          <tr><td class="token">title-lg</td><td style="font-weight:600;font-size:20px;letter-spacing:-0.3px;color:var(--ink);">Plan name title</td><td>Inter · 22 · 600</td></tr>
+          <tr><td class="token">title-md</td><td style="font-weight:600;font-size:18px;color:var(--ink);">Feature card title</td><td>Inter · 18 · 600</td></tr>
+          <tr><td class="token">body-md</td><td style="font-size:16px;color:var(--body);">Default running-text holds at 16/400.</td><td>Inter · 16 · 400</td></tr>
+          <tr><td class="token">button</td><td style="font-weight:600;font-size:14px;color:var(--ink);">START FOR FREE</td><td>Inter · 14 · 600</td></tr>
+          <tr><td class="token">code</td><td style="font-family:'JetBrains Mono',monospace;color:var(--body);">cal.com/peter-ellis/30min</td><td>JetBrains Mono · 14 · 400</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <div class="ds-block-sub">md (8) for buttons + inputs · lg (12) for cards · xl (16) for hero mockup · pill / full for nav pills + avatars.</div>
+      <div class="radius-ladder">
+        <div class="r-cell"><div class="r-box" style="border-radius:4px;"></div><div class="r-lbl">xs · 4</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:6px;"></div><div class="r-lbl">sm · 6</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:8px;"></div><div class="r-lbl">md · 8</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:12px;"></div><div class="r-lbl">lg · 12</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:16px;"></div><div class="r-lbl">xl · 16</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:9999px;"></div><div class="r-lbl">pill · ∞</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3>Components</h3>
+      <div class="ds-block-sub">Default + active states only.</div>
+      <div class="comp-matrix">
+        <div class="comp"><div class="comp-name">button-primary</div><div class="comp-vis"><a class="btn btn-primary" href="#">Sign up free</a></div></div>
+        <div class="comp"><div class="comp-name">button-secondary</div><div class="comp-vis"><a class="btn btn-secondary" href="#">Book a demo</a></div></div>
+        <div class="comp"><div class="comp-name">nav-pill-group</div><div class="comp-vis"><div class="pill-group"><a class="active" href="#">Personal</a><a href="#">Teams</a></div></div></div>
+        <div class="comp"><div class="comp-name">badge-pill</div><div class="comp-vis"><span style="padding:4px 12px;border-radius:9999px;background:var(--surface-card);font-size:13px;font-weight:500;color:var(--ink);">New</span><span style="padding:4px 12px;border-radius:9999px;background:var(--badge-pink);color:#fff;font-size:13px;font-weight:500;">Live</span></div></div>
+        <div class="comp"><div class="comp-name">avatar-circle</div><div class="comp-vis"><div class="avatar-stack"><span class="av" style="background:var(--badge-pink);width:36px;height:36px;font-size:13px;">A</span><span class="av" style="background:var(--badge-violet);width:36px;height:36px;font-size:13px;">M</span><span class="av" style="background:var(--badge-emerald);width:36px;height:36px;font-size:13px;">J</span></div></div></div>
+        <div class="comp"><div class="comp-name">text-input</div><div class="comp-vis"><input style="border:1px solid var(--hairline);border-radius:8px;padding:10px 14px;font:14px Inter,system-ui;width:200px;background:var(--canvas);color:var(--ink);" placeholder="you@company.com" /></div></div>
+        <div class="comp"><div class="comp-name">rating-stars</div><div class="comp-vis"><span style="color:var(--badge-orange);letter-spacing:2px;font-size:16px;">★★★★★</span><span style="font-size:13px;color:var(--ink);">4.9</span></div></div>
+        <div class="comp"><div class="comp-name">tier-featured</div><div class="comp-vis"><div style="background:var(--surface-dark);color:var(--on-dark);padding:14px 18px;border-radius:8px;font-size:13px;line-height:1.4;width:180px;"><div class="cal-sans" style="font-size:16px;margin-bottom:4px;">Teams</div><div style="color:var(--on-dark-soft);">$12 / user / mo</div></div></div></div>
+        <div class="comp"><div class="comp-name">slot-button</div><div class="comp-vis"><div class="slot" style="width:200px;"><button style="padding:11px;border-radius:8px;border:1px solid var(--hairline);background:var(--canvas);color:var(--ink);font-size:14px;font-weight:500;flex:1;">09:30</button><button class="confirm" style="padding:11px;border-radius:8px;background:var(--ink);color:var(--on-primary);border:none;font-size:14px;font-weight:500;flex:1;">Confirm</button></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom:12px;">
+          <span class="glyph">Cal</span>
+          <span>Cal.com</span>
+        </div>
+        <p>Open scheduling infrastructure for everyone. Inspired marketing surface generated for design study.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul><li><a href="#">Features</a></li><li><a href="#">Workflows</a></li><li><a href="#">Integrations</a></li><li><a href="#">Pricing</a></li></ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul><li><a href="#">Sales teams</a></li><li><a href="#">Customer success</a></li><li><a href="#">Recruiting</a></li><li><a href="#">Education</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Brand</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul><li><a href="#">Docs</a></li><li><a href="#">Community</a></li><li><a href="#">Status</a></li><li><a href="#">Open source</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© Cal.com (inspired) · Generated for design study</div>
+      <div>Cal Sans · Ink #111 · Dark footer · pill nav</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.cal.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

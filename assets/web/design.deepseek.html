@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DeepSeek — 设计系统研究</title>
+<meta name="description" content="DeepSeek 设计语言视觉研究: 白底极简 + 蓝鲸蓝单色强调, 学术克制的中国开源 AI 设计禅意. 营销 demo + 设计系统参考." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --canvas: #ffffff;
+  --surface-1: #fafafa;
+  --surface-2: #f5f5f5;
+  --surface-card: #ffffff;
+  --accent: #4D6BFE;
+  --accent-hover: #3a57e8;
+  --accent-soft: rgba(77, 107, 254, 0.08);
+  --ink: #1a1a1a;
+  --ink-bright: #000000;
+  --ink-soft: #333333;
+  --ink-muted: #666666;
+  --ink-dim: #999999;
+  --border: #e5e5e5;
+  --border-soft: #f0f0f0;
+  --border-bright: #d4d4d4;
+  --shadow-soft: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.06);
+  --font-ui: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --r-min: 2px;
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ====== Nav ====== */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1200px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 18px; letter-spacing: -0.3px; color: var(--ink-bright); }
+.brand-mark { width: 28px; height: 28px; display: grid; place-items: center; }
+.brand-mark svg { width: 28px; height: 28px; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link { padding: 8px 14px; font-size: 14px; font-weight: 500; color: var(--ink-muted); transition: color .15s; }
+.nav-link:hover { color: var(--ink-bright); }
+.nav-link.active { color: var(--ink-bright); }
+.nav-cta { display: flex; gap: 10px; align-items: center; }
+
+/* ====== Buttons ====== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; cursor: pointer; border: 0; transition: background .15s, color .15s, border-color .15s; font-weight: 500; }
+.btn-primary { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: var(--r-md); font-size: 14px; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-outline { background: transparent; color: var(--ink-bright); padding: 12px 24px; border-radius: var(--r-md); border: 1px solid var(--border-bright); font-size: 14px; }
+.btn-outline:hover { border-color: var(--ink); }
+.btn-ghost { background: transparent; color: var(--accent); padding: 12px 24px; border-radius: var(--r-md); font-size: 14px; }
+.btn-ghost:hover { background: var(--accent-soft); }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+
+/* ====== Hero ====== */
+.hero { padding: 96px 0 80px; }
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--accent); padding: 6px 12px; border-radius: var(--r-pill); background: var(--accent-soft); }
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.hero h1 { font-size: 64px; line-height: 1.1; letter-spacing: -2px; font-weight: 600; margin: 22px 0 20px; color: var(--ink-bright); }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lead { font-size: 17px; line-height: 1.65; color: var(--ink-muted); max-width: 520px; margin: 0 0 32px; }
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero-meta { margin-top: 48px; display: flex; gap: 40px; align-items: center; }
+.hero-meta-item { font-size: 13px; color: var(--ink-muted); }
+.hero-meta-item strong { display: block; color: var(--ink-bright); font-weight: 600; font-size: 24px; letter-spacing: -0.6px; margin-bottom: 2px; }
+
+/* Chat dialog mockup */
+.chat-mock {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.chat-head { padding: 14px 18px; border-bottom: 1px solid var(--border-soft); display: flex; align-items: center; gap: 10px; }
+.chat-head .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.chat-head .title { font-size: 13px; font-weight: 500; color: var(--ink); }
+.chat-head .badge { margin-left: auto; font-size: 11px; padding: 2px 8px; border-radius: var(--r-sm); background: var(--accent-soft); color: var(--accent); font-family: var(--font-mono); font-weight: 500; }
+.chat-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.chat-msg { display: flex; gap: 12px; }
+.chat-avatar { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; font-size: 11px; font-weight: 600; }
+.chat-avatar.user { background: var(--surface-2); color: var(--ink-soft); }
+.chat-avatar.ai { background: var(--accent); color: #fff; }
+.chat-content { flex: 1; font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); padding-top: 4px; }
+.thinking { background: var(--surface-2); border-left: 2px solid var(--accent); padding: 10px 14px; border-radius: 0 var(--r-sm) var(--r-sm) 0; font-size: 12.5px; color: var(--ink-muted); margin-bottom: 10px; font-family: var(--font-mono); }
+.thinking .lbl { color: var(--accent); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; display: block; margin-bottom: 4px; }
+.code-block { background: #0d1117; color: #e6edf3; padding: 12px 14px; border-radius: var(--r-sm); font-family: var(--font-mono); font-size: 12px; line-height: 1.55; margin-top: 10px; overflow-x: auto; }
+.code-block .kw { color: #ff7b72; }
+.code-block .fn { color: #d2a8ff; }
+.code-block .str { color: #a5d6ff; }
+.code-block .cm { color: #8b949e; }
+.chat-input { border-top: 1px solid var(--border-soft); padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+.chat-input .field { flex: 1; font-size: 13px; color: var(--ink-dim); }
+.chat-input .send { width: 28px; height: 28px; border-radius: var(--r-sm); background: var(--accent); color: #fff; display: grid; place-items: center; }
+
+/* ====== Sections ====== */
+.section { padding: 96px 0; border-top: 1px solid var(--border-soft); }
+.section-head { margin-bottom: 56px; max-width: 720px; }
+.section-eyebrow { font-size: 12px; font-weight: 500; color: var(--accent); margin-bottom: 14px; letter-spacing: 0.4px; }
+.section-title { font-size: 40px; line-height: 1.15; letter-spacing: -1.2px; font-weight: 600; margin: 0 0 16px; color: var(--ink-bright); }
+.section-sub { font-size: 16px; color: var(--ink-muted); line-height: 1.6; margin: 0; }
+
+/* Feature cards */
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+.feat { background: #fff; padding: 36px 32px; transition: background .2s; }
+.feat:hover { background: var(--surface-1); }
+.feat-icon { width: 40px; height: 40px; border-radius: var(--r-md); background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 20px; }
+.feat-icon svg { width: 20px; height: 20px; }
+.feat-title { font-size: 18px; font-weight: 600; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.3px; }
+.feat-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.6; margin: 0 0 16px; }
+.feat-link { font-size: 13px; color: var(--accent); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
+
+/* Benchmarks */
+.bench-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.bench-card { border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px 24px; background: #fff; }
+.bench-card .lbl { font-size: 12px; font-weight: 500; color: var(--ink-muted); margin-bottom: 8px; }
+.bench-card .val { font-size: 36px; font-weight: 600; color: var(--accent); letter-spacing: -1px; line-height: 1; margin-bottom: 8px; font-family: var(--font-mono); }
+.bench-card .desc { font-size: 12.5px; color: var(--ink-muted); line-height: 1.5; }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.plan { border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px 28px; background: #fff; transition: border-color .2s; }
+.plan:hover { border-color: var(--ink-dim); }
+.plan.featured { border-color: var(--accent); position: relative; }
+.plan-badge { position: absolute; top: -10px; left: 28px; background: var(--accent); color: #fff; padding: 3px 10px; border-radius: var(--r-sm); font-size: 11px; font-weight: 500; }
+.plan-name { font-size: 13px; font-weight: 500; color: var(--ink-muted); margin-bottom: 6px; }
+.plan-title { font-size: 22px; font-weight: 600; color: var(--ink-bright); letter-spacing: -0.5px; margin-bottom: 16px; }
+.plan-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 20px; }
+.plan-price .num { font-size: 36px; font-weight: 600; color: var(--ink-bright); letter-spacing: -1px; font-family: var(--font-mono); }
+.plan-price .per { font-size: 13px; color: var(--ink-muted); }
+.plan-blurb { font-size: 13px; color: var(--ink-muted); margin-bottom: 22px; line-height: 1.55; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 10px; }
+.plan li { font-size: 13.5px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px; line-height: 1.55; }
+.plan li svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--accent); margin-top: 3px; }
+.plan-cta { width: 100%; }
+
+/* CTA */
+.cta-band { border: 1px solid var(--border); border-radius: var(--r-xl); padding: 56px 48px; text-align: center; background: var(--surface-1); }
+.cta-band h2 { font-size: 36px; line-height: 1.15; letter-spacing: -1px; margin: 0 0 12px; font-weight: 600; color: var(--ink-bright); }
+.cta-band p { margin: 0 auto 28px; font-size: 15px; color: var(--ink-muted); max-width: 540px; line-height: 1.6; }
+
+/* Footer */
+footer { border-top: 1px solid var(--border-soft); padding: 64px 0 40px; background: #fff; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
+.foot-brand p { color: var(--ink-muted); font-size: 13px; line-height: 1.6; margin: 16px 0 22px; max-width: 280px; }
+.foot-col h4 { font-size: 13px; font-weight: 600; color: var(--ink-bright); margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); transition: color .12s; }
+.foot-col li a:hover { color: var(--accent); }
+.foot-bottom { display: flex; justify-content: space-between; padding-top: 28px; border-top: 1px solid var(--border-soft); font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 12px; }
+
+/* Design system */
+.ds-section { background: var(--surface-1); padding: 100px 0; border-top: 1px solid var(--border-soft); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 36px; letter-spacing: -1px; line-height: 1.12; margin: 0 0 10px; font-weight: 600; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-muted); font-size: 14px; max-width: 560px; line-height: 1.6; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); font-size: 12px; font-weight: 500; color: var(--ink-soft); transition: border-color .15s, color .15s; }
+.ds-source:hover { border-color: var(--accent); color: var(--accent); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 22px; font-weight: 600; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.4px; }
+.ds-desc { font-size: 13.5px; color: var(--ink-muted); margin: 0 0 24px; line-height: 1.55; max-width: 580px; }
+.ds-caption { font-size: 11px; font-weight: 600; color: var(--ink-muted); margin: 28px 0 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 12px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border-soft); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-muted); background: var(--surface-1); }
+.ds-type-table td { color: var(--ink-soft); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11.5px; color: var(--accent); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.ds-radius-cell { background: #fff; border: 1px solid var(--border); padding: 16px 8px; text-align: center; border-radius: var(--r-md); }
+.ds-radius-box { width: 56px; height: 56px; background: var(--accent); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 11.5px; font-weight: 600; color: var(--ink); }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); padding: 22px; }
+.ds-card h5 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input-line { background: #fff; border: 1px solid var(--border); padding: 10px 14px; border-radius: var(--r-md); color: var(--ink); font-size: 13px; font-family: inherit; width: 100%; outline: none; transition: border-color .15s; }
+.input-line:focus { border-color: var(--accent); }
+.input-line::placeholder { color: var(--ink-dim); }
+.tag { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: var(--r-sm); font-size: 11px; font-weight: 500; }
+.tag-blue { background: var(--accent-soft); color: var(--accent); }
+.tag-gray { background: var(--surface-2); color: var(--ink-muted); }
+.tag-line { background: transparent; color: var(--ink-soft); border: 1px solid var(--border); }
+
+/* Floating source link */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: #fff; border: 1px solid var(--border); padding: 9px 16px; border-radius: var(--r-md); font-size: 12px; font-weight: 500; color: var(--ink-soft); box-shadow: var(--shadow-card); transition: color .15s, border-color .15s; }
+.src-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero h1 { font-size: 44px; letter-spacing: -1.4px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .bench-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .cta-band { padding: 40px 28px; }
+  .cta-band h2 { font-size: 28px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 34px; letter-spacing: -1px; }
+  .section-title { font-size: 28px; }
+  .ds-intro h2 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M5 14c0-3 3-7 8-7 4 0 6 2 8 2s3-1 5-1c1 0 2 1 2 2 0 2-2 3-2 4 0 2 2 4 2 6 0 4-4 7-9 7-3 0-5-1-7-1-3 0-5 2-7 1-1 0-1-2 0-3 1-1 2-2 2-4-1-2-2-3-2-6z" fill="#4D6BFE"/>
+          <circle cx="22" cy="13" r="1.5" fill="#fff"/>
+        </svg>
+      </span>
+      <span>DeepSeek</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link active" href="#">首页</a>
+      <a class="nav-link" href="#">模型</a>
+      <a class="nav-link" href="#">API 平台</a>
+      <a class="nav-link" href="#">研究论文</a>
+      <a class="nav-link" href="#">开源</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#">登录</a>
+      <a class="btn btn-primary btn-sm" href="#">开始对话</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>DeepSeek-V3 · 开源 671B MoE</span>
+      <h1>探索 <em>未至之境</em></h1>
+      <p class="lead">DeepSeek 致力于通过开源大语言模型推进通用人工智能的边界. 我们相信开放的研究和共享的权重将让 AI 更安全, 更值得信赖, 也更接近真正服务人类的形态.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#">开始使用 DeepSeek-V3</a>
+        <a class="btn btn-outline" href="#">查看论文 ↗</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>671B</strong>总参数量</div>
+        <div class="hero-meta-item"><strong>128K</strong>上下文长度</div>
+        <div class="hero-meta-item"><strong>MIT</strong>开源协议</div>
+      </div>
+    </div>
+
+    <div class="chat-mock">
+      <div class="chat-head">
+        <span class="dot"></span>
+        <span class="title">DeepSeek-R1 · 深度思考</span>
+        <span class="badge">推理中</span>
+      </div>
+      <div class="chat-body">
+        <div class="chat-msg">
+          <div class="chat-avatar user">我</div>
+          <div class="chat-content">用 Python 写一个判断质数的函数, 要求处理 n &lt; 2 的边界情况.</div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-avatar ai">DS</div>
+          <div class="chat-content">
+            <div class="thinking">
+              <span class="lbl">Thinking</span>
+              首先考虑边界: n &lt; 2 时不是质数. 然后判断 2 是质数. 对于其他数, 只需检查到 √n 即可, 因为如果 n = a × b, 那么 a 或 b 至少有一个 ≤ √n.
+            </div>
+            这里是一个高效的质数判断实现:
+            <div class="code-block"><span class="kw">def</span> <span class="fn">is_prime</span>(n: <span class="kw">int</span>) -&gt; <span class="kw">bool</span>:
+    <span class="cm"># 边界: 小于 2 的数不是质数</span>
+    <span class="kw">if</span> n &lt; <span class="str">2</span>:
+        <span class="kw">return</span> <span class="kw">False</span>
+    <span class="kw">if</span> n == <span class="str">2</span>:
+        <span class="kw">return</span> <span class="kw">True</span>
+    <span class="kw">if</span> n % <span class="str">2</span> == <span class="str">0</span>:
+        <span class="kw">return</span> <span class="kw">False</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="str">3</span>, <span class="fn">int</span>(n**<span class="str">0.5</span>)+<span class="str">1</span>, <span class="str">2</span>):
+        <span class="kw">if</span> n % i == <span class="str">0</span>:
+            <span class="kw">return</span> <span class="kw">False</span>
+    <span class="kw">return</span> <span class="kw">True</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input">
+        <div class="field">向 DeepSeek 提问任何问题</div>
+        <div class="send">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">能力矩阵</div>
+      <h2 class="section-title">基础模型 · 推理增强 · 全栈开源</h2>
+      <p class="section-sub">从基础语言模型到深度推理引擎, DeepSeek 系列覆盖通用对话, 代码生成, 数学推理, API 服务等核心场景. 所有模型权重和技术报告完整公开.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="feat-title">DeepSeek-V3</h3>
+        <p class="feat-desc">671B 参数 MoE 架构基础模型, 在通用对话和写作任务上达到业界领先水平, 推理成本仅为同级模型的十分之一.</p>
+        <a href="#" class="feat-link">查看技术报告 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3 class="feat-title">DeepSeek-R1</h3>
+        <p class="feat-desc">深度推理模型, 通过纯强化学习激发模型的链式思考能力, 在 MATH, AIME, Codeforces 上达到 OpenAI o1 同等水平.</p>
+        <a href="#" class="feat-link">阅读论文 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3 class="feat-title">DeepSeek-Coder</h3>
+        <p class="feat-desc">面向代码场景的专家模型, 覆盖 87 种编程语言, 在 HumanEval, MBPP, LiveCodeBench 上持续领先, 支持仓库级别理解.</p>
+        <a href="#" class="feat-link">下载权重 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+        </div>
+        <h3 class="feat-title">DeepSeek-Math</h3>
+        <p class="feat-desc">数学专精模型, 在 GSM8K, MATH 基准上超越多数闭源大模型, 提出 GRPO 强化学习算法, 改变推理训练范式.</p>
+        <a href="#" class="feat-link">技术细节 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3 class="feat-title">API 平台</h3>
+        <p class="feat-desc">OpenAI 兼容接口, 低延迟低单价, 国内直连无需翻墙. 支持函数调用, JSON 模式, 缓存命中折扣等企业级特性.</p>
+        <a href="#" class="feat-link">查看文档 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        </div>
+        <h3 class="feat-title">完全开源</h3>
+        <p class="feat-desc">所有主力模型权重以 MIT 协议公开, 商用免费且无需申请. 训练框架, 数据配比, 评测脚本同步开放给研究社区.</p>
+        <a href="#" class="feat-link">GitHub 仓库 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARKS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">性能基准</div>
+      <h2 class="section-title">领先的推理表现, 极致的训练效率</h2>
+      <p class="section-sub">在公开学术基准上保持顶尖水准的同时, 单次训练成本控制在 600 万美元以内, 重新定义大模型经济学.</p>
+    </div>
+
+    <div class="bench-grid">
+      <div class="bench-card">
+        <div class="lbl">MATH-500</div>
+        <div class="val">97.3</div>
+        <div class="desc">R1 在数学竞赛级题目上超越多数闭源模型</div>
+      </div>
+      <div class="bench-card">
+        <div class="lbl">Codeforces Elo</div>
+        <div class="val">2029</div>
+        <div class="desc">竞赛编程评级达到人类专家级别 Top 4%</div>
+      </div>
+      <div class="bench-card">
+        <div class="lbl">MMLU</div>
+        <div class="val">88.5</div>
+        <div class="desc">综合知识测评, V3 与最强闭源模型并驾齐驱</div>
+      </div>
+      <div class="bench-card">
+        <div class="lbl">训练成本</div>
+        <div class="val">$5.6M</div>
+        <div class="desc">完整 V3 训练所需 GPU 小时折算的总成本</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">API 价格</div>
+      <h2 class="section-title">透明计费 · 缓存命中折扣 · 学术友好</h2>
+      <p class="section-sub">按 token 计费, 命中缓存的输入费用降至十分之一. 学术研究, 开源项目可申请免费配额.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">DeepSeek-V3</div>
+        <div class="plan-title">通用对话模型</div>
+        <div class="plan-price"><span class="num">¥2</span><span class="per">/ 百万 tokens (输入)</span></div>
+        <div class="plan-blurb">适合通用对话, 写作, 摘要, 函数调用等场景.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>128K 上下文窗口</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>缓存命中价 ¥0.5 / M tokens</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>OpenAI 兼容 SDK</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>函数调用 / JSON 模式</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">查看 API 文档</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">推荐</div>
+        <div class="plan-name">DeepSeek-R1</div>
+        <div class="plan-title">深度推理模型</div>
+        <div class="plan-price"><span class="num">¥4</span><span class="per">/ 百万 tokens (输入)</span></div>
+        <div class="plan-blurb">数学, 代码, 复杂推理任务的首选, 输出可见思考过程.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>显式 chain-of-thought 输出</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>对标 OpenAI o1 推理深度</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>开源蒸馏小模型可商用</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>缓存命中价 ¥1 / M tokens</li>
+        </ul>
+        <a class="btn btn-primary plan-cta" href="#">立即接入 R1</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">开源权重</div>
+        <div class="plan-title">本地部署</div>
+        <div class="plan-price"><span class="num">免费</span><span class="per">MIT 协议商用</span></div>
+        <div class="plan-blurb">下载完整权重, 自托管或基于开源框架二次开发.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>HuggingFace / ModelScope 镜像</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>vLLM / SGLang 推理优化</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>蒸馏 1.5B 至 70B 全系列</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>完整训练代码公开</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">访问 GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2>开放的研究, 共享的智能</h2>
+      <p>我们相信知识不应被围墙阻隔. 从今天开始, 用 DeepSeek 构建属于你的 AI 应用.</p>
+      <div class="hero-actions" style="justify-content:center">
+        <a class="btn btn-primary" href="#">免费注册</a>
+        <a class="btn btn-outline" href="#">查看文档</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>极简至上 · 学术克制 · 蓝鲸唯一</h2>
+        <p>DeepSeek 的视觉语言拒绝花哨. 白底, 黑字, 一抹蓝鲸蓝. 没有渐变, 没有阴影堆叠, 没有多余的装饰. 它的克制本身就是表达 — 让内容和推理过程成为唯一的主角.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.deepseek.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">白底主导, 蓝鲸蓝作为唯一功能性色彩. 灰阶承担信息层级, 黑字承担正文. 拒绝多余的色相, 让信息密度成为页面的主旋律.</p>
+
+      <div class="ds-caption">主色 Primary</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#4D6BFE"></div><div class="meta"><div class="name">蓝鲸蓝</div><div class="val">#4D6BFE</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3a57e8"></div><div class="meta"><div class="name">悬停蓝</div><div class="val">#3A57E8</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#eef1ff;border:1px solid #e5e5e5"></div><div class="meta"><div class="name">蓝软光</div><div class="val">#EEF1FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">极黑</div><div class="val">#000000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1a1a1a"></div><div class="meta"><div class="name">墨黑</div><div class="val">#1A1A1A</div></div></div>
+      </div>
+
+      <div class="ds-caption">文字 Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1a1a1a"></div><div class="meta"><div class="name">正文</div><div class="val">#1A1A1A</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#333333"></div><div class="meta"><div class="name">次级</div><div class="val">#333333</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#666666"></div><div class="meta"><div class="name">辅助</div><div class="val">#666666</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#999999"></div><div class="meta"><div class="name">弱化</div><div class="val">#999999</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#d4d4d4"></div><div class="meta"><div class="name">禁用</div><div class="val">#D4D4D4</div></div></div>
+      </div>
+
+      <div class="ds-caption">面板与边框 Surface</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #e5e5e5"></div><div class="meta"><div class="name">画布白</div><div class="val">#FFFFFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fafafa;border:1px solid #e5e5e5"></div><div class="meta"><div class="name">浅灰底</div><div class="val">#FAFAFA</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f5f5f5;border:1px solid #e5e5e5"></div><div class="meta"><div class="name">分组底</div><div class="val">#F5F5F5</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e5e5e5"></div><div class="meta"><div class="name">分割线</div><div class="val">#E5E5E5</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f0f0f0"></div><div class="meta"><div class="name">软分割</div><div class="val">#F0F0F0</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Inter + Noto Sans SC 双字族. 400-700 权重区间, 不使用展示字体. 数据和代码部分使用 JetBrains Mono. 中文字号与英文字号严格对齐, 行距保持 1.6 的阅读舒适度.</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>用途</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:30px;font-weight:600;letter-spacing:-1px">探索未至之境</td><td>64 / 4rem</td><td>600</td><td>Hero 主标题</td></tr>
+          <tr><td class="token">--title-section</td><td class="sample" style="font-size:22px;font-weight:600">基础模型与推理引擎</td><td>40 / 2.5rem</td><td>600</td><td>章节标题</td></tr>
+          <tr><td class="token">--title-card</td><td class="sample" style="font-size:18px;font-weight:600">DeepSeek-V3</td><td>18 / 1.13rem</td><td>600</td><td>卡片标题</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:16px;font-weight:400">通过开源大模型推进通用 AI</td><td>16 / 1rem</td><td>400</td><td>正文</td></tr>
+          <tr><td class="token">--body-sm</td><td class="sample" style="font-size:14px;font-weight:400;color:#666">查看技术报告</td><td>14 / 0.88rem</td><td>400</td><td>辅助文本</td></tr>
+          <tr><td class="token">--button</td><td class="sample" style="font-size:14px;font-weight:500">开始对话</td><td>14 / 0.88rem</td><td>500</td><td>按钮</td></tr>
+          <tr><td class="token">--code</td><td class="sample" style="font-family:'JetBrains Mono';font-size:12px">is_prime(n)</td><td>12 / 0.75rem</td><td>400-500</td><td>代码片段</td></tr>
+          <tr><td class="token">--label</td><td class="sample" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:#666">PRIMARY</td><td>11 / 0.69rem</td><td>600</td><td>标签 / 小标题</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">小圆角是 DeepSeek 的几何语言. 按钮 6px, 卡片 8-12px, 标签 4px. 没有 pill 形, 没有圆形按钮, 一切方正而克制.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">最小</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">按钮</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">容器</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">徽章</div><div class="ds-radius-val">999px</div></div>
+      </div>
+    </div>
+
+    <!-- Spacing -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Spacing</h3>
+      <p class="ds-desc">基于 4px 基线的间距系统. 模块间使用大间距营造呼吸感, 模块内使用小间距保持紧凑. 学术克制的设计语言在间距上表现为留白克制, 信息密度适中.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div style="height:4px;width:4px;background:#4D6BFE;margin:26px auto 10px"></div><div class="ds-radius-label">2xs</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div style="height:8px;width:8px;background:#4D6BFE;margin:24px auto 10px"></div><div class="ds-radius-label">xs</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div style="height:16px;width:16px;background:#4D6BFE;margin:20px auto 10px"></div><div class="ds-radius-label">sm</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div style="height:24px;width:24px;background:#4D6BFE;margin:16px auto 10px"></div><div class="ds-radius-label">md</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div style="height:40px;width:40px;background:#4D6BFE;margin:8px auto 10px"></div><div class="ds-radius-label">lg</div><div class="ds-radius-val">40px</div></div>
+        <div class="ds-radius-cell"><div style="height:56px;width:56px;background:#4D6BFE;margin:0 auto 10px"></div><div class="ds-radius-label">xl</div><div class="ds-radius-val">96px</div></div>
+      </div>
+    </div>
+
+    <!-- Voice & Tone -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Voice & Tone</h3>
+      <p class="ds-desc">DeepSeek 的文字气质是学术克制的中国研究者. 不堆砌, 不夸张, 不卖弄技术词汇. 信息为先, 表达直接, 让模型本身的能力成为最大的说服力.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>克制</h5>
+          <div class="ds-card-stack">
+            <div style="font-size:14px;color:#1a1a1a;line-height:1.65">用 "探索未至之境" 而非 "颠覆式革命".<br/>用 "开源权重" 而非 "震撼业界突破".<br/>用 "MIT 协议商用" 而非 "无限商业可能".</div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>精确</h5>
+          <div class="ds-card-stack">
+            <div style="font-size:14px;color:#1a1a1a;line-height:1.65">"671B 参数 MoE 架构" 优于 "超大规模模型".<br/>"训练成本 ¥5.6M" 优于 "成本极低".<br/>"Codeforces 2029 分" 优于 "代码能力强".</div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>开放</h5>
+          <div class="ds-card-stack">
+            <div style="font-size:14px;color:#1a1a1a;line-height:1.65">承认局限. 公开方法. 邀请验证.<br/>论文优先, 演示其次.<br/>把模型权重交给社区, 让 benchmark 自己说话.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">按钮极简, 输入框只有底边色变化, 标签使用浅蓝底. 没有装饰性元素, 一切组件都为承载信息和操作而存在.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">主按钮 Primary</a>
+            <a class="btn btn-outline" href="#">次按钮 Outline</a>
+            <a class="btn btn-ghost" href="#">幽灵按钮 Ghost</a>
+            <div class="ds-card-row">
+              <a class="btn btn-primary btn-sm" href="#">小按钮</a>
+              <a class="btn btn-outline btn-sm" href="#">小次按钮</a>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="input-line" placeholder="向 DeepSeek 提问任何问题" />
+            <input class="input-line" placeholder="输入 API Key" />
+            <div class="ds-card-row">
+              <span class="tag tag-blue">深度思考</span>
+              <span class="tag tag-gray">通用</span>
+              <span class="tag tag-line">开源</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="border:1px solid #e5e5e5;border-radius:8px;padding:16px;width:100%;background:#fff">
+              <div style="font-size:11px;font-weight:600;color:#666;margin-bottom:6px;letter-spacing:0.4px">DEEPSEEK-V3</div>
+              <div style="font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:4px">671B MoE 模型</div>
+              <div style="font-size:12px;color:#666">开源权重 · MIT 协议</div>
+            </div>
+            <div style="border:1px solid #4D6BFE;border-radius:8px;padding:16px;width:100%;background:#eef1ff">
+              <div style="font-size:11px;font-weight:600;color:#4D6BFE;margin-bottom:6px">CACHE HIT</div>
+              <div style="font-size:15px;font-weight:600;color:#1a1a1a">¥0.5 / M tokens</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M5 14c0-3 3-7 8-7 4 0 6 2 8 2s3-1 5-1c1 0 2 1 2 2 0 2-2 3-2 4 0 2 2 4 2 6 0 4-4 7-9 7-3 0-5-1-7-1-3 0-5 2-7 1-1 0-1-2 0-3 1-1 2-2 2-4-1-2-2-3-2-6z" fill="#4D6BFE"/><circle cx="22" cy="13" r="1.5" fill="#fff"/></svg>
+          </span>
+          <span>DeepSeek</span>
+        </div>
+        <p>这是一份设计研究 — DeepSeek 视觉语言的自包含致敬, 用于演示令牌系统, 几何与表达. 与杭州深度求索公司无官方关联.</p>
+      </div>
+      <div class="foot-col">
+        <h4>产品</h4>
+        <ul>
+          <li><a href="#">DeepSeek 对话</a></li>
+          <li><a href="#">DeepSeek-R1</a></li>
+          <li><a href="#">DeepSeek-V3</a></li>
+          <li><a href="#">API 平台</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>研究</h4>
+        <ul>
+          <li><a href="#">技术报告</a></li>
+          <li><a href="#">论文列表</a></li>
+          <li><a href="#">基准测试</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>开源</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">HuggingFace</a></li>
+          <li><a href="#">ModelScope</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#">公司介绍</a></li>
+          <li><a href="#">加入我们</a></li>
+          <li><a href="#">联系方式</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计研究 · 致敬 DeepSeek 视觉语言 · 作者 云中江树</span>
+      <span>许可协议 · 隐私 · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.deepseek.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

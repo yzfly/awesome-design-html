@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NVIDIA — Inspired Design</title>
+<meta name="description" content="An NVIDIA-inspired marketing page: black hero/footer chapters, paper-white body, NVIDIA Green #76b900 as the single accent, 2px radius, NVIDIA-EMEA-feel Inter at 400/700, decorative green corner squares. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #76b900;
+  --primary-dark: #5a8d00;
+  --on-primary: #000000;
+  --accent-green-pale: #bff230;
+
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-soft: #f7f7f7;
+  --surface-dark: #000000;
+  --surface-elevated: #1a1a1a;
+
+  /* Hairlines */
+  --hairline: #cccccc;
+  --hairline-strong: #5e5e5e;
+
+  /* Text */
+  --ink: #000000;
+  --body: #1a1a1a;
+  --mute: #757575;
+  --stone: #898989;
+  --ash: #a7a7a7;
+  --on-dark: #ffffff;
+  --on-dark-mute: rgba(255,255,255,0.7);
+
+  /* Semantic */
+  --link-blue: #0046a4;
+  --error: #e52020;
+  --warning: #df6500;
+  --warning-bright: #ef9100;
+  --success-deep: #3f8500;
+  --accent-purple: #952fc6;
+  --accent-purple-pale: #f9d4ff;
+  --accent-yellow-pale: #feeeb2;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  background: var(--canvas);
+  color: var(--body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--primary); color: #000; }
+
+/* Layout */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .wrap { padding: 0 20px; } }
+
+/* Caption / eyebrow uppercase */
+.eyebrow {
+  font-size: 14px; font-weight: 700; line-height: 1.43;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.eyebrow.on-dark { color: var(--primary); }
+.eyebrow.on-light { color: var(--ink); }
+
+/* Utility bar */
+.utility-bar {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  height: 32px;
+  font-size: 12px; font-weight: 400;
+  border-bottom: 1px solid var(--hairline-strong);
+}
+.utility-inner { height: 100%; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+.utility-inner a { color: var(--on-dark-mute); }
+.utility-inner a:hover { color: var(--on-dark); }
+
+/* Primary nav */
+.top-nav {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  height: 64px;
+  position: sticky; top: 0; z-index: 30;
+  border-bottom: 1px solid var(--hairline-strong);
+}
+.nav-inner { height: 100%; display: flex; align-items: center; gap: 24px; }
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--on-dark);
+}
+.logo svg { display: block; }
+.logo .wordmark {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--on-dark);
+}
+.nav-center { display: flex; gap: 4px; margin-left: 32px; }
+.nav-center a {
+  font-size: 16px; font-weight: 700;
+  color: var(--on-dark);
+  padding: 8px 14px;
+  display: inline-flex; align-items: center;
+}
+.nav-center a:hover { color: var(--primary); }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.nav-icon-d {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--on-dark);
+}
+.nav-icon-d:hover { color: var(--primary); }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+/* Buttons — 2px */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 24px;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 16px; font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer; border: 0;
+  transition: background .12s ease, color .12s ease;
+  text-decoration: none;
+  height: 44px;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  padding: 9px 22px;
+  border: 2px solid var(--primary);
+}
+.btn-outline:hover { background: var(--primary); color: #000; }
+.btn-outline-dark {
+  background: transparent;
+  color: var(--on-dark);
+  padding: 9px 22px;
+  border: 2px solid var(--on-dark);
+}
+.btn-outline-dark:hover { background: var(--on-dark); color: var(--ink); }
+.btn-ghost {
+  background: transparent;
+  color: var(--primary);
+  padding: 0;
+  border-radius: 0;
+  height: auto;
+  font-size: 14.4px; letter-spacing: 0.144px;
+  text-transform: uppercase;
+}
+.btn-ghost:hover { color: var(--primary-dark); }
+
+/* Sections */
+section { padding: 64px 0; }
+.section-head { max-width: 880px; margin-bottom: 48px; }
+.section-title {
+  font-size: 36px; font-weight: 700;
+  line-height: 1.25; letter-spacing: 0;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+.section-lede {
+  font-size: 16px; line-height: 1.5;
+  color: var(--body);
+  margin: 0;
+}
+
+/* HERO — dark chapter */
+.hero {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  padding: 80px 0 96px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  /* angular green corner accent */
+  content: '';
+  position: absolute;
+  top: 64px; right: 80px;
+  width: 16px; height: 16px;
+  background: var(--primary);
+}
+.hero::after {
+  /* faint wireframe grid */
+  content: '';
+  position: absolute;
+  right: -200px; top: 20%;
+  width: 720px; height: 520px;
+  background:
+    linear-gradient(90deg, rgba(118,185,0,0.16) 1px, transparent 1px) 0 0/40px 40px,
+    linear-gradient(0deg, rgba(118,185,0,0.16) 1px, transparent 1px) 0 0/40px 40px;
+  mask-image: radial-gradient(closest-side at 60% 50%, #000 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(closest-side at 60% 50%, #000 30%, transparent 70%);
+  pointer-events: none;
+}
+.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 2; }
+@media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+.hero h1 {
+  font-size: 48px; font-weight: 700;
+  line-height: 1.25; letter-spacing: 0;
+  color: var(--on-dark);
+  margin: 0 0 24px;
+}
+@media (max-width: 720px) { .hero h1 { font-size: 36px; } }
+.hero .lede {
+  font-size: 22px; font-weight: 400;
+  line-height: 1.5; color: var(--on-dark-mute);
+  margin: 0 0 32px;
+  max-width: 540px;
+}
+.hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* AI Compute Card centerpiece */
+.compute-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 2px;
+  padding: 32px;
+  color: var(--on-dark);
+  position: relative;
+  display: flex; flex-direction: column; gap: 24px;
+}
+.compute-card .corner-sq {
+  position: absolute; top: -1px; left: -1px;
+  width: 14px; height: 14px;
+  background: var(--primary);
+}
+.compute-card .compute-head {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+}
+.compute-card .badge-tag {
+  background: rgba(118,185,0,0.15);
+  color: var(--primary);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.compute-card h3 {
+  margin: 0;
+  font-size: 24px; font-weight: 700; line-height: 1.25;
+  color: var(--on-dark);
+}
+.compute-card .sku { font-size: 12px; letter-spacing: 0.08em; color: var(--ash); text-transform: uppercase; }
+.compute-card .gpu-illo {
+  height: 160px;
+  background:
+    repeating-linear-gradient(90deg, #2a2a2a 0 14px, #1a1a1a 14px 16px),
+    linear-gradient(180deg, #232323, #0e0e0e);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 2px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.compute-card .gpu-illo::before {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 30px, rgba(255,255,255,0.04) 30px 32px),
+    linear-gradient(135deg, #1c1c1c, #0c0c0c);
+  border-radius: 2px;
+}
+.compute-card .gpu-illo::after {
+  content: '';
+  position: absolute;
+  width: 220px; height: 60px;
+  background:
+    radial-gradient(closest-side, rgba(118,185,0,0.7), rgba(118,185,0,0) 70%);
+  filter: blur(6px);
+}
+.compute-card .gpu-label {
+  position: absolute;
+  bottom: 10px; left: 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.compute-specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--hairline-strong); }
+.compute-specs .spec { background: var(--surface-elevated); padding: 12px; display: flex; flex-direction: column; gap: 2px; }
+.compute-specs .lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ash); }
+.compute-specs .val { font-size: 18px; font-weight: 700; color: var(--on-dark); }
+.compute-specs .val .u { font-size: 11px; color: var(--ash); margin-left: 2px; font-weight: 400; }
+.compute-card .cta-row { display: flex; gap: 8px; }
+.compute-card .compute-mini-bar {
+  display: flex; gap: 12px; padding-top: 12px;
+  border-top: 1px solid var(--hairline-strong);
+  font-size: 12px; color: var(--on-dark-mute);
+}
+.compute-card .compute-mini-bar .ok { color: var(--primary); }
+
+/* Breadcrumb */
+.breadcrumb-bar {
+  background: var(--surface-soft);
+  height: 48px;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--body);
+  display: flex; align-items: center;
+  border-bottom: 1px solid var(--hairline);
+}
+.breadcrumb-bar .crumb-inner { display: flex; gap: 12px; align-items: center; }
+.breadcrumb-bar a { color: var(--mute); }
+.breadcrumb-bar .now { color: var(--ink); }
+
+/* Sub-nav strip */
+.sub-nav {
+  background: var(--surface-soft);
+  border-bottom: 1px solid var(--hairline);
+  height: 56px;
+}
+.sub-nav-inner { height: 100%; display: flex; align-items: center; gap: 0; overflow-x: auto; }
+.sub-nav-inner a {
+  font-size: 16px; font-weight: 700;
+  color: var(--ink);
+  padding: 0 18px;
+  height: 100%;
+  display: inline-flex; align-items: center;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+.sub-nav-inner a.on { color: var(--ink); border-bottom-color: var(--primary); }
+.sub-nav-inner a:hover { color: var(--primary-dark); }
+
+/* Stats row */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+}
+@media (max-width: 720px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+.callout-stat {
+  background: var(--canvas);
+  padding: 24px;
+  position: relative;
+}
+.callout-stat .corner-sq {
+  position: absolute; top: -1px; left: -1px;
+  width: 12px; height: 12px;
+  background: var(--primary);
+}
+.callout-stat .num {
+  font-size: 36px; font-weight: 700; line-height: 1.25;
+  color: var(--primary);
+}
+.callout-stat .lbl { font-size: 14px; color: var(--body); margin-top: 4px; }
+
+/* Feature grid (4-up) */
+.feature-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 960px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  padding: 32px;
+  position: relative;
+  display: flex; flex-direction: column; gap: 12px;
+  min-height: 240px;
+}
+.feature-card .corner-sq {
+  position: absolute; top: -1px; left: -1px;
+  width: 12px; height: 12px;
+  background: var(--primary);
+}
+.feature-card .ico {
+  width: 24px; height: 24px;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.feature-card h3 {
+  font-size: 20px; font-weight: 700; line-height: 1.25;
+  color: var(--ink); margin: 0;
+}
+.feature-card p {
+  font-size: 16px; line-height: 1.5;
+  color: var(--body);
+  margin: 0;
+}
+.feature-card .more {
+  margin-top: auto;
+  color: var(--primary);
+  font-size: 14.4px; font-weight: 700;
+  letter-spacing: 0.144px;
+  text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.feature-card .more:hover { color: var(--primary-dark); }
+
+/* Resource cards (3-up with badge & corner-square) */
+.resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .resource-grid { grid-template-columns: 1fr; } }
+.resource-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  padding: 24px;
+  position: relative;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.resource-card .corner-sq {
+  position: absolute; top: -1px; left: -1px;
+  width: 12px; height: 12px;
+  background: var(--primary);
+}
+.resource-card .thumb {
+  height: 140px;
+  background:
+    linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 60%, #2c2c2c 100%);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.resource-card .thumb.purple { background: linear-gradient(135deg, #2a0a3a 0%, #952fc6 60%, #4d1368 100%); }
+.resource-card .thumb.green { background: linear-gradient(135deg, #102606 0%, #3f8500 50%, #76b900 100%); }
+.resource-card .thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 12px, rgba(255,255,255,0.04) 12px 13px);
+}
+.badge-tag {
+  background: var(--surface-soft);
+  color: var(--body);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+.resource-card h4 { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.47; color: var(--ink); }
+.resource-card p { margin: 0; font-size: 15px; line-height: 1.67; color: var(--body); }
+.resource-card .read { color: var(--primary); font-size: 14.4px; font-weight: 700; letter-spacing: 0.144px; text-transform: uppercase; }
+
+/* DARK CTA STRIP */
+.cta-strip {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  padding: 64px 48px;
+  display: grid; grid-template-columns: 1.5fr auto;
+  gap: 24px; align-items: center;
+  position: relative;
+  border-radius: 0;
+}
+@media (max-width: 720px) { .cta-strip { padding: 48px 28px; grid-template-columns: 1fr; } }
+.cta-strip::before {
+  content: '';
+  position: absolute; top: 16px; left: 16px;
+  width: 12px; height: 12px;
+  background: var(--primary);
+}
+.cta-strip h3 { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.25; }
+.cta-strip p { margin: 8px 0 0; font-size: 16px; color: var(--on-dark-mute); max-width: 540px; }
+
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  padding: 32px;
+  position: relative;
+  display: flex; flex-direction: column; gap: 16px;
+  min-height: 440px;
+}
+.pricing-card .corner-sq {
+  position: absolute; top: -1px; left: -1px;
+  width: 12px; height: 12px;
+  background: var(--primary);
+}
+.pricing-card.featured { background: var(--surface-dark); color: var(--on-dark); border-color: var(--primary); }
+.pricing-card.featured h3, .pricing-card.featured .price { color: var(--on-dark); }
+.pricing-card.featured p, .pricing-card.featured ul { color: var(--on-dark-mute); }
+.pricing-card h3 { margin: 0; font-size: 22px; font-weight: 700; }
+.pricing-card .price { font-size: 36px; font-weight: 700; line-height: 1.25; color: var(--primary); }
+.pricing-card .price small { font-size: 14px; color: var(--mute); font-weight: 400; }
+.pricing-card.featured .price small { color: var(--on-dark-mute); }
+.pricing-card p { margin: 0; font-size: 15px; color: var(--body); }
+.pricing-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.pricing-card ul li {
+  font-size: 15px;
+  padding-left: 24px;
+  position: relative;
+}
+.pricing-card ul li::before {
+  content: ''; position: absolute; left: 0; top: 8px;
+  width: 14px; height: 8px;
+  background:
+    linear-gradient(45deg, transparent 35%, var(--primary) 35% 60%, transparent 60%);
+  border-bottom: 2px solid var(--primary);
+  border-right: 2px solid var(--primary);
+  width: 6px; height: 12px;
+  background: none;
+  transform: rotate(45deg);
+  top: 2px;
+}
+.pricing-card .cta { margin-top: auto; }
+
+/* ─── DESIGN SYSTEM SECTION ─── */
+.ds-section { background: var(--surface-soft); border-top: 1px solid var(--hairline); padding: 96px 0; }
+.ds-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 16px;
+  color: var(--primary); font-size: 14.4px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.144px;
+}
+.ds-row {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  padding: 40px;
+  margin-bottom: 24px;
+  position: relative;
+  display: grid; grid-template-columns: 240px 1fr;
+  gap: 40px;
+}
+.ds-row .corner-sq {
+  position: absolute; top: -1px; left: -1px;
+  width: 14px; height: 14px;
+  background: var(--primary);
+}
+@media (max-width: 900px) { .ds-row { grid-template-columns: 1fr; gap: 16px; padding: 28px; } }
+.ds-row h3 {
+  font-size: 24px; font-weight: 700; letter-spacing: 0;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.ds-sub { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mute); }
+
+.color-group { margin-bottom: 24px; }
+.color-group h4 {
+  margin: 0 0 12px;
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--mute);
+}
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+.swatch { background: var(--canvas); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.swatch .chip { height: 56px; border-radius: 2px; border: 1px solid var(--hairline); }
+.swatch .chip-label { font-size: 13px; font-weight: 700; }
+.swatch .chip-hex { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--mute); }
+
+/* Type table */
+.type-table { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: 2px; }
+.type-row {
+  display: grid; grid-template-columns: 200px 120px 80px 1fr;
+  gap: 24px; align-items: baseline;
+  padding: 20px;
+  border-bottom: 1px solid var(--hairline);
+}
+.type-row:last-child { border-bottom: 0; }
+@media (max-width: 720px) { .type-row { grid-template-columns: 1fr; } }
+.type-name { font-size: 13px; font-weight: 700; }
+.type-meta { font-size: 12px; font-family: "JetBrains Mono", monospace; color: var(--mute); }
+.t-display-xl { font-size: 48px; font-weight: 700; line-height: 1.25; }
+.t-display-lg { font-size: 36px; font-weight: 700; line-height: 1.25; }
+.t-heading-xl { font-size: 24px; font-weight: 700; line-height: 1.25; }
+.t-heading-md { font-size: 20px; font-weight: 700; line-height: 1.25; }
+.t-card { font-size: 17px; font-weight: 700; line-height: 1.47; }
+.t-body { font-size: 16px; font-weight: 400; line-height: 1.5; }
+.t-cap { font-size: 14px; font-weight: 700; line-height: 1.43; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* Radius ladder */
+.radius-row { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
+.radius-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.radius-tile .box { width: 88px; height: 88px; background: var(--surface-soft); border: 1px solid var(--hairline); }
+.radius-tile .val { font-size: 13px; font-weight: 700; }
+.radius-tile .lab { font-size: 11px; color: var(--mute); text-transform: uppercase; letter-spacing: 0.08em; }
+.r-none .box { border-radius: 0; }
+.r-xs .box   { border-radius: 1px; }
+.r-sm .box   { border-radius: 2px; }
+.r-full .box { border-radius: 50%; }
+
+/* Components matrix */
+.comp-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .comp-matrix { grid-template-columns: 1fr; } }
+.comp-cell {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  padding: 24px;
+  position: relative;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.comp-cell .corner-sq {
+  position: absolute; top: -1px; left: -1px;
+  width: 10px; height: 10px;
+  background: var(--primary);
+}
+.comp-cell h5 {
+  margin: 0;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--mute);
+}
+.comp-stack { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.input-rect {
+  width: 100%; height: 44px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  padding: 0 16px;
+  font: inherit; font-size: 16px;
+  color: var(--ink);
+}
+.input-rect:focus { outline: 0; border: 2px solid var(--primary); }
+.pill-tab-x {
+  background: transparent; color: var(--ink);
+  font-size: 14.4px; font-weight: 700;
+  padding: 10px 18px;
+  border: 0; border-radius: 2px;
+  cursor: pointer;
+  letter-spacing: 0.144px;
+}
+.pill-tab-x.on { background: var(--ink); color: var(--on-dark); }
+
+/* Footer */
+.footer {
+  background: var(--surface-dark);
+  color: var(--on-dark-mute);
+  padding: 64px 0 32px;
+  border-top: 1px solid var(--hairline-strong);
+}
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr repeat(4, 1fr);
+  gap: 32px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--hairline-strong);
+}
+@media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+.footer-brand h4 { color: var(--on-dark); font-size: 14px; font-weight: 700; letter-spacing: 0.18em; margin: 0 0 12px; text-transform: uppercase; }
+.footer-brand p { margin: 0; font-size: 14px; color: var(--on-dark-mute); max-width: 320px; }
+.footer-col h5 { color: var(--on-dark); font-size: 16px; font-weight: 700; margin: 0 0 12px; }
+.footer-col a { display: block; color: var(--on-dark-mute); font-size: 14px; padding: 6px 0; }
+.footer-col a:hover { color: var(--primary); }
+.footer-bottom {
+  padding-top: 24px;
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--mute);
+}
+
+/* Floating DESIGN.md */
+.floating-design-link {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--primary); color: #000;
+  padding: 12px 20px; border-radius: 2px;
+  font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  z-index: 50;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.floating-design-link:hover { background: var(--primary-dark); color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="utility-inner wrap">
+    <a href="#">Solutions</a>
+    <a href="#">Industries</a>
+    <a href="#">Developers</a>
+    <a href="#">Partners</a>
+    <a href="#">Login</a>
+  </div>
+</div>
+
+<!-- PRIMARY NAV -->
+<nav class="top-nav">
+  <div class="nav-inner wrap">
+    <a class="logo" href="#" aria-label="NVIDIA home">
+      <svg width="36" height="22" viewBox="0 0 36 22" aria-hidden="true">
+        <!-- Stylized NVIDIA-like eye mark in green -->
+        <path d="M2 11 C2 5, 7 2, 14 2 C22 2, 28 6, 34 11 C28 16, 22 20, 14 20 C7 20, 2 17, 2 11 Z"
+              fill="none" stroke="#76b900" stroke-width="2.2" />
+        <ellipse cx="20" cy="11" rx="6" ry="4" fill="#76b900"/>
+        <ellipse cx="20" cy="11" rx="2" ry="2" fill="#000"/>
+      </svg>
+      <span class="wordmark">NVIDIA</span>
+    </a>
+    <div class="nav-center">
+      <a href="#">Products</a>
+      <a href="#">Solutions</a>
+      <a href="#">Industries</a>
+      <a href="#">Developers</a>
+      <a href="#">Resources</a>
+      <a href="#">Company</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-icon-d" href="#" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
+      <a class="nav-icon-d" href="#" aria-label="Login">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+      </a>
+      <a class="btn btn-primary" href="#" style="height:36px;padding:8px 18px;font-size:14.4px;">Get started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">NVIDIA Blackwell · Q2 2026</span>
+        <h1>Accelerated computing<br/>for the age of AI.</h1>
+        <p class="lede">From training the world's largest models to inference at the edge — the same architecture, the same software stack, from data center to laptop.</p>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary" href="#">Try DGX Cloud →</a>
+          <a class="btn btn-outline-dark" href="#">Watch GTC keynote</a>
+        </div>
+      </div>
+      <!-- AI Compute Card centerpiece -->
+      <div class="compute-card">
+        <span class="corner-sq"></span>
+        <div class="compute-head">
+          <div>
+            <span class="badge-tag">Available now</span>
+            <h3 style="margin-top:8px">DGX B200 · Blackwell</h3>
+            <div class="sku">SKU NV-DGX-B200-8GPU</div>
+          </div>
+          <div style="text-align:right;font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--ash);">
+            STATUS<br/><span style="color:var(--primary);">● ONLINE</span>
+          </div>
+        </div>
+        <div class="gpu-illo" aria-hidden="true">
+          <span class="gpu-label">8× B200 · NVLink mesh</span>
+        </div>
+        <div class="compute-specs">
+          <div class="spec"><span class="lbl">FP4 Compute</span><span class="val">144<span class="u">PFLOPS</span></span></div>
+          <div class="spec"><span class="lbl">HBM3e</span><span class="val">1.4<span class="u">TB</span></span></div>
+          <div class="spec"><span class="lbl">NVLink BW</span><span class="val">14.4<span class="u">TB/s</span></span></div>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" style="height:40px;padding:9px 18px;font-size:14.4px;" href="#">Configure</a>
+          <a class="btn btn-outline-dark" style="height:40px;padding:7px 16px;font-size:14.4px;" href="#">Datasheet (PDF)</a>
+        </div>
+        <div class="compute-mini-bar">
+          <span><span class="ok">●</span> 14 deployments</span>
+          <span>|</span>
+          <span>Shipping Q2 2026</span>
+          <span>|</span>
+          <span>Available in 18 regions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BREADCRUMB + SUB-NAV (paper-white) -->
+<div class="breadcrumb-bar">
+  <div class="wrap">
+    <div class="crumb-inner">
+      <a href="#">NVIDIA</a>
+      <span style="color:var(--mute)">›</span>
+      <a href="#">Solutions</a>
+      <span style="color:var(--mute)">›</span>
+      <span class="now">AI Foundry</span>
+    </div>
+  </div>
+</div>
+<div class="sub-nav">
+  <div class="wrap">
+    <div class="sub-nav-inner">
+      <a class="on" href="#">Overview</a>
+      <a href="#">Training</a>
+      <a href="#">Inference</a>
+      <a href="#">Foundation Models</a>
+      <a href="#">Customers</a>
+      <a href="#">Pricing</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS / CALLOUTS -->
+<section style="padding-top: 56px;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow on-light" style="color:var(--ink)">Why NVIDIA</span>
+      <h2 class="section-title">The platform behind every modern AI breakthrough.</h2>
+      <p class="section-lede">From training the largest open-weight models on DGX SuperPOD to running on RTX on a developer's laptop — one software stack, end to end.</p>
+    </div>
+    <div class="stats-row">
+      <div class="callout-stat"><span class="corner-sq"></span><div class="num">4×</div><div class="lbl">Faster training vs prior generation</div></div>
+      <div class="callout-stat"><span class="corner-sq"></span><div class="num">25×</div><div class="lbl">Lower energy per token at inference</div></div>
+      <div class="callout-stat"><span class="corner-sq"></span><div class="num">18</div><div class="lbl">Cloud regions running DGX Cloud</div></div>
+      <div class="callout-stat"><span class="corner-sq"></span><div class="num">3.4M</div><div class="lbl">Developers building on CUDA</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE GRID 4-up -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow on-light" style="color:var(--ink)">Capabilities</span>
+      <h2 class="section-title">Explore our AI solutions.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="corner-sq"></span>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h16v4H4z"/></svg></div>
+        <h3>Agentic AI</h3>
+        <p>NVIDIA NIM microservices and NeMo blueprints to build, fine-tune, and deploy agents in production.</p>
+        <a class="more" href="#">Learn more →</a>
+      </div>
+      <div class="feature-card">
+        <span class="corner-sq"></span>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg></div>
+        <h3>Data Science</h3>
+        <p>RAPIDS, cuDF, and cuML — GPU-accelerated dataframes and ML at the speed of memory, not disk.</p>
+        <a class="more" href="#">Learn more →</a>
+      </div>
+      <div class="feature-card">
+        <span class="corner-sq"></span>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12 L8 7 L13 12 L18 6 L21 9"/><path d="M3 18 H21"/></svg></div>
+        <h3>Inference</h3>
+        <p>NVIDIA Triton + TensorRT-LLM serve open models at production latency on B200, H200, and L40S.</p>
+        <a class="more" href="#">Learn more →</a>
+      </div>
+      <div class="feature-card">
+        <span class="corner-sq"></span>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17 V11 a7 7 0 0 1 14 0 V17"/><path d="M3 17h18M9 21h6"/></svg></div>
+        <h3>Conversational AI</h3>
+        <p>Riva and Maxine — speech, translation, and real-time avatars deployed at telco-grade latency.</p>
+        <a class="more" href="#">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCE CARDS 3-up -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow on-light" style="color:var(--ink)">Latest in AI resources</span>
+      <h2 class="section-title">Research, papers, and whitepapers.</h2>
+    </div>
+    <div class="resource-grid">
+      <article class="resource-card">
+        <span class="corner-sq"></span>
+        <div class="thumb" aria-hidden="true"></div>
+        <span class="badge-tag">White paper</span>
+        <h4>Scaling FP4 training to 100K-GPU clusters.</h4>
+        <p>How NVLink-72 and Blackwell's transformer engine compound to deliver 4× the throughput at the same wall-clock budget.</p>
+        <a class="read" href="#">Read more →</a>
+      </article>
+      <article class="resource-card">
+        <span class="corner-sq"></span>
+        <div class="thumb purple" aria-hidden="true"></div>
+        <span class="badge-tag">Webinar</span>
+        <h4>NIM microservices in production.</h4>
+        <p>Three customer case studies on serving open-weight Llama 4 and Mixtral with TensorRT-LLM at sub-200ms p95.</p>
+        <a class="read" href="#">Watch on demand →</a>
+      </article>
+      <article class="resource-card">
+        <span class="corner-sq"></span>
+        <div class="thumb green" aria-hidden="true"></div>
+        <span class="badge-tag">Blog</span>
+        <h4>Cosmos world models for robotics.</h4>
+        <p>Generating photoreal sim-to-real training data with diffusion-based world models on RTX A6000.</p>
+        <a class="read" href="#">Read article →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DARK CTA STRIP -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-strip">
+      <div>
+        <h3>Ready to accelerate your AI?</h3>
+        <p>Provision a B200 in DGX Cloud in minutes — no procurement cycle, no commit. Pay-per-minute pricing on the same hardware that runs the world's largest models.</p>
+      </div>
+      <div>
+        <a class="btn btn-primary" href="#">Start DGX Cloud trial →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow on-light" style="color:var(--ink)">DGX Cloud pricing</span>
+      <h2 class="section-title">Per-minute pricing on every GPU.</h2>
+    </div>
+    <div class="pricing-grid">
+      <article class="pricing-card">
+        <span class="corner-sq"></span>
+        <h3>L40S</h3>
+        <div class="price">$1.42<small> / GPU·hr</small></div>
+        <p>For inference workloads and fine-tuning up to 70B parameters.</p>
+        <ul>
+          <li>48 GB GDDR6</li>
+          <li>FP8 inference</li>
+          <li>On-demand · spot</li>
+          <li>Community support</li>
+        </ul>
+        <div class="cta"><a class="btn btn-outline" href="#">Start free trial →</a></div>
+      </article>
+      <article class="pricing-card featured">
+        <span class="corner-sq"></span>
+        <h3>H200</h3>
+        <div class="price">$4.80<small> / GPU·hr</small></div>
+        <p>For mid-sized training runs and production inference of frontier models.</p>
+        <ul>
+          <li>141 GB HBM3e</li>
+          <li>NVLink 8-way</li>
+          <li>Reserved capacity</li>
+          <li>24×7 priority support</li>
+        </ul>
+        <div class="cta"><a class="btn btn-primary" href="#">Provision H200 →</a></div>
+      </article>
+      <article class="pricing-card">
+        <span class="corner-sq"></span>
+        <h3>B200</h3>
+        <div class="price">$8.40<small> / GPU·hr</small></div>
+        <p>For training the largest open-weight models and exascale inference.</p>
+        <ul>
+          <li>192 GB HBM3e</li>
+          <li>NVLink-72 fabric</li>
+          <li>FP4 transformer engine</li>
+          <li>Dedicated solutions architect</li>
+        </ul>
+        <div class="cta"><a class="btn btn-outline" href="#">Talk to sales →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PART B — DESIGN SYSTEM REFERENCE ─── -->
+<section class="ds-section" id="design-system">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow on-light" style="color:var(--primary)">Design system</span>
+      <h2 class="section-title">Tokens, by NVIDIA.</h2>
+      <p class="section-lede">Two-mode surface architecture, a single saturated green accent, 2px radius everywhere, and a corner-square that ships with every reusable card.</p>
+      <a class="ds-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.nvidia.html" target="_blank" rel="noopener">→ Read the full DESIGN.md</a>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-row">
+      <span class="corner-sq"></span>
+      <div>
+        <h3>Color</h3>
+        <div class="ds-sub">grouped &amp; named</div>
+      </div>
+      <div>
+        <div class="color-group">
+          <h4>Brand &amp; accent</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#76b900"></div><span class="chip-label">primary (NVIDIA Green)</span><span class="chip-hex">#76b900</span></div>
+            <div class="swatch"><div class="chip" style="background:#5a8d00"></div><span class="chip-label">primary-dark</span><span class="chip-hex">#5a8d00</span></div>
+            <div class="swatch"><div class="chip" style="background:#bff230"></div><span class="chip-label">accent-green-pale</span><span class="chip-hex">#bff230</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Surface</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#ffffff"></div><span class="chip-label">canvas</span><span class="chip-hex">#ffffff</span></div>
+            <div class="swatch"><div class="chip" style="background:#f7f7f7"></div><span class="chip-label">surface-soft</span><span class="chip-hex">#f7f7f7</span></div>
+            <div class="swatch"><div class="chip" style="background:#000000"></div><span class="chip-label">surface-dark</span><span class="chip-hex">#000000</span></div>
+            <div class="swatch"><div class="chip" style="background:#1a1a1a"></div><span class="chip-label">surface-elevated</span><span class="chip-hex">#1a1a1a</span></div>
+            <div class="swatch"><div class="chip" style="background:#cccccc"></div><span class="chip-label">hairline</span><span class="chip-hex">#cccccc</span></div>
+            <div class="swatch"><div class="chip" style="background:#5e5e5e"></div><span class="chip-label">hairline-strong</span><span class="chip-hex">#5e5e5e</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Text</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#000000"></div><span class="chip-label">ink</span><span class="chip-hex">#000000</span></div>
+            <div class="swatch"><div class="chip" style="background:#1a1a1a"></div><span class="chip-label">body</span><span class="chip-hex">#1a1a1a</span></div>
+            <div class="swatch"><div class="chip" style="background:#757575"></div><span class="chip-label">mute</span><span class="chip-hex">#757575</span></div>
+            <div class="swatch"><div class="chip" style="background:#a7a7a7"></div><span class="chip-label">ash</span><span class="chip-hex">#a7a7a7</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Semantic &amp; editorial</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#0046a4"></div><span class="chip-label">link-blue (inline)</span><span class="chip-hex">#0046a4</span></div>
+            <div class="swatch"><div class="chip" style="background:#e52020"></div><span class="chip-label">error</span><span class="chip-hex">#e52020</span></div>
+            <div class="swatch"><div class="chip" style="background:#df6500"></div><span class="chip-label">warning</span><span class="chip-hex">#df6500</span></div>
+            <div class="swatch"><div class="chip" style="background:#952fc6"></div><span class="chip-label">accent-purple</span><span class="chip-hex">#952fc6</span></div>
+            <div class="swatch"><div class="chip" style="background:#feeeb2"></div><span class="chip-label">accent-yellow-pale</span><span class="chip-hex">#feeeb2</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-row">
+      <span class="corner-sq"></span>
+      <div>
+        <h3>Typography</h3>
+        <div class="ds-sub">NVIDIA-EMEA · weights 400 / 700</div>
+      </div>
+      <div>
+        <div class="type-table">
+          <div class="type-row">
+            <span class="type-name">display-xl</span>
+            <span class="type-meta">48 / 700 / 0</span>
+            <span class="type-meta">1.25</span>
+            <span class="type-sample t-display-xl">Accelerated computing.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">display-lg</span>
+            <span class="type-meta">36 / 700 / 0</span>
+            <span class="type-meta">1.25</span>
+            <span class="type-sample t-display-lg">Explore our AI solutions.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">heading-xl</span>
+            <span class="type-meta">24 / 700 / 0</span>
+            <span class="type-meta">1.25</span>
+            <span class="type-sample t-heading-xl">Sub-section title.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">heading-md</span>
+            <span class="type-meta">20 / 700 / 0</span>
+            <span class="type-meta">1.25</span>
+            <span class="type-sample t-heading-md">Card group title.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">card-title</span>
+            <span class="type-meta">17 / 700 / 0</span>
+            <span class="type-meta">1.47</span>
+            <span class="type-sample t-card">Resource card title.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">body-md</span>
+            <span class="type-meta">16 / 400 / 0</span>
+            <span class="type-meta">1.5</span>
+            <span class="type-sample t-body">Default body — hierarchy comes from weight, not color.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">caption-md</span>
+            <span class="type-meta">14 / 700 / 0</span>
+            <span class="type-meta">1.43</span>
+            <span class="type-sample t-cap">BREADCRUMB · EYEBROW · BADGE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-row">
+      <span class="corner-sq"></span>
+      <div>
+        <h3>Radius</h3>
+        <div class="ds-sub">Aggressively angular — 2px everywhere</div>
+      </div>
+      <div>
+        <div class="radius-row">
+          <div class="radius-tile r-none"><div class="box"></div><span class="val">none</span><span class="lab">0px · hero/footer</span></div>
+          <div class="radius-tile r-xs"><div class="box"></div><span class="val">xs</span><span class="lab">1px · accent</span></div>
+          <div class="radius-tile r-sm"><div class="box"></div><span class="val">sm</span><span class="lab">2px · default</span></div>
+          <div class="radius-tile r-full"><div class="box"></div><span class="val">full</span><span class="lab">circle · avatar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-row">
+      <span class="corner-sq"></span>
+      <div>
+        <h3>Components</h3>
+        <div class="ds-sub">Buttons · tabs · inputs · cards</div>
+      </div>
+      <div>
+        <div class="comp-matrix">
+          <div class="comp-cell">
+            <span class="corner-sq"></span>
+            <h5>Buttons</h5>
+            <div class="comp-stack">
+              <a class="btn btn-primary" href="#">Primary</a>
+              <a class="btn btn-outline" href="#">Outline</a>
+            </div>
+            <div class="comp-stack" style="background:#000;padding:12px;border-radius:2px;">
+              <a class="btn btn-primary" href="#">Primary</a>
+              <a class="btn btn-outline-dark" href="#">On dark</a>
+            </div>
+            <a class="btn-ghost" href="#" style="background:transparent;display:inline-flex;align-items:center;gap:6px;font-size:14.4px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.144px;">Ghost link →</a>
+          </div>
+          <div class="comp-cell">
+            <span class="corner-sq"></span>
+            <h5>Pill tabs &amp; badges</h5>
+            <div class="comp-stack">
+              <button class="pill-tab-x on">ALL</button>
+              <button class="pill-tab-x">PAPERS</button>
+              <button class="pill-tab-x">WEBINARS</button>
+            </div>
+            <div class="comp-stack">
+              <span class="badge-tag">White paper</span>
+              <span class="badge-tag" style="background:var(--accent-yellow-pale)">Tip</span>
+              <span class="badge-tag" style="background:var(--accent-purple-pale);color:#4d1368;">Preview</span>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <span class="corner-sq"></span>
+            <h5>Text input</h5>
+            <input class="input-rect" placeholder="Search models, datasheets, blueprints…"/>
+            <span style="font-size:12px;color:var(--mute);">Focus: 2px green border replaces hairline.</span>
+          </div>
+          <div class="comp-cell">
+            <span class="corner-sq"></span>
+            <h5>Inline link</h5>
+            <p style="margin:0;font-size:15px;line-height:1.67;">Train on <a style="color:var(--link-blue);text-decoration:underline;" href="#">NVIDIA DGX Cloud</a> with reserved or on-demand capacity — the only blue in the system lives on inline body links like this one.</p>
+          </div>
+          <div class="comp-cell" style="grid-column: 1 / -1;">
+            <span class="corner-sq"></span>
+            <h5>Feature card · Resource card</h5>
+            <div class="feature-grid" style="margin-top:0;">
+              <div class="feature-card">
+                <span class="corner-sq"></span>
+                <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/></svg></div>
+                <h3>Feature card.</h3>
+                <p>32px padding, hairline border, green corner square anchored top-left.</p>
+                <a class="more" href="#">Learn more →</a>
+              </div>
+              <div class="feature-card">
+                <span class="corner-sq"></span>
+                <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg></div>
+                <h3>Callout stat.</h3>
+                <p>Display-lg numeric in NVIDIA Green, body caption underneath.</p>
+                <a class="more" href="#">Learn more →</a>
+              </div>
+              <div class="resource-card" style="grid-column: span 2;">
+                <span class="corner-sq"></span>
+                <span class="badge-tag">Webinar</span>
+                <h4>Resource card.</h4>
+                <p>16:9 thumbnail at the top, body-sm description, ghost-link "Read more" — exactly the same chrome as the marketing cards above.</p>
+                <a class="read" href="#">Watch now →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>NVIDIA</h4>
+        <p>An inspired tribute to NVIDIA's marketing system — black/white duality, NVIDIA Green corner squares, 2px radius everywhere. Not affiliated with NVIDIA Corporation.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <a href="#">DGX Systems</a><a href="#">RTX</a><a href="#">Jetson</a><a href="#">Drive</a><a href="#">Omniverse</a>
+      </div>
+      <div class="footer-col">
+        <h5>Software</h5>
+        <a href="#">CUDA</a><a href="#">NeMo</a><a href="#">Triton</a><a href="#">TensorRT</a><a href="#">RAPIDS</a>
+      </div>
+      <div class="footer-col">
+        <h5>Industries</h5>
+        <a href="#">Healthcare</a><a href="#">Robotics</a><a href="#">Financial Services</a><a href="#">Telecom</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Newsroom</a><a href="#">Investors</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 INSPIRED TRIBUTE · AWESOME-DESIGN-MD</span>
+      <span>DESIGN.NVIDIA.HTML</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.nvidia.html" target="_blank" rel="noopener">
+  View DESIGN.md
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Voltagent — Inspired Design</title>
+<meta name="description" content="A Voltagent-inspired marketing page: near-black canvas, single electric-green accent, hairline-bordered feature cards, Inter + SF Mono. Looks like documentation that decided to sell something. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #00d992;
+  --primary-soft: #2fd6a1;
+  --primary-deep: #10b981;
+  --on-primary: #101010;
+  /* Text */
+  --ink: #f2f2f2;
+  --ink-strong: #ffffff;
+  --body: #bdbdbd;
+  --mute: #8b949e;
+  --canvas-text-soft: #f5f6f7;
+  /* Surface */
+  --canvas: #101010;
+  --canvas-soft: #1a1a1a;
+  --canvas-elev: #1f1f1f;
+  --hairline: #3d3a39;
+  --hairline-soft: rgba(79, 93, 117, 0.4);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-feature-settings: "calt", "rlig";
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.625;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--primary); color: var(--on-primary); }
+
+.mono { font-family: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+
+/* Layout */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .wrap { padding: 0 20px; } }
+
+/* Eyebrow — uppercase, tracked */
+.eyebrow {
+  font-size: 14px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2.52px;
+  color: var(--primary);
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.eyebrow-mute { color: var(--mute); }
+
+/* Nav */
+.top-nav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+  padding: 12px 0;
+}
+.nav-inner { display: flex; align-items: center; gap: 24px; }
+.logo {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 18px; font-weight: 700; letter-spacing: -0.4px;
+  color: var(--ink-strong);
+}
+.logo svg { display: block; }
+.nav-center { display: flex; gap: 4px; margin-left: 24px; }
+.nav-center a {
+  font-size: 14px; font-weight: 400; color: var(--body);
+  padding: 8px 12px; border-radius: 6px;
+}
+.nav-center a:hover { color: var(--ink-strong); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 16px; border-radius: 6px;
+  font-family: inherit;
+  font-size: 16px; font-weight: 600; line-height: 1.5;
+  cursor: pointer; border: 1px solid transparent;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+  text-decoration: none;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-soft); }
+.btn-outline { background: var(--canvas); color: var(--ink); border-color: var(--hairline); }
+.btn-outline:hover { border-color: var(--ink); }
+.btn-ghost-green { background: var(--canvas); color: var(--primary-soft); }
+.btn-ghost-green:hover { color: var(--primary); }
+.btn-sm { padding: 8px 12px; font-size: 14px; }
+
+/* Pill tag */
+.pill-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--canvas);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  padding: 4px 12px; border-radius: 9999px;
+  font-size: 14px; font-weight: 400;
+}
+.pill-tag .dot {
+  width: 6px; height: 6px; border-radius: 9999px;
+  background: var(--primary);
+}
+
+/* Code inline chip */
+.code-chip {
+  display: inline-block;
+  background: var(--canvas-soft);
+  color: var(--canvas-text-soft);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; font-weight: 400;
+  padding: 2px 8px; border-radius: 6px;
+  border: 1px solid var(--hairline);
+}
+
+/* Hero */
+.hero { padding: 80px 0 64px; }
+.hero h1 {
+  font-size: clamp(36px, 6vw, 60px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.65px;
+  margin: 24px 0;
+  color: var(--ink-strong);
+  max-width: 900px;
+}
+.hero h1 strong { color: var(--primary); font-weight: 500; }
+.hero p.lede {
+  font-size: 18px; font-weight: 400; line-height: 1.625;
+  color: var(--body);
+  max-width: 640px;
+  margin: 0 0 28px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.hero-install {
+  display: inline-flex; gap: 12px; align-items: center;
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; color: var(--ink);
+}
+.hero-install .prompt { color: var(--primary); }
+.hero-install .copy {
+  margin-left: 8px;
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--mute);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.hero-install .copy:hover { color: var(--ink); border-color: var(--ink); }
+
+/* Agent chat mockup — the brand-aligned product centerpiece */
+.agent-mock {
+  margin-top: 56px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 440px;
+  position: relative;
+}
+@media (max-width: 980px) { .agent-mock { grid-template-columns: 1fr; } }
+.agent-side {
+  border-right: 1px solid var(--hairline);
+  padding: 16px;
+}
+@media (max-width: 980px) { .agent-side { border-right: 0; border-bottom: 1px solid var(--hairline); } }
+.agent-side h6 {
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.52px;
+  color: var(--mute); margin: 0 0 12px;
+}
+.agent-side .row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 6px;
+  font-size: 14px; color: var(--body);
+  cursor: pointer;
+  position: relative;
+}
+.agent-side .row.active {
+  color: var(--ink-strong);
+  background: var(--canvas-soft);
+}
+.agent-side .row.active::before {
+  content: ""; position: absolute; left: -16px; top: 8px; bottom: 8px;
+  width: 2px; background: var(--primary);
+  border-radius: 2px;
+}
+.agent-side .row .mini-glyph {
+  width: 18px; height: 18px; border-radius: 4px;
+  background: var(--canvas-soft); display: flex; align-items: center; justify-content: center;
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace; font-size: 10px;
+}
+.agent-side .row.active .mini-glyph { background: var(--primary); color: var(--on-primary); }
+.agent-main {
+  display: flex; flex-direction: column;
+  background: var(--canvas);
+}
+.agent-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-bottom: 1px solid var(--hairline);
+  font-size: 14px;
+}
+.agent-head .name { font-weight: 600; color: var(--ink-strong); }
+.agent-head .live-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 10px; border-radius: 9999px;
+  background: rgba(0,217,146,0.12);
+  border: 1px solid rgba(0,217,146,0.4);
+  color: var(--primary);
+  font-size: 12px; font-weight: 600;
+}
+.agent-head .live-pill .dot { width: 6px; height: 6px; border-radius: 9999px; background: var(--primary); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.agent-chat { padding: 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+.msg { display: flex; gap: 12px; max-width: 90%; }
+.msg .avatar {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  display: flex; align-items: center; justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 600;
+  flex-shrink: 0;
+}
+.msg.user .avatar { background: var(--canvas-soft); color: var(--mute); }
+.msg.agent .avatar { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.msg .bubble {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 14px; line-height: 1.55;
+  color: var(--ink);
+}
+.msg.agent .bubble {
+  border-color: var(--hairline);
+}
+.msg .tool-trace {
+  margin-top: 8px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--mute);
+  display: flex; gap: 8px; align-items: center;
+}
+.msg .tool-trace .kw { color: var(--primary); }
+.agent-input {
+  display: flex; gap: 8px; padding: 14px 20px;
+  border-top: 1px solid var(--hairline);
+  background: var(--canvas);
+}
+.agent-input input {
+  flex: 1;
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 14px;
+}
+.agent-input input:focus { outline: none; border-color: var(--primary); }
+.agent-input .send {
+  background: var(--primary); color: var(--on-primary);
+  border: 0; border-radius: 6px; padding: 0 16px;
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer;
+}
+
+/* Green divider band */
+.green-divider {
+  border-top: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
+  background: var(--canvas);
+  padding: 16px 0;
+  text-align: center;
+}
+.green-divider .row {
+  display: flex; gap: 40px; justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; color: var(--mute);
+  flex-wrap: wrap;
+}
+.green-divider .row strong { color: var(--primary); font-weight: 600; }
+
+/* Sections */
+section { padding: 96px 0; }
+.section-head { margin-bottom: 56px; max-width: 880px; }
+h2.section-title {
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.9px;
+  color: var(--ink-strong);
+  margin: 0 0 16px;
+}
+.section-lede {
+  font-size: 18px;
+  line-height: 1.625;
+  color: var(--body);
+  max-width: 640px;
+}
+
+/* Feature grid */
+.feature-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+@media (max-width: 980px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color .15s ease;
+}
+.feature-card:hover { border-color: var(--mute); }
+.feature-card.emph { border-width: 2px; border-color: var(--primary); }
+.feature-card .ico {
+  width: 36px; height: 36px; border-radius: 6px;
+  background: var(--canvas-soft); border: 1px solid var(--hairline);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary);
+}
+.feature-card h3 {
+  font-size: 24px; font-weight: 700; letter-spacing: -0.6px; line-height: 1.33;
+  margin: 0; color: var(--ink-strong);
+}
+.feature-card p { color: var(--body); font-size: 16px; margin: 0; line-height: 1.625; }
+.feature-card .meta {
+  display: flex; gap: 8px; margin-top: 6px;
+}
+
+/* Code mockup card */
+.code-mockup {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 32px;
+}
+.code-mockup .head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--hairline);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--mute);
+}
+.code-mockup .head .dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--hairline); }
+.code-mockup .head .copy-btn {
+  margin-left: auto;
+  background: transparent; border: 1px solid var(--hairline); color: var(--mute);
+  font-family: inherit; font-size: 11px;
+  padding: 4px 8px; border-radius: 4px; cursor: pointer;
+}
+.code-mockup pre {
+  margin: 0; padding: 20px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; line-height: 1.55;
+  color: var(--ink);
+  overflow-x: auto;
+}
+.code-mockup pre .kw { color: #ff8aa2; }
+.code-mockup pre .fn { color: var(--primary); }
+.code-mockup pre .st { color: #a8e8a8; }
+.code-mockup pre .nm { color: #ffd9a0; }
+.code-mockup pre .cm { color: var(--mute); font-style: italic; }
+
+/* Split section: text + code */
+.split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; }
+@media (max-width: 980px) { .split { grid-template-columns: 1fr; gap: 32px; } }
+.split h3 {
+  font-size: 24px; font-weight: 700; line-height: 1.33; letter-spacing: -0.6px;
+  margin: 0 0 16px; color: var(--ink-strong);
+}
+.split p { color: var(--body); margin: 0 0 12px; }
+.split ul {
+  list-style: none; padding: 0; margin: 16px 0; font-size: 15px;
+}
+.split ul li {
+  position: relative; padding: 6px 0 6px 22px;
+  color: var(--body);
+}
+.split ul li::before {
+  content: "→"; position: absolute; left: 0; top: 6px;
+  color: var(--primary); font-weight: 600;
+}
+
+/* Pricing */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  margin-top: 48px;
+}
+@media (max-width: 980px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.pricing-card.featured {
+  border-color: var(--primary);
+  border-width: 2px;
+}
+.pricing-card h3 {
+  font-size: 20px; font-weight: 600; letter-spacing: 0; line-height: 1.4;
+  margin: 0; color: var(--ink-strong);
+}
+.pricing-card .price {
+  font-size: 36px; font-weight: 400; line-height: 1.1; letter-spacing: -0.9px;
+  color: var(--ink-strong);
+}
+.pricing-card .price small { font-size: 14px; color: var(--mute); letter-spacing: 0; }
+.pricing-card p { color: var(--body); font-size: 14px; margin: 0 0 12px; line-height: 1.625; }
+.pricing-card ul { list-style: none; padding: 0; margin: 8px 0 16px; font-size: 14px; }
+.pricing-card ul li {
+  padding: 6px 0 6px 22px; position: relative; color: var(--body); line-height: 1.5;
+}
+.pricing-card ul li::before {
+  content: "✓"; color: var(--primary); position: absolute; left: 0; top: 6px; font-weight: 600;
+}
+.pricing-card .cta { margin-top: auto; }
+.pricing-card .featured-pill {
+  align-self: flex-start;
+  padding: 2px 10px; border-radius: 9999px;
+  background: var(--primary); color: var(--on-primary);
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.5px;
+}
+
+/* ─── DS section ─── */
+.ds-section { padding: 96px 0; }
+.ds-row { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding: 40px 0; border-top: 1px solid var(--hairline); }
+.ds-row > div > h3 {
+  font-size: 24px; font-weight: 700; line-height: 1.33; letter-spacing: -0.6px;
+  margin: 0; color: var(--ink-strong);
+}
+.ds-sub {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--mute); margin-top: 8px;
+}
+@media (max-width: 820px) { .ds-row { grid-template-columns: 1fr; } }
+
+.color-group { margin-bottom: 32px; }
+.color-group:last-child { margin-bottom: 0; }
+.color-group h4 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.52px;
+  color: var(--mute); margin: 0 0 12px;
+}
+.color-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.swatch {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.chip { height: 56px; border-radius: 6px; border: 1px solid var(--hairline); }
+.chip-label { font-size: 14px; font-weight: 600; color: var(--ink-strong); }
+.chip-hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--mute); }
+
+.type-row {
+  display: grid; grid-template-columns: 200px 90px 1fr;
+  gap: 24px; align-items: baseline;
+  padding: 16px 0; border-top: 1px solid var(--hairline);
+}
+.type-row:first-of-type { border-top: 0; }
+.type-token {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--mute);
+}
+.type-size {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--mute); text-align: right;
+}
+.type-sample { color: var(--ink-strong); }
+.type-sample.body { color: var(--body); font-weight: 400; line-height: 1.625; }
+.type-sample.mono { font-family: "JetBrains Mono", monospace; }
+.type-sample.up {
+  font-size: 14px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 2.52px;
+  color: var(--primary);
+}
+@media (max-width: 720px) { .type-row { grid-template-columns: 1fr; gap: 4px; } .type-size { text-align: left; } }
+
+.radius-row { display: flex; flex-wrap: wrap; gap: 16px; }
+.radius-card { flex: 1 1 130px; text-align: center; }
+.radius-tile {
+  height: 70px; background: var(--canvas-soft); border: 1px solid var(--hairline);
+  margin-bottom: 8px;
+}
+.radius-label { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--mute); }
+
+.comp-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 720px) { .comp-matrix { grid-template-columns: 1fr; } }
+.comp-cell {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 24px;
+}
+.comp-cell h5 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 2.52px;
+  color: var(--mute); margin: 0 0 16px;
+}
+.comp-stack { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input-rect {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  border-radius: 6px; padding: 12px 16px;
+  font-family: inherit; font-size: 14px;
+  width: 100%;
+}
+.input-rect:focus { outline: none; border-color: var(--primary); }
+
+.ds-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px; color: var(--primary);
+  margin-top: 24px;
+  border-bottom: 1px solid var(--primary); padding-bottom: 2px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 2.52px;
+}
+
+/* Footer */
+.footer { background: var(--canvas); padding: 64px 32px 32px; border-top: 1px solid var(--hairline); }
+.footer-inner { max-width: 1280px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 32px;
+}
+@media (max-width: 820px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+.footer-brand h4 { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin: 0 0 12px; color: var(--ink-strong); }
+.footer-brand p { font-size: 14px; color: var(--body); max-width: 280px; line-height: 1.625; }
+.footer-col h5 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 2.52px;
+  color: var(--mute); margin: 0 0 12px;
+}
+.footer-col a { display: block; font-size: 14px; color: var(--body); padding: 5px 0; }
+.footer-col a:hover { color: var(--primary); }
+.footer-bottom {
+  margin-top: 48px; padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+  display: flex; justify-content: space-between;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--mute); flex-wrap: wrap; gap: 12px;
+}
+
+/* Floating DESIGN.md */
+.floating-design-link {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--canvas-soft); color: var(--primary);
+  padding: 10px 18px; border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; font-weight: 600;
+  z-index: 50; border: 1px solid var(--primary);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.floating-design-link:hover { background: var(--primary); color: var(--on-primary); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M13 2 L4 14 H11 L10 22 L20 10 H13 Z" fill="#00d992"/>
+      </svg>
+      voltagent
+    </a>
+    <div class="nav-center">
+      <a href="#">Docs</a>
+      <a href="#">Examples</a>
+      <a href="#">Integrations</a>
+      <a href="#">Pricing</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="btn btn-outline btn-sm">Sign in</a>
+      <a href="#" class="btn btn-primary btn-sm">Start free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">AI AGENT ENGINEERING PLATFORM</span>
+    <h1>Build, run, and observe production <strong>AI agents</strong> — without the framework tax.</h1>
+    <p class="lede">An open-source, TypeScript-native framework for building durable AI agents. Composable tools, typed memory, full observability — all in one SDK.</p>
+    <div class="hero-cta">
+      <a href="#" class="btn btn-primary">Start building →</a>
+      <a href="#" class="btn btn-outline">Read the docs</a>
+    </div>
+    <div class="hero-install" role="region" aria-label="install command">
+      <span class="prompt">$</span>
+      <span class="mono">npx create-voltagent-app@latest my-agent</span>
+      <button class="copy">copy</button>
+    </div>
+
+    <!-- AGENT CHAT MOCKUP -->
+    <div class="agent-mock" aria-label="Agent runtime preview">
+      <aside class="agent-side">
+        <h6>AGENTS</h6>
+        <div class="row active">
+          <span class="mini-glyph">⚡</span>
+          <span>support-triage</span>
+        </div>
+        <div class="row">
+          <span class="mini-glyph">▸</span>
+          <span>doc-writer</span>
+        </div>
+        <div class="row">
+          <span class="mini-glyph">▸</span>
+          <span>research-loop</span>
+        </div>
+        <div class="row">
+          <span class="mini-glyph">▸</span>
+          <span>code-reviewer</span>
+        </div>
+        <h6 style="margin-top:20px">TOOLS</h6>
+        <div class="row"><span class="mini-glyph">⌥</span><span>search_kb</span></div>
+        <div class="row"><span class="mini-glyph">⌥</span><span>create_ticket</span></div>
+        <div class="row"><span class="mini-glyph">⌥</span><span>send_email</span></div>
+      </aside>
+      <main class="agent-main">
+        <div class="agent-head">
+          <span class="name">support-triage</span>
+          <span class="mono" style="color:var(--mute)">· gpt-4o · v0.18</span>
+          <span class="live-pill" style="margin-left:auto"><span class="dot"></span>LIVE</span>
+        </div>
+        <div class="agent-chat">
+          <div class="msg user">
+            <div class="avatar">U</div>
+            <div>
+              <div class="bubble">Customer says order #4821 hasn't arrived. Can you check and refund if it's lost?</div>
+            </div>
+          </div>
+          <div class="msg agent">
+            <div class="avatar">⚡</div>
+            <div>
+              <div class="bubble">
+                Looking up order #4821 — last scan was 6 days ago in transit. I'll mark it lost and issue a refund.
+              </div>
+              <div class="tool-trace">
+                <span class="kw">tool</span> →
+                <span>search_kb("order=4821") · 142ms</span>
+                <span style="color:var(--primary);margin-left:auto">✓ 200</span>
+              </div>
+              <div class="tool-trace">
+                <span class="kw">tool</span> →
+                <span>create_ticket(type="refund", amount=42.90) · 89ms</span>
+                <span style="color:var(--primary);margin-left:auto">✓ 200</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="agent-input">
+          <input placeholder="Continue the trace…" />
+          <button class="send">Send →</button>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- GREEN DIVIDER -->
+<div class="green-divider">
+  <div class="wrap">
+    <div class="row">
+      <span><strong>17k+</strong> ★ on GitHub</span>
+      <span><strong>240+</strong> integrations</span>
+      <span><strong>1.2M</strong> weekly downloads</span>
+      <span>Apache <strong>2.0</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">EVERYTHING YOU NEED</span>
+      <h2 class="section-title">The agent runtime, made boring.</h2>
+      <p class="section-lede">Voltagent gives you typed primitives for the four hard parts of agent engineering — tools, memory, control-flow, and observability — without locking you into a vendor.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card emph">
+        <div class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 L4 14 H11 L10 22 L20 10 H13 Z"/></svg></div>
+        <h3>Typed tools.</h3>
+        <p>Define tool schemas in TypeScript. Zod-validated inputs, typed outputs, automatic retry semantics.</p>
+        <div class="meta"><span class="pill-tag"><span class="dot"></span>core</span><span class="code-chip">@voltagent/core</span></div>
+      </article>
+      <article class="feature-card">
+        <div class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4 H20 V20 H4 Z M4 10 H20"/></svg></div>
+        <h3>Durable memory.</h3>
+        <p>Long-term store with vector + SQL semantics. Sessions, threads, and replayable state — no Redis to babysit.</p>
+        <div class="meta"><span class="code-chip">@voltagent/memory</span></div>
+      </article>
+      <article class="feature-card">
+        <div class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Observable by default.</h3>
+        <p>Every tool call, prompt, and decision lands in a trace tree. Diff agent versions across runs.</p>
+        <div class="meta"><span class="code-chip">@voltagent/trace</span></div>
+      </article>
+      <article class="feature-card">
+        <div class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12 H20 M12 4 V20"/></svg></div>
+        <h3>Composable control-flow.</h3>
+        <p>Sequential, parallel, and loop primitives. Branch on tool output without writing custom orchestration.</p>
+        <div class="meta"><span class="code-chip">graph()</span></div>
+      </article>
+      <article class="feature-card">
+        <div class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7 H20 M4 12 H20 M4 17 H14"/></svg></div>
+        <h3>Model-agnostic.</h3>
+        <p>OpenAI, Anthropic, Google, local Ollama — swap providers in one line. Token accounting included.</p>
+        <div class="meta"><span class="code-chip">@voltagent/ai</span></div>
+      </article>
+      <article class="feature-card">
+        <div class="ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M8 8 V4 a4 4 0 0 1 8 0 V8"/></svg></div>
+        <h3>Production safe.</h3>
+        <p>Rate limits, cost budgets, prompt-injection guards, audit logging — every concern your security team will ask.</p>
+        <div class="meta"><span class="code-chip">@voltagent/guard</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT — CODE -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow eyebrow-mute">FIVE-LINE AGENT</span>
+        <h3>Define an agent. Hand it tools. Run it.</h3>
+        <p>No decorators. No magic. The agent is a plain TypeScript value — composable, testable, deployable.</p>
+        <ul>
+          <li>Define tools with Zod schemas — validated at runtime.</li>
+          <li>Pick any model: OpenAI, Anthropic, local Ollama.</li>
+          <li>Trace every step automatically — no instrumentation.</li>
+        </ul>
+        <a href="#" class="btn btn-ghost-green">Read the quickstart →</a>
+      </div>
+      <div>
+        <div class="code-mockup">
+          <div class="head">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span style="margin-left:8px">agent.ts</span>
+            <button class="copy-btn">copy</button>
+          </div>
+<pre><span class="kw">import</span> { defineAgent, tool } <span class="kw">from</span> <span class="st">"@voltagent/core"</span>;
+<span class="kw">import</span> { z } <span class="kw">from</span> <span class="st">"zod"</span>;
+
+<span class="kw">const</span> searchKb = <span class="fn">tool</span>({
+  name: <span class="st">"search_kb"</span>,
+  input: z.<span class="fn">object</span>({ query: z.<span class="fn">string</span>() }),
+  <span class="fn">run</span>: <span class="kw">async</span> ({ query }) =&gt; kb.<span class="fn">search</span>(query),
+});
+
+<span class="kw">export const</span> support = <span class="fn">defineAgent</span>({
+  model: <span class="st">"gpt-4o"</span>,
+  tools: [searchKb],
+  system: <span class="st">"You triage customer support tickets."</span>,
+});
+
+<span class="cm">// run it</span>
+<span class="kw">const</span> trace = <span class="kw">await</span> support.<span class="fn">run</span>(<span class="st">"order #4821 lost"</span>);
+console.<span class="fn">log</span>(trace.steps);</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">PRICING</span>
+      <h2 class="section-title">Open-source forever. Cloud when you need it.</h2>
+    </div>
+    <div class="pricing-grid">
+      <article class="pricing-card">
+        <h3>OSS</h3>
+        <div class="price">Free<small> · Apache 2.0</small></div>
+        <p>Self-host every primitive on your own infra. Forever, no asterisks.</p>
+        <ul>
+          <li>Full SDK</li>
+          <li>CLI + local tracer</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#" class="btn btn-outline cta">Star on GitHub →</a>
+      </article>
+      <article class="pricing-card featured">
+        <span class="featured-pill">POPULAR</span>
+        <h3>Cloud</h3>
+        <div class="price">$29<small> /seat /month</small></div>
+        <p>Hosted runtime with trace history, evals, and prompt-management UI.</p>
+        <ul>
+          <li>Hosted observability</li>
+          <li>Eval suites + dataset diffs</li>
+          <li>Prompt registry</li>
+          <li>Team workspaces</li>
+        </ul>
+        <a href="#" class="btn btn-primary cta">Start 14-day trial →</a>
+      </article>
+      <article class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">Custom<small> · annual</small></div>
+        <p>BYOC, SOC 2, dedicated capacity, and on-call agent engineers.</p>
+        <ul>
+          <li>VPC deployment</li>
+          <li>SSO + audit log retention</li>
+          <li>SOC 2 Type II</li>
+          <li>Designated engineer</li>
+        </ul>
+        <a href="#" class="btn btn-outline cta">Talk to sales →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PART B — DESIGN SYSTEM ─── -->
+<section class="ds-section" id="design-system">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">DESIGN SYSTEM REFERENCE</span>
+      <h2 class="section-title">Tokens, by Voltagent.</h2>
+      <p class="section-lede">Near-black canvas, one electric-green accent, hairline-bordered cards, Inter + SF Mono. The brand reads as documentation that decided to also sell something.</p>
+      <a class="ds-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.voltagent.html" target="_blank" rel="noopener">READ THE FULL DESIGN.MD →</a>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-row">
+      <div>
+        <h3>Color</h3>
+        <div class="ds-sub">grouped &amp; named</div>
+      </div>
+      <div>
+        <div class="color-group">
+          <h4>Brand</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#00d992"></div><span class="chip-label">primary</span><span class="chip-hex">#00d992</span></div>
+            <div class="swatch"><div class="chip" style="background:#2fd6a1"></div><span class="chip-label">primary-soft</span><span class="chip-hex">#2fd6a1</span></div>
+            <div class="swatch"><div class="chip" style="background:#10b981"></div><span class="chip-label">primary-deep</span><span class="chip-hex">#10b981</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Surface</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#101010"></div><span class="chip-label">canvas</span><span class="chip-hex">#101010</span></div>
+            <div class="swatch"><div class="chip" style="background:#1a1a1a"></div><span class="chip-label">canvas-soft</span><span class="chip-hex">#1a1a1a</span></div>
+            <div class="swatch"><div class="chip" style="background:#3d3a39"></div><span class="chip-label">hairline</span><span class="chip-hex">#3d3a39</span></div>
+            <div class="swatch"><div class="chip" style="background:#b8b3b0"></div><span class="chip-label">hairline-soft</span><span class="chip-hex">#b8b3b0</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Text</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#ffffff"></div><span class="chip-label">ink-strong</span><span class="chip-hex">#ffffff</span></div>
+            <div class="swatch"><div class="chip" style="background:#f2f2f2"></div><span class="chip-label">ink</span><span class="chip-hex">#f2f2f2</span></div>
+            <div class="swatch"><div class="chip" style="background:#bdbdbd"></div><span class="chip-label">body</span><span class="chip-hex">#bdbdbd</span></div>
+            <div class="swatch"><div class="chip" style="background:#8b949e"></div><span class="chip-label">mute</span><span class="chip-hex">#8b949e</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="ds-row">
+      <div>
+        <h3>Type</h3>
+        <div class="ds-sub">inter + sf-mono</div>
+      </div>
+      <div>
+        <div class="type-row">
+          <span class="type-token">display-xl</span><span class="type-size">60 / -0.65</span>
+          <span class="type-sample" style="font-size:42px;font-weight:400;line-height:1;letter-spacing:-0.5px">AI agent runtime.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">display-lg</span><span class="type-size">36 / -0.9</span>
+          <span class="type-sample" style="font-size:30px;font-weight:400;line-height:1.1;letter-spacing:-0.8px">Section headline.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">display-md</span><span class="type-size">24 / -0.6</span>
+          <span class="type-sample" style="font-size:22px;font-weight:700;line-height:1.33;letter-spacing:-0.5px">Card title display.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">eyebrow-mono</span><span class="type-size">14 / 2.52</span>
+          <span class="type-sample up">UPPERCASE EYEBROW</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">body-lg</span><span class="type-size">18 / 0</span>
+          <span class="type-sample body" style="font-size:18px">Lead paragraph at 1.625 line-height — long-form developer prose.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">body-md</span><span class="type-size">16 / 0</span>
+          <span class="type-sample body" style="font-size:16px">Default body type — Inter weight 400.</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">code</span><span class="type-size">13 / 0</span>
+          <span class="type-sample mono" style="font-size:13px">await agent.run("ship it")</span>
+        </div>
+        <div class="type-row">
+          <span class="type-token">caption</span><span class="type-size">12 / 0</span>
+          <span class="type-sample body" style="font-size:12px">Fine print at 12px / weight 400.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-row">
+      <div>
+        <h3>Radius</h3>
+        <div class="ds-sub">6px buttons · 8px cards</div>
+      </div>
+      <div>
+        <div class="radius-row">
+          <div class="radius-card"><div class="radius-tile" style="border-radius:0"></div><span class="radius-label">none · 0</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:4px"></div><span class="radius-label">xs · 4</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:6px"></div><span class="radius-label">sm · 6</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:8px"></div><span class="radius-label">md · 8</span></div>
+          <div class="radius-card"><div class="radius-tile" style="border-radius:9999px;height:40px;margin-top:15px"></div><span class="radius-label">pill</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-row">
+      <div>
+        <h3>Components</h3>
+        <div class="ds-sub">working matrix</div>
+      </div>
+      <div>
+        <div class="comp-matrix">
+          <div class="comp-cell">
+            <h5>BUTTONS</h5>
+            <div class="comp-stack">
+              <a class="btn btn-primary">Start free</a>
+              <a class="btn btn-outline">Read docs</a>
+              <a class="btn btn-ghost-green">Learn more →</a>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>PILLS &amp; CHIPS</h5>
+            <div class="comp-stack">
+              <span class="pill-tag"><span class="dot"></span>LIVE</span>
+              <span class="pill-tag">beta</span>
+              <span class="code-chip">@voltagent/core</span>
+              <span class="code-chip">npx voltagent</span>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>TEXT INPUT</h5>
+            <input class="input-rect" placeholder="ask the agent anything…" />
+          </div>
+          <div class="comp-cell">
+            <h5>FEATURE CARD</h5>
+            <div class="feature-card" style="margin-top:0">
+              <div class="ico">⚡</div>
+              <h3 style="font-size:18px">Card chrome · 8px radius.</h3>
+              <p style="font-size:14px">1px hairline border on the dark canvas. No shadow.</p>
+            </div>
+          </div>
+          <div class="comp-cell" style="grid-column:1/-1">
+            <h5>CODE MOCKUP</h5>
+            <div class="code-mockup" style="margin-top:0">
+              <div class="head">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span style="margin-left:8px">hello.ts</span>
+                <button class="copy-btn">copy</button>
+              </div>
+<pre><span class="kw">const</span> agent = <span class="fn">defineAgent</span>({ model: <span class="st">"gpt-4o"</span> });
+<span class="kw">const</span> trace = <span class="kw">await</span> agent.<span class="fn">run</span>(<span class="st">"hello, voltage"</span>);</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>voltagent</h4>
+        <p>Open-source AI agent engineering platform. Inspired tribute, sourced from awesome-design-md.</p>
+      </div>
+      <div class="footer-col">
+        <h5>PLATFORM</h5>
+        <a href="#">Core SDK</a><a href="#">Memory</a><a href="#">Trace</a><a href="#">Guard</a>
+      </div>
+      <div class="footer-col">
+        <h5>RESOURCES</h5>
+        <a href="#">Docs</a><a href="#">Examples</a><a href="#">Awesome design</a><a href="#">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h5>COMMUNITY</h5>
+        <a href="#">GitHub</a><a href="#">Discord</a><a href="#">Twitter</a>
+      </div>
+      <div class="footer-col">
+        <h5>COMPANY</h5>
+        <a href="#">About</a><a href="#">Pricing</a><a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 INSPIRED TRIBUTE · APACHE 2.0</span>
+      <span>design.voltagent.html</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.voltagent.html" target="_blank" rel="noopener">
+  View DESIGN.md
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Uber — iOS design spec</title>
+<meta name="description" content="Uber iOS app design reference. #000 brand, #fff canvas, full-pill geometry, edge-to-edge maps, Uber Move typography." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#ffffff; --surface-1:#F6F6F6; --surface-2:#EEEEEE; --surface-card:#FFFFFF; --surface-card-alt:#FAFAFA;
+  --accent:#000000; --accent-hover:#1A1A1A; --accent-teal:#1FBAD6; --accent-slate:#142328;
+  --ink:#000000; --ink-soft:#1A1A1A; --ink-muted:#6B6B6B; --ink-dim:#9E9E9E;
+  --border:#E2E2E2; --border-soft:#EEEEEE; --border-strong:#CFCFCF;
+  --map-land:#EDE8DF; --map-water:#CADDDA; --map-road:#FFFFFF; --map-park:#D4E4D0;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:14px; --r-card:12px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.8px;color:var(--ink)}
+.brand-mark{width:30px;height:30px;border-radius:6px;background:#000;display:grid;place-items:center;color:#fff;font-weight:900;font-size:18px;letter-spacing:-.5px}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-full);font-size:14px;font-weight:600;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink);background:var(--surface-1)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:#000;color:#fff;padding:13px 22px;border-radius:var(--r-full)}
+.btn-primary:hover{background:#1A1A1A}
+.btn-pill{background:var(--surface-1);color:var(--ink);padding:11px 18px;border-radius:var(--r-full)}
+.btn-outline{background:#fff;border:1px solid var(--ink);color:var(--ink);padding:11px 18px;border-radius:var(--r-full)}
+.btn-light{background:#fff;border:1px solid var(--border-strong);color:var(--ink);padding:13px 22px;border-radius:var(--r-full)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden;background:#fff}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(31,186,214,.08),transparent 70%),radial-gradient(700px 500px at 80% 30%,rgba(0,0,0,.04),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-full);background:#000;color:#fff;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-teal)}
+.hero h1{font-size:clamp(44px,7vw,90px);line-height:1;letter-spacing:-2.6px;font-weight:800;margin-bottom:22px;color:var(--ink)}
+.hero h1 .gradient-word{color:#000;position:relative;display:inline-block}
+.hero h1 .gradient-word::after{content:"";position:absolute;bottom:6px;left:0;right:0;height:14px;background:var(--accent-teal);z-index:-1;opacity:.85}
+.hero p{font-size:18px;line-height:1.55;color:var(--ink-muted);max-width:620px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar.dark{color:#fff}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;color:var(--ink);font-size:11px;display:flex;flex-direction:column;padding-top:52px;background:#fff}
+
+/* ========== MAP TILE ========== */
+.map-tile{background:var(--map-land);position:relative;overflow:hidden}
+.map-tile::before{content:"";position:absolute;inset:-20%;background:
+  linear-gradient(90deg,transparent 48%,var(--map-road) 48%,var(--map-road) 52%,transparent 52%),
+  linear-gradient(0deg,transparent 38%,var(--map-road) 38%,var(--map-road) 41%,transparent 41%),
+  linear-gradient(45deg,transparent 60%,var(--map-road) 60%,var(--map-road) 62%,transparent 62%);
+  opacity:.85}
+.map-tile::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 40% at 20% 30%,var(--map-park),transparent 60%),
+  radial-gradient(ellipse 50% 30% at 90% 80%,var(--map-water),transparent 70%);
+  opacity:.7}
+.map-pin{position:absolute;width:14px;height:14px;background:#000;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3);z-index:3}
+.map-pin.dest{background:#fff;border-color:#000}
+.map-route{position:absolute;height:4px;background:#000;z-index:2;border-radius:2px}
+.map-car{position:absolute;width:24px;height:24px;background:#000;border-radius:6px;display:grid;place-items:center;z-index:4;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.map-car svg{width:14px;height:14px;fill:#fff}
+
+/* ========== SCREEN: HOME ========== */
+.ub-top{position:absolute;top:52px;left:14px;right:14px;display:flex;gap:8px;align-items:center;z-index:8}
+.ub-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1FBAD6,#000);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.ub-search{flex:1;background:#fff;border:1px solid var(--border-strong);border-radius:var(--r-full);padding:11px 16px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink);font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.ub-search svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:2.5}
+.ub-search .lt{margin-left:auto;display:flex;align-items:center;gap:4px;color:var(--ink-muted);font-weight:500;font-size:11.5px}
+.ub-shortcuts{position:absolute;top:108px;left:14px;right:14px;display:grid;grid-template-columns:1fr 1fr;gap:6px;z-index:7}
+.ub-shortcut{background:#fff;border-radius:14px;padding:10px 12px;display:flex;align-items:center;gap:8px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.ub-shortcut .ic{width:28px;height:28px;border-radius:50%;background:var(--surface-1);display:grid;place-items:center;flex-shrink:0}
+.ub-shortcut .ic svg{width:14px;height:14px;stroke:#000;fill:none;stroke-width:2}
+.ub-shortcut .lb{font-size:11px;font-weight:700;line-height:1.15;color:#000}
+.ub-shortcut .sb{font-size:9.5px;color:var(--ink-muted);font-weight:500}
+.ub-sugg{position:absolute;top:218px;left:14px;right:14px;z-index:6}
+.ub-sugg-head{font-size:11.5px;font-weight:700;color:#000;margin-bottom:6px;letter-spacing:-.1px}
+.ub-sugg-row{display:flex;gap:6px;overflow:hidden}
+.ub-sugg-card{background:#000;color:#fff;border-radius:12px;padding:8px 10px;min-width:120px;flex-shrink:0}
+.ub-sugg-card.alt{background:var(--surface-1);color:#000;border:1px solid var(--border)}
+.ub-sugg-card .ct{font-size:10px;font-weight:700;line-height:1.2;margin-bottom:2px}
+.ub-sugg-card .cb{font-size:9px;opacity:.7;line-height:1.2}
+.ub-home-map{position:absolute;top:298px;bottom:0;left:0;right:0;z-index:1}
+
+/* tab bar */
+.ub-tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:#fff;border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:flex-start;padding:8px 14px 0;z-index:10}
+.ub-tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-muted);font-size:10px;font-weight:600}
+.ub-tab.active{color:#000}
+.ub-tab svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ========== SCREEN: RIDE SELECTION ========== */
+.ub-rs-top{position:absolute;top:52px;left:0;right:0;background:#fff;padding:6px 14px 10px;z-index:8;border-bottom:1px solid var(--border)}
+.ub-rs-pickup{display:flex;align-items:center;gap:10px;padding:6px 0}
+.ub-rs-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.ub-rs-dot.pin{background:#000}
+.ub-rs-dot.sq{border-radius:2px;background:#000}
+.ub-rs-text{flex:1;font-size:12.5px;color:#000;font-weight:500}
+.ub-rs-text small{display:block;font-size:10px;color:var(--ink-muted);font-weight:400}
+.ub-rs-line{width:1px;height:14px;background:var(--border-strong);margin-left:5px}
+.ub-rs-map{position:absolute;top:148px;left:0;right:0;height:140px;z-index:1}
+.ub-rs-sheet{position:absolute;top:280px;left:0;right:0;bottom:0;background:#fff;border-radius:18px 18px 0 0;padding:14px 14px 76px;z-index:9;box-shadow:0 -4px 12px rgba(0,0,0,.08)}
+.ub-rs-handle{width:36px;height:4px;background:var(--border-strong);border-radius:2px;margin:0 auto 10px}
+.ub-rs-title{font-size:13px;font-weight:700;color:#000;margin-bottom:8px}
+.ub-rs-list{display:flex;flex-direction:column;gap:0}
+.ub-rs-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-soft)}
+.ub-rs-row.active{background:rgba(0,0,0,.04);border-radius:8px;padding:8px;margin:0 -8px;border-bottom:0}
+.ub-rs-row .ic{width:36px;height:32px;display:grid;place-items:center;flex-shrink:0;font-size:18px}
+.ub-rs-row .nm{flex:1;font-size:12px;font-weight:700;color:#000}
+.ub-rs-row .nm small{font-weight:500;color:var(--ink-muted);display:block;font-size:10px;margin-top:1px}
+.ub-rs-row .pr{font-size:12.5px;font-weight:700;color:#000;text-align:right}
+.ub-rs-row .pr small{display:block;color:var(--ink-muted);font-weight:500;font-size:10px}
+.ub-rs-cta{position:absolute;left:14px;right:14px;bottom:78px;background:#000;color:#fff;border-radius:var(--r-full);padding:13px;text-align:center;font-size:13px;font-weight:700;z-index:10}
+
+/* ========== SCREEN: TRIP TRACKING ========== */
+.ub-trip-map{position:absolute;inset:0;background:var(--map-land);overflow:hidden}
+.ub-trip-map::before{content:"";position:absolute;inset:-20%;background:
+  linear-gradient(90deg,transparent 30%,var(--map-road) 30%,var(--map-road) 33%,transparent 33%),
+  linear-gradient(0deg,transparent 50%,var(--map-road) 50%,var(--map-road) 53%,transparent 53%),
+  linear-gradient(120deg,transparent 70%,var(--map-road) 70%,var(--map-road) 72%,transparent 72%);
+  opacity:.85}
+.ub-trip-map::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 20% 70%,var(--map-park),transparent 60%),radial-gradient(ellipse 50% 30% at 80% 20%,var(--map-water),transparent 70%);opacity:.7}
+.ub-trip-route{position:absolute;top:42%;left:20%;right:20%;height:4px;background:#000;border-radius:2px;z-index:2;transform:rotate(-12deg)}
+.ub-trip-card{position:absolute;bottom:8px;left:8px;right:8px;background:#fff;border-radius:14px;padding:14px;z-index:9;box-shadow:0 -2px 24px rgba(0,0,0,.12)}
+.ub-trip-eta{font-size:18px;font-weight:800;color:#000;letter-spacing:-.4px}
+.ub-trip-eta small{font-size:11px;font-weight:500;color:var(--ink-muted);display:block;margin-top:2px}
+.ub-trip-driver{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);margin-top:10px}
+.ub-trip-dav{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FFDFB8,#A87655);flex-shrink:0}
+.ub-trip-dmeta{flex:1;min-width:0}
+.ub-trip-dname{font-size:12px;font-weight:700;color:#000}
+.ub-trip-drate{font-size:10px;color:var(--ink-muted);display:flex;align-items:center;gap:3px}
+.ub-trip-dplate{font-size:9.5px;color:#000;background:var(--surface-1);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-weight:700;display:inline-block;margin-top:2px}
+.ub-trip-actions{display:flex;gap:6px;margin-top:10px}
+.ub-trip-act{flex:1;padding:8px;border-radius:var(--r-full);border:1px solid var(--border-strong);font-size:11px;font-weight:700;color:#000;text-align:center}
+.ub-trip-act.primary{background:#000;color:#fff;border-color:#000}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border);background:#fff}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--ink);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:800;letter-spacing:-1.8px;line-height:1.05;margin-bottom:18px;color:var(--ink)}
+.section-head p{font-size:17px;color:var(--ink-muted);line-height:1.55;max-width:600px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:#fff;border-radius:14px;padding:28px;border:1px solid var(--border)}
+.feat:hover{background:var(--surface-1)}
+.feat .feat-ic{width:42px;height:42px;border-radius:50%;background:#000;display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:20px;height:20px;fill:#fff;stroke:#fff}
+.feat h3{font-size:20px;font-weight:800;letter-spacing:-.4px;margin-bottom:10px;color:var(--ink)}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-1);padding:1px 6px;border-radius:3px;color:var(--ink)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.8px;margin-bottom:16px;color:var(--ink);line-height:1.1}
+.ios-feat-text p{font-size:15px;color:var(--ink-muted);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:5px 10px;border-radius:var(--r-full);color:var(--ink);border:1px solid var(--border-strong)}
+.ios-feat-visual{background:var(--surface-1);border-radius:14px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* Dynamic Island Uber live activity */
+.di-stage{display:flex;flex-direction:column;align-items:center;gap:24px}
+.di-mock{width:240px;height:42px;background:#000;border-radius:999px;display:flex;align-items:center;padding:0 14px;gap:10px}
+.di-mock .ic{width:24px;height:24px;border-radius:50%;background:#fff;display:grid;place-items:center;flex-shrink:0}
+.di-mock .ic svg{width:14px;height:14px;fill:#000}
+.di-mock .text{color:#fff;font-size:11px;font-weight:700;flex:1}
+.di-mock .text small{display:block;font-weight:500;opacity:.7;font-size:10px}
+.di-mock .pr{color:#fff;font-size:12px;font-weight:800}
+
+/* Pin selection */
+.pin-stage{position:relative;width:300px;height:300px;border-radius:14px;background:var(--map-land);overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.pin-stage::before{content:"";position:absolute;inset:-10%;background:
+  linear-gradient(90deg,transparent 48%,var(--map-road) 48%,var(--map-road) 52%,transparent 52%),
+  linear-gradient(0deg,transparent 50%,var(--map-road) 50%,var(--map-road) 53%,transparent 53%);
+  opacity:.85}
+.pin-floating{position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);z-index:3;text-align:center}
+.pin-floating .pin-card{background:#000;color:#fff;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:700;margin-bottom:6px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.pin-floating .pin-card small{font-weight:500;opacity:.7;font-size:9px}
+.pin-floating .pin-icon{width:32px;height:42px;margin:0 auto;background:#000;clip-path:polygon(50% 100%,0 30%,50% 0,100% 30%);position:relative}
+.pin-floating .pin-icon::after{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:10px;height:10px;background:#fff;border-radius:50%}
+
+/* Post trip tip */
+.tip-card{width:280px;background:#fff;border-radius:14px;padding:18px;box-shadow:0 8px 32px rgba(0,0,0,.12);border:1px solid var(--border)}
+.tip-head{font-size:14px;font-weight:800;color:#000;margin-bottom:4px}
+.tip-sub{font-size:11.5px;color:var(--ink-muted);margin-bottom:14px}
+.tip-stars{display:flex;gap:6px;margin-bottom:14px;justify-content:center}
+.tip-star{font-size:24px;color:#000}
+.tip-amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.tip-amt{padding:10px 0;text-align:center;border:1px solid var(--border-strong);border-radius:var(--r-full);font-size:11px;font-weight:700;color:#000}
+.tip-amt.active{background:#000;color:#fff;border-color:#000}
+.tip-cta{background:#000;color:#fff;border-radius:var(--r-full);padding:11px;text-align:center;font-size:12px;font-weight:700}
+
+/* ========== DESIGN SYSTEM (Part B) ========== */
+.ds-section{padding:120px 0;background:#fff;border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1.8px;line-height:1.05;margin:14px 0 14px;color:var(--ink)}
+.ds-intro p{font-size:16px;color:var(--ink-muted);max-width:560px;line-height:1.55}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--border-strong);padding:8px 14px;border-radius:var(--r-full);white-space:nowrap;background:#fff}
+.ds-source:hover{background:var(--surface-1)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:8px;color:var(--ink)}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.55;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:8px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:6px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:700;line-height:1.2;color:var(--ink)}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-muted);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:var(--accent-teal)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:#000;margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700;color:var(--ink)}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-circle{width:54px;height:54px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;cursor:pointer}
+.btn-circle svg{width:22px;height:22px;fill:#fff}
+.btn-circle-sm{width:36px;height:36px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center}
+.btn-circle-sm svg{width:16px;height:16px;fill:#fff}
+.btn-ghost-circle{width:36px;height:36px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;border:1px solid var(--ink)}
+.input-pill{background:#fff;border:1px solid var(--border-strong);border-radius:var(--r-full);padding:13px 18px;color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-muted)}
+.input-pill:focus{border-color:#000;border-width:2px;padding:12px 17px}
+.tag{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:var(--r-full);letter-spacing:.2px}
+.tag-explicit{background:var(--surface-1);color:var(--ink)}
+.tag-new{background:#000;color:#fff}
+.tag-pod{background:rgba(31,186,214,.18);color:var(--accent-slate)}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:8px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:var(--ink);letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border);background:#000;color:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.55}
+.foot a{color:#fff;font-weight:700;text-decoration:underline}
+footer .brand{color:#fff}
+footer .brand-mark{background:#fff;color:#000}
+footer .btn-pill{background:rgba(255,255,255,.15);color:#fff}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#000;border:1px solid #000;color:#fff;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-full);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.float-link:hover{background:#1A1A1A}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">U</span>
+      Uber <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Sign in</a>
+      <a class="btn btn-primary" href="#">Open the app</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Get there.<br/><span class="gradient-word">Nothing else.</span></h1>
+    <p>The Uber iOS app, dissected. Black is the only brand color. Maps fill edge-to-edge. Pills carry every primary action — Uber's iconic full-pill button is the geometry the whole product agrees on.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-light" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- RIDE SELECTION -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="14" height="10" viewBox="0 0 18 14" fill="#000"><path d="M9 3c-2.4 0-4.6.9-6.3 2.4l1.6 1.6C5.6 5.8 7.2 5.2 9 5.2s3.4.6 4.7 1.8l1.6-1.6C13.6 3.9 11.4 3 9 3zm0 4c-1.4 0-2.7.5-3.6 1.4l1.6 1.6C7.5 9.4 8.2 9.2 9 9.2s1.5.2 2 .8l1.6-1.6C11.7 7.5 10.4 7 9 7zm0 4l-1.4 1.4c.4.4.9.6 1.4.6s1-.2 1.4-.6L9 11z"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="ub-rs-top">
+              <div class="ub-rs-pickup">
+                <span class="ub-rs-dot pin"></span>
+                <div class="ub-rs-text">Current location<small>123 Liberty St</small></div>
+              </div>
+              <div class="ub-rs-line"></div>
+              <div class="ub-rs-pickup">
+                <span class="ub-rs-dot sq"></span>
+                <div class="ub-rs-text">SFO Airport<small>San Francisco, CA</small></div>
+              </div>
+            </div>
+            <div class="ub-rs-map map-tile">
+              <div class="map-route" style="top:48%;left:18%;width:64%;transform:rotate(-8deg)"></div>
+              <div class="map-pin" style="top:46%;left:18%"></div>
+              <div class="map-pin dest" style="top:50%;left:78%"></div>
+            </div>
+            <div class="ub-rs-sheet">
+              <div class="ub-rs-handle"></div>
+              <div class="ub-rs-title">Choose a ride</div>
+              <div class="ub-rs-list">
+                <div class="ub-rs-row active">
+                  <div class="ic">🚗</div>
+                  <div class="nm">UberX<small>5 min away · 4 seats</small></div>
+                  <div class="pr">$24.50<small>9:48 AM</small></div>
+                </div>
+                <div class="ub-rs-row">
+                  <div class="ic">🚙</div>
+                  <div class="nm">UberXL<small>8 min · 6 seats</small></div>
+                  <div class="pr">$38.20</div>
+                </div>
+                <div class="ub-rs-row">
+                  <div class="ic">🚘</div>
+                  <div class="nm">Uber Black<small>6 min · Premium</small></div>
+                  <div class="pr">$52.80</div>
+                </div>
+              </div>
+            </div>
+            <div class="ub-rs-cta">Choose UberX</div>
+            <div class="ub-tab-bar">
+              <div class="ub-tab active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="ub-tab"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>Services</div>
+              <div class="ub-tab"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Activity</div>
+              <div class="ub-tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M3 21a9 9 0 0118 0"/></svg>Account</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Ride Selection</div>
+      </div>
+
+      <!-- HOME (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="ub-top">
+              <div class="ub-avatar">J</div>
+              <div class="ub-search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+                Where to?
+                <span class="lt"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Later</span>
+              </div>
+            </div>
+            <div class="ub-shortcuts">
+              <div class="ub-shortcut">
+                <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+                <div><div class="lb">Home</div><div class="sb">15 min</div></div>
+              </div>
+              <div class="ub-shortcut">
+                <div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M8 6V4h8v2"/></svg></div>
+                <div><div class="lb">Work</div><div class="sb">22 min</div></div>
+              </div>
+              <div class="ub-shortcut">
+                <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l3 6 6 .9-4.5 4.3 1 6.3L12 17.7l-5.5 2.8 1-6.3L3 9.9 9 9z"/></svg></div>
+                <div><div class="lb">Saved</div><div class="sb">3 places</div></div>
+              </div>
+              <div class="ub-shortcut">
+                <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 11h18M9 7V4h6v3"/></svg></div>
+                <div><div class="lb">Send package</div><div class="sb">Try Uber Connect</div></div>
+              </div>
+            </div>
+            <div class="ub-sugg">
+              <div class="ub-sugg-head">Suggestions</div>
+              <div class="ub-sugg-row">
+                <div class="ub-sugg-card"><div class="ct">Ride to airport</div><div class="cb">Save with Reserve</div></div>
+                <div class="ub-sugg-card alt"><div class="ct">Uber Eats</div><div class="cb">$10 off first order</div></div>
+              </div>
+            </div>
+            <div class="ub-home-map map-tile">
+              <div class="map-pin" style="top:30%;left:48%"></div>
+              <div style="position:absolute;top:30%;left:48%;width:14px;height:14px;border-radius:50%;background:rgba(0,0,0,.2);transform:scale(2.2);animation:pulse 2s infinite"></div>
+            </div>
+            <div class="ub-tab-bar">
+              <div class="ub-tab active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="ub-tab"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>Services</div>
+              <div class="ub-tab"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Activity</div>
+              <div class="ub-tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M3 21a9 9 0 0118 0"/></svg>Account</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Where to?</div>
+      </div>
+
+      <!-- TRIP TRACKING -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="ub-trip-map">
+              <div class="ub-trip-route"></div>
+              <div class="map-pin" style="top:40%;left:22%"></div>
+              <div class="map-pin dest" style="top:46%;left:78%"></div>
+              <div class="map-car" style="top:42%;left:48%"><svg viewBox="0 0 24 24"><path d="M5 11l2-5h10l2 5v6h-2v-2H7v2H5v-6zm2 0h10l-1.5-4h-7L7 11zm1 3a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/></svg></div>
+            </div>
+            <div class="ub-trip-card">
+              <div class="ub-trip-eta">Arriving in 3 min<small>9:48 AM · SFO Airport, Terminal 3</small></div>
+              <div class="ub-trip-driver">
+                <div class="ub-trip-dav"></div>
+                <div class="ub-trip-dmeta">
+                  <div class="ub-trip-dname">Marcus</div>
+                  <div class="ub-trip-drate">★ 4.93 · Toyota Camry · Silver</div>
+                  <span class="ub-trip-dplate">7XYZ123</span>
+                </div>
+              </div>
+              <div class="ub-trip-actions">
+                <div class="ub-trip-act primary">Message</div>
+                <div class="ub-trip-act">Call</div>
+                <div class="ub-trip-act">Share</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Trip Tracking</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One black pill.</h2>
+      <p>Every Uber screen earns its position with the same grammar — an edge-to-edge map, a sheet that lifts above it, and a single black pill that says "go." Nothing decorative survives.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="#fff" stroke-width="2"/></svg></div>
+        <h3>Where to?</h3>
+        <p>The most-tapped surface in the app. Pill search bar at the top, a 2×2 of shortcut tiles (<code>Home</code>, <code>Work</code>, <code>Saved</code>, <code>Send package</code>), then a horizontal carousel of suggestions over a faded map preview.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M5 11l2-5h10l2 5v6h-2v-2H7v2H5v-6zm2 0h10l-1.5-4h-7L7 11z" fill="#fff"/></svg></div>
+        <h3>Ride Selection</h3>
+        <p>Map fills the top half, a sheet lifts from the bottom with options listed vertically — UberX, XL, Black, Pool. Each row is icon + arrival + ETA + right-aligned price. The full-width pill CTA confirms.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="#fff"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#fff" stroke-width="2"/></svg></div>
+        <h3>Trip Tracking</h3>
+        <p>Full-screen map, route polyline, driver car icon, pickup and dropoff pins. Bottom card shows driver photo, rating, plate, model, and three action pills: Message (primary), Call, Share Trip.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Dynamic Island · Live Activity</div>
+          <h3>Your ride lives in the notch.</h3>
+          <p>From the moment you confirm a ride to the moment you arrive, Uber occupies the Dynamic Island with a compact car icon, the ETA, and the plate number. Long-press expands to driver photo, "Call/Message" buttons, and a live mini-map.</p>
+          <p>Lock screen mirrors the same payload through ActivityKit; the car icon stays on the wallpaper.</p>
+          <div class="ios-feat-tokens">
+            <code>compact: 96 × 28</code>
+            <code>expanded: 359 × 160</code>
+            <code>poll: 5s</code>
+            <code>icon: 24×24pt</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="di-stage">
+            <div class="di-mock">
+              <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 11l2-5h10l2 5v6h-2v-2H7v2H5v-6zm2 0h10l-1.5-4h-7L7 11z"/></svg></div>
+              <div class="text">Marcus is on the way<small>Toyota Camry · 7XYZ123</small></div>
+              <div class="pr">3 min</div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-align:center">Compact state · ETA-synced</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual" style="background:linear-gradient(140deg,#F6F6F6,#E2E2E2)">
+          <div class="pin-stage">
+            <div class="pin-floating">
+              <div class="pin-card">Set your pickup<small>Drag to adjust</small></div>
+              <div class="pin-icon"></div>
+            </div>
+            <div style="position:absolute;bottom:14px;left:14px;right:14px;background:#000;color:#fff;border-radius:9999px;padding:11px;text-align:center;font-size:12px;font-weight:700">Confirm Pickup</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Pin Selection</div>
+          <h3>Drag the map. The pin stays still.</h3>
+          <p>Uber's pickup-precision moment is one of iOS's most physical UX gestures. The pin is anchored to the screen center; the map slides under it. A black callout above the pin shows the address and updates as the map settles for ~200ms after the last drag.</p>
+          <p>Each meaningful position change emits a tiny selection haptic — the same one iOS uses on its time-picker wheels.</p>
+          <div class="ios-feat-tokens">
+            <code>settle: 200ms</code>
+            <code>haptic: selection</code>
+            <code>pin: 32×42pt</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Tip & Rate</div>
+          <h3>Five black stars. Four pill options.</h3>
+          <p>Post-trip is the only place Uber dedicates a full-screen modal. Big bold stars at the top — black, never gold — then a 4-up tip selector ($1 / $2 / $5 / Other) at full-pill radius. The Done button at the bottom is the same pill.</p>
+          <p>Rating below 5 stars triggers a follow-up sheet asking what went wrong; categories appear as additional pills.</p>
+          <div class="ios-feat-tokens">
+            <code>star size: 32pt</code>
+            <code>tip grid: 4×</code>
+            <code>haptic on select</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="tip-card">
+            <div class="tip-head">Rate your trip with Marcus</div>
+            <div class="tip-sub">Help us improve. Your feedback is anonymous.</div>
+            <div class="tip-stars">
+              <span class="tip-star">★</span><span class="tip-star">★</span><span class="tip-star">★</span><span class="tip-star">★</span><span class="tip-star">★</span>
+            </div>
+            <div style="font-size:11.5px;font-weight:700;margin-bottom:8px">Add a tip</div>
+            <div class="tip-amounts">
+              <div class="tip-amt">$1</div>
+              <div class="tip-amt active">$2</div>
+              <div class="tip-amt">$5</div>
+              <div class="tip-amt">Other</div>
+            </div>
+            <div class="tip-cta">Submit</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>Black, and the map.</h2>
+        <p>Every Uber token starts at #000. White is the second color. The teal accent shows up so rarely you forget it exists. Maps carry the entire visual hierarchy of the surface.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.uber-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Black is the brand. Every button, every pin, every active state lands at #000. White is the canvas. Teal (Uber's UberX brand color) appears mostly in marketing — almost never in functional iOS surfaces.</p>
+
+      <div class="ds-caption">Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Uber Black</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1A1A1A"></div><div class="name">Hover Black</div><div class="val">#1A1A1A</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1FBAD6"></div><div class="name">UberX Teal</div><div class="val">#1FBAD6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#142328"></div><div class="name">Deep Slate</div><div class="val">#142328</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #E2E2E2"></div><div class="name">Canvas</div><div class="val">#ffffff</div></div>
+      </div>
+
+      <div class="ds-caption">Ink</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Primary</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1A1A1A"></div><div class="name">Soft</div><div class="val">#1A1A1A</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#6B6B6B"></div><div class="name">Muted</div><div class="val">#6B6B6B</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#9E9E9E"></div><div class="name">Dim</div><div class="val">#9E9E9E</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#CFCFCF"></div><div class="name">Disabled</div><div class="val">#CFCFCF</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#F6F6F6;border:1px solid #E2E2E2"></div><div class="name">Surface 1</div><div class="val">#F6F6F6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EEEEEE;border:1px solid #E2E2E2"></div><div class="name">Surface 2</div><div class="val">#EEEEEE</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FAFAFA;border:1px solid #E2E2E2"></div><div class="name">Card Alt</div><div class="val">#FAFAFA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E2E2E2"></div><div class="name">Border</div><div class="val">#E2E2E2</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#CFCFCF"></div><div class="name">Border Strong</div><div class="val">#CFCFCF</div></div>
+      </div>
+
+      <div class="ds-caption">Map Palette</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#EDE8DF"></div><div class="name">Map Land</div><div class="val">#EDE8DF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#CADDDA"></div><div class="name">Water</div><div class="val">#CADDDA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D4E4D0"></div><div class="name">Park</div><div class="val">#D4E4D0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border:1px solid #E2E2E2"></div><div class="name">Road</div><div class="val">#FFFFFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Route Line</div><div class="val">#000000</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Uber Move — substituted here with Inter. Heavy weights. Display headlines at -0.5px tracking. Action buttons remain sentence case at 700 weight inside the pill — never ALL CAPS in iOS.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:28px;font-weight:800;letter-spacing:-.5px">Get there. Get going.</td><td>28 / 1.75rem</td><td>800</td><td>-0.5px</td></tr>
+          <tr><td class="token">--eta-large</td><td class="sample" style="font-size:22px;font-weight:800;letter-spacing:-.4px">Arriving in 3 min</td><td>22 / 1.38rem</td><td>800</td><td>-0.4px</td></tr>
+          <tr><td class="token">--ride-row</td><td class="sample" style="font-size:16px;font-weight:700">UberX</td><td>16 / 1.00rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--price</td><td class="sample" style="font-size:16px;font-weight:800;font-feature-settings:'tnum'">$24.50</td><td>16 / 1.00rem</td><td>800 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:14px;font-weight:500">5 min away · 4 seats</td><td>14 / 0.88rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--button-pill</td><td class="sample" style="font-size:14px;font-weight:700">Choose UberX</td><td>14 / 0.88rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--meta</td><td class="sample" style="font-size:12px;font-weight:500;color:#6B6B6B">9:48 AM · 4.2 mi</td><td>12 / 0.75rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--plate</td><td class="sample" style="font-family:var(--font-mono);font-size:11px;background:#F6F6F6;padding:2px 6px;border-radius:3px;font-weight:700">7XYZ123</td><td>11 / 0.69rem</td><td>700 mono</td><td>0.4px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">The full-pill (9999px) is Uber's signature — every primary CTA and every search input lives there. Cards land at 12. Sheets at 18. The square corner only appears on map tiles edge-to-edge.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Edge</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Hairline</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Inset</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Map Card</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:18px"></div><div class="ds-radius-label">Sheet Top</div><div class="ds-radius-val">18px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">9999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Avatar</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Pill height</div><div class="tk-val">48pt</div><div class="tk-note">Primary CTA. Pill stays the same height across screen widths.</div></div>
+        <div class="token-cell"><div class="tk-label">Search pill</div><div class="tk-val">44pt</div><div class="tk-note">Where to? input, with subtle shadow y4 b12 rgba 0/0/0/0.08.</div></div>
+        <div class="token-cell"><div class="tk-label">Map tile</div><div class="tk-val">edge</div><div class="tk-note">Maps bleed to safe-area edges; no padding, no radius.</div></div>
+        <div class="token-cell"><div class="tk-label">Pickup pin</div><div class="tk-val">14×14pt</div><div class="tk-note">Black dot, 3pt white ring. Drop shadow y2 b8.</div></div>
+        <div class="token-cell"><div class="tk-label">Sheet handle</div><div class="tk-val">36×4pt</div><div class="tk-note">Centered, #CFCFCF. The only affordance the sheet exposes.</div></div>
+        <div class="token-cell"><div class="tk-label">Tab bar</div><div class="tk-val">83pt</div><div class="tk-note">4 tabs. Icons 20pt, label 10pt 600.</div></div>
+        <div class="token-cell"><div class="tk-label">Side padding</div><div class="tk-val">14pt</div><div class="tk-note">Tightens to 8pt for ride-row icons, 18pt for trip card.</div></div>
+        <div class="token-cell"><div class="tk-label">Ride row</div><div class="tk-val">48pt</div><div class="tk-note">Hairline divider below. Active state inset 8pt with #F6F6F6.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Pills carry every CTA. Circles carry every avatar. Map pins are the only "iconography" the brand really commits to.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Choose UberX</a>
+            <a class="btn btn-outline" href="#">Add a stop</a>
+            <a class="btn btn-light" href="#">Schedule for later</a>
+            <a class="btn btn-pill" href="#">Cancel</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="btn-circle"><svg viewBox="0 0 24 24" fill="#fff"><path d="M5 11l2-5h10l2 5v6h-2v-2H7v2H5v-6zm2 0h10l-1.5-4h-7L7 11z"/></svg></button>
+              <button class="btn-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5"/></svg></button>
+              <button class="btn-ghost-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Where to?" />
+            <input class="input-pill" placeholder="123 Liberty St" />
+            <div class="ds-card-row">
+              <span class="tag tag-explicit">Cash</span>
+              <span class="tag tag-new">UberX</span>
+              <span class="tag tag-pod">Reserve</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Ride Row</h5>
+          <div class="ds-card-stack">
+            <div style="background:#fff;border:1px solid #E2E2E2;border-radius:12px;padding:12px;width:100%;display:flex;align-items:center;gap:10px">
+              <div style="font-size:24px">🚗</div>
+              <div style="flex:1"><div style="font-size:13px;font-weight:700">UberX</div><div style="font-size:11px;color:#6B6B6B">5 min · 4 seats</div></div>
+              <div style="font-size:13px;font-weight:800">$24.50</div>
+            </div>
+            <div style="background:#000;color:#fff;border-radius:9999px;padding:11px 18px;font-size:13px;font-weight:700;text-align:center;width:100%">Choose UberX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark">U</span>
+      Uber iOS
+    </div>
+    <p>Design reference. Not affiliated with Uber Technologies, Inc. Token values are derived from the public iOS app and Uber's Base brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.uber-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.uber-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.uber-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

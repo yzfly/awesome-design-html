@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Resend — Inspired Design</title>
+<meta name="description" content="A Resend-inspired marketing page: true black canvas, oversized editorial serif hero, atmospheric glows, code window + white email card. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#fcfdff;
+  --primary-on:#000000;
+  --ink:#fcfdff;
+  --body:rgba(252,253,255,0.86);
+  --charcoal:rgba(252,253,255,0.7);
+  --mute:#a1a4a5;
+  --ash:#888e90;
+  --stone:#464a4d;
+  --on-light:#000000;
+  --on-light-mute:rgba(0,0,51,0.7);
+
+  --canvas:#000000;
+  --surface-card:#0a0a0c;
+  --surface-elevated:#101012;
+  --surface-deep:#06060a;
+  --hairline:rgba(255,255,255,0.06);
+  --hairline-strong:rgba(255,255,255,0.14);
+  --divider-soft:rgba(255,255,255,0.04);
+
+  --accent-orange:#ff801f;
+  --accent-orange-glow:rgba(255,89,0,0.22);
+  --accent-yellow:#ffc53d;
+  --accent-blue:#3b9eff;
+  --accent-blue-glow:rgba(0,117,255,0.34);
+  --accent-green:#11ff99;
+  --accent-green-glow:rgba(34,255,153,0.18);
+  --accent-red:#ff2047;
+  --accent-red-glow:rgba(255,32,71,0.34);
+  --link:#3b9eff;
+  --surface-light:#f1f7fe;
+
+  --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-full:9999px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Inter",-apple-system,system-ui,sans-serif;
+  background:var(--canvas);
+  color:var(--body);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"ss01","ss03","ss04","ss11";
+}
+a{color:inherit;text-decoration:none}
+.serif{font-family:"Instrument Serif","Domaine Display",Georgia,serif;font-weight:400}
+.mono{font-family:"JetBrains Mono","Geist Mono",ui-monospace,Menlo,monospace}
+::selection{background:var(--ink);color:var(--canvas)}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+
+/* —— Top nav —— */
+.nav{position:sticky;top:0;z-index:30;background:rgba(0,0,0,0.7);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--hairline);height:64px}
+.nav-inner{height:100%;display:flex;align-items:center;gap:32px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:500;font-size:17px;letter-spacing:-0.3px}
+.brand .mark{width:24px;height:24px;border-radius:var(--r-sm);background:var(--ink);color:var(--canvas);font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center}
+.nav-links{display:flex;gap:6px;margin-left:8px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--charcoal);padding:8px 12px;letter-spacing:0.1px}
+.nav-links a:hover{color:var(--ink)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-right .signin{font-size:14px;font-weight:500;color:var(--charcoal);padding:6px 10px}
+.nav-right .signin:hover{color:var(--ink)}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* —— Buttons —— */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:500;font-size:14px;line-height:1.43;padding:8px 16px;border-radius:var(--r-md);border:1px solid transparent;cursor:pointer;transition:all .15s ease;height:36px;letter-spacing:0.1px}
+.btn-primary{background:var(--primary);color:var(--primary-on)}
+.btn-primary:hover{background:var(--surface-light)}
+.btn-ghost{background:var(--surface-elevated);color:var(--ink);border-color:var(--hairline-strong)}
+.btn-ghost:hover{background:#16161a}
+.btn-outline{background:var(--canvas);color:var(--ink);border-color:var(--hairline-strong)}
+.btn-outline:hover{background:var(--surface-card)}
+
+/* —— Hero —— */
+.hero{position:relative;padding:120px 0 96px;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:80%;height:90%;background:radial-gradient(ellipse at center,var(--accent-orange-glow) 0%,transparent 60%);pointer-events:none}
+.hero-pill{position:relative;display:inline-flex;align-items:center;gap:8px;background:var(--surface-elevated);border:1px solid var(--hairline-strong);border-radius:var(--r-full);padding:5px 12px 5px 6px;font-size:13px;font-weight:500;color:var(--body);margin-bottom:32px}
+.hero-pill .badge{background:var(--ink);color:var(--canvas);font-size:11px;font-weight:600;padding:2px 7px;border-radius:var(--r-full)}
+.hero h1{position:relative;font-family:"Instrument Serif",Georgia,serif;font-size:96px;font-weight:400;line-height:1.0;letter-spacing:-0.96px;color:var(--ink);margin:0 0 28px;font-feature-settings:"ss01","ss04","ss11"}
+.hero h1 .it{font-style:italic;letter-spacing:-2px}
+.hero .sub{position:relative;font-size:20px;line-height:1.3;color:var(--charcoal);max-width:560px;margin:0 auto 40px}
+.hero-actions{position:relative;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-trust{position:relative;margin-top:64px;color:var(--ash);font-size:12px;letter-spacing:0.6px;text-transform:uppercase;font-weight:500}
+.hero-logos{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:24px;align-items:center;margin-top:24px;color:var(--mute);font-size:14px;font-weight:500;letter-spacing:-0.2px}
+.hero-logos .l{text-align:center;font-style:italic;color:var(--ash)}
+@media(max-width:760px){.hero h1{font-size:56px;letter-spacing:-1px}.hero-logos{grid-template-columns:repeat(3,1fr)}}
+
+/* —— Section —— */
+.section{padding:96px 0;position:relative;overflow:hidden}
+.section .eyebrow{font-size:11px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:1px;margin:0 0 16px}
+.section h2{font-family:"Instrument Serif",Georgia,serif;font-size:76px;font-weight:400;line-height:1.0;letter-spacing:-0.768px;color:var(--ink);margin:0 0 24px;font-feature-settings:"ss01","ss04","ss11"}
+.section h2 .it{font-style:italic}
+.section .lede{font-size:18px;line-height:1.55;color:var(--charcoal);max-width:560px;margin:0 0 56px}
+@media(max-width:760px){.section h2{font-size:44px;letter-spacing:-0.5px}}
+
+/* —— Glow positions —— */
+.glow-blue::before{content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse at center,var(--accent-blue-glow) 0%,transparent 60%);pointer-events:none}
+.glow-green::before{content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse at center,var(--accent-green-glow) 0%,transparent 60%);pointer-events:none}
+.glow-red::before{content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse at center,var(--accent-red-glow) 0%,transparent 60%);pointer-events:none}
+
+/* —— Code window —— */
+.code-story{display:grid;grid-template-columns:0.95fr 1.05fr;gap:48px;align-items:center;position:relative}
+@media(max-width:980px){.code-story{grid-template-columns:1fr;gap:32px}}
+.cs-text h3{font-family:"Instrument Serif",Georgia,serif;font-size:48px;font-weight:400;line-height:1.05;letter-spacing:-0.5px;color:var(--ink);margin:0 0 20px}
+.cs-text p{font-size:17px;line-height:1.55;color:var(--charcoal);margin:0 0 16px;max-width:480px}
+.cs-text ul{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:8px}
+.cs-text li{font-size:15px;color:var(--body);display:flex;gap:10px;align-items:flex-start}
+.cs-text li .dot{width:6px;height:6px;border-radius:var(--r-full);background:var(--accent-green);margin-top:8px;flex:0 0 auto;box-shadow:0 0 0 3px rgba(17,255,153,0.15)}
+
+.code-window{background:var(--surface-deep);border:1px solid var(--hairline-strong);border-radius:var(--r-lg);overflow:hidden}
+.cw-bar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--hairline)}
+.cw-bar .lights{display:flex;gap:6px}
+.cw-bar .lights span{width:11px;height:11px;border-radius:var(--r-full)}
+.cw-bar .lights .r{background:var(--accent-red)}
+.cw-bar .lights .y{background:var(--accent-yellow)}
+.cw-bar .lights .g{background:var(--accent-green)}
+.cw-bar .label{margin-left:8px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--mute);letter-spacing:0.2px}
+.cw-tabs{display:flex;gap:4px;padding:6px 12px 0;background:var(--surface-deep);border-bottom:1px solid var(--hairline)}
+.cw-tabs .t{font-family:"JetBrains Mono",monospace;font-size:12px;padding:6px 12px;border-radius:var(--r-sm) var(--r-sm) 0 0;color:var(--charcoal);cursor:pointer}
+.cw-tabs .t.active{background:var(--surface-card);color:var(--ink);border:1px solid var(--hairline-strong);border-bottom:1px solid var(--surface-card);margin-bottom:-1px}
+.cw-body{padding:20px 22px;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.7;color:var(--body);white-space:pre;overflow:auto}
+.cw-body .k{color:#c792ea}
+.cw-body .s{color:#a7e2b4}
+.cw-body .n{color:#ffcb6b}
+.cw-body .c{color:#5f6c75}
+.cw-body .f{color:#82aaff}
+.cw-body .o{color:var(--accent-orange)}
+.cw-body .ln{color:var(--stone);user-select:none;display:inline-block;width:24px;text-align:right;margin-right:14px}
+
+/* —— Email mockup —— */
+.email-band{padding:120px 0 96px;text-align:center;position:relative;overflow:hidden}
+.email-band::before{content:"";position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:90%;height:600px;background:radial-gradient(ellipse at center,rgba(255,128,31,0.16) 0%,transparent 65%);pointer-events:none}
+.email-card{position:relative;max-width:560px;margin:48px auto 0;background:#ffffff;color:var(--on-light);border-radius:var(--r-lg);overflow:hidden;text-align:left;box-shadow:0 30px 100px -20px rgba(255,128,31,0.18),0 10px 30px -5px rgba(0,0,0,0.5)}
+.email-head{padding:24px 32px 20px;border-bottom:1px solid #eee;font-size:13px}
+.email-head .from{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.email-head .av{width:32px;height:32px;border-radius:var(--r-full);background:linear-gradient(135deg,#ff801f,#ff2047);color:#fff;font-weight:600;font-size:14px;display:inline-flex;align-items:center;justify-content:center;letter-spacing:-0.3px}
+.email-head .name{font-weight:600;color:#000;font-size:14px}
+.email-head .addr{color:#666;font-size:13px;margin-left:auto}
+.email-head .to{color:#888;font-size:13px;margin-top:4px}
+.email-head .subj{font-size:20px;font-weight:600;color:#000;margin-top:12px;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:26px;letter-spacing:-0.3px}
+.email-body{padding:32px;font-size:15px;line-height:1.6;color:#1a1a1a}
+.email-body h4{font-size:18px;font-weight:600;color:#000;margin:0 0 12px}
+.email-body p{margin:0 0 14px}
+.email-body .cta{display:inline-block;background:#000;color:#fff;padding:10px 20px;border-radius:var(--r-md);font-weight:500;font-size:14px;margin-top:8px}
+.email-body .receipt{background:#f8f8f8;border:1px solid #eee;border-radius:var(--r-md);padding:14px;font-size:13px;color:#1a1a1a;margin-top:18px;font-family:"JetBrains Mono",monospace}
+.email-body .receipt .row{display:flex;justify-content:space-between;padding:3px 0}
+.email-body .receipt .row.total{border-top:1px solid #e5e5e5;padding-top:8px;margin-top:6px;font-weight:600;color:#000}
+.email-foot{padding:18px 32px 24px;font-size:12px;color:#888;border-top:1px solid #eee}
+
+/* —— Feature grid —— */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative;margin-top:40px}
+@media(max-width:980px){.feat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.feat-grid{grid-template-columns:1fr}}
+.feat{background:var(--surface-card);border:1px solid var(--hairline-strong);border-radius:var(--r-lg);padding:32px}
+.feat .ic{width:36px;height:36px;border-radius:var(--r-sm);background:var(--surface-elevated);border:1px solid var(--hairline-strong);display:inline-flex;align-items:center;justify-content:center;color:var(--ink);margin-bottom:20px}
+.feat h3{font-size:20px;font-weight:500;color:var(--ink);margin:0 0 8px;letter-spacing:-0.3px;font-family:"Inter",sans-serif}
+.feat p{font-size:15px;line-height:1.55;color:var(--charcoal);margin:0}
+
+/* —— Pricing —— */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;position:relative}
+@media(max-width:980px){.price-grid{grid-template-columns:1fr}}
+.tier{background:var(--surface-card);border:1px solid var(--hairline-strong);border-radius:var(--r-lg);padding:32px;display:flex;flex-direction:column;gap:18px}
+.tier.featured{background:var(--surface-elevated)}
+.tier .nm{font-size:24px;font-weight:500;color:var(--ink);margin:0;letter-spacing:-0.4px}
+.tier .price{font-family:"Instrument Serif",Georgia,serif;font-size:56px;font-weight:400;color:var(--ink);line-height:1;letter-spacing:-2.8px}
+.tier .price small{font-family:"Inter",sans-serif;font-size:14px;font-weight:400;color:var(--mute);margin-left:6px;letter-spacing:0}
+.tier .desc{font-size:14px;line-height:1.6;color:var(--charcoal);margin:0}
+.tier ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.tier li{display:flex;gap:10px;color:var(--body)}
+.tier li::before{content:"";flex:0 0 auto;width:14px;height:14px;color:var(--accent-green);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2311ff99' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");background-repeat:no-repeat;background-size:14px;background-position:center;margin-top:5px}
+
+/* —— DS Section —— */
+.ds{background:var(--canvas);padding:96px 0;border-top:1px solid var(--hairline);position:relative}
+.ds-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.ds h2{font-family:"Instrument Serif",Georgia,serif;font-size:48px;font-weight:400;letter-spacing:-0.5px;color:var(--ink);margin:0 0 6px;line-height:1.0}
+.ds .sub{color:var(--charcoal);font-size:15px}
+.ds-hd a{font-size:13px;font-weight:500;color:var(--ink);border:1px solid var(--hairline-strong);background:var(--surface-elevated);padding:8px 14px;border-radius:var(--r-md)}
+.ds-block{margin-top:56px}
+.ds-block h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--mute);margin:0 0 16px}
+.ds-block .desc{font-size:15px;color:var(--charcoal);margin:0 0 20px;max-width:560px;line-height:1.6}
+
+.color-cat{margin-top:18px}
+.color-cat-title{font-size:13px;font-weight:500;color:var(--ink);margin:0 0 10px}
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+@media(max-width:980px){.swatches{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.swatches{grid-template-columns:repeat(2,1fr)}}
+.sw{background:var(--surface-card);border:1px solid var(--hairline-strong);border-radius:var(--r-md);overflow:hidden}
+.sw-chip{height:60px;border-bottom:1px solid var(--hairline)}
+.sw-meta{padding:8px 10px;font-size:12px;line-height:1.4}
+.sw-name{font-weight:500;color:var(--ink)}
+.sw-val{font-family:"JetBrains Mono",monospace;color:var(--mute);font-size:11px;margin-top:2px}
+
+.typo{background:var(--surface-card);border:1px solid var(--hairline-strong);border-radius:var(--r-md);overflow:hidden}
+.typo-row{display:grid;grid-template-columns:160px 220px 1fr;gap:24px;padding:16px 20px;border-top:1px solid var(--hairline);align-items:center}
+.typo-row:first-child{border-top:none}
+.typo-row .tok{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink);font-weight:500}
+.typo-row .spec{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--mute)}
+.typo-row .smp{color:var(--ink)}
+@media(max-width:760px){.typo-row{grid-template-columns:1fr}}
+
+.radii{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+@media(max-width:860px){.radii{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:560px){.radii{grid-template-columns:repeat(2,1fr)}}
+.rad{background:var(--surface-card);border:1px solid var(--hairline-strong);padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;border-radius:var(--r-md)}
+.rad-vis{width:56px;height:56px;background:var(--surface-elevated);border:1px solid var(--hairline-strong)}
+.rad .nm{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink);font-weight:500}
+.rad .vl{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--mute)}
+
+.cmp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:860px){.cmp-grid{grid-template-columns:1fr}}
+.cmp{background:var(--surface-card);border:1px solid var(--hairline-strong);border-radius:var(--r-md);padding:24px}
+.cmp h4{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--mute);margin:0 0 16px}
+.cmp .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.cmp .row:last-child{margin-bottom:0}
+.cmp .label{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--mute);min-width:130px}
+.input{background:var(--surface-card);border:1px solid var(--hairline-strong);border-radius:var(--r-md);height:40px;padding:10px 14px;font-size:14px;font-family:inherit;color:var(--ink);width:240px}
+.input.focused{border-color:var(--ink)}
+.pill{background:var(--surface-elevated);color:var(--body);font-size:12px;padding:4px 10px;border-radius:var(--r-full);border:1px solid var(--hairline-strong)}
+.status-dot{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--body)}
+.status-dot::before{content:"";width:8px;height:8px;border-radius:var(--r-full);background:var(--accent-green);box-shadow:0 0 8px var(--accent-green)}
+
+/* —— Footer —— */
+.foot{background:var(--canvas);border-top:1px solid var(--hairline);padding:64px 32px 40px}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px;max-width:1200px;margin:0 auto}
+@media(max-width:980px){.foot-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:640px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-col h5{font-size:13px;font-weight:500;color:var(--ink);margin:0 0 14px}
+.foot-col a{display:block;font-size:14px;color:var(--charcoal);padding:5px 0}
+.foot-col a:hover{color:var(--ink)}
+.foot-brand-row p{font-size:14px;color:var(--charcoal);max-width:280px;margin:14px 0 16px;line-height:1.6}
+.foot-line{margin-top:48px;padding-top:24px;border-top:1px solid var(--divider-soft);display:flex;justify-content:space-between;color:var(--ash);font-size:12px;flex-wrap:wrap;gap:12px;max-width:1200px;margin-left:auto;margin-right:auto}
+
+/* Floating */
+.float-md{position:fixed;right:18px;bottom:18px;z-index:50;background:var(--ink);color:var(--canvas);font-size:13px;font-weight:500;padding:10px 16px;border-radius:var(--r-md);box-shadow:0 6px 18px rgba(0,0,0,0.4);border:1px solid var(--surface-light)}
+.float-md:hover{background:var(--surface-light)}
+</style>
+</head>
+<body>
+
+<!-- Top nav -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#">
+      <span class="mark">R</span>
+      Resend
+    </a>
+    <nav class="nav-links">
+      <a href="#">Features</a>
+      <a href="#">Customers</a>
+      <a href="#">Pricing</a>
+      <a href="#">Docs</a>
+      <a href="#">Blog</a>
+    </nav>
+    <div class="nav-right">
+      <a class="signin" href="#">Sign in</a>
+      <a class="btn btn-primary" href="#">Get started</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-pill">
+      <span class="badge">NEW</span>
+      Inbound webhooks · live in 14 regions
+    </span>
+    <h1>Email <span class="it">for</span><br>developers</h1>
+    <p class="sub">The email API for the modern stack. Build, test, and deliver transactional email at scale — with a developer experience that feels like a print magazine, not a 1998 ESP.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#">Get started</a>
+      <a class="btn btn-ghost" href="#">Read the docs →</a>
+    </div>
+
+    <div class="hero-trust">Trusted by engineering teams at</div>
+    <div class="hero-logos">
+      <div class="l">Vercel</div>
+      <div class="l">Linear</div>
+      <div class="l">Cal.com</div>
+      <div class="l">Raycast</div>
+      <div class="l">Cursor</div>
+      <div class="l">Supabase</div>
+    </div>
+  </div>
+</section>
+
+<!-- Code story -->
+<section class="section glow-blue">
+  <div class="wrap">
+    <span class="eyebrow">Integrate this weekend</span>
+    <h2>One SDK. <span class="it">Six</span> minutes. Send.</h2>
+    <p class="lede">A clean REST API, idiomatic SDKs for every modern runtime, and a typed React-Email template engine. No drag-and-drop builder. No campaign jargon. Just send().</p>
+
+    <div class="code-story">
+      <div class="cs-text">
+        <h3 class="serif">Type-safe, tree-shaken, ten lines.</h3>
+        <p>The Resend SDK ships first-class types for every endpoint. Domains, audiences, contacts, batch sends — all autocompleted in your editor. Drop your <span class="mono" style="color:var(--ink);background:var(--surface-card);padding:2px 6px;border-radius:var(--r-xs);border:1px solid var(--hairline-strong)">RESEND_API_KEY</span> in <span class="mono" style="color:var(--ink);background:var(--surface-card);padding:2px 6px;border-radius:var(--r-xs);border:1px solid var(--hairline-strong)">.env.local</span>, write a <span class="mono" style="color:var(--ink);background:var(--surface-card);padding:2px 6px;border-radius:var(--r-xs);border:1px solid var(--hairline-strong)">.tsx</span> template, send.</p>
+        <ul>
+          <li><span class="dot"></span> SDKs for Node, Deno, Python, Ruby, Go, PHP.</li>
+          <li><span class="dot"></span> React Email — write templates as components, render to HTML server-side.</li>
+          <li><span class="dot"></span> Idempotency keys, scheduled sends, batch up to 100 / request.</li>
+          <li><span class="dot"></span> Webhooks for delivered, bounced, complained, opened, clicked.</li>
+        </ul>
+      </div>
+      <div class="code-window">
+        <div class="cw-bar">
+          <div class="lights"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+          <span class="label">send.ts · resend-node@4.2.0</span>
+        </div>
+        <div class="cw-tabs">
+          <span class="t active">TypeScript</span>
+          <span class="t">Python</span>
+          <span class="t">Ruby</span>
+          <span class="t">Go</span>
+          <span class="t">curl</span>
+        </div>
+        <pre class="cw-body"><span class="ln">1</span><span class="k">import</span> { Resend } <span class="k">from</span> <span class="s">"resend"</span>
+<span class="ln">2</span><span class="k">import</span> { ReceiptEmail } <span class="k">from</span> <span class="s">"@/emails/receipt"</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="k">const</span> resend = <span class="k">new</span> <span class="f">Resend</span>(process.env.<span class="o">RESEND_API_KEY</span>)
+<span class="ln">5</span>
+<span class="ln">6</span><span class="k">const</span> { data } = <span class="k">await</span> resend.emails.<span class="f">send</span>({
+<span class="ln">7</span>  from:    <span class="s">"orders@acme.dev"</span>,
+<span class="ln">8</span>  to:      <span class="s">"river@example.com"</span>,
+<span class="ln">9</span>  subject: <span class="s">"Your Acme order #2814"</span>,
+<span class="ln">10</span>  react:   &lt;<span class="f">ReceiptEmail</span> total={<span class="n">42.0</span>} /&gt;,
+<span class="ln">11</span>  tags:    [{ name: <span class="s">"category"</span>, value: <span class="s">"receipt"</span> }]
+<span class="ln">12</span>})
+<span class="ln">13</span>
+<span class="ln">14</span><span class="c">// → id: "ed_2H4Kp...", queued in 38ms</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Email mockup band -->
+<section class="email-band">
+  <div class="wrap">
+    <span class="eyebrow" style="font-size:11px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:1px">Beyond experience</span>
+    <h2 class="serif" style="font-family:'Instrument Serif',Georgia,serif;font-size:76px;font-weight:400;line-height:1.0;letter-spacing:-0.768px;color:var(--ink);margin:16px 0 24px">Email <span style="font-style:italic">reimagined</span>.</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto;text-align:center">Compose with components, theme with CSS variables, preview pixel-perfect across Gmail, Outlook, Apple Mail. Then send.</p>
+
+    <div class="email-card">
+      <div class="email-head">
+        <div class="from">
+          <span class="av">A</span>
+          <span class="name">Acme · Receipts</span>
+          <span class="addr">orders@acme.dev</span>
+        </div>
+        <div class="to">to river@example.com</div>
+        <div class="subj">Your Acme order #2814 has shipped</div>
+      </div>
+      <div class="email-body">
+        <h4>Hi River 👋</h4>
+        <p>Your order is on its way. We packed it Tuesday afternoon and handed it off to the carrier — you should see it on your doorstep by Friday.</p>
+        <a class="cta" href="#">Track shipment →</a>
+        <div class="receipt">
+          <div class="row"><span>Quill notebook · A5</span><span>$24.00</span></div>
+          <div class="row"><span>Black ink refill · 6pk</span><span>$12.00</span></div>
+          <div class="row"><span>Shipping (US standard)</span><span>$6.00</span></div>
+          <div class="row total"><span>Total</span><span>$42.00 USD</span></div>
+        </div>
+      </div>
+      <div class="email-foot">Acme Co. · 100 Main St, Brooklyn, NY · <a href="#" style="color:#888;text-decoration:underline">Unsubscribe</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- Features grid -->
+<section class="section glow-green">
+  <div class="wrap">
+    <span class="eyebrow">Built for delivery</span>
+    <h2>Reach humans. <span class="it">Not</span> spam folders.</h2>
+    <p class="lede">Best-in-class deliverability isn't an accident — it's the result of warmed IPs, automatic DKIM/SPF/DMARC, dedicated postmasters, and a team that obsesses over every bounce.</p>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg></div>
+        <h3>99.9% delivered</h3>
+        <p>Dedicated IPs auto-warmed, dynamic reputation scoring, instant blacklist alerts. Inbox placement, not promotion tab.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Sub-second send</h3>
+        <p>p95 send latency under 800ms from our 14 global regions. Schedule, queue, batch — all without leaving your transactional flow.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l4-7 5 4 4-6 5 9"/><path d="M3 18h18"/></svg></div>
+        <h3>Real observability</h3>
+        <p>Live logs, per-email status, per-domain reputation. Webhooks for every event. Export to your data warehouse in two clicks.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v6c0 5-4 8-8 8s-8-3-8-8V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>SOC 2 + GDPR</h3>
+        <p>SOC 2 Type II, GDPR-ready, DPA on every plan, EU data residency on Pro+. HIPAA available on Enterprise.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3>React Email native</h3>
+        <p>Compose in JSX, theme with CSS variables, get pixel-perfect previews. Open-source — fork it, extend it, ship it.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M5 9l7-7 7 7M5 15l7 7 7-7"/></svg></div>
+        <h3>Webhooks + inbound</h3>
+        <p>Forward inbound mail to any HTTPS endpoint. Reply-handling, support pipelines, AI-routed support tickets — your call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">Available today</span>
+    <h2>Pricing as honest <span class="it">as</span> the API.</h2>
+    <p class="lede">Per-email pricing, no seat tax, no surprise overage. Cancel any time, no salesperson required.</p>
+
+    <div class="price-grid">
+      <div class="tier">
+        <h3 class="nm">Free</h3>
+        <div class="price">$0<small>/ month</small></div>
+        <p class="desc">For hobby projects and side hustles. No card required.</p>
+        <ul>
+          <li>3,000 emails / month</li>
+          <li>1 verified domain</li>
+          <li>1 day of log retention</li>
+          <li>Community support</li>
+        </ul>
+        <a class="btn btn-outline" href="#">Sign up</a>
+      </div>
+      <div class="tier featured">
+        <h3 class="nm">Pro</h3>
+        <div class="price">$20<small>/ month</small></div>
+        <p class="desc">For teams shipping production transactional email.</p>
+        <ul>
+          <li>50,000 emails / mo, then $0.001 / email</li>
+          <li>10 verified domains</li>
+          <li>3 days log retention</li>
+          <li>Dedicated IPs available</li>
+          <li>Email + chat support</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Start Pro trial</a>
+      </div>
+      <div class="tier">
+        <h3 class="nm">Enterprise</h3>
+        <div class="price serif">Talk<small>· custom</small></div>
+        <p class="desc">For regulated industries, large volume, dedicated CSM.</p>
+        <ul>
+          <li>Unlimited domains</li>
+          <li>SOC 2 + HIPAA + DPA + BAA</li>
+          <li>SLA + 99.99% uptime</li>
+          <li>EU data residency</li>
+          <li>Dedicated postmaster</li>
+        </ul>
+        <a class="btn btn-outline" href="#">Talk to us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DS Reference -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-hd">
+      <div>
+        <h2>Design system reference</h2>
+        <div class="sub">Tokens, type ladder, radius, components — pulled from the captured DESIGN.md.</div>
+      </div>
+      <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.resend.html" target="_blank" rel="noopener">View source DESIGN.md ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3>Color</h3>
+      <p class="desc">True black canvas, off-white ink, atmospheric glow accents at low opacity. The brand never warms to a light surface — except the email mockup card.</p>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Brand & ink</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#fcfdff"></div><div class="sw-meta"><div class="sw-name">Primary</div><div class="sw-val">#fcfdff</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#f1f7fe"></div><div class="sw-meta"><div class="sw-name">Pressed</div><div class="sw-val">#f1f7fe</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:rgba(252,253,255,0.86);border-right:1px solid var(--hairline)"></div><div class="sw-meta"><div class="sw-name">Body 86%</div><div class="sw-val">rgba(252,253,255,.86)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:rgba(252,253,255,0.7)"></div><div class="sw-meta"><div class="sw-name">Charcoal 70%</div><div class="sw-val">rgba(252,253,255,.7)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#a1a4a5"></div><div class="sw-meta"><div class="sw-name">Mute</div><div class="sw-val">#a1a4a5</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#464a4d"></div><div class="sw-meta"><div class="sw-name">Stone</div><div class="sw-val">#464a4d</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Surface (dark world)</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#000000"></div><div class="sw-meta"><div class="sw-name">Canvas</div><div class="sw-val">#000000</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#06060a"></div><div class="sw-meta"><div class="sw-name">Deep</div><div class="sw-val">#06060a</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#0a0a0c"></div><div class="sw-meta"><div class="sw-name">Card</div><div class="sw-val">#0a0a0c</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#101012"></div><div class="sw-meta"><div class="sw-name">Elevated</div><div class="sw-val">#101012</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:rgba(255,255,255,0.06)"></div><div class="sw-meta"><div class="sw-name">Hairline 6%</div><div class="sw-val">rgba(255,255,255,.06)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:rgba(255,255,255,0.14)"></div><div class="sw-meta"><div class="sw-name">Hairline 14%</div><div class="sw-val">rgba(255,255,255,.14)</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Atmospheric glow (never solid)</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:radial-gradient(ellipse at center,rgba(255,89,0,0.7) 0%,transparent 70%),#000"></div><div class="sw-meta"><div class="sw-name">Orange glow</div><div class="sw-val">rgba(255,89,0,.22)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:radial-gradient(ellipse at center,rgba(0,117,255,0.7) 0%,transparent 70%),#000"></div><div class="sw-meta"><div class="sw-name">Blue glow</div><div class="sw-val">rgba(0,117,255,.34)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:radial-gradient(ellipse at center,rgba(34,255,153,0.7) 0%,transparent 70%),#000"></div><div class="sw-meta"><div class="sw-name">Green glow</div><div class="sw-val">rgba(34,255,153,.18)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:radial-gradient(ellipse at center,rgba(255,32,71,0.7) 0%,transparent 70%),#000"></div><div class="sw-meta"><div class="sw-name">Red glow</div><div class="sw-val">rgba(255,32,71,.34)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#ffc53d"></div><div class="sw-meta"><div class="sw-name">Yellow</div><div class="sw-val">#ffc53d</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#3b9eff"></div><div class="sw-meta"><div class="sw-name">Link blue</div><div class="sw-val">#3b9eff</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <p class="desc">Domaine Display (editorial serif) for hero — Instrument Serif as stand-in here. ABC Favorit / Inter for body. Geist Mono for code. Strict lane discipline.</p>
+      <div class="typo">
+        <div class="typo-row"><div class="tok">display-xxl</div><div class="spec">96 / 400 / -0.96 · serif</div><div class="smp serif" style="font-size:56px;line-height:1.0;letter-spacing:-1px;color:var(--ink)">Email for developers</div></div>
+        <div class="typo-row"><div class="tok">display-xl</div><div class="spec">76.8 / 400 / -0.77</div><div class="smp serif" style="font-size:44px;line-height:1.0;letter-spacing:-0.5px;color:var(--ink)">Email reimagined.</div></div>
+        <div class="typo-row"><div class="tok">display-lg</div><div class="spec">56 / 400 / -2.8 · Favorit</div><div class="smp" style="font-size:36px;letter-spacing:-1.6px;font-weight:400;color:var(--ink)">$20<span style="font-size:14px;color:var(--mute)"> /mo</span></div></div>
+        <div class="typo-row"><div class="tok">heading-md</div><div class="spec">24 / 500 / -0.4 · Inter</div><div class="smp" style="font-size:24px;font-weight:500;letter-spacing:-0.4px;color:var(--ink)">Pro</div></div>
+        <div class="typo-row"><div class="tok">subtitle</div><div class="spec">20 / 400 / 1.3</div><div class="smp" style="font-size:20px;color:var(--charcoal)">The email API for the modern stack.</div></div>
+        <div class="typo-row"><div class="tok">body-md</div><div class="spec">16 / 400 / -0.8 · Favorit</div><div class="smp" style="font-size:16px;color:var(--body);letter-spacing:-0.5px">Marketing prose body. Tight tracking, comfortable leading.</div></div>
+        <div class="typo-row"><div class="tok">body-sm</div><div class="spec">14 / 400 · Inter</div><div class="smp" style="font-size:14px;color:var(--charcoal)">Captions, UI metadata, secondary copy.</div></div>
+        <div class="typo-row"><div class="tok">button-sm</div><div class="spec">14 / 500 / +0.35</div><div class="smp" style="font-size:14px;font-weight:500;letter-spacing:0.35px;color:var(--ink)">Get started →</div></div>
+        <div class="typo-row"><div class="tok">code-md</div><div class="spec">13 / 400 / 1.6 · mono</div><div class="smp mono" style="font-size:13px;color:var(--ink)">resend.emails.send({ ... })</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <p class="desc">Buttons 8px, cards / code wells / email mockups 12px, pills / avatars full. Hero stripe and footer carry no radius at all.</p>
+      <div class="radii">
+        <div class="rad"><div class="rad-vis" style="border-radius:0"></div><div class="nm">none</div><div class="vl">0px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:4px"></div><div class="nm">xs</div><div class="vl">4px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:6px"></div><div class="nm">sm</div><div class="vl">6px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:8px"></div><div class="nm">md</div><div class="vl">8px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:12px"></div><div class="nm">lg</div><div class="vl">12px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:16px"></div><div class="nm">xl</div><div class="vl">16px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:9999px"></div><div class="nm">full</div><div class="vl">9999px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Components</h3>
+      <p class="desc">White button = brightest pixel = single page anchor. Translucent borders replace shadows. Code wells carry traffic-light chrome.</p>
+      <div class="cmp-grid">
+        <div class="cmp">
+          <h4>Buttons</h4>
+          <div class="row"><span class="label">primary (white)</span><a class="btn btn-primary">Get started</a></div>
+          <div class="row"><span class="label">ghost</span><a class="btn btn-ghost">Read the docs</a></div>
+          <div class="row"><span class="label">outline</span><a class="btn btn-outline">Talk to us</a></div>
+        </div>
+        <div class="cmp">
+          <h4>Inputs</h4>
+          <div class="row"><span class="label">text-input</span><input class="input" placeholder="you@company.com"/></div>
+          <div class="row"><span class="label">focused</span><input class="input focused" value="you@company.com"/></div>
+        </div>
+        <div class="cmp">
+          <h4>Pills & status</h4>
+          <div class="row"><span class="label">badge-pill</span><span class="pill">NEW</span><span class="pill">Beta</span><span class="pill">v4.2</span></div>
+          <div class="row"><span class="label">status-dot</span><span class="status-dot">All systems operational</span></div>
+          <div class="row"><span class="label">contributor</span><div style="width:32px;height:32px;border-radius:var(--r-full);background:linear-gradient(135deg,#ff801f,#ff2047)"></div><div style="width:32px;height:32px;border-radius:var(--r-full);background:linear-gradient(135deg,#3b9eff,#11ff99)"></div><div style="width:32px;height:32px;border-radius:var(--r-full);background:linear-gradient(135deg,#ffc53d,#ff801f)"></div></div>
+        </div>
+        <div class="cmp" style="grid-column:span 2">
+          <h4>Code window</h4>
+          <div class="code-window" style="margin-top:8px">
+            <div class="cw-bar">
+              <div class="lights"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+              <span class="label">install.sh</span>
+            </div>
+            <pre class="cw-body" style="padding:14px 18px"><span class="ln">1</span><span class="c"># 1. install</span>
+<span class="ln">2</span><span class="o">$</span> npm install <span class="s">resend</span>
+<span class="ln">3</span><span class="o">$</span> echo <span class="s">"RESEND_API_KEY=re_..."</span> &gt;&gt; .env.local
+<span class="ln">4</span><span class="c"># 2. send</span>
+<span class="ln">5</span><span class="o">$</span> npx resend send --from <span class="s">"orders@acme.dev"</span> --to <span class="s">"river@example.com"</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="foot">
+  <div class="foot-grid">
+    <div class="foot-col foot-brand-row">
+      <a class="brand" href="#"><span class="mark">R</span> Resend</a>
+      <p>The email API for the modern stack. Built by developers, for the inbox.</p>
+      <div class="status-dot" style="font-size:13px;color:var(--charcoal)">All systems operational</div>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <a href="#">Features</a><a href="#">Customers</a><a href="#">Pricing</a><a href="#">Changelog</a>
+    </div>
+    <div class="foot-col">
+      <h5>Resources</h5>
+      <a href="#">Documentation</a><a href="#">API Reference</a><a href="#">SDKs</a><a href="#">React Email</a>
+    </div>
+    <div class="foot-col">
+      <h5>Company</h5>
+      <a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Press</a>
+    </div>
+    <div class="foot-col">
+      <h5>Legal</h5>
+      <a href="#">Privacy</a><a href="#">Terms</a><a href="#">DPA</a><a href="#">Security</a>
+    </div>
+  </div>
+  <div class="foot-line">
+    <div>© 2026 Resend, Inc.</div>
+    <div>Made for the inbox. Designed to be read.</div>
+  </div>
+</footer>
+
+<a class="float-md" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.resend.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

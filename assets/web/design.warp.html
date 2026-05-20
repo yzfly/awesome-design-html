@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Warp — Inspired Design</title>
+<meta name="description" content="A Warp-inspired marketing page: warm-dark canvas, off-white CTAs, terminal mockup as protagonist, tight 3-4px radii, Inter + DM Mono + Instrument Serif italic moments. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  /* Brand */
+  --primary: #f7f5f0;
+  --on-primary: #2b2622;
+  /* Text */
+  --ink: #f7f5f0;
+  --body-strong: #dad2c1;
+  --body: #c9c0ad;
+  --mute: #aea69c;
+  /* Surfaces */
+  --canvas: #2b2622;
+  --canvas-soft: #383330;
+  --canvas-soft-2: #423d39;
+  --hairline: #3f3a36;
+  --hairline-strong: #524d49;
+  /* Terminal accents (scoped to in-mockup syntax) */
+  --term-cyan: #62c8c8;
+  --term-magenta: #d68aff;
+  --term-yellow: #e9c46a;
+  --term-green: #8dca8c;
+  --term-red: #e76f6f;
+  --term-blue: #7ba6e2;
+  --term-prompt: #d68aff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(247,245,240,0.18); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--hairline-strong); border-radius: 4px; }
+.mono { font-family: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+.serif { font-family: "Instrument Serif", Georgia, "Times New Roman", serif; }
+
+/* —— Layout —— */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+  padding: 10px 0;
+}
+.topnav .row { display: flex; align-items: center; gap: 24px; font-size: 14px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ink); font-weight: 600; font-size: 17px;
+}
+.brand .logo {
+  width: 22px; height: 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 16px; align-items: center; }
+.nav-links a {
+  color: var(--ink); padding: 4px 10px; border-radius: 3px;
+  font: 500 14px/1.4 Inter, system-ui;
+}
+.nav-links a:hover { background: var(--canvas-soft); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 8px 16px;
+  border-radius: 3px;
+  font: 500 14px/1.4 Inter, system-ui;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent; color: var(--ink);
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+}
+.btn:focus-visible { outline: 1px solid var(--primary); outline-offset: 2px; }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: #efece5; }
+.btn-ghost { background: var(--canvas); color: var(--ink); border-color: var(--hairline); }
+.btn-ghost:hover { background: var(--canvas-soft); border-color: var(--hairline-strong); }
+.btn-text { background: transparent; color: var(--ink); padding: 8px 10px; }
+.btn-text:hover { background: var(--canvas-soft); }
+.btn-icon-circular {
+  width: 36px; height: 36px; padding: 0;
+  border-radius: 9999px;
+  background: var(--canvas); color: var(--ink);
+  border: 1px solid var(--hairline);
+}
+.btn-icon-circular:hover { background: var(--canvas-soft); }
+
+/* —— Type —— */
+.eyebrow {
+  font-size: 12px; font-weight: 500; line-height: 1.4; letter-spacing: 0.4px;
+  color: var(--mute); text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.display-xl {
+  font-weight: 400; font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.1; letter-spacing: -1.6px;
+  margin: 0; color: var(--ink);
+}
+.display-xl em.serif {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic; font-weight: 400;
+  color: var(--body-strong); letter-spacing: -0.5px;
+}
+.display-lg { font-weight: 400; font-size: clamp(32px, 4.2vw, 48px); line-height: 1.1; letter-spacing: -1.2px; margin: 0; }
+.display-md { font-weight: 500; font-size: clamp(24px, 2.8vw, 32px); line-height: 1.25; letter-spacing: -0.8px; margin: 0; }
+.display-sm { font-weight: 500; font-size: 24px; line-height: 1.33; letter-spacing: -0.4px; margin: 0; }
+.display-serif { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(32px, 4.2vw, 48px); line-height: 1.08; letter-spacing: -0.5px; }
+.body-lg { font-size: 18px; line-height: 1.55; color: var(--body); }
+.body-md { font-size: 16px; line-height: 1.5; color: var(--body); }
+.body-md-strong { font-size: 16px; line-height: 1.5; color: var(--ink); font-weight: 500; }
+.body-sm { font-size: 14px; line-height: 1.43; color: var(--body); }
+.caption { font-size: 12px; line-height: 1.33; color: var(--mute); }
+
+/* —— Sections —— */
+section { padding: 96px 0; }
+section.tight { padding: 64px 0; }
+
+/* —— Hero —— */
+.hero { padding: 96px 0 64px; }
+.hero .display-xl { max-width: 18ch; margin-bottom: 24px; }
+.hero .lead { font-size: 18px; line-height: 1.55; max-width: 620px; color: var(--body); margin: 0 0 32px; }
+.hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.hero .cta-row .meta { color: var(--mute); font-size: 13px; margin-left: 4px; }
+.hero .platform-row { display: flex; gap: 18px; margin-top: 32px; flex-wrap: wrap; align-items: center; color: var(--mute); font-size: 13px; }
+.hero .platform-row svg { color: var(--mute); }
+
+/* —— Terminal mockup (the protagonist) —— */
+.term-split {
+  display: grid; gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 56px;
+}
+@media (max-width: 980px) { .term-split { grid-template-columns: 1fr; } }
+.term-card {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  min-height: 460px;
+}
+.term-titlebar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--canvas);
+}
+.term-traffic { display: flex; gap: 6px; }
+.term-traffic span { width: 11px; height: 11px; border-radius: 50%; background: var(--canvas-soft-2); border: 1px solid var(--hairline); }
+.term-title { font: 400 13px/1.2 "DM Mono", monospace; color: var(--mute); margin-left: auto; margin-right: auto; }
+.term-pill {
+  font: 500 11px/1 Inter, sans-serif; padding: 3px 8px;
+  border: 1px solid var(--hairline-strong); border-radius: 3px;
+  color: var(--body); text-transform: uppercase; letter-spacing: 0.4px;
+}
+
+.term-body {
+  font-family: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px; line-height: 1.5;
+  padding: 16px 18px;
+  color: var(--body-strong);
+  flex: 1;
+  overflow: hidden;
+}
+.term-line { white-space: pre-wrap; min-height: 19.5px; }
+.term-prompt { color: var(--term-prompt); }
+.term-user { color: var(--term-cyan); }
+.term-path { color: var(--term-blue); }
+.term-flag { color: var(--term-yellow); }
+.term-out { color: var(--body-strong); }
+.term-mute { color: var(--mute); }
+.term-ok { color: var(--term-green); }
+.term-err { color: var(--term-red); }
+.term-comment { color: var(--mute); font-style: italic; }
+.term-ai-block {
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-left: 2px solid var(--term-magenta);
+  background: rgba(214,138,255,0.04);
+  border-radius: 0 3px 3px 0;
+  font-family: Inter, sans-serif;
+  font-size: 13px; line-height: 1.5; color: var(--ink);
+}
+.term-ai-block .ai-label {
+  font: 500 10px/1.4 Inter; letter-spacing: 0.4px; text-transform: uppercase;
+  color: var(--term-magenta); margin-bottom: 4px;
+}
+.term-cursor {
+  display: inline-block; width: 7px; height: 14px;
+  background: var(--primary); vertical-align: -2px;
+  animation: blink 1.1s steps(2) infinite;
+}
+@keyframes blink { to { opacity: 0; } }
+.term-input-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--hairline);
+  font: 400 13px/1.4 "DM Mono", monospace;
+  color: var(--body); background: var(--canvas);
+}
+.term-input-row .lbl { color: var(--mute); font-size: 11px; letter-spacing: 0.4px; text-transform: uppercase; }
+
+/* —— Logos —— */
+.logos {
+  padding: 40px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.logos-head { font-size: 13px; color: var(--mute); margin-bottom: 20px; }
+.logos-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+}
+@media (max-width: 760px) { .logos-grid { grid-template-columns: repeat(2, 1fr); } }
+.logo-tile {
+  background: var(--canvas-soft);
+  border-radius: 4px;
+  padding: 18px 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 15px; color: var(--body-strong);
+  letter-spacing: -0.2px;
+}
+
+/* —— Section head —— */
+.section-head { max-width: 680px; }
+.section-head .display-md { margin-bottom: 16px; }
+
+/* —— Feature grid —— */
+.feature-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 48px;
+}
+@media (max-width: 1024px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 760px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.feature-card .icon {
+  width: 36px; height: 36px; border-radius: 4px;
+  background: var(--canvas); border: 1px solid var(--hairline);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
+}
+.feature-card h3 { font-weight: 500; font-size: 20px; letter-spacing: -0.3px; margin: 0; color: var(--ink); }
+.feature-card p { margin: 0; color: var(--body); font-size: 14px; line-height: 1.55; }
+.kbd {
+  display: inline-block; padding: 1px 6px;
+  font: 400 11px/1.4 "DM Mono", monospace;
+  background: var(--canvas); border: 1px solid var(--hairline); border-radius: 2px;
+  color: var(--body-strong);
+}
+
+/* —— Testimonial —— */
+.testimonial {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  padding: 32px;
+  display: grid; grid-template-columns: 96px 1fr; gap: 24px; align-items: center;
+  max-width: 800px; margin: 0 auto;
+}
+@media (max-width: 600px) { .testimonial { grid-template-columns: 1fr; text-align: left; } }
+.testimonial .portrait {
+  width: 96px; height: 96px; border-radius: 4px;
+  background: linear-gradient(135deg, #5a4e44, #7a695b);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink); font-weight: 600; font-size: 28px;
+}
+.testimonial blockquote {
+  margin: 0; font-size: 18px; font-weight: 400; line-height: 1.55; color: var(--ink);
+}
+.testimonial .author { margin-top: 12px; font-size: 13px; color: var(--mute); }
+.testimonial .author strong { color: var(--body-strong); font-weight: 500; }
+
+/* —— Press rows —— */
+.press-list { margin-top: 48px; }
+.press-row {
+  display: grid; grid-template-columns: 140px 1fr 100px; align-items: center;
+  gap: 24px; padding: 18px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+@media (max-width: 700px) { .press-row { grid-template-columns: 1fr; gap: 4px; } }
+.press-row .meta { font: 400 13px/1.4 "DM Mono", monospace; color: var(--mute); }
+.press-row .quote { font-size: 16px; line-height: 1.5; color: var(--body); }
+.press-row .source { font: 500 14px/1.4 Inter, system-ui; color: var(--ink); text-align: right; letter-spacing: -0.1px; }
+@media (max-width: 700px) { .press-row .source { text-align: left; } }
+
+/* —— Download tiles —— */
+.download-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+@media (max-width: 760px) { .download-grid { grid-template-columns: 1fr; } }
+.download-tile {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.download-tile .top { display: flex; align-items: center; gap: 12px; }
+.download-tile .platform-icon {
+  width: 40px; height: 40px; border-radius: 4px;
+  background: var(--canvas); display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
+}
+.download-tile h4 { font: 500 16px/1.5 Inter; margin: 0; color: var(--ink); }
+.download-tile .ver { font: 400 13px/1.4 "DM Mono", monospace; color: var(--mute); }
+.download-tile .cmd { font: 400 12px/1.5 "DM Mono", monospace; color: var(--body); padding: 8px 10px; background: var(--canvas); border: 1px solid var(--hairline); border-radius: 3px; }
+
+/* —— Pricing —— */
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+@media (max-width: 1024px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tier.featured { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.tier h3 { margin: 0; font-weight: 500; font-size: 24px; letter-spacing: -0.4px; }
+.tier .price { font-weight: 400; font-size: 44px; letter-spacing: -1.2px; line-height: 1; }
+.tier .price .per { font-size: 14px; color: var(--mute); margin-left: 4px; letter-spacing: 0; }
+.tier.featured .price .per { color: var(--on-primary); opacity: 0.6; }
+.tier .desc { font-size: 14px; line-height: 1.55; color: var(--body); min-height: 50px; }
+.tier.featured .desc { color: var(--on-primary); opacity: 0.78; }
+.tier ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; color: var(--body); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+.tier.featured li { color: var(--on-primary); }
+.tier li svg { flex: none; margin-top: 3px; color: var(--ink); }
+.tier.featured li svg { color: var(--on-primary); }
+.tier .cta-wrap { margin-top: auto; }
+
+/* —— Footer —— */
+footer {
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline);
+  padding: 48px 0;
+}
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 2fr repeat(4, 1fr); }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 { font-size: 13px; font-weight: 500; color: var(--ink); margin: 0 0 16px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 14px; color: var(--body); }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+  padding-top: 32px; margin-top: 32px;
+  border-top: 1px solid var(--hairline);
+  font-size: 13px; color: var(--mute);
+}
+.brand-mini { max-width: 280px; display: flex; flex-direction: column; gap: 12px; }
+.brand-mini p { margin: 0; font-size: 14px; color: var(--body); line-height: 1.5; }
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas-soft); border: 1px solid var(--hairline-strong);
+  padding: 8px 14px; border-radius: 9999px; font-size: 13px; color: var(--ink);
+  font-weight: 500;
+}
+.src-link:hover { background: var(--canvas-soft-2); }
+
+/* —— Design system block —— */
+.ds-block { padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+.ds-heading { font-size: 32px; font-weight: 500; letter-spacing: -0.8px; margin: 0 0 16px; color: var(--ink); }
+.ds-caption {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase;
+  color: var(--mute); margin: 28px 0 12px;
+}
+.ds-block .ds-caption:first-of-type { margin-top: 16px; }
+
+.ds-sw-grid { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .ds-sw-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .ds-sw-grid { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--canvas-soft); border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; }
+.ds-sw .chip { height: 56px; }
+.ds-sw .meta { padding: 8px 10px; border-top: 1px solid var(--hairline); }
+.ds-sw .name { font-size: 12px; font-weight: 500; color: var(--ink); }
+.ds-sw .val { font-size: 11px; color: var(--mute); font-family: "DM Mono", monospace; margin-top: 2px; }
+
+.ds-typescale { background: var(--canvas-soft); border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; }
+.ds-tr { display: grid; grid-template-columns: 140px 240px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font: 500 11px/1.3 "DM Mono", monospace; color: var(--ink); }
+.ds-spec { font: 400 11px/1.3 "DM Mono", monospace; color: var(--mute); }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(7, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--canvas-soft-2); border: 1px solid var(--hairline-strong); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input {
+  height: 36px; padding: 8px 10px; border-radius: 3px;
+  border: 1px solid var(--hairline); background: var(--canvas-soft);
+  color: var(--ink); font-family: inherit; font-size: 14px; width: 100%;
+}
+.ds-input.focused { border-color: var(--hairline-strong); outline: none; }
+.ds-field-label { font: 500 11px/1.4 "DM Mono", monospace; color: var(--mute); margin-bottom: 6px; display: block; letter-spacing: 0.4px; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini { border-radius: 4px; padding: 20px; border: 1px solid var(--hairline); background: var(--canvas-soft); display: flex; flex-direction: column; gap: 8px; }
+.ds-card-mini h4 { margin: 0; font: 500 16px/1.4 Inter; color: var(--ink); letter-spacing: -0.2px; }
+.ds-card-mini p { margin: 0; font-size: 13px; color: var(--body); line-height: 1.55; }
+.ds-card-mini.featured { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.ds-card-mini.featured h4 { color: var(--on-primary); }
+.ds-card-mini.featured p { color: var(--on-primary); opacity: 0.78; }
+
+.ds-tag-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.badge-pill {
+  display: inline-block; background: var(--canvas-soft-2); color: var(--ink);
+  font: 500 11px/1.4 Inter; letter-spacing: 0.4px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 9999px;
+}
+</style>
+</head>
+<body>
+
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#">
+    <span class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M4 4l8 8-8 8M12 4l8 8-8 8" stroke="#f7f5f0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    Warp
+  </a>
+  <nav class="nav-links">
+    <a href="#">Agents</a>
+    <a href="#">Terminal</a>
+    <a href="#">Pricing</a>
+    <a href="#">Docs</a>
+    <a href="#">Changelog</a>
+    <a href="#">Careers</a>
+  </nav>
+  <div class="nav-right">
+    <button class="btn-icon-circular" aria-label="theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+    <a href="#" class="btn btn-text">Sign In</a>
+    <a href="#" class="btn btn-primary">Download Warp</a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Agentic Development Environment</p>
+  <h1 class="display-xl">Warp is the agentic development environment <em class="serif">built for how engineers actually work.</em></h1>
+  <p class="lead">A terminal that thinks. Type natural language, run shell commands, hand off long tasks to agents — all inside one quiet, warm canvas.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary">Download for Mac</a>
+    <a href="#" class="btn btn-ghost">Watch a demo →</a>
+    <span class="meta">Free for individuals. macOS · Linux · Windows.</span>
+  </div>
+  <div class="platform-row">
+    <span>Trusted by engineers at</span>
+    <span style="color: var(--ink); font-weight: 500;">Anthropic</span>
+    <span style="color: var(--mute);">·</span>
+    <span style="color: var(--ink); font-weight: 500;">OpenAI</span>
+    <span style="color: var(--mute);">·</span>
+    <span style="color: var(--ink); font-weight: 500;">Google</span>
+    <span style="color: var(--mute);">·</span>
+    <span style="color: var(--ink); font-weight: 500;">Stanford</span>
+  </div>
+
+  <!-- Terminal mockup split (the protagonist) -->
+  <div class="term-split">
+    <!-- Left: agent terminal -->
+    <div class="term-card">
+      <div class="term-titlebar">
+        <div class="term-traffic"><span></span><span></span><span></span></div>
+        <span class="term-title">~/projects/queue — agent</span>
+        <span class="term-pill">Agent</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="term-prompt">⏵</span> <span class="term-user">zephyr</span> <span class="term-mute">in</span> <span class="term-path">~/projects/queue</span></div>
+        <div class="term-line term-mute"># add retry with exponential backoff to the job runner</div>
+
+        <div class="term-ai-block">
+          <div class="ai-label">Warp Agent</div>
+          I'll wrap <span class="mono" style="color:var(--term-magenta);">processQueue</span> with retry logic. Plan:
+          <div style="margin-top: 8px; padding-left: 12px; border-left: 1px solid var(--hairline-strong); font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.7;">
+            <div><span style="color:var(--term-green);">✓</span> read <span style="color:var(--term-blue);">queue.ts</span></div>
+            <div><span style="color:var(--term-green);">✓</span> grep <span style="color:var(--term-yellow);">"retry"</span> across repo</div>
+            <div><span style="color:var(--term-magenta);">●</span> edit <span style="color:var(--term-blue);">queue.ts:32-48</span></div>
+            <div><span style="color:var(--mute);">○</span> run <span style="color:var(--term-yellow);">pnpm test</span></div>
+          </div>
+        </div>
+
+        <div class="term-line"><span class="term-prompt">⏵</span> <span class="term-out">pnpm test --filter queue</span></div>
+        <div class="term-line term-out">  <span class="term-ok">PASS</span>  src/queue.test.ts <span class="term-mute">(18 tests)</span></div>
+        <div class="term-line term-out">  <span class="term-ok">PASS</span>  src/retry.test.ts <span class="term-mute">(6 tests · new)</span></div>
+        <div class="term-line term-mute">  Tests: 24 passed · 0 failed · 1.4s</div>
+        <div class="term-line"><span class="term-prompt">⏵</span> <span class="term-cursor"></span></div>
+      </div>
+      <div class="term-input-row">
+        <span class="lbl">Ask</span>
+        <span style="flex:1;">Plan, run, or hand off a task…</span>
+        <span class="kbd" style="margin:0;">⌘⏎</span>
+      </div>
+    </div>
+
+    <!-- Right: terminal mode -->
+    <div class="term-card">
+      <div class="term-titlebar">
+        <div class="term-traffic"><span></span><span></span><span></span></div>
+        <span class="term-title">~/projects/queue — terminal</span>
+        <span class="term-pill">Terminal</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="term-prompt">⏵</span> <span class="term-out">git status</span></div>
+        <div class="term-line term-out">On branch <span class="term-yellow">retry-backoff</span></div>
+        <div class="term-line term-out">Changes to be committed:</div>
+        <div class="term-line term-out">  <span class="term-ok">modified:</span> src/queue.ts</div>
+        <div class="term-line term-out">  <span class="term-ok">new file:</span>  src/retry.ts</div>
+        <div class="term-line term-out">  <span class="term-ok">new file:</span>  src/retry.test.ts</div>
+        <div class="term-line"> </div>
+        <div class="term-line"><span class="term-prompt">⏵</span> <span class="term-out">git diff --stat src/queue.ts</span></div>
+        <div class="term-line term-out"> src/queue.ts | <span class="term-yellow">42 ++++++++++++-</span></div>
+        <div class="term-line term-mute"> 1 file changed, 38 insertions(+), 4 deletions(-)</div>
+        <div class="term-line"> </div>
+        <div class="term-line"><span class="term-prompt">⏵</span> <span class="term-out">gh pr create --fill --draft</span></div>
+        <div class="term-line term-out">Creating pull request for <span class="term-yellow">retry-backoff</span> → <span class="term-blue">main</span></div>
+        <div class="term-line term-ok">✓ Draft PR #482 created</div>
+        <div class="term-line term-mute">  https://github.com/team/queue/pull/482</div>
+        <div class="term-line"><span class="term-prompt">⏵</span> <span class="term-cursor"></span></div>
+      </div>
+      <div class="term-input-row">
+        <span class="lbl">Shell</span>
+        <span style="flex:1;"><span class="term-prompt">⏵</span> <span class="mono">git log --oneline -n 5</span></span>
+        <span class="kbd" style="margin:0;">⏎</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="tight"><div class="wrap"><div class="logos">
+  <div class="logos-head">Built and used by engineers at</div>
+  <div class="logos-grid">
+    <div class="logo-tile">Anthropic</div>
+    <div class="logo-tile">OpenAI</div>
+    <div class="logo-tile">Google</div>
+    <div class="logo-tile">Stanford</div>
+    <div class="logo-tile">Notion</div>
+  </div>
+</div></div></section>
+
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Two modes, one terminal</p>
+    <h2 class="display-md">A shell that <span class="display-serif" style="font-size: inherit; vertical-align: -2px;">listens</span> as well as it executes.</h2>
+    <p class="body-lg" style="margin-top: 16px;">Switch between agent mode and terminal mode without leaving your prompt. Warp keeps the canvas warm, the chrome quiet, and the keystrokes meaningful.</p>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+      </div>
+      <h3>Block-based shell</h3>
+      <p>Every command gets its own block. Scroll, search, share, or fork an output without losing your place.</p>
+      <span><span class="kbd">⌘</span> <span class="kbd">D</span></span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33"/></svg>
+      </div>
+      <h3>Agent that runs your tasks</h3>
+      <p>Hand off a long task — refactor, migrate, write tests — and let the agent run reads, greps, and edits while you stay in flow.</p>
+      <span><span class="kbd">⌘</span> <span class="kbd">⏎</span></span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+      </div>
+      <h3>Workflows for the repo</h3>
+      <p>Save named commands per directory. Share the workflow with the team and stop pasting the same incantations to Slack.</p>
+      <span><span class="kbd">⌃</span> <span class="kbd">⇧</span> <span class="kbd">R</span></span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 11l3-3 3 3M9 17l3 3 3-3"/><circle cx="12" cy="12" r="9"/></svg>
+      </div>
+      <h3>Cross-machine sync</h3>
+      <p>Your prompt, themes, workflows, and history follow you. Sign in on a new machine and your terminal feels lived-in immediately.</p>
+      <span><span class="kbd">cloud sync</span></span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v6"/></svg>
+      </div>
+      <h3>Split panes, ssh, tmux</h3>
+      <p>Native split panes, smart ssh detection, and tmux-aware behaviour. Everything you expect from a terminal — and then some.</p>
+      <span><span class="kbd">⌘</span> <span class="kbd">|</span></span>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg>
+      </div>
+      <h3>SOC 2 + on-prem ready</h3>
+      <p>Privacy mode keeps commands and outputs local. Enterprise plans support on-prem LLM endpoints and audit logs.</p>
+      <span><span class="kbd">privacy on</span></span>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="testimonial">
+    <div class="portrait">RM</div>
+    <div>
+      <blockquote>"Warp is the rare developer tool where the AI doesn't feel grafted on. It feels like the shell finally read the docs the rest of us already wrote."</blockquote>
+      <div class="author"><strong>Rina Mehta</strong> · Engineering lead, Anthropic</div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Press</p>
+    <h2 class="display-md">What people are saying.</h2>
+  </div>
+  <div class="press-list">
+    <div class="press-row">
+      <div class="meta">May 14 · 2026</div>
+      <div class="quote">"The first terminal that's actually trying something new since iTerm shipped panes."</div>
+      <div class="source">TechCrunch</div>
+    </div>
+    <div class="press-row">
+      <div class="meta">Apr 02 · 2026</div>
+      <div class="quote">"Warp's agent mode is the most legible 'AI in your CLI' I've used. The receipts are the point."</div>
+      <div class="source">The Pragmatic Engineer</div>
+    </div>
+    <div class="press-row">
+      <div class="meta">Feb 18 · 2026</div>
+      <div class="quote">"Quiet, warm, fast. The terminal stops being the loudest thing on your screen."</div>
+      <div class="source">Hacker News</div>
+    </div>
+    <div class="press-row">
+      <div class="meta">Jan 30 · 2026</div>
+      <div class="quote">"$50M Series B for a terminal app. Doesn't sound like a sentence — until you use it."</div>
+      <div class="source">The Information</div>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="section-head" style="text-align: center; margin: 0 auto;">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="display-md">Free to start. Pay when the agent has earned it.</h2>
+  </div>
+  <div class="tiers">
+    <div class="tier">
+      <h3>Free</h3>
+      <div class="price">$0</div>
+      <div class="desc">The full terminal experience and a starter allowance for the agent. Forever.</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Full Warp terminal</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>150 agent requests / mo</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Workflows + themes</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-ghost" style="width: 100%;">Download free</a></div>
+    </div>
+    <div class="tier featured">
+      <h3>Pro</h3>
+      <div class="price">$20<span class="per">/mo</span></div>
+      <div class="desc">For builders who use the agent every day. Unlimited core agent, cross-machine sync, priority models.</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Everything in Free</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited agent runs</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>sonnet · gpt-4o · gemini</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Cloud sync + history</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-ghost" style="width: 100%; background: var(--on-primary); color: var(--primary); border-color: var(--on-primary);">Get Pro</a></div>
+    </div>
+    <div class="tier">
+      <h3>Team</h3>
+      <div class="price">$40<span class="per">/user · mo</span></div>
+      <div class="desc">For teams that ship together. SSO, admin controls, on-prem LLM endpoint, audit logs.</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>SAML SSO + SCIM</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Shared workflows</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>On-prem LLM endpoint</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-ghost" style="width: 100%;">Contact sales</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Download</p>
+    <h2 class="display-md">Available on every platform an engineer uses.</h2>
+  </div>
+  <div class="download-grid">
+    <div class="download-tile">
+      <div class="top">
+        <div class="platform-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-2.86 2.34-4.23 2.45-4.3-1.34-1.96-3.42-2.23-4.16-2.26-1.77-.18-3.46 1.04-4.36 1.04-.91 0-2.3-1.02-3.78-.99-1.94.03-3.74 1.13-4.74 2.86-2.02 3.5-.52 8.69 1.45 11.54.96 1.39 2.11 2.95 3.6 2.9 1.45-.06 2-.93 3.75-.93s2.25.93 3.78.9c1.56-.03 2.55-1.42 3.5-2.81 1.1-1.6 1.56-3.16 1.59-3.24-.03-.01-3.05-1.17-3.08-4.71M14.1 3.78c.8-.97 1.35-2.31 1.2-3.66-1.16.05-2.58.78-3.41 1.74-.74.85-1.4 2.22-1.23 3.53 1.3.1 2.63-.66 3.44-1.61"/></svg></div>
+        <div>
+          <h4>macOS</h4>
+          <div class="ver">v1.84 · Universal · ARM + Intel</div>
+        </div>
+      </div>
+      <a href="#" class="btn btn-primary">Download .dmg</a>
+      <div class="cmd">brew install --cask warp</div>
+    </div>
+    <div class="download-tile">
+      <div class="top">
+        <div class="platform-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/><path d="M7 7c2 2 8 2 10 0M7 17c2-2 8-2 10 0"/></svg></div>
+        <div>
+          <h4>Linux</h4>
+          <div class="ver">v1.84 · deb · rpm · AppImage</div>
+        </div>
+      </div>
+      <a href="#" class="btn btn-primary">Download .deb</a>
+      <div class="cmd">curl -fsSL warp.dev/get.sh | sh</div>
+    </div>
+    <div class="download-tile">
+      <div class="top">
+        <div class="platform-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.7L10 4.7v7.4H3M11 4.6L21 3v9.1H11M3 13h7v7.4l-7-1M11 13h10v9l-10-1.6"/></svg></div>
+        <div>
+          <h4>Windows</h4>
+          <div class="ver">v1.84 · Preview · x64 / ARM64</div>
+        </div>
+      </div>
+      <a href="#" class="btn btn-primary">Download .exe</a>
+      <div class="cmd">winget install warp</div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head" style="margin-bottom: 48px;">
+    <p class="eyebrow">Design System</p>
+    <h2 class="display-md">The tokens behind every pixel.</h2>
+    <p class="body-lg" style="margin-top: 16px;">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.warp.html" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">DESIGN.md</a>. <span class="display-serif" style="font-size: 18px;">Warm</span> dark canvas. No chromatic brand accent — the off-white IS the voice. Tight 3–4px button radii.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand — the off-white IS the brand</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#f7f5f0"></div><div class="meta"><div class="name">primary / ink</div><div class="val">#f7f5f0</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#2b2622"></div><div class="meta"><div class="name">on-primary</div><div class="val">#2b2622</div></div></div>
+    </div>
+
+    <p class="ds-caption">Surface — warm dark, not pure black</p>
+    <div class="ds-sw-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 600px;">
+      <div class="ds-sw"><div class="chip" style="background:#2b2622"></div><div class="meta"><div class="name">canvas</div><div class="val">#2b2622</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#383330"></div><div class="meta"><div class="name">canvas-soft</div><div class="val">#383330</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#3f3a36"></div><div class="meta"><div class="name">hairline</div><div class="val">#3f3a36</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text — all carry a hint of warmth</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#f7f5f0"></div><div class="meta"><div class="name">ink</div><div class="val">#f7f5f0</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#dad2c1"></div><div class="meta"><div class="name">body-strong</div><div class="val">#dad2c1</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c9c0ad"></div><div class="meta"><div class="name">body</div><div class="val">#c9c0ad</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#aea69c"></div><div class="meta"><div class="name">mute</div><div class="val">#aea69c</div></div></div>
+    </div>
+
+    <p class="ds-caption">Terminal syntax — scoped to in-mockup output only</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#d68aff"></div><div class="meta"><div class="name">prompt / agent</div><div class="val">#d68aff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#62c8c8"></div><div class="meta"><div class="name">user</div><div class="val">#62c8c8</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#7ba6e2"></div><div class="meta"><div class="name">path</div><div class="val">#7ba6e2</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e9c46a"></div><div class="meta"><div class="name">flag</div><div class="val">#e9c46a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#8dca8c"></div><div class="meta"><div class="name">ok</div><div class="val">#8dca8c</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption" style="margin-bottom: 16px;">Inter for narrative · DM Mono for code · Instrument Serif italic for editorial moments · negative tracking on display</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">64 · w400 · −1.60 · 1.10</span><div class="ds-sam" style="font-size:50px; font-weight:400; letter-spacing:-1.4px; line-height:1.1;">Agentic development environment</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">48 · w400 · −1.20 · 1.10</span><div class="ds-sam" style="font-size:42px; font-weight:400; letter-spacing:-1.1px; line-height:1.1;">Quietly confident headline</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">32 · w500 · −0.80 · 1.25</span><div class="ds-sam" style="font-size:28px; font-weight:500; letter-spacing:-0.7px;">Section heading sits here</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-sm</span><span class="ds-spec">24 · w500 · −0.40 · 1.33</span><div class="ds-sam" style="font-size:24px; font-weight:500; letter-spacing:-0.4px;">Card title</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-serif</span><span class="ds-spec">48 · w400 · −0.50 · Instrument</span><div class="ds-sam serif" style="font-size:36px; font-weight:400; font-style: italic; letter-spacing:-0.5px;">an editorial italic moment</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">18 · w400 · 0 · 28px</span><div class="ds-sam" style="font-size:18px; color: var(--body);">Lead paragraph. Sets the tone below a display headline.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 · w400 · 0 · 24px</span><div class="ds-sam" style="font-size:16px; color: var(--body);">Default body — paragraph copy across cards and prose.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-sm</span><span class="ds-spec">14 · w400 · 0 · 20px</span><div class="ds-sam" style="font-size:14px; color: var(--body);">Secondary body and nav.</div></div>
+      <div class="ds-tr"><span class="ds-tok">code</span><span class="ds-spec">13 · w400 · DM Mono · 18px</span><div class="ds-sam mono" style="font-size:13px; color: var(--ink);">$ git diff --stat src/queue.ts</div></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">14 · w500 · 0 · 20px</span><div class="ds-sam" style="font-size:14px; font-weight:500;">Download Warp · Sign In</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius — extremely tight</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:0"></div><span class="ds-tok">none</span><span class="ds-spec">0</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:1px"></div><span class="ds-tok">xxs</span><span class="ds-spec">1</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:2px"></div><span class="ds-tok">xs</span><span class="ds-spec">2 · chip</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:3px"></div><span class="ds-tok">sm</span><span class="ds-spec">3 · btn</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">md</span><span class="ds-spec">4 · card</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:6px"></div><span class="ds-tok">lg</span><span class="ds-spec">6 · larger</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">full</span><span class="ds-spec">∞ · icon</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — 3px radius. The brand never uses generous pills for CTAs.</p>
+    <div class="ds-comp-row">
+      <a class="btn btn-primary">button-primary</a>
+      <a class="btn btn-ghost">button-secondary-ghost</a>
+      <a class="btn btn-text">button-text</a>
+      <button class="btn-icon-circular" style="border: 1px solid var(--hairline);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2"/></svg>
+      </button>
+    </div>
+
+    <p class="ds-caption">Inputs — canvas-soft · 3px radius · hairline border</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="Plan, run, or hand off…"/>
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="git diff --stat src/queue.ts"/>
+      </div>
+    </div>
+
+    <p class="ds-caption">Pills, badges, keycaps — pill radius reserved for status / icon containers</p>
+    <div class="ds-tag-row">
+      <span class="badge-pill">Pro</span>
+      <span class="badge-pill" style="background: var(--canvas); border: 1px solid var(--hairline-strong);">Beta</span>
+      <span class="kbd">⌘</span>
+      <span class="kbd">⏎</span>
+      <span class="kbd">git status</span>
+    </div>
+
+    <p class="ds-caption">Card variants — 4px radius · hairline + surface contrast carry depth</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-mini">
+        <h4>card-content</h4>
+        <p>Background canvas-soft · 4px radius · 1px hairline. Default content card.</p>
+      </div>
+      <div class="ds-card-mini featured">
+        <h4>pricing-tier-featured</h4>
+        <p>Polarity-flipped: off-white fill, warm-dark text. The featured tier inversion.</p>
+      </div>
+      <div class="ds-card-mini">
+        <h4>card-mockup</h4>
+        <p>Same chrome as card-content but body in DM Mono when text appears. The terminal mockup.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="brand-mini">
+      <a class="brand" href="#">
+        <span class="logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4l8 8-8 8M12 4l8 8-8 8" stroke="#f7f5f0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Warp
+      </a>
+      <p>The agentic development environment. Tokens and component spec sourced from awesome-design-md.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Terminal</a></li>
+        <li><a href="#">Agents</a></li>
+        <li><a href="#">Workflows</a></li>
+        <li><a href="#">Cloud sync</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Discord</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Trust</a></li>
+        <li><a href="#">Security</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© Warp (inspired) · Generated for design study</div>
+    <div>Canvas #2b2622 · Off-white #f7f5f0 · Radius 3 / 4 · Inter + DM Mono + Instrument Serif</div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.warp.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>腾讯云 Tencent Cloud — 设计语言研究</title>
+<meta name="description" content="腾讯云视觉语言的设计研究：白底 + 腾讯蓝 #006EFF 单色锚点、冷感企业蓝渐变、4–8px 圆角、产业互联网叙事。营销 demo + 设计系统参考。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-1: #f7f9fc;
+  --surface-2: #eef3f8;
+  --surface-card: #ffffff;
+  --surface-dark: #0a1f3d;
+  /* Brand */
+  --tc-blue: #006EFF;
+  --tc-blue-deep: #0050C8;
+  --tc-blue-soft: #5DACFF;
+  --tc-blue-fog: #E5F0FF;
+  /* Text */
+  --ink: #1d2129;
+  --ink-bright: #000000;
+  --ink-soft: #4e5969;
+  --ink-muted: #86909c;
+  --ink-dim: #c9cdd4;
+  /* Border */
+  --border: #e5e6eb;
+  --border-soft: #f2f3f5;
+  --border-bright: #c9cdd4;
+  /* Semantic */
+  --positive: #00b42a;
+  --warning: #ff7d00;
+  --negative: #f53f3f;
+  /* Shadow */
+  --shadow-card: 0 4px 16px rgba(0,40,120,0.06), 0 1px 2px rgba(0,40,120,0.04);
+  --shadow-heavy: 0 16px 40px rgba(0,40,120,0.12);
+  /* Type */
+  --font-ui: "Inter", "PingFang SC", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", helvetica, arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radii */
+  --r-min: 2px;
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-2xl: 20px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1240px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--tc-blue); }
+.brand-mark { width: 30px; height: 30px; border-radius: 6px; background: linear-gradient(135deg, var(--tc-blue) 0%, var(--tc-blue-deep) 100%); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(0,110,255,0.3); }
+.brand-mark svg { width: 18px; height: 18px; color: #fff; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link { padding: 8px 14px; font-size: 14px; font-weight: 500; color: var(--ink-soft); border-radius: 6px; transition: color .15s, background .15s; }
+.nav-link:hover { color: var(--tc-blue); background: var(--tc-blue-fog); }
+.nav-link.active { color: var(--tc-blue); font-weight: 600; }
+.nav-cta { display: flex; gap: 8px; align-items: center; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; cursor: pointer; border: 1px solid transparent; transition: all .15s ease; font-weight: 500; }
+.btn-primary { background: var(--tc-blue); color: #fff; padding: 10px 22px; border-radius: var(--r-md); font-size: 14px; box-shadow: 0 2px 6px rgba(0,110,255,0.25); }
+.btn-primary:hover { background: var(--tc-blue-deep); box-shadow: 0 6px 16px rgba(0,110,255,0.35); transform: translateY(-1px); }
+.btn-outline { background: #fff; color: var(--tc-blue); padding: 10px 22px; border-radius: var(--r-md); border-color: var(--tc-blue); font-size: 14px; }
+.btn-outline:hover { background: var(--tc-blue-fog); }
+.btn-ghost { background: transparent; color: var(--ink-soft); padding: 8px 14px; border-radius: var(--r-sm); font-size: 14px; }
+.btn-ghost:hover { color: var(--tc-blue); background: var(--tc-blue-fog); }
+.btn-sm { padding: 6px 14px; font-size: 13px; }
+.btn-lg { padding: 14px 32px; font-size: 15px; border-radius: var(--r-lg); }
+
+/* Hero */
+.hero { position: relative; padding: 80px 0 100px; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background:
+  radial-gradient(55% 50% at 78% 28%, rgba(93,172,255,0.22), transparent 65%),
+  radial-gradient(45% 40% at 12% 90%, rgba(0,80,200,0.10), transparent 70%),
+  linear-gradient(180deg, #ffffff 0%, #f3f8ff 100%);
+  z-index: -1;
+}
+.hero-bg::after { content: ""; position: absolute; inset: 0; background-image:
+  linear-gradient(rgba(0,110,255,0.04) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(0,110,255,0.04) 1px, transparent 1px);
+  background-size: 64px 64px; mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5), transparent 70%); }
+.hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; position: relative; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--tc-blue); padding: 6px 14px; border-radius: 999px; background: var(--tc-blue-fog); border: 1px solid rgba(0,110,255,0.18); }
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--tc-blue); }
+.hero h1 { font-size: 60px; line-height: 1.08; letter-spacing: -1.6px; font-weight: 800; margin: 22px 0 18px; color: var(--ink-bright); }
+.hero h1 em { font-style: normal; background: linear-gradient(120deg, var(--tc-blue) 0%, var(--tc-blue-soft) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p.lead { font-size: 16px; line-height: 1.7; color: var(--ink-soft); max-width: 520px; margin: 0 0 32px; }
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero-meta { margin-top: 40px; display: flex; gap: 36px; align-items: center; }
+.hero-meta-item strong { display: block; color: var(--ink-bright); font-weight: 700; font-size: 22px; letter-spacing: -0.4px; }
+.hero-meta-item span { font-size: 12px; color: var(--ink-muted); margin-top: 2px; display: block; }
+
+/* Iso server visual */
+.iso { position: relative; height: 460px; perspective: 1200px; }
+.iso-stage { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(55deg) rotateZ(-35deg); }
+.iso-floor { position: absolute; left: 50%; top: 55%; width: 380px; height: 380px; margin: -190px 0 0 -190px; background:
+  linear-gradient(rgba(0,110,255,0.18) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(0,110,255,0.18) 1px, transparent 1px);
+  background-size: 38px 38px; border: 1px solid rgba(0,110,255,0.25); border-radius: 4px;
+  box-shadow: 0 0 60px rgba(0,110,255,0.15); }
+.iso-rack { position: absolute; left: 50%; top: 50%; width: 130px; height: 180px; margin: -90px 0 0 -65px; background: linear-gradient(180deg, #ffffff 0%, #e8f1ff 100%); border: 1px solid #cfe1ff; border-radius: 8px; transform: translateZ(70px); box-shadow: 0 10px 40px rgba(0,80,200,0.20); padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+.iso-rack .led { height: 14px; border-radius: 3px; background: linear-gradient(90deg, var(--tc-blue) 0%, var(--tc-blue-soft) 100%); position: relative; }
+.iso-rack .led::after { content: ""; position: absolute; right: 6px; top: 50%; width: 5px; height: 5px; border-radius: 50%; background: #fff; transform: translateY(-50%); box-shadow: 0 0 6px #fff; }
+.iso-rack .led.dim { background: #dbe7f7; }
+.iso-rack .led.dim::after { background: #5DACFF; box-shadow: none; }
+.iso-cloud { position: absolute; left: 50%; top: 22%; margin-left: -50px; width: 100px; height: 60px; transform: translateZ(160px); }
+.iso-cloud svg { width: 100%; height: 100%; filter: drop-shadow(0 12px 24px rgba(0,110,255,0.3)); }
+.iso-card { position: absolute; transform-style: preserve-3d; background: #fff; border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow-card); padding: 12px 16px; font-size: 12px; font-weight: 500; color: var(--ink); display: flex; gap: 8px; align-items: center; }
+.iso-card .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--positive); }
+.iso-card.c1 { top: 10%; right: 5%; transform: translateZ(120px); }
+.iso-card.c2 { bottom: 12%; left: 4%; transform: translateZ(100px); }
+.iso-card.c3 { top: 45%; right: -5%; transform: translateZ(80px); }
+
+/* Section */
+.section { padding: 96px 0; }
+.section-alt { background: var(--surface-1); }
+.section-head { text-align: center; margin-bottom: 56px; }
+.section-eyebrow { display: inline-block; font-size: 12px; font-weight: 600; color: var(--tc-blue); margin-bottom: 12px; padding: 4px 12px; background: var(--tc-blue-fog); border-radius: 999px; letter-spacing: 0.5px; }
+.section-title { font-size: 40px; line-height: 1.15; letter-spacing: -1px; font-weight: 800; margin: 0 0 14px; color: var(--ink-bright); }
+.section-sub { font-size: 16px; color: var(--ink-soft); line-height: 1.7; max-width: 640px; margin: 0 auto; }
+
+/* Product grid */
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.product-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: 28px; transition: all .2s ease; position: relative; overflow: hidden; }
+.product-card::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 3px; background: var(--tc-blue); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.product-card:hover { border-color: var(--tc-blue-soft); transform: translateY(-4px); box-shadow: var(--shadow-heavy); }
+.product-card:hover::before { transform: scaleX(1); }
+.product-icon { width: 48px; height: 48px; border-radius: 10px; background: linear-gradient(135deg, var(--tc-blue) 0%, var(--tc-blue-deep) 100%); display: grid; place-items: center; color: #fff; margin-bottom: 18px; box-shadow: 0 6px 16px rgba(0,110,255,0.25); }
+.product-icon svg { width: 24px; height: 24px; stroke-width: 2; }
+.product-card h3 { font-size: 18px; font-weight: 700; margin: 0 0 8px; color: var(--ink-bright); }
+.product-card p { font-size: 14px; color: var(--ink-soft); margin: 0 0 18px; line-height: 1.65; }
+.product-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 500; color: var(--tc-blue); }
+.product-link:hover { gap: 8px; }
+
+/* Stat band */
+.stat-band { background: linear-gradient(120deg, var(--tc-blue-deep) 0%, var(--tc-blue) 60%, #2D8BFF 100%); border-radius: var(--r-2xl); padding: 56px 48px; color: #fff; position: relative; overflow: hidden; }
+.stat-band::before { content: ""; position: absolute; right: -100px; top: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%); }
+.stat-band-inner { position: relative; display: grid; grid-template-columns: 1.2fr 2fr; gap: 40px; align-items: center; }
+.stat-band h2 { font-size: 32px; line-height: 1.2; letter-spacing: -0.8px; margin: 0; font-weight: 800; }
+.stat-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.stat-item strong { display: block; font-size: 36px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+.stat-item span { display: block; font-size: 13px; opacity: 0.85; margin-top: 8px; }
+
+/* Solution split */
+.sol-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.sol-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: 36px; position: relative; overflow: hidden; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; }
+.sol-card.blue { background: linear-gradient(135deg, var(--tc-blue-deep) 0%, var(--tc-blue) 100%); color: #fff; border: 0; }
+.sol-card.blue h3, .sol-card.blue p { color: #fff; }
+.sol-card.blue p { opacity: 0.85; }
+.sol-card h3 { font-size: 26px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.4px; color: var(--ink-bright); }
+.sol-card p { font-size: 14px; color: var(--ink-soft); margin: 0 0 24px; max-width: 360px; line-height: 1.7; }
+.sol-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 4px; background: var(--tc-blue-fog); color: var(--tc-blue); margin-bottom: 14px; letter-spacing: 0.5px; }
+.sol-card.blue .sol-tag { background: rgba(255,255,255,0.18); color: #fff; }
+.sol-vis { margin-top: 16px; height: 100px; border-radius: var(--r-md); background: linear-gradient(135deg, var(--tc-blue-fog) 0%, #fff 100%); border: 1px solid var(--border-soft); display: grid; place-items: center; }
+.sol-card.blue .sol-vis { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.15); }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.plan { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: 32px; position: relative; transition: all .18s; }
+.plan:hover { border-color: var(--tc-blue-soft); box-shadow: var(--shadow-card); }
+.plan.featured { border: 2px solid var(--tc-blue); background: linear-gradient(180deg, #f3f8ff 0%, #ffffff 30%); }
+.plan-badge { position: absolute; top: -12px; left: 28px; background: var(--tc-blue); color: #fff; padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+.plan-name { font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 10px; letter-spacing: 0.5px; }
+.plan-title { font-size: 22px; font-weight: 700; color: var(--ink-bright); margin-bottom: 4px; }
+.plan-price { display: flex; align-items: baseline; gap: 4px; margin: 18px 0 8px; }
+.plan-price .currency { font-size: 18px; color: var(--ink); font-weight: 600; }
+.plan-price .num { font-size: 38px; font-weight: 800; letter-spacing: -1.2px; color: var(--ink-bright); }
+.plan-price .per { font-size: 13px; color: var(--ink-muted); }
+.plan-blurb { font-size: 13px; color: var(--ink-soft); margin-bottom: 22px; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
+.plan li { font-size: 13px; color: var(--ink); display: flex; align-items: flex-start; gap: 10px; line-height: 1.55; }
+.plan li svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--tc-blue); margin-top: 4px; }
+.plan-cta { width: 100%; padding: 12px 20px; border-radius: var(--r-md); font-size: 14px; font-weight: 500; }
+
+/* CTA */
+.cta-band { background: var(--surface-dark); border-radius: var(--r-2xl); padding: 64px 56px; display: flex; align-items: center; justify-content: space-between; gap: 32px; color: #fff; position: relative; overflow: hidden; }
+.cta-band::before { content: ""; position: absolute; right: -50px; bottom: -50px; width: 360px; height: 360px; background: radial-gradient(circle, rgba(0,110,255,0.4), transparent 70%); border-radius: 50%; }
+.cta-band h2 { font-size: 36px; line-height: 1.15; letter-spacing: -1px; margin: 0 0 10px; font-weight: 800; max-width: 560px; position: relative; }
+.cta-band p { margin: 0; font-size: 15px; opacity: 0.75; max-width: 480px; position: relative; }
+.cta-band .btn { position: relative; }
+
+/* Footer */
+footer { background: #fafbfc; border-top: 1px solid var(--border-soft); padding: 64px 0 32px; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
+.foot-brand p { color: var(--ink-soft); font-size: 13px; line-height: 1.7; margin: 14px 0 22px; max-width: 280px; }
+.foot-col h4 { font-size: 13px; font-weight: 600; color: var(--ink-bright); margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: var(--ink-soft); transition: color .12s; }
+.foot-col li a:hover { color: var(--tc-blue); }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--border-soft); font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 14px; }
+
+/* Design System Part B */
+.ds-section { background: #fafbfc; padding: 100px 0; border-top: 1px solid var(--border-soft); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 36px; letter-spacing: -1px; line-height: 1.15; margin: 0 0 8px; font-weight: 800; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-soft); font-size: 14px; max-width: 540px; line-height: 1.7; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #fff; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--ink-soft); transition: all .15s; }
+.ds-source:hover { color: var(--tc-blue); border-color: var(--tc-blue); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border-soft); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 22px; font-weight: 700; color: var(--ink-bright); margin: 0 0 8px; }
+.ds-desc { font-size: 13px; color: var(--ink-soft); margin: 0 0 24px; line-height: 1.7; max-width: 580px; }
+.ds-caption { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--ink-muted); text-transform: uppercase; margin: 28px 0 12px; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 12px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border-soft); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 600; letter-spacing: 0.8px; color: var(--ink-muted); text-transform: uppercase; background: var(--surface-1); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--tc-blue); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.ds-radius-cell { background: #fff; border: 1px solid var(--border); padding: 18px 8px; text-align: center; border-radius: 8px; }
+.ds-radius-box { width: 56px; height: 56px; background: linear-gradient(135deg, var(--tc-blue) 0%, var(--tc-blue-deep) 100%); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 12px; font-weight: 600; color: var(--ink); }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); padding: 22px; }
+.ds-card h5 { font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--tc-blue); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input { background: #fff; border: 1px solid var(--border); padding: 10px 14px; border-radius: var(--r-md); color: var(--ink); font-size: 13px; font-family: inherit; width: 100%; outline: none; transition: border-color .15s, box-shadow .15s; }
+.input:focus { border-color: var(--tc-blue); box-shadow: 0 0 0 3px rgba(0,110,255,0.12); }
+.tag { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
+.tag-info { background: var(--tc-blue-fog); color: var(--tc-blue); }
+.tag-success { background: #e8ffea; color: var(--positive); }
+.tag-warn { background: #fff7e6; color: var(--warning); }
+.tag-line { background: transparent; color: var(--ink-soft); border: 1px solid var(--border); }
+
+/* Floating source */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: #fff; border: 1px solid var(--border); padding: 10px 18px; border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--ink-soft); box-shadow: var(--shadow-card); transition: color .15s, border-color .15s; }
+.src-link:hover { color: var(--tc-blue); border-color: var(--tc-blue); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero h1 { font-size: 42px; letter-spacing: -1.2px; }
+  .product-grid, .pricing-grid, .sol-split { grid-template-columns: 1fr; }
+  .stat-band-inner { grid-template-columns: 1fr; }
+  .stat-list { grid-template-columns: repeat(2, 1fr); }
+  .cta-band { flex-direction: column; align-items: flex-start; padding: 40px 28px; }
+  .cta-band h2 { font-size: 26px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+  .iso { height: 320px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+      </span>
+      <span>腾讯云</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link active" href="#">产品</a>
+      <a class="nav-link" href="#">解决方案</a>
+      <a class="nav-link" href="#">行业应用</a>
+      <a class="nav-link" href="#">开发者</a>
+      <a class="nav-link" href="#">合作伙伴</a>
+      <a class="nav-link" href="#">了解我们</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#">控制台</a>
+      <a class="btn btn-outline btn-sm" href="#">注册</a>
+      <a class="btn btn-primary btn-sm" href="#">立即登录</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>双十一限时 · 新用户首单 0.1 折起</span>
+      <h1>产业向上,<br/><em>云启未来</em>。</h1>
+      <p class="lead">提供安全、稳定、易用的全栈云服务,从 IaaS 到 PaaS,从 AI 到大数据,助力企业数字化转型,与产业互联网共生长。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#">免费试用</a>
+        <a class="btn btn-outline btn-lg" href="#">联系销售</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>5000+</strong><span>产品与解决方案</span></div>
+        <div class="hero-meta-item"><strong>26</strong><span>全球地理区域</span></div>
+        <div class="hero-meta-item"><strong>99.995%</strong><span>SLA 服务可用性</span></div>
+      </div>
+    </div>
+
+    <div class="iso" aria-label="云架构示意">
+      <div class="iso-stage">
+        <div class="iso-floor"></div>
+        <div class="iso-rack">
+          <div class="led"></div>
+          <div class="led"></div>
+          <div class="led dim"></div>
+          <div class="led"></div>
+          <div class="led dim"></div>
+          <div class="led"></div>
+          <div class="led dim"></div>
+          <div class="led"></div>
+        </div>
+        <div class="iso-cloud">
+          <svg viewBox="0 0 100 60" fill="none">
+            <defs>
+              <linearGradient id="cg" x1="0" y1="0" x2="100" y2="60">
+                <stop offset="0%" stop-color="#5DACFF"/>
+                <stop offset="100%" stop-color="#006EFF"/>
+              </linearGradient>
+            </defs>
+            <path d="M75 35h-3a18 18 0 10-32 8h35a8 8 0 000-16z" fill="url(#cg)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="iso-card c1"><span class="dot"></span>CVM 实例运行中 · 142</div>
+      <div class="iso-card c2"><span class="dot"></span>QPS 8.2M · 延迟 13ms</div>
+      <div class="iso-card c3"><span class="dot"></span>CDN 节点 · 2800+</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">核心产品</span>
+      <h2 class="section-title">从基础设施到上层应用,一站式云能力</h2>
+      <p class="section-sub">无论你是初创团队还是大型企业,腾讯云都能用同一套技术底座,支撑你从 0 到 1,再到无限可能。</p>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>云服务器 CVM</h3>
+        <p>稳定可靠的弹性计算服务,支持秒级开通,覆盖全球 26 个地理区域,SLA 高达 99.995%。</p>
+        <a class="product-link" href="#">了解更多 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+        </div>
+        <h3>云数据库 TencentDB</h3>
+        <p>一站式数据库服务,覆盖 MySQL、Redis、MongoDB、ClickHouse,自动容灾、备份与扩缩容。</p>
+        <a class="product-link" href="#">了解更多 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <h3>云直播 CSS</h3>
+        <p>低延迟、高并发的直播解决方案,赋能秀场、电商、教育、互动游戏等多场景。</p>
+        <a class="product-link" href="#">了解更多 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3>内容分发 CDN</h3>
+        <p>全球 2800+ 加速节点,智能调度,提供卓越的网页、音视频与下载加速体验。</p>
+        <a class="product-link" href="#">了解更多 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3>区块链 TBaaS</h3>
+        <p>基于腾讯云的可信区块链服务,提供 BaaS 平台、联盟链与企业级智能合约能力。</p>
+        <a class="product-link" href="#">了解更多 →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>云安全 CWP</h3>
+        <p>覆盖主机安全、Web 防护、DDoS 防御与零信任体系,为业务提供端到端安全保护。</p>
+        <a class="product-link" href="#">了解更多 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT -->
+<section class="section">
+  <div class="container">
+    <div class="stat-band">
+      <div class="stat-band-inner">
+        <h2>支撑全球客户的产业互联网底座</h2>
+        <div class="stat-list">
+          <div class="stat-item"><strong>26</strong><span>地理区域</span></div>
+          <div class="stat-item"><strong>2800+</strong><span>加速节点</span></div>
+          <div class="stat-item"><strong>100W+</strong><span>付费客户</span></div>
+          <div class="stat-item"><strong>180+</strong><span>国家与地区</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">行业解决方案</span>
+      <h2 class="section-title">用云的方式,重新定义你的行业</h2>
+      <p class="section-sub">十年深耕产业互联网,我们与合作伙伴共建零售、金融、医疗、文旅、政务等多个垂直领域的最佳实践。</p>
+    </div>
+
+    <div class="sol-split">
+      <div class="sol-card">
+        <div>
+          <span class="sol-tag">智慧零售</span>
+          <h3>从门店到供应链,全链路数字化</h3>
+          <p>整合微信生态、企业微信、小程序、视频号,打通公域与私域,为零售品牌提供端到端解决方案。</p>
+        </div>
+        <div class="sol-vis">
+          <svg width="240" height="60" viewBox="0 0 240 60" fill="none" stroke="#006EFF" stroke-width="2" stroke-linecap="round">
+            <circle cx="30" cy="30" r="14"/><circle cx="120" cy="30" r="14"/><circle cx="210" cy="30" r="14"/>
+            <line x1="44" y1="30" x2="106" y2="30"/><line x1="134" y1="30" x2="196" y2="30"/>
+          </svg>
+        </div>
+        <a class="btn btn-outline btn-sm" href="#">查看方案</a>
+      </div>
+
+      <div class="sol-card blue">
+        <div>
+          <span class="sol-tag">金融科技</span>
+          <h3>等保合规,为金融业务保驾护航</h3>
+          <p>满足金融行业等保三级、PCI-DSS 等合规要求,为银行、券商、保险提供专属云方案。</p>
+        </div>
+        <div class="sol-vis">
+          <svg width="240" height="60" viewBox="0 0 240 60" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <path d="M30 50V20l40-12 40 12v30"/><path d="M30 50h80"/><path d="M50 50V32M70 50V32M90 50V32"/>
+          </svg>
+        </div>
+        <a class="btn btn-outline btn-sm" href="#" style="background:#fff;border-color:#fff;color:var(--tc-blue);">查看方案</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">套餐计费</span>
+      <h2 class="section-title">弹性付费,按需选择</h2>
+      <p class="section-sub">无论日常开发还是企业级生产,都有合适的计费方案。新用户首单更可享受 0.1 折起优惠。</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">个人开发</div>
+        <div class="plan-title">轻量应用服务器</div>
+        <div class="plan-price"><span class="currency">¥</span><span class="num">62</span><span class="per">/月起</span></div>
+        <div class="plan-blurb">适合个人博客、轻量站点、开发测试。</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>2 核 2G 内存 / 50G SSD</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>3M 带宽 + 200G 月流量</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>预装多款应用镜像</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">立即购买</a>
+      </div>
+
+      <div class="plan featured">
+        <div class="plan-badge">最受欢迎</div>
+        <div class="plan-name">中小企业</div>
+        <div class="plan-title">标准型云服务器</div>
+        <div class="plan-price"><span class="currency">¥</span><span class="num">218</span><span class="per">/月起</span></div>
+        <div class="plan-blurb">适合企业官网、电商、SaaS 应用。</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>4 核 8G 内存 / 100G SSD</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>5M 独享带宽</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>免费 DDoS 基础防护</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>7×24 工单支持</li>
+        </ul>
+        <a class="btn btn-primary plan-cta" href="#">立即购买</a>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">大型企业</div>
+        <div class="plan-title">企业级专属方案</div>
+        <div class="plan-price"><span class="num">联系销售</span></div>
+        <div class="plan-blurb">私有化部署、混合云架构、定制 SLA。</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>专属客户经理</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>等保合规支持</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>定制级 SLA 99.99%</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">联系商务</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>开始你的云端旅程</h2>
+        <p>注册即送代金券 + 免费试用 8 大热门产品,30 天上手云端架构。</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="#" style="background:#fff;color:var(--tc-blue);">免费注册</a>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM (Part B) -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <span class="section-eyebrow">设计系统参考</span>
+        <h2>冷静、克制、值得信赖的企业蓝</h2>
+        <p>腾讯云的视觉语言用单一的腾讯蓝 #006EFF 锚定专业感:大量留白、4–8px 圆角、克制的渐变、isometric 3D 插画。每一个 token 都为"产业互联网"这一叙事服务。</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.tencent-cloud.html" target="_blank" rel="noopener">查看 DESIGN.md ↗</a>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3 class="ds-heading">色彩</h3>
+      <p class="ds-desc">以白为底,以蓝为锚。腾讯蓝 #006EFF 比阿里云 #FF6A00 更冷感,与企业级服务的稳定感一致。仅在 CTA、图标、链接等功能性场景使用主色。</p>
+
+      <div class="ds-caption">品牌主色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#006EFF"></div><div class="meta"><div class="name">腾讯蓝</div><div class="val">#006EFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0050C8"></div><div class="meta"><div class="name">深蓝</div><div class="val">#0050C8</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5DACFF"></div><div class="meta"><div class="name">浅蓝</div><div class="val">#5DACFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E5F0FF"></div><div class="meta"><div class="name">蓝色背景</div><div class="val">#E5F0FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(120deg,#006EFF,#5DACFF)"></div><div class="meta"><div class="name">主渐变</div><div class="val">linear-gradient</div></div></div>
+      </div>
+
+      <div class="ds-caption">文字与中性色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">主标题</div><div class="val">#000000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1d2129"></div><div class="meta"><div class="name">正文</div><div class="val">#1d2129</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4e5969"></div><div class="meta"><div class="name">辅助</div><div class="val">#4e5969</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#86909c"></div><div class="meta"><div class="name">弱化</div><div class="val">#86909c</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#c9cdd4"></div><div class="meta"><div class="name">禁用</div><div class="val">#c9cdd4</div></div></div>
+      </div>
+
+      <div class="ds-caption">背景与分隔</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #e5e6eb"></div><div class="meta"><div class="name">底色</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fafbfc;border:1px solid #e5e6eb"></div><div class="meta"><div class="name">页底</div><div class="val">#fafbfc</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f7f9fc;border:1px solid #e5e6eb"></div><div class="meta"><div class="name">弱背景</div><div class="val">#f7f9fc</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#eef3f8;border:1px solid #e5e6eb"></div><div class="meta"><div class="name">浅蓝灰</div><div class="val">#eef3f8</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0a1f3d"></div><div class="meta"><div class="name">深底</div><div class="val">#0a1f3d</div></div></div>
+      </div>
+
+      <div class="ds-caption">语义色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#00b42a"></div><div class="meta"><div class="name">成功</div><div class="val">#00b42a</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ff7d00"></div><div class="meta"><div class="name">警告</div><div class="val">#ff7d00</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f53f3f"></div><div class="meta"><div class="name">错误</div><div class="val">#f53f3f</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#006EFF"></div><div class="meta"><div class="name">信息</div><div class="val">#006EFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e5e6eb"></div><div class="meta"><div class="name">分隔</div><div class="val">#e5e6eb</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">字体</h3>
+      <p class="ds-desc">中文 PingFang SC 优先,西文 Inter 互补。字号采用 4 的倍数体系,标题 -0.5px ~ -1.6px 的负字距强化精致感。</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>样例</th><th>字号</th><th>字重</th><th>字距</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:32px;font-weight:800;letter-spacing:-1px">产业向上 云启未来</td><td>60 / 48 / 32</td><td>800</td><td>-1.6 ~ -1px</td></tr>
+          <tr><td class="token">--title-h2</td><td class="sample" style="font-size:24px;font-weight:700;letter-spacing:-0.5px">章节标题</td><td>40 / 32 / 24</td><td>700</td><td>-1 ~ -0.5px</td></tr>
+          <tr><td class="token">--title-h3</td><td class="sample" style="font-size:18px;font-weight:700">产品名称</td><td>18 / 16</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:14px;font-weight:400">正文段落,1.55 行高</td><td>14</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--body-strong</td><td class="sample" style="font-size:14px;font-weight:600">正文强调</td><td>14</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--btn</td><td class="sample" style="font-size:14px;font-weight:500">立即购买</td><td>13 / 14 / 15</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--caption</td><td class="sample" style="font-size:12px;font-weight:400;color:#86909c">SLA 99.995%</td><td>12</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--mono</td><td class="sample" style="font-family:JetBrains Mono,monospace;font-size:12px">curl -X POST</td><td>11 / 12</td><td>400 / 500</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">圆角</h3>
+      <p class="ds-desc">企业级克制 — 主流圆角集中在 4–8px,卡片 12–20px,只在徽章与状态点使用 999px。</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">最小</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">按钮</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">输入</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">徽章</div><div class="ds-radius-val">999px</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">组件</h3>
+      <p class="ds-desc">按钮、输入、标签 — 都遵循"边框分明、阴影克制"的原则。Hover 用底色或阴影变化,而不是放大。</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>按钮</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">主要按钮</a>
+            <a class="btn btn-outline" href="#">次要按钮</a>
+            <a class="btn btn-ghost" href="#">幽灵按钮</a>
+            <a class="btn btn-primary btn-lg" href="#">大号 CTA</a>
+            <div class="ds-card-row">
+              <a class="btn btn-primary btn-sm" href="#">小</a>
+              <a class="btn btn-outline btn-sm" href="#">小</a>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>输入与状态</h5>
+          <div class="ds-card-stack">
+            <input class="input" placeholder="输入实例名称" />
+            <input class="input" placeholder="搜索产品..." />
+            <div class="ds-card-row">
+              <span class="tag tag-info">信息</span>
+              <span class="tag tag-success">运行中</span>
+              <span class="tag tag-warn">告警</span>
+              <span class="tag tag-line">已停止</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>卡片</h5>
+          <div class="ds-card-stack" style="width:100%">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;width:100%;box-shadow:var(--shadow-card)">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#006EFF,#0050C8);display:grid;place-items:center;color:#fff;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#1d2129">CVM-prod-01</div>
+                  <div style="font-size:11px;color:#86909c">广州一区</div>
+                </div>
+              </div>
+              <div style="font-size:11px;color:#4e5969;display:flex;gap:8px;align-items:center"><span class="tag tag-success">运行中</span><span>4 核 8G · 5 Mbps</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+          </span>
+          <span>腾讯云</span>
+        </div>
+        <p>本站为腾讯云视觉语言的设计学习样本,旨在展示 token 体系、克制企业蓝美学与产业互联网叙事。与 Tencent Cloud 无任何隶属关系。</p>
+      </div>
+      <div class="foot-col">
+        <h4>产品</h4>
+        <ul>
+          <li><a href="#">云服务器</a></li>
+          <li><a href="#">云数据库</a></li>
+          <li><a href="#">CDN</a></li>
+          <li><a href="#">云直播</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>解决方案</h4>
+        <ul>
+          <li><a href="#">智慧零售</a></li>
+          <li><a href="#">金融科技</a></li>
+          <li><a href="#">智慧医疗</a></li>
+          <li><a href="#">智慧政务</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>开发者</h4>
+        <ul>
+          <li><a href="#">文档中心</a></li>
+          <li><a href="#">API 网关</a></li>
+          <li><a href="#">SDK 下载</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>了解我们</h4>
+        <ul>
+          <li><a href="#">关于腾讯云</a></li>
+          <li><a href="#">合作伙伴</a></li>
+          <li><a href="#">招贤纳士</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计学习作品 · 致敬腾讯云视觉语言</span>
+      <span>隐私政策 · 服务协议 · 法律声明</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.tencent-cloud.html" target="_blank" rel="noopener">查看源码 ↗</a>
+
+</body>
+</html>

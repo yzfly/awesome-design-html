@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>哔哩哔哩 bilibili — 设计系统研究</title>
+<meta name="description" content="哔哩哔哩 bilibili 设计语言视觉研究: B 站粉蓝双色, 二次元社区圆润友好的视觉系统, 弹幕文化的色彩表达. 营销 demo + 设计系统参考." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --canvas: #ffffff;
+  --canvas-tint: #fff6f9;
+  --surface-1: #fdf2f6;
+  --surface-2: #fce4ec;
+  --accent-pink: #FB7299;
+  --accent-pink-deep: #E85B83;
+  --accent-pink-soft: rgba(251, 114, 153, 0.1);
+  --accent-blue: #00A1D6;
+  --accent-blue-deep: #0084B0;
+  --accent-blue-soft: rgba(0, 161, 214, 0.1);
+  --accent-yellow: #FFC100;
+  --accent-purple: #9D5EE3;
+  --accent-green: #6BCB77;
+  --ink: #18191c;
+  --ink-bright: #000000;
+  --ink-soft: #424650;
+  --ink-muted: #61666d;
+  --ink-dim: #9499a0;
+  --border: #f1f2f3;
+  --border-soft: #f6f7f8;
+  --border-mid: #e3e5e7;
+  --shadow-card: 0 4px 16px rgba(251, 114, 153, 0.1);
+  --shadow-deep: 0 12px 32px rgba(251, 114, 153, 0.16);
+  --font-ui: "Inter", "Noto Sans SC", -apple-system, "PingFang SC", sans-serif;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; max-width: 1240px; margin: 0 auto; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; letter-spacing: -0.3px; color: var(--accent-blue); flex-shrink: 0; }
+.brand-mark { width: 36px; height: 30px; border-radius: 8px; background: var(--accent-pink); position: relative; }
+.brand-mark::before { content: ""; position: absolute; width: 6px; height: 8px; background: var(--accent-pink); border-radius: 2px; top: -6px; left: 6px; transform: rotate(-25deg); }
+.brand-mark::after { content: ""; position: absolute; width: 6px; height: 8px; background: var(--accent-pink); border-radius: 2px; top: -6px; right: 6px; transform: rotate(25deg); }
+.brand-eyes { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 5px; }
+.brand-eyes span { width: 4px; height: 4px; border-radius: 50%; background: #fff; }
+.nav-search { flex: 1; max-width: 420px; position: relative; }
+.nav-search input { width: 100%; padding: 8px 16px 8px 38px; background: var(--surface-1); border: 1px solid transparent; border-radius: var(--r-pill); font-size: 13px; outline: none; transition: all .15s; }
+.nav-search input:focus { border-color: var(--accent-pink); background: #fff; }
+.nav-search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(--ink-dim); }
+.nav-links { display: flex; align-items: center; gap: 2px; }
+.nav-link { padding: 6px 12px; font-size: 13px; font-weight: 500; color: var(--ink-soft); border-radius: var(--r-sm); transition: all .15s; }
+.nav-link:hover { color: var(--accent-pink); }
+.nav-link.active { color: var(--accent-pink); }
+.nav-cta { display: flex; gap: 10px; align-items: center; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; cursor: pointer; border: 0; transition: all .15s; font-weight: 500; }
+.btn-pink { background: var(--accent-pink); color: #fff; padding: 8px 20px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600; }
+.btn-pink:hover { background: var(--accent-pink-deep); transform: translateY(-1px); }
+.btn-pink-lg { background: var(--accent-pink); color: #fff; padding: 12px 28px; border-radius: var(--r-pill); font-size: 14px; font-weight: 600; box-shadow: 0 4px 14px rgba(251, 114, 153, 0.3); }
+.btn-pink-lg:hover { background: var(--accent-pink-deep); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(251, 114, 153, 0.4); }
+.btn-blue { background: var(--accent-blue); color: #fff; padding: 12px 28px; border-radius: var(--r-pill); font-size: 14px; font-weight: 600; }
+.btn-blue:hover { background: var(--accent-blue-deep); }
+.btn-outline-pink { background: #fff; color: var(--accent-pink); padding: 12px 28px; border-radius: var(--r-pill); border: 1.5px solid var(--accent-pink); font-size: 14px; font-weight: 600; }
+.btn-outline-pink:hover { background: var(--accent-pink-soft); }
+.btn-soft { background: var(--surface-1); color: var(--ink-soft); padding: 8px 16px; border-radius: var(--r-pill); font-size: 13px; }
+.btn-soft:hover { background: var(--surface-2); }
+
+/* Hero */
+.hero { padding: 56px 0 80px; position: relative; overflow: hidden; background: linear-gradient(180deg, var(--canvas-tint) 0%, var(--canvas) 70%); }
+.hero h1 { font-size: 60px; line-height: 1.08; letter-spacing: -2px; font-weight: 800; margin: 16px 0 16px; color: var(--ink-bright); text-align: center; }
+.hero h1 em { font-style: normal; color: var(--accent-pink); }
+.hero p.lead { font-size: 17px; line-height: 1.6; color: var(--ink-muted); margin: 0 auto 32px; max-width: 540px; text-align: center; }
+.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+.eyebrow-wrap { text-align: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--accent-pink); padding: 6px 14px; border-radius: var(--r-pill); background: #fff; border: 1px solid var(--accent-pink-soft); box-shadow: 0 2px 8px rgba(251, 114, 153, 0.08); }
+.eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-pink); box-shadow: 0 0 8px var(--accent-pink); }
+
+/* Video grid hero */
+.video-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.video-card { background: #fff; border-radius: var(--r-lg); overflow: hidden; transition: all .25s; cursor: pointer; position: relative; }
+.video-card:hover { transform: translateY(-6px); }
+.video-card:hover .video-thumb { box-shadow: 0 12px 28px rgba(251, 114, 153, 0.25); }
+.video-thumb { aspect-ratio: 16/10; border-radius: var(--r-lg); position: relative; overflow: hidden; transition: all .25s; }
+.v-t-1 { background: linear-gradient(135deg, #FB7299 0%, #FFC1D1 60%, #FFE5EE 100%); }
+.v-t-2 { background: linear-gradient(135deg, #00A1D6 0%, #88D7F2 60%, #D6F0FA 100%); }
+.v-t-3 { background: linear-gradient(135deg, #FFC100 0%, #FFE082 60%, #FFF4D0 100%); }
+.v-t-4 { background: linear-gradient(135deg, #9D5EE3 0%, #C9A0F0 60%, #EBDDF8 100%); }
+.v-t-5 { background: linear-gradient(135deg, #6BCB77 0%, #B3E5BA 60%, #DEF3E1 100%); }
+.v-t-6 { background: linear-gradient(135deg, #FB7299 0%, #9D5EE3 100%); }
+.v-t-7 { background: linear-gradient(135deg, #00A1D6 0%, #6BCB77 100%); }
+.v-t-8 { background: linear-gradient(135deg, #FFC100 0%, #FB7299 100%); }
+.video-thumb-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.92); display: grid; place-items: center; color: var(--accent-pink); opacity: 0; transition: opacity .2s; }
+.video-card:hover .video-thumb-icon { opacity: 1; }
+.video-thumb-icon svg { width: 22px; height: 22px; }
+.video-thumb .danmu { position: absolute; padding: 3px 8px; background: rgba(0,0,0,0.5); color: #fff; font-size: 10px; border-radius: 4px; backdrop-filter: blur(4px); }
+.danmu.d1 { top: 12px; left: 12px; }
+.danmu.d2 { top: 40px; right: 14px; }
+.video-thumb .duration { position: absolute; bottom: 8px; right: 8px; padding: 2px 6px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; border-radius: 4px; font-weight: 500; }
+.video-info { padding: 12px 4px; }
+.video-title { font-size: 14px; font-weight: 600; color: var(--ink-bright); line-height: 1.45; margin: 0 0 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.video-meta { display: flex; gap: 12px; align-items: center; font-size: 12px; color: var(--ink-dim); }
+.video-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.video-meta svg { width: 12px; height: 12px; }
+
+/* Sections */
+.section { padding: 80px 0; }
+.section-head { margin-bottom: 40px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.section-eyebrow { font-size: 12px; font-weight: 600; color: var(--accent-pink); margin-bottom: 10px; letter-spacing: 0.4px; }
+.section-title { font-size: 36px; line-height: 1.15; letter-spacing: -1px; font-weight: 800; margin: 0; color: var(--ink-bright); }
+.section-sub { font-size: 14px; color: var(--ink-muted); line-height: 1.6; max-width: 420px; margin: 0; }
+
+/* Channels grid */
+.channels-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.channel { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px 14px; text-align: center; transition: all .2s; cursor: pointer; }
+.channel:hover { transform: translateY(-4px); border-color: transparent; box-shadow: var(--shadow-card); }
+.channel-icon { width: 52px; height: 52px; border-radius: var(--r-md); margin: 0 auto 12px; display: grid; place-items: center; color: #fff; }
+.ci-1 { background: linear-gradient(135deg, #FB7299, #E85B83); }
+.ci-2 { background: linear-gradient(135deg, #00A1D6, #0084B0); }
+.ci-3 { background: linear-gradient(135deg, #9D5EE3, #7B3FC4); }
+.ci-4 { background: linear-gradient(135deg, #FFC100, #FFA000); color: #18191c; }
+.ci-5 { background: linear-gradient(135deg, #6BCB77, #4FAF5B); }
+.ci-6 { background: linear-gradient(135deg, #FB7299, #FFC100); }
+.channel-icon svg { width: 24px; height: 24px; }
+.channel-name { font-size: 13.5px; font-weight: 700; color: var(--ink-bright); margin-bottom: 2px; }
+.channel-tag { font-size: 11px; color: var(--ink-muted); }
+
+/* Live cards */
+.live-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.live-card { background: #fff; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); transition: all .2s; }
+.live-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+.live-thumb { aspect-ratio: 16/9; position: relative; }
+.live-thumb.l1 { background: linear-gradient(135deg, #FB7299, #9D5EE3, #00A1D6); }
+.live-thumb.l2 { background: linear-gradient(135deg, #00A1D6, #6BCB77, #FFC100); }
+.live-thumb.l3 { background: linear-gradient(135deg, #FFC100, #FB7299, #9D5EE3); }
+.live-badge { position: absolute; top: 10px; left: 10px; background: var(--accent-pink); color: #fff; padding: 3px 10px; border-radius: var(--r-pill); font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+.live-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.live-viewers { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.5); color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; backdrop-filter: blur(4px); }
+.live-info { padding: 14px 16px; }
+.live-title { font-size: 14px; font-weight: 600; color: var(--ink-bright); margin: 0 0 6px; }
+.live-streamer { font-size: 12.5px; color: var(--ink-muted); display: flex; align-items: center; gap: 6px; }
+.live-streamer .avatar { width: 22px; height: 22px; border-radius: 50%; background: var(--accent-pink); display: grid; place-items: center; color: #fff; font-size: 10px; font-weight: 700; }
+
+/* Membership */
+.member-band {
+  background: linear-gradient(135deg, #FB7299 0%, #FFA0B9 100%);
+  border-radius: var(--r-xl);
+  padding: 48px 48px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+.member-band::before { content: ""; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,0.12); top: -180px; right: -100px; }
+.member-band::after { content: ""; position: absolute; width: 200px; height: 200px; border-radius: 50%; background: rgba(0, 161, 214, 0.18); bottom: -80px; left: -50px; }
+.member-band h3 { font-size: 38px; line-height: 1.12; letter-spacing: -1px; font-weight: 800; margin: 0 0 14px; position: relative; }
+.member-band p { font-size: 15px; line-height: 1.65; opacity: 0.95; margin: 0 0 28px; max-width: 460px; position: relative; }
+.member-perks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; position: relative; }
+.perk { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: var(--r-md); padding: 14px; display: flex; align-items: center; gap: 10px; }
+.perk-icon { width: 32px; height: 32px; border-radius: 50%; background: #fff; color: var(--accent-pink); display: grid; place-items: center; flex-shrink: 0; }
+.perk-icon svg { width: 15px; height: 15px; }
+.perk-text { font-size: 13px; font-weight: 600; }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.plan { background: #fff; border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 28px 24px; transition: all .2s; position: relative; }
+.plan:hover { border-color: var(--accent-pink); transform: translateY(-4px); box-shadow: var(--shadow-card); }
+.plan.featured { background: linear-gradient(180deg, #FFF5F8 0%, #FFFFFF 100%); border-color: var(--accent-pink); box-shadow: 0 0 0 2px var(--accent-pink-soft); }
+.plan-badge { position: absolute; top: -10px; right: 24px; background: var(--accent-pink); color: #fff; padding: 4px 12px; border-radius: var(--r-pill); font-size: 11px; font-weight: 700; }
+.plan-name { font-size: 12px; font-weight: 600; color: var(--accent-pink); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.6px; }
+.plan-title { font-size: 20px; font-weight: 800; color: var(--ink-bright); margin-bottom: 14px; }
+.plan-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 16px; }
+.plan-price .num { font-size: 36px; font-weight: 800; color: var(--ink-bright); letter-spacing: -1px; }
+.plan-price .per { font-size: 12px; color: var(--ink-muted); }
+.plan-blurb { font-size: 13px; color: var(--ink-muted); margin-bottom: 22px; line-height: 1.55; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
+.plan li { font-size: 13px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 8px; line-height: 1.55; }
+.plan li svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--accent-pink); margin-top: 3px; }
+.plan-cta { width: 100%; }
+
+/* CTA */
+.cta-band { background: linear-gradient(135deg, #FB7299 0%, #00A1D6 100%); border-radius: var(--r-xl); padding: 56px 48px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+.cta-band::before { content: ""; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(255, 193, 0, 0.18); top: -200px; left: -100px; }
+.cta-band::after { content: ""; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: rgba(157, 94, 227, 0.2); bottom: -100px; right: -50px; }
+.cta-band h2 { font-size: 40px; line-height: 1.15; letter-spacing: -1.2px; margin: 0 0 14px; font-weight: 800; position: relative; }
+.cta-band p { margin: 0 auto 28px; font-size: 15px; opacity: 0.95; max-width: 520px; position: relative; }
+.cta-band .btn { position: relative; background: #fff; color: var(--accent-pink); }
+.cta-band .btn:hover { background: var(--accent-yellow); color: var(--ink-bright); }
+
+/* Footer */
+footer { padding: 56px 0 32px; background: var(--canvas-tint); border-top: 1px solid var(--border); }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 40px; }
+.foot-brand p { color: var(--ink-muted); font-size: 13px; line-height: 1.6; margin: 14px 0 18px; max-width: 280px; }
+.foot-col h4 { font-size: 13px; font-weight: 700; color: var(--ink-bright); margin: 0 0 16px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); transition: color .12s; }
+.foot-col li a:hover { color: var(--accent-pink); }
+.foot-bottom { display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 10px; }
+
+/* Design system */
+.ds-section { background: var(--canvas-tint); padding: 100px 0; border-top: 1px solid var(--border); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 36px; letter-spacing: -1.2px; line-height: 1.12; margin: 0 0 10px; font-weight: 800; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-muted); font-size: 14px; max-width: 560px; line-height: 1.65; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; background: #fff; border: 1px solid var(--border-mid); border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--ink-soft); transition: all .15s; }
+.ds-source:hover { border-color: var(--accent-pink); color: var(--accent-pink); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border-mid); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 22px; font-weight: 800; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.4px; }
+.ds-desc { font-size: 13.5px; color: var(--ink-muted); margin: 0 0 24px; line-height: 1.6; max-width: 580px; }
+.ds-caption { font-size: 11px; font-weight: 700; color: var(--accent-pink); margin: 28px 0 12px; letter-spacing: 0.6px; text-transform: uppercase; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: #fff; border: 1px solid var(--border-mid); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 68px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 12px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 10.5px; color: var(--ink-muted); font-family: ui-monospace, monospace; margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border-mid); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-muted); background: var(--surface-1); }
+.ds-type-table td { color: var(--ink-soft); }
+.ds-type-table td.token { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--accent-pink); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.ds-radius-cell { background: #fff; border: 1px solid var(--border-mid); padding: 16px 8px; text-align: center; border-radius: var(--r-md); }
+.ds-radius-box { width: 56px; height: 56px; background: var(--accent-pink); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 11.5px; font-weight: 600; color: var(--ink); }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: ui-monospace, monospace; margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: #fff; border: 1px solid var(--border-mid); border-radius: var(--r-lg); padding: 24px; }
+.ds-card h5 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent-pink); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input-soft { background: var(--surface-1); border: 1.5px solid transparent; padding: 10px 16px; border-radius: var(--r-pill); color: var(--ink); font-size: 13px; font-family: inherit; width: 100%; outline: none; transition: all .15s; }
+.input-soft:focus { border-color: var(--accent-pink); background: #fff; }
+.input-soft::placeholder { color: var(--ink-dim); }
+.tag { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: var(--r-pill); font-size: 11.5px; font-weight: 600; }
+.tag-pink { background: var(--accent-pink-soft); color: var(--accent-pink); }
+.tag-blue { background: var(--accent-blue-soft); color: var(--accent-blue); }
+.tag-yellow { background: rgba(255, 193, 0, 0.16); color: #B88A00; }
+.tag-purple { background: rgba(157, 94, 227, 0.14); color: #7C3CC8; }
+
+/* Floating source */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: #fff; border: 1px solid var(--border-mid); padding: 10px 18px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--ink-soft); box-shadow: var(--shadow-card); transition: all .15s; }
+.src-link:hover { color: var(--accent-pink); border-color: var(--accent-pink); }
+
+@media (max-width: 980px) {
+  .hero h1 { font-size: 40px; letter-spacing: -1.2px; }
+  .video-grid { grid-template-columns: repeat(2, 1fr); }
+  .channels-grid { grid-template-columns: repeat(3, 1fr); }
+  .live-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .member-band { grid-template-columns: 1fr; padding: 40px 28px; }
+  .member-band h3 { font-size: 28px; }
+  .cta-band { padding: 40px 28px; }
+  .cta-band h2 { font-size: 28px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .nav-search { max-width: none; }
+  .section { padding: 56px 0; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 30px; }
+  .video-grid { grid-template-columns: 1fr; }
+  .channels-grid { grid-template-columns: repeat(2, 1fr); }
+  .section-title { font-size: 26px; }
+  .ds-intro h2 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">
+        <span class="brand-eyes"><span></span><span></span></span>
+      </span>
+      <span>bilibili</span>
+    </a>
+    <div class="nav-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="搜索你感兴趣的内容" />
+    </div>
+    <nav class="nav-links">
+      <a class="nav-link active" href="#">首页</a>
+      <a class="nav-link" href="#">番剧</a>
+      <a class="nav-link" href="#">直播</a>
+      <a class="nav-link" href="#">游戏中心</a>
+      <a class="nav-link" href="#">会员购</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-soft" href="#">登录</a>
+      <a class="btn btn-pink" href="#">投稿</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow-wrap">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>2.5 亿月活 · Z 世代社区</span>
+    </div>
+    <h1>你感兴趣的视频 <em>都在 B 站</em></h1>
+    <p class="lead">从二次元到知识分享, 从生活记录到游戏直播, 哔哩哔哩是中国最活跃的年轻文化社区. 弹幕互动, UP 主投稿, 每一个角落都有你的同好.</p>
+    <div class="hero-actions">
+      <a class="btn btn-pink-lg" href="#">立即下载 App</a>
+      <a class="btn btn-outline-pink" href="#">浏览推荐</a>
+    </div>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-thumb v-t-1">
+          <div class="danmu d1">前方高能!</div>
+          <div class="danmu d2">awsl</div>
+          <div class="video-thumb-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="duration">12:34</div>
+        </div>
+        <div class="video-info">
+          <h3 class="video-title">【4K 修复】2025 拜年纪 · 全员合唱压轴版</h3>
+          <div class="video-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>820万</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>12.5万</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb v-t-2">
+          <div class="danmu d1">学到了!</div>
+          <div class="video-thumb-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="duration">28:15</div>
+        </div>
+        <div class="video-info">
+          <h3 class="video-title">从零开始学 Python · 第十讲 装饰器深入解析</h3>
+          <div class="video-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>156万</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>3.2万</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb v-t-3">
+          <div class="danmu d1">哈哈哈哈</div>
+          <div class="danmu d2">名场面</div>
+          <div class="video-thumb-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="duration">06:42</div>
+        </div>
+        <div class="video-info">
+          <h3 class="video-title">【鬼畜】当代年轻人的修仙日常 · 究极混剪</h3>
+          <div class="video-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>523万</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>8.9万</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb v-t-4">
+          <div class="danmu d1">求 BGM</div>
+          <div class="video-thumb-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="duration">15:08</div>
+        </div>
+        <div class="video-info">
+          <h3 class="video-title">2025 番剧排行 · 上半年口碑 Top 10 盘点</h3>
+          <div class="video-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>312万</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>5.6万</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">分区导航</div>
+        <h2 class="section-title">六大分区, 总有你的菜</h2>
+      </div>
+      <p class="section-sub">从动画番剧到知识科普, 从游戏直播到生活 vlog, B 站把你的兴趣分门别类, 一键直达.</p>
+    </div>
+
+    <div class="channels-grid">
+      <div class="channel">
+        <div class="channel-icon ci-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.5 0-2.5 1.5-2.5 3 0 2 2.5 2 2.5 5s-2.5 3-2.5 5 1 3 2.5 3 2.5-1.5 2.5-3-2.5-2-2.5-5 2.5-3 2.5-5-1-3-2.5-3z"/></svg>
+        </div>
+        <div class="channel-name">番剧</div>
+        <div class="channel-tag">动画 · 漫改</div>
+      </div>
+      <div class="channel">
+        <div class="channel-icon ci-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20v14H2z"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="channel-name">知识</div>
+        <div class="channel-tag">科普 · 学习</div>
+      </div>
+      <div class="channel">
+        <div class="channel-icon ci-3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <div class="channel-name">鬼畜</div>
+        <div class="channel-tag">名场面 · 调教</div>
+      </div>
+      <div class="channel">
+        <div class="channel-icon ci-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div class="channel-name">直播</div>
+        <div class="channel-tag">游戏 · 才艺</div>
+      </div>
+      <div class="channel">
+        <div class="channel-icon ci-5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="13" r="1"/></svg>
+        </div>
+        <div class="channel-name">游戏</div>
+        <div class="channel-tag">电竞 · 攻略</div>
+      </div>
+      <div class="channel">
+        <div class="channel-icon ci-6">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <div class="channel-name">漫画</div>
+        <div class="channel-tag">国漫 · 日漫</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">正在直播</div>
+        <h2 class="section-title">和 UP 主一起在线狂欢</h2>
+      </div>
+      <a href="#" style="font-size:13px;font-weight:600;color:#FB7299">查看全部直播 →</a>
+    </div>
+
+    <div class="live-grid">
+      <div class="live-card">
+        <div class="live-thumb l1">
+          <span class="live-badge">LIVE</span>
+          <span class="live-viewers">8.6 万人在看</span>
+        </div>
+        <div class="live-info">
+          <div class="live-title">原神 · 5.5 版本新地图首发探索</div>
+          <div class="live-streamer">
+            <span class="avatar">小</span>小破站游戏区 · 游戏
+          </div>
+        </div>
+      </div>
+      <div class="live-card">
+        <div class="live-thumb l2">
+          <span class="live-badge">LIVE</span>
+          <span class="live-viewers">3.2 万人在看</span>
+        </div>
+        <div class="live-info">
+          <div class="live-title">音乐人 Live · 国风电子专场</div>
+          <div class="live-streamer">
+            <span class="avatar">音</span>音乐区 · 才艺
+          </div>
+        </div>
+      </div>
+      <div class="live-card">
+        <div class="live-thumb l3">
+          <span class="live-badge">LIVE</span>
+          <span class="live-viewers">12.4 万人在看</span>
+        </div>
+        <div class="live-info">
+          <div class="live-title">绘画过程直播 · 厚涂插画从零开始</div>
+          <div class="live-streamer">
+            <span class="avatar">绘</span>绘画区 · 教程
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="section">
+  <div class="container">
+    <div class="member-band">
+      <div>
+        <h3>大会员 · 解锁全部精彩</h3>
+        <p>开通哔哩哔哩大会员, 海量独家番剧, 杜比音效, 1080P+ 高清画质, 让追番观影更尽兴.</p>
+        <a class="btn btn-pink-lg" style="background:#fff;color:#FB7299;box-shadow:none" href="#">立即开通 ¥25/月</a>
+      </div>
+      <div class="member-perks">
+        <div class="perk">
+          <div class="perk-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8.5 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 9 8.5"/></svg>
+          </div>
+          <div class="perk-text">独家番剧</div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          </div>
+          <div class="perk-text">1080P+ 高清</div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <div class="perk-text">杜比音效</div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="perk-text">弹幕装扮</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">会员方案</div>
+        <h2 class="section-title">选你最喜欢的方式</h2>
+      </div>
+      <p class="section-sub">月度灵活, 年度最划算, 联合会员还能同时享受其他平台权益.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">月度</div>
+        <div class="plan-title">月卡</div>
+        <div class="plan-price"><span class="num">¥25</span><span class="per">/月</span></div>
+        <div class="plan-blurb">灵活订阅, 想看就开, 随时取消.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>独家番剧观看</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>1080P 高清画质</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>专属会员标识</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>免广告体验</li>
+        </ul>
+        <a class="btn btn-outline-pink plan-cta" href="#">立即开通</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">超值年卡</div>
+        <div class="plan-name">年度</div>
+        <div class="plan-title">年卡</div>
+        <div class="plan-price"><span class="num">¥168</span><span class="per">/年 · 月均 14 元</span></div>
+        <div class="plan-blurb">B 站铁粉首选, 一年都用得着.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>全部月卡权益</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>1080P+ 高码率</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>杜比视界与全景声</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>每年生日礼包</li>
+        </ul>
+        <a class="btn btn-pink-lg plan-cta" href="#">立即开通</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">联合会员</div>
+        <div class="plan-title">B 站 × 京东 PLUS</div>
+        <div class="plan-price"><span class="num">¥258</span><span class="per">/年 · 双会员</span></div>
+        <div class="plan-blurb">买东西的同时, 顺便追个番.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>B 站大会员年卡</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>京东 PLUS 年卡</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>购物运费券</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>专属客服</li>
+        </ul>
+        <a class="btn btn-outline-pink plan-cta" href="#">立即开通</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2>来 B 站, 找到你的同好</h2>
+      <p>2.5 亿月活用户, 海量 UP 主创作, 弹幕陪你看每一帧. 你的兴趣, 这里都有人懂.</p>
+      <a class="btn btn-pink-lg" href="#">立即下载 App</a>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>粉蓝双色 · 二次元友好系统</h2>
+        <p>B 站的视觉语言天然带着二次元社区的可爱与活力. 粉色承担情感与互动, 蓝色承担识别与稳定, 多彩点缀于各个分区. 圆角是 B 站的几何性格, 弹幕是 B 站的色彩文化.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.bilibili.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">B 站粉是品牌情感主色, 用于会员, 互动, 强调; B 站蓝是 logo 与识别色, 出现在导航与标识中. 黄, 紫, 绿作为分区辅助色, 让多元内容拥有各自的色彩归属.</p>
+
+      <div class="ds-caption">主色 Brand Pink</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FB7299"></div><div class="meta"><div class="name">B 站粉</div><div class="val">#FB7299</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E85B83"></div><div class="meta"><div class="name">深粉</div><div class="val">#E85B83</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFC1D1"></div><div class="meta"><div class="name">浅粉</div><div class="val">#FFC1D1</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFE5EE"></div><div class="meta"><div class="name">微粉底</div><div class="val">#FFE5EE</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(251,114,153,0.1)"></div><div class="meta"><div class="name">粉色软底</div><div class="val">10% opacity</div></div></div>
+      </div>
+
+      <div class="ds-caption">识别色 Brand Blue</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#00A1D6"></div><div class="meta"><div class="name">B 站蓝</div><div class="val">#00A1D6</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0084B0"></div><div class="meta"><div class="name">深蓝</div><div class="val">#0084B0</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#88D7F2"></div><div class="meta"><div class="name">浅蓝</div><div class="val">#88D7F2</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D6F0FA"></div><div class="meta"><div class="name">微蓝底</div><div class="val">#D6F0FA</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(0,161,214,0.1)"></div><div class="meta"><div class="name">蓝色软底</div><div class="val">10% opacity</div></div></div>
+      </div>
+
+      <div class="ds-caption">分区色 Channel Colors</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FFC100"></div><div class="meta"><div class="name">活力黄</div><div class="val">#FFC100</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#9D5EE3"></div><div class="meta"><div class="name">梦幻紫</div><div class="val">#9D5EE3</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#6BCB77"></div><div class="meta"><div class="name">青春绿</div><div class="val">#6BCB77</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FB7299,#00A1D6)"></div><div class="meta"><div class="name">粉蓝渐变</div><div class="val">CTA</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FFC100,#FB7299)"></div><div class="meta"><div class="name">活力渐变</div><div class="val">Hero</div></div></div>
+      </div>
+
+      <div class="ds-caption">文字 Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">标题黑</div><div class="val">#000000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#18191c"></div><div class="meta"><div class="name">正文</div><div class="val">#18191C</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#424650"></div><div class="meta"><div class="name">次级</div><div class="val">#424650</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#61666d"></div><div class="meta"><div class="name">辅助</div><div class="val">#61666D</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#9499a0"></div><div class="meta"><div class="name">弱化</div><div class="val">#9499A0</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">PingFang SC + Inter, 圆润 600-800 重量级承担主标题, 视频卡片标题采用 14px 紧凑布局以容纳更多内容. 不使用衬线字体, 保持二次元社区的圆润友好.</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>样例</th><th>字号</th><th>字重</th><th>用途</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:30px;font-weight:800">你感兴趣的视频都在</td><td>60 / 3.75rem</td><td>800</td><td>Hero 主标题</td></tr>
+          <tr><td class="token">--title-section</td><td class="sample" style="font-size:22px;font-weight:800">六大分区</td><td>36 / 2.25rem</td><td>800</td><td>章节标题</td></tr>
+          <tr><td class="token">--title-card</td><td class="sample" style="font-size:14px;font-weight:600">2025 拜年纪</td><td>14 / 0.88rem</td><td>600</td><td>视频卡标题</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:15px;font-weight:400">2.5 亿月活的年轻文化社区</td><td>15 / 0.94rem</td><td>400</td><td>正文</td></tr>
+          <tr><td class="token">--body-sm</td><td class="sample" style="font-size:13px;font-weight:400;color:#61666d">UP 主投稿</td><td>13 / 0.81rem</td><td>400</td><td>辅助</td></tr>
+          <tr><td class="token">--meta</td><td class="sample" style="font-size:12px;font-weight:400;color:#9499a0">820万播放 · 12.5万弹幕</td><td>12 / 0.75rem</td><td>400</td><td>元数据</td></tr>
+          <tr><td class="token">--button</td><td class="sample" style="font-size:13px;font-weight:600">投稿</td><td>13 / 0.81rem</td><td>600</td><td>按钮</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">大圆角是 B 站的几何性格. 按钮 pill 形保持二次元圆润感, 视频卡 16px 大圆角, 即使小标签也至少 6px 圆角. 拒绝任何尖锐的角.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">最小</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:10px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">10px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">视频卡</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">大容器</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">按钮</div><div class="ds-radius-val">999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">头像</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">粉色按钮是主交互, 蓝色按钮承担识别与登录, 描边按钮承担次操作. 多色标签对应不同分区, 让信息天然带上情绪与归属感.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-pink-lg" href="#">粉色主按钮</a>
+            <a class="btn btn-blue" href="#">蓝色按钮</a>
+            <a class="btn btn-outline-pink" href="#">粉色描边</a>
+            <a class="btn btn-pink" href="#">小粉按钮</a>
+            <a class="btn btn-soft" href="#">软按钮</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="input-soft" placeholder="搜索你感兴趣的内容" />
+            <input class="input-soft" placeholder="发条弹幕吧" />
+            <div class="ds-card-row">
+              <span class="tag tag-pink">大会员</span>
+              <span class="tag tag-blue">UP主</span>
+              <span class="tag tag-yellow">置顶</span>
+              <span class="tag tag-purple">番剧</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#fff;border:1px solid #e3e5e7;border-radius:16px;padding:0;width:100%;overflow:hidden">
+              <div style="height:90px;background:linear-gradient(135deg,#FB7299,#9D5EE3);position:relative">
+                <span style="position:absolute;top:8px;left:8px;background:#FB7299;color:#fff;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;display:flex;align-items:center;gap:4px">LIVE</span>
+                <span style="position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,0.5);color:#fff;padding:1px 6px;border-radius:4px;font-size:10px">8.6万</span>
+              </div>
+              <div style="padding:10px 12px">
+                <div style="font-size:13px;font-weight:600;color:#000">原神 5.5 探索</div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,#FB7299,#00A1D6);color:#fff;border-radius:16px;padding:14px;width:100%">
+              <div style="font-size:11px;font-weight:700;margin-bottom:4px;opacity:0.9">大会员</div>
+              <div style="font-size:14px;font-weight:700">¥25 / 月</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark"><span class="brand-eyes"><span></span><span></span></span></span>
+          <span>bilibili</span>
+        </div>
+        <p>这是一份设计研究 — 哔哩哔哩 (bilibili) 视觉语言的自包含致敬, 用于演示 Z 世代二次元社区粉蓝双色设计系统. 与上海哔哩哔哩科技无官方关联.</p>
+      </div>
+      <div class="foot-col">
+        <h4>内容</h4>
+        <ul>
+          <li><a href="#">番剧</a></li>
+          <li><a href="#">直播</a></li>
+          <li><a href="#">课堂</a></li>
+          <li><a href="#">漫画</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>会员</h4>
+        <ul>
+          <li><a href="#">大会员</a></li>
+          <li><a href="#">联合会员</a></li>
+          <li><a href="#">会员购</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>创作者</h4>
+        <ul>
+          <li><a href="#">投稿中心</a></li>
+          <li><a href="#">创作激励</a></li>
+          <li><a href="#">UP 主学院</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#">关于我们</a></li>
+          <li><a href="#">招贤纳士</a></li>
+          <li><a href="#">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计研究 · 致敬 bilibili 视觉语言 · 作者 云中江树</span>
+      <span>用户协议 · 隐私政策</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.bilibili.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

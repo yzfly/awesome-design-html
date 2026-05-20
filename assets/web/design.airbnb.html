@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Airbnb — Inspired Design</title>
+<meta name="description" content="An Airbnb-inspired marketing page: pure white canvas, single-voltage Rausch coral, photography-led property cards, pill search bar, 8px rounded CTAs. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #ff385c;
+  --primary-active: #e00b41;
+  --primary-disabled: #ffd1da;
+  --primary-error-text: #c13515;
+  --primary-error-text-hover: #b32505;
+  --luxe: #460479;
+  --plus: #92174d;
+  /* Text */
+  --ink: #222222;
+  --body: #3f3f3f;
+  --muted: #6a6a6a;
+  --muted-soft: #929292;
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-soft: #f7f7f7;
+  --surface-card: #ffffff;
+  --surface-strong: #f2f2f2;
+  /* Lines */
+  --hairline: #dddddd;
+  --hairline-soft: #ebebeb;
+  --border-strong: #c1c1c1;
+  /* Misc */
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  --legal-link: #428bff;
+  --star-rating: #222222;
+  --scrim: rgba(0,0,0,0.5);
+  /* Radii */
+  --r-none: 0px;
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 32px;
+  --r-full: 9999px;
+  /* Photography placeholder tints (warm, friendly, on-brand) */
+  --photo-1: linear-gradient(135deg, #ffb38a 0%, #ff6f7a 50%, #ff385c 100%);
+  --photo-2: linear-gradient(160deg, #f5d6a4 0%, #f08b5e 60%, #e36444 100%);
+  --photo-3: linear-gradient(135deg, #a4d4e8 0%, #6fb1d6 60%, #4485a8 100%);
+  --photo-4: linear-gradient(135deg, #e9a4c8 0%, #c87aa0 60%, #92174d 100%);
+  --photo-5: linear-gradient(135deg, #cfe6c0 0%, #82b76e 60%, #4a7d3c 100%);
+  --photo-6: linear-gradient(160deg, #f2deba 0%, #d8a36a 60%, #8e5e2e 100%);
+  --photo-7: linear-gradient(135deg, #d4b8e8 0%, #a17fc4 60%, #6b4a98 100%);
+  --photo-8: linear-gradient(135deg, #ffd8c2 0%, #ff8c5a 60%, #e85a32 100%);
+  --photo-luxe: linear-gradient(135deg, #6b3a9c 0%, #460479 100%);
+  --photo-night: linear-gradient(160deg, #2d3e60 0%, #1a2540 100%);
+  /* Card lift shadow (single tier per spec) */
+  --shadow-lift: rgba(0,0,0,0.02) 0 0 0 1px, rgba(0,0,0,0.04) 0 2px 6px 0, rgba(0,0,0,0.1) 0 4px 8px 0;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Airbnb Cereal VF", Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+::selection { background: rgba(255,56,92,0.18); }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 80px; }
+@media (max-width: 900px) { .wrap { padding: 0 24px; } }
+
+/* —— Top nav (80px tall, hairline bottom) —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline-soft);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 80px;
+  gap: 24px;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 22px; color: var(--primary);
+  letter-spacing: -0.5px;
+}
+.brand .glyph {
+  width: 30px; height: 30px;
+  color: var(--primary);
+}
+.product-tabs {
+  display: inline-flex; gap: 28px;
+  justify-self: center;
+}
+.product-tab {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 16px; font-weight: 600; color: var(--muted);
+  padding: 12px 8px;
+  border-bottom: 2px solid transparent;
+  position: relative;
+}
+.product-tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+.product-tab .glyph { font-size: 22px; line-height: 1; }
+.product-tab .new-tag {
+  position: absolute; top: -2px; right: -22px;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 8px; font-weight: 700; letter-spacing: 0.32px;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--r-full);
+  box-shadow: var(--shadow-lift);
+}
+
+.nav-right {
+  justify-self: end;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.nav-link {
+  font-size: 14px; font-weight: 600; padding: 12px 14px;
+  border-radius: var(--r-full); color: var(--ink);
+}
+.nav-link:hover { background: var(--surface-soft); }
+.icon-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--hairline);
+  padding: 6px 8px 6px 14px;
+  border-radius: var(--r-full);
+  background: var(--canvas);
+  cursor: pointer;
+  box-shadow: rgba(0,0,0,0.04) 0 1px 2px 0;
+}
+.icon-pill:hover { box-shadow: var(--shadow-lift); }
+.avatar-circle {
+  width: 30px; height: 30px; border-radius: var(--r-full);
+  background: var(--ink); color: var(--on-dark);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600;
+}
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: 500 16px/1.25 "Inter", system-ui, sans-serif;
+  padding: 14px 24px;
+  height: 48px;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .15s, color .15s, border-color .15s;
+  background: transparent;
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.btn-primary:hover { background: var(--primary-active); }
+.btn-primary-disabled {
+  background: var(--primary-disabled);
+  color: var(--on-primary);
+  cursor: not-allowed;
+}
+.btn-secondary {
+  background: var(--canvas);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 13px 23px;
+}
+.btn-secondary:hover { background: var(--surface-soft); }
+.btn-tertiary {
+  background: transparent; color: var(--ink);
+  text-decoration: underline; padding: 12px 0; height: auto;
+}
+.btn-pill-rausch {
+  background: var(--primary); color: var(--on-primary);
+  border-radius: var(--r-full);
+  height: auto; padding: 10px 20px; font-size: 14px;
+}
+.btn-pill-rausch:hover { background: var(--primary-active); }
+
+/* —— Search bar (signature) —— */
+.search-bar {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.2fr auto;
+  align-items: center;
+  background: var(--canvas);
+  border-radius: var(--r-full);
+  height: 64px;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 8px 0 0;
+  box-shadow: var(--shadow-lift);
+}
+.search-seg {
+  padding: 12px 24px;
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--r-full);
+  height: 64px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.search-seg + .search-seg::before {
+  content: ""; position: absolute; left: 0; top: 12px; bottom: 12px;
+  width: 1px; background: var(--hairline);
+}
+.search-seg:hover { background: var(--surface-soft); }
+.search-seg:hover + .search-seg::before { background: transparent; }
+.search-seg .lab {
+  font-size: 12px; font-weight: 700; color: var(--ink);
+  letter-spacing: 0;
+}
+.search-seg .val { font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+.search-orb {
+  background: var(--primary); color: var(--on-primary);
+  border: none;
+  width: 48px; height: 48px;
+  border-radius: var(--r-full);
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  margin-right: 0;
+  transition: width .2s;
+}
+.search-orb.expanded {
+  width: auto; padding: 0 18px;
+  font-size: 14px; font-weight: 600;
+}
+.search-orb:hover { background: var(--primary-active); }
+
+/* —— Category strip —— */
+.category-strip {
+  border-bottom: 1px solid var(--hairline-soft);
+  background: var(--canvas);
+}
+.category-strip .row {
+  display: flex; gap: 28px; padding: 16px 0;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.category-strip .row::-webkit-scrollbar { display: none; }
+.cat {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--muted); padding: 8px 4px;
+  font-size: 12px; font-weight: 600;
+  border-bottom: 2px solid transparent;
+  flex: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cat.active { color: var(--ink); border-bottom-color: var(--ink); }
+.cat .glyph { font-size: 22px; line-height: 1; }
+.cat:hover { color: var(--ink); }
+
+.filter-pill {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  font-size: 12px; font-weight: 600; color: var(--ink);
+  background: var(--canvas);
+  cursor: pointer;
+  flex: none;
+}
+
+/* —— Hero opener —— */
+.hero {
+  padding: 64px 0 16px;
+  text-align: center;
+}
+.hero h1 {
+  margin: 0 auto 12px;
+  font-weight: 700; font-size: clamp(24px, 3.4vw, 32px);
+  line-height: 1.2; color: var(--ink); letter-spacing: -0.3px;
+  max-width: 22ch;
+}
+.hero .lead {
+  font-size: 16px; color: var(--body); line-height: 1.5;
+  max-width: 560px; margin: 0 auto 32px;
+}
+
+/* —— Property card grid —— */
+section { padding: 64px 0; }
+.section-head {
+  display: flex; align-items: end; justify-content: space-between;
+  margin: 0 0 24px; gap: 24px; flex-wrap: wrap;
+}
+.section-head h2 {
+  font-size: clamp(20px, 2.2vw, 22px); font-weight: 700;
+  letter-spacing: 0; line-height: 1.2; margin: 0; color: var(--ink);
+}
+.section-head .more { font-size: 14px; color: var(--ink); font-weight: 600; }
+.section-head .more:hover { text-decoration: underline; }
+
+.prop-grid {
+  display: grid; gap: 24px 16px;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1100px) { .prop-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) { .prop-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .prop-grid { grid-template-columns: 1fr; } }
+
+.prop {
+  display: flex; flex-direction: column;
+  cursor: pointer;
+}
+.prop-photo {
+  aspect-ratio: 1/0.95;
+  border-radius: var(--r-md);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.prop-photo .photo { position: absolute; inset: 0; }
+.prop-photo .photo.p1 { background: var(--photo-1); }
+.prop-photo .photo.p2 { background: var(--photo-2); }
+.prop-photo .photo.p3 { background: var(--photo-3); }
+.prop-photo .photo.p4 { background: var(--photo-4); }
+.prop-photo .photo.p5 { background: var(--photo-5); }
+.prop-photo .photo.p6 { background: var(--photo-6); }
+.prop-photo .photo.p7 { background: var(--photo-7); }
+.prop-photo .photo.p8 { background: var(--photo-8); }
+.prop-photo .photo.night { background: var(--photo-night); }
+.prop-photo .photo.luxe { background: var(--photo-luxe); }
+/* Decorative "window" overlay inside photo for visual interest */
+.prop-photo .photo::after {
+  content: ""; position: absolute;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 4px;
+}
+.prop-photo .photo.p1::after { right: 18%; top: 30%; width: 18%; height: 26%; }
+.prop-photo .photo.p2::after { left: 20%; top: 38%; width: 22%; height: 22%; }
+.prop-photo .photo.p3::after { right: 22%; bottom: 22%; width: 28%; height: 18%; }
+.prop-photo .photo.p4::after { left: 24%; top: 28%; width: 18%; height: 28%; }
+.prop-photo .photo.p5::after { right: 18%; top: 24%; width: 24%; height: 22%; }
+.prop-photo .photo.p6::after { left: 28%; bottom: 24%; width: 22%; height: 20%; }
+.prop-photo .photo.p7::after { right: 24%; top: 28%; width: 22%; height: 26%; }
+.prop-photo .photo.p8::after { left: 20%; bottom: 28%; width: 26%; height: 20%; }
+
+.guest-fav {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--canvas); color: var(--ink);
+  font-size: 11px; font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  box-shadow: var(--shadow-lift);
+  z-index: 2;
+}
+.heart-btn {
+  position: absolute; top: 10px; right: 10px;
+  width: 32px; height: 32px; border-radius: var(--r-full);
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.95);
+  border: none; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  z-index: 2;
+  transition: transform .15s;
+}
+.heart-btn:hover { transform: scale(1.08); }
+.heart-btn.saved { color: var(--primary); background: transparent; }
+.heart-btn.saved svg { fill: var(--primary); stroke: var(--canvas); stroke-width: 1.6; }
+.dots-row {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  display: inline-flex; gap: 4px;
+  z-index: 2;
+}
+.dots-row .d {
+  width: 6px; height: 6px; border-radius: var(--r-full);
+  background: rgba(255,255,255,0.6);
+}
+.dots-row .d.active { background: var(--canvas); }
+
+.prop .ttl {
+  font-size: 16px; font-weight: 600; color: var(--ink);
+  line-height: 1.25; margin: 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.prop .ttl .rate {
+  font-size: 14px; color: var(--ink); font-weight: 400;
+  display: inline-flex; align-items: center; gap: 4px;
+  flex: none;
+}
+.prop .meta-row {
+  font-size: 14px; color: var(--muted); font-weight: 400;
+  margin-top: 2px; line-height: 1.43;
+}
+.prop .meta-row.dates { margin-top: 0; }
+.prop .price {
+  margin-top: 6px;
+  font-size: 14px; color: var(--ink); font-weight: 600;
+}
+.prop .price em { font-style: normal; font-weight: 400; }
+
+/* —— Inspirational city link grid —— */
+.city-grid {
+  display: grid; gap: 24px 32px;
+  grid-template-columns: repeat(6, 1fr);
+}
+@media (max-width: 1100px) { .city-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px) { .city-grid { grid-template-columns: repeat(2, 1fr); } }
+.city-link .name { font-size: 16px; font-weight: 600; color: var(--ink); line-height: 1.25; }
+.city-link .sub { font-size: 14px; color: var(--muted); margin-top: 2px; }
+.city-link:hover .name { text-decoration: underline; }
+
+.city-tabs {
+  display: inline-flex; gap: 24px;
+  border-bottom: 1px solid var(--hairline-soft);
+  margin-bottom: 32px;
+  width: 100%;
+}
+.city-tab {
+  padding: 16px 0; font-size: 14px; font-weight: 500; color: var(--muted);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+.city-tab.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+
+/* —— Listing detail composite (signature) —— */
+.detail-band { background: var(--canvas); padding: 32px 0 80px; }
+.detail-head { margin-bottom: 24px; }
+.detail-head h2 {
+  font-size: 22px; font-weight: 500;
+  line-height: 1.18; letter-spacing: -0.44px;
+  margin: 0 0 8px; color: var(--ink);
+}
+.detail-head .sub {
+  font-size: 14px; color: var(--ink);
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+}
+.detail-head .sub .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink); }
+
+.detail-gallery {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-bottom: 48px;
+  aspect-ratio: 2/1;
+  position: relative;
+}
+.detail-gallery .photo { position: relative; }
+.detail-gallery .photo.main { grid-row: span 2; }
+.detail-gallery .photo.p1 { background: var(--photo-1); }
+.detail-gallery .photo.p2 { background: var(--photo-2); }
+.detail-gallery .photo.p3 { background: var(--photo-3); }
+.detail-gallery .photo.p4 { background: var(--photo-4); }
+.detail-gallery .photo.p5 { background: var(--photo-5); }
+.gallery-btn {
+  position: absolute; right: 16px; bottom: 16px;
+  background: var(--canvas); color: var(--ink);
+  border: 1px solid var(--ink);
+  font-size: 14px; font-weight: 600;
+  padding: 8px 14px; border-radius: var(--r-sm);
+  cursor: pointer;
+  display: inline-flex; gap: 6px; align-items: center;
+  z-index: 2;
+}
+
+.detail-grid {
+  display: grid; grid-template-columns: 1.6fr 1fr;
+  gap: 80px;
+}
+@media (max-width: 1024px) { .detail-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.detail-left { display: flex; flex-direction: column; gap: 24px; }
+.detail-section {
+  border-bottom: 1px solid var(--hairline-soft);
+  padding-bottom: 24px;
+}
+.detail-section h3 {
+  font-size: 21px; font-weight: 700; margin: 0 0 8px;
+  color: var(--ink);
+}
+.detail-section p { font-size: 16px; color: var(--body); line-height: 1.5; margin: 0; }
+.amenities-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  margin-top: 16px;
+}
+.amenity {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 0; font-size: 16px; color: var(--ink);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.amenity:nth-last-child(-n+2) { border-bottom: 0; }
+.amenity svg { color: var(--ink); flex: none; }
+
+/* Rating display (signature 64px moment) */
+.rating-display {
+  display: flex; align-items: center; gap: 24px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.rating-display .number {
+  font-size: 64px; font-weight: 700; line-height: 1.1;
+  letter-spacing: -1px;
+  color: var(--ink);
+}
+.rating-display .laurel { font-size: 56px; color: var(--ink); }
+.rating-display .copy { display: flex; flex-direction: column; gap: 4px; }
+.rating-display .copy strong { font-size: 16px; font-weight: 600; }
+.rating-display .copy span { font-size: 14px; color: var(--muted); }
+
+.stat-cols {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline-soft);
+}
+@media (max-width: 700px) { .stat-cols { grid-template-columns: 1fr 1fr; } }
+.stat-col .lab { font-size: 12px; color: var(--ink); font-weight: 600; }
+.stat-col .num { font-size: 18px; font-weight: 600; margin-top: 4px; color: var(--ink); }
+.stat-col .bar {
+  margin-top: 6px;
+  height: 3px; background: var(--hairline);
+  border-radius: var(--r-full); overflow: hidden;
+}
+.stat-col .bar .fill { background: var(--ink); height: 100%; border-radius: var(--r-full); }
+
+/* Reservation card (right rail, sticky) */
+.reservation {
+  background: var(--canvas);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lift);
+  padding: 24px;
+  position: sticky; top: 96px;
+}
+.reservation .price-row {
+  display: flex; align-items: baseline; gap: 6px; margin: 0 0 16px;
+}
+.reservation .price-row .n { font-size: 22px; font-weight: 600; color: var(--ink); }
+.reservation .price-row .per { font-size: 14px; color: var(--muted); }
+.date-picker {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+.date-picker .row { display: grid; grid-template-columns: 1fr 1fr; }
+.dp-cell {
+  padding: 10px 12px;
+  border-right: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+}
+.dp-cell:last-child { border-right: 0; }
+.dp-cell:nth-last-child(-n+2) { border-bottom: 0; }
+.dp-cell .lab { font-size: 10px; font-weight: 700; color: var(--ink); letter-spacing: 0.32px; text-transform: uppercase; }
+.dp-cell .val { font-size: 14px; color: var(--ink); margin-top: 2px; }
+
+.reservation .btn-primary { width: 100%; margin: 16px 0; height: 48px; font-size: 16px; font-weight: 600; }
+.reservation .note { font-size: 14px; text-align: center; color: var(--ink); margin: 0 0 16px; }
+.reservation .fee {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 16px; color: var(--ink); padding: 8px 0;
+}
+.reservation .fee.total {
+  padding-top: 16px; margin-top: 8px;
+  border-top: 1px solid var(--hairline-soft);
+  font-weight: 600;
+}
+.reservation .fee .u { text-decoration: underline; cursor: help; color: var(--ink); }
+
+/* —— Host card —— */
+.host-card {
+  background: var(--canvas);
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline-soft);
+  padding: 24px;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 24px;
+  align-items: center;
+}
+.host-avatar {
+  width: 80px; height: 80px; border-radius: var(--r-full);
+  background: var(--photo-2);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 700; color: white;
+  position: relative;
+}
+.host-avatar .crown {
+  position: absolute; bottom: -4px; right: -4px;
+  width: 28px; height: 28px; border-radius: var(--r-full);
+  background: var(--primary); color: var(--on-primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 3px solid var(--canvas);
+  font-size: 13px;
+}
+.host-info .name { font-size: 18px; font-weight: 600; color: var(--ink); }
+.host-info .tag { font-size: 14px; color: var(--muted); }
+.host-info .stats { font-size: 14px; color: var(--ink); margin-top: 4px; }
+@media (max-width: 700px) { .host-card { grid-template-columns: auto 1fr; } .host-card .btn-secondary { grid-column: span 2; justify-self: stretch; } }
+
+/* —— Become-a-host band —— */
+.host-band {
+  background: var(--ink); color: var(--on-dark);
+  border-radius: var(--r-lg);
+  padding: 64px 48px;
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+@media (max-width: 900px) { .host-band { grid-template-columns: 1fr; padding: 40px 28px; } }
+.host-band h2 {
+  font-size: clamp(28px, 3.8vw, 44px); font-weight: 700;
+  letter-spacing: -0.5px; line-height: 1.1; margin: 0 0 16px;
+}
+.host-band p {
+  font-size: 16px; line-height: 1.5; color: rgba(255,255,255,0.85);
+  margin: 0 0 24px;
+}
+.host-band .stat-row { display: flex; gap: 40px; margin-bottom: 24px; flex-wrap: wrap; }
+.host-band .stat { display: flex; flex-direction: column; }
+.host-band .stat .n { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; line-height: 1; }
+.host-band .stat .l { font-size: 14px; color: rgba(255,255,255,0.75); margin-top: 4px; }
+.host-band .btn-pill-rausch { font-size: 16px; padding: 14px 24px; }
+.house-illust {
+  background: var(--photo-1);
+  border-radius: var(--r-md);
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+}
+.house-illust::after {
+  content: ""; position: absolute;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 4px;
+  left: 22%; top: 36%; width: 22%; height: 30%;
+}
+.house-illust .badge-float {
+  position: absolute; top: 16px; left: 16px;
+  background: var(--canvas); color: var(--ink);
+  font-size: 11px; font-weight: 600; padding: 4px 10px;
+  border-radius: var(--r-full);
+  box-shadow: var(--shadow-lift);
+}
+
+/* —— Footer —— */
+footer {
+  border-top: 1px solid var(--hairline-soft);
+  background: var(--canvas);
+  padding: 48px 0 0;
+}
+.footer-banner {
+  background: var(--surface-soft);
+  border-radius: var(--r-md);
+  padding: 32px 32px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 24px;
+  margin-bottom: 48px;
+}
+.footer-banner h3 { font-size: 22px; font-weight: 600; margin: 0 0 4px; color: var(--ink); letter-spacing: -0.18px; }
+.footer-banner p { font-size: 14px; color: var(--muted); margin: 0; }
+.footer-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-grid h4 { font-size: 16px; font-weight: 500; color: var(--ink); margin: 0 0 16px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-grid li a { font-size: 14px; color: var(--ink); }
+.footer-grid li a:hover { text-decoration: underline; }
+.legal-band {
+  padding: 24px 0;
+  font-size: 13px; color: var(--muted);
+  display: flex; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.legal-band .right { margin-left: auto; display: inline-flex; gap: 16px; }
+.legal-band a { color: var(--ink); }
+.legal-band a:hover { text-decoration: underline; }
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); color: var(--ink);
+  border: 1px solid var(--hairline);
+  padding: 8px 14px; border-radius: var(--r-full);
+  font-size: 12px; font-weight: 600;
+  box-shadow: var(--shadow-lift);
+}
+.src-link:hover { color: var(--primary); }
+
+/* —— DS section (signature: reuses brand styling) —— */
+.ds-section { padding: 96px 0; background: var(--surface-soft); }
+.ds-intro { text-align: center; margin-bottom: 48px; max-width: 640px; margin-left: auto; margin-right: auto; }
+.ds-intro h2 { font-size: 28px; font-weight: 700; margin: 0 0 12px; color: var(--ink); }
+.ds-intro p { font-size: 16px; color: var(--body); line-height: 1.5; margin: 0; }
+.ds-intro a { color: var(--legal-link); }
+.ds-intro a:hover { text-decoration: underline; }
+
+.ds-block {
+  background: var(--canvas);
+  border-radius: var(--r-md);
+  padding: 40px;
+  margin-bottom: 24px;
+  border: 1px solid var(--hairline-soft);
+}
+.ds-block h3 {
+  font-size: 21px; font-weight: 700; margin: 0 0 8px; color: var(--ink);
+}
+.ds-block > p {
+  font-size: 14px; color: var(--muted); line-height: 1.43;
+  margin: 0 0 24px;
+}
+.ds-caption {
+  font-size: 8px; font-weight: 700; letter-spacing: 0.32px;
+  text-transform: uppercase; color: var(--muted);
+  margin: 24px 0 12px;
+}
+.ds-block .ds-caption:first-of-type { margin-top: 0; }
+
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--canvas);
+}
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 13px; color: var(--ink); font-weight: 600; }
+.ds-sw .val { font-size: 11px; color: var(--muted); font-family: ui-monospace, Menlo, monospace; margin-top: 2px; }
+
+.ds-typescale {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+.ds-tr {
+  display: grid; grid-template-columns: 160px 240px 1fr;
+  align-items: baseline; gap: 24px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 12px; color: var(--ink); font-family: ui-monospace, Menlo, monospace; font-weight: 600; }
+.ds-spec { font-size: 11px; color: var(--muted); font-family: ui-monospace, Menlo, monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(7, 1fr);
+}
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--primary); }
+.ds-rad .lab { font-size: 11px; font-family: ui-monospace, Menlo, monospace; color: var(--ink); font-weight: 600; }
+.ds-rad .vv { font-size: 11px; font-family: ui-monospace, Menlo, monospace; color: var(--muted); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-comp-row + .ds-comp-row { margin-top: 16px; }
+.ds-input {
+  width: 100%; height: 56px;
+  padding: 14px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  color: var(--ink);
+  font: 400 16px/1.5 inherit;
+}
+.ds-input.focused { border-width: 2px; border-color: var(--ink); padding: 13px 11px; outline: none; }
+.ds-input::placeholder { color: var(--muted); }
+.ds-input-pair {
+  display: grid; gap: 16px; grid-template-columns: 1fr 1fr;
+  max-width: 640px;
+}
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-field-label {
+  font-size: 12px; font-weight: 700; color: var(--ink);
+  letter-spacing: 0; margin-bottom: 6px;
+  display: block;
+  font-family: ui-monospace, Menlo, monospace;
+}
+.ds-tag {
+  display: inline-flex; align-items: center; padding: 4px 10px;
+  border-radius: var(--r-full);
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 11px; font-weight: 600;
+  box-shadow: var(--shadow-lift);
+}
+.ds-tag.new {
+  font-size: 8px; font-weight: 700; letter-spacing: 0.32px;
+  text-transform: uppercase; padding: 2px 6px;
+}
+.ds-tag.luxe { background: var(--luxe); color: white; box-shadow: none; }
+.ds-tag.plus { background: var(--plus); color: white; box-shadow: none; }
+.ds-cards-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+@media (max-width: 900px) { .ds-cards-row { grid-template-columns: 1fr; } }
+.ds-mini-card {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid var(--hairline-soft);
+}
+.ds-mini-card .ph { aspect-ratio: 1; }
+.ds-mini-card .meta-p { padding: 12px; }
+.ds-mini-card .meta-p .t { font-size: 16px; font-weight: 600; color: var(--ink); }
+.ds-mini-card .meta-p .s { font-size: 14px; color: var(--muted); margin-top: 2px; }
+.ds-mini-card .meta-p .p { font-size: 14px; color: var(--ink); font-weight: 600; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#" aria-label="Belo">
+    <svg class="glyph" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+      <path d="M16 1c-2.36 0-4.32 1.1-5.68 3.1L1.45 22.34c-.32.72-.45 1.45-.45 2.18 0 4.13 3.5 7.48 7.79 7.48 2.04 0 4.05-.78 5.79-2.41.97-.9 2.07-2.18 3.42-3.85 1.35 1.67 2.45 2.95 3.42 3.85 1.74 1.63 3.75 2.41 5.79 2.41 4.29 0 7.79-3.35 7.79-7.48 0-.73-.13-1.46-.45-2.18L26.68 4.1C25.32 2.1 23.36 1 21 1zM16 4.86c1.05 0 2.04.5 2.74 1.55l8.86 18.24c.17.39.24.78.24 1.17 0 2.2-1.83 4.02-4.05 4.02-1.13 0-2.18-.39-3.05-1.17-1.05-.94-2.5-2.59-4.36-4.86C14.5 25.99 13.05 27.64 12 28.58c-.87.78-1.92 1.17-3.05 1.17-2.22 0-4.05-1.83-4.05-4.02 0-.39.07-.78.24-1.17L13.26 6.41c.7-1.05 1.69-1.55 2.74-1.55z"/>
+    </svg>
+    belo
+  </a>
+  <nav class="product-tabs">
+    <a href="#" class="product-tab active">
+      <span class="glyph">🏠</span> Homes
+    </a>
+    <a href="#" class="product-tab">
+      <span class="glyph">🎈</span> Experiences <span class="new-tag">New</span>
+    </a>
+    <a href="#" class="product-tab">
+      <span class="glyph">🛎️</span> Services <span class="new-tag">New</span>
+    </a>
+  </nav>
+  <div class="nav-right">
+    <a class="nav-link" href="#">Become a host</a>
+    <button class="nav-link" aria-label="Language" style="padding: 12px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </button>
+    <button class="icon-pill" aria-label="Account menu">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="4" x2="14" y2="4"/><line x1="2" y1="8" x2="14" y2="8"/><line x1="2" y1="12" x2="14" y2="12"/></svg>
+      <span class="avatar-circle">A</span>
+    </button>
+  </div>
+</div></header>
+
+<!-- Hero / search opener -->
+<section class="hero"><div class="wrap">
+  <h1>Inspiration for future getaways</h1>
+  <p class="lead">Find a place built for what you love — beach houses, ski cabins, treehouses, and 8 million more.</p>
+  <div class="search-bar">
+    <div class="search-seg">
+      <div class="lab">Where</div>
+      <div class="val">Search destinations</div>
+    </div>
+    <div class="search-seg">
+      <div class="lab">Check in</div>
+      <div class="val">Add dates</div>
+    </div>
+    <div class="search-seg">
+      <div class="lab">Check out</div>
+      <div class="val">Add dates</div>
+    </div>
+    <div class="search-seg">
+      <div class="lab">Who</div>
+      <div class="val">Add guests</div>
+    </div>
+    <button class="search-orb expanded">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="7" cy="7" r="5"/><line x1="11" y1="11" x2="14.5" y2="14.5"/></svg>
+      Search
+    </button>
+  </div>
+</div></section>
+
+<!-- Category strip -->
+<div class="category-strip"><div class="wrap row">
+  <span class="cat active"><span class="glyph">🏛️</span> Iconic</span>
+  <span class="cat"><span class="glyph">🏝️</span> Beach</span>
+  <span class="cat"><span class="glyph">🏰</span> Castles</span>
+  <span class="cat"><span class="glyph">🌲</span> Cabins</span>
+  <span class="cat"><span class="glyph">🛁</span> Amazing pools</span>
+  <span class="cat"><span class="glyph">🏔️</span> Skiing</span>
+  <span class="cat"><span class="glyph">🌾</span> Countryside</span>
+  <span class="cat"><span class="glyph">🌴</span> Tropical</span>
+  <span class="cat"><span class="glyph">🌊</span> Lakefront</span>
+  <span class="cat"><span class="glyph">🍷</span> Vineyards</span>
+  <span class="cat"><span class="glyph">🎨</span> Design</span>
+  <span class="filter-pill">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3v10M11 3v10M2 5h6M8 11h6"/></svg>
+    Filters
+  </span>
+</div></div>
+
+<!-- Property card grid -->
+<section><div class="wrap">
+  <div class="section-head">
+    <h2>Stays guests love most</h2>
+    <a class="more" href="#">Show all →</a>
+  </div>
+  <div class="prop-grid">
+    <article class="prop">
+      <div class="prop-photo">
+        <span class="guest-fav">Guest favorite</span>
+        <button class="heart-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div class="dots-row"><span class="d active"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+        <div class="photo p1"></div>
+      </div>
+      <h3 class="ttl">Tinos, Greece <span class="rate">★ 4.95</span></h3>
+      <p class="meta-row">A-frame · Sea view</p>
+      <p class="meta-row dates">Apr 12 – 18</p>
+      <p class="price">$248 <em>night</em></p>
+    </article>
+    <article class="prop">
+      <div class="prop-photo">
+        <span class="guest-fav">Guest favorite</span>
+        <button class="heart-btn saved">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div class="dots-row"><span class="d"></span><span class="d active"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+        <div class="photo p3"></div>
+      </div>
+      <h3 class="ttl">Big Sur, CA <span class="rate">★ 4.92</span></h3>
+      <p class="meta-row">Cliffside · Hot tub</p>
+      <p class="meta-row dates">May 3 – 9</p>
+      <p class="price">$612 <em>night</em></p>
+    </article>
+    <article class="prop">
+      <div class="prop-photo">
+        <button class="heart-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div class="dots-row"><span class="d active"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+        <div class="photo p5"></div>
+      </div>
+      <h3 class="ttl">Montvale Valley <span class="rate">★ 4.88</span></h3>
+      <p class="meta-row">Treehouse · 2 beds</p>
+      <p class="meta-row dates">Jun 18 – 24</p>
+      <p class="price">$184 <em>night</em></p>
+    </article>
+    <article class="prop">
+      <div class="prop-photo">
+        <span class="guest-fav">Guest favorite</span>
+        <button class="heart-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div class="dots-row"><span class="d active"></span><span class="d"></span><span class="d"></span></div>
+        <div class="photo p2"></div>
+      </div>
+      <h3 class="ttl">Joshua Tree, CA <span class="rate">★ 4.97</span></h3>
+      <p class="meta-row">Desert cabin · Stargazing</p>
+      <p class="meta-row dates">Jul 11 – 17</p>
+      <p class="price">$328 <em>night</em></p>
+    </article>
+    <article class="prop">
+      <div class="prop-photo">
+        <button class="heart-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div class="dots-row"><span class="d active"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+        <div class="photo p4"></div>
+      </div>
+      <h3 class="ttl">Marrakech medina <span class="rate">★ 4.86</span></h3>
+      <p class="meta-row">Riad · Plunge pool</p>
+      <p class="meta-row dates">Apr 22 – 28</p>
+      <p class="price">$152 <em>night</em></p>
+    </article>
+    <article class="prop">
+      <div class="prop-photo">
+        <span class="guest-fav">Guest favorite</span>
+        <button class="heart-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div class="dots-row"><span class="d"></span><span class="d active"></span><span class="d"></span><span class="d"></span></div>
+        <div class="photo p6"></div>
+      </div>
+      <h3 class="ttl">Tuscany, Italy <span class="rate">★ 4.91</span></h3>
+      <p class="meta-row">Farmhouse · Olive grove</p>
+      <p class="meta-row dates">Sep 5 – 11</p>
+      <p class="price">$268 <em>night</em></p>
+    </article>
+    <article class="prop">
+      <div class="prop-photo">
+        <button class="heart-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div class="dots-row"><span class="d active"></span><span class="d"></span><span class="d"></span></div>
+        <div class="photo p7"></div>
+      </div>
+      <h3 class="ttl">Kyoto, Japan <span class="rate">★ 4.94</span></h3>
+      <p class="meta-row">Machiya · Zen garden</p>
+      <p class="meta-row dates">Oct 14 – 20</p>
+      <p class="price">$214 <em>night</em></p>
+    </article>
+    <article class="prop">
+      <div class="prop-photo">
+        <span class="guest-fav">Guest favorite</span>
+        <button class="heart-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <div class="dots-row"><span class="d"></span><span class="d active"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>
+        <div class="photo p8"></div>
+      </div>
+      <h3 class="ttl">Lisbon, Portugal <span class="rate">★ 4.89</span></h3>
+      <p class="meta-row">Hilltop loft · Tile work</p>
+      <p class="meta-row dates">Mar 12 – 18</p>
+      <p class="price">$176 <em>night</em></p>
+    </article>
+  </div>
+</div></section>
+
+<!-- Listing detail composite -->
+<section class="detail-band"><div class="wrap">
+  <div class="detail-head">
+    <h2>Close to Fethiye Aliyah Bali Beach — Sea-View Cabin</h2>
+    <div class="sub">
+      <span>★ 4.92 · <a href="#" style="text-decoration: underline;">214 reviews</a></span>
+      <span class="dot"></span>
+      <span>Superhost</span>
+      <span class="dot"></span>
+      <span>Muğla, Türkiye</span>
+    </div>
+  </div>
+
+  <div class="detail-gallery">
+    <div class="photo main p3"></div>
+    <div class="photo p1"></div>
+    <div class="photo p5"></div>
+    <div class="photo p2"></div>
+    <div class="photo p6"></div>
+    <button class="gallery-btn">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="2" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Show all photos
+    </button>
+  </div>
+
+  <div class="detail-grid">
+    <div class="detail-left">
+
+      <!-- Rating display (signature 64px moment) -->
+      <div class="detail-section" style="border: 0; padding: 0;">
+        <div class="rating-display">
+          <span class="laurel">🌿</span>
+          <div style="text-align: center;">
+            <div class="number">4.92</div>
+            <div style="font-size: 14px; font-weight: 600; color: var(--ink);">Guest favorite</div>
+          </div>
+          <span class="laurel" style="transform: scaleX(-1);">🌿</span>
+        </div>
+        <p style="font-size: 14px; color: var(--muted); text-align: center; margin: 0;">One of the most loved homes on Belo based on ratings, reviews, and reliability</p>
+        <div class="stat-cols">
+          <div class="stat-col"><div class="lab">Overall</div><div class="num">4.92</div><div class="bar"><div class="fill" style="width: 98%;"></div></div></div>
+          <div class="stat-col"><div class="lab">Cleanliness</div><div class="num">4.95</div><div class="bar"><div class="fill" style="width: 99%;"></div></div></div>
+          <div class="stat-col"><div class="lab">Check-in</div><div class="num">4.96</div><div class="bar"><div class="fill" style="width: 99%;"></div></div></div>
+          <div class="stat-col"><div class="lab">Communication</div><div class="num">4.97</div><div class="bar"><div class="fill" style="width: 100%;"></div></div></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>About this place</h3>
+        <p>Hand-built sea-view cabin tucked into the pine ridge above Aliyah Bali Beach. Wake up to the Aegean through floor-to-ceiling windows, walk five minutes through cypress to the cove, and end the day on the cantilever deck with a glass of Bozcaada white. Sleeps four — two bedrooms, one bath, full chef's kitchen. Hand-thrown ceramics from Datça village, linen sheets, robust wifi for the occasional remote day.</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>What this place offers</h3>
+        <div class="amenities-grid">
+          <div class="amenity">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            Sea view
+          </div>
+          <div class="amenity">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M12 5v14"/></svg>
+            Wifi 200 Mbps
+          </div>
+          <div class="amenity">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+            Outdoor terrace
+          </div>
+          <div class="amenity">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            Chef's kitchen
+          </div>
+          <div class="amenity">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l4-4h10l4 4v12H3z"/></svg>
+            Free parking
+          </div>
+          <div class="amenity">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/></svg>
+            Self check-in
+          </div>
+        </div>
+      </div>
+
+      <div class="host-card">
+        <div class="host-avatar">E
+          <span class="crown">★</span>
+        </div>
+        <div class="host-info">
+          <div class="name">Hosted by Eylül</div>
+          <div class="tag">Superhost · 7 years hosting</div>
+          <div class="stats">214 reviews · 100% response · within an hour</div>
+        </div>
+        <a class="btn btn-secondary" href="#">Contact host</a>
+      </div>
+    </div>
+
+    <!-- Reservation rail -->
+    <aside>
+      <div class="reservation">
+        <p class="price-row"><span class="n">$248</span><span class="per">night</span></p>
+
+        <div class="date-picker">
+          <div class="row">
+            <div class="dp-cell"><div class="lab">Check-in</div><div class="val">Apr 12, 2026</div></div>
+            <div class="dp-cell"><div class="lab">Check-out</div><div class="val">Apr 18, 2026</div></div>
+          </div>
+          <div class="row" style="grid-template-columns: 1fr;">
+            <div class="dp-cell"><div class="lab">Guests</div><div class="val">2 adults</div></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary">Reserve</button>
+        <p class="note">You won't be charged yet</p>
+
+        <div class="fee"><span class="u">$248 × 6 nights</span><span>$1,488</span></div>
+        <div class="fee"><span class="u">Cleaning fee</span><span>$84</span></div>
+        <div class="fee"><span class="u">Belo service fee</span><span>$212</span></div>
+        <div class="fee total"><span>Total</span><span>$1,784</span></div>
+      </div>
+    </aside>
+  </div>
+</div></section>
+
+<!-- Inspirational city link grid -->
+<section style="background: var(--canvas);"><div class="wrap">
+  <h2 style="font-size: 22px; font-weight: 700; letter-spacing: 0; margin: 0 0 16px;">Inspiration for future getaways</h2>
+  <div class="city-tabs">
+    <span class="city-tab active">Popular</span>
+    <span class="city-tab">Arts &amp; culture</span>
+    <span class="city-tab">Outdoors</span>
+    <span class="city-tab">Mountains</span>
+    <span class="city-tab">Beach</span>
+    <span class="city-tab">Unique stays</span>
+    <span class="city-tab">Categories</span>
+    <span class="city-tab">Things to do</span>
+  </div>
+  <div class="city-grid">
+    <a class="city-link" href="#"><div class="name">Canmore</div><div class="sub">Pet-friendly rentals</div></a>
+    <a class="city-link" href="#"><div class="name">Benalmádena</div><div class="sub">Beach rentals</div></a>
+    <a class="city-link" href="#"><div class="name">Marbella</div><div class="sub">Vacation rentals with pool</div></a>
+    <a class="city-link" href="#"><div class="name">Mijas</div><div class="sub">Cottage rentals</div></a>
+    <a class="city-link" href="#"><div class="name">Prescott</div><div class="sub">Pet-friendly rentals</div></a>
+    <a class="city-link" href="#"><div class="name">Mountain View</div><div class="sub">Vacation rentals</div></a>
+    <a class="city-link" href="#"><div class="name">Wilmington</div><div class="sub">Beachfront rentals</div></a>
+    <a class="city-link" href="#"><div class="name">Athens</div><div class="sub">City apartments</div></a>
+    <a class="city-link" href="#"><div class="name">Tinos</div><div class="sub">Cycladic stays</div></a>
+    <a class="city-link" href="#"><div class="name">Tulum</div><div class="sub">Jungle villas</div></a>
+    <a class="city-link" href="#"><div class="name">Reykjavík</div><div class="sub">Aurora cabins</div></a>
+    <a class="city-link" href="#"><div class="name">Lisbon</div><div class="sub">Riverside lofts</div></a>
+  </div>
+</div></section>
+
+<!-- Become-a-host band -->
+<section style="background: var(--canvas);"><div class="wrap">
+  <div class="host-band">
+    <div>
+      <h2>Your home could earn $4,200 next month.</h2>
+      <p>Belo Setup is our concierge — they'll match you with a Superhost who handles the listing, photos, and your first guest. You keep 100% of the side hustle, none of the homework.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">$4.2K</div><div class="l">avg. monthly earnings</div></div>
+        <div class="stat"><div class="n">7M+</div><div class="l">hosts worldwide</div></div>
+        <div class="stat"><div class="n">$1M</div><div class="l">host protection per stay</div></div>
+      </div>
+      <a class="btn btn-pill-rausch" href="#">Try hosting →</a>
+    </div>
+    <div class="house-illust">
+      <span class="badge-float">Guest favorite</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- Design system section (signature) -->
+<section class="ds-section"><div class="wrap">
+  <div class="ds-intro">
+    <h2>The tokens behind every pixel.</h2>
+    <p>Sourced from <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.airbnb.html" target="_blank" rel="noopener">DESIGN.md</a>. Single Rausch voltage, near-black ink, 8px button radius, 14px card radius, modest display weights — the system trusts photography over typographic muscle.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3>Color</h3>
+    <p>One brand voltage. No secondary. The Luxe purple and Plus magenta only ever appear inside Luxe / Plus sub-brand surfaces — never in mainline.</p>
+
+    <p class="ds-caption">Brand · The single voltage</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ff385c"></div><div class="meta"><div class="name">primary · Rausch</div><div class="val">#ff385c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e00b41"></div><div class="meta"><div class="name">primary-active</div><div class="val">#e00b41</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffd1da"></div><div class="meta"><div class="name">primary-disabled</div><div class="val">#ffd1da</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c13515"></div><div class="meta"><div class="name">error-text</div><div class="val">#c13515</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#b32505"></div><div class="meta"><div class="name">error-text-hover</div><div class="val">#b32505</div></div></div>
+    </div>
+
+    <p class="ds-caption">Sub-brand · Luxe + Plus — scoped to sub-domains</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#460479"></div><div class="meta"><div class="name">luxe</div><div class="val">#460479</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#92174d"></div><div class="meta"><div class="name">plus</div><div class="val">#92174d</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#428bff"></div><div class="meta"><div class="name">legal-link</div><div class="val">#428bff</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text — five steps from ink to muted-soft</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#222222"></div><div class="meta"><div class="name">ink</div><div class="val">#222222</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#3f3f3f"></div><div class="meta"><div class="name">body</div><div class="val">#3f3f3f</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#6a6a6a"></div><div class="meta"><div class="name">muted</div><div class="val">#6a6a6a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#929292"></div><div class="meta"><div class="name">muted-soft</div><div class="val">#929292</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#222222"></div><div class="meta"><div class="name">star-rating</div><div class="val">#222222</div></div></div>
+    </div>
+
+    <p class="ds-caption">Surface &amp; hairlines — white, almost-white, faintest gray</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ffffff; border-bottom: 1px solid var(--hairline);"></div><div class="meta"><div class="name">canvas</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f7f7f7"></div><div class="meta"><div class="name">surface-soft</div><div class="val">#f7f7f7</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f2f2f2"></div><div class="meta"><div class="name">surface-strong</div><div class="val">#f2f2f2</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ebebeb"></div><div class="meta"><div class="name">hairline-soft</div><div class="val">#ebebeb</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#dddddd"></div><div class="meta"><div class="name">hairline</div><div class="val">#dddddd</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c1c1c1"></div><div class="meta"><div class="name">border-strong</div><div class="val">#c1c1c1</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3>Typography</h3>
+    <p>Cereal VF (sub Inter). Display sits at 22–28px in weight 500–600 — modest by SaaS standards. The single typographically loud moment in the system is the 64px rating display.</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">rating-display</span><span class="ds-spec">64 · w700 · −1px · 1.10</span><div class="ds-sam" style="font-size:48px; font-weight:700; letter-spacing:-0.75px; line-height:1.1;">4.92</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">28 · w700 · 0 · 1.43</span><div class="ds-sam" style="font-size:26px; font-weight:700; line-height:1.43;">Inspiration for future getaways</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">22 · w500 · −0.44 · 1.18</span><div class="ds-sam" style="font-size:22px; font-weight:500; letter-spacing:-0.44px; line-height:1.18;">Close to Fethiye Aliyah Bali Beach</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">21 · w700 · 0 · 1.43</span><div class="ds-sam" style="font-size:21px; font-weight:700; line-height:1.43;">What this place offers</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-sm</span><span class="ds-spec">20 · w600 · −0.18 · 1.20</span><div class="ds-sam" style="font-size:20px; font-weight:600; letter-spacing:-0.18px; line-height:1.2;">Things to know</div></div>
+      <div class="ds-tr"><span class="ds-tok">title-md</span><span class="ds-spec">16 · w600 · 0 · 1.25</span><div class="ds-sam" style="font-size:16px; font-weight:600; line-height:1.25;">Wilmington</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 · w400 · 0 · 1.50</span><div class="ds-sam" style="font-size:16px; font-weight:400; line-height:1.5;">Hand-built sea-view cabin tucked into the pine ridge.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-sm</span><span class="ds-spec">14 · w400 · 0 · 1.43</span><div class="ds-sam" style="font-size:14px; font-weight:400; line-height:1.43; color: var(--muted);">$248 night · 6 nights · 2 guests</div></div>
+      <div class="ds-tr"><span class="ds-tok">caption</span><span class="ds-spec">14 · w500 · 0 · 1.29</span><div class="ds-sam" style="font-size:14px; font-weight:500;">Where · When · Who</div></div>
+      <div class="ds-tr"><span class="ds-tok">badge</span><span class="ds-spec">11 · w600 · 0 · 1.18</span><div class="ds-sam" style="font-size:11px; font-weight:600;">Guest favorite</div></div>
+      <div class="ds-tr"><span class="ds-tok">uppercase-tag</span><span class="ds-spec">8 · w700 · +0.32 · UPPER</span><div class="ds-sam" style="font-size:9px; font-weight:700; letter-spacing:0.32px; text-transform:uppercase;">NEW · TAG · 8/700</div></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">16 · w500 · 0 · 1.25</span><div class="ds-sam" style="font-size:16px; font-weight:500;">Reserve · Continue</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3>Radius — every interactive thing is rounded</h3>
+    <p>There is essentially no hard corner anywhere except the body grid. Buttons 8px, cards 14px, search bar fully pill, hearts and orbs circles.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:0;"></div><span class="lab">none</span><span class="vv">0 · grid</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="lab">xs</span><span class="vv">4 · chip</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="lab">sm</span><span class="vv">8 · button</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:14px"></div><span class="lab">md</span><span class="vv">14 · card</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:20px"></div><span class="lab">lg</span><span class="vv">20 · gallery</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:32px"></div><span class="lab">xl</span><span class="vv">32 · cat strip</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="lab">full</span><span class="vv">∞ · orb</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3>Components</h3>
+
+    <p class="ds-caption">Buttons — 8px radius primary · pill rausch · 48px height</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">Reserve</a>
+      <a href="#" class="btn btn-primary" style="background: var(--primary-active);">Pressed</a>
+      <a href="#" class="btn btn-primary-disabled" aria-disabled="true">Disabled</a>
+      <a href="#" class="btn btn-secondary">Contact host</a>
+      <a href="#" class="btn btn-tertiary">Show more</a>
+      <a href="#" class="btn btn-pill-rausch">Become a host</a>
+    </div>
+
+    <p class="ds-caption">Search orb — the hottest single moment</p>
+    <div class="ds-comp-row">
+      <button class="search-orb">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="7" cy="7" r="5"/><line x1="11" y1="11" x2="14.5" y2="14.5"/></svg>
+      </button>
+      <button class="search-orb expanded">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="7" cy="7" r="5"/><line x1="11" y1="11" x2="14.5" y2="14.5"/></svg>
+        Search
+      </button>
+      <button class="heart-btn" style="position: static; background: var(--surface-strong); color: var(--ink);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="heart-btn saved" style="position: static;">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+    </div>
+
+    <p class="ds-caption">Inputs — 56px height · 8px radius · 2px ink focus border</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="Add destination" />
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="Tinos, Greece" />
+      </div>
+    </div>
+
+    <p class="ds-caption">Tags &amp; badges — only the Rausch heart fills with brand color</p>
+    <div class="ds-comp-row">
+      <span class="ds-tag">Guest favorite</span>
+      <span class="ds-tag new">New</span>
+      <span class="ds-tag" style="background: var(--canvas); border: 1px solid var(--ink); color: var(--ink); box-shadow: none;">Superhost</span>
+      <span class="ds-tag luxe">Belo Luxe</span>
+      <span class="ds-tag plus">Belo Plus</span>
+    </div>
+
+    <p class="ds-caption">Cards — property-card · 14px radius, photo-first</p>
+    <div class="ds-cards-row">
+      <div class="ds-mini-card">
+        <div class="ph" style="background: var(--photo-1);"></div>
+        <div class="meta-p">
+          <div class="t">Tinos, Greece</div>
+          <div class="s">A-frame · Sea view</div>
+          <div class="p">$248 night</div>
+        </div>
+      </div>
+      <div class="ds-mini-card">
+        <div class="ph" style="background: var(--photo-3);"></div>
+        <div class="meta-p">
+          <div class="t">Big Sur, CA</div>
+          <div class="s">Cliffside · Hot tub</div>
+          <div class="p">$612 night</div>
+        </div>
+      </div>
+      <div class="ds-mini-card">
+        <div class="ph" style="background: var(--photo-5);"></div>
+        <div class="meta-p">
+          <div class="t">Montvale Valley</div>
+          <div class="s">Treehouse · 2 beds</div>
+          <div class="p">$184 night</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Footer -->
+<footer><div class="wrap">
+  <div class="footer-banner">
+    <div>
+      <h3>Inspiration for your next trip, in your inbox.</h3>
+      <p>Travel tips, picks of the season, and the rare deal we actually like. No spam, no tabloids.</p>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <input class="ds-input" placeholder="you@home.com" style="width: 280px; height: 48px;"/>
+      <button class="btn btn-primary">Subscribe</button>
+    </div>
+  </div>
+
+  <div class="footer-grid">
+    <div>
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">AirCover</a></li>
+        <li><a href="#">Anti-discrimination</a></li>
+        <li><a href="#">Disability support</a></li>
+        <li><a href="#">Cancellation options</a></li>
+        <li><a href="#">Report neighborhood concern</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Hosting</h4>
+      <ul>
+        <li><a href="#">Belo your home</a></li>
+        <li><a href="#">AirCover for Hosts</a></li>
+        <li><a href="#">Hosting resources</a></li>
+        <li><a href="#">Community forum</a></li>
+        <li><a href="#">Hosting responsibly</a></li>
+        <li><a href="#">Belo-friendly apartments</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Belo</h4>
+      <ul>
+        <li><a href="#">Newsroom</a></li>
+        <li><a href="#">New features</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Investors</a></li>
+        <li><a href="#">Gift cards</a></li>
+        <li><a href="#">Belo.org emergency stays</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legal-band">
+    <span>© 2026 Belo (inspired), Inc.</span>
+    <span>·</span>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Sitemap</a>
+    <div class="right">
+      <a href="#">🌐 English (US)</a>
+      <a href="#">USD</a>
+      <a href="#" aria-label="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99C18.34 21.12 22 16.99 22 12z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5" stroke-width="3"/></svg>
+      </a>
+    </div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.airbnb.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

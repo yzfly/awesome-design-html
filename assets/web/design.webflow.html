@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Webflow — Inspired Design</title>
+<meta name="description" content="A Webflow-inspired marketing surface: near-black #080808 primary against generous white canvas, five-stop chromatic category palette (purple/pink/blue/orange/green), and a full-bleed visual designer mockup with layers panel, canvas, and properties inspector." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;600&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #080808;
+  --on-primary: #ffffff;
+  --ink: #080808;
+  --ink-strong: #222222;
+  --body: #363636;
+  --body-mid: #5a5a5a;
+  --mute: #898989;
+  --mute-soft: #ababab;
+  --hairline: #d8d8d8;
+  --hairline-soft: #ececec;
+  --canvas: #ffffff;
+  /* Accents — 5-stop category palette */
+  --acc-purple: #7a3dff;
+  --acc-pink: #ed52cb;
+  --acc-blue: #3b89ff;
+  --acc-blue-deep: #006acc;
+  --acc-blue-info: #146ef5;
+  --acc-orange: #ff6b00;
+  --acc-green: #00d722;
+  --acc-yellow: #ffae13;
+  --acc-red: #ee1d36;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "WF Visual Sans Variable", system-ui, -apple-system, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.16px;
+  font-feature-settings: "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(122,61,255,0.22); }
+
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 68px; gap: 28px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.4px; }
+.brand .glyph {
+  width: 30px; height: 22px;
+  background: var(--ink);
+  position: relative;
+  border-radius: 2px;
+}
+.brand .glyph::before, .brand .glyph::after { content: ""; position: absolute; background: var(--canvas); }
+.brand .glyph::before { left: 6px; top: 4px; width: 2px; height: 14px; transform: rotate(-22deg); }
+.brand .glyph::after { right: 6px; top: 4px; width: 2px; height: 14px; transform: rotate(22deg); }
+.nav-links { display: flex; gap: 4px; margin-left: 8px; }
+.nav-links a { font-size: 14px; color: var(--ink); font-weight: 500; padding: 8px 12px; }
+.nav-links a:hover { color: var(--acc-blue-deep); }
+.nav-right { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font: 500 16px/1.4 "Inter", system-ui;
+  letter-spacing: -0.16px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: #1a1a1a; }
+.btn-secondary { background: var(--canvas); color: var(--ink); border-color: var(--hairline); }
+.btn-secondary:hover { border-color: var(--ink); }
+.btn-sm { padding: 8px 14px; font-size: 14px; }
+.btn-text { background: none; color: var(--ink); border: none; padding: 8px 0; gap: 6px; }
+.btn-text::after { content: "→"; transition: transform 0.15s; }
+.btn-text:hover::after { transform: translateX(3px); }
+
+/* Eyebrow */
+.eyebrow {
+  display: inline-block;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.eyebrow.dot::before { content: "●"; color: var(--acc-purple); font-size: 8px; margin-right: 8px; vertical-align: 2px; }
+
+/* —— Hero —— */
+.hero { padding: 88px 0 64px; }
+h1.hero-h {
+  font: 600 80px/1.04 "Inter", system-ui;
+  letter-spacing: -2.4px;
+  color: var(--ink);
+  margin: 0 0 24px;
+  max-width: 980px;
+}
+h1.hero-h .stroke { color: var(--canvas); -webkit-text-stroke: 2px var(--ink); font-style: italic; }
+.hero p.lede { font: 400 22px/1.5 "Inter", system-ui; letter-spacing: -0.22px; color: var(--body); max-width: 640px; margin: 0 0 32px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.hero-meta { margin-top: 22px; font-size: 14px; color: var(--body-mid); display: flex; align-items: center; gap: 14px; }
+
+/* —— Visual Designer Mockup —— */
+.designer-shell {
+  margin-top: 56px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 84px 24px rgba(0,0,0,0),
+    0 54px 22px rgba(0,0,0,0.01),
+    0 30px 18px rgba(0,0,0,0.04),
+    0 13px 13px rgba(0,0,0,0.08),
+    0 3px 7px rgba(0,0,0,0.09);
+}
+.designer-topbar {
+  height: 44px; display: flex; align-items: center; gap: 14px;
+  padding: 0 14px; background: var(--canvas); border-bottom: 1px solid var(--hairline-soft);
+  font-size: 13px;
+}
+.designer-topbar .dots { display: flex; gap: 5px; }
+.designer-topbar .dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--hairline); }
+.designer-topbar .pill {
+  padding: 4px 10px; border-radius: 4px; background: var(--canvas); border: 1px solid var(--hairline); font-size: 12px; color: var(--body); font-weight: 500;
+}
+.designer-topbar .toolicon { width: 28px; height: 28px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; color: var(--body); }
+.designer-topbar .toolicon.active { background: var(--ink); color: var(--canvas); }
+.designer-topbar .url { font-family: "Inconsolata", monospace; font-size: 12px; color: var(--body-mid); border: 1px solid var(--hairline-soft); padding: 4px 10px; border-radius: 4px; background: #fafafa; }
+.designer-topbar .right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.designer-topbar .right .publish {
+  background: var(--acc-blue-info); color: #fff; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 500; border: none; cursor: pointer;
+}
+
+.designer-body {
+  display: grid;
+  grid-template-columns: 240px 1fr 260px;
+  background: #f6f6f7;
+  min-height: 540px;
+}
+
+/* Layers panel */
+.layers {
+  background: var(--canvas); border-right: 1px solid var(--hairline-soft);
+  padding: 12px 0 12px 0;
+  font-size: 13px;
+}
+.layers .panel-tabs { display: flex; gap: 0; padding: 0 12px 10px; border-bottom: 1px solid var(--hairline-soft); margin-bottom: 8px; }
+.layers .panel-tabs span { padding: 4px 10px; font-size: 12px; color: var(--mute); font-weight: 500; }
+.layers .panel-tabs span.active { color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: -8px; font-weight: 600; }
+.layers .row {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 12px; font-size: 12px; color: var(--ink); cursor: default;
+  font-family: "Inter", system-ui;
+}
+.layers .row .chev { width: 12px; color: var(--mute); font-size: 9px; }
+.layers .row .ic { width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center; color: var(--body-mid); }
+.layers .row .name { flex: 1; }
+.layers .row .tag { font-size: 10px; color: var(--mute-soft); font-family: "Inconsolata", monospace; }
+.layers .row.active { background: rgba(20,110,245,0.10); color: var(--acc-blue-info); }
+.layers .row.active .ic, .layers .row.active .tag { color: var(--acc-blue-info); }
+.layers .row.indent { padding-left: 28px; }
+.layers .row.indent-2 { padding-left: 44px; }
+.layers .row.indent-3 { padding-left: 60px; }
+
+/* Canvas */
+.canvas-wrap {
+  background: #e8eaed;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: 32px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  position: relative;
+}
+.canvas-ruler { font-family: "Inconsolata", monospace; font-size: 11px; color: var(--body-mid); align-self: flex-start; }
+.canvas-ruler::before { content: "1240 × auto"; padding: 3px 8px; background: var(--ink); color: #fff; border-radius: 4px; }
+.mock-site {
+  width: 100%; max-width: 760px; background: var(--canvas);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 18px 32px rgba(0,0,0,0.10);
+  position: relative;
+}
+.mock-site .selected-frame { outline: 2px solid var(--acc-blue-info); outline-offset: 2px; }
+.mock-nav { display: flex; align-items: center; padding: 14px 22px; border-bottom: 1px solid var(--hairline-soft); font-size: 13px; gap: 16px; }
+.mock-nav .b { font-weight: 600; color: var(--ink); letter-spacing: -0.3px; }
+.mock-nav .links { display: flex; gap: 18px; color: var(--body); }
+.mock-nav .cta { margin-left: auto; background: var(--ink); color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 12px; }
+.mock-hero { padding: 36px 28px; }
+.mock-hero h1 { font: 600 36px/1.1 "Inter"; letter-spacing: -1px; margin: 0 0 12px; color: var(--ink); }
+.mock-hero p { font-size: 14px; color: var(--body); margin: 0 0 18px; max-width: 380px; line-height: 1.5; }
+.mock-hero .row { display: flex; gap: 8px; }
+.mock-hero .row .btn { padding: 8px 14px; font-size: 13px; }
+.mock-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 0 28px 32px; }
+.mock-grid .cell {
+  aspect-ratio: 4 / 3; border-radius: 4px; padding: 14px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: #fff; font-size: 12px;
+}
+.mock-grid .cell h4 { margin: 0; font-weight: 600; font-size: 16px; line-height: 1.2; }
+.mock-grid .cell .lbl { font-size: 10px; letter-spacing: 0.6px; text-transform: uppercase; opacity: 0.85; }
+.mock-grid .cell.p { background: var(--acc-purple); }
+.mock-grid .cell.b { background: var(--acc-blue); }
+.mock-grid .cell.o { background: var(--acc-orange); }
+
+/* Properties panel */
+.props { background: var(--canvas); border-left: 1px solid var(--hairline-soft); padding: 14px 14px; font-size: 12px; color: var(--ink); }
+.props .panel-tabs { display: flex; gap: 0; margin-bottom: 14px; border-bottom: 1px solid var(--hairline-soft); }
+.props .panel-tabs span { padding: 6px 10px; font-size: 11px; color: var(--mute); font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
+.props .panel-tabs span.active { color: var(--ink); border-bottom: 2px solid var(--ink); margin-bottom: -1px; }
+.props .group { margin-bottom: 16px; }
+.props .group-title { font-size: 10px; font-weight: 600; color: var(--mute); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; }
+.props .field { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+.props .field .lbl { font-size: 11px; color: var(--body-mid); }
+.props .field input, .props .field .val {
+  border: 1px solid var(--hairline-soft); border-radius: 3px; background: #fafafa;
+  padding: 4px 6px; font: 11px "Inconsolata", monospace; color: var(--ink); width: 100%; text-align: right;
+}
+.props .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 4px; vertical-align: -3px; border: 1px solid rgba(0,0,0,0.1); }
+.props .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+
+.designer-statusbar {
+  height: 28px; padding: 0 12px; background: var(--canvas); border-top: 1px solid var(--hairline-soft);
+  display: flex; align-items: center; gap: 14px; font-family: "Inconsolata", monospace; font-size: 11px; color: var(--body-mid);
+}
+
+/* Logo strip */
+.logo-strip { padding: 56px 0; border-top: 1px solid var(--hairline-soft); border-bottom: 1px solid var(--hairline-soft); }
+.logo-strip .caption { font-size: 14px; color: var(--body-mid); text-align: center; margin-bottom: 24px; }
+.logos { display: grid; grid-template-columns: repeat(7,1fr); gap: 24px; align-items: center; }
+.logo-cell { color: var(--mute); font-weight: 600; font-size: 16px; letter-spacing: -0.3px; text-align: center; }
+
+/* Sections */
+section { padding: 96px 0; }
+h2 { font: 600 56px/1.04 "Inter", system-ui; letter-spacing: -1.7px; color: var(--ink); margin: 0; }
+h2.med { font-size: 44.8px; line-height: 1.04; letter-spacing: -1.4px; }
+.section-lede { font: 400 20px/1.5 "Inter"; letter-spacing: -0.2px; color: var(--body); max-width: 660px; margin: 18px 0 0; }
+
+/* Category card row */
+.cat-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; margin-top: 48px; min-height: 540px; }
+.cat-card {
+  border-radius: 8px; padding: 28px;
+  color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  position: relative; overflow: hidden;
+}
+.cat-card h3 { font: 500 32px/1.1 "Inter"; letter-spacing: -1px; margin: 0; max-width: 420px; }
+.cat-card p { margin: 0; font-size: 15px; line-height: 1.5; opacity: 0.9; max-width: 360px; }
+.cat-card .tag { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.85; }
+.cat-card .more { font-size: 14px; font-weight: 500; }
+.cat-card.large { grid-row: span 2; }
+.cat-card.purple { background: var(--acc-purple); }
+.cat-card.pink   { background: var(--acc-pink); }
+.cat-card.blue   { background: var(--acc-blue); }
+.cat-card.orange { background: var(--acc-orange); }
+.cat-card.green  { background: var(--acc-green); color: var(--ink); }
+.cat-card.green .tag { color: var(--ink); opacity: 0.65; }
+.cat-card .ill {
+  background: rgba(255,255,255,0.14); border-radius: 6px;
+  height: 110px; margin-top: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Inconsolata", monospace; font-size: 11px;
+}
+.cat-card.green .ill { background: rgba(0,0,0,0.08); }
+
+/* Feature card row */
+.feat-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 48px; }
+.feat-c { border: 1px solid var(--hairline); border-radius: 8px; padding: 32px; background: var(--canvas); display: flex; flex-direction: column; gap: 18px; }
+.feat-c.dark { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.feat-c .lbl { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.6px; color: var(--mute); }
+.feat-c.dark .lbl { color: var(--mute-soft); }
+.feat-c h3 { font: 600 32px/1.1 "Inter"; letter-spacing: -1px; margin: 0; }
+.feat-c p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--body); }
+.feat-c.dark p { color: var(--mute-soft); }
+
+/* Code block in feat */
+.code-block {
+  font-family: "Inconsolata", monospace; font-size: 13px;
+  background: #0f0f10; color: #fff; border-radius: 6px; padding: 18px; line-height: 1.6;
+}
+.code-block .k { color: #ed52cb; }
+.code-block .s { color: #00d722; }
+.code-block .c { color: var(--mute-soft); }
+.code-block .n { color: #3b89ff; }
+
+/* CMS preview rows */
+.cms-rows { display: flex; flex-direction: column; gap: 6px; }
+.cms-row { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 4px; background: rgba(255,255,255,0.06); font-size: 13px; }
+.cms-row .badge { font-size: 10px; padding: 3px 8px; border-radius: 9999px; font-weight: 500; }
+.cms-row .badge.published { background: var(--acc-green); color: var(--ink); }
+.cms-row .badge.draft { background: var(--acc-yellow); color: var(--ink); }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+.tier { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 8px; padding: 32px; display: flex; flex-direction: column; gap: 18px; position: relative; }
+.tier.featured { background: var(--ink); color: var(--on-primary); border-color: var(--ink); box-shadow: 0 30px 18px rgba(0,0,0,0.04), 0 13px 13px rgba(0,0,0,0.08); }
+.tier .name { font: 500 24px/1 "Inter"; letter-spacing: -0.5px; color: var(--ink); }
+.tier.featured .name { color: var(--on-primary); }
+.tier .price { font: 600 48px/1 "Inter"; letter-spacing: -1.5px; }
+.tier .price small { font-size: 16px; font-weight: 500; color: var(--mute); margin-left: 4px; }
+.tier.featured .price small { color: var(--mute-soft); }
+.tier .tag { font-size: 13px; color: var(--body-mid); }
+.tier.featured .tag { color: var(--mute-soft); }
+.tier ul { list-style: none; padding: 0; margin: 8px 0; display: flex; flex-direction: column; gap: 9px; font-size: 14px; color: var(--body); }
+.tier.featured ul { color: var(--mute-soft); }
+.tier ul li { display: flex; gap: 8px; align-items: flex-start; }
+.tier ul li svg { color: var(--acc-green); flex: none; margin-top: 3px; }
+.tier .featured-flag { position: absolute; top: -10px; left: 24px; background: var(--acc-blue-info); color: #fff; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase; }
+.tier .btn { width: 100%; }
+.tier.featured .btn-primary { background: var(--canvas); color: var(--ink); }
+
+/* CTA */
+.cta-band { padding: 80px 56px; border-radius: 8px; background: var(--ink); color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.cta-band h3 { font: 600 44.8px/1.04 "Inter"; letter-spacing: -1.4px; margin: 0; max-width: 620px; }
+
+/* —— DS reference (Part B) —— */
+.ds { background: #fafafa; padding: 96px 0; border-top: 1px solid var(--hairline-soft); }
+.ds h2 { font: 600 44.8px/1.04 "Inter"; letter-spacing: -1.4px; margin: 0 0 8px; }
+.ds .ds-sub { font-size: 17px; color: var(--body); max-width: 660px; margin-bottom: 36px; }
+.ds-block { background: var(--canvas); border-radius: 8px; padding: 32px; margin-bottom: 22px; border: 1px solid var(--hairline-soft); }
+.ds-block h3 { font: 600 24px/1.1 "Inter"; letter-spacing: -0.5px; margin: 0 0 4px; }
+.ds-block .ds-block-sub { font-size: 13px; color: var(--mute); margin-bottom: 18px; letter-spacing: 0; }
+.ds-group-title { font-size: 11px; font-weight: 500; color: var(--mute); letter-spacing: 0.6px; text-transform: uppercase; margin: 18px 0 10px; }
+.swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.sw { border-radius: 6px; overflow: hidden; border: 1px solid var(--hairline-soft); }
+.sw .chip-vis { height: 72px; }
+.sw .meta { padding: 8px 10px; font-size: 12px; }
+.sw .name { color: var(--ink); font-weight: 500; }
+.sw .hex { color: var(--mute); font-family: "Inconsolata", monospace; font-size: 11px; margin-top: 2px; }
+
+.type-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.type-table th, .type-table td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--hairline-soft); vertical-align: middle; }
+.type-table th { font-size: 11px; color: var(--mute); font-weight: 500; letter-spacing: 0.6px; text-transform: uppercase; }
+.type-table td.token { font-family: "Inconsolata", monospace; font-size: 12px; color: var(--mute); width: 200px; }
+
+.radius-ladder { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; }
+.radius-ladder .r-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.radius-ladder .r-box { width: 84px; height: 84px; background: var(--ink); }
+.radius-ladder .r-lbl { font-size: 12px; color: var(--mute); font-family: "Inconsolata", monospace; }
+
+.comp-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.comp { border: 1px solid var(--hairline-soft); border-radius: 6px; padding: 20px; background: var(--canvas); }
+.comp .comp-name { font-size: 11px; font-weight: 500; color: var(--mute); letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 14px; }
+.comp .comp-vis { min-height: 60px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+/* Footer */
+.footer { background: var(--canvas); padding: 88px 0 48px; border-top: 1px solid var(--hairline); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 40px; }
+.footer-grid h4 { font-size: 14px; font-weight: 500; margin: 0 0 14px; color: var(--ink); }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 14px; color: var(--body-mid); }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-brand p { margin: 14px 0 0; font-size: 13px; color: var(--body-mid); max-width: 280px; line-height: 1.55; }
+.footer-bottom { padding-top: 30px; margin-top: 48px; border-top: 1px solid var(--hairline-soft); font-size: 13px; color: var(--body-mid); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); border: 1px solid var(--hairline);
+  padding: 8px 14px; border-radius: 9999px; font-size: 12px; color: var(--mute);
+  box-shadow: 0 4px 14px rgba(15,15,15,0.07);
+}
+.src-link:hover { color: var(--ink); border-color: var(--ink); }
+
+@media (max-width: 1100px) {
+  .designer-body { grid-template-columns: 200px 1fr 220px; }
+  .cat-row { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .cat-card.large { grid-row: auto; grid-column: span 2; }
+  .swatches { grid-template-columns: repeat(4, 1fr); }
+  h1.hero-h { font-size: 56px; letter-spacing: -1.8px; }
+  h2 { font-size: 44px; }
+}
+@media (max-width: 768px) {
+  .designer-body { grid-template-columns: 1fr; }
+  .layers, .props { display: none; }
+  .cat-row { grid-template-columns: 1fr; }
+  .cat-card.large { grid-column: auto; }
+  .feat-2, .pricing-grid, .footer-grid, .comp-matrix { grid-template-columns: 1fr; }
+  .swatches { grid-template-columns: repeat(3, 1fr); }
+  .nav-links { display: none; }
+  h1.hero-h { font-size: 40px; letter-spacing: -1.2px; }
+  h2 { font-size: 36px; }
+  section { padding: 64px 0; }
+  .hero { padding: 56px 0 40px; }
+  .wrap { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top nav -->
+<header class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#">
+      <span class="glyph"></span>
+      <span>Webflow</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Resources</a>
+      <a href="#">Enterprise</a>
+      <a href="#">Pricing</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#" style="font-size:14px;color:var(--ink);font-weight:500;padding:8px 6px;">Log in</a>
+      <a class="btn btn-sm btn-secondary" href="#">Contact sales</a>
+      <a class="btn btn-sm btn-primary" href="#">Get started — it's free</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow dot">The Website Experience Platform</span>
+    <h1 class="hero-h">Design, build, <span class="stroke">and launch</span> production sites visually.</h1>
+    <p class="lede">Webflow is the visual development platform for modern marketing teams. Drag the structure, write the styles in plain CSS, and publish to global hosting — without handing off to engineering.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#">Get started — it's free</a>
+      <a class="btn btn-secondary" href="#">Watch a 2-min demo</a>
+      <a class="btn-text" href="#">Built for enterprise</a>
+    </div>
+    <div class="hero-meta">
+      <span style="display:inline-flex;align-items:center;gap:6px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--acc-green);"></span> 99.99% uptime</span>
+      <span>·</span>
+      <span>Used by 3.5M+ designers</span>
+      <span>·</span>
+      <span>SOC 2 Type II</span>
+    </div>
+
+    <!-- Designer mockup -->
+    <div class="designer-shell">
+      <div class="designer-topbar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <span class="toolicon active">⬚</span>
+        <span class="toolicon">▤</span>
+        <span class="toolicon">⌘</span>
+        <span class="toolicon">✦</span>
+        <span class="toolicon">↻</span>
+        <span class="pill">Production · v2.4</span>
+        <span class="url">https://acme.io/products/launch</span>
+        <div class="right">
+          <span class="toolicon" title="desktop">▭</span>
+          <span class="toolicon" title="tablet">▢</span>
+          <span class="toolicon" title="mobile">▯</span>
+          <button class="publish">Publish</button>
+        </div>
+      </div>
+
+      <div class="designer-body">
+        <!-- Layers -->
+        <div class="layers">
+          <div class="panel-tabs">
+            <span class="active">Layers</span><span>Pages</span><span>CMS</span>
+          </div>
+          <div class="row"><span class="chev">▾</span><span class="ic">▭</span><span class="name">Body</span><span class="tag">body</span></div>
+          <div class="row indent"><span class="chev">▾</span><span class="ic">▱</span><span class="name">Navbar</span><span class="tag">.navbar</span></div>
+          <div class="row indent-2"><span class="ic">A</span><span class="name">Logo</span><span class="tag">a</span></div>
+          <div class="row indent-2"><span class="ic">≡</span><span class="name">Menu</span><span class="tag">nav</span></div>
+          <div class="row indent"><span class="chev">▾</span><span class="ic">▱</span><span class="name">Hero Section</span><span class="tag">section</span></div>
+          <div class="row indent-2"><span class="ic">⊟</span><span class="name">Container</span><span class="tag">.wrap</span></div>
+          <div class="row indent-3 active"><span class="ic">H</span><span class="name">Heading H1</span><span class="tag">h1</span></div>
+          <div class="row indent-3"><span class="ic">¶</span><span class="name">Paragraph</span><span class="tag">p</span></div>
+          <div class="row indent-3"><span class="ic">▱</span><span class="name">Button Row</span><span class="tag">div</span></div>
+          <div class="row indent"><span class="chev">▸</span><span class="ic">▱</span><span class="name">Category Grid</span><span class="tag">.cat-row</span></div>
+          <div class="row indent"><span class="chev">▸</span><span class="ic">▱</span><span class="name">Pricing Section</span><span class="tag">section</span></div>
+          <div class="row indent"><span class="chev">▸</span><span class="ic">▱</span><span class="name">Footer</span><span class="tag">footer</span></div>
+        </div>
+
+        <!-- Canvas -->
+        <div class="canvas-wrap">
+          <div class="canvas-ruler"></div>
+          <div class="mock-site">
+            <div class="mock-nav">
+              <span class="b">Acme</span>
+              <div class="links"><span>Products</span><span>Solutions</span><span>Pricing</span></div>
+              <span class="cta">Sign up</span>
+            </div>
+            <div class="mock-hero selected-frame">
+              <h1>Ship sites faster than your roadmap.</h1>
+              <p>One platform for design, content, and publishing — built for modern marketing teams.</p>
+              <div class="row">
+                <a class="btn btn-primary" href="#">Get started</a>
+                <a class="btn btn-secondary" href="#">Book demo</a>
+              </div>
+            </div>
+            <div class="mock-grid">
+              <div class="cell p"><div class="lbl">Design</div><h4>Visual canvas</h4></div>
+              <div class="cell b"><div class="lbl">SEO</div><h4>Built‑in optimization</h4></div>
+              <div class="cell o"><div class="lbl">Hosting</div><h4>Edge network</h4></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Properties -->
+        <div class="props">
+          <div class="panel-tabs">
+            <span class="active">Style</span><span>Settings</span><span>Element</span>
+          </div>
+          <div class="group">
+            <div class="group-title">Selector</div>
+            <div class="val" style="text-align:left;"><span style="color:var(--acc-blue-info);font-weight:500;">.hero-h</span><span style="color:var(--mute);"> &nbsp;·&nbsp; H1</span></div>
+          </div>
+          <div class="group">
+            <div class="group-title">Typography</div>
+            <div class="field"><div class="lbl">Family</div><div class="val">WF Visual Sans</div></div>
+            <div class="field"><div class="lbl">Weight</div><div class="val">600</div></div>
+            <div class="field"><div class="lbl">Size</div><div class="val">80 px</div></div>
+            <div class="field"><div class="lbl">Line</div><div class="val">83.2 px</div></div>
+            <div class="field"><div class="lbl">Tracking</div><div class="val">-0.8 px</div></div>
+            <div class="field"><div class="lbl">Color</div><div class="val"><span class="swatch" style="background:#080808;"></span>#080808</div></div>
+          </div>
+          <div class="group">
+            <div class="group-title">Spacing</div>
+            <div class="pair">
+              <div class="field" style="grid-template-columns: 1fr;"><div class="lbl">Margin top</div><div class="val">0</div></div>
+              <div class="field" style="grid-template-columns: 1fr;"><div class="lbl">Margin bot</div><div class="val">24 px</div></div>
+            </div>
+          </div>
+          <div class="group">
+            <div class="group-title">Layout</div>
+            <div class="field"><div class="lbl">Display</div><div class="val">block</div></div>
+            <div class="field"><div class="lbl">Max-w</div><div class="val">980 px</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="designer-statusbar">
+        <span>html › body › section.hero › h1.hero-h</span>
+        <span style="margin-left:auto;">100% · Saved 2s ago · <span style="color:var(--acc-green);">●</span> live preview</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logo strip -->
+<section class="logo-strip" style="padding:48px 0;">
+  <div class="wrap">
+    <div class="caption">Building the web for</div>
+    <div class="logos">
+      <div class="logo-cell">Dropbox</div>
+      <div class="logo-cell">Discord</div>
+      <div class="logo-cell">Vercel</div>
+      <div class="logo-cell">PwC</div>
+      <div class="logo-cell">Loom</div>
+      <div class="logo-cell">Crunchyroll</div>
+      <div class="logo-cell">Mural</div>
+    </div>
+  </div>
+</section>
+
+<!-- Category grid -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Platform</span>
+    <h2>Every layer of the modern website, in one canvas.</h2>
+    <p class="section-lede">Webflow ships design, CMS, hosting, ecommerce, and analytics under a single primitive — the visual element. Your team works on the site they ship, not on a Figma frame of it.</p>
+
+    <div class="cat-row">
+      <div class="cat-card purple large">
+        <div>
+          <div class="tag">Design</div>
+          <h3>A visual canvas that writes the CSS for you.</h3>
+        </div>
+        <div class="ill">grid · flex · breakpoints · ms-overrides</div>
+        <p>Drag structure, write styles in plain CSS, version every change. Engineering keeps the keys to the deploy — designers keep the keys to the page.</p>
+        <a class="btn-text" href="#" style="color:#fff;">Explore the Designer</a>
+      </div>
+
+      <div class="cat-card pink">
+        <div>
+          <div class="tag">Animations</div>
+          <h3>Interactions without timeline jail.</h3>
+        </div>
+        <p>Scroll-linked, hover-triggered, page-load. All visual, all exportable.</p>
+      </div>
+
+      <div class="cat-card blue">
+        <div>
+          <div class="tag">SEO</div>
+          <h3>Optimized for index — and for AI agents.</h3>
+        </div>
+        <p>Semantic markup, alt text, sitemaps, Open Graph — all configured visually.</p>
+      </div>
+
+      <div class="cat-card orange">
+        <div>
+          <div class="tag">Hosting</div>
+          <h3>Edge network that ships in under a second.</h3>
+        </div>
+        <p>Global CDN, SSL, image optimization. Publish to staging or production with one click.</p>
+      </div>
+
+      <div class="cat-card green">
+        <div>
+          <div class="tag">Ecommerce</div>
+          <h3>Sell from the same canvas you design.</h3>
+        </div>
+        <p>Products, checkout, taxes, subscriptions — all visual. No headless setup required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Two feature cards: light + dark -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <span class="eyebrow">CMS · Localization</span>
+    <h2 class="med">Content models your editors actually use.</h2>
+    <div class="feat-2">
+      <div class="feat-c">
+        <div class="lbl">CMS COLLECTIONS</div>
+        <h3>Schema, in a sidebar.</h3>
+        <p>Define a Blog Post once with title, slug, body, author reference, and SEO fields. Webflow generates the editor view, the URL, the sitemap, and the page template automatically.</p>
+        <div style="border:1px solid var(--hairline);border-radius:6px;padding:14px;font-size:13px;">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;font-weight:500;"><span style="display:inline-block;width:6px;height:6px;background:var(--acc-blue-info);border-radius:50%;"></span> Posts <span style="color:var(--mute);font-weight:400;">· 42 items</span></div>
+          <div style="display:grid;grid-template-columns:1fr auto auto;gap:10px;padding:8px 0;border-top:1px solid var(--hairline-soft);"><span>The redesign that doubled signups</span><span style="font-size:11px;padding:2px 8px;background:#e8f9ec;color:#00721a;border-radius:9999px;">Published</span><span style="color:var(--mute);">May 18</span></div>
+          <div style="display:grid;grid-template-columns:1fr auto auto;gap:10px;padding:8px 0;border-top:1px solid var(--hairline-soft);"><span>Notes from a year of localization</span><span style="font-size:11px;padding:2px 8px;background:#fff4d6;color:#825700;border-radius:9999px;">Draft</span><span style="color:var(--mute);">May 16</span></div>
+          <div style="display:grid;grid-template-columns:1fr auto auto;gap:10px;padding:8px 0;border-top:1px solid var(--hairline-soft);"><span>Why we moved off Wordpress</span><span style="font-size:11px;padding:2px 8px;background:#e8f9ec;color:#00721a;border-radius:9999px;">Published</span><span style="color:var(--mute);">May 12</span></div>
+        </div>
+      </div>
+
+      <div class="feat-c dark">
+        <div class="lbl">DEVELOPER MODE</div>
+        <h3>Talk to Webflow from your codebase.</h3>
+        <p>REST + GraphQL APIs for every CMS field, asset, and form submission. Embed components, ship Webflow output through your CI.</p>
+        <div class="code-block">
+<span class="c">// Push a localized landing page</span><br>
+<span class="k">const</span> <span class="n">res</span> = <span class="k">await</span> webflow.<span class="n">pages</span>.create({<br>
+&nbsp;&nbsp;site: <span class="s">"acme.io"</span>,<br>
+&nbsp;&nbsp;locale: <span class="s">"de-DE"</span>,<br>
+&nbsp;&nbsp;template: <span class="s">"product-launch"</span>,<br>
+&nbsp;&nbsp;publish: <span class="k">true</span><br>
+});
+        </div>
+        <div class="cms-rows" style="margin-top:8px;">
+          <div class="cms-row"><span>POST /sites/:id/pages</span><span class="badge published">200 OK</span><span style="font-family:'Inconsolata',monospace;color:var(--mute-soft);">142ms</span></div>
+          <div class="cms-row"><span>POST /collections/:id/items</span><span class="badge published">200 OK</span><span style="font-family:'Inconsolata',monospace;color:var(--mute-soft);">98ms</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="med">Plans that scale from solo to enterprise.</h2>
+    <p class="section-lede">No publishing limits, no surprise overages. Build sites for free; pay when you publish to a custom domain.</p>
+
+    <div class="pricing-grid">
+      <div class="tier">
+        <div class="name">Starter</div>
+        <div class="tag">For solo builders</div>
+        <div class="price">$14<small>/mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Custom domain</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 50,000 monthly visits</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 2 CMS collections</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Webflow branding hidden</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Start free</a>
+      </div>
+      <div class="tier featured">
+        <span class="featured-flag">Most popular</span>
+        <div class="name">Growth</div>
+        <div class="tag">For modern marketing teams</div>
+        <div class="price">$39<small>/mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 250,000 monthly visits</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 10,000 CMS items</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Localization (3 locales)</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> A/B testing + analytics</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Start 14-day trial</a>
+      </div>
+      <div class="tier">
+        <div class="name">Enterprise</div>
+        <div class="tag">For high-traffic teams</div>
+        <div class="price">Custom</div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Unlimited locales + brands</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> SSO / SAML / RBAC</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 99.99% uptime SLA</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Dedicated CSM</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band">
+      <h3>Build your next site visually — and ship it before the meeting ends.</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a class="btn btn-primary" style="background:#fff;color:var(--ink);" href="#">Get started — it's free</a>
+        <a class="btn btn-secondary" style="background:transparent;color:#fff;border-color:#3a3a3a;" href="#">Watch the demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     Part B — Design System Reference
+========================================================= -->
+<section class="ds">
+  <div class="wrap">
+    <span class="eyebrow">Design system reference</span>
+    <h2>Tokens behind the visual canvas.</h2>
+    <p class="ds-sub">Webflow's marketing surface is a near-black-on-white system punctuated by a five-stop chromatic palette. Cards take a tight 8 px radius; buttons take 4 px. The brand never goes pill, and never goes above weight 600.</p>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3>Color</h3>
+      <div class="ds-block-sub">Primary ink · Surface · Text · 5-stop chromatic category palette</div>
+
+      <div class="ds-group-title">Ink + Surface</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--primary);"></div><div class="meta"><div class="name">primary</div><div class="hex">#080808</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--ink-strong);"></div><div class="meta"><div class="name">ink-strong</div><div class="hex">#222222</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--body);"></div><div class="meta"><div class="name">body</div><div class="hex">#363636</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--body-mid);"></div><div class="meta"><div class="name">body-mid</div><div class="hex">#5a5a5a</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--mute);"></div><div class="meta"><div class="name">mute</div><div class="hex">#898989</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--hairline);"></div><div class="meta"><div class="name">hairline</div><div class="hex">#d8d8d8</div></div></div>
+      </div>
+
+      <div class="ds-group-title">Category palette (5-stop)</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-purple);"></div><div class="meta"><div class="name">acc-purple</div><div class="hex">#7a3dff</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-pink);"></div><div class="meta"><div class="name">acc-pink</div><div class="hex">#ed52cb</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-blue);"></div><div class="meta"><div class="name">acc-blue</div><div class="hex">#3b89ff</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-orange);"></div><div class="meta"><div class="name">acc-orange</div><div class="hex">#ff6b00</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-green);"></div><div class="meta"><div class="name">acc-green</div><div class="hex">#00d722</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-yellow);"></div><div class="meta"><div class="name">acc-yellow</div><div class="hex">#ffae13</div></div></div>
+      </div>
+
+      <div class="ds-group-title">Semantic + deep blue</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-blue-info);"></div><div class="meta"><div class="name">blue-info</div><div class="hex">#146ef5</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-blue-deep);"></div><div class="meta"><div class="name">blue-deep</div><div class="hex">#006acc</div></div></div>
+        <div class="sw"><div class="chip-vis" style="background:var(--acc-red);"></div><div class="meta"><div class="name">acc-red</div><div class="hex">#ee1d36</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <div class="ds-block-sub">Single family — WF Visual Sans Variable — covers every role. Weight ceiling at 600.</div>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Spec</th></tr></thead>
+        <tbody>
+          <tr><td class="token">display-xxl</td><td style="font-weight:600;font-size:48px;letter-spacing:-1.6px;line-height:1.04;color:var(--ink);">Hero headline</td><td>80 · 600 · -0.8</td></tr>
+          <tr><td class="token">display-xl</td><td style="font-weight:600;font-size:40px;letter-spacing:-1.3px;color:var(--ink);">Sub-hero displays</td><td>56 · 600 · 0</td></tr>
+          <tr><td class="token">display-lg</td><td style="font-weight:600;font-size:34px;letter-spacing:-1px;color:var(--ink);">Section headlines</td><td>44.8 · 600 · 0</td></tr>
+          <tr><td class="token">display-md</td><td style="font-weight:500;font-size:28px;color:var(--ink);">Card-cluster headlines</td><td>32 · 500 · 0</td></tr>
+          <tr><td class="token">eyebrow-uppercase</td><td style="font-weight:500;font-size:15px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);">PLATFORM EYEBROW</td><td>15 · 500 · 1.5</td></tr>
+          <tr><td class="token">body-md</td><td style="font-size:16px;letter-spacing:-0.16px;color:var(--body);">Default body text holds at 16/400/-0.16.</td><td>16 · 400 · -0.16</td></tr>
+          <tr><td class="token">caption</td><td style="font-size:12.8px;font-weight:550;color:var(--ink);">SIGNATURE 550-CAPTION</td><td>12.8 · 550 · 0</td></tr>
+          <tr><td class="token">caption-mono</td><td style="font-family:'Inconsolata',monospace;font-size:12px;color:var(--body-mid);">.hero-h · 80px / 600</td><td>Inconsolata · 12 · 400</td></tr>
+          <tr><td class="token">button-md</td><td style="font-size:16px;font-weight:500;letter-spacing:-0.16px;color:var(--ink);">Get started — it's free</td><td>16 · 500 · -0.16</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <div class="ds-block-sub">Tight engineered geometry: 4 px for buttons + badges, 8 px for cards. Pill is reserved for circular icon containers.</div>
+      <div class="radius-ladder">
+        <div class="r-cell"><div class="r-box" style="border-radius:0;"></div><div class="r-lbl">none · 0</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:2px;"></div><div class="r-lbl">xs · 2</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:4px;"></div><div class="r-lbl">sm · 4</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:8px;"></div><div class="r-lbl">md · 8</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:9999px;"></div><div class="r-lbl">full · ∞</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3>Components</h3>
+      <div class="ds-block-sub">Default + active states only.</div>
+      <div class="comp-matrix">
+        <div class="comp"><div class="comp-name">button-primary</div><div class="comp-vis"><a class="btn btn-primary" href="#">Get started — it's free</a></div></div>
+        <div class="comp"><div class="comp-name">button-secondary</div><div class="comp-vis"><a class="btn btn-secondary" href="#">Watch demo</a></div></div>
+        <div class="comp"><div class="comp-name">button-text-arrow</div><div class="comp-vis"><a class="btn-text" href="#">Learn more</a></div></div>
+        <div class="comp"><div class="comp-name">text-input</div><div class="comp-vis"><input style="border:1px solid var(--hairline);border-radius:4px;padding:10px 14px;font:16px Inter,system-ui;width:200px;letter-spacing:-0.16px;background:var(--canvas);color:var(--ink);" placeholder="you@company.com"/></div></div>
+        <div class="comp"><div class="comp-name">badge-info</div><div class="comp-vis"><span style="background:var(--acc-blue-info);color:#fff;padding:4px 10px;border-radius:4px;font-size:12.8px;font-weight:550;">NEW</span><span style="background:#fff;color:var(--acc-blue-info);border:1px solid var(--acc-blue-info);padding:4px 10px;border-radius:4px;font-size:12.8px;font-weight:550;">SOFT</span></div></div>
+        <div class="comp"><div class="comp-name">card-feature</div><div class="comp-vis"><div style="border:1px solid var(--hairline);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--ink);width:180px;line-height:1.4;">Schema, in a sidebar.</div></div></div>
+        <div class="comp"><div class="comp-name">category-card · purple</div><div class="comp-vis"><div style="background:var(--acc-purple);color:#fff;padding:14px 18px;border-radius:8px;font-weight:500;font-size:14px;width:180px;letter-spacing:-0.2px;">A visual canvas.</div></div></div>
+        <div class="comp"><div class="comp-name">category-card · green</div><div class="comp-vis"><div style="background:var(--acc-green);color:var(--ink);padding:14px 18px;border-radius:8px;font-weight:500;font-size:14px;width:180px;letter-spacing:-0.2px;">Sell from the canvas.</div></div></div>
+        <div class="comp"><div class="comp-name">tier-featured</div><div class="comp-vis"><div style="background:var(--ink);color:#fff;padding:14px 18px;border-radius:8px;font-size:13px;line-height:1.4;width:180px;"><span style="font-weight:500;letter-spacing:-0.3px;">Growth</span><br><span style="color:var(--mute-soft);font-size:12px;">$39 / mo</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom:12px;">
+          <span class="glyph"></span>
+          <span>Webflow</span>
+        </div>
+        <p>The website experience platform. Inspired marketing surface generated for design study.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul><li><a href="#">Designer</a></li><li><a href="#">CMS</a></li><li><a href="#">Hosting</a></li><li><a href="#">Ecommerce</a></li><li><a href="#">Analyze</a></li></ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul><li><a href="#">For marketing</a></li><li><a href="#">For design</a></li><li><a href="#">For dev teams</a></li><li><a href="#">Enterprise</a></li></ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul><li><a href="#">Webflow University</a></li><li><a href="#">Templates</a></li><li><a href="#">Showcase</a></li><li><a href="#">Forum</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© Webflow (inspired) · Generated for design study</div>
+      <div>WF Visual Sans · Ink #080808 · 5-stop chromatic palette</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.webflow.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

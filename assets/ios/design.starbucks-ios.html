@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Starbucks — iOS design spec</title>
+<meta name="description" content="Starbucks iOS app design reference. Deep emerald canvas, Stars rewards arc, mobile order, scan to pay, gold tier accent." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#fff; --surface-1:#FAF8F5; --surface-2:#F1ECE3; --surface-3:#D4E9E2; --surface-card:#fff;
+  --green:#006241; --green-dark:#1E3932; --green-soft:#7DAA94; --green-mint:#D4E9E2;
+  --ink:#000; --ink-soft:#2E2E2E; --ink-muted:#6F6F6F; --ink-dim:#A1A1A1;
+  --border:#E6E6E6; --border-soft:#F0EDE6;
+  --gold:#CBA258; --gold-soft:#E8D4A8; --brown:#9D5116; --brown-soft:#D9C2A6;
+  --confirm:#3A7D5F; --negative:#C04545;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.2px}
+.brand-mark{width:34px;height:34px;border-radius:50%;background:var(--green);display:grid;place-items:center;position:relative}
+.brand-mark::after{content:"";width:14px;height:14px;border-radius:50%;border:2px solid #fff;background:var(--green)}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:600;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--green);background:var(--green-mint)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.03)}
+.btn-primary{background:var(--green);color:#fff;padding:13px 24px;border-radius:var(--r-pill)}
+.btn-primary:hover{background:var(--green-dark)}
+.btn-pill{background:#fff;color:var(--ink);padding:11px 18px;border-radius:var(--r-pill);border:1.5px solid var(--ink)}
+.btn-outline{background:transparent;border:1.5px solid var(--ink);color:var(--ink);padding:11px 18px;border-radius:var(--r-pill)}
+.btn-light{background:#000;color:#fff;padding:12px 22px;border-radius:var(--r-pill)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#F4F7F2 50%,#fff 100%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 540px at 50% 0%,rgba(0,98,65,.10),transparent 70%),radial-gradient(600px 400px at 80% 20%,rgba(203,162,88,.10),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-pill);background:var(--green-mint);color:var(--green);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.hero h1{font-size:clamp(44px,7vw,86px);line-height:1;letter-spacing:-2px;font-weight:800;margin-bottom:22px;color:var(--ink)}
+.hero h1 .gradient-word{color:var(--green)}
+.hero p{font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,98,65,.18),0 0 0 1px rgba(0,0,0,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar.light{color:#fff}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.97}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.97}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+/* ========== SCREENS ========== */
+.scr{position:absolute;inset:0;font-size:11px;display:flex;flex-direction:column;padding-top:0}
+
+/* HOME */
+.sb-home-header{background:var(--green);color:#fff;padding:60px 18px 18px;position:relative}
+.sb-home-header .greet{font-size:18px;font-weight:700;letter-spacing:-.3px}
+.sb-home-header .stars-row{margin-top:14px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.08);border-radius:14px;padding:12px}
+.sb-arc{width:54px;height:54px;flex-shrink:0;position:relative}
+.sb-arc svg{width:100%;height:100%;transform:rotate(-90deg)}
+.sb-arc .arc-num{position:absolute;inset:0;display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff}
+.sb-stars-meta{flex:1;padding:0 12px}
+.sb-stars-meta .num{font-size:18px;font-weight:800;color:#fff}
+.sb-stars-meta .sub{font-size:9.5px;color:rgba(255,255,255,.75)}
+.sb-stars-meta .next{font-size:9.5px;color:var(--gold);font-weight:600;margin-top:2px}
+.sb-redeem{background:var(--gold);color:var(--green-dark);padding:6px 12px;border-radius:999px;font-size:10px;font-weight:700;flex-shrink:0}
+.sb-home-body{flex:1;padding:14px 14px 70px;overflow:hidden;background:#fff}
+.sb-feat-card{border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--border);margin-bottom:14px}
+.sb-feat-img{aspect-ratio:16/10;background:linear-gradient(160deg,#9D5116 0%,#5e2f0d 60%,#2a1606)}
+.sb-feat-img.iced{background:radial-gradient(circle at 40% 35%,#d9c2a6 0%,#8a5a35 35%,#3f2010 80%)}
+.sb-feat-img.tea{background:linear-gradient(160deg,#4a7a5a,#1E3932)}
+.sb-feat-body{padding:12px 14px}
+.sb-feat-body .eyebrow{font-size:9px;color:var(--ink-muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.sb-feat-body .ttl{font-size:14px;font-weight:700;line-height:1.2;color:var(--ink)}
+.sb-feat-body .sub{font-size:10.5px;color:var(--ink-muted);margin-top:3px;line-height:1.4}
+.sb-section-h{font-size:14px;font-weight:700;color:var(--green-dark);margin:8px 0 10px;letter-spacing:-.2px}
+.sb-row-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.sb-mini{border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--border)}
+.sb-mini .img{aspect-ratio:1;background:radial-gradient(circle at 35% 35%,#d9c2a6,#5e2f0d)}
+.sb-mini .img.green{background:radial-gradient(circle at 35% 35%,#7DAA94,#1E3932)}
+.sb-mini .lbl{padding:6px 8px;font-size:10px;font-weight:700;line-height:1.2}
+.sb-gold-card{background:linear-gradient(135deg,#1E3932 0%,#3a5e51 60%);border-radius:14px;padding:14px;color:#fff;position:relative;overflow:hidden}
+.sb-gold-card::after{content:"★";position:absolute;right:-12px;top:-12px;font-size:80px;color:rgba(203,162,88,.18)}
+.sb-gold-card .gh{font-size:9px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.sb-gold-card .gt{font-size:13px;font-weight:700;margin-top:3px;line-height:1.2}
+
+/* ORDER */
+.sb-order-head{padding:60px 16px 14px;background:#fff}
+.sb-order-head .title{font-size:22px;font-weight:800;letter-spacing:-.4px;color:var(--green-dark);margin-bottom:10px}
+.sb-search{background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r-pill);padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-muted)}
+.sb-search svg{width:14px;height:14px;fill:var(--ink-muted)}
+.sb-order-tabs{display:flex;gap:14px;padding:14px 16px 8px;border-bottom:1px solid var(--border);overflow:hidden;background:#fff}
+.sb-otab{font-size:12px;font-weight:700;color:var(--ink-muted);padding-bottom:8px;position:relative;white-space:nowrap}
+.sb-otab.active{color:var(--green-dark)}
+.sb-otab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--green);border-radius:2px}
+.sb-cat-grid{flex:1;padding:18px 16px 70px;background:#fff;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 8px;overflow:hidden;align-content:start}
+.sb-cat{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.sb-cat .ic{width:62px;height:62px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#d9c2a6,#5e2f0d)}
+.sb-cat .ic.iced{background:radial-gradient(circle at 35% 35%,#d6c8b8,#1E3932)}
+.sb-cat .ic.frap{background:radial-gradient(circle at 35% 35%,#e9d8c2,#9D5116 70%)}
+.sb-cat .ic.htea{background:radial-gradient(circle at 35% 35%,#dcb277,#7a3e15)}
+.sb-cat .ic.itea{background:radial-gradient(circle at 35% 35%,#f0d68c,#a76c1e)}
+.sb-cat .ic.refresh{background:radial-gradient(circle at 35% 35%,#f9a8a1,#c43d3d)}
+.sb-cat .nm{font-size:10.5px;font-weight:700;color:var(--ink);line-height:1.15}
+
+/* STARS / REWARDS */
+.sb-stars-bg{background:var(--green);color:#fff}
+.sb-stars-head{padding:60px 18px 8px}
+.sb-stars-head .ttl{font-size:18px;font-weight:700;letter-spacing:-.3px}
+.sb-stars-ring{display:grid;place-items:center;margin:8px auto 6px;width:170px;height:170px;position:relative}
+.sb-stars-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.sb-stars-ring .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.sb-stars-ring .ctr .big{font-size:36px;font-weight:800;letter-spacing:-1px;color:#fff}
+.sb-stars-ring .ctr .small{font-size:10px;font-weight:600;color:var(--gold)}
+.sb-tiers{flex:1;background:#fff;color:var(--ink);border-radius:24px 24px 0 0;margin-top:14px;padding:18px 16px 70px;overflow:hidden}
+.sb-tier-h{font-size:11px;font-weight:700;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px}
+.sb-tier{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.sb-tier .star{width:32px;height:32px;border-radius:50%;background:var(--gold-soft);color:var(--green-dark);display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0}
+.sb-tier.locked .star{background:var(--surface-2);color:var(--ink-muted)}
+.sb-tier .meta{flex:1}
+.sb-tier .meta .nm{font-size:12px;font-weight:700;color:var(--ink)}
+.sb-tier .meta .sub{font-size:10px;color:var(--ink-muted);margin-top:1px}
+.sb-tier .badge-redeem{background:var(--green);color:#fff;padding:5px 10px;border-radius:999px;font-size:10px;font-weight:700}
+
+/* tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:#fff;border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:flex-start;padding:9px 10px 0;z-index:10}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-muted);font-size:9px;font-weight:600}
+.tab.active{color:var(--green)}
+.tab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}
+.tab.active svg{fill:currentColor;stroke:currentColor}
+.tab.scan{position:relative}
+.tab.scan .scan-fab{width:46px;height:46px;border-radius:50%;background:var(--green);display:grid;place-items:center;margin-top:-12px;box-shadow:0 6px 14px rgba(0,98,65,.35)}
+.tab.scan .scan-fab svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
+.tab.scan span{margin-top:2px;color:var(--ink-muted)}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--green);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:800;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px;color:var(--green-dark)}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.55;max-width:580px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:16px;padding:28px;border:1px solid var(--border)}
+.feat:hover{background:var(--green-mint)}
+.feat .feat-ic{width:38px;height:38px;border-radius:50%;background:var(--green-mint);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--green)}
+.feat h3{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px;color:var(--green-dark)}
+.feat p{font-size:14px;color:var(--ink-soft);line-height:1.6}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:1px 6px;border-radius:3px;color:var(--green);border:1px solid var(--border)}
+
+/* iOS-specific feature row */
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px;color:var(--green-dark)}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.65;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-1);padding:5px 10px;border-radius:4px;color:var(--green);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--surface-1);border-radius:16px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* Stars circular visual */
+.stars-stage{display:flex;flex-direction:column;align-items:center;gap:20px}
+.stars-ring-big{width:220px;height:220px;position:relative;display:grid;place-items:center}
+.stars-ring-big svg{width:100%;height:100%;transform:rotate(-90deg)}
+.stars-ring-big .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.stars-ring-big .ctr .big{font-size:46px;font-weight:800;letter-spacing:-1px;color:var(--green-dark)}
+.stars-ring-big .ctr .small{font-size:12px;color:var(--gold);font-weight:700}
+
+/* Mobile order visual */
+.mo-stack{display:flex;flex-direction:column;gap:12px;width:300px}
+.mo-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px}
+.mo-card .ic{width:42px;height:42px;border-radius:50%;background:var(--green-mint);display:grid;place-items:center;flex-shrink:0}
+.mo-card .ic svg{width:20px;height:20px;fill:var(--green)}
+.mo-card .meta{flex:1}
+.mo-card .meta .nm{font-size:13px;font-weight:700;color:var(--ink)}
+.mo-card .meta .sub{font-size:11px;color:var(--ink-muted);margin-top:2px}
+.mo-card .eta{font-size:14px;font-weight:800;color:var(--green);font-feature-settings:"tnum"}
+.mo-track{background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:14px;padding:16px;color:#fff;position:relative}
+.mo-track .top{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+.mo-track .order{font-size:14px;font-weight:700}
+.mo-track .steps{display:flex;align-items:center;margin-top:12px;gap:4px}
+.mo-track .dot{width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.mo-track .line{flex:1;height:2px;background:rgba(203,162,88,.35)}
+.mo-track .line.done{background:var(--gold)}
+
+/* Barcode visual */
+.bc-stack{width:280px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.06)}
+.bc-stack .nm{font-size:11px;color:var(--ink-muted);font-weight:600;letter-spacing:.4px;text-transform:uppercase}
+.bc-stack .bal{font-size:26px;font-weight:800;color:var(--green-dark);margin:4px 0 14px;font-feature-settings:"tnum"}
+.bc-bars{display:flex;gap:1px;justify-content:center;align-items:flex-end;height:60px;padding:0 20px;margin-bottom:14px}
+.bc-bars span{background:#000;border-radius:.5px}
+.bc-num{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);letter-spacing:3px;font-feature-settings:"tnum"}
+
+/* ========== DESIGN SYSTEM SECTION (Part B) ========== */
+.ds-section{padding:120px 0;background:var(--surface-1);border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px;color:var(--green-dark)}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:580px;line-height:1.55}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--green);border:1px solid var(--green);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;background:#fff}
+.ds-source:hover{background:var(--green-mint)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px;color:var(--green-dark)}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.55;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+/* swatches */
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:12px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px;border:1px solid var(--border)}
+.ds-sw .name{font-size:12px;font-weight:700;line-height:1.2;color:var(--ink)}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* type table */
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:var(--green)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+/* radius */
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,var(--green),var(--green-dark));margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700;color:var(--ink)}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* components */
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-circle{width:54px;height:54px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 16px rgba(0,98,65,.3)}
+.btn-circle svg{width:24px;height:24px;fill:currentColor}
+.btn-circle-sm{width:38px;height:38px;border-radius:50%;background:var(--gold);color:var(--green-dark);display:grid;place-items:center}
+.btn-circle-sm svg{width:18px;height:18px;fill:currentColor}
+.btn-ghost-circle{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--green);color:var(--green);background:#fff;display:grid;place-items:center}
+.btn-ghost-circle svg{width:18px;height:18px;fill:currentColor}
+.input-pill{background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r-pill);padding:11px 16px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.3px}
+.tag-gold{background:var(--gold-soft);color:#5e3f10}
+.tag-new{background:var(--green-mint);color:var(--green)}
+.tag-mobile{background:#FFF1E0;color:var(--brown)}
+
+/* iOS-specific token strip */
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:12px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:20px;font-weight:800;margin-top:6px;color:var(--green-dark);letter-spacing:-.3px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.45}
+
+/* ========== FOOTER ========== */
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.55}
+.foot a{color:var(--green);font-weight:700}
+
+/* floating link */
+.float-link{position:fixed;bottom:18px;right:18px;background:var(--green);border:1px solid var(--green-dark);color:#fff;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 8px 24px rgba(0,98,65,.3)}
+.float-link:hover{background:var(--green-dark)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      Starbucks <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Sign In</a>
+      <a class="btn btn-primary" href="#">Join Rewards</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Every screen is a <span class="gradient-word">green light.</span></h1>
+    <p>The Starbucks iOS app, dissected. Deep emerald canvas. Pill-shaped CTAs. Stars rotate on a circular arc. Gold belongs to one thing — and one thing only.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- ORDER -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="sb-order-head">
+              <div class="title">What can we get<br/>started for you?</div>
+              <div class="sb-search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Search menu</span>
+              </div>
+            </div>
+            <div class="sb-order-tabs">
+              <div class="sb-otab active">Featured</div>
+              <div class="sb-otab">Drinks</div>
+              <div class="sb-otab">Food</div>
+              <div class="sb-otab">Merch</div>
+            </div>
+            <div class="sb-cat-grid">
+              <div class="sb-cat"><div class="ic"></div><div class="nm">Hot Coffees</div></div>
+              <div class="sb-cat"><div class="ic iced"></div><div class="nm">Iced Coffees</div></div>
+              <div class="sb-cat"><div class="ic frap"></div><div class="nm">Frappuccino</div></div>
+              <div class="sb-cat"><div class="ic htea"></div><div class="nm">Hot Teas</div></div>
+              <div class="sb-cat"><div class="ic itea"></div><div class="nm">Iced Teas</div></div>
+              <div class="sb-cat"><div class="ic refresh"></div><div class="nm">Refreshers</div></div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab scan"><div class="scan-fab"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg></div><span>Scan</span></div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 2h14l-1 16-6 4-6-4z"/></svg>Order</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 7h14v12H5zm5-3h4v3h-4z"/></svg>Gift</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg>Offers</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Order Menu</div>
+      </div>
+
+      <!-- HOME (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar light">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="sb-home-header">
+              <div class="greet">Good morning, Jiang</div>
+              <div class="stars-row">
+                <div class="sb-arc">
+                  <svg viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="3.5"/>
+                    <circle cx="18" cy="18" r="15.5" fill="none" stroke="#CBA258" stroke-width="3.5" stroke-dasharray="73 100" stroke-linecap="round"/>
+                  </svg>
+                  <div class="arc-num">175★</div>
+                </div>
+                <div class="sb-stars-meta">
+                  <div class="num">25 Stars to go</div>
+                  <div class="sub">Until your next reward</div>
+                  <div class="next">200★ · Handcrafted drink</div>
+                </div>
+                <div class="sb-redeem">Redeem</div>
+              </div>
+            </div>
+            <div class="sb-home-body">
+              <div class="sb-section-h">Featured</div>
+              <div class="sb-feat-card">
+                <div class="sb-feat-img iced"></div>
+                <div class="sb-feat-body">
+                  <div class="eyebrow">Try the new</div>
+                  <div class="ttl">Iced Brown Sugar Oatmilk<br/>Shaken Espresso</div>
+                  <div class="sub">Espresso, brown sugar, oatmilk, cinnamon.</div>
+                </div>
+              </div>
+              <div class="sb-section-h">Try something new</div>
+              <div class="sb-row-2">
+                <div class="sb-mini"><div class="img"></div><div class="lbl">Pistachio Latte</div></div>
+                <div class="sb-mini"><div class="img green"></div><div class="lbl">Matcha Cream</div></div>
+              </div>
+              <div class="sb-gold-card">
+                <div class="gh">Members Only</div>
+                <div class="gt">Double Stars Day — earn 2x on every order Friday.</div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab scan"><div class="scan-fab"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg></div><span>Scan</span></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 2h14l-1 16-6 4-6-4z"/></svg>Order</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 7h14v12H5zm5-3h4v3h-4z"/></svg>Gift</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg>Offers</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Home · Stars Arc</div>
+      </div>
+
+      <!-- STARS / REWARDS -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar light">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr sb-stars-bg">
+            <div class="sb-stars-head"><div class="ttl">Stars</div></div>
+            <div class="sb-stars-ring">
+              <svg viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="2.5"/>
+                <circle cx="18" cy="18" r="15" fill="none" stroke="#CBA258" stroke-width="2.5" stroke-dasharray="73 100" stroke-linecap="round"/>
+              </svg>
+              <div class="ctr">
+                <div class="big">175★</div>
+                <div class="small">25 to next reward</div>
+              </div>
+            </div>
+            <div class="sb-tiers">
+              <div class="sb-tier-h">Reward Tiers</div>
+              <div class="sb-tier">
+                <div class="star">25</div>
+                <div class="meta"><div class="nm">Customization</div><div class="sub">Free milk or syrup</div></div>
+                <div class="badge-redeem">Redeem</div>
+              </div>
+              <div class="sb-tier">
+                <div class="star">100</div>
+                <div class="meta"><div class="nm">Brewed coffee or bakery</div><div class="sub">Any size</div></div>
+                <div class="badge-redeem">Redeem</div>
+              </div>
+              <div class="sb-tier locked">
+                <div class="star">200</div>
+                <div class="meta"><div class="nm">Handcrafted drink</div><div class="sub">25 more Stars</div></div>
+              </div>
+              <div class="sb-tier locked">
+                <div class="star">300</div>
+                <div class="meta"><div class="nm">Hot breakfast / parfait</div><div class="sub">125 more Stars</div></div>
+              </div>
+              <div class="sb-tier locked">
+                <div class="star">400</div>
+                <div class="meta"><div class="nm">Select merchandise</div><div class="sub">225 more Stars</div></div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab scan"><div class="scan-fab"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg></div><span>Scan</span></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 2h14l-1 16-6 4-6-4z"/></svg>Order</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 7h14v12H5zm5-3h4v3h-4z"/></svg>Gift</div>
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg>Offers</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Stars · Rewards</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One deep emerald.</h2>
+      <p>Every Starbucks screen earns its position on an iPhone through the same rules — emerald header, white body, pill-shaped CTAs, gold reserved entirely for the Stars system.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>Home</h3>
+        <p>Green banner up top with a personalized greeting + circular Stars arc. White body below stacks Featured hero card, recommendations, Members-Only deals. The <code>#CBA258</code> gold appears only on the arc.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M5 2h14l-1 16-6 4-6-4z"/></svg></div>
+        <h3>Order</h3>
+        <p>Top tab underline switches Featured / Drinks / Food / Merch. Categories render as 50%-radius circles (Hot Coffees, Iced, Frapps, Teas, Refreshers). One green underline tells you where you are.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg></div>
+        <h3>Stars</h3>
+        <p>Full-green canvas surfaces a hero progress ring with gold arc. Below: white reward-tier sheet lists 25⭐ → 400⭐ with redemption pills. Locked tiers go monochrome.</p>
+      </div>
+    </div>
+
+    <!-- iOS-specific feature blocks -->
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Stars Arc</div>
+          <h3>Progress you can feel filling.</h3>
+          <p>The Stars ring is a single SVG circle with <code>stroke-dasharray</code> animated on every order. Each Star earned fires a haptic tick; the arc rotates to its new position on a 0.8s spring curve. Gold against deep emerald is the only color pair allowed in this control.</p>
+          <p>Mini-arc on Home; hero-arc in the Stars tab; lock-screen widget mirrors both.</p>
+          <div class="ios-feat-tokens">
+            <code>radius: 50%</code>
+            <code>stroke: 2.5pt</code>
+            <code>spring: 0.8s</code>
+            <code>haptic: light tick</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="stars-stage">
+            <div class="stars-ring-big">
+              <svg viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15" fill="none" stroke="#E6E6E6" stroke-width="2.5"/>
+                <circle cx="18" cy="18" r="15" fill="none" stroke="#CBA258" stroke-width="2.5" stroke-dasharray="73 100" stroke-linecap="round"/>
+              </svg>
+              <div class="ctr">
+                <div class="big">175★</div>
+                <div class="small">25 to reward</div>
+              </div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-align:center">73% · animated dasharray</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual" style="background:#fff">
+          <div class="mo-stack">
+            <div class="mo-track">
+              <div class="top">Mobile Order · In Progress</div>
+              <div class="order">Iced Brown Sugar Oatmilk · Grande</div>
+              <div class="steps">
+                <span class="dot"></span><span class="line done"></span>
+                <span class="dot"></span><span class="line done"></span>
+                <span class="dot"></span><span class="line"></span>
+                <span class="dot" style="background:rgba(203,162,88,.3)"></span>
+              </div>
+              <div style="font-size:11px;color:var(--gold);margin-top:10px;font-weight:600">Ready in 4 min · Av. Liberdade</div>
+            </div>
+            <div class="mo-card">
+              <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg></div>
+              <div class="meta">
+                <div class="nm">Earned 8 Stars</div>
+                <div class="sub">Posted to your account</div>
+              </div>
+              <div class="eta">+8★</div>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Mobile Order &amp; Live Activity</div>
+          <h3>The countdown that pulls you to the door.</h3>
+          <p>The instant you tap Order, a Dynamic Island Live Activity pins to the lock screen showing your drink name and ETA. The countdown lives in the iOS system layer — you can see it from the home screen, the lock screen, or behind another app.</p>
+          <p>4-step progress: Placed → Confirmed → Preparing → Ready. Gold marks completed steps; muted gold marks pending.</p>
+          <div class="ios-feat-tokens">
+            <code>ActivityKit: enabled</code>
+            <code>steps: 4</code>
+            <code>countdown: tnum</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Scan to Pay</div>
+          <h3>Barcode at center, the whole store falls quiet.</h3>
+          <p>The Scan tab is a center-floating green FAB — never the default tab, always elevated. Tap it and a modal sheet presents your Starbucks Card barcode on a white surface, with the balance above. The phone's brightness max-bumps automatically.</p>
+          <p>Apple Pay sits as a secondary affordance; the in-house Card always wins because earning Stars requires it.</p>
+          <div class="ios-feat-tokens">
+            <code>scan FAB: 46pt</code>
+            <code>sheet: .large</code>
+            <code>UIScreen.brightness: 1.0</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual" style="background:linear-gradient(140deg,#D4E9E2,#fff)">
+          <div class="bc-stack">
+            <div class="nm">Starbucks Card</div>
+            <div class="bal">€42.18</div>
+            <div class="bc-bars">
+              <span style="width:2px;height:46px"></span><span style="width:1px;height:38px"></span><span style="width:3px;height:50px"></span><span style="width:2px;height:42px"></span><span style="width:1px;height:48px"></span><span style="width:2px;height:36px"></span><span style="width:3px;height:50px"></span><span style="width:1px;height:44px"></span><span style="width:2px;height:38px"></span><span style="width:2px;height:48px"></span><span style="width:1px;height:36px"></span><span style="width:3px;height:46px"></span><span style="width:2px;height:50px"></span><span style="width:1px;height:42px"></span><span style="width:2px;height:38px"></span><span style="width:3px;height:50px"></span><span style="width:1px;height:46px"></span><span style="width:2px;height:40px"></span><span style="width:2px;height:48px"></span><span style="width:1px;height:36px"></span><span style="width:3px;height:50px"></span><span style="width:2px;height:42px"></span><span style="width:1px;height:46px"></span><span style="width:2px;height:38px"></span>
+            </div>
+            <div class="bc-num">6042 8174 9023 4561</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The whole vocabulary, in one place.</h2>
+        <p>Every token Starbucks's iOS app reaches for — surface ladder, type ramp, radius scale, components. The green is non-negotiable. The gold belongs only to Stars.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.starbucks-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Two greens stack the brand: deep emerald for headers and CTAs, darker emerald for hero canvases. Mint cream is the only soft surface. Gold ties the entire Stars economy together — and shows up nowhere else.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#006241"></div><div class="name">Starbucks Green</div><div class="val">#006241</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1E3932"></div><div class="name">Forest</div><div class="val">#1E3932</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D4E9E2"></div><div class="name">Mint Cream</div><div class="val">#D4E9E2</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#7DAA94"></div><div class="name">Sage</div><div class="val">#7DAA94</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border:1px solid #E6E6E6"></div><div class="name">Canvas</div><div class="val">#FFFFFF</div></div>
+      </div>
+
+      <div class="ds-caption">Stars &amp; Accent</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#CBA258"></div><div class="name">Gold Tier</div><div class="val">#CBA258</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E8D4A8"></div><div class="name">Gold Soft</div><div class="val">#E8D4A8</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#9D5116"></div><div class="name">Coffee Brown</div><div class="val">#9D5116</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D9C2A6"></div><div class="name">Brown Soft</div><div class="val">#D9C2A6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(140deg,#CBA258,#8a6c33)"></div><div class="name">Arc Gold</div><div class="val">gradient</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Ink</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2E2E2E"></div><div class="name">Body</div><div class="val">#2E2E2E</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#6F6F6F"></div><div class="name">Muted</div><div class="val">#6F6F6F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#A1A1A1"></div><div class="name">Dim</div><div class="val">#A1A1A1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border:1px solid #E6E6E6"></div><div class="name">On-Green</div><div class="val">#FFFFFF</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#3A7D5F"></div><div class="name">Confirm</div><div class="val">#3A7D5F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#C04545"></div><div class="name">Negative</div><div class="val">#C04545</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FAF8F5"></div><div class="name">Surface</div><div class="val">#FAF8F5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F1ECE3"></div><div class="name">Surface 2</div><div class="val">#F1ECE3</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E6E6E6"></div><div class="name">Border</div><div class="val">#E6E6E6</div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">SoDo Sans in production — Inter as a faithful substitute. Display sizes lean heavy (700–800). Numbers in Stars and balance are tabular so the count doesn't dance.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:28px;font-weight:800;letter-spacing:-.5px">Good morning, Jiang</td><td>28 / 1.75rem</td><td>800</td><td>-0.5px</td></tr>
+          <tr><td class="token">--title-section</td><td class="sample" style="font-size:18px;font-weight:700;letter-spacing:-.3px">Featured</td><td>18 / 1.13rem</td><td>700</td><td>-0.3px</td></tr>
+          <tr><td class="token">--card-title</td><td class="sample" style="font-size:14px;font-weight:700">Iced Brown Sugar Oatmilk Shaken Espresso</td><td>14 / 0.88rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:14px;font-weight:400;color:#6F6F6F">Espresso, brown sugar, oatmilk, cinnamon.</td><td>14 / 0.88rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--button-pill</td><td class="sample" style="font-size:14px;font-weight:700">Order now</td><td>14 / 0.88rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--stars-count</td><td class="sample" style="font-size:36px;font-weight:800;letter-spacing:-1px;color:#006241;font-feature-settings:'tnum'">175★</td><td>36 / 2.25rem</td><td>800 (tnum)</td><td>-1px</td></tr>
+          <tr><td class="token">--card-balance</td><td class="sample" style="font-size:26px;font-weight:800;color:#1E3932;font-feature-settings:'tnum'">€42.18</td><td>26 / 1.63rem</td><td>800 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--tab-active</td><td class="sample" style="font-size:9px;font-weight:600;color:#006241">Home</td><td>9 / 0.56rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--eyebrow</td><td class="sample" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#6F6F6F">Members Only</td><td>9 / 0.56rem</td><td>700</td><td>0.6px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Pills everywhere — buttons are full-radius; category tiles are circles; cards rest at 14–16px; the home header bleeds straight off the top with no top corner. Hard angles are reserved for inline tabs.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Hairline</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Underline</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Tile</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Hero</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">Sheet</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">∞</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Category</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- iOS spec strip -->
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">5-tab layout. Scan FAB elevated -12pt above the bar.</div></div>
+        <div class="token-cell"><div class="tk-label">Scan FAB</div><div class="tk-val">46pt</div><div class="tk-note">Green circle, white icon, shadow y6 b14.</div></div>
+        <div class="token-cell"><div class="tk-label">Stars ring</div><div class="tk-val">170pt</div><div class="tk-note">Hero variant. 54pt mini for the home header.</div></div>
+        <div class="token-cell"><div class="tk-label">Header bleed</div><div class="tk-val">edge-to-edge</div><div class="tk-note">Green wraps under status bar. No top corner radius.</div></div>
+        <div class="token-cell"><div class="tk-label">Category tile</div><div class="tk-val">62pt</div><div class="tk-note">50% radius. 3-up grid with 14pt row gap.</div></div>
+        <div class="token-cell"><div class="tk-label">CTA height</div><div class="tk-val">44pt</div><div class="tk-note">Full pill, 13pt vertical padding. Always green.</div></div>
+        <div class="token-cell"><div class="tk-label">Live Activity</div><div class="tk-val">enabled</div><div class="tk-note">ActivityKit countdown for Mobile Order pickup ETA.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation curve</div><div class="tk-val">spring</div><div class="tk-note">0.8s for arc fill. 0.25s easeOut for sheets.</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Pills, circles, and quiet white cards — the language of a coffeehouse counter, translated to an iPhone.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Order now</a>
+            <a class="btn btn-pill" href="#">Save for later</a>
+            <a class="btn btn-outline" href="#">View menu</a>
+            <a class="btn btn-light" href="#">Join Rewards</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="btn-circle" aria-label="Order"><svg viewBox="0 0 24 24"><path d="M5 2h14l-1 16-6 4-6-4z"/></svg></button>
+              <button class="btn-circle-sm" aria-label="Star"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13l-5-4 6.5-.5z"/></svg></button>
+              <button class="btn-ghost-circle" aria-label="Plus"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search menu" />
+            <input class="input-pill" placeholder="Find a store" />
+            <div class="ds-card-row">
+              <span class="tag tag-gold">Gold Member</span>
+              <span class="tag tag-new">2x Stars today</span>
+              <span class="tag tag-mobile">Mobile Order</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:14px;width:100%;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.04)">
+              <div style="aspect-ratio:16/9;background:radial-gradient(circle at 40% 35%,#d9c2a6,#8a5a35 60%,#3f2010)"></div>
+              <div style="padding:12px 14px">
+                <div style="font-size:9px;color:var(--ink-muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px">Try the new</div>
+                <div style="font-size:14px;font-weight:700;margin-top:4px">Iced Brown Sugar Oatmilk Shaken Espresso</div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,#1E3932,#3a5e51);border-radius:14px;padding:14px;color:#fff;width:100%;position:relative">
+              <div style="font-size:9px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px">Members Only</div>
+              <div style="font-size:13px;font-weight:700;margin-top:4px">Double Stars Day · earn 2x Friday</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      Starbucks iOS
+    </div>
+    <p>Design reference. Not affiliated with Starbucks Corporation. Token values are derived from the public iOS app and Starbucks's published creative expression guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.starbucks-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.starbucks-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.starbucks-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

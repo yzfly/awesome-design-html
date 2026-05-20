@@ -1,0 +1,1568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Intercom — Inspired Design</title>
+<meta name="description" content="An Intercom-inspired marketing page: cream canvas, charcoal primary, Fin Orange AI accent, white floating cards, product-mockup-led rhythm. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #111111;
+  --ink: #111111;
+  --ink-muted: #626260;
+  --ink-subtle: #7b7b78;
+  --ink-tertiary: #9c9fa5;
+  --on-primary: #ffffff;
+  /* Surface */
+  --canvas: #f5f1ec;
+  --surface-1: #ffffff;
+  --surface-2: #ebe7e1;
+  --inverse-canvas: #000000;
+  --inverse-surface-1: #313130;
+  --inverse-ink: #ffffff;
+  --inverse-ink-muted: #9c9fa5;
+  --hairline: #d3cec6;
+  --hairline-soft: #ebe7e1;
+  /* Accent (Fin AI) */
+  --fin-orange: #ff5600;
+  --fin-orange-deep: #e64a00;
+  --report-orange: #fe4c02;
+  --report-blue: #65b5ff;
+  --report-green: #0bdf50;
+  --report-pink: #ff2067;
+  --report-lime: #b3e01c;
+  --report-cyan: #03b2cb;
+  --brand-blue: #0007cb;
+  --semantic-error: #c41c1c;
+  /* Conversational blues (Intercom Messenger feel) */
+  --msg-bubble: #f0ebe5;
+  --gradient-fin: linear-gradient(135deg, #ff8a3d 0%, #ff5600 60%, #b53400 100%);
+  --gradient-purple: linear-gradient(135deg, #6a78ff 0%, #4b00cb 100%);
+  /* Radii */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-xxl: 24px;
+  --r-pill: 9999px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Saans", "Saans Fallback", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+.mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+::selection { background: rgba(255,86,0,0.22); }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; }
+
+/* —— Top nav (cream, 56px) —— */
+.topnav {
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s;
+}
+.topnav.scrolled { border-bottom-color: var(--hairline-soft); }
+.topnav .row {
+  display: flex; align-items: center; gap: 24px;
+  height: 56px;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 500; font-size: 20px; color: var(--ink);
+  letter-spacing: -0.4px;
+}
+.brand .glyph {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--surface-1);
+}
+.nav-links { display: flex; gap: 4px; margin-left: 16px; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--ink);
+  padding: 8px 12px; border-radius: var(--r-md);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.nav-links a:hover { background: var(--surface-2); }
+.nav-links a .chev { font-size: 9px; color: var(--ink-subtle); margin-top: 2px; }
+.nav-right { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 18px;
+  border-radius: var(--r-md);
+  font: 500 15px/1.2 "Inter", system-ui, sans-serif;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .15s, color .15s, border-color .15s;
+  background: transparent;
+}
+.btn-primary {
+  background: var(--ink); color: var(--on-primary);
+}
+.btn-primary:hover { background: var(--inverse-canvas); }
+.btn-secondary {
+  background: var(--surface-1); color: var(--ink);
+  border: 1px solid var(--hairline);
+}
+.btn-secondary:hover { background: var(--surface-2); }
+.btn-tertiary {
+  background: transparent; color: var(--ink);
+}
+.btn-tertiary:hover { background: var(--surface-2); }
+.btn-fin {
+  background: var(--gradient-fin); color: var(--on-primary);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  position: relative;
+}
+.btn-fin:hover { filter: brightness(1.05); }
+.btn-fin .spark { width: 12px; height: 12px; }
+.btn-lg { padding: 12px 22px; font-size: 16px; }
+
+/* —— Hero —— */
+.hero {
+  position: relative;
+  padding: 80px 0 64px;
+  text-align: left;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+}
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surface-1);
+  border: 1px solid var(--hairline-soft);
+  color: var(--ink);
+  font-size: 13px; font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  margin-bottom: 24px;
+}
+.hero .eyebrow .spark {
+  width: 14px; height: 14px;
+  background: var(--gradient-fin);
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: none;
+}
+.hero .eyebrow strong { color: var(--fin-orange); font-weight: 600; }
+
+.hero h1 {
+  font-weight: 500;
+  font-size: clamp(40px, 6.4vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin: 0 0 24px;
+  color: var(--ink);
+  max-width: 14ch;
+}
+.hero h1 em { font-style: normal; background: var(--gradient-fin); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .lead {
+  font-size: 18px; font-weight: 400; line-height: 1.5;
+  letter-spacing: -0.1px;
+  color: var(--ink-muted);
+  max-width: 520px; margin: 0 0 32px;
+}
+.hero .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; }
+
+/* —— Fin chat mockup (signature) —— */
+.fin-mockup {
+  background: var(--surface-1);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  border: 1px solid var(--hairline-soft);
+  position: relative;
+}
+.fin-mockup .head {
+  background: var(--gradient-fin);
+  color: var(--on-primary);
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.fin-mockup .head .ava {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: white;
+  flex: none;
+}
+.fin-mockup .head .name { font-weight: 600; font-size: 15px; line-height: 1.2; }
+.fin-mockup .head .stat { font-size: 12px; opacity: 0.85; line-height: 1.3; display: flex; align-items: center; gap: 4px; }
+.fin-mockup .head .stat .pulse { width: 6px; height: 6px; background: #b3e01c; border-radius: 50%; }
+.fin-mockup .head .cls { margin-left: auto; opacity: 0.8; }
+
+.chat-body {
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+  background: var(--surface-1);
+  min-height: 360px;
+}
+.bubble { max-width: 78%; display: flex; gap: 8px; }
+.bubble .a {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--gradient-fin);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: white; font-size: 12px;
+  flex: none;
+}
+.bubble .b {
+  background: var(--msg-bubble);
+  color: var(--ink);
+  padding: 12px 16px;
+  border-radius: var(--r-xl);
+  border-top-left-radius: 4px;
+  font-size: 15px; line-height: 1.5;
+}
+.bubble .b strong { font-weight: 600; }
+.bubble .b code { font-family: "JetBrains Mono", monospace; font-size: 13px; background: var(--surface-1); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--hairline-soft); }
+.bubble.user { margin-left: auto; flex-direction: row-reverse; }
+.bubble.user .b {
+  background: var(--ink);
+  color: var(--on-primary);
+  border-top-left-radius: var(--r-xl);
+  border-top-right-radius: 4px;
+}
+.bubble.user .a {
+  background: var(--surface-2); color: var(--ink); font-weight: 500;
+}
+
+.fin-source {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-md);
+  padding: 10px 12px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--ink-muted);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.fin-source svg { color: var(--fin-orange); flex: none; }
+.fin-source .doc {
+  font-weight: 500; color: var(--ink);
+}
+
+.quick-replies {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 4px;
+}
+.quick-replies .qr {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-pill);
+  padding: 8px 14px;
+  font-size: 13px; font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+}
+.quick-replies .qr:hover { background: var(--surface-2); }
+
+.chat-composer {
+  border-top: 1px solid var(--hairline-soft);
+  padding: 14px 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.chat-composer .field {
+  flex: 1; font-size: 14px; color: var(--ink-tertiary);
+}
+.chat-composer .send {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--ink); color: var(--on-primary);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* —— Customer logo strip —— */
+.logos {
+  padding: 32px 0 0;
+  border-top: 1px solid var(--hairline-soft);
+  margin-top: 40px;
+}
+.logos .lab {
+  font-size: 13px; color: var(--ink-subtle);
+  margin-bottom: 24px;
+  text-align: center;
+}
+.logo-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  opacity: 0.7;
+}
+.logo-mark {
+  font-size: 18px; font-weight: 500; color: var(--ink-muted);
+  letter-spacing: -0.3px;
+  font-family: inherit;
+}
+.logo-mark.serif { font-family: "Times New Roman", serif; font-style: italic; }
+
+/* —— Sections —— */
+section { padding: 96px 0; position: relative; }
+.section-head { max-width: 760px; margin: 0 0 64px; }
+.section-head .eyebrow {
+  font-size: 14px; font-weight: 500; line-height: 1.3;
+  color: var(--ink-muted);
+  margin-bottom: 16px;
+}
+.section-head h2 {
+  font-size: clamp(32px, 4.4vw, 56px);
+  font-weight: 500; line-height: 1.1;
+  letter-spacing: -1.4px;
+  margin: 0 0 16px; color: var(--ink);
+  max-width: 18ch;
+}
+.section-head p {
+  font-size: 20px; font-weight: 400;
+  line-height: 1.4; letter-spacing: -0.2px;
+  color: var(--ink-muted);
+  margin: 0; max-width: 580px;
+}
+.section-head p a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* —— Feature split (mockup-led) —— */
+.feature-block {
+  display: grid; grid-template-columns: 1fr 1.3fr;
+  gap: 64px; align-items: center;
+  margin-bottom: 96px;
+}
+.feature-block:last-child { margin-bottom: 0; }
+.feature-block.flip > .feature-text { order: 2; }
+@media (max-width: 900px) {
+  .feature-block { grid-template-columns: 1fr; gap: 32px; }
+  .feature-block.flip > .feature-text { order: 0; }
+}
+.feature-text .eyebrow {
+  font-size: 14px; font-weight: 500; color: var(--fin-orange);
+  margin-bottom: 12px;
+}
+.feature-text.normal .eyebrow { color: var(--ink-muted); }
+.feature-text h3 {
+  font-weight: 500;
+  font-size: clamp(28px, 3.4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  margin: 0 0 16px;
+  color: var(--ink);
+  max-width: 16ch;
+}
+.feature-text p {
+  font-size: 18px; line-height: 1.5; color: var(--ink-muted);
+  letter-spacing: -0.1px;
+  margin: 0 0 24px;
+}
+.feature-text .bullets { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
+.feature-text .bullets li {
+  display: flex; align-items: start; gap: 10px;
+  font-size: 15px; line-height: 1.5; color: var(--ink);
+}
+.feature-text .bullets li svg { color: var(--ink); flex: none; margin-top: 4px; }
+.feature-text a.inline { display: inline-flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
+.feature-text a.inline:hover { color: var(--fin-orange); border-color: var(--fin-orange); }
+
+/* Product mockup card */
+.product-mockup {
+  background: var(--surface-1);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--hairline-soft);
+  padding: 24px;
+  position: relative;
+}
+
+/* Inbox mockup */
+.inbox {
+  display: grid; grid-template-columns: 220px 1fr;
+  gap: 16px;
+  min-height: 420px;
+}
+@media (max-width: 600px) { .inbox { grid-template-columns: 1fr; } .inbox .threads { display: none; } }
+.inbox .threads {
+  background: var(--canvas);
+  border-radius: var(--r-md);
+  padding: 12px;
+  font-size: 13px;
+}
+.inbox .threads .filter {
+  display: flex; gap: 8px; margin-bottom: 12px;
+  font-size: 13px; font-weight: 500;
+}
+.inbox .threads .filter .f { padding: 4px 10px; border-radius: var(--r-pill); color: var(--ink-subtle); }
+.inbox .threads .filter .f.on { background: var(--surface-1); color: var(--ink); }
+.inbox .threads .thread {
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  display: flex; gap: 10px;
+  cursor: pointer;
+}
+.inbox .threads .thread.active { background: var(--surface-1); }
+.inbox .threads .thread .av {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--report-blue); color: white;
+  font-size: 11px; font-weight: 500;
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+}
+.inbox .threads .thread .av.b { background: var(--report-green); }
+.inbox .threads .thread .av.c { background: var(--report-pink); }
+.inbox .threads .thread .av.d { background: var(--report-lime); color: var(--ink); }
+.inbox .threads .thread .info { flex: 1; min-width: 0; }
+.inbox .threads .thread .info .n { font-weight: 500; color: var(--ink); font-size: 13px; display: flex; align-items: center; gap: 4px; }
+.inbox .threads .thread .info .n .t { margin-left: auto; color: var(--ink-tertiary); font-size: 11px; font-weight: 400; }
+.inbox .threads .thread .info .p { font-size: 12px; color: var(--ink-muted); margin-top: 2px; line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.inbox .convo {
+  display: flex; flex-direction: column;
+  border-radius: var(--r-md);
+  background: var(--canvas);
+}
+.inbox .convo-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.inbox .convo-head .av { width: 28px; height: 28px; border-radius: 50%; background: var(--report-pink); color: white; font-size: 11px; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; }
+.inbox .convo-head .n { font-weight: 500; color: var(--ink); font-size: 14px; }
+.inbox .convo-head .meta { font-size: 12px; color: var(--ink-tertiary); }
+.inbox .convo-head .actions { margin-left: auto; display: inline-flex; gap: 6px; }
+.inbox .convo-head .action { font-size: 12px; padding: 4px 10px; border-radius: var(--r-pill); background: var(--surface-1); border: 1px solid var(--hairline); color: var(--ink); font-weight: 500; }
+
+.inbox .convo-body {
+  padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1;
+}
+.inbox .b {
+  background: var(--surface-1);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  font-size: 13px; line-height: 1.5;
+  max-width: 80%;
+}
+.inbox .b.agent {
+  background: var(--ink); color: var(--on-primary);
+  margin-left: auto;
+}
+.inbox .b.fin {
+  background: linear-gradient(135deg, #fff2e8, #ffe2cc);
+  color: var(--ink);
+  border: 1px solid #ffd0a8;
+  margin-left: auto;
+  max-width: 90%;
+  display: flex; align-items: start; gap: 8px;
+}
+.inbox .b.fin .spark {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--gradient-fin);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: none; margin-top: 1px;
+  color: white; font-size: 11px;
+}
+
+/* Analytics mockup */
+.analytics {
+  background: var(--canvas);
+  border-radius: var(--r-md);
+  padding: 20px;
+  display: grid; gap: 16px;
+}
+.analytics .h {
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+}
+.analytics .h .ttl { font-size: 14px; font-weight: 500; color: var(--ink); }
+.analytics .h .sub { font-size: 12px; color: var(--ink-subtle); }
+.analytics .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.analytics .kpi {
+  background: var(--surface-1);
+  border-radius: var(--r-sm);
+  padding: 12px;
+}
+.analytics .kpi .lab { font-size: 11px; color: var(--ink-subtle); font-weight: 500; }
+.analytics .kpi .n { font-size: 22px; font-weight: 500; letter-spacing: -0.5px; color: var(--ink); margin-top: 4px; line-height: 1.1; }
+.analytics .kpi .d { font-size: 11px; color: var(--report-green); font-weight: 500; margin-top: 2px; }
+.analytics .chart {
+  background: var(--surface-1);
+  border-radius: var(--r-sm);
+  padding: 16px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.analytics .chart svg { width: 100%; height: 100%; }
+.analytics .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-muted); }
+.analytics .legend .d { display: inline-flex; align-items: center; gap: 6px; }
+.analytics .legend .sw { width: 10px; height: 10px; border-radius: 2px; }
+
+/* Help center mockup */
+.helpcenter {
+  background: var(--canvas);
+  border-radius: var(--r-md);
+  padding: 24px;
+}
+.helpcenter .search {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  font-size: 14px; color: var(--ink-tertiary);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.helpcenter .cats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.helpcenter .cat {
+  background: var(--surface-1);
+  border-radius: var(--r-md);
+  padding: 14px;
+  display: flex; align-items: center; gap: 12px;
+  border: 1px solid var(--hairline-soft);
+}
+.helpcenter .cat .ic {
+  width: 32px; height: 32px; border-radius: var(--r-sm);
+  background: var(--canvas);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex: none;
+}
+.helpcenter .cat .info { line-height: 1.2; }
+.helpcenter .cat .t { font-size: 13px; font-weight: 500; color: var(--ink); }
+.helpcenter .cat .s { font-size: 11px; color: var(--ink-subtle); margin-top: 2px; }
+.helpcenter .articles { margin-top: 16px; }
+.helpcenter .articles .art {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hairline-soft);
+  font-size: 13px; color: var(--ink);
+}
+.helpcenter .articles .art:last-child { border-bottom: 0; }
+.helpcenter .articles .art .num { color: var(--ink-tertiary); width: 18px; }
+.helpcenter .articles .art .views { margin-left: auto; color: var(--ink-tertiary); font-size: 11px; }
+
+/* —— Testimonial dark band (signature elevation 3) —— */
+.quote-band {
+  background: var(--inverse-canvas);
+  color: var(--inverse-ink);
+  padding: 96px 0;
+  position: relative;
+}
+.quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+@media (max-width: 900px) { .quote-grid { grid-template-columns: 1fr; } }
+.quote-band blockquote {
+  font-size: clamp(28px, 3.6vw, 40px);
+  font-weight: 500; line-height: 1.2; letter-spacing: -0.8px;
+  margin: 0 0 32px; color: var(--inverse-ink);
+}
+.quote-band .who {
+  display: flex; align-items: center; gap: 16px;
+}
+.quote-band .who .av {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--gradient-fin);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 500; color: white;
+}
+.quote-band .who .info { display: flex; flex-direction: column; line-height: 1.3; }
+.quote-band .who .info strong { font-size: 15px; font-weight: 500; }
+.quote-band .who .info span { font-size: 13px; color: var(--inverse-ink-muted); }
+.quote-band .right { display: flex; flex-direction: column; gap: 12px; }
+.quote-band .stat-tile {
+  background: var(--inverse-surface-1);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+.quote-band .stat-tile .n { font-size: 48px; font-weight: 500; letter-spacing: -1.4px; line-height: 1; color: var(--inverse-ink); margin-bottom: 4px; }
+.quote-band .stat-tile .l { font-size: 14px; color: var(--inverse-ink-muted); }
+
+/* —— Pricing —— */
+.pricing-band { background: var(--canvas); }
+.tabs-pill {
+  display: inline-flex;
+  background: var(--canvas);
+  padding: 4px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--hairline-soft);
+  margin: 0 auto 48px;
+}
+.tab-row {
+  display: flex; justify-content: center;
+}
+.tabs-pill .t {
+  padding: 8px 16px; border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 500;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+.tabs-pill .t.on {
+  background: var(--surface-1);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.tier-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+@media (max-width: 900px) { .tier-grid { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.tier.feat { background: var(--ink); color: var(--on-primary); border-color: var(--ink); }
+.tier .nm { font-size: 28px; font-weight: 500; letter-spacing: -0.5px; line-height: 1.2; margin: 0; display: flex; align-items: center; gap: 8px; }
+.tier .pr { display: flex; align-items: baseline; gap: 6px; margin: 0; }
+.tier .pr .num { font-size: 40px; font-weight: 500; letter-spacing: -0.8px; line-height: 1.15; }
+.tier .pr .per { font-size: 14px; opacity: 0.7; }
+.tier .desc { font-size: 14px; line-height: 1.5; min-height: 60px; opacity: 0.85; margin: 0; }
+.tier .div { height: 1px; background: var(--hairline-soft); margin: 4px 0; }
+.tier.feat .div { background: var(--inverse-surface-1); }
+.tier .feature-h { font-size: 13px; font-weight: 500; opacity: 0.85; }
+.tier ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.tier li { display: flex; align-items: start; gap: 8px; font-size: 14px; line-height: 1.4; }
+.tier li svg { flex: none; margin-top: 3px; opacity: 0.85; }
+.tier .cta-wrap { margin-top: auto; }
+.tier .cta-wrap .btn { width: 100%; }
+.fin-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--gradient-fin); color: white;
+  padding: 2px 8px; border-radius: var(--r-pill);
+  font-size: 11px; font-weight: 600;
+}
+
+/* Startup tinted band */
+.startup-card {
+  margin-top: 64px;
+  background: var(--surface-2);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 32px; align-items: center;
+}
+@media (max-width: 800px) { .startup-card { grid-template-columns: 1fr; } }
+.startup-card h3 { font-size: 28px; font-weight: 500; letter-spacing: -0.5px; line-height: 1.2; margin: 0 0 8px; }
+.startup-card p { font-size: 16px; color: var(--ink-muted); line-height: 1.5; margin: 0 0 16px; }
+.startup-card .stamp {
+  font-size: 56px; font-weight: 500; letter-spacing: -1.4px;
+  line-height: 1; color: var(--ink); text-align: right;
+}
+.startup-card .stamp .l { font-size: 14px; color: var(--ink-muted); font-weight: 400; letter-spacing: 0; }
+
+/* —— FAQ —— */
+.faqs { display: flex; flex-direction: column; gap: 0; }
+.faq-row {
+  background: var(--canvas);
+  padding: 24px 0;
+  border-bottom: 1px solid var(--hairline-soft);
+  display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
+  cursor: pointer;
+}
+.faq-row:first-child { border-top: 1px solid var(--hairline-soft); }
+.faq-row .q { font-size: 18px; font-weight: 500; color: var(--ink); letter-spacing: -0.2px; }
+.faq-row .toggle {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--surface-1);
+  border: 1px solid var(--hairline-soft);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* —— CTA banner —— */
+.cta-banner {
+  background: var(--surface-1);
+  border-radius: var(--r-lg);
+  padding: 48px;
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 32px; align-items: center;
+}
+@media (max-width: 800px) { .cta-banner { grid-template-columns: 1fr; padding: 32px; } }
+.cta-banner h2 { font-size: clamp(24px, 3.4vw, 28px); font-weight: 500; letter-spacing: -0.5px; line-height: 1.2; margin: 0 0 8px; color: var(--ink); }
+.cta-banner p { font-size: 16px; color: var(--ink-muted); margin: 0; line-height: 1.5; }
+.cta-banner .ctas { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-self: end; }
+@media (max-width: 800px) { .cta-banner .ctas { justify-self: start; } }
+
+/* —— Footer (cream) —— */
+footer {
+  background: var(--canvas);
+  padding: 64px 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: 32px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 {
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  margin: 0 0 16px;
+}
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 13px; color: var(--ink-subtle); }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-brand .brand { margin-bottom: 16px; display: inline-flex; }
+.footer-brand p { font-size: 12px; color: var(--ink-subtle); margin: 0; line-height: 1.5; max-width: 280px; }
+.legal-band {
+  padding-top: 24px;
+  display: flex; align-items: center; gap: 24px;
+  font-size: 12px; color: var(--ink-subtle);
+  flex-wrap: wrap;
+}
+.legal-band .right { margin-left: auto; display: inline-flex; gap: 16px; }
+.legal-band a:hover { color: var(--ink); }
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--surface-1);
+  color: var(--ink);
+  border: 1px solid var(--hairline-soft);
+  padding: 8px 14px; border-radius: var(--r-pill);
+  font-size: 12px; font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.src-link:hover { background: var(--canvas); color: var(--fin-orange); }
+
+/* —— Floating Fin launcher (signature messenger) —— */
+.fin-launcher {
+  position: fixed; right: 24px; bottom: 64px; z-index: 40;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--gradient-fin); color: white;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(255,86,0,0.3);
+  cursor: pointer;
+  border: none;
+}
+
+/* —— DS section (signature: reuses brand styling) —— */
+.ds-section { padding: 96px 0; background: var(--canvas); }
+.ds-intro { margin-bottom: 64px; max-width: 720px; }
+.ds-intro h2 {
+  font-size: clamp(32px, 4vw, 48px); font-weight: 500;
+  letter-spacing: -1.2px; line-height: 1.1;
+  margin: 0 0 16px; color: var(--ink);
+}
+.ds-intro p {
+  font-size: 18px; line-height: 1.5; color: var(--ink-muted);
+  letter-spacing: -0.1px; margin: 0;
+}
+.ds-intro a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+.ds-block {
+  background: var(--surface-1);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--hairline-soft);
+  padding: 40px;
+  margin-bottom: 24px;
+}
+.ds-block h3 {
+  font-size: 28px; font-weight: 500; letter-spacing: -0.5px;
+  margin: 0 0 8px; color: var(--ink);
+}
+.ds-block > p {
+  font-size: 15px; color: var(--ink-muted); line-height: 1.5;
+  margin: 0 0 24px;
+}
+.ds-caption {
+  font-size: 14px; font-weight: 500;
+  color: var(--ink-muted);
+  margin: 28px 0 14px;
+}
+.ds-block .ds-caption:first-of-type { margin-top: 0; }
+
+.ds-swatches {
+  display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 900px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 500px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 8px 12px; }
+.ds-sw .name { font-size: 13px; color: var(--ink); font-weight: 500; }
+.ds-sw .val { font-size: 11px; color: var(--ink-subtle); font-family: "JetBrains Mono", monospace; margin-top: 2px; }
+
+.ds-typescale {
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.ds-tr {
+  display: grid; grid-template-columns: 140px 220px 1fr;
+  align-items: baseline; gap: 24px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 12px; color: var(--ink); font-family: "JetBrains Mono", monospace; font-weight: 500; }
+.ds-spec { font-size: 11px; color: var(--ink-subtle); font-family: "JetBrains Mono", monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 20px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(8, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 56px; height: 56px; background: var(--ink); }
+.ds-rad .lab { font-size: 11px; color: var(--ink); font-family: "JetBrains Mono", monospace; font-weight: 500; }
+.ds-rad .vv { font-size: 11px; color: var(--ink-subtle); font-family: "JetBrains Mono", monospace; }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-comp-row + .ds-comp-row { margin-top: 16px; }
+.ds-on-dark {
+  background: var(--inverse-canvas); padding: 24px; border-radius: var(--r-lg);
+}
+.ds-input {
+  height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  color: var(--ink);
+  font: 400 16px/1.5 inherit;
+  width: 100%;
+}
+.ds-input.focused {
+  border-width: 2px; border-color: var(--ink);
+  padding: 9px 13px; outline: none;
+}
+.ds-input-pair { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; max-width: 640px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-field-label {
+  font-size: 12px; font-weight: 500; color: var(--ink);
+  margin-bottom: 6px; display: block;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.ds-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: var(--r-sm);
+  background: var(--canvas); color: var(--ink);
+  font-size: 13px; font-weight: 500;
+}
+.ds-tag.orange { background: var(--gradient-fin); color: white; }
+.ds-tag.dark { background: var(--ink); color: var(--on-primary); }
+.ds-tag.muted { background: var(--surface-2); color: var(--ink-muted); }
+
+.ds-cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .ds-cards-row { grid-template-columns: 1fr; } }
+.ds-mini-card {
+  background: var(--surface-1);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.ds-mini-card.feat { background: var(--ink); color: var(--on-primary); border-color: var(--ink); }
+.ds-mini-card.startup { background: var(--surface-2); }
+.ds-mini-card .lab { font-size: 15px; font-weight: 500; }
+.ds-mini-card .v { font-size: 12px; opacity: 0.75; font-family: "JetBrains Mono", monospace; }
+.ds-mini-card .body { font-size: 14px; line-height: 1.5; opacity: 0.85; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#">
+    <span class="glyph">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6" fill="none"/>
+        <path d="M5 10c1 1 5 1 6 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      </svg>
+    </span>
+    Intercomm
+  </a>
+  <nav class="nav-links">
+    <a href="#">Product <span class="chev">▾</span></a>
+    <a href="#">Pricing</a>
+    <a href="#">Solutions <span class="chev">▾</span></a>
+    <a href="#">Customers</a>
+    <a href="#">Resources <span class="chev">▾</span></a>
+  </nav>
+  <div class="nav-right">
+    <a class="btn btn-tertiary" href="#">Sign in</a>
+    <a class="btn btn-secondary" href="#">View demo</a>
+    <a class="btn btn-primary" href="#">Start free trial</a>
+  </div>
+</div></header>
+
+<!-- Hero -->
+<section class="hero"><div class="wrap">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">
+        <span class="spark">
+          <svg width="8" height="8" viewBox="0 0 10 10" fill="white"><path d="M5 0l1 3 3 1-3 1-1 3-1-3L1 4l3-1z"/></svg>
+        </span>
+        Introducing <strong>Finn AI</strong> — instant, accurate answers, grounded in your content.
+      </span>
+      <h1>Customer service, <em>solved.</em></h1>
+      <p class="lead">Finn AI resolves 56% of support questions on its own. Your agents handle the rest in our AI-enhanced Inbox. Customers get help fast, your team gets their day back.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="#">Start free trial</a>
+        <a class="btn btn-secondary btn-lg" href="#">View demo →</a>
+      </div>
+    </div>
+
+    <!-- Fin chat mockup -->
+    <div class="fin-mockup">
+      <div class="head">
+        <div class="ava">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 14c1.5 1.5 6.5 1.5 8 0"/><circle cx="9" cy="10" r="0.6" fill="currentColor"/><circle cx="15" cy="10" r="0.6" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <div class="name">Finn AI</div>
+          <div class="stat"><span class="pulse"></span> Replies instantly · trained on Intercomm docs</div>
+        </div>
+        <div class="cls">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
+        </div>
+      </div>
+      <div class="chat-body">
+        <div class="bubble">
+          <div class="a">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12c1 1.5 5 1.5 6 0"/></svg>
+          </div>
+          <div class="b">
+            Hi Mira — I'm Finn 👋 What can I help you with today?
+            <div class="quick-replies">
+              <span class="qr">Refund a charge</span>
+              <span class="qr">Cancel my plan</span>
+              <span class="qr">Connect to Salesforce</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bubble user">
+          <div class="a">M</div>
+          <div class="b">How do I move my account to annual billing without losing the proration I have on file?</div>
+        </div>
+
+        <div class="bubble">
+          <div class="a">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12c1 1.5 5 1.5 6 0"/></svg>
+          </div>
+          <div class="b">
+            Switching to annual won't reset your proration — we credit the unused portion of your monthly cycle against the first annual invoice. You can switch from <strong>Settings → Billing → Change plan</strong>. The new annual term begins immediately, and the credit appears as a line item on your next invoice.
+            <div class="fin-source">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 2h7l3 3v9H3z"/><path d="M10 2v3h3"/></svg>
+              Sourced from <span class="doc">"Switching billing cycles" · Help Center</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-composer">
+        <span class="field">Reply to Finn…</span>
+        <span class="send">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 8l12-6-4 14-2-6-6-2z"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer logos -->
+  <div class="logos">
+    <p class="lab">Customer service teams at 25,000+ companies move faster with Intercomm.</p>
+    <div class="logo-row">
+      <span class="logo-mark serif">Atlassian</span>
+      <span class="logo-mark">amazon</span>
+      <span class="logo-mark serif">Ramp</span>
+      <span class="logo-mark">monzo</span>
+      <span class="logo-mark">Lightspeed</span>
+      <span class="logo-mark serif">Anthropic</span>
+      <span class="logo-mark">Notion</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- Feature: Inbox (Fin + Agents) -->
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">The AI-enhanced Inbox</p>
+    <h2>One Inbox. Finn handles the easy ones. Your team handles the hard ones.</h2>
+    <p>Finn picks up the routine — refunds, status, integrations. Your agents see a clean queue of escalations with Finn's reasoning attached. No copy-paste, no re-asking the customer.</p>
+  </div>
+
+  <div class="feature-block">
+    <div class="feature-text">
+      <p class="eyebrow">A single shared Inbox</p>
+      <h3>Where humans and AI ship support together.</h3>
+      <p>Finn replies first. When it escalates, your agent sees the whole thread, the resolution attempted, and the source articles Finn cited. The handoff is instant — your customer doesn't repeat themselves.</p>
+      <ul class="bullets">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> Smart routing by topic, sentiment, plan tier</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> Finn's citations attached to every escalation</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> Macros, snippets, and AI-generated replies inline</li>
+      </ul>
+      <a class="inline" href="#">Tour the AI Inbox
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
+      </a>
+    </div>
+
+    <div class="product-mockup">
+      <div class="inbox">
+        <div class="threads">
+          <div class="filter">
+            <span class="f on">Open · 8</span>
+            <span class="f">Snoozed</span>
+          </div>
+          <div class="thread active">
+            <div class="av c">MS</div>
+            <div class="info">
+              <div class="n">Mira Singh <span class="t">2m</span></div>
+              <div class="p">Refund + cancel question — Finn replied with article</div>
+            </div>
+          </div>
+          <div class="thread">
+            <div class="av">AT</div>
+            <div class="info">
+              <div class="n">Atlas Tan <span class="t">8m</span></div>
+              <div class="p">SAML SSO not redirecting — escalated to Avi</div>
+            </div>
+          </div>
+          <div class="thread">
+            <div class="av b">JK</div>
+            <div class="info">
+              <div class="n">Jamie Kao <span class="t">22m</span></div>
+              <div class="p">Annual billing — Finn resolved (5⭐)</div>
+            </div>
+          </div>
+          <div class="thread">
+            <div class="av d">KH</div>
+            <div class="info">
+              <div class="n">Kira Halsey <span class="t">1h</span></div>
+              <div class="p">Salesforce sync error · {404}</div>
+            </div>
+          </div>
+        </div>
+        <div class="convo">
+          <div class="convo-head">
+            <div class="av">MS</div>
+            <div>
+              <div class="n">Mira Singh</div>
+              <div class="meta">Ramp HQ · Business+ · CS since 2024</div>
+            </div>
+            <div class="actions">
+              <span class="action">Close</span>
+              <span class="action">Assign</span>
+              <span class="action">Snooze</span>
+            </div>
+          </div>
+          <div class="convo-body">
+            <div class="b">Hey — I started a refund yesterday but it still says pending. Should I be worried?</div>
+            <div class="b fin">
+              <span class="spark">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="white"><path d="M5 0l1 3 3 1-3 1-1 3-1-3L1 4l3-1z"/></svg>
+              </span>
+              <span><strong>Finn:</strong> Refunds settle within 3–5 business days — yours is 1 day in, fully on track. Marking this resolved unless Mira replies.</span>
+            </div>
+            <div class="b">Oh perfect, thanks!</div>
+            <div class="b agent">You got it 👋 — closing this out. Reach out anytime.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature: Help Center -->
+  <div class="feature-block flip">
+    <div class="feature-text normal">
+      <p class="eyebrow">Help Center</p>
+      <h3>The articles that train your AI also help your customers.</h3>
+      <p>Write once. Publish to your Help Center and Finn picks it up automatically. Track which articles deflect the most, find the gaps, and watch your resolution rate climb.</p>
+      <ul class="bullets">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> Articles instantly indexed by Finn</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> See which articles Finn cites most often</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> Multi-language (32 languages, machine-translated)</li>
+      </ul>
+      <a class="inline" href="#">Build a Help Center
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
+      </a>
+    </div>
+
+    <div class="product-mockup">
+      <div class="helpcenter">
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="5"/><line x1="11" y1="11" x2="14.5" y2="14.5"/></svg>
+          Search 284 articles
+        </div>
+        <div class="cats">
+          <div class="cat"><span class="ic">💳</span><div class="info"><div class="t">Billing &amp; plans</div><div class="s">42 articles</div></div></div>
+          <div class="cat"><span class="ic">🔗</span><div class="info"><div class="t">Integrations</div><div class="s">68 articles</div></div></div>
+          <div class="cat"><span class="ic">⚙️</span><div class="info"><div class="t">Account settings</div><div class="s">36 articles</div></div></div>
+          <div class="cat"><span class="ic">🛡️</span><div class="info"><div class="t">Security &amp; SSO</div><div class="s">24 articles</div></div></div>
+        </div>
+        <div class="articles">
+          <div class="art"><span class="num">1.</span><span>Switching between monthly and annual billing</span><span class="views">14,209 views</span></div>
+          <div class="art"><span class="num">2.</span><span>Setting up Salesforce two-way sync</span><span class="views">8,940 views</span></div>
+          <div class="art"><span class="num">3.</span><span>SAML SSO with Okta &amp; Microsoft Entra</span><span class="views">6,118 views</span></div>
+          <div class="art"><span class="num">4.</span><span>How Finn AI scopes answers to your workspace</span><span class="views">4,802 views</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature: Analytics -->
+  <div class="feature-block">
+    <div class="feature-text normal">
+      <p class="eyebrow">Reports</p>
+      <h3>See what's working — and what your customers actually ask.</h3>
+      <p>Live cohort reports for resolution rate, customer satisfaction, and Finn's deflection. Pivot by plan, region, or article. Export a board-ready slide in two clicks.</p>
+      <ul class="bullets">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> 12 built-in reports for support &amp; CX teams</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> Custom dashboards with drag-and-drop tiles</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> Live data — refreshes every 30 seconds</li>
+      </ul>
+      <a class="inline" href="#">See the reports library
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
+      </a>
+    </div>
+
+    <div class="product-mockup">
+      <div class="analytics">
+        <div class="h">
+          <div>
+            <div class="ttl">Support pulse · Last 30 days</div>
+            <div class="sub">Across 12,408 conversations · live data</div>
+          </div>
+          <div class="ds-tag" style="background: var(--surface-2); color: var(--ink); padding: 4px 10px; border-radius: var(--r-pill); font-size: 11px;">▾ Last 30 days</div>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="lab">Resolution rate</div><div class="n">56%</div><div class="d">↑ 8.2 pts</div></div>
+          <div class="kpi"><div class="lab">First reply (median)</div><div class="n">9s</div><div class="d">↑ Finn-led</div></div>
+          <div class="kpi"><div class="lab">CSAT</div><div class="n">4.7<span style="font-size: 14px; color: var(--ink-tertiary);"> /5</span></div><div class="d">↑ 0.3</div></div>
+        </div>
+        <div class="chart">
+          <svg viewBox="0 0 320 160" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#65b5ff" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#65b5ff" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#ff5600" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#ff5600" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- baseline grid -->
+            <line x1="0" y1="40" x2="320" y2="40" stroke="#ebe7e1" stroke-width="1"/>
+            <line x1="0" y1="80" x2="320" y2="80" stroke="#ebe7e1" stroke-width="1"/>
+            <line x1="0" y1="120" x2="320" y2="120" stroke="#ebe7e1" stroke-width="1"/>
+            <!-- Finn deflection (orange) -->
+            <path d="M0,120 L40,108 L80,98 L120,74 L160,70 L200,52 L240,46 L280,28 L320,22 L320,160 L0,160 Z" fill="url(#g2)"/>
+            <path d="M0,120 L40,108 L80,98 L120,74 L160,70 L200,52 L240,46 L280,28 L320,22" stroke="#ff5600" stroke-width="2" fill="none"/>
+            <!-- Agent volume (blue) -->
+            <path d="M0,90 L40,84 L80,92 L120,86 L160,78 L200,82 L240,76 L280,70 L320,68 L320,160 L0,160 Z" fill="url(#g1)"/>
+            <path d="M0,90 L40,84 L80,92 L120,86 L160,78 L200,82 L240,76 L280,70 L320,68" stroke="#65b5ff" stroke-width="2" fill="none"/>
+            <!-- Hover dot -->
+            <circle cx="200" cy="52" r="4" fill="#ff5600" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="legend">
+          <div class="d"><span class="sw" style="background: #ff5600;"></span> Finn deflection</div>
+          <div class="d"><span class="sw" style="background: #65b5ff;"></span> Agent volume</div>
+          <div class="d"><span class="sw" style="background: #b3e01c;"></span> CSAT (overlay)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Quote band (signature dark elevation 3) -->
+<section class="quote-band"><div class="wrap">
+  <div class="quote-grid">
+    <div>
+      <blockquote>"Finn picked up 64% of our overnight queue in the first week. The team showed up Monday and walked into a clean board for the first time in two years."</blockquote>
+      <div class="who">
+        <div class="av">RT</div>
+        <div class="info">
+          <strong>Rae Tanaka</strong>
+          <span>Director of Customer Experience, Lightspeed</span>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="stat-tile"><div class="n">64%</div><div class="l">resolution rate handled by Finn in week one</div></div>
+      <div class="stat-tile"><div class="n">3.2×</div><div class="l">faster median first reply across all channels</div></div>
+      <div class="stat-tile"><div class="n">$1.4M</div><div class="l">annual cost savings vs. previous helpdesk</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Pricing -->
+<section class="pricing-band"><div class="wrap">
+  <div class="section-head" style="margin-bottom: 32px;">
+    <p class="eyebrow">Pricing</p>
+    <h2>Pay for the seats. Finn is a separate, simple, per-resolution charge.</h2>
+    <p>Three plans for your team. Finn is metered: you only pay when it resolves a conversation. See the Finn pricing FAQ below for examples.</p>
+  </div>
+
+  <div class="tab-row">
+    <div class="tabs-pill">
+      <span class="t on">Monthly</span>
+      <span class="t">Annual · save 20%</span>
+    </div>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier">
+      <h3 class="nm">Essential</h3>
+      <p class="pr"><span class="num">$29</span><span class="per">/seat · month</span></p>
+      <p class="desc">For small teams getting their first AI-augmented inbox off the ground.</p>
+      <div class="div"></div>
+      <div class="feature-h">Includes</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Shared Inbox · 3 seats</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Help Center · 1 site</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Email + Messenger</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Basic reports</li>
+      </ul>
+      <div class="cta-wrap"><a class="btn btn-secondary" href="#">Start free trial</a></div>
+    </div>
+
+    <div class="tier feat">
+      <h3 class="nm">Advanced <span class="fin-pill">+ Finn AI</span></h3>
+      <p class="pr"><span class="num">$85</span><span class="per">/seat · month</span></p>
+      <p class="desc">For growing teams that want Finn AI on the front line and full workflow automation.</p>
+      <div class="div"></div>
+      <div class="feature-h">Everything in Essential, plus</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Finn AI (metered, $0.99/resolution)</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Workflows + automation</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Custom reports + dashboards</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>WhatsApp, SMS, voice</li>
+      </ul>
+      <div class="cta-wrap"><a class="btn btn-fin" href="#">Start Advanced trial
+        <svg class="spark" viewBox="0 0 10 10" fill="white"><path d="M5 0l1 3 3 1-3 1-1 3-1-3L1 4l3-1z"/></svg>
+      </a></div>
+    </div>
+
+    <div class="tier">
+      <h3 class="nm">Expert</h3>
+      <p class="pr"><span class="num">$132</span><span class="per">/seat · month</span></p>
+      <p class="desc">For high-touch operations — SLAs, data residency, audit logs, premium support.</p>
+      <div class="div"></div>
+      <div class="feature-h">Everything in Advanced, plus</div>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>SLAs + uptime guarantee</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>EU / US data residency</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>HIPAA, SOC2 Type II</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Dedicated CS manager</li>
+      </ul>
+      <div class="cta-wrap"><a class="btn btn-secondary" href="#">Talk to sales</a></div>
+    </div>
+  </div>
+
+  <div class="startup-card">
+    <div>
+      <h3>Startups, save 90%.</h3>
+      <p>Pre-Series A startups under 25 employees get the Advanced plan + 1,000 Finn resolutions / month at 10% of list. No salespeople, no commitments — just answer five questions.</p>
+      <a class="btn btn-secondary" href="#">Apply for the startup program</a>
+    </div>
+    <div class="stamp">
+      90% <span class="l">off Advanced for one year</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">FAQ</p>
+    <h2>The questions we hear most before signing.</h2>
+  </div>
+  <div class="faqs">
+    <div class="faq-row">
+      <div class="q">How is Finn AI priced?</div>
+      <div class="toggle">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l5 5 5-5"/></svg>
+      </div>
+    </div>
+    <div class="faq-row">
+      <div class="q">Will Finn answer questions outside what we've documented?</div>
+      <div class="toggle">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l5 5 5-5"/></svg>
+      </div>
+    </div>
+    <div class="faq-row">
+      <div class="q">How do we migrate from Zendesk or Helpscout?</div>
+      <div class="toggle">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l5 5 5-5"/></svg>
+      </div>
+    </div>
+    <div class="faq-row">
+      <div class="q">What integrations are supported out of the box?</div>
+      <div class="toggle">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l5 5 5-5"/></svg>
+      </div>
+    </div>
+    <div class="faq-row">
+      <div class="q">Where is my data stored, and what about SOC2 / HIPAA?</div>
+      <div class="toggle">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l5 5 5-5"/></svg>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- DS section -->
+<section class="ds-section"><div class="wrap">
+  <div class="ds-intro">
+    <h2>The tokens behind every pixel.</h2>
+    <p>Sourced from <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.intercom.html" target="_blank" rel="noopener">DESIGN.md</a>. Cream canvas, charcoal primary, single Fin Orange accent reserved for AI, white floating cards. The system reads as a careful editorial publication.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3>Color</h3>
+    <p>The cream canvas (#f5f1ec) is the brand's defining surface — neither white nor gray, deliberately warm. Fin Orange is the only chromatic accent and is scoped strictly to the Finn AI product.</p>
+
+    <p class="ds-caption">Surface · cream, white, deep black</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#f5f1ec"></div><div class="meta"><div class="name">canvas</div><div class="val">#f5f1ec</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff; border-bottom: 1px solid var(--hairline);"></div><div class="meta"><div class="name">surface-1</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ebe7e1"></div><div class="meta"><div class="name">surface-2</div><div class="val">#ebe7e1</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">inverse-canvas</div><div class="val">#000000</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#313130"></div><div class="meta"><div class="name">inverse-surface-1</div><div class="val">#313130</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text · charcoal-led, four-step ramp</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#111111"></div><div class="meta"><div class="name">ink</div><div class="val">#111111</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#626260"></div><div class="meta"><div class="name">ink-muted</div><div class="val">#626260</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#7b7b78"></div><div class="meta"><div class="name">ink-subtle</div><div class="val">#7b7b78</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9c9fa5"></div><div class="meta"><div class="name">ink-tertiary</div><div class="val">#9c9fa5</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#d3cec6"></div><div class="meta"><div class="name">hairline</div><div class="val">#d3cec6</div></div></div>
+    </div>
+
+    <p class="ds-caption">Fin Orange · the single chromatic accent, AI only</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ff5600"></div><div class="meta"><div class="name">fin-orange</div><div class="val">#ff5600</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#fe4c02"></div><div class="meta"><div class="name">report-orange</div><div class="val">#fe4c02</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0007cb"></div><div class="meta"><div class="name">brand-blue</div><div class="val">#0007cb</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c41c1c"></div><div class="meta"><div class="name">semantic-error</div><div class="val">#c41c1c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0bdf50"></div><div class="meta"><div class="name">semantic-success</div><div class="val">#0bdf50</div></div></div>
+    </div>
+
+    <p class="ds-caption">Report palette · in-product analytics only, never marketing surface</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#65b5ff"></div><div class="meta"><div class="name">report-blue</div><div class="val">#65b5ff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0bdf50"></div><div class="meta"><div class="name">report-green</div><div class="val">#0bdf50</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ff2067"></div><div class="meta"><div class="name">report-pink</div><div class="val">#ff2067</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#b3e01c"></div><div class="meta"><div class="name">report-lime</div><div class="val">#b3e01c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#03b2cb"></div><div class="meta"><div class="name">report-cyan</div><div class="val">#03b2cb</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3>Typography</h3>
+    <p>Saans (substituted Inter), weight 500 for display, 400 for body. Negative tracking pulls aggressively at display sizes (-2.0px at 72px) and resolves to 0 on body. Same family carries the entire hierarchy.</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">72 · w500 · −2.0 · 1.05</span><div class="ds-sam" style="font-size:54px; font-weight:500; letter-spacing:-1.5px; line-height:1.05;">Customer service, solved.</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">56 · w500 · −1.4 · 1.10</span><div class="ds-sam" style="font-size:42px; font-weight:500; letter-spacing:-1.05px; line-height:1.1;">One Inbox for Finn and your team.</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">40 · w500 · −0.8 · 1.15</span><div class="ds-sam" style="font-size:32px; font-weight:500; letter-spacing:-0.64px; line-height:1.15;">Where humans and AI ship support.</div></div>
+      <div class="ds-tr"><span class="ds-tok">headline</span><span class="ds-spec">28 · w500 · −0.5 · 1.20</span><div class="ds-sam" style="font-size:26px; font-weight:500; letter-spacing:-0.47px; line-height:1.2;">Pricing tier title</div></div>
+      <div class="ds-tr"><span class="ds-tok">card-title</span><span class="ds-spec">22 · w500 · −0.3 · 1.25</span><div class="ds-sam" style="font-size:22px; font-weight:500; letter-spacing:-0.3px; line-height:1.25;">Feature card heading</div></div>
+      <div class="ds-tr"><span class="ds-tok">subhead</span><span class="ds-spec">20 · w400 · −0.2 · 1.40</span><div class="ds-sam" style="font-size:20px; font-weight:400; letter-spacing:-0.2px; line-height:1.4; color: var(--ink-muted);">Lead body. Intro paragraph.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">18 · w400 · −0.1 · 1.50</span><div class="ds-sam" style="font-size:18px; font-weight:400; letter-spacing:-0.1px; line-height:1.5;">Hero subhead body. Reads quietly.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body</span><span class="ds-spec">16 · w400 · 0 · 1.50</span><div class="ds-sam" style="font-size:16px; font-weight:400; line-height:1.5;">Default running body. The system trusts space over weight.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-sm</span><span class="ds-spec">14 · w400 · 0 · 1.50</span><div class="ds-sam" style="font-size:14px; font-weight:400; line-height:1.5; color: var(--ink-muted);">Footer text, card body, captions</div></div>
+      <div class="ds-tr"><span class="ds-tok">button</span><span class="ds-spec">15 · w500 · 0 · 1.20</span><div class="ds-sam" style="font-size:15px; font-weight:500;">Start free trial · View demo</div></div>
+      <div class="ds-tr"><span class="ds-tok">eyebrow</span><span class="ds-spec">14 · w500 · 0 · sentence case</span><div class="ds-sam" style="font-size:14px; font-weight:500; color: var(--fin-orange);">Introducing Finn AI</div></div>
+      <div class="ds-tr"><span class="ds-tok">mono</span><span class="ds-spec">13 · w400 · 0 · 1.50</span><div class="ds-sam mono" style="font-size:13px;">const finn = new Intercomm()</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3>Radius — sober, never pill-rounded CTAs</h3>
+    <p>Buttons sit at 8px (`rounded.md`). Pricing cards at 12px (`rounded.lg`). Product mockup tiles at 16px (`rounded.xl`). Pill radius (9999px) is reserved for tab toggles and avatar circles.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="lab">xs</span><span class="vv">4 · chip</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:6px"></div><span class="lab">sm</span><span class="vv">6 · tag</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="lab">md</span><span class="vv">8 · button</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:12px"></div><span class="lab">lg</span><span class="vv">12 · card</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="lab">xl</span><span class="vv">16 · mockup</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:24px"></div><span class="lab">xxl</span><span class="vv">24 · banner</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="lab">pill</span><span class="vv">∞ · tab</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px; aspect-ratio: 1; width: 56px;"></div><span class="lab">full</span><span class="vv">∞ · avatar</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3>Components</h3>
+
+    <p class="ds-caption">Buttons — charcoal primary · 8px radius · Fin Orange ONLY for AI CTAs</p>
+    <div class="ds-comp-row">
+      <a class="btn btn-primary" href="#">Start free trial</a>
+      <a class="btn btn-secondary" href="#">View demo</a>
+      <a class="btn btn-tertiary" href="#">Sign in</a>
+      <a class="btn btn-fin" href="#">Try Finn AI
+        <svg class="spark" viewBox="0 0 10 10" fill="white"><path d="M5 0l1 3 3 1-3 1-1 3-1-3L1 4l3-1z"/></svg>
+      </a>
+    </div>
+
+    <p class="ds-caption">On-dark variant — quote strip context</p>
+    <div class="ds-on-dark">
+      <div class="ds-comp-row">
+        <a class="btn" style="background: var(--surface-1); color: var(--ink);" href="#">Read the case study</a>
+        <a class="btn" style="background: transparent; color: var(--inverse-ink); border: 1px solid var(--inverse-ink-muted);" href="#">Watch the talk</a>
+      </div>
+    </div>
+
+    <p class="ds-caption">Inputs — 44px height · 8px radius · 2px charcoal focus</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="rae@lightspeed.com"/>
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="rae@lightspeed.com"/>
+      </div>
+    </div>
+
+    <p class="ds-caption">Tabs &amp; tags</p>
+    <div class="ds-comp-row">
+      <div class="tabs-pill" style="margin: 0;">
+        <span class="t on">Monthly</span>
+        <span class="t">Annual</span>
+      </div>
+      <span class="ds-tag">Default tag</span>
+      <span class="ds-tag dark">Dark tag</span>
+      <span class="ds-tag muted">Muted tag</span>
+      <span class="ds-tag orange">+ Finn AI</span>
+    </div>
+
+    <p class="ds-caption">Cards — pricing · featured (inverts to charcoal) · startup tinted</p>
+    <div class="ds-cards-row">
+      <div class="ds-mini-card">
+        <div class="lab">pricing-card</div>
+        <div class="v">surface-1 + 12px radius + hairline</div>
+        <div class="body">Default pricing tier. White surface lifted onto cream.</div>
+      </div>
+      <div class="ds-mini-card feat">
+        <div class="lab">pricing-card-featured</div>
+        <div class="v">ink + 12px radius</div>
+        <div class="body">Featured tier inverts to charcoal — never to Fin Orange.</div>
+      </div>
+      <div class="ds-mini-card startup">
+        <div class="lab">startup-discount-card</div>
+        <div class="v">surface-2 + 12px radius</div>
+        <div class="body">Slightly darker cream tint for emphasis bands.</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA banner -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="cta-banner">
+    <div>
+      <h2>Start a free 14-day trial of Intercomm.</h2>
+      <p>Get the AI-enhanced Inbox, Help Center, and Reports. Plug Finn AI in when you're ready.</p>
+    </div>
+    <div class="ctas">
+      <a class="btn btn-primary btn-lg" href="#">Start free trial</a>
+      <a class="btn btn-secondary btn-lg" href="#">Talk to sales</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- Footer (cream) -->
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="#">
+        <span class="glyph">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6" fill="none"/>
+            <path d="M5 10c1 1 5 1 6 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+          </svg>
+        </span>
+        Intercomm
+      </a>
+      <p>An Intercom-inspired single-page composition. Tokens and component spec sourced from awesome-design-md.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">AI Inbox</a></li>
+        <li><a href="#">Finn AI</a></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Messenger</a></li>
+        <li><a href="#">Reports</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Solutions</h4>
+      <ul>
+        <li><a href="#">Customer support</a></li>
+        <li><a href="#">Customer engagement</a></li>
+        <li><a href="#">B2B</a></li>
+        <li><a href="#">B2C</a></li>
+        <li><a href="#">Financial services</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Customer stories</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Academy</a></li>
+        <li><a href="#">Status</a></li>
+        <li><a href="#">Developer Hub</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Newsroom</a></li>
+        <li><a href="#">Security &amp; Trust</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal-band">
+    <span>© 2026 Intercomm (inspired), Inc.</span>
+    <div class="right">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Cookies</a>
+      <a href="#">🌐 English (US)</a>
+    </div>
+  </div>
+</div></footer>
+
+<!-- Floating Fin launcher -->
+<button class="fin-launcher" aria-label="Open Finn AI">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="9"/>
+    <circle cx="9" cy="10" r="1" fill="currentColor"/>
+    <circle cx="15" cy="10" r="1" fill="currentColor"/>
+    <path d="M8 14c1.5 1.5 6.5 1.5 8 0"/>
+  </svg>
+</button>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.intercom.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sentri — Inspired Design</title>
+<meta name="description" content="A Sentri-inspired marketing page: violet-midnight canvas, lime keyword highlight chip, sticker mascots, stack-trace mockup, Rubik + Monaco. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#150f23;
+  --ink-deep:#1f1633;
+  --on-primary:#ffffff;
+  --accent-lime:#c2ef4e;
+  --accent-pink:#fa7faa;
+  --accent-violet:#6a5fc1;
+  --accent-violet-deep:#422082;
+  --accent-violet-mid:#79628c;
+
+  --canvas-dark:#1f1633;
+  --canvas-light:#ffffff;
+  --surface-night:#150f23;
+  --press-light:#f0f0f0;
+  --press-stronger:#efefef;
+  --hairline-violet:#362d59;
+  --hairline-cool:#cfcfdb;
+  --hairline-cloud:#e5e7eb;
+
+  --ink:#1f1633;
+  --ink-press:#1a1a1a;
+  --on-dark-muted:rgba(255,255,255,0.72);
+  --on-dark-faint:rgba(255,255,255,0.18);
+  --ring-focus:rgba(157,193,245,0.5);
+
+  --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:10px; --r-xl:12px; --r-xxl:18px; --r-full:9999px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Rubik",-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+  background:var(--canvas-dark);
+  color:var(--on-primary);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+.mono{font-family:"JetBrains Mono",Monaco,Menlo,monospace}
+::selection{background:var(--accent-lime);color:var(--ink-deep)}
+
+.wrap{max-width:1152px;margin:0 auto;padding:0 32px}
+
+/* —— Top nav (dark) —— */
+.nav-d{position:sticky;top:0;z-index:30;background:rgba(31,22,51,0.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline-violet);height:72px}
+.nav-d-inner{height:100%;display:flex;align-items:center;gap:32px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px;letter-spacing:-0.4px;color:var(--on-primary)}
+.brand .mark{width:32px;height:32px;border-radius:var(--r-md);background:var(--accent-lime);color:var(--ink-deep);font-weight:800;font-size:18px;display:inline-flex;align-items:center;justify-content:center}
+.nav-links{display:flex;gap:4px;margin-left:8px}
+.nav-links a{font-size:15px;font-weight:500;color:var(--on-dark-muted);padding:8px 14px;border-radius:var(--r-md)}
+.nav-links a:hover{color:var(--on-primary);background:var(--on-dark-faint)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-right .sign{font-size:15px;font-weight:500;color:var(--on-dark-muted);padding:8px 12px}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* —— Buttons —— */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:700;font-size:14px;line-height:1.14;padding:12px 18px;border-radius:var(--r-md);border:1px solid transparent;cursor:pointer;transition:all .15s ease;letter-spacing:0.2px;text-transform:uppercase}
+.btn-primary{background:var(--primary);color:var(--on-primary);box-shadow:0 0 0 0 rgba(21,15,35,0.5)}
+.btn-primary:hover{background:#0a0418}
+.btn-inverted{background:var(--on-primary);color:var(--ink-deep)}
+.btn-inverted:hover{background:var(--press-light)}
+.btn-ghost-dark{background:var(--on-dark-faint);color:var(--on-primary);border:1px solid var(--hairline-violet);border-radius:var(--r-xl)}
+.btn-ghost-dark:hover{background:rgba(255,255,255,0.28)}
+.btn-violet{background:var(--accent-violet-mid);color:var(--on-primary);border-radius:var(--r-xl);font-weight:500;padding:8px 16px;border:1px solid var(--accent-violet)}
+
+/* —— Hero (dark) —— */
+.hero{position:relative;padding:96px 0 120px;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,rgba(106,95,193,0.35) 0%,transparent 60%),var(--canvas-dark)}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.4) 0.8px,transparent 1.5px);background-size:36px 36px;opacity:0.18;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.6) 1px,transparent 1.5px);background-size:120px 120px;opacity:0.25;pointer-events:none}
+.hero-inner{position:relative;z-index:2;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--on-dark-faint);border:1px solid var(--hairline-violet);border-radius:var(--r-full);padding:6px 14px;font-size:13px;font-weight:500;color:var(--on-primary);margin-bottom:28px}
+.hero-eyebrow .pd{width:6px;height:6px;border-radius:var(--r-full);background:var(--accent-lime);box-shadow:0 0 0 3px rgba(194,239,78,0.18)}
+.hero h1{font-size:88px;font-weight:700;line-height:1.05;letter-spacing:-2px;color:var(--on-primary);margin:0 0 28px}
+.hero h1 .lime{background:var(--accent-lime);color:var(--ink-deep);padding:0 14px;border-radius:var(--r-xs);display:inline-block;line-height:1.05;font-weight:700;letter-spacing:-2px}
+.hero .sub{font-size:18px;line-height:2.0;color:var(--on-dark-muted);max-width:580px;margin:0 auto 40px;font-weight:400}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-actions .btn-inverted{box-shadow:0 0 0 6px rgba(255,255,255,0.05)}
+
+/* sticker mascot positions */
+.sticker{position:absolute;z-index:1;pointer-events:none}
+.sticker-1{top:130px;left:6%;transform:rotate(-8deg)}
+.sticker-2{top:50%;right:5%;transform:translateY(-50%) rotate(10deg)}
+.sticker-3{bottom:120px;left:14%;transform:rotate(6deg)}
+.sticker-4{bottom:80px;right:11%;transform:rotate(-12deg)}
+@media(max-width:860px){.sticker{display:none}}
+@media(max-width:760px){.hero h1{font-size:48px;letter-spacing:-1px}.hero h1 .lime{padding:0 8px}}
+
+/* —— Stack-trace mockup —— */
+.trace-wrap{position:relative;margin-top:64px;padding:24px;background:var(--ink-deep);border:1px solid var(--hairline-violet);border-radius:var(--r-xxl);box-shadow:0 30px 80px -10px rgba(0,0,0,0.5)}
+.trace-bar{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--hairline-violet);margin-bottom:16px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--on-dark-muted)}
+.trace-bar .lights span{display:inline-block;width:11px;height:11px;border-radius:var(--r-full);margin-right:6px}
+.trace-bar .lights .r{background:#ff5f5f}
+.trace-bar .lights .y{background:#ffce6b}
+.trace-bar .lights .g{background:#5fff9a}
+.trace-bar .path{margin-left:8px;color:var(--on-dark-muted)}
+.trace-bar .right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.trace-bar .pill{background:var(--accent-violet-deep);color:var(--on-primary);font-size:11px;font-family:"Rubik",sans-serif;font-weight:600;padding:3px 8px;border-radius:var(--r-xs);text-transform:uppercase;letter-spacing:0.3px}
+.trace-bar .pill.live{background:#173b2a;color:#5fff9a}
+.trace-bar .pill.live::before{content:"●";margin-right:5px}
+.trace-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:18px}
+@media(max-width:860px){.trace-grid{grid-template-columns:1fr}}
+.trace-panel{background:var(--surface-night);border:1px solid var(--hairline-violet);border-radius:var(--r-md);padding:16px 18px;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.6;color:var(--on-primary);text-align:left}
+.trace-h{display:flex;align-items:center;gap:8px;font-size:11px;font-family:"Rubik",sans-serif;font-weight:600;color:var(--on-dark-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+.trace-h .sev{background:#5b1820;color:#ff7a85;padding:2px 8px;border-radius:var(--r-xs);font-size:10px;letter-spacing:0.3px}
+.trace-line{padding:3px 0;color:var(--on-dark-muted)}
+.trace-line.hl{background:rgba(255,255,255,0.06);color:var(--on-primary);margin:0 -18px;padding:3px 18px;position:relative}
+.trace-line.hl::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent-lime)}
+.trace-line .ln{color:#615573;display:inline-block;width:24px;text-align:right;margin-right:14px}
+.trace-line .fn{color:var(--accent-lime)}
+.trace-line .mod{color:#d0b8ff}
+.trace-line .file{color:#88a8d8}
+.trace-line .err{color:#ff7a85}
+.trace-line .s{color:#9be2a8}
+
+.trace-meta{font-family:"Rubik",sans-serif;font-size:13px;color:var(--on-dark-muted);line-height:1.7}
+.trace-meta .row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--hairline-violet);font-size:13px}
+.trace-meta .row:last-child{border-bottom:none}
+.trace-meta .row .l{color:var(--on-dark-muted);font-family:"JetBrains Mono",monospace;font-size:12px}
+.trace-meta .row .v{color:var(--on-primary);font-weight:500}
+.trace-meta .row .v.lime{color:var(--accent-lime)}
+.trace-meta .row .v.pink{color:var(--accent-pink)}
+
+/* —— Section —— */
+.section{padding:96px 0;position:relative}
+.eyebrow{font-size:11px;font-weight:600;color:var(--accent-lime);text-transform:uppercase;letter-spacing:1px;margin:0 0 14px}
+.section h2{font-size:60px;font-weight:500;line-height:1.1;letter-spacing:-1.2px;color:var(--on-primary);margin:0 0 20px;max-width:780px}
+.section h2 .lime{background:var(--accent-lime);color:var(--ink-deep);padding:0 12px;border-radius:var(--r-xs);font-weight:500;display:inline-block}
+.section .lede{font-size:18px;line-height:2.0;color:var(--on-dark-muted);max-width:620px;margin:0 0 56px;font-weight:400}
+@media(max-width:760px){.section h2{font-size:40px;letter-spacing:-0.6px}}
+
+/* —— Feature dark cards —— */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative}
+@media(max-width:980px){.feat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.feat-grid{grid-template-columns:1fr}}
+.feat{background:var(--ink-deep);border:1px solid var(--hairline-violet);border-radius:var(--r-xxl);padding:32px;display:flex;flex-direction:column;gap:16px}
+.feat.spot{background:var(--accent-violet-deep);border-color:transparent}
+.feat .ic{width:40px;height:40px;border-radius:var(--r-md);background:var(--on-dark-faint);display:inline-flex;align-items:center;justify-content:center;color:var(--accent-lime)}
+.feat.spot .ic{background:rgba(255,255,255,0.16);color:var(--accent-lime)}
+.feat h3{font-size:24px;font-weight:500;color:var(--on-primary);margin:0;letter-spacing:-0.3px}
+.feat p{font-size:16px;line-height:1.6;color:var(--on-dark-muted);margin:0;font-weight:400}
+.feat .stat{margin-top:auto;display:flex;gap:6px;align-items:center;font-size:13px;color:var(--on-dark-muted);font-family:"JetBrains Mono",monospace}
+.feat .stat strong{color:var(--accent-lime);font-weight:700}
+
+/* —— Code install band —— */
+.install{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
+@media(max-width:860px){.install{grid-template-columns:1fr}}
+.install-text h3{font-size:36px;font-weight:500;line-height:1.15;color:var(--on-primary);margin:0 0 16px;letter-spacing:-0.6px}
+.install-text p{font-size:16px;line-height:1.7;color:var(--on-dark-muted);margin:0 0 20px;max-width:480px}
+.lang-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.lang-tabs .lt{background:var(--on-dark-faint);color:var(--on-dark-muted);font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;padding:6px 12px;border-radius:var(--r-xl);border:1px solid var(--hairline-violet);cursor:pointer}
+.lang-tabs .lt.on{background:var(--accent-violet-deep);color:var(--on-primary);border-color:var(--accent-violet)}
+.code-block{background:var(--surface-night);color:var(--on-primary);border-radius:var(--r-md);padding:20px 22px;font-family:"JetBrains Mono",monospace;font-size:14px;line-height:1.65;overflow:auto;border:1px solid var(--hairline-violet)}
+.code-block .k{color:#d0b8ff}
+.code-block .s{color:#9be2a8}
+.code-block .c{color:#615573}
+.code-block .n{color:#ffce6b}
+.code-block .f{color:var(--accent-lime)}
+
+/* —— Light band for pricing —— */
+.light-band{background:var(--canvas-light);color:var(--ink-deep);padding:96px 0;position:relative}
+.light-band .eyebrow{color:var(--accent-violet)}
+.light-band h2{font-size:30px;font-weight:500;color:var(--ink-deep);letter-spacing:0;line-height:1.2;max-width:780px}
+.light-band h2.big{font-size:60px;line-height:1.1;letter-spacing:-1.2px}
+.light-band .lede{font-size:16px;line-height:1.7;color:var(--accent-violet-mid);max-width:620px}
+
+.lime-divider{height:18px;width:100%;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 18' preserveAspectRatio='none'><path d='M0 10 Q 30 0 60 10 T 120 10 T 180 10 T 240 10 T 300 10 T 360 10 T 420 10 T 480 10 T 540 10 T 600 10 T 660 10 T 720 10 T 780 10 T 840 10 T 900 10 T 960 10 T 1020 10 T 1080 10 T 1140 10 T 1200 10' fill='none' stroke='%23c2ef4e' stroke-width='3' stroke-linecap='round'/></svg>");background-size:100% 100%;background-repeat:no-repeat}
+
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+@media(max-width:1100px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.price-grid{grid-template-columns:1fr}}
+.tier{background:var(--canvas-light);color:var(--ink-deep);border:1px solid var(--hairline-cloud);border-radius:var(--r-xl);padding:28px;display:flex;flex-direction:column;gap:14px}
+.tier.featured{background:var(--surface-night);color:var(--on-primary);border-color:transparent}
+.tier .nm{font-size:24px;font-weight:500;margin:0;letter-spacing:-0.3px}
+.tier .price{font-size:48px;font-weight:500;letter-spacing:-1.2px;color:inherit;line-height:1}
+.tier .price small{font-size:14px;font-weight:400;color:inherit;opacity:0.65;margin-left:6px;letter-spacing:0}
+.tier .desc{font-size:14px;line-height:1.6;color:inherit;opacity:0.72;margin:0;min-height:48px}
+.tier ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:14px;flex-grow:1}
+.tier li{display:flex;gap:8px;color:inherit;opacity:0.92;line-height:1.5}
+.tier li::before{content:"+";color:var(--accent-lime);font-weight:700;flex:0 0 auto;font-family:"JetBrains Mono",monospace}
+.tier.featured li::before{color:var(--accent-lime)}
+
+/* —— DS Section (light) —— */
+.ds{background:var(--canvas-light);color:var(--ink-deep);padding:96px 0;border-top:1px solid var(--hairline-cloud)}
+.ds-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.ds h2{font-size:36px;font-weight:500;letter-spacing:-0.5px;color:var(--ink-deep);margin:0 0 6px;line-height:1.1}
+.ds .sub{color:var(--accent-violet-mid);font-size:15px}
+.ds-hd a{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.2px;color:var(--ink-deep);border:1px solid var(--hairline-cool);background:var(--canvas-light);padding:10px 16px;border-radius:var(--r-md)}
+.ds-block{margin-top:56px}
+.ds-block h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--accent-violet-mid);margin:0 0 16px}
+.ds-block .desc{font-size:15px;color:var(--accent-violet-mid);margin:0 0 20px;max-width:560px;line-height:1.6}
+
+.color-cat{margin-top:18px}
+.color-cat-title{font-size:13px;font-weight:600;color:var(--ink-deep);margin:0 0 10px;text-transform:uppercase;letter-spacing:0.3px}
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+@media(max-width:980px){.swatches{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.swatches{grid-template-columns:repeat(2,1fr)}}
+.sw{background:var(--canvas-light);border:1px solid var(--hairline-cloud);border-radius:var(--r-md);overflow:hidden}
+.sw-chip{height:60px;border-bottom:1px solid var(--hairline-cloud)}
+.sw-meta{padding:8px 10px;font-size:12px;line-height:1.4}
+.sw-name{font-weight:600;color:var(--ink-deep)}
+.sw-val{font-family:"JetBrains Mono",monospace;color:var(--accent-violet-mid);font-size:11px;margin-top:2px}
+
+.typo{background:var(--canvas-light);border:1px solid var(--hairline-cloud);border-radius:var(--r-md);overflow:hidden}
+.typo-row{display:grid;grid-template-columns:170px 240px 1fr;gap:24px;padding:16px 20px;border-top:1px solid var(--hairline-cloud);align-items:center}
+.typo-row:first-child{border-top:none}
+.typo-row .tok{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-deep);font-weight:600}
+.typo-row .spec{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent-violet-mid)}
+.typo-row .smp{color:var(--ink-deep)}
+@media(max-width:760px){.typo-row{grid-template-columns:1fr}}
+
+.radii{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+@media(max-width:860px){.radii{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:560px){.radii{grid-template-columns:repeat(2,1fr)}}
+.rad{background:var(--canvas-light);border:1px solid var(--hairline-cloud);padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;border-radius:var(--r-md)}
+.rad-vis{width:56px;height:56px;background:var(--ink-deep);border:1px solid var(--hairline-violet)}
+.rad .nm{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-deep);font-weight:600}
+.rad .vl{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent-violet-mid)}
+
+.cmp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:860px){.cmp-grid{grid-template-columns:1fr}}
+.cmp{background:var(--canvas-light);border:1px solid var(--hairline-cloud);border-radius:var(--r-md);padding:24px}
+.cmp h4{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--accent-violet-mid);margin:0 0 16px}
+.cmp .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.cmp .row:last-child{margin-bottom:0}
+.cmp .label{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent-violet-mid);min-width:130px}
+.input{background:var(--canvas-light);border:1px solid var(--hairline-cool);border-radius:var(--r-sm);height:40px;padding:8px 12px;font-size:14px;font-family:inherit;color:var(--ink-deep);width:240px}
+.input.focused{border:1px solid var(--ink-deep);box-shadow:inset 0 2px 10px rgba(0,0,0,0.15)}
+.pill-dark{background:var(--surface-night);color:var(--on-primary);font-size:14px;padding:4px 8px;border-radius:var(--r-xs);font-family:"JetBrains Mono",monospace}
+.lime-chip{background:var(--accent-lime);color:var(--ink-deep);padding:0 12px;border-radius:var(--r-xs);font-weight:700;display:inline-block;letter-spacing:-0.3px}
+.violet-token{background:var(--accent-violet-mid);color:var(--on-primary);border-radius:var(--r-xl);font-weight:500;padding:6px 14px;font-size:13px;text-transform:uppercase;letter-spacing:0.2px;border:1px solid var(--accent-violet)}
+
+/* —— Footer (light) —— */
+.foot{background:var(--canvas-light);color:var(--ink-deep);padding:48px 32px 32px;position:relative}
+.foot::before{content:"";display:block;height:18px;margin-bottom:32px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 18' preserveAspectRatio='none'><path d='M0 10 Q 30 0 60 10 T 120 10 T 180 10 T 240 10 T 300 10 T 360 10 T 420 10 T 480 10 T 540 10 T 600 10 T 660 10 T 720 10 T 780 10 T 840 10 T 900 10 T 960 10 T 1020 10 T 1080 10 T 1140 10 T 1200 10' fill='none' stroke='%23c2ef4e' stroke-width='3' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-size:100% 100%}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px;max-width:1152px;margin:0 auto}
+@media(max-width:980px){.foot-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:640px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-col h5{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--ink-deep);margin:0 0 12px}
+.foot-col a{display:block;font-size:14px;color:var(--accent-violet-mid);padding:5px 0}
+.foot-col a:hover{color:var(--ink-deep)}
+.foot-brand p{font-size:14px;color:var(--accent-violet-mid);max-width:280px;margin:12px 0 0;line-height:1.6}
+.foot-line{margin-top:48px;padding-top:20px;border-top:1px solid var(--hairline-cloud);max-width:1152px;margin-left:auto;margin-right:auto;display:flex;justify-content:space-between;color:var(--accent-violet-mid);font-size:13px;flex-wrap:wrap;gap:12px}
+
+/* Floating */
+.float-md{position:fixed;right:18px;bottom:18px;z-index:50;background:var(--primary);color:var(--on-primary);font-size:13px;font-weight:700;letter-spacing:0.2px;padding:10px 16px;border-radius:var(--r-md);box-shadow:0 6px 18px rgba(0,0,0,0.4);text-transform:uppercase;border:1px solid var(--accent-violet)}
+.float-md:hover{background:#000}
+</style>
+</head>
+<body>
+
+<!-- Top nav (dark) -->
+<header class="nav-d">
+  <div class="wrap nav-d-inner">
+    <a class="brand" href="#">
+      <span class="mark">S</span>
+      Sentri
+    </a>
+    <nav class="nav-links">
+      <a href="#">Product</a>
+      <a href="#">Pricing</a>
+      <a href="#">Customers</a>
+      <a href="#">Docs</a>
+      <a href="#">Blog</a>
+    </nav>
+    <div class="nav-right">
+      <a class="sign" href="#">Sign in</a>
+      <a class="btn btn-ghost-dark" style="font-size:13px;padding:8px 14px" href="#">Get Demo</a>
+      <a class="btn btn-inverted" href="#">Get Started</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <!-- Sticker mascots -->
+  <div class="sticker sticker-1">
+    <svg width="92" height="92" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="34" fill="#c2ef4e" stroke="#1f1633" stroke-width="3"/>
+      <circle cx="40" cy="44" r="4.5" fill="#1f1633"/>
+      <circle cx="60" cy="44" r="4.5" fill="#1f1633"/>
+      <path d="M38 58 q12 10 24 0" stroke="#1f1633" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M14 26 l8 8 M86 26 l-8 8" stroke="#1f1633" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="sticker sticker-2">
+    <svg width="84" height="84" viewBox="0 0 100 100" fill="none">
+      <path d="M30 80 L50 18 L70 80 Z" fill="#fa7faa" stroke="#1f1633" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="50" cy="50" r="4" fill="#1f1633"/>
+      <path d="M45 70 q5 5 10 0" stroke="#1f1633" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+  <div class="sticker sticker-3">
+    <svg width="84" height="84" viewBox="0 0 100 100" fill="none">
+      <rect x="20" y="32" width="60" height="44" rx="6" fill="#1f1633" stroke="#c2ef4e" stroke-width="3"/>
+      <circle cx="35" cy="48" r="3" fill="#c2ef4e"/>
+      <circle cx="65" cy="48" r="3" fill="#c2ef4e"/>
+      <path d="M35 62 h30" stroke="#fa7faa" stroke-width="3" stroke-linecap="round"/>
+      <path d="M30 32 v-8 M70 32 v-8" stroke="#c2ef4e" stroke-width="3"/>
+    </svg>
+  </div>
+  <div class="sticker sticker-4">
+    <svg width="92" height="92" viewBox="0 0 100 100" fill="none">
+      <ellipse cx="50" cy="78" rx="32" ry="8" fill="#1f1633"/>
+      <path d="M30 78 L50 22 L70 78 Z" fill="#c2ef4e" stroke="#1f1633" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M40 60 L50 35 L60 60 Z" fill="#fa7faa" stroke="#1f1633" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <div class="wrap hero-inner">
+    <span class="hero-eyebrow"><span class="pd"></span> Built for code in production · Observability 3.0</span>
+    <h1>The console can <span class="lime">wait</span>.<br>The stack <span class="lime">trace</span> can't.</h1>
+    <p class="sub">Application monitoring built for developers who actually read the stack trace. Errors, performance, profiling, replays — one platform, one query language, one bill.</p>
+    <div class="hero-actions">
+      <a class="btn btn-inverted" href="#">Get Started</a>
+      <a class="btn btn-ghost-dark" href="#">Get a Demo</a>
+    </div>
+
+    <!-- Stack-trace mockup -->
+    <div class="trace-wrap">
+      <div class="trace-bar">
+        <div class="lights"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+        <span class="path">sentri.app / acme-web / issues / SENT-2814</span>
+        <div class="right">
+          <span class="pill">prod</span>
+          <span class="pill live">live</span>
+        </div>
+      </div>
+      <div class="trace-grid">
+        <div class="trace-panel">
+          <div class="trace-h">
+            <span class="sev">ERROR</span>
+            <span>TypeError · checkout.tsx</span>
+          </div>
+          <div class="trace-line"><span class="ln">12</span><span class="mod">import</span> { computeTotal } <span class="mod">from</span> <span class="s">"@/lib/cart"</span></div>
+          <div class="trace-line"><span class="ln">13</span></div>
+          <div class="trace-line"><span class="ln">14</span><span class="mod">export</span> <span class="mod">async function</span> <span class="fn">checkout</span>(cart) {</div>
+          <div class="trace-line"><span class="ln">15</span>  <span class="mod">const</span> total = <span class="fn">computeTotal</span>(cart.items)</div>
+          <div class="trace-line hl"><span class="ln">16</span>  <span class="err">→ Cannot read properties of undefined (reading 'price')</span></div>
+          <div class="trace-line"><span class="ln">17</span>  <span class="mod">return</span> await stripe.<span class="fn">charge</span>(total)</div>
+          <div class="trace-line"><span class="ln">18</span>}</div>
+          <div class="trace-line" style="margin-top:10px;color:var(--accent-pink)">at <span class="fn">computeTotal</span> (<span class="file">lib/cart.ts:42</span>)</div>
+          <div class="trace-line" style="color:var(--accent-pink)">at <span class="fn">checkout</span> (<span class="file">checkout.tsx:16</span>)</div>
+          <div class="trace-line" style="color:var(--accent-pink)">at <span class="fn">POST</span> (<span class="file">route.ts:9</span>)</div>
+        </div>
+        <div class="trace-panel" style="font-family:Rubik">
+          <div class="trace-h"><span style="background:#173b2a;color:#5fff9a;padding:2px 8px;border-radius:var(--r-xs);font-size:10px;letter-spacing:0.3px">DETAIL</span><span>Issue context</span></div>
+          <div class="trace-meta">
+            <div class="row"><span class="l">events</span><span class="v lime">1,284</span></div>
+            <div class="row"><span class="l">users</span><span class="v">412</span></div>
+            <div class="row"><span class="l">first seen</span><span class="v">2h ago</span></div>
+            <div class="row"><span class="l">last seen</span><span class="v lime">12s ago</span></div>
+            <div class="row"><span class="l">environment</span><span class="v">production</span></div>
+            <div class="row"><span class="l">release</span><span class="v" style="font-family:'JetBrains Mono',monospace;font-size:12px">web@v2026.5.20</span></div>
+            <div class="row"><span class="l">browser</span><span class="v">Chrome 134</span></div>
+            <div class="row"><span class="l">node</span><span class="v">v22.4.0</span></div>
+            <div class="row"><span class="l">suspect commit</span><span class="v pink mono" style="font-family:'JetBrains Mono',monospace;font-size:12px">a3f29c · river@</span></div>
+          </div>
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+            <span class="violet-token">+ assign</span>
+            <span class="violet-token">+ resolve</span>
+            <span class="violet-token">+ replay</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature dark cards -->
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">Errors. Performance. Profiling.</span>
+    <h2>Everything you need to debug <span class="lime">production</span>.</h2>
+    <p class="lede">Stop guessing. Sentri ships errors, performance, session replay, distributed tracing, code profiling, and AI root-cause analysis under one unified data model — query it all in one place.</p>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 17h.01"/></svg></div>
+        <h3>Error monitoring</h3>
+        <p>Every uncaught exception, stack-traced and grouped. Suspect commit, breadcrumbs, and the user who hit it — in one view.</p>
+        <div class="stat"><span>events/day</span><strong>· 18.4M</strong></div>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l4-7 5 4 4-6 5 9"/><path d="M3 18h18"/></svg></div>
+        <h3>Performance</h3>
+        <p>Distributed tracing across services, browsers, mobile. Find the slow span — even when it's three jumps deep.</p>
+        <div class="stat"><span>p95 trace</span><strong>· 240ms</strong></div>
+      </div>
+      <div class="feat spot">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 10l4 2-4 2z"/></svg></div>
+        <h3>Session replay</h3>
+        <p>Watch the exact pixels your user saw when the error fired. Rage clicks, dead clicks, console errors — captured.</p>
+        <div class="stat"><span>replays/day</span><strong>· 2.1M</strong></div>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 8h8M8 12h5"/></svg></div>
+        <h3>Code profiling</h3>
+        <p>CPU and memory profiles, line-by-line. Find the hot function before it costs you a server.</p>
+        <div class="stat"><span>fns sampled</span><strong>· 940M/wk</strong></div>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M5 9l7-7 7 7M5 15l7 7 7-7"/></svg></div>
+        <h3>Releases + suspect commit</h3>
+        <p>Tie every error to a release, every release to a commit, every commit to a developer. Blame, kindly.</p>
+        <div class="stat"><span>commits matched</span><strong>· 99.2%</strong></div>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M5.6 18.4l2.1-2.1M12 21v-3M18.4 18.4l-2.1-2.1M21 12h-3M18.4 5.6l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3>Sentri AI · suspects</h3>
+        <p>The AI reads your traces, replays, commits, and tells you the root cause in plain English — usually within 30 seconds.</p>
+        <div class="stat"><span>root cause</span><strong>· 73% auto</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Install band -->
+<section class="section">
+  <div class="wrap">
+    <div class="install">
+      <div class="install-text">
+        <span class="eyebrow">Three lines</span>
+        <h3>Install. Wrap. <span style="background:var(--accent-lime);color:var(--ink-deep);padding:0 8px;border-radius:var(--r-xs)">Ship</span>.</h3>
+        <p>Install the SDK for your runtime, wrap your app, deploy. Sentri starts capturing the moment your first error fires — usually within seconds.</p>
+        <div class="lang-tabs">
+          <span class="lt on">JavaScript</span>
+          <span class="lt">Python</span>
+          <span class="lt">Go</span>
+          <span class="lt">Ruby</span>
+          <span class="lt">Rust</span>
+          <span class="lt">PHP</span>
+          <span class="lt">iOS</span>
+          <span class="lt">Android</span>
+        </div>
+      </div>
+      <pre class="code-block"><span class="c"># 1 — install</span>
+<span class="f">$</span> npm install <span class="s">@sentri/nextjs</span>
+
+<span class="c"># 2 — wrap your app (instrumentation.ts)</span>
+<span class="k">import</span> * <span class="k">as</span> Sentri <span class="k">from</span> <span class="s">"@sentri/nextjs"</span>
+
+Sentri.<span class="f">init</span>({
+  dsn: <span class="s">"https://abc@o0.ingest.sentri.io/0"</span>,
+  tracesSampleRate: <span class="n">1.0</span>,
+  replaysSessionSampleRate: <span class="n">0.1</span>,
+  release: <span class="s">"web@v2026.5.20"</span>,
+  environment: <span class="s">"production"</span>
+})
+
+<span class="c"># 3 — ship.</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- Lime divider into light -->
+<div style="background:var(--canvas-dark);padding:48px 0 24px"><div class="wrap"><div class="lime-divider"></div></div></div>
+
+<!-- Pricing (light band) -->
+<section class="light-band">
+  <div class="wrap">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="big">Pricing plans for dev teams of <span style="background:var(--accent-lime);color:var(--ink-deep);padding:0 12px;border-radius:var(--r-xs)">all sizes</span>.</h2>
+    <p class="lede" style="margin-top:16px">Pay by volume. No per-seat tax. No data-residency tax. The free tier is genuinely free, and the next one is the one you actually want.</p>
+
+    <div class="price-grid">
+      <div class="tier">
+        <h3 class="nm">Developer</h3>
+        <div class="price">$0<small>/ mo</small></div>
+        <p class="desc">For solo devs and side projects. No card required.</p>
+        <ul>
+          <li>5k errors / mo</li>
+          <li>10k performance events</li>
+          <li>50 replays</li>
+          <li>1 user</li>
+          <li>Community Discord</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Start Free</a>
+      </div>
+      <div class="tier">
+        <h3 class="nm">Team</h3>
+        <div class="price">$26<small>/ mo</small></div>
+        <p class="desc">For startups shipping fast. The usual suspects, included.</p>
+        <ul>
+          <li>50k errors / mo</li>
+          <li>100k performance events</li>
+          <li>500 replays / mo</li>
+          <li>Unlimited users</li>
+          <li>Email + chat support</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Start Trial</a>
+      </div>
+      <div class="tier featured">
+        <h3 class="nm">Business</h3>
+        <div class="price">$80<small>/ mo</small></div>
+        <p class="desc">For scaling teams. Profiling, AI suspects, suspect commit.</p>
+        <ul>
+          <li>250k errors / mo</li>
+          <li>1M performance events</li>
+          <li>10k replays + profiling</li>
+          <li>Sentri AI · root cause</li>
+          <li>Priority support</li>
+          <li>SAML SSO</li>
+        </ul>
+        <a class="btn btn-inverted" href="#">Start Trial</a>
+      </div>
+      <div class="tier">
+        <h3 class="nm">Enterprise</h3>
+        <div class="price">Talk<small>· custom</small></div>
+        <p class="desc">For regulated industries. SLA, BAA, dedicated CSM.</p>
+        <ul>
+          <li>Unlimited volume</li>
+          <li>SOC 2 + HIPAA + BAA</li>
+          <li>SLA · 99.95% uptime</li>
+          <li>Dedicated CSM</li>
+          <li>Self-hosted option</li>
+          <li>Audit log + retention</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Talk to Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DS Reference (light) -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-hd">
+      <div>
+        <h2>Design system reference</h2>
+        <div class="sub">Tokens, type ladder, radius, components — pulled from the captured DESIGN.md.</div>
+      </div>
+      <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.sentry.html" target="_blank" rel="noopener">View source DESIGN.md ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3>Color</h3>
+      <p class="desc">Dual-polarity. Violet-midnight + lime keyword chip for marketing; pure white for transactional. Lime is a typographic device, never a button.</p>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Brand & accent</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#150f23"></div><div class="sw-meta"><div class="sw-name">Primary</div><div class="sw-val">#150f23</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#1f1633"></div><div class="sw-meta"><div class="sw-name">Ink deep</div><div class="sw-val">#1f1633</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#c2ef4e"></div><div class="sw-meta"><div class="sw-name">Lime</div><div class="sw-val">#c2ef4e</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#fa7faa"></div><div class="sw-meta"><div class="sw-name">Pink</div><div class="sw-val">#fa7faa</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#6a5fc1"></div><div class="sw-meta"><div class="sw-name">Violet</div><div class="sw-val">#6a5fc1</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#422082"></div><div class="sw-meta"><div class="sw-name">Violet deep</div><div class="sw-val">#422082</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Surface</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#1f1633"></div><div class="sw-meta"><div class="sw-name">Canvas dark</div><div class="sw-val">#1f1633</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#150f23"></div><div class="sw-meta"><div class="sw-name">Night</div><div class="sw-val">#150f23</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#ffffff;border-right:1px solid var(--hairline-cloud)"></div><div class="sw-meta"><div class="sw-name">Canvas light</div><div class="sw-val">#ffffff</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#362d59"></div><div class="sw-meta"><div class="sw-name">Hairline violet</div><div class="sw-val">#362d59</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#cfcfdb"></div><div class="sw-meta"><div class="sw-name">Hairline cool</div><div class="sw-val">#cfcfdb</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#e5e7eb"></div><div class="sw-meta"><div class="sw-name">Hairline cloud</div><div class="sw-val">#e5e7eb</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Text & state</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#ffffff;border-right:1px solid var(--hairline-cloud)"></div><div class="sw-meta"><div class="sw-name">On primary</div><div class="sw-val">#ffffff</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#1f1633"></div><div class="sw-meta"><div class="sw-name">Ink</div><div class="sw-val">#1f1633</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:rgba(255,255,255,0.72)"></div><div class="sw-meta"><div class="sw-name">On-dark 72%</div><div class="sw-val">rgba(255,255,255,.72)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:rgba(255,255,255,0.18)"></div><div class="sw-meta"><div class="sw-name">On-dark 18%</div><div class="sw-val">rgba(255,255,255,.18)</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#79628c"></div><div class="sw-meta"><div class="sw-name">Violet mid</div><div class="sw-val">#79628c</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#f0f0f0"></div><div class="sw-meta"><div class="sw-name">Press light</div><div class="sw-val">#f0f0f0</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <p class="desc">Chunky display sans for hero (Rubik 700 stand-in), Rubik for UI, Monaco for code. Buttons + eyebrows are always uppercase with 0.2px tracking.</p>
+      <div class="typo">
+        <div class="typo-row"><div class="tok">display-hero</div><div class="spec">88 / 700 / 1.2</div><div class="smp" style="font-size:48px;font-weight:700;letter-spacing:-1px;line-height:1.1;color:var(--ink-deep)">The stack <span class="lime-chip">trace</span></div></div>
+        <div class="typo-row"><div class="tok">display-large</div><div class="spec">60 / 500 / 1.1</div><div class="smp" style="font-size:38px;font-weight:500;letter-spacing:-0.6px;color:var(--ink-deep)">Debug production</div></div>
+        <div class="typo-row"><div class="tok">heading-xl</div><div class="spec">30 / 500 / 1.2</div><div class="smp" style="font-size:30px;font-weight:500;color:var(--ink-deep)">Pricing plans</div></div>
+        <div class="typo-row"><div class="tok">heading-md</div><div class="spec">24 / 500 / 1.25</div><div class="smp" style="font-size:24px;font-weight:500;color:var(--ink-deep)">Card title</div></div>
+        <div class="typo-row"><div class="tok">body-lg</div><div class="spec">16 / 400 / 2.0</div><div class="smp" style="font-size:16px;line-height:2.0;color:var(--accent-violet-mid)">Marketing prose with airy 2.0 leading.</div></div>
+        <div class="typo-row"><div class="tok">body-md</div><div class="spec">16 / 500 / 1.5</div><div class="smp" style="font-size:16px;font-weight:500;color:var(--ink-deep)">Default UI body, table cells, form labels.</div></div>
+        <div class="typo-row"><div class="tok">button-cap</div><div class="spec">14 / 700 / +0.2 · UPPER</div><div class="smp" style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.2px;color:var(--ink-deep)">GET STARTED</div></div>
+        <div class="typo-row"><div class="tok">eyebrow</div><div class="spec">15 / 500 / 1.4</div><div class="smp" style="font-size:15px;font-weight:500;color:var(--accent-violet-mid);text-transform:uppercase;letter-spacing:0.2px">Errors. Performance. Profiling.</div></div>
+        <div class="typo-row"><div class="tok">code</div><div class="spec">16 / 400 · Monaco</div><div class="smp mono" style="font-size:16px;color:var(--ink-deep)">Sentri.init({ dsn })</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <p class="desc">Buttons + code blocks at 8px, pricing cards at 12px, illustration containers at 18px. Pill-radius for avatars.</p>
+      <div class="radii">
+        <div class="rad"><div class="rad-vis" style="border-radius:4px"></div><div class="nm">xs</div><div class="vl">4px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:6px"></div><div class="nm">sm</div><div class="vl">6px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:8px"></div><div class="nm">md</div><div class="vl">8px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:10px"></div><div class="nm">lg</div><div class="vl">10px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:12px"></div><div class="nm">xl</div><div class="vl">12px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:18px"></div><div class="nm">xxl</div><div class="vl">18px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:9999px"></div><div class="nm">full</div><div class="vl">9999px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Components</h3>
+      <p class="desc">Single-polarity CTAs (primary on light, inverted on dark), uppercase button caps, lime keyword chip = typographic device, never a button.</p>
+      <div class="cmp-grid">
+        <div class="cmp">
+          <h4>Buttons</h4>
+          <div class="row"><span class="label">primary</span><a class="btn btn-primary">GET STARTED</a></div>
+          <div class="row"><span class="label">inverted</span><div style="background:var(--ink-deep);padding:10px;border-radius:var(--r-md)"><a class="btn btn-inverted">GET STARTED</a></div></div>
+          <div class="row"><span class="label">ghost-on-dark</span><div style="background:var(--ink-deep);padding:10px;border-radius:var(--r-md)"><a class="btn btn-ghost-dark">GET DEMO</a></div></div>
+          <div class="row"><span class="label">violet-token</span><a class="btn btn-violet">+ ASSIGN</a></div>
+        </div>
+        <div class="cmp">
+          <h4>Pills & chips</h4>
+          <div class="row"><span class="label">chip-lime-keyword</span><span class="lime-chip" style="font-size:18px;font-weight:700;padding:2px 12px;letter-spacing:-0.3px">trace</span></div>
+          <div class="row"><span class="label">pill-neutral-dark</span><div style="background:var(--ink-deep);padding:6px;border-radius:var(--r-md)"><span class="pill-dark">prod</span> <span class="pill-dark" style="background:#173b2a;color:#5fff9a">● live</span></div></div>
+          <div class="row"><span class="label">violet-token</span><span class="violet-token">+ RESOLVE</span></div>
+        </div>
+        <div class="cmp">
+          <h4>Inputs</h4>
+          <div class="row"><span class="label">text-input</span><input class="input" placeholder="you@company.com"/></div>
+          <div class="row"><span class="label">focused</span><input class="input focused" value="you@company.com"/></div>
+          <div class="row"><span class="label">select-violet</span><div style="background:var(--accent-violet-deep);color:var(--on-primary);padding:8px 16px;border-radius:var(--r-md);font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px">United States ▾</div></div>
+        </div>
+        <div class="cmp">
+          <h4>Code block</h4>
+          <pre class="code-block" style="font-size:13px;padding:14px"><span class="c"># install</span>
+<span class="f">$</span> npm i <span class="s">@sentri/nextjs</span>
+Sentri.<span class="f">init</span>({ dsn })</pre>
+        </div>
+        <div class="cmp" style="grid-column:span 2">
+          <h4>Mascot stickers (decorative — never inside cards)</h4>
+          <div class="row" style="gap:24px;justify-content:center;padding:8px 0">
+            <svg width="60" height="60" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="#c2ef4e" stroke="#1f1633" stroke-width="3"/><circle cx="40" cy="44" r="4.5" fill="#1f1633"/><circle cx="60" cy="44" r="4.5" fill="#1f1633"/><path d="M38 58 q12 10 24 0" stroke="#1f1633" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+            <svg width="60" height="60" viewBox="0 0 100 100"><path d="M30 80 L50 18 L70 80 Z" fill="#fa7faa" stroke="#1f1633" stroke-width="3" stroke-linejoin="round"/></svg>
+            <svg width="60" height="60" viewBox="0 0 100 100"><rect x="20" y="32" width="60" height="44" rx="6" fill="#1f1633" stroke="#c2ef4e" stroke-width="3"/><circle cx="35" cy="48" r="3" fill="#c2ef4e"/><circle cx="65" cy="48" r="3" fill="#c2ef4e"/></svg>
+            <svg width="60" height="60" viewBox="0 0 100 100"><path d="M30 78 L50 22 L70 78 Z" fill="#c2ef4e" stroke="#1f1633" stroke-width="3" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="foot">
+  <div class="foot-grid">
+    <div class="foot-col foot-brand">
+      <a class="brand" href="#" style="color:var(--ink-deep)"><span class="mark">S</span> Sentri</a>
+      <p>Application monitoring built for developers who actually read the stack trace.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <a href="#">Error monitoring</a><a href="#">Performance</a><a href="#">Session replay</a><a href="#">Profiling</a><a href="#">Sentri AI</a>
+    </div>
+    <div class="foot-col">
+      <h5>Resources</h5>
+      <a href="#">Documentation</a><a href="#">SDKs</a><a href="#">API</a><a href="#">Changelog</a>
+    </div>
+    <div class="foot-col">
+      <h5>Company</h5>
+      <a href="#">About</a><a href="#">Careers</a><a href="#">Customers</a><a href="#">Press</a>
+    </div>
+    <div class="foot-col">
+      <h5>Legal</h5>
+      <a href="#">Privacy</a><a href="#">Terms</a><a href="#">DPA</a><a href="#">Security</a>
+    </div>
+  </div>
+  <div class="foot-line">
+    <div>© 2026 Sentri Inc. · Built by developers, for the stack trace.</div>
+    <div>SOC 2 Type II · HIPAA · ● status: operational</div>
+  </div>
+</footer>
+
+<a class="float-md" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.sentry.html" target="_blank" rel="noopener">VIEW DESIGN.MD ↗</a>
+
+</body>
+</html>

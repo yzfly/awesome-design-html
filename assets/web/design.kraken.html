@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kraken — Inspired Design</title>
+<meta name="description" content="A Kraken-inspired crypto exchange marketing page: white surface, Kraken Purple primary, 12px-radius buttons, trading dashboard panels, tabular mono prices and serious security signals. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --purple:        #7132f5;
+  --purple-dark:   #5741d8;
+  --purple-deep:   #5b1ecf;
+  --purple-subtle: rgba(133, 91, 251, 0.16);
+  --purple-faint:  rgba(133, 91, 251, 0.06);
+
+  /* Ink + neutral */
+  --ink:        #101114;
+  --ink-soft:   #1a1c22;
+  --cool-gray:  #686b82;
+  --silver:     #9497a9;
+  --border:     #dedee5;
+  --border-soft: rgba(104, 107, 130, 0.16);
+  --gray-fill:  rgba(148, 151, 169, 0.08);
+  --white:      #ffffff;
+  --canvas:     #ffffff;
+  --canvas-alt: #fafafb;
+
+  /* Semantic — trading */
+  --green:      #149e61;
+  --green-bg:   rgba(20, 158, 97, 0.16);
+  --green-dark: #026b3f;
+  --red:        #d4393f;
+  --red-bg:     rgba(212, 57, 63, 0.12);
+
+  /* Radius */
+  --r-3:  3px;
+  --r-6:  6px;
+  --r-8:  8px;
+  --r-10: 10px;
+  --r-12: 12px;
+  --r-16: 16px;
+  --r-pill: 9999px;
+  --r-circle: 50%;
+
+  /* Shadow */
+  --sh-subtle: rgba(0, 0, 0, 0.03) 0px 4px 24px;
+  --sh-micro:  rgba(16, 24, 40, 0.04) 0px 1px 4px;
+  --sh-lift:   rgba(16, 24, 40, 0.08) 0px 16px 40px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "IBM Plex Sans", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.38;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+.mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 500; font-feature-settings: "tnum"; }
+.up   { color: var(--green); }
+.down { color: var(--red); }
+
+/* — Display ladder — */
+.display { font-family: "IBM Plex Sans", sans-serif; font-weight: 700; }
+.h-hero    { font-size: 56px; font-weight: 700; line-height: 1.05; letter-spacing: -1.4px; margin: 0; }
+.h-section { font-size: 40px; font-weight: 700; line-height: 1.15; letter-spacing: -0.7px; margin: 0; }
+.h-sub     { font-size: 28px; font-weight: 700; line-height: 1.25; letter-spacing: -0.5px; margin: 0; }
+.h-feature { font-size: 22px; font-weight: 600; line-height: 1.2; margin: 0; }
+.body-p    { font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--cool-gray); }
+.body-s    { font-size: 14px; font-weight: 400; line-height: 1.43; color: var(--cool-gray); }
+.caption   { font-size: 12px; font-weight: 500; color: var(--silver); }
+.micro     { font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--silver); }
+
+/* — Layout — */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; }
+.section-tight { padding: 64px 0; }
+
+/* — Nav — */
+.nav {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-row {
+  display: flex; align-items: center; height: 72px; gap: 32px;
+  max-width: 1280px; margin: 0 auto; padding: 0 24px;
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 22px; letter-spacing: -0.5px; }
+.brand-logo {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff;
+}
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); }
+.nav-links a:hover { color: var(--purple); }
+.nav-right { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+
+/* — Buttons — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit; font-size: 16px; font-weight: 600; line-height: 1.2;
+  padding: 13px 20px; border-radius: var(--r-12);
+  border: 1px solid transparent; cursor: pointer; transition: background .15s ease;
+}
+.btn-sm { padding: 9px 14px; font-size: 14px; font-weight: 500; }
+.btn-primary { background: var(--purple); color: #fff; }
+.btn-primary:hover { background: var(--purple-deep); }
+.btn-outline { background: #fff; color: var(--purple-dark); border-color: var(--purple-dark); }
+.btn-outline:hover { background: var(--purple-faint); }
+.btn-subtle { background: var(--purple-subtle); color: var(--purple); }
+.btn-subtle:hover { background: rgba(133, 91, 251, 0.24); }
+.btn-white { background: #fff; color: var(--ink); border-radius: var(--r-10); box-shadow: var(--sh-subtle); }
+.btn-secondary { background: var(--gray-fill); color: var(--ink); }
+.btn-secondary:hover { background: rgba(148, 151, 169, 0.16); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: var(--ink-soft); }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; font-size: 12px; font-weight: 600;
+  border-radius: var(--r-6);
+}
+.badge-success { background: var(--green-bg); color: var(--green-dark); }
+.badge-neutral { background: rgba(104, 107, 130, 0.12); color: #484b5e; border-radius: var(--r-8); }
+.badge-purple  { background: var(--purple-subtle); color: var(--purple); }
+
+/* — Hero — */
+.hero { padding: 80px 0 64px; position: relative; overflow: hidden; }
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(113, 50, 245, 0.10), transparent 50%),
+    radial-gradient(circle at 20% 90%, rgba(91, 30, 207, 0.08), transparent 55%);
+}
+.hero-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px 6px 8px; background: var(--purple-subtle);
+  color: var(--purple); border-radius: var(--r-pill);
+  font-size: 13px; font-weight: 600; margin-bottom: 24px;
+}
+.hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); }
+.hero-grid h1 { margin: 0 0 20px; font-size: 60px; line-height: 1.05; letter-spacing: -1.5px; }
+.hero-grid .lede { font-size: 18px; color: var(--cool-gray); margin: 0 0 32px; max-width: 520px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.hero-meta {
+  display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+  color: var(--cool-gray); font-size: 13px;
+}
+.hero-meta .ck { display: inline-flex; align-items: center; gap: 6px; }
+.hero-meta .ck svg { color: var(--green); }
+
+/* Trading panel mock (right of hero) */
+.panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-16);
+  box-shadow: var(--sh-lift);
+  overflow: hidden;
+}
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+}
+.panel-head .tabs { display: flex; gap: 4px; }
+.panel-head .tab { font-size: 13px; padding: 6px 12px; border-radius: var(--r-8); color: var(--cool-gray); font-weight: 500; cursor: pointer; }
+.panel-head .tab.active { background: var(--purple-subtle); color: var(--purple); }
+.panel-body { padding: 18px 20px; }
+.market-row {
+  display: grid; grid-template-columns: 1.8fr 1fr 1fr 0.7fr; gap: 12px;
+  align-items: center; padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+.market-row:first-of-type { border-top: 0; }
+.market-pair { display: flex; align-items: center; gap: 12px; }
+.coin-dot { width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 12px; flex: none; }
+.coin-btc  { background: linear-gradient(135deg, #f7931a, #e07b08); }
+.coin-eth  { background: linear-gradient(135deg, #627eea, #3c4fa4); }
+.coin-sol  { background: linear-gradient(135deg, #9945ff, #14f195); }
+.coin-usdc { background: linear-gradient(135deg, #2775ca, #1c5ba1); }
+.market-pair .sym { font-weight: 600; font-size: 14px; }
+.market-pair .name { font-size: 12px; color: var(--silver); }
+.market-row .price { text-align: right; font-size: 14px; font-weight: 600; }
+.market-row .chg { text-align: right; font-size: 13px; font-weight: 600; }
+.panel-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  background: var(--canvas-alt);
+}
+.panel-foot .meta { display: flex; gap: 16px; font-size: 12px; color: var(--silver); }
+.panel-foot .meta b { color: var(--ink); font-weight: 600; }
+
+/* — Trust strip — */
+.trust-strip {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 24px; padding: 40px 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 56px;
+}
+.trust-strip .micro { color: var(--silver); }
+.trust-logos { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; font-weight: 600; color: var(--cool-gray); }
+.trust-logos span { font-size: 14px; letter-spacing: -0.2px; }
+
+/* — Live ticker — */
+.ticker {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  margin-top: 56px;
+}
+.ticker-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--r-12); padding: 18px 20px;
+}
+.ticker-card .pair { font-size: 13px; color: var(--silver); font-weight: 500; }
+.ticker-card .px { font-size: 22px; font-weight: 700; margin-top: 4px; font-feature-settings: "tnum"; }
+.ticker-card .delta { font-size: 13px; font-weight: 600; margin-top: 2px; }
+.ticker-card .sparkline { height: 28px; margin-top: 8px; }
+
+/* — Features grid — */
+.feature-head {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px;
+  margin-bottom: 48px;
+}
+.feature-head h2 { max-width: 620px; }
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.feature {
+  background: var(--canvas-alt); border: 1px solid var(--border);
+  border-radius: var(--r-16); padding: 28px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.feature .ico {
+  width: 44px; height: 44px; border-radius: var(--r-12);
+  background: var(--purple-subtle); color: var(--purple);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.feature h3 { margin: 4px 0 0; }
+.feature p  { margin: 0; color: var(--cool-gray); font-size: 15px; }
+.feature .meta { margin-top: auto; display: flex; gap: 10px; font-size: 12px; color: var(--silver); padding-top: 12px; border-top: 1px solid var(--border); }
+
+/* — Security band (dark) — */
+.security {
+  background: var(--ink); color: #fff;
+  border-radius: var(--r-16);
+  padding: 64px 56px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  align-items: center;
+  position: relative; overflow: hidden;
+}
+.security::before {
+  content: ""; position: absolute; right: -120px; top: -120px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(113, 50, 245, 0.45), transparent 70%);
+  filter: blur(10px); pointer-events: none;
+}
+.security h2 { font-size: 44px; font-weight: 700; line-height: 1.1; letter-spacing: -0.9px; margin: 0; }
+.security p { color: rgba(255,255,255,0.7); margin: 16px 0 24px; max-width: 480px; font-size: 16px; }
+.security .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+.security .badges span {
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85);
+  padding: 8px 14px; border-radius: var(--r-8); font-size: 13px; font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.security .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; position: relative; z-index: 1; }
+.security .stat-grid .s {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-12); padding: 24px;
+}
+.security .stat-grid .s .n { font-size: 36px; font-weight: 700; letter-spacing: -0.6px; font-feature-settings: "tnum"; }
+.security .stat-grid .s .l { color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 6px; }
+
+/* — Fees / pricing — */
+.fees-head { margin-bottom: 40px; max-width: 640px; }
+.fees-table {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--r-16); overflow: hidden;
+}
+.fees-row {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 24px;
+  padding: 18px 28px; align-items: center;
+  border-top: 1px solid var(--border);
+}
+.fees-row:first-child { border-top: 0; background: var(--canvas-alt); }
+.fees-row.head { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--silver); }
+.fees-row .tier { font-weight: 600; }
+.fees-row .v { font-family: "JetBrains Mono", monospace; font-feature-settings: "tnum"; font-size: 14px; font-weight: 500; }
+.fees-row.featured { background: var(--purple-faint); }
+
+/* — CTA dark band — */
+.cta-band {
+  border-radius: var(--r-16);
+  padding: 56px;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
+  color: #fff;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.cta-band::after {
+  content: ""; position: absolute; right: -80px; bottom: -80px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  pointer-events: none;
+}
+.cta-band h2 { font-size: 40px; font-weight: 700; line-height: 1.1; letter-spacing: -0.8px; margin: 0; }
+.cta-band p { color: rgba(255,255,255,0.85); margin: 16px 0 0; }
+.cta-band .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.cta-band .actions .btn-white { background: #fff; color: var(--purple-deep); }
+.cta-band .actions .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); }
+
+/* — DS reference — */
+.ds-wrap {
+  border-top: 1px solid var(--border);
+  background: var(--canvas-alt);
+  padding: 96px 0;
+}
+.ds-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 56px; }
+.ds-block { padding: 48px 0; border-top: 1px solid var(--border); }
+.ds-block:first-of-type { border-top: 0; }
+.ds-block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 28px; }
+.ds-block-head h3 { font-size: 26px; font-weight: 700; letter-spacing: -0.4px; margin: 0; }
+
+/* Color */
+.color-group { margin-bottom: 28px; }
+.color-group .gh { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--silver); margin-bottom: 12px; }
+.color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.swatch {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--r-12); padding: 14px;
+  display: flex; gap: 14px; align-items: center;
+}
+.swatch .chip {
+  width: 48px; height: 48px; border-radius: var(--r-10);
+  flex: none; box-shadow: inset 0 0 0 1px rgba(16,17,20,0.06);
+}
+.swatch .meta .name { font-weight: 600; font-size: 14px; }
+.swatch .meta .hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--cool-gray); margin-top: 2px; }
+
+/* Type table */
+.ty-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: var(--r-12); overflow: hidden; }
+.ty-table th, .ty-table td {
+  text-align: left; padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.ty-table tr:last-child td { border-bottom: 0; }
+.ty-table th { background: var(--canvas-alt); font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; font-size: 11px; color: var(--silver); }
+
+/* Radius ladder */
+.r-ladder { display: flex; gap: 14px; flex-wrap: wrap; }
+.r-tile {
+  background: #fff; border: 1px solid var(--border);
+  padding: 22px; min-width: 130px;
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-start;
+}
+.r-tile .pad { width: 60px; height: 60px; background: var(--purple); }
+.r-tile.t3  { border-radius: 3px; } .r-tile.t3 .pad { border-radius: 3px; }
+.r-tile.t6  { border-radius: 6px; } .r-tile.t6 .pad { border-radius: 6px; }
+.r-tile.t8  { border-radius: 8px; } .r-tile.t8 .pad { border-radius: 8px; }
+.r-tile.t10 { border-radius: 10px; } .r-tile.t10 .pad { border-radius: 10px; }
+.r-tile.t12 { border-radius: 12px; } .r-tile.t12 .pad { border-radius: 12px; }
+.r-tile.t16 { border-radius: 16px; } .r-tile.t16 .pad { border-radius: 16px; }
+.r-tile.tpill { border-radius: 9999px; padding: 16px 22px; } .r-tile.tpill .pad { border-radius: 9999px; width: 80px; height: 28px; }
+.r-tile .lab { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--cool-gray); }
+
+/* Components matrix */
+.comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.comp {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--r-12); padding: 22px;
+  display: flex; flex-direction: column; gap: 12px; min-height: 200px;
+}
+.comp .clabel { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--silver); }
+.comp .crow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.comp .tag {
+  font-family: "JetBrains Mono", monospace; font-size: 11px;
+  background: var(--gray-fill); padding: 3px 8px; border-radius: var(--r-6);
+  color: var(--cool-gray);
+}
+.comp p { margin: 0; font-size: 13px; color: var(--cool-gray); }
+
+/* Elevation */
+.elev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.elev {
+  background: #fff; border: 1px solid var(--border);
+  padding: 28px; border-radius: var(--r-12);
+}
+.elev.e1 { box-shadow: var(--sh-micro); }
+.elev.e2 { box-shadow: var(--sh-subtle); }
+.elev.e3 { box-shadow: var(--sh-lift); }
+.elev .clabel { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--silver); }
+.elev .v { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--cool-gray); margin-top: 10px; }
+.elev p { margin: 8px 0 0; font-size: 13px; color: var(--cool-gray); }
+
+/* — Footer — */
+.footer {
+  background: #fff; border-top: 1px solid var(--border);
+  padding: 72px 0 48px;
+}
+.foot-grid {
+  display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px;
+  margin-bottom: 56px;
+}
+.foot-brand p { color: var(--cool-gray); font-size: 14px; max-width: 320px; margin: 14px 0 24px; }
+.foot-brand .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.foot-brand .badges span {
+  border: 1px solid var(--border); border-radius: var(--r-8);
+  padding: 6px 12px; font-size: 12px; color: var(--cool-gray); font-weight: 500;
+}
+.foot-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--silver); margin: 0 0 16px; }
+.foot-col a { display: block; padding: 6px 0; font-size: 14px; color: var(--ink); }
+.foot-col a:hover { color: var(--purple); }
+.foot-bottom {
+  border-top: 1px solid var(--border); padding-top: 24px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  font-size: 12px; color: var(--silver);
+  align-items: center;
+}
+.foot-bottom .legal { display: flex; gap: 16px; flex-wrap: wrap; }
+.foot-bottom .socials { display: flex; gap: 8px; }
+.foot-bottom .socials a {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--gray-fill); display: inline-flex; align-items: center; justify-content: center; color: var(--cool-gray);
+}
+.foot-bottom .socials a:hover { background: var(--purple-subtle); color: var(--purple); }
+
+/* — Floating DESIGN.md link — */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px; z-index: 100;
+  background: var(--purple); color: #fff;
+  padding: 11px 18px; border-radius: var(--r-12);
+  font-size: 13px; font-weight: 600;
+  box-shadow: 0 8px 24px rgba(91, 30, 207, 0.32);
+}
+.src-link:hover { background: var(--purple-deep); }
+
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-grid h1 { font-size: 44px; }
+  .ticker { grid-template-columns: repeat(2, 1fr); }
+  .feature-grid { grid-template-columns: 1fr; }
+  .security { grid-template-columns: 1fr; padding: 40px; }
+  .security .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .cta-band { grid-template-columns: 1fr; padding: 40px; }
+  .fees-row { grid-template-columns: 1fr 1fr; }
+  .fees-row.head { display: none; }
+  .color-grid { grid-template-columns: repeat(2, 1fr); }
+  .comp-grid { grid-template-columns: 1fr; }
+  .elev-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero { padding: 48px 0 32px; }
+  .hero-grid h1 { font-size: 36px; }
+  .ticker { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- — NAV — -->
+<nav class="nav" aria-label="Primary">
+  <div class="nav-row">
+    <a class="brand" href="#">
+      <span class="brand-logo" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M4 20c0-8 4-14 8-14s8 6 8 14"/>
+          <circle cx="8" cy="11" r="1.2" fill="currentColor"/>
+          <circle cx="16" cy="11" r="1.2" fill="currentColor"/>
+        </svg>
+      </span>
+      <span>kraken</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Buy crypto</a>
+      <a href="#">Trade</a>
+      <a href="#">Earn</a>
+      <a href="#">Institutions</a>
+      <a href="#">NFT</a>
+      <a href="#">Learn</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" style="font-size:14px;font-weight:500;color:var(--ink);">Sign in</a>
+      <button class="btn btn-primary btn-sm">Create account</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- — HERO — -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-eyebrow"><span class="dot"></span> Serious crypto, since 2011</span>
+          <h1 class="display">Trade<br/>crypto without<br/>compromise.</h1>
+          <p class="lede">Spot, margin, derivatives and on-chain — all under one regulated roof. 230+ assets, deep liquidity, and the security record that institutions audit against.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary">Get started</button>
+            <button class="btn btn-outline">View markets</button>
+          </div>
+          <div class="hero-meta">
+            <span class="ck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Proof of reserves verified</span>
+            <span class="ck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> SOC 2 Type II</span>
+            <span class="ck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> FinCEN registered MSB</span>
+          </div>
+        </div>
+
+        <div class="panel" role="figure" aria-label="Live markets">
+          <div class="panel-head">
+            <strong style="font-size:15px;">Markets</strong>
+            <div class="tabs">
+              <span class="tab active">Top</span>
+              <span class="tab">Gainers</span>
+              <span class="tab">New</span>
+            </div>
+          </div>
+          <div class="panel-body" style="padding-top:8px;">
+            <div class="market-row">
+              <div class="market-pair">
+                <span class="coin-dot coin-btc">B</span>
+                <span><div class="sym">BTC / USD</div><div class="name">Bitcoin</div></span>
+              </div>
+              <div class="price mono">$73,418.20</div>
+              <div class="chg up mono">+2.41%</div>
+              <button class="btn btn-subtle btn-sm">Buy</button>
+            </div>
+            <div class="market-row">
+              <div class="market-pair">
+                <span class="coin-dot coin-eth">Ξ</span>
+                <span><div class="sym">ETH / USD</div><div class="name">Ethereum</div></span>
+              </div>
+              <div class="price mono">$3,842.66</div>
+              <div class="chg up mono">+1.18%</div>
+              <button class="btn btn-subtle btn-sm">Buy</button>
+            </div>
+            <div class="market-row">
+              <div class="market-pair">
+                <span class="coin-dot coin-sol">S</span>
+                <span><div class="sym">SOL / USD</div><div class="name">Solana</div></span>
+              </div>
+              <div class="price mono">$184.92</div>
+              <div class="chg down mono">−0.62%</div>
+              <button class="btn btn-subtle btn-sm">Buy</button>
+            </div>
+            <div class="market-row">
+              <div class="market-pair">
+                <span class="coin-dot coin-usdc">$</span>
+                <span><div class="sym">USDC / USD</div><div class="name">USD Coin</div></span>
+              </div>
+              <div class="price mono">$1.0001</div>
+              <div class="chg up mono">+0.01%</div>
+              <button class="btn btn-subtle btn-sm">Buy</button>
+            </div>
+          </div>
+          <div class="panel-foot">
+            <div class="meta">
+              <span><b>230+</b> assets</span>
+              <span><b>$3.2B</b> 24h vol</span>
+            </div>
+            <a href="#" style="color:var(--purple);font-weight:600;font-size:13px;">All markets →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust-strip">
+        <span class="micro">Trusted by institutions, builders, and 13M+ clients</span>
+        <div class="trust-logos">
+          <span>Jane Street</span>
+          <span>Galaxy</span>
+          <span>Anchorage</span>
+          <span>Coatue</span>
+          <span>Tribe</span>
+          <span>Visa Ventures</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — LIVE TICKER — -->
+  <section class="wrap">
+    <div class="ticker">
+      <div class="ticker-card">
+        <div class="pair mono">BTC · 24h</div>
+        <div class="px mono">$73,418.20</div>
+        <div class="delta up mono">+1,727 (+2.41%)</div>
+        <svg class="sparkline" viewBox="0 0 100 28" preserveAspectRatio="none"><polyline fill="none" stroke="#149e61" stroke-width="1.6" points="0,20 12,16 24,18 36,12 48,14 60,8 72,10 84,5 100,4"/></svg>
+      </div>
+      <div class="ticker-card">
+        <div class="pair mono">ETH · 24h</div>
+        <div class="px mono">$3,842.66</div>
+        <div class="delta up mono">+44.79 (+1.18%)</div>
+        <svg class="sparkline" viewBox="0 0 100 28" preserveAspectRatio="none"><polyline fill="none" stroke="#149e61" stroke-width="1.6" points="0,16 14,18 28,14 42,15 56,11 70,13 84,9 100,8"/></svg>
+      </div>
+      <div class="ticker-card">
+        <div class="pair mono">SOL · 24h</div>
+        <div class="px mono">$184.92</div>
+        <div class="delta down mono">−1.16 (−0.62%)</div>
+        <svg class="sparkline" viewBox="0 0 100 28" preserveAspectRatio="none"><polyline fill="none" stroke="#d4393f" stroke-width="1.6" points="0,8 14,10 28,7 42,13 56,12 70,17 84,16 100,19"/></svg>
+      </div>
+      <div class="ticker-card">
+        <div class="pair mono">DOT · 24h</div>
+        <div class="px mono">$7.214</div>
+        <div class="delta up mono">+0.23 (+3.32%)</div>
+        <svg class="sparkline" viewBox="0 0 100 28" preserveAspectRatio="none"><polyline fill="none" stroke="#149e61" stroke-width="1.6" points="0,22 14,18 28,16 42,12 56,15 70,9 84,6 100,5"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- — FEATURES — -->
+  <section class="section">
+    <div class="wrap">
+      <div class="feature-head">
+        <div>
+          <span class="badge badge-purple">Everything in one account</span>
+          <h2 class="h-section" style="margin-top:14px;">Built for the way real traders actually trade.</h2>
+        </div>
+        <p class="body-p" style="max-width:340px;">From your first swap to a 25× margin position — Kraken keeps the same login, custody and risk surface across every product.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l4-4 4 4 4-4 6 6"/><path d="M21 14V6h-8"/></svg>
+          </span>
+          <h3 class="h-feature">Spot &amp; Pro trading</h3>
+          <p>Real order books, advanced charting, conditional orders and 5× to 25× margin where regulated.</p>
+          <div class="meta"><span class="badge badge-success">0.16% maker</span><span class="badge badge-neutral">0.26% taker</span></div>
+        </article>
+
+        <article class="feature">
+          <span class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </span>
+          <h3 class="h-feature">Cold custody by default</h3>
+          <p>95% of client assets held in geographically distributed, air-gapped cold storage with 24/7 surveillance.</p>
+          <div class="meta"><span class="badge badge-success">Proof of reserves</span><span class="badge badge-neutral">SOC 2 Type II</span></div>
+        </article>
+
+        <article class="feature">
+          <span class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
+          </span>
+          <h3 class="h-feature">Stake &amp; earn</h3>
+          <p>On-chain staking for 18 assets with weekly auto-payouts. No lockups on ETH, opt in or out anytime.</p>
+          <div class="meta"><span class="badge badge-success">Up to 22% APR</span><span class="badge badge-neutral">18 assets</span></div>
+        </article>
+
+        <article class="feature">
+          <span class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+          </span>
+          <h3 class="h-feature">Pro API &amp; FIX</h3>
+          <p>REST, WebSocket and native FIX 4.4 endpoints with sub-millisecond matching and co-location options.</p>
+          <div class="meta"><span class="badge badge-success">99.99% uptime</span><span class="badge badge-neutral">FIX 4.4</span></div>
+        </article>
+
+        <article class="feature">
+          <span class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+          </span>
+          <h3 class="h-feature">Fiat in 8 currencies</h3>
+          <p>USD, EUR, GBP, JPY, CHF, CAD, AUD and AED on-ramps. SWIFT, SEPA Instant, ACH and FedNow supported.</p>
+          <div class="meta"><span class="badge badge-success">SEPA Instant</span><span class="badge badge-neutral">8 fiats</span></div>
+        </article>
+
+        <article class="feature">
+          <span class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+          </span>
+          <h3 class="h-feature">24 / 7 client care</h3>
+          <p>Real humans on chat in seven languages with a median first-response under two minutes.</p>
+          <div class="meta"><span class="badge badge-success">&lt; 2 min median</span><span class="badge badge-neutral">7 languages</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- — SECURITY BAND — -->
+  <section class="wrap">
+    <div class="security">
+      <div>
+        <span class="badge badge-purple" style="background:rgba(113,50,245,0.22);color:#cbb4ff;">Security model</span>
+        <h2 style="margin-top:14px;">Boring is a security posture.</h2>
+        <p>Thirteen years on the same exchange architecture. Zero client funds lost to a breach. Independently attested proof of reserves, every quarter, on-chain.</p>
+        <div class="badges">
+          <span>SOC 1 Type II</span>
+          <span>SOC 2 Type II</span>
+          <span>ISO 27001</span>
+          <span>NYDFS BitLicense</span>
+          <span>FinCEN MSB</span>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="s"><div class="n mono">13yrs</div><div class="l">Operating without a security breach affecting client funds</div></div>
+        <div class="s"><div class="n mono">95%</div><div class="l">Of client assets held in air-gapped cold storage at all times</div></div>
+        <div class="s"><div class="n mono">$3.2B</div><div class="l">Daily spot &amp; derivatives volume across the exchange</div></div>
+        <div class="s"><div class="n mono">230+</div><div class="l">Assets listed under our institutional listing framework</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — FEES — -->
+  <section class="section">
+    <div class="wrap">
+      <div class="fees-head">
+        <span class="badge badge-purple">Fees that scale with you</span>
+        <h2 class="h-section" style="margin-top:14px;">Volume-tiered fees, published in plain numbers.</h2>
+        <p class="body-p" style="margin-top:12px;max-width:560px;">No hidden spreads, no payment-for-order-flow. Maker rebates start the moment your rolling 30-day volume crosses $50K.</p>
+      </div>
+
+      <div class="fees-table">
+        <div class="fees-row head">
+          <span>30-day volume</span>
+          <span>Maker</span>
+          <span>Taker</span>
+          <span>Margin</span>
+          <span>Withdrawals</span>
+        </div>
+        <div class="fees-row">
+          <span class="tier">$0 – $50K</span>
+          <span class="v">0.16%</span>
+          <span class="v">0.26%</span>
+          <span class="v">0.02% / 4h</span>
+          <span class="v">0.0001 BTC</span>
+        </div>
+        <div class="fees-row featured">
+          <span class="tier">$50K – $1M <span class="badge badge-purple" style="margin-left:6px;">Popular</span></span>
+          <span class="v">0.12%</span>
+          <span class="v">0.22%</span>
+          <span class="v">0.02% / 4h</span>
+          <span class="v">0.00005 BTC</span>
+        </div>
+        <div class="fees-row">
+          <span class="tier">$1M – $10M</span>
+          <span class="v">0.08%</span>
+          <span class="v">0.18%</span>
+          <span class="v">0.01% / 4h</span>
+          <span class="v">Free</span>
+        </div>
+        <div class="fees-row">
+          <span class="tier">$10M+</span>
+          <span class="v up">−0.02%</span>
+          <span class="v">0.10%</span>
+          <span class="v">0.01% / 4h</span>
+          <span class="v">Free</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — CTA — -->
+  <section class="wrap" style="margin-bottom:96px;">
+    <div class="cta-band">
+      <div>
+        <h2>Open your account in under three minutes.</h2>
+        <p>Verify with a passport, fund with SEPA Instant or ACH, and place your first order today. No deposit minimum.</p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-white">Create free account</button>
+        <button class="btn btn-ghost">Talk to institutional sales</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================
+       PART B  —  DESIGN SYSTEM REFERENCE
+       ================================================= -->
+  <section class="ds-wrap" id="ds">
+    <div class="wrap">
+      <div class="ds-head">
+        <div>
+          <span class="badge badge-purple">The design system</span>
+          <h2 class="h-section" style="margin-top:14px;">A serious crypto exchange, drawn in purple.</h2>
+        </div>
+        <p class="body-p" style="max-width:340px;">White surface, Kraken Purple primary, 12-px radius buttons, whisper shadows — synthesized from <code style="font-family:'JetBrains Mono',monospace;font-size:13px;">DESIGN.md</code>.</p>
+      </div>
+
+      <!-- COLOR -->
+      <div class="ds-block">
+        <div class="ds-block-head">
+          <h3>Color</h3>
+          <span class="micro">Purple scale + neutrals + trading semantics</span>
+        </div>
+
+        <div class="color-group">
+          <div class="gh">Brand purple</div>
+          <div class="color-grid">
+            <div class="swatch"><span class="chip" style="background:#7132f5"></span><div class="meta"><div class="name">Kraken Purple</div><div class="hex">#7132f5</div></div></div>
+            <div class="swatch"><span class="chip" style="background:#5741d8"></span><div class="meta"><div class="name">Purple Dark</div><div class="hex">#5741d8</div></div></div>
+            <div class="swatch"><span class="chip" style="background:#5b1ecf"></span><div class="meta"><div class="name">Purple Deep</div><div class="hex">#5b1ecf</div></div></div>
+            <div class="swatch"><span class="chip" style="background:rgba(133,91,251,0.16)"></span><div class="meta"><div class="name">Purple Subtle</div><div class="hex">rgba(133,91,251,.16)</div></div></div>
+          </div>
+        </div>
+
+        <div class="color-group">
+          <div class="gh">Ink + neutrals</div>
+          <div class="color-grid">
+            <div class="swatch"><span class="chip" style="background:#101114"></span><div class="meta"><div class="name">Near Black</div><div class="hex">#101114</div></div></div>
+            <div class="swatch"><span class="chip" style="background:#686b82"></span><div class="meta"><div class="name">Cool Gray</div><div class="hex">#686b82</div></div></div>
+            <div class="swatch"><span class="chip" style="background:#9497a9"></span><div class="meta"><div class="name">Silver Blue</div><div class="hex">#9497a9</div></div></div>
+            <div class="swatch"><span class="chip" style="background:#dedee5"></span><div class="meta"><div class="name">Border Gray</div><div class="hex">#dedee5</div></div></div>
+            <div class="swatch"><span class="chip" style="background:#ffffff;box-shadow:inset 0 0 0 1px #dedee5"></span><div class="meta"><div class="name">White</div><div class="hex">#ffffff</div></div></div>
+            <div class="swatch"><span class="chip" style="background:rgba(148,151,169,0.08)"></span><div class="meta"><div class="name">Gray Fill</div><div class="hex">rgba(148,151,169,.08)</div></div></div>
+          </div>
+        </div>
+
+        <div class="color-group">
+          <div class="gh">Semantic — trading</div>
+          <div class="color-grid">
+            <div class="swatch"><span class="chip" style="background:#149e61"></span><div class="meta"><div class="name">Green</div><div class="hex">#149e61</div></div></div>
+            <div class="swatch"><span class="chip" style="background:#026b3f"></span><div class="meta"><div class="name">Green Dark</div><div class="hex">#026b3f</div></div></div>
+            <div class="swatch"><span class="chip" style="background:rgba(20,158,97,0.16)"></span><div class="meta"><div class="name">Green BG</div><div class="hex">rgba(20,158,97,.16)</div></div></div>
+            <div class="swatch"><span class="chip" style="background:#d4393f"></span><div class="meta"><div class="name">Red (down)</div><div class="hex">#d4393f</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TYPOGRAPHY -->
+      <div class="ds-block">
+        <div class="ds-block-head">
+          <h3>Typography</h3>
+          <span class="micro">Kraken-Brand (display) + Kraken-Product (UI)</span>
+        </div>
+        <table class="ty-table">
+          <thead><tr>
+            <th>Role</th><th>Sample</th><th>Family</th><th>Size / LH</th><th>Weight</th><th>Tracking</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>Display Hero</td><td style="font-weight:700;letter-spacing:-1px;font-size:24px;">Trade without compromise</td><td>Kraken-Brand</td><td>48 / 1.17</td><td>700</td><td>-1px</td></tr>
+            <tr><td>Section Heading</td><td style="font-weight:700;letter-spacing:-0.5px;font-size:20px;">Built for traders</td><td>Kraken-Brand</td><td>36 / 1.22</td><td>700</td><td>-0.5px</td></tr>
+            <tr><td>Sub-heading</td><td style="font-weight:700;letter-spacing:-0.5px;font-size:18px;">Security model</td><td>Kraken-Brand</td><td>28 / 1.29</td><td>700</td><td>-0.5px</td></tr>
+            <tr><td>Feature Title</td><td style="font-weight:600;font-size:16px;">Spot &amp; Pro trading</td><td>Kraken-Product</td><td>22 / 1.20</td><td>600</td><td>normal</td></tr>
+            <tr><td>Body</td><td style="font-size:14px;">Real order books, advanced charting.</td><td>Kraken-Product</td><td>16 / 1.38</td><td>400</td><td>normal</td></tr>
+            <tr><td>Button</td><td style="font-weight:600;font-size:14px;">Create account</td><td>Kraken-Product</td><td>16 / 1.38</td><td>500–600</td><td>normal</td></tr>
+            <tr><td>Caption</td><td style="font-size:13px;color:var(--silver);">Proof of reserves verified</td><td>Kraken-Product</td><td>14 / 1.43</td><td>400–700</td><td>normal</td></tr>
+            <tr><td>Mono / Numeric</td><td class="mono" style="font-size:13px;">$73,418.20 · +2.41%</td><td>JetBrains Mono</td><td>12–24</td><td>500</td><td>tnum</td></tr>
+            <tr><td>Micro</td><td style="font-size:11px;letter-spacing:0.8px;text-transform:uppercase;color:var(--silver);">VERIFIED</td><td>Kraken-Product</td><td>7–12 / 1.0</td><td>500</td><td>uppercase</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- RADIUS -->
+      <div class="ds-block">
+        <div class="ds-block-head">
+          <h3>Radius</h3>
+          <span class="micro">12px is the maximum for buttons — never pill</span>
+        </div>
+        <div class="r-ladder">
+          <div class="r-tile t3"><div class="pad"></div><div class="lab">3px</div></div>
+          <div class="r-tile t6"><div class="pad"></div><div class="lab">6px · badge</div></div>
+          <div class="r-tile t8"><div class="pad"></div><div class="lab">8px · neutral</div></div>
+          <div class="r-tile t10"><div class="pad"></div><div class="lab">10px · white btn</div></div>
+          <div class="r-tile t12"><div class="pad"></div><div class="lab">12px · button</div></div>
+          <div class="r-tile t16"><div class="pad"></div><div class="lab">16px · panel</div></div>
+          <div class="r-tile tpill"><div class="pad"></div><div class="lab">9999 · pill chip</div></div>
+        </div>
+      </div>
+
+      <!-- COMPONENTS -->
+      <div class="ds-block">
+        <div class="ds-block-head">
+          <h3>Components</h3>
+          <span class="micro">Buttons · badges · panels · market rows</span>
+        </div>
+        <div class="comp-grid">
+          <div class="comp">
+            <span class="clabel">Primary — Purple</span>
+            <div class="crow"><button class="btn btn-primary btn-sm">Get started</button></div>
+            <div class="crow">
+              <span class="tag">bg #7132f5</span><span class="tag">radius 12</span>
+              <span class="tag">pad 13 16</span><span class="tag">weight 600</span>
+            </div>
+            <p>Default CTA. Hover deepens to #5b1ecf.</p>
+          </div>
+
+          <div class="comp">
+            <span class="clabel">Outlined — Purple Dark</span>
+            <div class="crow"><button class="btn btn-outline btn-sm">View markets</button></div>
+            <div class="crow">
+              <span class="tag">bg #fff</span><span class="tag">border 1 #5741d8</span>
+              <span class="tag">text #5741d8</span><span class="tag">radius 12</span>
+            </div>
+            <p>Secondary action next to a primary purple.</p>
+          </div>
+
+          <div class="comp">
+            <span class="clabel">Subtle — 16% Purple</span>
+            <div class="crow"><button class="btn btn-subtle btn-sm">Buy</button></div>
+            <div class="crow">
+              <span class="tag">bg rgba(133,91,251,.16)</span>
+              <span class="tag">text #7132f5</span>
+              <span class="tag">pad 8</span>
+            </div>
+            <p>Inline / table actions like the buy button on market rows.</p>
+          </div>
+
+          <div class="comp">
+            <span class="clabel">White — Elevated</span>
+            <div class="crow"><button class="btn btn-white btn-sm">Sign in</button></div>
+            <div class="crow">
+              <span class="tag">bg #fff</span><span class="tag">radius 10</span>
+              <span class="tag">shadow subtle</span>
+            </div>
+            <p>Used over a purple band to invert contrast.</p>
+          </div>
+
+          <div class="comp">
+            <span class="clabel">Secondary — Gray Fill</span>
+            <div class="crow"><button class="btn btn-secondary btn-sm">Cancel</button></div>
+            <div class="crow">
+              <span class="tag">bg rgba(148,151,169,.08)</span>
+              <span class="tag">text #101114</span><span class="tag">radius 12</span>
+            </div>
+            <p>Utility / tertiary action — never a CTA.</p>
+          </div>
+
+          <div class="comp">
+            <span class="clabel">Badge — Success</span>
+            <div class="crow"><span class="badge badge-success">Proof of reserves</span><span class="badge badge-neutral">SOC 2</span></div>
+            <div class="crow">
+              <span class="tag">success bg rgba(20,158,97,.16)</span>
+              <span class="tag">text #026b3f</span>
+              <span class="tag">radius 6</span>
+            </div>
+            <p>Compliance pings and trading signals — always rounded 6 / 8.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ELEVATION -->
+      <div class="ds-block">
+        <div class="ds-block-head">
+          <h3>Elevation</h3>
+          <span class="micro">Whisper shadows only — Kraken stays flat</span>
+        </div>
+        <div class="elev-grid">
+          <div class="elev e1">
+            <span class="clabel">Micro</span>
+            <div class="v">rgba(16,24,40,.04) 0 1 4</div>
+            <p>Inline panels, dense table containers.</p>
+          </div>
+          <div class="elev e2">
+            <span class="clabel">Subtle</span>
+            <div class="v">rgba(0,0,0,.03) 0 4 24</div>
+            <p>White buttons over a colored band; hovering cards.</p>
+          </div>
+          <div class="elev e3">
+            <span class="clabel">Lift</span>
+            <div class="v">rgba(16,24,40,.08) 0 16 40</div>
+            <p>Hero market panel — the only meaningful float on the page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- — Footer — -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-logo" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <path d="M4 20c0-8 4-14 8-14s8 6 8 14"/>
+              <circle cx="8" cy="11" r="1.2" fill="currentColor"/>
+              <circle cx="16" cy="11" r="1.2" fill="currentColor"/>
+            </svg>
+          </span>
+          <span>kraken</span>
+        </div>
+        <p>Crypto exchange built for clients who actually need an exchange. Operating since 2011 under continuous regulatory review.</p>
+        <div class="badges">
+          <span>SOC 2 Type II</span>
+          <span>ISO 27001</span>
+          <span>FinCEN MSB</span>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h4>Products</h4>
+        <a href="#">Buy crypto</a>
+        <a href="#">Spot trading</a>
+        <a href="#">Margin &amp; futures</a>
+        <a href="#">Kraken Pro</a>
+        <a href="#">Staking</a>
+        <a href="#">NFT marketplace</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Newsroom</a>
+        <a href="#">Security</a>
+        <a href="#">Proof of reserves</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="#">Learn center</a>
+        <a href="#">Status</a>
+        <a href="#">Fees</a>
+        <a href="#">API docs</a>
+        <a href="#">Tax reports</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Support</h4>
+        <a href="#">Help center</a>
+        <a href="#">Contact us</a>
+        <a href="#">Live chat</a>
+        <a href="#">Account verification</a>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Payward, Inc. Kraken is a registered trademark. Cryptocurrency assets involve risk of loss.</span>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Disclosures</a>
+        <a href="#">Licenses</a>
+      </div>
+      <div class="socials" aria-label="Social links">
+        <a href="#" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.66 0h4.37v1.91h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v8.45h-4.56v-7.49c0-1.79-.04-4.09-2.49-4.09-2.5 0-2.88 1.95-2.88 3.96V22H7.88V8z"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.3v3.3c0 .3.1.7.8.6A12 12 0 0012 .3"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.kraken.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

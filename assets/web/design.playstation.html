@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PlayStation — Inspired Design</title>
+<meta name="description" content="A PlayStation-inspired marketing page: three-canvas chapter rhythm of black, white, and PlayStation Blue, fully-rounded pill CTAs, light-weight display type, and dramatic CSS-rendered game key art. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #0070d1;
+  --primary-pressed: #0064b7;
+  --primary-active: #004d8d;
+  --on-primary: #ffffff;
+  --commerce: #d53b00;
+  --commerce-pressed: #aa2f00;
+  --on-commerce: #ffffff;
+  /* Ink / text */
+  --ink: #000000;
+  --ink-deep: #121314;
+  --ink-elevated: #181818;
+  --body-light: rgba(0,0,0,0.6);
+  --mute-light: #6b6b6b;
+  --ash-light: #cccccc;
+  --on-dark: #ffffff;
+  --body-dark: rgba(255,255,255,0.7);
+  --on-dark-mute: #cccccc;
+  --mute-dark: rgba(229,229,229,0.55);
+  --ash-dark: rgba(229,229,229,0.2);
+  /* Surfaces */
+  --canvas-light: #ffffff;
+  --surface-soft: #f3f3f3;
+  --surface-card: #f5f7fa;
+  --surface-filter: rgba(245,247,250,0.3);
+  --canvas-dark: #000000;
+  --surface-dark-elevated: #121314;
+  --surface-dark-card: #181818;
+  --hairline-light: #e6e6e6;
+  --hairline-dark: rgba(229,229,229,0.2);
+  /* Link / semantic */
+  --link-light: #0064b7;
+  --link-dark: #53b1ff;
+  /* PS+ gradient */
+  --psp-gold-1: #ffce21;
+  --psp-gold-2: #f5a623;
+  --psp-gold-3: #ee8e00;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Roboto", "Inter", Arial, Helvetica, sans-serif;
+  background: var(--canvas-dark);
+  color: var(--on-dark);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(0,112,209,0.45); color: #fff; }
+
+/* —— Layout —— */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 768px) { .wrap { padding: 0 24px; } }
+
+/* —— Type tokens —— */
+.display-xl { font-family: Roboto, Inter, sans-serif; font-weight: 300; font-size: clamp(34px, 5.6vw, 54px); line-height: 1.15; letter-spacing: -0.1px; margin: 0; }
+.display-lg { font-weight: 300; font-size: clamp(30px, 4.4vw, 44px); line-height: 1.2; letter-spacing: 0.1px; margin: 0; }
+.display-md { font-weight: 300; font-size: clamp(26px, 3.5vw, 35px); line-height: 1.25; letter-spacing: 0; margin: 0; }
+.heading-xl { font-weight: 300; font-size: clamp(24px, 2.6vw, 28px); line-height: 1.25; letter-spacing: 0.1px; margin: 0; }
+.heading-lg { font-weight: 300; font-size: 22px; line-height: 1.3; letter-spacing: 0.1px; margin: 0; }
+.heading-md { font-weight: 600; font-size: 18px; line-height: 1.1; letter-spacing: 0; margin: 0; }
+.body-md { font-weight: 400; font-size: 18px; line-height: 1.5; letter-spacing: 0.1px; }
+.body-strong { font-weight: 500; font-size: 18px; line-height: 1.25; letter-spacing: 0.4px; }
+.body-sm { font-weight: 400; font-size: 16px; line-height: 1.5; }
+.caption-md { font-weight: 400; font-size: 14px; line-height: 1.5; }
+.caption-sm { font-weight: 500; font-size: 12px; line-height: 1.5; letter-spacing: 0.1px; }
+
+/* —— Buttons (pill, always) —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 12px 28px;
+  border-radius: 9999px;
+  font-weight: 700; font-size: 18px; line-height: 1.25; letter-spacing: 0.45px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent; color: var(--on-dark);
+  transition: background .15s, border-color .15s, color .15s;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-pressed); }
+.btn-commerce { background: var(--commerce); color: var(--on-commerce); }
+.btn-commerce:hover { background: var(--commerce-pressed); }
+.btn-secondary-light { background: transparent; color: var(--ink); border-color: var(--ash-light); }
+.btn-secondary-light:hover { background: var(--surface-soft); }
+.btn-secondary-dark { background: transparent; color: var(--on-dark); border-color: var(--hairline-dark); }
+.btn-secondary-dark:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+.btn-sm { height: 40px; padding: 8px 20px; font-size: 14px; letter-spacing: 0.324px; }
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas-dark);
+  position: sticky; top: 0; z-index: 30;
+  height: 48px;
+  display: flex; align-items: center;
+  border-bottom: 1px solid var(--hairline-dark);
+}
+.topnav .row { display: flex; align-items: center; gap: 24px; width: 100%; }
+.brand-ps {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--on-dark);
+  font: 400 28px/1 "Roboto", sans-serif;
+  letter-spacing: -1px;
+}
+.brand-ps .ps-logo {
+  display: inline-block; width: 30px; height: 22px;
+  position: relative;
+}
+.nav-links { display: flex; gap: 0; margin-left: 24px; align-items: center; flex: 1; justify-content: center; }
+.nav-links a {
+  color: var(--on-dark); padding: 8px 14px;
+  font-weight: 500; font-size: 14px; letter-spacing: 0.2px;
+}
+.nav-links a:hover { color: rgba(255,255,255,0.75); }
+.nav-right { display: flex; gap: 4px; align-items: center; }
+.nav-icon {
+  width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 9999px; color: var(--on-dark);
+}
+.nav-icon:hover { background: rgba(255,255,255,0.1); }
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+}
+
+/* —— Sub-nav —— */
+.subnav {
+  background: var(--canvas-dark);
+  border-bottom: 1px solid var(--hairline-dark);
+  height: 48px;
+  display: flex; align-items: center; gap: 20px;
+  font-size: 14px; color: var(--on-dark-mute);
+}
+.subnav .crumbs { display: flex; gap: 16px; overflow-x: auto; }
+.subnav .crumbs a { color: var(--on-dark-mute); padding: 4px 0; white-space: nowrap; }
+.subnav .crumbs a.active { color: var(--on-dark); border-bottom: 2px solid var(--primary); padding-bottom: 6px; }
+
+/* —— Sections / bands —— */
+.band { padding: 96px 0; }
+@media (max-width: 900px) { .band { padding: 64px 0; } }
+@media (max-width: 480px) { .band { padding: 48px 0; } }
+.band-dark { background: var(--canvas-dark); color: var(--on-dark); }
+.band-light { background: var(--canvas-light); color: var(--ink); }
+.band-blue { background: var(--primary); color: var(--on-primary); }
+.band-gradient {
+  background: linear-gradient(180deg, var(--surface-dark-elevated) 0%, var(--canvas-dark) 100%);
+  color: var(--on-dark);
+}
+
+/* —— Hero band —— */
+.hero { padding: 64px 0 96px; }
+.hero .copy { max-width: 580px; margin-bottom: 32px; }
+.hero .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--on-dark-mute); margin-bottom: 16px; display: inline-block; }
+.hero .display-xl { margin-bottom: 16px; }
+.hero .lead { font-size: 18px; line-height: 1.55; color: var(--body-dark); max-width: 540px; margin: 0 0 32px; }
+.hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* —— Game art (CSS-rendered) —— */
+.game-art {
+  position: relative; overflow: hidden;
+  border-radius: 8px; aspect-ratio: 16 / 9;
+  background: #0a0a0a;
+  display: flex; align-items: flex-end;
+  padding: 24px;
+}
+.game-art::before {
+  content: ""; position: absolute; inset: 0;
+  z-index: 0;
+}
+.game-art > * { position: relative; z-index: 2; }
+.game-art::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
+}
+/* art variants */
+.art-marathon::before {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(222,255,32,0.18) 0%, transparent 45%),
+    radial-gradient(circle at 70% 65%, rgba(255,138,0,0.22) 0%, transparent 55%),
+    linear-gradient(135deg, #1a1a14 0%, #2a1810 60%, #050505 100%);
+}
+.art-cosmic::before {
+  background:
+    radial-gradient(circle at 50% 60%, rgba(120,80,200,0.35) 0%, transparent 50%),
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 0%, transparent 30%),
+    linear-gradient(180deg, #060818 0%, #1a0a2e 50%, #050010 100%);
+}
+.art-racer::before {
+  background:
+    radial-gradient(ellipse at 50% 80%, rgba(255,200,0,0.3) 0%, transparent 50%),
+    linear-gradient(180deg, #0a1428 0%, #2a0a0a 60%, #050505 100%);
+}
+.art-survival::before {
+  background:
+    radial-gradient(circle at 70% 30%, rgba(80,200,150,0.22) 0%, transparent 45%),
+    linear-gradient(135deg, #0a1810 0%, #1a2818 50%, #050a05 100%);
+}
+.art-rpg::before {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(180,40,80,0.3) 0%, transparent 55%),
+    linear-gradient(180deg, #1a0810 0%, #28101a 60%, #050000 100%);
+}
+.art-vr::before {
+  background:
+    radial-gradient(circle at 30% 50%, rgba(0,180,255,0.32) 0%, transparent 50%),
+    radial-gradient(circle at 80% 60%, rgba(180,40,200,0.2) 0%, transparent 50%),
+    linear-gradient(180deg, #050818 0%, #181028 100%);
+}
+.art-console::before {
+  background:
+    radial-gradient(circle at 50% 50%, #ffffff 0%, #e6e9ee 40%, #b8c0cc 100%);
+}
+.art-console::after { background: transparent; }
+.console-render {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.console-shape {
+  width: 60%; height: 70%;
+  background: linear-gradient(135deg, #fafafa 0%, #d0d6e0 100%);
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+.console-shape::before {
+  content: ""; position: absolute;
+  left: 50%; top: 50%; width: 8%; height: 70%;
+  background: var(--canvas-dark);
+  transform: translate(-50%, -50%);
+}
+.console-shape::after {
+  content: ""; position: absolute;
+  left: 10%; bottom: 12%; width: 35%; height: 6px;
+  background: var(--primary); border-radius: 4px;
+}
+.game-art .meta { color: var(--on-dark); }
+.game-art .title { font-size: 24px; font-weight: 700; letter-spacing: 0.4px; margin: 0 0 4px; line-height: 1.1; }
+.game-art .platform { font-size: 13px; font-weight: 500; letter-spacing: 0.6px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+
+/* —— Hero composition (text + art) —— */
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px;
+  align-items: center;
+}
+@media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+.hero-art {
+  border-radius: 8px; aspect-ratio: 16 / 10; position: relative; overflow: hidden;
+  background: var(--surface-dark-elevated);
+}
+.hero-art::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(0,112,209,0.45) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(255,138,0,0.18) 0%, transparent 55%),
+    linear-gradient(135deg, #0a1830 0%, #1a0828 60%, #050505 100%);
+}
+.hero-art .console-render { z-index: 2; }
+.hero-art .badge-info { position: absolute; top: 16px; left: 16px; z-index: 3; }
+
+/* —— Badge —— */
+.badge-info {
+  display: inline-block; background: var(--primary); color: var(--on-primary);
+  font-size: 12px; font-weight: 500; letter-spacing: 0.2px;
+  padding: 4px 10px; border-radius: 9999px;
+}
+.badge-orange { background: var(--commerce); }
+
+/* —— Section heads —— */
+.section-head { margin-bottom: 48px; }
+.section-head .eyebrow {
+  font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--mute-light); margin-bottom: 16px; display: block;
+}
+.band-dark .section-head .eyebrow, .band-blue .section-head .eyebrow { color: var(--on-dark-mute); }
+.section-head .lead { font-size: 18px; line-height: 1.55; max-width: 620px; margin: 16px 0 0; }
+.band-light .section-head .lead { color: var(--body-light); }
+.band-dark .section-head .lead { color: var(--body-dark); }
+
+/* —— Game tile rail —— */
+.tile-rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+@media (max-width: 1024px) { .tile-rail { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .tile-rail { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .tile-rail { grid-template-columns: 1fr; } }
+.game-tile { display: flex; flex-direction: column; gap: 12px; cursor: pointer; }
+.game-tile .art { aspect-ratio: 16 / 9; border-radius: 8px; position: relative; overflow: hidden; background: var(--surface-dark-card); }
+.game-tile .art::before { content: ""; position: absolute; inset: 0; }
+.game-tile .meta { font-size: 16px; font-weight: 500; }
+.game-tile .platform { font-size: 13px; color: var(--mute-dark); letter-spacing: 0.4px; }
+.band-light .game-tile .platform { color: var(--mute-light); }
+
+/* —— Filter pills —— */
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.filter-pill {
+  background: var(--surface-filter); color: var(--ink);
+  font-size: 14px; font-weight: 700; letter-spacing: 0.324px;
+  padding: 8px 16px; border-radius: 9999px; cursor: pointer;
+  border: 1px solid var(--ash-light);
+}
+.band-dark .filter-pill { background: rgba(255,255,255,0.08); color: var(--on-dark); border-color: var(--hairline-dark); }
+.filter-pill.active { background: var(--canvas-light); color: var(--ink); border-color: var(--canvas-light); }
+
+/* —— PS Plus banner —— */
+.psp-banner {
+  background: var(--surface-dark-elevated);
+  color: var(--on-dark);
+  border-radius: 8px;
+  padding: 48px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.psp-banner::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  background: linear-gradient(90deg, var(--psp-gold-1) 0%, var(--psp-gold-2) 50%, var(--psp-gold-3) 100%);
+}
+.psp-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  align-items: center;
+}
+@media (max-width: 880px) { .psp-grid { grid-template-columns: 1fr; gap: 32px; } }
+.psp-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.psp-tier {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--hairline-dark);
+  border-radius: 8px; padding: 20px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.psp-tier .tier-name {
+  font-size: 13px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+  background: linear-gradient(90deg, var(--psp-gold-1) 0%, var(--psp-gold-3) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.psp-tier .tier-price { font-size: 22px; font-weight: 300; letter-spacing: 0.1px; }
+.psp-tier .tier-price small { font-size: 13px; color: var(--mute-dark); font-weight: 400; }
+.psp-tier .tier-bullet { font-size: 13px; color: var(--body-dark); }
+
+/* —— Product / feature card —— */
+.product-card {
+  background: var(--surface-card); color: var(--ink);
+  border-radius: 8px; padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.product-card .icon {
+  width: 48px; height: 48px; border-radius: 8px;
+  background: var(--primary); color: var(--on-primary);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.product-card .title { font-size: 22px; font-weight: 300; letter-spacing: 0.1px; }
+.product-card .desc { font-size: 16px; color: var(--body-light); line-height: 1.5; }
+
+/* —— News strip —— */
+.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 880px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .news-grid { grid-template-columns: 1fr; } }
+.news-card { display: flex; flex-direction: column; gap: 16px; }
+.news-card .thumb {
+  aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; position: relative;
+  background: var(--surface-dark-card);
+}
+.news-card .thumb::before { content: ""; position: absolute; inset: 0; }
+.news-card .tag {
+  font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--primary);
+}
+.news-card h3 { font-size: 22px; font-weight: 300; line-height: 1.25; letter-spacing: 0.1px; margin: 0; }
+.news-card .meta { font-size: 13px; color: var(--mute-light); }
+
+/* —— Anniversary block —— */
+.anniversary {
+  text-align: center; padding: 32px 0;
+}
+.anniversary .years {
+  font-size: clamp(80px, 14vw, 160px); font-weight: 300; line-height: 1; letter-spacing: -2px;
+  background: linear-gradient(135deg, #ffffff 0%, #5da3ff 50%, #0070d1 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin: 0;
+}
+.anniversary .sub { font-size: 22px; font-weight: 300; color: var(--on-dark-mute); letter-spacing: 0.2px; margin-top: 8px; }
+
+/* —— Footer —— */
+footer {
+  background: var(--primary); color: var(--on-primary);
+  padding: 48px 0 32px;
+}
+.footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+@media (max-width: 900px) { .footer-top { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; } }
+@media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
+.footer-brand { display: flex; flex-direction: column; gap: 16px; }
+.footer-brand .ps-wordmark {
+  font: 400 38px/1 "Roboto", sans-serif; letter-spacing: -1.5px; color: var(--on-primary);
+}
+.footer-brand p { font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.85); margin: 0; max-width: 280px; }
+.footer-col h4 { font-size: 14px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; margin: 0 0 16px; color: var(--on-primary); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a { font-size: 14px; color: rgba(255,255,255,0.88); }
+.footer-col ul a:hover { color: var(--on-primary); text-decoration: underline; text-underline-offset: 3px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.18);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+  font-size: 12px; color: rgba(255,255,255,0.8);
+}
+
+/* —— DS section —— */
+.ds-block { margin-bottom: 64px; }
+.ds-heading {
+  font-size: 22px; font-weight: 300; letter-spacing: 0.1px;
+  margin: 0 0 16px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--hairline-light);
+}
+.band-dark .ds-heading { border-bottom-color: var(--hairline-dark); }
+.ds-caption { font-size: 13px; color: var(--mute-light); margin: 16px 0 12px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase; }
+.band-dark .ds-caption { color: var(--mute-dark); }
+
+.ds-sw-grid { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .ds-sw-grid { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { border-radius: 8px; overflow: hidden; background: var(--surface-card); border: 1px solid var(--hairline-light); }
+.band-dark .ds-sw { background: var(--surface-dark-card); border-color: var(--hairline-dark); }
+.ds-sw .chip { height: 72px; }
+.ds-sw .meta { padding: 10px 14px; }
+.ds-sw .name { font-size: 13px; font-weight: 500; letter-spacing: 0.2px; }
+.ds-sw .val { font-size: 12px; opacity: 0.7; margin-top: 2px; font-family: "Inter", monospace; }
+
+.ds-typescale { border-radius: 8px; overflow: hidden; background: var(--surface-card); border: 1px solid var(--hairline-light); }
+.ds-tr { display: grid; grid-template-columns: 140px 260px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline-light); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 12px; font-weight: 500; letter-spacing: 0.4px; font-family: "Inter", monospace; }
+.ds-spec { font-size: 12px; color: var(--mute-light); font-family: "Inter", monospace; }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(5, 1fr); max-width: 720px; }
+@media (max-width: 600px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-rad .box { width: 80px; height: 80px; background: var(--primary); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 880px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini { border-radius: 8px; padding: 24px; border: 1px solid var(--hairline-light); background: var(--surface-card); }
+.ds-card-mini.dark { background: var(--surface-dark-card); border-color: var(--hairline-dark); color: var(--on-dark); }
+.ds-card-mini.blue { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.ds-card-mini h4 { margin: 0 0 8px; font-size: 18px; font-weight: 500; letter-spacing: 0.2px; }
+.ds-card-mini p { margin: 0; font-size: 14px; line-height: 1.5; opacity: 0.85; }
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--primary); color: var(--on-primary);
+  padding: 10px 18px; border-radius: 9999px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.45px;
+  border: 1px solid transparent;
+}
+.src-link:hover { background: var(--primary-pressed); }
+</style>
+</head>
+<body>
+
+<header class="topnav band-dark"><div class="wrap row">
+  <a class="brand-ps" href="#" aria-label="PlayStation">
+    <svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true">
+      <path d="M5.4 1.2v17.5c1.4.4 2.6.2 2.6-1.5V5.2c0-.6.2-1 .6-1 .5 0 .7.5.7 1.2v9.4c2.3.8 5.6.7 5.6-3.6V3.7C14.9 1.5 12.8.5 9.9.5 8.4.5 6.7.7 5.4 1.2z" fill="#fff"/>
+      <path d="M0 17.4v3l11-3.9v-2.2c0-.7-.4-.9-1-.7L0 17.4z" fill="#fff"/>
+      <path d="M16.8 11.1c2.3.7 6 .7 7.5-1.5V5.7c0-.6.2-1 .7-1 .4 0 .6.4.6 1v3.8c1.5-.4 3.1-1.1 3.1-3 0-2.2-2.5-3.4-4.4-3.4-2.3 0-7.5.3-7.5 4v4z" fill="#fff"/>
+    </svg>
+  </a>
+  <nav class="nav-links">
+    <a href="#">Games</a>
+    <a href="#">PS5</a>
+    <a href="#">PS4</a>
+    <a href="#">PS VR2</a>
+    <a href="#">Subscriptions</a>
+    <a href="#">Hardware</a>
+    <a href="#">News</a>
+    <a href="#">Shop</a>
+    <a href="#">Support</a>
+  </nav>
+  <div class="nav-right">
+    <a class="nav-icon" aria-label="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></a>
+    <a class="nav-icon" aria-label="cart"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></a>
+    <a class="nav-icon" aria-label="account" style="background: rgba(255,255,255,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/></svg></a>
+  </div>
+</div></header>
+
+<div class="band-dark"><div class="wrap subnav">
+  <div class="crumbs">
+    <a href="#" class="active">Home</a>
+    <a href="#">PS5</a>
+    <a href="#">PS5 games</a>
+    <a href="#">PS Plus</a>
+    <a href="#">Accessories</a>
+    <a href="#">PS VR2</a>
+  </div>
+</div></div>
+
+<!-- HERO BAND — DARK -->
+<section class="band band-dark hero"><div class="wrap">
+  <div class="hero-grid">
+    <div class="copy">
+      <span class="eyebrow">PlayStation 5</span>
+      <h1 class="display-xl">Play has<br/>no limits.</h1>
+      <p class="lead">Stunning games. Immersive haptics. Lightning-fast loads. Step into the worlds you love with a console designed for the next generation of play.</p>
+      <div class="cta-row">
+        <a href="#" class="btn btn-primary">Learn more</a>
+        <a href="#" class="btn btn-commerce">Buy now</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <span class="badge-info">New</span>
+      <div class="console-render">
+        <div class="console-shape"></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CONSOLE SHOWCASE — LIGHT -->
+<section class="band band-light"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Hardware</span>
+    <h2 class="display-lg">Discover all PS5 consoles and accessories.</h2>
+    <p class="lead" style="color: var(--body-light);">From the slim console to the DualSense Edge controller, PlayStation hardware is engineered to disappear into the game.</p>
+  </div>
+  <div class="tile-rail">
+    <div class="game-tile">
+      <div class="art art-console"><div class="console-render"><div class="console-shape"></div></div></div>
+      <div class="meta">PS5 Console</div>
+      <div class="platform">From €549.99</div>
+    </div>
+    <div class="game-tile">
+      <div class="art art-console" style="--c: #f5f7fa;"><div class="console-render"><div class="console-shape" style="width: 55%; height: 25%; border-radius: 100px / 50%;"></div></div></div>
+      <div class="meta">DualSense Wireless Controller</div>
+      <div class="platform">From €69.99</div>
+    </div>
+    <div class="game-tile">
+      <div class="art art-console"><div class="console-render"><div class="console-shape" style="width: 70%; height: 50%; background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);"></div></div></div>
+      <div class="meta">PS VR2 Headset</div>
+      <div class="platform">From €599.99</div>
+    </div>
+    <div class="game-tile">
+      <div class="art art-console"><div class="console-render"><div class="console-shape" style="width: 50%; height: 65%; border-radius: 16px;"></div></div></div>
+      <div class="meta">Pulse Elite Headset</div>
+      <div class="platform">From €149.99</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- GAMES RAIL — DARK -->
+<section class="band band-dark"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Coming soon</span>
+    <h2 class="display-lg">Great PS4 &amp; PS5 games out now<br/>or coming soon.</h2>
+  </div>
+  <div class="filter-row">
+    <button class="filter-pill active">All</button>
+    <button class="filter-pill">Coming Soon</button>
+    <button class="filter-pill">Recently Released</button>
+    <button class="filter-pill">PS VR2</button>
+    <button class="filter-pill">Exclusives</button>
+  </div>
+  <div class="tile-rail">
+    <div class="game-tile">
+      <div class="art art-marathon">
+        <span style="position: absolute; top: 16px; left: 16px; z-index: 3;" class="badge-info badge-orange">Pre-order</span>
+        <div style="position: absolute; left: 20px; bottom: 20px; z-index: 3; color: #deff20; font-weight: 700; font-size: 22px; letter-spacing: 6px;">MARATHON</div>
+      </div>
+      <div class="meta">Marathon</div>
+      <div class="platform">PS5 · Bungie</div>
+    </div>
+    <div class="game-tile">
+      <div class="art art-cosmic">
+        <span style="position: absolute; top: 16px; left: 16px; z-index: 3;" class="badge-info">New</span>
+        <div style="position: absolute; left: 20px; bottom: 20px; z-index: 3; color: #fff; font-weight: 300; font-size: 20px; letter-spacing: 1px;">Starfield: Eternal</div>
+      </div>
+      <div class="meta">Starfield: Eternal</div>
+      <div class="platform">PS5 · Bethesda</div>
+    </div>
+    <div class="game-tile">
+      <div class="art art-racer">
+        <span style="position: absolute; top: 16px; left: 16px; z-index: 3;" class="badge-info badge-orange">Out now</span>
+        <div style="position: absolute; left: 20px; bottom: 20px; z-index: 3; color: #fff; font-weight: 700; font-size: 22px; font-style: italic;">GT8</div>
+      </div>
+      <div class="meta">Gran Turismo 8</div>
+      <div class="platform">PS5 · Polyphony</div>
+    </div>
+    <div class="game-tile">
+      <div class="art art-survival">
+        <span style="position: absolute; top: 16px; left: 16px; z-index: 3;" class="badge-info">Coming soon</span>
+        <div style="position: absolute; left: 20px; bottom: 20px; z-index: 3; color: #fff; font-weight: 700; font-size: 18px; letter-spacing: 0.5px;">Death Stranding 3</div>
+      </div>
+      <div class="meta">Death Stranding 3</div>
+      <div class="platform">PS5 · Kojima Productions</div>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: center; gap: 8px; margin-top: 32px;">
+    <span style="width: 8px; height: 8px; border-radius: 9999px; background: var(--on-dark);"></span>
+    <span style="width: 8px; height: 8px; border-radius: 9999px; background: var(--ash-dark);"></span>
+    <span style="width: 8px; height: 8px; border-radius: 9999px; background: var(--ash-dark);"></span>
+    <span style="width: 8px; height: 8px; border-radius: 9999px; background: var(--ash-dark);"></span>
+  </div>
+</div></section>
+
+<!-- PS PLUS BANNER — LIGHT -->
+<section class="band band-light"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Membership</span>
+    <h2 class="display-lg">Discover PlayStation Plus.</h2>
+  </div>
+  <div class="psp-banner">
+    <div class="psp-grid">
+      <div>
+        <h3 class="heading-xl" style="margin-bottom: 16px;">A growing library. Online multiplayer. Exclusive deals.</h3>
+        <p class="body-md" style="color: var(--body-dark); margin: 0 0 24px;">Three tiers, hundreds of games. Choose the membership that fits how you play, then dive into PS5 and PS4 titles refreshed every month.</p>
+        <a href="#" class="btn btn-primary">Join PlayStation Plus</a>
+      </div>
+      <div class="psp-tiers">
+        <div class="psp-tier">
+          <div class="tier-name">Essential</div>
+          <div class="tier-price">€8.99<small>/mo</small></div>
+          <div class="tier-bullet">2 games / month</div>
+          <div class="tier-bullet">Online multiplayer</div>
+        </div>
+        <div class="psp-tier">
+          <div class="tier-name">Extra</div>
+          <div class="tier-price">€13.99<small>/mo</small></div>
+          <div class="tier-bullet">400+ game catalog</div>
+          <div class="tier-bullet">Day-one releases</div>
+        </div>
+        <div class="psp-tier">
+          <div class="tier-name">Premium</div>
+          <div class="tier-price">€16.99<small>/mo</small></div>
+          <div class="tier-bullet">Classics catalog</div>
+          <div class="tier-bullet">Cloud streaming</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 30 YEARS — DARK GRADIENT -->
+<section class="band band-gradient"><div class="wrap">
+  <div class="anniversary">
+    <span class="eyebrow" style="color: var(--on-dark-mute); font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase;">On PlayStation</span>
+    <h2 class="years">30</h2>
+    <p class="sub">Years of PlayStation. Three decades of play.</p>
+    <div style="margin-top: 32px;"><a href="#" class="btn btn-secondary-dark">Explore the timeline →</a></div>
+  </div>
+</div></section>
+
+<!-- NEWS STRIP — LIGHT -->
+<section class="band band-light"><div class="wrap">
+  <div class="section-head" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
+    <div>
+      <span class="eyebrow">PlayStation Blog</span>
+      <h2 class="display-lg" style="margin-top: 8px;">Latest stories &amp; updates.</h2>
+    </div>
+    <a href="#" class="btn btn-secondary-light btn-sm">See all news</a>
+  </div>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="thumb art-rpg"></div>
+      <span class="tag">Hardware</span>
+      <h3>The DualSense Edge: a year inside the pro controller.</h3>
+      <span class="meta">May 18, 2026 · 6 min read</span>
+    </div>
+    <div class="news-card">
+      <div class="thumb art-vr"></div>
+      <span class="tag">PS VR2</span>
+      <h3>Five new PS VR2 titles announced for summer.</h3>
+      <span class="meta">May 16, 2026 · 4 min read</span>
+    </div>
+    <div class="news-card">
+      <div class="thumb art-marathon"></div>
+      <span class="tag">Game Reveal</span>
+      <h3>Bungie's Marathon gets a launch date.</h3>
+      <span class="meta">May 12, 2026 · 8 min read</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============================================================== -->
+<!-- PART B — DESIGN SYSTEM REFERENCE (light canvas)                 -->
+<!-- ============================================================== -->
+<section class="band band-light" style="padding-top: 96px;"><div class="wrap">
+  <div class="section-head" style="margin-bottom: 64px;">
+    <span class="eyebrow">Design System</span>
+    <h2 class="display-lg">Three canvases. One brand voice.</h2>
+    <p class="lead" style="color: var(--body-light);">A chapter-driven layout system: pure black, true white, and PlayStation Blue alternate down the page. The chrome is quiet — light-weight type, pill CTAs, 8px cards. Source — <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.playstation.html" target="_blank" rel="noopener" style="color: var(--link-light); text-decoration: underline; text-underline-offset: 3px;">DESIGN.md</a>.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand — PlayStation Blue carries every primary action</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#0070d1"></div><div class="meta"><div class="name">primary</div><div class="val">#0070d1</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0064b7"></div><div class="meta"><div class="name">primary-pressed</div><div class="val">#0064b7</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#004d8d"></div><div class="meta"><div class="name">primary-active</div><div class="val">#004d8d</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#d53b00"></div><div class="meta"><div class="name">commerce</div><div class="val">#d53b00</div></div></div>
+    </div>
+
+    <p class="ds-caption">Canvas — the three-chapter system</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">canvas-dark</div><div class="val">#000000</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff; border-bottom: 1px solid var(--hairline-light);"></div><div class="meta"><div class="name">canvas-light</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0070d1"></div><div class="meta"><div class="name">primary band</div><div class="val">#0070d1</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#121314"></div><div class="meta"><div class="name">dark-elevated</div><div class="val">#121314</div></div></div>
+    </div>
+
+    <p class="ds-caption">Surface — alternating card chrome</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#181818"></div><div class="meta"><div class="name">dark-card</div><div class="val">#181818</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f5f7fa"></div><div class="meta"><div class="name">surface-card</div><div class="val">#f5f7fa</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f3f3f3"></div><div class="meta"><div class="name">surface-soft</div><div class="val">#f3f3f3</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background: linear-gradient(90deg,#ffce21 0%, #f5a623 50%, #ee8e00 100%);"></div><div class="meta"><div class="name">PS+ gold</div><div class="val">gradient</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption">PlayStation SST → Roboto / Inter fallback. The light weight (300) on display is the brand voice.</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">54 · w300 · -0.1px · 1.25</span><div class="ds-sam" style="font-size:48px; font-weight:300; letter-spacing:-0.1px;">Play has no limits.</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">44 · w300 · 0.1px · 1.25</span><div class="ds-sam" style="font-size:38px; font-weight:300; letter-spacing:0.1px;">Great PS5 games coming soon</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">35 · w300 · 0 · 1.25</span><div class="ds-sam" style="font-size:32px; font-weight:300;">Section headline</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-xl</span><span class="ds-spec">28 · w300 · 0.1px · 1.25</span><div class="ds-sam" style="font-size:26px; font-weight:300; letter-spacing:0.1px;">PS Plus tier callout</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-md</span><span class="ds-spec">18 · w600 · 0 · 1.0</span><div class="ds-sam" style="font-size:18px; font-weight:600;">Strong nav label</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">18 · w400 · 0.1px · 1.5</span><div class="ds-sam" style="font-size:18px; color: var(--body-light);">Default paragraph copy across editorial.</div></div>
+      <div class="ds-tr"><span class="ds-tok">button-lg</span><span class="ds-spec">18 · w700 · 0.45px · 1.25</span><div class="ds-sam" style="font-size:18px; font-weight:700; letter-spacing:0.45px;">JOIN PS PLUS</div></div>
+      <div class="ds-tr"><span class="ds-tok">caption-md</span><span class="ds-spec">14 · w400 · 0 · 1.5</span><div class="ds-sam" style="font-size:14px; color: var(--mute-light);">Footer link / metadata</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius — pills for CTAs, 8px for cards</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:0"></div><span class="ds-tok">none</span><span class="ds-spec">0  · bands</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">sm</span><span class="ds-spec">4  · inputs</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="ds-tok">md</span><span class="ds-spec">8  · cards</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="ds-tok">lg</span><span class="ds-spec">16 · dialogs</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">full</span><span class="ds-spec">∞  · pills</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — always pill, always 48px high on primary</p>
+    <div class="ds-comp-row" style="background: var(--surface-soft); padding: 24px; border-radius: 8px;">
+      <a class="btn btn-primary">Primary blue</a>
+      <a class="btn btn-commerce">Buy now</a>
+      <a class="btn btn-secondary-light">Secondary · light</a>
+      <a class="btn btn-primary btn-sm">Compact pill</a>
+    </div>
+
+    <p class="ds-caption">Filter pills + info badges</p>
+    <div class="ds-comp-row">
+      <button class="filter-pill active">Active filter</button>
+      <button class="filter-pill" style="background: var(--surface-card); border-color: var(--ash-light);">Inactive</button>
+      <span class="badge-info">New</span>
+      <span class="badge-info badge-orange">Pre-order</span>
+      <span class="badge-info" style="background: var(--ink); color: var(--on-dark);">Coming Soon</span>
+    </div>
+
+    <p class="ds-caption">Card variants — three canvas modes</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-mini">
+        <h4>product-card · light</h4>
+        <p>Cool-blue-tinted #f5f7fa fill, 24px padding, 8px radius. PS Plus tier comparison, feature panels, news cards.</p>
+      </div>
+      <div class="ds-card-mini dark">
+        <h4>product-card · dark</h4>
+        <p>#181818 fill, 24px padding, 8px radius. Game tiles, dark-canvas editorial cards.</p>
+      </div>
+      <div class="ds-card-mini blue">
+        <h4>action moment · blue</h4>
+        <p>Pure PlayStation Blue fill, white on top. Reserved for the footer and the page's single "this is the action" band.</p>
+      </div>
+    </div>
+
+    <p class="ds-caption">PS Plus gradient — used exclusively on the PS Plus banner</p>
+    <div style="height: 60px; border-radius: 8px; background: linear-gradient(90deg, var(--psp-gold-1) 0%, var(--psp-gold-2) 50%, var(--psp-gold-3) 100%);"></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="ps-wordmark">PlayStation</div>
+      <p>An inspired study of PlayStation's three-canvas marketing system. Tokens and component spec sourced from awesome-design-md.</p>
+    </div>
+    <div class="footer-col">
+      <h4>PlayStation</h4>
+      <ul>
+        <li><a href="#">PS5</a></li>
+        <li><a href="#">PS4</a></li>
+        <li><a href="#">PS VR2</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Games</h4>
+      <ul>
+        <li><a href="#">All games</a></li>
+        <li><a href="#">PS Store</a></li>
+        <li><a href="#">PS Plus</a></li>
+        <li><a href="#">Exclusives</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <ul>
+        <li><a href="#">Sign in</a></li>
+        <li><a href="#">My account</a></li>
+        <li><a href="#">Library</a></li>
+        <li><a href="#">Friends</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help center</a></li>
+        <li><a href="#">Community</a></li>
+        <li><a href="#">PS Direct</a></li>
+        <li><a href="#">Refunds</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© Sony Interactive Entertainment (inspired) · Generated for design study</div>
+    <div>Canvas dark · canvas light · PlayStation Blue #0070d1 · Roboto Light</div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.playstation.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

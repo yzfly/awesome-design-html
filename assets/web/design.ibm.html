@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IBM — Inspired Design</title>
+<meta name="description" content="An IBM-inspired marketing page in faithful Carbon Design System: white canvas, IBM Blue accent, 0px corners, IBM Plex Sans at weight 300 for display. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #0f62fe;
+  --on-primary: #ffffff;
+  --blue-60: #0043ce;
+  --blue-80: #002d9c;
+  --blue-hover: #0050e6;
+
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-1: #f4f4f4;
+  --surface-2: #e0e0e0;
+  --inverse-canvas: #161616;
+  --inverse-surface-1: #262626;
+
+  /* Hairlines */
+  --hairline: #e0e0e0;
+  --hairline-strong: #161616;
+
+  /* Text */
+  --ink: #161616;
+  --ink-muted: #525252;
+  --ink-subtle: #8c8c8c;
+  --inverse-ink: #ffffff;
+  --inverse-ink-muted: #c6c6c6;
+
+  /* Semantic */
+  --success: #24a148;
+  --warning: #f1c21b;
+  --error: #da1e28;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--primary); color: #fff; }
+
+/* Layout */
+.wrap { max-width: 1312px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .wrap { padding: 0 16px; } }
+
+/* Eyebrow — sentence case, 14px, not all-caps */
+.eyebrow {
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 0.16px;
+  color: var(--ink-muted);
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+/* Utility bar */
+.utility-bar {
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--hairline);
+  height: 32px;
+  font-size: 12px; letter-spacing: 0.32px;
+  color: var(--ink-muted);
+}
+.utility-inner { height: 100%; display: flex; align-items: center; justify-content: flex-end; gap: 24px; }
+.utility-inner a { color: var(--ink-muted); }
+.utility-inner a:hover { color: var(--ink); }
+@media (max-width: 720px) { .utility-bar { display: none; } }
+
+/* Top nav */
+.top-nav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  height: 48px;
+  position: sticky; top: 0; z-index: 30;
+}
+.nav-inner { height: 100%; display: flex; align-items: center; gap: 24px; }
+.logo {
+  display: flex; align-items: center;
+  font-size: 14px; font-weight: 600;
+  color: var(--ink);
+  padding: 0 16px 0 0;
+  height: 100%;
+  border-right: 1px solid var(--hairline);
+}
+.logo-mark {
+  width: 56px; height: 22px; display: block;
+}
+.nav-center { display: flex; gap: 0; height: 100%; }
+.nav-center a {
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 0.16px;
+  color: var(--ink);
+  padding: 0 16px;
+  display: inline-flex; align-items: center;
+  height: 100%;
+}
+.nav-center a:hover { background: var(--surface-1); }
+.nav-right { margin-left: auto; display: flex; align-items: center; height: 100%; }
+.nav-icon {
+  width: 48px; height: 100%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
+}
+.nav-icon:hover { background: var(--surface-1); }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+/* Buttons — 0px corners, Carbon */
+.btn {
+  display: inline-flex; align-items: center; gap: 64px;
+  padding: 12px 16px;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 0.16px;
+  cursor: pointer; border: 1px solid transparent;
+  transition: background .12s ease;
+  text-decoration: none;
+  min-width: 0;
+  position: relative;
+}
+.btn .btn-icon { margin-left: auto; }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--blue-hover); }
+.btn-secondary { background: var(--ink); color: var(--inverse-ink); }
+.btn-secondary:hover { background: #2f2f2f; }
+.btn-tertiary {
+  background: transparent; color: var(--primary);
+  border: 1px solid var(--primary);
+}
+.btn-tertiary:hover { background: var(--primary); color: var(--on-primary); }
+.btn-ghost {
+  background: transparent; color: var(--primary);
+  padding-left: 0;
+}
+.btn-ghost:hover { color: var(--blue-60); }
+.btn-danger { background: var(--error); color: #fff; }
+
+/* Sections */
+section { padding: 64px 0; }
+@media (max-width: 720px) { section { padding: 48px 0; } }
+
+.section-head { max-width: 880px; margin-bottom: 48px; }
+.section-title {
+  font-size: 42px; font-weight: 300;
+  line-height: 1.2; letter-spacing: 0;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+.section-lede {
+  font-size: 18px; font-weight: 400;
+  line-height: 1.5; color: var(--ink-muted);
+  margin: 0;
+}
+
+/* HERO */
+.hero {
+  padding: 80px 0 96px;
+  position: relative;
+  background:
+    radial-gradient(1200px 600px at 90% -10%, rgba(15,98,254,0.08), transparent 60%),
+    var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+}
+.hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+@media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+.hero h1 {
+  font-size: 76px; font-weight: 300;
+  line-height: 1.17; letter-spacing: -0.5px;
+  color: var(--ink);
+  margin: 0 0 24px;
+}
+@media (max-width: 720px) { .hero h1 { font-size: 42px; letter-spacing: -0.3px; } }
+.hero p.lede {
+  font-size: 18px; font-weight: 400;
+  line-height: 1.5; color: var(--ink-muted);
+  margin: 0 0 32px;
+  max-width: 540px;
+}
+.hero-cta-row { display: flex; gap: 1px; flex-wrap: wrap; }
+.hero-cta-row .btn { min-width: 256px; }
+@media (max-width: 720px) { .hero-cta-row .btn { min-width: 0; flex: 1; } }
+
+/* Hero illustration — dotted Carbon mesh */
+.hero-illo {
+  position: relative;
+  height: 360px;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(15,98,254,0.18) 1px, transparent 0) 0 0/16px 16px,
+    linear-gradient(135deg, rgba(15,98,254,0.06), rgba(15,98,254,0));
+  border: 1px solid var(--hairline);
+}
+.hero-illo::after {
+  content: '';
+  position: absolute; right: -1px; bottom: -1px;
+  width: 96px; height: 96px;
+  background: var(--primary);
+}
+.hero-illo .illo-mark {
+  position: absolute; left: 24px; bottom: 24px;
+  color: var(--ink); font-size: 12px; letter-spacing: 0.32px;
+  text-transform: lowercase;
+}
+
+/* DASHBOARD CENTERPIECE */
+.dash-section { background: var(--surface-1); padding: 96px 0; }
+.dash {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  display: grid; grid-template-columns: 200px 1fr;
+}
+@media (max-width: 900px) { .dash { grid-template-columns: 1fr; } }
+.dash-side {
+  border-right: 1px solid var(--hairline);
+  padding: 16px 0;
+}
+.dash-side .group-label {
+  padding: 8px 16px;
+  font-size: 12px; letter-spacing: 0.32px;
+  color: var(--ink-subtle);
+  text-transform: uppercase;
+}
+.dash-side a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px;
+  font-size: 14px; letter-spacing: 0.16px;
+  color: var(--ink);
+  border-left: 2px solid transparent;
+}
+.dash-side a.active {
+  background: var(--surface-1);
+  border-left-color: var(--primary);
+  font-weight: 600;
+}
+.dash-main { display: flex; flex-direction: column; }
+.dash-bar {
+  height: 48px;
+  display: flex; align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--hairline);
+  gap: 24px;
+  font-size: 12px; letter-spacing: 0.32px;
+  color: var(--ink-muted);
+}
+.dash-bar .crumb { color: var(--ink-subtle); }
+.dash-bar .crumb.now { color: var(--ink); }
+.dash-tabs { display: flex; height: 48px; border-bottom: 1px solid var(--hairline); }
+.dash-tabs button {
+  height: 48px; padding: 0 20px;
+  background: transparent; border: 0; border-bottom: 2px solid transparent;
+  font: inherit; font-size: 14px; letter-spacing: 0.16px;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+.dash-tabs button.on { color: var(--ink); font-weight: 600; border-bottom-color: var(--primary); }
+.dash-body { padding: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--hairline); }
+@media (max-width: 720px) { .dash-body { grid-template-columns: repeat(2,1fr); } }
+.kpi {
+  background: var(--canvas);
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kpi .lbl { font-size: 12px; letter-spacing: 0.32px; color: var(--ink-muted); text-transform: uppercase; }
+.kpi .num { font-size: 42px; font-weight: 300; line-height: 1; letter-spacing: 0; color: var(--ink); }
+.kpi .delta { font-size: 12px; letter-spacing: 0.32px; color: var(--success); }
+.kpi .delta.dn { color: var(--error); }
+
+.dash-chart {
+  grid-column: 1 / -1;
+  background: var(--canvas);
+  padding: 24px;
+}
+.dash-chart .chart-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+.dash-chart h4 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: 0; }
+.chart-meta { font-size: 12px; letter-spacing: 0.32px; color: var(--ink-muted); }
+.chart-svg { width: 100%; height: 180px; display: block; }
+
+.dash-table {
+  grid-column: 1 / -1;
+  background: var(--canvas);
+}
+.dash-table table { width: 100%; border-collapse: collapse; }
+.dash-table th, .dash-table td {
+  text-align: left; padding: 14px 16px;
+  font-size: 14px; letter-spacing: 0.16px;
+  border-bottom: 1px solid var(--hairline);
+}
+.dash-table th { background: var(--surface-1); color: var(--ink); font-weight: 600; font-size: 12px; letter-spacing: 0.32px; text-transform: uppercase; }
+.dash-table td.status { display: inline-flex; align-items: center; gap: 8px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 8px;
+  background: var(--surface-1);
+  color: var(--ink);
+  font-size: 12px; letter-spacing: 0.32px;
+}
+.tag .dot { width: 8px; height: 8px; background: var(--success); display: inline-block; }
+.tag.warn .dot { background: var(--warning); }
+.tag.err .dot { background: var(--error); }
+
+/* FEATURE GRID */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+@media (max-width: 960px) { .feature-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--canvas);
+  padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 16px;
+  min-height: 280px;
+}
+.feature-card .ico {
+  width: 28px; height: 28px; color: var(--primary);
+}
+.feature-card h3 {
+  font-size: 24px; font-weight: 400;
+  line-height: 1.33; letter-spacing: 0;
+  margin: 0;
+  color: var(--ink);
+}
+.feature-card p {
+  font-size: 14px; letter-spacing: 0.16px; line-height: 1.5;
+  color: var(--ink-muted); margin: 0;
+}
+.feature-card a.more {
+  margin-top: auto;
+  color: var(--primary);
+  font-size: 14px; letter-spacing: 0.16px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.feature-card a.more:hover { color: var(--blue-60); }
+
+/* LOGO STRIP */
+.logo-band {
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--canvas);
+}
+.logo-row {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  border-left: 1px solid var(--hairline);
+}
+@media (max-width: 900px) { .logo-row { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 480px) { .logo-row { grid-template-columns: repeat(2,1fr); } }
+.logo-tile {
+  border-right: 1px solid var(--hairline);
+  padding: 32px 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-muted);
+  font-size: 16px; font-weight: 600; letter-spacing: 0;
+  min-height: 96px;
+}
+
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card { background: var(--canvas); padding: 32px; display: flex; flex-direction: column; gap: 16px; min-height: 420px; }
+.pricing-card.featured { background: var(--inverse-canvas); color: var(--inverse-ink); }
+.pricing-card.featured h3, .pricing-card.featured .price { color: var(--inverse-ink); }
+.pricing-card.featured p, .pricing-card.featured ul { color: var(--inverse-ink-muted); }
+.pricing-card.featured ul li::before { background: var(--primary); }
+.pricing-card h3 { margin: 0; font-size: 20px; font-weight: 400; letter-spacing: 0; }
+.pricing-card .price {
+  font-size: 42px; font-weight: 300;
+  line-height: 1.2; letter-spacing: 0;
+  color: var(--ink);
+}
+.pricing-card .price small { font-size: 14px; color: var(--ink-muted); font-weight: 400; letter-spacing: 0.16px; }
+.pricing-card.featured .price small { color: var(--inverse-ink-muted); }
+.pricing-card p { margin: 0; font-size: 14px; color: var(--ink-muted); letter-spacing: 0.16px; }
+.pricing-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.pricing-card ul li { font-size: 14px; letter-spacing: 0.16px; color: var(--ink); padding-left: 20px; position: relative; }
+.pricing-card ul li::before { content:''; position: absolute; left: 0; top: 8px; width: 12px; height: 1px; background: var(--ink); }
+.pricing-card .cta { margin-top: auto; }
+
+/* CTA BANNER */
+.cta-banner {
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 48px;
+  display: grid; grid-template-columns: 1.4fr auto; gap: 32px; align-items: center;
+}
+@media (max-width: 720px) { .cta-banner { grid-template-columns: 1fr; padding: 32px 24px; } }
+.cta-banner h3 { margin: 0; font-size: 32px; font-weight: 400; line-height: 1.25; letter-spacing: 0; }
+.cta-banner p { margin: 8px 0 0; font-size: 16px; letter-spacing: 0.16px; opacity: 0.92; }
+.cta-banner .btn-secondary { background: var(--canvas); color: var(--primary); }
+.cta-banner .btn-secondary:hover { background: #e9eaec; }
+
+/* ─── DESIGN SYSTEM SECTION ─── */
+.ds-section { background: var(--canvas); border-top: 1px solid var(--hairline); padding: 96px 0; }
+.ds-section .section-title { font-size: 60px; font-weight: 300; letter-spacing: -0.4px; line-height: 1.17; }
+.ds-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 16px;
+  color: var(--primary); font-size: 14px; letter-spacing: 0.16px;
+}
+.ds-row {
+  display: grid; grid-template-columns: 240px 1fr;
+  gap: 48px;
+  padding: 48px 0;
+  border-top: 1px solid var(--hairline);
+}
+@media (max-width: 900px) { .ds-row { grid-template-columns: 1fr; gap: 16px; } }
+.ds-row h3 {
+  font-size: 32px; font-weight: 300; letter-spacing: 0; line-height: 1.25;
+  margin: 0 0 8px;
+}
+.ds-sub { font-size: 12px; letter-spacing: 0.32px; color: var(--ink-muted); }
+
+.color-group { margin-bottom: 32px; }
+.color-group h4 {
+  margin: 0 0 16px;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.16px;
+  color: var(--ink);
+}
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+.swatch { background: var(--canvas); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.swatch .chip { height: 56px; border: 1px solid var(--hairline); }
+.swatch .chip-label { font-size: 14px; font-weight: 600; letter-spacing: 0.16px; }
+.swatch .chip-hex { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-muted); letter-spacing: 0; }
+
+/* Typography table */
+.type-table {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--hairline);
+}
+.type-row {
+  display: grid; grid-template-columns: 200px 100px 80px 1fr;
+  gap: 24px;
+  align-items: baseline;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hairline);
+}
+.type-row:last-child { border-bottom: 0; }
+@media (max-width: 720px) { .type-row { grid-template-columns: 1fr; } }
+.type-name { font-size: 14px; font-weight: 600; letter-spacing: 0.16px; }
+.type-meta { font-size: 12px; letter-spacing: 0.32px; color: var(--ink-muted); font-family: "IBM Plex Mono", monospace; }
+.type-sample { color: var(--ink); }
+.t-display-xl { font-size: 60px; font-weight: 300; line-height: 1.17; letter-spacing: -0.4px; }
+.t-display-md { font-size: 42px; font-weight: 300; line-height: 1.2; }
+.t-headline { font-size: 32px; font-weight: 400; line-height: 1.25; }
+.t-card-title { font-size: 24px; font-weight: 400; line-height: 1.33; }
+.t-body-lg { font-size: 18px; line-height: 1.5; }
+.t-body { font-size: 16px; line-height: 1.5; letter-spacing: 0.16px; }
+.t-caption { font-size: 12px; letter-spacing: 0.32px; }
+
+/* Radius ladder */
+.radius-row { display: flex; gap: 24px; align-items: flex-end; flex-wrap: wrap; }
+.radius-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.radius-tile .box {
+  width: 88px; height: 88px;
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+}
+.radius-tile .lab { font-size: 12px; letter-spacing: 0.32px; color: var(--ink-muted); }
+.radius-tile .val { font-size: 14px; font-weight: 600; letter-spacing: 0.16px; }
+.r-none .box { border-radius: 0; }
+.r-xs .box   { border-radius: 2px; }
+.r-sm .box   { border-radius: 4px; }
+.r-md .box   { border-radius: 6px; }
+.r-lg .box   { border-radius: 8px; }
+.r-pill .box { border-radius: 9999px; width: 160px; }
+
+/* Component matrix */
+.comp-matrix {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+@media (max-width: 900px) { .comp-matrix { grid-template-columns: 1fr; } }
+.comp-cell { background: var(--canvas); padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.comp-cell h5 {
+  margin: 0;
+  font-size: 12px; letter-spacing: 0.32px; text-transform: uppercase;
+  color: var(--ink-muted); font-weight: 600;
+}
+.comp-stack { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.input-rect {
+  width: 100%; height: 44px;
+  padding: 11px 16px;
+  background: var(--surface-1);
+  border: 0; border-bottom: 1px solid var(--ink);
+  font: inherit; font-size: 14px; letter-spacing: 0.16px;
+  color: var(--ink);
+}
+.input-rect:focus { outline: 0; border-bottom: 2px solid var(--primary); }
+
+.carbon-tabs { display: flex; border-bottom: 1px solid var(--hairline); }
+.carbon-tabs span {
+  padding: 12px 16px;
+  font-size: 14px; letter-spacing: 0.16px; color: var(--ink-muted);
+  border-bottom: 2px solid transparent;
+}
+.carbon-tabs span.on { color: var(--ink); font-weight: 600; border-bottom-color: var(--primary); }
+
+/* Footer */
+.footer {
+  background: var(--inverse-canvas);
+  color: var(--inverse-ink-muted);
+  padding: 64px 0 32px;
+}
+.footer-inner { padding: 0 32px; max-width: 1312px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr repeat(4, 1fr);
+  gap: 32px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--inverse-surface-1);
+}
+@media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+.footer-brand h4 { color: var(--inverse-ink); font-size: 24px; font-weight: 400; margin: 0 0 16px; letter-spacing: 0; }
+.footer-brand p { margin: 0; font-size: 14px; letter-spacing: 0.16px; color: var(--inverse-ink-muted); max-width: 320px; }
+.footer-col h5 { color: var(--inverse-ink); font-size: 14px; font-weight: 600; letter-spacing: 0.16px; margin: 0 0 16px; }
+.footer-col a { display: block; color: var(--inverse-ink-muted); font-size: 14px; letter-spacing: 0.16px; padding: 6px 0; }
+.footer-col a:hover { color: var(--inverse-ink); }
+.footer-bottom {
+  padding-top: 24px;
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  font-size: 12px; letter-spacing: 0.32px; color: var(--inverse-ink-muted);
+}
+
+/* Floating DESIGN.md */
+.floating-design-link {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--primary); color: var(--on-primary);
+  padding: 12px 16px; border-radius: 0;
+  font-size: 13px; font-weight: 400; letter-spacing: 0.16px;
+  z-index: 50;
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--primary);
+}
+.floating-design-link:hover { background: var(--blue-hover); border-color: var(--blue-hover); }
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="utility-inner wrap">
+    <a href="#">IBM Cloud</a>
+    <a href="#">Docs</a>
+    <a href="#">Support</a>
+    <a href="#">Contact</a>
+  </div>
+</div>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="nav-inner wrap">
+    <a class="logo" href="#" aria-label="IBM home">
+      <svg class="logo-mark" viewBox="0 0 56 22" aria-hidden="true">
+        <g fill="currentColor">
+          <!-- IBM 8-bar mark in simplified form -->
+          <rect x="0"  y="0"  width="14" height="2"/>
+          <rect x="0"  y="4"  width="14" height="2"/>
+          <rect x="0"  y="8"  width="14" height="2"/>
+          <rect x="0"  y="12" width="14" height="2"/>
+          <rect x="0"  y="16" width="14" height="2"/>
+          <rect x="0"  y="20" width="14" height="2"/>
+          <rect x="18" y="0"  width="14" height="2"/>
+          <rect x="18" y="4"  width="14" height="2"/>
+          <rect x="18" y="8"  width="14" height="2"/>
+          <rect x="18" y="12" width="14" height="2"/>
+          <rect x="18" y="16" width="14" height="2"/>
+          <rect x="18" y="20" width="14" height="2"/>
+          <rect x="36" y="0"  width="20" height="2"/>
+          <rect x="36" y="4"  width="20" height="2"/>
+          <rect x="36" y="8"  width="20" height="2"/>
+          <rect x="36" y="12" width="20" height="2"/>
+          <rect x="36" y="16" width="20" height="2"/>
+          <rect x="36" y="20" width="20" height="2"/>
+        </g>
+      </svg>
+    </a>
+    <div class="nav-center">
+      <a href="#">Products</a>
+      <a href="#">Solutions</a>
+      <a href="#">Consulting</a>
+      <a href="#">Learn</a>
+      <a href="#">Support</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-icon" href="#" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
+      <a class="nav-icon" href="#" aria-label="Account">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">IBM watsonx — Enterprise AI</span>
+        <h1>Let's create<br/>a smarter business.</h1>
+        <p class="lede">Foundation models, governance, and assistants for the enterprise — running on hybrid cloud, with the rigor your auditors expect.</p>
+        <div class="hero-cta-row">
+          <a href="#" class="btn btn-primary">
+            Try watsonx free
+            <span class="btn-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+          <a href="#" class="btn btn-secondary">
+            Book a consultation
+            <span class="btn-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-illo" aria-hidden="true">
+        <span class="illo-mark">carbon mesh / 0001</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD CENTERPIECE -->
+<section class="dash-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Cloud Pak for AIOps</span>
+      <h2 class="section-title">One console.<br/>Every workload.</h2>
+      <p class="section-lede">A grid-disciplined operations surface that holds telemetry, policy, and incident response on a single Carbon canvas.</p>
+    </div>
+
+    <div class="dash" role="img" aria-label="Operations dashboard mockup">
+      <aside class="dash-side">
+        <div class="group-label">Workloads</div>
+        <a class="active" href="#"><span style="width:16px;height:16px;background:var(--primary);display:inline-block"></span>Overview</a>
+        <a href="#"><span style="width:16px;height:16px;border:1px solid var(--hairline-strong);display:inline-block"></span>Inference</a>
+        <a href="#"><span style="width:16px;height:16px;border:1px solid var(--hairline-strong);display:inline-block"></span>Training</a>
+        <a href="#"><span style="width:16px;height:16px;border:1px solid var(--hairline-strong);display:inline-block"></span>Vector store</a>
+        <div class="group-label">Governance</div>
+        <a href="#"><span style="width:16px;height:16px;border:1px solid var(--hairline-strong);display:inline-block"></span>Policy</a>
+        <a href="#"><span style="width:16px;height:16px;border:1px solid var(--hairline-strong);display:inline-block"></span>Audit log</a>
+      </aside>
+      <main class="dash-main">
+        <div class="dash-bar">
+          <span class="crumb">IBM Cloud</span>
+          <span>/</span>
+          <span class="crumb">watsonx.ai</span>
+          <span>/</span>
+          <span class="crumb now">prod-us-east-1</span>
+          <span style="margin-left:auto;">Region: us-east · Updated 14:02</span>
+        </div>
+        <div class="dash-tabs">
+          <button class="on">Overview</button>
+          <button>Inference</button>
+          <button>Policies</button>
+          <button>Costs</button>
+        </div>
+        <div class="dash-body">
+          <div class="kpi"><span class="lbl">Active deployments</span><span class="num">128</span><span class="delta">▲ 12 vs last week</span></div>
+          <div class="kpi"><span class="lbl">Inference / hr</span><span class="num">4.2M</span><span class="delta">▲ 8.3%</span></div>
+          <div class="kpi"><span class="lbl">p95 latency</span><span class="num">142<small style="font-size:14px">ms</small></span><span class="delta dn">▼ 18ms</span></div>
+          <div class="kpi"><span class="lbl">Compliance</span><span class="num">100%</span><span class="delta">SOC 2 / ISO 27001</span></div>
+
+          <div class="dash-chart">
+            <div class="chart-head">
+              <h4>Inference throughput · 24h</h4>
+              <span class="chart-meta">prod-us-east-1 · all models</span>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 720 180" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="ibmgrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#0f62fe" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="#0f62fe" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g stroke="#e0e0e0" stroke-width="1">
+                <line x1="0" y1="45"  x2="720" y2="45"/>
+                <line x1="0" y1="90"  x2="720" y2="90"/>
+                <line x1="0" y1="135" x2="720" y2="135"/>
+              </g>
+              <path fill="url(#ibmgrad)" d="M0,140 L40,128 L90,132 L140,110 L190,118 L240,90 L290,98 L340,72 L390,80 L440,54 L490,62 L540,40 L590,52 L640,30 L690,42 L720,30 L720,180 L0,180 Z"/>
+              <path fill="none" stroke="#0f62fe" stroke-width="2"
+                d="M0,140 L40,128 L90,132 L140,110 L190,118 L240,90 L290,98 L340,72 L390,80 L440,54 L490,62 L540,40 L590,52 L640,30 L690,42 L720,30"/>
+              <g fill="#8c8c8c" font-family="IBM Plex Mono" font-size="11" letter-spacing="0.32">
+                <text x="0"   y="170">00:00</text>
+                <text x="180" y="170">06:00</text>
+                <text x="360" y="170">12:00</text>
+                <text x="540" y="170">18:00</text>
+                <text x="680" y="170">24:00</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="dash-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Deployment</th>
+                  <th>Model</th>
+                  <th>Region</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Cost / hr</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>claims-triage-prod</td><td>granite-13b-instruct-v2</td><td>us-east-1</td><td><span class="tag"><span class="dot"></span>Healthy</span></td><td style="text-align:right;">$14.20</td></tr>
+                <tr><td>kyc-assistant</td><td>granite-8b-code</td><td>eu-de-2</td><td><span class="tag"><span class="dot"></span>Healthy</span></td><td style="text-align:right;">$ 9.80</td></tr>
+                <tr><td>doc-extract-batch</td><td>granite-3-multilingual</td><td>jp-tok</td><td><span class="tag warn"><span class="dot"></span>Throttled</span></td><td style="text-align:right;">$ 6.40</td></tr>
+                <tr><td>retail-copilot</td><td>llama-3-70b (governed)</td><td>us-east-1</td><td><span class="tag err"><span class="dot"></span>Drift</span></td><td style="text-align:right;">$22.10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE GRID -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Capabilities</span>
+      <h2 class="section-title">Enterprise AI, the rigorous way.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="ico">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18"/><path d="M3 9h18M9 3v18"/></svg>
+        </div>
+        <h3>watsonx.ai</h3>
+        <p>Build, tune, and deploy IBM Granite and open foundation models on your data — governed by default.</p>
+        <a class="more" href="#">Explore watsonx.ai <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="feature-card">
+        <div class="ico">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="M4 10h16M8 6v12"/></svg>
+        </div>
+        <h3>watsonx.data</h3>
+        <p>An open lakehouse that fits your existing warehouse — Iceberg, Presto, and your own object storage.</p>
+        <a class="more" href="#">Explore watsonx.data <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="feature-card">
+        <div class="ico">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg>
+        </div>
+        <h3>watsonx.governance</h3>
+        <p>End-to-end model risk management, audit, and EU AI-Act-ready policy controls on every deployment.</p>
+        <a class="more" href="#">Explore governance <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="feature-card">
+        <div class="ico">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+        </div>
+        <h3>Hybrid cloud</h3>
+        <p>Same control plane across AWS, Azure, GCP, on-prem, and IBM Cloud — without vendor-specific glue code.</p>
+        <a class="more" href="#">Explore Cloud Paks <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO BAND -->
+<section class="logo-band" style="padding:0">
+  <div class="wrap" style="padding-top:48px; padding-bottom:48px;">
+    <span class="eyebrow">Trusted by</span>
+    <div class="logo-row" style="margin-top:8px;">
+      <div class="logo-tile">FERRARI</div>
+      <div class="logo-tile">PFIZER</div>
+      <div class="logo-tile">CITI</div>
+      <div class="logo-tile">SIEMENS</div>
+      <div class="logo-tile">ANTHEM</div>
+      <div class="logo-tile">VODAFONE</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Pricing</span>
+      <h2 class="section-title">Start small.<br/>Scale on your terms.</h2>
+    </div>
+    <div class="pricing-grid">
+      <article class="pricing-card">
+        <h3>Essentials</h3>
+        <div class="price">$0<small> / month</small></div>
+        <p>For evaluators and individual builders. Granite trial models, single project, community support.</p>
+        <ul>
+          <li>5M tokens / month</li>
+          <li>Single workspace</li>
+          <li>Community support</li>
+          <li>Standard SLAs</li>
+        </ul>
+        <div class="cta"><a href="#" class="btn btn-tertiary">Start free<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </article>
+      <article class="pricing-card featured">
+        <h3>Standard</h3>
+        <div class="price">$1,500<small> / month</small></div>
+        <p>For teams putting models into production. Governance, RBAC, audit log retention.</p>
+        <ul>
+          <li>250M tokens / month</li>
+          <li>RBAC + SSO + audit</li>
+          <li>watsonx.governance included</li>
+          <li>24×5 priority support</li>
+        </ul>
+        <div class="cta"><a href="#" class="btn btn-primary">Try watsonx<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </article>
+      <article class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">Custom<small> · annual</small></div>
+        <p>For regulated estates with regional residency, private networking, and dedicated capacity.</p>
+        <ul>
+          <li>Reserved GPU capacity</li>
+          <li>Private VPC + sovereign region</li>
+          <li>Dedicated client engineer</li>
+          <li>FedRAMP / HIPAA posture</li>
+        </ul>
+        <div class="cta"><a href="#" class="btn btn-tertiary">Talk to IBM<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-banner">
+      <div>
+        <h3>Put enterprise AI to work.</h3>
+        <p>Start with watsonx in IBM Cloud — provision in minutes, governed from day one.</p>
+      </div>
+      <div style="display:flex; gap:1px; flex-wrap:wrap;">
+        <a href="#" class="btn btn-secondary">Start free trial<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PART B — DESIGN SYSTEM REFERENCE ─── -->
+<section class="ds-section" id="design-system">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Design system</span>
+      <h2 class="section-title">Tokens, by Carbon.</h2>
+      <p class="section-lede">A white canvas, light gray lift, one assertive blue. Engineered hierarchy through size and weight — not chrome.</p>
+      <a class="ds-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.ibm.html" target="_blank" rel="noopener">→ Read the full DESIGN.md</a>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-row">
+      <div>
+        <h3>Color</h3>
+        <div class="ds-sub">Carbon tokens — grouped &amp; named</div>
+      </div>
+      <div>
+        <div class="color-group">
+          <h4>Brand &amp; accent</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#0f62fe"></div><span class="chip-label">primary</span><span class="chip-hex">#0f62fe</span></div>
+            <div class="swatch"><div class="chip" style="background:#0050e6"></div><span class="chip-label">blue-hover</span><span class="chip-hex">#0050e6</span></div>
+            <div class="swatch"><div class="chip" style="background:#0043ce"></div><span class="chip-label">blue-60</span><span class="chip-hex">#0043ce</span></div>
+            <div class="swatch"><div class="chip" style="background:#002d9c"></div><span class="chip-label">blue-80</span><span class="chip-hex">#002d9c</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Surface</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#ffffff"></div><span class="chip-label">canvas</span><span class="chip-hex">#ffffff</span></div>
+            <div class="swatch"><div class="chip" style="background:#f4f4f4"></div><span class="chip-label">surface-1</span><span class="chip-hex">#f4f4f4</span></div>
+            <div class="swatch"><div class="chip" style="background:#e0e0e0"></div><span class="chip-label">surface-2</span><span class="chip-hex">#e0e0e0</span></div>
+            <div class="swatch"><div class="chip" style="background:#161616"></div><span class="chip-label">inverse-canvas</span><span class="chip-hex">#161616</span></div>
+            <div class="swatch"><div class="chip" style="background:#262626"></div><span class="chip-label">inverse-surface-1</span><span class="chip-hex">#262626</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Text</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#161616"></div><span class="chip-label">ink</span><span class="chip-hex">#161616</span></div>
+            <div class="swatch"><div class="chip" style="background:#525252"></div><span class="chip-label">ink-muted</span><span class="chip-hex">#525252</span></div>
+            <div class="swatch"><div class="chip" style="background:#8c8c8c"></div><span class="chip-label">ink-subtle</span><span class="chip-hex">#8c8c8c</span></div>
+            <div class="swatch"><div class="chip" style="background:#c6c6c6"></div><span class="chip-label">inverse-ink-muted</span><span class="chip-hex">#c6c6c6</span></div>
+          </div>
+        </div>
+        <div class="color-group">
+          <h4>Semantic</h4>
+          <div class="color-grid">
+            <div class="swatch"><div class="chip" style="background:#24a148"></div><span class="chip-label">success</span><span class="chip-hex">#24a148</span></div>
+            <div class="swatch"><div class="chip" style="background:#f1c21b"></div><span class="chip-label">warning</span><span class="chip-hex">#f1c21b</span></div>
+            <div class="swatch"><div class="chip" style="background:#da1e28"></div><span class="chip-label">error</span><span class="chip-hex">#da1e28</span></div>
+            <div class="swatch"><div class="chip" style="background:#0f62fe"></div><span class="chip-label">info</span><span class="chip-hex">#0f62fe</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-row">
+      <div>
+        <h3>Typography</h3>
+        <div class="ds-sub">IBM Plex Sans — 300 for display, 400 for body</div>
+      </div>
+      <div>
+        <div class="type-table">
+          <div class="type-row">
+            <span class="type-name">display-xl</span>
+            <span class="type-meta">76 / 300 / -0.5</span>
+            <span class="type-meta">1.17</span>
+            <span class="type-sample t-display-xl">Smarter business.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">display-md</span>
+            <span class="type-meta">42 / 300 / 0</span>
+            <span class="type-meta">1.20</span>
+            <span class="type-sample t-display-md">Let&rsquo;s create.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">headline</span>
+            <span class="type-meta">32 / 400 / 0</span>
+            <span class="type-meta">1.25</span>
+            <span class="type-sample t-headline">Section opener.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">card-title</span>
+            <span class="type-meta">24 / 400 / 0</span>
+            <span class="type-meta">1.33</span>
+            <span class="type-sample t-card-title">Feature card title.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">body-lg</span>
+            <span class="type-meta">18 / 400 / 0</span>
+            <span class="type-meta">1.5</span>
+            <span class="type-sample t-body-lg">Lead paragraph that runs next to a 76px headline.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">body</span>
+            <span class="type-meta">16 / 400 / 0.16</span>
+            <span class="type-meta">1.5</span>
+            <span class="type-sample t-body">Default body — Carbon's precision tracking of 0.16px is part of the brand voice. Don't remove it.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-name">caption</span>
+            <span class="type-meta">12 / 400 / 0.32</span>
+            <span class="type-meta">1.33</span>
+            <span class="type-sample t-caption">UTILITY · META · BREADCRUMB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-row">
+      <div>
+        <h3>Radius</h3>
+        <div class="ds-sub">The brand commits to 0px. Other tokens exist for product surfaces.</div>
+      </div>
+      <div>
+        <div class="radius-row">
+          <div class="radius-tile r-none"><div class="box"></div><span class="val">none</span><span class="lab">0px · default</span></div>
+          <div class="radius-tile r-xs"><div class="box"></div><span class="val">xs</span><span class="lab">2px</span></div>
+          <div class="radius-tile r-sm"><div class="box"></div><span class="val">sm</span><span class="lab">4px</span></div>
+          <div class="radius-tile r-md"><div class="box"></div><span class="val">md</span><span class="lab">6px</span></div>
+          <div class="radius-tile r-lg"><div class="box"></div><span class="val">lg</span><span class="lab">8px</span></div>
+          <div class="radius-tile r-pill"><div class="box"></div><span class="val">pill</span><span class="lab">9999px · status</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-row">
+      <div>
+        <h3>Components</h3>
+        <div class="ds-sub">Carbon — buttons, inputs, tabs, cards</div>
+      </div>
+      <div>
+        <div class="comp-matrix">
+          <div class="comp-cell">
+            <h5>Buttons</h5>
+            <div class="comp-stack">
+              <a class="btn btn-primary" href="#">Primary<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+              <a class="btn btn-secondary" href="#">Secondary<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+              <a class="btn btn-tertiary" href="#">Tertiary<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+              <a class="btn btn-ghost" href="#">Ghost link <span class="btn-icon" style="margin-left:8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+              <a class="btn btn-danger" href="#">Delete</a>
+            </div>
+          </div>
+          <div class="comp-cell">
+            <h5>Text input</h5>
+            <label style="font-size:12px;letter-spacing:0.32px;color:var(--ink-muted)">Account name</label>
+            <input class="input-rect" placeholder="acme-prod-us-east"/>
+            <span style="font-size:12px;letter-spacing:0.32px;color:var(--ink-subtle)">Lowercase, hyphens only.</span>
+          </div>
+          <div class="comp-cell">
+            <h5>Tabs</h5>
+            <div class="carbon-tabs">
+              <span class="on">Overview</span>
+              <span>Inference</span>
+              <span>Policy</span>
+              <span>Cost</span>
+            </div>
+            <span style="font-size:12px;letter-spacing:0.32px;color:var(--ink-subtle)">Selected tab carries the 2px blue underline.</span>
+          </div>
+          <div class="comp-cell">
+            <h5>Tags &amp; status</h5>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <span class="tag"><span class="dot"></span>Healthy</span>
+              <span class="tag warn"><span class="dot"></span>Throttled</span>
+              <span class="tag err"><span class="dot"></span>Drift</span>
+              <span class="tag" style="background:#e8f1ff;"><span class="dot" style="background:#0f62fe"></span>Info</span>
+            </div>
+          </div>
+          <div class="comp-cell" style="grid-column:1/-1">
+            <h5>Feature card · Resource tile</h5>
+            <div class="feature-grid" style="border:1px solid var(--hairline);">
+              <div class="feature-card">
+                <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18"/></svg></div>
+                <h3>Hairline + surface lift.</h3>
+                <p>Cards lift via 1px hairlines and surface change to surface-1. No shadow.</p>
+                <a class="more" href="#">Learn more <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="feature-card" style="background:var(--surface-1);">
+                <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg></div>
+                <h3>Feature card · elevated.</h3>
+                <p>Same shape on surface-1 — used for &ldquo;Recommended&rdquo; tiles in carousels.</p>
+                <a class="more" href="#">Learn more <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="feature-card" style="background:var(--inverse-canvas); color:var(--inverse-ink);">
+                <div class="ico" style="color:#fff;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h16M12 4l8 8-8 8"/></svg></div>
+                <h3 style="color:var(--inverse-ink)">Inverse card.</h3>
+                <p style="color:var(--inverse-ink-muted)">The footer is the only inverted surface above the page break.</p>
+                <a class="more" href="#" style="color:#78a9ff;">Learn more <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="feature-card">
+                <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 7h14M5 12h14M5 17h10"/></svg></div>
+                <h3>Resource tile.</h3>
+                <p>16px padding, body-sm 14/400/0.16. Used for case studies and articles.</p>
+                <a class="more" href="#">Read article <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>IBM</h4>
+        <p>An inspired tribute to IBM's Carbon Design System — flat, rigorous, light-weighted. Not affiliated with International Business Machines Corporation.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <a href="#">watsonx</a><a href="#">Cloud Paks</a><a href="#">IBM Cloud</a><a href="#">Storage</a><a href="#">Z &amp; LinuxONE</a>
+      </div>
+      <div class="footer-col">
+        <h5>Solutions</h5>
+        <a href="#">AI</a><a href="#">Hybrid cloud</a><a href="#">Automation</a><a href="#">Security</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="#">Documentation</a><a href="#">Community</a><a href="#">Training</a><a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a><a href="#">Investors</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 INSPIRED TRIBUTE · AWESOME-DESIGN-MD</span>
+      <span>design.ibm.html</span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-design-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.ibm.html" target="_blank" rel="noopener">
+  View DESIGN.md
+  <span aria-hidden="true">↗</span>
+</a>
+
+</body>
+</html>

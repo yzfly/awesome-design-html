@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notion — iOS design spec</title>
+<meta name="description" content="Notion iOS app design reference. #ffffff canvas, #37352F warm-black ink, hairline borders, block-based density, slash-command grammar." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#ffffff; --surface-1:#F7F6F3; --surface-2:#F1F1EF; --surface-card:#FFFFFF; --surface-card-alt:#FBFAF9;
+  --accent:#37352F; --accent-border:#2F2D27; --accent-hover:#1F1E1A;
+  --ink:#37352F; --ink-soft:#605C56; --ink-muted:#787774; --ink-dim:#9B9A97;
+  --border:#EBECED; --border-soft:#E9E9E7; --border-strong:#D3D1CB;
+  --tint-yellow:#FBF3DB; --tint-pink:#FAF1F5; --tint-blue:#E7F3F8; --tint-gray:#F1F1EF; --tint-green:#EEF3ED; --tint-orange:#FAEBDD;
+  --ink-yellow:#CB912F; --ink-pink:#AD1A72; --ink-blue:#2F80ED; --ink-green:#4C9C6B; --ink-orange:#D9730D;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",ui-sans-serif,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:3px; --r-md:4px; --r-lg:6px; --r-xl:8px; --r-card:4px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.4px;color:var(--ink)}
+.brand-mark{width:28px;height:28px;border-radius:5px;background:#000;display:grid;place-items:center;color:#fff;font-weight:900;font-size:18px;letter-spacing:-1px;font-family:Georgia,serif}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:7px 12px;border-radius:6px;font-size:14px;font-weight:500;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink);background:var(--surface-2)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:500;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:#000;color:#fff;padding:10px 16px;border-radius:6px}
+.btn-primary:hover{background:#1A1A1A}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:9px 14px;border-radius:6px}
+.btn-outline{background:#fff;border:1px solid var(--border-strong);color:var(--ink);padding:9px 14px;border-radius:6px}
+.btn-light{background:#fff;border:1px solid var(--border-strong);color:var(--ink);padding:10px 16px;border-radius:6px}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden;background:#fff}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(251,243,219,.5),transparent 70%),radial-gradient(700px 500px at 80% 30%,rgba(250,241,245,.4),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 11px;border-radius:5px;background:var(--surface-2);color:var(--ink-muted);font-size:11px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--ink-muted)}
+.hero h1{font-size:clamp(44px,7vw,86px);line-height:1.02;letter-spacing:-2.6px;font-weight:700;margin-bottom:22px;color:var(--ink)}
+.hero h1 .gradient-word{font-style:italic;font-family:Georgia,"Times New Roman",serif;font-weight:400;color:var(--ink-orange)}
+.hero p{font-size:18px;line-height:1.55;color:var(--ink-muted);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;color:var(--ink);font-size:11px;display:flex;flex-direction:column;padding-top:52px;background:#fff}
+
+/* ========== SCREEN: PAGE ========== */
+.no-top{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 8px}
+.no-top svg{width:18px;height:18px;stroke:var(--ink-muted);fill:none;stroke-width:2}
+.no-top .no-actions{display:flex;gap:14px}
+.no-cover{height:14px}
+.no-page-head{padding:14px 18px 6px}
+.no-page-icon{font-size:38px;line-height:1;margin-bottom:8px}
+.no-page-meta{display:flex;gap:10px;font-size:10px;color:var(--ink-dim);margin-bottom:8px;font-weight:500}
+.no-page-meta span{display:flex;align-items:center;gap:3px}
+.no-page-meta svg{width:11px;height:11px;stroke:var(--ink-dim);fill:none;stroke-width:2}
+.no-page-title{font-size:24px;font-weight:700;line-height:1.15;letter-spacing:-.6px;color:var(--ink);margin-bottom:14px}
+.no-body{flex:1;overflow:hidden;padding:0 18px;font-size:12.5px;line-height:1.45;color:var(--ink)}
+.no-block{margin-bottom:6px;display:flex;gap:6px;align-items:flex-start}
+.no-block-handle{color:var(--ink-dim);font-size:10px;opacity:.4;flex-shrink:0;line-height:1.5}
+.no-h1{font-size:16px;font-weight:700;letter-spacing:-.3px;margin:8px 0 6px}
+.no-h2{font-size:14px;font-weight:700;margin:8px 0 4px}
+.no-toggle{display:flex;align-items:center;gap:4px}
+.no-toggle::before{content:"▸";font-size:9px;color:var(--ink-muted)}
+.no-check{display:flex;align-items:center;gap:6px}
+.no-check .ck{width:11px;height:11px;border:1.5px solid var(--ink-muted);border-radius:2px;flex-shrink:0}
+.no-check .ck.on{background:var(--ink);border-color:var(--ink);position:relative}
+.no-check .ck.on::after{content:"";position:absolute;left:2px;top:0;width:4px;height:7px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(45deg)}
+.no-check.done{color:var(--ink-dim);text-decoration:line-through}
+.no-bullet{display:flex;gap:6px}
+.no-bullet::before{content:"•";color:var(--ink);font-weight:700;flex-shrink:0}
+.no-callout{background:var(--surface-2);border-radius:4px;padding:8px 10px;display:flex;gap:8px;align-items:flex-start;margin:6px 0;font-size:11.5px;line-height:1.45}
+.no-callout .ic{font-size:14px;flex-shrink:0;line-height:1}
+.no-table{margin:8px 0;border:1px solid var(--border);border-radius:3px;font-size:10px}
+.no-table-row{display:grid;grid-template-columns:1.4fr .8fr .8fr;border-bottom:1px solid var(--border)}
+.no-table-row:last-child{border-bottom:0}
+.no-table-cell{padding:4px 8px;border-right:1px solid var(--border);font-size:10px}
+.no-table-cell:last-child{border-right:0}
+.no-table-row.head .no-table-cell{color:var(--ink-muted);font-weight:500;background:var(--surface-1)}
+.no-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:9px;font-weight:500}
+.no-tag.yel{background:var(--tint-yellow);color:var(--ink-yellow)}
+.no-tag.pin{background:var(--tint-pink);color:var(--ink-pink)}
+.no-tag.blu{background:var(--tint-blue);color:var(--ink-blue)}
+.no-tag.gra{background:var(--tint-gray);color:var(--ink-muted)}
+.no-tag.gre{background:var(--tint-green);color:var(--ink-green)}
+
+.no-kb{position:absolute;bottom:0;left:0;right:0;height:44px;background:var(--surface-1);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 12px;z-index:10}
+.no-kb svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2}
+
+/* tab bar */
+.no-tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:#fff;border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:flex-start;padding:8px 14px 0;z-index:10}
+.no-tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-dim);font-size:9.5px;font-weight:500}
+.no-tab.active{color:var(--ink)}
+.no-tab svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+/* ========== SCREEN: DATABASE / KANBAN ========== */
+.no-db-top{padding:6px 16px 8px;display:flex;justify-content:space-between;align-items:center}
+.no-db-top svg{width:18px;height:18px;stroke:var(--ink-muted);fill:none;stroke-width:2}
+.no-db-title{padding:0 16px 8px;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.3px}
+.no-db-tabs{padding:0 16px 8px;display:flex;gap:14px;border-bottom:1px solid var(--border);font-size:11px;color:var(--ink-muted);font-weight:500}
+.no-db-tabs span{padding:0 0 6px;cursor:pointer}
+.no-db-tabs span.active{color:var(--ink);border-bottom:2px solid var(--ink);padding-bottom:5px}
+.no-db-filters{padding:8px 16px;display:flex;gap:5px;overflow:hidden}
+.no-db-filter{padding:3px 7px;border:1px solid var(--border);border-radius:4px;font-size:10px;color:var(--ink-muted);font-weight:500;white-space:nowrap}
+.no-db-filter.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.no-kanban{display:flex;gap:8px;padding:0 12px;overflow:hidden;flex:1}
+.no-kanban-col{flex-shrink:0;width:118px;display:flex;flex-direction:column;gap:6px}
+.no-kanban-col-head{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:var(--ink);padding:4px 2px}
+.no-kanban-col-count{color:var(--ink-dim);font-weight:400}
+.no-kanban-card{background:#fff;border:1px solid var(--border);border-radius:4px;padding:7px;font-size:10.5px;line-height:1.3}
+.no-kanban-card-title{font-weight:600;margin-bottom:4px;color:var(--ink);line-height:1.2}
+.no-kanban-card-meta{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+
+/* ========== SCREEN: WORKSPACE HOME ========== */
+.no-ws-bg{background:var(--surface-1)}
+.no-ws-top{padding:6px 14px 10px;display:flex;justify-content:space-between;align-items:center}
+.no-ws-top svg{width:18px;height:18px;stroke:var(--ink-muted);fill:none;stroke-width:2}
+.no-ws-ws{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ink)}
+.no-ws-ws .ws-ic{width:18px;height:18px;border-radius:3px;background:linear-gradient(135deg,#FFE5B4,#F5A623);display:grid;place-items:center;font-size:10px}
+.no-ws-search{margin:0 14px 12px;background:#fff;border:1px solid var(--border);border-radius:5px;padding:7px 10px;display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-muted)}
+.no-ws-search svg{width:12px;height:12px;stroke:var(--ink-muted);fill:none;stroke-width:2}
+.no-ws-sec{font-size:11px;color:var(--ink-muted);font-weight:500;padding:8px 16px 4px;display:flex;align-items:center;gap:4px}
+.no-ws-sec svg{width:10px;height:10px;stroke:var(--ink-muted);fill:none;stroke-width:2}
+.no-ws-item{padding:5px 16px;font-size:12px;color:var(--ink);line-height:1.2;display:flex;align-items:center;gap:6px}
+.no-ws-item .ic{font-size:12px;width:14px;text-align:center}
+.no-ws-item .arr{margin-left:auto;color:var(--ink-dim);font-size:9px}
+.no-ws-item.indent{padding-left:30px;color:var(--ink-soft)}
+.no-ws-item.ai{color:var(--ink-pink);font-weight:500}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border);background:#fff}
+.section-eyebrow{font-size:11px;letter-spacing:.6px;text-transform:uppercase;font-weight:500;color:var(--ink-muted);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:700;letter-spacing:-1.8px;line-height:1.05;margin-bottom:18px;color:var(--ink)}
+.section-head p{font-size:17px;color:var(--ink-muted);line-height:1.55;max-width:600px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:#fff;border-radius:6px;padding:28px;border:1px solid var(--border)}
+.feat:hover{background:var(--surface-1)}
+.feat .feat-ic{font-size:24px;margin-bottom:14px}
+.feat h3{font-size:18px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px;color:var(--ink)}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:1px 5px;border-radius:3px;color:var(--ink)}
+
+/* iOS specific feature row */
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:30px;font-weight:700;letter-spacing:-.8px;margin-bottom:16px;color:var(--ink);line-height:1.1}
+.ios-feat-text p{font-size:15px;color:var(--ink-muted);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:5px 10px;border-radius:4px;color:var(--ink);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--surface-1);border-radius:6px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* Slash command sheet */
+.slash-sheet{width:240px;background:#fff;border-radius:6px;padding:6px;border:1px solid var(--border);box-shadow:0 12px 40px rgba(15,15,15,.12)}
+.slash-header{font-size:10px;color:var(--ink-dim);padding:6px 8px;text-transform:uppercase;letter-spacing:.6px;font-weight:500}
+.slash-row{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:3px;font-size:12.5px;color:var(--ink)}
+.slash-row.active{background:var(--surface-2)}
+.slash-row .ic{width:36px;height:36px;border-radius:3px;border:1px solid var(--border);display:grid;place-items:center;font-size:16px;flex-shrink:0;background:#fff}
+.slash-row .meta{flex:1;min-width:0}
+.slash-row .nm{font-size:12.5px;font-weight:500;line-height:1.2}
+.slash-row .ds{font-size:10.5px;color:var(--ink-muted);margin-top:2px}
+
+/* Drag handle */
+.drag-stack{display:flex;flex-direction:column;gap:6px;width:280px}
+.drag-row{display:flex;align-items:flex-start;gap:6px;padding:6px 8px;border-radius:3px;background:#fff;border:1px solid transparent}
+.drag-row.active{background:var(--surface-1);border-color:var(--border)}
+.drag-handle{color:var(--ink-dim);font-size:14px;cursor:grab;line-height:1.3;width:14px;flex-shrink:0;text-align:center}
+.drag-plus{color:var(--ink-dim);font-size:14px;width:14px;flex-shrink:0;text-align:center;line-height:1.3}
+.drag-text{font-size:13px;color:var(--ink);line-height:1.4}
+
+/* Notion AI */
+.ai-stack{display:flex;flex-direction:column;gap:10px;width:280px}
+.ai-bubble{background:#fff;border-radius:6px;padding:12px;border:1px solid var(--border);box-shadow:0 12px 40px rgba(15,15,15,.08)}
+.ai-bubble-head{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.ai-bubble-head .sp{color:var(--ink-pink);font-size:14px}
+.ai-bubble-head .lb{font-size:11px;color:var(--ink-pink);font-weight:600}
+.ai-bubble-text{font-size:12px;line-height:1.5;color:var(--ink);margin-bottom:10px}
+.ai-actions{display:flex;gap:6px;flex-wrap:wrap}
+.ai-actions button{font-size:10.5px;padding:4px 8px;background:var(--surface-2);border-radius:4px;color:var(--ink);font-weight:500}
+.ai-actions button.primary{background:#000;color:#fff}
+
+/* ========== DESIGN SYSTEM SECTION (Part B) ========== */
+.ds-section{padding:120px 0;background:#fff;border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-1.8px;line-height:1.05;margin:14px 0 14px;color:var(--ink)}
+.ds-intro p{font-size:16px;color:var(--ink-muted);max-width:560px;line-height:1.55}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--ink);border:1px solid var(--border-strong);padding:8px 14px;border-radius:6px;white-space:nowrap;background:#fff}
+.ds-source:hover{background:var(--surface-1)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px;color:var(--ink)}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.55;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:4px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:3px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:500;line-height:1.2;color:var(--ink)}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.6px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:var(--ink-pink)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:var(--ink);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:500;color:var(--ink)}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:6px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn-circle{width:40px;height:40px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;cursor:pointer}
+.btn-circle svg{width:18px;height:18px;fill:#fff}
+.btn-circle-sm{width:30px;height:30px;border-radius:6px;background:var(--surface-2);color:var(--ink);display:grid;place-items:center}
+.btn-circle-sm svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:2}
+.btn-ghost-circle{width:30px;height:30px;border-radius:4px;background:transparent;color:var(--ink-muted);display:grid;place-items:center}
+.btn-ghost-circle:hover{color:var(--ink);background:var(--surface-2)}
+.input-pill{background:#fff;border:1px solid var(--border-strong);border-radius:5px;padding:8px 12px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-dim)}
+.input-pill:focus{border-color:var(--ink)}
+.tag{font-size:10.5px;font-weight:500;padding:2px 7px;border-radius:3px}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:6px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.6px}
+.token-cell .tk-val{font-size:18px;font-weight:700;margin-top:6px;color:var(--ink);letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+/* ========== FOOTER ========== */
+footer{padding:60px 0;border-top:1px solid var(--border);background:var(--surface-1)}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.55}
+.foot a{color:var(--ink);font-weight:600;text-decoration:underline}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#000;border:1px solid #000;color:#fff;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:6px;z-index:99;box-shadow:0 8px 24px rgba(15,15,15,.15)}
+.float-link:hover{background:#1A1A1A}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">N</span>
+      Notion <span style="font-weight:400;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Log in</a>
+      <a class="btn btn-primary" href="#">Get Notion free</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Every block knows<br/>its <span class="gradient-word">place</span>.</h1>
+    <p>The Notion iOS app, dissected. White canvas, warm-black ink at #37352F. Hairline borders. Almost no color — except the six pastel tints reserved for callouts and highlights.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- DATABASE / KANBAN -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="14" height="10" viewBox="0 0 18 14" fill="#000"><path d="M9 3c-2.4 0-4.6.9-6.3 2.4l1.6 1.6C5.6 5.8 7.2 5.2 9 5.2s3.4.6 4.7 1.8l1.6-1.6C13.6 3.9 11.4 3 9 3zm0 4c-1.4 0-2.7.5-3.6 1.4l1.6 1.6C7.5 9.4 8.2 9.2 9 9.2s1.5.2 2 .8l1.6-1.6C11.7 7.5 10.4 7 9 7zm0 4l-1.4 1.4c.4.4.9.6 1.4.6s1-.2 1.4-.6L9 11z"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="no-db-top">
+              <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+              <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+            </div>
+            <div class="no-db-title">📊 Sprint Tasks</div>
+            <div class="no-db-tabs">
+              <span class="active">Board</span>
+              <span>Table</span>
+              <span>Calendar</span>
+              <span>Gallery</span>
+            </div>
+            <div class="no-db-filters">
+              <span class="no-db-filter active">All</span>
+              <span class="no-db-filter">Assigned</span>
+              <span class="no-db-filter">Due</span>
+              <span class="no-db-filter">+ Filter</span>
+            </div>
+            <div class="no-kanban">
+              <div class="no-kanban-col">
+                <div class="no-kanban-col-head">To Do <span class="no-kanban-col-count">4</span></div>
+                <div class="no-kanban-card">
+                  <div class="no-kanban-card-title">Design auth flow</div>
+                  <div class="no-kanban-card-meta"><span class="no-tag blu">Design</span></div>
+                </div>
+                <div class="no-kanban-card">
+                  <div class="no-kanban-card-title">Wire up Stripe</div>
+                  <div class="no-kanban-card-meta"><span class="no-tag yel">Backend</span></div>
+                </div>
+                <div class="no-kanban-card">
+                  <div class="no-kanban-card-title">User onboarding copy</div>
+                  <div class="no-kanban-card-meta"><span class="no-tag pin">Writing</span></div>
+                </div>
+              </div>
+              <div class="no-kanban-col">
+                <div class="no-kanban-col-head">In Progress <span class="no-kanban-col-count">2</span></div>
+                <div class="no-kanban-card">
+                  <div class="no-kanban-card-title">Dark mode tokens</div>
+                  <div class="no-kanban-card-meta"><span class="no-tag blu">Design</span></div>
+                </div>
+                <div class="no-kanban-card">
+                  <div class="no-kanban-card-title">Calendar view fixes</div>
+                  <div class="no-kanban-card-meta"><span class="no-tag gre">Eng</span></div>
+                </div>
+              </div>
+              <div class="no-kanban-col">
+                <div class="no-kanban-col-head">Done <span class="no-kanban-col-count">8</span></div>
+                <div class="no-kanban-card" style="opacity:.65">
+                  <div class="no-kanban-card-title">Sidebar drawer</div>
+                  <div class="no-kanban-card-meta"><span class="no-tag gra">Shipped</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="no-tab-bar">
+              <div class="no-tab active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="no-tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Search</div>
+              <div class="no-tab"><svg viewBox="0 0 24 24"><path d="M22 6l-10 7L2 6"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg>Inbox</div>
+              <div class="no-tab"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Database · Board</div>
+      </div>
+
+      <!-- PAGE VIEW (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="no-top">
+              <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+              <div class="no-actions">
+                <svg viewBox="0 0 24 24"><path d="M21 21l-4-4M3 11a8 8 0 1016 0 8 8 0 00-16 0z"/></svg>
+                <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+              </div>
+            </div>
+            <div class="no-page-head">
+              <div class="no-page-icon">🚀</div>
+              <div class="no-page-meta">
+                <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>Add cover</span>
+                <span><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg>Add comment</span>
+              </div>
+              <div class="no-page-title">Project Roadmap</div>
+            </div>
+            <div class="no-body">
+              <div class="no-block"><span class="no-block-handle">⋮⋮</span><span>The plan for Q3. Quiet, dense, no surprises.</span></div>
+
+              <div class="no-h2">Goals</div>
+              <div class="no-block no-toggle">Ship public beta</div>
+              <div class="no-block no-toggle">Hit 1k weekly actives</div>
+
+              <div class="no-callout">
+                <span class="ic">💡</span>
+                <span>Move fast on the auth flow — it blocks every other ticket below.</span>
+              </div>
+
+              <div class="no-h2">Sprint board</div>
+              <div class="no-table">
+                <div class="no-table-row head">
+                  <div class="no-table-cell">Task</div>
+                  <div class="no-table-cell">Owner</div>
+                  <div class="no-table-cell">Status</div>
+                </div>
+                <div class="no-table-row">
+                  <div class="no-table-cell">Auth flow</div>
+                  <div class="no-table-cell">J. Shu</div>
+                  <div class="no-table-cell"><span class="no-tag yel">Doing</span></div>
+                </div>
+                <div class="no-table-row">
+                  <div class="no-table-cell">Onboarding copy</div>
+                  <div class="no-table-cell">Lin</div>
+                  <div class="no-table-cell"><span class="no-tag gra">Todo</span></div>
+                </div>
+              </div>
+
+              <div class="no-h2">This week</div>
+              <div class="no-block no-check done"><span class="ck on" style="display:inline-block;width:11px;height:11px;border:1.5px solid #37352F;border-radius:2px;background:#37352F;position:relative"></span> Define metrics</div>
+              <div class="no-block no-check"><span class="ck"></span> Wire up Stripe</div>
+              <div class="no-block no-check"><span class="ck"></span> Pair on dark mode tokens</div>
+            </div>
+            <div class="no-kb">
+              <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8M6 12l2 2 7-7"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Page</div>
+      </div>
+
+      <!-- WORKSPACE HOME / SIDEBAR -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr no-ws-bg">
+            <div class="no-ws-top">
+              <div class="no-ws-ws">
+                <span class="ws-ic">🦊</span>
+                Jiang's Workspace
+              </div>
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <div class="no-ws-search">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+              <span>Quick find...</span>
+            </div>
+            <div class="no-ws-sec"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>PRIVATE</div>
+            <div class="no-ws-item"><span class="ic">📝</span>Daily Journal<span class="arr">›</span></div>
+            <div class="no-ws-item"><span class="ic">📊</span>Project Roadmap<span class="arr">›</span></div>
+            <div class="no-ws-item"><span class="ic">🗂️</span>Reading List<span class="arr">›</span></div>
+            <div class="no-ws-item indent"><span class="ic">📖</span>Fiction</div>
+            <div class="no-ws-item indent"><span class="ic">📑</span>Papers</div>
+            <div class="no-ws-item"><span class="ic">💡</span>Ideas<span class="arr">›</span></div>
+
+            <div class="no-ws-sec"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>WORKSPACE</div>
+            <div class="no-ws-item"><span class="ic">👥</span>Team Wiki<span class="arr">›</span></div>
+            <div class="no-ws-item"><span class="ic">📋</span>Sprint Tasks<span class="arr">›</span></div>
+
+            <div class="no-ws-sec" style="padding-top:14px"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>TEMPLATES</div>
+            <div class="no-ws-item"><span class="ic">⚙️</span>Engineering</div>
+            <div class="no-ws-item"><span class="ic">🎨</span>Design Specs</div>
+
+            <div class="no-ws-item ai" style="margin-top:18px;border-top:1px solid var(--border);padding-top:10px"><span class="ic">✨</span>Ask Notion AI<span class="arr" style="color:var(--ink-pink)">›</span></div>
+
+            <div class="no-tab-bar">
+              <div class="no-tab active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="no-tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Search</div>
+              <div class="no-tab"><svg viewBox="0 0 24 24"><path d="M22 6l-10 7L2 6"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg>Inbox</div>
+              <div class="no-tab"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Workspace Home</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. No color budget.</h2>
+      <p>Notion's iOS app is almost monochrome on purpose. Six pastel tints exist to highlight a word or wrap a callout — never to brand a button. Hairline borders carry every structural beat.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic">📄</div>
+        <h3>Page</h3>
+        <p>Emoji icon over an H1 title, then a stream of mixed blocks: paragraphs, toggles, callouts, tables, checkboxes. Side padding stays at <code>18pt</code>. Borders on blocks are <code>0</code> — only the table earns hairlines.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic">🗂️</div>
+        <h3>Database</h3>
+        <p>View tabs sit under the title like browser tabs — Board, Table, Calendar, Gallery. Kanban cards land at <code>4px</code> radius, <code>1px</code> border, no shadow. The active tab gets a single black underline.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic">🦊</div>
+        <h3>Workspace Home</h3>
+        <p>Sidebar drawer over a <code>#F7F6F3</code> warm background. Pages disclose with a tiny arrow. Emoji-as-icon by default. Notion AI sits at the bottom in pink, the one true colored row.</p>
+      </div>
+    </div>
+
+    <!-- iOS-specific feature blocks -->
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Slash Commands</div>
+          <h3>Type "/", get a vocabulary.</h3>
+          <p>The most-used affordance in the app. Hitting "/" in any editable block lifts a floating sheet of block types — heading, toggle, callout, code, table, image — each with a 36×36 black-bordered icon tile that mirrors the desktop app pixel-for-pixel.</p>
+          <p>Arrow keys / drag select between rows on iPad with a hardware keyboard; touch select on iPhone scrolls a single column.</p>
+          <div class="ios-feat-tokens">
+            <code>sheet radius: 6pt</code>
+            <code>row height: 44pt</code>
+            <code>icon tile: 36pt</code>
+            <code>fuzzy match</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="slash-sheet">
+            <div class="slash-header">BASIC BLOCKS</div>
+            <div class="slash-row active">
+              <div class="ic">📝</div>
+              <div class="meta"><div class="nm">Text</div><div class="ds">Just start writing with plain text.</div></div>
+            </div>
+            <div class="slash-row">
+              <div class="ic">📄</div>
+              <div class="meta"><div class="nm">Page</div><div class="ds">Embed a sub-page inside this one.</div></div>
+            </div>
+            <div class="slash-row">
+              <div class="ic">☑</div>
+              <div class="meta"><div class="nm">To-do</div><div class="ds">Track tasks with a checkbox.</div></div>
+            </div>
+            <div class="slash-row">
+              <div class="ic">H1</div>
+              <div class="meta"><div class="nm">Heading 1</div><div class="ds">Big section heading.</div></div>
+            </div>
+            <div class="slash-row">
+              <div class="ic">▸</div>
+              <div class="meta"><div class="nm">Toggle list</div><div class="ds">Toggles can hide and show content.</div></div>
+            </div>
+            <div class="slash-row">
+              <div class="ic">💡</div>
+              <div class="meta"><div class="nm">Callout</div><div class="ds">Make writing stand out.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="drag-stack">
+            <div class="drag-row">
+              <span class="drag-plus">+</span><span class="drag-handle">⋮⋮</span>
+              <span class="drag-text">Mobile design is mostly about restraint.</span>
+            </div>
+            <div class="drag-row active">
+              <span class="drag-plus">+</span><span class="drag-handle">⋮⋮</span>
+              <span class="drag-text">Every block has a six-dot handle and a plus button. The plus opens slash commands; the handle drags or opens block actions.</span>
+            </div>
+            <div class="drag-row">
+              <span class="drag-plus">+</span><span class="drag-handle">⋮⋮</span>
+              <span class="drag-text">On touch, long-press the handle to lift the block; light haptic on engage.</span>
+            </div>
+            <div class="drag-row">
+              <span class="drag-plus">+</span><span class="drag-handle">⋮⋮</span>
+              <span class="drag-text">Releasing snaps into the closest gutter.</span>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Block Handle</div>
+          <h3>Six dots, and the whole page rearranges.</h3>
+          <p>Every block on iPhone exposes a plus + six-dot drag handle at its left edge — invisible until tap-and-hold. Long-press lifts the block with a light haptic; the rest of the page reflows around it as you drag.</p>
+          <p>Tap-only on the handle opens the block action menu: duplicate, turn into, color, move to.</p>
+          <div class="ios-feat-tokens">
+            <code>handle: 14×14pt</code>
+            <code>haptic: light</code>
+            <code>lift: scale 1.02</code>
+            <code>shadow: y4 b12</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Notion AI</div>
+          <h3>One sparkle. One color the brand never uses anywhere else.</h3>
+          <p>Notion AI introduces the only persistent non-neutral hue in the product — a pink sparkle. Triggered inline (space at the start of a new block) or via the sidebar entry, it presents a small bubble offering rewrite, summarize, continue, brainstorm.</p>
+          <p>Output streams character-by-character with a subtle pink underline that fades after 800ms.</p>
+          <div class="ios-feat-tokens">
+            <code>accent: #AD1A72</code>
+            <code>bubble radius: 6pt</code>
+            <code>stream cursor: ▍</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual" style="background:linear-gradient(140deg,#FAF1F5,#FBF3DB)">
+          <div class="ai-stack">
+            <div class="ai-bubble">
+              <div class="ai-bubble-head">
+                <span class="sp">✦</span>
+                <span class="lb">NOTION AI</span>
+              </div>
+              <div class="ai-bubble-text">The plan for Q3 is to ship the public beta, hit 1k weekly actives, and quietly retire the legacy auth flow. No surprises.</div>
+              <div class="ai-actions">
+                <button class="primary">Done</button>
+                <button>Try again</button>
+                <button>Make longer</button>
+                <button>Continue</button>
+              </div>
+            </div>
+            <div style="text-align:center;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted)">Inline · pink underline fades 800ms</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The least colorful system in the App Store.</h2>
+        <p>Every token Notion's iOS app reaches for — the warm-black ink ladder, the six tints reserved for highlights, the radius scale that almost never exceeds 6px. Hairlines do the structural work; color does not.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.notion-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Warm black at #37352F. Pure white canvas. A whisper of warmth in surface grays. Six tint pairs (yellow, pink, blue, gray, green, orange) exist only inside highlight pills and callout backgrounds — never as button color.</p>
+
+      <div class="ds-caption">Ink Ladder</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#37352F"></div><div class="name">Warm Black</div><div class="val">#37352F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#605C56"></div><div class="name">Soft Ink</div><div class="val">#605C56</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#787774"></div><div class="name">Muted</div><div class="val">#787774</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#9B9A97"></div><div class="name">Dim</div><div class="val">#9B9A97</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #EBECED"></div><div class="name">Canvas</div><div class="val">#ffffff</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#F7F6F3;border:1px solid #EBECED"></div><div class="name">Warm Surface</div><div class="val">#F7F6F3</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F1F1EF;border:1px solid #EBECED"></div><div class="name">Sidebar</div><div class="val">#F1F1EF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FBFAF9;border:1px solid #EBECED"></div><div class="name">Card Alt</div><div class="val">#FBFAF9</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EBECED"></div><div class="name">Border</div><div class="val">#EBECED</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D3D1CB"></div><div class="name">Border Strong</div><div class="val">#D3D1CB</div></div>
+      </div>
+
+      <div class="ds-caption">Highlight Tints</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FBF3DB"></div><div class="name">Yellow</div><div class="val">#FBF3DB</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FAF1F5"></div><div class="name">Pink</div><div class="val">#FAF1F5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E7F3F8"></div><div class="name">Blue</div><div class="val">#E7F3F8</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EEF3ED"></div><div class="name">Green</div><div class="val">#EEF3ED</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FAEBDD"></div><div class="name">Orange</div><div class="val">#FAEBDD</div></div>
+      </div>
+
+      <div class="ds-caption">Tint Ink (text on tint)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#CB912F"></div><div class="name">Yellow Ink</div><div class="val">#CB912F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#AD1A72"></div><div class="name">Pink Ink (AI)</div><div class="val">#AD1A72</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2F80ED"></div><div class="name">Blue Ink</div><div class="val">#2F80ED</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4C9C6B"></div><div class="name">Green Ink</div><div class="val">#4C9C6B</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D9730D"></div><div class="name">Orange Ink</div><div class="val">#D9730D</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Notion's UI uses a custom sans (Notion Sans) — substituted here with Inter. The page-title hierarchy goes h1 32 / h2 24 / body 16, all at 1.45–1.5 line-height. Italicized serif appears only in marketing or empty states.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--page-title</td><td class="sample" style="font-size:30px;font-weight:700;letter-spacing:-1px">Project Roadmap</td><td>30 / 1.88rem</td><td>700</td><td>-1.0px</td></tr>
+          <tr><td class="token">--h1</td><td class="sample" style="font-size:26px;font-weight:700;letter-spacing:-.6px">Goals</td><td>26 / 1.63rem</td><td>700</td><td>-0.6px</td></tr>
+          <tr><td class="token">--h2</td><td class="sample" style="font-size:22px;font-weight:700;letter-spacing:-.4px">This week</td><td>22 / 1.38rem</td><td>700</td><td>-0.4px</td></tr>
+          <tr><td class="token">--h3</td><td class="sample" style="font-size:18px;font-weight:700">Sprint board</td><td>18 / 1.13rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:16px;font-weight:400;line-height:1.5">A canvas wide enough to think on. Quiet enough not to interrupt.</td><td>16 / 1.00rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--caption</td><td class="sample" style="font-size:14px;font-weight:500;color:#605C56">Add a comment</td><td>14 / 0.88rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--meta</td><td class="sample" style="font-size:12px;font-weight:500;color:#9B9A97">Edited 2h ago</td><td>12 / 0.75rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--code</td><td class="sample" style="font-family:var(--font-mono);font-size:13px;background:#F7F6F3;padding:1px 5px;border-radius:3px">/toggle</td><td>13 / 0.81rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--accent-serif</td><td class="sample" style="font-family:Georgia,serif;font-style:italic;font-size:18px">place</td><td>18 / 1.13rem</td><td>400</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Radii almost never exceed 6px. Cards land at 4. Inputs at 5. Buttons at 6. The only round corner of any size is the iOS sheet itself at 14, inherited from the system, not declared by Notion.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Block</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Hairline</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:3px"></div><div class="ds-radius-label">Tag</div><div class="ds-radius-val">3px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:5px"></div><div class="ds-radius-label">Input</div><div class="ds-radius-val">5px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Modal</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">System Sheet</div><div class="ds-radius-val">14px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Page padding</div><div class="tk-val">18pt</div><div class="tk-note">Block content stays at 18pt L/R. Cover bleeds edge-to-edge.</div></div>
+        <div class="token-cell"><div class="tk-label">Block gap</div><div class="tk-val">4pt</div><div class="tk-note">Between sibling blocks. Headings get 8pt above.</div></div>
+        <div class="token-cell"><div class="tk-label">Handle</div><div class="tk-val">14×14pt</div><div class="tk-note">Six-dot drag + plus button. Tap target expanded to 36pt.</div></div>
+        <div class="token-cell"><div class="tk-label">Sidebar width</div><div class="tk-val">86%</div><div class="tk-note">Drawer overlay; dims trailing 14% at rgba(15,15,15,0.4).</div></div>
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">Including 34pt home-indicator safe area.</div></div>
+        <div class="token-cell"><div class="tk-label">KB toolbar</div><div class="tk-val">44pt</div><div class="tk-note">Formatting strip above the keyboard. Background #F7F6F3.</div></div>
+        <div class="token-cell"><div class="tk-label">Border hairline</div><div class="tk-val">1pt</div><div class="tk-note">Renders at 0.5pt @2x and @3x for crisp pixel alignment.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation</div><div class="tk-val">200ms</div><div class="tk-note">easeOut for blocks. 280ms easeInOut for drawer.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Buttons stay rectangular. Tags are pastel. Inputs lean on hairline borders. Black is the only fill that carries primary affordance.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Get Notion free</a>
+            <a class="btn btn-light" href="#">Add a block</a>
+            <a class="btn btn-outline" href="#">Share</a>
+            <a class="btn btn-pill" href="#">Add cover</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="btn-circle" aria-label="Add"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+              <button class="btn-circle-sm" aria-label="More"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2" fill="#37352F"/><circle cx="12" cy="12" r="2" fill="#37352F"/><circle cx="19" cy="12" r="2" fill="#37352F"/></svg></button>
+              <button class="btn-ghost-circle" aria-label="Handle">⋮⋮</button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search or ask a question..." />
+            <input class="input-pill" placeholder="Untitled" />
+            <div class="ds-card-row">
+              <span class="tag" style="background:#FBF3DB;color:#CB912F">Backend</span>
+              <span class="tag" style="background:#FAF1F5;color:#AD1A72">Writing</span>
+              <span class="tag" style="background:#E7F3F8;color:#2F80ED">Design</span>
+              <span class="tag" style="background:#EEF3ED;color:#4C9C6B">Done</span>
+              <span class="tag" style="background:#F1F1EF;color:#787774">Todo</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Blocks</h5>
+          <div class="ds-card-stack">
+            <div style="background:#F1F1EF;border-radius:4px;padding:10px 12px;font-size:13px;width:100%;display:flex;gap:8px"><span>💡</span><span>A callout block — six pastel tints to choose from.</span></div>
+            <div style="font-size:14px;display:flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border:1.5px solid #37352F;border-radius:2px;display:inline-block;background:#37352F;position:relative"></span><span style="text-decoration:line-through;color:#9B9A97">Wire up Stripe</span></div>
+            <div style="font-size:14px;display:flex;align-items:center;gap:6px"><span style="width:11px;height:11px;border:1.5px solid #787774;border-radius:2px;display:inline-block"></span>Pair on dark mode tokens</div>
+            <div style="background:#fff;border:1px solid #EBECED;border-radius:4px;padding:8px;width:100%;font-size:11.5px"><div style="font-weight:600;margin-bottom:3px">Design auth flow</div><span class="tag" style="background:#E7F3F8;color:#2F80ED">Design</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark">N</span>
+      Notion iOS
+    </div>
+    <p>Design reference. Not affiliated with Notion Labs, Inc. Token values are derived from the public iOS app. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.notion-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.notion-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.notion-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

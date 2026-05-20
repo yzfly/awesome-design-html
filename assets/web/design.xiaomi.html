@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>小米 Xiaomi — 设计语言研究</title>
+<meta name="description" content="小米视觉语言的设计研究：极简白底 + 小米橙 #FF6900 单色锚点、Apple-style 克制布局、为发烧而生的性价比叙事。营销 demo + 设计系统参考。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-1: #f5f5f7;
+  --surface-2: #ededed;
+  --surface-dark: #1d1d1f;
+  /* Brand */
+  --mi-orange: #FF6900;
+  --mi-orange-deep: #E55E00;
+  --mi-orange-soft: #FFE4D1;
+  --mi-orange-fog: #FFF4EC;
+  /* Text */
+  --ink: #1d1d1f;
+  --ink-bright: #000000;
+  --ink-soft: #4a4a4f;
+  --ink-muted: #86868b;
+  --ink-dim: #c7c7cc;
+  /* Border */
+  --border: #e8e8e8;
+  --border-soft: #f0f0f0;
+  /* Shadow */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-heavy: 0 16px 40px rgba(0,0,0,0.10);
+  /* Type */
+  --font-ui: "Inter", "MI Sans", "PingFang SC", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radii */
+  --r-min: 2px;
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-2xl: 20px;
+  --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1200px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--ink-bright); }
+.brand-mark { width: 34px; height: 34px; border-radius: 8px; background: var(--mi-orange); display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: -0.5px; box-shadow: 0 4px 12px rgba(255,105,0,0.30); }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link { padding: 6px 14px; font-size: 13px; font-weight: 500; color: var(--ink-soft); border-radius: 6px; transition: all .15s; }
+.nav-link:hover { color: var(--mi-orange); }
+.nav-link.active { color: var(--ink-bright); font-weight: 600; }
+.nav-cta { display: flex; gap: 8px; align-items: center; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; cursor: pointer; border: 1px solid transparent; transition: all .15s ease; font-weight: 500; }
+.btn-primary { background: var(--mi-orange); color: #fff; padding: 11px 26px; border-radius: var(--r-lg); font-size: 14px; }
+.btn-primary:hover { background: var(--mi-orange-deep); }
+.btn-outline { background: transparent; color: var(--ink-bright); padding: 11px 26px; border-radius: var(--r-lg); border-color: var(--ink-bright); font-size: 14px; }
+.btn-outline:hover { background: var(--ink-bright); color: #fff; }
+.btn-ghost { background: transparent; color: var(--ink-soft); padding: 8px 14px; border-radius: var(--r-md); font-size: 13px; }
+.btn-ghost:hover { color: var(--mi-orange); }
+.btn-link { background: transparent; color: var(--mi-orange); padding: 0; font-size: 14px; font-weight: 500; }
+.btn-link:hover { color: var(--mi-orange-deep); }
+.btn-sm { padding: 7px 16px; font-size: 13px; }
+.btn-lg { padding: 14px 32px; font-size: 15px; }
+
+/* Hero */
+.hero { padding: 100px 0 80px; text-align: center; background: linear-gradient(180deg, #fff 0%, #fafafa 100%); position: relative; overflow: hidden; }
+.hero h1 { font-size: 72px; line-height: 1.05; letter-spacing: -2.4px; font-weight: 700; margin: 0 0 18px; color: var(--ink-bright); }
+.hero h1 .orange { color: var(--mi-orange); }
+.hero h2.subtitle { font-size: 24px; line-height: 1.3; letter-spacing: -0.6px; font-weight: 500; color: var(--ink-soft); margin: 0 0 28px; }
+.hero-links { display: flex; gap: 28px; align-items: center; justify-content: center; margin-bottom: 56px; font-size: 16px; }
+.hero-links a { color: var(--mi-orange); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
+.hero-links a:hover { color: var(--mi-orange-deep); gap: 8px; transition: gap .15s; }
+.hero-links .price { color: var(--ink); font-weight: 400; }
+
+/* Product mockup phone */
+.phone-stage { position: relative; max-width: 760px; margin: 0 auto; padding: 40px 0 0; }
+.phone {
+  width: 280px; height: 580px; margin: 0 auto;
+  background: linear-gradient(160deg, #2a2a2c 0%, #1d1d1f 100%);
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 4px 16px rgba(0,0,0,0.10);
+  position: relative;
+}
+.phone::before {
+  content: ""; position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+  width: 110px; height: 26px; background: #000; border-radius: 999px; z-index: 2;
+}
+.phone-screen {
+  width: 100%; height: 100%; border-radius: 36px;
+  background: linear-gradient(160deg, #FF8C42 0%, #FF6900 35%, #E55E00 100%);
+  position: relative; overflow: hidden;
+}
+.phone-screen::after {
+  content: ""; position: absolute; right: -40px; top: -40px; width: 200px; height: 200px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.20), transparent 60%);
+}
+.phone-screen .label {
+  position: absolute; bottom: 90px; left: 0; right: 0; text-align: center;
+  color: #fff; font-size: 32px; font-weight: 700; letter-spacing: -0.6px;
+}
+.phone-screen .meta {
+  position: absolute; bottom: 60px; left: 0; right: 0; text-align: center;
+  color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 500;
+}
+.phone-orbit { position: absolute; left: 50%; top: 50%; width: 480px; height: 480px; margin: -240px 0 0 -240px; border-radius: 50%; border: 1px dashed var(--border); z-index: -1; }
+.orbit-chip { position: absolute; padding: 8px 14px; background: #fff; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; font-weight: 500; color: var(--ink); box-shadow: var(--shadow-card); display: flex; gap: 6px; align-items: center; }
+.orbit-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mi-orange); }
+.orbit-chip.c1 { top: 8%; left: 5%; }
+.orbit-chip.c2 { top: 18%; right: 5%; }
+.orbit-chip.c3 { bottom: 18%; left: 0%; }
+.orbit-chip.c4 { bottom: 8%; right: 4%; }
+
+/* Section */
+.section { padding: 100px 0; }
+.section-dark { background: var(--surface-dark); color: #fff; }
+.section-alt { background: var(--surface-1); }
+.section-head { text-align: center; margin-bottom: 56px; }
+.section-eyebrow { display: inline-block; font-size: 12px; font-weight: 500; color: var(--mi-orange); margin-bottom: 14px; letter-spacing: 1px; text-transform: uppercase; }
+.section-title { font-size: 48px; line-height: 1.1; letter-spacing: -1.4px; font-weight: 700; margin: 0 0 16px; color: var(--ink-bright); }
+.section-dark .section-title { color: #fff; }
+.section-sub { font-size: 17px; color: var(--ink-soft); line-height: 1.65; max-width: 640px; margin: 0 auto; }
+.section-dark .section-sub { color: rgba(255,255,255,0.7); }
+
+/* 6-tile bento */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: 360px 320px; gap: 16px; }
+.bento-tile { background: #fff; border-radius: var(--r-2xl); padding: 32px; position: relative; overflow: hidden; cursor: pointer; transition: transform .25s; }
+.bento-tile:hover { transform: translateY(-4px); }
+.bento-tile h3 { font-size: 22px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.4px; color: var(--ink-bright); }
+.bento-tile p { font-size: 14px; color: var(--ink-soft); margin: 0; max-width: 280px; line-height: 1.55; }
+.bento-tile .more { position: absolute; right: 24px; bottom: 24px; font-size: 13px; color: var(--mi-orange); font-weight: 500; }
+.bento-tile.t1 { grid-column: span 3; background: linear-gradient(135deg, #fff 0%, #fff4ec 100%); }
+.bento-tile.t2 { grid-column: span 3; background: var(--surface-dark); color: #fff; }
+.bento-tile.t2 h3, .bento-tile.t2 p { color: #fff; }
+.bento-tile.t2 p { color: rgba(255,255,255,0.7); }
+.bento-tile.t3 { grid-column: span 2; }
+.bento-tile.t4 { grid-column: span 2; background: var(--mi-orange); color: #fff; }
+.bento-tile.t4 h3, .bento-tile.t4 p { color: #fff; }
+.bento-tile.t4 p { color: rgba(255,255,255,0.85); }
+.bento-tile.t5 { grid-column: span 2; }
+
+/* Visual icons inside bento */
+.bento-vis { position: absolute; right: -10px; bottom: -10px; width: 180px; height: 180px; opacity: 0.7; }
+.bento-vis svg { width: 100%; height: 100%; }
+.bento-tile.t2 .bento-vis svg { color: var(--mi-orange); }
+.bento-tile.t4 .bento-vis svg { color: #fff; opacity: 0.4; }
+
+/* Stat band */
+.stat-band { padding: 100px 0; background: var(--surface-1); }
+.stat-band-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; align-items: center; }
+.stat-band h2 { font-size: 40px; line-height: 1.15; letter-spacing: -1.2px; margin: 0; font-weight: 700; color: var(--ink-bright); }
+.stat-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.stat-item { padding: 24px; background: #fff; border-radius: var(--r-xl); border: 1px solid var(--border); }
+.stat-item strong { display: block; font-size: 44px; font-weight: 800; color: var(--mi-orange); letter-spacing: -1.5px; line-height: 1; }
+.stat-item span { display: block; font-size: 13px; color: var(--ink-soft); margin-top: 10px; }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.plan { background: #fff; border: 1px solid var(--border); border-radius: var(--r-2xl); padding: 32px; position: relative; transition: all .2s; }
+.plan:hover { border-color: var(--mi-orange); box-shadow: var(--shadow-card); transform: translateY(-2px); }
+.plan.featured { background: var(--ink-bright); color: #fff; border-color: var(--ink-bright); }
+.plan.featured .plan-title, .plan.featured .plan-price .num { color: #fff; }
+.plan.featured .plan-blurb, .plan.featured li { color: rgba(255,255,255,0.8); }
+.plan.featured li svg { color: var(--mi-orange); }
+.plan-badge { position: absolute; top: -10px; right: 28px; background: var(--mi-orange); color: #fff; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+.plan-name { font-size: 12px; font-weight: 600; color: var(--mi-orange); margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+.plan-title { font-size: 22px; font-weight: 700; color: var(--ink-bright); margin-bottom: 4px; }
+.plan-price { display: flex; align-items: baseline; gap: 4px; margin: 18px 0 8px; }
+.plan-price .currency { font-size: 18px; font-weight: 500; }
+.plan-price .num { font-size: 42px; font-weight: 800; letter-spacing: -1.5px; color: var(--ink-bright); }
+.plan-price .per { font-size: 13px; color: var(--ink-muted); }
+.plan-blurb { font-size: 13px; color: var(--ink-soft); margin-bottom: 22px; line-height: 1.6; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
+.plan li { font-size: 13px; color: var(--ink); display: flex; align-items: flex-start; gap: 10px; line-height: 1.55; }
+.plan li svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--mi-orange); margin-top: 4px; }
+.plan-cta { width: 100%; padding: 12px 20px; border-radius: var(--r-lg); }
+
+/* CTA */
+.cta { padding: 140px 0; text-align: center; background: var(--surface-1); }
+.cta h2 { font-size: 56px; line-height: 1.1; letter-spacing: -1.6px; font-weight: 700; margin: 0 0 18px; color: var(--ink-bright); }
+.cta p { font-size: 18px; color: var(--ink-soft); margin: 0 auto 36px; max-width: 520px; line-height: 1.6; }
+
+/* Footer */
+footer { background: var(--ink-bright); color: rgba(255,255,255,0.75); padding: 64px 0 32px; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
+.foot-brand p { font-size: 13px; line-height: 1.7; margin: 14px 0 22px; max-width: 280px; color: rgba(255,255,255,0.65); }
+.foot-brand .brand { color: #fff; }
+.foot-col h4 { font-size: 13px; font-weight: 600; color: #fff; margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: rgba(255,255,255,0.65); transition: color .12s; }
+.foot-col li a:hover { color: var(--mi-orange); }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.10); font-size: 12px; color: rgba(255,255,255,0.5); flex-wrap: wrap; gap: 14px; }
+
+/* Design System Part B */
+.ds-section { background: #fff; padding: 100px 0; border-top: 1px solid var(--border-soft); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 36px; letter-spacing: -1px; line-height: 1.15; margin: 0 0 8px; font-weight: 700; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-soft); font-size: 14px; max-width: 540px; line-height: 1.65; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 999px; font-size: 12px; font-weight: 500; color: var(--ink-soft); transition: all .15s; }
+.ds-source:hover { color: var(--mi-orange); border-color: var(--mi-orange); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border-soft); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 22px; font-weight: 700; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.3px; }
+.ds-desc { font-size: 13px; color: var(--ink-soft); margin: 0 0 24px; line-height: 1.7; max-width: 580px; }
+.ds-caption { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--ink-muted); text-transform: uppercase; margin: 28px 0 12px; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 12px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border-soft); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 600; letter-spacing: 0.8px; color: var(--ink-muted); text-transform: uppercase; background: var(--surface-1); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--mi-orange); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.ds-radius-cell { background: var(--surface-1); padding: 18px 8px; text-align: center; border-radius: 8px; }
+.ds-radius-box { width: 56px; height: 56px; background: var(--mi-orange); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 12px; font-weight: 600; color: var(--ink); }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: var(--surface-1); border-radius: var(--r-md); padding: 22px; }
+.ds-card h5 { font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mi-orange); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input { background: #fff; border: 1px solid var(--border); padding: 10px 14px; border-radius: var(--r-lg); color: var(--ink); font-size: 13px; font-family: inherit; width: 100%; outline: none; transition: all .15s; }
+.input:focus { border-color: var(--mi-orange); box-shadow: 0 0 0 3px rgba(255,105,0,0.12); }
+.tag { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.tag-orange { background: var(--mi-orange-fog); color: var(--mi-orange); }
+.tag-dark { background: var(--ink-bright); color: #fff; }
+.tag-line { background: transparent; color: var(--ink-soft); border: 1px solid var(--border); }
+
+/* Floating source */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: var(--ink-bright); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 12px; font-weight: 500; box-shadow: var(--shadow-card); transition: all .15s; }
+.src-link:hover { background: var(--mi-orange); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero { padding: 64px 0; }
+  .hero h1 { font-size: 44px; letter-spacing: -1.4px; }
+  .hero h2.subtitle { font-size: 18px; }
+  .bento { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .bento-tile { grid-column: span 1 !important; min-height: 280px; }
+  .stat-band-inner { grid-template-columns: 1fr; gap: 32px; }
+  .stat-list { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .cta h2 { font-size: 36px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+  .phone-orbit { display: none; }
+  .orbit-chip { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">MI</span>
+      <span>小米</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link active" href="#">手机</a>
+      <a class="nav-link" href="#">汽车</a>
+      <a class="nav-link" href="#">智能家电</a>
+      <a class="nav-link" href="#">穿戴</a>
+      <a class="nav-link" href="#">配件</a>
+      <a class="nav-link" href="#">服务</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#">登录</a>
+      <a class="btn btn-primary btn-sm" href="#">购物车</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Xiaomi <span class="orange">17 Pro</span></h1>
+    <h2 class="subtitle">超大杯影像旗舰 · 全焦段徕卡光学</h2>
+    <div class="hero-links">
+      <a href="#">了解更多 →</a>
+      <a href="#">立即购买 →</a>
+      <span class="price">¥ 4,999 起</span>
+    </div>
+
+    <div class="phone-stage">
+      <div class="phone-orbit"></div>
+      <span class="orbit-chip c1"><span class="dot"></span>骁龙 8 Gen 5</span>
+      <span class="orbit-chip c2"><span class="dot"></span>徕卡 Summilux</span>
+      <span class="orbit-chip c3"><span class="dot"></span>5500mAh 大电池</span>
+      <span class="orbit-chip c4"><span class="dot"></span>2K 全等深四曲屏</span>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="label">Xiaomi 17 Pro</div>
+          <div class="meta">为发烧而生</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO PRODUCTS -->
+<section class="section section-alt">
+  <div class="container-wide">
+    <div class="section-head">
+      <span class="section-eyebrow">PRODUCT LINEUP</span>
+      <h2 class="section-title">人车家全生态</h2>
+      <p class="section-sub">从手中到家中,从客厅到车里 — 小米用同一套底层逻辑,串联起 5 亿台智能设备。</p>
+    </div>
+
+    <div class="bento">
+      <div class="bento-tile t1">
+        <h3>Xiaomi SU7 Ultra</h3>
+        <p>1548 PS 三电机性能版本,纽北赛道量产电车纪录保持者。</p>
+        <span class="more">了解更多 →</span>
+        <div class="bento-vis" style="right:-30px;bottom:30px;width:280px;height:120px;">
+          <svg viewBox="0 0 280 120" fill="none" stroke="#FF6900" stroke-width="2" stroke-linecap="round">
+            <path d="M40 90 Q60 60 100 60 L180 60 Q220 60 240 90"/>
+            <circle cx="80" cy="90" r="14"/>
+            <circle cx="200" cy="90" r="14"/>
+            <path d="M100 60 L120 40 L180 40 L200 60"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="bento-tile t2">
+        <h3>Xiaomi 17 系列</h3>
+        <p>影像旗舰新标杆 · 1 英寸大底主摄 + 徕卡变焦四摄。</p>
+        <span class="more" style="color:#FF6900">了解更多 →</span>
+        <div class="bento-vis" style="right:-20px;bottom:-30px;width:240px;height:240px;">
+          <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="60" y="20" width="80" height="160" rx="16"/>
+            <circle cx="100" cy="65" r="22"/>
+            <circle cx="100" cy="65" r="14"/>
+            <circle cx="100" cy="65" r="6" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="bento-tile t3">
+        <h3>Mix Flip 2</h3>
+        <p>4 英寸外屏,折叠也能轻装出行。</p>
+        <span class="more">了解更多 →</span>
+      </div>
+
+      <div class="bento-tile t4">
+        <h3>Xiaomi Pad 7 Pro</h3>
+        <p>骁龙 8s Gen 3 + 3.2K 高刷屏,生产力与创意并行。</p>
+        <span class="more" style="color:#fff;">了解更多 →</span>
+        <div class="bento-vis" style="right:-10px;bottom:-30px;width:200px;height:200px;">
+          <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="30" y="40" width="140" height="100" rx="8"/>
+            <line x1="30" y1="160" x2="170" y2="160"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="bento-tile t5">
+        <h3>Watch S5</h3>
+        <p>蓝宝石玻璃 + 钛金属边框,运动健康全监测。</p>
+        <span class="more">了解更多 →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stat-band">
+  <div class="container">
+    <div class="stat-band-inner">
+      <h2>用产品创造价值,<br/>用价格创造惊喜。</h2>
+      <div class="stat-list">
+        <div class="stat-item"><strong>5亿+</strong><span>AIoT 连接设备</span></div>
+        <div class="stat-item"><strong>180+</strong><span>覆盖国家与地区</span></div>
+        <div class="stat-item"><strong>Top 3</strong><span>全球智能手机出货</span></div>
+        <div class="stat-item"><strong>14年</strong><span>始终为发烧而生</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">XIAOMI 17 系列</span>
+      <h2 class="section-title">选一台适合你的</h2>
+      <p class="section-sub">三个版本,三种性格,但都拥有同一颗为发烧而生的心脏。</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">标准版</div>
+        <div class="plan-title">Xiaomi 17</div>
+        <div class="plan-price"><span class="currency">¥</span><span class="num">3,999</span><span class="per">起</span></div>
+        <div class="plan-blurb">12+256GB,日常使用最佳搭档。</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>6.36 英寸 2K 直屏</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>骁龙 8 Gen 5 移动平台</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>徕卡光学三摄</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>5000mAh + 90W 快充</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">立即购买</a>
+      </div>
+
+      <div class="plan featured">
+        <div class="plan-badge">热销</div>
+        <div class="plan-name">Pro 版</div>
+        <div class="plan-title">Xiaomi 17 Pro</div>
+        <div class="plan-price"><span class="currency">¥</span><span class="num">4,999</span><span class="per">起</span></div>
+        <div class="plan-blurb">16+512GB,影像旗舰首选。</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>6.73 英寸 2K 四曲面屏</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>1 英寸大底主摄</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>徕卡 Summilux 镜头</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>5500mAh + 120W 快充</li>
+        </ul>
+        <a class="btn btn-primary plan-cta" href="#">立即购买</a>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">超大杯</div>
+        <div class="plan-title">Xiaomi 17 Ultra</div>
+        <div class="plan-price"><span class="currency">¥</span><span class="num">6,499</span><span class="per">起</span></div>
+        <div class="plan-blurb">16+1TB,移动影像创作的天花板。</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>6.82 英寸 2K 全等深四曲屏</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>1 英寸 + 200MP 长焦四摄</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>钛金属中框</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>专业摄影手柄套装</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">立即购买</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>为发烧而生。</h2>
+    <p>14 年,我们坚持把好产品做到极致,把价格做到诚意。 因为我们相信,科技应当公平地服务每一个人。</p>
+    <div class="hero-links" style="margin-bottom:0;">
+      <a class="btn btn-primary btn-lg" href="#">了解 Xiaomi 故事</a>
+      <a class="btn btn-outline btn-lg" href="#">访问小米之家</a>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM Part B -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <span class="section-eyebrow">设计系统参考</span>
+        <h2>极简 · 克制 · 性价比的视觉表达</h2>
+        <p>小米的视觉语言借鉴 Apple 的极简骨架,但把灰阶替换为更鲜活的小米橙 #FF6900。 大量留白、巨大的产品图、强烈的负字距标题 — 用最少的元素讲最饱满的产品故事。</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.xiaomi.html" target="_blank" rel="noopener">查看 DESIGN.md ↗</a>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3 class="ds-heading">色彩</h3>
+      <p class="ds-desc">几乎只有小米橙、黑、白、灰四种颜色。橙色仅用于品牌标识、CTA、价格强调,其余皆为中性灰阶。</p>
+
+      <div class="ds-caption">品牌主色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FF6900"></div><div class="meta"><div class="name">小米橙</div><div class="val">#FF6900</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E55E00"></div><div class="meta"><div class="name">深橙</div><div class="val">#E55E00</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFE4D1"></div><div class="meta"><div class="name">浅橙</div><div class="val">#FFE4D1</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFF4EC"></div><div class="meta"><div class="name">橙底</div><div class="val">#FFF4EC</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FF8C42,#FF6900,#E55E00)"></div><div class="meta"><div class="name">橙渐变</div><div class="val">linear-gradient</div></div></div>
+      </div>
+
+      <div class="ds-caption">文字与中性色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">主色</div><div class="val">#000000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1d1d1f"></div><div class="meta"><div class="name">正文</div><div class="val">#1d1d1f</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4a4a4f"></div><div class="meta"><div class="name">辅助</div><div class="val">#4a4a4f</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#86868b"></div><div class="meta"><div class="name">弱化</div><div class="val">#86868b</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#c7c7cc"></div><div class="meta"><div class="name">禁用</div><div class="val">#c7c7cc</div></div></div>
+      </div>
+
+      <div class="ds-caption">背景与分隔</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #e8e8e8"></div><div class="meta"><div class="name">底色</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f5f5f7;border:1px solid #e8e8e8"></div><div class="meta"><div class="name">弱底</div><div class="val">#f5f5f7</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ededed;border:1px solid #e8e8e8"></div><div class="meta"><div class="name">分隔底</div><div class="val">#ededed</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e8e8e8;border:1px solid #c7c7cc"></div><div class="meta"><div class="name">边框</div><div class="val">#e8e8e8</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1d1d1f"></div><div class="meta"><div class="name">深底</div><div class="val">#1d1d1f</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">字体</h3>
+      <p class="ds-desc">中文优先 MI Sans / PingFang SC,西文 Inter。 主标题字号巨大(48–72px),负字距 -1.4 ~ -2.4px,营造 Apple 同款"产品旗帜感"。</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>样例</th><th>字号</th><th>字重</th><th>字距</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--hero-display</td><td class="sample" style="font-size:36px;font-weight:700;letter-spacing:-1.4px">Xiaomi 17 Pro</td><td>72 / 56 / 36</td><td>700</td><td>-2.4 ~ -1.4px</td></tr>
+          <tr><td class="token">--hero-sub</td><td class="sample" style="font-size:18px;font-weight:500;color:#4a4a4f">超大杯影像旗舰</td><td>24 / 18</td><td>500</td><td>-0.6 ~ -0.3px</td></tr>
+          <tr><td class="token">--section-title</td><td class="sample" style="font-size:32px;font-weight:700;letter-spacing:-1px">人车家全生态</td><td>48 / 32</td><td>700</td><td>-1.4 ~ -1px</td></tr>
+          <tr><td class="token">--card-title</td><td class="sample" style="font-size:20px;font-weight:700;letter-spacing:-0.4px">Xiaomi SU7 Ultra</td><td>22 / 20</td><td>700</td><td>-0.4px</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:15px;font-weight:400">正文段落,15/1.6</td><td>15</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--btn</td><td class="sample" style="font-size:14px;font-weight:500">立即购买</td><td>13 / 14 / 15</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--price-display</td><td class="sample" style="font-size:32px;font-weight:800;letter-spacing:-1.2px;color:#FF6900">¥ 4,999</td><td>42 / 32</td><td>800</td><td>-1.5 ~ -1.2px</td></tr>
+          <tr><td class="token">--caption</td><td class="sample" style="font-size:12px;font-weight:400;color:#86868b">立即购买 →</td><td>12 / 13</td><td>400</td><td>1px upper</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">圆角</h3>
+      <p class="ds-desc">克制偏方:按钮 8px,卡片 12px,大型容器 20px,徽章 999px。 整体偏方,呼应"工业产品"的克制气质。</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">最小</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">输入</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">按钮</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:20px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">20px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">徽章</div><div class="ds-radius-val">999px</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">组件</h3>
+      <p class="ds-desc">主按钮为橙色实底,次按钮为黑色描边,文字链接为橙色 + 箭头 — 这套规范让用户在任何页面都能 1 秒识别"重要"与"次要"。</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>按钮</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">主要按钮</a>
+            <a class="btn btn-outline" href="#">次要按钮</a>
+            <a class="btn btn-ghost" href="#">幽灵按钮</a>
+            <a class="btn btn-link" href="#">了解更多 →</a>
+            <a class="btn btn-primary btn-lg" href="#">立即购买</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>输入与标签</h5>
+          <div class="ds-card-stack">
+            <input class="input" placeholder="搜索产品" />
+            <input class="input" placeholder="请输入手机号" />
+            <div class="ds-card-row">
+              <span class="tag tag-orange">热销</span>
+              <span class="tag tag-dark">新品</span>
+              <span class="tag tag-line">分期免息</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>产品卡</h5>
+          <div class="ds-card-stack" style="width:100%">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:20px;padding:20px;width:100%;">
+              <div style="font-size:11px;color:var(--mi-orange);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">NEW</div>
+              <div style="font-size:18px;font-weight:700;color:var(--ink-bright);margin-bottom:4px;letter-spacing:-0.3px;">Xiaomi Watch S5</div>
+              <div style="font-size:12px;color:var(--ink-muted);margin-bottom:14px;">钛金属边框 · 蓝宝石玻璃</div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;">
+                <span style="font-size:18px;font-weight:800;color:var(--ink-bright);letter-spacing:-0.4px;">¥ 1,599</span>
+                <span style="font-size:11px;color:var(--mi-orange);font-weight:500;">立即购买 →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark">MI</span>
+          <span>小米</span>
+        </div>
+        <p>本站为小米视觉语言的设计学习样本,旨在展示其极简克制美学与"为发烧而生"的产品哲学。与 Xiaomi Inc. 无任何隶属关系。</p>
+      </div>
+      <div class="foot-col">
+        <h4>选购</h4>
+        <ul>
+          <li><a href="#">手机</a></li>
+          <li><a href="#">汽车</a></li>
+          <li><a href="#">智能家电</a></li>
+          <li><a href="#">穿戴</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>服务</h4>
+        <ul>
+          <li><a href="#">官方维修</a></li>
+          <li><a href="#">小米贷款</a></li>
+          <li><a href="#">小米保险</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>关于小米</h4>
+        <ul>
+          <li><a href="#">小米公司</a></li>
+          <li><a href="#">投资者关系</a></li>
+          <li><a href="#">招贤纳士</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>关注我们</h4>
+        <ul>
+          <li><a href="#">小米社区</a></li>
+          <li><a href="#">微博</a></li>
+          <li><a href="#">微信公众号</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计学习作品 · 致敬小米视觉语言</span>
+      <span>京 ICP · 京公网安备 · 隐私政策</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.xiaomi.html" target="_blank" rel="noopener">查看源码 ↗</a>
+
+</body>
+</html>

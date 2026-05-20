@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cursor — Inspired Design</title>
+<meta name="description" content="A Cursor-inspired marketing page: warm cream canvas, near-black ink, magazine-weight display, AI-timeline pastel pills, IDE mockup as protagonist. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  /* Brand */
+  --primary: #f54e00;
+  --primary-active: #d04200;
+  --on-primary: #ffffff;
+  /* Ink / text */
+  --ink: #26251e;
+  --body: #5a5852;
+  --body-strong: #26251e;
+  --muted: #807d72;
+  --muted-soft: #a09c92;
+  /* Surfaces */
+  --canvas: #f7f7f4;
+  --canvas-soft: #fafaf7;
+  --surface-card: #ffffff;
+  --surface-strong: #e6e5e0;
+  /* Hairlines */
+  --hairline: #e6e5e0;
+  --hairline-soft: #efeee8;
+  --hairline-strong: #cfcdc4;
+  /* Timeline pastel (scoped) */
+  --tl-thinking: #dfa88f;
+  --tl-grep: #9fc9a2;
+  --tl-read: #9fbbe0;
+  --tl-edit: #c0a8dd;
+  --tl-done: #c08532;
+  /* Semantic */
+  --success: #1f8a65;
+  --error: #cf2d56;
+  /* Syntax (inside IDE only) */
+  --syn-kw: #b8336a;
+  --syn-fn: #1f6fc0;
+  --syn-str: #1f8a65;
+  --syn-com: #a09c92;
+  --syn-num: #c08532;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.15px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(245,78,0,0.22); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--hairline-strong); border-radius: 4px; }
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+
+/* —— Layout —— */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top nav —— */
+.topnav {
+  height: 64px;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 28px; font-size: 14px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 500; color: var(--ink); letter-spacing: -0.4px; font-size: 17px;
+}
+.brand .logo {
+  width: 22px; height: 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.brand .logo svg { display: block; }
+.nav-links { display: flex; gap: 4px; margin-left: 12px; }
+.nav-links a { color: var(--ink); padding: 8px 12px; border-radius: 6px; font-weight: 500; }
+.nav-links a:hover { background: var(--hairline-soft); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 40px; padding: 10px 18px;
+  border-radius: 8px;
+  font: 500 14px/1 "Inter", system-ui;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent; color: var(--ink);
+  transition: background .15s, color .15s, border-color .15s;
+  white-space: nowrap;
+}
+.btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-active); }
+.btn-secondary { background: var(--surface-card); color: var(--ink); border-color: var(--hairline-strong); padding: 9px 17px; }
+.btn-secondary:hover { background: var(--canvas-soft); }
+.btn-tertiary { background: transparent; color: var(--ink); padding: 9px 12px; }
+.btn-tertiary:hover { background: var(--hairline-soft); }
+.btn-download { background: var(--ink); color: var(--canvas); height: 44px; padding: 12px 20px; }
+.btn-download:hover { background: #16150f; }
+.btn-sm { height: 32px; padding: 6px 12px; font-size: 13px; }
+
+/* —— Type —— */
+.eyebrow {
+  font-size: 11px; font-weight: 600; line-height: 1.4;
+  letter-spacing: 0.88px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 18px;
+}
+.display-mega {
+  font-weight: 400; font-size: clamp(40px, 7.5vw, 72px);
+  line-height: 1.1; letter-spacing: -2.16px;
+  margin: 0; color: var(--ink);
+}
+.display-mega em { font-style: normal; color: var(--muted); }
+.display-lg { font-weight: 400; font-size: clamp(28px, 4vw, 36px); line-height: 1.2; letter-spacing: -0.72px; margin: 0; }
+.display-md { font-weight: 400; font-size: clamp(22px, 2.6vw, 26px); line-height: 1.25; letter-spacing: -0.325px; margin: 0; }
+.display-sm { font-weight: 400; font-size: 22px; line-height: 1.3; letter-spacing: -0.11px; margin: 0; }
+.title-md { font-weight: 600; font-size: 18px; line-height: 1.4; margin: 0; }
+.body-lg { font-size: 18px; line-height: 1.55; color: var(--body); }
+.body-md { font-size: 16px; line-height: 1.5; color: var(--body); }
+.body-sm { font-size: 14px; line-height: 1.5; color: var(--body); }
+.caption { font-size: 13px; line-height: 1.4; color: var(--muted); }
+
+/* —— Sections —— */
+section { padding: 80px 0; }
+section.tight { padding: 40px 0; }
+
+/* —— Hero —— */
+.hero { padding: 80px 0 40px; position: relative; }
+.hero .display-mega { max-width: 16ch; margin-bottom: 24px; }
+.hero .lead { font-size: 18px; line-height: 1.55; max-width: 580px; color: var(--body); margin: 0 0 32px; }
+.hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.hero .platform-line { display: flex; gap: 6px; align-items: center; margin-top: 16px; font-size: 13px; color: var(--muted); }
+
+/* —— IDE mockup (protagonist) —— */
+.ide-mockup-card {
+  margin-top: 56px;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ide-titlebar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--canvas-soft);
+}
+.ide-traffic { display: flex; gap: 6px; }
+.ide-traffic span { width: 11px; height: 11px; border-radius: 50%; background: var(--hairline-strong); }
+.ide-tab {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px; color: var(--body);
+  padding: 4px 10px; background: var(--surface-card);
+  border: 1px solid var(--hairline); border-radius: 6px;
+}
+.ide-tab.active { color: var(--ink); }
+.ide-tab .x { color: var(--muted-soft); }
+.ide-path { margin-left: 8px; font-size: 12px; color: var(--muted); font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+.ide-frame {
+  display: grid;
+  grid-template-columns: 200px 1fr 320px;
+  min-height: 460px;
+}
+@media (max-width: 1024px) { .ide-frame { grid-template-columns: 1fr; } .ide-side, .ide-chat { display: none; } }
+
+.ide-side {
+  background: var(--canvas-soft);
+  border-right: 1px solid var(--hairline);
+  padding: 14px 8px;
+  font-size: 13px;
+}
+.ide-side .group {
+  font-size: 11px; color: var(--muted); letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 10px 10px 6px; font-weight: 600;
+}
+.ide-side .row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 10px; border-radius: 4px;
+  color: var(--body); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12.5px;
+  cursor: default;
+}
+.ide-side .row:hover { background: var(--hairline-soft); }
+.ide-side .row.active { background: var(--hairline); color: var(--ink); }
+.ide-side .row .ch { color: var(--muted-soft); font-size: 11px; width: 12px; display: inline-block; }
+.ide-side .row.dirty::after { content: "●"; margin-left: auto; color: var(--primary); font-size: 10px; }
+
+.ide-main {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 13px; line-height: 1.65; color: var(--body-strong);
+  padding: 16px 0 16px 16px;
+  background: var(--surface-card);
+  overflow: hidden;
+}
+.ide-line { display: grid; grid-template-columns: 30px 1fr; gap: 16px; }
+.ide-ln { color: var(--muted-soft); text-align: right; font-size: 12px; user-select: none; }
+.ide-co { color: var(--ink); white-space: pre; }
+.tk-kw { color: var(--syn-kw); }
+.tk-fn { color: var(--syn-fn); }
+.tk-str { color: var(--syn-str); }
+.tk-com { color: var(--syn-com); font-style: italic; }
+.tk-num { color: var(--syn-num); }
+.tk-mu { color: var(--muted); }
+.ide-cursor::after { content: ""; display: inline-block; width: 2px; height: 14px; background: var(--primary); vertical-align: -2px; margin-left: 1px; animation: blink 1.1s steps(2) infinite; }
+@keyframes blink { to { opacity: 0; } }
+.ide-ghost { background: rgba(245,78,0,0.08); border-radius: 2px; color: var(--muted); }
+
+.ide-chat {
+  background: var(--canvas-soft);
+  border-left: 1px solid var(--hairline);
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 14px;
+  overflow: hidden;
+}
+.chat-head {
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--hairline);
+  font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600;
+}
+.chat-msg {
+  font-size: 13px; line-height: 1.55; color: var(--body-strong);
+  padding: 10px 12px; background: var(--surface-card);
+  border: 1px solid var(--hairline); border-radius: 8px;
+}
+.chat-msg.user { background: transparent; border-color: var(--hairline-soft); color: var(--ink); }
+.chat-msg .who { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.chat-timeline { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.tl-step {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--body); font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+.tl-pill {
+  font-family: "Inter", sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.88px; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 9999px; color: var(--ink);
+  white-space: nowrap;
+}
+.tl-thinking { background: var(--tl-thinking); }
+.tl-grep { background: var(--tl-grep); }
+.tl-read { background: var(--tl-read); }
+.tl-edit { background: var(--tl-edit); }
+.tl-done { background: var(--tl-done); color: var(--on-primary); }
+.chat-input {
+  margin-top: auto;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+}
+.chat-input .ctrl-k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; color: var(--muted-soft); margin-left: auto; padding: 2px 6px; border: 1px solid var(--hairline); border-radius: 4px; }
+
+/* —— Customer logos —— */
+.logos {
+  padding: 40px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+.logo-mark { font-weight: 500; font-size: 16px; letter-spacing: -0.3px; color: var(--muted); opacity: 0.85; }
+.logo-mark:hover { opacity: 1; color: var(--ink); }
+
+/* —— Section head —— */
+.section-head { max-width: 680px; }
+.section-head .display-lg { margin-bottom: 18px; }
+
+/* —— Feature grid —— */
+.feature-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 48px;
+}
+@media (max-width: 1024px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 760px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.feature-card .icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
+}
+.feature-card h3 { font-weight: 600; font-size: 18px; margin: 0; color: var(--ink); }
+.feature-card p { margin: 0; color: var(--body); font-size: 14px; line-height: 1.55; }
+.kbd {
+  display: inline-block; padding: 1px 6px;
+  font: 500 11px/1.4 "JetBrains Mono", ui-monospace, monospace;
+  background: var(--surface-strong); border: 1px solid var(--hairline-strong); border-radius: 4px;
+  color: var(--ink);
+}
+
+/* —— Comparison card —— */
+.comparison {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 0;
+  margin-top: 48px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+@media (max-width: 760px) { .comparison { grid-template-columns: 1fr; } }
+.comparison .col { padding: 28px 28px 28px; }
+.comparison .col + .col { border-left: 1px solid var(--hairline); }
+@media (max-width: 760px) { .comparison .col + .col { border-left: 0; border-top: 1px solid var(--hairline); } }
+.comparison .col h4 { margin: 0 0 4px; font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.comparison .col h3 { margin: 0 0 16px; font-size: 22px; font-weight: 400; letter-spacing: -0.2px; color: var(--ink); }
+.comparison ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.comparison li { font-size: 14px; color: var(--body); display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+.comparison li svg { flex: none; margin-top: 3px; }
+.comparison .col.this svg { color: var(--success); }
+.comparison .col.other svg { color: var(--muted-soft); }
+.comparison .col.other li { color: var(--muted); }
+
+/* —— Testimonial —— */
+.testimonial {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 24px;
+  max-width: 760px; margin: 0 auto;
+}
+.testimonial blockquote {
+  margin: 0; font-size: 22px; font-weight: 400; line-height: 1.45; letter-spacing: -0.11px;
+  color: var(--ink);
+}
+.testimonial .author { display: flex; align-items: center; gap: 12px; }
+.tm-avatar {
+  width: 40px; height: 40px; border-radius: 9999px;
+  background: linear-gradient(135deg, #dfa88f, #c08532);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 600; font-size: 14px;
+}
+.testimonial .meta { display: flex; flex-direction: column; }
+.testimonial .meta strong { font-size: 14px; font-weight: 600; color: var(--ink); }
+.testimonial .meta span { font-size: 13px; color: var(--muted); }
+
+/* —— Pricing —— */
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+@media (max-width: 1024px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.tier.featured { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
+.tier h3 { margin: 0; font-weight: 400; font-size: 22px; letter-spacing: -0.11px; }
+.tier .price { font-weight: 400; font-size: 44px; letter-spacing: -1.0px; line-height: 1; }
+.tier .price .per { font-size: 14px; color: var(--muted); margin-left: 6px; letter-spacing: 0; }
+.tier.featured .price .per { color: var(--muted-soft); }
+.tier .desc { font-size: 14px; line-height: 1.55; color: var(--body); min-height: 42px; }
+.tier.featured .desc { color: var(--muted-soft); }
+.tier ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; color: var(--body); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+.tier.featured li { color: var(--canvas); }
+.tier li svg { flex: none; margin-top: 3px; color: var(--primary); }
+.tier .cta-wrap { margin-top: auto; }
+
+/* —— CTA band —— */
+.cta-band {
+  text-align: center;
+  padding: 96px 0;
+}
+.cta-band .display-lg { margin-bottom: 28px; }
+
+/* —— Footer —— */
+footer {
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline);
+  padding: 64px 0 48px;
+}
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 2fr repeat(4, 1fr); }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin: 0 0 16px; letter-spacing: -0.1px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-grid li a { font-size: 14px; color: var(--body); }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+  padding-top: 32px; margin-top: 48px;
+  border-top: 1px solid var(--hairline);
+  font-size: 13px; color: var(--muted);
+}
+.brand-mini { max-width: 280px; display: flex; flex-direction: column; gap: 12px; }
+.brand-mini p { margin: 0; font-size: 14px; color: var(--body); line-height: 1.55; }
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--surface-card); border: 1px solid var(--hairline-strong);
+  padding: 8px 14px; border-radius: 9999px; font-size: 13px; color: var(--ink);
+  font-weight: 500;
+}
+.src-link:hover { background: var(--canvas-soft); }
+
+/* —— Design system block —— */
+.ds-block { padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+.ds-heading { font-size: 26px; font-weight: 400; letter-spacing: -0.325px; margin: 0 0 16px; color: var(--ink); }
+.ds-caption {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.88px; text-transform: uppercase;
+  color: var(--muted); margin: 28px 0 12px;
+}
+.ds-block .ds-caption:first-of-type { margin-top: 16px; }
+
+.ds-sw-grid { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .ds-sw-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .ds-sw-grid { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
+.ds-sw .chip { height: 56px; border-bottom: 1px solid var(--hairline); }
+.ds-sw .meta { padding: 8px 10px; }
+.ds-sw .name { font-size: 12px; font-weight: 500; color: var(--ink); }
+.ds-sw .val { font-size: 11px; color: var(--muted); font-family: "JetBrains Mono", ui-monospace, monospace; margin-top: 2px; }
+
+.ds-typescale { background: var(--surface-card); border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; }
+.ds-tr { display: grid; grid-template-columns: 160px 240px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font: 500 11px/1.3 "JetBrains Mono", ui-monospace, monospace; color: var(--ink); }
+.ds-spec { font: 400 11px/1.3 "JetBrains Mono", ui-monospace, monospace; color: var(--muted); }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(8, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--surface-card); border: 1px solid var(--hairline-strong); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input { height: 44px; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--hairline-strong); background: var(--surface-card); color: var(--ink); font-family: inherit; font-size: 14px; width: 100%; }
+.ds-input.focused { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(245,78,0,0.18); outline: none; }
+.ds-field-label { font: 500 11px/1.4 "JetBrains Mono", ui-monospace, monospace; color: var(--muted); margin-bottom: 6px; display: block; letter-spacing: 0.04em; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini { border-radius: 12px; padding: 24px; border: 1px solid var(--hairline); background: var(--surface-card); display: flex; flex-direction: column; gap: 8px; }
+.ds-card-mini h4 { margin: 0; font-weight: 600; font-size: 16px; color: var(--ink); }
+.ds-card-mini p { margin: 0; font-size: 13px; color: var(--body); line-height: 1.55; }
+.ds-card-mini.featured { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
+.ds-card-mini.featured h4 { color: var(--canvas); }
+.ds-card-mini.featured p { color: var(--muted-soft); }
+
+.ds-tag-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.tl-pill.ds { font-size: 10px; padding: 4px 10px; }
+.badge-pill {
+  display: inline-block; background: var(--surface-strong); color: var(--ink);
+  font: 600 11px/1.4 "Inter", sans-serif; letter-spacing: 0.88px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 9999px;
+}
+</style>
+</head>
+<body>
+
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#">
+    <span class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0">
+        <path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2z" fill="#26251e"/>
+        <path d="M12 2v20M2 7.5L22 16.5M22 7.5L2 16.5" stroke="#f7f7f4" stroke-width="0.8" stroke-linecap="round"/>
+      </svg>
+    </span>
+    Cursor
+  </a>
+  <nav class="nav-links">
+    <a href="#">Pricing</a>
+    <a href="#">Features</a>
+    <a href="#">Enterprise</a>
+    <a href="#">Blog</a>
+    <a href="#">Forum</a>
+    <a href="#">Careers</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-tertiary">Sign In</a>
+    <a href="#" class="btn btn-download">Download for macOS</a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">The AI Code Editor</p>
+  <h1 class="display-mega">Built to make you <em>extraordinarily productive.</em></h1>
+  <p class="lead">Cursor is the best way to code with AI. It writes, edits, and refactors alongside you in a familiar editor — quietly, in your style, on your terms.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-download">Download for macOS</a>
+    <a href="#" class="btn btn-tertiary">All downloads →</a>
+  </div>
+  <div class="platform-line">
+    <span class="mono">macOS · Windows · Linux</span>
+    <span style="color: var(--muted-soft); margin: 0 6px;">·</span>
+    <span>Free to try</span>
+  </div>
+
+  <!-- IDE Mockup (the protagonist) -->
+  <div class="ide-mockup-card">
+    <div class="ide-titlebar">
+      <div class="ide-traffic"><span></span><span></span><span></span></div>
+      <div class="ide-tab active"><span>app.tsx</span><span class="x">×</span></div>
+      <div class="ide-tab"><span>queue.ts</span><span class="x">×</span></div>
+      <div class="ide-tab"><span>schema.sql</span><span class="x">×</span></div>
+      <div class="ide-path">~/cursor-demo / src / app.tsx</div>
+    </div>
+
+    <div class="ide-frame">
+      <aside class="ide-side">
+        <div class="group">Explorer</div>
+        <div class="row"><span class="ch">▾</span>cursor-demo</div>
+        <div class="row" style="padding-left: 24px;"><span class="ch">▾</span>src</div>
+        <div class="row active" style="padding-left: 36px;">app.tsx</div>
+        <div class="row dirty" style="padding-left: 36px;">queue.ts</div>
+        <div class="row" style="padding-left: 36px;">schema.sql</div>
+        <div class="row" style="padding-left: 36px;">auth.ts</div>
+        <div class="row" style="padding-left: 24px;"><span class="ch">▸</span>tests</div>
+        <div class="row" style="padding-left: 24px;"><span class="ch">▸</span>public</div>
+        <div class="row" style="padding-left: 12px;">package.json</div>
+        <div class="row" style="padding-left: 12px;">tsconfig.json</div>
+        <div class="row" style="padding-left: 12px;">README.md</div>
+      </aside>
+
+      <main class="ide-main">
+        <div class="ide-line"><span class="ide-ln">1</span><span class="ide-co"><span class="tk-com">// queue.ts — agentic job runner</span></span></div>
+        <div class="ide-line"><span class="ide-ln">2</span><span class="ide-co"><span class="tk-kw">import</span> { <span class="tk-fn">RateLimiter</span> } <span class="tk-kw">from</span> <span class="tk-str">"./rate-limiter"</span></span></div>
+        <div class="ide-line"><span class="ide-ln">3</span><span class="ide-co"><span class="tk-kw">import</span> { <span class="tk-fn">spans</span> } <span class="tk-kw">from</span> <span class="tk-str">"@/lib/tracing"</span></span></div>
+        <div class="ide-line"><span class="ide-ln">4</span><span class="ide-co"> </span></div>
+        <div class="ide-line"><span class="ide-ln">5</span><span class="ide-co"><span class="tk-kw">export async function</span> <span class="tk-fn">processQueue</span>(jobs<span class="tk-mu">:</span> <span class="tk-fn">Job</span>[]) {</span></div>
+        <div class="ide-line"><span class="ide-ln">6</span><span class="ide-co">  <span class="tk-kw">const</span> limiter <span class="tk-mu">=</span> <span class="tk-kw">new</span> <span class="tk-fn">RateLimiter</span>({ rps<span class="tk-mu">:</span> <span class="tk-num">12</span> })</span></div>
+        <div class="ide-line"><span class="ide-ln">7</span><span class="ide-co">  <span class="tk-kw">const</span> results <span class="tk-mu">=</span> <span class="tk-kw">await</span> <span class="tk-fn">Promise</span>.<span class="tk-fn">all</span>(</span></div>
+        <div class="ide-line"><span class="ide-ln">8</span><span class="ide-co">    jobs.<span class="tk-fn">map</span>(<span class="tk-kw">async</span> (job) <span class="tk-mu">=&gt;</span> {</span></div>
+        <div class="ide-line"><span class="ide-ln">9</span><span class="ide-co">      <span class="tk-kw">return</span> <span class="tk-kw">await</span> limiter.<span class="tk-fn">acquire</span>().<span class="tk-fn">then</span>(()<span class="tk-mu">=&gt;</span></span></div>
+        <div class="ide-line"><span class="ide-ln">10</span><span class="ide-co">        <span class="tk-fn">spans</span>(<span class="tk-str">"job.run"</span>, ()<span class="tk-mu">=&gt;</span> job.<span class="tk-fn">run</span>())<span class="ide-cursor"></span></span></div>
+        <div class="ide-line"><span class="ide-ln">11</span><span class="ide-co"><span class="ide-ghost">      ).catch((err) =&gt; logger.error({ jobId: job.id, err }))</span></span></div>
+        <div class="ide-line"><span class="ide-ln">12</span><span class="ide-co">    })</span></div>
+        <div class="ide-line"><span class="ide-ln">13</span><span class="ide-co">  )</span></div>
+        <div class="ide-line"><span class="ide-ln">14</span><span class="ide-co">  <span class="tk-kw">return</span> results</span></div>
+        <div class="ide-line"><span class="ide-ln">15</span><span class="ide-co">}</span></div>
+      </main>
+
+      <aside class="ide-chat">
+        <div class="chat-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>Agent · sonnet-4</div>
+        <div class="chat-msg user"><div class="who">You</div>Add a retry with exponential backoff and surface errors via the logger.</div>
+        <div class="chat-msg">
+          <div class="who">Cursor</div>
+          I'll wrap the inner <span class="mono" style="color:var(--syn-fn)">job.run()</span> call with retry logic. Here's the plan:
+          <div class="chat-timeline">
+            <div class="tl-step"><span class="tl-pill tl-thinking">Thinking</span><span>analyzing queue.ts</span></div>
+            <div class="tl-step"><span class="tl-pill tl-grep">Grepping</span><span>RateLimiter, retry</span></div>
+            <div class="tl-step"><span class="tl-pill tl-read">Reading</span><span>rate-limiter.ts · logger.ts</span></div>
+            <div class="tl-step"><span class="tl-pill tl-edit">Editing</span><span>queue.ts:10-11</span></div>
+            <div class="tl-step"><span class="tl-pill tl-done">Done</span><span>+18 −2 · 1 file</span></div>
+          </div>
+        </div>
+        <div class="chat-input">
+          <span>Plan, edit, refactor…</span>
+          <span class="ctrl-k">⌘L</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div></section>
+
+<div class="wrap"><div class="logos">
+  <span class="logo-mark">Shopify</span>
+  <span class="logo-mark">OpenAI</span>
+  <span class="logo-mark">Perplexity</span>
+  <span class="logo-mark">Ramp</span>
+  <span class="logo-mark">Mercury</span>
+  <span class="logo-mark">Replicate</span>
+  <span class="logo-mark">Vercel</span>
+</div></div>
+
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Feels familiar</p>
+    <h2 class="display-lg">Tab, Tab, Tab. <em style="color: var(--muted); font-style: normal;">Then a whole feature.</em></h2>
+    <p class="body-lg" style="margin-top: 16px;">Cursor lets you breeze through changes by predicting your next edit. Designed to read like a magazine, behave like an IDE.</p>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg>
+      </div>
+      <h3>Frontier intelligence</h3>
+      <p>Powered by a mix of purpose-built and frontier models. Cursor is smart and fast — <span class="kbd">⌘K</span> to ask, <span class="kbd">⌘L</span> for the agent.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12l4 4L19 6"/><path d="M5 19h14"/></svg>
+      </div>
+      <h3>Predicts your next edit</h3>
+      <p>Cursor lets you breeze through changes by predicting the cursor's next position. Press <span class="kbd">Tab</span> to accept.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      </div>
+      <h3>Knows your codebase</h3>
+      <p>Get answers from the whole repo, or refer to a file or doc with <span class="kbd">@</span>. Cursor reads context like a teammate would.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h8v8H8z" fill="currentColor" fill-opacity="0.1"/></svg>
+      </div>
+      <h3>Edit in natural language</h3>
+      <p>Tell Cursor what to build. Watch the agent <span class="mono" style="color:var(--tl-edit); font-size: 12px;">edit</span>, <span class="mono" style="color:var(--tl-grep); font-size: 12px;">grep</span>, and <span class="mono" style="color:var(--tl-read); font-size: 12px;">read</span> across files.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg>
+      </div>
+      <h3>SOC 2 certified</h3>
+      <p>Privacy mode keeps your code on your machine. Code is never stored, never trained on.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <h3>Familiar. By design.</h3>
+      <p>Import extensions, themes, and keybindings from VS Code in a single click. Nothing to relearn.</p>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Comparison</p>
+    <h2 class="display-md">An AI editor that meets you where you write.</h2>
+  </div>
+  <div class="comparison">
+    <div class="col this">
+      <h4>Cursor</h4>
+      <h3>Quietly excellent.</h3>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Predicts cursor moves, not just text.</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Whole-repo context as a teammate.</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Agent runs read / grep / edit transparently.</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Privacy mode + SOC 2.</li>
+      </ul>
+    </div>
+    <div class="col other">
+      <h4>Other AI tools</h4>
+      <h3>A chat panel grafted on.</h3>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Single-file autocomplete only.</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Side panel that doesn't read the repo.</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Opaque agent — what did it actually do?</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>Your code, training data.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="testimonial">
+    <blockquote>"Cursor is the next leap in coding tools. It feels less like an AI tool, more like an editor that's quietly become better at being an editor."</blockquote>
+    <div class="author">
+      <div class="tm-avatar">SC</div>
+      <div class="meta">
+        <strong>Sarah Cook</strong>
+        <span>Staff engineer, Anthropic</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head" style="text-align: center; margin: 0 auto;">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="display-md">Start free. Upgrade when the agent has earned it.</h2>
+  </div>
+  <div class="tiers">
+    <div class="tier">
+      <h3>Hobby</h3>
+      <div class="price">$0</div>
+      <div class="desc">Pro two-week trial, then a steady free tier. Everything you need to try the editor.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>2,000 completions / mo</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>50 premium requests</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Pro models · sonnet, o3-mini</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="width: 100%;">Get Cursor</a></div>
+    </div>
+    <div class="tier featured">
+      <h3>Pro</h3>
+      <div class="price">$20<span class="per">/mo</span></div>
+      <div class="desc">Unlimited completions and 500 fast premium requests. Everything an individual builder needs.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited completions</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>500 fast premium requests</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Agent · grep + read + edit</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Privacy mode + SOC 2</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-primary" style="width: 100%;">Upgrade to Pro</a></div>
+    </div>
+    <div class="tier">
+      <h3>Business</h3>
+      <div class="price">$40<span class="per">/user · mo</span></div>
+      <div class="desc">For teams that ship together. SSO, admin controls, centralized billing, on-prem option.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SAML SSO + SCIM</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Admin dashboard</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="width: 100%;">Contact sales</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="cta-band"><div class="wrap">
+  <h2 class="display-lg" style="max-width: 16ch; margin: 0 auto;">Try Cursor now. <em style="color: var(--muted); font-style: normal;">Free to start.</em></h2>
+  <p class="body-lg" style="max-width: 540px; margin: 24px auto 32px;">Two weeks of Pro on the house. No credit card. Bring your VS Code keybindings and your repo — we'll meet you there.</p>
+  <a href="#" class="btn btn-download">Download for macOS</a>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head" style="margin-bottom: 48px;">
+    <p class="eyebrow">Design System</p>
+    <h2 class="display-md">The tokens behind every pixel.</h2>
+    <p class="body-lg" style="margin-top: 16px;">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.cursor.html" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline; text-underline-offset: 3px;">DESIGN.md</a>. Warm cream canvas. Single orange voltage. Magazine-weight display. Pastel pills scoped to the agent timeline.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#f54e00"></div><div class="meta"><div class="name">primary</div><div class="val">#f54e00</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#d04200"></div><div class="meta"><div class="name">primary-active</div><div class="val">#d04200</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#26251e"></div><div class="meta"><div class="name">ink</div><div class="val">#26251e</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #e6e5e0"></div><div class="meta"><div class="name">on-primary</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1f8a65"></div><div class="meta"><div class="name">success</div><div class="val">#1f8a65</div></div></div>
+    </div>
+
+    <p class="ds-caption">Surface — warm cream floor, not white</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#f7f7f4"></div><div class="meta"><div class="name">canvas</div><div class="val">#f7f7f4</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#fafaf7"></div><div class="meta"><div class="name">canvas-soft</div><div class="val">#fafaf7</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #e6e5e0"></div><div class="meta"><div class="name">surface-card</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e6e5e0"></div><div class="meta"><div class="name">surface-strong</div><div class="val">#e6e5e0</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#26251e"></div><div class="meta"><div class="name">ink / body-strong</div><div class="val">#26251e</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#5a5852"></div><div class="meta"><div class="name">body</div><div class="val">#5a5852</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#807d72"></div><div class="meta"><div class="name">muted</div><div class="val">#807d72</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#a09c92"></div><div class="meta"><div class="name">muted-soft</div><div class="val">#a09c92</div></div></div>
+    </div>
+
+    <p class="ds-caption">Hairlines</p>
+    <div class="ds-sw-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 600px;">
+      <div class="ds-sw"><div class="chip" style="background:#e6e5e0"></div><div class="meta"><div class="name">hairline</div><div class="val">#e6e5e0</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#efeee8"></div><div class="meta"><div class="name">hairline-soft</div><div class="val">#efeee8</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#cfcdc4"></div><div class="meta"><div class="name">hairline-strong</div><div class="val">#cfcdc4</div></div></div>
+    </div>
+
+    <p class="ds-caption">Timeline — AI action stages, scoped to product UI only</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#dfa88f"></div><div class="meta"><div class="name">tl-thinking</div><div class="val">#dfa88f</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9fc9a2"></div><div class="meta"><div class="name">tl-grep</div><div class="val">#9fc9a2</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9fbbe0"></div><div class="meta"><div class="name">tl-read</div><div class="val">#9fbbe0</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c0a8dd"></div><div class="meta"><div class="name">tl-edit</div><div class="val">#c0a8dd</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c08532"></div><div class="meta"><div class="name">tl-done</div><div class="val">#c08532</div></div></div>
+    </div>
+
+    <p class="ds-caption">Semantic</p>
+    <div class="ds-sw-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 400px;">
+      <div class="ds-sw"><div class="chip" style="background:#1f8a65"></div><div class="meta"><div class="name">success</div><div class="val">#1f8a65</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#cf2d56"></div><div class="meta"><div class="name">error</div><div class="val">#cf2d56</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption" style="margin-bottom: 16px;">CursorGothic substituted with Inter at weight 400 · negative tracking on display · weight stays at 400</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-mega</span><span class="ds-spec">72 · w400 · −2.16 · 1.10</span><div class="ds-sam" style="font-size:54px; font-weight:400; letter-spacing:-1.8px; line-height:1.1;">Extraordinarily productive</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">36 · w400 · −0.72 · 1.20</span><div class="ds-sam" style="font-size:32px; font-weight:400; letter-spacing:-0.65px; line-height:1.2;">Section heading set quietly</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">26 · w400 · −0.325 · 1.25</span><div class="ds-sam" style="font-size:24px; font-weight:400; letter-spacing:-0.3px; line-height:1.25;">Sub-section sits under a head</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-sm</span><span class="ds-spec">22 · w400 · −0.11 · 1.30</span><div class="ds-sam" style="font-size:22px; font-weight:400; letter-spacing:-0.11px; line-height:1.3;">Card group title</div></div>
+      <div class="ds-tr"><span class="ds-tok">title-md</span><span class="ds-spec">18 · w600 · 0 · 1.40</span><div class="ds-sam" style="font-size:18px; font-weight:600;">Feature card title</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 · w400 · 0 · 1.50</span><div class="ds-sam" style="font-size:16px; font-weight:400; color: var(--body);">Default body. Used across cards, paragraphs, and prose.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-sm</span><span class="ds-spec">14 · w400 · 0 · 1.50</span><div class="ds-sam" style="font-size:14px; font-weight:400; color: var(--body);">Footer body, captions, secondary lines.</div></div>
+      <div class="ds-tr"><span class="ds-tok">caption-uppercase</span><span class="ds-spec">11 · w600 · +0.88 · UPPER</span><div class="ds-sam" style="font-size:11px; font-weight:600; letter-spacing:0.88px; text-transform: uppercase; color: var(--muted);">Section label · timeline pill</div></div>
+      <div class="ds-tr"><span class="ds-tok">code</span><span class="ds-spec">13 · w400 · JetBrains Mono</span><div class="ds-sam mono" style="font-size:13px; color: var(--ink);">const limiter = new RateLimiter({ rps: 12 })</div></div>
+      <div class="ds-tr"><span class="ds-tok">button</span><span class="ds-spec">14 · w500 · 0 · 1.00</span><div class="ds-sam" style="font-size:14px; font-weight:500;">Get Cursor &nbsp;·&nbsp; Download for macOS</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:0"></div><span class="ds-tok">none</span><span class="ds-spec">0</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">xs</span><span class="ds-spec">4 · tags</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:6px"></div><span class="ds-tok">sm</span><span class="ds-spec">6</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="ds-tok">md</span><span class="ds-spec">8 · btn / input</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:12px"></div><span class="ds-tok">lg</span><span class="ds-spec">12 · cards</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="ds-tok">xl</span><span class="ds-spec">16 · rare</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">pill</span><span class="ds-spec">∞ · timeline</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">full</span><span class="ds-spec">∞ · avatar</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — 8px radius, never pill, primary scarce</p>
+    <div class="ds-comp-row">
+      <a class="btn btn-primary">button-primary</a>
+      <a class="btn" style="background:var(--primary-active);color:#fff;">primary-active</a>
+      <a class="btn btn-secondary">button-secondary</a>
+      <a class="btn btn-tertiary">button-tertiary</a>
+      <a class="btn btn-download">button-download</a>
+    </div>
+
+    <p class="ds-caption">Inputs — surface-card · 8px radius · 44px height</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="Search the codebase"/>
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="@queue.ts · rps: 12"/>
+      </div>
+    </div>
+
+    <p class="ds-caption">Tags & timeline pills — pill radius, uppercase 11/600/0.88</p>
+    <div class="ds-tag-row">
+      <span class="tl-pill tl-thinking ds">Thinking</span>
+      <span class="tl-pill tl-grep ds">Grepping</span>
+      <span class="tl-pill tl-read ds">Reading</span>
+      <span class="tl-pill tl-edit ds">Editing</span>
+      <span class="tl-pill tl-done ds">Done</span>
+      <span class="badge-pill">Pro</span>
+      <span class="badge-pill">Beta</span>
+    </div>
+
+    <p class="ds-caption">Card variants — 12px radius, hairline border, no shadow</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-mini">
+        <h4>feature-card</h4>
+        <p>Background surface-card · 12px radius · 1px hairline. Default content card across the marketing page.</p>
+      </div>
+      <div class="ds-card-mini featured">
+        <h4>pricing-tier-featured</h4>
+        <p>Background ink · text canvas. The featured tier inverts surface — depth without color change.</p>
+      </div>
+      <div class="ds-card-mini">
+        <h4>ide-mockup-card</h4>
+        <p>Background white · 12px radius · contains the multi-pane editor. The only "elevated" surface in the system.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="brand-mini">
+      <a class="brand" href="#">
+        <span class="logo">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2z" fill="#26251e"/><path d="M12 2v20M2 7.5L22 16.5M22 7.5L2 16.5" stroke="#f7f7f4" stroke-width="0.8" stroke-linecap="round"/></svg>
+        </span>
+        Cursor
+      </a>
+      <p>The AI Code Editor. Tokens and component spec sourced from awesome-design-md.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Enterprise</a></li>
+        <li><a href="#">Downloads</a></li>
+        <li><a href="#">Changelog</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">Forum</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Security</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Trust</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© Cursor (inspired) · Generated for design study</div>
+    <div>Canvas #f7f7f4 · Orange #f54e00 · Display 400 · Radius 8 / 12</div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.cursor.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

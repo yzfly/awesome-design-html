@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MiniMax — Inspired Design</title>
+<meta name="description" content="A MiniMax-inspired marketing page and design-system reference: stark white canvas, black-pill CTAs, vibrant gradient product cards (coral, magenta, blue, purple), DM Sans across every surface, model showcase mockup. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --primary: #0a0a0a;
+  --on-primary: #ffffff;
+  --primary-soft: #181e25;
+  --coral: #ff5530;
+  --magenta: #ea5ec1;
+  --blue: #1456f0;
+  --blue-deep: #1d4ed8;
+  --blue-700: #17437d;
+  --cyan: #3daeff;
+  --blue-200: #bfdbfe;
+  --purple: #a855f7;
+  --canvas: #ffffff;
+  --surface: #f7f8fa;
+  --surface-soft: #f2f3f5;
+  --hairline: #e5e7eb;
+  --hairline-soft: #eaecf0;
+  --ink: #0a0a0a;
+  --ink-strong: #000000;
+  --charcoal: #222222;
+  --slate: #45515e;
+  --steel: #5f5f5f;
+  --stone: #8e8e93;
+  --muted: #a8aab2;
+  --success-bg: #e8ffea;
+  --success-text: #1ba673;
+  --on-dark: #ffffff;
+  --footer-bg: #0a0a0a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(20,86,240,0.2); }
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* Promo banner */
+.promo-banner {
+  background: var(--primary); color: var(--on-primary);
+  text-align: center; font-size: 14px; font-weight: 500;
+  padding: 10px 20px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.promo-banner a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Top nav */
+.topnav {
+  height: 64px;
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 32px; font-size: 14px; font-weight: 500; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; color: var(--ink); letter-spacing: -0.02em; }
+.brand-mark {
+  width: 28px; height: 28px;
+  background: var(--ink);
+  border-radius: 50%;
+  position: relative;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+}
+.brand-mark::after {
+  content: ""; width: 12px; height: 12px;
+  background: var(--canvas);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.nav-links { display: flex; align-items: center; gap: 28px; color: var(--ink); }
+.nav-links a:hover { color: var(--slate); }
+.spacer { flex: 1; }
+.nav-cta { display: flex; align-items: center; gap: 10px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 14px; font-weight: 600; line-height: 1.4;
+  padding: 11px 24px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 150ms ease, color 150ms ease;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--charcoal); }
+.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.btn-secondary:hover { background: var(--ink); color: var(--on-primary); }
+.btn-tertiary { background: var(--canvas); color: var(--ink); border: 1px solid var(--hairline); }
+.btn-on-color { background: var(--canvas); color: var(--ink); border: none; }
+.btn-on-dark { background: var(--canvas); color: var(--ink); }
+
+/* Hero */
+.hero { padding: 96px 0 64px; text-align: center; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 9999px; background: var(--surface); font-size: 13px; font-weight: 500; color: var(--charcoal); }
+.hero-eyebrow .dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--coral); display: inline-block; }
+.hero h1 {
+  font-size: clamp(40px, 7.2vw, 80px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 24px 0 20px;
+  max-width: 980px;
+  margin-left: auto; margin-right: auto;
+}
+.hero h1 .grad {
+  background: linear-gradient(90deg, var(--coral), var(--magenta), var(--purple), var(--blue));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero .sub { font-size: 18px; font-weight: 500; color: var(--steel); max-width: 640px; margin: 0 auto 32px; }
+.hero-ctas { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* Model showcase — vibrant product cards */
+.matrix-wrap { padding: 16px 0 96px; }
+.matrix {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.model-card {
+  border-radius: 32px;
+  padding: 32px 28px;
+  color: var(--on-dark);
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  display: flex; flex-direction: column;
+  isolation: isolate;
+}
+.model-card .badge {
+  position: absolute; top: 20px; right: 20px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+.model-card .tagline { font-size: 13px; font-weight: 500; opacity: 0.85; letter-spacing: 0.5px; text-transform: uppercase; }
+.model-card .name { font-size: 56px; font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; margin-top: auto; }
+.model-card .blurb { font-size: 13px; line-height: 1.5; opacity: 0.85; margin-top: 12px; max-width: 28ch; }
+.model-card .glow { position: absolute; border-radius: 9999px; filter: blur(60px); opacity: 0.5; }
+.model-card .ic { position: absolute; right: -10px; top: 60px; opacity: 0.18; z-index: 0; }
+
+.mc-coral { background: linear-gradient(135deg, #ff5530, #ff8050); }
+.mc-coral .glow { background: #ffaa80; width: 220px; height: 220px; bottom: -60px; right: -60px; }
+.mc-magenta { background: linear-gradient(135deg, #ea5ec1, #c93dac); }
+.mc-magenta .glow { background: #ff90d8; width: 220px; height: 220px; bottom: -60px; right: -60px; }
+.mc-blue { background: linear-gradient(135deg, #1456f0, #3daeff); }
+.mc-blue .glow { background: #88c8ff; width: 220px; height: 220px; bottom: -60px; right: -60px; }
+.mc-purple { background: linear-gradient(135deg, #a855f7, #7b3aed); }
+.mc-purple .glow { background: #d4a8ff; width: 220px; height: 220px; bottom: -60px; right: -60px; }
+
+/* Stats */
+.stats-wrap { padding: 64px 0; background: var(--canvas); border-top: 1px solid var(--hairline-soft); border-bottom: 1px solid var(--hairline-soft); }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: left; }
+.stat .n { font-size: 40px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); }
+.stat .lbl { font-size: 14px; color: var(--steel); margin-top: 6px; }
+
+/* Section heads */
+.section { padding: 96px 0; }
+.sec-head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+.sec-head .lbl { display: inline-block; font-size: 13px; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.6px; }
+.sec-head h2 {
+  font-size: 56px; font-weight: 600; line-height: 1.1; letter-spacing: -0.025em;
+  margin: 16px 0 14px; color: var(--ink);
+}
+.sec-head p { font-size: 18px; color: var(--steel); margin: 0; }
+
+/* AI product tiles */
+.ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ai-tile {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex; flex-direction: column;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+.ai-tile:hover { border-color: var(--ink); }
+.ai-tile .ic {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  color: var(--on-dark);
+}
+.ai-tile h3 { font-size: 20px; font-weight: 600; margin: 0 0 6px; color: var(--ink); }
+.ai-tile p { font-size: 14px; color: var(--steel); margin: 0 0 16px; flex: 1; }
+.ai-tile .link { font-size: 14px; font-weight: 500; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
+
+/* Models comparison table */
+.tbl-wrap { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 16px; overflow: hidden; }
+.tbl { width: 100%; border-collapse: collapse; }
+.tbl th, .tbl td { padding: 16px 20px; text-align: left; font-size: 14px; }
+.tbl thead { background: var(--surface); }
+.tbl th { font-size: 13px; font-weight: 600; color: var(--steel); text-transform: uppercase; letter-spacing: 0.5px; }
+.tbl tbody tr { border-top: 1px solid var(--hairline-soft); }
+.tbl .model-name { font-weight: 600; color: var(--ink); display: inline-flex; align-items: center; gap: 10px; }
+.tbl .dot-coral { width: 8px; height: 8px; border-radius: 9999px; background: var(--coral); display: inline-block; }
+.tbl .dot-magenta { background: var(--magenta); }
+.tbl .dot-blue { background: var(--blue); }
+.tbl .dot-purple { background: var(--purple); }
+.badge {
+  display: inline-block;
+  font-size: 12px; font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 9999px;
+}
+.badge-new { background: var(--coral); color: var(--on-dark); }
+.badge-beta { background: var(--blue-200); color: var(--blue-deep); }
+.badge-success { background: var(--success-bg); color: var(--success-text); }
+
+/* Promo CTA card */
+.promo-cta {
+  background: var(--coral);
+  color: var(--on-dark);
+  border-radius: 32px;
+  padding: 64px 56px;
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+.promo-cta .glow { position: absolute; border-radius: 9999px; filter: blur(80px); background: #ffaa80; width: 360px; height: 360px; right: -80px; bottom: -100px; opacity: 0.6; }
+.promo-cta .txt { position: relative; z-index: 2; }
+.promo-cta h2 { font-size: 48px; font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 12px; }
+.promo-cta p { font-size: 17px; opacity: 0.92; margin: 0; max-width: 56ch; }
+
+/* Design system */
+.ds { padding: 96px 0; background: var(--surface); border-top: 1px solid var(--hairline); }
+.ds-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.ds-head .lbl { font-size: 13px; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 0.6px; }
+.ds-head h2 { font-size: 48px; font-weight: 600; letter-spacing: -0.025em; margin: 12px 0; }
+.ds-head p { color: var(--steel); font-size: 16px; }
+
+.ds-section { margin-bottom: 56px; }
+.ds-section h3 {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.6px;
+  color: var(--ink); text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+.color-grp { margin-bottom: 24px; }
+.color-grp .gh { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+.color-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.swatch {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.swatch .chip { height: 56px; border-radius: 8px; }
+.swatch .nm { font-size: 13px; font-weight: 600; }
+.swatch .hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--steel); }
+
+.type-table { width: 100%; background: var(--canvas); border: 1px solid var(--hairline); border-radius: 16px; overflow: hidden; border-collapse: separate; border-spacing: 0; }
+.type-table th, .type-table td { padding: 14px 18px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--hairline-soft); }
+.type-table th { font-weight: 600; color: var(--steel); text-transform: uppercase; letter-spacing: 0.5px; font-size: 12px; background: var(--surface); }
+.type-table tr:last-child td { border-bottom: 0; }
+.type-table .sample { color: var(--ink); }
+.type-table .meta { font-family: "JetBrains Mono", monospace; color: var(--steel); }
+
+.radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+.radius-cell { background: var(--canvas); border: 1px solid var(--hairline); padding: 18px; border-radius: 12px; text-align: center; }
+.radius-cell .box { height: 64px; background: var(--ink); margin-bottom: 12px; }
+.radius-cell .nm { font-size: 13px; font-weight: 600; color: var(--ink); }
+.radius-cell .val { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--steel); }
+
+.comp-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.comp-cell {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  padding: 24px;
+}
+.comp-cell .lbl { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--steel); text-transform: uppercase; margin-bottom: 16px; }
+.comp-cell .demo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.input-demo { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 8px; padding: 9px 14px; height: 40px; font-size: 16px; color: var(--ink); width: 100%; outline: none; font-family: inherit; }
+.input-demo:focus { border: 2px solid var(--blue-deep); padding: 8px 13px; }
+.pill-tab { background: var(--canvas); color: var(--steel); border: 1px solid var(--hairline); padding: 6px 16px; border-radius: 9999px; font-size: 14px; font-weight: 500; }
+.pill-tab.active { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+
+/* Footer */
+.footer { background: var(--footer-bg); color: var(--on-dark); padding: 80px 32px 40px; }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 32px; }
+.foot-grid h5 { font-size: 13px; font-weight: 500; color: var(--on-dark); margin: 0 0 16px; }
+.foot-grid ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot-grid li a { font-size: 14px; color: var(--muted); }
+.foot-grid li a:hover { color: var(--on-dark); }
+.foot-tag { font-size: 22px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 16px; }
+.foot-social { display: flex; gap: 12px; margin-top: 24px; }
+.foot-social a { width: 36px; height: 36px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.08); color: var(--on-dark); }
+.foot-legal { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; margin-top: 48px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 13px; color: var(--muted); }
+
+/* floating link */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px; z-index: 80;
+  background: var(--ink); color: var(--on-primary);
+  padding: 10px 16px; border-radius: 9999px;
+  font-size: 13px; font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
+.src-link:hover { background: var(--charcoal); }
+
+@media (max-width: 1024px) {
+  .matrix, .ai-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .hero h1 { font-size: 48px; }
+  .sec-head h2, .ds-head h2 { font-size: 36px; }
+  .promo-cta { flex-direction: column; align-items: flex-start; padding: 40px; }
+  .promo-cta h2 { font-size: 36px; }
+}
+@media (max-width: 640px) {
+  .matrix, .ai-grid, .comp-matrix { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<div class="promo-banner">
+  <span>Invite &amp; Earn — Rewards for both sides.</span>
+  <a href="#">Learn more →</a>
+</div>
+
+<header class="topnav">
+  <div class="wrap row">
+    <a href="#" class="brand"><span class="brand-mark" aria-hidden></span> MiniMax</a>
+    <nav class="nav-links">
+      <a href="#">Models</a>
+      <a href="#">Product</a>
+      <a href="#">API</a>
+      <a href="#">Pricing</a>
+      <a href="#">Company</a>
+    </nav>
+    <span class="spacer"></span>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-secondary">Login</a>
+      <a href="#" class="btn btn-primary">Contact us</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow"><span class="dot"></span> M2.7 is live — 12% faster inference</span>
+    <h1>Intelligence with<br/>everyone.<br/><span class="grad">Models built to ship.</span></h1>
+    <p class="sub">Foundation models for text, audio, video, and agents — all from one Chinese AI lab. Train, deploy, and scale on the MiniMax platform.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary">Start building <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#" class="btn btn-secondary">View models</a>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL MATRIX (vibrant product cards) -->
+<section class="matrix-wrap">
+  <div class="wrap">
+    <div class="matrix">
+      <div class="model-card mc-coral">
+        <span class="badge">NEW</span>
+        <span class="glow"></span>
+        <span class="tagline">Foundation · Text</span>
+        <div class="name">M2.7</div>
+        <p class="blurb">Reasoning model with 128k context. 12% faster inference, 38% lower price-per-token than M2.6.</p>
+      </div>
+      <div class="model-card mc-magenta">
+        <span class="glow"></span>
+        <span class="tagline">Generative · Audio</span>
+        <div class="name">Music<br/>2.6</div>
+        <p class="blurb">Full-song generation in 32 styles. Instrumental separation and lyric-aware composition.</p>
+      </div>
+      <div class="model-card mc-blue">
+        <span class="badge">LIVE</span>
+        <span class="glow"></span>
+        <span class="tagline">Generative · Video</span>
+        <div class="name">Hailuo</div>
+        <p class="blurb">10s 1080p text-to-video at 24fps. Cinematic motion control and camera-aware prompts.</p>
+      </div>
+      <div class="model-card mc-purple">
+        <span class="glow"></span>
+        <span class="tagline">Generative · Speech</span>
+        <div class="name">Speech<br/>2.8</div>
+        <p class="blurb">28 languages, 480 voices, sub-200ms streaming. Emotion control via prompt tags.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-wrap">
+  <div class="wrap stats">
+    <div class="stat"><div class="n">214,000+</div><div class="lbl">Enterprise clients &amp; developers</div></div>
+    <div class="stat"><div class="n">180</div><div class="lbl">Countries served</div></div>
+    <div class="stat"><div class="n">8.4B</div><div class="lbl">Tokens served daily</div></div>
+    <div class="stat"><div class="n">99.99%</div><div class="lbl">API uptime SLA</div></div>
+  </div>
+</section>
+
+<!-- AI PRODUCT TILES -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="lbl">Full-stack matrix</span>
+      <h2>Every modality.<br/>One platform.</h2>
+      <p>Build agents, generate media, run open weights — through one SDK and one billing plan.</p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-tile">
+        <div class="ic" style="background:var(--coral);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+        </div>
+        <h3>Agent</h3>
+        <p>Build, deploy, and scale tool-using agents on top of M2.7.</p>
+        <a href="#" class="link">Docs <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="ai-tile">
+        <div class="ic" style="background:var(--blue);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M10 10l5 2-5 2v-4z" fill="currentColor"/></svg>
+        </div>
+        <h3>Hailuo Video</h3>
+        <p>Cinematic text-to-video at production quality.</p>
+        <a href="#" class="link">Open studio <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="ai-tile">
+        <div class="ic" style="background:var(--magenta);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <h3>MiniMax Audio</h3>
+        <p>Speech, music, and sound effects from one API.</p>
+        <a href="#" class="link">Try it <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="ai-tile">
+        <div class="ic" style="background:var(--purple);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Open Source</h3>
+        <p>M2-Lite, Hailuo-Mini and Music-Tiny on Hugging Face.</p>
+        <a href="#" class="link">View weights <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS COMPARISON -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="lbl">Models overview</span>
+      <h2>Pick the right<br/>weight class.</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Model</th><th>Context</th><th>Modality</th><th>Status</th><th>Price / 1M tok</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="model-name"><span class="dot-coral tbl"></span>M2.7</span></td>
+            <td>128k</td>
+            <td>Text · Reasoning</td>
+            <td><span class="badge badge-new">NEW</span></td>
+            <td class="mono">$1.20 / $4.80</td>
+          </tr>
+          <tr>
+            <td><span class="model-name"><span class="dot-magenta tbl" style="width:8px;height:8px;border-radius:9999px;background:var(--magenta);display:inline-block;"></span>Music 2.6</span></td>
+            <td>—</td>
+            <td>Audio · Music</td>
+            <td><span class="badge badge-success">Available</span></td>
+            <td class="mono">$0.04 / second</td>
+          </tr>
+          <tr>
+            <td><span class="model-name"><span style="width:8px;height:8px;border-radius:9999px;background:var(--blue);display:inline-block;"></span>Hailuo</span></td>
+            <td>—</td>
+            <td>Video · 1080p</td>
+            <td><span class="badge badge-beta">BETA</span></td>
+            <td class="mono">$0.12 / second</td>
+          </tr>
+          <tr>
+            <td><span class="model-name"><span style="width:8px;height:8px;border-radius:9999px;background:var(--purple);display:inline-block;"></span>Speech 2.8</span></td>
+            <td>—</td>
+            <td>Audio · TTS</td>
+            <td><span class="badge badge-success">Available</span></td>
+            <td class="mono">$0.018 / 1k chars</td>
+          </tr>
+          <tr>
+            <td><span class="model-name"><span style="width:8px;height:8px;border-radius:9999px;background:var(--ink);display:inline-block;"></span>M2-Lite</span></td>
+            <td>32k</td>
+            <td>Text · Open Source</td>
+            <td><span class="badge badge-success">Available</span></td>
+            <td class="mono">Self-host</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO CTA -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="promo-cta">
+      <div class="glow"></div>
+      <div class="txt">
+        <h2>Refunds of 10%<br/>on every token, this quarter.</h2>
+        <p>Run M2.7 in production with confidence. Active until June 30 — credits land monthly.</p>
+      </div>
+      <div style="position:relative;z-index:2;">
+        <a href="#" class="btn btn-on-color">Join now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM REFERENCE -->
+<section class="ds" id="design-system">
+  <div class="wrap">
+    <div class="ds-head">
+      <span class="lbl">Design system</span>
+      <h2>The reference.</h2>
+      <p>Tokens, type, components — the chrome that carries every MiniMax surface.</p>
+    </div>
+
+    <div class="ds-section">
+      <h3>Color</h3>
+
+      <div class="color-grp">
+        <div class="gh">Mono &amp; Surface</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#0a0a0a;"></div><div class="nm">primary</div><div class="hex">#0a0a0a</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffffff;border:1px solid var(--hairline);"></div><div class="nm">canvas</div><div class="hex">#ffffff</div></div>
+          <div class="swatch"><div class="chip" style="background:#f7f8fa;border:1px solid var(--hairline);"></div><div class="nm">surface</div><div class="hex">#f7f8fa</div></div>
+          <div class="swatch"><div class="chip" style="background:#e5e7eb;"></div><div class="nm">hairline</div><div class="hex">#e5e7eb</div></div>
+        </div>
+      </div>
+
+      <div class="color-grp">
+        <div class="gh">Product identity (one per model)</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#ff5530;"></div><div class="nm">brand-coral · M2.7</div><div class="hex">#ff5530</div></div>
+          <div class="swatch"><div class="chip" style="background:#ea5ec1;"></div><div class="nm">brand-magenta · Music</div><div class="hex">#ea5ec1</div></div>
+          <div class="swatch"><div class="chip" style="background:#1456f0;"></div><div class="nm">brand-blue · Hailuo</div><div class="hex">#1456f0</div></div>
+          <div class="swatch"><div class="chip" style="background:#a855f7;"></div><div class="nm">brand-purple · Speech</div><div class="hex">#a855f7</div></div>
+        </div>
+      </div>
+
+      <div class="color-grp">
+        <div class="gh">Text &amp; Semantic</div>
+        <div class="color-row">
+          <div class="swatch"><div class="chip" style="background:#222222;"></div><div class="nm">charcoal</div><div class="hex">#222222</div></div>
+          <div class="swatch"><div class="chip" style="background:#5f5f5f;"></div><div class="nm">steel</div><div class="hex">#5f5f5f</div></div>
+          <div class="swatch"><div class="chip" style="background:#a8aab2;"></div><div class="nm">muted</div><div class="hex">#a8aab2</div></div>
+          <div class="swatch"><div class="chip" style="background:#1ba673;"></div><div class="nm">success-text</div><div class="hex">#1ba673</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <h3>Typography · DM Sans</h3>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Spec</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>hero-display</td>
+            <td class="sample" style="font-size:48px;font-weight:600;line-height:1.05;letter-spacing:-1.2px;">Intelligence with everyone.</td>
+            <td class="meta">DM Sans · 80 / 600 · -2px</td>
+          </tr>
+          <tr>
+            <td>display-lg</td>
+            <td class="sample" style="font-size:36px;font-weight:600;line-height:1.1;letter-spacing:-1px;">Models built to ship.</td>
+            <td class="meta">DM Sans · 56 / 600 · -1.5px</td>
+          </tr>
+          <tr>
+            <td>heading-lg</td>
+            <td class="sample" style="font-size:32px;font-weight:600;letter-spacing:-0.5px;">Pick the right weight class.</td>
+            <td class="meta">DM Sans · 40 / 600 · -1px</td>
+          </tr>
+          <tr>
+            <td>card-title</td>
+            <td class="sample" style="font-size:20px;font-weight:600;">Hailuo Video</td>
+            <td class="meta">DM Sans · 20 / 600</td>
+          </tr>
+          <tr>
+            <td>body-md</td>
+            <td class="sample">Foundation models for text, audio, video, and agents.</td>
+            <td class="meta">DM Sans · 16 / 400 · 1.5</td>
+          </tr>
+          <tr>
+            <td>caption-bold</td>
+            <td class="sample" style="font-size:13px;font-weight:600;">BETA / NEW / AVAILABLE</td>
+            <td class="meta">DM Sans · 13 / 600</td>
+          </tr>
+          <tr>
+            <td>button-md</td>
+            <td class="sample" style="font-size:14px;font-weight:600;">Start building</td>
+            <td class="meta">DM Sans · 14 / 600</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-section">
+      <h3>Radius</h3>
+      <div class="radius-grid">
+        <div class="radius-cell"><div class="box" style="border-radius:6px;"></div><div class="nm">sm</div><div class="val">6px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:8px;"></div><div class="nm">md · forms</div><div class="val">8px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:12px;"></div><div class="nm">lg</div><div class="val">12px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:16px;"></div><div class="nm">xl · white cards</div><div class="val">16px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:24px;"></div><div class="nm">xxxl · tiles</div><div class="val">24px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:32px;"></div><div class="nm">hero · vibrant</div><div class="val">32px</div></div>
+        <div class="radius-cell"><div class="box" style="border-radius:9999px;"></div><div class="nm">full · CTA</div><div class="val">9999px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <h3>Components</h3>
+      <div class="comp-matrix">
+        <div class="comp-cell">
+          <div class="lbl">Buttons</div>
+          <div class="demo">
+            <a href="#" class="btn btn-primary">Contact us</a>
+            <a href="#" class="btn btn-secondary">Login</a>
+            <a href="#" class="btn btn-tertiary">Docs</a>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Badges</div>
+          <div class="demo">
+            <span class="badge badge-new">NEW</span>
+            <span class="badge badge-beta">BETA</span>
+            <span class="badge badge-success">Active</span>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Pill tabs</div>
+          <div class="demo">
+            <span class="pill-tab active">Token plan</span>
+            <span class="pill-tab">Audio subscription</span>
+            <span class="pill-tab">Video package</span>
+          </div>
+        </div>
+        <div class="comp-cell">
+          <div class="lbl">Text input</div>
+          <div class="demo">
+            <input class="input-demo" placeholder="hello@minimax.io" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="color:var(--on-dark);">
+          <span class="brand-mark" style="background:var(--on-dark);" aria-hidden></span> MiniMax
+        </div>
+        <div class="foot-tag" style="color:var(--on-dark);margin-top:24px;">Intelligence with everyone.</div>
+        <div style="font-size:14px;color:var(--muted);">Foundation models from China to the world.</div>
+        <div class="foot-social">
+          <a href="#" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h3l-7 8 8 12h-6l-5-7-5 7H3l8-9L3 2h7l4 6 4-6z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1 .8-.2 1.7-.3 2.5-.3s1.7.1 2.5.3c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg></a>
+          <a href="#" aria-label="Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12l-1-3 2 1.5 2 1.5 3.5 2V6a2 2 0 0 0-2-2zM9 14c-.8 0-1.5-.8-1.5-1.8s.7-1.8 1.5-1.8 1.5.8 1.5 1.8S9.8 14 9 14zm6 0c-.8 0-1.5-.8-1.5-1.8s.7-1.8 1.5-1.8 1.5.8 1.5 1.8-.7 1.8-1.5 1.8z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Research</h5>
+        <ul><li><a href="#">M-series</a></li><li><a href="#">Hailuo</a></li><li><a href="#">Music</a></li><li><a href="#">Papers</a></li></ul>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul><li><a href="#">Agent</a></li><li><a href="#">Audio</a></li><li><a href="#">Video</a></li><li><a href="#">Open weights</a></li></ul>
+      </div>
+      <div>
+        <h5>API</h5>
+        <ul><li><a href="#">Docs</a></li><li><a href="#">Pricing</a></li><li><a href="#">Console</a></li><li><a href="#">Status</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">News</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 MiniMax — Inspired demo. Not affiliated.</span>
+      <span class="mono">All systems operational</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.minimax.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

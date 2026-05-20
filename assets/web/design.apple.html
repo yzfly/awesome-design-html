@@ -1,0 +1,1882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Apple — Inspired Design</title>
+<meta name="description" content="An Apple-inspired marketing page: edge-to-edge product tiles alternating light and dark, SF Pro feel via Inter, single Action Blue accent, pill CTAs. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #0066cc;
+  --primary-focus: #0071e3;
+  --primary-on-dark: #2997ff;
+  /* Surface */
+  --canvas: #ffffff;
+  --canvas-parchment: #f5f5f7;
+  --surface-pearl: #fafafc;
+  --surface-tile-1: #272729;
+  --surface-tile-2: #2a2a2c;
+  --surface-tile-3: #252527;
+  --surface-black: #000000;
+  --chip-translucent: rgba(210, 210, 215, 0.64);
+  /* Text */
+  --ink: #1d1d1f;
+  --ink-muted-80: #333333;
+  --ink-muted-48: #7a7a7a;
+  --on-dark: #ffffff;
+  --on-dark-muted: #cccccc;
+  /* Hairlines */
+  --hairline: #e0e0e0;
+  --divider-soft: #f0f0f0;
+  /* The single shadow */
+  --product-shadow: 3px 5px 30px 0 rgba(0,0,0,0.22);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-weight: 400;
+  font-feature-settings: "ss03";
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: color-mix(in srgb, var(--primary) 25%, transparent); }
+button { font-family: inherit; }
+
+/* —— Global nav (slim black bar) —— */
+.global-nav {
+  background: var(--surface-black);
+  color: var(--on-dark);
+  height: 44px;
+  display: flex; align-items: center;
+  padding: 0 22px;
+  font-size: 12px; letter-spacing: -0.12px;
+  position: relative; z-index: 20;
+}
+.gnav-inner {
+  max-width: 980px; margin: 0 auto;
+  display: flex; align-items: center; gap: 28px; width: 100%;
+}
+.gnav-inner .apl-mark { font-size: 16px; line-height: 1; opacity: 0.95; }
+.gnav-inner a { opacity: 0.8; }
+.gnav-inner a:hover { opacity: 1; }
+.gnav-right { margin-left: auto; display: flex; gap: 24px; }
+@media (max-width: 833px) {
+  .gnav-inner nav, .gnav-right { display: none; }
+  .gnav-inner { justify-content: center; }
+}
+
+/* —— Sub-nav frosted —— */
+.sub-nav {
+  position: sticky; top: 0; z-index: 18;
+  background: rgba(245, 245, 247, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.sub-nav-inner {
+  max-width: 1024px; margin: 0 auto;
+  display: flex; align-items: center;
+  height: 52px; padding: 0 22px;
+}
+.sub-nav .product-name {
+  font-size: 21px; font-weight: 600; letter-spacing: 0.231px; line-height: 1.19;
+  color: var(--ink);
+}
+.sub-nav nav {
+  margin-left: 32px;
+  display: flex; gap: 20px;
+}
+.sub-nav nav a {
+  font-size: 14px; line-height: 1.29; letter-spacing: -0.224px;
+  color: var(--ink); opacity: 0.85;
+}
+.sub-nav nav a:hover { opacity: 1; }
+.sub-nav .cta-wrap { margin-left: auto; }
+@media (max-width: 833px) {
+  .sub-nav nav { display: none; }
+}
+
+/* —— Layout —— */
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+.wrap-wide { max-width: 1440px; margin: 0 auto; padding: 0 22px; }
+
+/* —— Tile (full-bleed alternating) —— */
+.tile {
+  padding: 80px 0 0;
+  text-align: center;
+  position: relative;
+}
+.tile-content { padding: 0 22px; }
+.tile h1, .tile h2 {
+  font-weight: 600;
+  font-size: clamp(34px, 5.2vw, 56px);
+  line-height: 1.07;
+  letter-spacing: -0.28px;
+  margin: 0 0 8px;
+  color: inherit;
+}
+.tile h2 {
+  font-size: clamp(32px, 4.5vw, 40px);
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+.tile .tagline {
+  font-size: clamp(21px, 2.5vw, 28px);
+  font-weight: 400; letter-spacing: 0.196px; line-height: 1.14;
+  margin: 0 0 22px;
+}
+.tile .micro {
+  font-size: 14px; color: var(--ink-muted-80);
+  letter-spacing: -0.224px; line-height: 1.43;
+  margin: 0 auto 24px; max-width: 540px;
+}
+.tile.dark { background: var(--surface-tile-1); color: var(--on-dark); }
+.tile.dark .micro { color: var(--on-dark-muted); }
+.tile.dark-2 { background: var(--surface-tile-2); color: var(--on-dark); }
+.tile.dark-3 { background: var(--surface-tile-3); color: var(--on-dark); }
+.tile.parchment { background: var(--canvas-parchment); }
+.tile.light { background: var(--canvas); }
+
+.cta-row {
+  display: inline-flex; gap: 16px; align-items: center; justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* —— Pill buttons — the signature blue pill —— */
+.pill {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 11px 22px;
+  font: 400 17px/1.18 "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.374px;
+  border-radius: 9999px;
+  cursor: pointer; text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+  white-space: nowrap;
+}
+.pill:active { transform: scale(0.95); }
+.pill-primary { background: var(--primary); color: var(--on-dark); }
+.pill-primary:hover { background: var(--primary-focus); }
+.pill-ghost { background: transparent; color: var(--primary); border-color: var(--primary); }
+.pill-ghost:hover { background: rgba(0,102,204,0.06); }
+.pill-ghost-on-dark { background: transparent; color: var(--primary-on-dark); border-color: var(--primary-on-dark); }
+.pill-ghost-on-dark:hover { background: rgba(41,151,255,0.1); }
+.pill-store {
+  padding: 14px 28px;
+  font-size: 18px; font-weight: 300; letter-spacing: 0;
+}
+
+/* —— Inline blue text link —— */
+.tlink { color: var(--primary); font-size: 17px; line-height: 1.47; }
+.tlink:hover { text-decoration: underline; }
+.tlink-on-dark { color: var(--primary-on-dark); }
+.tlink::after { content: " ›"; font-size: 16px; }
+
+/* —— Dark utility rect button (sub-nav buy) —— */
+.btn-dark {
+  background: var(--ink); color: var(--on-dark);
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 14px; font-weight: 400; letter-spacing: -0.224px; line-height: 1.29;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: transform .15s ease, background .15s ease;
+}
+.btn-dark:hover { background: #2c2c2e; }
+.btn-dark:active { transform: scale(0.95); }
+.btn-blue-rect {
+  background: var(--primary); color: white;
+  border-radius: 9999px;
+  padding: 8px 15px;
+  font-size: 14px; font-weight: 400; letter-spacing: -0.224px; line-height: 1.29;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: transform .15s ease, background .15s ease;
+}
+.btn-blue-rect:hover { background: var(--primary-focus); }
+.btn-blue-rect:active { transform: scale(0.95); }
+
+/* —— The product render area (the only place a shadow appears) —— */
+.product-render {
+  margin: 48px auto 0;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.product-render .device {
+  width: 80%; aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, #2a2a2c 0%, #1a1a1c 70%, #0a0a0c 100%);
+  border-radius: 28px;
+  filter: drop-shadow(var(--product-shadow));
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.tile.light .product-render .device { background: linear-gradient(135deg, #e8e8ed 0%, #f5f5f7 60%, #fafafc 100%); }
+.tile.parchment .product-render .device { background: linear-gradient(135deg, #1d1d1f 0%, #272729 60%, #3a3a3c 100%); }
+.product-render .glyph {
+  width: 38%; aspect-ratio: 1; border-radius: 24px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), transparent 60%),
+    linear-gradient(135deg, #4b4b4d 0%, #1d1d1f 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.tile.light .product-render .glyph {
+  background: radial-gradient(circle at 30% 30%, rgba(0,0,0,0.06), transparent 60%),
+    linear-gradient(135deg, #c8c8cd 0%, #8a8a8e 100%);
+}
+.product-render .specs {
+  position: absolute; bottom: 16px; left: 0; right: 0;
+  font-size: 11px; color: rgba(255,255,255,0.5);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  text-align: center;
+}
+.tile.light .product-render .specs { color: rgba(0,0,0,0.4); }
+
+/* —— Bottom bleed: tile body grows out under product shadow —— */
+.tile-bottom-pad { height: 80px; }
+
+/* —— Two-up tile —— */
+.tile-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  background: var(--canvas);
+}
+@media (max-width: 833px) { .tile-grid { grid-template-columns: 1fr; } }
+.tile-grid .tile { padding: 80px 0 60px; }
+
+/* —— Store utility cards (configurator + grid) —— */
+.section { padding: 80px 0; }
+.section-head { text-align: center; margin-bottom: 48px; }
+.section-head h2 {
+  font-weight: 600; font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1; letter-spacing: -0.005em;
+  margin: 0 0 12px;
+}
+.section-head p {
+  font-size: 21px; font-weight: 400; letter-spacing: 0.231px; line-height: 1.19;
+  color: var(--ink); max-width: 720px; margin: 0 auto;
+}
+
+.store-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+@media (max-width: 1023px) { .store-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .store-grid { grid-template-columns: 1fr; } }
+.store-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform .2s ease;
+}
+.store-card:hover { transform: translateY(-2px); }
+.store-card .thumb {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: var(--canvas-parchment);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 8px;
+}
+.store-card .thumb-icon {
+  width: 60%; aspect-ratio: 1;
+  background: linear-gradient(135deg, #d0d0d5, #f0f0f3);
+  border-radius: 20%;
+  position: relative;
+}
+.store-card .thumb-icon::after {
+  content: ""; position: absolute; inset: 25%; border-radius: 50%;
+  background: linear-gradient(135deg, #a0a0a5, #d0d0d5);
+}
+.store-card h3 {
+  font-size: 17px; font-weight: 600; letter-spacing: -0.374px;
+  line-height: 1.24; margin: 0;
+}
+.store-card .price {
+  font-size: 17px; font-weight: 400; letter-spacing: -0.374px;
+  color: var(--ink-muted-80); margin: 0;
+}
+.store-card .blue-link {
+  font-size: 14px; color: var(--primary); margin-top: 4px;
+  letter-spacing: -0.224px;
+}
+.store-card .blue-link::after { content: " ›"; }
+
+/* —— Configurator chips —— */
+.chip-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; max-width: 800px; margin: 0 auto;
+}
+@media (max-width: 640px) { .chip-row { grid-template-columns: repeat(2, 1fr); } }
+.cfg-chip {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 9999px;
+  padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; letter-spacing: -0.224px;
+  cursor: pointer;
+  transition: border-color .15s ease;
+}
+.cfg-chip:hover { border-color: #b0b0b5; }
+.cfg-chip.selected { border: 2px solid var(--primary-focus); padding: 11px 15px; }
+.cfg-chip .swatch {
+  width: 24px; height: 24px; border-radius: 50%; flex: none;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.cfg-chip .label { display: flex; flex-direction: column; gap: 2px; }
+.cfg-chip .label .delta { font-size: 12px; color: var(--ink-muted-48); }
+
+/* —— Search input —— */
+.search-input {
+  background: var(--canvas);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 9999px;
+  padding: 0 20px;
+  height: 44px;
+  font-size: 17px; font-weight: 400; letter-spacing: -0.374px;
+  color: var(--ink);
+  width: 100%;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.search-input:focus { border-color: var(--primary-focus); box-shadow: 0 0 0 2px var(--primary-focus); }
+
+/* —— Floating sticky bar (decorative) —— */
+.sticky-bar {
+  position: relative; max-width: 900px; margin: 24px auto 0;
+  background: rgba(245, 245, 247, 0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(0,0,0,0.04);
+  border-radius: 9999px;
+  height: 64px; padding: 12px 16px 12px 32px;
+  display: flex; align-items: center; gap: 16px;
+  font-size: 17px; letter-spacing: -0.374px;
+}
+.sticky-bar .total {
+  font-weight: 600;
+  font-feature-settings: "tnum";
+}
+.sticky-bar .price-line { color: var(--ink-muted-80); }
+.sticky-bar .cta-wrap { margin-left: auto; display: flex; gap: 8px; }
+
+/* —— Footer (parchment) —— */
+footer {
+  background: var(--canvas-parchment);
+  color: var(--ink-muted-80);
+  padding: 24px 0;
+  font-size: 12px; letter-spacing: -0.12px; line-height: 1.4;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+.footer-wrap { max-width: 980px; margin: 0 auto; padding: 0 22px; }
+.footer-cols {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+@media (max-width: 833px) { .footer-cols { grid-template-columns: 1fr 1fr; } }
+.footer-cols h4 {
+  font-size: 14px; font-weight: 600; letter-spacing: -0.224px; line-height: 1.29;
+  margin: 0 0 8px; color: var(--ink);
+}
+.footer-cols ul { padding: 0; margin: 0; list-style: none; }
+.footer-cols li {
+  font-size: 12px; line-height: 2.41; letter-spacing: -0.12px;
+}
+.footer-cols a { color: var(--ink-muted-80); }
+.footer-cols a:hover { text-decoration: underline; color: var(--ink); }
+.footer-legal {
+  padding: 16px 0; display: flex; flex-wrap: wrap;
+  justify-content: space-between; gap: 12px;
+  font-size: 10px; color: var(--ink-muted-48); letter-spacing: -0.08px;
+}
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 9999px;
+  padding: 8px 14px;
+  font-size: 12px; color: var(--ink-muted-80); letter-spacing: -0.12px;
+}
+.src-link:hover { color: var(--primary); }
+
+/* ════════════════════════════════════════════ */
+/*           DESIGN SYSTEM REFERENCE             */
+/* ════════════════════════════════════════════ */
+.ds-section { background: var(--canvas); padding: 80px 0; border-top: 1px solid var(--hairline); }
+.ds-intro { text-align: center; margin-bottom: 56px; }
+.ds-intro h2 {
+  font-size: clamp(28px, 4vw, 40px); font-weight: 600;
+  letter-spacing: -0.005em; line-height: 1.1; margin: 0 0 12px;
+}
+.ds-intro p {
+  font-size: 17px; max-width: 640px; margin: 0 auto;
+  letter-spacing: -0.374px; line-height: 1.47; color: var(--ink-muted-80);
+}
+.ds-intro p a { color: var(--primary); }
+
+.ds-block { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--divider-soft); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading {
+  font-size: 28px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.2;
+  margin: 0 0 20px;
+}
+.ds-caption {
+  font-size: 12px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted-48); margin: 28px 0 12px;
+}
+
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 8px; overflow: hidden;
+}
+.ds-sw .chip { height: 60px; }
+.ds-sw .meta { padding: 8px 10px; }
+.ds-sw .name { font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: -0.224px; }
+.ds-sw .val { font-size: 10px; color: var(--ink-muted-48); font-family: ui-monospace, "SF Mono", Menlo, monospace; margin-top: 2px; }
+
+.ds-typescale {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 18px; overflow: hidden;
+}
+.ds-tr {
+  display: grid; grid-template-columns: 140px 220px 1fr;
+  align-items: baseline; gap: 24px; padding: 20px 24px;
+  border-bottom: 1px solid var(--divider-soft);
+}
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 11px; color: var(--ink); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.ds-spec { font-size: 11px; color: var(--ink-muted-48); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 8px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(7, 1fr); }
+@media (max-width: 900px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 520px) { .ds-radius { grid-template-columns: repeat(2, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-rad .box { width: 72px; height: 72px; background: var(--canvas-parchment); border: 1px solid var(--hairline); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-field-label {
+  font-size: 11px; color: var(--ink-muted-48);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  margin-bottom: 6px; display: block;
+}
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini {
+  border-radius: 18px; padding: 24px;
+  border: 1px solid var(--hairline);
+  background: var(--canvas);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ds-card-mini h4 { margin: 0; font-weight: 600; font-size: 17px; letter-spacing: -0.374px; }
+.ds-card-mini p { margin: 0; font-size: 14px; color: var(--ink-muted-80); letter-spacing: -0.224px; line-height: 1.43; }
+.ds-card-mini.parchment { background: var(--canvas-parchment); }
+.ds-card-mini.dark { background: var(--surface-tile-1); color: var(--on-dark); border-color: transparent; }
+.ds-card-mini.dark p { color: var(--on-dark-muted); }
+
+.ds-disabled-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 11px 22px; border-radius: 9999px;
+  font: 400 17px/1 "Inter", sans-serif;
+  background: var(--canvas-parchment); color: var(--ink-muted-48);
+  cursor: not-allowed; letter-spacing: -0.374px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   REAL PRODUCT MOCKUPS — CSS-only Apple device renders
+   These replace the placeholder color blocks the old tiles used.
+   ════════════════════════════════════════════════════════════ */
+
+/* ===== iPhone 17 Pro — titanium frame + lock screen ===== */
+.iphone-real {
+  width: 300px; aspect-ratio: 9 / 19.5;
+  margin: 64px auto 0;
+  background: linear-gradient(140deg, #c8c8cd 0%, #898990 30%, #6a6a72 60%, #4a4a52 100%);
+  border-radius: 58px;
+  padding: 11px;
+  position: relative;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.20),
+    inset 0 -3px 0 rgba(0,0,0,0.35),
+    0 4px 12px rgba(0,0,0,0.15),
+    0 30px 70px rgba(0,0,0,0.30);
+}
+.iphone-real::before {
+  content: ''; position: absolute; top: 130px; left: -3px;
+  width: 4px; height: 36px; background: #6a6a72;
+  border-radius: 2px 0 0 2px;
+}
+.iphone-real::after {
+  content: ''; position: absolute; top: 195px; left: -3px;
+  width: 4px; height: 56px; background: #6a6a72;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 88px 0 #6a6a72;
+}
+.iphone-real .right-btn {
+  position: absolute; top: 170px; right: -3px;
+  width: 4px; height: 90px; background: #6a6a72;
+  border-radius: 0 2px 2px 0;
+}
+.iphone-real .screen {
+  width: 100%; height: 100%;
+  border-radius: 47px;
+  position: relative; overflow: hidden;
+  /* Apple wallpaper — warm titanium gradient with bloom */
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(255,200,150,0.6), transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(180,80,40,0.4), transparent 50%),
+    linear-gradient(165deg, #1a0a08 0%, #3a1a0e 30%, #6a3018 60%, #c25a20 90%, #ff8040 100%);
+}
+.iphone-real .island {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  width: 110px; height: 32px; background: #000;
+  border-radius: 9999px; z-index: 5;
+}
+.iphone-real .status-time {
+  position: absolute; top: 17px; left: 28px; font-size: 13px;
+  color: #fff; font-weight: 600; letter-spacing: -.2px; z-index: 6;
+}
+.iphone-real .status-icons {
+  position: absolute; top: 17px; right: 24px; display: flex; gap: 5px;
+  align-items: center; z-index: 6;
+}
+.iphone-real .status-icons svg { fill: #fff; }
+.iphone-real .lock-date {
+  position: absolute; top: 70px; left: 0; right: 0; text-align: center;
+  color: #fff; font-size: 16px; font-weight: 500; letter-spacing: -.2px;
+}
+.iphone-real .lock-time {
+  position: absolute; top: 92px; left: 0; right: 0; text-align: center;
+  color: #fff; font-size: 80px; font-weight: 200; letter-spacing: -3px;
+  font-feature-settings: "tnum"; line-height: 1;
+}
+.iphone-real .lock-widget {
+  position: absolute; top: 215px; left: 14px; right: 14px;
+  background: rgba(255,255,255,0.18); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: 14px; padding: 11px 14px;
+  color: #fff; display: flex; align-items: center; gap: 10px;
+}
+.iphone-real .lock-widget .w-ic {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: linear-gradient(135deg, #ff8040, #c25a20);
+  flex-shrink: 0;
+}
+.iphone-real .lock-widget .w-meta { flex: 1; min-width: 0; }
+.iphone-real .lock-widget .w-title { font-size: 12px; font-weight: 600; line-height: 1.2; }
+.iphone-real .lock-widget .w-sub { font-size: 10px; opacity: 0.85; }
+.iphone-real .lock-bottom {
+  position: absolute; bottom: 16px; left: 0; right: 0;
+  display: flex; justify-content: space-between; padding: 0 38px;
+}
+.iphone-real .lock-bottom .pill-ic {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.20); backdrop-filter: blur(16px);
+  display: grid; place-items: center;
+}
+.iphone-real .lock-bottom .pill-ic svg { width: 18px; height: 18px; fill: #fff; }
+.iphone-real .home-indicator {
+  position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%);
+  width: 130px; height: 4px;
+  background: rgba(255,255,255,0.85); border-radius: 9999px;
+}
+
+/* ===== Apple Watch Ultra 3 — titanium case + dial ===== */
+.watch-real {
+  width: 230px; aspect-ratio: 1 / 1.20;
+  margin: 64px auto 0;
+  background: linear-gradient(140deg, #b8b8be 0%, #757580 35%, #4a4a52 70%, #2a2a32 100%);
+  border-radius: 48px;
+  padding: 18px 18px 18px 18px;
+  position: relative;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.20),
+    inset 0 -2px 0 rgba(0,0,0,0.35),
+    0 26px 60px rgba(0,0,0,0.40);
+}
+.watch-real::before {
+  /* digital crown */
+  content: ''; position: absolute; top: 26%; right: -10px;
+  width: 18px; height: 26px;
+  background: linear-gradient(90deg, #6a6a72 0%, #898990 50%, #6a6a72 100%);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.3);
+}
+.watch-real::after {
+  /* side button */
+  content: ''; position: absolute; top: 50%; right: -6px;
+  width: 12px; height: 32px;
+  background: #4a4a52;
+  border-radius: 0 4px 4px 0;
+}
+.watch-real .face {
+  width: 100%; height: 100%;
+  background: #000;
+  border-radius: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.watch-real .face::before {
+  content: ''; position: absolute; inset: 12px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255,140,40,0.7), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(255,0,80,0.5), transparent 55%),
+    radial-gradient(circle at 20% 80%, rgba(120,40,200,0.4), transparent 55%),
+    #000;
+}
+.watch-real .face .w-time {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  color: #ff8a30; font-size: 56px; font-weight: 200; letter-spacing: -2px;
+  font-feature-settings: "tnum";
+  text-shadow: 0 0 28px rgba(255,138,48,0.55);
+  z-index: 2;
+}
+.watch-real .face .w-date {
+  position: absolute; top: 22px; right: 24px;
+  font-size: 12px; color: #fff; font-weight: 600; letter-spacing: .4px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.watch-real .face .w-comp {
+  position: absolute; bottom: 22px; left: 0; right: 0;
+  display: flex; justify-content: space-around;
+  z-index: 2;
+}
+.watch-real .face .w-comp .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.watch-real .face .w-comp .dot.a { background: #ff3a30; }
+.watch-real .face .w-comp .dot.b { background: #30d158; }
+.watch-real .face .w-comp .dot.c { background: #0a84ff; }
+
+/* ===== AirPods Pro 3 — case + earbuds ===== */
+.airpods-real {
+  width: 340px; height: 240px;
+  margin: 64px auto 0;
+  position: relative;
+}
+.airpods-real .case {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 220px; height: 165px;
+  background: linear-gradient(165deg, #ffffff 0%, #f0f0f3 50%, #d6d6da 100%);
+  border-radius: 50% / 35%;
+  box-shadow:
+    inset 0 -8px 16px rgba(0,0,0,0.06),
+    0 24px 50px rgba(0,0,0,0.20);
+}
+.airpods-real .case::before {
+  /* hinge line */
+  content: ''; position: absolute; top: 50%; left: 8%; right: 8%;
+  height: 1px; background: rgba(0,0,0,0.10);
+}
+.airpods-real .case::after {
+  /* indicator LED */
+  content: ''; position: absolute; top: 35%; left: 50%; transform: translateX(-50%);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #76f060, #2ea020);
+  box-shadow: 0 0 10px rgba(118, 240, 96, 0.6);
+}
+.airpods-real .bud {
+  position: absolute; top: 18%;
+  width: 56px; height: 100px;
+  background: linear-gradient(170deg, #ffffff 0%, #ededf0 60%, #b8b8bc 100%);
+  border-radius: 50% 50% 28% 28% / 65% 65% 28% 28%;
+  box-shadow:
+    inset -2px -3px 4px rgba(0,0,0,0.08),
+    0 14px 28px rgba(0,0,0,0.18);
+  z-index: 2;
+}
+.airpods-real .bud::before {
+  /* stem detail */
+  content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+  width: 18px; height: 22px;
+  background: linear-gradient(180deg, #ededf0 0%, #b8b8bc 100%);
+  border-radius: 0 0 10px 10px;
+}
+.airpods-real .bud.l { left: 4%; transform: rotate(-14deg); }
+.airpods-real .bud.r { right: 4%; transform: rotate(14deg); }
+
+/* ===== MacBook Pro — silhouette + screen ===== */
+.macbook-real {
+  width: 90%; max-width: 600px;
+  margin: 56px auto 0;
+  position: relative;
+}
+.macbook-real .lid {
+  width: 100%; aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, #c8c8cd 0%, #898990 50%, #4a4a52 100%);
+  border-radius: 13px 13px 4px 4px;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+}
+.macbook-real .lid-screen {
+  width: 100%; height: 100%;
+  border-radius: 3px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(160,80,255,0.4), transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(255,80,180,0.4), transparent 50%),
+    linear-gradient(135deg, #0a0014 0%, #1a0033 30%, #3a0050 70%, #5a0080 100%);
+  position: relative;
+  overflow: hidden;
+}
+.macbook-real .lid-screen::before {
+  /* mac menu bar */
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 12%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.15));
+  backdrop-filter: blur(12px);
+}
+.macbook-real .lid-screen::after {
+  /* dock */
+  content: ''; position: absolute; bottom: 6%; left: 20%; right: 20%;
+  height: 13%;
+  background: rgba(255,255,255,0.18); backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.20);
+}
+.macbook-real .notch {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 7px;
+  background: #000;
+  border-radius: 0 0 8px 8px;
+}
+.macbook-real .base {
+  position: absolute; bottom: -10px; left: -2%;
+  width: 104%; height: 10px;
+  background: linear-gradient(180deg, #898990 0%, #4a4a52 100%);
+  border-radius: 2px 2px 18px 18px;
+}
+.macbook-real .base::after {
+  /* trackpad indent illusion */
+  content: ''; position: absolute; bottom: 1px; left: 50%; transform: translateX(-50%);
+  width: 18%; height: 2px; background: rgba(0,0,0,0.3);
+  border-radius: 0 0 4px 4px;
+}
+
+/* ===== iPad Pro — silhouette + screen ===== */
+.ipad-real {
+  width: 70%; max-width: 360px;
+  margin: 56px auto 0;
+  aspect-ratio: 5 / 7;
+  background: linear-gradient(135deg, #c8c8cd 0%, #898990 50%, #4a4a52 100%);
+  border-radius: 28px;
+  padding: 10px;
+  position: relative;
+  box-shadow: 0 24px 50px rgba(0,0,0,0.20);
+}
+.ipad-real .screen {
+  width: 100%; height: 100%;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,170,80,0.5), transparent 55%),
+    radial-gradient(ellipse at 30% 80%, rgba(255,80,160,0.45), transparent 55%),
+    linear-gradient(135deg, #1a0010 0%, #3a0028 30%, #6a0050 70%, #c8407a 100%);
+  position: relative;
+  overflow: hidden;
+}
+.ipad-real .screen::before {
+  /* glass reflection */
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), transparent);
+}
+
+/* ===== Apple Intelligence band — siri glow ===== */
+.ai-band {
+  background: #000;
+  padding: 140px 22px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.ai-band::before {
+  content: ''; position: absolute; inset: -100px;
+  background:
+    radial-gradient(circle 600px at 25% 50%, rgba(255, 70, 160, 0.40), transparent 70%),
+    radial-gradient(circle 500px at 75% 35%, rgba(70, 200, 255, 0.40), transparent 70%),
+    radial-gradient(circle 400px at 50% 80%, rgba(170, 110, 255, 0.35), transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+.ai-band-inner { position: relative; max-width: 900px; margin: 0 auto; }
+.ai-band .ai-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); font-weight: 500;
+  margin-bottom: 28px;
+}
+.ai-band .ai-eyebrow::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: linear-gradient(135deg, #ff44a0, #00ccff);
+  box-shadow: 0 0 12px rgba(255,68,160,0.7);
+}
+.ai-band h2 {
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  background: linear-gradient(120deg, #ff5fa8 0%, #ffa75c 25%, #ffe366 50%, #5cd6ff 75%, #aa8cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0 0 28px;
+}
+.ai-band .ai-tagline {
+  font-size: clamp(20px, 2.6vw, 28px);
+  color: #fff; font-weight: 400; letter-spacing: 0.2px;
+  max-width: 700px; margin: 0 auto 40px;
+  line-height: 1.3;
+}
+.ai-band .ai-tagline .accent {
+  background: linear-gradient(120deg, #ff5fa8, #5cd6ff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-weight: 500;
+}
+.ai-band .ai-cta { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.ai-band .pill-primary { background: #fff; color: #000; }
+.ai-band .pill-primary:hover { background: #f0f0f0; }
+.ai-band .pill-ghost { color: #fff; border-color: rgba(255,255,255,0.4); }
+.ai-band .pill-ghost:hover { background: rgba(255,255,255,0.08); }
+.ai-band .ai-features {
+  margin-top: 80px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  text-align: left;
+}
+@media(max-width: 833px) { .ai-band .ai-features { grid-template-columns: 1fr; gap: 24px; } }
+.ai-feat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 28px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.ai-feat .ic {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, #ff44a0, #5cd6ff);
+  box-shadow: 0 0 20px rgba(255,68,160,0.4);
+  margin-bottom: 10px;
+}
+.ai-feat h4 {
+  font-size: 18px; color: #fff; font-weight: 600;
+  letter-spacing: -0.3px; margin: 0;
+}
+.ai-feat p {
+  font-size: 14px; color: rgba(255,255,255,0.65);
+  line-height: 1.5; margin: 0;
+}
+
+/* ===== Better hero proportions ===== */
+.tile.hero-tile { padding: 88px 0 40px; min-height: 92vh; display: flex; flex-direction: column; justify-content: flex-start; }
+.tile.hero-tile .tile-content { display: flex; flex-direction: column; align-items: center; }
+.tile.hero-tile h1 {
+  font-size: clamp(48px, 7.5vw, 88px);
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.tile.hero-tile .tagline {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 400;
+  margin-bottom: 28px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   2026 REFRESH — apple.com current hero + Liquid Glass + AI
+   ════════════════════════════════════════════════════════════ */
+
+/* ===== HERO: MacBook Neo — citrus palette ===== */
+.tile.hero-neo {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 248, 200, 0.55), transparent 60%),
+    radial-gradient(ellipse 70% 80% at 50% 100%, rgba(220, 100, 12, 0.20), transparent 60%),
+    linear-gradient(180deg, #ffd860 0%, #ffba24 38%, #f49016 72%, #d56610 100%);
+  padding: 80px 22px 40px;
+  min-height: 100vh;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.hero-neo .tile-content { display: flex; flex-direction: column; align-items: center; }
+.hero-neo .eyebrow {
+  font-size: 14px; color: #5a2a08;
+  letter-spacing: -0.224px; margin: 0 0 16px;
+  font-weight: 500;
+}
+.hero-neo h1 {
+  color: #1a0a02;
+  font-size: clamp(54px, 8.5vw, 104px);
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 0 8px;
+  line-height: 1.02;
+}
+.hero-neo .tagline {
+  color: #5a2a08;
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  margin: 0 0 24px;
+}
+.hero-neo .pill-primary { background: #1a0a02; color: #ffe488; }
+.hero-neo .pill-primary:hover { background: #000; }
+.hero-neo .pill-ghost { color: #1a0a02; border-color: #1a0a02; }
+.hero-neo .pill-ghost:hover { background: rgba(26,10,2,0.08); }
+.hero-neo .micro { color: #5a2a08; }
+
+/* MacBook Neo — citrus body */
+.macbook-neo {
+  width: 80%; max-width: 720px;
+  margin: 50px auto 0;
+  position: relative;
+}
+.macbook-neo .lid {
+  width: 100%; aspect-ratio: 16 / 10.2;
+  background: linear-gradient(160deg, #ffe488 0%, #ffba2a 50%, #db7008 100%);
+  border-radius: 16px 16px 6px 6px;
+  padding: 18px;
+  position: relative;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.4),
+    inset 0 -2px 0 rgba(0,0,0,0.15),
+    0 36px 80px rgba(140,60,0,0.5);
+}
+.macbook-neo .lid-screen {
+  width: 100%; height: 100%;
+  border-radius: 4px;
+  background:
+    radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.40), transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(255,80,150,0.30), transparent 55%),
+    linear-gradient(135deg, #ff9020 0%, #f06010 45%, #c54008 100%);
+  position: relative;
+  overflow: hidden;
+}
+.macbook-neo .lid-screen::before {
+  /* macOS Tahoe menu bar (Liquid Glass) */
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 11%;
+  background: rgba(0,0,0,0.30); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.macbook-neo .lid-screen::after {
+  /* Tahoe Dock — Liquid Glass */
+  content: ''; position: absolute; bottom: 5%; left: 20%; right: 20%; height: 14%;
+  background: rgba(255,255,255,0.25); backdrop-filter: blur(24px);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.30);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.macbook-neo .notch {
+  position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+  width: 96px; height: 8px;
+  background: #1a0a02;
+  border-radius: 0 0 8px 8px;
+  z-index: 2;
+}
+.macbook-neo .base {
+  position: absolute; bottom: -13px; left: -2%;
+  width: 104%; height: 13px;
+  background: linear-gradient(180deg, #ffba2a 0%, #db7008 100%);
+  border-radius: 3px 3px 22px 22px;
+}
+.macbook-neo .base::after {
+  content: ''; position: absolute; bottom: 1px; left: 50%; transform: translateX(-50%);
+  width: 18%; height: 2px;
+  background: rgba(0,0,0,0.30);
+  border-radius: 0 0 4px 4px;
+}
+
+/* ===== LIQUID GLASS BAND — iOS 26 + macOS Tahoe ===== */
+.tile.glass-band {
+  background:
+    radial-gradient(ellipse 50% 40% at 25% 20%, rgba(140, 200, 255, 0.30), transparent 65%),
+    radial-gradient(ellipse 50% 50% at 75% 70%, rgba(255, 180, 220, 0.30), transparent 65%),
+    radial-gradient(ellipse 40% 30% at 50% 100%, rgba(180, 160, 255, 0.25), transparent 65%),
+    linear-gradient(180deg, #f5f8fc 0%, #e8edf5 60%, #dde4ee 100%);
+  padding: 120px 22px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.glass-band .tile-content { max-width: 1100px; margin: 0 auto; position: relative; }
+.glass-band .eyebrow {
+  font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: #555; font-weight: 500; margin: 0 0 18px;
+}
+.glass-band h2 {
+  color: #1d1d1f;
+  font-size: clamp(40px, 6vw, 72px);
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  font-weight: 600;
+  margin: 0 0 20px;
+}
+.glass-band .tagline {
+  color: #555;
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  max-width: 740px; margin-left: auto; margin-right: auto;
+}
+
+/* App-icon grid — every icon is "Liquid Glass" */
+.glass-icons {
+  display: grid; grid-template-columns: repeat(9, 1fr);
+  gap: 14px; max-width: 900px; margin: 70px auto 0;
+}
+@media (max-width: 1023px) { .glass-icons { grid-template-columns: repeat(6, 1fr); } }
+@media (max-width: 600px) { .glass-icons { grid-template-columns: repeat(4, 1fr); } }
+.glass-icon {
+  aspect-ratio: 1;
+  border-radius: 22%;
+  position: relative;
+  display: grid; place-items: center;
+  font-size: 10px; color: rgba(255,255,255,0.95); letter-spacing: -0.1px;
+  font-weight: 600;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.55),
+    inset 0 -2px 4px rgba(0,0,0,0.15),
+    0 8px 20px rgba(0,0,0,0.22),
+    0 2px 4px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+.glass-icon:hover { transform: translateY(-3px) scale(1.04); }
+.glass-icon::before {
+  /* top refraction highlight */
+  content: ''; position: absolute; inset: 0;
+  border-radius: 22%;
+  background: linear-gradient(165deg,
+    rgba(255,255,255,0.45) 0%,
+    rgba(255,255,255,0.08) 38%,
+    transparent 70%);
+  pointer-events: none;
+}
+.glass-icon::after {
+  /* inner glass shine bottom */
+  content: ''; position: absolute; bottom: 7%; left: 14%; right: 14%; height: 22%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.30), transparent 70%);
+  border-radius: 50%;
+  filter: blur(2px);
+  pointer-events: none;
+}
+.glass-icon span { position: relative; z-index: 2; }
+/* Individual icon palettes */
+.glass-icon.ic-msg { background: linear-gradient(180deg, #4ce05e 0%, #1aa539 100%); }
+.glass-icon.ic-mus { background: linear-gradient(180deg, #fb6f8e 0%, #d72e58 100%); }
+.glass-icon.ic-pho { background: linear-gradient(135deg, #ffd040 0%, #ff7030 30%, #ec3a8b 60%, #5cb6ff 100%); }
+.glass-icon.ic-cam { background: linear-gradient(180deg, #b0b0b3 0%, #3a3a3d 100%); color: #fff; }
+.glass-icon.ic-mps { background: linear-gradient(180deg, #9addff 0%, #2a86d8 100%); }
+.glass-icon.ic-mai { background: linear-gradient(180deg, #6db4ff 0%, #1d68c8 100%); }
+.glass-icon.ic-fac { background: linear-gradient(180deg, #6cd97f 0%, #2da846 100%); }
+.glass-icon.ic-saf { background: linear-gradient(180deg, #7ac7fc 0%, #1f76d4 100%); }
+.glass-icon.ic-set { background: linear-gradient(135deg, #e8e8ea 0%, #888892 60%, #5a5a60 100%); color: #1d1d1f; }
+.glass-icon.ic-set::before { background: linear-gradient(165deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 40%, transparent 70%); }
+
+/* ===== AI BAND — replace existing 3-feature grid with 3 iPhone carousel ===== */
+.ai-band .ai-iphones {
+  margin: 64px auto 56px;
+  max-width: 880px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: flex-end;
+}
+@media (max-width: 833px) { .ai-band .ai-iphones { grid-template-columns: 1fr; gap: 30px; } }
+.iphone-ai {
+  background: linear-gradient(140deg, #c0c0c8 0%, #6a6a70 45%, #3a3a40 100%);
+  border-radius: 40px;
+  padding: 8px;
+  aspect-ratio: 9 / 19.5;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 28px 60px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.10);
+}
+.iphone-ai.tilt-l { transform: rotate(-3deg) translateY(20px); }
+.iphone-ai.tilt-r { transform: rotate(3deg) translateY(20px); }
+.iphone-ai.center { transform: scale(1.08); z-index: 2; }
+@media (max-width: 833px) { .iphone-ai.tilt-l, .iphone-ai.tilt-r, .iphone-ai.center { transform: none; max-width: 280px; margin: 0 auto; } }
+.iphone-ai .screen {
+  width: 100%; height: 100%;
+  border-radius: 33px;
+  position: relative;
+  overflow: hidden;
+}
+.iphone-ai .island {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 78px; height: 22px; background: #000; border-radius: 9999px; z-index: 5;
+}
+.iphone-ai .ai-status { position: absolute; top: 14px; left: 22px; font-size: 11px; color: #fff; font-weight: 600; z-index: 6; }
+
+/* Screen variants */
+/* Screen 1: Siri active with inner glow */
+.iphone-ai.scr-siri .screen {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(80, 220, 255, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 30% 80%, rgba(255, 80, 180, 0.5) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(255, 200, 100, 0.4) 0%, transparent 55%),
+    linear-gradient(165deg, #050010 0%, #100020 40%, #1a0028 100%);
+}
+.iphone-ai.scr-siri .siri-content {
+  position: absolute; top: 24%; left: 14%; right: 14%; color: #fff; text-align: left; z-index: 3;
+}
+.iphone-ai.scr-siri .siri-greeting { font-size: 9px; opacity: 0.7; margin-bottom: 4px; letter-spacing: -0.1px; }
+.iphone-ai.scr-siri .siri-q {
+  font-size: 13px; line-height: 1.35; font-weight: 500;
+  background: linear-gradient(120deg, #ff5fa8, #ffa75c 30%, #ffe366 60%, #5cd6ff 90%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.iphone-ai.scr-siri .siri-glow-bar {
+  position: absolute; bottom: 14%; left: 0; right: 0; height: 34%;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(0, 200, 255, 0.7), transparent 65%),
+    radial-gradient(ellipse at 70% 60%, rgba(255, 100, 200, 0.65), transparent 65%);
+  filter: blur(18px);
+}
+
+/* Screen 2: Genmoji creation (center) */
+.iphone-ai.scr-genmoji .screen { background: #fff; }
+.iphone-ai.scr-genmoji .gen-nav {
+  position: absolute; top: 14px; left: 0; right: 0;
+  text-align: center; font-size: 11px; font-weight: 600; color: #1d1d1f; z-index: 6;
+}
+.iphone-ai.scr-genmoji .gen-prompt {
+  position: absolute; top: 22%; left: 11%; right: 11%;
+  background: #f2f2f6; border-radius: 14px; padding: 10px 12px;
+  font-size: 10.5px; color: #1d1d1f; line-height: 1.3;
+}
+.iphone-ai.scr-genmoji .gen-prompt::before {
+  content: '✨'; margin-right: 4px;
+}
+.iphone-ai.scr-genmoji .gen-result {
+  position: absolute; top: 35%; left: 50%; transform: translateX(-50%);
+  width: 50%; aspect-ratio: 1;
+  background:
+    radial-gradient(circle at 40% 30%, #ffe488, #ffba2a 50%, #db7008 100%);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(255, 180, 50, 0.45);
+  display: grid; place-items: center;
+  font-size: 38px;
+}
+.iphone-ai.scr-genmoji .gen-options {
+  position: absolute; bottom: 18%; left: 11%; right: 11%;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
+}
+.iphone-ai.scr-genmoji .gen-options .opt {
+  aspect-ratio: 1; border-radius: 8px;
+}
+.iphone-ai.scr-genmoji .opt-1 { background: radial-gradient(circle at 40% 30%, #ff8a30, #c54008); }
+.iphone-ai.scr-genmoji .opt-2 { background: radial-gradient(circle at 40% 30%, #b78cff, #6c2eff); }
+.iphone-ai.scr-genmoji .opt-3 { background: radial-gradient(circle at 40% 30%, #5cb6ff, #1d68c8); }
+.iphone-ai.scr-genmoji .opt-4 { background: radial-gradient(circle at 40% 30%, #ff7a9c, #ec3a8b); }
+.iphone-ai.scr-genmoji .gen-cta {
+  position: absolute; bottom: 6%; left: 18%; right: 18%;
+  background: #0071e3; color: #fff;
+  padding: 9px 0; border-radius: 12px;
+  font-size: 11px; font-weight: 600; text-align: center;
+}
+
+/* Screen 3: Live Translation (Messages) */
+.iphone-ai.scr-trans .screen { background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ed 100%); }
+.iphone-ai.scr-trans .trans-nav {
+  position: absolute; top: 12px; left: 0; right: 0;
+  text-align: center; z-index: 6;
+}
+.iphone-ai.scr-trans .trans-nav .name { font-size: 11px; font-weight: 600; color: #1d1d1f; }
+.iphone-ai.scr-trans .trans-nav .sub { font-size: 9px; color: #0071e3; margin-top: 1px; }
+.iphone-ai.scr-trans .trans-bubble {
+  position: absolute; left: 8%; right: 30%;
+  padding: 7px 11px;
+  font-size: 10px; line-height: 1.3;
+  border-radius: 14px;
+  background: #e9e9ed; color: #1d1d1f;
+}
+.iphone-ai.scr-trans .trans-bubble.out {
+  left: 30%; right: 8%;
+  background: #0a84ff; color: #fff;
+  border-bottom-right-radius: 3px;
+}
+.iphone-ai.scr-trans .trans-bubble.in {
+  border-bottom-left-radius: 3px;
+}
+.iphone-ai.scr-trans .trans-bubble .orig {
+  display: block; font-weight: 500;
+}
+.iphone-ai.scr-trans .trans-bubble .trans-line {
+  display: block;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  margin-top: 4px; padding-top: 4px;
+  font-size: 9.5px; opacity: 0.92;
+}
+.iphone-ai.scr-trans .trans-bubble.in .trans-line {
+  border-top-color: rgba(0,0,0,0.10);
+}
+.iphone-ai.scr-trans .b1 { top: 19%; }
+.iphone-ai.scr-trans .b2 { top: 36%; }
+.iphone-ai.scr-trans .b3 { top: 54%; }
+.iphone-ai.scr-trans .trans-badge {
+  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(0,0,0,0.6); color: #fff;
+  padding: 5px 10px; border-radius: 9999px;
+  font-size: 9px; font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+.iphone-ai.scr-trans .trans-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: linear-gradient(135deg, #ff5fa8, #5cd6ff);
+  box-shadow: 0 0 6px rgba(255,95,168,0.7);
+}
+
+</style>
+</head>
+<body>
+
+<!-- ─── Global thin black nav ─── -->
+<div class="global-nav">
+  <div class="gnav-inner">
+    <a href="#" class="apl-mark">◉</a>
+    <nav style="display: flex; gap: 28px;">
+      <a href="#">Store</a>
+      <a href="#">Mac</a>
+      <a href="#">iPad</a>
+      <a href="#">iPhone</a>
+      <a href="#">Watch</a>
+      <a href="#">Vision</a>
+      <a href="#">AirPods</a>
+      <a href="#">TV &amp; Home</a>
+      <a href="#">Entertainment</a>
+      <a href="#">Accessories</a>
+      <a href="#">Support</a>
+    </nav>
+    <div class="gnav-right">
+      <a href="#">⌕</a>
+      <a href="#">⊕</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Frosted sub-nav ─── -->
+<div class="sub-nav">
+  <div class="sub-nav-inner">
+    <span class="product-name">iPhone</span>
+    <nav>
+      <a href="#">Overview</a>
+      <a href="#">Switch</a>
+      <a href="#">Compare</a>
+      <a href="#">AirPods</a>
+      <a href="#">Accessories</a>
+      <a href="#">Apple Trade In</a>
+    </nav>
+    <div class="cta-wrap">
+      <a href="#" class="btn-blue-rect">Buy</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HERO TILE (NEW: MacBook Neo · citrus) ─── -->
+<section class="tile hero-neo">
+  <div class="tile-content">
+    <p class="eyebrow">New · Just announced</p>
+    <h1>MacBook Neo</h1>
+    <p class="tagline">Amazing Mac. Surprising price.</p>
+    <div class="cta-row">
+      <a href="#" class="pill pill-primary">Learn more</a>
+      <a href="#" class="pill pill-ghost">Buy</a>
+    </div>
+    <p class="micro" style="margin-top: 16px;">From $799 or $33.29/mo. for 24 mo. before trade‑in*</p>
+
+    <!-- MacBook Neo — citrus body + Tahoe Liquid Glass dock -->
+    <div class="macbook-neo">
+      <div class="lid">
+        <div class="lid-screen"></div>
+        <div class="notch"></div>
+      </div>
+      <div class="base"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── iPhone 17 Pro tile (moved from hero — now a secondary product tile) ─── -->
+<section class="tile light hero-tile">
+  <div class="tile-content">
+    <p style="font-size: 14px; color: var(--ink-muted-48); letter-spacing: -0.224px; margin: 0 0 16px;">Also new</p>
+    <h1>iPhone 17 Pro</h1>
+    <p class="tagline" style="color: var(--ink-muted-80);">A titanium leap. A camera reborn.</p>
+    <div class="cta-row">
+      <a href="#" class="pill pill-primary">Learn more</a>
+      <a href="#" class="pill pill-ghost">Buy</a>
+    </div>
+    <p class="micro" style="margin-top: 16px;">From $999 or $41.62/mo. for 24 mo. before trade‑in*</p>
+
+    <!-- Real iPhone 17 Pro mockup — titanium frame + lock screen -->
+    <div class="iphone-real">
+      <span class="right-btn"></span>
+      <div class="screen">
+        <div class="island"></div>
+        <div class="status-time">9:41</div>
+        <div class="status-icons">
+          <svg width="13" height="9" viewBox="0 0 18 12"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+          <svg width="20" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.55"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.55"/></svg>
+        </div>
+        <div class="lock-date">Wednesday, May 20</div>
+        <div class="lock-time">9:41</div>
+        <div class="lock-widget">
+          <div class="w-ic"></div>
+          <div class="w-meta">
+            <div class="w-title">Sunset in 12 minutes</div>
+            <div class="w-sub">Golden hour starts now · Lisbon</div>
+          </div>
+        </div>
+        <div class="lock-bottom">
+          <div class="pill-ic"><svg viewBox="0 0 24 24"><path d="M9 21V11l5 4v4a2 2 0 002 2zm10-6h-6V5a2 2 0 012-2h4z"/></svg></div>
+          <div class="pill-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="3.5"/><path d="M9 4h6l1 2h3a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h3z" fill="none" stroke="#fff" stroke-width="2"/></svg></div>
+        </div>
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LIQUID GLASS TILE (iOS 26 + macOS Tahoe + iPadOS 26) ─── -->
+<section class="tile glass-band">
+  <div class="tile-content">
+    <p class="eyebrow">Liquid Glass · iOS 26 · macOS Tahoe</p>
+    <h2>One design language.<br/>Across every surface you touch.</h2>
+    <p class="tagline">Controls that bend the light. App icons that catch it.<br/>A single material system, alive on every device.</p>
+
+    <!-- Liquid Glass app icon grid — iOS 26 home screen sampler -->
+    <div class="glass-icons">
+      <div class="glass-icon ic-msg" aria-label="Messages"><span>Msgs</span></div>
+      <div class="glass-icon ic-mus" aria-label="Music"><span>Music</span></div>
+      <div class="glass-icon ic-pho" aria-label="Photos"><span>Photos</span></div>
+      <div class="glass-icon ic-cam" aria-label="Camera"><span>Cam</span></div>
+      <div class="glass-icon ic-mps" aria-label="Maps"><span>Maps</span></div>
+      <div class="glass-icon ic-mai" aria-label="Mail"><span>Mail</span></div>
+      <div class="glass-icon ic-fac" aria-label="FaceTime"><span>FT</span></div>
+      <div class="glass-icon ic-saf" aria-label="Safari"><span>Safari</span></div>
+      <div class="glass-icon ic-set" aria-label="Settings"><span>Set</span></div>
+    </div>
+
+    <div class="cta-row" style="margin-top: 64px;">
+      <a href="#" class="pill pill-primary">Learn about Liquid Glass</a>
+      <a href="#" class="pill pill-ghost">Developer guide</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DARK TILE (Watch Ultra 3) ─── -->
+<section class="tile dark">
+  <div class="tile-content">
+    <h2 style="color: var(--on-dark);">Apple Watch Ultra 3</h2>
+    <p class="tagline" style="color: var(--on-dark);">Adventure. Engineered.</p>
+    <div class="cta-row">
+      <a href="#" class="pill pill-primary">Learn more</a>
+      <a href="#" class="pill pill-ghost-on-dark">Buy</a>
+    </div>
+    <p class="micro" style="margin-top: 16px;">Titanium case. Satellite SOS. 72‑hour battery. Brightness 5,000 nits.</p>
+
+    <!-- Real Watch Ultra 3 mockup — titanium body + Wayfinder face -->
+    <div class="watch-real">
+      <div class="face">
+        <div class="w-date">WED 20</div>
+        <div class="w-time">9:41</div>
+        <div class="w-comp"><span class="dot a"></span><span class="dot b"></span><span class="dot c"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tile-bottom-pad"></div>
+</section>
+
+<!-- ─── PARCHMENT TILE (AirPods Pro 3) ─── -->
+<section class="tile parchment">
+  <div class="tile-content">
+    <h2>AirPods Pro 3</h2>
+    <p class="tagline" style="color: var(--ink-muted-80);">Listen differently. Hear everything.</p>
+    <div class="cta-row">
+      <a href="#" class="pill pill-primary">Learn more</a>
+      <a href="#" class="pill pill-ghost">Buy</a>
+    </div>
+    <p class="micro" style="margin-top: 16px;">Adaptive Audio. H3 chip. Heart‑rate sensing. USB‑C MagSafe.</p>
+
+    <!-- Real AirPods Pro mockup — open case + two buds -->
+    <div class="airpods-real">
+      <div class="case"></div>
+      <div class="bud l"></div>
+      <div class="bud r"></div>
+    </div>
+  </div>
+  <div class="tile-bottom-pad"></div>
+</section>
+
+<!-- ─── DUAL TILE (Mac / iPad) ─── -->
+<section class="tile-grid">
+  <div class="tile dark-2" style="padding-top: 80px;">
+    <div class="tile-content">
+      <h2 style="color: var(--on-dark);">MacBook Pro</h2>
+      <p class="tagline" style="color: var(--on-dark);">Pro to the power of M5.</p>
+      <div class="cta-row">
+        <a href="#" class="pill pill-primary">Learn more</a>
+        <a href="#" class="pill pill-ghost-on-dark">Buy</a>
+      </div>
+
+      <!-- Real MacBook Pro mockup — lid + screen + base -->
+      <div class="macbook-real">
+        <div class="lid">
+          <div class="lid-screen"></div>
+          <div class="notch"></div>
+        </div>
+        <div class="base"></div>
+      </div>
+    </div>
+  </div>
+  <div class="tile light" style="padding-top: 80px;">
+    <div class="tile-content">
+      <h2>iPad Pro</h2>
+      <p class="tagline" style="color: var(--ink-muted-80);">Built for Apple Intelligence.</p>
+      <div class="cta-row">
+        <a href="#" class="pill pill-primary">Learn more</a>
+        <a href="#" class="pill pill-ghost">Buy</a>
+      </div>
+
+      <!-- Real iPad Pro mockup -->
+      <div class="ipad-real">
+        <div class="screen"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STORE GRID — configurator-feel utility cards ─── -->
+<section class="section parchment" style="background: var(--canvas-parchment);">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p style="font-size: 14px; color: var(--ink-muted-48); letter-spacing: -0.224px; margin: 0 0 8px;">The Apple Store</p>
+      <h2>Build your iPhone.</h2>
+      <p style="color: var(--ink-muted-80);">Choose a finish. The story stays the same; the look is yours.</p>
+    </div>
+
+    <div class="chip-row" style="margin-bottom: 64px;">
+      <div class="cfg-chip selected">
+        <span class="swatch" style="background: linear-gradient(135deg, #4f5b66, #2c3540);"></span>
+        <span class="label"><strong>Deep Titanium</strong><span class="delta">From $999</span></span>
+      </div>
+      <div class="cfg-chip">
+        <span class="swatch" style="background: linear-gradient(135deg, #e9d8b9, #c5ad80);"></span>
+        <span class="label"><strong>Natural Titanium</strong><span class="delta">From $999</span></span>
+      </div>
+      <div class="cfg-chip">
+        <span class="swatch" style="background: linear-gradient(135deg, #d4d6db, #a0a3a8);"></span>
+        <span class="label"><strong>Silver</strong><span class="delta">From $999</span></span>
+      </div>
+      <div class="cfg-chip">
+        <span class="swatch" style="background: linear-gradient(135deg, #c8d0b7, #9aa088);"></span>
+        <span class="label"><strong>Sage Titanium</strong><span class="delta">+$100</span></span>
+      </div>
+    </div>
+
+    <div class="store-grid">
+      <div class="store-card">
+        <div class="thumb"><div class="thumb-icon"></div></div>
+        <h3>iPhone 17 Pro</h3>
+        <p class="price">From $999</p>
+        <a href="#" class="blue-link">Buy</a>
+      </div>
+      <div class="store-card">
+        <div class="thumb"><div class="thumb-icon" style="border-radius: 50%; background: linear-gradient(135deg, #1a1a1c, #4a4a4d);"></div></div>
+        <h3>Apple Watch Ultra 3</h3>
+        <p class="price">From $799</p>
+        <a href="#" class="blue-link">Buy</a>
+      </div>
+      <div class="store-card">
+        <div class="thumb"><div class="thumb-icon" style="border-radius: 30%; background: linear-gradient(135deg, #ffffff, #e0e0e5);"></div></div>
+        <h3>AirPods Pro 3</h3>
+        <p class="price">$249</p>
+        <a href="#" class="blue-link">Buy</a>
+      </div>
+      <div class="store-card">
+        <div class="thumb"><div class="thumb-icon" style="border-radius: 12%; background: linear-gradient(135deg, #c8c8cd, #8a8a8e);"></div></div>
+        <h3>MagSafe Charger</h3>
+        <p class="price">$39</p>
+        <a href="#" class="blue-link">Buy</a>
+      </div>
+    </div>
+
+    <div class="sticky-bar">
+      <div class="price-line">Subtotal · <span class="total">$1,229.00</span></div>
+      <div class="cta-wrap">
+        <a href="#" class="pill pill-ghost" style="padding: 8px 16px; font-size: 14px;">Save</a>
+        <a href="#" class="pill pill-primary" style="padding: 8px 16px; font-size: 14px;">Add to Bag</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── APPLE INTELLIGENCE BAND ─── -->
+<section class="ai-band">
+  <div class="ai-band-inner">
+    <div class="ai-eyebrow">Apple Intelligence</div>
+    <h2>AI for the rest of us.</h2>
+    <p class="ai-tagline">
+      Siri with your context. Genmoji from a phrase. Live Translation across messages and calls.
+      <span class="accent">On‑device. Private. Built right in.</span>
+    </p>
+
+    <!-- 3 iPhone mockups — Siri / Genmoji / Live Translation -->
+    <div class="ai-iphones">
+      <!-- Phone 1: Siri active lock screen -->
+      <div class="iphone-ai scr-siri tilt-l">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="ai-status">9:41</div>
+          <div class="siri-content">
+            <div class="siri-greeting">Siri</div>
+            <div class="siri-q">When does my next meeting start, and where?</div>
+          </div>
+          <div class="siri-glow-bar"></div>
+        </div>
+      </div>
+
+      <!-- Phone 2 (center): Genmoji creation -->
+      <div class="iphone-ai scr-genmoji center">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="gen-nav">New Genmoji</div>
+          <div class="gen-prompt">"happy sun wearing sunglasses"</div>
+          <div class="gen-result">🌞</div>
+          <div class="gen-options">
+            <div class="opt opt-1"></div>
+            <div class="opt opt-2"></div>
+            <div class="opt opt-3"></div>
+            <div class="opt opt-4"></div>
+          </div>
+          <div class="gen-cta">Add Genmoji</div>
+        </div>
+      </div>
+
+      <!-- Phone 3: Live Translation -->
+      <div class="iphone-ai scr-trans tilt-r">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="trans-nav">
+            <div class="name">Akira</div>
+            <div class="sub">⚡ Live Translation · JP → EN</div>
+          </div>
+          <div class="trans-bubble in b1">
+            <span class="orig">今日の夕日、すごく綺麗だったよ</span>
+            <span class="trans-line">Today's sunset was really beautiful</span>
+          </div>
+          <div class="trans-bubble out b2">
+            <span class="orig">Send some photos! 📸</span>
+            <span class="trans-line">写真を送って!📸</span>
+          </div>
+          <div class="trans-bubble in b3">
+            <span class="orig">いま送るね</span>
+            <span class="trans-line">Sending now</span>
+          </div>
+          <div class="trans-badge">Apple Intelligence</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-cta">
+      <a href="#" class="pill pill-primary">Discover Apple Intelligence</a>
+      <a href="#" class="pill pill-ghost">Watch the film</a>
+    </div>
+
+    <div class="ai-features">
+      <div class="ai-feat">
+        <div class="ic"></div>
+        <h4>Private by design</h4>
+        <p>On‑device by default. When models scale up, Private Cloud Compute keeps your data unseen — even by Apple.</p>
+      </div>
+      <div class="ai-feat">
+        <div class="ic"></div>
+        <h4>Built into the OS</h4>
+        <p>Surfaces in Mail, Messages, Notes, FaceTime — every app you already use. No new app, no new account.</p>
+      </div>
+      <div class="ai-feat">
+        <div class="ic"></div>
+        <h4>Aware of your context</h4>
+        <p>Siri sees what's on your screen and across your apps, so the next sentence already knows the question.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ENVIRONMENT QUOTE (dark editorial) ─── -->
+<section class="tile dark-3" style="padding: 96px 22px;">
+  <div style="max-width: 720px; margin: 0 auto;">
+    <p style="font-size: 12px; color: #5db872; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 24px; line-height: 1.3;">◉ APPLE 2030</p>
+    <h2 style="color: var(--on-dark); font-size: clamp(28px, 4vw, 40px); margin: 0 0 24px;">Carbon neutral by 2030 — across our entire supply chain.</h2>
+    <p style="color: var(--on-dark-muted); font-size: 21px; letter-spacing: 0.231px; line-height: 1.4; margin: 0 0 32px;">Every Apple device is on a path to zero emissions. The first products are already there.</p>
+    <a href="#" class="pill pill-primary">See our progress</a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!--          DESIGN SYSTEM REFERENCE             -->
+<!-- ════════════════════════════════════════════ -->
+<section class="ds-section">
+  <div class="wrap-wide">
+    <div class="ds-intro">
+      <p style="font-size: 14px; color: var(--ink-muted-48); letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 12px;">DESIGN SYSTEM</p>
+      <h2>The tokens behind the museum.</h2>
+      <p>Apple's web language is photography-first, single-accent, near-invisible chrome. Every color, type role and curve below is sourced from the brand's
+        <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.apple.html" target="_blank" rel="noopener">DESIGN.md</a>.</p>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-caption">Brand & Accent — the one blue</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0066cc"></div><div class="meta"><div class="name">primary</div><div class="val">#0066cc</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0071e3"></div><div class="meta"><div class="name">primary-focus</div><div class="val">#0071e3</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2997ff"></div><div class="meta"><div class="name">primary-on-dark</div><div class="val">#2997ff</div></div></div>
+      </div>
+
+      <p class="ds-caption">Surface</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid var(--hairline)"></div><div class="meta"><div class="name">canvas</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f5f5f7"></div><div class="meta"><div class="name">canvas-parchment</div><div class="val">#f5f5f7</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fafafc"></div><div class="meta"><div class="name">surface-pearl</div><div class="val">#fafafc</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#272729"></div><div class="meta"><div class="name">surface-tile-1</div><div class="val">#272729</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2a2a2c"></div><div class="meta"><div class="name">surface-tile-2</div><div class="val">#2a2a2c</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#252527"></div><div class="meta"><div class="name">surface-tile-3</div><div class="val">#252527</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">surface-black</div><div class="val">#000000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#d2d2d7"></div><div class="meta"><div class="name">chip-translucent</div><div class="val">#d2d2d7 · 64%</div></div></div>
+      </div>
+
+      <p class="ds-caption">Text & Hairlines</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1d1d1f"></div><div class="meta"><div class="name">ink</div><div class="val">#1d1d1f</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#333333"></div><div class="meta"><div class="name">ink-muted-80</div><div class="val">#333333</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#7a7a7a"></div><div class="meta"><div class="name">ink-muted-48</div><div class="val">#7a7a7a</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#cccccc"></div><div class="meta"><div class="name">body-muted</div><div class="val">#cccccc</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e0e0e0"></div><div class="meta"><div class="name">hairline</div><div class="val">#e0e0e0</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f0f0f0"></div><div class="meta"><div class="name">divider-soft</div><div class="val">#f0f0f0</div></div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-caption" style="margin-bottom: 16px;">SF Pro Display + SF Pro Text (substituted by Inter). Negative tracking at display sizes is the brand voice.</p>
+      <div class="ds-typescale">
+        <div class="ds-tr">
+          <span class="ds-tok">hero-display</span>
+          <span class="ds-spec">56 · w600 · −0.28 · 1.07</span>
+          <div class="ds-sam" style="font-size:48px; font-weight:600; letter-spacing:-0.28px; line-height:1.07;">iPhone 17 Pro</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">display-lg</span>
+          <span class="ds-spec">40 · w600 · 0 · 1.10</span>
+          <div class="ds-sam" style="font-size:36px; font-weight:600; letter-spacing:0; line-height:1.1;">A titanium leap.</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">display-md</span>
+          <span class="ds-spec">34 · w600 · −0.374 · 1.47</span>
+          <div class="ds-sam" style="font-size:30px; font-weight:600; letter-spacing:-0.374px; line-height:1.2;">Section head, SF Pro Text</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">lead</span>
+          <span class="ds-spec">28 · w400 · +0.196 · 1.14</span>
+          <div class="ds-sam" style="font-size:24px; font-weight:400; letter-spacing:0.196px; line-height:1.14;">Product tile sub-copy.</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">lead-airy</span>
+          <span class="ds-spec">24 · w300 · 0 · 1.5</span>
+          <div class="ds-sam" style="font-size:22px; font-weight:300; letter-spacing:0; line-height:1.5;">The rare weight-300 lead — environment-page atmosphere.</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">tagline</span>
+          <span class="ds-spec">21 · w600 · +0.231 · 1.19</span>
+          <div class="ds-sam" style="font-size:21px; font-weight:600; letter-spacing:0.231px; line-height:1.19;">Sub-nav category &middot; tagline assertion</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">body</span>
+          <span class="ds-spec">17 · w400 · −0.374 · 1.47</span>
+          <div class="ds-sam" style="font-size:17px; font-weight:400; letter-spacing:-0.374px; line-height:1.47;">Default body — 17px, not 16. The extra pixel sets the reading pace.</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">caption</span>
+          <span class="ds-spec">14 · w400 · −0.224 · 1.43</span>
+          <div class="ds-sam" style="font-size:14px; font-weight:400; letter-spacing:-0.224px; line-height:1.43; color: var(--ink-muted-80);">Captions, secondary labels, store metadata</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">button-large</span>
+          <span class="ds-spec">18 · w300 · 0 · 1.0</span>
+          <div class="ds-sam" style="font-size:18px; font-weight:300; letter-spacing:0; line-height:1;">Store hero CTA — the rare weight 300 button</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">nav-link</span>
+          <span class="ds-spec">12 · w400 · −0.12 · 1.0</span>
+          <div class="ds-sam" style="font-size:12px; font-weight:400; letter-spacing:-0.12px; line-height:1;">Global nav · fine-print</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <div class="ds-radius">
+        <div class="ds-rad"><div class="box" style="border-radius:0"></div><span class="ds-tok">none</span><span class="ds-spec">0 · tiles</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:5px"></div><span class="ds-tok">xs</span><span class="ds-spec">5</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="ds-tok">sm</span><span class="ds-spec">8 · utility</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:11px"></div><span class="ds-tok">md</span><span class="ds-spec">11 · pearl</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:18px"></div><span class="ds-tok">lg</span><span class="ds-spec">18 · cards</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">pill</span><span class="ds-spec">∞ · CTAs</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:50%"></div><span class="ds-tok">full</span><span class="ds-spec">50% · icon</span></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+
+      <p class="ds-caption">Buttons — pill 9999 · padding 11/22</p>
+      <div class="ds-comp-row">
+        <a href="#" class="pill pill-primary">Learn more</a>
+        <a href="#" class="pill pill-primary" style="background: var(--primary-focus);">Pressed</a>
+        <a href="#" class="pill pill-ghost">Buy</a>
+        <a href="#" class="pill pill-store">Store hero CTA</a>
+        <button class="btn-dark">Sign In</button>
+        <button class="btn-blue-rect">Buy now</button>
+        <span class="ds-disabled-pill">Disabled</span>
+      </div>
+
+      <p class="ds-caption">Inputs — pill search, ink hairline, 44px height</p>
+      <div class="ds-input-pair">
+        <div>
+          <label class="ds-field-label">search-input</label>
+          <input class="search-input" placeholder="⌕  Search accessories" />
+        </div>
+        <div>
+          <label class="ds-field-label">search-input · focused</label>
+          <input class="search-input" value="AirPods Pro 3" style="border-color: var(--primary-focus); box-shadow: 0 0 0 2px rgba(0,113,227,0.4);" />
+        </div>
+      </div>
+
+      <p class="ds-caption">Configurator chips — pill, selected = 2px focus blue ring</p>
+      <div class="chip-row" style="display: flex; gap: 12px; flex-wrap: wrap; max-width: 800px; grid-template-columns: none;">
+        <div class="cfg-chip selected">
+          <span class="swatch" style="background: linear-gradient(135deg, #4f5b66, #2c3540);"></span>
+          <span class="label"><strong>Selected</strong><span class="delta">256 GB · $999</span></span>
+        </div>
+        <div class="cfg-chip">
+          <span class="swatch" style="background: linear-gradient(135deg, #e9d8b9, #c5ad80);"></span>
+          <span class="label"><strong>Default</strong><span class="delta">256 GB · $999</span></span>
+        </div>
+      </div>
+
+      <p class="ds-caption">Cards — utility 18r · pearl chip 11r · dark tile 0r</p>
+      <div class="ds-card-grid">
+        <div class="ds-card-mini">
+          <h4>store-utility-card</h4>
+          <p>White canvas, 18px radius, 1px hairline, 24 padding. The shop and accessories grid card — product render carries the only shadow.</p>
+        </div>
+        <div class="ds-card-mini parchment">
+          <h4>parchment surface</h4>
+          <p>The signature Apple off-white. Used as alternating light tile, footer canvas, and the iPhone buy floating sticky-bar background at 80% alpha.</p>
+        </div>
+        <div class="ds-card-mini dark">
+          <h4>product-tile-dark</h4>
+          <p>Full-bleed near-black at #272729. Radius 0 — tiles touch edges. The color change IS the divider; never a border or shadow.</p>
+        </div>
+      </div>
+
+      <p class="ds-caption">Tags / micro labels</p>
+      <div class="ds-comp-row">
+        <span style="display:inline-block;padding:4px 10px;border-radius:9999px;background:var(--canvas-parchment);font-size:12px;color:var(--ink-muted-80);letter-spacing:-0.12px;">New</span>
+        <span style="display:inline-block;padding:4px 10px;border-radius:9999px;background:rgba(0,102,204,0.1);color:var(--primary);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;">Pro</span>
+        <span style="display:inline-block;padding:4px 10px;border-radius:9999px;background:rgba(93,184,114,0.12);color:#2d8c47;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;">2030</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer (parchment) ─── -->
+<footer>
+  <div class="footer-wrap">
+    <p style="font-size: 12px; color: var(--ink-muted-48); margin: 0 0 16px; letter-spacing: -0.12px;">
+      * Trade-in values vary. Prices include applicable connectivity discount. Available financing options shown at checkout.
+    </p>
+    <div class="footer-cols">
+      <div>
+        <h4>Shop and Learn</h4>
+        <ul>
+          <li><a href="#">Store</a></li><li><a href="#">Mac</a></li><li><a href="#">iPad</a></li>
+          <li><a href="#">iPhone</a></li><li><a href="#">Watch</a></li><li><a href="#">AirPods</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Apple Wallet</h4>
+        <ul>
+          <li><a href="#">Wallet</a></li><li><a href="#">Apple Card</a></li>
+          <li><a href="#">Apple Pay</a></li><li><a href="#">Apple Cash</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="#">Manage Your ID</a></li><li><a href="#">Account</a></li>
+          <li><a href="#">iCloud.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Apple Store</h4>
+        <ul>
+          <li><a href="#">Find a Store</a></li><li><a href="#">Genius Bar</a></li>
+          <li><a href="#">Today at Apple</a></li><li><a href="#">Trade In</a></li>
+          <li><a href="#">Order Status</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About Apple</h4>
+        <ul>
+          <li><a href="#">Newsroom</a></li><li><a href="#">Leadership</a></li>
+          <li><a href="#">Career Opportunities</a></li><li><a href="#">Environment</a></li>
+          <li><a href="#">Inclusion &amp; Diversity</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <div>© Apple-inspired · Generated for design study · SF Pro substituted by Inter</div>
+      <div>Action Blue #0066cc · 9999px pill · 17px body · one drop-shadow</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.apple.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

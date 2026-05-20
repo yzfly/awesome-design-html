@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cohere — Inspired Design</title>
+<meta name="description" content="A Cohere-inspired marketing page and design-system reference: white editorial canvas, deep green product band, pill CTAs, agent console mockup. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --primary: #17171c;
+  --cohere-black: #000000;
+  --ink: #212121;
+  --deep-green: #003c33;
+  --dark-navy: #071829;
+  --canvas: #ffffff;
+  --soft-stone: #eeece7;
+  --pale-green: #edfce9;
+  --pale-blue: #f1f5ff;
+  --hairline: #d9d9dd;
+  --border-light: #e5e7eb;
+  --card-border: #f2f2f2;
+  --muted: #93939f;
+  --slate: #75758a;
+  --body-muted: #616161;
+  --action-blue: #1863dc;
+  --focus-blue: #4c6ee6;
+  --coral: #ff7759;
+  --coral-soft: #ffad9b;
+  --form-focus: #9b60aa;
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  --error: #b30000;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, "Helvetica Neue", Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(0,60,51,0.18); }
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: 0.28px; }
+
+/* Layout */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+/* Announcement bar */
+.announce {
+  background: var(--cohere-black);
+  color: var(--on-dark);
+  height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; gap: 12px;
+}
+.announce a { text-decoration: underline; text-underline-offset: 3px; }
+.announce .close { margin-left: 16px; opacity: 0.6; cursor: pointer; }
+
+/* Top nav */
+.topnav {
+  height: 72px;
+  border-bottom: 1px solid var(--card-border);
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 32px; font-size: 14px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 500; font-size: 17px; color: var(--ink); }
+.brand-mark {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--ink);
+  position: relative;
+}
+.brand-mark::after {
+  content: ""; position: absolute; inset: 5px;
+  border-radius: 50%; background: var(--canvas);
+}
+.brand-mark::before {
+  content: ""; position: absolute; left: 50%; top: 5px; width: 1px; height: 12px;
+  background: var(--ink);
+}
+.nav-links { display: flex; align-items: center; gap: 28px; color: var(--ink); }
+.nav-links a { color: var(--ink); }
+.nav-links a:hover { color: var(--body-muted); }
+.spacer { flex: 1; }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+.signin { color: var(--ink); font-size: 14px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 14px; font-weight: 500; line-height: 1.71;
+  padding: 10px 24px; border-radius: 32px; border: 1px solid transparent;
+  cursor: pointer; transition: opacity 120ms ease;
+}
+.btn:hover { opacity: 0.88; }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-on-dark { background: var(--canvas); color: var(--ink); }
+.btn-pill-outline {
+  background: transparent; color: var(--primary);
+  border: 1px solid var(--ink);
+  border-radius: 30px;
+  padding: 6px 14px; font-size: 13px;
+}
+.btn-link {
+  background: transparent; color: var(--ink); padding: 8px 0;
+  border-radius: 4px; text-decoration: underline; text-underline-offset: 4px;
+  text-decoration-thickness: 1px; text-decoration-color: var(--hairline);
+}
+
+/* Hero */
+.hero { padding: 88px 0 56px; }
+.eyebrow { font-size: 14px; letter-spacing: 0.28px; color: var(--slate); text-transform: uppercase; }
+.h-hero {
+  font-size: 88px; line-height: 1; letter-spacing: -1.92px; font-weight: 400;
+  margin: 24px 0 32px; color: var(--ink); max-width: 16ch;
+}
+.h-hero em { font-style: normal; color: var(--deep-green); }
+.h-sub { font-size: 18px; line-height: 1.4; color: var(--body-muted); max-width: 56ch; }
+.hero-actions { display: flex; gap: 14px; margin-top: 36px; align-items: center; }
+
+/* Hero media (two-card composition) */
+.hero-media {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 16px;
+  margin-top: 72px;
+}
+.media-card {
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  min-height: 380px;
+}
+.media-card.photo {
+  background: linear-gradient(135deg, #1b4f44 0%, #0b261f 50%, #071512 100%);
+  display: flex; align-items: flex-end;
+}
+.photo-overlay {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(60% 50% at 20% 30%, rgba(255,119,89,0.18), transparent 70%),
+    radial-gradient(45% 55% at 90% 85%, rgba(24,99,220,0.22), transparent 70%);
+}
+.photo-meta {
+  position: relative;
+  padding: 22px 24px;
+  color: var(--on-dark);
+  font-size: 12px;
+  display: flex; gap: 10px; align-items: center;
+}
+.photo-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+
+/* Agent console card */
+.agent-card {
+  background: var(--primary);
+  color: var(--on-dark);
+  border-radius: 22px;
+  padding: 22px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-height: 380px;
+}
+.agent-head { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.agent-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--deep-green); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--on-dark); }
+.agent-name { font-weight: 500; }
+.agent-name small { color: var(--muted); font-weight: 400; margin-left: 6px; }
+.agent-status {
+  margin-left: auto; font-size: 11px; padding: 3px 8px; border-radius: 32px;
+  background: rgba(237,252,233,0.14); color: #c8efbf; letter-spacing: 0.4px;
+}
+.agent-prompt {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #d0d0d8;
+}
+.agent-prompt strong { color: var(--on-dark); font-weight: 500; }
+.agent-response {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #bcbcc6;
+}
+.agent-response b { color: var(--on-dark); font-weight: 500; }
+.agent-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.agent-tag {
+  font-size: 11px; padding: 3px 8px; border-radius: 4px;
+  background: rgba(255,255,255,0.06); color: #cfcfd9; letter-spacing: 0.3px;
+}
+.agent-integrations { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); }
+.int-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px;
+  color: var(--on-dark); font-size: 11px;
+}
+.int-chip .sq { width: 8px; height: 8px; border-radius: 2px; }
+
+/* Trust strip */
+.trust { padding: 96px 0 56px; text-align: center; }
+.trust-label { font-size: 14px; color: var(--body-muted); margin-bottom: 40px; }
+.logo-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  opacity: 0.78; color: var(--ink);
+}
+.logo-row span { font-weight: 500; font-size: 18px; letter-spacing: -0.3px; }
+.logo-row .serif { font-family: "Georgia", serif; font-style: italic; font-weight: 400; }
+
+/* Capability grid */
+.capabilities { padding: 80px 0; }
+.section-head {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: end;
+  margin-bottom: 56px;
+}
+.h-section {
+  font-size: 56px; line-height: 1; letter-spacing: -1.2px; font-weight: 400;
+  color: var(--ink); max-width: 14ch;
+}
+.section-sub { color: var(--body-muted); font-size: 18px; line-height: 1.5; max-width: 48ch; }
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.cap {
+  padding: 28px 4px 0;
+  border-top: 1px solid var(--hairline);
+}
+.cap-icon {
+  width: 36px; height: 36px; color: var(--ink); margin-bottom: 24px;
+}
+.cap h3 {
+  font-size: 24px; font-weight: 400; line-height: 1.3; margin: 0 0 12px;
+  letter-spacing: -0.2px;
+}
+.cap p { color: var(--body-muted); font-size: 15px; line-height: 1.55; margin: 0 0 18px; }
+.cap a { color: var(--ink); font-size: 14px; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--hairline); }
+
+/* Dark feature band */
+.dark-band {
+  background: var(--deep-green);
+  color: var(--on-dark);
+  border-radius: 22px;
+  padding: 88px 64px;
+  margin: 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+.dark-band::before {
+  content: ""; position: absolute; right: -10%; top: -30%;
+  width: 60%; height: 160%;
+  background: radial-gradient(closest-side, rgba(237,252,233,0.12), transparent 70%);
+  pointer-events: none;
+}
+.dark-band .eyebrow { color: rgba(237,252,233,0.6); }
+.dark-band .h-section { color: var(--on-dark); }
+.dark-band-inner { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: start; position: relative; }
+.dark-band p.lead { color: rgba(255,255,255,0.78); font-size: 18px; line-height: 1.5; margin: 24px 0 32px; max-width: 38ch; }
+.dark-band .btn-on-dark { background: var(--canvas); color: var(--ink); }
+.dark-features { display: grid; gap: 14px; }
+.dark-feat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 22px;
+  display: grid; grid-template-columns: 28px 1fr; gap: 16px; align-items: start;
+}
+.dark-feat svg { color: rgba(237,252,233,0.85); }
+.dark-feat h4 { font-size: 18px; font-weight: 400; margin: 0 0 6px; color: var(--on-dark); }
+.dark-feat p { font-size: 14px; line-height: 1.55; margin: 0; color: rgba(255,255,255,0.62); }
+
+/* Product cards (stone) */
+.products { padding: 80px 0 40px; }
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+.product-card {
+  background: var(--soft-stone);
+  border-radius: 8px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 18px;
+  min-height: 380px;
+}
+.product-card .mono { color: var(--slate); font-size: 13px; }
+.product-card h3 { font-size: 32px; font-weight: 400; line-height: 1.1; letter-spacing: -0.32px; margin: 0; }
+.product-card p { color: var(--body-muted); font-size: 15px; line-height: 1.55; margin: 0; }
+.product-card hr { border: 0; border-top: 1px solid rgba(33,33,33,0.12); margin: 6px 0; }
+.product-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.product-card li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; font-size: 14px; color: var(--ink); align-items: start; }
+.product-card li svg { color: var(--deep-green); margin-top: 2px; }
+.product-card .btn { align-self: flex-start; margin-top: auto; }
+
+/* Research / pricing CTA strip */
+.cta-row { padding: 80px 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+.cta-row h2 { font-size: 48px; line-height: 1.1; letter-spacing: -0.48px; font-weight: 400; margin: 0; max-width: 18ch; }
+.cta-row p { color: var(--body-muted); font-size: 16px; line-height: 1.5; margin: 16px 0 24px; max-width: 50ch; }
+
+/* Design system section */
+.ds {
+  padding: 112px 0 80px;
+  background: var(--canvas);
+}
+.ds-head { margin-bottom: 64px; }
+.ds-head .mono { color: var(--slate); }
+.ds h2.ds-title { font-size: 64px; line-height: 1; letter-spacing: -1.2px; font-weight: 400; margin: 16px 0 16px; max-width: 18ch; }
+.ds-head p { color: var(--body-muted); font-size: 16px; max-width: 60ch; }
+.ds-head a { color: var(--action-blue); text-decoration: underline; text-underline-offset: 4px; }
+
+.ds-block {
+  padding: 56px 0;
+  border-top: 1px solid var(--hairline);
+}
+.ds-block-head {
+  display: grid; grid-template-columns: 220px 1fr; gap: 48px;
+  margin-bottom: 40px; align-items: baseline;
+}
+.ds-block-head .label { font-size: 13px; letter-spacing: 0.28px; color: var(--slate); text-transform: uppercase; font-family: "JetBrains Mono", monospace; }
+.ds-block-head h3 { font-size: 32px; line-height: 1.2; letter-spacing: -0.32px; font-weight: 400; margin: 0; }
+
+/* Color section */
+.color-cluster { display: grid; gap: 32px; }
+.color-cap {
+  font-size: 13px; letter-spacing: 0.28px; color: var(--slate);
+  text-transform: uppercase; font-family: "JetBrains Mono", monospace;
+  padding-bottom: 12px; border-bottom: 1px solid var(--hairline-soft);
+}
+.swatch-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.swatch {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.swatch .chip {
+  height: 88px; border-radius: 8px;
+  border: 1px solid var(--card-border);
+}
+.swatch .name { font-size: 13px; color: var(--ink); font-weight: 500; }
+.swatch .hex { font-size: 11px; color: var(--slate); font-family: "JetBrains Mono", monospace; letter-spacing: 0.4px; }
+
+/* Typography table */
+.type-table { display: grid; gap: 14px; }
+.type-row {
+  display: grid;
+  grid-template-columns: 200px 180px 1fr;
+  gap: 24px; align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.type-tok { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--ink); letter-spacing: 0.28px; }
+.type-spec { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--slate); }
+.type-sample { color: var(--ink); }
+
+/* Radius ladder */
+.radius-row { display: flex; gap: 20px; align-items: end; flex-wrap: wrap; }
+.radius-cell { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.radius-box {
+  width: 100px; height: 100px;
+  background: var(--soft-stone);
+  border: 1px solid var(--hairline);
+}
+.radius-cell .name { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink); }
+.radius-cell .val { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--slate); }
+
+/* Components matrix */
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.comp-card {
+  border: 1px solid var(--hairline-soft);
+  border-radius: 16px;
+  padding: 28px;
+  background: var(--canvas);
+}
+.comp-card h4 { font-size: 18px; font-weight: 400; margin: 0 0 6px; }
+.comp-card .desc { font-size: 13px; color: var(--slate); margin-bottom: 20px; }
+.comp-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--hairline);
+  font-size: 14px; font-family: inherit;
+  background: var(--canvas); color: var(--ink);
+}
+.input:focus { outline: none; border-color: var(--form-focus); box-shadow: 0 0 0 3px rgba(155,96,170,0.18); }
+.input.focused { border-color: var(--form-focus); box-shadow: 0 0 0 3px rgba(155,96,170,0.18); }
+.label-form { display: block; font-size: 12px; color: var(--slate); margin-bottom: 6px; }
+
+/* Badges/tags */
+.tag {
+  display: inline-flex; align-items: center; padding: 4px 10px;
+  font-size: 12px; border-radius: 8px;
+  background: transparent; color: var(--coral); border: 1px solid var(--coral-soft);
+}
+.tag.filled { background: var(--coral); color: var(--canvas); border-color: var(--coral); }
+.tag.blue { color: var(--action-blue); border-color: rgba(24,99,220,0.3); }
+.tag.green { color: var(--deep-green); border-color: rgba(0,60,51,0.2); background: var(--pale-green); }
+
+/* Footer */
+.footer {
+  background: var(--primary);
+  color: var(--on-dark);
+  padding: 80px 0 48px;
+  margin-top: 80px;
+}
+.foot-top {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: end;
+  padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.foot-eye { font-size: 13px; color: var(--coral); letter-spacing: 0.28px; text-transform: uppercase; font-family: "JetBrains Mono", monospace; }
+.foot-top h3 { font-size: 48px; line-height: 1; letter-spacing: -0.48px; font-weight: 400; margin: 12px 0 0; color: var(--on-dark); max-width: 14ch; }
+.news {
+  display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 32px; overflow: hidden; background: rgba(255,255,255,0.04);
+}
+.news input {
+  flex: 1; background: transparent; border: 0; color: var(--on-dark);
+  padding: 14px 20px; font-size: 14px; font-family: inherit;
+}
+.news input::placeholder { color: rgba(255,255,255,0.5); }
+.news input:focus { outline: none; }
+.news button {
+  background: var(--on-dark); color: var(--ink); border: 0;
+  padding: 0 22px; cursor: pointer; font-size: 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.foot-cols {
+  display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px;
+  padding-top: 56px;
+}
+.foot-cols h5 { font-size: 14px; font-weight: 500; margin: 0 0 18px; color: var(--on-dark); }
+.foot-cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.foot-cols a { color: var(--muted); font-size: 13px; }
+.foot-cols a:hover { color: var(--on-dark); }
+.foot-legal {
+  margin-top: 56px; padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; gap: 24px; justify-content: space-between;
+  font-size: 12px; color: var(--muted);
+}
+
+/* Floating source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--primary); color: var(--on-dark);
+  font-size: 12px; padding: 10px 16px; border-radius: 32px;
+  border: 1px solid var(--ink);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+}
+.src-link:hover { background: var(--ink); }
+
+@media (max-width: 1024px) {
+  .h-hero { font-size: 64px; letter-spacing: -1.2px; }
+  .hero-media, .section-head, .product-grid, .cap-grid, .dark-band-inner, .cta-row, .foot-cols { grid-template-columns: 1fr; }
+  .swatch-row { grid-template-columns: repeat(3, 1fr); }
+  .type-row { grid-template-columns: 1fr; gap: 8px; }
+  .foot-top { grid-template-columns: 1fr; gap: 32px; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .dark-band { padding: 56px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announce">
+  <span>Announcing North — agentic productivity for the enterprise.</span>
+  <a href="#">Learn more</a>
+  <span class="close" aria-hidden>×</span>
+</div>
+
+<!-- Nav -->
+<header class="topnav">
+  <div class="wrap row">
+    <a class="brand" href="#"><span class="brand-mark" aria-hidden></span> cohere</a>
+    <nav class="nav-links">
+      <a href="#">Products</a>
+      <a href="#">Research</a>
+      <a href="#">Solutions</a>
+      <a href="#">Customers</a>
+      <a href="#">Pricing</a>
+      <a href="#">Docs</a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="nav-cta">
+      <a class="signin" href="#">Sign in</a>
+      <a class="btn btn-primary" href="#">Request a demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="wrap hero">
+  <div class="mono eyebrow">ENTERPRISE AI · SECURE BY DEFAULT</div>
+  <h1 class="h-hero">The AI platform built for <em>enterprise</em>.</h1>
+  <p class="h-sub">Cohere builds private, multilingual foundation models and an agentic stack you can deploy on any cloud — or your own infrastructure. Used by global banks, telcos, and governments who can't put their data anywhere.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">Request a demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn-link" href="#">Try the playground</a>
+  </div>
+
+  <div class="hero-media">
+    <!-- Photo / atmospheric card -->
+    <div class="media-card photo">
+      <div class="photo-overlay" aria-hidden></div>
+      <div class="photo-meta">
+        <span class="dot"></span>
+        <span class="mono" style="color:#cde7e0;">FIELD STUDY · 2026</span>
+        <span style="margin-left:auto; color:rgba(255,255,255,0.6);">Singapore, Marina Bay</span>
+      </div>
+    </div>
+
+    <!-- Agent console -->
+    <div class="agent-card">
+      <div class="agent-head">
+        <div class="agent-avatar">N</div>
+        <div class="agent-name">North Agent <small>· Risk Analyst</small></div>
+        <span class="agent-status">● Running</span>
+      </div>
+      <div class="agent-prompt">
+        <strong>You:</strong> Summarize the EMEA exposure on the Q3 risk model and draft a memo for the credit committee.
+      </div>
+      <div class="agent-response">
+        <b>North:</b> Pulled 14 documents from the data room. EMEA exposure is concentrated in two counterparties (DE, FR) representing 38% of net notional. Drafting a 2-page memo with the new VaR figures and proposed hedges.
+        <div class="agent-tags">
+          <span class="agent-tag">retrieval</span>
+          <span class="agent-tag">rerank-v3</span>
+          <span class="agent-tag">command-a</span>
+          <span class="agent-tag">PII redaction</span>
+        </div>
+      </div>
+      <div class="agent-integrations">
+        <span class="int-chip"><span class="sq" style="background:#ff7759;"></span>Snowflake</span>
+        <span class="int-chip"><span class="sq" style="background:#1863dc;"></span>Salesforce</span>
+        <span class="int-chip"><span class="sq" style="background:#4c6ee6;"></span>SharePoint</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<section class="wrap trust">
+  <div class="trust-label">Trusted by the institutions that move trillions.</div>
+  <div class="logo-row">
+    <span>OracleCloud</span>
+    <span class="serif">Notion</span>
+    <span>FUJITSU</span>
+    <span>RBC</span>
+    <span>LG CNS</span>
+    <span class="serif">Bell</span>
+    <span>SAP</span>
+  </div>
+</section>
+
+<!-- Capabilities -->
+<section class="wrap capabilities">
+  <div class="section-head">
+    <h2 class="h-section">A model stack that doesn't compromise.</h2>
+    <p class="section-sub">Three primitives — generation, retrieval, and reasoning — wired together for enterprise workloads. Private deployment is a first-class citizen, not a checkbox.</p>
+  </div>
+  <div class="cap-grid">
+    <div class="cap">
+      <svg class="cap-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="18" cy="18" r="14"/><path d="M6 18h24M18 6c4 4 4 20 0 24M18 6c-4 4-4 20 0 24"/></svg>
+      <h3>Command A</h3>
+      <p>A 111B frontier model tuned for enterprise reasoning, tool-use, and 23 languages. Optimized for two H100s — half the infra cost of comparable frontier models.</p>
+      <a href="#">Explore Command →</a>
+    </div>
+    <div class="cap">
+      <svg class="cap-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 10h24M6 18h24M6 26h16"/><circle cx="28" cy="26" r="3"/></svg>
+      <h3>Embed & Rerank</h3>
+      <p>Best-in-class retrieval on long-tail enterprise text. Embed v4 spans 100+ languages and four modalities; Rerank lifts existing search stacks without re-indexing.</p>
+      <a href="#">Explore Embed →</a>
+    </div>
+    <div class="cap">
+      <svg class="cap-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="6" y="6" width="10" height="10"/><rect x="20" y="6" width="10" height="10"/><rect x="6" y="20" width="10" height="10"/><rect x="20" y="20" width="10" height="10"/></svg>
+      <h3>Private deployment</h3>
+      <p>Run on AWS, Azure, GCP, OCI, Cohere Cloud — or fully air-gapped on your own hardware. The model is yours; the weights never leave your perimeter.</p>
+      <a href="#">Deployment options →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Dark feature band -->
+<section class="wrap">
+  <div class="dark-band">
+    <div class="eyebrow mono">NORTH · AGENTIC PRODUCTIVITY</div>
+    <div class="dark-band-inner">
+      <div>
+        <h2 class="h-section">Agents that actually do the work.</h2>
+        <p class="lead">North reads from the systems your teams already use — CRM, data warehouse, document stores — and acts inside them. Knowledge work, not chat.</p>
+        <a class="btn btn-on-dark" href="#">See North in action <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="dark-features">
+        <div class="dark-feat">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div>
+            <h4>Always on, always accountable</h4>
+            <p>Every action an agent takes is logged with full provenance — which document, which model, which user authorized it.</p>
+          </div>
+        </div>
+        <div class="dark-feat">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+          <div>
+            <h4>200+ enterprise connectors</h4>
+            <p>From Salesforce to SAP to your custom ERP. North talks to the systems your teams already trust.</p>
+          </div>
+        </div>
+        <div class="dark-feat">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z"/></svg>
+          <div>
+            <h4>SOC 2, ISO 27001, HIPAA</h4>
+            <p>Compliance is built in, not retrofitted. North inherits your existing SSO, role policies, and data residency rules.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products / pricing-ish stone cards -->
+<section class="wrap products">
+  <div class="section-head">
+    <h2 class="h-section">Pick the deployment that fits.</h2>
+    <p class="section-sub">Three commercial paths — from a hosted API to fully private on-prem. The model and tooling stay the same; only the perimeter changes.</p>
+  </div>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="mono">DEVELOPER</div>
+      <h3>Cohere Platform</h3>
+      <p>Hosted API access for prototyping, with pay-as-you-go pricing and dashboards.</p>
+      <hr>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Command, Embed, Rerank APIs</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Free playground tier</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> 99.9% uptime SLA</li>
+      </ul>
+      <a class="btn btn-primary" href="#">Start free</a>
+    </div>
+    <div class="product-card">
+      <div class="mono">ENTERPRISE</div>
+      <h3>Cohere Cloud</h3>
+      <p>Dedicated capacity on AWS, Azure, GCP, or OCI — with VPC isolation and seat-based licensing.</p>
+      <hr>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Dedicated GPU pool</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Fine-tuning included</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> SSO, RBAC, audit logs</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> 24/7 customer success</li>
+      </ul>
+      <a class="btn btn-primary" href="#">Talk to sales</a>
+    </div>
+    <div class="product-card">
+      <div class="mono">SOVEREIGN</div>
+      <h3>Private deployment</h3>
+      <p>On-prem or air-gapped — for regulated industries, defense, and sovereign clouds. Weights stay with you.</p>
+      <hr>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Customer-managed weights</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Air-gapped install</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Bespoke fine-tunes</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg> Solutions engineering</li>
+      </ul>
+      <a class="btn btn-primary" href="#">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA row -->
+<section class="wrap cta-row">
+  <div>
+    <div class="mono eyebrow" style="color: var(--coral);">RESEARCH</div>
+    <h2>The work behind the platform.</h2>
+    <p>Open papers, model cards, and the research lab that built Aya, Command, and a generation of multilingual systems. We publish what we ship.</p>
+    <a class="btn btn-pill-outline" href="#">Read the research</a>
+  </div>
+  <div>
+    <div class="mono eyebrow" style="color: var(--slate);">PUBLICATIONS</div>
+    <div style="display:grid; gap: 14px; margin-top: 18px;">
+      <div style="display:grid; grid-template-columns: 1fr auto; gap:24px; padding: 14px 0; border-bottom: 1px solid var(--hairline);">
+        <div>
+          <div style="font-size: 17px; line-height: 1.35;">Aya 23: Open weight multilingual LLM</div>
+          <div class="tag blue" style="margin-top:8px;">multilingual</div>
+        </div>
+        <div class="mono" style="color: var(--slate); font-size: 12px; align-self: center;">2026.04</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr auto; gap:24px; padding: 14px 0; border-bottom: 1px solid var(--hairline);">
+        <div>
+          <div style="font-size: 17px; line-height: 1.35;">Rerank v3: long-context retrieval</div>
+          <div class="tag" style="margin-top:8px;">retrieval</div>
+        </div>
+        <div class="mono" style="color: var(--slate); font-size: 12px; align-self: center;">2026.02</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr auto; gap:24px; padding: 14px 0; border-bottom: 1px solid var(--hairline);">
+        <div>
+          <div style="font-size: 17px; line-height: 1.35;">Tool-calling without hallucination</div>
+          <div class="tag green" style="margin-top:8px;">agents</div>
+        </div>
+        <div class="mono" style="color: var(--slate); font-size: 12px; align-self: center;">2025.11</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── PART B: DESIGN SYSTEM ───────────── -->
+
+<section class="wrap ds">
+  <div class="ds-head">
+    <div class="mono">DESIGN SYSTEM · v.alpha</div>
+    <h2 class="ds-title">The system in the open.</h2>
+    <p>Tokens and primitives behind the Cohere marketing surface — colors grouped by role, the type ladder, radii, and the canonical component set. Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.cohere.html" target="_blank" rel="noopener">DESIGN.md</a>. Editorial restraint, pill CTAs, dark product bands, coral accents kept to taxonomy only.</p>
+  </div>
+
+  <!-- Color -->
+  <div class="ds-block">
+    <div class="ds-block-head">
+      <div class="label">01 · Color</div>
+      <h3>White editorial canvas. Dark product bands. Coral and blue for taxonomy.</h3>
+    </div>
+    <div class="color-cluster">
+      <div>
+        <div class="color-cap">Brand & Accent</div>
+        <div class="swatch-row" style="margin-top:18px;">
+          <div class="swatch"><div class="chip" style="background:#000000;"></div><div class="name">cohere-black</div><div class="hex">#000000</div></div>
+          <div class="swatch"><div class="chip" style="background:#17171c;"></div><div class="name">primary</div><div class="hex">#17171c</div></div>
+          <div class="swatch"><div class="chip" style="background:#003c33;"></div><div class="name">deep-green</div><div class="hex">#003c33</div></div>
+          <div class="swatch"><div class="chip" style="background:#071829;"></div><div class="name">dark-navy</div><div class="hex">#071829</div></div>
+          <div class="swatch"><div class="chip" style="background:#1863dc;"></div><div class="name">action-blue</div><div class="hex">#1863dc</div></div>
+          <div class="swatch"><div class="chip" style="background:#ff7759;"></div><div class="name">coral</div><div class="hex">#ff7759</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="color-cap">Surface</div>
+        <div class="swatch-row" style="margin-top:18px;">
+          <div class="swatch"><div class="chip" style="background:#ffffff;"></div><div class="name">canvas</div><div class="hex">#ffffff</div></div>
+          <div class="swatch"><div class="chip" style="background:#eeece7;"></div><div class="name">soft-stone</div><div class="hex">#eeece7</div></div>
+          <div class="swatch"><div class="chip" style="background:#edfce9;"></div><div class="name">pale-green</div><div class="hex">#edfce9</div></div>
+          <div class="swatch"><div class="chip" style="background:#f1f5ff;"></div><div class="name">pale-blue</div><div class="hex">#f1f5ff</div></div>
+          <div class="swatch"><div class="chip" style="background:#f2f2f2;"></div><div class="name">card-border</div><div class="hex">#f2f2f2</div></div>
+          <div class="swatch"><div class="chip" style="background:#d9d9dd;"></div><div class="name">hairline</div><div class="hex">#d9d9dd</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="color-cap">Text & Rules</div>
+        <div class="swatch-row" style="margin-top:18px;">
+          <div class="swatch"><div class="chip" style="background:#212121;"></div><div class="name">ink</div><div class="hex">#212121</div></div>
+          <div class="swatch"><div class="chip" style="background:#616161;"></div><div class="name">body-muted</div><div class="hex">#616161</div></div>
+          <div class="swatch"><div class="chip" style="background:#75758a;"></div><div class="name">slate</div><div class="hex">#75758a</div></div>
+          <div class="swatch"><div class="chip" style="background:#93939f;"></div><div class="name">muted</div><div class="hex">#93939f</div></div>
+          <div class="swatch"><div class="chip" style="background:#e5e7eb;"></div><div class="name">border-light</div><div class="hex">#e5e7eb</div></div>
+          <div class="swatch"><div class="chip" style="background:#ffad9b;"></div><div class="name">coral-soft</div><div class="hex">#ffad9b</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="color-cap">Semantic</div>
+        <div class="swatch-row" style="margin-top:18px;">
+          <div class="swatch"><div class="chip" style="background:#4c6ee6;"></div><div class="name">focus-blue</div><div class="hex">#4c6ee6</div></div>
+          <div class="swatch"><div class="chip" style="background:#9b60aa;"></div><div class="name">form-focus</div><div class="hex">#9b60aa</div></div>
+          <div class="swatch"><div class="chip" style="background:#b30000;"></div><div class="name">error</div><div class="hex">#b30000</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typography -->
+  <div class="ds-block">
+    <div class="ds-block-head">
+      <div class="label">02 · Typography</div>
+      <h3>Monumental display, restrained UI body. Mono labels for system markers.</h3>
+    </div>
+    <div class="type-table">
+      <div class="type-row"><div class="type-tok">hero-display</div><div class="type-spec">96 / 1.0 / -1.92px</div><div class="type-sample" style="font-size: 56px; line-height: 1; letter-spacing: -1.12px;">The AI platform</div></div>
+      <div class="type-row"><div class="type-tok">product-display</div><div class="type-spec">72 / 1.0 / -1.44px</div><div class="type-sample" style="font-size: 44px; line-height: 1; letter-spacing: -0.88px;">Built for enterprise</div></div>
+      <div class="type-row"><div class="type-tok">section-display</div><div class="type-spec">60 / 1.0 / -1.2px</div><div class="type-sample" style="font-size: 38px; line-height: 1; letter-spacing: -0.76px;">Agents that work</div></div>
+      <div class="type-row"><div class="type-tok">section-heading</div><div class="type-spec">48 / 1.2 / -0.48px</div><div class="type-sample" style="font-size: 32px; line-height: 1.2; letter-spacing: -0.32px;">Frontier multilingual models</div></div>
+      <div class="type-row"><div class="type-tok">card-heading</div><div class="type-spec">32 / 1.2 / -0.32px</div><div class="type-sample" style="font-size: 26px; line-height: 1.2; letter-spacing: -0.26px;">Command A</div></div>
+      <div class="type-row"><div class="type-tok">feature-heading</div><div class="type-spec">24 / 1.3 / 0</div><div class="type-sample" style="font-size: 22px; line-height: 1.3;">Private deployment, your weights.</div></div>
+      <div class="type-row"><div class="type-tok">body-large</div><div class="type-spec">18 / 1.4 / 0</div><div class="type-sample" style="font-size: 18px; line-height: 1.4;">Cohere builds private foundation models and the agentic stack to deploy them.</div></div>
+      <div class="type-row"><div class="type-tok">body</div><div class="type-spec">16 / 1.5 / 0</div><div class="type-sample" style="font-size: 16px; line-height: 1.5;">Default body copy. Used everywhere the page needs to settle into rhythm.</div></div>
+      <div class="type-row"><div class="type-tok">button</div><div class="type-spec">14 / 1.71 / 500</div><div class="type-sample" style="font-size: 14px; line-height: 1.71; font-weight: 500;">Request a demo</div></div>
+      <div class="type-row"><div class="type-tok">mono-label</div><div class="type-spec">CohereMono / 14 / 0.28</div><div class="type-sample mono" style="font-size: 14px; letter-spacing: 0.28px; text-transform: uppercase; color: var(--slate);">ENTERPRISE · SECURE BY DEFAULT</div></div>
+      <div class="type-row"><div class="type-tok">caption</div><div class="type-spec">14 / 1.4 / 0</div><div class="type-sample" style="font-size: 14px; line-height: 1.4; color: var(--slate);">Captions and small explanatory text.</div></div>
+      <div class="type-row"><div class="type-tok">micro</div><div class="type-spec">12 / 1.4 / 0</div><div class="type-sample" style="font-size: 12px; line-height: 1.4; color: var(--slate);">Footer microcopy and small links.</div></div>
+    </div>
+  </div>
+
+  <!-- Radius -->
+  <div class="ds-block">
+    <div class="ds-block-head">
+      <div class="label">03 · Radius</div>
+      <h3>Subtle media corners. Pill CTAs. Nothing too cute.</h3>
+    </div>
+    <div class="radius-row">
+      <div class="radius-cell"><div class="radius-box" style="border-radius: 4px;"></div><div class="name">xs</div><div class="val">4px</div></div>
+      <div class="radius-cell"><div class="radius-box" style="border-radius: 8px;"></div><div class="name">sm</div><div class="val">8px</div></div>
+      <div class="radius-cell"><div class="radius-box" style="border-radius: 16px;"></div><div class="name">md</div><div class="val">16px</div></div>
+      <div class="radius-cell"><div class="radius-box" style="border-radius: 22px;"></div><div class="name">lg</div><div class="val">22px</div></div>
+      <div class="radius-cell"><div class="radius-box" style="border-radius: 30px;"></div><div class="name">xl</div><div class="val">30px</div></div>
+      <div class="radius-cell"><div class="radius-box" style="border-radius: 32px;"></div><div class="name">pill</div><div class="val">32px</div></div>
+      <div class="radius-cell"><div class="radius-box" style="border-radius: 9999px;"></div><div class="name">full</div><div class="val">9999</div></div>
+    </div>
+  </div>
+
+  <!-- Components -->
+  <div class="ds-block">
+    <div class="ds-block-head">
+      <div class="label">04 · Components</div>
+      <h3>Pill CTAs. Text links. Coral chips. Stone cards. Dark product fields.</h3>
+    </div>
+    <div class="comp-grid">
+
+      <div class="comp-card">
+        <h4>Buttons</h4>
+        <div class="desc">Primary pills carry the headline action. Secondary actions are usually underlined text.</div>
+        <div class="comp-row">
+          <a class="btn btn-primary" href="#">Primary pill</a>
+          <a class="btn-pill-outline" href="#">Outline pill</a>
+          <a class="btn-link" href="#">Text link →</a>
+        </div>
+        <div class="comp-row" style="background: var(--primary); padding: 14px; border-radius: 8px;">
+          <a class="btn btn-on-dark" href="#">On-dark pill</a>
+          <a href="#" style="color: var(--on-dark); text-decoration: underline; font-size: 14px; text-underline-offset: 4px;">Text link on dark</a>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <h4>Inputs</h4>
+        <div class="desc">Rectangular inputs, thin gray border, violet focus.</div>
+        <div style="display:grid; gap: 12px;">
+          <div>
+            <label class="label-form">Work email</label>
+            <input class="input" placeholder="you@company.com" />
+          </div>
+          <div>
+            <label class="label-form">Use case (focused)</label>
+            <input class="input focused" value="Risk analytics for credit committee" />
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <h4>Tags & badges</h4>
+        <div class="desc">Coral chips for taxonomy. Filled active state. Pale green for status.</div>
+        <div class="comp-row">
+          <span class="tag filled">Tutorials</span>
+          <span class="tag">Research</span>
+          <span class="tag">Product</span>
+          <span class="tag blue">Embed</span>
+          <span class="tag green">● Live</span>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <h4>Stone card</h4>
+        <div class="desc">Warm neutral block. 8px radius. 32px padding. Used for product summaries.</div>
+        <div style="background: var(--soft-stone); border-radius: 8px; padding: 22px;">
+          <div class="mono" style="font-size: 12px; color: var(--slate);">DEVELOPER</div>
+          <div style="font-size: 24px; line-height: 1.2; margin: 8px 0 10px;">Cohere Platform</div>
+          <div style="font-size: 14px; color: var(--body-muted);">Hosted API access. Free playground. Pay-as-you-go.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-eye">AI MOVES FAST</div>
+        <h3>Get the brief.</h3>
+      </div>
+      <div>
+        <div style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">Monthly. Field notes from the lab. No marketing.</div>
+        <div class="news">
+          <input type="email" placeholder="you@company.com" />
+          <button>Subscribe <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <a class="brand" href="#" style="color: var(--on-dark);"><span class="brand-mark" style="background: var(--on-dark);" aria-hidden></span> cohere</a>
+        <div style="margin-top: 18px; font-size: 13px; color: var(--muted); max-width: 26ch;">Frontier multilingual models, retrieval, and agents — built for enterprise data.</div>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul><li><a href="#">Command</a></li><li><a href="#">Embed</a></li><li><a href="#">Rerank</a></li><li><a href="#">North</a></li></ul>
+      </div>
+      <div>
+        <h5>Solutions</h5>
+        <ul><li><a href="#">Financial services</a></li><li><a href="#">Healthcare</a></li><li><a href="#">Government</a></li><li><a href="#">Manufacturing</a></li></ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul><li><a href="#">Documentation</a></li><li><a href="#">Research</a></li><li><a href="#">Blog</a></li><li><a href="#">Playground</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 Cohere Inc. — Inspired demo. Not affiliated.</span>
+      <span class="mono">SOC 2 · ISO 27001 · HIPAA</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.cohere.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

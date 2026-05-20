@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mintlify — Inspired Design</title>
+<meta name="description" content="A Mintlify-inspired marketing page: atmospheric sky-gradient hero, mint accent CTAs, black pill primaries, 3-column doc layout, Inter + Geist Mono. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#0a0a0a;
+  --on-primary:#ffffff;
+  --brand-green:#00d4a4;
+  --brand-green-deep:#00b48a;
+  --brand-green-soft:#7cebcb;
+  --brand-tag:#3772cf;
+  --brand-warn:#c37d0d;
+  --brand-annotate:#1ba673;
+  --brand-error:#d45656;
+
+  --hero-sky-from:#87a8c8;
+  --hero-sky-to:#f5e9d8;
+  --hero-dark-from:#1a3d4a;
+  --hero-dark-to:#2d5a4f;
+  --testimonial-orange:#f55a3c;
+
+  --canvas:#ffffff;
+  --canvas-dark:#0a0a0a;
+  --surface:#f7f7f7;
+  --surface-soft:#fafafa;
+  --surface-code:#1c1c1e;
+  --hairline:#e5e5e5;
+  --hairline-soft:#ededed;
+  --hairline-dark:#1f1f1f;
+
+  --ink:#0a0a0a;
+  --charcoal:#1c1c1e;
+  --slate:#3a3a3c;
+  --steel:#5a5a5c;
+  --stone:#888888;
+  --muted:#a8a8aa;
+  --on-dark:#ffffff;
+  --on-dark-muted:#b3b3b3;
+
+  --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-xxl:24px; --r-full:9999px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--canvas);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+.mono{font-family:"JetBrains Mono","SF Mono",Menlo,Consolas,monospace}
+::selection{background:var(--brand-green-soft);color:var(--ink)}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.wrap-narrow{max-width:1120px;margin:0 auto;padding:0 32px}
+
+/* —— Promo banner —— */
+.promo{background:var(--canvas-dark);color:var(--on-dark);font-size:14px;font-weight:500;padding:10px 16px;text-align:center}
+.promo a{text-decoration:underline;text-decoration-color:var(--brand-green);text-underline-offset:3px}
+.promo .arrow{color:var(--brand-green);margin-left:4px}
+
+/* —— Top nav —— */
+.nav{background:var(--canvas);border-bottom:1px solid var(--hairline-soft);position:sticky;top:0;z-index:30;height:64px}
+.nav-inner{height:100%;display:flex;align-items:center;gap:32px}
+.brand{display:flex;align-items:center;gap:8px;color:var(--ink);font-weight:600;font-size:18px;letter-spacing:-0.4px}
+.brand .mark{width:28px;height:28px;border-radius:var(--r-md);background:var(--ink);display:inline-flex;align-items:center;justify-content:center;color:var(--brand-green);font-weight:700;font-size:16px}
+.nav-links{display:flex;gap:2px;margin-left:8px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--steel);padding:8px 12px;border-radius:var(--r-md)}
+.nav-links a:hover{color:var(--ink);background:var(--surface)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+@media(max-width:980px){.nav-links{display:none}}
+
+/* —— Buttons —— */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:500;font-size:14px;line-height:1.3;padding:10px 20px;border-radius:var(--r-full);border:1px solid transparent;cursor:pointer;transition:all .15s ease;height:40px}
+.btn-primary{background:var(--ink);color:var(--on-primary)}
+.btn-primary:hover{background:var(--charcoal)}
+.btn-secondary{background:transparent;color:var(--ink);border-color:var(--hairline)}
+.btn-secondary:hover{border-color:var(--steel)}
+.btn-accent{background:var(--brand-green);color:var(--ink)}
+.btn-accent:hover{background:var(--brand-green-deep);color:var(--on-primary)}
+.btn-on-dark{background:var(--on-dark);color:var(--ink)}
+.btn-ghost{background:transparent;color:var(--ink);padding:8px 12px;border-radius:var(--r-md)}
+.btn-sm{height:32px;padding:6px 14px;font-size:13px}
+
+/* —— Hero —— */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#a3bdd7 0%,#c4d4e0 30%,#dfd9ce 65%,#f5e9d8 100%);padding:80px 0 96px;text-align:center}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(ellipse at 20% 35%,rgba(255,255,255,0.55) 0%,transparent 50%),radial-gradient(ellipse at 78% 25%,rgba(255,255,255,0.45) 0%,transparent 45%),radial-gradient(ellipse at 50% 80%,rgba(255,255,255,0.35) 0%,transparent 55%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:880px;margin:0 auto;padding:0 32px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.7);border-radius:var(--r-full);padding:6px 14px;font-size:13px;font-weight:500;color:var(--ink);margin-bottom:28px}
+.hero-pill .ndot{width:8px;height:8px;border-radius:var(--r-full);background:var(--brand-green);box-shadow:0 0 0 3px rgba(0,212,164,0.25)}
+.hero h1{font-size:72px;font-weight:600;line-height:1.05;letter-spacing:-2px;color:var(--ink);margin:0 0 24px}
+.hero .sub{font-size:20px;line-height:1.5;color:var(--slate);max-width:640px;margin:0 auto 36px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+@media(max-width:760px){.hero h1{font-size:48px;letter-spacing:-1.2px}.hero .sub{font-size:17px}}
+
+/* —— Hero product mockup —— */
+.mock{max-width:1080px;margin:0 auto;background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-lg);box-shadow:0 24px 48px -8px rgba(0,0,0,0.12);overflow:hidden;text-align:left}
+.mock-bar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface-soft);border-bottom:1px solid var(--hairline-soft);font-size:13px;color:var(--steel)}
+.mock-bar .lights{display:flex;gap:6px}
+.mock-bar .lights span{width:11px;height:11px;border-radius:var(--r-full);background:var(--hairline)}
+.mock-bar .url{flex:1;background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);padding:4px 10px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--steel);max-width:380px;margin:0 auto}
+.mock-grid{display:grid;grid-template-columns:220px 1fr 200px;min-height:420px}
+@media(max-width:860px){.mock-grid{grid-template-columns:1fr}}
+
+/* Doc sidebar */
+.doc-side{border-right:1px solid var(--hairline-soft);padding:20px 16px;background:var(--canvas);font-size:13px}
+.doc-side .search{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);padding:8px 12px;font-size:13px;color:var(--stone);margin-bottom:18px;display:flex;align-items:center;gap:6px}
+.doc-side .search .k{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:11px;background:var(--canvas);border:1px solid var(--hairline);padding:2px 6px;border-radius:var(--r-xs);color:var(--steel)}
+.doc-side .sec{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--steel);padding:14px 10px 6px}
+.doc-side .item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:var(--r-sm);color:var(--steel);font-weight:400;font-size:13px;line-height:1.4}
+.doc-side .item.active{background:var(--surface);color:var(--ink);font-weight:500}
+.doc-side .item.active::before{content:"";width:4px;height:4px;border-radius:var(--r-full);background:var(--brand-green);box-shadow:0 0 0 2px rgba(0,212,164,0.2)}
+.doc-side .item .di{width:14px;height:14px;color:var(--stone)}
+
+/* Doc body */
+.doc-body{padding:24px 28px;background:var(--canvas)}
+.doc-crumb{font-size:12px;color:var(--stone);margin-bottom:10px}
+.doc-crumb span{color:var(--steel)}
+.doc-body h3{font-size:28px;font-weight:600;margin:0 0 6px;color:var(--ink);letter-spacing:-0.3px}
+.doc-body .doc-sub{font-size:14px;color:var(--steel);margin:0 0 18px;line-height:1.6}
+.doc-body p{font-size:14px;color:var(--charcoal);line-height:1.65;margin:0 0 14px}
+.doc-body .inl-code{background:var(--surface);color:var(--charcoal);border:1px solid var(--hairline);border-radius:var(--r-xs);padding:2px 6px;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500}
+.doc-body .tag-chip{background:rgba(55,114,207,0.12);color:var(--brand-tag);border-radius:var(--r-sm);padding:2px 7px;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500}
+.code-block{background:var(--surface-code);color:var(--on-dark);border-radius:var(--r-md);overflow:hidden;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.55;margin:14px 0}
+.code-head{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid var(--hairline-dark);color:var(--on-dark-muted);font-size:12px}
+.code-head .lang{font-family:"JetBrains Mono",monospace}
+.code-head .copy{margin-left:auto;font-size:11px;border:1px solid var(--hairline-dark);padding:2px 8px;border-radius:var(--r-sm);color:var(--on-dark-muted)}
+.code-body{padding:14px 16px;color:var(--on-dark);white-space:pre;overflow:auto}
+.code-body .k{color:#c792ea}
+.code-body .s{color:#a7e2b4}
+.code-body .n{color:#ffcb6b}
+.code-body .c{color:#5f6c75}
+.code-body .f{color:#82aaff}
+.code-body .tg{color:#fa9bd8}
+.prop-row{padding:14px 0;border-bottom:1px solid var(--hairline-soft);font-size:13px}
+.prop-row:last-child{border-bottom:none}
+.prop-row .pn{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+.prop-row .pn code{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-xs);padding:2px 6px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--charcoal);font-weight:500}
+.prop-row .pt{background:var(--surface);color:var(--steel);font-family:"JetBrains Mono",monospace;font-size:11px;border-radius:var(--r-sm);padding:2px 6px}
+.prop-row .req{background:var(--brand-error);color:var(--on-dark);font-size:10px;font-weight:600;letter-spacing:0.5px;border-radius:var(--r-sm);padding:2px 6px}
+.prop-row .pd{color:var(--steel);font-size:13px;line-height:1.55}
+
+/* Doc TOC */
+.doc-toc{border-left:1px solid var(--hairline-soft);padding:24px 18px;font-size:13px;background:var(--canvas)}
+.doc-toc h6{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--steel);margin:0 0 10px}
+.doc-toc a{display:block;padding:4px 0;color:var(--steel)}
+.doc-toc a.active{color:var(--ink);font-weight:500;border-left:2px solid var(--brand-green);padding-left:8px;margin-left:-10px}
+@media(max-width:860px){.doc-side,.doc-toc{display:none}}
+
+/* —— Logo wall —— */
+.logos{padding:48px 0;border-bottom:1px solid var(--hairline-soft)}
+.logos .ll{text-align:center;font-size:13px;color:var(--steel);font-weight:500;letter-spacing:0.3px;margin-bottom:24px}
+.logos .row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:center}
+@media(max-width:760px){.logos .row{grid-template-columns:repeat(3,1fr)}}
+.logos .item{padding:14px;text-align:center;color:var(--steel);font-weight:500;font-size:18px;letter-spacing:-0.4px}
+
+/* —— Section —— */
+.section{padding:96px 0}
+.section + .section{border-top:1px solid var(--hairline-soft)}
+.section-eyebrow{font-size:13px;font-weight:600;color:var(--brand-green-deep);text-transform:uppercase;letter-spacing:0.5px;margin:0 0 12px}
+.section-h{font-size:48px;font-weight:600;line-height:1.1;letter-spacing:-1px;color:var(--ink);margin:0 0 16px;max-width:780px}
+.section-lede{font-size:18px;line-height:1.6;color:var(--steel);max-width:680px;margin:0 0 48px}
+
+/* —— Feature grid —— */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:980px){.feat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.feat-grid{grid-template-columns:1fr}}
+.feat{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:32px}
+.feat .ic{width:40px;height:40px;border-radius:var(--r-md);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--ink)}
+.feat h3{font-size:22px;font-weight:600;color:var(--ink);margin:0 0 8px;letter-spacing:-0.3px}
+.feat p{font-size:15px;line-height:1.6;color:var(--steel);margin:0 0 14px}
+.feat .lnk{font-size:14px;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:4px}
+
+/* —— Dark band —— */
+.band-dark{background:linear-gradient(135deg,var(--hero-dark-from) 0%,var(--hero-dark-to) 100%);color:var(--on-dark);padding:96px 0;position:relative;overflow:hidden}
+.band-dark::after{content:"";position:absolute;right:-10%;top:-30%;width:60%;height:160%;background:radial-gradient(circle at center,rgba(0,212,164,0.22) 0%,transparent 60%)}
+.band-dark .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;position:relative;z-index:2}
+@media(max-width:860px){.band-dark .grid{grid-template-columns:1fr}}
+.band-dark h2{font-size:48px;font-weight:600;line-height:1.1;letter-spacing:-1px;margin:0 0 16px;color:var(--on-dark)}
+.band-dark p{font-size:18px;line-height:1.6;color:rgba(255,255,255,0.85);margin:0 0 28px;max-width:520px}
+.band-dark .actions{display:flex;gap:12px;flex-wrap:wrap}
+.terminal{background:rgba(0,0,0,0.4);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-lg);overflow:hidden;font-family:"JetBrains Mono",monospace;font-size:13px}
+.terminal-bar{display:flex;align-items:center;gap:6px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.6)}
+.terminal-bar .lights span{width:10px;height:10px;border-radius:var(--r-full);background:rgba(255,255,255,0.15);display:inline-block;margin-right:5px}
+.terminal-body{padding:18px 20px;color:rgba(255,255,255,0.9);line-height:1.7}
+.terminal-body .pr{color:var(--brand-green)}
+.terminal-body .cm{color:rgba(255,255,255,0.5)}
+.terminal-body .ok{color:var(--brand-green)}
+
+/* —— Testimonial —— */
+.testi{background:var(--testimonial-orange);color:var(--on-dark);border-radius:var(--r-lg);padding:64px;display:grid;grid-template-columns:1.4fr 0.6fr;gap:48px;align-items:center}
+@media(max-width:860px){.testi{grid-template-columns:1fr;padding:40px}}
+.testi blockquote{margin:0;font-size:28px;font-weight:600;line-height:1.3;letter-spacing:-0.3px}
+.testi .attr{margin-top:24px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.9);display:flex;align-items:center;gap:10px}
+.testi .av{width:36px;height:36px;border-radius:var(--r-full);background:rgba(255,255,255,0.2);display:inline-flex;align-items:center;justify-content:center;font-weight:600}
+.testi .badge{background:rgba(255,255,255,0.2);border-radius:var(--r-full);padding:4px 10px;font-size:12px;font-weight:600;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-bottom:12px}
+
+/* —— Pricing —— */
+.toggle-row{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:32px}
+.toggle{background:var(--surface);border-radius:var(--r-full);padding:4px;display:inline-flex;font-size:13px;font-weight:500}
+.toggle button{background:transparent;border:none;font-family:inherit;font-size:13px;font-weight:500;padding:6px 14px;border-radius:var(--r-full);cursor:pointer;color:var(--steel);display:inline-flex;align-items:center;gap:6px}
+.toggle button.on{background:var(--canvas);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,0.08)}
+.toggle .save{background:var(--brand-green);color:var(--ink);font-size:11px;font-weight:600;padding:2px 7px;border-radius:var(--r-full)}
+
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:980px){.price-grid{grid-template-columns:1fr}}
+.tier{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:32px;display:flex;flex-direction:column;gap:18px}
+.tier.featured{border:2px solid var(--brand-green);box-shadow:0 8px 24px rgba(0,212,164,0.08);position:relative}
+.tier .nm{font-size:20px;font-weight:600;color:var(--ink);margin:0}
+.tier .price{font-size:56px;font-weight:600;letter-spacing:-1.5px;line-height:1;color:var(--ink)}
+.tier .price small{font-size:14px;font-weight:400;color:var(--steel);margin-left:6px;letter-spacing:0}
+.tier .desc{font-size:14px;line-height:1.6;color:var(--steel);margin:0}
+.tier ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.tier li{display:flex;gap:10px;color:var(--charcoal)}
+.tier li::before{content:"";flex:0 0 auto;width:18px;height:18px;border-radius:var(--r-full);background:var(--brand-green-soft);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300b48a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");background-size:12px;background-repeat:no-repeat;background-position:center;margin-top:2px}
+.tier .feat-pill{display:inline-flex;align-items:center;gap:6px;background:var(--brand-green);color:var(--ink);font-size:12px;font-weight:600;padding:2px 10px;border-radius:var(--r-full);align-self:flex-start}
+
+/* —— DS Section —— */
+.ds{background:var(--surface-soft);border-top:1px solid var(--hairline);padding:96px 0}
+.ds-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.ds h2{font-size:36px;font-weight:600;letter-spacing:-0.5px;color:var(--ink);margin:0 0 6px}
+.ds .sub{color:var(--steel);font-size:15px}
+.ds-hd a{font-size:13px;font-weight:500;color:var(--ink);border:1px solid var(--hairline);background:var(--canvas);padding:8px 14px;border-radius:var(--r-full)}
+.ds-block{margin-top:56px}
+.ds-block h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--steel);margin:0 0 16px}
+.ds-block .desc{font-size:15px;color:var(--steel);margin:0 0 20px;max-width:560px;line-height:1.6}
+
+.color-cat{margin-top:18px}
+.color-cat-title{font-size:13px;font-weight:600;color:var(--ink);margin:0 0 10px}
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+@media(max-width:980px){.swatches{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.swatches{grid-template-columns:repeat(2,1fr)}}
+.sw{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden}
+.sw-chip{height:64px;border-bottom:1px solid var(--hairline-soft)}
+.sw-meta{padding:8px 10px;font-size:12px;line-height:1.4}
+.sw-name{font-weight:500;color:var(--ink)}
+.sw-val{font-family:"JetBrains Mono",monospace;color:var(--steel);font-size:11px;margin-top:2px}
+
+.typo{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);overflow:hidden}
+.typo-row{display:grid;grid-template-columns:160px 220px 1fr;gap:24px;padding:16px 20px;border-top:1px solid var(--hairline-soft);align-items:center}
+.typo-row:first-child{border-top:none}
+.typo-row .tok{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink);font-weight:500}
+.typo-row .spec{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--steel)}
+.typo-row .smp{color:var(--ink)}
+@media(max-width:760px){.typo-row{grid-template-columns:1fr}}
+
+.radii{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+@media(max-width:860px){.radii{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:560px){.radii{grid-template-columns:repeat(2,1fr)}}
+.rad{background:var(--canvas);border:1px solid var(--hairline);padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;border-radius:var(--r-md)}
+.rad-vis{width:56px;height:56px;background:var(--brand-green-soft);border:1px solid var(--brand-green-deep)}
+.rad .nm{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink);font-weight:500}
+.rad .vl{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--steel)}
+
+.cmp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:860px){.cmp-grid{grid-template-columns:1fr}}
+.cmp{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);padding:24px}
+.cmp h4{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--steel);margin:0 0 16px}
+.cmp .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.cmp .row:last-child{margin-bottom:0}
+.cmp .label{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--steel);min-width:130px}
+.pill-tab{padding:8px 16px;border-radius:var(--r-full);font-size:14px;font-weight:500;color:var(--steel);background:var(--canvas);border:1px solid var(--hairline);cursor:pointer}
+.pill-tab.on{background:var(--ink);color:var(--on-primary);border-color:var(--ink)}
+.input{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-md);height:40px;padding:8px 14px;font-size:14px;font-family:inherit;color:var(--ink);width:240px}
+.input.focused{border:2px solid var(--brand-green);padding:7px 13px}
+.badge-discount{background:var(--brand-green);color:var(--ink);font-size:12px;font-weight:600;padding:3px 10px;border-radius:var(--r-full)}
+.badge-required{background:var(--brand-error);color:var(--on-dark);font-size:10px;font-weight:600;letter-spacing:0.5px;padding:2px 6px;border-radius:var(--r-sm);text-transform:uppercase}
+.badge-type{background:var(--surface);color:var(--steel);font-family:"JetBrains Mono",monospace;font-size:12px;padding:2px 8px;border-radius:var(--r-sm)}
+.badge-tag{background:rgba(55,114,207,0.15);color:var(--brand-tag);font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:600;padding:2px 8px;border-radius:var(--r-sm)}
+
+/* —— Footer —— */
+.foot{background:var(--canvas);border-top:1px solid var(--hairline);padding:64px 0 32px}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px}
+@media(max-width:980px){.foot-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:640px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-col h5{font-size:14px;font-weight:500;color:var(--ink);margin:0 0 12px}
+.foot-col a{display:block;font-size:14px;color:var(--steel);padding:5px 0}
+.foot-brand-row .brand{margin-bottom:14px}
+.foot-line{margin-top:48px;padding-top:24px;border-top:1px solid var(--hairline-soft);display:flex;justify-content:space-between;color:var(--steel);font-size:13px;flex-wrap:wrap;gap:12px}
+
+/* Floating badge */
+.float-md{position:fixed;right:18px;bottom:18px;z-index:50;background:var(--ink);color:var(--on-dark);font-size:13px;font-weight:500;padding:10px 16px;border-radius:var(--r-full);box-shadow:0 6px 18px rgba(0,0,0,0.18)}
+.float-md:hover{background:#000}
+</style>
+</head>
+<body>
+
+<!-- Promo banner -->
+<div class="promo">
+  <a href="#"><span style="color:var(--brand-green)">⌘</span> Mintlify just shipped MCP support — connect any docs site to Claude, Cursor, ChatGPT <span class="arrow">→</span></a>
+</div>
+
+<!-- Top nav -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#">
+      <span class="mark">M</span>
+      Mintlify
+    </a>
+    <nav class="nav-links">
+      <a href="#">Solutions</a>
+      <a href="#">Pricing</a>
+      <a href="#">Customers</a>
+      <a href="#">Documentation</a>
+      <a href="#">Changelog</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-ghost" href="#">Talk to sales</a>
+      <a class="btn btn-primary btn-sm" href="#">Get Started</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-pill"><span class="ndot"></span> Introducing Mintlify Agents · live</span>
+    <h1>The intelligent<br>Knowledge Platform</h1>
+    <p class="sub">Where engineers, AI agents, and writers ship documentation that's read, indexed, and trusted — by humans and machines alike.</p>
+    <div class="hero-actions">
+      <a class="btn btn-accent" href="#">Get started — free</a>
+      <a class="btn btn-secondary" href="#">Talk to us →</a>
+    </div>
+
+    <!-- Doc page mockup -->
+    <div class="mock">
+      <div class="mock-bar">
+        <div class="lights"><span></span><span></span><span></span></div>
+        <div class="url">acme.mintlify.app / components / tabs</div>
+        <div style="font-size:11px;font-weight:500;color:var(--steel)">v3.4.1</div>
+      </div>
+      <div class="mock-grid">
+        <aside class="doc-side">
+          <div class="search">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+            Search docs…
+            <span class="k">⌘K</span>
+          </div>
+          <div class="sec">Getting Started</div>
+          <div class="item">Introduction</div>
+          <div class="item">Installation</div>
+          <div class="item">Quickstart</div>
+          <div class="sec">Components</div>
+          <div class="item">Accordions</div>
+          <div class="item">Cards</div>
+          <div class="item">Code blocks</div>
+          <div class="item active">Tabs</div>
+          <div class="item">Steps</div>
+          <div class="item">Tooltips</div>
+        </aside>
+        <div class="doc-body">
+          <div class="doc-crumb">Components <span>/</span> <span>Tabs</span></div>
+          <h3>Tabs</h3>
+          <p class="doc-sub">Toggle between several views in the same space.</p>
+          <p>The <span class="tag-chip">&lt;Tabs&gt;</span> component lets you organize related content into discrete panes. Wrap each pane in <span class="tag-chip">&lt;Tab&gt;</span> and give it a <span class="inl-code">title</span> prop.</p>
+          <div class="code-block">
+            <div class="code-head"><span class="lang">JSX</span><span class="copy">📋 Copy</span></div>
+            <div class="code-body"><span class="c">{/* Tabs: render in order */}</span>
+<span class="tg">&lt;Tabs</span> <span class="f">defaultIndex</span>=<span class="s">{1}</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;Tab</span> <span class="f">title</span>=<span class="s">"npm"</span><span class="tg">&gt;</span>
+    <span class="k">$</span> npm install <span class="s">mintlify</span>
+  <span class="tg">&lt;/Tab&gt;</span>
+  <span class="tg">&lt;Tab</span> <span class="f">title</span>=<span class="s">"pnpm"</span><span class="tg">&gt;</span>
+    <span class="k">$</span> pnpm add <span class="s">mintlify</span>
+  <span class="tg">&lt;/Tab&gt;</span>
+<span class="tg">&lt;/Tabs&gt;</span></div>
+          </div>
+          <h6 style="font-size:13px;font-weight:600;color:var(--ink);margin:18px 0 8px;text-transform:uppercase;letter-spacing:0.4px">Props</h6>
+          <div class="prop-row">
+            <div class="pn"><code>defaultIndex</code><span class="pt">number</span></div>
+            <div class="pd">The index of the tab to show by default. Defaults to <code style="font-family:'JetBrains Mono',monospace;color:var(--charcoal);font-size:12px">0</code>.</div>
+          </div>
+          <div class="prop-row">
+            <div class="pn"><code>title</code><span class="pt">string</span><span class="req">required</span></div>
+            <div class="pd">The label displayed in the tab header.</div>
+          </div>
+        </div>
+        <aside class="doc-toc">
+          <h6>On this page</h6>
+          <a href="#" class="active">Tabs</a>
+          <a href="#">Usage</a>
+          <a href="#">Props</a>
+          <a href="#">Examples</a>
+          <a href="#">Accessibility</a>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logo wall -->
+<section class="logos">
+  <div class="wrap">
+    <div class="ll">Trusted by 12,000+ engineering teams</div>
+    <div class="row">
+      <div class="item">Anthropic</div>
+      <div class="item">Cognition</div>
+      <div class="item">Vercel</div>
+      <div class="item">PayPal</div>
+      <div class="item">Block</div>
+      <div class="item">Lovable</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section">
+  <div class="wrap-narrow">
+    <div class="section-eyebrow">Built for the intelligence age</div>
+    <h2 class="section-h">Docs that work for engineers, agents, and writers.</h2>
+    <p class="section-lede">One source of truth, three first-class consumers. Mintlify renders to the web, ships an MCP server, indexes for retrieval, and lets your writers ship without merging a single line of code.</p>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        </div>
+        <h3>MDX-native</h3>
+        <p>Write Markdown, ship components. Tabs, Cards, Steps, CodeGroups, Frames — every primitive your docs deserve.</p>
+        <a class="lnk" href="#">Read the syntax →</a>
+      </div>
+      <div class="feat">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 010 18"/></svg>
+        </div>
+        <h3>AI-search built-in</h3>
+        <p>Semantic search, agentic chat, and an exposed MCP endpoint that drops you into Claude, Cursor, or ChatGPT in one click.</p>
+        <a class="lnk" href="#">Try the agent →</a>
+      </div>
+      <div class="feat">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M9 4v14"/></svg>
+        </div>
+        <h3>Visual editor</h3>
+        <p>Non-engineers edit live, see diffs in PR previews, ship to staging in two clicks. Git is still the source — they just don't need to touch it.</p>
+        <a class="lnk" href="#">See editor →</a>
+      </div>
+      <div class="feat">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+        </div>
+        <h3>API playgrounds</h3>
+        <p>Auto-generate live OpenAPI playgrounds from your spec. Curl, JS, Python — all rendered, all up-to-date.</p>
+        <a class="lnk" href="#">View playground →</a>
+      </div>
+      <div class="feat">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l4-7 5 4 4-6 5 9"/><path d="M3 18h18"/></svg>
+        </div>
+        <h3>Analytics + feedback</h3>
+        <p>See which pages convert, which sentences dead-end. Built-in upvote/downvote rolled up by section, by user, by question.</p>
+        <a class="lnk" href="#">See analytics →</a>
+      </div>
+      <div class="feat">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>SOC 2 + SSO</h3>
+        <p>SOC 2 Type II out of the gate. SAML SSO, custom domains, RBAC, audit logs, EU + US data residency.</p>
+        <a class="lnk" href="#">Security center →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dark band -->
+<section class="band-dark">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <span class="section-eyebrow" style="color:var(--brand-green)">Mintlify for startups</span>
+        <h2>50% off for your first year — apply in 90 seconds.</h2>
+        <p>If you're pre-Series A, YC, or backed by a partner fund, Mintlify Lift Off gives you the Growth tier free for 6 months, then 50% off through your first year of revenue.</p>
+        <div class="actions">
+          <a class="btn btn-on-dark" href="#">Apply now</a>
+          <a class="btn btn-ghost" href="#" style="color:var(--on-dark)">See program details →</a>
+        </div>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <span>~/acme-docs · zsh</span>
+        </div>
+        <div class="terminal-body">
+<span class="cm"># 1. install</span>
+<span class="pr">$</span> npm i -g mintlify
+<span class="pr">$</span> mintlify init acme-docs
+
+<span class="cm"># 2. preview locally</span>
+<span class="pr">$</span> mintlify dev
+<span style="color:rgba(255,255,255,0.65)">⠋ starting server on </span><span class="ok">localhost:3000</span>
+<span class="ok">✓ ready in 412ms</span>
+
+<span class="cm"># 3. ship</span>
+<span class="pr">$</span> git push origin main
+<span class="ok">✓ deployed to docs.acme.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial -->
+<section class="section">
+  <div class="wrap">
+    <div class="testi">
+      <div>
+        <span class="badge">★ Cursor</span>
+        <blockquote>"Every YC batch we consistently see the top performing startups use Mintlify to build their docs."</blockquote>
+        <div class="attr">
+          <span class="av">MT</span>
+          <div>Michael Truell · Co-founder, Cursor</div>
+        </div>
+      </div>
+      <div>
+        <div style="background:rgba(255,255,255,0.15);border-radius:var(--r-lg);padding:20px;font-size:12px;font-family:'JetBrains Mono',monospace;line-height:1.6;color:rgba(255,255,255,0.92)">
+          <div style="opacity:0.6;margin-bottom:6px">// metrics — last 30d</div>
+          <div>monthly_pageviews: <span style="color:#ffd97a">2.4M</span></div>
+          <div>p95_load:           <span style="color:#ffd97a">132ms</span></div>
+          <div>agent_queries:      <span style="color:#ffd97a">89,440</span></div>
+          <div>search_ctr:         <span style="color:#ffd97a">71.2%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section">
+  <div class="wrap-narrow">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="section-h">Pricing on your terms.</h2>
+    <p class="section-lede">Plans for every stage — from your first README to your Series C. Annual saves 20% across every tier.</p>
+
+    <div class="toggle-row">
+      <div class="toggle">
+        <button>Monthly</button>
+        <button class="on">Annual <span class="save">Save 20%</span></button>
+      </div>
+    </div>
+
+    <div class="price-grid">
+      <div class="tier">
+        <h3 class="nm">Free</h3>
+        <div class="price">$0<small>/ month</small></div>
+        <p class="desc">For personal projects, OSS docs, side hustles.</p>
+        <ul>
+          <li>Unlimited pages</li>
+          <li>mintlify.app subdomain</li>
+          <li>Community support</li>
+          <li>Public repo only</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Start free</a>
+      </div>
+      <div class="tier featured">
+        <span class="feat-pill">★ Lift Off</span>
+        <h3 class="nm">Growth</h3>
+        <div class="price">$120<small>/ month</small></div>
+        <p class="desc">For teams shipping a public product. Custom domain, analytics, AI search.</p>
+        <ul>
+          <li>Custom domain</li>
+          <li>AI search + chat</li>
+          <li>Private repos</li>
+          <li>Visual editor seats</li>
+          <li>Standard support</li>
+        </ul>
+        <a class="btn btn-accent" href="#">Start trial</a>
+      </div>
+      <div class="tier">
+        <h3 class="nm">Custom</h3>
+        <div class="price">Talk<small>· enterprise</small></div>
+        <p class="desc">For regulated industries, large engineering orgs, multi-product docs.</p>
+        <ul>
+          <li>SAML SSO + RBAC</li>
+          <li>SOC 2 + DPA + BAA</li>
+          <li>SLA + dedicated CSM</li>
+          <li>White-label theming</li>
+          <li>Audit log + retention</li>
+        </ul>
+        <a class="btn btn-secondary" href="#">Talk to sales →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DS Reference -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-hd">
+      <div>
+        <h2>Design system reference</h2>
+        <div class="sub">Tokens, type ladder, radius, components — pulled from the captured DESIGN.md.</div>
+      </div>
+      <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mintlify.html" target="_blank" rel="noopener">View source DESIGN.md ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3>Color</h3>
+      <p class="desc">Grouped by role. Mint green is reserved for accent CTAs and active state — never large surfaces. Atmospheric gradients carry hero mood.</p>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Brand & accent</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#0a0a0a"></div><div class="sw-meta"><div class="sw-name">Primary</div><div class="sw-val">#0a0a0a</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#00d4a4"></div><div class="sw-meta"><div class="sw-name">Mint</div><div class="sw-val">#00d4a4</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#00b48a"></div><div class="sw-meta"><div class="sw-name">Mint deep</div><div class="sw-val">#00b48a</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#7cebcb"></div><div class="sw-meta"><div class="sw-name">Mint soft</div><div class="sw-val">#7cebcb</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#3772cf"></div><div class="sw-meta"><div class="sw-name">Tag blue</div><div class="sw-val">#3772cf</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#f55a3c"></div><div class="sw-meta"><div class="sw-name">Coral</div><div class="sw-val">#f55a3c</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Surface</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#ffffff;border-right:1px solid var(--hairline)"></div><div class="sw-meta"><div class="sw-name">Canvas</div><div class="sw-val">#ffffff</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#fafafa"></div><div class="sw-meta"><div class="sw-name">Soft</div><div class="sw-val">#fafafa</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#f7f7f7"></div><div class="sw-meta"><div class="sw-name">Surface</div><div class="sw-val">#f7f7f7</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#e5e5e5"></div><div class="sw-meta"><div class="sw-name">Hairline</div><div class="sw-val">#e5e5e5</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#1c1c1e"></div><div class="sw-meta"><div class="sw-name">Code</div><div class="sw-val">#1c1c1e</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#0a0a0a"></div><div class="sw-meta"><div class="sw-name">Dark</div><div class="sw-val">#0a0a0a</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Atmospheric hero</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:linear-gradient(180deg,#87a8c8,#f5e9d8)"></div><div class="sw-meta"><div class="sw-name">Sky gradient</div><div class="sw-val">#87a8c8 → #f5e9d8</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:linear-gradient(135deg,#1a3d4a,#2d5a4f)"></div><div class="sw-meta"><div class="sw-name">Dark teal</div><div class="sw-val">#1a3d4a → #2d5a4f</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Text</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#0a0a0a"></div><div class="sw-meta"><div class="sw-name">Ink</div><div class="sw-val">#0a0a0a</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#1c1c1e"></div><div class="sw-meta"><div class="sw-name">Charcoal</div><div class="sw-val">#1c1c1e</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#3a3a3c"></div><div class="sw-meta"><div class="sw-name">Slate</div><div class="sw-val">#3a3a3c</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#5a5a5c"></div><div class="sw-meta"><div class="sw-name">Steel</div><div class="sw-val">#5a5a5c</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#888888"></div><div class="sw-meta"><div class="sw-name">Stone</div><div class="sw-val">#888888</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#a8a8aa"></div><div class="sw-meta"><div class="sw-name">Muted</div><div class="sw-val">#a8a8aa</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <p class="desc">Inter for every UI and prose role, Geist Mono for code. Tight display tracking, comfortable 1.5 line-height for documentation prose.</p>
+      <div class="typo">
+        <div class="typo-row"><div class="tok">hero-display</div><div class="spec">72 / 600 / -2px</div><div class="smp" style="font-size:48px;font-weight:600;letter-spacing:-1.5px;line-height:1.1">Knowledge platform</div></div>
+        <div class="typo-row"><div class="tok">display-lg</div><div class="spec">56 / 600 / -1.5px</div><div class="smp" style="font-size:40px;font-weight:600;letter-spacing:-1.2px">For the intelligence age</div></div>
+        <div class="typo-row"><div class="tok">heading-1</div><div class="spec">48 / 600 / -1px</div><div class="smp" style="font-size:32px;font-weight:600;letter-spacing:-0.8px">Pricing on your terms</div></div>
+        <div class="typo-row"><div class="tok">heading-3</div><div class="spec">28 / 600 / 1.25</div><div class="smp" style="font-size:24px;font-weight:600">Tabs</div></div>
+        <div class="typo-row"><div class="tok">subtitle</div><div class="spec">18 / 400 / 1.5</div><div class="smp" style="font-size:18px;color:var(--slate)">Where engineers and agents ship together.</div></div>
+        <div class="typo-row"><div class="tok">body-md</div><div class="spec">16 / 400 / 1.5</div><div class="smp" style="font-size:16px;color:var(--charcoal)">Primary documentation body. Comfortable long-form reading.</div></div>
+        <div class="typo-row"><div class="tok">body-sm</div><div class="spec">14 / 400 / 1.5</div><div class="smp" style="font-size:14px;color:var(--steel)">Secondary body, table cells, sidebar nav.</div></div>
+        <div class="typo-row"><div class="tok">micro-uppercase</div><div class="spec">11 / 600 · UPPER</div><div class="smp" style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--steel)">COMPONENTS</div></div>
+        <div class="typo-row"><div class="tok">code-md</div><div class="spec">14 / 400 · Geist Mono</div><div class="smp mono" style="font-size:14px">mintlify dev → localhost:3000</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <p class="desc">Tightly disciplined. Buttons and badges always pill. Cards always 12px. No corner softening in between for the same family.</p>
+      <div class="radii">
+        <div class="rad"><div class="rad-vis" style="border-radius:4px"></div><div class="nm">xs</div><div class="vl">4px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:6px"></div><div class="nm">sm</div><div class="vl">6px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:8px"></div><div class="nm">md</div><div class="vl">8px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:12px"></div><div class="nm">lg</div><div class="vl">12px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:16px"></div><div class="nm">xl</div><div class="vl">16px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:24px"></div><div class="nm">xxl</div><div class="vl">24px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:9999px"></div><div class="nm">full</div><div class="vl">9999px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Components</h3>
+      <p class="desc">Pill buttons, segmented tabs, doc property rows, type chips. All UI carries pill or 12px-radius silhouettes.</p>
+      <div class="cmp-grid">
+        <div class="cmp">
+          <h4>Buttons</h4>
+          <div class="row"><span class="label">primary</span><a class="btn btn-primary">Get Started</a></div>
+          <div class="row"><span class="label">accent</span><a class="btn btn-accent">Get started — free</a></div>
+          <div class="row"><span class="label">on-dark</span><div style="background:var(--canvas-dark);padding:8px;border-radius:var(--r-md)"><a class="btn btn-on-dark">Apply now</a></div></div>
+          <div class="row"><span class="label">secondary</span><a class="btn btn-secondary">Talk to us</a></div>
+          <div class="row"><span class="label">ghost</span><a class="btn btn-ghost">Talk to sales</a></div>
+        </div>
+        <div class="cmp">
+          <h4>Pills, tabs & toggles</h4>
+          <div class="row"><span class="label">pill-tab</span><span class="pill-tab on">Pricing</span><span class="pill-tab">Roadmap</span></div>
+          <div class="row"><span class="label">toggle</span><div class="toggle" style="margin:0"><button>Monthly</button><button class="on">Annual <span class="save">-20%</span></button></div></div>
+          <div class="row"><span class="label">badge-discount</span><span class="badge-discount">Save 20%</span></div>
+        </div>
+        <div class="cmp">
+          <h4>Inputs</h4>
+          <div class="row"><span class="label">text-input</span><input class="input" placeholder="you@company.com"/></div>
+          <div class="row"><span class="label">focused</span><input class="input focused" value="you@company.com"/></div>
+        </div>
+        <div class="cmp">
+          <h4>Doc primitives</h4>
+          <div class="row"><span class="label">badge-required</span><span class="badge-required">required</span></div>
+          <div class="row"><span class="label">badge-type</span><span class="badge-type">string</span><span class="badge-type">number</span><span class="badge-type">boolean</span></div>
+          <div class="row"><span class="label">badge-tag</span><span class="badge-tag">&lt;Tabs&gt;</span></div>
+          <div class="row"><span class="label">inline-code</span><span class="inl-code" style="background:var(--surface);color:var(--charcoal);border:1px solid var(--hairline);border-radius:var(--r-xs);padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:12px">defaultIndex</span></div>
+        </div>
+        <div class="cmp" style="grid-column:span 2">
+          <h4>Code block</h4>
+          <div class="code-block" style="margin:0">
+            <div class="code-head"><span class="lang">bash</span><span class="copy">📋 Copy</span></div>
+            <div class="code-body"><span class="pr" style="color:#7cebcb">$</span> npm install <span class="s">mintlify</span>
+<span class="pr" style="color:#7cebcb">$</span> mintlify dev <span class="c">// → localhost:3000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col foot-brand-row">
+        <a class="brand" href="#"><span class="mark">M</span> Mintlify</a>
+        <p style="font-size:14px;color:var(--steel);max-width:280px;margin:0 0 16px;line-height:1.6">The Knowledge Platform that turns documentation into a product.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--steel)">
+          <span style="width:8px;height:8px;border-radius:var(--r-full);background:var(--brand-green)"></span>
+          All systems operational
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Explore</h5>
+        <a href="#">Solutions</a><a href="#">Customers</a><a href="#">Changelog</a><a href="#">Roadmap</a>
+      </div>
+      <div class="foot-col">
+        <h5>Resources</h5>
+        <a href="#">Documentation</a><a href="#">Guides</a><a href="#">API Reference</a><a href="#">Components</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Press</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a><a href="#">DPA</a>
+      </div>
+    </div>
+    <div class="foot-line">
+      <div>© 2026 Mintlify, Inc.</div>
+      <div>SOC 2 Type II · Made for documentation that gets read.</div>
+    </div>
+  </div>
+</footer>
+
+<a class="float-md" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mintlify.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Threads — iOS design spec</title>
+<meta name="description" content="Threads iOS app design reference. Pure black canvas, zero accent color, hairline separators, multi-part thread pole, Meta's quiet typography ethic." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#000000; --canvas-soft:#0a0a0a; --surface-1:#101010; --surface-2:#1a1a1a; --surface-3:#262626;
+  --ink:#ffffff; --ink-soft:#e5e5e5; --ink-muted:#a8a8a8; --ink-dim:#777777; --ink-faint:#4d4d4d;
+  --border:#252525; --border-hair:#1f1f1f; --border-soft:#161616;
+  --verified:#0095F6; --like:#ED4956; --link:#0095F6;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-hair)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.brand-mark{width:30px;height:30px;border-radius:8px;background:#fff;display:grid;place-items:center}
+.brand-mark svg{width:18px;height:18px;fill:#000}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:600;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:opacity .15s, transform .12s}
+.btn:hover{opacity:.9}
+.btn-primary{background:#fff;color:#000;padding:12px 24px;border-radius:var(--r-pill)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:#fff;padding:11px 22px;border-radius:var(--r-pill)}
+.btn-ghost{background:transparent;color:var(--ink);padding:11px 22px;border-radius:var(--r-pill)}
+
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(255,255,255,.04),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--r-pill);background:rgba(255,255,255,.06);color:var(--ink-soft);font-size:12px;font-weight:600;letter-spacing:.5px;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#fff}
+.hero h1{font-size:clamp(44px,7vw,84px);line-height:.95;letter-spacing:-2.6px;font-weight:800;margin-bottom:22px}
+.hero h1 .at{color:var(--ink-muted);font-weight:600}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-muted);max-width:560px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* iPHONE */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#fff}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;padding-top:52px;display:flex;flex-direction:column;background:#000;color:#fff}
+
+/* FEED */
+.th-header{display:flex;align-items:center;justify-content:center;padding:8px 16px 12px;position:relative}
+.th-header .at-logo{width:24px;height:24px;display:grid;place-items:center}
+.th-header .at-logo svg{width:24px;height:24px;fill:#fff}
+.th-tabs{display:flex;border-bottom:1px solid var(--border-hair)}
+.th-tab{flex:1;text-align:center;padding:10px 0;font-size:13px;font-weight:600;color:var(--ink-muted);position:relative}
+.th-tab.active{color:#fff}
+.th-tab.active::after{content:"";position:absolute;bottom:-1px;left:30%;right:30%;height:1px;background:#fff}
+.th-body{flex:1;overflow:hidden}
+.th-post{padding:12px 14px;border-bottom:1px solid var(--border-hair);display:flex;gap:10px}
+.th-post .left{display:flex;flex-direction:column;align-items:center;width:34px;flex-shrink:0}
+.th-post .av{width:34px;height:34px;border-radius:50%;flex-shrink:0}
+.av-1{background:linear-gradient(135deg,#fdc468,#dc2743)}
+.av-2{background:linear-gradient(135deg,#0095F6,#073b4c)}
+.av-3{background:linear-gradient(135deg,#06d6a0,#118ab2)}
+.av-4{background:linear-gradient(135deg,#bc1888,#3a0e0a)}
+.av-5{background:linear-gradient(135deg,#ff9e80,#dc2743)}
+.av-6{background:linear-gradient(135deg,#264653,#e9c46a)}
+.av-7{background:linear-gradient(135deg,#a8dadc,#1d3557)}
+.th-post .right{flex:1;min-width:0}
+.th-post .head{display:flex;align-items:center;gap:5px;font-size:12px;line-height:1.2;margin-bottom:5px}
+.th-post .name{font-weight:600}
+.th-post .verified{width:11px;height:11px;fill:var(--verified)}
+.th-post .time{color:var(--ink-muted);font-size:11px;margin-left:auto;display:flex;align-items:center;gap:4px}
+.th-post .more svg{width:14px;height:14px;fill:var(--ink-muted)}
+.th-post .body{font-size:12.5px;line-height:1.4;margin-bottom:8px;color:var(--ink)}
+.th-post .media{aspect-ratio:1.5/1;border-radius:10px;background:linear-gradient(135deg,#ff9e80,#dc2743,#7a1f4a);margin:6px 0 8px;border:1px solid var(--border-hair)}
+.th-post .actions{display:flex;gap:18px;margin-top:4px}
+.th-post .actions svg{width:18px;height:18px;stroke:#fff;stroke-width:1.6;fill:none}
+.th-post .actions .liked{fill:var(--like);stroke:var(--like)}
+.th-post .footer{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:11px;color:var(--ink-muted)}
+.th-post .footer .avatars{display:flex;margin-right:4px}
+.th-post .footer .avatars .av-mini{width:14px;height:14px;border-radius:50%;border:1px solid #000;margin-left:-4px}
+/* multi-part thread pole */
+.th-post.has-reply .left::after{content:"";flex:1;width:2px;background:var(--border);margin-top:4px;border-radius:1px;min-height:30px}
+.th-post.is-reply{padding-top:8px}
+.th-post.is-reply .left{position:relative}
+.th-post.is-reply .av{margin-top:0}
+
+/* ACTIVITY */
+.act-tabs{display:flex;gap:6px;padding:10px 14px;overflow:hidden;border-bottom:1px solid var(--border-hair)}
+.act-chip{padding:6px 12px;border-radius:var(--r-pill);border:1px solid var(--border);font-size:11px;font-weight:600;color:#fff;white-space:nowrap;background:transparent}
+.act-chip.active{background:#fff;color:#000;border-color:#fff}
+.act-row{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border-hair);align-items:flex-start}
+.act-row .av-wrap{position:relative}
+.act-row .av-wrap .av{width:36px;height:36px;border-radius:50%}
+.act-row .av-wrap .icon-dot{position:absolute;bottom:-3px;right:-4px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;border:2px solid #000}
+.act-row .icon-dot.heart{background:var(--like)}
+.act-row .icon-dot.reply{background:var(--verified)}
+.act-row .icon-dot.repost{background:#fff}
+.act-row .icon-dot svg{width:9px;height:9px;fill:#fff}
+.act-row .icon-dot.repost svg{fill:#000}
+.act-row .meta{flex:1;font-size:12.5px;line-height:1.35}
+.act-row .meta strong{font-weight:600}
+.act-row .meta .quote{color:var(--ink-muted);margin-top:3px;display:block;font-size:11.5px}
+.act-row .meta .tm{color:var(--ink-muted);font-size:10.5px;margin-top:2px}
+.act-row .follow-btn{padding:5px 12px;border:1px solid var(--border);border-radius:8px;background:transparent;color:#fff;font-size:11px;font-weight:600;flex-shrink:0;align-self:center}
+
+/* PROFILE */
+.prof-top{padding:12px 16px 6px}
+.prof-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.prof-name{font-size:22px;font-weight:800;letter-spacing:-.4px}
+.prof-handle{display:flex;align-items:center;gap:6px;margin-bottom:8px;font-size:13px}
+.prof-handle .handle{font-weight:500}
+.prof-handle .ig-link{background:var(--surface-2);padding:3px 8px;border-radius:var(--r-pill);font-size:10.5px;color:var(--ink-muted)}
+.prof-av{width:54px;height:54px;border-radius:50%}
+.prof-bio{font-size:12.5px;line-height:1.4;margin-bottom:10px;color:var(--ink)}
+.prof-followers{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-muted);margin-bottom:14px}
+.prof-followers .av-stack{display:flex;margin-right:3px}
+.prof-followers .av-stack .av-mini{width:16px;height:16px;border-radius:50%;border:1.5px solid #000;margin-left:-4px}
+.prof-actions{display:flex;gap:6px;padding:0 16px 14px}
+.prof-action{flex:1;padding:8px 0;background:transparent;border:1px solid var(--border);border-radius:var(--r-md);font-size:12.5px;font-weight:600;text-align:center;color:#fff}
+.prof-tabs{display:flex;border-bottom:1px solid var(--border-hair)}
+.prof-tab{flex:1;text-align:center;padding:10px 0;font-size:12.5px;font-weight:600;color:var(--ink-muted);position:relative}
+.prof-tab.active{color:#fff}
+.prof-tab.active::after{content:"";position:absolute;bottom:-1px;left:30%;right:30%;height:1px;background:#fff}
+
+/* TAB BAR */
+.th-tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:#000;border-top:1px solid var(--border-hair);display:flex;justify-content:space-around;align-items:center;z-index:10}
+.th-tab-bar .t{padding:10px;display:grid;place-items:center}
+.th-tab-bar .t svg{width:24px;height:24px;stroke:var(--ink-muted);stroke-width:1.8;fill:none}
+.th-tab-bar .t.active svg{stroke:#fff;fill:#fff}
+
+/* SECTIONS */
+.section{padding:120px 0;border-top:1px solid var(--border-hair)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--ink-muted);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:800;letter-spacing:-1.4px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-muted);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:14px;padding:28px;border:1px solid var(--border-hair)}
+.feat:hover{background:var(--surface-2)}
+.feat .feat-ic{width:36px;height:36px;border-radius:9px;background:#fff;display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:#000}
+.feat h3{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:1px 6px;border-radius:3px;color:var(--ink-soft);border:1px solid var(--border-hair)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:50px 0;border-top:1px solid var(--border-hair)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-muted);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-1);padding:5px 10px;border-radius:6px;color:var(--ink-soft);border:1px solid var(--border-hair)}
+.ios-feat-visual{background:var(--surface-1);border-radius:14px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-hair);position:relative;overflow:hidden}
+
+/* Multi-part thread visual */
+.thread-stack{display:flex;flex-direction:column;width:320px;gap:0}
+.thread-cell{display:flex;gap:10px;padding:8px 0}
+.thread-cell .pole{display:flex;flex-direction:column;align-items:center;width:34px;flex-shrink:0}
+.thread-cell .pole .av{width:34px;height:34px;border-radius:50%}
+.thread-cell .pole .line{flex:1;width:2px;background:var(--border);margin-top:4px;border-radius:1px;min-height:20px}
+.thread-cell:last-child .pole .line{display:none}
+.thread-cell .body{flex:1;font-size:12px;line-height:1.4;padding-top:4px}
+.thread-cell .body .who{font-weight:600;margin-bottom:3px}
+.thread-cell .body .txt{color:var(--ink-soft)}
+
+/* Quote card */
+.quote-card{width:300px;border:1px solid var(--border);border-radius:14px;padding:14px;background:var(--surface-1)}
+.quote-card .head{display:flex;align-items:center;gap:8px;font-size:11.5px;margin-bottom:6px}
+.quote-card .head .name{font-weight:600}
+.quote-card .head .av{width:18px;height:18px;border-radius:50%}
+.quote-card .head .verified{width:9px;height:9px;fill:var(--verified)}
+.quote-card .head .time{color:var(--ink-muted);margin-left:auto;font-size:10.5px}
+.quote-card .body{font-size:12px;line-height:1.4;color:var(--ink-soft)}
+
+/* Activity chips visual */
+.chips-stack{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;width:320px}
+.chips-stack .act-chip{padding:6px 14px;border-radius:9999px;border:1px solid var(--border);font-size:11.5px;font-weight:600;color:#fff;background:transparent}
+.chips-stack .act-chip.active{background:#fff;color:#000;border-color:#fff}
+
+/* DESIGN SYSTEM */
+.ds-section{padding:120px 0;background:var(--canvas-soft);border-top:1px solid var(--border-hair)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border-hair);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1.4px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-muted);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:#fff;border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border-hair)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:var(--surface-1);border-radius:10px;padding:10px;border:1px solid var(--border-hair)}
+.ds-sw .chip{height:64px;border-radius:6px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border-hair);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-hair);vertical-align:middle}
+.ds-type-table td.token{color:#fff}
+.ds-type-table td.sample{font-family:var(--font-ui);color:#fff}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:#fff;margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:var(--surface-1);border-radius:14px;padding:22px;border:1px solid var(--border-hair)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-dark{background:var(--surface-2);border:1px solid var(--border-hair);border-radius:12px;padding:10px 14px;color:#fff;font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-dark::placeholder{color:var(--ink-dim)}
+.tag{font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:6px}
+.tag-red{background:rgba(237,73,86,.18);color:var(--like)}
+.tag-blue{background:rgba(0,149,246,.18);color:var(--verified)}
+.tag-gray{background:var(--surface-2);color:var(--ink-soft)}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:var(--surface-1);border-radius:8px;padding:18px;border:1px solid var(--border-hair)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:#fff;letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border-hair);background:var(--canvas-soft)}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.5}
+.foot a{color:#fff;font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#000;border:1px solid var(--border);color:#fff;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M17 7a5 5 0 015 5 5 5 0 01-5 5h-5l1.5-1.5M7 17a5 5 0 01-5-5 5 5 0 015-5h5l-1.5 1.5" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+      Threads <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#">Log In</a>
+      <a class="btn btn-primary" href="#">Join Threads</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Words first.<br/><span class="at">Everything else, hairline-quiet.</span></h1>
+    <p>The Threads iOS app, dissected. Pure black canvas. Zero accent color. The conversation does the talking; the interface vanishes into the gutter.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- ACTIVITY -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="th-header">
+              <div style="font-size:17px;font-weight:700">Activity</div>
+            </div>
+            <div class="act-tabs">
+              <div class="act-chip active">All</div>
+              <div class="act-chip">Follows</div>
+              <div class="act-chip">Replies</div>
+              <div class="act-chip">Mentions</div>
+              <div class="act-chip">Quotes</div>
+              <div class="act-chip">Reposts</div>
+            </div>
+            <div style="flex:1;overflow:hidden">
+              <div class="act-row">
+                <div class="av-wrap"><div class="av av-1"></div><div class="icon-dot heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div></div>
+                <div class="meta"><strong>marie_kn</strong> liked your thread<div class="quote">"Golden hour over the Tagus 🌅"</div><div class="tm">2h</div></div>
+              </div>
+              <div class="act-row">
+                <div class="av-wrap"><div class="av av-2"></div><div class="icon-dot reply"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div></div>
+                <div class="meta"><strong>joao_s</strong> replied: <div class="quote">"That second photo is unreal"</div><div class="tm">5h</div></div>
+                <button class="follow-btn">Reply</button>
+              </div>
+              <div class="act-row">
+                <div class="av-wrap"><div class="av av-3"></div><div class="icon-dot repost"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div></div>
+                <div class="meta"><strong>akira.l</strong> reposted your thread<div class="tm">8h</div></div>
+              </div>
+              <div class="act-row">
+                <div class="av-wrap"><div class="av av-4"></div></div>
+                <div class="meta"><strong>nikodi</strong> started following you<div class="tm">1d</div></div>
+                <button class="follow-btn">Follow back</button>
+              </div>
+              <div class="act-row">
+                <div class="av-wrap"><div class="av av-5"></div><div class="icon-dot heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div></div>
+                <div class="meta"><strong>pedrofx</strong> and 12 others liked your reply<div class="tm">2d</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="th-tab-bar">
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+            <div class="t active"><svg viewBox="0 0 24 24" fill="#fff" stroke="#fff"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+          </div>
+        </div>
+        <div class="iphone-label">Activity</div>
+      </div>
+
+      <!-- FOR YOU -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="th-header">
+              <div class="at-logo"><svg viewBox="0 0 24 24"><path d="M17 7a5 5 0 015 5 5 5 0 01-5 5h-5l1.5-1.5M7 17a5 5 0 01-5-5 5 5 0 015-5h5l-1.5 1.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+            </div>
+            <div class="th-tabs">
+              <div class="th-tab active">For you</div>
+              <div class="th-tab">Following</div>
+            </div>
+            <div class="th-body">
+              <div class="th-post has-reply">
+                <div class="left"><div class="av av-1"></div></div>
+                <div class="right">
+                  <div class="head">
+                    <span class="name">marie_kn</span>
+                    <svg class="verified" viewBox="0 0 24 24"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg>
+                    <span class="time">2h <svg class="more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span>
+                  </div>
+                  <div class="body">When the golden hour hits at exactly the right second 🌅</div>
+                  <div class="media"></div>
+                  <div class="actions">
+                    <svg viewBox="0 0 24 24" class="liked"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                  </div>
+                  <div class="footer">
+                    <div class="avatars"><div class="av-mini av-2"></div><div class="av-mini av-3"></div></div>
+                    218 replies · 12,482 likes
+                  </div>
+                </div>
+              </div>
+
+              <div class="th-post is-reply">
+                <div class="left"><div class="av av-2"></div></div>
+                <div class="right">
+                  <div class="head">
+                    <span class="name">joao_s</span>
+                    <span class="time">5h</span>
+                  </div>
+                  <div class="body">That second photo is unreal. What time exactly?</div>
+                  <div class="actions">
+                    <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="th-tab-bar">
+            <div class="t active"><svg viewBox="0 0 24 24" fill="#fff" stroke="#fff"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+          </div>
+        </div>
+        <div class="iphone-label">For you</div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="th-header" style="justify-content:space-between">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </div>
+            <div class="prof-top">
+              <div class="prof-row">
+                <div>
+                  <div class="prof-name">Jiang Shu</div>
+                  <div class="prof-handle">
+                    <span class="handle">jiang.shu</span>
+                    <span class="ig-link">instagram.com/jiang.shu</span>
+                  </div>
+                </div>
+                <div class="prof-av" style="background:linear-gradient(135deg,#fdc468,#dc2743)"></div>
+              </div>
+              <div class="prof-bio">Writer · designer. Building things that respect the reader's time. Lisbon → Tokyo.</div>
+              <div class="prof-followers">
+                <div class="av-stack"><div class="av-mini av-2"></div><div class="av-mini av-3"></div></div>
+                8,402 followers · instagram.com/jiang.shu
+              </div>
+            </div>
+            <div class="prof-actions">
+              <div class="prof-action">Edit profile</div>
+              <div class="prof-action">Share profile</div>
+            </div>
+            <div class="prof-tabs">
+              <div class="prof-tab active">Threads</div>
+              <div class="prof-tab">Replies</div>
+              <div class="prof-tab">Media</div>
+              <div class="prof-tab">Reposts</div>
+            </div>
+            <div style="flex:1;overflow:hidden">
+              <div class="th-post">
+                <div class="left"><div class="av" style="background:linear-gradient(135deg,#fdc468,#dc2743)"></div></div>
+                <div class="right">
+                  <div class="head"><span class="name">jiang.shu</span><span class="time">2h</span></div>
+                  <div class="body">When the golden hour hits at exactly the right second 🌅</div>
+                  <div class="actions">
+                    <svg viewBox="0 0 24 24" class="liked"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                  </div>
+                  <div class="footer">218 replies · 12.4K likes</div>
+                </div>
+              </div>
+              <div class="th-post">
+                <div class="left"><div class="av" style="background:linear-gradient(135deg,#fdc468,#dc2743)"></div></div>
+                <div class="right">
+                  <div class="head"><span class="name">jiang.shu</span><span class="time">1d</span></div>
+                  <div class="body">A small ritual: phone face-down, kettle on, no music for the first hour.</div>
+                  <div class="footer">42 replies · 1.1K likes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="th-tab-bar">
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+            <div class="t active"><svg viewBox="0 0 24 24" fill="#fff" stroke="#fff"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+          </div>
+        </div>
+        <div class="iphone-label">Profile</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. Hairline between each idea.</h2>
+      <p>Threads's app prizes typographic restraint above all. There are no card shadows, no rounded backgrounds for posts, no accent colors saying "look here." Just text, a hairline below it, and the next thought.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>For you</h3>
+        <p>Two-tab strip (For you · Following) with white-underline active state. Posts sit edge-to-edge on the black canvas, separated only by a 1px hairline at <code>#1f1f1f</code>. No card chrome, no shadows.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+        <h3>Activity</h3>
+        <p>Eight filter chips (All / Follows / Replies / Mentions / Quotes / Reposts / Verified / Likes) — outline by default, white-fill on active. Rows show a tiny colored badge in the avatar's bottom-right corner indicating event type.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+        <h3>Profile</h3>
+        <p>Name big 24/800, handle 13/500 muted, Instagram-handle pill (the only "card" on the page). Bio + follower count + mutual-follower avatars. Edit/Share buttons are outlined — never filled.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Multi-part thread</div>
+          <h3>A pole that connects one idea to the next.</h3>
+          <p>When a user posts a thread of replies to themselves, Threads renders a 2px vertical pole between each avatar, anchoring child posts to their parent. The pole is the only "structural" graphic in the app — everything else is just type.</p>
+          <p>The pole color is the same hairline gray (<code>#252525</code>) used for post separators — it has to be visible but never demand attention.</p>
+          <div class="ios-feat-tokens">
+            <code>width: 2px</code>
+            <code>color: #252525</code>
+            <code>radius: 1px</code>
+            <code>margin: 4px from avatar</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="thread-stack">
+            <div class="thread-cell"><div class="pole"><div class="av av-1"></div><div class="line"></div></div><div class="body"><div class="who">marie_kn</div><div class="txt">When the golden hour hits at exactly the right second 🌅</div></div></div>
+            <div class="thread-cell"><div class="pole"><div class="av av-1"></div><div class="line"></div></div><div class="body"><div class="who">marie_kn</div><div class="txt">Took 47 shots to get that one.</div></div></div>
+            <div class="thread-cell"><div class="pole"><div class="av av-1"></div></div><div class="body"><div class="who">marie_kn</div><div class="txt">The fish came out of nowhere honestly.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="quote-card">
+            <div class="head"><div class="av av-2"></div><span class="name">joao_s</span><svg class="verified" viewBox="0 0 24 24"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg><span class="time">5h</span></div>
+            <div class="body">That second photo is unreal. The light wraps around the bird in a way you can't fake.</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Quote card</div>
+          <h3>A second voice, framed in a hairline.</h3>
+          <p>When a user quotes another post, the quoted content renders inside a 1px-bordered rounded rectangle — the ONLY card-like surface in the app's content stream. The card is 14px radius, sits flush with the body text, never carries a fill.</p>
+          <p>If the quoted author is verified, the blue check appears at the inline baseline. Original post timestamp is right-aligned in the card header.</p>
+          <div class="ios-feat-tokens">
+            <code>border: 1px #252525</code>
+            <code>radius: 14px</code>
+            <code>padding: 14px</code>
+            <code>fill: transparent</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Activity filter chips</div>
+          <h3>Eight states, one row, no panic.</h3>
+          <p>The Activity screen uses an outline-by-default, fill-on-active chip system — 8 chips that scroll horizontally without ever wrapping. Active chip swaps to white fill with black ink. Border color matches the canvas surface ladder.</p>
+          <p>The chips never use brand colors; the system stays purely monochrome so the activity content (avatars + body text) gets every drop of attention.</p>
+          <div class="ios-feat-tokens">
+            <code>idle: border #252525</code>
+            <code>active: fill #fff</code>
+            <code>radius: 9999px</code>
+            <code>padding: 6 × 14</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="chips-stack">
+            <div class="act-chip active">All</div>
+            <div class="act-chip">Follows</div>
+            <div class="act-chip">Replies</div>
+            <div class="act-chip">Mentions</div>
+            <div class="act-chip">Quotes</div>
+            <div class="act-chip">Reposts</div>
+            <div class="act-chip">Verified</div>
+            <div class="act-chip">Likes</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>Black, white, hairline. And exactly two accent colors.</h2>
+        <p>Every token Threads's iOS app reaches for — surface ladder, type ramp, radius scale, components. Inherited Meta-blue verified check and Instagram-red heart are the only chromatic notes — everything else is built from a five-stop gray ladder.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.threads-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A purely monochrome chassis. Inherited Meta-blue verified check and Instagram-red heart are the only chromatic notes in the entire app — everything else (typography, separators, chrome) is built from a five-stop gray ladder.</p>
+
+      <div class="ds-caption">Canvas & Surface</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Canvas</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0a0a0a"></div><div class="name">Canvas Soft</div><div class="val">#0a0a0a</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#101010"></div><div class="name">Surface 1</div><div class="val">#101010</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1a1a1a"></div><div class="name">Surface 2</div><div class="val">#1a1a1a</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#262626"></div><div class="name">Surface 3</div><div class="val">#262626</div></div>
+      </div>
+
+      <div class="ds-caption">Ink</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="name">Ink</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e5e5e5"></div><div class="name">Ink Soft</div><div class="val">#e5e5e5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#a8a8a8"></div><div class="name">Ink Muted</div><div class="val">#a8a8a8</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#777777"></div><div class="name">Ink Dim</div><div class="val">#777777</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4d4d4d"></div><div class="name">Ink Faint</div><div class="val">#4d4d4d</div></div>
+      </div>
+
+      <div class="ds-caption">Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#252525"></div><div class="name">Border</div><div class="val">#252525</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1f1f1f"></div><div class="name">Hairline</div><div class="val">#1f1f1f</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#161616"></div><div class="name">Border Soft</div><div class="val">#161616</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2a2a2a"></div><div class="name">Outline</div><div class="val">#2a2a2a</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#333333"></div><div class="name">Divider</div><div class="val">#333333</div></div>
+      </div>
+
+      <div class="ds-caption">The Only Two Accents</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0095F6"></div><div class="name">Verified</div><div class="val">#0095F6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ED4956"></div><div class="name">Like Heart</div><div class="val">#ED4956</div></div>
+        <div class="ds-sw"><div class="chip" style="background:transparent;border:1px dashed #4d4d4d"></div><div class="name">No others</div><div class="val">— —</div></div>
+        <div class="ds-sw"><div class="chip" style="background:transparent;border:1px dashed #4d4d4d"></div><div class="name">No others</div><div class="val">— —</div></div>
+        <div class="ds-sw"><div class="chip" style="background:transparent;border:1px dashed #4d4d4d"></div><div class="name">No others</div><div class="val">— —</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Meta's homegrown Inter (literally — Threads uses Inter as the system font, no substitution needed). Display 22-24 for screen titles. Body 15/400 with comfortable line-height. Display name 15/600, handle 15/400 muted.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--prof-name</td><td class="sample" style="font-size:24px;font-weight:800;letter-spacing:-.5px">Jiang Shu</td><td>24 / 1.5rem</td><td>800</td><td>-0.5px</td></tr>
+          <tr><td class="token">--screen-title</td><td class="sample" style="font-size:17px;font-weight:700">Activity</td><td>17 / 1.06rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--display-name</td><td class="sample" style="font-size:15px;font-weight:600">marie_kn</td><td>15 / 0.94rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--handle</td><td class="sample" style="font-size:13px;font-weight:500;color:#a8a8a8">jiang.shu</td><td>13 / 0.81rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:15px;font-weight:400;line-height:1.4">When the golden hour hits at exactly the right second 🌅</td><td>15 / 0.94rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--meta</td><td class="sample" style="font-size:13px;color:#a8a8a8">218 replies · 12.4K likes</td><td>13 / 0.81rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--timestamp</td><td class="sample" style="font-size:12px;color:#a8a8a8">2h</td><td>12 / 0.75rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--tab</td><td class="sample" style="font-size:13px;font-weight:600">For you</div></td><td>13 / 0.81rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--chip</td><td class="sample" style="font-size:12px;font-weight:600">Replies</td><td>12 / 0.75rem</td><td>600</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">The card was not invented in this app. The only radius that matters lives in two places: media (12px) and the quote-card (14px). Everything else is either a circle (avatar, like burst) or a pill (chip, button) or a flat hairline.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Hairline</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Min</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Tag</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Media</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Quote</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">9999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Avatar</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Post separator</div><div class="tk-val">1px</div><div class="tk-note">Hairline #1f1f1f. No padding bleed — sits flush with screen edges.</div></div>
+        <div class="token-cell"><div class="tk-label">Avatar (feed)</div><div class="tk-val">34pt</div><div class="tk-note">36pt on Activity rows. 54pt on Profile. Always perfect circle.</div></div>
+        <div class="token-cell"><div class="tk-label">Thread pole</div><div class="tk-val">2pt</div><div class="tk-note">Connects parent → child in self-replies. Color matches separator.</div></div>
+        <div class="token-cell"><div class="tk-label">Action stroke</div><div class="tk-val">1.6pt</div><div class="tk-note">Heart, reply, repost, share — all outlined. Hearts fill on tap.</div></div>
+        <div class="token-cell"><div class="tk-label">Quote card</div><div class="tk-val">14pt</div><div class="tk-note">The only card-like surface. 1pt border, no fill.</div></div>
+        <div class="token-cell"><div class="tk-label">Filter chip</div><div class="tk-val">28pt</div><div class="tk-note">Height. Pill shape. Outline → white-fill on active.</div></div>
+        <div class="token-cell"><div class="tk-label">Tab indicator</div><div class="tk-val">1pt</div><div class="tk-note">White underline, 30-70% of tab width, centered.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation</div><div class="tk-val">spring</div><div class="tk-note">0.5 response, 0.85 damping. Subtle — Threads is anti-bouncy.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">A vocabulary that refuses ornament. Buttons are either white-on-black (primary) or outlined-on-black (secondary). No fills. No gradients.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Join Threads</a>
+            <a class="btn btn-outline" href="#">Edit profile</a>
+            <a class="btn btn-outline" href="#">Share profile</a>
+            <a class="btn btn-ghost" href="#">Cancel</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button style="padding:5px 12px;background:#fff;color:#000;border-radius:8px;font-size:11px;font-weight:700;border:0">Follow</button>
+              <button style="padding:5px 12px;background:transparent;color:#fff;border:1px solid #252525;border-radius:8px;font-size:11px;font-weight:600">Following</button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-dark" placeholder="Search" />
+            <input class="input-dark" placeholder="What's new?" />
+            <div class="ds-card-row">
+              <span class="tag tag-red">Liked</span>
+              <span class="tag tag-blue">Verified</span>
+              <span class="tag tag-gray">Replies</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Post components</h5>
+          <div class="ds-card-stack" style="gap:8px;width:100%">
+            <div style="display:flex;gap:8px;align-items:flex-start;width:100%">
+              <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#fdc468,#dc2743);flex-shrink:0"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px">marie_kn <svg width="11" height="11" viewBox="0 0 24 24" fill="#0095F6"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg></div>
+                <div style="font-size:12px;color:#e5e5e5;margin-top:2px;line-height:1.35">Magic hour over the Tagus 🌅</div>
+              </div>
+            </div>
+            <div style="border-top:1px solid #1f1f1f;margin-top:6px;padding-top:6px;font-size:11px;color:#a8a8a8">218 replies · 12.4K likes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M17 7a5 5 0 015 5 5 5 0 01-5 5h-5l1.5-1.5M7 17a5 5 0 01-5-5 5 5 0 015-5h5l-1.5 1.5" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+      Threads iOS
+    </div>
+    <p>Design reference. Not affiliated with Meta Platforms, Inc. Token values are derived from the public iOS app and Meta's published brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.threads-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-outline" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.threads-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.threads-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

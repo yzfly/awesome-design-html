@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Robinhood — iOS design spec</title>
+<meta name="description" content="Robinhood iOS app design reference. White canvas, signature green-up orange-down, tabular numbers, confetti first trade, after-hours moon." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#fff; --surface-1:#FAFAFA; --surface-2:#F0F0F0; --surface-3:#1A1A1A;
+  --gain:#00C805; --gain-deep:#00A004; --gain-tint:#E7FBE7;
+  --loss:#FF5000; --loss-deep:#D04200; --loss-tint:#FFEDE3;
+  --ink:#000; --ink-soft:#1A1A1A; --ink-muted:#787878; --ink-dim:#A8A8A8;
+  --border:#F0F0F0; --border-soft:#F7F7F7; --border-strong:#E0E0E0;
+  --gold:#CBA258; --gold-soft:#F0DDB5; --moon:#FF8A00;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+.tnum{font-feature-settings:"tnum"}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.3px}
+.brand-mark{width:32px;height:32px;border-radius:50%;background:var(--gain);display:grid;place-items:center;color:#fff}
+.brand-mark svg{width:16px;height:16px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:600;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.03)}
+.btn-primary{background:var(--gain);color:#000;padding:13px 26px;border-radius:var(--r-pill)}
+.btn-primary:hover{background:var(--gain-deep);color:#fff}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:11px 18px;border-radius:var(--r-pill)}
+.btn-outline{background:transparent;border:1.5px solid var(--ink);color:var(--ink);padding:11px 18px;border-radius:var(--r-pill)}
+.btn-light{background:#000;color:#fff;padding:12px 22px;border-radius:var(--r-pill)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#F4FBF4 50%,#fff 100%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 540px at 50% 0%,rgba(0,200,5,.08),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-pill);background:var(--gain-tint);color:var(--gain-deep);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gain)}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:1;letter-spacing:-2.2px;font-weight:900;margin-bottom:22px}
+.hero h1 .gradient-word{color:var(--gain)}
+.hero p{font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,200,5,.18),0 0 0 1px rgba(0,0,0,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.97}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.97}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+/* ========== SCREENS ========== */
+.scr{position:absolute;inset:0;font-size:11px;display:flex;flex-direction:column;padding-top:54px;background:#fff;color:var(--ink)}
+
+/* PORTFOLIO */
+.rh-port-head{padding:6px 16px 0}
+.rh-val{font-size:32px;font-weight:800;letter-spacing:-1.2px;font-feature-settings:"tnum"}
+.rh-change{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;margin-top:2px;color:var(--loss);font-feature-settings:"tnum"}
+.rh-change svg{width:10px;height:10px;fill:currentColor}
+.rh-change.gain{color:var(--gain)}
+.rh-chart{height:140px;padding:14px 0 6px;position:relative}
+.rh-chart svg{width:100%;height:100%}
+.rh-period{display:flex;gap:0;padding:6px 16px 12px;border-bottom:1px solid var(--border)}
+.rh-period .p{flex:1;text-align:center;padding:6px 0;font-size:11px;font-weight:700;color:var(--ink-muted);border-radius:6px}
+.rh-period .p.active{color:var(--loss);background:var(--loss-tint)}
+.rh-holdings-h{padding:14px 16px 6px;font-size:13px;font-weight:800;color:var(--ink)}
+.rh-list{flex:1;overflow:hidden;padding:0 16px 70px}
+.rh-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border-soft)}
+.rh-row .tk{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:11px;flex-shrink:0}
+.rh-row .tk.aapl{background:linear-gradient(135deg,#000,#444)}
+.rh-row .tk.tsla{background:linear-gradient(135deg,#c00,#600)}
+.rh-row .tk.nvda{background:linear-gradient(135deg,#76b900,#3d6300)}
+.rh-row .tk.amzn{background:linear-gradient(135deg,#ff9900,#7a4500)}
+.rh-row .tk.btc{background:linear-gradient(135deg,#f7931a,#8a4d00)}
+.rh-row .meta{flex:1;min-width:0}
+.rh-row .sym{font-size:13px;font-weight:800;color:var(--ink)}
+.rh-row .nm{font-size:10.5px;color:var(--ink-muted);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rh-row .right{text-align:right;font-feature-settings:"tnum"}
+.rh-row .pr{font-size:12px;font-weight:700;color:var(--ink)}
+.rh-row .ch{font-size:10.5px;font-weight:600;margin-top:1px;color:var(--gain)}
+.rh-row .ch.loss{color:var(--loss)}
+
+/* STOCK DETAIL */
+.rh-sd-head{padding:8px 16px 4px;display:flex;align-items:center;justify-content:space-between}
+.rh-sd-head .nm{font-size:13px;font-weight:700;color:var(--ink)}
+.rh-sd-head svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:1.8}
+.rh-sd-stats{display:grid;grid-template-columns:1fr 1fr 1fr;padding:14px 16px 0;border-top:1px solid var(--border);font-feature-settings:"tnum"}
+.rh-sd-stats .s{padding:6px 0}
+.rh-sd-stats .s .lbl{font-size:9.5px;color:var(--ink-muted);font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.rh-sd-stats .s .v{font-size:13px;font-weight:700;margin-top:3px;color:var(--ink)}
+.rh-news-h{padding:14px 16px 6px;font-size:13px;font-weight:800}
+.rh-news{padding:0 16px 14px;display:flex;flex-direction:column;gap:8px}
+.rh-news-item{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border-soft)}
+.rh-news-item .src{font-size:9px;color:var(--ink-muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.rh-news-item .ttl{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3;margin-top:2px}
+.rh-news-item .thumb{width:42px;height:42px;border-radius:6px;background:linear-gradient(135deg,#666,#222);flex-shrink:0;order:2}
+.rh-buy-bar{position:absolute;left:14px;right:14px;bottom:14px;display:flex;gap:8px;z-index:6}
+.rh-buy-btn{flex:1;background:var(--gain);color:#000;padding:12px 0;text-align:center;font-weight:800;font-size:13px;border-radius:var(--r-pill);font-feature-settings:"tnum"}
+.rh-sell-btn{flex:1;background:#fff;border:1.5px solid var(--ink);color:var(--ink);padding:12px 0;text-align:center;font-weight:800;font-size:13px;border-radius:var(--r-pill)}
+
+/* ORDER ENTRY */
+.rh-oe-head{padding:6px 16px 8px}
+.rh-oe-head .ttl{font-size:18px;font-weight:800;color:var(--ink)}
+.rh-oe-head .sub{font-size:11px;color:var(--ink-muted);margin-top:2px;font-feature-settings:"tnum"}
+.rh-oe-types{padding:8px 16px;display:flex;gap:6px}
+.rh-oe-types .t{flex:1;text-align:center;padding:6px 0;font-size:10.5px;font-weight:700;color:var(--ink-muted);border-radius:6px}
+.rh-oe-types .t.active{background:var(--ink);color:#fff}
+.rh-shares{padding:16px 16px 0;text-align:center}
+.rh-shares .lbl{font-size:10.5px;color:var(--ink-muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.rh-shares .ct{font-size:64px;font-weight:800;letter-spacing:-2px;font-feature-settings:"tnum";color:var(--ink);line-height:1}
+.rh-est{padding:0 16px;text-align:center;margin-top:4px}
+.rh-est .lbl{font-size:10.5px;color:var(--ink-muted);font-weight:700}
+.rh-est .v{font-size:14px;font-weight:800;color:var(--ink);font-feature-settings:"tnum";margin-top:2px}
+.rh-keypad{padding:14px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.rh-key{aspect-ratio:1.5/1;border-radius:50px;background:var(--surface-1);display:grid;place-items:center;font-size:18px;font-weight:700;color:var(--ink);font-feature-settings:"tnum"}
+.rh-review{position:absolute;left:14px;right:14px;bottom:14px;background:var(--gain);color:#000;padding:14px 0;text-align:center;font-weight:800;font-size:14px;border-radius:var(--r-pill);z-index:6}
+
+/* tab bar (Robinhood has no tab bar on order entry — but standard 4-tab on portfolio) */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:#fff;border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:flex-start;padding:9px 10px 0;z-index:5}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-muted);font-size:9px;font-weight:600}
+.tab.active{color:var(--ink)}
+.tab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}
+.tab.active svg{fill:currentColor;stroke:currentColor}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--gain-deep);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.55;max-width:580px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:16px;padding:28px;border:1px solid var(--border)}
+.feat:hover{background:var(--gain-tint)}
+.feat .feat-ic{width:38px;height:38px;border-radius:50%;background:var(--gain-tint);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--gain-deep)}
+.feat h3{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-soft);line-height:1.6}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:1px 6px;border-radius:3px;color:var(--gain-deep);border:1px solid var(--border)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.65;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-1);padding:5px 10px;border-radius:4px;color:var(--gain-deep);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--surface-1);border-radius:16px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* Confetti visual */
+.cf-stage{position:relative;width:300px;height:300px}
+.cf-stage .ph{position:absolute;inset:60px 30px;background:#fff;border:1px solid var(--border);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:2}
+.cf-stage .ph .t{font-size:14px;font-weight:800}
+.cf-stage .ph .v{font-size:32px;font-weight:800;color:var(--gain);font-feature-settings:"tnum";margin-top:6px;letter-spacing:-1px}
+.cf-stage .ph .s{font-size:11px;color:var(--ink-muted);margin-top:6px}
+.cf-dot{position:absolute;width:8px;height:8px;border-radius:50%;z-index:1}
+.cf-bar{position:absolute;width:10px;height:4px;border-radius:1px;z-index:1}
+
+/* Gold upsell */
+.gd-card{width:300px;background:linear-gradient(135deg,#1A1A1A 0%,#3a3a3a 100%);border-radius:18px;padding:22px;color:#fff;position:relative;overflow:hidden}
+.gd-card::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(203,162,88,.4),transparent 70%)}
+.gd-card .badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#000;padding:4px 10px;border-radius:999px;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase}
+.gd-card .title{font-size:24px;font-weight:900;letter-spacing:-.6px;margin-top:10px;line-height:1.05}
+.gd-card .perks{margin-top:14px;display:flex;flex-direction:column;gap:6px;font-size:11.5px;font-weight:500;color:rgba(255,255,255,.85)}
+.gd-card .perks span{display:flex;align-items:center;gap:8px}
+.gd-card .perks .b{color:var(--gold);font-weight:800;font-feature-settings:"tnum"}
+.gd-card .cta{margin-top:18px;background:var(--gold);color:#000;padding:10px 18px;border-radius:var(--r-pill);font-weight:800;font-size:13px;display:inline-flex}
+
+/* After-hours visual */
+.ah-stage{display:flex;flex-direction:column;align-items:center;gap:18px;width:280px}
+.ah-ticker{width:100%;background:#fff;border:1.5px solid var(--moon);border-radius:14px;padding:14px;position:relative}
+.ah-ticker .ind{position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:5px;background:var(--moon);color:#fff;padding:3px 8px;border-radius:999px;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.ah-ticker .ind svg{width:10px;height:10px;fill:#fff}
+.ah-ticker .sym{font-size:14px;font-weight:800}
+.ah-ticker .nm{font-size:10.5px;color:var(--ink-muted)}
+.ah-ticker .pr{font-size:24px;font-weight:800;font-feature-settings:"tnum";margin-top:8px;letter-spacing:-.5px}
+.ah-ticker .ch{font-size:11px;color:var(--gain);font-weight:700;font-feature-settings:"tnum"}
+.ah-note{font-family:var(--font-mono);font-size:11px;color:var(--moon);text-align:center;font-weight:600}
+
+/* ========== DESIGN SYSTEM SECTION (Part B) ========== */
+.ds-section{padding:120px 0;background:var(--surface-1);border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:580px;line-height:1.55}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--gain-deep);border:1px solid var(--gain);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;background:#fff}
+.ds-source:hover{background:var(--gain-tint)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.55;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:12px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px;border:1px solid var(--border)}
+.ds-sw .name{font-size:12px;font-weight:700;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:var(--gain-deep)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,var(--gain),var(--gain-deep));margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-circle{width:54px;height:54px;border-radius:50%;background:var(--gain);color:#000;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 16px rgba(0,200,5,.3)}
+.btn-circle svg{width:24px;height:24px;fill:currentColor}
+.btn-circle-sm{width:38px;height:38px;border-radius:50%;background:var(--gain);color:#000;display:grid;place-items:center;font-weight:800;font-size:18px}
+.btn-ghost-circle{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--ink);color:var(--ink);background:#fff;display:grid;place-items:center}
+.btn-ghost-circle svg{width:18px;height:18px;fill:currentColor}
+.input-pill{background:var(--surface-2);border:0;border-radius:var(--r-pill);padding:11px 16px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;letter-spacing:.3px;text-transform:uppercase;font-feature-settings:"tnum"}
+.tag-gain{background:var(--gain-tint);color:var(--gain-deep)}
+.tag-loss{background:var(--loss-tint);color:var(--loss-deep)}
+.tag-gold{background:var(--gold-soft);color:#5e3f10}
+.tag-ah{background:#FFEEDC;color:var(--moon)}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:12px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:20px;font-weight:800;margin-top:6px;color:var(--ink);letter-spacing:-.3px;font-feature-settings:"tnum"}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.45}
+
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.55}
+.foot a{color:var(--gain-deep);font-weight:700}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#000;border:1px solid var(--border-strong);color:var(--gain);font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.float-link:hover{background:#1a1a1a}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M5 20l4-14 4 8 4-12 2 18z" stroke="#fff" stroke-width="2" fill="none" stroke-linejoin="round"/></svg></span>
+      Robinhood <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Log In</a>
+      <a class="btn btn-primary" href="#">Get Robinhood</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Markets, made <span class="gradient-word">tappable.</span></h1>
+    <p>The Robinhood iOS app, dissected. White canvas. Two colors: green-up and orange-down. Tabular figures so the numbers never dance. Confetti only on the trades that matter.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- STOCK DETAIL -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="rh-sd-head">
+              <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6V6z"/></svg>
+              <div class="nm">AAPL · Apple</div>
+              <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+            </div>
+            <div class="rh-port-head" style="padding-top:8px">
+              <div class="rh-val">$184.72</div>
+              <div class="rh-change gain">▲ +$2.18 (+1.20%) Today</div>
+            </div>
+            <div class="rh-chart">
+              <svg viewBox="0 0 280 140" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="again" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#00C805" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="#00C805" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0 90 L25 85 L50 95 L70 70 L95 75 L120 60 L145 55 L170 65 L200 45 L230 50 L260 35 L280 30 L280 140 L0 140 Z" fill="url(#again)"/>
+                <path d="M0 90 L25 85 L50 95 L70 70 L95 75 L120 60 L145 55 L170 65 L200 45 L230 50 L260 35 L280 30" stroke="#00C805" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="rh-period">
+              <div class="p">1D</div>
+              <div class="p">1W</div>
+              <div class="p active" style="color:#00A004;background:#E7FBE7">1M</div>
+              <div class="p">3M</div>
+              <div class="p">1Y</div>
+              <div class="p">ALL</div>
+            </div>
+            <div class="rh-sd-stats">
+              <div class="s"><div class="lbl">Mkt Cap</div><div class="v">2.84T</div></div>
+              <div class="s"><div class="lbl">P/E</div><div class="v">29.2</div></div>
+              <div class="s"><div class="lbl">Div Yield</div><div class="v">0.51%</div></div>
+            </div>
+            <div class="rh-news-h">News</div>
+            <div class="rh-news">
+              <div class="rh-news-item">
+                <div>
+                  <div class="src">CNBC · 2h ago</div>
+                  <div class="ttl">Apple raises FY guidance on Services strength</div>
+                </div>
+                <div class="thumb"></div>
+              </div>
+              <div class="rh-news-item">
+                <div>
+                  <div class="src">Bloomberg · 4h ago</div>
+                  <div class="ttl">Vision Pro production cut amid weak demand</div>
+                </div>
+                <div class="thumb" style="background:linear-gradient(135deg,#3a3a3a,#0a0a0a)"></div>
+              </div>
+            </div>
+            <div class="rh-buy-bar">
+              <div class="rh-sell-btn">Sell</div>
+              <div class="rh-buy-btn">Buy</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Stock Detail · AAPL</div>
+      </div>
+
+      <!-- PORTFOLIO (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="rh-port-head">
+              <div style="font-size:11px;color:var(--ink-muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px">Investing</div>
+              <div class="rh-val">$12,482.07</div>
+              <div class="rh-change">▼ -$42.18 (-0.34%) Today</div>
+            </div>
+            <div class="rh-chart">
+              <svg viewBox="0 0 280 140" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="aloss" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#FF5000" stop-opacity="0.2"/>
+                    <stop offset="100%" stop-color="#FF5000" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0 40 L25 50 L50 45 L75 60 L100 55 L125 70 L150 60 L175 78 L200 70 L225 85 L250 80 L280 92 L280 140 L0 140 Z" fill="url(#aloss)"/>
+                <path d="M0 40 L25 50 L50 45 L75 60 L100 55 L125 70 L150 60 L175 78 L200 70 L225 85 L250 80 L280 92" stroke="#FF5000" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="rh-period">
+              <div class="p active">1D</div>
+              <div class="p">1W</div>
+              <div class="p">1M</div>
+              <div class="p">3M</div>
+              <div class="p">1Y</div>
+              <div class="p">ALL</div>
+            </div>
+            <div class="rh-holdings-h">Holdings</div>
+            <div class="rh-list">
+              <div class="rh-row">
+                <div class="tk aapl">A</div>
+                <div class="meta"><div class="sym">AAPL</div><div class="nm">Apple · 12 shares</div></div>
+                <div class="right"><div class="pr">$184.72</div><div class="ch">+1.20%</div></div>
+              </div>
+              <div class="rh-row">
+                <div class="tk tsla">T</div>
+                <div class="meta"><div class="sym">TSLA</div><div class="nm">Tesla · 6 shares</div></div>
+                <div class="right"><div class="pr">$248.50</div><div class="ch loss">-2.18%</div></div>
+              </div>
+              <div class="rh-row">
+                <div class="tk nvda">N</div>
+                <div class="meta"><div class="sym">NVDA</div><div class="nm">NVIDIA · 8 shares</div></div>
+                <div class="right"><div class="pr">$842.10</div><div class="ch">+3.42%</div></div>
+              </div>
+              <div class="rh-row">
+                <div class="tk amzn">A</div>
+                <div class="meta"><div class="sym">AMZN</div><div class="nm">Amazon · 4 shares</div></div>
+                <div class="right"><div class="pr">$178.32</div><div class="ch loss">-0.85%</div></div>
+              </div>
+              <div class="rh-row">
+                <div class="tk btc">₿</div>
+                <div class="meta"><div class="sym">BTC</div><div class="nm">Bitcoin · 0.05</div></div>
+                <div class="right"><div class="pr">$67,420</div><div class="ch">+0.92%</div></div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z"/></svg>Browse</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0116 0"/></svg>Account</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Portfolio</div>
+      </div>
+
+      <!-- ORDER ENTRY -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="rh-oe-head">
+              <div class="ttl">Buy AAPL</div>
+              <div class="sub">$184.72 · Market open</div>
+            </div>
+            <div class="rh-oe-types">
+              <div class="t active">Market</div>
+              <div class="t">Limit</div>
+              <div class="t">Stop</div>
+              <div class="t">Stop Lim.</div>
+            </div>
+            <div class="rh-shares">
+              <div class="lbl">Shares</div>
+              <div class="ct">2</div>
+            </div>
+            <div class="rh-est">
+              <div class="lbl">Estimated Cost</div>
+              <div class="v">$369.44</div>
+            </div>
+            <div class="rh-keypad">
+              <div class="rh-key">1</div>
+              <div class="rh-key">2</div>
+              <div class="rh-key">3</div>
+              <div class="rh-key">4</div>
+              <div class="rh-key">5</div>
+              <div class="rh-key">6</div>
+              <div class="rh-key">7</div>
+              <div class="rh-key">8</div>
+              <div class="rh-key">9</div>
+              <div class="rh-key">.</div>
+              <div class="rh-key">0</div>
+              <div class="rh-key"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M21 5H8L3 12l5 7h13a2 2 0 002-2V7a2 2 0 00-2-2z"/><path d="M12 9l6 6m0-6l-6 6"/></svg></div>
+            </div>
+            <div class="rh-review">Review Order</div>
+          </div>
+        </div>
+        <div class="iphone-label">Order Entry</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. Two colors. Numbers everywhere.</h2>
+      <p>Every Robinhood screen earns its position on an iPhone through the same rules — white canvas, tabular numerics, green-up orange-down, a chart that fills 40% of the viewport before anything else gets to speak.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/></svg></div>
+        <h3>Portfolio</h3>
+        <p>Account value massive at 32pt-tabular up top, day-change in green or orange directly beneath, then the line chart fills 140pt edge-to-edge. Period tabs (1D…ALL) sit just below. Holdings list ends with tickered avatars and aligned price columns.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 12h16M12 4v16"/></svg></div>
+        <h3>Stock Detail</h3>
+        <p>Same chart layout, scoped to one ticker. Stats row (Mkt Cap · P/E · Div Yield) tabular. News list below with thumbnails right. Floating Buy / Sell pair fixed to the bottom — green Buy always primary.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+        <h3>Order Entry</h3>
+        <p>Order-type selector (Market / Limit / Stop / Stop Limit) at the top, then a single massive number (shares) center-stage at 64pt. Custom number pad below. "Review Order" green pill anchors the bottom.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Confetti Moment</div>
+          <h3>The trade gets its own celebration.</h3>
+          <p>Your first trade of the day triggers a confetti burst — 60–80 SwiftUI <code>Canvas</code>-rendered dots fall from the top of the screen with rotation. Honors "Reduce Motion": confetti reduces to a single haptic + green checkmark for accessibility.</p>
+          <p>This is also the only place the brand allows yellow and purple to appear — confetti pieces sample from the gain green, a celebratory yellow, and a Robinhood Gold gold.</p>
+          <div class="ios-feat-tokens">
+            <code>pieces: 60–80</code>
+            <code>duration: 1.8s</code>
+            <code>haptic: success</code>
+            <code>reduceMotion: respect</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="cf-stage">
+            <div class="cf-dot" style="background:#00C805;top:10px;left:30px"></div>
+            <div class="cf-bar" style="background:#CBA258;top:40px;left:60px;transform:rotate(20deg)"></div>
+            <div class="cf-dot" style="background:#FFD400;top:30px;left:120px"></div>
+            <div class="cf-bar" style="background:#00C805;top:20px;left:180px;transform:rotate(-30deg)"></div>
+            <div class="cf-dot" style="background:#FF5000;top:50px;left:240px"></div>
+            <div class="cf-bar" style="background:#9D4FFF;top:80px;left:30px;transform:rotate(45deg)"></div>
+            <div class="cf-dot" style="background:#00C805;top:230px;left:80px"></div>
+            <div class="cf-bar" style="background:#CBA258;top:250px;left:200px;transform:rotate(-15deg)"></div>
+            <div class="cf-dot" style="background:#FFD400;top:270px;left:150px"></div>
+            <div class="cf-bar" style="background:#00C805;top:110px;left:260px;transform:rotate(60deg)"></div>
+            <div class="ph">
+              <div class="t">Order filled</div>
+              <div class="v">+2 AAPL</div>
+              <div class="s">$369.44 · 9:41 AM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual" style="background:#000">
+          <div class="gd-card">
+            <div class="badge">★ Robinhood Gold</div>
+            <div class="title">5% APY on your<br/>uninvested cash</div>
+            <div class="perks">
+              <span><span class="b">$0</span> commissions extended</span>
+              <span><span class="b">3%</span> IRA match</span>
+              <span><span class="b">$1,000</span> instant deposit</span>
+            </div>
+            <div class="cta">Try Gold free for 30 days</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Robinhood Gold</div>
+          <h3>The only place the app goes dark.</h3>
+          <p>The Gold upsell card is the single dark surface in the whole light-mode product. Black gradient, radial gold halo top-right, and the only accent gold (<code>#CBA258</code>) in the system. CTA inverts to gold-on-black.</p>
+          <p>Shows up at three points: portfolio header, account tab, and post-deposit success sheet.</p>
+          <div class="ios-feat-tokens">
+            <code>bg: #1A1A1A → #3a3a3a</code>
+            <code>halo: radial gold</code>
+            <code>radius: 18pt</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">After-Hours</div>
+          <h3>A small moon, a different ruleset.</h3>
+          <p>Between 4 PM and 8 PM ET, every quote screen wears an orange "🌙 After Hours" indicator. The border on stock tickers shifts to <code>#FF8A00</code>, and the price card carries a small moon glyph + label. Order types restrict to Limit only.</p>
+          <p>This is the only place orange means something other than "loss" — context wins.</p>
+          <div class="ios-feat-tokens">
+            <code>border: #FF8A00</code>
+            <code>label: AFTER HOURS</code>
+            <code>order: limit only</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="ah-stage">
+            <div class="ah-ticker">
+              <div class="ind">
+                <svg viewBox="0 0 24 24"><path d="M20 14a8 8 0 11-9-9 6 6 0 009 9z"/></svg>
+                After Hours
+              </div>
+              <div class="sym">AAPL</div>
+              <div class="nm">Apple Inc.</div>
+              <div class="pr">$184.92</div>
+              <div class="ch">+$0.20 (+0.11%) AH</div>
+            </div>
+            <div class="ah-note">Extended-hours · Limit orders only · 4:00 PM – 8:00 PM ET</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The whole vocabulary, in one place.</h2>
+        <p>Every token Robinhood's iOS app reaches for — surface ladder, type ramp, radius scale, components. The green and orange are absolute: green-up, orange-down, no exceptions.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.robinhood-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Two semantic colors do almost all the work: green for gain, orange for loss. White canvas. Black ink. Robinhood Gold for the premium tier — and a controlled moon-orange for after-hours, which is the only orange that isn't a loss.</p>
+
+      <div class="ds-caption">Semantic — Always-on</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#00C805"></div><div class="name">Gain Green</div><div class="val">#00C805</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#00A004"></div><div class="name">Gain Deep</div><div class="val">#00A004</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E7FBE7"></div><div class="name">Gain Tint</div><div class="val">#E7FBE7</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF5000"></div><div class="name">Loss Orange</div><div class="val">#FF5000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFEDE3"></div><div class="name">Loss Tint</div><div class="val">#FFEDE3</div></div>
+      </div>
+
+      <div class="ds-caption">Neutral</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border:1px solid #E0E0E0"></div><div class="name">Canvas</div><div class="val">#FFFFFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Ink</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#787878"></div><div class="name">Muted</div><div class="val">#787878</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#A8A8A8"></div><div class="name">Dim</div><div class="val">#A8A8A8</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F0F0F0"></div><div class="name">Border</div><div class="val">#F0F0F0</div></div>
+      </div>
+
+      <div class="ds-caption">Gold &amp; After Hours</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#CBA258"></div><div class="name">RH Gold</div><div class="val">#CBA258</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F0DDB5"></div><div class="name">Gold Soft</div><div class="val">#F0DDB5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1A1A1A"></div><div class="name">Gold BG</div><div class="val">#1A1A1A</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF8A00"></div><div class="name">Moon Orange</div><div class="val">#FF8A00</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFEEDC"></div><div class="name">Moon Tint</div><div class="val">#FFEEDC</div></div>
+      </div>
+
+      <div class="ds-caption">Charts</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(180deg,rgba(0,200,5,.35),rgba(0,200,5,0))"></div><div class="name">Gain Area</div><div class="val">α 0.35→0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(180deg,rgba(255,80,0,.3),rgba(255,80,0,0))"></div><div class="name">Loss Area</div><div class="val">α 0.30→0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#00C805"></div><div class="name">Gain Stroke</div><div class="val">2pt</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF5000"></div><div class="name">Loss Stroke</div><div class="val">2.2pt</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F7F7F7"></div><div class="name">Chart Bed</div><div class="val">#F7F7F7</div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Capsule Sans in production — Inter as substitute, always heavy. Every numeric token locks <code>font-feature-settings:"tnum"</code>. The portfolio value is the only display weight; everything else is meta.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--portfolio-value</td><td class="sample tnum" style="font-size:36px;font-weight:800;letter-spacing:-1.2px">$12,482.07</td><td>36 / 2.25rem</td><td>800 (tnum)</td><td>-1.2px</td></tr>
+          <tr><td class="token">--day-change-loss</td><td class="sample tnum" style="font-size:13px;font-weight:700;color:#FF5000">▼ -$42.18 (-0.34%)</td><td>13 / 0.81rem</td><td>700 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--day-change-gain</td><td class="sample tnum" style="font-size:13px;font-weight:700;color:#00A004">▲ +$2.18 (+1.20%)</td><td>13 / 0.81rem</td><td>700 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--ticker</td><td class="sample" style="font-size:14px;font-weight:800">AAPL</td><td>14 / 0.88rem</td><td>800</td><td>normal</td></tr>
+          <tr><td class="token">--row-price</td><td class="sample tnum" style="font-size:13px;font-weight:700">$184.72</td><td>13 / 0.81rem</td><td>700 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--shares-display</td><td class="sample tnum" style="font-size:64px;font-weight:800;letter-spacing:-2px;line-height:1">2</td><td>64 / 4.00rem</td><td>800 (tnum)</td><td>-2px</td></tr>
+          <tr><td class="token">--button</td><td class="sample" style="font-size:14px;font-weight:800">Review Order</td><td>14 / 0.88rem</td><td>800</td><td>normal</td></tr>
+          <tr><td class="token">--meta-row</td><td class="sample" style="font-size:11px;font-weight:600;color:#787878">Apple · 12 shares</td><td>11 / 0.69rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--stat-label</td><td class="sample" style="font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:#787878">Mkt Cap</td><td>9.5 / 0.59rem</td><td>600</td><td>0.4px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Buttons are full pills. Cards stay quiet at 12px. Charts run edge-to-edge with no clipping. Number-pad keys are 50% — they look like coin slots.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0px"></div><div class="ds-radius-label">Chart</div><div class="ds-radius-val">0</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Tag</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Period</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Tile</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:18px"></div><div class="ds-radius-label">Gold</div><div class="ds-radius-val">18px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">∞</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Keypad</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- iOS spec strip -->
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar</div><div class="tk-val">83pt</div><div class="tk-note">4 tabs: Home, Browse, Search, Account.</div></div>
+        <div class="token-cell"><div class="tk-label">Chart height</div><div class="tk-val">140pt</div><div class="tk-note">Edge-to-edge. Area fill at 0.25→0 alpha.</div></div>
+        <div class="token-cell"><div class="tk-label">Buy/Sell bar</div><div class="tk-val">14pt inset</div><div class="tk-note">Floating bottom. Buy always green primary.</div></div>
+        <div class="token-cell"><div class="tk-label">Keypad</div><div class="tk-val">3×4</div><div class="tk-note">50% radius circles. Backspace bottom-right.</div></div>
+        <div class="token-cell"><div class="tk-label">tnum</div><div class="tk-val">required</div><div class="tk-note">Every numeric token. No exceptions.</div></div>
+        <div class="token-cell"><div class="tk-label">Confetti</div><div class="tk-val">60–80</div><div class="tk-note">First trade of day. Honors Reduce Motion.</div></div>
+        <div class="token-cell"><div class="tk-label">Period tabs</div><div class="tk-val">6</div><div class="tk-note">1D / 1W / 1M / 3M / 1Y / ALL.</div></div>
+        <div class="token-cell"><div class="tk-label">Refresh</div><div class="tk-val">15s</div><div class="tk-note">Quote poll. WebSocket on detail screens.</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Two pills, three tags, one chart. The kit is small on purpose.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Review Order</a>
+            <a class="btn btn-pill" href="#">Watchlist</a>
+            <a class="btn btn-outline" href="#">Sell</a>
+            <a class="btn btn-light" href="#">Try Gold free</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="btn-circle" aria-label="Buy"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5"/></svg></button>
+              <button class="btn-circle-sm" aria-label="1">1</button>
+              <button class="btn-ghost-circle" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search stocks or crypto" />
+            <input class="input-pill" placeholder="Shares · 2.00" />
+            <div class="ds-card-row">
+              <span class="tag tag-gain">+1.20%</span>
+              <span class="tag tag-loss">-0.34%</span>
+              <span class="tag tag-gold">Gold</span>
+              <span class="tag tag-ah">AH</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;width:100%;display:flex;align-items:center;gap:10px">
+              <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#000,#444);display:grid;place-items:center;color:#fff;font-weight:800;font-size:11px">A</div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:800">AAPL</div>
+                <div style="font-size:10.5px;color:var(--ink-muted)">Apple · 12 shares</div>
+              </div>
+              <div style="text-align:right;font-feature-settings:'tnum'">
+                <div style="font-size:12px;font-weight:700">$184.72</div>
+                <div style="font-size:10.5px;color:var(--gain);font-weight:700">+1.20%</div>
+              </div>
+            </div>
+            <div style="background:#000;border-radius:18px;padding:14px;color:#fff;width:100%;position:relative;overflow:hidden">
+              <div style="display:inline-flex;align-items:center;gap:4px;background:var(--gold);color:#000;padding:3px 8px;border-radius:999px;font-size:9.5px;font-weight:800;text-transform:uppercase">★ Gold</div>
+              <div style="font-size:14px;font-weight:800;margin-top:8px">5% APY on cash</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M5 20l4-14 4 8 4-12 2 18z" stroke="#fff" stroke-width="2" fill="none" stroke-linejoin="round"/></svg></span>
+      Robinhood iOS
+    </div>
+    <p>Design reference. Not affiliated with Robinhood Markets, Inc. Token values are derived from the public iOS app and Robinhood's brand identity. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.robinhood-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.robinhood-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.robinhood-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

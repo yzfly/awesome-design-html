@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Revolut — Inspired Design</title>
+<meta name="description" content="A Revolut-inspired marketing page: full-bleed black canvas, Aeonik-style 136px display headlines, white pill CTAs, cobalt-violet featured plan, premium card mockup centerpiece. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #494fdf;
+  --primary-bright: #4f55f1;
+  --primary-deep: #3a40c4;
+  --on-primary: #ffffff;
+  /* Canvas */
+  --canvas-light: #ffffff;
+  --canvas-dark: #000000;
+  --surface-soft: #f4f4f4;
+  --surface-deep: #0a0a0a;
+  --surface-elevated: #16181a;
+  /* Text */
+  --ink: #191c1f;
+  --body: #1f2226;
+  --charcoal: #3a3d40;
+  --mute: #505a63;
+  --ash: #5c5e60;
+  --stone: #8d969e;
+  --faint: #c9c9cd;
+  --on-dark: #ffffff;
+  --on-dark-mute: rgba(255,255,255,0.72);
+  /* Hairline */
+  --hairline-light: #e2e2e7;
+  --hairline-dark: rgba(255,255,255,0.12);
+  --hairline-strong: #191c1f;
+  --divider-soft: rgba(255,255,255,0.06);
+  /* Accent palette (illustrations only) */
+  --acc-teal: #00a87e;
+  --acc-blue-link: #376cd5;
+  --acc-light-blue: #007bc2;
+  --acc-light-green: #428619;
+  --acc-yellow: #b09000;
+  --acc-warning: #ec7e00;
+  --acc-pink: #e61e49;
+  --acc-danger: #e23b4a;
+  --acc-brown: #936d62;
+  /* Radius */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--canvas-dark);
+  color: var(--on-dark);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.24px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-feature-settings: "tnum"; letter-spacing: 0; }
+
+/* Aeonik-ish stack: tight, weight 500-ish via Inter 500/600 with -1% letter-spacing */
+.aeon { font-family: "Inter", sans-serif; font-feature-settings: "ss01"; }
+.display-xxl { font-weight: 500; font-size: 136px; line-height: 1.0; letter-spacing: -3.4px; }
+.display-xl  { font-weight: 500; font-size: 80px;  line-height: 1.0; letter-spacing: -1.6px; }
+.display-lg  { font-weight: 500; font-size: 48px;  line-height: 1.0; letter-spacing: -.96px; }
+.display-md  { font-weight: 500; font-size: 40px;  line-height: 1.1; letter-spacing: -.8px; }
+.heading-lg  { font-weight: 500; font-size: 32px;  line-height: 1.19; letter-spacing: -.32px; }
+.heading-md  { font-weight: 500; font-size: 24px;  line-height: 1.33; }
+.heading-sm  { font-weight: 500; font-size: 20px;  line-height: 1.4; }
+.body-lg     { font-weight: 400; font-size: 18px;  line-height: 1.56; }
+.body-md     { font-weight: 400; font-size: 16px;  line-height: 1.5; letter-spacing: .24px; }
+.body-sm     { font-weight: 400; font-size: 14px;  line-height: 1.43; }
+.caption     { font-weight: 400; font-size: 13px;  line-height: 1.4; }
+
+/* Layout */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.band-dark { background: var(--canvas-dark); color: var(--on-dark); padding: 88px 0; }
+.band-light { background: var(--canvas-light); color: var(--ink); padding: 88px 0; }
+
+/* Nav */
+.nav { background: var(--canvas-dark); position: sticky; top: 0; z-index: 50; }
+.nav-row { display: flex; align-items: center; height: 64px; max-width: 1200px; margin: 0 auto; padding: 0 24px; gap: 32px; }
+.brand-mark { display: flex; align-items: center; gap: 8px; }
+.brand-glyph {
+  width: 28px; height: 28px;
+  background: var(--primary);
+  border-radius: var(--r-sm);
+  display: inline-flex; align-items: center; justify-content: center; color: #fff;
+}
+.brand-name { font-family: "Inter", sans-serif; font-weight: 500; font-size: 20px; letter-spacing: -0.4px; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--on-dark-mute); }
+.nav-links a:hover { color: var(--on-dark); }
+.nav-right { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+
+/* Buttons (pill) */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit; font-size: 16px; font-weight: 600; line-height: 1; letter-spacing: 0.24px;
+  border-radius: var(--r-full);
+  padding: 14px 28px;
+  border: 0; cursor: pointer; transition: background .15s ease, color .15s ease;
+  height: 48px;
+}
+.btn-primary { background: var(--canvas-light); color: var(--canvas-dark); }
+.btn-primary:hover { background: var(--faint); }
+.btn-dark { background: var(--canvas-dark); color: var(--on-dark); }
+.btn-soft { background: var(--surface-soft); color: var(--ink); }
+.btn-outline-dark { background: var(--canvas-dark); color: var(--on-dark); box-shadow: inset 0 0 0 1px var(--on-dark); padding: 13px 27px; }
+.btn-outline-light { background: var(--canvas-light); color: var(--ink); box-shadow: inset 0 0 0 1px var(--hairline-strong); padding: 13px 27px; }
+.btn-pill-sm { padding: 8px 16px; height: 36px; font-size: 14px; }
+
+/* Nav-bar primary CTA shrink */
+.nav-right .btn { height: 40px; padding: 10px 20px; font-size: 14px; }
+
+/* Hero */
+.hero {
+  background: var(--canvas-dark);
+  padding: 80px 0 120px;
+  position: relative;
+  overflow: hidden;
+}
+.hero h1 { margin: 0 0 40px; }
+.hero .sub { color: var(--on-dark-mute); max-width: 640px; margin-bottom: 40px; }
+.hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-trust-row { margin-top: 64px; display: flex; gap: 56px; flex-wrap: wrap; align-items: baseline; }
+.hero-trust-row .num { font-size: 48px; font-weight: 500; line-height: 1; letter-spacing: -.96px; color: var(--on-dark); }
+.hero-trust-row .lbl { font-size: 14px; color: var(--on-dark-mute); margin-top: 4px; }
+
+/* Product mockup band — full-bleed card centerpiece */
+.product-band {
+  background: var(--canvas-dark);
+  padding: 0 0 88px;
+  text-align: center;
+}
+.product-band h2 { margin: 0 auto 56px; max-width: 800px; }
+.card-stack {
+  position: relative;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  height: 480px;
+}
+.card-mock {
+  position: absolute;
+  width: 480px; height: 304px; /* 1.586:1 credit card */
+  border-radius: var(--r-lg);
+  padding: 28px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: #fff;
+  box-shadow: 0 40px 80px -20px rgba(73, 79, 223, 0.4);
+}
+.card-mock.front {
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-deep) 100%);
+  z-index: 3;
+}
+.card-mock.back {
+  left: 50%; top: 50%;
+  transform: translate(-72%, -38%) rotate(-12deg);
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  z-index: 2;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,.6);
+}
+.card-mock.right {
+  left: 50%; top: 50%;
+  transform: translate(-28%, -60%) rotate(6deg);
+  background: linear-gradient(135deg, var(--acc-brown) 0%, #5e463f 100%);
+  z-index: 1;
+}
+.card-mock .chip {
+  width: 36px; height: 28px; border-radius: 4px;
+  background: linear-gradient(135deg, #d4af37 0%, #b8941e 100%);
+}
+.card-mock .pan {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 18px; letter-spacing: 4px;
+}
+.card-mock .lbl-row { display: flex; justify-content: space-between; align-items: flex-end; }
+.card-mock .lbl-row .name { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.card-mock .lbl-row .mark { font-weight: 500; font-size: 18px; }
+
+/* 3-up feature grid (dark) */
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feat-card-dark {
+  background: var(--surface-elevated);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  min-height: 280px;
+}
+.feat-card-dark h3 { margin: 0; font-size: 24px; font-weight: 500; letter-spacing: -.3px; }
+.feat-card-dark p { margin: 0; color: var(--on-dark-mute); }
+.feat-icon {
+  width: 56px; height: 56px; border-radius: var(--r-md);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--primary); color: #fff;
+}
+
+/* Spend insights card (mockup-style block) */
+.insights-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; margin-top: 56px; align-items: center; }
+.insights-card {
+  background: var(--surface-elevated);
+  border-radius: var(--r-xl);
+  padding: 40px;
+}
+.insights-card .lbl-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.insights-card .total { font-family: "JetBrains Mono", monospace; font-size: 48px; font-weight: 600; letter-spacing: -1px; }
+.insights-card .delta { font-size: 14px; color: var(--acc-light-green); margin-top: 4px; }
+.cat-row { display: grid; grid-template-columns: 28px 1fr auto; gap: 14px; align-items: center; padding: 14px 0; border-top: 1px solid var(--hairline-dark); }
+.cat-row:first-of-type { border-top: 0; }
+.cat-dot { width: 28px; height: 28px; border-radius: var(--r-full); display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; }
+.cat-name { font-size: 14px; }
+.cat-amt { font-family: "JetBrains Mono", monospace; font-size: 14px; font-weight: 500; }
+
+/* Plan grid (4-up) */
+.plan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 56px; }
+.plan {
+  background: var(--surface-elevated);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 20px;
+  min-height: 380px;
+}
+.plan.featured { background: var(--primary); color: var(--on-primary); position: relative; }
+.plan .badge-feat {
+  display: inline-block; background: var(--canvas-dark); color: var(--on-dark);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: var(--r-full);
+  position: absolute; top: 20px; right: 20px;
+}
+.plan h3 { margin: 0; font-size: 28px; font-weight: 500; letter-spacing: -.3px; }
+.plan .price { font-family: "JetBrains Mono", monospace; font-size: 36px; font-weight: 600; letter-spacing: -.5px; }
+.plan .price small { font-family: "Inter", sans-serif; font-size: 14px; color: var(--on-dark-mute); }
+.plan.featured .price small { color: rgba(255,255,255,0.85); }
+.plan ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.plan li { font-size: 14px; color: var(--on-dark-mute); display: flex; gap: 10px; align-items: flex-start; }
+.plan.featured li { color: rgba(255,255,255,0.92); }
+.plan li svg { color: var(--on-dark); flex: 0 0 auto; margin-top: 4px; }
+.plan .cta { margin-top: auto; }
+
+/* Light catalogue band (FAQ) */
+.faq-list { margin-top: 56px; }
+.faq-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--hairline-light);
+  font-size: 18px; font-weight: 500; color: var(--ink);
+}
+.faq-row:first-child { border-top: 1px solid var(--hairline-light); }
+.faq-row .chev { color: var(--mute); }
+
+/* Download tiles */
+.download-row { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+.download-tile {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--surface-soft); color: var(--ink);
+  border-radius: var(--r-md);
+  padding: 12px 20px; height: 56px; font-size: 14px;
+}
+.download-tile .label { font-size: 11px; color: var(--mute); display: block; }
+.download-tile .store { font-size: 16px; font-weight: 500; line-height: 1; }
+
+/* DS section */
+.ds {
+  background: var(--canvas-light);
+  color: var(--ink);
+  padding: 120px 0;
+}
+.ds .body-md, .ds p { color: var(--body); letter-spacing: 0.24px; }
+.ds-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 56px; }
+.ds-head h2 { margin: 0; }
+.ds-head .ds-meta { color: var(--mute); font-size: 14px; }
+.ds-head .ds-meta a { color: var(--primary); font-weight: 600; }
+.ds-block { margin-bottom: 64px; }
+.ds-block h3 { margin: 0 0 24px; font-size: 20px; font-weight: 500; letter-spacing: -.2px; }
+.ds-sublabel { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); margin: 16px 0 12px; }
+
+.swatch-group { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 16px; }
+.swatch { background: var(--canvas-light); border: 1px solid var(--hairline-light); border-radius: var(--r-md); padding: 14px; }
+.swatch .chip { height: 56px; border-radius: var(--r-sm); margin-bottom: 10px; }
+.swatch .tok { font-size: 12px; font-weight: 600; }
+.swatch .hex { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--mute); }
+
+.ds-type { border: 1px solid var(--hairline-light); border-radius: var(--r-lg); overflow: hidden; }
+.ds-type-row {
+  display: grid; grid-template-columns: 160px 220px 1fr; gap: 24px; align-items: center;
+  padding: 18px 24px; border-top: 1px solid var(--hairline-light);
+}
+.ds-type-row:first-child { border-top: 0; }
+.ds-type-row .tok { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; }
+.ds-type-row .spec { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--mute); }
+
+.ds-rad-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.ds-rad { text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.ds-rad .box { width: 80px; height: 80px; background: var(--surface-soft); border: 1px solid var(--hairline-light); }
+.ds-rad .tok { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; }
+.ds-rad .spec { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--mute); }
+
+.ds-comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.ds-comp-block {
+  border: 1px solid var(--hairline-light); border-radius: var(--r-lg); padding: 24px;
+  display: flex; flex-direction: column; gap: 16px; background: var(--canvas-light);
+}
+.ds-comp-block .label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input {
+  appearance: none; background: var(--canvas-light); border: 1px solid var(--hairline-light);
+  border-radius: var(--r-md); padding: 14px 16px; height: 56px; font: inherit; color: var(--ink); width: 100%;
+  letter-spacing: 0.24px;
+}
+.ds-pill-chip {
+  display: inline-flex; gap: 6px; align-items: center;
+  background: var(--surface-soft); color: var(--ink);
+  font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: var(--r-full); height: 36px;
+}
+.ds-badge {
+  display: inline-flex; gap: 6px; align-items: center;
+  font-size: 13px; padding: 4px 12px; border-radius: var(--r-full);
+  background: var(--surface-soft); color: var(--ink);
+}
+.ds-badge.feat { background: var(--primary); color: #fff; }
+
+/* Footer */
+footer { background: var(--canvas-dark); color: var(--on-dark-mute); padding: 80px 0 32px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(5, 1fr); gap: 32px; }
+.footer-grid h4 { margin: 0 0 16px; font-size: 13px; color: var(--on-dark); font-weight: 500; }
+.footer-grid ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid a { color: var(--on-dark-mute); font-size: 14px; }
+.footer-grid a:hover { color: var(--on-dark); }
+.legal { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--divider-soft); color: var(--stone); font-size: 13px; }
+
+/* Floating */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px; z-index: 100;
+  background: var(--canvas-light); color: var(--canvas-dark);
+  padding: 10px 20px; border-radius: var(--r-full);
+  font-size: 13px; font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 900px) {
+  .feature-grid, .plan-grid, .insights-grid, .ds-comp-grid { grid-template-columns: 1fr; }
+  .plan-grid { grid-template-columns: 1fr 1fr; }
+  .swatch-group { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .display-xxl { font-size: 64px; letter-spacing: -1.6px; }
+  .display-xl { font-size: 48px; letter-spacing: -1px; }
+  .card-mock { width: 280px; height: 176px; padding: 16px; }
+  .card-mock .pan { font-size: 14px; letter-spacing: 2px; }
+  .card-stack { height: 320px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ Nav ============ -->
+<nav class="nav">
+  <div class="nav-row">
+    <div class="brand-mark">
+      <span class="brand-glyph">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 4h8a4 4 0 0 1 0 8H6v8M6 12h6l4 8"/></svg>
+      </span>
+      <span class="brand-name">Revolut</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">Personal</a>
+      <a href="#">Business</a>
+      <a href="#">Premium</a>
+      <a href="#">Company</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="btn btn-outline-dark btn-pill-sm">Log in</a>
+      <a href="#" class="btn btn-primary">Sign up</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ Hero (dark) ============ -->
+<section class="hero">
+  <div class="wrap">
+    <h1 class="display-xxl aeon">Banking &amp;<br/>beyond.</h1>
+    <p class="body-lg sub">Join 70+ million people and businesses around the world using Revolut. One app for all your money — spending, savings, investing, transfers.</p>
+    <div class="hero-cta-row">
+      <a href="#" class="btn btn-primary">Choose your subscription</a>
+      <a href="#" class="btn btn-outline-dark">Compare plans</a>
+    </div>
+    <div class="hero-trust-row">
+      <div><div class="num mono">70M+</div><div class="lbl">customers worldwide</div></div>
+      <div><div class="num mono">200+</div><div class="lbl">countries supported</div></div>
+      <div><div class="num mono">40</div><div class="lbl">currencies in-app</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Product mockup band: card stack ============ -->
+<section class="product-band">
+  <div class="wrap">
+    <h2 class="display-lg aeon">A card you'll actually want to&nbsp;use.</h2>
+    <div class="card-stack">
+      <div class="card-mock back">
+        <span class="chip"></span>
+        <div>
+          <div class="pan">5293 ··· 8841</div>
+          <div class="lbl-row" style="margin-top: 16px;">
+            <div class="name">Standard</div>
+            <div class="mark">VISA</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-mock front">
+        <span class="chip"></span>
+        <div>
+          <div class="pan">4936 7821 ··· 1289</div>
+          <div class="lbl-row" style="margin-top: 16px;">
+            <div class="name">Avery Chen</div>
+            <div class="mark">VISA</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-mock right">
+        <span class="chip"></span>
+        <div>
+          <div class="pan">5512 ··· 2204</div>
+          <div class="lbl-row" style="margin-top: 16px;">
+            <div class="name">Metal</div>
+            <div class="mark">VISA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Feature grid (dark) ============ -->
+<section class="band-dark" style="padding-top: 0;">
+  <div class="wrap">
+    <h2 class="display-lg aeon" style="margin-bottom: 16px;">Everything money should do.</h2>
+    <p class="body-lg" style="color: var(--on-dark-mute); max-width: 600px; margin-bottom: 56px;">
+      One app for spending, savings, currency exchange, stocks, crypto, and travel — without the bank-branch ceremony.
+    </p>
+    <div class="feature-grid">
+      <div class="feat-card-dark">
+        <span class="feat-icon" style="background: var(--acc-teal);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        </span>
+        <h3>Spend in 150+ currencies</h3>
+        <p>Hold and exchange 40 currencies at the interbank rate. Spend abroad with no foreign fees up to the plan limit.</p>
+      </div>
+      <div class="feat-card-dark">
+        <span class="feat-icon" style="background: var(--acc-pink);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-3 3"/></svg>
+        </span>
+        <h3>Invest in stocks &amp; crypto</h3>
+        <p>From $1, commission-free fractional trades. 5,000+ US, UK, and EU equities and 100+ tokens, all from your account.</p>
+      </div>
+      <div class="feat-card-dark">
+        <span class="feat-icon" style="background: var(--acc-light-blue);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 3v18"/></svg>
+        </span>
+        <h3>Built-in budgeting</h3>
+        <p>Auto-categorised spending. Budget per category, get a daily nudge, and round up to save without thinking.</p>
+      </div>
+    </div>
+
+    <!-- Spend insights ui mockup -->
+    <div class="insights-grid">
+      <div>
+        <h2 class="display-md aeon" style="margin-bottom: 24px;">Know exactly where your money goes.</h2>
+        <p class="body-lg" style="color: var(--on-dark-mute); max-width: 480px;">
+          Every transaction auto-categorised the moment it lands. See the month at a glance — by merchant, category, or country — and set rules to keep yourself on track.
+        </p>
+        <a href="#" class="btn btn-primary" style="margin-top: 24px;">See it in the app</a>
+      </div>
+      <div class="insights-card">
+        <div class="lbl-row">
+          <div>
+            <div style="font-size: 13px; color: var(--on-dark-mute);">Spent in November</div>
+            <div class="total mono">$2,418.40</div>
+            <div class="delta">↓ 12% vs October</div>
+          </div>
+          <div class="ds-pill-chip" style="background: var(--surface-deep); color: var(--on-dark);">Nov 2026 ▾</div>
+        </div>
+        <div class="cat-row">
+          <span class="cat-dot" style="background: var(--acc-teal);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12l9-9 9 9"/><path d="M5 12v8h14v-8"/></svg>
+          </span>
+          <span class="cat-name">Rent &amp; utilities</span>
+          <span class="cat-amt">$1,180.00</span>
+        </div>
+        <div class="cat-row">
+          <span class="cat-dot" style="background: var(--acc-pink);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 10h18M5 6h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/></svg>
+          </span>
+          <span class="cat-name">Groceries</span>
+          <span class="cat-amt">$412.60</span>
+        </div>
+        <div class="cat-row">
+          <span class="cat-dot" style="background: var(--acc-light-green);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </span>
+          <span class="cat-name">Travel</span>
+          <span class="cat-amt">$340.18</span>
+        </div>
+        <div class="cat-row">
+          <span class="cat-dot" style="background: var(--acc-warning);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20"/></svg>
+          </span>
+          <span class="cat-name">Subscriptions</span>
+          <span class="cat-amt">$284.30</span>
+        </div>
+        <div class="cat-row">
+          <span class="cat-dot" style="background: var(--acc-brown);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/></svg>
+          </span>
+          <span class="cat-name">Other</span>
+          <span class="cat-amt">$201.32</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Plans (dark) ============ -->
+<section class="band-dark">
+  <div class="wrap">
+    <h2 class="display-lg aeon" style="margin-bottom: 16px;">Pick a plan that fits.</h2>
+    <p class="body-lg" style="color: var(--on-dark-mute); max-width: 600px;">
+      Five tiers, no surprises. Upgrade or downgrade any time — your money is always yours.
+    </p>
+    <div class="plan-grid">
+      <div class="plan">
+        <h3>Standard</h3>
+        <div class="price mono">Free<small> &middot; forever</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Up to $1k FX per month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>1 free transfer / month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Standard support</li>
+        </ul>
+        <a href="#" class="btn btn-outline-dark cta">Get Standard</a>
+      </div>
+      <div class="plan">
+        <h3>Plus</h3>
+        <div class="price mono">$3.99<small> /mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Cashback on purchases</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Priority phone support</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Customisable card</li>
+        </ul>
+        <a href="#" class="btn btn-outline-dark cta">Get Plus</a>
+      </div>
+      <div class="plan featured">
+        <span class="badge-feat">Most popular</span>
+        <h3>Premium</h3>
+        <div class="price mono">$9.99<small style="color: rgba(255,255,255,.78);"> /mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited FX, no markup</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Worldwide travel insurance</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Disposable virtual cards</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Priority customer service</li>
+        </ul>
+        <a href="#" class="btn btn-primary cta">Get Premium</a>
+      </div>
+      <div class="plan">
+        <h3>Metal</h3>
+        <div class="price mono">$16.99<small> /mo</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Solid-metal card</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>1% cashback worldwide</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Concierge service</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>WeWork access</li>
+        </ul>
+        <a href="#" class="btn btn-outline-dark cta">Get Metal</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Light catalogue band ============ -->
+<section class="band-light">
+  <div class="wrap">
+    <h2 class="display-lg aeon" style="margin-bottom: 16px;">Frequently asked.</h2>
+    <p class="body-lg" style="color: var(--mute); max-width: 600px;">Everything you might wonder about Revolut, in plain language. Still curious? Our 24/7 in-app chat has the rest.</p>
+    <div class="faq-list">
+      <div class="faq-row"><span>Is Revolut a bank?</span><span class="chev">+</span></div>
+      <div class="faq-row"><span>How do I get a Revolut card?</span><span class="chev">+</span></div>
+      <div class="faq-row"><span>What are the FX limits per plan?</span><span class="chev">+</span></div>
+      <div class="faq-row"><span>How is my money protected?</span><span class="chev">+</span></div>
+      <div class="faq-row"><span>Can I close my account at any time?</span><span class="chev">+</span></div>
+    </div>
+    <div class="download-row">
+      <a href="#" class="download-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        <span><span class="label">Download on the</span><span class="store">App Store</span></span>
+      </a>
+      <a href="#" class="download-tile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5a.5.5 0 0 1 .8-.4l13.4 8.5a.5.5 0 0 1 0 .8L3.8 20.9a.5.5 0 0 1-.8-.4z"/></svg>
+        <span><span class="label">Get it on</span><span class="store">Google Play</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESIGN SYSTEM ============ -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-head">
+      <div>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute);">Design system</span>
+        <h2 class="display-lg aeon" style="margin-top: 12px;">Tokens, type, components.</h2>
+      </div>
+      <div class="ds-meta">Sourced from <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.revolut.html" target="_blank">awesome-design-md / revolut</a></div>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3>Color</h3>
+
+      <div class="ds-sublabel">Brand &amp; Canvas</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#494fdf;"></div><div class="tok">primary</div><div class="hex">#494fdf</div></div>
+        <div class="swatch"><div class="chip" style="background:#4f55f1;"></div><div class="tok">primary-bright</div><div class="hex">#4f55f1</div></div>
+        <div class="swatch"><div class="chip" style="background:#3a40c4;"></div><div class="tok">primary-deep</div><div class="hex">#3a40c4</div></div>
+        <div class="swatch"><div class="chip" style="background:#000000;"></div><div class="tok">canvas-dark</div><div class="hex">#000000</div></div>
+        <div class="swatch"><div class="chip" style="background:#ffffff;"></div><div class="tok">canvas-light</div><div class="hex">#ffffff</div></div>
+        <div class="swatch"><div class="chip" style="background:#16181a;"></div><div class="tok">surface-elevated</div><div class="hex">#16181a</div></div>
+      </div>
+
+      <div class="ds-sublabel">Text</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#191c1f;"></div><div class="tok">ink</div><div class="hex">#191c1f</div></div>
+        <div class="swatch"><div class="chip" style="background:#1f2226;"></div><div class="tok">body</div><div class="hex">#1f2226</div></div>
+        <div class="swatch"><div class="chip" style="background:#3a3d40;"></div><div class="tok">charcoal</div><div class="hex">#3a3d40</div></div>
+        <div class="swatch"><div class="chip" style="background:#505a63;"></div><div class="tok">mute</div><div class="hex">#505a63</div></div>
+        <div class="swatch"><div class="chip" style="background:#8d969e;"></div><div class="tok">stone</div><div class="hex">#8d969e</div></div>
+        <div class="swatch"><div class="chip" style="background:#c9c9cd;"></div><div class="tok">faint</div><div class="hex">#c9c9cd</div></div>
+      </div>
+
+      <div class="ds-sublabel">Accent (illustrations only — never as buttons)</div>
+      <div class="swatch-group">
+        <div class="swatch"><div class="chip" style="background:#00a87e;"></div><div class="tok">accent-teal</div><div class="hex">#00a87e</div></div>
+        <div class="swatch"><div class="chip" style="background:#007bc2;"></div><div class="tok">accent-light-blue</div><div class="hex">#007bc2</div></div>
+        <div class="swatch"><div class="chip" style="background:#428619;"></div><div class="tok">accent-light-green</div><div class="hex">#428619</div></div>
+        <div class="swatch"><div class="chip" style="background:#ec7e00;"></div><div class="tok">accent-warning</div><div class="hex">#ec7e00</div></div>
+        <div class="swatch"><div class="chip" style="background:#e61e49;"></div><div class="tok">accent-pink</div><div class="hex">#e61e49</div></div>
+        <div class="swatch"><div class="chip" style="background:#936d62;"></div><div class="tok">accent-brown</div><div class="hex">#936d62</div></div>
+      </div>
+    </div>
+
+    <!-- Type -->
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <div class="ds-type">
+        <div class="ds-type-row"><span class="tok">display-xxl</span><span class="spec">136 · w500 · -2.72 · 1.0</span><div class="sam" style="font-size: 64px; font-weight: 500; line-height: 1; letter-spacing: -1.6px;">Banking &amp; Beyond.</div></div>
+        <div class="ds-type-row"><span class="tok">display-xl</span><span class="spec">80 · w500 · -.8 · 1.0</span><div class="sam" style="font-size: 48px; font-weight: 500; line-height: 1; letter-spacing: -1px;">Section opener.</div></div>
+        <div class="ds-type-row"><span class="tok">display-lg</span><span class="spec">48 · w500 · -.48 · 1.21</span><div class="sam display-lg">Sub-section title.</div></div>
+        <div class="ds-type-row"><span class="tok">heading-lg</span><span class="spec">32 · w500 · -.32 · 1.19</span><div class="sam heading-lg">Plan card title.</div></div>
+        <div class="ds-type-row"><span class="tok">body-lg</span><span class="spec">18 · w400 · -.09 · 1.56</span><div class="sam body-lg">Marketing prose set in Inter regular.</div></div>
+        <div class="ds-type-row"><span class="tok">body-md</span><span class="spec">16 · w400 · .24 · 1.5</span><div class="sam body-md">Default body — positive 0.24px tracking on UI labels feels slightly mechanical.</div></div>
+        <div class="ds-type-row"><span class="tok">button-md</span><span class="spec">16 · w600 · .24</span><div class="sam" style="font-size:16px; font-weight: 600; letter-spacing: 0.24px;">Choose your subscription</div></div>
+        <div class="ds-type-row"><span class="tok">caption</span><span class="spec">13 · w400 · 0 · 1.4</span><div class="sam caption" style="color: var(--mute);">Regulatory disclosure, footnotes</div></div>
+      </div>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <div class="ds-rad-row">
+        <div class="ds-rad"><div class="box" style="border-radius:0px;"></div><span class="tok">none</span><span class="spec">0 · band</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:8px;"></div><span class="tok">sm</span><span class="spec">8</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:12px;"></div><span class="tok">md</span><span class="spec">12 · input</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:20px;"></div><span class="tok">lg</span><span class="spec">20 · cards</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:28px;"></div><span class="tok">xl</span><span class="spec">28 · mockup</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:9999px;"></div><span class="tok">full</span><span class="spec">9999 · button</span></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3>Components</h3>
+      <div class="ds-comp-grid">
+        <div class="ds-comp-block">
+          <span class="label">Buttons — 48px pill</span>
+          <div class="ds-comp-row">
+            <a class="btn btn-dark">Dark (catalogue)</a>
+            <a class="btn btn-soft">Soft</a>
+          </div>
+          <div class="ds-comp-row">
+            <a class="btn btn-outline-light">Outline light</a>
+            <a class="btn btn-pill-sm" style="background: var(--surface-soft); color: var(--ink);">Sub-nav pill</a>
+          </div>
+          <div class="ds-comp-row" style="background: var(--canvas-dark); padding: 16px; border-radius: var(--r-md);">
+            <a class="btn btn-primary">Primary on dark</a>
+            <a class="btn btn-outline-dark">Outline dark</a>
+          </div>
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Inputs — 56px tall, 12px radius</span>
+          <input class="ds-input" placeholder="Full name" />
+          <input class="ds-input" value="ava@revolut.com" />
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Badges &amp; chips</span>
+          <div class="ds-comp-row">
+            <span class="ds-badge">Personal</span>
+            <span class="ds-badge">Business</span>
+            <span class="ds-badge feat">Most popular</span>
+            <span class="ds-badge feat">New</span>
+          </div>
+          <div class="ds-comp-row">
+            <span class="ds-pill-chip">Spending</span>
+            <span class="ds-pill-chip">Savings</span>
+            <span class="ds-pill-chip">Transfers</span>
+          </div>
+        </div>
+
+        <div class="ds-comp-block">
+          <span class="label">Numbers — JetBrains Mono, tnum</span>
+          <div style="display: flex; gap: 24px; align-items: baseline; flex-wrap: wrap;">
+            <div class="mono" style="font-size: 40px; font-weight: 600; letter-spacing: -.8px;">$2,418.40</div>
+            <div class="mono" style="font-size: 16px; color: var(--acc-light-green);">↓ 12%</div>
+          </div>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px;">
+            <div class="mono">FX 1.0867</div>
+            <div class="mono" style="color: var(--mute);">Interbank · live</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand-mark" style="margin-bottom: 16px;">
+          <span class="brand-glyph">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 4h8a4 4 0 0 1 0 8H6v8M6 12h6l4 8"/></svg>
+          </span>
+          <span class="brand-name" style="color: var(--on-dark);">Revolut</span>
+        </div>
+        <small style="color: var(--on-dark-mute); font-size: 13px; max-width: 280px; display: block;">A Revolut-inspired single-page composition. Tokens and component spec sourced from awesome-design-md.</small>
+      </div>
+      <div>
+        <h4>Personal</h4>
+        <ul><li><a href="#">Standard</a></li><li><a href="#">Plus</a></li><li><a href="#">Premium</a></li><li><a href="#">Metal</a></li><li><a href="#">Ultra</a></li></ul>
+      </div>
+      <div>
+        <h4>Money</h4>
+        <ul><li><a href="#">Spending</a></li><li><a href="#">Savings</a></li><li><a href="#">Transfers</a></li><li><a href="#">FX</a></li><li><a href="#">Crypto</a></li></ul>
+      </div>
+      <div>
+        <h4>Business</h4>
+        <ul><li><a href="#">Freelancer</a></li><li><a href="#">Growth</a></li><li><a href="#">Scale</a></li><li><a href="#">Enterprise</a></li><li><a href="#">API</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Press</a></li><li><a href="#">Careers</a></li><li><a href="#">Investor relations</a></li><li><a href="#">Newsroom</a></li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li><a href="#">Help Centre</a></li><li><a href="#">In-app chat</a></li><li><a href="#">System status</a></li><li><a href="#">Legal</a></li><li><a href="#">Privacy</a></li></ul>
+      </div>
+    </div>
+    <div class="legal">
+      © Revolut (inspired) &middot; Generated for design study &middot; Aeonik Pro (sub. Inter 500) &middot; Cobalt #494fdf &middot; Pill 9999 &middot; Card 20 · Mockup 28.
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.revolut.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

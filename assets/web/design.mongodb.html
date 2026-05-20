@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MongoDB — Inspired Design</title>
+<meta name="description" content="A MongoDB-inspired marketing page: deep navy-teal hero band, bright leaf-green pill CTAs, code mockup cards, 3-tier pricing with mint-bordered featured tier. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --brand-green: #00ed64;
+  --primary: #00ed64;
+  --primary-deep: #00b545;
+  --primary-pressed: #008c34;
+  --on-primary: #001e2b;
+  --brand-green-dark: #00684a;
+  --brand-green-mid: #00a35c;
+  --brand-green-soft: #c3f0d2;
+  --brand-teal-deep: #001e2b;
+  --brand-teal: #003d4f;
+  --brand-teal-mid: #00684a;
+  /* Accents — category encoding */
+  --accent-purple: #7b3ff2;
+  --accent-orange: #fa6e39;
+  --accent-pink: #f06bb8;
+  --accent-blue: #3d4f9f;
+  /* Semantic */
+  --warning-bg: #fff8e0;
+  --warning-text: #946f3f;
+  /* Surfaces */
+  --canvas: #ffffff;
+  --canvas-dark: #001e2b;
+  --surface: #f9fbfa;
+  --surface-soft: #f4f7f6;
+  --surface-feature: #e3fcef;
+  /* Hairlines */
+  --hairline: #e1e5e8;
+  --hairline-soft: #eceff1;
+  --hairline-strong: #c1ccd6;
+  --hairline-dark: #1c2d38;
+  /* Text */
+  --ink: #001e2b;
+  --charcoal: #1c2d38;
+  --slate: #3d4f5b;
+  --steel: #5c6c7a;
+  --stone: #7c8c9a;
+  --muted: #a8b3bc;
+  --on-dark: #ffffff;
+  --on-dark-muted: #a8b3bc;
+  /* Radius */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-xxl: 24px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Euclid Circular A", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "ss01" 1, "cv11" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(0,237,100,0.30); color: var(--ink); }
+.mono { font-family: "JetBrains Mono", "Source Code Pro", "SF Mono", Menlo, monospace; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Promo banner (signature: dark teal strip above nav) —— */
+.promo-banner {
+  background: var(--brand-teal-deep);
+  color: var(--on-dark);
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 14px; font-weight: 500;
+}
+.promo-banner a { color: var(--brand-green); margin-left: 8px; font-weight: 500; }
+.promo-banner a:hover { text-decoration: underline; }
+.promo-banner strong { font-weight: 600; }
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 64px; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.4px; }
+.brand .glyph { display: inline-flex; width: 28px; height: 28px; }
+.nav-links { display: flex; gap: 4px; margin-left: 24px; }
+.nav-links a { font-size: 14px; color: var(--ink); font-weight: 500; padding: 8px 12px; border-radius: var(--r-md); }
+.nav-links a:hover { background: var(--surface); }
+.nav-right { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+
+/* —— Buttons (pill — r-full) —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit;
+  font-size: 14px; font-weight: 600; line-height: 1.3;
+  border-radius: var(--r-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 10px 22px;
+  background: transparent;
+  color: var(--ink);
+  transition: background .15s, border-color .15s, transform .15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--brand-green); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-deep); }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--hairline-strong); }
+.btn-secondary:hover { background: var(--surface); }
+.btn-on-dark { background: var(--brand-green); color: var(--on-primary); }
+.btn-on-dark:hover { background: var(--primary-deep); }
+.btn-secondary-on-dark { background: transparent; color: var(--on-dark); border-color: var(--hairline-dark); }
+.btn-secondary-on-dark:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); }
+.btn-ghost { background: transparent; color: var(--ink); border-radius: var(--r-md); padding: 8px 12px; }
+.btn-ghost:hover { background: var(--surface); }
+.btn-link { color: var(--brand-green-dark); padding: 0; font-size: 14px; font-weight: 500; }
+.btn-link:hover { text-decoration: underline; }
+.btn-lg { padding: 12px 26px; font-size: 15px; }
+
+/* —— Type roles —— */
+.hero-display { font-weight: 500; font-size: clamp(40px, 6.4vw, 72px); line-height: 1.1; letter-spacing: -1.5px; margin: 0; }
+.display-lg { font-weight: 500; font-size: clamp(36px, 4.6vw, 56px); line-height: 1.15; letter-spacing: -1px; margin: 0; }
+.heading-1 { font-weight: 500; font-size: clamp(32px, 4vw, 48px); line-height: 1.2; letter-spacing: -0.5px; margin: 0; }
+.heading-2 { font-weight: 500; font-size: clamp(28px, 3vw, 36px); line-height: 1.25; letter-spacing: -0.5px; margin: 0; }
+.heading-3 { font-weight: 500; font-size: 28px; line-height: 1.3; margin: 0; }
+.heading-4 { font-weight: 500; font-size: 22px; line-height: 1.35; margin: 0; }
+.heading-5 { font-weight: 600; font-size: 18px; line-height: 1.4; margin: 0; }
+.subtitle { font-weight: 400; font-size: 18px; line-height: 1.5; color: var(--slate); }
+.body-md { font-size: 16px; line-height: 1.55; }
+.body-sm { font-size: 14px; line-height: 1.5; color: var(--slate); }
+.caption { font-size: 13px; line-height: 1.4; color: var(--steel); }
+.micro-uppercase { font-size: 11px; line-height: 1.4; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+
+/* —— Hero band (signature: deep teal with bright green pill) —— */
+.hero-band {
+  background: var(--brand-teal-deep);
+  color: var(--on-dark);
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 96px;
+  text-align: center;
+}
+.hero-band .eyebrow { color: var(--brand-green); font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 20px; }
+.hero-band h1 { color: var(--on-dark); max-width: 18ch; margin: 0 auto 24px; position: relative; z-index: 2; }
+.hero-band p.lead { color: var(--on-dark-muted); max-width: 640px; margin: 0 auto 36px; font-size: 20px; line-height: 1.5; position: relative; z-index: 2; }
+.hero-band .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2; }
+/* atmospheric green orb */
+.hero-band::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(0,237,100,0.12) 0%, rgba(0,237,100,0.04) 30%, transparent 60%);
+  transform: translate(-50%, -65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-band::after {
+  content: "";
+  position: absolute;
+  bottom: -200px; right: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,104,74,0.5) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Code mockup card on hero (signature) */
+.code-mockup-card {
+  margin: 56px auto 0;
+  max-width: 880px;
+  background: var(--canvas-dark);
+  color: var(--on-dark);
+  border-radius: var(--r-lg);
+  padding: 0;
+  text-align: left;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 12px 32px -4px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+.code-mockup-card .tabs {
+  display: flex; align-items: center; gap: 4px;
+  padding: 10px 12px;
+  background: #001520;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-family: "JetBrains Mono", monospace;
+}
+.code-mockup-card .tabs .traffic { display: flex; gap: 6px; margin-right: 16px; }
+.code-mockup-card .tabs .traffic span { width: 11px; height: 11px; border-radius: 50%; background: #2a3a45; }
+.code-mockup-card .tabs .traffic span.r { background: #ff5f57; }
+.code-mockup-card .tabs .traffic span.y { background: #febc2e; }
+.code-mockup-card .tabs .traffic span.g { background: var(--brand-green); }
+.code-mockup-card .tabs .tab { padding: 6px 14px; font-size: 12px; color: rgba(255,255,255,0.55); border-radius: var(--r-sm) var(--r-sm) 0 0; }
+.code-mockup-card .tabs .tab.act { background: var(--canvas-dark); color: var(--brand-green); }
+.code-mockup-card .body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 320px;
+}
+@media (max-width: 720px) { .code-mockup-card .body { grid-template-columns: 1fr; } }
+.code-mockup-card pre {
+  margin: 0; padding: 24px;
+  font-family: "JetBrains Mono", "Source Code Pro", monospace;
+  font-size: 13px; line-height: 1.55;
+  color: rgba(255,255,255,0.92);
+  overflow: auto;
+}
+.code-mockup-card .com { color: #607d8b; }
+.code-mockup-card .kw { color: #c084fc; }
+.code-mockup-card .str { color: var(--brand-green); }
+.code-mockup-card .fn { color: #80deea; }
+.code-mockup-card .num { color: #fa6e39; }
+.code-mockup-card .panel-result {
+  background: #00121a;
+  border-left: 1px solid rgba(255,255,255,0.06);
+  padding: 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  overflow: auto;
+}
+.code-mockup-card .panel-result .row { display: flex; gap: 12px; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.05); }
+.code-mockup-card .panel-result .row:last-child { border-bottom: 0; }
+.code-mockup-card .panel-result .key { color: #80deea; }
+.code-mockup-card .panel-result .v-str { color: var(--brand-green); }
+.code-mockup-card .panel-result .v-num { color: #fa6e39; }
+.code-mockup-card .panel-result .v-id { color: rgba(255,255,255,0.85); }
+.code-mockup-card .panel-result .meta-strip { display: flex; justify-content: space-between; padding: 8px 0 0; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+.code-mockup-card .panel-result .meta-strip .ok { color: var(--brand-green); }
+
+.hero-platform-card-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  max-width: 880px; margin: 32px auto 0; position: relative; z-index: 3;
+}
+@media (max-width: 720px) { .hero-platform-card-row { grid-template-columns: 1fr; } }
+.hero-platform-card {
+  background: var(--brand-teal-mid);
+  color: var(--on-dark);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  text-align: left;
+}
+.hero-platform-card .name { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--brand-green); letter-spacing: 0.8px; text-transform: uppercase; }
+.hero-platform-card h4 { font-size: 18px; font-weight: 600; margin: 8px 0 6px; }
+.hero-platform-card p { font-size: 13px; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.5; }
+
+/* —— Sections —— */
+section { padding: 96px 0; }
+.section-tight { padding: 64px 0; }
+.section-soft { background: var(--surface); }
+.section-head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+.section-head .eyebrow { display: inline-block; padding: 4px 12px; background: var(--brand-green-soft); color: var(--brand-green-dark); border-radius: var(--r-full); font-size: 12px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 16px; }
+.section-head h2 { margin: 0 0 16px; }
+.section-head p { margin: 0; color: var(--slate); font-size: 18px; line-height: 1.55; }
+
+/* —— Feature deploy cards (Atlas / Community / Enterprise) —— */
+.deploy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .deploy-grid { grid-template-columns: 1fr; } }
+.deploy-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color .15s, transform .15s, box-shadow .15s;
+}
+.deploy-card:hover { border-color: var(--hairline-strong); transform: translateY(-2px); box-shadow: 0 12px 24px -4px rgba(0,30,43,0.08); }
+.deploy-card .badge-row { display: flex; gap: 8px; }
+.deploy-card .h-ic { width: 48px; height: 48px; border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; color: var(--brand-green-dark); background: var(--surface-feature); }
+.deploy-card h3 { margin: 8px 0 0; }
+.deploy-card p { font-size: 15px; color: var(--slate); line-height: 1.55; margin: 0; }
+.deploy-card ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.deploy-card li { font-size: 14px; color: var(--ink); display: flex; gap: 8px; align-items: flex-start; }
+.deploy-card li svg { flex: none; margin-top: 3px; color: var(--brand-green-dark); }
+.deploy-card .footer-row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 16px; }
+
+.badge {
+  display: inline-flex; align-items: center;
+  font-size: 12px; font-weight: 600;
+  padding: 2px 8px; border-radius: var(--r-sm);
+}
+.badge.green { background: var(--brand-green); color: var(--on-primary); }
+.badge.purple { background: var(--accent-purple); color: var(--on-dark); }
+.badge.orange { background: var(--accent-orange); color: var(--on-dark); }
+.badge.green-soft { background: var(--brand-green-soft); color: var(--brand-green-dark); border-radius: var(--r-full); padding: 4px 10px; }
+.badge.popular { background: var(--brand-teal-deep); color: var(--brand-green); border-radius: var(--r-full); padding: 4px 10px; }
+.badge.blue { background: var(--accent-blue); color: var(--on-dark); }
+.badge.pink { background: var(--accent-pink); color: var(--on-dark); }
+
+/* —— "Why" feature grid (4-up surface cards) —— */
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1024px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } }
+.why-card {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.why-card .ic { width: 28px; height: 28px; color: var(--brand-green-dark); }
+.why-card h4 { margin: 0; font-size: 18px; font-weight: 600; }
+.why-card p { font-size: 14px; color: var(--slate); line-height: 1.55; margin: 0; }
+
+/* —— Code + copy demo —— */
+.code-demo-block {
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center;
+}
+@media (max-width: 900px) { .code-demo-block { grid-template-columns: 1fr; gap: 32px; } }
+.code-demo-block .copy h2 { margin: 0 0 16px; }
+.code-demo-block .copy p { color: var(--slate); font-size: 17px; line-height: 1.55; margin: 0 0 20px; }
+.code-demo-block .copy ul { padding: 0; margin: 0 0 24px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.code-demo-block .copy li { font-size: 15px; color: var(--ink); display: flex; gap: 10px; align-items: flex-start; }
+.code-demo-block .copy li svg { flex: none; margin-top: 4px; color: var(--brand-green-dark); }
+
+.code-block-std {
+  background: var(--canvas-dark);
+  color: var(--on-dark);
+  border-radius: var(--r-md);
+  font-family: "JetBrains Mono", "Source Code Pro", monospace;
+  font-size: 13px; line-height: 1.6;
+  overflow: hidden;
+}
+.code-block-std .head { background: rgba(255,255,255,0.04); padding: 10px 16px; font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.4px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; gap: 16px; align-items: center; }
+.code-block-std .head .lang { color: var(--brand-green); }
+.code-block-std pre { margin: 0; padding: 20px; }
+.code-block-std .com { color: #607d8b; }
+.code-block-std .kw { color: #c084fc; }
+.code-block-std .str { color: var(--brand-green); }
+.code-block-std .fn { color: #80deea; }
+.code-block-std .num { color: var(--accent-orange); }
+
+/* —— Course catalog (university surface, colored tags) —— */
+.course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .course-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .course-grid { grid-template-columns: 1fr; } }
+.course-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color .15s, transform .15s;
+}
+.course-card:hover { border-color: var(--brand-green-dark); transform: translateY(-2px); }
+.course-card .badge-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.course-card h4 { margin: 0; font-size: 18px; font-weight: 600; }
+.course-card p { font-size: 14px; color: var(--slate); line-height: 1.55; margin: 0; }
+.course-card .meta { display: flex; gap: 12px; font-size: 13px; color: var(--steel); margin-top: auto; padding-top: 12px; }
+.course-card .meta b { color: var(--ink); font-weight: 500; }
+.course-card .cta-row { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--hairline-soft); }
+
+.search-pill-large {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-md);
+  padding: 14px 18px;
+  max-width: 520px; margin: 0 auto 32px;
+  height: 56px;
+}
+.search-pill-large svg { color: var(--steel); flex: none; }
+.search-pill-large input { flex: 1; border: 0; background: transparent; color: var(--ink); font-family: inherit; font-size: 16px; outline: none; }
+.search-pill-large input::placeholder { color: var(--steel); }
+
+/* —— 3-tier pricing (signature: featured uses mint bg + green border) —— */
+.pill-tabs { display: inline-flex; gap: 8px; margin-bottom: 32px; }
+.pill-tab {
+  padding: 8px 16px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-full);
+  font-size: 14px;
+  color: var(--steel);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+}
+.pill-tab.act { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+
+.tiers-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 1024px) { .tiers-3 { grid-template-columns: 1fr; max-width: 540px; margin: 0 auto; } }
+.tier {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  position: relative;
+}
+.tier.featured {
+  background: var(--surface-feature);
+  border: 2px solid var(--brand-green);
+}
+.tier .tier-name { font-size: 22px; font-weight: 500; margin: 0; letter-spacing: -0.2px; }
+.tier .price { display: flex; align-items: baseline; gap: 6px; font-feature-settings: "tnum" 1; }
+.tier .price .num { font-size: 36px; font-weight: 500; letter-spacing: -0.5px; color: var(--ink); }
+.tier .price .per { font-size: 14px; color: var(--steel); }
+.tier .desc { font-size: 14px; line-height: 1.55; color: var(--slate); margin: 0; min-height: 60px; }
+.tier ul { padding: 0; margin: 8px 0 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; line-height: 1.5; color: var(--ink); display: flex; gap: 8px; align-items: flex-start; }
+.tier li svg { flex: none; margin-top: 3px; color: var(--brand-green-dark); }
+.tier .cta-wrap { margin-top: auto; padding-top: 16px; }
+.tier .cta-wrap .btn { width: 100%; }
+.tier .badge-top { position: absolute; top: -12px; left: 24px; }
+
+/* Comparison table */
+.compare {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  margin-top: 40px;
+  overflow: hidden;
+}
+.compare-row { display: grid; grid-template-columns: 2fr repeat(3, 1fr); padding: 16px 24px; border-bottom: 1px solid var(--hairline-soft); font-size: 14px; align-items: center; }
+.compare-row:last-child { border-bottom: 0; }
+.compare-row.head { background: var(--surface-soft); font-weight: 600; font-size: 13px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.4px; }
+.compare-row.section { background: var(--surface-soft); font-weight: 600; font-size: 12px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.6px; padding: 10px 24px; grid-template-columns: 1fr; }
+.compare-row .yes { color: var(--brand-green-dark); font-weight: 600; }
+.compare-row .no { color: var(--muted); }
+
+/* —— CTA banner (dark) —— */
+.cta-banner-dark {
+  background: var(--brand-teal-deep);
+  color: var(--on-dark);
+  border-radius: var(--r-lg);
+  padding: 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 720px) { .cta-banner-dark { padding: 40px 24px; } }
+.cta-banner-dark::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,237,100,0.10) 0%, transparent 60%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.cta-banner-dark h2 { color: var(--on-dark); margin: 0 0 16px; position: relative; }
+.cta-banner-dark p { color: var(--on-dark-muted); font-size: 18px; max-width: 560px; margin: 0 auto 32px; position: relative; }
+.cta-banner-dark .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* —— Footer —— */
+footer {
+  background: var(--brand-teal-deep);
+  color: var(--on-dark);
+  padding: 64px 0 32px;
+}
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 1.6fr repeat(5, 1fr); }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.footer-grid h4 { font-size: 14px; font-weight: 500; color: var(--on-dark); margin: 0 0 16px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 14px; color: var(--on-dark-muted); padding: 4px 0; display: inline-block; }
+.footer-grid li a:hover { color: var(--brand-green); }
+.footer-brand { display: flex; flex-direction: column; gap: 12px; color: var(--on-dark); }
+.footer-brand .brand { color: var(--on-dark); }
+.footer-brand p { margin: 0; font-size: 14px; color: var(--on-dark-muted); line-height: 1.55; max-width: 260px; }
+.footer-bottom { padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--hairline-dark); font-size: 13px; color: var(--on-dark-muted); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas); border: 1px solid var(--hairline-strong);
+  padding: 8px 16px; border-radius: var(--r-full); font-size: 13px; font-weight: 600;
+  color: var(--ink);
+  box-shadow: 0 4px 12px rgba(0,30,43,0.08);
+}
+.src-link:hover { background: var(--brand-green); color: var(--on-primary); border-color: var(--brand-green); }
+
+/* —— Design system tokens section —— */
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 28px; font-weight: 500; letter-spacing: -0.3px; color: var(--ink); margin: 0 0 16px; }
+.ds-caption { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--steel); margin: 28px 0 12px; font-family: "JetBrains Mono", monospace; }
+
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 56px; }
+.ds-sw .meta { padding: 8px 10px; }
+.ds-sw .name { font-size: 12px; font-weight: 500; color: var(--ink); }
+.ds-sw .val { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--steel); margin-top: 2px; }
+
+.ds-typescale { background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; }
+.ds-tr { display: grid; grid-template-columns: 160px 240px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline-soft); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink); font-weight: 500; }
+.ds-spec { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--steel); }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; letter-spacing: -0.4px !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(7, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 72px; height: 72px; background: var(--brand-teal-deep); }
+.ds-rad .lab { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--ink); font-weight: 500; }
+.ds-rad .vv { font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--steel); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-on-dark-block { background: var(--brand-teal-deep); padding: 24px; border-radius: var(--r-lg); }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; margin-top: 16px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input { height: 44px; padding: 12px 16px; border-radius: var(--r-md); border: 1px solid var(--hairline-strong); background: var(--canvas); color: var(--ink); font-family: inherit; font-size: 16px; width: 100%; }
+.ds-input.focused { border: 2px solid var(--brand-green-dark); outline: none; padding: 11px 15px; }
+.ds-field-label { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--steel); margin-bottom: 6px; display: block; letter-spacing: 0.4px; text-transform: uppercase; font-weight: 600; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-top: 16px; }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-demo { padding: 24px; border-radius: var(--r-lg); }
+.ds-card-demo.base { background: var(--canvas); border: 1px solid var(--hairline); }
+.ds-card-demo.featured { background: var(--surface-feature); border: 2px solid var(--brand-green); }
+.ds-card-demo.dark { background: var(--brand-teal-deep); color: var(--on-dark); }
+.ds-card-demo h5 { font-size: 16px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.2px; }
+.ds-card-demo p { font-size: 13px; margin: 0; line-height: 1.5; }
+.ds-card-demo.base p { color: var(--slate); }
+.ds-card-demo.featured p { color: var(--brand-green-dark); }
+.ds-card-demo.dark p { color: rgba(255,255,255,0.7); }
+
+.ds-pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+.ds-pill { padding: 4px 10px; border-radius: var(--r-full); font-size: 12px; font-weight: 600; }
+.ds-pill.tab { padding: 6px 14px; border: 1px solid var(--hairline); color: var(--steel); background: transparent; }
+.ds-pill.tab.act { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- Promo banner (signature: dark teal strip above nav) -->
+<div class="promo-banner">
+  <strong>MongoLeaf .next 2026 is here.</strong>
+  AI-native search, queryable encryption, and Atlas Vector v2 — all in one keynote.
+  <a href="#">Watch the keynote →</a>
+</div>
+
+<!-- Top nav -->
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#">
+    <svg class="glyph" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M16 2C16 2 22 8 22 18C22 24 19 29 16 30C13 29 10 24 10 18C10 8 16 2 16 2Z" fill="#00ed64"/>
+      <path d="M16 2L16 30" stroke="#00684a" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="16" cy="22" r="1.2" fill="#00684a"/>
+    </svg>
+    MongoLeaf
+  </a>
+  <nav class="nav-links">
+    <a href="#">Products</a>
+    <a href="#">Solutions</a>
+    <a href="#">Resources</a>
+    <a href="#">Company</a>
+    <a href="#">Pricing</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-ghost">Contact sales</a>
+    <a href="#" class="btn btn-ghost">Sign In</a>
+    <a href="#" class="btn btn-primary">Try Free</a>
+  </div>
+</div></header>
+
+<!-- HERO BAND: deep teal, bright green CTA, code mockup card below -->
+<section class="hero-band">
+  <div class="wrap" style="position: relative; z-index: 2;">
+    <p class="eyebrow">— AI-Native Data Platform · 2026</p>
+    <h1 class="hero-display">One data platform.<br/>Unlimited AI potential.</h1>
+    <p class="lead">A document database, vector search, and stream processing — unified behind one query language. Power the next generation of AI applications without stitching together half a dozen services.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary btn-lg">Try Free</a>
+      <a href="#" class="btn btn-secondary-on-dark btn-lg">Talk to an expert</a>
+    </div>
+
+    <!-- Code mockup card (signature: terminal-aesthetic dark canvas) -->
+    <div class="code-mockup-card">
+      <div class="tabs">
+        <div class="traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+        <span class="tab act">aggregate.js</span>
+        <span class="tab">result.json</span>
+      </div>
+      <div class="body">
+        <pre><span class="com">// Find product reviews semantically</span>
+<span class="com">// similar to the user's query.</span>
+<span class="kw">const</span> results = <span class="kw">await</span> db
+  .<span class="fn">collection</span>(<span class="str">"reviews"</span>)
+  .<span class="fn">aggregate</span>([
+    {
+      <span class="str">"$vectorSearch"</span>: {
+        index: <span class="str">"plot_embedding_idx"</span>,
+        path: <span class="str">"embedding"</span>,
+        queryVector: <span class="fn">embed</span>(query),
+        numCandidates: <span class="num">400</span>,
+        limit: <span class="num">5</span>
+      }
+    },
+    {
+      <span class="str">"$project"</span>: {
+        title: <span class="num">1</span>,
+        score: { <span class="str">"$meta"</span>: <span class="str">"vectorSearchScore"</span> }
+      }
+    }
+  ])
+  .<span class="fn">toArray</span>();</pre>
+        <div class="panel-result">
+          <div style="color: var(--brand-green); margin-bottom: 8px;">▸ db.reviews.aggregate(…)</div>
+          <div class="row"><span class="key">title:</span><span class="v-str">"Quiet sturdy chair…"</span></div>
+          <div class="row"><span class="key">score:</span><span class="v-num">0.9412</span></div>
+          <div class="row" style="margin-top: 6px;"><span class="key">title:</span><span class="v-str">"Comfortable WFH pick"</span></div>
+          <div class="row"><span class="key">score:</span><span class="v-num">0.9088</span></div>
+          <div class="row" style="margin-top: 6px;"><span class="key">title:</span><span class="v-str">"Worth every dollar"</span></div>
+          <div class="row"><span class="key">score:</span><span class="v-num">0.8741</span></div>
+          <div class="meta-strip">
+            <span><span class="ok">●</span> 200 OK · 5 docs</span>
+            <span>42 ms</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Three platform cards under the mockup -->
+    <div class="hero-platform-card-row">
+      <div class="hero-platform-card">
+        <div class="name">Atlas Database</div>
+        <h4>Multi-cloud document DB</h4>
+        <p>The same database across AWS, GCP, and Azure — with cross-cloud replication built in.</p>
+      </div>
+      <div class="hero-platform-card">
+        <div class="name">Atlas Vector Search</div>
+        <h4>Vector queries, native</h4>
+        <p>Store embeddings next to your documents. Query them with the same aggregation pipeline.</p>
+      </div>
+      <div class="hero-platform-card">
+        <div class="name">Atlas Stream</div>
+        <h4>Streaming for documents</h4>
+        <p>Kafka-compatible streams that land in your collections — without the cross-system glue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Deploy: Atlas / Community / Enterprise -->
+<section><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Customize your deployment</span>
+    <h2 class="heading-1">Three ways to run MongoLeaf.</h2>
+    <p>Cloud-managed, self-hosted, or air-gapped on-prem — every deployment runs the same query language and the same SDKs.</p>
+  </div>
+
+  <div class="deploy-grid">
+    <div class="deploy-card">
+      <div class="badge-row"><span class="badge green-soft">● Most popular</span></div>
+      <div class="h-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+      <h3 class="heading-3">Atlas (Cloud)</h3>
+      <p>Fully managed across AWS, GCP, and Azure. Autoscaling, point-in-time recovery, and queryable encryption — without the ops team.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Multi-cloud, multi-region</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Autoscaling storage + compute</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Vector + stream built in</li>
+      </ul>
+      <div class="footer-row">
+        <a href="#" class="btn btn-link">Explore Atlas →</a>
+        <a href="#" class="btn btn-primary">Start free</a>
+      </div>
+    </div>
+
+    <div class="deploy-card">
+      <div class="badge-row"><span class="badge purple">Open source</span></div>
+      <div class="h-ic" style="background: rgba(123,63,242,0.08); color: var(--accent-purple);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <h3 class="heading-3">Community Edition</h3>
+      <p>The source-available core. Run MongoLeaf on your own hardware, in your own VPC, with the developer tools we use ourselves.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Document model + replication</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Compass GUI + mongosh</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Community forum support</li>
+      </ul>
+      <div class="footer-row">
+        <a href="#" class="btn btn-link">Read the docs →</a>
+        <a href="#" class="btn btn-secondary">Download</a>
+      </div>
+    </div>
+
+    <div class="deploy-card">
+      <div class="badge-row"><span class="badge orange">Enterprise</span></div>
+      <div class="h-ic" style="background: rgba(250,110,57,0.08); color: var(--accent-orange);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L4 6v6c0 5 3.5 9.4 8 10 4.5-.6 8-5 8-10V6l-8-4z"/></svg></div>
+      <h3 class="heading-3">Enterprise Advanced</h3>
+      <p>Air-gapped, FIPS-compliant, and certified for the most demanding workloads. Run anywhere, including disconnected environments.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Air-gapped deployments</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>LDAP / Kerberos / FIPS 140-2</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>24×7 enterprise support</li>
+      </ul>
+      <div class="footer-row">
+        <a href="#" class="btn btn-link">Compare editions →</a>
+        <a href="#" class="btn btn-secondary">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Why MongoLeaf — 4-up surface cards -->
+<section class="section-soft"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Loved by builders</span>
+    <h2 class="heading-1">A database the way you think.</h2>
+    <p>Documents that map to objects. Indexes that learn your queries. SDKs in every language you care about. MongoLeaf is the database engineers actually want to write against.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <h4>Document model</h4>
+      <p>Objects in your code map 1:1 to documents in the database. No ORM, no join hell, no impedance mismatch.</p>
+    </div>
+    <div class="why-card">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <h4>Vector search</h4>
+      <p>Semantic search lives inside the same aggregation pipeline as your filters. No separate vector store to operate.</p>
+    </div>
+    <div class="why-card">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.07 7.07l4.24 4.24M1 12h6m10 0h6"/></svg>
+      <h4>Global replication</h4>
+      <p>Three-node replica sets, zone-aware sharding, and read preferences that let you push reads to the closest region.</p>
+    </div>
+    <div class="why-card">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <h4>Queryable encryption</h4>
+      <p>Encrypt sensitive fields client-side and still run equality and range queries on the encrypted ciphertext.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- Code + copy: AI use case -->
+<section><div class="wrap">
+  <div class="section-head" style="margin-bottom: 56px;">
+    <span class="eyebrow">AI use case</span>
+    <h2 class="display-lg">Build retrieval-augmented apps without a second database.</h2>
+    <p>Embeddings live next to the documents they describe. One query language. One operational footprint. One source of truth.</p>
+  </div>
+
+  <div class="code-demo-block">
+    <div class="copy">
+      <h3 class="heading-2">From embedding to answer in one aggregation.</h3>
+      <p>Run vector search, then chain a $project, $lookup, and $match — all in the same pipeline. The hard part of RAG isn't the embeddings; it's keeping them in sync. MongoLeaf moves that problem into the database.</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>HNSW-indexed vector search with metadata pre-filtering</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Auto-embedding via the LLM provider of your choice</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Re-rank inside the pipeline — no extra round-trip</li>
+      </ul>
+      <a href="#" class="btn btn-primary">Read the RAG guide</a>
+    </div>
+    <div class="code-block-std">
+      <div class="head"><span class="lang">▸ shell</span><span>db.products.aggregate</span><span style="margin-left: auto; color: rgba(255,255,255,0.5);">connected to atlas-prod</span></div>
+      <pre><span class="com">// Hybrid: vector + metadata + rerank</span>
+[
+  {
+    <span class="str">"$vectorSearch"</span>: {
+      index: <span class="str">"product_emb_v2"</span>,
+      path: <span class="str">"embedding"</span>,
+      queryVector: <span class="fn">embed</span>(query),
+      filter: { in_stock: <span class="kw">true</span>, price: { $lt: <span class="num">200</span> } },
+      numCandidates: <span class="num">400</span>,
+      limit: <span class="num">20</span>
+    }
+  },
+  {
+    <span class="str">"$lookup"</span>: {
+      from: <span class="str">"reviews"</span>,
+      localField: <span class="str">"_id"</span>,
+      foreignField: <span class="str">"product_id"</span>,
+      as: <span class="str">"reviews"</span>
+    }
+  },
+  {
+    <span class="str">"$project"</span>: {
+      name: <span class="num">1</span>,
+      score: { <span class="str">"$meta"</span>: <span class="str">"vectorSearchScore"</span> },
+      avg_rating: { <span class="str">"$avg"</span>: <span class="str">"$reviews.rating"</span> }
+    }
+  }
+]</pre>
+    </div>
+  </div>
+</div></section>
+
+<!-- MongoLeaf University — course catalog -->
+<section class="section-soft"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">MongoLeaf University</span>
+    <h2 class="heading-1">Learn the platform. Certify your skills.</h2>
+    <p>Free, self-paced courses taught by the engineers who built the product. Certify when you're ready.</p>
+  </div>
+
+  <div class="search-pill-large">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search 240+ courses, paths, and labs…" />
+  </div>
+
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="badge-row"><span class="badge purple">Database & Security</span></div>
+      <h4>MongoLeaf for SQL Developers</h4>
+      <p>You know JOINs. Now learn $lookup. A 4-hour bridge for engineers coming from Postgres or MySQL.</p>
+      <div class="meta"><span><b>4h</b> · 6 lessons</span><span>● Beginner</span></div>
+      <div class="cta-row"><span class="caption">Free</span><a href="#" class="btn btn-link">Get started →</a></div>
+    </div>
+    <div class="course-card">
+      <div class="badge-row"><span class="badge orange">Search</span></div>
+      <h4>Atlas Vector Search Essentials</h4>
+      <p>Build a semantic search index from scratch. Includes a free Atlas cluster for the duration of the course.</p>
+      <div class="meta"><span><b>6h</b> · 8 lessons</span><span>● Intermediate</span></div>
+      <div class="cta-row"><span class="caption">Free</span><a href="#" class="btn btn-link">Get started →</a></div>
+    </div>
+    <div class="course-card">
+      <div class="badge-row"><span class="badge blue">Atlas & Cloud</span></div>
+      <h4>Multi-Region Atlas Deployments</h4>
+      <p>Design read-preference strategies that route queries to the nearest replica without sacrificing consistency.</p>
+      <div class="meta"><span><b>3h</b> · 5 lessons</span><span>● Advanced</span></div>
+      <div class="cta-row"><span class="caption">Free</span><a href="#" class="btn btn-link">Get started →</a></div>
+    </div>
+    <div class="course-card">
+      <div class="badge-row"><span class="badge green">AI</span></div>
+      <h4>RAG with MongoLeaf and LangChain</h4>
+      <p>Ship a working retrieval-augmented chatbot. Embedding pipeline, hybrid search, rerank, eval harness — all of it.</p>
+      <div class="meta"><span><b>8h</b> · 10 lessons</span><span>● Intermediate</span></div>
+      <div class="cta-row"><span class="caption">Free</span><a href="#" class="btn btn-link">Get started →</a></div>
+    </div>
+    <div class="course-card">
+      <div class="badge-row"><span class="badge pink">Aggregation</span></div>
+      <h4>Aggregation Pipeline Masterclass</h4>
+      <p>$match, $lookup, $group, $bucket, $facet — the seven stages you'll use in 95% of your queries.</p>
+      <div class="meta"><span><b>5h</b> · 7 lessons</span><span>● Intermediate</span></div>
+      <div class="cta-row"><span class="caption">Free</span><a href="#" class="btn btn-link">Get started →</a></div>
+    </div>
+    <div class="course-card">
+      <div class="badge-row"><span class="badge purple">Database & Security</span></div>
+      <h4>Queryable Encryption in Practice</h4>
+      <p>Encrypt sensitive fields client-side and still run equality + range queries against the ciphertext.</p>
+      <div class="meta"><span><b>2h</b> · 4 lessons</span><span>● Advanced</span></div>
+      <div class="cta-row"><span class="caption">Free</span><a href="#" class="btn btn-link">Get started →</a></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Pricing: 3-tier (signature: featured tier uses mint surface + green border) -->
+<section><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="heading-1">Start free. Scale when ready.</h2>
+    <p>A free forever tier for evaluation. Pay-as-you-go credit beyond that. No seat minimums, no procurement gates until you genuinely need them.</p>
+    <div class="pill-tabs" style="margin-top: 24px;">
+      <button class="pill-tab act">MongoLeaf Atlas</button>
+      <button class="pill-tab">Enterprise Advanced</button>
+    </div>
+  </div>
+
+  <div class="tiers-3">
+    <div class="tier">
+      <h3 class="tier-name">Free</h3>
+      <p class="price"><span class="num">$0</span></p>
+      <p class="desc">For evaluation, prototypes, and personal projects. Free forever — no credit card required.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>512 MB shared storage</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Shared compute (M0)</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Atlas Vector Search</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Community support</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary">Get started free</a></div>
+    </div>
+    <div class="tier featured">
+      <span class="badge popular badge-top">★ Most popular</span>
+      <h3 class="tier-name">Flex</h3>
+      <p class="price"><span class="num">$0.012</span><span class="per">/hr · pay-as-you-go</span></p>
+      <p class="desc">Right-sized for production workloads. Pay for the compute and storage you actually use.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Up to 5 GB storage included</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Auto-scaling compute</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Point-in-time recovery (7d)</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Email + chat support</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-primary">Choose Flex</a></div>
+    </div>
+    <div class="tier">
+      <h3 class="tier-name">Dedicated</h3>
+      <p class="price"><span class="num">$0.08</span><span class="per">/hr · starting</span></p>
+      <p class="desc">Isolated compute, customizable hardware, and the controls enterprise procurement teams expect.</p>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Isolated M10+ compute</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>VPC peering + private link</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>SOC 2 · HIPAA · ISO 27001</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>24×7 priority support</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary">Choose Dedicated</a></div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-row head"><div>Feature</div><div>Free</div><div>Flex</div><div>Dedicated</div></div>
+    <div class="compare-row section">Storage & Compute</div>
+    <div class="compare-row"><div>Storage</div><div>512 MB</div><div>Up to 5 GB</div><div>10 GB → 4 TB+</div></div>
+    <div class="compare-row"><div>Dedicated CPU</div><div><span class="no">—</span></div><div><span class="no">—</span></div><div><span class="yes">✓</span></div></div>
+    <div class="compare-row"><div>Auto-scaling</div><div><span class="no">—</span></div><div><span class="yes">✓</span></div><div><span class="yes">✓</span></div></div>
+    <div class="compare-row section">Security</div>
+    <div class="compare-row"><div>Queryable encryption</div><div><span class="yes">✓</span></div><div><span class="yes">✓</span></div><div><span class="yes">✓</span></div></div>
+    <div class="compare-row"><div>VPC peering</div><div><span class="no">—</span></div><div><span class="no">—</span></div><div><span class="yes">✓</span></div></div>
+    <div class="compare-row"><div>Private endpoints</div><div><span class="no">—</span></div><div><span class="no">—</span></div><div><span class="yes">✓</span></div></div>
+    <div class="compare-row section">Backup & Recovery</div>
+    <div class="compare-row"><div>Daily backups</div><div><span class="no">—</span></div><div><span class="yes">✓</span></div><div><span class="yes">✓</span></div></div>
+    <div class="compare-row"><div>Point-in-time recovery</div><div><span class="no">—</span></div><div>7 days</div><div>72 hours continuous</div></div>
+    <div class="compare-row section">Support</div>
+    <div class="compare-row"><div>Response time</div><div>Community</div><div>&lt; 24h</div><div>&lt; 1h · 24×7</div></div>
+  </div>
+</div></section>
+
+<!-- CTA banner dark -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="cta-banner-dark">
+    <h2 class="display-lg">Ready when you are.</h2>
+    <p>Spin up a free Atlas cluster in under a minute. No credit card. No expiration. The same database the largest teams in the world run in production.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary btn-lg">Try Free</a>
+      <a href="#" class="btn btn-secondary-on-dark btn-lg">Talk to sales</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============== DESIGN SYSTEM SECTION (Part B) ============== -->
+<section class="section-soft"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Design system</span>
+    <h2 class="heading-1">Bright green on deep teal. The whole story.</h2>
+    <p>Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mongodb.html" target="_blank" rel="noopener" style="color: var(--brand-green-dark); text-decoration: underline;">DESIGN.md</a>. Dual-mode identity. Pill CTAs (r-full). 12px rounded cards. 3-tier pricing with mint-bordered featured tier.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand — the unmistakable signal</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#00ed64"></div><div class="meta"><div class="name">brand-green</div><div class="val">#00ed64 · primary CTA</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#00b545"></div><div class="meta"><div class="name">primary-deep</div><div class="val">#00b545 · pressed</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#008c34"></div><div class="meta"><div class="name">primary-pressed</div><div class="val">#008c34</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#00684a"></div><div class="meta"><div class="name">brand-green-dark</div><div class="val">#00684a · links</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#00a35c"></div><div class="meta"><div class="name">brand-green-mid</div><div class="val">#00a35c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c3f0d2"></div><div class="meta"><div class="name">brand-green-soft</div><div class="val">#c3f0d2 · success bg</div></div></div>
+    </div>
+
+    <p class="ds-caption">Teal — the dark canvas</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#001e2b"></div><div class="meta"><div class="name">brand-teal-deep</div><div class="val">#001e2b · hero + footer</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#003d4f"></div><div class="meta"><div class="name">brand-teal</div><div class="val">#003d4f</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#00684a"></div><div class="meta"><div class="name">brand-teal-mid</div><div class="val">#00684a · platform card</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#001e2b"></div><div class="meta"><div class="name">canvas-dark</div><div class="val">#001e2b · code blocks</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1c2d38"></div><div class="meta"><div class="name">hairline-dark</div><div class="val">#1c2d38</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e3fcef"></div><div class="meta"><div class="name">surface-feature</div><div class="val">#e3fcef · featured tier</div></div></div>
+    </div>
+
+    <p class="ds-caption">Category accents — course tags ONLY, never system colors</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#7b3ff2"></div><div class="meta"><div class="name">accent-purple</div><div class="val">#7b3ff2 · database & security</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#fa6e39"></div><div class="meta"><div class="name">accent-orange</div><div class="val">#fa6e39 · search</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f06bb8"></div><div class="meta"><div class="name">accent-pink</div><div class="val">#f06bb8 · aggregation</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#3d4f9f"></div><div class="meta"><div class="name">accent-blue</div><div class="val">#3d4f9f · atlas & cloud</div></div></div>
+    </div>
+
+    <p class="ds-caption">Ink ladder — text on light surfaces</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#001e2b"></div><div class="meta"><div class="name">ink</div><div class="val">#001e2b · headlines + body</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1c2d38"></div><div class="meta"><div class="name">charcoal</div><div class="val">#1c2d38</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#3d4f5b"></div><div class="meta"><div class="name">slate</div><div class="val">#3d4f5b · secondary</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#5c6c7a"></div><div class="meta"><div class="name">steel</div><div class="val">#5c6c7a · tertiary</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#7c8c9a"></div><div class="meta"><div class="name">stone</div><div class="val">#7c8c9a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#a8b3bc"></div><div class="meta"><div class="name">muted</div><div class="val">#a8b3bc · disabled</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="body-md" style="color: var(--slate); margin: 0 0 24px;">Euclid Circular A is the contemporary geometric brand face. Inter is the open-source substitute used here. Source Code Pro for every code mockup (JetBrains Mono sub). Weight 500 across display; weight 600 reserved for buttons and small emphasis.</p>
+
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">hero-display</span><span class="ds-spec">72px · 500 · 1.10 · -1.5px</span><span class="ds-sam" style="font-size: 48px; font-weight: 500; line-height: 1.10; letter-spacing: -1.2px;">One data platform.</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">56px · 500 · 1.15 · -1px</span><span class="ds-sam" style="font-size: 40px; font-weight: 500; line-height: 1.15; letter-spacing: -0.8px;">Section opener</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-1</span><span class="ds-spec">48px · 500 · 1.20 · -0.5px</span><span class="ds-sam" style="font-size: 36px; font-weight: 500; line-height: 1.20; letter-spacing: -0.5px;">Page-level headline</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-2</span><span class="ds-spec">36px · 500 · 1.25 · -0.5px</span><span class="ds-sam" style="font-size: 30px; font-weight: 500; line-height: 1.25; letter-spacing: -0.4px;">Subsection headline</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-3</span><span class="ds-spec">28px · 500 · 1.30 · 0</span><span class="ds-sam" style="font-size: 24px; font-weight: 500; line-height: 1.30;">Card title</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-5</span><span class="ds-spec">18px · 600 · 1.40 · 0</span><span class="ds-sam" style="font-size: 18px; font-weight: 600; line-height: 1.40;">FAQ question or small card</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16px · 400 · 1.55 · 0</span><span class="ds-sam" style="font-size: 16px; font-weight: 400; line-height: 1.55;">Primary body text — generous leading for documentation readability.</span></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">14px · 600 · 1.30 · 0</span><span class="ds-sam" style="font-size: 14px; font-weight: 600; line-height: 1.30;">Try Free</span></div>
+      <div class="ds-tr"><span class="ds-tok">micro-uppercase</span><span class="ds-spec">11px · 600 · 1.40 · 1px</span><span class="ds-sam" style="font-size: 11px; font-weight: 600; line-height: 1.40; letter-spacing: 1px; text-transform: uppercase;">SECTION EYEBROW · CATEGORY TAG</span></div>
+      <div class="ds-tr"><span class="ds-tok">code-md</span><span class="ds-spec">14px · 400 · 1.55 · 0 · mono</span><span class="ds-sam mono" style="font-size: 14px; font-weight: 400; line-height: 1.55;">db.products.aggregate([ { $vectorSearch: … } ])</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <p class="body-md" style="color: var(--slate); margin: 0 0 24px;">Every CTA is a pill (<span class="mono">r-full</span>). Every card is <span class="mono">r-lg</span> (12px). Course category tags use <span class="mono">r-sm</span> (6px) — the only sharp-cornered surface in the system.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius: 4px;"></div><div class="lab">xs</div><div class="vv">4px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 6px;"></div><div class="lab">sm</div><div class="vv">6px · badges</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 8px;"></div><div class="lab">md</div><div class="vv">8px · inputs</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 12px;"></div><div class="lab">lg</div><div class="vv">12px · cards</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 16px;"></div><div class="lab">xl</div><div class="vv">16px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 24px;"></div><div class="lab">xxl</div><div class="vv">24px</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 9999px;"></div><div class="lab">full</div><div class="vv">9999px · pills</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons on white canvas</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">button-primary</a>
+      <a href="#" class="btn btn-secondary">button-secondary</a>
+      <a href="#" class="btn btn-ghost">button-ghost</a>
+      <a href="#" class="btn btn-link">button-link · green</a>
+    </div>
+
+    <p class="ds-caption">Buttons on deep-teal hero band</p>
+    <div class="ds-on-dark-block">
+      <div class="ds-comp-row">
+        <a href="#" class="btn btn-on-dark">button-on-dark</a>
+        <a href="#" class="btn btn-secondary-on-dark">button-secondary-on-dark</a>
+      </div>
+    </div>
+
+    <p class="ds-caption">Inputs — focus is a 2px green-dark ring</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input · default</label>
+        <input class="ds-input" placeholder="user@mongoleaf.com" />
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="user@mongoleaf.com" />
+      </div>
+    </div>
+
+    <p class="ds-caption">Cards — base / featured / dark</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-demo base">
+        <h5>card-base · 12px radius</h5>
+        <p>White canvas + 1px hairline. The default container. Flat by default — no shadows on documentation surfaces.</p>
+      </div>
+      <div class="ds-card-demo featured">
+        <h5>pricing-card-featured</h5>
+        <p>Mint surface + 2px brand-green border. The signature featured tier — never green text on green.</p>
+      </div>
+      <div class="ds-card-demo dark">
+        <h5>card-feature-dark</h5>
+        <p style="color: rgba(255,255,255,0.75);">Deep teal fill for product showcase cards on the hero band. White text, no border.</p>
+      </div>
+    </div>
+
+    <p class="ds-caption">Badges & tags — category palette</p>
+    <div class="ds-pill-row">
+      <span class="badge green">badge-green</span>
+      <span class="badge green-soft">● badge-green-soft</span>
+      <span class="badge popular">★ badge-popular</span>
+      <span class="badge purple">database & security</span>
+      <span class="badge orange">search</span>
+      <span class="badge blue">atlas & cloud</span>
+      <span class="badge pink">aggregation</span>
+    </div>
+
+    <p class="ds-caption">Tabs — pill style (pricing)</p>
+    <div class="ds-pill-row">
+      <span class="ds-pill tab act">pill-tab-active</span>
+      <span class="ds-pill tab">pill-tab</span>
+      <span class="ds-pill tab">Enterprise Advanced</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- Footer: dark teal (signature) -->
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="#">
+        <svg class="glyph" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M16 2C16 2 22 8 22 18C22 24 19 29 16 30C13 29 10 24 10 18C10 8 16 2 16 2Z" fill="#00ed64"/>
+          <circle cx="16" cy="22" r="1.2" fill="#00684a"/>
+        </svg>
+        MongoLeaf
+      </a>
+      <p>The data platform for AI-native applications. One query language. One operational footprint. One source of truth.</p>
+    </div>
+    <div>
+      <h4>Products</h4>
+      <ul><li><a href="#">Atlas</a></li><li><a href="#">Vector Search</a></li><li><a href="#">Stream Processing</a></li><li><a href="#">Community Edition</a></li><li><a href="#">Enterprise Advanced</a></li></ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul><li><a href="#">Documentation</a></li><li><a href="#">Developer Hub</a></li><li><a href="#">University</a></li><li><a href="#">Blog</a></li><li><a href="#">Customer stories</a></li></ul>
+    </div>
+    <div>
+      <h4>Solutions</h4>
+      <ul><li><a href="#">AI applications</a></li><li><a href="#">Modernization</a></li><li><a href="#">Financial services</a></li><li><a href="#">Public sector</a></li></ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Newsroom</a></li><li><a href="#">Investor relations</a></li></ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul><li><a href="#">Terms</a></li><li><a href="#">Privacy</a></li><li><a href="#">Security</a></li><li><a href="#">Trust center</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 MongoLeaf, Inc. · The data platform for AI.</span>
+    <span>Inspired by mongodb DESIGN.md · awesome-design-md</span>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.mongodb.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

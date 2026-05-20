@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mirror — Inspired by Miro's design system</title>
+<meta name="description" content="A Miro-inspired marketing page: stark white canvas, canary-yellow wordmark, black pill CTAs, pastel feature cards that echo the actual sticky-note palette, whiteboard mockup centerpiece. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #1c1c1e;
+  --primary-charcoal: #2c2c34;
+  --on-primary: #ffffff;
+  --brand-yellow: #ffd02f;
+  --brand-yellow-deep: #fcb900;
+  --yellow-light: #fff4c4;
+  --yellow-dark: #746019;
+  --surface-yellow: #fff8e0;
+  --brand-blue: #4262ff;
+  --blue-450: #5b76fe;
+  --blue-pressed: #2a41b6;
+  --brand-coral: #ff9999;
+  --coral-light: #ffc6c6;
+  --coral-dark: #600000;
+  --brand-rose: #ffd8f4;
+  --rose-light: #fde0f0;
+  --brand-pink: #fde0f0;
+  --brand-teal: #0fbcb0;
+  --teal-light: #c3faf5;
+  --moss-dark: #187574;
+  --brand-orange-light: #ffe6cd;
+  --brand-red: #fbd4d4;
+  --success-accent: #00b473;
+  --surface-pricing-featured: #f5f3ff;
+  /* Surfaces */
+  --canvas: #ffffff;
+  --surface: #f7f8fa;
+  --surface-soft: #fafbfc;
+  --hairline: #e0e2e8;
+  --hairline-soft: #eef0f3;
+  --hairline-strong: #c7cad5;
+  /* Text */
+  --ink-deep: #050038;
+  --ink: #1c1c1e;
+  --charcoal: #2c2c34;
+  --slate: #555a6a;
+  --steel: #6b6f7e;
+  --stone: #8e91a0;
+  --muted: #a5a8b5;
+  --on-dark: #ffffff;
+  --on-dark-muted: #a5a8b5;
+  --footer-bg: #1c1c1e;
+  /* Radius */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-xxl: 20px;
+  --r-xxxl: 28px;
+  --r-feature: 32px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Noto Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--brand-yellow); color: var(--ink); }
+.handwritten { font-family: "Caveat", cursive; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* ===== Promo banner (dark strip above nav) ===== */
+.promo-banner {
+  background: var(--ink); color: var(--on-dark);
+  font-size: 14px; font-weight: 500;
+  padding: 12px 16px; text-align: center;
+}
+.promo-banner .pill {
+  display: inline-block;
+  background: var(--brand-yellow); color: var(--ink);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 4px 10px; border-radius: var(--r-full);
+  margin-left: 8px;
+}
+
+/* ===== Top nav ===== */
+.topnav {
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+}
+.topnav .row { display: flex; align-items: center; height: 64px; gap: 24px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 600; font-size: 22px; color: var(--ink);
+  letter-spacing: -0.6px;
+}
+.brand .wordmark {
+  display: inline-flex; align-items: center;
+  font-weight: 700; font-size: 22px;
+}
+.brand .wordmark-y {
+  background: var(--brand-yellow);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: var(--ink);
+  font-weight: 700; letter-spacing: -0.6px;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 8px; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--ink);
+  padding: 8px 12px; border-radius: var(--r-md);
+}
+.nav-links a:hover { background: var(--surface); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.nav-right a.txt { font-size: 14px; font-weight: 500; color: var(--ink); padding: 8px 12px; }
+
+/* ===== Buttons (pill only) ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit;
+  font-size: 14px; font-weight: 500; line-height: 1.3;
+  border-radius: var(--r-full);
+  border: 0; cursor: pointer;
+  padding: 12px 24px;
+  transition: background .15s, transform .1s;
+}
+.btn-primary { background: var(--ink); color: var(--on-primary); }
+.btn-primary:hover { background: var(--charcoal); }
+.btn-yellow { background: var(--brand-yellow); color: var(--ink); }
+.btn-yellow:hover { background: var(--brand-yellow-deep); }
+.btn-blue { background: var(--brand-blue); color: var(--on-primary); }
+.btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--hairline-strong); }
+.btn-secondary:hover { background: var(--surface); }
+.btn-on-dark { background: var(--on-dark); color: var(--ink); }
+.btn-ghost { background: transparent; color: var(--ink); padding: 8px 12px; border-radius: var(--r-md); }
+.btn-lg { padding: 16px 28px; font-size: 15px; }
+
+/* ===== Typography ===== */
+.hero-display {
+  font-size: clamp(40px, 7vw, 80px); font-weight: 500; line-height: 1.05; letter-spacing: -2px;
+  color: var(--ink); margin: 0;
+}
+.display-lg {
+  font-size: clamp(36px, 5vw, 60px); font-weight: 500; line-height: 1.10; letter-spacing: -1.5px;
+  color: var(--ink); margin: 0;
+}
+.heading-1 { font-size: 48px; font-weight: 500; line-height: 1.15; letter-spacing: -1px; color: var(--ink); margin: 0; }
+.heading-2 { font-size: 36px; font-weight: 500; line-height: 1.2; letter-spacing: -0.5px; color: var(--ink); margin: 0; }
+.heading-3 { font-size: 28px; font-weight: 500; line-height: 1.25; color: var(--ink); margin: 0; }
+.heading-4 { font-size: 22px; font-weight: 500; line-height: 1.3; color: var(--ink); margin: 0; }
+.subtitle { font-size: 18px; font-weight: 400; line-height: 1.5; color: var(--slate); }
+.body-md { font-size: 16px; line-height: 1.5; color: var(--slate); }
+.caption { font-size: 13px; font-weight: 400; line-height: 1.4; color: var(--steel); }
+.micro-uppercase { font-size: 11px; font-weight: 600; line-height: 1.4; letter-spacing: 0.5px; text-transform: uppercase; color: var(--brand-blue); }
+.stat-display { font-size: 64px; font-weight: 500; line-height: 1.1; letter-spacing: -1.5px; color: var(--ink); }
+
+@media (max-width: 768px) {
+  .heading-1 { font-size: 36px; }
+  .heading-2 { font-size: 28px; }
+}
+
+/* ===== Sections ===== */
+section { padding: 96px 0; }
+
+/* ===== Hero ===== */
+.hero { padding: 80px 0; text-align: center; }
+.hero h1 { margin: 0 auto 24px; max-width: 880px; }
+.hero .lead { font-size: 20px; color: var(--slate); max-width: 600px; margin: 0 auto 32px; line-height: 1.5; }
+.hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ===== Whiteboard mockup (centerpiece) ===== */
+.whiteboard {
+  margin: 64px auto 0;
+  max-width: 1100px;
+  background: var(--canvas);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--hairline-soft);
+  padding: 0;
+  box-shadow: 0 12px 32px -4px rgba(5, 0, 56, 0.08);
+  overflow: hidden;
+}
+.whiteboard-toolbar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.whiteboard-toolbar .tool {
+  width: 32px; height: 32px;
+  border-radius: var(--r-md);
+  background: var(--surface); color: var(--steel);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.whiteboard-toolbar .tool.active { background: var(--ink); color: var(--on-dark); }
+.whiteboard-toolbar .sep { width: 1px; height: 20px; background: var(--hairline); margin: 0 4px; }
+.whiteboard-toolbar .right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.whiteboard-toolbar .av {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--canvas);
+  background: var(--brand-coral);
+  font-size: 11px; font-weight: 600; color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.whiteboard-toolbar .av.av2 { background: var(--brand-teal); color: #fff; margin-left: -8px; }
+.whiteboard-toolbar .av.av3 { background: var(--brand-yellow); margin-left: -8px; }
+
+.whiteboard-canvas {
+  background:
+    radial-gradient(circle at 1px 1px, var(--hairline) 1px, transparent 0);
+  background-size: 24px 24px;
+  background-color: var(--surface-soft);
+  height: 440px;
+  position: relative;
+  overflow: hidden;
+}
+.sticky {
+  position: absolute;
+  border-radius: 4px;
+  padding: 14px 16px;
+  width: 140px; min-height: 100px;
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  line-height: 1.35;
+  box-shadow: 2px 4px 12px rgba(5, 0, 56, 0.12);
+  transform: rotate(-2deg);
+}
+.sticky .pin {
+  position: absolute; left: 50%; top: -8px;
+  transform: translateX(-50%);
+  width: 12px; height: 12px;
+  background: rgba(0,0,0,0.2); border-radius: 50%;
+}
+.sticky .label {
+  font-family: "Caveat", cursive;
+  font-size: 18px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+.sticky.s-yellow { background: var(--brand-yellow); }
+.sticky.s-coral { background: var(--brand-coral); }
+.sticky.s-teal { background: var(--teal-light); }
+.sticky.s-rose { background: var(--brand-rose); }
+.sticky.s-orange { background: var(--brand-orange-light); }
+.sticky.s-blue { background: #c8d4ff; }
+.sticky.s-mint { background: #cdf2d8; }
+
+.sticky.p1 { left: 5%; top: 12%; transform: rotate(-3deg); }
+.sticky.p2 { left: 24%; top: 24%; transform: rotate(2deg); width: 160px; }
+.sticky.p3 { left: 44%; top: 14%; transform: rotate(-2deg); }
+.sticky.p4 { left: 62%; top: 26%; transform: rotate(3deg); }
+.sticky.p5 { left: 8%; top: 56%; transform: rotate(2deg); }
+.sticky.p6 { left: 28%; top: 64%; transform: rotate(-2deg); width: 150px; }
+.sticky.p7 { left: 50%; top: 58%; transform: rotate(1deg); }
+.sticky.p8 { left: 72%; top: 60%; transform: rotate(-3deg); }
+.sticky.p9 { right: 4%; top: 12%; transform: rotate(3deg); }
+
+.wb-arrow {
+  position: absolute;
+  border: 2px dashed var(--steel);
+  border-bottom: 0; border-right: 0;
+  width: 80px; height: 30px;
+  border-top-left-radius: 8px;
+}
+.wb-arrow::after {
+  content: ""; position: absolute;
+  right: -1px; top: -8px;
+  border-left: 8px solid var(--steel);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.wb-arrow.a1 { left: 18%; top: 38%; transform: rotate(20deg); }
+.wb-arrow.a2 { left: 38%; top: 42%; transform: rotate(-10deg); width: 60px; }
+
+.wb-frame {
+  position: absolute;
+  border: 2px solid var(--brand-blue);
+  border-radius: var(--r-md);
+  background: rgba(66, 98, 255, 0.06);
+}
+.wb-frame.f1 { left: 2%; top: 6%; width: 39%; height: 50%; }
+.wb-frame .lab {
+  position: absolute; left: -1px; top: -28px;
+  background: var(--brand-blue); color: #fff;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 4px 4px 0 0;
+}
+
+/* ===== Feature card grid (pastel sticky-note echo) ===== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 24px;
+}
+.feature-grid > div:nth-child(2) { grid-column: span 1; }
+@media (max-width: 1024px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  border-radius: var(--r-xxxl);
+  padding: 32px;
+  min-height: 320px;
+  display: flex; flex-direction: column;
+  color: var(--ink);
+  position: relative; overflow: hidden;
+}
+.feature-card .tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  background: rgba(255,255,255,0.5);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  margin-bottom: auto;
+  align-self: flex-start;
+}
+.feature-card h3 {
+  font-size: 28px; font-weight: 500; line-height: 1.2; letter-spacing: -0.5px;
+  margin: 16px 0 8px;
+}
+.feature-card p { font-size: 15px; color: var(--ink); opacity: 0.75; margin: 0; }
+.feature-card .vis {
+  margin-top: 24px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.feature-card .vis .sn {
+  width: 64px; height: 64px;
+  border-radius: 4px;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.1);
+  font-family: "Caveat", cursive;
+  font-size: 14px; line-height: 1.1;
+  padding: 6px 8px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.fc-yellow { background: var(--brand-yellow); }
+.fc-coral { background: var(--coral-light); }
+.fc-teal { background: var(--teal-light); }
+.fc-rose { background: var(--rose-light); }
+.fc-white { background: var(--canvas); border: 1px solid var(--hairline-soft); }
+
+/* ===== Stats row ===== */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+  padding: 64px 0;
+  border-top: 1px solid var(--hairline-soft);
+  border-bottom: 1px solid var(--hairline-soft);
+}
+@media (max-width: 768px) { .stats-row { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+.stat-cell { text-align: center; }
+.stat-cell .num {
+  font-size: 56px; font-weight: 500; line-height: 1.1; letter-spacing: -1.5px;
+  color: var(--ink);
+}
+.stat-cell .lbl { font-size: 14px; color: var(--steel); margin-top: 8px; }
+
+/* ===== Pricing ===== */
+.pricing-toggle {
+  background: var(--surface);
+  border-radius: var(--r-full);
+  padding: 4px;
+  display: inline-flex;
+  margin: 0 auto 32px;
+}
+.pricing-toggle .opt {
+  padding: 8px 18px;
+  font-size: 14px; font-weight: 500;
+  border-radius: var(--r-full);
+  color: var(--slate);
+  cursor: pointer;
+}
+.pricing-toggle .opt.on { background: var(--canvas); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+@media (max-width: 1024px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+  padding: 32px;
+}
+.pricing-card.featured {
+  background: var(--surface-pricing-featured);
+  border: 2px solid var(--brand-blue);
+}
+.pricing-card.enterprise {
+  background: var(--ink); color: var(--on-dark);
+}
+.pricing-card.enterprise h3, .pricing-card.enterprise .price { color: var(--on-dark); }
+.pricing-card.enterprise .desc, .pricing-card.enterprise li { color: var(--on-dark-muted); }
+.pricing-card .badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  background: var(--brand-blue); color: var(--on-dark);
+  padding: 4px 10px; border-radius: var(--r-full);
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+.pricing-card h3 { font-size: 22px; font-weight: 500; margin: 0 0 6px; }
+.pricing-card .desc { font-size: 14px; color: var(--slate); margin: 0 0 20px; min-height: 40px; }
+.pricing-card .price { font-size: 40px; font-weight: 500; letter-spacing: -1.5px; line-height: 1; margin: 0 0 4px; }
+.pricing-card .price small { font-size: 14px; color: var(--steel); font-weight: 400; letter-spacing: 0; }
+.pricing-card .cta { margin: 20px 0; }
+.pricing-card .cta .btn { width: 100%; }
+.pricing-card ul { list-style: none; padding: 0; margin: 0; }
+.pricing-card li {
+  font-size: 14px; padding: 8px 0;
+  display: flex; align-items: flex-start; gap: 10px;
+  line-height: 1.4;
+}
+.pricing-card li::before {
+  content: ""; display: inline-block;
+  width: 16px; height: 16px;
+  flex: none; margin-top: 2px;
+  background: var(--success-accent);
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4'><polyline points='20 6 9 17 4 12'/></svg>");
+  background-size: 10px; background-position: center; background-repeat: no-repeat;
+}
+
+/* CTA banner dark */
+.cta-band {
+  background: var(--ink); color: var(--on-dark);
+  border-radius: var(--r-feature);
+  padding: 64px;
+  text-align: center;
+  margin: 32px 0;
+}
+.cta-band h2 { color: var(--on-dark); margin: 0 0 16px; }
+.cta-band p { color: var(--on-dark-muted); max-width: 520px; margin: 0 auto 24px; font-size: 18px; }
+
+/* Logo wall */
+.logo-wall {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 32px;
+  align-items: center; justify-items: center;
+  padding: 32px 0;
+}
+@media (max-width: 768px) { .logo-wall { grid-template-columns: repeat(3, 1fr); } }
+.logo-wall .logo {
+  font-size: 18px; font-weight: 600; color: var(--steel);
+  letter-spacing: -0.4px;
+  text-align: center;
+}
+
+/* ===== Footer ===== */
+footer { background: var(--footer-bg); color: var(--on-dark); padding: 96px 32px 48px; margin-top: 64px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(5, 1fr); gap: 32px; margin-bottom: 48px; }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; } }
+@media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-brand .wm { display: inline-flex; align-items: center; }
+.footer-brand .wm-y { background: var(--brand-yellow); padding: 4px 12px; border-radius: 4px; color: var(--ink); font-weight: 700; font-size: 20px; letter-spacing: -0.5px; }
+.footer-brand p { font-size: 14px; color: var(--on-dark-muted); margin: 16px 0 0; max-width: 240px; line-height: 1.5; }
+footer h4 { font-size: 14px; font-weight: 500; color: var(--on-dark); margin: 0 0 16px; }
+footer ul { list-style: none; padding: 0; margin: 0; }
+footer li { margin: 6px 0; }
+footer a { font-size: 14px; color: var(--on-dark-muted); }
+footer a:hover { color: var(--on-dark); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-size: 13px; color: var(--on-dark-muted);
+}
+
+/* ===== Source link ===== */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px;
+  background: var(--brand-yellow); color: var(--ink);
+  border: 0;
+  font-size: 13px; font-weight: 600;
+  padding: 10px 16px; border-radius: var(--r-full);
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.src-link:hover { background: var(--ink); color: var(--brand-yellow); }
+
+/* ============= DS section ============= */
+.ds-block { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading {
+  font-size: 36px; font-weight: 500; letter-spacing: -0.5px;
+  color: var(--ink); margin: 0 0 16px; line-height: 1.2;
+}
+.ds-caption {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--steel);
+  margin: 32px 0 12px;
+}
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px)  { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px)  { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--canvas); border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--hairline-soft); }
+.ds-sw .chip { height: 70px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 12px; color: var(--steel); margin-top: 2px; font-family: ui-monospace, Menlo, monospace; }
+
+.ds-tints { display: grid; gap: 16px; grid-template-columns: repeat(5, 1fr); margin-top: 12px; }
+@media (max-width: 800px) { .ds-tints { grid-template-columns: repeat(2, 1fr); } }
+.ds-tint {
+  border-radius: var(--r-xxxl);
+  padding: 24px;
+  aspect-ratio: 1 / 1;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  color: var(--ink);
+  box-shadow: 2px 3px 12px rgba(5,0,56,0.06);
+}
+.ds-tint .lab { font-weight: 600; font-size: 15px; letter-spacing: -0.3px; }
+.ds-tint .v { font-size: 11px; opacity: 0.75; margin-top: 4px; font-family: ui-monospace, monospace; }
+.ds-tint.dark { color: #fff; }
+
+.ds-typescale { border: 1px solid var(--hairline); border-radius: var(--r-xl); overflow: hidden; background: var(--canvas); }
+.ds-tr { display: grid; grid-template-columns: 180px 240px 1fr; gap: 16px; padding: 18px 24px; border-top: 1px solid var(--hairline-soft); align-items: center; }
+.ds-tr:first-child { border-top: 0; }
+.ds-tok { font-weight: 600; font-size: 14px; color: var(--ink); }
+.ds-spec { font-size: 12px; color: var(--steel); font-family: ui-monospace, Menlo, monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 800px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(9, 1fr); }
+@media (max-width: 1000px) { .ds-radius { grid-template-columns: repeat(5, 1fr); } }
+@media (max-width: 560px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { text-align: center; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--brand-yellow); margin: 0 auto 8px; }
+.ds-rad .lab { font-size: 13px; font-weight: 600; color: var(--ink); }
+.ds-rad .vv { font-size: 11px; color: var(--steel); font-family: ui-monospace, monospace; }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 700px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-field-label { font-size: 12px; font-weight: 600; color: var(--steel); display: block; margin-bottom: 6px; }
+.ds-input { width: 100%; height: 44px; border: 1px solid var(--hairline-strong); border-radius: var(--r-md); padding: 0 16px; font-size: 16px; font-family: inherit; background: var(--canvas); color: var(--ink); }
+.ds-input.focused { border: 2px solid var(--brand-blue); outline: 0; padding: 0 15px; }
+.ds-card-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 880px) { .ds-card-row { grid-template-columns: 1fr; } }
+.ds-card-demo { padding: 24px; border-radius: var(--r-xl); border: 1px solid var(--hairline-soft); background: var(--canvas); }
+.ds-card-demo.lg { border-radius: var(--r-xxxl); }
+
+.ds-badge-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.ds-badge {
+  display: inline-flex; align-items: center;
+  font-size: 13px; font-weight: 600;
+  padding: 4px 10px; border-radius: var(--r-full);
+}
+.bd-yellow { background: var(--surface-yellow); color: var(--yellow-dark); }
+.bd-coral { background: var(--coral-light); color: var(--coral-dark); }
+.bd-purple { background: var(--surface-pricing-featured); color: var(--brand-blue); }
+.bd-success { background: var(--success-accent); color: #fff; }
+.bd-promo { background: var(--brand-yellow); color: var(--ink); }
+.bd-discount { background: var(--brand-yellow); color: var(--ink); border-radius: var(--r-sm); padding: 2px 6px; }
+
+</style>
+</head>
+<body>
+
+<!-- ============== PROMO BANNER ============== -->
+<div class="promo-banner">
+  Mirror Workshop · NYC · 18 June — Hear how AI Workflows ships
+  <span class="pill">Get your spot</span>
+</div>
+
+<!-- ============== TOP NAV ============== -->
+<header class="topnav"><div class="wrap"><div class="row">
+  <a href="#" class="brand">
+    <span class="wordmark"><span class="wordmark-y">Mirror</span></span>
+  </a>
+  <nav class="nav-links">
+    <a href="#">Product</a>
+    <a href="#">Solutions</a>
+    <a href="#">Resources</a>
+    <a href="#">Pricing</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="txt">Login</a>
+    <a href="#" class="txt">Contact sales</a>
+    <a href="#" class="btn btn-primary">Get started free</a>
+  </div>
+</div></div></header>
+
+<!-- ============== PART A — Marketing ============== -->
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <h1 class="hero-display">See how teams get great work done with Mirror.</h1>
+  <p class="lead">The AI-powered visual workspace where teams plan, build, and ship together — from kanban to mind maps to retros, all on one infinite canvas.</p>
+  <div class="hero-ctas">
+    <a href="#" class="btn btn-primary btn-lg">Get started free</a>
+    <a href="#" class="btn btn-secondary btn-lg">Book a demo</a>
+  </div>
+
+  <!-- Whiteboard mockup centerpiece -->
+  <div class="whiteboard">
+    <div class="whiteboard-toolbar">
+      <span class="tool">▤</span>
+      <span class="tool active">✎</span>
+      <span class="tool">▢</span>
+      <span class="tool">⬚</span>
+      <span class="sep"></span>
+      <span class="tool" style="background: var(--brand-yellow);"></span>
+      <span class="tool" style="background: var(--brand-coral);"></span>
+      <span class="tool" style="background: var(--teal-light);"></span>
+      <span class="tool" style="background: var(--brand-rose);"></span>
+      <span class="sep"></span>
+      <span class="tool">T</span>
+      <span class="tool">↗</span>
+      <div class="right">
+        <span class="av">JS</span>
+        <span class="av av2">LP</span>
+        <span class="av av3">RT</span>
+        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;">Share</a>
+      </div>
+    </div>
+    <div class="whiteboard-canvas">
+      <div class="wb-frame f1"><span class="lab">Sprint planning</span></div>
+      <div class="sticky s-yellow p1"><span class="label">User research</span></div>
+      <div class="sticky s-coral p2"><span class="label">Pain points from interviews</span></div>
+      <div class="sticky s-teal p3"><span class="label">Sketch flows</span></div>
+      <div class="sticky s-rose p9"><span class="label">Ship by Q3</span></div>
+      <div class="wb-arrow a1"></div>
+      <div class="wb-arrow a2"></div>
+      <div class="sticky s-orange p4"><span class="label">Map dependencies</span></div>
+      <div class="sticky s-mint p5"><span class="label">Done — verify with QA</span></div>
+      <div class="sticky s-blue p6"><span class="label">Stretch goal: AI agent</span></div>
+      <div class="sticky s-yellow p7"><span class="label">Retro: what went well</span></div>
+      <div class="sticky s-coral p8"><span class="label">Blocker: API rate limit</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- LOGO WALL -->
+<section style="padding: 0 0 64px;"><div class="wrap">
+  <p class="caption" style="text-align: center; margin-bottom: 24px;">Trusted by 250,000+ teams worldwide</p>
+  <div class="logo-wall">
+    <span class="logo">Cisco</span>
+    <span class="logo">Netflix</span>
+    <span class="logo">Atlassian</span>
+    <span class="logo">Volvo</span>
+    <span class="logo">PWC</span>
+    <span class="logo">Deloitte</span>
+  </div>
+</div></section>
+
+<!-- FEATURE CARDS (pastel sticky-note echo) -->
+<section style="padding-top: 32px;"><div class="wrap">
+  <div style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+    <p class="micro-uppercase">— Product</p>
+    <h2 class="heading-1" style="margin: 16px 0;">An infinite canvas for every kind of thinking.</h2>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card fc-yellow">
+      <span class="tag">AI Workflows</span>
+      <h3>Run an agent on every sticky note.</h3>
+      <p>Drop an AI agent onto the board and let it cluster, summarize, and translate. Stickies become structured data without leaving the canvas.</p>
+      <div class="vis">
+        <div class="sn fc-yellow" style="background: var(--brand-yellow-deep);">Cluster</div>
+        <div class="sn fc-yellow" style="background: var(--brand-yellow-deep);">Summarize</div>
+        <div class="sn fc-yellow" style="background: var(--brand-yellow-deep);">Translate</div>
+      </div>
+    </div>
+    <div class="feature-card fc-teal">
+      <span class="tag">Agile</span>
+      <h3>Plan a sprint in one screen.</h3>
+      <p>Drag stories onto a board. Group, prioritize, ship.</p>
+      <div class="vis">
+        <div class="sn fc-teal" style="background: var(--brand-teal); color: #fff;">Sprint 14</div>
+        <div class="sn fc-teal" style="background: var(--brand-teal); color: #fff;">Q3 plan</div>
+      </div>
+    </div>
+    <div class="feature-card fc-coral">
+      <span class="tag">Templates</span>
+      <h3>2,500+ ready-made boards.</h3>
+      <p>Retros, OKRs, journey maps — drop one in and run.</p>
+      <div class="vis">
+        <div class="sn fc-coral" style="background: var(--brand-coral);">Retro</div>
+        <div class="sn fc-coral" style="background: var(--brand-coral);">OKR</div>
+      </div>
+    </div>
+    <div class="feature-card fc-rose">
+      <span class="tag">Customer stories</span>
+      <h3>Cisco runs every sprint here.</h3>
+      <p>"Mirror collapsed our planning week into a 90-minute board." — VP Engineering, Cisco</p>
+      <div class="vis">
+        <div class="sn fc-rose" style="background: #f4a8d6;">"Game-changer"</div>
+      </div>
+    </div>
+    <div class="feature-card fc-white">
+      <span class="tag" style="background: var(--surface);">Integrations</span>
+      <h3>Connects to Slack, Jira, Figma, Linear, GitHub.</h3>
+      <p>Pull tickets in, push decisions out. Mirror is where the canvas lives — but everything you ship still lives in your stack.</p>
+      <div class="vis">
+        <div class="sn" style="background: var(--surface); border: 1px solid var(--hairline);">Slack</div>
+        <div class="sn" style="background: var(--surface); border: 1px solid var(--hairline);">Jira</div>
+        <div class="sn" style="background: var(--surface); border: 1px solid var(--hairline);">Figma</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- STATS ROW -->
+<section style="padding: 32px 0;"><div class="wrap">
+  <div class="stats-row">
+    <div class="stat-cell"><div class="num">100M+</div><div class="lbl">Users worldwide</div></div>
+    <div class="stat-cell"><div class="num">99%</div><div class="lbl">Of the Fortune 100</div></div>
+    <div class="stat-cell"><div class="num">2,500+</div><div class="lbl">Templates ready to run</div></div>
+    <div class="stat-cell"><div class="num">4.7★</div><div class="lbl">Across G2 & Capterra</div></div>
+  </div>
+</div></section>
+
+<!-- PRICING -->
+<section><div class="wrap">
+  <div style="text-align: center; max-width: 720px; margin: 0 auto 32px;">
+    <p class="micro-uppercase">— Pricing</p>
+    <h2 class="heading-1" style="margin: 16px 0;">Pick the plan that fits how your team works.</h2>
+  </div>
+  <div style="text-align: center;">
+    <div class="pricing-toggle">
+      <span class="opt">Monthly</span>
+      <span class="opt on">Annual · save 15%</span>
+    </div>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <h3>Free</h3>
+      <p class="desc">For individuals starting out on the canvas.</p>
+      <p class="price">$0<small> / user · mo</small></p>
+      <div class="cta"><a href="#" class="btn btn-secondary">Get started</a></div>
+      <ul>
+        <li>3 editable boards</li>
+        <li>Pre-built templates</li>
+        <li>Core integrations</li>
+      </ul>
+    </div>
+    <div class="pricing-card">
+      <h3>Starter</h3>
+      <p class="desc">For small teams shipping together.</p>
+      <p class="price">$8<small> / user · mo</small></p>
+      <div class="cta"><a href="#" class="btn btn-secondary">Choose Starter</a></div>
+      <ul>
+        <li>Unlimited boards</li>
+        <li>Voting & timer</li>
+        <li>Custom templates</li>
+        <li>Project folders</li>
+      </ul>
+    </div>
+    <div class="pricing-card featured">
+      <p class="badge">Most popular</p>
+      <h3>Business</h3>
+      <p class="desc">For cross-functional teams scaling visual work.</p>
+      <p class="price">$16<small> / user · mo</small></p>
+      <div class="cta"><a href="#" class="btn btn-primary">Choose Business</a></div>
+      <ul>
+        <li>Everything in Starter</li>
+        <li>AI Workflows</li>
+        <li>Single sign-on</li>
+        <li>Day Pass for stakeholders</li>
+        <li>Private workspaces</li>
+      </ul>
+    </div>
+    <div class="pricing-card enterprise">
+      <h3>Enterprise</h3>
+      <p class="desc">For the largest design and product orgs.</p>
+      <p class="price" style="font-size: 28px;">Custom</p>
+      <div class="cta"><a href="#" class="btn btn-on-dark">Contact sales</a></div>
+      <ul>
+        <li>SAML SSO + SCIM</li>
+        <li>Audit log API</li>
+        <li>Dedicated CSM</li>
+        <li>Premium support</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- DARK CTA BAND -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="cta-band">
+    <h2 class="display-lg" style="color: var(--on-dark);">Build your next great thing.</h2>
+    <p>Join 100M+ users who plan, build, and ship on Mirror's infinite canvas.</p>
+    <a href="#" class="btn btn-on-dark btn-lg">Get started free</a>
+  </div>
+</div></section>
+
+
+<!-- ============== PART B — Design System ============== -->
+<section><div class="wrap">
+  <div style="max-width: 720px; margin: 0 auto 48px; text-align: center;">
+    <p class="micro-uppercase">— Design system</p>
+    <h2 class="display-lg" style="margin: 16px 0;">Yellow wordmark, black&nbsp;pill, sticky&nbsp;palette.</h2>
+    <p class="body-md" style="font-size: 18px; color: var(--slate);">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.miro.html" target="_blank" rel="noopener" style="color: var(--brand-blue); border-bottom: 1px solid var(--brand-blue);">DESIGN.md</a>. Stark white canvas + canary yellow wordmark. Black pill CTAs across every surface. Pastel feature cards echo the actual sticky-note palette of the product. Roobert PRO across every tier (Inter substitute).</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand — yellow wordmark, black CTA</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ffd02f"></div><div class="meta"><div class="name">brand-yellow</div><div class="val">#ffd02f</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#fcb900"></div><div class="meta"><div class="name">brand-yellow-deep</div><div class="val">#fcb900</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1c1c1e"></div><div class="meta"><div class="name">primary · ink</div><div class="val">#1c1c1e</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#4262ff"></div><div class="meta"><div class="name">brand-blue</div><div class="val">#4262ff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#00b473"></div><div class="meta"><div class="name">success-accent</div><div class="val">#00b473</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#050038"></div><div class="meta"><div class="name">ink-deep</div><div class="val">#050038</div></div></div>
+    </div>
+
+    <p class="ds-caption">Sticky-note palette — pastel feature cards</p>
+    <div class="ds-tints">
+      <div class="ds-tint" style="background: var(--brand-yellow);"><div class="lab">brand-yellow</div><div class="v">#ffd02f</div></div>
+      <div class="ds-tint" style="background: var(--coral-light);"><div class="lab">coral-light</div><div class="v">#ffc6c6</div></div>
+      <div class="ds-tint" style="background: var(--teal-light);"><div class="lab">teal-light</div><div class="v">#c3faf5</div></div>
+      <div class="ds-tint" style="background: var(--brand-rose);"><div class="lab">brand-rose</div><div class="v">#ffd8f4</div></div>
+      <div class="ds-tint" style="background: var(--brand-orange-light);"><div class="lab">orange-light</div><div class="v">#ffe6cd</div></div>
+    </div>
+
+    <p class="ds-caption">Tag-chip pairs (light fill, dark text)</p>
+    <div class="ds-swatches" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="ds-sw"><div class="chip" style="background:#fff8e0"></div><div class="meta"><div class="name">surface-yellow / #746019</div><div class="val">badge-tag-yellow</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ffc6c6"></div><div class="meta"><div class="name">coral-light / #600000</div><div class="val">badge-tag-coral</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f5f3ff"></div><div class="meta"><div class="name">surface-pricing-featured</div><div class="val">badge-tag-purple</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#c3faf5"></div><div class="meta"><div class="name">teal-light / #187574</div><div class="val">badge-tag-teal</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text & surface neutrals</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ffffff; border-bottom: 1px solid var(--hairline);"></div><div class="meta"><div class="name">canvas</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#fafbfc"></div><div class="meta"><div class="name">surface-soft</div><div class="val">#fafbfc</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f7f8fa"></div><div class="meta"><div class="name">surface</div><div class="val">#f7f8fa</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e0e2e8"></div><div class="meta"><div class="name">hairline</div><div class="val">#e0e2e8</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#555a6a"></div><div class="meta"><div class="name">slate</div><div class="val">#555a6a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1c1c1e"></div><div class="meta"><div class="name">footer-bg</div><div class="val">#1c1c1e</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="body-md" style="margin: 0 0 24px;">Roobert PRO is Miro's custom face — Inter at weights 400 / 500 / 600 is the open-source substitute. Single-weight scale: 400 (body), 500 (emphasis + all headings), 600 (badges + uppercase). The face never uses 700 in this system.</p>
+
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">hero-display</span><span class="ds-spec">80 / 500 / 1.05 / -2px</span><span class="ds-sam" style="font-size: 44px; font-weight: 500; line-height: 1.05; letter-spacing: -2px;">See how teams get great done</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">60 / 500 / 1.10 / -1.5px</span><span class="ds-sam" style="font-size: 36px; font-weight: 500; line-height: 1.1; letter-spacing: -1.5px;">Section opener</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-1</span><span class="ds-spec">48 / 500 / 1.15 / -1px</span><span class="ds-sam" style="font-size: 32px; font-weight: 500; line-height: 1.15; letter-spacing: -1px;">Page-level headline</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-2</span><span class="ds-spec">36 / 500 / 1.20 / -0.5px</span><span class="ds-sam" style="font-size: 28px; font-weight: 500; line-height: 1.2; letter-spacing: -0.5px;">Subsection headline</span></div>
+      <div class="ds-tr"><span class="ds-tok">heading-3</span><span class="ds-spec">28 / 500 / 1.25</span><span class="ds-sam" style="font-size: 24px; font-weight: 500; line-height: 1.25;">Card title</span></div>
+      <div class="ds-tr"><span class="ds-tok">subtitle</span><span class="ds-spec">18 / 400 / 1.50</span><span class="ds-sam" style="font-size: 18px; line-height: 1.5;">Hero subtitle. Generous breathing.</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 / 400 / 1.50</span><span class="ds-sam" style="font-size: 16px; line-height: 1.5;">Default body. Tight hero leading, relaxed body.</span></div>
+      <div class="ds-tr"><span class="ds-tok">caption-bold</span><span class="ds-spec">13 / 600 / 1.40</span><span class="ds-sam" style="font-size: 13px; font-weight: 600;">Badge label · tag chip</span></div>
+      <div class="ds-tr"><span class="ds-tok">micro-uppercase</span><span class="ds-spec">11 / 600 / 1.40 / 0.5px</span><span class="ds-sam" style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--brand-blue);">SECTION EYEBROW</span></div>
+      <div class="ds-tr"><span class="ds-tok">stat-display</span><span class="ds-spec">64 / 500 / 1.10 / -1.5px</span><span class="ds-sam" style="font-size: 48px; font-weight: 500; line-height: 1.1; letter-spacing: -1.5px;">100M+</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <p class="body-md" style="margin: 0 0 24px;">All buttons render at <code style="font-family: ui-monospace, monospace;">r-full</code> (pill). Pastel feature cards land at 28px. The hero CTA banner reaches 32px. Inputs are 8px.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius: 4px;"></div><div class="lab">xs</div><div class="vv">4 · chips</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 6px;"></div><div class="lab">sm</div><div class="vv">6 · discount</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 8px;"></div><div class="lab">md</div><div class="vv">8 · inputs</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 12px;"></div><div class="lab">lg</div><div class="vv">12 · cards</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 16px;"></div><div class="lab">xl</div><div class="vv">16 · pricing</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 20px;"></div><div class="lab">xxl</div><div class="vv">20 · feature</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 28px;"></div><div class="lab">xxxl</div><div class="vv">28 · pastel</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 32px;"></div><div class="lab">feature</div><div class="vv">32 · CTA</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 9999px;"></div><div class="lab">full</div><div class="vv">∞ · pills</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — black pill across every surface</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">button-primary</a>
+      <a href="#" class="btn btn-yellow">button-yellow</a>
+      <a href="#" class="btn btn-blue">button-blue</a>
+      <a href="#" class="btn btn-secondary">button-secondary</a>
+      <a href="#" class="btn btn-ghost">button-ghost</a>
+    </div>
+
+    <p class="ds-caption">On-dark pair (used in dark CTA banner)</p>
+    <div class="ds-comp-row" style="background: var(--ink); padding: 24px; border-radius: var(--r-feature);">
+      <a href="#" class="btn btn-on-dark">button-on-dark</a>
+      <a href="#" class="btn btn-yellow">button-yellow · on dark</a>
+    </div>
+
+    <p class="ds-caption">Inputs — focus is the blue border</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input · default</label>
+        <input class="ds-input" placeholder="you@mirror.app" />
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="you@mirror.app" />
+      </div>
+    </div>
+
+    <p class="ds-caption">Cards — pastel echoes the sticky-note palette</p>
+    <div class="ds-card-row">
+      <div class="ds-card-demo lg" style="background: var(--brand-yellow); border: 0;">
+        <span class="ds-badge bd-yellow" style="background: rgba(255,255,255,0.6);">card-feature-yellow</span>
+        <p class="heading-4" style="margin: 12px 0 4px;">28px radius · pastel</p>
+        <p class="body-md" style="font-size: 14px; color: rgba(0,0,0,0.7);">Saturated brand-color card.</p>
+      </div>
+      <div class="ds-card-demo lg" style="background: var(--coral-light); border: 0;">
+        <span class="ds-badge bd-coral" style="background: rgba(255,255,255,0.6);">card-feature-coral</span>
+        <p class="heading-4" style="margin: 12px 0 4px;">Echoes sticky color.</p>
+        <p class="body-md" style="font-size: 14px; color: rgba(0,0,0,0.7);">Same shape, different voltage.</p>
+      </div>
+      <div class="ds-card-demo">
+        <span class="ds-badge bd-purple">card-base</span>
+        <p class="heading-4" style="margin: 12px 0 4px;">16px radius · hairline</p>
+        <p class="body-md" style="font-size: 14px;">Default white feature card with quiet outline.</p>
+      </div>
+    </div>
+
+    <p class="ds-caption">Badges — pill family</p>
+    <div class="ds-badge-row">
+      <span class="ds-badge bd-yellow">badge-tag-yellow</span>
+      <span class="ds-badge bd-coral">badge-tag-coral</span>
+      <span class="ds-badge bd-purple">badge-tag-purple</span>
+      <span class="ds-badge bd-success">badge-success</span>
+      <span class="ds-badge bd-promo">badge-promo</span>
+      <span class="ds-badge bd-discount">SAVE 15%</span>
+    </div>
+
+    <p class="ds-caption">Promo banner — black strip with inline yellow pill</p>
+    <div class="promo-banner" style="border-radius: var(--r-md); margin-top: 0;">
+      Mirror Workshop · Hear how AI Workflows ships
+      <span class="pill">Get your spot</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============== FOOTER ============== -->
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="wm"><span class="wm-y">Mirror</span></span>
+      <p>The AI-powered visual workspace where teams plan, build, and ship.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul><li><a href="#">Whiteboard</a></li><li><a href="#">AI Workflows</a></li><li><a href="#">Templates</a></li><li><a href="#">Integrations</a></li></ul>
+    </div>
+    <div>
+      <h4>Solutions</h4>
+      <ul><li><a href="#">Agile</a></li><li><a href="#">Product</a></li><li><a href="#">UX research</a></li><li><a href="#">Strategy</a></li></ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul><li><a href="#">Help center</a></li><li><a href="#">Community</a></li><li><a href="#">Mirroverse</a></li><li><a href="#">Customers</a></li></ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">News</a></li><li><a href="#">Contact</a></li></ul>
+    </div>
+    <div>
+      <h4>Plans & Pricing</h4>
+      <ul><li><a href="#">Free</a></li><li><a href="#">Starter</a></li><li><a href="#">Business</a></li><li><a href="#">Enterprise</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Mirror · Built on the canvas</span>
+    <span>Inspired by miro DESIGN.md · awesome-design-md</span>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.miro.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

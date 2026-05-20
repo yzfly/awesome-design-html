@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tinder — iOS design spec</title>
+<meta name="description" content="Tinder iOS app design reference. Pink-to-orange gradient brand (#FE3C72 → #FF655B). Swipe deck, action button stack, It's a Match modal, Gold gradient gate." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#ffffff; --canvas-soft:#fafafa; --surface:#f5f5f5;
+  --pink:#FE3C72; --orange:#FF655B; --gradient:linear-gradient(135deg,#FE3C72 0%,#FF655B 100%);
+  --gold:#FFC629; --gold-deep:#E89B00; --platinum:#A57DF1;
+  --super:#1B82FF; --boost:#9C27FF; --boost-light:#C77DFF;
+  --ink:#000000; --ink-2:#222222; --ink-soft:#666666; --ink-muted:#999999; --ink-dim:#cccccc;
+  --border:#ECECEC; --border-soft:#F5F5F5;
+  --confirm:#42D886; --negative:#FF4458;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-2xl:22px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.brand-mark{width:30px;height:30px;border-radius:8px;background:var(--gradient);display:grid;place-items:center}
+.brand-mark svg{width:18px;height:18px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:600;color:var(--ink-soft)}
+.nav-pill.active{color:var(--ink);background:var(--surface)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:opacity .15s, transform .12s}
+.btn:hover{opacity:.9}
+.btn-gradient{background:var(--gradient);color:#fff;padding:13px 26px;border-radius:var(--r-pill);text-transform:uppercase;letter-spacing:.6px;font-weight:800}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:11px 22px;border-radius:var(--r-pill)}
+.btn-ghost{background:transparent;color:var(--ink);padding:11px 22px;border-radius:var(--r-pill)}
+.btn-gold{background:linear-gradient(135deg,#FFD86F,#FFC629 60%,#E89B00);color:#000;padding:13px 26px;border-radius:var(--r-pill);text-transform:uppercase;letter-spacing:.6px;font-weight:800}
+
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:var(--gradient);opacity:.08;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--r-pill);background:rgba(254,60,114,.10);color:var(--pink);font-size:12px;font-weight:700;letter-spacing:.5px;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gradient)}
+.hero h1{font-size:clamp(44px,7vw,84px);line-height:.95;letter-spacing:-2.6px;font-weight:900;margin-bottom:22px}
+.hero h1 .gradient-word{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:560px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(254,60,114,.18),0 0 0 1px rgba(0,0,0,.08)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#fff}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.status-bar.light{color:#fff}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;padding-top:52px;display:flex;flex-direction:column;background:#fff}
+
+/* SWIPE DECK */
+.scr-swipe{background:#fafafa;position:relative}
+.swipe-header{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 10px;position:relative;z-index:5}
+.swipe-header .menu svg{width:22px;height:22px;fill:none;stroke:#000;stroke-width:1.8}
+.swipe-header .flame{width:32px;height:32px;border-radius:50%;background:var(--gradient);display:grid;place-items:center}
+.swipe-header .flame svg{width:18px;height:18px;fill:#fff}
+.swipe-header .filter svg{width:22px;height:22px;fill:none;stroke:#000;stroke-width:1.8}
+.swipe-cards{flex:1;position:relative;padding:10px 14px;display:grid;place-items:center}
+.profile-card{position:relative;width:100%;max-width:220px;aspect-ratio:5/7;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#ff9e80 0%,#FE3C72 40%,#7a1f4a 100%);box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.profile-card .dots{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:3px;z-index:3}
+.profile-card .dots span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.4)}
+.profile-card .dots span.active{background:#fff}
+.profile-card .badges{position:absolute;top:24px;right:10px;z-index:3;display:flex;flex-direction:column;gap:5px;align-items:flex-end}
+.profile-card .badge{font-size:9.5px;font-weight:800;background:rgba(0,0,0,.6);color:#fff;padding:3px 7px;border-radius:9999px;backdrop-filter:blur(8px)}
+.profile-card .badge.verified{background:rgba(27,130,255,.95)}
+.profile-card .overlay{position:absolute;bottom:0;left:0;right:0;padding:30px 14px 14px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.65) 60%,rgba(0,0,0,.9))}
+.profile-card .nm{font-size:24px;font-weight:800;color:#fff;display:flex;align-items:flex-end;gap:6px;line-height:1}
+.profile-card .nm .age{font-weight:400;font-size:22px}
+.profile-card .nm .verified-tick{width:14px;height:14px;fill:var(--super);margin-bottom:3px}
+.profile-card .dist{font-size:11px;color:#fff;margin-top:5px;display:flex;align-items:center;gap:4px;font-weight:500}
+.profile-card .dist svg{width:11px;height:11px;fill:#fff}
+.profile-card .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.profile-card .tag{font-size:9.5px;font-weight:600;background:rgba(255,255,255,.22);color:#fff;padding:3px 8px;border-radius:9999px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3)}
+
+/* swipe overlays on card */
+.profile-card .like-overlay,.profile-card .nope-overlay,.profile-card .super-overlay{position:absolute;top:30px;font-weight:900;font-size:30px;padding:6px 14px;border:3px solid;border-radius:8px;text-transform:uppercase;letter-spacing:2px;opacity:0;z-index:4}
+.profile-card .like-overlay{left:14px;color:var(--confirm);border-color:var(--confirm);transform:rotate(-18deg)}
+.profile-card .nope-overlay{right:14px;color:var(--negative);border-color:var(--negative);transform:rotate(18deg)}
+.profile-card .super-overlay{left:50%;transform:translateX(-50%);color:var(--super);border-color:var(--super);bottom:80px;top:auto}
+
+/* card behind */
+.profile-card.behind{position:absolute;top:14px;left:50%;transform:translateX(-50%) scale(.94) translateY(8px);z-index:-1;opacity:.7;filter:saturate(.85)}
+
+.swipe-actions{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px 16px;z-index:5}
+.act-btn{border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.10);display:grid;place-items:center;border:1px solid var(--border-soft)}
+.act-btn svg{width:50%;height:50%}
+.act-btn.rewind{width:38px;height:38px}
+.act-btn.rewind svg{fill:var(--gold)}
+.act-btn.nope{width:50px;height:50px}
+.act-btn.nope svg{fill:var(--negative)}
+.act-btn.super{width:42px;height:42px}
+.act-btn.super svg{fill:var(--super)}
+.act-btn.like{width:50px;height:50px}
+.act-btn.like svg{fill:var(--confirm)}
+.act-btn.boost{width:38px;height:38px;background:var(--boost);box-shadow:0 4px 14px rgba(156,39,255,.30)}
+.act-btn.boost svg{fill:#fff}
+
+/* MATCHES */
+.scr-matches{padding-top:48px}
+.matches-header{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 8px}
+.matches-header .ttl{font-size:22px;font-weight:800;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+.matches-header svg{width:20px;height:20px;fill:none;stroke:#000;stroke-width:1.8}
+.match-tabs{display:flex;gap:18px;padding:0 16px 12px;font-weight:700;font-size:13px}
+.match-tabs .mt{color:var(--ink-muted);padding-bottom:6px;border-bottom:2px solid transparent}
+.match-tabs .mt.active{color:#000;border-bottom-color:#000}
+.new-matches-row{padding:10px 14px;border-bottom:1px solid var(--border-soft)}
+.new-matches-row .lab{font-size:12px;font-weight:700;color:#000;margin-bottom:8px}
+.new-matches-row .row{display:flex;gap:10px;overflow:hidden}
+.new-matches-row .nm-cell{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;width:60px}
+.new-matches-row .nm-cell .pic{width:60px;height:80px;border-radius:8px;position:relative;overflow:hidden}
+.new-matches-row .nm-cell .pic .dot{position:absolute;top:5px;right:5px;width:10px;height:10px;border-radius:50%;background:var(--pink);border:2px solid #fff}
+.new-matches-row .nm-cell .name{font-size:10.5px;font-weight:600}
+.pic-1{background:linear-gradient(135deg,#fdc468,#dc2743)}
+.pic-2{background:linear-gradient(160deg,#06d6a0,#118ab2,#073b4c)}
+.pic-3{background:linear-gradient(160deg,#a8dadc,#457b9d,#1d3557)}
+.pic-4{background:linear-gradient(160deg,#ffd60a,#FE3C72)}
+.pic-5{background:linear-gradient(135deg,#bc1888,#3a0e0a)}
+.likes-card{margin:12px 14px;background:var(--gradient);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:11px;color:#fff}
+.likes-card .lc-pic{width:48px;height:48px;border-radius:8px;background:rgba(255,255,255,.2);position:relative;overflow:hidden;filter:blur(8px)}
+.likes-card .lc-pic::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#ff9e80,#7a1f4a)}
+.likes-card .lc-meta{flex:1}
+.likes-card .lc-num{font-size:18px;font-weight:800;line-height:1.1}
+.likes-card .lc-sub{font-size:11.5px;opacity:.95;font-weight:500}
+.likes-card .lc-cta{background:#fff;color:#000;padding:6px 12px;border-radius:9999px;font-size:11px;font-weight:700}
+.match-list{flex:1;overflow:hidden}
+.match-msg{display:flex;gap:10px;padding:10px 14px;align-items:center;border-bottom:1px solid var(--border-soft)}
+.match-msg .av{width:50px;height:50px;border-radius:50%;flex-shrink:0;border:2px solid var(--pink)}
+.match-msg .meta{flex:1;min-width:0}
+.match-msg .nm{font-size:13px;font-weight:700}
+.match-msg .preview{font-size:11.5px;color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:1px}
+.match-msg .time{font-size:10.5px;color:var(--ink-muted);flex-shrink:0;font-feature-settings:"tnum"}
+
+/* PROFILE */
+.scr-profile{padding-top:48px;overflow-y:hidden}
+.prof-hero{aspect-ratio:5/6;background:linear-gradient(135deg,#fdc468,#dc2743);position:relative}
+.prof-hero .name-overlay{position:absolute;bottom:14px;left:14px;color:#fff}
+.prof-hero .name-overlay .nm{font-size:22px;font-weight:800;display:flex;align-items:flex-end;gap:5px}
+.prof-hero .name-overlay .nm .age{font-weight:400;font-size:20px}
+.prof-hero .name-overlay .occ{font-size:12px;margin-top:3px;display:flex;align-items:center;gap:5px;font-weight:500}
+.prof-hero .edit{position:absolute;bottom:14px;right:14px;width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.prof-hero .edit svg{width:18px;height:18px;fill:var(--pink)}
+.prof-completion{padding:12px 16px;font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--border-soft)}
+.prof-completion .bar{width:100%;height:5px;background:var(--border);border-radius:3px;margin-top:6px;overflow:hidden}
+.prof-completion .bar .fill{height:100%;width:78%;background:var(--gradient);border-radius:3px}
+.gold-card{margin:12px 14px;border-radius:12px;background:linear-gradient(135deg,#FFD86F,#FFC629 50%,#E89B00);padding:14px;color:#000;display:flex;align-items:center;gap:11px}
+.gold-card .gc-ic{width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.18);display:grid;place-items:center;flex-shrink:0}
+.gold-card .gc-ic svg{width:22px;height:22px;fill:#000}
+.gold-card .gc-meta{flex:1}
+.gold-card .gc-ttl{font-size:14px;font-weight:800}
+.gold-card .gc-sub{font-size:11px;font-weight:500;margin-top:2px}
+.gold-card .gc-cta{background:#000;color:#fff;padding:7px 13px;border-radius:9999px;font-size:11px;font-weight:700}
+.prof-section{padding:12px 16px}
+.prof-section .sec-title{font-size:11px;font-weight:700;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.prof-section .pills{display:flex;flex-wrap:wrap;gap:6px}
+.prof-section .pill{padding:5px 12px;border-radius:9999px;border:1px solid var(--border);font-size:11px;font-weight:600;color:#000;display:flex;align-items:center;gap:4px}
+.prof-section .pill svg{width:11px;height:11px;fill:var(--ink-soft)}
+
+/* TAB BAR */
+.tinder-tab{position:absolute;bottom:0;left:0;right:0;height:62px;background:#fff;display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--border-soft);z-index:10}
+.tinder-tab .t{padding:10px;display:grid;place-items:center}
+.tinder-tab .t svg{width:24px;height:24px;fill:var(--ink-muted)}
+.tinder-tab .t.active svg{fill:var(--pink)}
+.tinder-tab .t.gold svg{fill:var(--gold-deep)}
+
+/* SECTIONS */
+.section{padding:120px 0;border-top:1px solid var(--border-soft)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:800;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.4px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--canvas-soft);border-radius:14px;padding:28px;border:1px solid var(--border-soft)}
+.feat .feat-ic{width:36px;height:36px;border-radius:50%;background:var(--gradient);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:#fff}
+.feat h3{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-soft);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:1px 6px;border-radius:3px;color:var(--pink);border:1px solid var(--border)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:50px 0;border-top:1px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:900;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:5px 10px;border-radius:6px;color:#000;border:1px solid var(--border)}
+.ios-feat-visual{background:var(--canvas-soft);border-radius:14px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* Swipe gesture demo */
+.gesture-stack{display:flex;flex-direction:column;align-items:center;gap:18px}
+.gesture-row{display:flex;gap:18px}
+.gesture-cell{display:flex;flex-direction:column;align-items:center;gap:6px}
+.mini-card{width:80px;height:110px;border-radius:10px;position:relative;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.mini-card.nope{background:linear-gradient(160deg,#06d6a0,#118ab2);transform:rotate(-18deg)}
+.mini-card.like{background:linear-gradient(160deg,#fdc468,#dc2743);transform:rotate(18deg)}
+.mini-card.super{background:linear-gradient(160deg,#bc1888,#3a0e0a);transform:translateY(-6px)}
+.mini-card .label{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);font-weight:900;font-size:14px;padding:3px 8px;border:2px solid;border-radius:4px;text-transform:uppercase;letter-spacing:1px}
+.mini-card.nope .label{color:var(--negative);border-color:var(--negative)}
+.mini-card.like .label{color:var(--confirm);border-color:var(--confirm);transform:translate(-50%,-50%) rotate(15deg)}
+.mini-card.super .label{color:var(--super);border-color:var(--super);transform:translate(-50%,-50%) rotate(0)}
+.gesture-cell .l{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);font-weight:600}
+
+/* It's a Match modal */
+.match-modal{width:280px;background:linear-gradient(160deg,#FE3C72 0%,#FF655B 60%,#7a1f4a);border-radius:16px;padding:24px;text-align:center;color:#fff;box-shadow:0 30px 60px rgba(254,60,114,.4)}
+.match-modal .ttl{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1;margin-bottom:6px;font-style:italic}
+.match-modal .sub{font-size:12px;font-weight:500;opacity:.95;margin-bottom:16px}
+.match-modal .pics{position:relative;height:90px;margin-bottom:18px}
+.match-modal .pics .p{width:60px;height:90px;border-radius:8px;border:2px solid #fff;position:absolute;top:0}
+.match-modal .pics .p1{left:50%;transform:translateX(-50%) translateX(-22px) rotate(-12deg);background:linear-gradient(135deg,#fdc468,#dc2743)}
+.match-modal .pics .p2{left:50%;transform:translateX(-50%) translateX(22px) rotate(12deg);background:linear-gradient(160deg,#06d6a0,#118ab2)}
+.match-modal .input-row{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:9999px;padding:10px 14px;font-size:12px;text-align:left;color:rgba(255,255,255,.85);margin-bottom:10px}
+.match-modal .send-btn{background:#fff;color:var(--pink);padding:10px 0;border-radius:9999px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;width:100%}
+
+/* Gold gradient gate */
+.gold-stack{display:flex;flex-direction:column;gap:14px;width:300px}
+.gold-tier{background:linear-gradient(135deg,#FFD86F,#FFC629 50%,#E89B00);border-radius:14px;padding:18px;color:#000;display:flex;flex-direction:column;gap:10px;box-shadow:0 16px 30px rgba(232,155,0,.30)}
+.gold-tier .head{display:flex;justify-content:space-between;align-items:flex-start}
+.gold-tier .head h4{font-size:22px;font-weight:900;line-height:1;font-style:italic}
+.gold-tier .head .ic svg{width:28px;height:28px;fill:#000}
+.gold-tier .perks{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.gold-tier .perks .p{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600}
+.gold-tier .perks .p svg{width:13px;height:13px;fill:#000}
+.gold-tier .cta{background:#000;color:#FFC629;padding:11px 0;border-radius:9999px;font-size:12px;font-weight:800;text-align:center;text-transform:uppercase;letter-spacing:.6px}
+
+.ds-section{padding:120px 0;background:var(--canvas-soft);border-top:1px solid var(--border-soft)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.4px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--pink);border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-pill);background:#fff}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-soft);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:10px;padding:10px;border:1px solid var(--border-soft)}
+.ds-sw .chip{height:64px;border-radius:6px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:700;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-muted);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px;background:var(--canvas-soft)}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+.ds-type-table tr:last-child td{border-bottom:0}
+.ds-type-table td.token{color:var(--pink)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:#000}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:var(--gradient);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:800}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border-soft)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-light{background:var(--surface);border:0;border-radius:9999px;padding:11px 16px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-light::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:9999px;letter-spacing:.2px}
+.tag-pink{background:rgba(254,60,114,.14);color:var(--pink)}
+.tag-super{background:rgba(27,130,255,.14);color:var(--super)}
+.tag-gold{background:rgba(232,155,0,.14);color:var(--gold-deep)}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:8px;padding:18px;border:1px solid var(--border-soft)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:900;margin-top:6px;color:var(--pink);letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-soft);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-soft);line-height:1.5}
+.foot a{color:var(--pink);font-weight:700}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#fff;border:1px solid var(--border);color:var(--pink);font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 8px 24px rgba(254,60,114,.20)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M13.5 1c0 3.5-2 5-3 6-1.5 1.5-2 3-2 5 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3-1.5-5-3-7-1-1.5-4-4-4-4z" fill="#fff"/></svg></span>
+      tinder <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#">Log In</a>
+      <a class="btn btn-gradient" href="#">Create Account</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>One gesture. Two outcomes.<br/><span class="gradient-word">One gradient</span> tying it together.</h1>
+    <p>The Tinder iOS app, dissected. A swipe deck above five colorful action buttons. Pink-to-orange gradient as the brand spine — applied to flame, CTAs, match modals, and nothing else.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gradient" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- MATCHES -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar"><span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-matches">
+            <div class="matches-header">
+              <div class="ttl">Matches</div>
+              <div style="display:flex;gap:14px">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M4 12h16M4 6h16M4 18h16"/></svg>
+              </div>
+            </div>
+            <div class="match-tabs">
+              <div class="mt active">Matches (24)</div>
+              <div class="mt">Messages</div>
+            </div>
+            <div class="likes-card">
+              <div class="lc-pic"></div>
+              <div class="lc-meta">
+                <div class="lc-num">128 Likes</div>
+                <div class="lc-sub">See who likes you with Gold</div>
+              </div>
+              <div class="lc-cta">UPGRADE</div>
+            </div>
+            <div class="new-matches-row">
+              <div class="lab">New Matches</div>
+              <div class="row">
+                <div class="nm-cell"><div class="pic pic-1"><div class="dot"></div></div><div class="name">Marie</div></div>
+                <div class="nm-cell"><div class="pic pic-2"><div class="dot"></div></div><div class="name">Akira</div></div>
+                <div class="nm-cell"><div class="pic pic-3"></div><div class="name">Sofia</div></div>
+                <div class="nm-cell"><div class="pic pic-4"></div><div class="name">Inês</div></div>
+                <div class="nm-cell"><div class="pic pic-5"></div><div class="name">Joana</div></div>
+              </div>
+            </div>
+            <div class="match-list">
+              <div class="match-msg">
+                <div class="av pic-1"></div>
+                <div class="meta"><div class="nm">Marie</div><div class="preview">Just sent you a song 🎶</div></div>
+                <div class="time">10:42</div>
+              </div>
+              <div class="match-msg">
+                <div class="av pic-2"></div>
+                <div class="meta"><div class="nm">Akira</div><div class="preview">Coffee tomorrow then? ☕</div></div>
+                <div class="time">9:18</div>
+              </div>
+              <div class="match-msg">
+                <div class="av pic-3"></div>
+                <div class="meta"><div class="nm">Sofia</div><div class="preview">Haha that's exactly my vibe</div></div>
+                <div class="time">Yesterday</div>
+              </div>
+            </div>
+          </div>
+          <div class="tinder-tab">
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M13.5 1c0 3.5-2 5-3 6-1.5 1.5-2 3-2 5 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3-1.5-5-3-7-1-1.5-4-4-4-4z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+            <div class="t gold"><svg viewBox="0 0 24 24"><path d="M12 1l3 5h6l-4.5 4.5L18 17l-6-3-6 3 1.5-6.5L3 6h6z"/></svg></div>
+            <div class="t active"><svg viewBox="0 0 24 24" fill="var(--pink)"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM2 22a10 10 0 0120 0H2z"/></svg></div>
+          </div>
+        </div>
+        <div class="iphone-label">Matches</div>
+      </div>
+
+      <!-- SWIPE DECK -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar"><span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-swipe">
+            <div class="swipe-header">
+              <div class="menu"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+              <div class="flame"><svg viewBox="0 0 24 24"><path d="M13.5 1c0 3.5-2 5-3 6-1.5 1.5-2 3-2 5 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3-1.5-5-3-7-1-1.5-4-4-4-4z"/></svg></div>
+              <div class="filter"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg></div>
+            </div>
+            <div class="swipe-cards">
+              <div class="profile-card behind"></div>
+              <div class="profile-card">
+                <div class="dots"><span class="active"></span><span></span><span></span><span></span></div>
+                <div class="badges">
+                  <span class="badge verified">✓ Verified</span>
+                </div>
+                <div class="overlay">
+                  <div class="nm">Marie <span class="age">26</span> <svg class="verified-tick" viewBox="0 0 24 24"><path d="M23 12l-2.4-2.8.3-3.7-3.6-.8L15.4 1.5 12 3 8.6 1.5 6.7 4.7l-3.6.8.3 3.7L1 12l2.4 2.8-.3 3.7 3.6.8 1.9 3.2L12 21l3.4 1.5 1.9-3.2 3.6-.8-.3-3.7zm-13 5l-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9l-8 8z"/></svg></div>
+                  <div class="dist"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>12 km away</div>
+                  <div class="tags">
+                    <span class="tag">📸 Photography</span>
+                    <span class="tag">☕ Coffee</span>
+                    <span class="tag">🌅 Sunsets</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swipe-actions">
+              <button class="act-btn rewind" aria-label="Rewind"><svg viewBox="0 0 24 24"><path d="M11 17l-5-5 5-5v3h7a4 4 0 010 8h-7v-1z"/></svg></button>
+              <button class="act-btn nope" aria-label="Nope"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></button>
+              <button class="act-btn super" aria-label="Super Like"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></button>
+              <button class="act-btn like" aria-label="Like"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></button>
+              <button class="act-btn boost" aria-label="Boost"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 10-12h-6z"/></svg></button>
+            </div>
+          </div>
+          <div class="tinder-tab">
+            <div class="t active"><svg viewBox="0 0 24 24" fill="var(--pink)"><path d="M13.5 1c0 3.5-2 5-3 6-1.5 1.5-2 3-2 5 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3-1.5-5-3-7-1-1.5-4-4-4-4z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+            <div class="t gold"><svg viewBox="0 0 24 24"><path d="M12 1l3 5h6l-4.5 4.5L18 17l-6-3-6 3 1.5-6.5L3 6h6z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+          </div>
+        </div>
+        <div class="iphone-label">Swipe deck</div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar"><span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-profile">
+            <div class="prof-hero">
+              <div class="name-overlay">
+                <div class="nm">Jiang <span class="age">31</span></div>
+                <div class="occ">💼 Designer · 📍 Lisbon</div>
+              </div>
+              <div class="edit"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4L16.5 3.5z" stroke="var(--pink)" stroke-width="2" fill="none"/></svg></div>
+            </div>
+            <div class="prof-completion">
+              Profile completion · 78%
+              <div class="bar"><div class="fill"></div></div>
+            </div>
+            <div class="gold-card">
+              <div class="gc-ic"><svg viewBox="0 0 24 24"><path d="M12 1l3 5h6l-4.5 4.5L18 17l-6-3-6 3 1.5-6.5L3 6h6z"/></svg></div>
+              <div class="gc-meta">
+                <div class="gc-ttl">Get Tinder Gold™</div>
+                <div class="gc-sub">See who Likes you · 5 Super Likes/week</div>
+              </div>
+              <div class="gc-cta">TRY</div>
+            </div>
+            <div class="prof-section">
+              <div class="sec-title">About me</div>
+              <div class="pills">
+                <span class="pill">📐 Designer</span>
+                <span class="pill">🏠 Lisbon</span>
+                <span class="pill">🌐 EN · PT · 中文</span>
+              </div>
+            </div>
+            <div class="prof-section">
+              <div class="sec-title">Interests</div>
+              <div class="pills">
+                <span class="pill">📸 Photography</span>
+                <span class="pill">☕ Coffee</span>
+                <span class="pill">🎬 Cinema</span>
+                <span class="pill">🍷 Wine</span>
+              </div>
+            </div>
+          </div>
+          <div class="tinder-tab">
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M13.5 1c0 3.5-2 5-3 6-1.5 1.5-2 3-2 5 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3-1.5-5-3-7-1-1.5-4-4-4-4z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+            <div class="t gold"><svg viewBox="0 0 24 24"><path d="M12 1l3 5h6l-4.5 4.5L18 17l-6-3-6 3 1.5-6.5L3 6h6z"/></svg></div>
+            <div class="t"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <div class="t active"><svg viewBox="0 0 24 24" fill="var(--pink)"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+          </div>
+        </div>
+        <div class="iphone-label">Profile</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. Five colorful buttons. One gradient that signs everything.</h2>
+      <p>Tinder's app is built around a single gesture — the swipe — and a row of five color-coded action buttons that turn the gesture into a vocabulary. The pink-to-orange brand gradient appears only where it earns its place: flame, primary CTAs, match celebrations.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M13.5 1c0 3.5-2 5-3 6-1.5 1.5-2 3-2 5 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3-1.5-5-3-7-1-1.5-4-4-4-4z"/></svg></div>
+        <h3>Swipe deck</h3>
+        <p>Full-screen card (5:7 aspect) with bottom gradient fade → name + age + distance overlay. Five circular action buttons below — gold rewind, red nope, blue super-like, green like, purple boost. Card behind peeks at 94% scale.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h3>Matches</h3>
+        <p>New Matches horizontal row with 60×80 cards + pink-dot "new" indicator. Likes-You card uses the brand gradient — the only chromatic real estate on the screen. Messages list below with circular pink-ringed avatars.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+        <h3>Profile</h3>
+        <p>Hero photo with name+age overlay bottom-left, edit pencil bottom-right. Profile completion meter. Gold gradient upsell card. Pill-based interest tags — outlined white, no fills.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Swipe gesture overlays</div>
+          <h3>Three intents, three colored stamps.</h3>
+          <p>Drag the card horizontally and a colored stamp fades in over the photo — red NOPE at 18° clockwise, green LIKE at -18°, blue SUPER LIKE straight (drag up). The stamp's opacity tracks the drag distance: 0% at rest, 100% at the commit threshold.</p>
+          <p>Release before the threshold and the card springs back. Cross it and the card flies off-screen in the gesture direction, the next card snaps into place behind.</p>
+          <div class="ios-feat-tokens">
+            <code>nope rotation: +18°</code>
+            <code>like rotation: -18°</code>
+            <code>super: straight up</code>
+            <code>threshold: 100pt</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="gesture-stack">
+            <div class="gesture-row">
+              <div class="gesture-cell">
+                <div class="mini-card nope"><div class="label">Nope</div></div>
+                <div class="l">drag left</div>
+              </div>
+              <div class="gesture-cell">
+                <div class="mini-card super"><div class="label">Super</div></div>
+                <div class="l">drag up</div>
+              </div>
+              <div class="gesture-cell">
+                <div class="mini-card like"><div class="label">Like</div></div>
+                <div class="l">drag right</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="match-modal">
+            <div class="ttl">It's a Match!</div>
+            <div class="sub">Marie likes you too · Lisbon, Portugal</div>
+            <div class="pics">
+              <div class="p p1"></div>
+              <div class="p p2"></div>
+            </div>
+            <div class="input-row">Say something nice…</div>
+            <div class="send-btn">Send Message</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">It's a Match modal</div>
+          <h3>Two photos overlapping, one big italic verdict.</h3>
+          <p>When both users have liked each other, Tinder slides up a full-screen modal: brand-gradient background, italicized "It's a Match!" wordmark in 30pt 900-weight, two card thumbnails tilted -12° and +12° toward each other, and a single CTA — Send Message.</p>
+          <p>"Keep swiping" exits without messaging. The modal honors iOS Reduce Motion (no card-tilt animation if disabled). Confetti is system-rendered.</p>
+          <div class="ios-feat-tokens">
+            <code>bg: gradient(135°)</code>
+            <code>radius: 16px</code>
+            <code>title: italic 30/900</code>
+            <code>haptic: success</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Gold / Platinum gate</div>
+          <h3>A second gradient. Used sparingly. Always premium.</h3>
+          <p>Tinder reserves a second gradient — gold (<code>#FFD86F → #E89B00</code>) — for paid tier upsells. It appears in the Likes-You unblur, the Gold upgrade card on Profile, and the trophy tab icon. Never anywhere else.</p>
+          <p>The contrast pairs gold-on-black for primary CTAs ("TRY"), and italicized 900-weight "Tinder Gold™" wordmark across all subscription surfaces.</p>
+          <div class="ios-feat-tokens">
+            <code>gradient: gold 135°</code>
+            <code>CTA: black on gold</code>
+            <code>ink: black (#000)</code>
+            <code>cap: ™ italic</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="gold-stack">
+            <div class="gold-tier">
+              <div class="head">
+                <h4>Tinder Gold™</h4>
+                <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 1l3 5h6l-4.5 4.5L18 17l-6-3-6 3 1.5-6.5L3 6h6z"/></svg></div>
+              </div>
+              <div class="perks">
+                <div class="p"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#000" stroke-width="3" fill="none"/></svg>See who Likes you</div>
+                <div class="p"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#000" stroke-width="3" fill="none"/></svg>Unlimited Likes</div>
+                <div class="p"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#000" stroke-width="3" fill="none"/></svg>5 Super Likes per week</div>
+                <div class="p"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#000" stroke-width="3" fill="none"/></svg>1 Boost per month</div>
+              </div>
+              <div class="cta">Continue — €19.99/mo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>One brand gradient. Five action colors. One gold tier.</h2>
+        <p>Every token Tinder's iOS app reaches for — surface ladder, type ramp, radius scale, components. The brand gradient is the only place pink and orange ever live; the action buttons each get a single hue; gold means "premium."</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.tinder-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Pink-to-orange brand gradient. Five color-coded action buttons (gold/red/blue/green/purple). Gold gradient for paid tiers. Everything else is grayscale — the photography brings every other color in.</p>
+
+      <div class="ds-caption">Brand Gradient</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FE3C72"></div><div class="name">Pink Start</div><div class="val">#FE3C72</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF655B"></div><div class="name">Orange End</div><div class="val">#FF655B</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FE3C72,#FF655B)"></div><div class="name">Gradient</div><div class="val">135deg</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF4458"></div><div class="name">Negative</div><div class="val">#FF4458</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#42D886"></div><div class="name">Confirm</div><div class="val">#42D886</div></div>
+      </div>
+
+      <div class="ds-caption">Action Buttons</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FFC629"></div><div class="name">Rewind</div><div class="val">#FFC629</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF4458"></div><div class="name">Nope</div><div class="val">#FF4458</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1B82FF"></div><div class="name">Super Like</div><div class="val">#1B82FF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#42D886"></div><div class="name">Like</div><div class="val">#42D886</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#9C27FF"></div><div class="name">Boost</div><div class="val">#9C27FF</div></div>
+      </div>
+
+      <div class="ds-caption">Gold / Platinum</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FFD86F"></div><div class="name">Gold Light</div><div class="val">#FFD86F</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFC629"></div><div class="name">Gold</div><div class="val">#FFC629</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E89B00"></div><div class="name">Gold Deep</div><div class="val">#E89B00</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#A57DF1"></div><div class="name">Platinum</div><div class="val">#A57DF1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FFD86F,#E89B00)"></div><div class="name">Gold Gradient</div><div class="val">135deg</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Ink</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #ECECEC"></div><div class="name">Canvas</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fafafa;border:1px solid #ECECEC"></div><div class="name">Soft</div><div class="val">#fafafa</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f5f5f5"></div><div class="name">Surface</div><div class="val">#f5f5f5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Ink</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#999999"></div><div class="name">Muted</div><div class="val">#999999</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Proxima Nova (substituted with Inter). Heavy, opinionated weights. Italics signal premium ("Tinder Gold™", "It's a Match!"). Numbers tabular in distances and ages.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--match-title</td><td class="sample" style="font-size:30px;font-weight:900;font-style:italic;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-1px">It's a Match!</td><td>30 / 1.88rem</td><td>900 italic</td><td>-1px</td></tr>
+          <tr><td class="token">--name-overlay</td><td class="sample" style="font-size:24px;font-weight:800;letter-spacing:-.4px">Marie 26</td><td>24 / 1.5rem</td><td>800</td><td>-0.4px</td></tr>
+          <tr><td class="token">--screen-title</td><td class="sample" style="font-size:22px;font-weight:800;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent">Matches</td><td>22 / 1.38rem</td><td>800</td><td>normal</td></tr>
+          <tr><td class="token">--gold-wordmark</td><td class="sample" style="font-size:18px;font-weight:900;font-style:italic;color:#E89B00">Tinder Gold™</td><td>18 / 1.13rem</td><td>900 italic</td><td>normal</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:15px;font-weight:500">12 km away</td><td>15 / 0.94rem</td><td>500</td><td>normal</td></tr>
+          <tr><td class="token">--cta</td><td class="sample" style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--pink)">Get Premium</td><td>14 / 0.88rem</td><td>800</td><td>0.6px</td></tr>
+          <tr><td class="token">--match-row</td><td class="sample" style="font-size:13px;font-weight:700">Marie</td><td>13 / 0.81rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--preview</td><td class="sample" style="font-size:12px;color:#666">Just sent you a song 🎶</td><td>12 / 0.75rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--tag</td><td class="sample" style="font-size:11px;font-weight:600;background:rgba(0,0,0,.04);padding:3px 8px;border-radius:9999px">📸 Photography</td><td>11 / 0.69rem</td><td>600</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Pill-and-circle for actions. Cards at 12-14px. Photo cards on the swipe deck and profile hero both share 14px — Tinder's signature card-corner.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Min</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Tile</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Mini-card</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Photo</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">Modal</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill / CTA</div><div class="ds-radius-val">9999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Action</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Profile card</div><div class="tk-val">5:7</div><div class="tk-note">Aspect ratio. Always 14pt radius, always 12pt photo dots top.</div></div>
+        <div class="token-cell"><div class="tk-label">Nope / Like btn</div><div class="tk-val">50pt</div><div class="tk-note">Outer circle. Rewind/Super/Boost drop to 38-42pt.</div></div>
+        <div class="token-cell"><div class="tk-label">Swipe threshold</div><div class="tk-val">100pt</div><div class="tk-note">Drag distance before commit. Card springs back below this.</div></div>
+        <div class="token-cell"><div class="tk-label">Card rotation</div><div class="tk-val">±18°</div><div class="tk-note">At max drag. Nope tilts CW; Like tilts CCW.</div></div>
+        <div class="token-cell"><div class="tk-label">Match modal</div><div class="tk-val">spring</div><div class="tk-note">0.5 response, 0.55 damping. Confetti via SwiftUI symbols.</div></div>
+        <div class="token-cell"><div class="tk-label">Gold gradient</div><div class="tk-val">135°</div><div class="tk-note">Same angle as brand gradient. Stops at #FFD86F → #E89B00.</div></div>
+        <div class="token-cell"><div class="tk-label">Distance precision</div><div class="tk-val">km</div><div class="tk-note">Rounded to nearest km. <2km shows "Just now near you".</div></div>
+        <div class="token-cell"><div class="tk-label">Haptics</div><div class="tk-val">3 levels</div><div class="tk-note">selection on drag · light on commit · success on match.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">A vocabulary built for one-handed thumb use — every action within thumb arc, every button colored distinctly so muscle memory wins.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-gradient" href="#">Create Account</a>
+            <a class="btn btn-gold" href="#">Get Gold™</a>
+            <a class="btn btn-outline" href="#">Continue</a>
+            <a class="btn btn-ghost" href="#">Skip</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="act-btn nope" style="position:static" aria-label="Nope"><svg viewBox="0 0 24 24" fill="var(--negative)"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></button>
+              <button class="act-btn super" style="position:static" aria-label="Super"><svg viewBox="0 0 24 24" fill="var(--super)"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></button>
+              <button class="act-btn like" style="position:static" aria-label="Like"><svg viewBox="0 0 24 24" fill="var(--confirm)"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-light" placeholder="Say something nice…" />
+            <input class="input-light" placeholder="What's your name?" />
+            <div class="ds-card-row">
+              <span class="tag tag-pink">Verified</span>
+              <span class="tag tag-super">Super Like</span>
+              <span class="tag tag-gold">Gold</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="width:100%;height:140px;border-radius:14px;background:linear-gradient(160deg,#fdc468,#dc2743 60%,#3a0e0a);position:relative;overflow:hidden">
+              <div style="position:absolute;top:8px;left:8px;right:8px;display:flex;gap:3px"><span style="flex:1;height:3px;border-radius:2px;background:#fff"></span><span style="flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.4)"></span></div>
+              <div style="position:absolute;bottom:0;left:0;right:0;padding:18px 10px 10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.8));color:#fff">
+                <div style="font-size:14px;font-weight:800">Marie 26</div>
+                <div style="font-size:10px;margin-top:2px">12 km away</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M13.5 1c0 3.5-2 5-3 6-1.5 1.5-2 3-2 5 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3-1.5-5-3-7-1-1.5-4-4-4-4z" fill="#fff"/></svg></span>
+      Tinder iOS
+    </div>
+    <p>Design reference. Not affiliated with Tinder LLC / Match Group. Token values are derived from the public iOS app and Tinder's published brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.tinder-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-outline" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.tinder-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.tinder-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

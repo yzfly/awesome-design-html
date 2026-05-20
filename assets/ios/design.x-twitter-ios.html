@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>X (Twitter) — iOS design spec</title>
+<meta name="description" content="X iOS app design reference. Pure #000 canvas, white-on-black geometry, legacy #1D9BF0 Twitter Blue for follow and links, hairline #2F3336 borders, Chirp typography." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#000000; --surface-1:#16181C; --surface-2:#1D1F23; --surface-3:#202327; --hover:#181818;
+  --accent:#1D9BF0; --accent-hover:#1A8CD8;
+  --ink:#ffffff; --ink-soft:#E7E9EA; --ink-muted:#71767B; --ink-dim:#5A5E62;
+  --border:#2F3336; --border-soft:#202327;
+  --like:#F91880; --repost:#00BA7C; --reply:#1D9BF0; --gold:#FFD700;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:9999px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.2px}
+.brand-mark{width:30px;height:30px;border-radius:50%;background:#000;border:1px solid #2F3336;display:grid;place-items:center}
+.brand-mark svg{width:16px;height:16px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-full);font-size:14px;font-weight:700;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink);background:var(--surface-1)}
+.nav-pill.active{color:var(--ink);background:var(--surface-1)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.03)}
+.btn-primary{background:#fff;color:#000;padding:12px 22px;border-radius:var(--r-full)}
+.btn-primary:hover{background:#D7DBDC}
+.btn-pill{background:var(--surface-1);color:var(--ink);padding:10px 18px;border-radius:var(--r-full);border:1px solid var(--border)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 18px;border-radius:var(--r-full)}
+.btn-light{background:#fff;color:#000;padding:12px 22px;border-radius:var(--r-full)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(29,155,240,.10),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-full);background:var(--surface-1);color:var(--ink-soft);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px;border:1px solid var(--border)}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:.95;letter-spacing:-2.2px;font-weight:900;margin-bottom:22px;color:var(--ink)}
+.hero h1 .gradient-word{position:relative;display:inline-block;color:#000;background:#fff;padding:0 14px;border-radius:6px}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#fff;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+/* avatars */
+.x-av{border-radius:50%;flex-shrink:0;display:grid;place-items:center;color:#fff;font-weight:700}
+.xav-1{background:linear-gradient(135deg,#1D9BF0,#0E5A8A)}
+.xav-2{background:linear-gradient(135deg,#F91880,#7A0F40)}
+.xav-3{background:linear-gradient(135deg,#FFD400,#A88500)}
+.xav-4{background:linear-gradient(135deg,#7856FF,#3F2A8A)}
+.xav-5{background:linear-gradient(135deg,#00BA7C,#06593D)}
+.xav-6{background:linear-gradient(135deg,#FF7A00,#A04F00)}
+.xav-7{background:linear-gradient(135deg,#FF4040,#7A0F0F)}
+.xav-8{background:linear-gradient(135deg,#5BA5E5,#1F4D7A)}
+
+.verified{display:inline-flex;width:14px;height:14px;color:var(--accent);vertical-align:-2px;margin-left:2px}
+.verified svg{width:100%;height:100%;fill:currentColor}
+.verified.gold{color:var(--gold)}
+
+/* ========== SCREEN: TIMELINE ========== */
+.scr{position:absolute;inset:0;color:#fff;font-size:11px;display:flex;flex-direction:column;padding-top:48px}
+.scr-tl{background:#000}
+.tl-head{position:absolute;top:44px;left:0;right:0;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);z-index:13;border-bottom:1px solid var(--border)}
+.tl-top{display:flex;justify-content:space-between;align-items:center;padding:6px 14px 4px}
+.tl-top .x-av{width:28px;height:28px;font-size:11px}
+.tl-top .logo{width:18px;height:18px}
+.tl-top .logo svg{fill:#fff}
+.tl-top .gear svg{width:18px;height:18px;fill:#fff}
+.tl-tabs{display:flex;border-bottom:1px solid var(--border)}
+.tl-tab{flex:1;text-align:center;padding:9px 0 8px;font-size:12px;color:var(--ink-muted);font-weight:500;position:relative}
+.tl-tab.active{color:var(--ink);font-weight:700}
+.tl-tab.active::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:46px;height:3px;border-radius:99px;background:var(--accent)}
+.tl-body{flex:1;overflow:hidden;padding:78px 0 0;display:flex;flex-direction:column}
+.tweet{padding:9px 14px 8px;border-bottom:1px solid var(--border);display:flex;gap:9px}
+.tweet .x-av{width:36px;height:36px;font-size:13px}
+.tweet .body{flex:1;min-width:0}
+.tweet .meta{display:flex;align-items:center;gap:3px;font-size:11.5px;line-height:1.2}
+.tweet .meta .nm{font-weight:700;color:var(--ink)}
+.tweet .meta .hd{color:var(--ink-muted);font-weight:400}
+.tweet .meta .time{color:var(--ink-muted)}
+.tweet .meta .dot-sep{color:var(--ink-muted)}
+.tweet .meta .more{margin-left:auto;color:var(--ink-muted)}
+.tweet .meta .more svg{width:14px;height:14px;fill:currentColor}
+.tweet .txt{font-size:12px;color:var(--ink);line-height:1.35;margin-top:1px;word-break:break-word}
+.tweet .link{color:var(--accent)}
+.tweet .img{margin-top:7px;border-radius:14px;height:96px;background:linear-gradient(135deg,#1D9BF0,#3F2A8A);border:1px solid var(--border)}
+.tweet .ad-tag{font-size:9.5px;color:var(--ink-muted);font-weight:500;margin-bottom:2px}
+.tweet .acts{display:flex;justify-content:space-between;margin-top:7px;padding-right:8px;color:var(--ink-muted)}
+.tweet .acts .ac{display:flex;align-items:center;gap:3px;font-size:10.5px;font-feature-settings:"tnum";font-weight:500}
+.tweet .acts svg{width:14px;height:14px;fill:currentColor}
+.tweet .acts .ac.liked{color:var(--like)}
+.tweet .acts .ac.liked svg{fill:var(--like)}
+.tweet .acts .ac.reposted{color:var(--repost)}
+
+/* tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:54px;background:rgba(0,0,0,.95);backdrop-filter:blur(20px);display:flex;justify-content:space-around;align-items:center;padding:0 6px;border-top:1px solid var(--border);z-index:10}
+.tab{display:flex;flex-direction:column;align-items:center;gap:1px;color:var(--ink-muted);font-size:9px;font-weight:500;flex:1;padding-top:4px}
+.tab.active{color:var(--ink)}
+.tab svg{width:22px;height:22px;fill:currentColor}
+
+/* fab */
+.fab{position:absolute;bottom:64px;right:10px;width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;z-index:11;box-shadow:0 6px 18px rgba(29,155,240,.4)}
+.fab svg{width:18px;height:18px;fill:#fff}
+
+/* ========== SCREEN: PROFILE ========== */
+.scr-prof{background:#000;padding-top:0}
+.prof-back-row{position:absolute;top:48px;left:0;right:0;display:flex;justify-content:space-between;padding:0 12px;z-index:14}
+.prof-back-row .pb{width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);display:grid;place-items:center}
+.prof-back-row .pb svg{width:14px;height:14px;fill:#fff}
+.prof-banner{position:absolute;top:48px;left:0;right:0;height:90px;background:linear-gradient(135deg,#1D9BF0,#7856FF 60%,#F91880);z-index:9}
+.prof-body{position:absolute;top:138px;left:0;right:0;bottom:0;padding:0 14px;display:flex;flex-direction:column;background:#000}
+.prof-row{display:flex;justify-content:space-between;align-items:flex-start;margin-top:-32px;margin-bottom:8px}
+.prof-row .x-av{width:62px;height:62px;font-size:22px;border:3px solid #000;background:linear-gradient(135deg,#1D9BF0,#0E5A8A)}
+.prof-row .pact{margin-top:38px;display:flex;gap:6px}
+.prof-row .iconbtn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center}
+.prof-row .iconbtn svg{width:13px;height:13px;fill:#fff}
+.prof-row .follow{background:#fff;color:#000;font-weight:700;font-size:12px;padding:7px 14px;border-radius:9999px}
+.prof-id .nm{font-size:16px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:3px}
+.prof-id .hd{font-size:12px;color:var(--ink-muted);margin-top:1px}
+.prof-bio{font-size:12px;color:var(--ink);margin-top:7px;line-height:1.35}
+.prof-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:7px;font-size:11.5px;color:var(--ink-muted)}
+.prof-meta .mi{display:flex;align-items:center;gap:3px}
+.prof-meta .mi svg{width:12px;height:12px;fill:currentColor}
+.prof-meta .mi.link{color:var(--accent)}
+.prof-stats{display:flex;gap:14px;margin-top:7px;font-size:11.5px}
+.prof-stats .ps strong{color:var(--ink);font-weight:700}
+.prof-stats .ps{color:var(--ink-muted)}
+.prof-tabs{display:flex;border-bottom:1px solid var(--border);margin:10px -14px 0}
+.prof-tabs .pt{flex:1;text-align:center;padding:9px 0;font-size:11px;font-weight:500;color:var(--ink-muted);position:relative}
+.prof-tabs .pt.active{color:var(--ink);font-weight:700}
+.prof-tabs .pt.active::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:36px;height:3px;border-radius:99px;background:var(--accent)}
+
+/* ========== SCREEN: COMPOSE ========== */
+.scr-compose{background:#000;padding-top:48px}
+.comp-head{display:flex;align-items:center;justify-content:space-between;padding:6px 14px 10px}
+.comp-head .cancel{font-size:13px;color:var(--ink);font-weight:500}
+.comp-head .draft{font-size:13px;color:var(--ink-muted)}
+.comp-head .post{background:#fff;color:#000;font-weight:700;font-size:12.5px;padding:7px 14px;border-radius:9999px}
+.comp-aud{display:flex;align-items:center;gap:6px;margin:0 14px 10px;background:transparent;color:var(--accent);font-size:11px;font-weight:600;padding:4px 10px;border:1px solid var(--border);border-radius:9999px;width:fit-content}
+.comp-area{display:flex;gap:10px;padding:0 14px}
+.comp-area .x-av{width:36px;height:36px;font-size:13px}
+.comp-area .input{flex:1;font-size:14px;color:var(--ink-muted);min-height:120px;line-height:1.4}
+.comp-area .input b{color:var(--ink);font-weight:400}
+.comp-tail{position:absolute;bottom:50px;left:0;right:0;border-top:1px solid var(--border);padding:9px 14px;display:flex;align-items:center;justify-content:space-between;background:#000;z-index:10}
+.comp-tail .icons{display:flex;gap:14px}
+.comp-tail .icons svg{width:18px;height:18px;fill:var(--accent)}
+.comp-tail .progress{display:flex;align-items:center;gap:6px}
+.comp-tail .progress svg{width:18px;height:18px}
+.comp-tail .progress circle.bg{stroke:var(--border);stroke-width:2;fill:none}
+.comp-tail .progress circle.fg{stroke:var(--accent);stroke-width:2;fill:none;stroke-dasharray:44 100;stroke-linecap:round;transform:rotate(-90deg);transform-origin:center}
+.comp-tail .progress .plus{width:24px;height:24px;border-left:1px solid var(--border);padding-left:8px;display:grid;place-items:center;color:var(--ink-muted)}
+.grok-fab{position:absolute;bottom:64px;right:10px;width:42px;height:42px;border-radius:50%;background:#000;border:1px solid var(--border);display:grid;place-items:center;z-index:11}
+.grok-fab svg{width:18px;height:18px;fill:#fff}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:16px;padding:28px;border:1px solid var(--border)}
+.feat:hover{background:var(--surface-2)}
+.feat .feat-ic{width:36px;height:36px;border-radius:50%;background:rgba(29,155,240,.14);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--accent)}
+.feat h3{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:rgba(255,255,255,.06);padding:1px 6px;border-radius:3px;color:var(--ink-soft)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-1);padding:5px 10px;border-radius:6px;color:var(--ink-soft);border:1px solid var(--border)}
+.ios-feat-visual{background:var(--surface-1);border-radius:16px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border);position:relative;overflow:hidden}
+
+/* bookmark sheet */
+.bookmark-stack{display:flex;flex-direction:column;gap:14px;width:280px}
+.bm-sheet{background:#000;border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.bm-sheet .h{font-size:14px;font-weight:700;color:var(--ink)}
+.bm-row{display:flex;align-items:center;gap:10px;padding:8px 6px;border-radius:6px}
+.bm-row svg{width:18px;height:18px;fill:#fff}
+.bm-row .lbl{font-size:13px;font-weight:500;color:var(--ink)}
+
+/* repost picker */
+.repost-stack{display:flex;flex-direction:column;gap:12px;width:280px}
+.repost-sheet{background:#000;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.repost-opt{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.repost-opt:last-child{border-bottom:0}
+.repost-opt svg{width:20px;height:20px;fill:var(--ink)}
+.repost-opt .ll{font-size:14px;font-weight:600;color:var(--ink)}
+.repost-opt .ss{font-size:11px;color:var(--ink-muted);margin-top:1px}
+
+/* verified hierarchy */
+.verified-stack{display:flex;flex-direction:column;gap:10px;width:300px}
+.verified-row{display:flex;align-items:center;gap:10px;background:var(--surface-1);border:1px solid var(--border);border-radius:12px;padding:10px 12px}
+.verified-row .x-av{width:34px;height:34px;font-size:12px}
+.verified-row .info .nn{font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:3px}
+.verified-row .info .desc{font-size:11px;color:var(--ink-muted);margin-top:1px}
+
+/* ========== DESIGN SYSTEM ========== */
+.ds-section{padding:120px 0;background:#0a0a0a;border-top:1px solid var(--border)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--accent);border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-full);white-space:nowrap}
+.ds-source:hover{background:var(--surface-1)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:var(--surface-1);border-radius:10px;padding:10px;border:1px solid var(--border)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ds-type-table td.token{color:var(--accent)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:#fff}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,#1D9BF0,#0E5A8A);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:var(--surface-1);border-radius:14px;padding:22px;border:1px solid var(--border)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-pill{background:transparent;border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:#fff;font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:9999px}
+.tag-ad{background:var(--surface-1);color:var(--ink-muted);border:1px solid var(--border)}
+.tag-verified{background:var(--accent);color:#fff}
+.tag-gold{background:var(--gold);color:#000}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:var(--surface-1);border-radius:10px;padding:18px;border:1px solid var(--border)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:#fff;letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border);background:#0a0a0a}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.5}
+.foot a{color:var(--accent);font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#fff;border:0;color:#000;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-full);z-index:99;font-weight:700;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.float-link:hover{background:#D7DBDC}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></span>
+      X <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Log In</a>
+      <a class="btn btn-primary" href="#">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Everything you want<br/>is happening <span class="gradient-word">right now</span>.</h1>
+    <p>The X iOS app, dissected. Pure black canvas. Hairline borders at <code>#2F3336</code>. One legacy blue for follow buttons and links — and not a single other accent in sight.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- PROFILE -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-prof">
+            <div class="prof-back-row">
+              <div class="pb"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+              <div class="pb"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2.2" fill="none"/><path d="M21 21l-4-4" stroke="#fff" stroke-width="2.2"/></svg></div>
+            </div>
+            <div class="prof-banner"></div>
+            <div class="prof-body">
+              <div class="prof-row">
+                <div class="x-av">JS</div>
+                <div class="pact">
+                  <div class="iconbtn"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
+                  <div class="iconbtn"><svg viewBox="0 0 24 24"><path d="M21 12c0 5-4 9-9 9-1.5 0-2.9-.4-4.2-1L3 21l1.2-4.8C3.4 15 3 13.5 3 12a9 9 0 1118 0z"/></svg></div>
+                  <button class="follow">Follow</button>
+                </div>
+              </div>
+              <div class="prof-id">
+                <div class="nm">Jiang Shu<span class="verified"><svg viewBox="0 0 24 24"><path d="M9.6 1.5L8.1 3 6 2.5l-.8 2L3 5.5l.5 2.1L2 9.6l1.5 1.5L3 13.2l2.2.5.8 2L8 15.4l1.5 1.5L12 14.3l2.5 1.6L16 14.4l2-.7.8-2 2.2-.5-.5-2.1L22 7.6l-1.5-1.5L21 4l-2.2-.5L18 1.5l-2.5.6L14 .5 12 2 9.6.5 8.1 3z"/><path d="M10 14l-3.5-3.5L8 9l2 2 5.5-5.5L17 7z" fill="#000"/></svg></span></div>
+                <div class="hd">@jiang.shu</div>
+              </div>
+              <div class="prof-bio">Designer in Shenzhen. Building things that explain themselves. Co-conspirator on the side.</div>
+              <div class="prof-meta">
+                <div class="mi"><svg viewBox="0 0 24 24"><path d="M12 2C7 2 4 5.5 4 9c0 4 8 13 8 13s8-9 8-13c0-3.5-3-7-8-7z" fill="none" stroke="currentColor" stroke-width="2"/></svg> Shenzhen</div>
+                <div class="mi"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/></svg> Joined Mar 2014</div>
+                <div class="mi link"><svg viewBox="0 0 24 24"><path d="M10 14L4 20m6-6l3-3a4 4 0 015.6 5.6L15 20m-5-6l-3 3a4 4 0 01-5.6-5.6L4 8" fill="none" stroke="currentColor" stroke-width="2"/></svg> jiangshu.dev</div>
+              </div>
+              <div class="prof-stats">
+                <div class="ps"><strong>847</strong> Following</div>
+                <div class="ps"><strong>12.4K</strong> Followers</div>
+              </div>
+              <div class="prof-tabs">
+                <div class="pt active">Posts</div>
+                <div class="pt">Replies</div>
+                <div class="pt">Highlights</div>
+                <div class="pt">Media</div>
+                <div class="pt">Likes</div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="11" r="1.4"/><circle cx="15" cy="11" r="1.4"/><path d="M9 15c1 1 2 1.5 3 1.5s2-.5 3-1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M12 22a2 2 0 002-2h-4a2 2 0 002 2zm6-6V11a6 6 0 10-12 0v5l-2 2v1h16v-1z" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M21 12c0 5-4 9-9 9-1.5 0-2.9-.4-4.2-1L3 21l1.2-4.8C3.4 15 3 13.5 3 12a9 9 0 1118 0z" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Profile</div>
+      </div>
+
+      <!-- TIMELINE (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-tl">
+            <div class="tl-head">
+              <div class="tl-top">
+                <div class="x-av xav-1">J</div>
+                <div class="logo"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25z"/></svg></div>
+                <div class="gear"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M19 13a7 7 0 000-2l2-1.5-2-3.5-2.4 1A7 7 0 0014 5.6L13.5 3h-3L10 5.6A7 7 0 007.4 7l-2.4-1-2 3.5L5 11a7 7 0 000 2l-2 1.5 2 3.5 2.4-1a7 7 0 002.6 1.4L10.5 21h3l.5-2.6a7 7 0 002.6-1.4l2.4 1 2-3.5z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+              </div>
+              <div class="tl-tabs">
+                <div class="tl-tab active">For You</div>
+                <div class="tl-tab">Following</div>
+              </div>
+            </div>
+            <div class="tl-body">
+              <div class="tweet">
+                <div class="x-av xav-2">M</div>
+                <div class="body">
+                  <div class="meta"><span class="nm">marie</span><span class="verified"><svg viewBox="0 0 24 24"><path d="M9.6 1.5L8.1 3 6 2.5l-.8 2L3 5.5l.5 2.1L2 9.6l1.5 1.5L3 13.2l2.2.5.8 2L8 15.4l1.5 1.5L12 14.3l2.5 1.6L16 14.4l2-.7.8-2 2.2-.5-.5-2.1L22 7.6l-1.5-1.5L21 4l-2.2-.5L18 1.5l-2.5.6L14 .5 12 2 9.6.5 8.1 3z"/><path d="M10 14l-3.5-3.5L8 9l2 2 5.5-5.5L17 7z" fill="#000"/></svg></span><span class="hd">@marie</span><span class="dot-sep">·</span><span class="time">2h</span><span class="more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span></div>
+                  <div class="txt">the only design rule that matters is: does this earn its position on the screen.</div>
+                  <div class="acts">
+                    <div class="ac"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> 142</div>
+                    <div class="ac"><svg viewBox="0 0 24 24"><path d="M5 8l4-4 4 4M9 4v12M19 16l-4 4-4-4M15 20V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> 8.4K</div>
+                    <div class="ac liked"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg> 24.1K</div>
+                    <div class="ac"><svg viewBox="0 0 24 24"><path d="M3 9l3-3 3 3M6 6v12M15 15l3 3 3-3M18 18V6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> 412K</div>
+                    <div class="ac"><svg viewBox="0 0 24 24"><path d="M5 4v16l5-3 5 3V4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+                  </div>
+                </div>
+              </div>
+              <div class="tweet">
+                <div class="x-av xav-3">D</div>
+                <div class="body">
+                  <div class="ad-tag">Ad</div>
+                  <div class="meta"><span class="nm">Linear</span><span class="verified gold"><svg viewBox="0 0 24 24"><path d="M9.6 1.5L8.1 3 6 2.5l-.8 2L3 5.5l.5 2.1L2 9.6l1.5 1.5L3 13.2l2.2.5.8 2L8 15.4l1.5 1.5L12 14.3l2.5 1.6L16 14.4l2-.7.8-2 2.2-.5-.5-2.1L22 7.6l-1.5-1.5L21 4l-2.2-.5L18 1.5l-2.5.6L14 .5 12 2 9.6.5 8.1 3z"/><path d="M10 14l-3.5-3.5L8 9l2 2 5.5-5.5L17 7z" fill="#000"/></svg></span><span class="hd">@linear</span><span class="more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span></div>
+                  <div class="txt">Built for the way modern software teams actually plan. <span class="link">linear.app</span></div>
+                  <div class="img"></div>
+                </div>
+              </div>
+              <div class="tweet">
+                <div class="x-av xav-4">C</div>
+                <div class="body">
+                  <div class="meta"><span class="nm">cosmo</span><span class="hd">@cosmo</span><span class="dot-sep">·</span><span class="time">4h</span><span class="more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></span></div>
+                  <div class="txt">paris in may is just better than paris in any other month, fight me</div>
+                  <div class="acts">
+                    <div class="ac"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> 22</div>
+                    <div class="ac reposted"><svg viewBox="0 0 24 24"><path d="M5 8l4-4 4 4M9 4v12M19 16l-4 4-4-4M15 20V8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> 312</div>
+                    <div class="ac"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> 1.8K</div>
+                    <div class="ac"><svg viewBox="0 0 24 24"><path d="M3 9l3-3 3 3M6 6v12M15 15l3 3 3-3M18 18V6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg> 88K</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fab"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5"/></svg></div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="11" r="1.4"/><circle cx="15" cy="11" r="1.4"/><path d="M9 15c1 1 2 1.5 3 1.5s2-.5 3-1.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M12 22a2 2 0 002-2h-4a2 2 0 002 2zm6-6V11a6 6 0 10-12 0v5l-2 2v1h16v-1z" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M21 12c0 5-4 9-9 9-1.5 0-2.9-.4-4.2-1L3 21l1.2-4.8C3.4 15 3 13.5 3 12a9 9 0 1118 0z" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">For You</div>
+      </div>
+
+      <!-- COMPOSE -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-compose">
+            <div class="comp-head">
+              <div class="cancel">Cancel</div>
+              <div class="draft">Drafts</div>
+              <button class="post">Post</button>
+            </div>
+            <div class="comp-aud">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+              Everyone can reply
+            </div>
+            <div class="comp-area">
+              <div class="x-av xav-1">J</div>
+              <div class="input">
+                <b>The best thing about a black canvas</b> is that it doesn't have an opinion about your post. The post does the talking.
+              </div>
+            </div>
+            <div class="grok-fab"><svg viewBox="0 0 24 24"><path d="M3 12c4-6 14-6 18 0M3 12c4 6 14 6 18 0M12 6v12" fill="none" stroke="#fff" stroke-width="2"/></svg></div>
+            <div class="comp-tail">
+              <div class="icons">
+                <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="10" r="1.5"/><path d="M3 17l5-5 7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><text x="12" y="15" font-size="9" fill="currentColor" font-weight="700" text-anchor="middle">GIF</text></svg>
+                <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 11v3M11 9v5M15 11v3M19 8v6" stroke="currentColor" stroke-width="1.8"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 00-8 8c0 4 4 8 8 12 4-4 8-8 8-12a8 8 0 00-8-8z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>
+                <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.8"/></svg>
+              </div>
+              <div class="progress">
+                <svg viewBox="0 0 18 18"><circle class="bg" cx="9" cy="9" r="7"/><circle class="fg" cx="9" cy="9" r="7"/></svg>
+                <div class="plus">+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Compose</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One pure black canvas.</h2>
+      <p>X on iOS is the most restrained app on your phone. Black canvas, white ink, hairline borders. Color appears only where it changes state — and it's always the same legacy Twitter blue.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>Timeline</h3>
+        <p>Tweet rows separated only by 1px <code>#2F3336</code> hairlines. Avatar 40pt left-rail. Action row at the bottom — comment / repost / heart / view count / share / bookmark — laid out for thumb economics.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 22a8 8 0 0116 0"/></svg></div>
+        <h3>Profile</h3>
+        <p>Banner image 90pt tall. Avatar 80pt drops 32pt into the body. Follow button white pill, top-right. Tab strip <code>Posts · Replies · Highlights · Media · Likes</code>.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5"/></svg></div>
+        <h3>Compose</h3>
+        <p>Full-screen sheet. White Post pill stays disabled until you type. 280-char ring fills in legacy Twitter blue, then turns yellow at 260, red over 280.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Bookmarks</div>
+          <h3>The save gesture that's faster than a screenshot.</h3>
+          <p>Tap the bookmark icon and the row becomes a save sheet — Add to Bookmarks, Add to Folder, Share External. The action committed counts up at the bottom of every tweet as a "view count" of bookmarks.</p>
+          <p>Bookmark icon goes solid blue when saved. Long-press on tweet reveals the same sheet plus translate, copy link, and Grok this post.</p>
+          <div class="ios-feat-tokens">
+            <code>icon: 18 → 22pt</code>
+            <code>saved: #1D9BF0</code>
+            <code>sheet: 14px radius</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="bookmark-stack">
+            <div class="bm-sheet">
+              <div class="h">Save to bookmarks</div>
+              <div class="bm-row"><svg viewBox="0 0 24 24"><path d="M5 4v16l5-3 5 3V4z" fill="#1D9BF0"/></svg><div class="lbl">All Bookmarks</div></div>
+              <div class="bm-row"><svg viewBox="0 0 24 24"><path d="M3 7l2-2h5l2 2h7v12H3z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><div class="lbl">Design tokens</div></div>
+              <div class="bm-row"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5"/></svg><div class="lbl">New folder</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="repost-stack">
+            <div class="repost-sheet">
+              <div class="repost-opt"><svg viewBox="0 0 24 24"><path d="M5 8l4-4 4 4M9 4v12M19 16l-4 4-4-4M15 20V8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><div><div class="ll">Repost</div><div class="ss">Share this post immediately</div></div></div>
+              <div class="repost-opt"><svg viewBox="0 0 24 24"><path d="M4 4h12v12l-3-3H4z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 18h6l3 3V11" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><div><div class="ll">Quote</div><div class="ss">Add a comment of your own</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Repost vs Quote</div>
+          <h3>Two amplifications, one button.</h3>
+          <p>Tap the repost icon and a bottom sheet asks: pure repost, or quote with comment. Repost broadcasts as-is. Quote opens the compose sheet with the source post embedded as a card.</p>
+          <p>Once reposted, the icon goes green <code>#00BA7C</code> until undone. Long-press the repost button to bypass the sheet and go straight to quote.</p>
+          <div class="ios-feat-tokens">
+            <code>sheet: bottom 14px</code>
+            <code>reposted: #00BA7C</code>
+            <code>haptic: medium on confirm</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Verified Hierarchy</div>
+          <h3>Blue checks, gold checks, gray checks.</h3>
+          <p>Verification on X is a tiered system. Blue = X Premium subscriber. Gold = verified organization. Gray = government/multilateral. Each badge renders at the same 14pt scale next to the display name.</p>
+          <p>The badge is a checkmark inside a starburst — never just a check. The starburst makes it instantly distinguishable from a generic "verified" icon.</p>
+          <div class="ios-feat-tokens">
+            <code>blue: #1D9BF0</code>
+            <code>gold: #FFD700</code>
+            <code>gray: #71767B</code>
+            <code>size: 14pt</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="verified-stack">
+            <div class="verified-row">
+              <div class="x-av xav-1">J</div>
+              <div class="info"><div class="nn">Jiang Shu <span class="verified"><svg viewBox="0 0 24 24"><path d="M9.6 1.5L8.1 3 6 2.5l-.8 2L3 5.5l.5 2.1L2 9.6l1.5 1.5L3 13.2l2.2.5.8 2L8 15.4l1.5 1.5L12 14.3l2.5 1.6L16 14.4l2-.7.8-2 2.2-.5-.5-2.1L22 7.6l-1.5-1.5L21 4l-2.2-.5L18 1.5l-2.5.6L14 .5 12 2 9.6.5 8.1 3z"/><path d="M10 14l-3.5-3.5L8 9l2 2 5.5-5.5L17 7z" fill="#000"/></svg></span></div><div class="desc">Premium subscriber</div></div>
+            </div>
+            <div class="verified-row">
+              <div class="x-av xav-3">L</div>
+              <div class="info"><div class="nn">Linear <span class="verified gold"><svg viewBox="0 0 24 24"><path d="M9.6 1.5L8.1 3 6 2.5l-.8 2L3 5.5l.5 2.1L2 9.6l1.5 1.5L3 13.2l2.2.5.8 2L8 15.4l1.5 1.5L12 14.3l2.5 1.6L16 14.4l2-.7.8-2 2.2-.5-.5-2.1L22 7.6l-1.5-1.5L21 4l-2.2-.5L18 1.5l-2.5.6L14 .5 12 2 9.6.5 8.1 3z"/><path d="M10 14l-3.5-3.5L8 9l2 2 5.5-5.5L17 7z" fill="#000"/></svg></span></div><div class="desc">Verified organization</div></div>
+            </div>
+            <div class="verified-row">
+              <div class="x-av xav-7">G</div>
+              <div class="info"><div class="nn">Government Dept. <span class="verified" style="color:#71767B"><svg viewBox="0 0 24 24"><path d="M9.6 1.5L8.1 3 6 2.5l-.8 2L3 5.5l.5 2.1L2 9.6l1.5 1.5L3 13.2l2.2.5.8 2L8 15.4l1.5 1.5L12 14.3l2.5 1.6L16 14.4l2-.7.8-2 2.2-.5-.5-2.1L22 7.6l-1.5-1.5L21 4l-2.2-.5L18 1.5l-2.5.6L14 .5 12 2 9.6.5 8.1 3z"/><path d="M10 14l-3.5-3.5L8 9l2 2 5.5-5.5L17 7z" fill="#000"/></svg></span></div><div class="desc">Gray check · official</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The whole vocabulary, in one place.</h2>
+        <p>Every token X's iOS app reaches for — black canvas, hairline ladder, one blue. The discipline IS the design.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.x-twitter-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Pure black, four shades of near-black for surface elevation, legacy Twitter Blue for everything interactive. The action-row uses three semantic colors — like pink, repost green, view blue — and that's the whole spectrum.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000;border:1px solid #2F3336"></div><div class="name">Pure Black</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="name">White Ink</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1D9BF0"></div><div class="name">Twitter Blue</div><div class="val">#1D9BF0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1A8CD8"></div><div class="name">Blue Hover</div><div class="val">#1A8CD8</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFD700"></div><div class="name">Gold Verified</div><div class="val">#FFD700</div></div>
+      </div>
+
+      <div class="ds-caption">Surface (elevation ladder)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#16181C"></div><div class="name">Surface 1</div><div class="val">#16181C</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1D1F23"></div><div class="name">Surface 2</div><div class="val">#1D1F23</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#202327"></div><div class="name">Surface 3</div><div class="val">#202327</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2F3336"></div><div class="name">Border</div><div class="val">#2F3336</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0a0a0a"></div><div class="name">Canvas Soft</div><div class="val">#0a0a0a</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="name">Ink</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E7E9EA"></div><div class="name">Ink Soft</div><div class="val">#E7E9EA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#D7DBDC"></div><div class="name">Ink Mid</div><div class="val">#D7DBDC</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#71767B"></div><div class="name">Muted</div><div class="val">#71767B</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5A5E62"></div><div class="name">Dim</div><div class="val">#5A5E62</div></div>
+      </div>
+
+      <div class="ds-caption">Action Row Semantics</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1D9BF0"></div><div class="name">Reply</div><div class="val">#1D9BF0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#00BA7C"></div><div class="name">Repost</div><div class="val">#00BA7C</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F91880"></div><div class="name">Like</div><div class="val">#F91880</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1D9BF0"></div><div class="name">Bookmark</div><div class="val">#1D9BF0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#71767B"></div><div class="name">Idle</div><div class="val">#71767B</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Chirp is the production face, substituted here with Inter. Display names 15/700. Handles 15/400 muted. Body 15/400. Numbers tabular for engagement counts.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display-name</td><td class="sample" style="font-size:15px;font-weight:700">Jiang Shu</td><td>15 / 0.94rem</td><td>700</td><td>profile + tweet</td></tr>
+          <tr><td class="token">--handle</td><td class="sample" style="font-size:15px;font-weight:400;color:#71767B">@jiang.shu</td><td>15 / 0.94rem</td><td>400</td><td>muted</td></tr>
+          <tr><td class="token">--tweet-body</td><td class="sample" style="font-size:15px;font-weight:400">the only design rule that matters.</td><td>15 / 0.94rem</td><td>400</td><td>line 1.4</td></tr>
+          <tr><td class="token">--link</td><td class="sample" style="font-size:15px;font-weight:400;color:#1D9BF0">linear.app</td><td>15 / 0.94rem</td><td>400</td><td>accent</td></tr>
+          <tr><td class="token">--profile-name</td><td class="sample" style="font-size:20px;font-weight:800">Jiang Shu</td><td>20 / 1.25rem</td><td>800</td><td>profile header</td></tr>
+          <tr><td class="token">--engagement</td><td class="sample" style="font-size:13px;font-weight:500;color:#71767B;font-feature-settings:'tnum'">24.1K</td><td>13 / 0.81rem</td><td>500 (tnum)</td><td>action row</td></tr>
+          <tr><td class="token">--time</td><td class="sample" style="font-size:13px;font-weight:400;color:#71767B">· 2h</td><td>13 / 0.81rem</td><td>400</td><td>relative</td></tr>
+          <tr><td class="token">--tab-label</td><td class="sample" style="font-size:15px;font-weight:700">For You</td><td>15 / 0.94rem</td><td>700</td><td>active state</td></tr>
+          <tr><td class="token">--ad-tag</td><td class="sample" style="font-size:13px;font-weight:500;color:#71767B">Ad</td><td>13 / 0.81rem</td><td>500</td><td>tweet eyebrow</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Media at 16px. Buttons full pill. Avatars circle. Cards rarely have radius — most boundaries are hairlines, not corners.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Min</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Hover</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Input</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Sheet</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">Media</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">∞</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Avatar</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">Anchors that survive across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar</div><div class="tk-val">49pt</div><div class="tk-note">Five tabs. Icons outline by default, filled on active.</div></div>
+        <div class="token-cell"><div class="tk-label">Avatar</div><div class="tk-val">40pt</div><div class="tk-note">36pt in DM list. 80pt on profile, -32pt into body.</div></div>
+        <div class="token-cell"><div class="tk-label">Tweet padding</div><div class="tk-val">12 × 16pt</div><div class="tk-note">Hairline divider only — no card, no shadow.</div></div>
+        <div class="token-cell"><div class="tk-label">Banner</div><div class="tk-val">200pt</div><div class="tk-note">3:1 aspect. Avatar floats over the bottom edge.</div></div>
+        <div class="token-cell"><div class="tk-label">Action icons</div><div class="tk-val">18pt</div><div class="tk-note">Stroke 1.6pt. Heart fills on like with bounce.</div></div>
+        <div class="token-cell"><div class="tk-label">FAB compose</div><div class="tk-val">56pt</div><div class="tk-note">Bottom-right, 16pt inset. #1D9BF0 fill.</div></div>
+        <div class="token-cell"><div class="tk-label">Hairline</div><div class="tk-val">1pt</div><div class="tk-note">#2F3336. Replaces card chrome on the timeline.</div></div>
+        <div class="token-cell"><div class="tk-label">Status bar</div><div class="tk-val">50pt</div><div class="tk-note">Time + battery; logo centered below in tl-head.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Pills, hairlines, action icons. The atom is the tweet row — Profile, Compose, and DM all wrap variants of it.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Follow</a>
+            <a class="btn btn-pill" href="#">Following</a>
+            <a class="btn btn-outline" href="#">Cancel</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button style="width:50px;height:50px;border-radius:50%;background:var(--accent);display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5"/></svg></button>
+              <button style="width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:transparent;display:grid;place-items:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="What's happening?" />
+            <input class="input-pill" placeholder="Search X" />
+            <div class="ds-card-row">
+              <span class="tag tag-ad">Ad</span>
+              <span class="tag tag-verified">Verified</span>
+              <span class="tag tag-gold">Org</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Tweet Row</h5>
+          <div class="ds-card-stack" style="width:100%">
+            <div style="display:flex;gap:9px;width:100%">
+              <div class="x-av xav-2" style="width:36px;height:36px;font-size:13px">M</div>
+              <div style="flex:1">
+                <div style="font-size:12.5px"><span style="font-weight:700">marie</span> <span style="color:var(--ink-muted)">@marie · 2h</span></div>
+                <div style="font-size:12.5px;margin-top:2px">the only design rule that matters</div>
+                <div style="display:flex;justify-content:space-between;margin-top:6px;color:var(--ink-muted);font-size:11px">
+                  <span style="display:flex;gap:3px;align-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H8l-4 4z"/></svg> 142</span>
+                  <span style="display:flex;gap:3px;align-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8l4-4 4 4M9 4v12M19 16l-4 4-4-4M15 20V8"/></svg> 8.4K</span>
+                  <span style="display:flex;gap:3px;align-items:center;color:var(--like)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg> 24K</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25z"/></svg></span>
+      X iOS
+    </div>
+    <p>Design reference. Not affiliated with X Corp. Token values derived from the public iOS app and the legacy Twitter brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.x-twitter-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.x-twitter-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.x-twitter-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>极氪 ZEEKR — Design System Study</title>
+<meta name="description" content="极氪 ZEEKR 001 FR / 7X 设计语言研究: 几何极简, 几乎纯黑白, 极氪光蓝 accent, Apple / Porsche taycan 混合风格, 国产豪华电车设计天花板. 营销 Demo + 设计系统参考." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Brand */
+  --zeekr-black: #0A0A0A;
+  --zeekr-white: #FFFFFF;
+  --zeekr-blue: #0061FF;
+  --zeekr-blue-hover: #1a72ff;
+  /* Surfaces (mono ladder) */
+  --ink-0: #0A0A0A;
+  --ink-1: #141414;
+  --ink-2: #1E1E1E;
+  --ink-3: #2A2A2A;
+  --gray-9: #1A1A1A;
+  --gray-7: #404040;
+  --gray-5: #6B6B6B;
+  --gray-3: #A8A8A8;
+  --gray-2: #D6D6D6;
+  --gray-1: #E8E8E8;
+  --paper: #F4F4F4;
+  --paper-2: #FAFAFA;
+  /* Text */
+  --text-dark: #0A0A0A;
+  --text-body: #404040;
+  --text-tert: #6B6B6B;
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-soft: rgba(255,255,255,0.72);
+  --text-on-dark-mute: rgba(255,255,255,0.42);
+  /* Type */
+  --font-display: "Inter", "Helvetica Neue", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-text: "Inter", "Noto Sans SC", "Helvetica Neue", "PingFang SC", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radius — minimal */
+  --r-min: 2px;
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-full: 999px;
+  /* Motion */
+  --t: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--zeekr-white);
+  color: var(--text-dark);
+  font-family: var(--font-text);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Nav ===== */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; padding: 18px 32px; transition: background var(--t), border-color var(--t); border-bottom: 1px solid transparent; }
+.nav.scrolled { background: rgba(0,0,0,0.78); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom-color: rgba(255,255,255,0.06); }
+.nav.over-dark .nav-btn, .nav.over-dark .icon-btn, .nav.over-dark .brand-text { color: var(--text-on-dark); }
+.nav.over-dark .nav-btn:hover, .nav.over-dark .icon-btn:hover { background: rgba(255,255,255,0.08); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 0; }
+.brand-text { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: 4px; color: var(--text-dark); }
+.nav-mid { display: flex; gap: 0; }
+.nav-btn { background: transparent; border: 0; color: var(--text-dark); font-size: 13px; font-weight: 500; padding: 8px 18px; min-height: 36px; cursor: pointer; transition: color var(--t), background var(--t); letter-spacing: 0.3px; }
+.nav-btn:hover { background: rgba(0,0,0,0.04); }
+.nav-right { display: flex; gap: 4px; align-items: center; }
+.icon-btn { background: transparent; border: 0; width: 36px; height: 36px; display: grid; place-items: center; color: var(--text-dark); cursor: pointer; transition: background var(--t); }
+.icon-btn:hover { background: rgba(0,0,0,0.04); }
+.icon-btn svg { width: 18px; height: 18px; }
+
+/* ===== Buttons ===== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 500; padding: 0 28px; min-height: 46px; min-width: 180px; border-radius: var(--r-sm); border: 1px solid transparent; cursor: pointer; transition: background var(--t), color var(--t), border-color var(--t); letter-spacing: 0.3px; }
+.btn-dark { background: var(--zeekr-black); color: var(--zeekr-white); }
+.btn-dark:hover { background: var(--ink-2); }
+.btn-light { background: var(--zeekr-white); color: var(--zeekr-black); }
+.btn-light:hover { background: var(--paper); }
+.btn-outline-light { background: transparent; color: var(--zeekr-white); border-color: rgba(255,255,255,0.4); }
+.btn-outline-light:hover { border-color: var(--zeekr-white); background: rgba(255,255,255,0.06); }
+.btn-outline-dark { background: transparent; color: var(--zeekr-black); border-color: var(--zeekr-black); }
+.btn-outline-dark:hover { background: var(--zeekr-black); color: var(--zeekr-white); }
+.btn-blue { background: var(--zeekr-blue); color: var(--zeekr-white); }
+.btn-blue:hover { background: var(--zeekr-blue-hover); }
+
+/* ===== Hero (black full-bleed) ===== */
+.hero { position: relative; min-height: 100vh; padding: 140px 24px 80px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; align-items: center; background: var(--zeekr-black); color: var(--text-on-dark); }
+.hero::before { content: ""; position: absolute; inset: 0; background:
+  radial-gradient(80% 60% at 50% 30%, #1a1a1a 0%, #0a0a0a 60%, #000 100%);
+  pointer-events: none;
+}
+.hero::after { content: ""; position: absolute; left: 50%; bottom: 18%; transform: translateX(-50%); width: min(1000px, 90vw); height: 14vh; background: radial-gradient(60% 50% at 50% 100%, rgba(0,97,255,0.18), transparent 70%); filter: blur(8px); pointer-events: none; }
+.hero-top { text-align: center; position: relative; z-index: 2; max-width: 1000px; }
+.hero-eyebrow { display: inline-block; font-size: 11px; font-weight: 500; color: var(--text-on-dark-mute); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 28px; }
+.hero-title { font-family: var(--font-display); font-size: clamp(60px, 11vw, 168px); font-weight: 700; color: var(--zeekr-white); line-height: 0.92; margin: 0 0 28px; letter-spacing: -4px; }
+.hero-title .stroke { -webkit-text-stroke: 2px var(--zeekr-white); color: transparent; font-weight: 600; }
+.hero-sub { font-size: 15px; color: var(--text-on-dark-soft); margin: 0 auto; max-width: 540px; line-height: 1.6; font-weight: 400; }
+.hero-stage { width: min(1200px, 95vw); position: relative; z-index: 2; }
+.hero-bottom { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; max-width: 1100px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+/* Wireframe lines decoration */
+.wire-lines { position: absolute; inset: 0; pointer-events: none; opacity: 0.06; }
+
+/* ===== Spec strip (mono) ===== */
+.spec-strip { background: var(--zeekr-black); padding: 80px 24px; border-top: 1px solid rgba(255,255,255,0.06); }
+.spec-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+.spec-cell { padding: 0; }
+.spec-val { font-family: var(--font-display); font-size: clamp(40px, 5vw, 72px); font-weight: 700; color: var(--zeekr-white); letter-spacing: -2.5px; line-height: 0.95; }
+.spec-val .unit { font-size: 14px; font-weight: 400; color: var(--text-on-dark-mute); margin-left: 6px; letter-spacing: 0; }
+.spec-label { font-size: 11px; font-weight: 500; color: var(--text-on-dark-mute); margin-top: 16px; text-transform: uppercase; letter-spacing: 2.5px; }
+.spec-cell.accent .spec-val { color: var(--zeekr-blue); }
+
+/* ===== Section base ===== */
+.section { padding: 140px 24px; position: relative; }
+.section.light { background: var(--zeekr-white); color: var(--text-dark); }
+.section.paper { background: var(--paper-2); }
+.section.dark { background: var(--zeekr-black); color: var(--text-on-dark); }
+.section-head { max-width: 1100px; margin: 0 auto 72px; }
+.section-head.center { text-align: center; }
+.section-head.center .section-desc { margin-left: auto; margin-right: auto; }
+.section-eyebrow { display: inline-block; font-size: 11px; font-weight: 500; color: var(--zeekr-blue); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 18px; }
+.section.dark .section-eyebrow { color: var(--zeekr-blue); }
+.section-title { font-family: var(--font-display); font-size: clamp(40px, 5.5vw, 72px); font-weight: 700; color: var(--text-dark); line-height: 1; letter-spacing: -2.5px; margin: 0 0 20px; }
+.section.dark .section-title { color: var(--zeekr-white); }
+.section-desc { font-size: 16px; color: var(--text-body); max-width: 620px; line-height: 1.65; margin: 0; }
+.section.dark .section-desc { color: var(--text-on-dark-soft); }
+
+/* ===== Feature grid (geometric mono cards) ===== */
+.feat-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray-1); border: 1px solid var(--gray-1); }
+.feat-card { background: var(--zeekr-white); padding: 56px 40px; transition: background var(--t); display: flex; flex-direction: column; min-height: 360px; }
+.feat-card:hover { background: var(--paper-2); }
+.feat-ico { width: 40px; height: 40px; display: grid; place-items: center; margin-bottom: 32px; color: var(--zeekr-black); }
+.feat-ico svg { width: 28px; height: 28px; }
+.feat-card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin: 0 0 12px; letter-spacing: -1px; color: var(--text-dark); }
+.feat-card p { font-size: 14px; line-height: 1.65; color: var(--text-body); margin: 0; flex: 1; }
+.feat-card .feat-meta { display: flex; align-items: baseline; gap: 10px; padding-top: 32px; margin-top: 32px; border-top: 1px solid var(--gray-1); }
+.feat-card .feat-meta strong { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: var(--zeekr-black); }
+.feat-card .feat-meta span { font-size: 12px; color: var(--text-tert); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* ===== Spec table (Porsche-like) ===== */
+.spec-table-wrap { max-width: 1100px; margin: 0 auto; background: var(--zeekr-black); color: var(--zeekr-white); border-radius: 0; overflow: hidden; }
+.spec-table-head { padding: 56px 56px 32px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.spec-table-head h3 { font-family: var(--font-display); font-size: 40px; font-weight: 700; margin: 0; letter-spacing: -1.5px; }
+.spec-table-head .badge { display: inline-block; padding: 6px 14px; border: 1px solid var(--zeekr-blue); color: var(--zeekr-blue); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; }
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.spec-table tr:last-child { border-bottom: 0; }
+.spec-table th, .spec-table td { padding: 24px 56px; text-align: left; font-size: 14px; vertical-align: middle; }
+.spec-table th { color: var(--text-on-dark-mute); font-weight: 400; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; width: 38%; }
+.spec-table td { color: var(--zeekr-white); font-weight: 500; }
+.spec-table td .big { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--zeekr-white); letter-spacing: -1px; margin-right: 6px; }
+.spec-table td .big.blue { color: var(--zeekr-blue); }
+
+/* ===== Model section (split black/white) ===== */
+.models-split { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--gray-1); }
+.model-block { padding: 80px 56px; min-height: 560px; display: flex; flex-direction: column; justify-content: space-between; }
+.model-block.dark { background: var(--zeekr-black); color: var(--text-on-dark); }
+.model-block.light { background: var(--zeekr-white); color: var(--text-dark); }
+.model-tag { display: inline-block; padding: 6px 14px; border: 1px solid currentColor; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 2.5px; opacity: 0.6; width: fit-content; margin-bottom: 28px; }
+.model-name { font-family: var(--font-display); font-size: clamp(48px, 6vw, 88px); font-weight: 700; letter-spacing: -3px; line-height: 0.95; margin: 0 0 16px; }
+.model-tagline { font-size: 16px; opacity: 0.7; line-height: 1.55; margin: 0 0 40px; max-width: 380px; }
+.model-mockup { flex: 1; display: grid; place-items: center; margin: 0 0 32px; min-height: 180px; }
+.model-mockup svg { width: 88%; max-width: 480px; }
+.model-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 36px; }
+.model-stat-val { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: -1px; line-height: 1; }
+.model-stat-label { font-size: 11px; opacity: 0.6; margin-top: 8px; text-transform: uppercase; letter-spacing: 1.5px; }
+.model-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ===== Trust band ===== */
+.trust { background: var(--zeekr-white); padding: 120px 24px; text-align: center; border-top: 1px solid var(--gray-1); }
+.trust-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -2px; color: var(--text-dark); margin: 0 0 72px; line-height: 1; }
+.trust-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.trust-cell { padding: 0 24px; border-right: 1px solid var(--gray-1); }
+.trust-cell:last-child { border-right: 0; }
+.trust-num { font-family: var(--font-display); font-size: 56px; font-weight: 700; color: var(--zeekr-black); letter-spacing: -2px; line-height: 1; }
+.trust-num .blue { color: var(--zeekr-blue); }
+.trust-num .unit { font-size: 20px; color: var(--text-tert); font-weight: 500; margin-left: 4px; }
+.trust-label { font-size: 12px; color: var(--text-tert); margin-top: 16px; text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* ===== DESIGN SYSTEM ===== */
+.ds-section { background: var(--paper); padding: 120px 24px 144px; }
+.ds-wrap { max-width: 1280px; margin: 0 auto; }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 64px; padding-bottom: 64px; border-bottom: 1px solid var(--gray-1); }
+.ds-eyebrow { font-size: 11px; font-weight: 500; color: var(--zeekr-blue); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 3px; }
+.ds-intro h2 { font-family: var(--font-display); font-size: clamp(36px, 4.5vw, 56px); font-weight: 700; margin: 0 0 12px; line-height: 1; color: var(--text-dark); letter-spacing: -2px; }
+.ds-intro p { font-size: 15px; color: var(--text-body); line-height: 1.65; margin: 0; max-width: 560px; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 12px 20px; background: var(--zeekr-black); color: var(--zeekr-white); font-size: 12px; font-weight: 500; transition: background var(--t); text-transform: uppercase; letter-spacing: 1.5px; }
+.ds-source:hover { background: var(--zeekr-blue); }
+.ds-block { margin-top: 64px; padding-top: 56px; border-top: 1px solid var(--gray-1); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--text-dark); margin: 0 0 8px; letter-spacing: -1px; }
+.ds-desc { font-size: 14px; color: var(--text-body); margin: 0 0 36px; max-width: 620px; line-height: 1.65; }
+.ds-caption { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--text-tert); margin: 36px 0 14px; }
+.ds-swatches { display: grid; gap: 1px; grid-template-columns: repeat(4, 1fr); background: var(--gray-1); border: 1px solid var(--gray-1); }
+.ds-sw { background: var(--zeekr-white); overflow: hidden; }
+.ds-sw .chip { height: 96px; }
+.ds-sw .meta { padding: 14px 18px; }
+.ds-sw .name { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.ds-sw .val { font-size: 11px; color: var(--text-tert); font-family: var(--font-mono); margin-top: 2px; }
+.ds-type-table { width: 100%; border-collapse: collapse; background: var(--zeekr-white); border: 1px solid var(--gray-1); }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 16px 20px; border-bottom: 1px solid var(--gray-1); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-tert); background: var(--paper-2); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--zeekr-blue); }
+.ds-radius { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-1); border: 1px solid var(--gray-1); }
+.ds-radius-cell { background: var(--zeekr-white); padding: 28px 14px; text-align: center; }
+.ds-radius-box { width: 64px; height: 64px; background: var(--zeekr-black); margin: 0 auto 14px; }
+.ds-radius-label { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.ds-radius-val { font-size: 11px; color: var(--text-tert); font-family: var(--font-mono); margin-top: 2px; }
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray-1); border: 1px solid var(--gray-1); }
+.ds-card { background: var(--zeekr-white); padding: 32px; }
+.ds-card h5 { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-dark); margin: 0 0 24px; letter-spacing: -0.5px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; }
+.ds-input { background: var(--zeekr-white); border: 1px solid var(--gray-2); border-radius: var(--r-sm); padding: 12px 16px; font-size: 14px; font-family: inherit; color: var(--text-dark); outline: none; transition: border-color var(--t); width: 100%; }
+.ds-input:focus { border-color: var(--zeekr-black); }
+.ds-tag { display: inline-flex; align-items: center; padding: 5px 12px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 0; }
+.ds-tag-dark { background: var(--zeekr-black); color: var(--zeekr-white); }
+.ds-tag-blue { background: var(--zeekr-blue); color: var(--zeekr-white); }
+.ds-tag-outline { background: var(--zeekr-white); color: var(--text-dark); border: 1px solid var(--zeekr-black); }
+.ds-tag-soft { background: var(--paper); color: var(--text-body); }
+
+/* ===== Footer ===== */
+footer { background: var(--zeekr-black); color: var(--text-on-dark); padding: 80px 24px 40px; }
+.foot-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.foot-col h4 { font-family: var(--font-display); font-size: 11px; font-weight: 600; color: var(--zeekr-white); margin: 0 0 20px; text-transform: uppercase; letter-spacing: 2px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col a { font-size: 13px; color: var(--text-on-dark-mute); transition: color var(--t); }
+.foot-col a:hover { color: var(--zeekr-white); }
+.foot-brand-text { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: 5px; color: var(--zeekr-white); margin: 0 0 16px; }
+.foot-brand-desc { font-size: 13px; color: var(--text-on-dark-soft); line-height: 1.65; max-width: 340px; margin: 0; }
+.foot-bottom { max-width: 1400px; margin: 32px auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 11px; color: var(--text-on-dark-mute); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* ===== Floating source link ===== */
+.src-link { position: fixed; right: 24px; bottom: 24px; z-index: 60; background: var(--zeekr-black); color: var(--zeekr-white); padding: 12px 20px; border-radius: 0; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; transition: background var(--t); border: 1px solid var(--zeekr-black); }
+.src-link:hover { background: var(--zeekr-blue); border-color: var(--zeekr-blue); }
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .nav { padding: 14px 16px; }
+  .nav-mid { display: none; }
+  .spec-inner, .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .trust-cell { border-right: 0; border-bottom: 1px solid var(--gray-1); padding: 20px; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .models-split { grid-template-columns: 1fr; }
+  .ds-swatches, .ds-radius { grid-template-columns: repeat(2, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .spec-table th, .spec-table td { padding: 16px 24px; }
+  .spec-table-head { padding: 32px 24px 24px; }
+}
+@media (max-width: 540px) {
+  .section { padding: 80px 16px; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<header class="nav over-dark" id="topNav">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <span class="brand-text">ZEEKR</span>
+    </a>
+    <nav class="nav-mid">
+      <button class="nav-btn">001</button>
+      <button class="nav-btn">001 FR</button>
+      <button class="nav-btn">007</button>
+      <button class="nav-btn">7X</button>
+      <button class="nav-btn">009</button>
+      <button class="nav-btn">MIX</button>
+      <button class="nav-btn">能源</button>
+      <button class="nav-btn">极氪生活</button>
+    </nav>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="搜索">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="账户">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="语言">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <!-- subtle wireframe lines -->
+  <svg class="wire-lines" viewBox="0 0 1400 800" preserveAspectRatio="none">
+    <line x1="0" y1="200" x2="1400" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="600" x2="1400" y2="600" stroke="#fff" stroke-width="0.5"/>
+    <line x1="350" y1="0" x2="350" y2="800" stroke="#fff" stroke-width="0.5"/>
+    <line x1="1050" y1="0" x2="1050" y2="800" stroke="#fff" stroke-width="0.5"/>
+  </svg>
+
+  <div class="hero-top">
+    <div class="hero-eyebrow">ZEEKR 001 FR · NÜRBURGRING RECORD</div>
+    <h1 class="hero-title">极氪 <span class="stroke">001 FR</span></h1>
+    <p class="hero-sub">三电机 1265 PS 极致性能 · 800V 高压平台 · 浩瀚架构 · 重新定义国产豪华纯电跑车的边界.</p>
+  </div>
+
+  <div class="hero-stage" aria-hidden="true">
+    <svg viewBox="0 0 1200 280" width="100%">
+      <defs>
+        <linearGradient id="zkBody" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#3a3a3a"/>
+          <stop offset="0.5" stop-color="#1a1a1a"/>
+          <stop offset="1" stop-color="#000"/>
+        </linearGradient>
+        <linearGradient id="zkLight" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#0061FF"/>
+          <stop offset="1" stop-color="#00BFFF"/>
+        </linearGradient>
+      </defs>
+      <!-- wireframe ground grid -->
+      <line x1="0" y1="252" x2="1200" y2="252" stroke="rgba(255,255,255,0.12)" stroke-width="0.6"/>
+      <line x1="200" y1="200" x2="1000" y2="200" stroke="rgba(255,255,255,0.04)" stroke-width="0.4"/>
+      <!-- car body (low slung shooting brake) -->
+      <path d="M70,210 C100,170 200,140 360,128 C520,118 680,120 800,128 C920,138 1020,160 1070,196 L1070,238 C1070,246 1060,254 1045,254 L95,254 C75,254 65,246 65,238 Z" fill="url(#zkBody)"/>
+      <!-- low roof / shooting brake silhouette -->
+      <path d="M200,140 C280,80 480,68 600,72 C720,76 800,98 880,140 L820,158 L260,158 Z" fill="url(#zkBody)"/>
+      <!-- wireframe stroke overlay on body (Apple-like wireframe) -->
+      <path d="M70,210 C100,170 200,140 360,128 C520,118 680,120 800,128 C920,138 1020,160 1070,196" stroke="#0061FF" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <path d="M200,140 C280,80 480,68 600,72 C720,76 800,98 880,140" stroke="rgba(255,255,255,0.5)" stroke-width="0.6" fill="none"/>
+      <!-- door cut single line minimalist -->
+      <path d="M520,130 L520,238" stroke="rgba(255,255,255,0.18)" stroke-width="0.4"/>
+      <path d="M760,138 L760,238" stroke="rgba(255,255,255,0.18)" stroke-width="0.4"/>
+      <!-- side highlight thin stroke -->
+      <path d="M120,196 C300,176 700,172 1000,196" stroke="rgba(255,255,255,0.32)" stroke-width="0.8" fill="none"/>
+      <!-- wheels (minimalist) -->
+      <g>
+        <circle cx="270" cy="240" r="44" fill="#000"/>
+        <circle cx="270" cy="240" r="44" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.5"/>
+        <circle cx="270" cy="240" r="32" fill="none" stroke="#fff" stroke-width="0.6" opacity="0.3"/>
+        <g stroke="#fff" stroke-width="0.8" opacity="0.6" fill="none">
+          <line x1="270" y1="210" x2="270" y2="270"/>
+          <line x1="240" y1="240" x2="300" y2="240"/>
+          <line x1="248" y1="218" x2="292" y2="262"/>
+          <line x1="292" y1="218" x2="248" y2="262"/>
+        </g>
+        <circle cx="270" cy="240" r="4" fill="#0061FF"/>
+      </g>
+      <g>
+        <circle cx="900" cy="240" r="44" fill="#000"/>
+        <circle cx="900" cy="240" r="44" stroke="#fff" stroke-width="0.6" fill="none" opacity="0.5"/>
+        <circle cx="900" cy="240" r="32" fill="none" stroke="#fff" stroke-width="0.6" opacity="0.3"/>
+        <g stroke="#fff" stroke-width="0.8" opacity="0.6" fill="none">
+          <line x1="900" y1="210" x2="900" y2="270"/>
+          <line x1="870" y1="240" x2="930" y2="240"/>
+          <line x1="878" y1="218" x2="922" y2="262"/>
+          <line x1="922" y1="218" x2="878" y2="262"/>
+        </g>
+        <circle cx="900" cy="240" r="4" fill="#0061FF"/>
+      </g>
+      <!-- DRL headlight light bar -->
+      <rect x="1050" y="180" width="20" height="2" rx="1" fill="url(#zkLight)"/>
+      <rect x="1050" y="186" width="14" height="1.5" rx="0.75" fill="#0061FF" opacity="0.6"/>
+      <!-- ZEEKR badge minimal -->
+      <text x="555" y="220" fill="rgba(255,255,255,0.6)" font-family="Inter" font-size="8" font-weight="600" letter-spacing="2">ZEEKR 001 FR</text>
+    </svg>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-actions">
+      <a class="btn btn-light" href="#">立即配置</a>
+      <a class="btn btn-outline-light" href="#">预约试驾</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Spec strip ===== -->
+<section class="spec-strip">
+  <div class="spec-inner">
+    <div class="spec-cell accent">
+      <div class="spec-val">1265<span class="unit">PS</span></div>
+      <div class="spec-label">Max Power</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">2.02<span class="unit">s</span></div>
+      <div class="spec-label">0-100 km/h</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">7:18<span class="unit"></span></div>
+      <div class="spec-label">Nürburgring</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">800<span class="unit">V</span></div>
+      <div class="spec-label">SEA Platform</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Feature grid ===== -->
+<section class="section light">
+  <div class="section-head center">
+    <span class="section-eyebrow">CORE TECHNOLOGY</span>
+    <h2 class="section-title">Engineering · Refined</h2>
+    <p class="section-desc">浩瀚架构 SEA 全栈自研, 三电与智驾的极致集成, 让性能与豪华在毫米与毫秒之间发生.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h3>Tri-Motor Performance</h3>
+      <p>三电机四驱布局, 总功率 1265 PS, 0-100 km/h 仅 2.02 秒. 单电机峰值转速 22500 rpm, 行业最高水平.</p>
+      <div class="feat-meta"><strong>1265</strong><span>PS · Tri-Motor AWD</span></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      </div>
+      <h3>SEA Architecture</h3>
+      <p>浩瀚架构 800V 高压平台. 5C 超充, 15 分钟补能 500 km. 麒麟电池 + 金砖电池双方案, 全场景能源管理.</p>
+      <div class="feat-meta"><strong>800V</strong><span>High-Voltage SEA</span></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.07 7.07l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.07-7.07l4.24-4.24"/></svg>
+      </div>
+      <h3>ZAD · Driving Intelligence</h3>
+      <p>浩瀚智驾全栈自研. 双 Orin-X + 激光雷达, 端到端大模型驱动, 城市 NOA 全国覆盖, 智驾时代的旗舰范本.</p>
+      <div class="feat-meta"><strong>508</strong><span>TOPS · End-to-End</span></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="1"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <h3>ZEEKR OS</h3>
+      <p>极氪自研车机系统. 8295 旗舰芯片, 全液晶仪表 + 中控 + AR-HUD, 极致流畅, 极致克制.</p>
+      <div class="feat-meta"><strong>8295</strong><span>Qualcomm Cockpit</span></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+      </div>
+      <h3>Active Aero & Chassis</h3>
+      <p>主动空气动力学组件 · 双腔空气悬架 + CDC + 主动后轮转向. 风阻 Cd 0.197, 同级最低.</p>
+      <div class="feat-meta"><strong>0.197</strong><span>Cd · Aero Coefficient</span></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>Track-Proven</h3>
+      <p>纽北 7:18.591 量产电动车纪录. AP Racing 碳陶刹车系统, Akebono 多活塞卡钳, 30.8 m 100-0 制动距离.</p>
+      <div class="feat-meta"><strong>7:18</strong><span>Nürburgring Record</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Spec table ===== -->
+<section class="section dark">
+  <div class="section-head center">
+    <span class="section-eyebrow">001 FR · SPECIFICATIONS</span>
+    <h2 class="section-title">No compromise</h2>
+  </div>
+  <div class="spec-table-wrap">
+    <div class="spec-table-head">
+      <h3>ZEEKR 001 FR</h3>
+      <span class="badge">Limited · Track Edition</span>
+    </div>
+    <table class="spec-table">
+      <tbody>
+        <tr><th>Total Power</th><td><span class="big blue">1265</span>PS · Tri-Motor AWD</td></tr>
+        <tr><th>0-100 km/h</th><td><span class="big">2.02</span>s</td></tr>
+        <tr><th>0-200 km/h</th><td><span class="big">5.6</span>s</td></tr>
+        <tr><th>Top Speed</th><td><span class="big">280</span>km/h</td></tr>
+        <tr><th>Nürburgring Lap</th><td><span class="big blue">7:18</span>·591 (Production EV Record)</td></tr>
+        <tr><th>Battery</th><td><span class="big">100</span>kWh CATL Qilin</td></tr>
+        <tr><th>CLTC Range</th><td><span class="big">580</span>km</td></tr>
+        <tr><th>5C Supercharge</th><td><span class="big">15</span>min · 10-80%</td></tr>
+        <tr><th>Brake 100-0</th><td><span class="big">30.8</span>m · AP Racing Carbon-Ceramic</td></tr>
+        <tr><th>Aero (Cd)</th><td><span class="big">0.197</span>Cd · Active Spoiler</td></tr>
+        <tr><th>Weight</th><td><span class="big">2345</span>kg · CFRP Body Panels</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== Models split ===== -->
+<section style="background:var(--gray-1)">
+  <div class="models-split">
+    <div class="model-block dark">
+      <div>
+        <div class="model-tag">FLAGSHIP COUPÉ</div>
+        <h2 class="model-name">001 FR</h2>
+        <p class="model-tagline">极致性能 · 赛道之王. 三电机豪华猎装跑车.</p>
+      </div>
+      <div class="model-mockup" aria-hidden="true">
+        <svg viewBox="0 0 480 140" fill="none">
+          <path d="M30 100 C50 70 120 50 240 46 C360 50 430 70 450 100 L450 116 C450 122 444 126 436 126 L44 126 C36 126 30 122 30 116 Z" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+          <path d="M100 46 C140 18 220 14 260 14 C310 14 360 28 400 46 L370 60 L130 60 Z" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+          <circle cx="110" cy="122" r="18" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+          <circle cx="370" cy="122" r="18" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+          <circle cx="110" cy="122" r="6" fill="#0061FF"/>
+          <circle cx="370" cy="122" r="6" fill="#0061FF"/>
+        </svg>
+      </div>
+      <div>
+        <div class="model-stats">
+          <div><div class="model-stat-val">1265 PS</div><div class="model-stat-label">Power</div></div>
+          <div><div class="model-stat-val">2.02s</div><div class="model-stat-label">0-100</div></div>
+          <div><div class="model-stat-val">580km</div><div class="model-stat-label">Range</div></div>
+        </div>
+        <div class="model-actions">
+          <a class="btn btn-light" href="#">立即配置</a>
+          <a class="btn btn-outline-light" href="#">技术细节</a>
+        </div>
+      </div>
+    </div>
+    <div class="model-block light">
+      <div>
+        <div class="model-tag">FAMILY SUV</div>
+        <h2 class="model-name">7X</h2>
+        <p class="model-tagline">800V 中型 SUV 旗舰. 全场景豪华纯电.</p>
+      </div>
+      <div class="model-mockup" aria-hidden="true">
+        <svg viewBox="0 0 480 140" fill="none">
+          <path d="M28 100 C50 64 120 42 240 38 C360 42 430 64 452 100 L452 116 C452 122 446 126 438 126 L42 126 C34 126 28 122 28 116 Z" fill="none" stroke="rgba(0,0,0,0.85)" stroke-width="1"/>
+          <path d="M90 38 C140 6 220 0 260 0 C310 0 360 14 400 38 L370 56 L120 56 Z" fill="none" stroke="rgba(0,0,0,0.55)" stroke-width="1"/>
+          <circle cx="110" cy="122" r="20" fill="none" stroke="rgba(0,0,0,0.85)" stroke-width="1"/>
+          <circle cx="370" cy="122" r="20" fill="none" stroke="rgba(0,0,0,0.85)" stroke-width="1"/>
+          <circle cx="110" cy="122" r="6" fill="#0061FF"/>
+          <circle cx="370" cy="122" r="6" fill="#0061FF"/>
+        </svg>
+      </div>
+      <div>
+        <div class="model-stats">
+          <div><div class="model-stat-val">636 PS</div><div class="model-stat-label">Power</div></div>
+          <div><div class="model-stat-val">3.8s</div><div class="model-stat-label">0-100</div></div>
+          <div><div class="model-stat-val">780km</div><div class="model-stat-label">Range</div></div>
+        </div>
+        <div class="model-actions">
+          <a class="btn btn-dark" href="#">立即配置</a>
+          <a class="btn btn-outline-dark" href="#">技术细节</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Trust band ===== -->
+<section class="trust">
+  <h2 class="trust-title">国产豪华纯电 · 全球首选</h2>
+  <div class="trust-grid">
+    <div class="trust-cell">
+      <div class="trust-num"><span class="blue">7:18</span></div>
+      <div class="trust-label">Nürburgring Record</div>
+    </div>
+    <div class="trust-cell">
+      <div class="trust-num">40<span class="unit">+</span></div>
+      <div class="trust-label">Global Markets</div>
+    </div>
+    <div class="trust-cell">
+      <div class="trust-num">2024</div>
+      <div class="trust-label">EV of the Year</div>
+    </div>
+    <div class="trust-cell">
+      <div class="trust-num">500<span class="unit">k+</span></div>
+      <div class="trust-label">Owners Worldwide</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM REFERENCE (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="ds-wrap">
+    <div class="ds-intro">
+      <div>
+        <div class="ds-eyebrow">Design System Reference</div>
+        <h2>Pure Black. Pure White. One Blue.</h2>
+        <p>极氪的视觉语言: 拒绝任何花哨. 几乎纯黑白单色系, 大字号几何 sans 字体配 -2.5px 负字距, 锋利的 4-8px 圆角, 唯一的极氪光蓝 (#0061FF) 作为功能 accent. Apple + Porsche Taycan 混合, 国产豪华电车设计天花板.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.zeekr.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">单色系 + 单一 accent 蓝. 黑与白是 hero, 灰阶承担层级, 极氪蓝 (#0061FF) 仅在关键交互, 数据高亮和品牌锚点上出现. 拒绝多余色彩, 让形式本身成为语言.</p>
+
+      <div class="ds-caption">Brand Mono</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0A0A0A"></div><div class="meta"><div class="name">ZEEKR Black</div><div class="val">#0A0A0A</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #E8E8E8"></div><div class="meta"><div class="name">Pure White</div><div class="val">#FFFFFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0061FF"></div><div class="meta"><div class="name">ZEEKR Blue</div><div class="val">#0061FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F4F4F4"></div><div class="meta"><div class="name">Paper</div><div class="val">#F4F4F4</div></div></div>
+      </div>
+
+      <div class="ds-caption">Grayscale Ladder</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#141414"></div><div class="meta"><div class="name">Ink 1</div><div class="val">#141414</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#404040"></div><div class="meta"><div class="name">Gray 7</div><div class="val">#404040</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#6B6B6B"></div><div class="meta"><div class="name">Gray 5</div><div class="val">#6B6B6B</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#A8A8A8"></div><div class="meta"><div class="name">Gray 3</div><div class="val">#A8A8A8</div></div></div>
+      </div>
+
+      <div class="ds-caption">Surface</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#D6D6D6"></div><div class="meta"><div class="name">Gray 2</div><div class="val">#D6D6D6</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E8E8E8"></div><div class="meta"><div class="name">Border</div><div class="val">#E8E8E8</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FAFAFA"></div><div class="meta"><div class="name">Paper 2</div><div class="val">#FAFAFA</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#0061FF,#00BFFF)"></div><div class="meta"><div class="name">Blue Gradient</div><div class="val">accent only</div></div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Inter / Helvetica Neue 配合 Noto Sans SC. 大标题 700 配 -2.5px 字距 (-4px 在最大尺寸), 营造几何精密感. 小号文字反而轻盈 (400-500). 全篇大量使用 uppercase + letter-spacing 强化冷峻感.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display-mega</td><td style="font-family:Inter;font-size:60px;font-weight:700;letter-spacing:-3px;line-height:0.95">001 FR</td><td>120-168px</td><td>700</td><td>Hero · 极大字号 + 负字距</td></tr>
+          <tr><td class="token">--display-stroke</td><td style="font-family:Inter;font-size:48px;font-weight:600;-webkit-text-stroke:1.5px #0A0A0A;color:transparent;letter-spacing:-2px">ZEEKR</td><td>48-96px</td><td>600</td><td>描边几何字</td></tr>
+          <tr><td class="token">--section-title</td><td style="font-family:Inter;font-size:32px;font-weight:700;letter-spacing:-1.5px">No compromise</td><td>40-72px</td><td>700</td><td>section 标题</td></tr>
+          <tr><td class="token">--spec-num</td><td style="font-family:Inter;font-size:40px;font-weight:700;color:#0A0A0A;letter-spacing:-1.5px">1265<span style="font-size:14px;color:#6B6B6B;margin-left:6px;font-weight:400">PS</span></td><td>40-72px</td><td>700</td><td>规格数字</td></tr>
+          <tr><td class="token">--card-title</td><td style="font-family:Inter;font-size:20px;font-weight:700;letter-spacing:-0.5px">Tri-Motor Performance</td><td>22-24px</td><td>700</td><td>卡片标题</td></tr>
+          <tr><td class="token">--body</td><td style="font-size:14px;color:#404040;line-height:1.65">三电机四驱布局, 总功率 1265 PS, 单电机峰值转速 22500 rpm.</td><td>14-15px</td><td>400</td><td>正文</td></tr>
+          <tr><td class="token">--eyebrow</td><td style="font-size:11px;color:#0061FF;font-weight:500;text-transform:uppercase;letter-spacing:3px">CORE TECHNOLOGY</td><td>11-12px</td><td>500</td><td>蓝色 uppercase 提示</td></tr>
+          <tr><td class="token">--label-mono</td><td style="font-size:11px;color:#6B6B6B;font-weight:500;text-transform:uppercase;letter-spacing:2px">Production EV Record</td><td>11-12px</td><td>500</td><td>spec label</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">最克制的圆角. 按钮 6-8px, 标签直角或 4px, 卡片直角. 不使用 16px+ 的友好圆角, 通过锐角传递机械感与豪华感.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Sharp</div><div class="ds-radius-val">0px · 卡片 / Tag</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">XS</div><div class="ds-radius-val">4px · 小元素</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">SM</div><div class="ds-radius-val">6px · CTA</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">MD</div><div class="ds-radius-val">8px · Input</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">极简组件库. 按钮黑底白字或白底黑字, 描边轮廓变体, 极少使用蓝色 (仅高度强调时). Tag 直角 + uppercase letter-spacing 是 ZEEKR 标志.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-dark" style="min-width:0" href="#">立即配置</a>
+            <a class="btn btn-outline-dark" style="min-width:0" href="#">预约试驾</a>
+            <a class="btn btn-blue" style="min-width:0" href="#">001 FR 预订</a>
+            <a class="btn btn-light" style="min-width:0;border:1px solid #E8E8E8" href="#">技术细节</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Tags & Input</h5>
+          <div class="ds-card-stack">
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="ds-tag ds-tag-dark">001 FR</span>
+              <span class="ds-tag ds-tag-blue">TRACK</span>
+              <span class="ds-tag ds-tag-outline">SEA</span>
+              <span class="ds-tag ds-tag-soft">800V</span>
+            </div>
+            <input class="ds-input" placeholder="Enter your email" />
+            <input class="ds-input" placeholder="输入手机号预约" />
+            <div style="display:flex;gap:24px;align-items:center;padding-top:8px">
+              <div style="display:flex;gap:8px;align-items:center"><span style="width:24px;height:2px;background:#0A0A0A"></span><span style="font-size:11px;color:#6B6B6B;text-transform:uppercase;letter-spacing:1.5px">Active</span></div>
+              <div style="display:flex;gap:8px;align-items:center"><span style="width:24px;height:2px;background:#0061FF"></span><span style="font-size:11px;color:#6B6B6B;text-transform:uppercase;letter-spacing:1.5px">Featured</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Spec Cell</h5>
+          <div style="background:#0A0A0A;padding:32px;color:#fff">
+            <div style="font-size:11px;color:rgba(255,255,255,0.42);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px">Max Power</div>
+            <div style="font-family:Inter;font-size:44px;font-weight:700;letter-spacing:-2px;line-height:1;color:#0061FF">1265<span style="font-size:13px;color:rgba(255,255,255,0.42);margin-left:6px;font-weight:400;letter-spacing:0">PS</span></div>
+            <div style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.72)">Tri-Motor AWD · 22500 rpm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-col">
+      <p class="foot-brand-text">ZEEKR</p>
+      <p class="foot-brand-desc">Future-Mobility · Born Premium. 一家全球化的智能纯电豪华品牌, 致力于成为可持续移动出行的引领者.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Models</h4>
+      <ul>
+        <li><a href="#">001 / 001 FR</a></li>
+        <li><a href="#">007</a></li>
+        <li><a href="#">7X</a></li>
+        <li><a href="#">009</a></li>
+        <li><a href="#">MIX</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Ownership</h4>
+      <ul>
+        <li><a href="#">立即配置</a></li>
+        <li><a href="#">预约试驾</a></li>
+        <li><a href="#">极氪超充</a></li>
+        <li><a href="#">售后服务</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Discover</h4>
+      <ul>
+        <li><a href="#">SEA 浩瀚架构</a></li>
+        <li><a href="#">ZEEKR Tech</a></li>
+        <li><a href="#">Innovation</a></li>
+        <li><a href="#">极氪生活</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">关于极氪</a></li>
+        <li><a href="#">Newsroom</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Investor Relations</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>Design Study · Tribute to ZEEKR's visual language</span>
+    <span>© 2026 ZEEKR Intelligent Technology</span>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.zeekr.html" target="_blank" rel="noopener">View source ↗</a>
+
+<script>
+  (function(){
+    var nav = document.getElementById('topNav');
+    function onScroll(){
+      var y = window.scrollY || window.pageYOffset;
+      if (y > window.innerHeight - 80) {
+        nav.classList.add('scrolled');
+        nav.classList.remove('over-dark');
+      } else {
+        nav.classList.remove('scrolled');
+        nav.classList.add('over-dark');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>

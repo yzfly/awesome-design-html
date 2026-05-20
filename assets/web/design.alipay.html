@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>支付宝 Alipay — 设计系统研究</title>
+<meta name="description" content="支付宝视觉语言研究:支付宝蓝 + 暖橙红包点缀 + 国民支付与生活服务的信任感. 营销 demo + 设计系统参考." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Surface */
+  --canvas: #ffffff;
+  --surface-1: #F5F8FC;
+  --surface-2: #E9F1FA;
+  --surface-tint: #EAF3FF;
+  /* 支付宝蓝 */
+  --blue: #1677FF;
+  --blue-light: #4093FF;
+  --blue-deep: #0958D9;
+  --blue-soft: #E6F0FF;
+  --blue-tint: #F0F6FF;
+  /* 暖橙(红包/会员) */
+  --orange: #FF6034;
+  --orange-soft: #FFE9DE;
+  --gold: #F5B544;
+  --gold-soft: #FFF4DD;
+  /* Text */
+  --ink: #15191F;
+  --ink-bright: #000000;
+  --ink-soft: #4a4f5a;
+  --ink-muted: #797f8c;
+  --ink-dim: #b2b6c0;
+  /* Border */
+  --border: #E4E9F0;
+  --border-soft: #EFF2F7;
+  --border-strong: #D2D7E0;
+  /* Semantic */
+  --success: #00B96B;
+  --warning: #F5B544;
+  --error: #FF4D4F;
+  /* Shadow */
+  --shadow-soft: 0 4px 14px rgba(22,119,255,0.08);
+  --shadow-medium: 0 12px 32px rgba(22,119,255,0.14);
+  --shadow-heavy: 0 24px 56px rgba(9,88,217,0.20);
+  /* Type */
+  --font-ui: "Inter", "Noto Sans SC", -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radii */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 24px;
+  --r-pill: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* ====== Nav ====== */
+.nav-wrap { background: rgba(255,255,255,0.93); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-soft); position: sticky; top: 0; z-index: 40; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1240px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.3px; font-size: 19px; color: var(--ink-bright); }
+.brand-mark { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); display: grid; place-items: center; color: #fff; box-shadow: 0 4px 14px rgba(22,119,255,0.30); position: relative; }
+.brand-mark svg { width: 22px; height: 22px; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-pill { padding: 8px 16px; border-radius: var(--r-md); font-size: 14px; font-weight: 500; color: var(--ink-soft); transition: color .15s, background .15s; }
+.nav-pill:hover { color: var(--blue); }
+.nav-pill.active { color: var(--blue); font-weight: 600; background: var(--blue-soft); }
+.nav-cta { display: flex; gap: 10px; align-items: center; }
+
+/* ====== Buttons ====== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; cursor: pointer; border: 0; transition: background .15s, box-shadow .15s, transform .12s; }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); color: #fff; padding: 13px 28px; border-radius: var(--r-lg); font-size: 15px; font-weight: 600; box-shadow: 0 4px 14px rgba(22,119,255,0.32); }
+.btn-primary:hover { box-shadow: 0 8px 20px rgba(22,119,255,0.42); transform: translateY(-1px); }
+.btn-orange { background: linear-gradient(135deg, var(--orange) 0%, #E04A20 100%); color: #fff; padding: 13px 28px; border-radius: var(--r-lg); font-size: 15px; font-weight: 600; box-shadow: 0 4px 14px rgba(255,96,52,0.30); }
+.btn-orange:hover { box-shadow: 0 8px 20px rgba(255,96,52,0.40); transform: translateY(-1px); }
+.btn-outline { background: #fff; color: var(--blue); padding: 12px 26px; border-radius: var(--r-lg); border: 1.5px solid var(--blue); font-size: 15px; font-weight: 600; }
+.btn-outline:hover { background: var(--blue-soft); }
+.btn-soft { background: var(--blue-soft); color: var(--blue-deep); padding: 12px 22px; border-radius: var(--r-lg); font-size: 14px; font-weight: 600; }
+.btn-soft:hover { background: #d3e4fc; }
+.btn-sm { padding: 9px 18px; font-size: 13px; }
+
+/* ====== Hero ====== */
+.hero { padding: 72px 0 100px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(60% 50% at 75% 25%, rgba(22,119,255,0.20), transparent 60%),
+    radial-gradient(40% 40% at 15% 80%, rgba(255,96,52,0.10), transparent 60%),
+    #fff;
+}
+.hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--blue-deep); padding: 6px 14px; border-radius: var(--r-pill); background: var(--blue-soft); border: 1px solid rgba(22,119,255,0.20); }
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+.hero h1 { font-size: 64px; line-height: 1.05; letter-spacing: -1.8px; font-weight: 700; margin: 22px 0 18px; color: var(--ink-bright); }
+.hero h1 .accent { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 50%, var(--orange) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p.lead { font-size: 17px; line-height: 1.65; color: var(--ink-soft); max-width: 480px; margin: 0 0 32px; }
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero-trust { margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--border-soft); display: flex; gap: 36px; flex-wrap: wrap; }
+.hero-trust-item strong { display: block; color: var(--ink-bright); font-weight: 700; font-size: 28px; letter-spacing: -0.6px; margin-bottom: 2px; }
+.hero-trust-item span { font-size: 12px; color: var(--ink-muted); }
+
+/* QR scan illustration */
+.scan-vis { position: relative; display: grid; place-items: center; padding: 24px; }
+.scan-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(22,119,255,0.18), transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(255,96,52,0.10), transparent 50%);
+  border-radius: var(--r-2xl);
+}
+.qr-card {
+  position: relative; background: #fff;
+  border-radius: var(--r-2xl); padding: 36px 32px;
+  box-shadow: var(--shadow-heavy);
+  border: 1px solid var(--border);
+  width: 100%; max-width: 380px;
+  text-align: center;
+}
+.qr-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.qr-head-left { display: flex; align-items: center; gap: 10px; color: #fff; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); padding: 8px 14px; border-radius: var(--r-md); font-size: 13px; font-weight: 600; }
+.qr-head-left svg { width: 16px; height: 16px; }
+.qr-amount { font-size: 11px; color: var(--ink-muted); font-weight: 500; }
+.qr-code { width: 100%; aspect-ratio: 1; background: #fff; border-radius: var(--r-lg); padding: 16px; border: 1px solid var(--border-soft); position: relative; margin-bottom: 20px; }
+.qr-grid { width: 100%; height: 100%; display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; position: relative; }
+.qr-cell { background: transparent; border-radius: 1px; }
+.qr-cell.on { background: #0c0e14; }
+.qr-corner { position: absolute; width: 48px; height: 48px; border: 6px solid #0c0e14; border-radius: 8px; background: #fff; }
+.qr-corner::after { content: ""; position: absolute; inset: 6px; background: #0c0e14; border-radius: 2px; }
+.qr-corner.tl { top: 12px; left: 12px; }
+.qr-corner.tr { top: 12px; right: 12px; }
+.qr-corner.bl { bottom: 12px; left: 12px; }
+.qr-center-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); display: grid; place-items: center; color: #fff; box-shadow: 0 4px 14px rgba(22,119,255,0.40); }
+.qr-center-logo svg { width: 28px; height: 28px; }
+.qr-foot { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+.qr-foot strong { color: var(--ink-bright); font-weight: 700; }
+.qr-actions { display: flex; gap: 10px; justify-content: center; }
+.qr-action { padding: 8px 18px; border-radius: var(--r-md); font-size: 12px; font-weight: 600; border: 1px solid var(--border); color: var(--ink-soft); background: #fff; cursor: pointer; }
+.qr-action.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.qr-float-card { position: absolute; background: #fff; border-radius: var(--r-lg); padding: 12px 14px; box-shadow: var(--shadow-medium); border: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
+.qr-float-card.fc-top { top: 30px; right: -20px; }
+.qr-float-card.fc-bot { bottom: 30px; left: -20px; }
+.qr-float-icon { width: 36px; height: 36px; border-radius: var(--r-md); display: grid; place-items: center; color: #fff; flex-shrink: 0; }
+.qr-float-icon.blue { background: linear-gradient(135deg, var(--blue), var(--blue-deep)); }
+.qr-float-icon.orange { background: linear-gradient(135deg, var(--orange), #E04A20); }
+.qr-float-icon svg { width: 18px; height: 18px; }
+.qr-float-text strong { display: block; font-size: 13px; font-weight: 700; color: var(--ink-bright); margin-bottom: 2px; }
+.qr-float-text span { font-size: 11px; color: var(--ink-muted); }
+
+/* ====== Section ====== */
+.section { padding: 96px 0; border-top: 1px solid var(--border-soft); }
+.section.tinted { background: var(--surface-1); }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
+.section-eyebrow { font-size: 12px; font-weight: 600; color: var(--blue); margin-bottom: 12px; letter-spacing: 1px; }
+.section-title { font-size: 44px; line-height: 1.1; letter-spacing: -1.2px; font-weight: 700; margin: 0; color: var(--ink-bright); max-width: 720px; }
+.section-sub { font-size: 15px; color: var(--ink-soft); line-height: 1.65; max-width: 460px; margin: 0; }
+
+/* ====== Services grid ====== */
+.svc-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.svc-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: 24px 16px; text-align: center; transition: transform .18s, box-shadow .18s, border-color .18s; cursor: pointer; }
+.svc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); border-color: var(--blue); }
+.svc-icon { width: 52px; height: 52px; margin: 0 auto 14px; border-radius: var(--r-lg); display: grid; place-items: center; color: #fff; }
+.svc-icon.blue { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); }
+.svc-icon.orange { background: linear-gradient(135deg, var(--orange) 0%, #E04A20 100%); }
+.svc-icon.green { background: linear-gradient(135deg, #00B96B 0%, #008A50 100%); }
+.svc-icon.gold { background: linear-gradient(135deg, var(--gold) 0%, #D89C20 100%); }
+.svc-icon.purple { background: linear-gradient(135deg, #9B5DE5 0%, #6A2BB8 100%); }
+.svc-icon.teal { background: linear-gradient(135deg, #14B8B0 0%, #0E8580 100%); }
+.svc-icon svg { width: 26px; height: 26px; }
+.svc-name { font-size: 14px; font-weight: 700; color: var(--ink-bright); margin-bottom: 4px; }
+.svc-desc { font-size: 11px; color: var(--ink-muted); }
+
+/* ====== Feature dual ====== */
+.feature-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.feature-card { border-radius: var(--r-2xl); padding: 40px; position: relative; overflow: hidden; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; }
+.feature-card.blue { background: linear-gradient(135deg, #1677FF 0%, #0958D9 100%); color: #fff; }
+.feature-card.orange-warm { background: linear-gradient(135deg, #FFE9DE 0%, #FFF4DD 100%); color: var(--ink-bright); }
+.feature-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; opacity: 0.85; text-transform: uppercase; }
+.feature-title { font-size: 30px; line-height: 1.15; letter-spacing: -0.6px; font-weight: 700; margin: 12px 0 12px; }
+.feature-sub { font-size: 14px; line-height: 1.65; opacity: 0.85; margin-bottom: 20px; max-width: 380px; }
+.feature-card.blue .feature-sub { color: rgba(255,255,255,0.85); }
+.feature-blob { position: absolute; right: -40px; bottom: -40px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,0.12); }
+.feature-card.orange-warm .feature-blob { background: rgba(255,96,52,0.18); }
+
+/* ====== Trust band ====== */
+.trust-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding: 64px 56px; background: linear-gradient(135deg, var(--blue-tint) 0%, #fff 100%); border-radius: var(--r-2xl); border: 1px solid var(--border); }
+.trust-stat { text-align: center; }
+.trust-stat strong { display: block; font-size: 48px; font-weight: 700; color: var(--blue-deep); letter-spacing: -1.2px; line-height: 1; margin-bottom: 8px; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.trust-stat span { font-size: 13px; color: var(--ink-soft); }
+
+/* ====== CTA ====== */
+.cta-band { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 60%, #03327E 100%); border-radius: var(--r-2xl); padding: 64px 48px; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 32px; position: relative; overflow: hidden; }
+.cta-band::before { content: ""; position: absolute; right: -100px; top: -100px; width: 320px; height: 320px; background: radial-gradient(circle, rgba(255,96,52,0.25), transparent 70%); border-radius: 50%; }
+.cta-band::after { content: ""; position: absolute; left: 35%; bottom: -80px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%); border-radius: 50%; }
+.cta-band > div { position: relative; z-index: 1; }
+.cta-band h2 { font-size: 40px; line-height: 1.1; letter-spacing: -1px; margin: 0 0 10px; font-weight: 700; max-width: 580px; }
+.cta-band p { margin: 0; font-size: 15px; color: rgba(255,255,255,0.82); max-width: 480px; }
+.cta-band .btn { background: #fff; color: var(--blue-deep); }
+.cta-band .btn:hover { background: var(--blue-tint); }
+
+/* ====== Footer ====== */
+footer { border-top: 1px solid var(--border-soft); padding: 64px 0 32px; background: #FAFBFD; }
+.foot-grid { display: grid; grid-template-columns: 1.3fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
+.foot-brand p { color: var(--ink-muted); font-size: 13px; line-height: 1.65; margin: 14px 0 22px; max-width: 280px; }
+.social { display: flex; gap: 10px; }
+.social a { width: 36px; height: 36px; border-radius: var(--r-md); background: #fff; border: 1px solid var(--border); display: grid; place-items: center; color: var(--ink-muted); transition: color .15s, background .15s; }
+.social a:hover { background: var(--blue-soft); color: var(--blue-deep); border-color: var(--blue); }
+.social svg { width: 16px; height: 16px; }
+.foot-col h4 { font-size: 13px; font-weight: 700; color: var(--ink-bright); margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); transition: color .12s; }
+.foot-col li a:hover { color: var(--blue); }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--border-soft); font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 14px; }
+
+/* ====== DS Section ====== */
+.ds-section { background: var(--surface-1); padding: 100px 0; border-top: 1px solid var(--border); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 38px; letter-spacing: -1.2px; line-height: 1.1; margin: 0 0 8px; font-weight: 700; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-soft); font-size: 14px; max-width: 560px; line-height: 1.65; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); font-size: 12px; font-weight: 600; color: var(--ink-soft); transition: color .15s, border-color .15s; }
+.ds-source:hover { color: var(--blue); border-color: var(--blue); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; color: var(--ink-bright); margin: 0 0 8px; }
+.ds-desc { font-size: 13px; color: var(--ink-soft); margin: 0 0 24px; line-height: 1.65; max-width: 580px; }
+.ds-caption { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-muted); margin: 28px 0 12px; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: #fff; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--border); }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 12px; font-weight: 600; color: var(--ink-bright); }
+.ds-sw .val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--border); }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--border-soft); font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-muted); background: var(--surface-1); }
+.ds-type-table td { color: var(--ink-soft); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--blue-deep); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; }
+.ds-radius-cell { background: #fff; padding: 16px 8px; text-align: center; border-radius: var(--r-md); border: 1px solid var(--border); }
+.ds-radius-box { width: 56px; height: 56px; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 11px; font-weight: 600; color: var(--ink-bright); }
+.ds-radius-val { font-size: 10px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: #fff; border-radius: var(--r-xl); padding: 24px; border: 1px solid var(--border); }
+.ds-card h5 { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--blue); margin: 0 0 18px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input-flat { background: #fff; border: 1.5px solid var(--border-strong); padding: 11px 16px; border-radius: var(--r-md); color: var(--ink-bright); font-size: 14px; font-family: inherit; width: 100%; outline: none; transition: border-color .12s; }
+.input-flat:focus { border-color: var(--blue); }
+.input-flat::placeholder { color: var(--ink-muted); }
+.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: var(--r-sm); font-size: 11px; font-weight: 600; }
+.tag-blue { background: var(--blue-soft); color: var(--blue-deep); }
+.tag-orange { background: var(--orange-soft); color: var(--orange); }
+.tag-gold { background: var(--gold-soft); color: #B5851D; }
+
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: #fff; border: 1px solid var(--border-strong); padding: 10px 18px; border-radius: var(--r-md); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: var(--ink-soft); box-shadow: var(--shadow-soft); transition: color .15s, border-color .15s; }
+.src-link:hover { color: var(--blue); border-color: var(--blue); }
+
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero h1 { font-size: 42px; letter-spacing: -1.2px; }
+  .svc-grid { grid-template-columns: repeat(3, 1fr); }
+  .feature-dual { grid-template-columns: 1fr; }
+  .trust-stats { grid-template-columns: 1fr 1fr; padding: 36px 24px; }
+  .cta-band { flex-direction: column; align-items: flex-start; padding: 40px 28px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(4, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+  .qr-float-card { display: none; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+  .section-title { font-size: 28px; letter-spacing: -0.8px; }
+  .svc-grid { grid-template-columns: repeat(2, 1fr); }
+  .trust-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 5v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V5l-8-3z" fill="currentColor" fill-opacity="0.15"/><path d="M12 2L4 5v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V5l-8-3z"/><path d="M8 13l2.5 2.5L16 10"/></svg>
+      </span>
+      <span>支付宝 <span style="font-weight:400;color:var(--ink-muted);font-size:13px;margin-left:4px">Alipay</span></span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-pill active" href="#">个人</a>
+      <a class="nav-pill" href="#">商家</a>
+      <a class="nav-pill" href="#">开发者</a>
+      <a class="nav-pill" href="#">行业方案</a>
+      <a class="nav-pill" href="#">蚂蚁森林</a>
+      <a class="nav-pill" href="#">关于支付宝</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-soft btn-sm" href="#">商家中心</a>
+      <a class="btn btn-primary btn-sm" href="#">免费下载</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>支付宝 10.6 · 数字生活新升级</span>
+      <h1>让生活,<br/><span class="accent">更简单。</span></h1>
+      <p class="lead">12 亿用户的国民支付与数字生活平台.扫一扫、收付款、出行、政务、医疗、理财——一个 App 装下日常的一切.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#">立即下载支付宝</a>
+        <a class="btn btn-outline" href="#">商家入驻 →</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item"><strong>12 亿</strong><span>累计用户</span></div>
+        <div class="hero-trust-item"><strong>80+</strong><span>覆盖国家</span></div>
+        <div class="hero-trust-item"><strong>9000 万</strong><span>商家合作</span></div>
+      </div>
+    </div>
+
+    <div class="scan-vis">
+      <div class="scan-bg"></div>
+      <div class="qr-card">
+        <div class="qr-head">
+          <div class="qr-head-left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="21" y2="14"/><line x1="14" y1="21" x2="21" y2="21"/><line x1="14" y1="17.5" x2="17.5" y2="17.5"/><line x1="21" y1="17.5" x2="21" y2="17.5"/></svg>
+            付款码
+          </div>
+          <div class="qr-amount">向商家付款</div>
+        </div>
+        <div class="qr-code">
+          <div class="qr-corner tl"></div>
+          <div class="qr-corner tr"></div>
+          <div class="qr-corner bl"></div>
+          <div class="qr-grid">
+            <!-- Generate QR-ish pattern via inline cells -->
+            <div class="qr-cell on" style="grid-column:5/6;grid-row:5/6"></div>
+            <div class="qr-cell on" style="grid-column:6/7;grid-row:5/6"></div>
+            <div class="qr-cell on" style="grid-column:8/9;grid-row:5/6"></div>
+            <div class="qr-cell on" style="grid-column:9/10;grid-row:5/6"></div>
+            <div class="qr-cell on" style="grid-column:5/6;grid-row:6/7"></div>
+            <div class="qr-cell on" style="grid-column:7/8;grid-row:6/7"></div>
+            <div class="qr-cell on" style="grid-column:9/10;grid-row:6/7"></div>
+            <div class="qr-cell on" style="grid-column:6/7;grid-row:7/8"></div>
+            <div class="qr-cell on" style="grid-column:8/9;grid-row:7/8"></div>
+            <div class="qr-cell on" style="grid-column:5/6;grid-row:8/9"></div>
+            <div class="qr-cell on" style="grid-column:7/8;grid-row:8/9"></div>
+            <div class="qr-cell on" style="grid-column:9/10;grid-row:8/9"></div>
+          </div>
+          <div class="qr-center-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 5v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V5l-8-3z" fill="rgba(255,255,255,0.18)"/><path d="M8 13l2.5 2.5L16 10"/></svg>
+          </div>
+        </div>
+        <div class="qr-foot">余额可用 <strong>¥3,288.66</strong></div>
+        <div class="qr-actions">
+          <span class="qr-action">付款码</span>
+          <span class="qr-action primary">收款码</span>
+        </div>
+      </div>
+      <div class="qr-float-card fc-top">
+        <div class="qr-float-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="qr-float-text"><strong>+¥18.80</strong><span>来自张三的转账</span></div>
+      </div>
+      <div class="qr-float-card fc-bot">
+        <div class="qr-float-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+        <div class="qr-float-text"><strong>红包到账</strong><span>已存入余额宝</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">服务广场</div>
+        <h2 class="section-title">日常需要的,都在这里.</h2>
+      </div>
+      <p class="section-sub">不只是支付,支付宝是一个数字生活底座——从扫码支付到政务办理,从公共出行到医疗挂号.</p>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="21" y2="14"/><line x1="14" y1="21" x2="21" y2="21"/><line x1="14" y1="17.5" x2="17.5" y2="17.5"/></svg>
+        </div>
+        <div class="svc-name">扫一扫</div>
+        <div class="svc-desc">付款 · 加好友</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="svc-name">收付款</div>
+        <div class="svc-desc">转账 · 收钱</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <div class="svc-name">余额宝</div>
+        <div class="svc-desc">理财 · 享收益</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 6 6 9 6 13a6 6 0 0012 0c0-4-2-7-6-11z"/></svg>
+        </div>
+        <div class="svc-name">蚂蚁森林</div>
+        <div class="svc-desc">绿色出行 · 公益</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 5v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V5l-8-3z"/><line x1="12" y1="10" x2="12" y2="14"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+        </div>
+        <div class="svc-name">健康医疗</div>
+        <div class="svc-desc">挂号 · 电子医保</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon gold">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+        </div>
+        <div class="svc-name">政务服务</div>
+        <div class="svc-desc">证照 · 缴费</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18l-2 12H5L3 7zM3 7L2 3H0"/></svg>
+        </div>
+        <div class="svc-name">饿了么</div>
+        <div class="svc-desc">点外卖 · 送药</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 01-2-2v-3l3-7h12l3 7v3a2 2 0 01-2 2M5 17v3M19 17v3M9 7h6"/></svg>
+        </div>
+        <div class="svc-name">公共出行</div>
+        <div class="svc-desc">公交 · 地铁码</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v6m4-6v6m-7 4h10a3 3 0 003-3V5a3 3 0 00-3-3H7a3 3 0 00-3 3v4a3 3 0 003 3z"/><path d="M9 22h6"/></svg>
+        </div>
+        <div class="svc-name">蚂蚁庄园</div>
+        <div class="svc-desc">爱心捐赠 · 喂鸡</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <div class="svc-name">芝麻信用</div>
+        <div class="svc-desc">免押 · 信用分</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="svc-name">水电煤</div>
+        <div class="svc-desc">生活缴费</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon gold">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 8 22 9 17 14 18 21 12 17 6 21 7 14 2 9 9 8 12 2"/></svg>
+        </div>
+        <div class="svc-name">会员权益</div>
+        <div class="svc-desc">积分 · 红包</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE DUAL -->
+<section class="section tinted">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">两个故事</div>
+        <h2 class="section-title">从支付,到生活的方方面面.</h2>
+      </div>
+      <p class="section-sub">国民支付的根基,加上情感连接的温度——支付宝是工具,也是日常陪伴.</p>
+    </div>
+    <div class="feature-dual">
+      <div class="feature-card blue">
+        <div>
+          <span class="feature-tag">国民支付 · 12 亿用户</span>
+          <h3 class="feature-title">让每一笔支付,<br/>都安全、即时、无感.</h3>
+          <p class="feature-sub">从扫码到刷脸,从国内到 80+ 国家——支付宝以毫秒级清算和银行级安全,承载中国人最日常的金融动作.</p>
+        </div>
+        <div><a class="btn" style="background:#fff;color:var(--blue-deep)" href="#">了解支付能力 →</a></div>
+        <div class="feature-blob"></div>
+      </div>
+      <div class="feature-card orange-warm">
+        <div>
+          <span class="feature-tag" style="color:var(--orange)">公益与温度 · 蚂蚁森林</span>
+          <h3 class="feature-title">每一个绿色行动,<br/>都被认真记得.</h3>
+          <p class="feature-sub">绿色出行、电子发票、闲置回收——你的每个低碳选择都被换算成能量球,最终长成一片真实的树林.</p>
+        </div>
+        <div><a class="btn btn-orange" href="#">查看我的能量 →</a></div>
+        <div class="feature-blob"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STATS -->
+<section class="section">
+  <div class="container">
+    <div class="trust-stats">
+      <div class="trust-stat"><strong>12 亿</strong><span>累计用户数</span></div>
+      <div class="trust-stat"><strong>80+</strong><span>覆盖国家与地区</span></div>
+      <div class="trust-stat"><strong>9000 万</strong><span>合作商家</span></div>
+      <div class="trust-stat"><strong>99.99%</strong><span>支付成功率</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>支付宝陪你,<br/>把生活打理得更简单.</h2>
+        <p>iOS · Android · HarmonyOS · Web 全平台支持,首次注册即送 ¥10 通用红包.</p>
+      </div>
+      <a class="btn btn-primary" style="background:#fff;color:var(--blue-deep);" href="#">立即下载 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- DS SECTION -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">设计系统参考</div>
+        <h2>蓝色的信任,加一点暖橙.</h2>
+        <p>支付宝的视觉语言是"国民信任 + 生活温度":支付宝蓝 #1677FF 是主基调,负责安全与稳重;暖橙 #FF6034 偶尔出现在红包、会员、情感节点,让金融工具不冷冰冰.下面是 token.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.alipay.html" target="_blank" rel="noopener">查看 DESIGN.md ↗</a>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3 class="ds-heading">色彩</h3>
+      <p class="ds-desc">支付宝蓝是品牌核心,从浅到深构成完整阶梯;暖橙仅出现在情感节点(红包、提示、欢迎);中性灰阶保持画面平衡.</p>
+
+      <div class="ds-caption">品牌主蓝</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1677FF"></div><div class="meta"><div class="name">支付宝蓝</div><div class="val">#1677FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4093FF"></div><div class="meta"><div class="name">浅蓝渐变</div><div class="val">#4093FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0958D9"></div><div class="meta"><div class="name">深蓝 · Hover</div><div class="val">#0958D9</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E6F0FF"></div><div class="meta"><div class="name">浅蓝 Soft</div><div class="val">#E6F0FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#1677FF,#4093FF)"></div><div class="meta"><div class="name">蓝色渐变</div><div class="val">1677FF→4093FF</div></div></div>
+      </div>
+
+      <div class="ds-caption">情感橙 · 红包/会员</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FF6034"></div><div class="meta"><div class="name">红包橙</div><div class="val">#FF6034</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFE9DE"></div><div class="meta"><div class="name">浅橙 Tint</div><div class="val">#FFE9DE</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F5B544"></div><div class="meta"><div class="name">会员金</div><div class="val">#F5B544</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFF4DD"></div><div class="meta"><div class="name">金色 Tint</div><div class="val">#FFF4DD</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FF6034,#F5B544)"></div><div class="meta"><div class="name">红包渐变</div><div class="val">orange→gold</div></div></div>
+      </div>
+
+      <div class="ds-caption">文字</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">极黑</div><div class="val">#000000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#15191F"></div><div class="meta"><div class="name">主文字</div><div class="val">#15191F</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4a4f5a"></div><div class="meta"><div class="name">次要文字</div><div class="val">#4a4f5a</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#797f8c"></div><div class="meta"><div class="name">弱化文字</div><div class="val">#797f8c</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#b2b6c0"></div><div class="meta"><div class="name">占位文字</div><div class="val">#b2b6c0</div></div></div>
+      </div>
+
+      <div class="ds-caption">表面与语义</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #E4E9F0"></div><div class="meta"><div class="name">画布</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F5F8FC"></div><div class="meta"><div class="name">表面 1</div><div class="val">#F5F8FC</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E4E9F0"></div><div class="meta"><div class="name">边框</div><div class="val">#E4E9F0</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#00B96B"></div><div class="meta"><div class="name">成功 · 收款</div><div class="val">#00B96B</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF4D4F"></div><div class="meta"><div class="name">错误 · 警告</div><div class="val">#FF4D4F</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">字体</h3>
+      <p class="ds-desc">中文 PingFang SC,英文 Inter.金额采用 tabular-nums 等宽数字字形.字重以 600-700 为主——保持金融场景的稳重感.</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>样式</th><th>字号</th><th>字重</th><th>用途</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:42px;font-weight:700;letter-spacing:-1.4px">让生活更简单</td><td>64 / 4rem</td><td>700</td><td>Hero</td></tr>
+          <tr><td class="token">--title-1</td><td class="sample" style="font-size:32px;font-weight:700;letter-spacing:-0.8px">服务广场</td><td>44 / 2.75rem</td><td>700</td><td>章节标题</td></tr>
+          <tr><td class="token">--title-2</td><td class="sample" style="font-size:24px;font-weight:700">让每一笔支付都即时</td><td>30 / 1.88rem</td><td>700</td><td>子标题</td></tr>
+          <tr><td class="token">--heading</td><td class="sample" style="font-size:16px;font-weight:700">余额宝</td><td>14 / 0.88rem</td><td>700</td><td>卡片标题</td></tr>
+          <tr><td class="token">--amount</td><td class="sample" style="font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;color:#1677FF">¥3,288.66</td><td>28 / 1.75rem</td><td>700</td><td>金额数字</td></tr>
+          <tr><td class="token">--amount-pos</td><td class="sample" style="font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;color:#00B96B">+¥18.80</td><td>16 / 1rem</td><td>700</td><td>收款金额</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:14px;font-weight:400">12 亿用户的国民支付</td><td>14 / 0.88rem</td><td>400</td><td>正文</td></tr>
+          <tr><td class="token">--caption</td><td class="sample" style="font-size:12px;font-weight:400;color:#797f8c">向商家付款 · 已加密</td><td>12 / 0.75rem</td><td>400</td><td>辅助说明</td></tr>
+          <tr><td class="token">--badge</td><td class="sample" style="font-size:11px;font-weight:600;color:#fff;background:#FF6034;padding:2px 8px;border-radius:9999px">新红包</td><td>11 / 0.69rem</td><td>600</td><td>徽章</td></tr>
+          <tr><td class="token">--mono</td><td class="sample" style="font-family:var(--font-mono);font-size:12px">#1677FF</td><td>12 / 0.75rem</td><td>500</td><td>代码 · 订单号</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">圆角</h3>
+      <p class="ds-desc">支付宝的圆角倾向"温和但不夸张":按钮 12px,卡片 16px,服务图标 12px.金融感不能太软,但也不能像企业级那么硬.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">极小</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">输入框</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">按钮 · 图标</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">大模块</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px"></div><div class="ds-radius-label">胶囊</div><div class="ds-radius-val">9999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">圆形</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">组件</h3>
+      <p class="ds-desc">按钮以蓝色渐变为主,带轻量投影;CTA 偶尔使用红包橙;输入框 1.5px 边框,聚焦变蓝;标签短小,只用于状态识别.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>按钮</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">主色 · 立即支付</a>
+            <a class="btn btn-orange" href="#">红包橙 · 拆红包</a>
+            <a class="btn btn-outline" href="#">描边 · 商家入驻</a>
+            <a class="btn btn-soft" href="#">柔和 · 登录</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>输入与标签</h5>
+          <div class="ds-card-stack">
+            <input class="input-flat" placeholder="请输入收款方账号" />
+            <input class="input-flat" placeholder="支付金额 ¥" />
+            <div class="ds-card-row">
+              <span class="tag tag-blue">官方</span>
+              <span class="tag tag-orange">新红包</span>
+              <span class="tag tag-gold">会员特权</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>卡片</h5>
+          <div class="ds-card-stack">
+            <div style="background:#fff;border:1px solid #E4E9F0;border-radius:16px;padding:16px;width:100%;display:flex;gap:12px;align-items:center">
+              <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#1677FF,#0958D9);color:#fff;display:grid;place-items:center;flex-shrink:0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700;color:#15191F">余额宝</div>
+                <div style="font-size:11px;color:#797f8c">昨日收益 +¥0.34</div>
+              </div>
+              <div style="font-size:16px;font-weight:700;color:#1677FF;font-variant-numeric:tabular-nums">¥3,288.66</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#FFE9DE,#FFF4DD);border-radius:16px;padding:16px;width:100%">
+              <div style="font-size:12px;color:#FF6034;font-weight:700;margin-bottom:4px">恭喜获得红包</div>
+              <div style="font-size:28px;color:#FF6034;font-weight:700;font-variant-numeric:tabular-nums">¥8.88</div>
+              <div style="font-size:11px;color:#797f8c;margin-top:4px">已存入余额,可立即使用</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 5v6c0 5.5 3.5 10 8 11 4.5-1 8-5.5 8-11V5l-8-3z"/><path d="M8 13l2.5 2.5L16 10"/></svg>
+          </span>
+          <span>支付宝</span>
+        </div>
+        <p>本页面是一份独立的视觉研究 · 对支付宝 Alipay 视觉语言的致敬,用于演示支付与生活服务产品的 token 系统、信任蓝与情感橙.与支付宝及蚂蚁集团无关.</p>
+        <div class="social">
+          <a href="#" aria-label="weixin"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 9c-2.5 0-4.5 1.6-4.5 3.6 0 1.1.6 2.1 1.5 2.7l-.4 1.3 1.5-.8c.6.2 1.2.3 1.9.3h.5c-.1-.3-.2-.7-.2-1 0-2.2 2.2-4 4.9-4h.5c-.4-1.2-1.5-2.1-3-2.1z"/></svg></a>
+          <a href="#" aria-label="weibo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></a>
+          <a href="#" aria-label="bili"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="6" width="18" height="13" rx="3"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>支付能力</h4>
+        <ul>
+          <li><a href="#">扫码支付</a></li>
+          <li><a href="#">收付款</a></li>
+          <li><a href="#">境外支付</a></li>
+          <li><a href="#">余额宝</a></li>
+          <li><a href="#">芝麻信用</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>数字生活</h4>
+        <ul>
+          <li><a href="#">出行公交</a></li>
+          <li><a href="#">健康医疗</a></li>
+          <li><a href="#">政务服务</a></li>
+          <li><a href="#">蚂蚁森林</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>商家与开发者</h4>
+        <ul>
+          <li><a href="#">商家入驻</a></li>
+          <li><a href="#">开放平台</a></li>
+          <li><a href="#">小程序</a></li>
+          <li><a href="#">蚂蚁链</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#">关于支付宝</a></li>
+          <li><a href="#">客户服务</a></li>
+          <li><a href="#">用户协议</a></li>
+          <li><a href="#">隐私政策</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计研究 · 致敬支付宝视觉语言</span>
+      <span>用户协议 · 隐私政策 · 法律声明 · 互联网金融行业协会</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.alipay.html" target="_blank" rel="noopener">查看 DESIGN.md ↗</a>
+
+</body>
+</html>

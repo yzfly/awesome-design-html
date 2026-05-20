@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Starbucks — Design System Study</title>
+<meta name="description" content="A visual study of Starbucks's design language: warm-cream canvas, four-tier green system, full-pill buttons, scale(0.95) press, floating Frap CTA. Marketing demo + design system reference." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600&family=Kalam:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Greens — the four-tier system */
+  --starbucks-green: #006241;
+  --green-accent: #00754A;
+  --house-green: #1E3932;
+  --green-uplift: #2b5148;
+  --green-light: #d4e9e2;
+  /* Gold — Rewards only */
+  --gold: #cba258;
+  --gold-light: #dfc49d;
+  --gold-lightest: #faf6ee;
+  /* Surfaces */
+  --white: #ffffff;
+  --neutral-cool: #f9f9f9;
+  --neutral-warm: #f2f0eb;
+  --ceramic: #edebe9;
+  --black: #000000;
+  /* Text */
+  --text-black: rgba(0,0,0,0.87);
+  --text-black-soft: rgba(0,0,0,0.58);
+  --text-white: rgba(255,255,255,1);
+  --text-white-soft: rgba(255,255,255,0.70);
+  --rewards-green: #33433d;
+  /* Semantic */
+  --red: #c82014;
+  --yellow: #fbbc05;
+  /* Border */
+  --input-border: #d6dbde;
+  --hairline: #e7e7e7;
+  /* Shadow */
+  --card-shadow: 0px 0px 0.5px 0px rgba(0,0,0,0.14), 0px 1px 1px 0px rgba(0,0,0,0.24);
+  --nav-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.06), 0 0 2px rgba(0,0,0,0.07);
+  --frap-shadow: 0 0 6px rgba(0,0,0,0.24), 0 8px 12px rgba(0,0,0,0.14);
+  /* Type */
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Lora", "Iowan Old Style", Georgia, serif;
+  --font-script: "Kalam", "Comic Sans MS", cursive;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radius */
+  --r-card: 12px;
+  --r-input: 4px;
+  --r-pill: 50px;
+  --r-circle: 50%;
+  /* Motion */
+  --press: scale(0.95);
+  --t-button: all 0.2s ease;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--neutral-warm);
+  color: var(--text-black);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.16px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* ====== Top Join Strip ====== */
+.join-strip { background: var(--black); color: #fff; padding: 8px 0; display: flex; align-items: center; justify-content: center; gap: 16px; font-size: 13px; }
+.join-strip a.btn-black { padding: 6px 14px; }
+
+/* ====== Nav ====== */
+.nav { background: var(--white); box-shadow: var(--nav-shadow); position: sticky; top: 0; z-index: 40; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; max-width: 1280px; margin: 0 auto; }
+.nav-left { display: flex; align-items: center; gap: 36px; }
+.brand-mark { width: 44px; height: 44px; border-radius: 50%; background: var(--starbucks-green); display: grid; place-items: center; flex-shrink: 0; }
+.brand-mark svg { width: 30px; height: 30px; color: #fff; }
+.nav-links { display: flex; gap: 24px; }
+.nav-link { font-size: 14px; font-weight: 600; color: var(--text-black); letter-spacing: -0.16px; padding: 6px 0; position: relative; }
+.nav-link:hover { color: var(--starbucks-green); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.find-store { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--text-black); margin-right: 10px; }
+
+/* ====== Buttons ====== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 600; letter-spacing: -0.16px; border-radius: var(--r-pill); padding: 8px 18px; cursor: pointer; border: 1px solid transparent; transition: var(--t-button); }
+.btn:active { transform: var(--press); }
+.btn-green-fill { background: var(--green-accent); color: var(--white); border-color: var(--green-accent); }
+.btn-green-fill:hover { background: #005d3a; border-color: #005d3a; }
+.btn-green-outline { background: transparent; color: var(--green-accent); border-color: var(--green-accent); }
+.btn-green-outline:hover { background: rgba(0,117,74,0.05); }
+.btn-black { background: var(--black); color: var(--white); border-color: var(--black); }
+.btn-black:hover { background: #1c1c1c; }
+.btn-dark-outline { background: transparent; color: var(--text-black); border-color: var(--text-black); }
+.btn-dark-outline:hover { background: rgba(0,0,0,0.05); }
+.btn-white-fill { background: var(--white); color: var(--green-accent); border-color: var(--white); }
+.btn-white-fill:hover { background: #f4f1ec; }
+.btn-white-outline { background: transparent; color: var(--white); border-color: var(--white); }
+.btn-white-outline:hover { background: rgba(255,255,255,0.1); }
+.btn-lg { padding: 12px 32px; font-size: 16px; }
+.btn-customize { background: var(--white); color: var(--green-accent); border: 1.5px solid var(--green-accent); padding: 14px 40px; }
+
+/* ====== Hero ====== */
+.hero { padding: 56px 0 80px; background: var(--neutral-warm); }
+.hero-inner { display: grid; grid-template-columns: 0.6fr 0.4fr; gap: 48px; align-items: center; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; color: var(--starbucks-green); margin-bottom: 22px; text-transform: uppercase; letter-spacing: 1.2px; }
+.hero-eyebrow .star { width: 14px; height: 14px; color: var(--gold); }
+.hero h1 { font-family: var(--font-serif); font-weight: 500; font-size: 64px; line-height: 1.08; color: var(--starbucks-green); margin: 0 0 18px; letter-spacing: -0.5px; }
+.hero h1 em { font-style: italic; color: var(--green-accent); font-weight: 500; }
+.hero p.lead { font-size: 19px; line-height: 1.55; color: var(--text-black); margin: 0 0 30px; max-width: 500px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-meta { display: flex; gap: 30px; margin-top: 42px; }
+.hero-meta-item { font-size: 13px; color: var(--text-black-soft); }
+.hero-meta-item strong { display: block; font-size: 24px; color: var(--starbucks-green); font-weight: 600; letter-spacing: -0.3px; margin-bottom: 2px; }
+.hero-image { position: relative; }
+.hero-cup { aspect-ratio: 4/5; border-radius: var(--r-card); overflow: hidden; background:
+  radial-gradient(70% 80% at 50% 35%, #f4cfb8 0%, #e89b6f 45%, #c66f3d 80%, #6b3614 100%);
+  position: relative; display: grid; place-items: center;
+  box-shadow: 0 20px 40px rgba(76,38,15,0.25);
+}
+.hero-cup::before { content: ""; position: absolute; inset: 0; background: radial-gradient(40% 30% at 30% 25%, rgba(255,255,255,0.35), transparent 60%); }
+.cup-svg { position: relative; z-index: 1; filter: drop-shadow(0 12px 20px rgba(0,0,0,0.25)); }
+.hero-badge { position: absolute; left: -16px; bottom: 32px; background: var(--gold); color: var(--house-green); padding: 10px 18px; border-radius: var(--r-pill); font-size: 13px; font-weight: 700; box-shadow: var(--card-shadow); display: flex; align-items: center; gap: 8px; }
+
+/* ====== Section ====== */
+.section { padding: 88px 0; }
+.section.cream { background: var(--neutral-warm); }
+.section.white { background: var(--white); }
+.section.ceramic { background: var(--ceramic); }
+.section.dark { background: var(--house-green); color: var(--white); }
+.section.dark .section-eyebrow { color: var(--gold); }
+.section.dark .section-title { color: var(--white); }
+.section.dark .section-sub { color: var(--text-white-soft); }
+.section-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 12px; }
+.section-title { font-family: var(--font-serif); font-size: 44px; line-height: 1.1; color: var(--starbucks-green); margin: 0 0 14px; font-weight: 500; letter-spacing: -0.3px; }
+.section.dark .section-title { color: var(--white); font-family: var(--font-sans); font-weight: 600; }
+.section-sub { font-size: 17px; color: var(--text-black); margin: 0; max-width: 540px; line-height: 1.6; }
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+
+/* ====== Beverage cards ====== */
+.bev-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.bev-card { background: var(--white); border-radius: var(--r-card); box-shadow: var(--card-shadow); overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; cursor: pointer; display: flex; flex-direction: column; }
+.bev-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+.bev-img { aspect-ratio: 1; display: grid; place-items: center; position: relative; overflow: hidden; }
+.bev-img-1 { background: radial-gradient(75% 70% at 50% 40%, #f4d0a8, #d49162 70%, #8a5224 100%); }
+.bev-img-2 { background: radial-gradient(75% 70% at 50% 40%, #ffd1d8, #f49aa6 70%, #c2566a 100%); }
+.bev-img-3 { background: radial-gradient(75% 70% at 50% 40%, #e3eed8, #aac88b 70%, #5a7d3a 100%); }
+.bev-img-4 { background: radial-gradient(75% 70% at 50% 40%, #ffe9a8, #f0c14c 70%, #a07f1f 100%); }
+.bev-img-5 { background: radial-gradient(75% 70% at 50% 40%, #e9dcd0, #a78b6f 70%, #5e4a36 100%); }
+.bev-img-6 { background: radial-gradient(75% 70% at 50% 40%, #f9c4d2, #e0729a 70%, #863c5c 100%); }
+.bev-img-7 { background: radial-gradient(75% 70% at 50% 40%, #d6e9e2, #6fb3a2 70%, #2e6553 100%); }
+.bev-img-8 { background: radial-gradient(75% 70% at 50% 40%, #ffe2cc, #f0a06b 70%, #a35921 100%); }
+.bev-cup { width: 52%; }
+.bev-meta { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+.bev-name { font-family: var(--font-serif); font-size: 19px; color: var(--starbucks-green); font-weight: 600; margin: 0 0 4px; line-height: 1.25; letter-spacing: -0.16px; }
+.bev-desc { font-size: 13px; color: var(--text-black-soft); margin: 0 0 14px; line-height: 1.5; flex: 1; }
+.bev-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.bev-price { font-size: 14px; font-weight: 600; color: var(--text-black); }
+.bev-star { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: var(--r-pill); font-size: 11px; font-weight: 700; color: var(--gold); border: 1px solid var(--gold); }
+
+/* ====== Rewards band ====== */
+.rewards-band { padding: 80px 0; background: var(--house-green); color: var(--white); }
+.rewards-inner { display: grid; grid-template-columns: 0.45fr 0.55fr; gap: 60px; align-items: center; }
+.rewards-eyebrow { font-size: 12px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 14px; }
+.rewards-title { font-family: var(--font-serif); font-size: 48px; line-height: 1.08; color: var(--white); margin: 0 0 18px; font-weight: 500; letter-spacing: -0.4px; }
+.rewards-title em { color: var(--gold); font-style: italic; }
+.rewards-sub { font-size: 17px; line-height: 1.6; color: var(--text-white-soft); margin: 0 0 26px; }
+.rewards-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.rewards-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.reward-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-card); padding: 22px 20px; position: relative; overflow: hidden; }
+.reward-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold); }
+.reward-card.bronze::before { background: linear-gradient(90deg, #b87333, #d4925a); }
+.reward-card.silver::before { background: linear-gradient(90deg, #b3b3b3, #e3e3e3); }
+.reward-card.gold::before { background: linear-gradient(90deg, var(--gold), #f0d09b); }
+.reward-level { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--text-white-soft); margin-bottom: 8px; }
+.reward-stars { font-family: var(--font-serif); font-size: 30px; font-weight: 600; color: var(--white); margin-bottom: 4px; letter-spacing: -0.3px; }
+.reward-name { font-size: 14px; color: var(--text-white-soft); margin-bottom: 16px; }
+.reward-perks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.85); }
+.reward-perks li { display: flex; align-items: flex-start; gap: 8px; line-height: 1.45; }
+.reward-perks li svg { width: 12px; height: 12px; color: var(--gold); flex-shrink: 0; margin-top: 4px; }
+
+/* ====== PDP customize cluster ====== */
+.pdp { display: grid; grid-template-columns: 0.45fr 0.55fr; gap: 60px; align-items: center; }
+.pdp-photo { aspect-ratio: 4/5; border-radius: var(--r-card); overflow: hidden; background: radial-gradient(70% 70% at 50% 40%, #ffd9e1 0%, #f4a3b5 50%, #c75070 100%); display: grid; place-items: center; box-shadow: var(--card-shadow); }
+.pdp h2 { font-family: var(--font-serif); font-size: 38px; color: var(--starbucks-green); font-weight: 500; margin: 0 0 6px; letter-spacing: -0.3px; }
+.pdp-crumb { font-size: 13px; color: var(--text-black-soft); margin-bottom: 8px; }
+.pdp-crumb a { color: var(--green-accent); text-decoration: underline; }
+.pdp-desc { font-size: 15px; line-height: 1.6; color: var(--text-black); margin: 14px 0 28px; max-width: 480px; }
+.size-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+.size-opt { background: var(--white); border-radius: var(--r-card); padding: 18px 8px; text-align: center; cursor: pointer; border: 1px solid transparent; box-shadow: var(--card-shadow); }
+.size-opt.active .size-ring { border-color: var(--green-accent); }
+.size-ring { width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent; display: grid; place-items: center; margin: 0 auto 8px; transition: border-color .2s; }
+.size-ring svg { width: 24px; height: 30px; }
+.size-name { font-size: 15px; font-weight: 700; color: var(--starbucks-green); letter-spacing: -0.16px; }
+.size-oz { font-size: 12px; color: var(--text-black-soft); margin-top: 2px; }
+.addins { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.addin-row { background: var(--white); border: 1px solid var(--input-border); border-radius: var(--r-input); padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+.addin-label { position: absolute; top: -7px; left: 14px; background: var(--white); padding: 0 6px; font-size: 11px; font-weight: 700; color: var(--text-black); letter-spacing: 0.5px; text-transform: uppercase; }
+.addin-val { font-size: 15px; color: var(--text-black); }
+.addin-row svg.chev { width: 16px; height: 16px; color: var(--text-black-soft); }
+.stepper { display: inline-flex; align-items: center; gap: 12px; }
+.stepper button { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--input-border); background: var(--white); display: grid; place-items: center; cursor: pointer; color: var(--text-black); }
+.stepper button:hover { border-color: var(--green-accent); color: var(--green-accent); }
+.stepper-num { font-size: 16px; font-weight: 700; color: var(--text-black); min-width: 16px; text-align: center; }
+.pdp-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ====== Gift cards ====== */
+.gift-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.gift-card { aspect-ratio: 1.55; border-radius: var(--r-card); overflow: hidden; box-shadow: var(--card-shadow); position: relative; display: grid; place-items: center; color: #fff; font-family: var(--font-script); font-weight: 700; font-size: 26px; text-align: center; padding: 22px; transition: transform .2s; cursor: pointer; }
+.gift-card:hover { transform: translateY(-3px); }
+.gc-1 { background: radial-gradient(80% 90% at 30% 30%, #f9c8d2, #d65f7d 60%, #80324b 100%); }
+.gc-2 { background: radial-gradient(80% 90% at 30% 30%, #ffd9a5, #e89d4a 60%, #8a5413 100%); color: #fff8e7; }
+.gc-3 { background: radial-gradient(80% 90% at 30% 30%, #b7dcc9, #5a9e76 60%, #1e3932 100%); }
+.gc-4 { background: radial-gradient(80% 90% at 30% 30%, #cbd5ff, #6a7fc9 60%, #2d3a73 100%); }
+.gc-5 { background: radial-gradient(80% 90% at 30% 30%, #f4d896, #cba258 60%, #6b4f1d 100%); color: #2c1e07; }
+.gc-6 { background: radial-gradient(80% 90% at 30% 30%, #ffe4d6, #e8967b 60%, #884528 100%); }
+.gc-7 { background: radial-gradient(80% 90% at 30% 30%, #d9e9e3, #6b9f8e 60%, #1e3932 100%); }
+.gc-8 { background: radial-gradient(80% 90% at 30% 30%, #faecd5, #d4b07e 60%, #6b4318 100%); color: #2c1e07; }
+.gc-cat { font-family: var(--font-sans); font-weight: 600; font-size: 13px; color: var(--starbucks-green); text-transform: uppercase; letter-spacing: 1.6px; margin-bottom: 12px; }
+
+/* ====== CTA Band ====== */
+.cta-band { background: var(--house-green); border-radius: var(--r-card); padding: 56px 56px; color: var(--white); display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+.cta-band h2 { font-family: var(--font-serif); font-size: 40px; margin: 0 0 10px; font-weight: 500; line-height: 1.1; letter-spacing: -0.3px; }
+.cta-band p { font-size: 16px; color: var(--text-white-soft); margin: 0; max-width: 500px; }
+
+/* ====== Footer ====== */
+footer { background: var(--house-green); color: var(--white); padding: 72px 0 36px; }
+.foot-grid { display: grid; grid-template-columns: 1.3fr repeat(4, 1fr); gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.foot-brand p { color: var(--text-white-soft); font-size: 14px; line-height: 1.6; max-width: 320px; margin: 20px 0; }
+.foot-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--gold); margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col a { font-size: 14px; color: var(--text-white-soft); }
+.foot-col a:hover { color: var(--white); }
+.foot-bottom { padding-top: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--text-white-soft); }
+.social { display: flex; gap: 12px; }
+.social a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: grid; place-items: center; color: #fff; }
+.social a:hover { background: var(--gold); color: var(--house-green); }
+.social svg { width: 16px; height: 16px; }
+
+/* ====== Floating Frap CTA ====== */
+.frap { position: fixed; right: 24px; bottom: 90px; width: 56px; height: 56px; border-radius: 50%; background: var(--green-accent); color: var(--white); display: grid; place-items: center; box-shadow: var(--frap-shadow); z-index: 60; transition: var(--t-button), box-shadow .2s; cursor: pointer; border: 0; }
+.frap:hover { transform: scale(1.05); }
+.frap:active { transform: var(--press); box-shadow: 0 0 6px rgba(0,0,0,0.24); }
+.frap svg { width: 26px; height: 26px; }
+
+/* ====== Source link ====== */
+.src-link { position: fixed; right: 24px; bottom: 24px; z-index: 50; background: var(--white); border: 1px solid var(--input-border); padding: 8px 16px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600; color: var(--green-accent); box-shadow: var(--card-shadow); transition: var(--t-button); }
+.src-link:hover { background: var(--green-accent); color: #fff; border-color: var(--green-accent); }
+
+/* ====== Design system reference (Part B) ====== */
+.ds-section { background: var(--ceramic); padding: 100px 0; }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: 56px; }
+.ds-intro h2 { font-family: var(--font-serif); font-size: 40px; font-weight: 500; color: var(--starbucks-green); margin: 0 0 10px; letter-spacing: -0.3px; line-height: 1.1; }
+.ds-intro p { color: var(--text-black); margin: 0; font-size: 15px; max-width: 540px; line-height: 1.6; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; background: var(--white); border-radius: var(--r-pill); font-size: 13px; font-weight: 600; color: var(--green-accent); border: 1px solid var(--green-accent); box-shadow: var(--card-shadow); }
+.ds-source:hover { background: var(--green-accent); color: #fff; }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.08); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--starbucks-green); margin: 0 0 8px; letter-spacing: -0.2px; }
+.ds-desc { font-size: 14px; color: var(--text-black); margin: 0 0 28px; line-height: 1.55; max-width: 600px; }
+.ds-caption { font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--text-black-soft); margin: 28px 0 14px; }
+.ds-swatches { display: grid; gap: 14px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: var(--white); border-radius: var(--r-card); overflow: hidden; box-shadow: var(--card-shadow); }
+.ds-sw .chip { height: 72px; }
+.ds-sw .meta { padding: 12px 14px; }
+.ds-sw .name { font-size: 13px; font-weight: 600; color: var(--text-black); }
+.ds-sw .val { font-size: 11px; color: var(--text-black-soft); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--r-card); overflow: hidden; box-shadow: var(--card-shadow); }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--hairline); font-size: 14px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--text-black-soft); background: var(--neutral-cool); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 12px; color: var(--green-accent); }
+.ds-type-table td.sample { color: var(--text-black); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+.ds-radius-cell { background: var(--white); padding: 22px 14px; text-align: center; border-radius: var(--r-card); box-shadow: var(--card-shadow); }
+.ds-radius-box { width: 64px; height: 64px; background: linear-gradient(135deg, var(--starbucks-green) 0%, var(--green-accent) 100%); margin: 0 auto 12px; }
+.ds-radius-label { font-size: 13px; font-weight: 600; color: var(--text-black); }
+.ds-radius-val { font-size: 11px; color: var(--text-black-soft); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.ds-card { background: var(--white); border-radius: var(--r-card); padding: 26px; box-shadow: var(--card-shadow); }
+.ds-card h5 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--starbucks-green); margin: 0 0 18px; letter-spacing: -0.16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.input-base { background: var(--white); border: 1px solid var(--input-border); border-radius: var(--r-input); padding: 14px 16px; font-size: 15px; color: var(--text-black); font-family: inherit; width: 100%; outline: none; transition: border-color .2s; }
+.input-base::placeholder { color: var(--text-black-soft); }
+.input-base:focus { border-color: var(--green-accent); }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: var(--r-pill); font-size: 12px; font-weight: 700; }
+.chip-gold { color: var(--gold); border: 1px solid var(--gold); background: transparent; }
+.chip-green { color: var(--green-accent); border: 1px solid var(--green-accent); background: transparent; }
+.chip-red { color: var(--red); border: 1px solid var(--red); background: transparent; }
+
+/* ====== Responsive ====== */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero h1 { font-size: 48px; }
+  .bev-grid { grid-template-columns: repeat(2, 1fr); }
+  .rewards-inner, .pdp { grid-template-columns: 1fr; gap: 40px; }
+  .gift-grid { grid-template-columns: repeat(2, 1fr); }
+  .cta-band { flex-direction: column; align-items: flex-start; padding: 40px 28px; }
+  .cta-band h2 { font-size: 30px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 56px 0; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 36px; }
+  .section-title { font-size: 30px; }
+  .bev-grid, .gift-grid { grid-template-columns: 1fr; }
+  .size-row { grid-template-columns: repeat(2, 1fr); }
+  .rewards-cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top join strip -->
+<div class="join-strip">
+  <span>Coffee meets you where you are. Earn double Stars Tuesdays.</span>
+  <a class="btn btn-black" href="#">Join now</a>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a class="brand-mark" href="#" aria-label="Starbucks home">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18a8 8 0 110-16 8 8 0 010 16zm-3-9.5l3-1.8 3 1.8v3.5l-3 1.8-3-1.8V10.5zm3-3.5L7 9.5v5L12 17l5-2.5v-5L12 7z"/></svg>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="#">Menu</a>
+        <a class="nav-link" href="#">Rewards</a>
+        <a class="nav-link" href="#">Gift Cards</a>
+        <a class="nav-link" href="#">Stores</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a class="find-store" href="#">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Find a store
+      </a>
+      <a class="btn btn-dark-outline" href="#">Sign in</a>
+      <a class="btn btn-black" href="#">Join now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <span class="hero-eyebrow">
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+        Free coffee is just the beginning
+      </span>
+      <h1>Spring is in the <em>cup</em>.</h1>
+      <p class="lead">New seasonal beverages, the warm bakery you remember, and Rewards that turn every visit into a little ceremony. Join us — your usual is waiting.</p>
+      <div class="hero-actions">
+        <a class="btn btn-green-fill btn-lg" href="#">Explore the spring menu</a>
+        <a class="btn btn-green-outline btn-lg" href="#">Start an order</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>2x</strong>Stars on Tuesdays</div>
+        <div class="hero-meta-item"><strong>25k+</strong>Stores worldwide</div>
+        <div class="hero-meta-item"><strong>4.7★</strong>App rating</div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-cup">
+        <svg class="cup-svg" width="200" height="240" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- lid -->
+          <ellipse cx="100" cy="36" rx="68" ry="14" fill="#1E3932"/>
+          <rect x="32" y="32" width="136" height="14" fill="#1E3932"/>
+          <ellipse cx="100" cy="46" rx="68" ry="10" fill="#0e221d"/>
+          <!-- cup body -->
+          <path d="M40 56 L60 224 Q60 232 70 232 L130 232 Q140 232 140 224 L160 56 Z" fill="#ffffff"/>
+          <!-- sleeve -->
+          <path d="M50 110 L62 200 Q62 206 68 206 L132 206 Q138 206 138 200 L150 110 Z" fill="#006241"/>
+          <!-- logo circle -->
+          <circle cx="100" cy="150" r="22" fill="#ffffff"/>
+          <circle cx="100" cy="150" r="20" fill="#006241"/>
+          <text x="100" y="156" text-anchor="middle" fill="#ffffff" font-family="serif" font-size="14" font-weight="700">★</text>
+          <!-- highlight -->
+          <path d="M44 60 L56 60 L48 200 L36 200 Z" fill="#f4f1ec" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+        Earn 150★
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Beverage menu -->
+<section class="section white">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Spring Menu</div>
+        <h2 class="section-title">Drinks that taste like the season opening up.</h2>
+      </div>
+      <p class="section-sub">Eight new ways to slow down. Each one handcrafted, locally sourced where possible, and made for sipping on a patio that's just warming back up.</p>
+    </div>
+    <div class="bev-grid">
+      <div class="bev-card">
+        <div class="bev-img bev-img-1"><svg class="bev-cup" viewBox="0 0 80 110" fill="none"><path d="M16 26 L24 100 Q24 106 30 106 L50 106 Q56 106 56 100 L64 26 Z" fill="#fff"/><path d="M22 56 L28 92 Q28 98 32 98 L48 98 Q52 98 52 92 L58 56 Z" fill="#006241"/></svg></div>
+        <div class="bev-meta">
+          <h3 class="bev-name">Brown Sugar Oatmilk Shaken Espresso</h3>
+          <p class="bev-desc">Blonde espresso, brown sugar, oatmilk over ice — shaken until silky.</p>
+          <div class="bev-foot"><span class="bev-price">$5.45</span><span class="bev-star">★ 150</span></div>
+        </div>
+      </div>
+      <div class="bev-card">
+        <div class="bev-img bev-img-2"><svg class="bev-cup" viewBox="0 0 80 110" fill="none"><path d="M16 26 L24 100 Q24 106 30 106 L50 106 Q56 106 56 100 L64 26 Z" fill="#fff"/><path d="M22 56 L28 92 Q28 98 32 98 L48 98 Q52 98 52 92 L58 56 Z" fill="#006241"/></svg></div>
+        <div class="bev-meta">
+          <h3 class="bev-name">Pink Drink Refresher</h3>
+          <p class="bev-desc">Strawberry açaí with coconutmilk and freeze-dried strawberries.</p>
+          <div class="bev-foot"><span class="bev-price">$5.25</span><span class="bev-star">★ 140</span></div>
+        </div>
+      </div>
+      <div class="bev-card">
+        <div class="bev-img bev-img-3"><svg class="bev-cup" viewBox="0 0 80 110" fill="none"><path d="M16 26 L24 100 Q24 106 30 106 L50 106 Q56 106 56 100 L64 26 Z" fill="#fff"/><path d="M22 56 L28 92 Q28 98 32 98 L48 98 Q52 98 52 92 L58 56 Z" fill="#006241"/></svg></div>
+        <div class="bev-meta">
+          <h3 class="bev-name">Matcha Latte</h3>
+          <p class="bev-desc">Ceremonial-grade matcha whisked with steamed milk and a touch of cane.</p>
+          <div class="bev-foot"><span class="bev-price">$5.75</span><span class="bev-star">★ 160</span></div>
+        </div>
+      </div>
+      <div class="bev-card">
+        <div class="bev-img bev-img-4"><svg class="bev-cup" viewBox="0 0 80 110" fill="none"><path d="M16 26 L24 100 Q24 106 30 106 L50 106 Q56 106 56 100 L64 26 Z" fill="#fff"/><path d="M22 56 L28 92 Q28 98 32 98 L48 98 Q52 98 52 92 L58 56 Z" fill="#006241"/></svg></div>
+        <div class="bev-meta">
+          <h3 class="bev-name">Honey Citrus Mint Tea</h3>
+          <p class="bev-desc">Jade Citrus Mint, peach tranquility, lemonade, and honey — gentle warmth.</p>
+          <div class="bev-foot"><span class="bev-price">$4.95</span><span class="bev-star">★ 130</span></div>
+        </div>
+      </div>
+      <div class="bev-card">
+        <div class="bev-img bev-img-5"><svg class="bev-cup" viewBox="0 0 80 110" fill="none"><path d="M16 26 L24 100 Q24 106 30 106 L50 106 Q56 106 56 100 L64 26 Z" fill="#fff"/><path d="M22 56 L28 92 Q28 98 32 98 L48 98 Q52 98 52 92 L58 56 Z" fill="#006241"/></svg></div>
+        <div class="bev-meta">
+          <h3 class="bev-name">Caramel Macchiato</h3>
+          <p class="bev-desc">Vanilla syrup, steamed milk, espresso, finished with caramel drizzle.</p>
+          <div class="bev-foot"><span class="bev-price">$5.95</span><span class="bev-star">★ 170</span></div>
+        </div>
+      </div>
+      <div class="bev-card">
+        <div class="bev-img bev-img-6"><svg class="bev-cup" viewBox="0 0 80 110" fill="none"><path d="M16 26 L24 100 Q24 106 30 106 L50 106 Q56 106 56 100 L64 26 Z" fill="#fff"/><path d="M22 56 L28 92 Q28 98 32 98 L48 98 Q52 98 52 92 L58 56 Z" fill="#006241"/></svg></div>
+        <div class="bev-meta">
+          <h3 class="bev-name">Strawberry Acai Lemonade</h3>
+          <p class="bev-desc">Real strawberry pieces, açaí notes, and a lemonade chaser.</p>
+          <div class="bev-foot"><span class="bev-price">$5.45</span><span class="bev-star">★ 150</span></div>
+        </div>
+      </div>
+      <div class="bev-card">
+        <div class="bev-img bev-img-7"><svg class="bev-cup" viewBox="0 0 80 110" fill="none"><path d="M16 26 L24 100 Q24 106 30 106 L50 106 Q56 106 56 100 L64 26 Z" fill="#fff"/><path d="M22 56 L28 92 Q28 98 32 98 L48 98 Q52 98 52 92 L58 56 Z" fill="#006241"/></svg></div>
+        <div class="bev-meta">
+          <h3 class="bev-name">Mint Majesty Tea</h3>
+          <p class="bev-desc">Hot or iced, this herbal infusion of mint and chamomile slows you down.</p>
+          <div class="bev-foot"><span class="bev-price">$3.95</span><span class="bev-star">★ 110</span></div>
+        </div>
+      </div>
+      <div class="bev-card">
+        <div class="bev-img bev-img-8"><svg class="bev-cup" viewBox="0 0 80 110" fill="none"><path d="M16 26 L24 100 Q24 106 30 106 L50 106 Q56 106 56 100 L64 26 Z" fill="#fff"/><path d="M22 56 L28 92 Q28 98 32 98 L48 98 Q52 98 52 92 L58 56 Z" fill="#006241"/></svg></div>
+        <div class="bev-meta">
+          <h3 class="bev-name">Pumpkin Spice Latte</h3>
+          <p class="bev-desc">Real pumpkin, cinnamon, nutmeg, clove. The original autumn ritual.</p>
+          <div class="bev-foot"><span class="bev-price">$5.95</span><span class="bev-star">★ 170</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rewards band -->
+<section class="rewards-band">
+  <div class="container rewards-inner">
+    <div>
+      <div class="rewards-eyebrow">Starbucks Rewards</div>
+      <h2 class="rewards-title">Free coffee is just the <em>beginning</em>.</h2>
+      <p class="rewards-sub">Join Starbucks Rewards to earn Stars for free food and drinks, anytime. Plus, enjoy birthday rewards, exclusive offers, and the joy of skipping the line on busy mornings.</p>
+      <div class="rewards-actions">
+        <a class="btn btn-white-fill" href="#">Join now</a>
+        <a class="btn btn-white-outline" href="#">Learn more</a>
+      </div>
+    </div>
+    <div class="rewards-cards">
+      <div class="reward-card bronze">
+        <div class="reward-level">Level 1</div>
+        <div class="reward-stars">25★</div>
+        <div class="reward-name">Customize your drink</div>
+        <ul class="reward-perks">
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Extra espresso shot</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Dairy substitute</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Flavored syrup</li>
+        </ul>
+      </div>
+      <div class="reward-card silver">
+        <div class="reward-level">Level 2</div>
+        <div class="reward-stars">100★</div>
+        <div class="reward-name">Brewed coffee or bakery</div>
+        <ul class="reward-perks">
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Hot brewed coffee</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Hot tea or bakery item</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Free refills in-store</li>
+        </ul>
+      </div>
+      <div class="reward-card gold">
+        <div class="reward-level">Level 3</div>
+        <div class="reward-stars">200★</div>
+        <div class="reward-name">Handcrafted drink</div>
+        <ul class="reward-perks">
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Any handcrafted drink</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Hot breakfast</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Parfait or salad</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PDP showcase -->
+<section class="section cream">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Product Detail</div>
+        <h2 class="section-title">Build it exactly the way you like it.</h2>
+      </div>
+      <p class="section-sub">Pick a size, choose your milk, add a little ceremony. We'll have it ready by the time you walk in.</p>
+    </div>
+    <div class="pdp">
+      <div class="pdp-photo">
+        <svg width="220" height="280" viewBox="0 0 220 280" fill="none">
+          <ellipse cx="110" cy="40" rx="76" ry="14" fill="#1E3932"/>
+          <rect x="34" y="36" width="152" height="16" fill="#1E3932"/>
+          <ellipse cx="110" cy="52" rx="76" ry="10" fill="#0e221d"/>
+          <path d="M42 60 L62 264 Q62 272 72 272 L148 272 Q158 272 158 264 L178 60 Z" fill="#fff"/>
+          <path d="M50 130 L66 230 Q66 238 72 238 L148 238 Q154 238 154 230 L170 130 Z" fill="#ffd9e1"/>
+          <circle cx="110" cy="170" r="26" fill="#fff"/>
+          <text x="110" y="178" text-anchor="middle" fill="#006241" font-family="serif" font-size="18" font-weight="700">★</text>
+        </svg>
+      </div>
+      <div>
+        <div class="pdp-crumb"><a href="#">Menu</a> / <a href="#">Refreshers</a> / Pink Energy Drink</div>
+        <h2>Pink Energy Drink</h2>
+        <p class="pdp-desc">Strawberry açaí, coconutmilk, and a kiss of caffeine from green coffee extract — a clean lift that tastes like the first warm afternoon of the year.</p>
+        <div class="size-row">
+          <div class="size-opt">
+            <div class="size-ring"><svg viewBox="0 0 24 30" fill="none"><path d="M6 6h12l-2 22h-8z" stroke="#006241" stroke-width="2"/></svg></div>
+            <div class="size-name">Tall</div>
+            <div class="size-oz">12 fl oz</div>
+          </div>
+          <div class="size-opt active">
+            <div class="size-ring"><svg viewBox="0 0 24 30" fill="none"><path d="M5 5h14l-2 24h-10z" stroke="#006241" stroke-width="2"/></svg></div>
+            <div class="size-name">Grande</div>
+            <div class="size-oz">16 fl oz</div>
+          </div>
+          <div class="size-opt">
+            <div class="size-ring"><svg viewBox="0 0 24 30" fill="none"><path d="M4 4h16l-2 26h-12z" stroke="#006241" stroke-width="2"/></svg></div>
+            <div class="size-name">Venti</div>
+            <div class="size-oz">24 fl oz</div>
+          </div>
+          <div class="size-opt">
+            <div class="size-ring"><svg viewBox="0 0 24 30" fill="none"><path d="M3 3h18l-2 28h-14z" stroke="#006241" stroke-width="2"/></svg></div>
+            <div class="size-name">Trenta</div>
+            <div class="size-oz">30 fl oz</div>
+          </div>
+        </div>
+        <div class="addins">
+          <div class="addin-row">
+            <span class="addin-label">Milk</span>
+            <span class="addin-val">Coconutmilk</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+          </div>
+          <div class="addin-row">
+            <span class="addin-label">Add-ins</span>
+            <span class="addin-val">Strawberry Inclusions</span>
+            <div class="stepper">
+              <button aria-label="Decrease">−</button>
+              <span class="stepper-num">1</span>
+              <button aria-label="Increase">+</button>
+            </div>
+          </div>
+          <div class="addin-row">
+            <span class="addin-label">Ice</span>
+            <span class="addin-val">Regular ice</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+          </div>
+        </div>
+        <div class="pdp-actions">
+          <a class="btn btn-customize" href="#">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#cba258"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+            Customize
+          </a>
+          <a class="btn btn-green-fill" style="padding:14px 32px;font-size:15px" href="#">Add to order · $6.45</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gift cards -->
+<section class="section white">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Gift Cards</div>
+        <h2 class="section-title">Send a little warmth.</h2>
+      </div>
+      <p class="section-sub">Hand-illustrated cards for every season and every reason. Each one painted by an artist, not generated — a small thing made with care.</p>
+    </div>
+    <div class="gc-cat">Spring · Thank you · Birthday · Anytime</div>
+    <div class="gift-grid">
+      <div class="gift-card gc-1">Thinking of you</div>
+      <div class="gift-card gc-2">Thank you</div>
+      <div class="gift-card gc-3">Happy spring</div>
+      <div class="gift-card gc-4">Just because</div>
+      <div class="gift-card gc-5">Cheers!</div>
+      <div class="gift-card gc-6">Happy birthday</div>
+      <div class="gift-card gc-7">Sip slowly</div>
+      <div class="gift-card gc-8">For you</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA band -->
+<section class="section cream">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>Your usual, ready before you arrive.</h2>
+        <p>Order ahead in the Starbucks app, earn Stars on every visit, and skip the line on the way to work.</p>
+      </div>
+      <a class="btn btn-white-fill btn-lg" href="#">Download the app</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DESIGN SYSTEM (Part B) ====== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>Warm cream, four greens, one floating pill.</h2>
+        <p>Starbucks's system is disciplined about where each green goes — Starbucks for headings, Accent for CTAs, House for bands, Uplift for decoration. Gold appears only for Rewards ceremony. Below: the tokens behind the café.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.starbucks.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <!-- Colors -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A four-tier green system mapped to specific surface roles, gold reserved for Rewards moments, warm-neutral cream as the page canvas. Cool whites appear only on cards and modals.</p>
+
+      <div class="ds-caption">Primary Greens</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#006241"></div><div class="meta"><div class="name">Starbucks Green</div><div class="val">#006241</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#00754A"></div><div class="meta"><div class="name">Green Accent</div><div class="val">#00754A</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1E3932"></div><div class="meta"><div class="name">House Green</div><div class="val">#1E3932</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2b5148"></div><div class="meta"><div class="name">Green Uplift</div><div class="val">#2b5148</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#d4e9e2"></div><div class="meta"><div class="name">Green Light</div><div class="val">#d4e9e2</div></div></div>
+      </div>
+
+      <div class="ds-caption">Gold (Rewards Only)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#cba258"></div><div class="meta"><div class="name">Gold</div><div class="val">#cba258</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#dfc49d"></div><div class="meta"><div class="name">Gold Light</div><div class="val">#dfc49d</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#faf6ee"></div><div class="meta"><div class="name">Gold Lightest</div><div class="val">#faf6ee</div></div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Canvas</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #e7e7e7"></div><div class="meta"><div class="name">White</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f9f9f9"></div><div class="meta"><div class="name">Neutral Cool</div><div class="val">#f9f9f9</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f2f0eb"></div><div class="meta"><div class="name">Neutral Warm</div><div class="val">#f2f0eb</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#edebe9"></div><div class="meta"><div class="name">Ceramic</div><div class="val">#edebe9</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">Black</div><div class="val">#000000</div></div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:rgba(0,0,0,0.87)"></div><div class="meta"><div class="name">Text Black</div><div class="val">rgba(0,0,0,.87)</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(0,0,0,0.58)"></div><div class="meta"><div class="name">Text Black Soft</div><div class="val">rgba(0,0,0,.58)</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#33433d"></div><div class="meta"><div class="name">Rewards Green</div><div class="val">#33433d</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(255,255,255,1);border:1px solid #e7e7e7"></div><div class="meta"><div class="name">Text White</div><div class="val">rgba(255,255,255,1)</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(255,255,255,0.7);border:1px solid #e7e7e7"></div><div class="meta"><div class="name">Text White Soft</div><div class="val">rgba(255,255,255,.7)</div></div></div>
+      </div>
+
+      <div class="ds-caption">Semantic</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#c82014"></div><div class="meta"><div class="name">Red</div><div class="val">#c82014</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fbbc05"></div><div class="meta"><div class="name">Yellow</div><div class="val">#fbbc05</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#d6dbde"></div><div class="meta"><div class="name">Input Border</div><div class="val">#d6dbde</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e7e7e7"></div><div class="meta"><div class="name">Hairline</div><div class="val">#e7e7e7</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(212,233,226,0.33);border:1px solid #d4e9e2"></div><div class="meta"><div class="name">Valid Tint</div><div class="val">green-light/33</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">SoDoSans is the universal voice (substituted here with Inter). Lora steps in for Rewards editorial moments; Kalam appears only for Careers cup-name touches. Tracking stays tight at -0.16px / -0.01em across the system.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:48px;font-weight:500;font-family:var(--font-serif);line-height:1.1">Display</td><td>5.0rem / 80px</td><td>500</td><td>Rewards hero</td></tr>
+          <tr><td class="token">--jumbo</td><td class="sample" style="font-size:36px;font-weight:500;font-family:var(--font-serif)">Jumbo Headline</td><td>3.6rem / 58px</td><td>500</td><td>Hero secondary</td></tr>
+          <tr><td class="token">--hero-large</td><td class="sample" style="font-size:28px;font-weight:500;font-family:var(--font-serif)">Hero Large</td><td>2.8rem / 45px</td><td>500</td><td>Landing headlines</td></tr>
+          <tr><td class="token">--h1</td><td class="sample" style="font-size:24px;font-weight:600;color:#006241">Brand H1 Heading</td><td>24px</td><td>600</td><td>Starbucks Green</td></tr>
+          <tr><td class="token">--h2</td><td class="sample" style="font-size:24px;font-weight:400">Section H2 Title</td><td>24px</td><td>400</td><td>Same size, weight + color shift</td></tr>
+          <tr><td class="token">--body-large</td><td class="sample" style="font-size:19px;font-weight:400">Body large intro copy</td><td>19px</td><td>400</td><td>Hero intro / feature</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:16px;font-weight:400">Default body copy at 16px</td><td>1.6rem / 16px</td><td>400</td><td>Default body</td></tr>
+          <tr><td class="token">--button-label</td><td class="sample" style="font-size:14px;font-weight:600">Pill button label</td><td>14–16px</td><td>600</td><td>50px pill</td></tr>
+          <tr><td class="token">--small</td><td class="sample" style="font-size:14px;font-weight:400;color:rgba(0,0,0,.58)">Metadata · 14px regular</td><td>1.4rem / 14px</td><td>400</td><td>Captions</td></tr>
+          <tr><td class="token">--rewards-serif</td><td class="sample" style="font-size:22px;font-weight:500;font-family:var(--font-serif);color:#006241">Rewards editorial</td><td>varies</td><td>500</td><td>Lora (Lander Tall sub)</td></tr>
+          <tr><td class="token">--cup-script</td><td class="sample" style="font-size:24px;font-family:var(--font-script);color:#006241">Hello, Jiang Shu</td><td>varies</td><td>—</td><td>Careers cup-name only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">A small radius vocabulary, rigorously applied: 50px on every button, 12px on cards and modals, 4px on inputs, 50% on the Frap.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Sharp</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Input</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">50px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Frap</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">The vocabulary is consistent: full-pill buttons with scale(0.95) on press, 4px outlined input rows with floating labels, 12px cards with whisper-soft layered shadows.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-green-fill" href="#">Explore the spring menu</a>
+            <a class="btn btn-green-outline" href="#">Start an order</a>
+            <a class="btn btn-black" href="#">Join now</a>
+            <a class="btn btn-dark-outline" href="#">Sign in</a>
+            <a class="btn btn-customize" href="#">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#cba258"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              Customize
+            </a>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+              <button style="background:#00754A;color:#fff;width:48px;height:48px;border-radius:50%;border:0;display:grid;place-items:center;box-shadow:var(--frap-shadow);cursor:pointer">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l1 4h11l-2 9H8L7 6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+              </button>
+              <span style="font-size:12px;color:var(--text-black-soft)">Frap floating CTA</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Fields</h5>
+          <div class="ds-card-stack">
+            <input class="input-base" placeholder="Email address" />
+            <input class="input-base" placeholder="Password" type="password" />
+            <div class="addin-row" style="width:100%;margin:0">
+              <span class="addin-label">Milk</span>
+              <span class="addin-val">Coconutmilk</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+              <span class="chip chip-gold">200★ item</span>
+              <span class="chip chip-green">Member</span>
+              <span class="chip chip-red">Sold out</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards & Status</h5>
+          <div class="ds-card-stack">
+            <div style="width:100%;background:#fff;border-radius:12px;padding:18px;box-shadow:var(--card-shadow);border:1px solid #f0eee9">
+              <div style="font-family:var(--font-serif);font-weight:600;font-size:18px;color:#006241;letter-spacing:-0.16px">Caramel Macchiato</div>
+              <div style="font-size:13px;color:var(--text-black-soft);margin-top:4px">Espresso · steamed milk · caramel</div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+                <span style="font-size:14px;font-weight:600">$5.95</span>
+                <span class="chip chip-gold">★ 170</span>
+              </div>
+            </div>
+            <div style="width:100%;background:var(--house-green);color:#fff;border-radius:12px;padding:20px;position:relative;overflow:hidden">
+              <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#cba258,#f0d09b)"></div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:6px">Level 3 · Gold</div>
+              <div style="font-family:var(--font-serif);font-size:24px;font-weight:600">200★</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:2px">Handcrafted drink</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div style="display:flex;align-items:center;gap:12px">
+          <a class="brand-mark" href="#" aria-label="Starbucks"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18a8 8 0 110-16 8 8 0 010 16zm0-13L7 9.5v5L12 17l5-2.5v-5L12 7z"/></svg></a>
+          <strong style="font-size:18px">Starbucks</strong>
+        </div>
+        <p>A design study — a self-contained homage to the Starbucks visual language, built to demonstrate token systems, the four-tier green palette, and the warm-cream canvas. Not affiliated with Starbucks Corporation.</p>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm12 3a1 1 0 110 2 1 1 0 010-2zm-7 2a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.92a8.2 8.2 0 01-2.36.65 4.13 4.13 0 001.8-2.27 8.2 8.2 0 01-2.6 1A4.1 4.1 0 0011.1 9.3a11.65 11.65 0 01-8.45-4.28 4.1 4.1 0 001.27 5.48 4.07 4.07 0 01-1.86-.51v.05a4.1 4.1 0 003.3 4.02 4.1 4.1 0 01-1.85.07 4.1 4.1 0 003.83 2.85A8.24 8.24 0 012 18.5 11.62 11.62 0 008.29 20.4c7.55 0 11.68-6.25 11.68-11.68 0-.18 0-.36-.01-.53A8.32 8.32 0 0022 5.92z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.2.33-2 2.04-2H17V2.14C16.66 2.1 15.46 2 14.07 2 11.15 2 9.13 3.78 9.13 7v3H6v4h3.13v8H13z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>About Us</h4><ul><li><a href="#">Our Company</a></li><li><a href="#">Our Coffee</a></li><li><a href="#">Stories &amp; News</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div class="foot-col"><h4>Customer Service</h4><ul><li><a href="#">Contact Us</a></li><li><a href="#">FAQ</a></li><li><a href="#">Order &amp; Pickup</a></li></ul></div>
+      <div class="foot-col"><h4>Quick Links</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Accessibility</a></li><li><a href="#">Cookies</a></li></ul></div>
+      <div class="foot-col"><h4>Social</h4><ul><li><a href="#">Spotify Playlists</a></li><li><a href="#">Pinterest</a></li><li><a href="#">YouTube</a></li><li><a href="#">TikTok</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Design Study · Tribute to Starbucks's visual language</span>
+      <span>Privacy · Terms · CA Supply Chain Act · Accessibility</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Frap CTA -->
+<button class="frap" aria-label="Order now">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l1 4h11l-2 9H8L7 6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+</button>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.starbucks.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spotify — iOS design spec</title>
+<meta name="description" content="Spotify iOS app design reference. #121212 canvas, #1DB954 functional green, pill-and-circle geometry, album-art-driven Now Playing gradient." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#121212; --surface-1:#181818; --surface-2:#1f1f1f; --surface-card:#252525; --surface-card-alt:#272727;
+  --accent:#1ed760; --accent-border:#1db954; --accent-hover:#1fdf64;
+  --ink:#fff; --ink-soft:#cbcbcb; --ink-muted:#b3b3b3; --ink-dim:#7c7c7c;
+  --border:#4d4d4d; --border-soft:#2a2a2a;
+  --negative:#f3727f; --warning:#ffa42b; --announce:#539df5;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:6px; --r-lg:8px; --r-xl:12px; --r-pill:500px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(18,18,18,.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.2px}
+.brand-mark{width:30px;height:30px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.brand-mark svg{width:18px;height:18px;fill:#000}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-full);font-size:14px;font-weight:700;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.04)}
+.btn-primary{background:var(--accent);color:#000;padding:12px 24px;border-radius:var(--r-full)}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:10px 18px;border-radius:var(--r-full)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 18px;border-radius:var(--r-full)}
+.btn-light{background:#fff;color:#000;padding:12px 24px;border-radius:var(--r-full)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(30,215,96,.18),transparent 70%),radial-gradient(700px 500px at 80% 30%,rgba(241,114,127,.10),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-full);background:rgba(30,215,96,.12);color:var(--accent);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:.95;letter-spacing:-2.2px;font-weight:900;margin-bottom:22px}
+.hero h1 .gradient-word{background:linear-gradient(120deg,#1ed760,#1db954 40%,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#fff;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+/* ========== SCREEN: HOME ========== */
+.scr{position:absolute;inset:0;color:#fff;font-size:11px;display:flex;flex-direction:column;padding-top:52px}
+.scr-home-bg{background:linear-gradient(180deg,#283d2b 0%,#1a221c 30%,var(--canvas) 60%)}
+.scr-chips{display:flex;gap:6px;padding:0 14px 12px;overflow:hidden}
+.scr-chip{padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.12);font-size:11px;font-weight:600;white-space:nowrap}
+.scr-chip.active{background:var(--accent);color:#000}
+.scr-body{flex:1;overflow:hidden;padding:0 14px}
+.tile-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:18px}
+.tile{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border-radius:5px;padding:0;overflow:hidden;height:42px}
+.tile .art{width:42px;height:42px;flex-shrink:0}
+.tile .name{font-size:10.5px;font-weight:700;line-height:1.1;padding-right:6px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sec-title{font-size:16px;font-weight:800;margin:4px 0 10px;letter-spacing:-.4px}
+.sec-sub{font-size:9.5px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;font-weight:700}
+.row-cards{display:flex;gap:8px;overflow:hidden;margin-bottom:14px}
+.row-card{flex-shrink:0;width:88px}
+.row-card .art{width:88px;height:88px;border-radius:4px;margin-bottom:6px}
+.row-card .ttl{font-size:10.5px;font-weight:700;line-height:1.2;margin-bottom:2px}
+.row-card .sub{font-size:9.5px;color:var(--ink-muted);line-height:1.2}
+/* album art swatches */
+.art-1{background:radial-gradient(circle at 30% 30%,#1ed760,#0e3d22)}
+.art-2{background:radial-gradient(circle at 30% 30%,#f3727f,#6b1f8a)}
+.art-3{background:linear-gradient(135deg,#ff6b35,#f7931e,#cc1f1a)}
+.art-4{background:linear-gradient(135deg,#7b2cbf,#3a0ca3,#0a0a0a)}
+.art-5{background:radial-gradient(circle at 70% 20%,#ffd60a,#ff8500,#5f0f40)}
+.art-6{background:linear-gradient(160deg,#06d6a0,#118ab2,#073b4c)}
+.art-7{background:radial-gradient(circle at 50% 50%,#fff,#cbcbcb,#7c7c7c)}
+.art-8{background:linear-gradient(135deg,#1d3557,#457b9d,#a8dadc)}
+.art-9{background:radial-gradient(circle at 20% 80%,#e63946,#1d3557)}
+.art-10{background:linear-gradient(135deg,#264653,#2a9d8f,#e9c46a)}
+
+/* tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:linear-gradient(180deg,rgba(18,18,18,.7),var(--canvas) 60%);display:flex;justify-content:space-around;align-items:flex-start;padding:8px 14px 0;backdrop-filter:blur(20px);z-index:10}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-muted);font-size:9.5px;font-weight:600}
+.tab.active{color:#fff}
+.tab svg{width:22px;height:22px;fill:currentColor}
+
+/* mini player above tab bar */
+.mini-player{position:absolute;bottom:64px;left:8px;right:8px;height:50px;background:#3a3a3a;border-radius:6px;display:flex;align-items:center;gap:8px;padding:6px 10px;z-index:9}
+.mini-player .mp-art{width:38px;height:38px;border-radius:3px;flex-shrink:0}
+.mini-player .mp-meta{flex:1;min-width:0}
+.mini-player .mp-title{font-size:11px;font-weight:700;line-height:1.1;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.mini-player .mp-sub{font-size:9.5px;color:var(--ink-muted);text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.mini-player .mp-controls{display:flex;align-items:center;gap:12px}
+.mini-player svg{width:18px;height:18px;fill:#fff}
+
+/* ========== SCREEN: NOW PLAYING ========== */
+.scr-np-bg{background:linear-gradient(180deg,#cc4f3d 0%,#7a2018 35%,#3a0e0a 65%,var(--canvas) 100%)}
+.np-header{display:flex;align-items:center;justify-content:space-between;padding:6px 18px 18px}
+.np-header svg{width:18px;height:18px;fill:#fff}
+.np-header .np-source{font-size:9.5px;text-transform:uppercase;letter-spacing:.6px;color:rgba(255,255,255,.85);font-weight:700;text-align:center}
+.np-header .np-source small{display:block;font-size:11px;text-transform:none;letter-spacing:0;color:#fff;font-weight:700;margin-top:2px}
+.np-cover{margin:14px 24px;aspect-ratio:1;border-radius:6px;background:linear-gradient(160deg,#ff6b35 0%,#f7931e 25%,#cc1f1a 60%,#3a0808 100%);box-shadow:0 20px 40px rgba(0,0,0,.55);position:relative;overflow:hidden}
+.np-cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.3),transparent 50%)}
+.np-info{padding:12px 24px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.np-info .np-titles{flex:1;min-width:0}
+.np-info .np-title{font-size:18px;font-weight:800;line-height:1.15;letter-spacing:-.4px;margin-bottom:3px}
+.np-info .np-artist{font-size:12px;color:rgba(255,255,255,.7);font-weight:500}
+.np-info svg{width:22px;height:22px;fill:#1ed760;flex-shrink:0;margin-top:6px}
+.np-progress{padding:14px 24px 6px}
+.np-bar{height:3px;background:rgba(255,255,255,.3);border-radius:999px;overflow:hidden;margin-bottom:6px}
+.np-bar .fill{height:100%;width:35%;background:#fff;border-radius:999px}
+.np-times{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.7);font-feature-settings:"tnum"}
+.np-controls{display:flex;align-items:center;justify-content:space-between;padding:8px 28px 6px}
+.np-controls svg{fill:#fff}
+.np-controls .icon{width:24px;height:24px}
+.np-controls .play-btn{width:60px;height:60px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.np-controls .play-btn svg{width:28px;height:28px;fill:#000;margin-left:3px}
+.np-bottom-row{display:flex;justify-content:space-between;padding:14px 24px 0}
+.np-bottom-row svg{width:18px;height:18px;fill:rgba(255,255,255,.85)}
+.np-device{display:flex;align-items:center;gap:6px;padding:14px 24px 0;font-size:11px;color:var(--accent);font-weight:600}
+.np-device svg{width:14px;height:14px;fill:var(--accent)}
+
+/* ========== SCREEN: LIBRARY ========== */
+.scr-lib-bg{background:var(--canvas)}
+.lib-header{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 12px}
+.lib-header .lib-user{display:flex;align-items:center;gap:8px}
+.lib-header .lib-avatar{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,#1ed760,#0e3d22);display:grid;place-items:center;font-size:11px;font-weight:700;color:#000}
+.lib-header .lib-title{font-size:20px;font-weight:800;letter-spacing:-.4px}
+.lib-header .lib-actions{display:flex;gap:14px}
+.lib-header svg{width:18px;height:18px;fill:#fff}
+.lib-chips{display:flex;gap:6px;padding:0 14px 14px;overflow:hidden;flex-wrap:wrap}
+.lib-chip{padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;font-weight:600;color:#fff;white-space:nowrap}
+.lib-chip.active{background:#fff;color:#000}
+.lib-list{padding:0 14px;display:flex;flex-direction:column;gap:14px}
+.lib-item{display:flex;gap:11px;align-items:center}
+.lib-item .lib-art{width:52px;height:52px;flex-shrink:0;border-radius:4px}
+.lib-item .lib-art.circle{border-radius:50%}
+.lib-item .lib-meta{flex:1;min-width:0}
+.lib-item .lib-name{font-size:13px;font-weight:600;line-height:1.2}
+.lib-item .lib-sub{font-size:11px;color:var(--ink-muted);margin-top:2px;display:flex;align-items:center;gap:4px}
+.lib-item .lib-pin{width:9px;height:9px;fill:var(--accent)}
+.lib-search{margin:8px 14px 14px;background:rgba(255,255,255,.08);border-radius:4px;padding:10px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-muted)}
+.lib-search svg{width:14px;height:14px;fill:var(--ink-muted)}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border-soft)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:8px;padding:28px;border:1px solid var(--border-soft)}
+.feat:hover{background:var(--surface-2)}
+.feat .feat-ic{width:36px;height:36px;border-radius:50%;background:rgba(30,215,96,.16);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--accent)}
+.feat h3{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:rgba(255,255,255,.06);padding:1px 6px;border-radius:3px;color:var(--ink-soft)}
+
+/* iOS specific feature row */
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:5px 10px;border-radius:4px;color:var(--ink-soft);border:1px solid var(--border-soft)}
+.ios-feat-visual{background:var(--surface-1);border-radius:12px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* Dynamic Island detail visual */
+.island-stage{display:flex;flex-direction:column;align-items:center;gap:24px}
+.island-mock{width:220px;height:36px;background:#000;border-radius:999px;display:flex;align-items:center;padding:0 8px;gap:10px;box-shadow:0 0 0 1px rgba(255,255,255,.05),0 20px 50px rgba(0,0,0,.4)}
+.island-mock .ia-art{width:22px;height:22px;border-radius:4px;flex-shrink:0}
+.island-mock .ia-wave{flex:1;display:flex;gap:2px;align-items:center;height:14px}
+.island-mock .ia-wave span{width:2px;background:var(--accent);border-radius:1px}
+.island-mock .ia-wave span:nth-child(1){height:6px}
+.island-mock .ia-wave span:nth-child(2){height:10px}
+.island-mock .ia-wave span:nth-child(3){height:14px}
+.island-mock .ia-wave span:nth-child(4){height:8px}
+.island-mock .ia-wave span:nth-child(5){height:12px}
+.island-mock .ia-wave span:nth-child(6){height:6px}
+.island-mock .ia-wave span:nth-child(7){height:10px}
+
+/* Haptic stack visual */
+.haptic-stack{display:flex;flex-direction:column;gap:10px;width:300px}
+.haptic-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface-2);border-radius:6px;border:1px solid var(--border-soft)}
+.haptic-row .h-ic{width:30px;height:30px;border-radius:50%;background:rgba(30,215,96,.18);display:grid;place-items:center;flex-shrink:0}
+.haptic-row .h-ic svg{width:14px;height:14px;fill:var(--accent)}
+.haptic-row .h-text{flex:1}
+.haptic-row .h-label{font-size:13px;font-weight:700}
+.haptic-row .h-spec{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted)}
+
+/* Now Playing widget visual */
+.widget-stack{display:flex;flex-direction:column;gap:14px;width:260px}
+.lockscreen-widget{background:rgba(255,255,255,.10);backdrop-filter:blur(20px);border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,.12)}
+.lockscreen-widget .lw-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.lockscreen-widget .lw-art{width:38px;height:38px;border-radius:5px}
+.lockscreen-widget .lw-meta{flex:1;min-width:0}
+.lockscreen-widget .lw-title{font-size:13px;font-weight:700;color:#fff}
+.lockscreen-widget .lw-artist{font-size:11px;color:rgba(255,255,255,.7)}
+.lockscreen-widget .lw-bar{height:3px;background:rgba(255,255,255,.25);border-radius:999px;overflow:hidden}
+.lockscreen-widget .lw-bar .fill{height:100%;width:55%;background:#fff;border-radius:999px}
+.lockscreen-widget .lw-times{display:flex;justify-content:space-between;font-size:9.5px;color:rgba(255,255,255,.7);margin-top:5px;font-feature-settings:"tnum"}
+.lockscreen-widget .lw-controls{display:flex;justify-content:space-around;margin-top:10px}
+.lockscreen-widget .lw-controls svg{width:22px;height:22px;fill:#fff}
+
+/* ========== DESIGN SYSTEM SECTION (Part B) ========== */
+.ds-section{padding:120px 0;background:#0c0c0c;border-top:1px solid var(--border-soft)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border-soft);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--accent);border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-full);white-space:nowrap}
+.ds-source:hover{background:var(--surface-2)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border-soft)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+/* swatches */
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:var(--surface-1);border-radius:8px;padding:10px;border:1px solid var(--border-soft)}
+.ds-sw .chip{height:64px;border-radius:6px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* type table */
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border-soft);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+.ds-type-table td.token{color:var(--accent)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:#fff}
+
+/* radius */
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,var(--accent),#0d6e30);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+/* components */
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:var(--surface-1);border-radius:10px;padding:22px;border:1px solid var(--border-soft)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn-circle{width:56px;height:56px;border-radius:50%;background:var(--accent);color:#000;display:grid;place-items:center;cursor:pointer}
+.btn-circle svg{width:24px;height:24px}
+.btn-circle-sm{width:36px;height:36px;border-radius:50%;background:var(--accent);color:#000;display:grid;place-items:center}
+.btn-circle-sm svg{width:18px;height:18px}
+.btn-ghost-circle{width:36px;height:36px;border-radius:50%;background:transparent;color:var(--ink-muted);display:grid;place-items:center}
+.btn-ghost-circle:hover{color:#fff}
+.input-pill{background:#3a3a3a;border:0;border-radius:4px;padding:11px 14px;color:#fff;font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:#b3b3b3}
+.tag{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:3px;letter-spacing:.4px;text-transform:uppercase}
+.tag-explicit{background:#7c7c7c;color:#000}
+.tag-new{background:var(--accent);color:#000}
+.tag-pod{background:rgba(83,157,245,.18);color:var(--announce)}
+
+/* iOS-specific token strip */
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:var(--surface-1);border-radius:6px;padding:18px;border:1px solid var(--border-soft)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:#fff;letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+/* ========== FOOTER ========== */
+footer{padding:60px 0;border-top:1px solid var(--border-soft);background:#0c0c0c}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.5}
+.foot a{color:var(--accent);font-weight:600}
+
+/* floating link */
+.float-link{position:fixed;bottom:18px;right:18px;background:#000;border:1px solid var(--border);color:var(--accent);font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-full);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.float-link:hover{background:var(--surface-2)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.41a.7.7 0 01-.96.23c-2.64-1.61-5.96-1.97-9.88-1.08a.7.7 0 11-.31-1.37c4.28-.97 7.95-.55 10.91 1.26a.7.7 0 01.24.96zm1.22-2.73a.88.88 0 01-1.2.29c-3.02-1.86-7.63-2.4-11.21-1.31a.88.88 0 11-.51-1.68c4.08-1.24 9.17-.64 12.62 1.49.41.25.55.79.3 1.21zm.1-2.85c-3.62-2.15-9.59-2.35-13.05-1.3a1.05 1.05 0 11-.61-2.01c3.96-1.2 10.52-.97 14.68 1.5a1.05 1.05 0 11-1.02 1.81z"/></svg>
+      </span>
+      Spotify <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Log In</a>
+      <a class="btn btn-light" href="#">Open Spotify</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>An interface that <span class="gradient-word">disappears</span><br/>so the music doesn't.</h1>
+    <p>The Spotify iOS app, dissected. #121212 canvas. One functional green. Pill-and-circle geometry. Album art is the only color in the room.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- LIBRARY -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen scr-lib-bg">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="14" height="10" viewBox="0 0 18 14" fill="#fff"><path d="M9 3c-2.4 0-4.6.9-6.3 2.4l1.6 1.6C5.6 5.8 7.2 5.2 9 5.2s3.4.6 4.7 1.8l1.6-1.6C13.6 3.9 11.4 3 9 3zm0 4c-1.4 0-2.7.5-3.6 1.4l1.6 1.6C7.5 9.4 8.2 9.2 9 9.2s1.5.2 2 .8l1.6-1.6C11.7 7.5 10.4 7 9 7zm0 4l-1.4 1.4c.4.4.9.6 1.4.6s1-.2 1.4-.6L9 11z"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="lib-header">
+              <div class="lib-user">
+                <span class="lib-avatar">J</span>
+                <span class="lib-title">Your Library</span>
+              </div>
+              <div class="lib-actions">
+                <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="#fff" stroke-width="2" fill="none"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2"/></svg>
+              </div>
+            </div>
+            <div class="lib-chips">
+              <span class="lib-chip active">Playlists</span>
+              <span class="lib-chip">Artists</span>
+              <span class="lib-chip">Albums</span>
+              <span class="lib-chip">Podcasts</span>
+            </div>
+            <div class="lib-list">
+              <div class="lib-item">
+                <div class="lib-art art-1"></div>
+                <div class="lib-meta">
+                  <div class="lib-name">Liked Songs</div>
+                  <div class="lib-sub"><svg class="lib-pin" viewBox="0 0 16 16"><path d="M9 2L7 4 4 5l3 3-1 5 4-3 4 3-1-5 3-3-3-1z"/></svg>Playlist · 1,247 songs</div>
+                </div>
+              </div>
+              <div class="lib-item">
+                <div class="lib-art art-2"></div>
+                <div class="lib-meta">
+                  <div class="lib-name">Discover Weekly</div>
+                  <div class="lib-sub">Playlist · Made for You</div>
+                </div>
+              </div>
+              <div class="lib-item">
+                <div class="lib-art circle art-5"></div>
+                <div class="lib-meta">
+                  <div class="lib-name">Tame Impala</div>
+                  <div class="lib-sub">Artist</div>
+                </div>
+              </div>
+              <div class="lib-item">
+                <div class="lib-art art-3"></div>
+                <div class="lib-meta">
+                  <div class="lib-name">After Hours</div>
+                  <div class="lib-sub">Album · The Weeknd</div>
+                </div>
+              </div>
+              <div class="lib-item">
+                <div class="lib-art art-4"></div>
+                <div class="lib-meta">
+                  <div class="lib-name">Midnight Drive</div>
+                  <div class="lib-sub">Playlist · 42 songs</div>
+                </div>
+              </div>
+              <div class="lib-item">
+                <div class="lib-art art-6"></div>
+                <div class="lib-meta">
+                  <div class="lib-name">Coding Mode</div>
+                  <div class="lib-sub">Playlist · 86 songs</div>
+                </div>
+              </div>
+            </div>
+            <div class="mini-player">
+              <div class="mp-art art-3"></div>
+              <div class="mp-meta">
+                <div class="mp-title">Blinding Lights</div>
+                <div class="mp-sub">The Weeknd</div>
+              </div>
+              <div class="mp-controls">
+                <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zm6 0h4v16h-4zm6 0h4v16h-4z" opacity=".9"/></svg>Library</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Your Library</div>
+      </div>
+
+      <!-- NOW PLAYING (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen scr-np-bg">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr" style="padding-top:48px">
+            <div class="np-header">
+              <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+              <div class="np-source">Playing from album<small>After Hours</small></div>
+              <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2" fill="#fff"/><circle cx="12" cy="12" r="2" fill="#fff"/><circle cx="19" cy="12" r="2" fill="#fff"/></svg>
+            </div>
+            <div class="np-cover"></div>
+            <div class="np-info">
+              <div class="np-titles">
+                <div class="np-title">Blinding Lights</div>
+                <div class="np-artist">The Weeknd</div>
+              </div>
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#1ed760" stroke-width="2" fill="none"/><path d="M9 12l2 2 4-4" stroke="#1ed760" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="np-progress">
+              <div class="np-bar"><div class="fill"></div></div>
+              <div class="np-times"><span>1:14</span><span>-2:18</span></div>
+            </div>
+            <div class="np-controls">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M16 4v16M14.5 12l-9 7V5l9 7z"/></svg>
+              <svg class="icon" viewBox="0 0 24 24"><path d="M19 6L9 12l10 6V6zm-13 0h2v12H6z"/></svg>
+              <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <svg class="icon" viewBox="0 0 24 24"><path d="M5 6l10 6L5 18V6zm13 0h-2v12h2z"/></svg>
+              <svg class="icon" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            <div class="np-device"><svg viewBox="0 0 24 24"><path d="M3 18h18v2H3zM3 6h18v8H3zm2 2v4h14V8H5z" fill="#1ed760"/></svg>iPhone · AirPods Pro</div>
+            <div class="np-bottom-row">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M3 6h13M3 12h13M3 18h9M17 14h5l-2.5-3L17 14z" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Now Playing</div>
+      </div>
+
+      <!-- HOME -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen scr-home-bg">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="scr-chips">
+              <span class="scr-chip active">All</span>
+              <span class="scr-chip">Music</span>
+              <span class="scr-chip">Podcasts</span>
+            </div>
+            <div class="scr-body" style="overflow-y:hidden">
+              <div class="tile-grid">
+                <div class="tile"><div class="art art-1"></div><div class="name">Liked Songs</div></div>
+                <div class="tile"><div class="art art-2"></div><div class="name">Discover Weekly</div></div>
+                <div class="tile"><div class="art art-3"></div><div class="name">After Hours</div></div>
+                <div class="tile"><div class="art art-4"></div><div class="name">Midnight Drive</div></div>
+                <div class="tile"><div class="art art-5"></div><div class="name">Daily Mix 1</div></div>
+                <div class="tile"><div class="art art-6"></div><div class="name">Coding Mode</div></div>
+              </div>
+              <div class="sec-title">Made for Jiang Shu</div>
+              <div class="row-cards">
+                <div class="row-card"><div class="art art-2"></div><div class="ttl">Discover Weekly</div><div class="sub">Your week. Your music.</div></div>
+                <div class="row-card"><div class="art art-5"></div><div class="ttl">Daily Mix 1</div><div class="sub">Tame Impala, Mac Demarco</div></div>
+                <div class="row-card"><div class="art art-7"></div><div class="ttl">Release Radar</div><div class="sub">Catch all the latest.</div></div>
+              </div>
+              <div class="sec-title">Recently Played</div>
+              <div class="row-cards">
+                <div class="row-card"><div class="art art-3"></div><div class="ttl">After Hours</div><div class="sub">The Weeknd</div></div>
+                <div class="row-card"><div class="art art-8"></div><div class="ttl">Currents</div><div class="sub">Tame Impala</div></div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Search</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zm6 0h4v16h-4zm6 0h4v16h-4z" opacity=".5"/></svg>Library</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Home</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One unmistakable green.</h2>
+      <p>Every Spotify screen earns its position on an iPhone through the same rules — black canvas, soft surface ladders, pill-shaped controls, and exactly one accent that means "this is interactive."</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>Home</h3>
+        <p>2x3 quick-access tiles above horizontal carousels. Top gradient fades from <code>#283d2b</code> into <code>#121212</code> — a soft hand-off, no border. Chips at the top filter the feed; the active chip flips to <code>#1ed760</code>.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <h3>Now Playing</h3>
+        <p>The album art's dominant color becomes the screen's gradient — extracted at runtime, capped at 80% saturation. White play button sits 60×60 at the optical center. Heart turns <code>#1ed760</code> when saved.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zm6 0h4v16h-4zm6 0h4v16h-4z"/></svg></div>
+        <h3>Your Library</h3>
+        <p>Vertical list, 52px artwork, double-line meta. Filter pills become solid white when active (inverse of Home). Mini-player floats persistent above the tab bar at <code>#3a3a3a</code>.</p>
+      </div>
+    </div>
+
+    <!-- iOS-specific feature blocks -->
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Dynamic Island</div>
+          <h3>Live Activity that breathes with the track.</h3>
+          <p>While Spotify plays, the island carries the album art on the left and a 7-bar waveform animation on the right — pulsing at the song's BPM. Long-press expands to scrubber + skip controls without leaving the host app.</p>
+          <p>Waveform color follows the extracted gradient. Default fallback: <code>#1ed760</code>.</p>
+          <div class="ios-feat-tokens">
+            <code>compact: 96 × 28</code>
+            <code>expanded: 359 × 160</code>
+            <code>radius: 999px</code>
+            <code>blur: 20px</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="island-stage">
+            <div class="island-mock">
+              <div class="ia-art art-3"></div>
+              <div class="ia-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-align:center">Compact state · BPM-synced</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="haptic-stack">
+            <div class="haptic-row">
+              <div class="h-ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <div class="h-text">
+                <div class="h-label">Play / Pause</div>
+                <div class="h-spec">UIImpactFeedbackGenerator · light</div>
+              </div>
+            </div>
+            <div class="haptic-row">
+              <div class="h-ic"><svg viewBox="0 0 24 24"><path d="M19 6L9 12l10 6V6z"/></svg></div>
+              <div class="h-text">
+                <div class="h-label">Skip / Previous</div>
+                <div class="h-spec">UIImpactFeedbackGenerator · medium</div>
+              </div>
+            </div>
+            <div class="haptic-row">
+              <div class="h-ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+              <div class="h-text">
+                <div class="h-label">Like (toggle on)</div>
+                <div class="h-spec">UINotificationFeedback · success</div>
+              </div>
+            </div>
+            <div class="haptic-row">
+              <div class="h-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></div>
+              <div class="h-text">
+                <div class="h-label">Scrubber landing</div>
+                <div class="h-spec">UISelectionFeedback · click</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Haptics</div>
+          <h3>Every tap has a weight.</h3>
+          <p>Spotify pairs visual state changes with Apple's haptic vocabulary — light for play/pause, medium for skip, success for liking a track, selection for landing a scrubber on a beat marker.</p>
+          <p>Haptics fire even on the lock screen widget. The system honors the user's iOS "Reduce Motion" preference and falls back gracefully when System Haptics are disabled.</p>
+          <div class="ios-feat-tokens">
+            <code>light</code><code>medium</code><code>success</code><code>selection</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Lock Screen · Control Center</div>
+          <h3>Now Playing, anywhere iOS will host it.</h3>
+          <p>The MPNowPlayingInfoCenter contract: album art, title, artist, scrubber, transport. Spotify pushes a translucent widget that adopts the system glass backdrop — no Spotify chrome at all, just metadata and white iconography.</p>
+          <p>AirPlay routing surface inherits the green accent for the selected device row only.</p>
+          <div class="ios-feat-tokens">
+            <code>UIBlurEffect: systemMaterialDark</code>
+            <code>corner: 14px</code>
+            <code>accent: #1ed760</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual" style="background:linear-gradient(140deg,#3a1f5a,#0c1024)">
+          <div class="widget-stack">
+            <div style="text-align:center;color:rgba(255,255,255,.95);font-weight:700;font-size:46px;letter-spacing:-2px;font-feature-settings:'tnum'">9:41</div>
+            <div style="text-align:center;color:rgba(255,255,255,.7);font-size:13px;margin-top:-10px">Tuesday, May 20</div>
+            <div class="lockscreen-widget">
+              <div class="lw-top">
+                <div class="lw-art art-3"></div>
+                <div class="lw-meta">
+                  <div class="lw-title">Blinding Lights</div>
+                  <div class="lw-artist">The Weeknd</div>
+                </div>
+              </div>
+              <div class="lw-bar"><div class="fill"></div></div>
+              <div class="lw-times"><span>2:01</span><span>-1:39</span></div>
+              <div class="lw-controls">
+                <svg viewBox="0 0 24 24"><path d="M19 6L9 12l10 6V6zm-13 0h2v12H6z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M5 6l10 6L5 18V6zm13 0h-2v12h2z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The whole vocabulary, in one place.</h2>
+        <p>Every token Spotify's iOS app reaches for — surface ladder, type ramp, radius scale, components. Use it as a paste-grade reference; the green is the only color you don't get to negotiate.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.spotify-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Near-black surfaces stacked in five shades. Spotify Green appears only on functional surfaces — play controls, active states, primary CTAs, the heart. Album art provides every other color in the room.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#1ed760"></div><div class="name">Spotify Green</div><div class="val">#1ed760</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1db954"></div><div class="name">Green Border</div><div class="val">#1db954</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#121212;border:1px solid #2a2a2a"></div><div class="name">Near Black</div><div class="val">#121212</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#181818;border:1px solid #2a2a2a"></div><div class="name">Dark Surface</div><div class="val">#181818</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1f1f1f;border:1px solid #2a2a2a"></div><div class="name">Mid Dark</div><div class="val">#1f1f1f</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="name">White</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fdfdfd;border:1px solid #2a2a2a"></div><div class="name">Bright</div><div class="val">#fdfdfd</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#cbcbcb"></div><div class="name">Soft</div><div class="val">#cbcbcb</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#b3b3b3"></div><div class="name">Silver</div><div class="val">#b3b3b3</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#7c7c7c"></div><div class="name">Dim</div><div class="val">#7c7c7c</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#252525"></div><div class="name">Card</div><div class="val">#252525</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#272727"></div><div class="name">Card Alt</div><div class="val">#272727</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3a3a3a"></div><div class="name">Mini-player</div><div class="val">#3a3a3a</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4d4d4d"></div><div class="name">Border Gray</div><div class="val">#4d4d4d</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000;border:1px solid #2a2a2a"></div><div class="name">True Black</div><div class="val">#000000</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#f3727f"></div><div class="name">Negative</div><div class="val">#f3727f</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffa42b"></div><div class="name">Warning</div><div class="val">#ffa42b</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#539df5"></div><div class="name">Announcement</div><div class="val">#539df5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#1ed760,#0e3d22)"></div><div class="name">Active Gradient</div><div class="val">extracted</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#cc4f3d,#3a0e0a)"></div><div class="name">Now Playing Bg</div><div class="val">art-derived</div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">CircularSp family — substituted here with Inter. Bold/regular binary hierarchy. Buttons stay uppercase with 1.4–2px tracking. Numbers in scrubbers and durations use tabular figures so they don't jitter.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--title-screen</td><td class="sample" style="font-size:28px;font-weight:800;letter-spacing:-.5px">Good evening</td><td>28 / 1.75rem</td><td>800</td><td>-0.5px</td></tr>
+          <tr><td class="token">--title-section</td><td class="sample" style="font-size:22px;font-weight:800;letter-spacing:-.4px">Made for Jiang Shu</td><td>22 / 1.38rem</td><td>800</td><td>-0.4px</td></tr>
+          <tr><td class="token">--now-playing-title</td><td class="sample" style="font-size:20px;font-weight:800;letter-spacing:-.4px">Blinding Lights</td><td>20 / 1.25rem</td><td>800</td><td>-0.4px</td></tr>
+          <tr><td class="token">--body-bold</td><td class="sample" style="font-size:16px;font-weight:700">Discover Weekly</td><td>16 / 1.00rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:14px;font-weight:400;color:#b3b3b3">Your week. Your music.</td><td>14 / 0.88rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--button-upper</td><td class="sample" style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px">Play Now</td><td>14 / 0.88rem</td><td>700</td><td>1.4–2px</td></tr>
+          <tr><td class="token">--tab-active</td><td class="sample" style="font-size:11px;font-weight:600">Home</td><td>11 / 0.69rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--scrubber-time</td><td class="sample" style="font-size:11px;font-weight:500;color:#b3b3b3;font-feature-settings:'tnum'">1:14 / 3:32</td><td>11 / 0.69rem</td><td>500 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--badge</td><td class="sample" style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px">Explicit</td><td>10.5 / 0.66rem</td><td>700</td><td>0.4px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Pill-and-circle geometry. Buttons land at 500px / 9999px; play controls at 50%; cards stay subtle at 4–8px. The mini-player at the bottom uses only 6px — the corners want to be felt, not seen.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Minimal</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Tile</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Cover</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">Widget</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:38px"></div><div class="ds-radius-label">Screen</div><div class="ds-radius-val">38px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:500px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">500px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Play</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- iOS spec strip -->
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">Including the 34pt home indicator safe area.</div></div>
+        <div class="token-cell"><div class="tk-label">Mini-player height</div><div class="tk-val">56pt</div><div class="tk-note">Sits 0pt above the tab bar, persistent across screens.</div></div>
+        <div class="token-cell"><div class="tk-label">Now Playing play</div><div class="tk-val">60×60pt</div><div class="tk-note">White circle, black glyph. The only white circle on the screen.</div></div>
+        <div class="token-cell"><div class="tk-label">Album art radius</div><div class="tk-val">6pt</div><div class="tk-note">Drops to 4pt on tiles, 50% on artist circles.</div></div>
+        <div class="token-cell"><div class="tk-label">Scrubber height</div><div class="tk-val">3pt</div><div class="tk-note">Expands to 6pt during drag with haptic landing.</div></div>
+        <div class="token-cell"><div class="tk-label">Side padding</div><div class="tk-val">16pt</div><div class="tk-note">14pt on Home tile-grid, 24pt on Now Playing.</div></div>
+        <div class="token-cell"><div class="tk-label">Card shadow</div><div class="tk-val">y8 b24</div><div class="tk-note">rgba(0,0,0,0.5). Album art and modal sheets only.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation curve</div><div class="tk-val">easeOut</div><div class="tk-note">.25s default. .35s for sheet presentations.</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Pills, circles, and inset inputs — the tactile vocabulary of a music device translated to the screen.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Get Premium</a>
+            <a class="btn btn-pill" href="#">Follow</a>
+            <a class="btn btn-outline" href="#">Following</a>
+            <a class="btn btn-light" href="#">Open App</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button class="btn-circle" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="btn-circle-sm" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="btn-ghost-circle" aria-label="Like"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search for songs, artists, or podcasts" />
+            <input class="input-pill" placeholder="What do you want to play?" />
+            <div class="ds-card-row">
+              <span class="tag tag-explicit">Explicit</span>
+              <span class="tag tag-new">New</span>
+              <span class="tag tag-pod">Podcast</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#1f1f1f;border-radius:8px;padding:14px;width:100%;box-shadow:rgba(0,0,0,.3) 0 8px 8px">
+              <div style="width:64px;height:64px;border-radius:6px;margin-bottom:12px;background:radial-gradient(circle at 30% 30%,#1ed760,#0e3d22)"></div>
+              <div style="font-size:13px;font-weight:700">Discover Weekly</div>
+              <div style="font-size:11px;color:#b3b3b3;margin-top:2px">Your week. Your music.</div>
+            </div>
+            <div style="background:#181818;border-radius:8px;padding:12px;width:100%;display:flex;gap:10px;align-items:center">
+              <div style="width:40px;height:40px;border-radius:6px;background:radial-gradient(circle at 30% 30%,#f3727f,#6b1f8a)"></div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700">Midnight Drive</div>
+                <div style="font-size:11px;color:#b3b3b3">Neon Carousel</div>
+              </div>
+              <button class="btn-ghost-circle" aria-label="More" style="width:28px;height:28px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.41a.7.7 0 01-.96.23c-2.64-1.61-5.96-1.97-9.88-1.08a.7.7 0 11-.31-1.37c4.28-.97 7.95-.55 10.91 1.26a.7.7 0 01.24.96zm1.22-2.73a.88.88 0 01-1.2.29c-3.02-1.86-7.63-2.4-11.21-1.31a.88.88 0 11-.51-1.68c4.08-1.24 9.17-.64 12.62 1.49.41.25.55.79.3 1.21zm.1-2.85c-3.62-2.15-9.59-2.35-13.05-1.3a1.05 1.05 0 11-.61-2.01c3.96-1.2 10.52-.97 14.68 1.5a1.05 1.05 0 11-1.02 1.81z"/></svg></span>
+      Spotify iOS
+    </div>
+    <p>Design reference. Not affiliated with Spotify AB. Token values are derived from the public iOS app and Spotify's published brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.spotify-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.spotify-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.spotify-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Uber — Inspired Design</title>
+<meta name="description" content="An Uber-inspired marketing page: black-and-white duet, 999px pill CTAs, sentence-case display type, ride-request form card, polarity-flipped promo bands. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  /* Brand */
+  --primary: #000000;
+  --on-primary: #ffffff;
+  --ink: #000000;
+  --body: #5e5e5e;
+  --mute: #afafaf;
+  --hairline-mid: #4b4b4b;
+  --canvas: #ffffff;
+  --canvas-soft: #efefef;
+  --canvas-softer: #f3f3f3;
+  --surface-pressed: #e2e2e2;
+  --link: #0000ee;
+  --on-dark: #ffffff;
+  --black-elevated: #282828;
+  /* Radius */
+  --r-none: 0px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-pill: 999px;
+  --r-pill-tab: 36px;
+  --r-full: 9999px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+::selection { background: var(--ink); color: var(--on-primary); }
+
+/* Layout */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+.wrap-wide { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+/* Top nav */
+.topnav {
+  background: var(--canvas);
+  height: 72px;
+  position: sticky; top: 0; z-index: 30;
+  border-bottom: 1px solid var(--canvas-soft);
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 32px; }
+.brand {
+  font: 700 24px/1 "Inter", system-ui;
+  color: var(--ink); letter-spacing: -0.5px;
+}
+.nav-links { display: flex; gap: 0; flex: 1; }
+.nav-links a {
+  color: var(--ink); padding: 8px 16px;
+  font: 500 16px/1.25 "Inter", system-ui;
+  border-radius: var(--r-pill);
+}
+.nav-links a:hover { background: var(--canvas-soft); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 44px; padding: 12px 16px;
+  border-radius: var(--r-pill);
+  font: 500 16px/1.25 "Inter", system-ui;
+  border: none; cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--black-elevated); }
+.btn-secondary { background: var(--canvas); color: var(--ink); }
+.btn-secondary:hover { background: var(--canvas-soft); }
+.btn-subtle { background: var(--canvas-soft); color: var(--ink); padding: 12px 24px; }
+.btn-subtle:hover { background: var(--surface-pressed); }
+.btn-large-rounded {
+  background: var(--primary); color: var(--on-primary);
+  padding: 16px 24px; border-radius: var(--r-xl);
+  font: 500 18px/1.33 "Inter", system-ui;
+  height: 56px;
+}
+.btn-large-rounded:hover { background: var(--black-elevated); }
+.btn-icon-circular {
+  width: 40px; height: 40px;
+  background: var(--canvas-soft); color: var(--ink);
+  border-radius: var(--r-full);
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; cursor: pointer;
+}
+.btn-icon-circular:hover { background: var(--surface-pressed); }
+.btn-app-pill {
+  background: var(--ink); color: var(--on-dark);
+  padding: 12px 24px;
+  border-radius: var(--r-pill);
+  font: 500 16px/1.25 "Inter", system-ui;
+  display: inline-flex; gap: 8px; align-items: center;
+}
+
+/* Type */
+.eyebrow {
+  font: 500 14px/1 "Inter"; letter-spacing: 1px;
+  color: var(--ink); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.display-xxl { font: 700 clamp(40px, 6vw, 52px)/1.23 "Inter"; margin: 0; letter-spacing: -1px; }
+.display-xl { font: 700 36px/1.22 "Inter"; margin: 0; letter-spacing: -0.5px; }
+.display-lg { font: 700 32px/1.25 "Inter"; margin: 0; letter-spacing: -0.5px; }
+.display-md { font: 700 24px/1.33 "Inter"; margin: 0; }
+.display-sm { font: 700 20px/1.4 "Inter"; margin: 0; }
+.body-lg { font: 500 18px/1.33 "Inter"; }
+.body-md { font: 400 16px/1.5 "Inter"; color: var(--body); }
+
+/* —— HERO with ride-request form —— */
+.hero {
+  background: var(--canvas);
+  padding: 48px 0 96px;
+}
+.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+.hero h1 { margin-bottom: 32px; }
+.hero p { margin: 0 0 24px; font-size: 18px; color: var(--ink); max-width: 460px; }
+
+/* Tab toggle */
+.tab-toggle {
+  display: inline-flex; gap: 4px;
+  background: var(--canvas-soft);
+  padding: 4px; border-radius: var(--r-pill-tab);
+  margin-bottom: 24px;
+}
+.tab-toggle button {
+  background: transparent; color: var(--ink);
+  border: none; padding: 8px 20px;
+  border-radius: var(--r-pill-tab);
+  font: 500 16px/1.25 "Inter";
+  cursor: pointer;
+}
+.tab-toggle button.active { background: var(--canvas); box-shadow: 0 1px 2px rgba(0,0,0,0.12); }
+
+.req-card {
+  background: var(--canvas);
+  border-radius: var(--r-xl);
+  padding: 16px;
+  box-shadow: rgba(0,0,0,0.16) 0px 4px 16px 0px;
+  max-width: 490px; width: 100%;
+}
+.req-row {
+  background: var(--canvas-soft);
+  padding: 16px;
+  border-radius: var(--r-md);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 8px;
+}
+.req-row .icon {
+  width: 16px; height: 16px; flex: 0 0 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
+}
+.req-row .dot {
+  width: 10px; height: 10px; background: var(--ink); border-radius: 50%;
+}
+.req-row .square {
+  width: 10px; height: 10px; background: var(--ink);
+}
+.req-row input {
+  flex: 1; border: none; background: transparent; outline: none;
+  font: 400 16px/1.5 "Inter"; color: var(--ink);
+}
+.req-row .chevron { color: var(--body); }
+.req-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.req-form-grid .req-row { margin-bottom: 0; }
+.req-card .btn { width: 100%; }
+
+/* Category chip row */
+.chip-row {
+  background: var(--canvas);
+  padding: 24px 0;
+  border-bottom: 1px solid var(--canvas-soft);
+}
+.chip-flex {
+  display: flex; gap: 8px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.chip-flex::-webkit-scrollbar { display: none; }
+.cat-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--canvas-soft); color: var(--ink);
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  border: none;
+  font: 500 14px/1.14 "Inter";
+  white-space: nowrap;
+  cursor: pointer;
+}
+.cat-chip:hover { background: var(--surface-pressed); }
+.cat-chip .ico {
+  width: 20px; height: 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* —— PROMO CARD ROW —— */
+.section { padding: 80px 0; }
+.section-head { margin-bottom: 48px; }
+.section-head h2 { margin-bottom: 16px; }
+.section-head p { font-size: 18px; color: var(--body); max-width: 600px; }
+.promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.promo-card {
+  background: var(--canvas);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 24px; align-items: center;
+  box-shadow: rgba(0,0,0,0.12) 0px 4px 16px 0px;
+}
+.promo-card.on-dark {
+  background: var(--ink); color: var(--on-dark);
+  box-shadow: none;
+}
+.promo-card h3 { font: 700 24px/1.33 "Inter"; margin: 0 0 12px; }
+.promo-card p { font: 400 16px/1.5 "Inter"; margin: 0 0 16px; color: var(--body); }
+.promo-card.on-dark p { color: var(--on-dark); opacity: 0.8; }
+.promo-art {
+  aspect-ratio: 4/3;
+  border-radius: var(--r-lg);
+  background: var(--canvas-soft);
+  position: relative; overflow: hidden;
+}
+.promo-card.on-dark .promo-art { background: var(--black-elevated); }
+.promo-card-actions { display: flex; gap: 8px; }
+
+/* Illustration art */
+.illu-rider {
+  background: linear-gradient(135deg, #d4c4a8 0%, #a89878 100%);
+}
+.illu-rider::before {
+  content: ""; position: absolute; left: 20%; top: 20%; width: 60%; height: 50%;
+  background: linear-gradient(180deg, #2a2a2a, #0a0a0a);
+  border-radius: 8px 24px 60px 8px / 12px 30px 50px 12px;
+  clip-path: polygon(0 60%, 5% 30%, 18% 12%, 78% 12%, 90% 30%, 100% 55%, 100% 100%, 0 100%);
+}
+.illu-rider::after {
+  content: ""; position: absolute; right: 22%; top: 15%; width: 28%; height: 35%;
+  background: radial-gradient(circle, #f5d4a8 30%, transparent 60%);
+  border-radius: 50%;
+}
+.illu-driver {
+  background: linear-gradient(135deg, #1a3a5e 0%, #0a1a2f 100%);
+}
+.illu-driver::before {
+  content: ""; position: absolute; left: 5%; bottom: 18%; right: 5%; height: 40%;
+  background: linear-gradient(180deg, #4a6a8e, #1a3a5e);
+  clip-path: polygon(0 60%, 8% 25%, 22% 8%, 78% 8%, 92% 25%, 100% 55%, 100% 100%, 0 100%);
+  border-radius: 4px;
+}
+.illu-driver::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 15%; height: 4px;
+  background: repeating-linear-gradient(90deg, #fff 0, #fff 12px, transparent 12px, transparent 24px);
+}
+.illu-eats {
+  background: linear-gradient(135deg, #f5a06b 0%, #c95a1c 100%);
+}
+.illu-eats::before {
+  content: ""; position: absolute; left: 25%; top: 25%; width: 50%; height: 50%;
+  background: linear-gradient(180deg, #c95a1c, #6e2a08);
+  border-radius: 8px;
+  box-shadow: inset 0 8px 0 #f5a06b;
+}
+.illu-eats::after {
+  content: ""; position: absolute; left: 35%; top: 30%; width: 30%; height: 15%;
+  background: #fff; border-radius: 4px;
+}
+.illu-business {
+  background: linear-gradient(135deg, #b8b8c8 0%, #5e5e7a 100%);
+}
+.illu-business::before {
+  content: ""; position: absolute; left: 15%; top: 20%; width: 70%; height: 60%;
+  background: linear-gradient(180deg, #ffffff, #d4d4dc);
+  border-radius: 4px;
+}
+.illu-business::after {
+  content: ""; position: absolute; left: 25%; top: 35%; width: 50%; height: 4px;
+  background: var(--ink);
+  box-shadow: 0 14px 0 var(--ink), 0 28px 0 var(--canvas-soft);
+}
+
+/* —— SHOWCASE CARD —— */
+.showcase {
+  background: var(--ink); color: var(--on-dark);
+  border-radius: var(--r-xl);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex; align-items: flex-end;
+}
+.showcase::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 60% 30%, rgba(180,180,200,0.25), transparent 60%),
+    radial-gradient(ellipse 80% 40% at 30% 80%, rgba(80,80,120,0.3), transparent 70%),
+    linear-gradient(135deg, #1a1a2a 0%, #000 80%);
+}
+.showcase .content { position: relative; z-index: 2; }
+.showcase h2 { font: 700 clamp(40px, 6vw, 52px)/1.0 "Inter"; margin: 0 0 12px; letter-spacing: -1px; }
+.showcase p { font-size: 18px; opacity: 0.8; max-width: 480px; margin: 0; }
+.showcase .date {
+  position: absolute; top: 24px; right: 32px;
+  font: 500 14px/1.14 "Inter"; opacity: 0.7;
+  letter-spacing: 1px;
+}
+
+/* —— MARKETPLACE / MAP MOCK —— */
+.market-section {
+  background: var(--canvas-soft);
+  padding: 80px 0;
+}
+.market-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; }
+.map-card {
+  background: var(--canvas);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: rgba(0,0,0,0.08) 0 4px 16px;
+  min-height: 480px;
+  position: relative;
+}
+.map-bg {
+  height: 360px;
+  background:
+    linear-gradient(0deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05)),
+    repeating-linear-gradient(0deg, transparent 0, transparent 60px, #e8e8ec 60px, #e8e8ec 61px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 80px, #e8e8ec 80px, #e8e8ec 81px),
+    linear-gradient(135deg, #f5f7f9 0%, #e8ecef 100%);
+  position: relative; overflow: hidden;
+}
+.map-road {
+  position: absolute; background: var(--mute); opacity: 0.4;
+}
+.map-road.r1 { left: 0; right: 0; top: 40%; height: 14px; background: #d4d4d8; opacity: 1; }
+.map-road.r2 { top: 0; bottom: 0; left: 35%; width: 12px; background: #d4d4d8; opacity: 1; }
+.map-road.r3 { left: 10%; right: 10%; top: 70%; height: 8px; background: #d4d4d8; opacity: 1; transform: rotate(-8deg); }
+.map-pin {
+  position: absolute; width: 24px; height: 24px;
+  background: var(--ink);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 3px solid var(--canvas);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+.map-pin.p1 { left: 22%; top: 28%; }
+.map-pin.p2 { left: 58%; top: 60%; background: #4d9bff; }
+.map-path {
+  position: absolute; left: 26%; top: 36%; width: 280px; height: 200px;
+  border: 2px dashed var(--ink); border-radius: 50%;
+  border-top-color: transparent; border-left-color: transparent;
+  transform: rotate(-15deg);
+  opacity: 0.5;
+}
+.fare-strip {
+  padding: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--canvas-soft);
+}
+.fare-strip .fare-label { font: 500 14px/1.14 "Inter"; color: var(--body); }
+.fare-strip .fare-amount { font: 700 32px/1.25 "Inter"; }
+.fare-strip .fare-eta { font: 500 14px/1.14 "Inter"; color: var(--body); }
+
+.driver-card {
+  background: var(--canvas);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  box-shadow: rgba(0,0,0,0.08) 0 4px 16px;
+}
+.driver-row {
+  display: flex; gap: 16px; align-items: center;
+  padding: 16px 0; border-bottom: 1px solid var(--canvas-soft);
+}
+.driver-row:last-child { border-bottom: none; }
+.driver-row.selected {
+  background: var(--canvas-softer);
+  margin: 0 -16px; padding: 16px;
+  border-radius: var(--r-lg);
+  border-bottom: 1px solid transparent;
+}
+.driver-icon {
+  width: 56px; height: 56px;
+  background: var(--canvas-soft);
+  border-radius: var(--r-lg);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink); flex: 0 0 56px;
+}
+.driver-info { flex: 1; }
+.driver-name { font: 500 16px/1.25 "Inter"; margin: 0 0 2px; }
+.driver-meta { font: 400 14px/1.4 "Inter"; color: var(--body); }
+.driver-price { text-align: right; }
+.driver-price .amt { font: 700 16px/1.25 "Inter"; }
+.driver-price .strike { font: 400 14px/1.14 "Inter"; color: var(--body); text-decoration: line-through; }
+
+/* —— GO•GET annual showcase —— */
+.annual-section {
+  padding: 80px 0;
+  background: var(--canvas);
+}
+
+/* —— SAFETY (3-up) —— */
+.feature-3up {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.feature-tile {
+  padding: 32px;
+  border-radius: var(--r-xl);
+  background: var(--canvas-soft);
+}
+.feature-tile .feat-ico {
+  width: 48px; height: 48px;
+  background: var(--canvas);
+  border-radius: var(--r-full);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+}
+.feature-tile h3 { font: 700 20px/1.4 "Inter"; margin: 0 0 8px; }
+.feature-tile p { font: 400 16px/1.5 "Inter"; color: var(--body); margin: 0; }
+
+/* —— APP DOWNLOAD —— */
+.app-section {
+  background: var(--ink);
+  color: var(--on-dark);
+  padding: 80px 0;
+}
+.app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.app-grid h2 { color: var(--on-dark); margin-bottom: 24px; }
+.app-grid p { color: var(--on-dark); opacity: 0.7; font-size: 18px; margin: 0 0 32px; }
+.app-pills { display: flex; gap: 12px; flex-wrap: wrap; }
+.app-phone {
+  aspect-ratio: 9/16; max-width: 320px; margin: 0 auto;
+  background: linear-gradient(135deg, #1a1a1a, #000);
+  border-radius: 32px;
+  padding: 12px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+.app-screen {
+  width: 100%; height: 100%;
+  background: var(--canvas);
+  border-radius: 24px;
+  position: relative; overflow: hidden;
+  padding: 20px;
+}
+.app-screen .map-mini {
+  height: 50%;
+  background:
+    repeating-linear-gradient(0deg, transparent 0, transparent 30px, #e8e8ec 30px, #e8e8ec 31px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 40px, #e8e8ec 40px, #e8e8ec 41px),
+    #f5f7f9;
+  border-radius: 12px; position: relative; margin-bottom: 16px;
+}
+.app-screen .map-mini::after {
+  content: ""; position: absolute; left: 45%; top: 40%;
+  width: 12px; height: 12px;
+  background: var(--ink); border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 0 2px #fff;
+}
+.app-screen .req-mini {
+  background: var(--canvas-soft);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+  font: 500 13px/1.2 "Inter";
+}
+.app-screen .req-mini .dot { width: 8px; height: 8px; background: var(--ink); border-radius: 50%; }
+.app-screen .req-mini .sq { width: 8px; height: 8px; background: var(--ink); }
+.app-screen .price-mini {
+  background: var(--ink); color: var(--on-dark);
+  border-radius: 999px;
+  padding: 12px;
+  text-align: center;
+  font: 500 14px/1.14 "Inter";
+  margin-top: 8px;
+}
+
+/* —— FAQ —— */
+.faq-section { padding: 80px 0; }
+.faq-row {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--canvas-soft);
+  display: flex; justify-content: space-between; align-items: center;
+  font: 500 16px/1.25 "Inter";
+  cursor: pointer;
+}
+.faq-row:hover { color: var(--body); }
+
+/* —— PRICING / TIERS —— */
+.tiers-section { padding: 80px 0; background: var(--canvas-soft); }
+.tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.tier-card {
+  background: var(--canvas-soft);
+  border: 1px solid var(--surface-pressed);
+  border-radius: var(--r-xl);
+  padding: 32px;
+}
+.tier-card.featured {
+  background: var(--ink); color: var(--on-dark);
+  border-color: var(--ink);
+}
+.tier-card h4 { font: 700 20px/1.4 "Inter"; margin: 0 0 8px; }
+.tier-card .price-num { font: 700 40px/1 "Inter"; letter-spacing: -1px; margin: 16px 0 8px; }
+.tier-card .price-sub { font: 400 14px/1.4 "Inter"; color: var(--body); margin-bottom: 24px; }
+.tier-card.featured .price-sub { color: var(--mute); }
+.tier-card ul { list-style: none; padding: 0; margin: 0 0 24px; }
+.tier-card ul li {
+  padding: 8px 0; font: 400 14px/1.5 "Inter";
+  display: flex; align-items: center; gap: 8px;
+}
+.tier-card.featured ul li { color: rgba(255,255,255,0.85); }
+.tier-card .btn { width: 100%; }
+
+/* ===========================
+   PART B — Design System
+   =========================== */
+.ds-section { background: var(--canvas); padding: 100px 0 80px; border-top: 1px solid var(--canvas-soft); }
+.ds-intro { max-width: 720px; margin-bottom: 60px; }
+.ds-intro h2 { font: 700 48px/1.0 "Inter"; margin: 0 0 16px; letter-spacing: -1px; }
+.ds-intro p { font-size: 18px; color: var(--body); }
+.ds-block { margin-bottom: 64px; }
+.ds-block-title {
+  font: 500 12px/1.2 "Inter"; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--mute);
+  border-bottom: 1px solid var(--canvas-soft);
+  padding-bottom: 8px; margin-bottom: 24px;
+  display: flex; justify-content: space-between; align-items: end;
+}
+.ds-block-title > span:first-child { color: var(--ink); font-weight: 700; font-size: 14px; }
+
+.color-group { margin-bottom: 32px; }
+.color-group h4 { font: 700 16px/1.5 "Inter"; margin: 0 0 16px; }
+.color-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.color-tile { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--canvas-soft); }
+.color-swatch { height: 80px; }
+.color-meta { padding: 10px 12px; font-size: 12px; background: var(--canvas); }
+.color-meta .name { font-weight: 700; font-size: 13px; color: var(--ink); margin-bottom: 2px; }
+.color-meta .hex { color: var(--body); font-family: ui-monospace, Menlo, monospace; font-size: 11px; }
+
+.type-table { width: 100%; border-collapse: collapse; }
+.type-table th, .type-table td { text-align: left; padding: 16px 12px; border-bottom: 1px solid var(--canvas-soft); vertical-align: middle; }
+.type-table th { font: 500 12px/1.2 "Inter"; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mute); padding-top: 0; padding-bottom: 12px; }
+.type-table td.token { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--body); width: 180px; }
+.type-table td.spec { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--mute); width: 220px; }
+
+.radius-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; }
+.radius-tile { text-align: center; }
+.radius-box { height: 90px; background: var(--ink); margin-bottom: 12px; }
+.radius-tile .name { font: 500 13px/1 "Inter"; color: var(--ink); margin-bottom: 2px; }
+.radius-tile .val { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--mute); }
+
+.comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.comp-card { border: 1px solid var(--canvas-soft); padding: 24px; border-radius: var(--r-xl); }
+.comp-card .label { font: 500 12px/1.2 "Inter"; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mute); margin-bottom: 16px; }
+.comp-card .stack { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.input-demo {
+  background: var(--canvas-soft); border: none;
+  border-radius: var(--r-md);
+  height: 48px; padding: 0 16px; width: 100%;
+  font: 400 16px/1.5 "Inter"; outline: none; color: var(--ink);
+}
+
+/* Footer */
+.footer {
+  background: var(--primary); color: var(--on-dark);
+  padding: 64px 0 32px;
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+.footer h5 { font: 500 16px/1.25 "Inter"; color: var(--on-dark); margin: 0 0 16px; }
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer ul li { padding: 5px 0; }
+.footer ul li a { color: var(--hairline-mid); font: 400 14px/1.5 "Inter"; }
+.footer ul li a:hover { color: var(--on-dark); }
+.footer-brand { font: 700 32px/1 "Inter"; letter-spacing: -0.5px; margin-bottom: 24px; display: block; }
+.footer-bottom {
+  border-top: 1px solid var(--hairline-mid);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  font: 400 12px/1.67 "Inter"; color: var(--mute);
+}
+
+/* Source link */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--ink); color: var(--on-primary);
+  border: none;
+  padding: 10px 18px; border-radius: var(--r-pill);
+  font: 500 14px/1 "Inter";
+}
+.src-link:hover { background: var(--black-elevated); }
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .promo-grid { grid-template-columns: 1fr; }
+  .promo-card { grid-template-columns: 1fr; }
+  .feature-3up { grid-template-columns: 1fr; }
+  .market-grid { grid-template-columns: 1fr; }
+  .app-grid { grid-template-columns: 1fr; }
+  .tiers-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .color-grid { grid-template-columns: repeat(3, 1fr); }
+  .radius-grid { grid-template-columns: repeat(4, 1fr); }
+  .comp-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 599px) {
+  .req-form-grid { grid-template-columns: 1fr; }
+  .color-grid { grid-template-columns: repeat(2, 1fr); }
+  .radius-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="wrap-wide row">
+    <a class="brand" href="#">Uber</a>
+    <div class="nav-links">
+      <a href="#">Company</a>
+      <a href="#">Safety</a>
+      <a href="#">Help</a>
+      <a href="#">EN</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" style="font:500 16px/1.25 'Inter';padding:8px 16px;border-radius:999px;">Log in</a>
+      <button class="btn btn-subtle">Sign up</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap-wide">
+    <div class="hero-grid">
+      <div>
+        <h1 class="display-xxl">Go anywhere<br>with Uber.</h1>
+        <p class="body-md" style="color:var(--ink);font-size:18px;">Request a ride, hop in, and relax. Reliable transportation, available across more than 10,000 cities worldwide.</p>
+
+        <div class="tab-toggle">
+          <button class="active">Ride</button>
+          <button>Reserve</button>
+          <button>Drive</button>
+        </div>
+
+        <div class="req-card">
+          <div class="req-row">
+            <span class="icon"><span class="dot"></span></span>
+            <input value="Current location" />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chevron"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+          </div>
+          <div class="req-row">
+            <span class="icon"><span class="square"></span></span>
+            <input placeholder="Enter destination" />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chevron"><path d="M12 5v14M5 12h14"/></svg>
+          </div>
+          <div class="req-form-grid">
+            <div class="req-row">
+              <span class="icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              </span>
+              <span style="font:400 16px/1.5 'Inter';">Today</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chevron"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="req-row">
+              <span class="icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              </span>
+              <span style="font:400 16px/1.5 'Inter';">Now</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chevron"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+          </div>
+          <button class="btn btn-primary">See prices</button>
+        </div>
+      </div>
+
+      <div class="showcase">
+        <div class="date">2025 · ANNUAL</div>
+        <div class="content">
+          <h2>Go · Get<br>2025.</h2>
+          <p>The trips you took, the meals you shared, the places you reached. Your year, in motion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHIP ROW -->
+<div class="chip-row">
+  <div class="wrap-wide chip-flex">
+    <button class="cat-chip"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="7" rx="2"/><path d="M6 11V7a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v4"/></svg></span>Ride</button>
+    <button class="cat-chip"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4"/></svg></span>Reserve</button>
+    <button class="cat-chip"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3v4a1 1 0 0 0 1 1h4M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11z"/></svg></span>Rentals</button>
+    <button class="cat-chip"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M14 21v-2a4 4 0 0 1 4-4"/></svg></span>Teens</button>
+    <button class="cat-chip"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m12 8 2 4-2 4-2-4z"/></svg></span>Group rides</button>
+    <button class="cat-chip"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M1 12h6M17 12h6"/></svg></span>Comfort</button>
+    <button class="cat-chip"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18l-2 12H5z"/></svg></span>Eats</button>
+    <button class="cat-chip"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 6V4h8v2"/></svg></span>Business</button>
+  </div>
+</div>
+
+<!-- MARKETPLACE / MAP MOCK -->
+<section class="market-section">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <span class="eyebrow">Real-time pricing</span>
+      <h2 class="display-xl">Choose your ride.</h2>
+      <p>From Pool to Premier — pick what fits the trip. Prices update in real time as demand shifts.</p>
+    </div>
+    <div class="market-grid">
+      <div class="map-card">
+        <div class="map-bg">
+          <div class="map-road r1"></div>
+          <div class="map-road r2"></div>
+          <div class="map-road r3"></div>
+          <div class="map-path"></div>
+          <div class="map-pin p1"></div>
+          <div class="map-pin p2"></div>
+        </div>
+        <div class="fare-strip">
+          <div>
+            <div class="fare-label">Estimated fare</div>
+            <div class="fare-amount">$18.40</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="fare-label">Arrival</div>
+            <div class="fare-eta" style="color:var(--ink);font-weight:700;">12 min · 4.2 mi</div>
+          </div>
+          <button class="btn btn-primary">Request UberX</button>
+        </div>
+      </div>
+
+      <div class="driver-card">
+        <h3 class="display-sm" style="margin-bottom:16px;">Available now</h3>
+        <div class="driver-row selected">
+          <div class="driver-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 14l1.5-5a2 2 0 0 1 2-1.5h7a2 2 0 0 1 2 1.5L19 14v5H5z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>
+          </div>
+          <div class="driver-info">
+            <p class="driver-name">UberX</p>
+            <p class="driver-meta">Affordable rides · 4 seats · 12 min</p>
+          </div>
+          <div class="driver-price"><div class="amt">$18.40</div></div>
+        </div>
+        <div class="driver-row">
+          <div class="driver-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 14l2-6a2 2 0 0 1 2-1.5h10a2 2 0 0 1 2 1.5l2 6v5H3z"/><circle cx="7" cy="17" r="1.5"/><circle cx="17" cy="17" r="1.5"/></svg>
+          </div>
+          <div class="driver-info">
+            <p class="driver-name">UberXL</p>
+            <p class="driver-meta">Bigger group · 6 seats · 15 min</p>
+          </div>
+          <div class="driver-price"><div class="amt">$26.10</div></div>
+        </div>
+        <div class="driver-row">
+          <div class="driver-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 14l1.5-5a2 2 0 0 1 2-1.5h7a2 2 0 0 1 2 1.5L19 14v5H5z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/><path d="M12 5v3"/></svg>
+          </div>
+          <div class="driver-info">
+            <p class="driver-name">Comfort</p>
+            <p class="driver-meta">Newer cars · Quiet preferred · 14 min</p>
+          </div>
+          <div class="driver-price"><div class="amt">$22.80</div></div>
+        </div>
+        <div class="driver-row">
+          <div class="driver-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16l1-6a2 2 0 0 1 2-1.5h10a2 2 0 0 1 2 1.5l1 6v3H4z"/><circle cx="7" cy="18" r="1.2"/><circle cx="17" cy="18" r="1.2"/></svg>
+          </div>
+          <div class="driver-info">
+            <p class="driver-name">Black</p>
+            <p class="driver-meta">Premium · Top-rated drivers · 18 min</p>
+          </div>
+          <div class="driver-price"><div class="amt">$42.00</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO CARD ROW -->
+<section class="section">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <h2 class="display-xl">Plan for later.</h2>
+      <p>Order ahead, or book a ride for any time in the next 30 days.</p>
+    </div>
+    <div class="promo-grid">
+      <div class="promo-card">
+        <div class="promo-art illu-rider"></div>
+        <div>
+          <h3>Reserve your ride.</h3>
+          <p>Confirm a driver up to 30 days in advance with a guaranteed price.</p>
+          <div class="promo-card-actions">
+            <button class="btn btn-subtle">Use Reserve</button>
+          </div>
+        </div>
+      </div>
+      <div class="promo-card on-dark">
+        <div class="promo-art illu-driver"></div>
+        <div>
+          <h3>Drive when you want.</h3>
+          <p>Make money on your schedule with deliveries and rides — or both. You decide.</p>
+          <div class="promo-card-actions">
+            <button class="btn btn-secondary">Get started</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY 3-up -->
+<section class="section" style="background:var(--canvas);padding-top:0;">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <h2 class="display-xl">Safety, simplified.</h2>
+      <p>Every trip backed by tech designed to keep you informed and in control.</p>
+    </div>
+    <div class="feature-3up">
+      <div class="feature-tile">
+        <div class="feat-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg>
+        </div>
+        <h3>Share trip in real time.</h3>
+        <p>Let loved ones follow your route from pickup to drop-off, automatically.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feat-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>24/7 incident support.</h3>
+        <p>A safety team is always one tap away in the app — wherever you are.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feat-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V10a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v11M3 21h18M9 14h6"/></svg>
+        </div>
+        <h3>RideCheck on every trip.</h3>
+        <p>If something seems off, we'll check in to make sure everyone is okay.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO CARD ROW 2 -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap-wide">
+    <div class="promo-grid">
+      <div class="promo-card">
+        <div class="promo-art illu-eats"></div>
+        <div>
+          <h3>Hungry? Order Uber Eats.</h3>
+          <p>Tens of thousands of restaurants delivered to your door. Plus grocery and convenience.</p>
+          <div class="promo-card-actions">
+            <button class="btn btn-primary">Order now</button>
+            <button class="btn btn-subtle">Learn more</button>
+          </div>
+        </div>
+      </div>
+      <div class="promo-card">
+        <div class="promo-art illu-business"></div>
+        <div>
+          <h3>Uber for Business.</h3>
+          <p>Move teams, treat clients, deliver meals — manage it all from one dashboard.</p>
+          <div class="promo-card-actions">
+            <button class="btn btn-primary">Get started</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS / PRICING -->
+<section class="tiers-section">
+  <div class="wrap-wide">
+    <div class="section-head" style="text-align:center;">
+      <span class="eyebrow">Uber for Business</span>
+      <h2 class="display-xl">Pricing made for every team.</h2>
+      <p style="margin: 16px auto 0;">From a single coffee meeting to a global rollout. Move on your terms.</p>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier-card">
+        <h4>Starter</h4>
+        <div class="price-num">$0</div>
+        <div class="price-sub">Per user / month</div>
+        <ul>
+          <li>· Up to 5 employees</li>
+          <li>· Centralized billing</li>
+          <li>· Email support</li>
+          <li>· Real-time receipts</li>
+        </ul>
+        <button class="btn btn-subtle">Start free</button>
+      </div>
+      <div class="tier-card featured">
+        <h4>Business</h4>
+        <div class="price-num">$12</div>
+        <div class="price-sub">Per user / month · billed yearly</div>
+        <ul>
+          <li>· Unlimited employees</li>
+          <li>· Custom expense policies</li>
+          <li>· Live priority support</li>
+          <li>· Travel program integration</li>
+          <li>· Uber Eats included</li>
+        </ul>
+        <button class="btn btn-secondary">Start trial</button>
+      </div>
+      <div class="tier-card">
+        <h4>Enterprise</h4>
+        <div class="price-num">Custom</div>
+        <div class="price-sub">Talk to sales</div>
+        <ul>
+          <li>· Dedicated CSM</li>
+          <li>· Custom contracts &amp; SLA</li>
+          <li>· Country-level controls</li>
+          <li>· API &amp; SAML SSO</li>
+          <li>· Procurement support</li>
+        </ul>
+        <button class="btn btn-subtle">Contact sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP DOWNLOAD -->
+<section class="app-section">
+  <div class="wrap-wide">
+    <div class="app-grid">
+      <div>
+        <span class="eyebrow" style="color: var(--on-dark); opacity: 0.6;">Download</span>
+        <h2 class="display-xl">It's easier in the apps.</h2>
+        <p>Track your ride, split fares, save favourite places, and pay touch-free.</p>
+        <div class="app-pills">
+          <a class="btn-app-pill" href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-3.13 2.55-4.62 2.67-4.7-1.46-2.13-3.73-2.42-4.53-2.45-1.93-.2-3.77 1.14-4.75 1.14-.99 0-2.5-1.11-4.11-1.08-2.11.03-4.06 1.23-5.14 3.12-2.21 3.83-.56 9.49 1.57 12.6 1.06 1.52 2.32 3.23 3.97 3.17 1.6-.06 2.2-1.03 4.14-1.03 1.93 0 2.47 1.03 4.16 1 1.72-.03 2.81-1.55 3.86-3.09 1.22-1.77 1.72-3.49 1.75-3.58-.04-.02-3.36-1.29-3.39-5.1z"/><path d="M14.13 4.05c.88-1.07 1.47-2.55 1.31-4.05-1.27.05-2.81.85-3.71 1.92-.81.94-1.51 2.45-1.32 3.91 1.41.11 2.85-.71 3.72-1.78z"/></svg>
+            Download on the App Store
+          </a>
+          <a class="btn-app-pill" href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 1.2C3.2 1.6 3 2.2 3 3v18c0 .8.2 1.4.6 1.8L13.5 12 3.6 1.2zM14.7 13.2l2.6 2.6-12.4 7c-.4.2-.7.2-1 .1l10.8-9.7zM20.3 9.5c.7.4 1 .9 1 1.5s-.3 1.1-1 1.5l-2.9 1.7-2.9-2.9 2.9-2.9 2.9 1.1zM4.9 1.1c.3-.1.6 0 1 .1l12.4 7L17 11.8 4.9 1.1z"/></svg>
+            Get it on Google Play
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="app-phone">
+          <div class="app-screen">
+            <div class="map-mini"></div>
+            <div class="req-mini">
+              <span class="dot"></span>
+              <span>Current location</span>
+            </div>
+            <div class="req-mini">
+              <span class="sq"></span>
+              <span style="color:var(--mute);">Enter destination</span>
+            </div>
+            <div class="price-mini">See prices</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center;">
+      <h2 class="display-xl">Common questions.</h2>
+    </div>
+    <div class="faq-row"><span>What is Uber and how does it work?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="faq-row"><span>How do I sign up to drive with Uber?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="faq-row"><span>Can I reserve a ride in advance?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="faq-row"><span>How are fares calculated?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="faq-row"><span>What if I leave something in the car?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+  </div>
+</section>
+
+<!-- ===================
+     PART B — DESIGN SYSTEM
+     =================== -->
+<section class="ds-section">
+  <div class="wrap-wide">
+    <div class="ds-intro">
+      <span class="eyebrow">Design system</span>
+      <h2>Black, white, and one pill.</h2>
+      <p>No third color. No mid-page accent. Two custom faces, one pill radius, and editorial 4:3 illustrations. The polarity flip — light card to black band — is the only depth cue this system needs.</p>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span>Color</span><span>12 tokens · grouped</span></div>
+
+      <div class="color-group">
+        <h4>Brand</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--primary)"></div><div class="color-meta"><div class="name">Primary / Ink</div><div class="hex">#000000</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--canvas);border-bottom:1px solid var(--canvas-soft)"></div><div class="color-meta"><div class="name">Canvas</div><div class="hex">#ffffff</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--black-elevated)"></div><div class="color-meta"><div class="name">Black Elevated</div><div class="hex">#282828</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Surface</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--canvas-soft)"></div><div class="color-meta"><div class="name">Canvas Soft</div><div class="hex">#efefef</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--canvas-softer)"></div><div class="color-meta"><div class="name">Canvas Softer</div><div class="hex">#f3f3f3</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--surface-pressed)"></div><div class="color-meta"><div class="name">Surface Pressed</div><div class="hex">#e2e2e2</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h4>Text</h4>
+        <div class="color-grid">
+          <div class="color-tile"><div class="color-swatch" style="background:var(--ink)"></div><div class="color-meta"><div class="name">Ink</div><div class="hex">#000000</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--body)"></div><div class="color-meta"><div class="name">Body</div><div class="hex">#5e5e5e</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--hairline-mid)"></div><div class="color-meta"><div class="name">Hairline Mid</div><div class="hex">#4b4b4b</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--mute)"></div><div class="color-meta"><div class="name">Mute</div><div class="hex">#afafaf</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--on-dark);border-bottom:1px solid var(--canvas-soft)"></div><div class="color-meta"><div class="name">On Dark</div><div class="hex">#ffffff</div></div></div>
+          <div class="color-tile"><div class="color-swatch" style="background:var(--link)"></div><div class="color-meta"><div class="name">Link</div><div class="hex">#0000ee</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span>Typography</span><span>UberMove · UberMoveText (Inter)</span></div>
+      <table class="type-table">
+        <thead><tr><th>Token</th><th>Spec</th><th>Sample</th></tr></thead>
+        <tbody>
+          <tr><td class="token">display-xxl</td><td class="spec">52px · 700 · 64px</td><td style="font:700 36px/1.22 'Inter';letter-spacing:-0.5px;">Go anywhere with Uber.</td></tr>
+          <tr><td class="token">display-xl</td><td class="spec">36px · 700 · 44px</td><td style="font:700 28px/1.22 'Inter';letter-spacing:-0.5px;">Plan for later.</td></tr>
+          <tr><td class="token">display-lg</td><td class="spec">32px · 700 · 40px</td><td style="font:700 24px/1.25 'Inter';">Promo card title</td></tr>
+          <tr><td class="token">display-md</td><td class="spec">24px · 700 · 32px</td><td style="font:700 20px/1.33 'Inter';">Card title</td></tr>
+          <tr><td class="token">display-sm</td><td class="spec">20px · 700 · 28px</td><td style="font:700 18px/1.4 'Inter';">Available now</td></tr>
+          <tr><td class="token">body-lg</td><td class="spec">18px · 500 · 24px</td><td style="font:500 18px/1.33 'Inter';">Lead paragraph.</td></tr>
+          <tr><td class="token">body-md</td><td class="spec">16px · 400 · 24px</td><td style="font:400 16px/1.5 'Inter';">Default paragraph body.</td></tr>
+          <tr><td class="token">body-md-strong</td><td class="spec">16px · 500 · 20px</td><td style="font:500 16px/1.25 'Inter';">Bolded inline body</td></tr>
+          <tr><td class="token">body-sm</td><td class="spec">14px · 400 · 20px</td><td style="font:400 14px/1.4 'Inter';">Caption text</td></tr>
+          <tr><td class="token">button-md</td><td class="spec">16px · 500 · 20px</td><td style="font:500 16px/1.25 'Inter';">See prices</td></tr>
+          <tr><td class="token">button-large</td><td class="spec">18px · 500 · 24px</td><td style="font:500 18px/1.33 'Inter';">Yes, help me</td></tr>
+          <tr><td class="token">caption</td><td class="spec">12px · 400 · 20px</td><td style="font:400 12px/1.67 'Inter';">Fine print metadata</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span>Radius</span><span>Pill 999px is the signature</span></div>
+      <div class="radius-grid">
+        <div class="radius-tile"><div class="radius-box" style="border-radius:0"></div><div class="name">none</div><div class="val">0px</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:8px"></div><div class="name">md</div><div class="val">8px · input</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:12px"></div><div class="name">lg</div><div class="val">12px</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:16px"></div><div class="name">xl</div><div class="val">16px · cards</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:36px"></div><div class="name">pill-tab</div><div class="val">36px · toggle</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:999px"></div><div class="name">pill</div><div class="val">999px · CTA</div></div>
+        <div class="radius-tile"><div class="radius-box" style="border-radius:9999px"></div><div class="name">full</div><div class="val">9999px · icon</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <div class="ds-block-title"><span>Components</span><span>Buttons · inputs · cards · pills</span></div>
+
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div class="label">Buttons — pill hierarchy</div>
+          <div class="stack">
+            <button class="btn btn-primary">See prices</button>
+            <button class="btn btn-secondary" style="border:1px solid var(--canvas-soft)">Sign in</button>
+            <button class="btn btn-subtle">Learn more</button>
+          </div>
+        </div>
+
+        <div class="comp-card" style="background: var(--ink); color: var(--on-dark); border-color: var(--ink);">
+          <div class="label" style="color: var(--mute);">On-dark pills</div>
+          <div class="stack">
+            <button class="btn btn-secondary">Get the app</button>
+            <button class="btn-app-pill">Download iOS</button>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Tab toggle &amp; chip row</div>
+          <div class="stack" style="flex-direction:column;align-items:flex-start;gap:16px;">
+            <div class="tab-toggle" style="margin: 0;">
+              <button class="active">Ride</button>
+              <button>Drive</button>
+            </div>
+            <div class="stack">
+              <button class="cat-chip">Reserve</button>
+              <button class="cat-chip">Eats</button>
+              <button class="cat-chip">Business</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Large rounded CTA &amp; input</div>
+          <div class="stack" style="flex-direction:column;align-items:stretch;gap:12px;">
+            <input class="input-demo" placeholder="Enter destination" />
+            <button class="btn-large-rounded">Yes, help me</button>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Icon buttons</div>
+          <div class="stack">
+            <button class="btn-icon-circular"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button class="btn-icon-circular"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+            <button class="btn-icon-circular"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></button>
+            <button class="btn-icon-circular"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="label">Card content (canonical)</div>
+          <div style="background:var(--canvas);padding:16px;border-radius:16px;box-shadow: rgba(0,0,0,0.12) 0 4px 16px;">
+            <h4 style="font:700 20px/1.4 'Inter';margin:0 0 8px;">Reserve your ride.</h4>
+            <p style="font:400 14px/1.5 'Inter';color:var(--body);margin:0 0 16px;">Confirm a driver up to 30 days in advance.</p>
+            <button class="btn btn-subtle">Use Reserve</button>
+          </div>
+        </div>
+
+        <div class="comp-card" style="grid-column: span 2;">
+          <div class="label">Ride-request form card</div>
+          <div class="req-card" style="max-width:none;box-shadow:none;border:1px solid var(--canvas-soft);">
+            <div class="req-row">
+              <span class="icon"><span class="dot"></span></span>
+              <input value="Pickup location" />
+            </div>
+            <div class="req-row">
+              <span class="icon"><span class="square"></span></span>
+              <input placeholder="Where to?" />
+            </div>
+            <div class="req-form-grid">
+              <div class="req-row"><span style="font:400 16px/1.5 'Inter';">Today</span></div>
+              <div class="req-row"><span style="font:400 16px/1.5 'Inter';">Now</span></div>
+            </div>
+            <button class="btn btn-primary">See prices</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap-wide">
+    <div class="footer-grid">
+      <div>
+        <span class="footer-brand">Uber</span>
+        <p style="color:var(--mute);font:400 14px/1.5 'Inter';max-width:280px;margin:0;">© 2025 Uber Technologies Inc. (Inspired · Generated for design study)</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Our offerings</a></li>
+          <li><a href="#">Newsroom</a></li>
+          <li><a href="#">Investors</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="#">Ride</a></li>
+          <li><a href="#">Drive</a></li>
+          <li><a href="#">Eats</a></li>
+          <li><a href="#">Business</a></li>
+          <li><a href="#">Freight</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Global citizenship</h5>
+        <ul>
+          <li><a href="#">Safety</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Travel</h5>
+        <ul>
+          <li><a href="#">Airports</a></li>
+          <li><a href="#">Cities</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>UberMove · Ink #000000 · Pill 999px · Black-on-white duet</div>
+      <div>EN · USD · Visit Help Center →</div>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.uber.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

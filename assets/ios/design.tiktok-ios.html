@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TikTok — iOS design spec</title>
+<meta name="description" content="TikTok iOS app design reference. #000 canvas, cyan #25F4EE + red #FE2C55 RGB-split brand mark, full-bleed 9:16 video, right-side action stack, spinning audio disc." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#000; --surface-1:#0a0a0a; --surface-2:#161616; --surface-card:#1c1c1c; --surface-card-alt:#222;
+  --tt-red:#FE2C55; --tt-cyan:#25F4EE;
+  --ink:#fff; --ink-soft:#f1f1f1; --ink-muted:#a8a8a8; --ink-dim:#717171;
+  --border:#2e2e2e; --border-soft:#1a1a1a;
+  --negative:#FE2C55; --warning:#ffa42b; --announce:#25F4EE;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:0; --r-sm:2px; --r-md:4px; --r-lg:6px; --r-xl:10px; --r-pill:500px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.3px}
+.brand-mark{width:30px;height:30px;border-radius:6px;background:#000;display:grid;place-items:center;position:relative}
+.brand-mark .note{position:relative;width:18px;height:18px}
+.brand-mark .note::before,.brand-mark .note::after,.brand-mark .note span{position:absolute;inset:0;font-weight:900;font-size:22px;line-height:1;font-family:var(--font-ui)}
+.brand-mark .note::before{content:"d";color:var(--tt-cyan);transform:translate(-2px,-2px)}
+.brand-mark .note::after{content:"d";color:var(--tt-red);transform:translate(2px,2px)}
+.brand-mark .note span{color:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-full);font-size:14px;font-weight:700;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--ink);background:var(--surface-2)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.04)}
+.btn-primary{background:var(--tt-red);color:#fff;padding:12px 22px;border-radius:var(--r-md)}
+.btn-primary:hover{background:#e02147}
+.btn-pill{background:var(--surface-2);color:var(--ink);padding:10px 18px;border-radius:var(--r-md)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 18px;border-radius:var(--r-md)}
+.btn-light{background:#fff;color:#000;padding:12px 22px;border-radius:var(--r-md)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 30% 0%,rgba(254,44,85,.18),transparent 70%),radial-gradient(700px 500px at 80% 30%,rgba(37,244,238,.14),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-full);background:rgba(254,44,85,.12);color:var(--tt-red);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--tt-red)}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:.95;letter-spacing:-2.2px;font-weight:900;margin-bottom:22px}
+.hero h1 .gradient-word{position:relative;display:inline-block}
+.hero h1 .gradient-word::before{content:attr(data-text);position:absolute;left:-3px;top:-3px;color:var(--tt-cyan);z-index:-1}
+.hero h1 .gradient-word::after{content:attr(data-text);position:absolute;left:3px;top:3px;color:var(--tt-red);z-index:-1}
+.hero h1 .gradient-word{color:#fff}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#000}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#fff;letter-spacing:-.2px}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;color:#fff;font-size:11px;display:flex;flex-direction:column}
+
+/* ========== SCREEN: FOR YOU ========== */
+.fy-bg{background:linear-gradient(150deg,#2b1530 0%,#3d1f29 35%,#1a0b14 70%,#000 100%);position:absolute;inset:0;overflow:hidden}
+.fy-bg::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 35%,rgba(254,44,85,.28),transparent 55%),radial-gradient(circle at 70% 70%,rgba(37,244,238,.18),transparent 50%)}
+.fy-bg::after{content:"";position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);top:40%;left:30%}
+.fy-toptabs{position:absolute;top:52px;left:0;right:0;display:flex;justify-content:center;gap:24px;z-index:5;font-size:13px;font-weight:700;color:rgba(255,255,255,.6)}
+.fy-toptabs .active{color:#fff;position:relative}
+.fy-toptabs .active::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-8px;width:18px;height:2.5px;background:#fff;border-radius:2px}
+.fy-search{position:absolute;top:52px;right:18px;z-index:5}
+.fy-search svg{width:18px;height:18px;fill:#fff}
+.fy-actions{position:absolute;right:10px;bottom:130px;display:flex;flex-direction:column;align-items:center;gap:14px;z-index:5}
+.fy-action{display:flex;flex-direction:column;align-items:center;gap:3px}
+.fy-action .ic{width:38px;height:38px;display:grid;place-items:center}
+.fy-action svg{width:30px;height:30px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.fy-action .lbl{font-size:10px;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.fy-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FE2C55,#25F4EE);border:1.5px solid #fff;position:relative;display:grid;place-items:center;color:#fff;font-size:14px;font-weight:800}
+.fy-avatar::after{content:"+";position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:var(--tt-red);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center;line-height:1}
+.fy-disc{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle,#3a3a3a 30%,#000 32%,#000 60%,#1a1a1a 62%);position:relative;border:2px solid #000;animation:spin 6s linear infinite}
+.fy-disc::after{content:"";position:absolute;inset:6px;border-radius:50%;background:linear-gradient(135deg,#FE2C55,#25F4EE)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fy-bottom{position:absolute;bottom:80px;left:14px;right:70px;z-index:4;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.fy-bottom .user{font-size:14px;font-weight:700;margin-bottom:5px}
+.fy-bottom .caption{font-size:12px;font-weight:400;line-height:1.35;margin-bottom:8px;color:rgba(255,255,255,.95)}
+.fy-bottom .song{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500}
+.fy-bottom .song svg{width:11px;height:11px;fill:#fff}
+
+/* ========== SCREEN: PROFILE ========== */
+.pf-bg{background:#000;position:absolute;inset:0}
+.pf-head{padding:60px 16px 0;display:flex;align-items:center;justify-content:space-between}
+.pf-head .lock{font-size:14px;font-weight:700;display:flex;align-items:center;gap:5px}
+.pf-head svg{width:18px;height:18px;fill:#fff}
+.pf-user{padding:14px 14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.pf-avatar{width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,#FE2C55,#25F4EE);display:grid;place-items:center;color:#fff;font-size:28px;font-weight:800}
+.pf-name{font-size:15px;font-weight:700;display:flex;align-items:center;gap:5px}
+.pf-name .verified{width:14px;height:14px;border-radius:50%;background:#25F4EE;display:inline-grid;place-items:center}
+.pf-name .verified svg{width:9px;height:9px;fill:#000}
+.pf-stats{display:flex;gap:18px;margin:6px 0 10px}
+.pf-stat{text-align:center}
+.pf-stat .v{font-size:14px;font-weight:800;font-feature-settings:"tnum"}
+.pf-stat .l{font-size:10px;color:var(--ink-muted);margin-top:1px}
+.pf-actions{display:flex;gap:5px;width:100%;padding:0 14px}
+.pf-actions .btn-fl{flex:1;padding:7px 0;border-radius:4px;background:#252525;font-size:11.5px;font-weight:700;text-align:center}
+.pf-actions .ico{width:30px;height:30px;border-radius:4px;background:#252525;display:grid;place-items:center}
+.pf-actions .ico svg{width:14px;height:14px;fill:#fff}
+.pf-bio{font-size:11px;color:rgba(255,255,255,.85);text-align:center;padding:10px 24px 8px;line-height:1.4}
+.pf-tabs{display:flex;border-bottom:1px solid #232323;margin:6px 0 0}
+.pf-tabs .pt{flex:1;text-align:center;padding:8px 0;color:var(--ink-muted);font-size:13px}
+.pf-tabs .pt.active{color:#fff;position:relative}
+.pf-tabs .pt.active::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:24px;height:1.5px;background:#fff}
+.pf-tabs .pt svg{width:16px;height:16px;fill:currentColor}
+.pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;padding:1.5px 0 0}
+.pf-vid{aspect-ratio:9/13;position:relative;overflow:hidden}
+.pf-vid .badge{position:absolute;left:4px;bottom:4px;display:flex;align-items:center;gap:2px;color:#fff;font-size:9.5px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.pf-vid .badge svg{width:9px;height:9px;fill:#fff}
+.v1{background:linear-gradient(135deg,#FE2C55,#3a0a18)}
+.v2{background:linear-gradient(135deg,#25F4EE,#0a3a3a)}
+.v3{background:linear-gradient(135deg,#7b2cbf,#2a0a3a)}
+.v4{background:linear-gradient(135deg,#fb5c74,#5a0e1a)}
+.v5{background:linear-gradient(135deg,#0d9488,#022c2c)}
+.v6{background:linear-gradient(135deg,#f97316,#3a1a05)}
+.v7{background:linear-gradient(135deg,#ec4899,#3a0a25)}
+.v8{background:linear-gradient(135deg,#3b82f6,#0a1a3a)}
+.v9{background:linear-gradient(135deg,#facc15,#3a2a05)}
+
+/* ========== SCREEN: INBOX ========== */
+.ib-bg{background:#000;position:absolute;inset:0}
+.ib-head{padding:56px 16px 8px;display:flex;align-items:center;justify-content:space-between}
+.ib-head h2{font-size:17px;font-weight:700}
+.ib-head svg{width:20px;height:20px;fill:#fff}
+.ib-cats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:4px 14px 14px}
+.ib-cat{background:#161616;border-radius:6px;padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.ib-cat .cic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center}
+.ib-cat .cic.red{background:var(--tt-red)}
+.ib-cat .cic.cyan{background:var(--tt-cyan)}
+.ib-cat .cic.yellow{background:#FFD166}
+.ib-cat .cic.green{background:#1ed760}
+.ib-cat .cic svg{width:14px;height:14px;fill:#fff}
+.ib-cat .cic.yellow svg,.ib-cat .cic.cyan svg{fill:#000}
+.ib-cat .lbl{font-size:10px;font-weight:600;color:#fff}
+.ib-sec{padding:12px 14px 4px;font-size:12px;font-weight:700;color:var(--ink-muted)}
+.ib-list{padding:0 14px;display:flex;flex-direction:column;gap:10px}
+.ib-row{display:flex;align-items:center;gap:10px}
+.ib-row .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FE2C55,#25F4EE);flex-shrink:0;position:relative}
+.ib-row .av::after{content:"";position:absolute;bottom:-2px;right:-2px;width:18px;height:18px;border-radius:50%;background:var(--tt-red);border:2px solid #000;display:grid;place-items:center}
+.ib-row.heart .av::after{background:var(--tt-red)}
+.ib-row.cmnt .av::after{background:var(--tt-cyan)}
+.ib-row.foll .av::after{background:#fff}
+.ib-row .meta{flex:1;min-width:0}
+.ib-row .name{font-size:13px;font-weight:600}
+.ib-row .name b{font-weight:800}
+.ib-row .time{font-size:11px;color:var(--ink-muted);margin-top:2px}
+.ib-row .thumb{width:36px;height:48px;background:linear-gradient(135deg,#FE2C55,#3a0a18);border-radius:2px;flex-shrink:0}
+
+/* tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:#000;display:flex;justify-content:space-around;align-items:flex-start;padding:8px 8px 0;z-index:10;border-top:1px solid #1a1a1a}
+.tab-bar.transparent{background:linear-gradient(180deg,transparent,rgba(0,0,0,.85) 60%);border-top:0}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-muted);font-size:9.5px;font-weight:600}
+.tab.active{color:#fff}
+.tab svg{width:22px;height:22px;fill:currentColor}
+.tab-create{width:42px;height:26px;border-radius:7px;background:#fff;display:grid;place-items:center;position:relative;overflow:visible}
+.tab-create::before{content:"";position:absolute;inset:0;background:var(--tt-cyan);border-radius:7px;transform:translate(-3px,0);z-index:-1}
+.tab-create::after{content:"";position:absolute;inset:0;background:var(--tt-red);border-radius:7px;transform:translate(3px,0);z-index:-2}
+.tab-create svg{width:18px;height:18px;fill:#000}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border-soft)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--tt-red);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:8px;padding:28px;border:1px solid var(--border-soft)}
+.feat:hover{background:var(--surface-2)}
+.feat .feat-ic{width:36px;height:36px;border-radius:50%;background:rgba(254,44,85,.16);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--tt-red)}
+.feat h3{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:rgba(255,255,255,.06);padding:1px 6px;border-radius:3px;color:var(--ink-soft)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:5px 10px;border-radius:4px;color:var(--ink-soft);border:1px solid var(--border-soft)}
+.ios-feat-visual{background:var(--surface-1);border-radius:12px;padding:40px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* action stack anatomy */
+.stack-anat{display:flex;align-items:flex-start;gap:30px}
+.stack-anat .col-mock{display:flex;flex-direction:column;align-items:center;gap:14px}
+.stack-anat .col-mock .it{display:flex;flex-direction:column;align-items:center;gap:2px}
+.stack-anat .col-mock .it .ic{width:36px;height:36px;display:grid;place-items:center}
+.stack-anat .col-mock .it .ic svg{width:28px;height:28px;fill:#fff}
+.stack-anat .col-mock .it .lbl{font-size:10px;color:#fff;font-weight:600}
+.stack-anat .col-mock .it.heart .ic svg{fill:var(--tt-red)}
+.stack-anat .col-labels{display:flex;flex-direction:column;gap:14px;font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);padding-top:6px}
+.stack-anat .col-labels .row{height:42px;display:flex;align-items:center}
+
+/* sound disc */
+.disc-stage{display:flex;flex-direction:column;align-items:center;gap:18px}
+.disc-large{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,#3a3a3a 28%,#000 30%,#000 62%,#1a1a1a 64%);position:relative;animation:spin 8s linear infinite;box-shadow:0 0 30px rgba(254,44,85,.3)}
+.disc-large::after{content:"";position:absolute;inset:18px;border-radius:50%;background:linear-gradient(135deg,#FE2C55,#25F4EE)}
+.disc-info{text-align:center}
+.disc-info .t{font-size:13px;font-weight:700}
+.disc-info .s{font-size:11px;color:var(--ink-muted);margin-top:4px;font-family:var(--font-mono)}
+
+/* double tap burst */
+.burst-stage{position:relative;display:grid;place-items:center;width:240px;height:240px}
+.burst-stage .bg{position:absolute;inset:0;background:linear-gradient(135deg,#FE2C55,#7b1f3d);border-radius:8px}
+.burst-stage .heart{position:relative;width:84px;height:84px;color:#fff;animation:pulse 1.8s ease-in-out infinite}
+.burst-stage .heart svg{width:100%;height:100%;fill:#fff;filter:drop-shadow(0 0 14px rgba(255,255,255,.5))}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+
+/* ========== DESIGN SYSTEM SECTION ========== */
+.ds-section{padding:120px 0;background:#070707;border-top:1px solid var(--border-soft)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border-soft);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--tt-red);border:1px solid var(--border);padding:8px 14px;border-radius:var(--r-md);white-space:nowrap}
+.ds-source:hover{background:var(--surface-2)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border-soft)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:var(--surface-1);border-radius:8px;padding:10px;border:1px solid var(--border-soft)}
+.ds-sw .chip{height:64px;border-radius:6px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border-soft);text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+.ds-type-table td.token{color:var(--tt-red)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:#fff}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,var(--tt-red),var(--tt-cyan));margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:var(--surface-1);border-radius:10px;padding:22px;border:1px solid var(--border-soft)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-pill{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:4px;padding:11px 14px;color:#fff;font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:#717171}
+.input-pill:focus{border-color:var(--tt-red)}
+.tag{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:3px;letter-spacing:.4px;text-transform:uppercase}
+.tag-foryou{background:var(--tt-red);color:#fff}
+.tag-live{background:var(--tt-cyan);color:#000}
+.tag-trend{background:#fff;color:#000}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:var(--surface-1);border-radius:6px;padding:18px;border:1px solid var(--border-soft)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:#fff;letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:1px solid var(--border-soft);background:#070707}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.5}
+.foot a{color:var(--tt-red);font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:#000;border:1px solid var(--border);color:var(--tt-red);font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-md);z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.float-link:hover{background:var(--surface-2)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">
+        <span class="note"><span>d</span></span>
+      </span>
+      TikTok <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Log In</a>
+      <a class="btn btn-primary" href="#">Get App</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>A black screen that <span class="gradient-word" data-text="moves">moves</span> at 60fps.</h1>
+    <p>TikTok's iOS app, dissected. A pure black canvas, cyan-and-red RGB split, full-bleed 9:16 video, and an action stack that sits exactly where the right thumb lands.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- INBOX -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="ib-bg"></div>
+          <div class="scr">
+            <div class="ib-head">
+              <h2>Inbox</h2>
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#fff" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="ib-cats">
+              <div class="ib-cat"><div class="cic red"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div><div class="lbl">Likes</div></div>
+              <div class="ib-cat"><div class="cic cyan"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 11-1-4" stroke="currentColor" stroke-width="2.5" fill="none"/></svg></div><div class="lbl">Comments</div></div>
+              <div class="ib-cat"><div class="cic yellow"><svg viewBox="0 0 24 24"><path d="M2 9l5 5 10-10" stroke="currentColor" stroke-width="2.5" fill="none"/></svg></div><div class="lbl">Mentions</div></div>
+              <div class="ib-cat"><div class="cic green"><svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 11-8 0 4 4 0 018 0zm-8 8v-2a4 4 0 014-4h0a4 4 0 014 4v2"/></svg></div><div class="lbl">Followers</div></div>
+            </div>
+            <div class="ib-sec">Activity · This week</div>
+            <div class="ib-list">
+              <div class="ib-row heart">
+                <div class="av"></div>
+                <div class="meta">
+                  <div class="name"><b>jamie_x</b> liked your video</div>
+                  <div class="time">12m ago</div>
+                </div>
+                <div class="thumb"></div>
+              </div>
+              <div class="ib-row cmnt">
+                <div class="av" style="background:linear-gradient(135deg,#FFD166,#FE2C55)"></div>
+                <div class="meta">
+                  <div class="name"><b>kai.exe</b> commented: "GOATED 🔥"</div>
+                  <div class="time">38m ago</div>
+                </div>
+                <div class="thumb" style="background:linear-gradient(135deg,#25F4EE,#0a3a3a)"></div>
+              </div>
+              <div class="ib-row foll">
+                <div class="av" style="background:linear-gradient(135deg,#25F4EE,#7b2cbf)"></div>
+                <div class="meta">
+                  <div class="name"><b>milo</b> started following you</div>
+                  <div class="time">1h ago</div>
+                </div>
+              </div>
+              <div class="ib-row heart">
+                <div class="av" style="background:linear-gradient(135deg,#fb5c74,#3a0a18)"></div>
+                <div class="meta">
+                  <div class="name"><b>sage_</b> and 24 others liked</div>
+                  <div class="time">2h ago</div>
+                </div>
+                <div class="thumb" style="background:linear-gradient(135deg,#7b2cbf,#2a0a3a)"></div>
+              </div>
+              <div class="ib-row cmnt">
+                <div class="av" style="background:linear-gradient(135deg,#3b82f6,#0a1a3a)"></div>
+                <div class="meta">
+                  <div class="name"><b>devon</b> mentioned you in a comment</div>
+                  <div class="time">3h ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Discover</div>
+              <div class="tab"><div class="tab-create"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#000" stroke-width="2.5"/></svg></div></div>
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Inbox</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2"/></svg>Profile</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Inbox</div>
+      </div>
+
+      <!-- FOR YOU (center) -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="fy-bg"></div>
+          <div class="scr">
+            <div class="fy-toptabs">
+              <span>Following</span>
+              <span class="active">For You</span>
+            </div>
+            <div class="fy-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="#fff" stroke-width="2"/></svg></div>
+
+            <div class="fy-actions">
+              <div class="fy-action"><div class="fy-avatar">M</div></div>
+              <div class="fy-action"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div><div class="lbl">218.4K</div></div>
+              <div class="fy-action"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div><div class="lbl">1,521</div></div>
+              <div class="fy-action"><div class="ic"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div><div class="lbl">12.4K</div></div>
+              <div class="fy-action"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></div><div class="lbl">Share</div></div>
+              <div class="fy-action" style="margin-top:6px"><div class="fy-disc"></div></div>
+            </div>
+
+            <div class="fy-bottom">
+              <div class="user">@maya.codes</div>
+              <div class="caption">when the unit tests pass on the first try 🥲 #devlife #fyp</div>
+              <div class="song"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 9l12-2M9 18a3 3 0 11-3-3 3 3 0 013 3zm12-2a3 3 0 11-3-3 3 3 0 013 3z" stroke="#fff" stroke-width="1.6" fill="none"/></svg>original sound — maya.codes</div>
+            </div>
+
+            <div class="tab-bar transparent">
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Discover</div>
+              <div class="tab"><div class="tab-create"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#000" stroke-width="2.5"/></svg></div></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Inbox</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2"/></svg>Profile</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">For You</div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#fff" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#fff"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#fff" fill-opacity="0.5"/></svg>
+            </div>
+          </div>
+          <div class="pf-bg"></div>
+          <div class="scr">
+            <div class="pf-head">
+              <svg viewBox="0 0 24 24"><path d="M3 5h2M3 19h18M3 12h14" stroke="#fff" stroke-width="2"/></svg>
+              <div class="lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#fff" stroke-width="2" fill="none"/><path d="M8 11V7a4 4 0 018 0v4" stroke="#fff" stroke-width="2" fill="none"/></svg>jiang_shu</div>
+              <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="#fff" stroke-width="2"/></svg>
+            </div>
+            <div class="pf-user">
+              <div class="pf-avatar">J</div>
+              <div class="pf-name">@jiang_shu <span class="verified"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="3" fill="none"/></svg></span></div>
+              <div class="pf-stats">
+                <div class="pf-stat"><div class="v">128</div><div class="l">Following</div></div>
+                <div class="pf-stat"><div class="v">24.5K</div><div class="l">Followers</div></div>
+                <div class="pf-stat"><div class="v">312.8K</div><div class="l">Likes</div></div>
+              </div>
+              <div class="pf-actions">
+                <div class="btn-fl">Edit Profile</div>
+                <div class="btn-fl">Share Profile</div>
+                <div class="ico"><svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 11-8 0 4 4 0 018 0zM4 21v-2a4 4 0 014-4h0M20 21v-2a4 4 0 00-4-4h0" stroke="#fff" stroke-width="2" fill="none"/></svg></div>
+              </div>
+              <div class="pf-bio">writing software, mostly · sometimes very serious nonsense</div>
+            </div>
+            <div class="pf-tabs">
+              <div class="pt active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+              <div class="pt"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 9v6l5-3z"/></svg></div>
+              <div class="pt"><svg viewBox="0 0 24 24"><path d="M5 4l7 16 2-7 7-2z" stroke="currentColor" stroke-width="2" fill="none"/></svg></div>
+              <div class="pt"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z" stroke="currentColor" stroke-width="2" fill="none"/></svg></div>
+            </div>
+            <div class="pf-grid">
+              <div class="pf-vid v1"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>1.2M</div></div>
+              <div class="pf-vid v2"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>418K</div></div>
+              <div class="pf-vid v3"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>92K</div></div>
+              <div class="pf-vid v4"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>61K</div></div>
+              <div class="pf-vid v5"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>54K</div></div>
+              <div class="pf-vid v6"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>38K</div></div>
+              <div class="pf-vid v7"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>21K</div></div>
+              <div class="pf-vid v8"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>17K</div></div>
+              <div class="pf-vid v9"><div class="badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>9.4K</div></div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg>Home</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>Discover</div>
+              <div class="tab"><div class="tab-create"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#000" stroke-width="2.5"/></svg></div></div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Inbox</div>
+              <div class="tab active"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2"/></svg>Profile</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Profile</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One thumb. Zero friction.</h2>
+      <p>Every TikTok screen earns its place on a phone by deferring to the video. The chrome is monochrome; brand color shows up only where you tap.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>For You</h3>
+        <p>Full-bleed 9:16 video, no margins, no chrome. The right-side action stack lives at <code>right:10pt</code>. Tab bar fades to a 0.85 black gradient so the video keeps the eye.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2"/></svg></div>
+        <h3>Profile</h3>
+        <p>3-column video grid at <code>9:13</code> tiles separated by a hairline 1.5pt gutter. Play-count badge bottom-left with a 9px play glyph. Edit and Share Profile share width 50/50.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h3>Inbox</h3>
+        <p>Four colored category tiles top, then a recent activity list — each row has an avatar with a status dot in the brand colors: red for likes, cyan for comments, white for follows.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Right-side action stack</div>
+          <h3>The thumb tower.</h3>
+          <p>Six controls stacked exactly where the right thumb falls. Avatar with follow-plus on top, then like / comment / bookmark / share, and a spinning audio disc at the bottom that loops at <code>360°/6s</code>.</p>
+          <p>Each icon is 30px, separated by 14pt vertical rhythm. Numeric labels are 10/600 with a 1pt drop shadow so they read on any video background.</p>
+          <div class="ios-feat-tokens">
+            <code>icon: 30pt</code>
+            <code>v-gap: 14pt</code>
+            <code>right: 10pt</code>
+            <code>label: 10/600</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="stack-anat">
+            <div class="col-mock">
+              <div class="it"><div class="ic"><div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#FE2C55,#25F4EE);border:1.5px solid #fff"></div></div></div>
+              <div class="it heart"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div><div class="lbl">218.4K</div></div>
+              <div class="it"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div><div class="lbl">1,521</div></div>
+              <div class="it"><div class="ic"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div><div class="lbl">12.4K</div></div>
+              <div class="it"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13" stroke="#fff" stroke-width="2" fill="none"/></svg></div><div class="lbl">Share</div></div>
+            </div>
+            <div class="col-labels">
+              <div class="row">avatar.follow</div>
+              <div class="row">heart.toggle</div>
+              <div class="row">comment.modal</div>
+              <div class="row">bookmark.save</div>
+              <div class="row">share.sheet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="disc-stage">
+            <div class="disc-large"></div>
+            <div class="disc-info">
+              <div class="t">original sound — maya.codes</div>
+              <div class="s">rotate(0 → 360deg) · 6s linear infinite</div>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Sound disc</div>
+          <h3>An album cover that doesn't stop turning.</h3>
+          <p>The bottom-right of the action stack rotates the song's cover art at one revolution every six seconds — running at 60fps on the device, never paused even while the video is scrubbed.</p>
+          <p>Tapping the disc routes to the sound's page, where the same disc grows to 130pt and keeps spinning at the original phase.</p>
+          <div class="ios-feat-tokens">
+            <code>linear infinite</code>
+            <code>duration: 6s</code>
+            <code>size: 42pt → 130pt</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Double-tap burst</div>
+          <h3>A heart you don't have to aim for.</h3>
+          <p>Double-tap anywhere on a video to like. A white heart is rendered at the tap origin, scales <code>1.0 → 1.2 → 1.0</code> over 600ms with a rotation jitter of ±18°, then fades into the heart counter on the action stack.</p>
+          <p>The system fires a <code>UIImpactFeedback.medium</code> haptic at the apex of the scale animation. The counter bumps with a separate <code>UINotificationFeedback.success</code>.</p>
+          <div class="ios-feat-tokens">
+            <code>scale: 1.2x</code>
+            <code>duration: 600ms</code>
+            <code>haptic: medium</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="burst-stage">
+            <div class="bg"></div>
+            <div class="heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>One canvas. Two brand channels. Cyan + Red.</h2>
+        <p>The whole TikTok iOS vocabulary — pure black surfaces, the cyan/red RGB-split mark, video-first geometry, and the right-thumb action ladder.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.tiktok-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A pure-black canvas with two opposing brand channels — cyan and red — applied only when the user is meant to react. Everything else is white. No grays in chrome.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FE2C55"></div><div class="name">TikTok Red</div><div class="val">#FE2C55</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#25F4EE"></div><div class="name">TikTok Cyan</div><div class="val">#25F4EE</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000;border:1px solid #2a2a2a"></div><div class="name">True Black</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fff"></div><div class="name">Pure White</div><div class="val">#FFFFFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#25F4EE,#FE2C55)"></div><div class="name">RGB Split</div><div class="val">cyan→red</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#fff"></div><div class="name">Ink</div><div class="val">#FFFFFF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f1f1f1;border:1px solid #2a2a2a"></div><div class="name">Soft</div><div class="val">#F1F1F1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#a8a8a8"></div><div class="name">Muted</div><div class="val">#A8A8A8</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#717171"></div><div class="name">Dim</div><div class="val">#717171</div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(255,255,255,.6);border:1px solid #2a2a2a"></div><div class="name">Tab Inactive</div><div class="val">white/.60</div></div>
+      </div>
+
+      <div class="ds-caption">Surface</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0a0a0a;border:1px solid #2a2a2a"></div><div class="name">Surface 1</div><div class="val">#0A0A0A</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#161616;border:1px solid #2a2a2a"></div><div class="name">Surface 2</div><div class="val">#161616</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1c1c1c;border:1px solid #2a2a2a"></div><div class="name">Card</div><div class="val">#1C1C1C</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#252525"></div><div class="name">Button Bg</div><div class="val">#252525</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2e2e2e"></div><div class="name">Border</div><div class="val">#2E2E2E</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic / Reaction</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FE2C55"></div><div class="name">Like / FYP</div><div class="val">#FE2C55</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#25F4EE"></div><div class="name">Comment / Live</div><div class="val">#25F4EE</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFD166"></div><div class="name">Mention</div><div class="val">#FFD166</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1ed760"></div><div class="name">Follow OK</div><div class="val">#1ED760</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FB5C74"></div><div class="name">Heart Soft</div><div class="val">#FB5C74</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">TT Norms / Proxima Nova in production — substituted with Inter. The hierarchy is heavy: 700–800 for everything semantic; only captions drop to 400. Tabular figures on every counter so they don't jitter while you're scrolling.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--title-screen</td><td class="sample" style="font-size:24px;font-weight:800;letter-spacing:-.4px">For You</td><td>24 / 1.5rem</td><td>800</td><td>-0.4px</td></tr>
+          <tr><td class="token">--profile-handle</td><td class="sample" style="font-size:17px;font-weight:700">@jiang_shu</td><td>17 / 1.06rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--caption-user</td><td class="sample" style="font-size:14px;font-weight:700">@maya.codes</td><td>14 / 0.88rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--caption-body</td><td class="sample" style="font-size:12px;font-weight:400;color:#f1f1f1">when the unit tests pass on the first try</td><td>12 / 0.75rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--stat-value</td><td class="sample" style="font-size:14px;font-weight:800;font-feature-settings:'tnum'">24.5K</td><td>14 / 0.88rem</td><td>800 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--stat-label</td><td class="sample" style="font-size:10px;color:#a8a8a8">Followers</td><td>10 / 0.63rem</td><td>400</td><td>normal</td></tr>
+          <tr><td class="token">--action-count</td><td class="sample" style="font-size:10px;font-weight:600;font-feature-settings:'tnum'">218.4K</td><td>10 / 0.63rem</td><td>600 (tnum)</td><td>normal</td></tr>
+          <tr><td class="token">--tab-label</td><td class="sample" style="font-size:9.5px;font-weight:600">Home</td><td>9.5 / 0.59rem</td><td>600</td><td>normal</td></tr>
+          <tr><td class="token">--badge-play</td><td class="sample" style="font-size:9.5px;font-weight:700;font-feature-settings:'tnum'">1.2M</td><td>9.5 / 0.59rem</td><td>700</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Square media is non-negotiable — video tiles ship at 0px so the grid reads as a contact sheet. Buttons land at 4px. Avatars round to 50%. There are no soft pills in TikTok's chrome.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Media</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Thumb</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:7px"></div><div class="ds-radius-label">Create</div><div class="ds-radius-val">7px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:10px"></div><div class="ds-radius-label">Sheet</div><div class="ds-radius-val">10px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:38px"></div><div class="ds-radius-label">Screen</div><div class="ds-radius-val">38px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Avatar</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants the For You feed and the Create flow agree on across every iPhone in support.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">5 slots, center slot is a 42×26 Create button.</div></div>
+        <div class="token-cell"><div class="tk-label">Action stack right</div><div class="tk-val">10pt</div><div class="tk-note">From screen right edge. Vertical gap 14pt.</div></div>
+        <div class="token-cell"><div class="tk-label">Disc rotation</div><div class="tk-val">6s</div><div class="tk-note">One full turn, linear infinite, 60fps.</div></div>
+        <div class="token-cell"><div class="tk-label">Heart burst</div><div class="tk-val">1.2x</div><div class="tk-note">Scale at apex, 600ms easeOut, ±18° rotation.</div></div>
+        <div class="token-cell"><div class="tk-label">Top tabs gap</div><div class="tk-val">24pt</div><div class="tk-note">Underline 18×2.5pt under active tab only.</div></div>
+        <div class="token-cell"><div class="tk-label">Grid gutter</div><div class="tk-val">1.5pt</div><div class="tk-note">Hairline between profile grid cells. 9:13 ratio.</div></div>
+        <div class="token-cell"><div class="tk-label">Caption width</div><div class="tk-val">75%</div><div class="tk-note">Keeps off the action stack on the right.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation curve</div><div class="tk-val">easeOut</div><div class="tk-note">200ms button press · 350ms sheet present.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">Squared chrome, monochrome buttons, brand color reserved for moments of feedback.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Follow</a>
+            <a class="btn btn-pill" href="#">Following</a>
+            <a class="btn btn-outline" href="#">Edit Profile</a>
+            <a class="btn btn-light" href="#">Open App</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button style="width:42px;height:26px;border-radius:7px;background:#fff;display:grid;place-items:center;position:relative;box-shadow:-3px 0 0 #25F4EE, 3px 0 0 #FE2C55"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#000" stroke-width="2.5"/></svg></button>
+              <button style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FE2C55,#25F4EE);display:grid;place-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search creators, sounds, hashtags" />
+            <input class="input-pill" placeholder="Add a comment…" />
+            <div class="ds-card-row">
+              <span class="tag tag-foryou">For You</span>
+              <span class="tag tag-live">LIVE</span>
+              <span class="tag tag-trend">Trending</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#0a0a0a;border-radius:6px;padding:10px;width:100%;display:flex;gap:10px;align-items:center">
+              <div style="width:42px;height:56px;background:linear-gradient(135deg,#FE2C55,#3a0a18);border-radius:2px"></div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700">@maya.codes</div>
+                <div style="font-size:11px;color:#a8a8a8">when the unit tests pass...</div>
+              </div>
+              <div style="font-size:11px;color:#fff;font-weight:700">218.4K</div>
+            </div>
+            <div style="background:#161616;border-radius:6px;padding:12px;width:100%;display:flex;gap:10px;align-items:center">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FE2C55,#25F4EE)"></div>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700">jamie_x liked your video</div>
+                <div style="font-size:11px;color:#a8a8a8">12m ago</div>
+              </div>
+              <div style="width:8px;height:8px;border-radius:50%;background:#FE2C55"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><span class="note"><span>d</span></span></span>
+      TikTok iOS
+    </div>
+    <p>Design reference. Not affiliated with ByteDance / TikTok Pte. Ltd. Tokens are derived from the public iOS app and TikTok's brand guidance. Source spec at <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.tiktok-ios.html" target="_blank" rel="noopener">this reference</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.tiktok-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.tiktok-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

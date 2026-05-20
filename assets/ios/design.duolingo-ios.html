@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Duolingo — iOS design spec</title>
+<meta name="description" content="Duolingo iOS app design reference. Bright #58CC02 green, saturated palette, chunky 3D-shadow buttons, lesson path with circular nodes, Duo the owl." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#ffffff; --canvas-soft:#FFF7E1; --surface:#F7F7F7;
+  --green:#58CC02; --green-deep:#46A302; --green-dark:#3C8A02;
+  --blue:#1CB0F6; --blue-deep:#0E92D2;
+  --red:#FF4B4B; --red-deep:#D43838;
+  --yellow:#FFC800; --yellow-deep:#E5B300;
+  --orange:#FF9600; --orange-deep:#E08400;
+  --purple:#CE82FF; --purple-deep:#B45EFF;
+  --pink:#FF86D2; --gold:#FFD900;
+  --ink:#3C3C3C; --ink-soft:#5A5A5A; --ink-muted:#777777; --ink-dim:#AFAFAF;
+  --border:#E5E5E5; --border-soft:#F0F0F0; --locked:#E5E5E5; --locked-deep:#C0C0C0;
+  --font-ui:"Nunito","Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:4px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-2xl:24px; --r-pill:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.brand-mark{width:34px;height:34px;border-radius:50%;background:var(--green);display:grid;place-items:center;box-shadow:0 3px 0 var(--green-dark)}
+.brand-mark svg{width:22px;height:22px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-pill);font-size:14px;font-weight:700;color:var(--ink-muted)}
+.nav-pill.active{color:var(--green-deep);background:rgba(88,204,2,.12)}
+
+/* 3D BUTTON SYSTEM - Duolingo's signature */
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;text-transform:uppercase;letter-spacing:.6px;transition:transform .08s;border-radius:14px;padding:13px 22px}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(2px);box-shadow:0 0 0 transparent!important}
+.btn-green{background:var(--green);color:#fff;box-shadow:0 4px 0 var(--green-dark)}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 4px 0 var(--blue-deep)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 4px 0 var(--red-deep)}
+.btn-yellow{background:var(--yellow);color:#fff;box-shadow:0 4px 0 var(--yellow-deep)}
+.btn-purple{background:var(--purple);color:#fff;box-shadow:0 4px 0 var(--purple-deep)}
+.btn-gray{background:#E5E5E5;color:#AFAFAF;box-shadow:0 4px 0 #C0C0C0;cursor:not-allowed}
+.btn-light{background:#fff;color:var(--green);border:2px solid var(--border);box-shadow:0 4px 0 var(--border)}
+.btn-ghost{background:transparent;color:var(--ink-muted);padding:13px 22px}
+
+.hero{position:relative;padding:48px 0 100px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-100px;left:-100px;width:600px;height:600px;background:radial-gradient(circle,var(--green),transparent 70%);opacity:.12;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:50px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,var(--yellow),transparent 70%);opacity:.15;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--r-pill);background:rgba(88,204,2,.12);color:var(--green-deep);font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.hero h1{font-size:clamp(44px,7vw,82px);line-height:.95;letter-spacing:-2px;font-weight:900;margin-bottom:22px;color:var(--ink)}
+.hero h1 .green-word{color:var(--green)}
+.hero h1 .yellow-word{color:var(--orange)}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:560px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(88,204,2,.18),0 0 0 1px rgba(0,0,0,.08)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:#fff}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:700;color:#3C3C3C}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+.scr{position:absolute;inset:0;padding-top:50px;display:flex;flex-direction:column;background:#fff}
+
+/* LESSON PATH */
+.path-top{display:flex;align-items:center;justify-content:space-between;padding:6px 14px 10px;background:#fff;border-bottom:1px solid var(--border-soft)}
+.path-top .flag{font-size:22px}
+.path-top .stat{display:flex;align-items:center;gap:3px;font-size:13px;font-weight:800}
+.path-top .stat svg{width:18px;height:18px}
+.path-top .streak{color:var(--orange)}
+.path-top .gem{color:var(--blue)}
+.path-top .heart{color:var(--red)}
+.section-banner{background:var(--green);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.section-banner .l{font-size:10.5px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.5px}
+.section-banner .t{font-size:14px;font-weight:800;margin-top:1px}
+.section-banner .guide{background:var(--green-deep);color:#fff;font-size:10.5px;font-weight:800;padding:5px 9px;border-radius:8px;display:flex;align-items:center;gap:3px}
+.section-banner .guide svg{width:11px;height:11px;fill:#fff}
+.path-body{flex:1;overflow:hidden;position:relative;background:#fff;padding:18px 0}
+.path-nodes{display:flex;flex-direction:column;align-items:center;gap:12px}
+.path-row{display:flex;justify-content:center;width:100%;position:relative}
+.path-row.left{justify-content:flex-start;padding-left:60px}
+.path-row.right{justify-content:flex-end;padding-right:60px}
+.lesson-node{position:relative;width:62px;height:62px}
+.lesson-node .circle{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:0 5px 0 currentColor;color:transparent;transition:transform .08s}
+.lesson-node.green .circle{background:var(--green);color:var(--green-dark)}
+.lesson-node.gold .circle{background:var(--gold);color:#D4B400}
+.lesson-node.locked .circle{background:var(--locked);color:var(--locked-deep)}
+.lesson-node .circle svg{width:30px;height:30px;fill:#fff}
+.lesson-node.locked .circle svg{fill:#fff;opacity:.8}
+.lesson-node .start-pill{position:absolute;top:-26px;left:50%;transform:translateX(-50%);background:#fff;color:var(--green);font-size:10px;font-weight:800;padding:3px 10px;border-radius:9999px;border:2px solid var(--green);box-shadow:0 3px 0 var(--green);text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.lesson-node .crown{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:24px;height:14px;background:var(--gold);border-radius:0 0 5px 5px;display:grid;place-items:center;color:#fff;font-size:9px;font-weight:900;clip-path:polygon(0 0,15% 60%,30% 0,50% 60%,70% 0,85% 60%,100% 0,100% 100%,0 100%)}
+
+/* LESSON SCREEN */
+.lesson-top{display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+.lesson-top .close{padding:4px}
+.lesson-top .close svg{width:18px;height:18px;stroke:var(--ink-muted);stroke-width:2.5;fill:none}
+.lesson-top .prog-bar{flex:1;height:14px;background:#E5E5E5;border-radius:9999px;overflow:hidden;position:relative}
+.lesson-top .prog-fill{height:100%;width:42%;background:var(--green);border-radius:9999px;box-shadow:inset 0 -4px 0 var(--green-dark)}
+.lesson-top .hearts{display:flex;align-items:center;gap:3px;font-size:13px;font-weight:800;color:var(--red)}
+.lesson-top .hearts svg{width:18px;height:18px;fill:var(--red)}
+.lesson-prompt{padding:12px 16px}
+.lesson-prompt .ins{font-size:14px;font-weight:800;margin-bottom:14px;color:var(--ink)}
+.lesson-prompt .duo{width:90px;height:90px;background:linear-gradient(160deg,#9BE65E,#58CC02 60%,#46A302);border-radius:50%;margin:0 auto 16px;position:relative;display:grid;place-items:center}
+.lesson-prompt .duo::before,.lesson-prompt .duo::after{content:"";position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:24px}
+.lesson-prompt .duo::before{left:18px}
+.lesson-prompt .duo::after{right:18px}
+.lesson-prompt .duo span.eye{position:absolute;width:8px;height:8px;background:#000;border-radius:50%;top:30px}
+.lesson-prompt .duo span.eye-l{left:23px}
+.lesson-prompt .duo span.eye-r{right:23px}
+.lesson-prompt .duo span.beak{position:absolute;width:14px;height:10px;background:var(--orange);border-radius:50% 50% 60% 60%;bottom:24px;left:50%;transform:translateX(-50%)}
+.lesson-prompt .speech{background:#fff;border:2px solid var(--border);border-radius:14px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--ink);box-shadow:0 3px 0 var(--border);max-width:200px;margin:0 auto 14px;text-align:left;position:relative}
+.lesson-prompt .speech::after{content:"";position:absolute;left:-9px;top:50%;transform:translateY(-50%);border:7px solid transparent;border-right-color:var(--border)}
+.lesson-build{padding:10px 16px;border-top:2px dashed var(--border);min-height:50px}
+.lesson-bank{padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px;border-top:2px dashed var(--border)}
+.word-chip{background:#fff;border:2px solid var(--border);border-radius:12px;padding:7px 12px;font-size:13px;font-weight:700;color:var(--ink);box-shadow:0 3px 0 var(--border);cursor:pointer}
+.word-chip.used{background:var(--border-soft);color:#fff;border-color:var(--border);box-shadow:none}
+.lesson-cta{padding:12px 16px;border-top:1px solid var(--border-soft);background:var(--canvas-soft)}
+.lesson-cta-btn{width:100%;background:var(--green);color:#fff;font-size:13px;font-weight:800;padding:14px 0;border-radius:14px;text-align:center;text-transform:uppercase;letter-spacing:.6px;box-shadow:0 5px 0 var(--green-dark)}
+.lesson-cta-btn.disabled{background:var(--locked);box-shadow:0 5px 0 var(--locked-deep);color:#fff}
+
+/* PROFILE / LEAGUE */
+.prof-top{padding:8px 16px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border-soft)}
+.prof-top .av{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#FFC800,#FF9600);border:3px solid #fff;box-shadow:0 0 0 2px var(--orange);display:grid;place-items:center;color:#fff;font-size:24px;font-weight:900}
+.prof-top .meta{flex:1}
+.prof-top .nm{font-size:16px;font-weight:900}
+.prof-top .hdl{font-size:12px;color:var(--ink-muted);font-weight:700}
+.prof-top .flag{font-size:18px;margin-left:5px}
+.prof-stats{padding:10px 14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;border-bottom:1px solid var(--border-soft)}
+.prof-stats .cell{text-align:center;background:#fff;border:2px solid var(--border-soft);border-radius:12px;padding:8px 4px;box-shadow:0 3px 0 var(--border-soft)}
+.prof-stats .cell .ic{font-size:18px;margin-bottom:1px}
+.prof-stats .cell .v{font-size:13px;font-weight:900;color:var(--ink)}
+.prof-stats .cell .l{font-size:9px;color:var(--ink-muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.prof-league{margin:14px;border:2px solid var(--blue);border-radius:14px;padding:14px;box-shadow:0 4px 0 var(--blue-deep);background:#fff}
+.prof-league .head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.prof-league .badge{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1CB0F6,#0E92D2);display:grid;place-items:center;color:#fff;font-size:18px}
+.prof-league .ttl{font-size:14px;font-weight:900;color:var(--blue-deep)}
+.prof-league .sub{font-size:10px;color:var(--ink-muted);font-weight:700}
+.prof-league .lb{display:flex;flex-direction:column;gap:6px}
+.prof-league .lb-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:8px;font-size:12px;font-weight:700}
+.prof-league .lb-row.me{background:rgba(88,204,2,.12)}
+.prof-league .lb-row .rk{width:18px;font-weight:900;color:var(--ink-muted);text-align:center}
+.prof-league .lb-row .rk.top{color:var(--yellow-deep)}
+.prof-league .lb-row .av-mini{width:24px;height:24px;border-radius:50%}
+.prof-league .lb-row .nm{flex:1;font-weight:700}
+.prof-league .lb-row .xp{font-weight:900;color:var(--green-deep);font-feature-settings:"tnum"}
+
+/* TAB BAR */
+.duo-tab{position:absolute;bottom:0;left:0;right:0;height:62px;background:#fff;display:flex;justify-content:space-around;align-items:center;border-top:2px solid var(--border-soft);z-index:10}
+.duo-tab .t{padding:10px;display:grid;place-items:center;border-radius:12px}
+.duo-tab .t svg{width:24px;height:24px}
+.duo-tab .t.green svg{fill:var(--green);stroke:var(--green)}
+.duo-tab .t.blue svg{fill:var(--blue);stroke:var(--blue)}
+.duo-tab .t.red svg{fill:var(--red);stroke:var(--red)}
+.duo-tab .t.purple svg{fill:var(--purple);stroke:var(--purple)}
+.duo-tab .t.muted svg{fill:var(--ink-dim);stroke:var(--ink-dim)}
+.duo-tab .t.active{background:rgba(0,0,0,.04)}
+
+/* SECTIONS */
+.section{padding:120px 0;border-top:1px solid var(--border-soft)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:900;color:var(--green-deep);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.4px;line-height:1.05;margin-bottom:18px}
+.section-head p{font-size:17px;color:var(--ink-soft);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:#fff;border:2px solid var(--border-soft);border-radius:14px;padding:28px;box-shadow:0 5px 0 var(--border-soft)}
+.feat .feat-ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;color:#fff}
+.feat.green .feat-ic{background:var(--green);box-shadow:0 4px 0 var(--green-dark)}
+.feat.blue .feat-ic{background:var(--blue);box-shadow:0 4px 0 var(--blue-deep)}
+.feat.purple .feat-ic{background:var(--purple);box-shadow:0 4px 0 var(--purple-deep)}
+.feat .feat-ic svg{width:24px;height:24px;fill:#fff}
+.feat h3{font-size:20px;font-weight:900;letter-spacing:-.3px;margin-bottom:10px}
+.feat p{font-size:14px;color:var(--ink-soft);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:var(--canvas-soft);padding:1px 6px;border-radius:4px;color:var(--orange-deep)}
+
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:50px 0;border-top:2px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:900;letter-spacing:-.6px;margin-bottom:16px}
+.ios-feat-text p{font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:#fff;padding:5px 10px;border-radius:6px;color:var(--green-deep);border:1.5px solid var(--border)}
+.ios-feat-visual{background:var(--canvas-soft);border-radius:18px;padding:50px;display:grid;place-items:center;min-height:420px;border:2px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* 3D button stack */
+.btn-stack{display:flex;flex-direction:column;gap:14px;width:240px}
+.btn-stack .demo{width:100%;font-size:14px;font-weight:800;padding:14px 0;text-align:center;text-transform:uppercase;letter-spacing:.6px;border-radius:14px;color:#fff}
+.btn-stack .demo.g{background:var(--green);box-shadow:0 6px 0 var(--green-dark)}
+.btn-stack .demo.b{background:var(--blue);box-shadow:0 6px 0 var(--blue-deep)}
+.btn-stack .demo.r{background:var(--red);box-shadow:0 6px 0 var(--red-deep)}
+.btn-stack .demo.p{background:var(--purple);box-shadow:0 6px 0 var(--purple-deep)}
+.btn-stack .demo.d{background:var(--locked);color:#fff;box-shadow:0 6px 0 var(--locked-deep);font-weight:900}
+
+/* Streak fire visual */
+.streak-stack{display:flex;flex-direction:column;align-items:center;gap:16px}
+.streak-flame{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#FFD86F 0%,#FF9600 60%,#FF4B4B 100%);display:grid;place-items:center;box-shadow:0 10px 0 var(--red-deep),0 20px 40px rgba(255,75,75,.4);position:relative}
+.streak-flame::before{content:"";position:absolute;inset:14px;border-radius:50%;background:radial-gradient(circle at 50% 30%,#FFFFFF 0%,#FFD86F 30%,transparent 70%);opacity:.6}
+.streak-flame .num{font-size:54px;font-weight:900;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.18);position:relative}
+.streak-label{font-size:14px;font-weight:900;color:var(--orange-deep);text-transform:uppercase;letter-spacing:1.2px}
+
+/* Duo states */
+.duo-stack{display:flex;gap:16px;align-items:flex-end}
+.duo-mini{width:80px;height:80px;border-radius:50%;position:relative;display:grid;place-items:center}
+.duo-mini.happy{background:linear-gradient(160deg,#9BE65E,#58CC02 60%,#46A302)}
+.duo-mini.sad{background:linear-gradient(160deg,#9BE65E,#58CC02 60%,#46A302);filter:saturate(.5)}
+.duo-mini.danced{background:linear-gradient(160deg,#CE82FF,#B45EFF 60%,#7E2EBD)}
+.duo-mini::before,.duo-mini::after{content:"";position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:22px}
+.duo-mini::before{left:16px}
+.duo-mini::after{right:16px}
+.duo-mini .eye{position:absolute;width:7px;height:7px;background:#000;border-radius:50%;top:26px}
+.duo-mini .eye-l{left:21px}
+.duo-mini .eye-r{right:21px}
+.duo-mini.sad .eye{background:#3C3C3C;transform:scaleY(.5);top:30px}
+.duo-mini .beak{position:absolute;width:12px;height:8px;background:var(--orange);border-radius:50% 50% 60% 60%;bottom:22px;left:50%;transform:translateX(-50%)}
+.duo-mini.sad .beak{transform:translateX(-50%) rotate(180deg);bottom:18px}
+.duo-name{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-align:center;margin-top:8px}
+
+/* DESIGN SYSTEM */
+.ds-section{padding:120px 0;background:var(--canvas-soft);border-top:2px solid var(--border-soft)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:2px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.4px;line-height:1.05;margin:14px 0 14px}
+.ds-intro p{font-size:16px;color:var(--ink-soft);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--green-deep);border:2px solid var(--green);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;background:#fff;box-shadow:0 3px 0 var(--green-dark);font-weight:700}
+
+.ds-block{padding:50px 0;border-top:2px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
+.ds-desc{font-size:15px;color:var(--ink-soft);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin:24px 0 10px;font-weight:700}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:12px;padding:10px;border:2px solid var(--border-soft);box-shadow:0 3px 0 var(--border-soft)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:800;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px;background:#fff;border:2px solid var(--border);border-radius:12px;overflow:hidden}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-muted);font-weight:700;border-bottom:2px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px;background:var(--canvas-soft)}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+.ds-type-table tr:last-child td{border-bottom:0}
+.ds-type-table td.token{color:var(--green-deep)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:var(--green);margin-bottom:10px;box-shadow:0 4px 0 var(--green-dark)}
+.ds-radius-label{font-size:12px;font-weight:800}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:2px solid var(--border-soft);box-shadow:0 4px 0 var(--border-soft)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin-bottom:18px;font-weight:700}
+.ds-card-stack{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-light{background:#fff;border:2px solid var(--border);border-radius:12px;padding:11px 16px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none;box-shadow:0 3px 0 var(--border);font-weight:700}
+.input-light::placeholder{color:var(--ink-muted)}
+.tag{font-size:10.5px;font-weight:800;padding:5px 11px;border-radius:9999px;letter-spacing:.2px;text-transform:uppercase}
+.tag-green{background:rgba(88,204,2,.16);color:var(--green-deep)}
+.tag-yellow{background:rgba(255,200,0,.18);color:var(--yellow-deep)}
+.tag-red{background:rgba(255,75,75,.16);color:var(--red-deep)}
+.tag-purple{background:rgba(206,130,255,.20);color:var(--purple-deep)}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:12px;padding:18px;border:2px solid var(--border-soft);box-shadow:0 3px 0 var(--border-soft)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.8px;font-weight:700}
+.token-cell .tk-val{font-size:18px;font-weight:900;margin-top:6px;color:var(--green-deep);letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-soft);margin-top:6px;line-height:1.4}
+
+footer{padding:60px 0;border-top:2px solid var(--border);background:#fff}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-soft);line-height:1.5}
+.foot a{color:var(--green-deep);font-weight:800}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:var(--green);color:#fff;font-family:var(--font-mono);font-size:12px;font-weight:700;padding:10px 14px;border-radius:var(--r-pill);z-index:99;box-shadow:0 4px 0 var(--green-dark)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="11" r="9" fill="#fff"/><circle cx="9" cy="10" r="3" fill="#000"/><circle cx="15" cy="10" r="3" fill="#000"/><path d="M9 16c1 1 2 1.5 3 1.5s2-.5 3-1.5" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+      Duolingo <span style="font-weight:600;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#">Log In</a>
+      <a class="btn btn-green" href="#">Get Started</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>A <span class="green-word">green owl</span> who actually<br/>knows where you <span class="yellow-word">live.</span></h1>
+    <p>The Duolingo iOS app, dissected. Six saturated brand colors, every button a 3D extrusion, a circular lesson path that snakes through five sections. Duo the owl shows up wherever you take five days off.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-green" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-light" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- LESSON SCREEN -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar"><span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#3C3C3C"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#3C3C3C" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#3C3C3C"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="lesson-top">
+              <div class="close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+              <div class="prog-bar"><div class="prog-fill"></div></div>
+              <div class="hearts"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>5</div>
+            </div>
+            <div class="lesson-prompt">
+              <div class="ins">Translate this sentence</div>
+              <div class="duo">
+                <span class="eye eye-l"></span>
+                <span class="eye eye-r"></span>
+                <span class="beak"></span>
+              </div>
+              <div class="speech">A onça come a maçã.</div>
+            </div>
+            <div class="lesson-build" id="build">
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <div class="word-chip">The</div>
+                <div class="word-chip">jaguar</div>
+              </div>
+            </div>
+            <div class="lesson-bank">
+              <div class="word-chip">eats</div>
+              <div class="word-chip">apple</div>
+              <div class="word-chip">the</div>
+              <div class="word-chip used">jaguar</div>
+              <div class="word-chip used">The</div>
+              <div class="word-chip">runs</div>
+              <div class="word-chip">eats</div>
+            </div>
+            <div class="lesson-cta">
+              <div class="lesson-cta-btn disabled">Check</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Lesson</div>
+      </div>
+
+      <!-- LESSON PATH -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar"><span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#3C3C3C"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#3C3C3C" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#3C3C3C"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="path-top">
+              <span class="flag">🇵🇹</span>
+              <div class="stat streak"><svg viewBox="0 0 24 24" fill="#FF9600"><path d="M13.5 1c0 3.5-2 5-3 6-1.5 1.5-2 3-2 5 0 3.31 2.69 6 6 6s6-2.69 6-6c0-3-1.5-5-3-7-1-1.5-4-4-4-4z"/></svg>12</div>
+              <div class="stat gem"><svg viewBox="0 0 24 24" fill="#1CB0F6"><path d="M6 2l-4 6 10 14L22 8l-4-6z"/></svg>245</div>
+              <div class="stat heart"><svg viewBox="0 0 24 24" fill="#FF4B4B"><path d="M12 21s-7-4.35-7-10a4 4 0 017-2.65A4 4 0 0119 11c0 5.65-7 10-7 10z"/></svg>5</div>
+            </div>
+            <div class="section-banner">
+              <div>
+                <div class="l">Section 2, Unit 5</div>
+                <div class="t">Order at a restaurant</div>
+              </div>
+              <div class="guide"><svg viewBox="0 0 24 24"><path d="M14 2v6h6M14 2l6 6M16 13H8m8 4H8m4-8H8"/></svg>GUIDE</div>
+            </div>
+            <div class="path-body">
+              <div class="path-nodes">
+                <div class="path-row"><div class="lesson-node gold"><div class="circle"><svg viewBox="0 0 24 24"><path d="M12 1l3 5h6l-4.5 4.5L18 17l-6-3-6 3 1.5-6.5L3 6h6z"/></svg></div><div class="crown">5</div></div></div>
+                <div class="path-row left"><div class="lesson-node gold"><div class="circle"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div><div class="crown">3</div></div></div>
+                <div class="path-row right"><div class="lesson-node green"><div class="start-pill">Start</div><div class="circle"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div></div></div>
+                <div class="path-row left"><div class="lesson-node locked"><div class="circle"><svg viewBox="0 0 24 24"><path d="M19 11h-1V7a6 6 0 00-12 0v4H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2zM8 7a4 4 0 018 0v4H8V7z"/></svg></div></div></div>
+                <div class="path-row"><div class="lesson-node locked"><div class="circle"><svg viewBox="0 0 24 24"><path d="M19 11h-1V7a6 6 0 00-12 0v4H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2zM8 7a4 4 0 018 0v4H8V7z"/></svg></div></div></div>
+                <div class="path-row right"><div class="lesson-node locked"><div class="circle"><svg viewBox="0 0 24 24"><path d="M2 7l5 5L22 5"/></svg></div></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="duo-tab">
+            <div class="t green active"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+            <div class="t blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+            <div class="t red"><svg viewBox="0 0 24 24"><path d="M5 4l3 5h8l3-5h-3l-1 2-3-2-3 2-1-2H5zM5 9v10a2 2 0 002 2h10a2 2 0 002-2V9"/></svg></div>
+            <div class="t purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6h6M14 2l6 6M16 13H8m8 4H8M10 9H8"/></svg></div>
+            <div class="t muted"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+          </div>
+        </div>
+        <div class="iphone-label">Lesson path</div>
+      </div>
+
+      <!-- PROFILE / LEAGUE -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar"><span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#3C3C3C"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#3C3C3C" stroke-opacity="0.5"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#3C3C3C"/></svg>
+            </div>
+          </div>
+          <div class="scr">
+            <div class="prof-top">
+              <div class="av">JS</div>
+              <div class="meta">
+                <div class="nm">Jiang Shu</div>
+                <div class="hdl">@jiang.shu · Joined Feb 2024</div>
+              </div>
+              <span class="flag">🇵🇹</span>
+            </div>
+            <div class="prof-stats">
+              <div class="cell"><div class="ic">🔥</div><div class="v">12</div><div class="l">Streak</div></div>
+              <div class="cell"><div class="ic">⚡</div><div class="v">1,842</div><div class="l">XP</div></div>
+              <div class="cell"><div class="ic">🏆</div><div class="v">Sapph.</div><div class="l">League</div></div>
+              <div class="cell"><div class="ic">🌟</div><div class="v">42</div><div class="l">Top 3</div></div>
+            </div>
+            <div class="prof-league">
+              <div class="head">
+                <div class="badge">💎</div>
+                <div>
+                  <div class="ttl">Sapphire League</div>
+                  <div class="sub">3 days left · Top 5 promote</div>
+                </div>
+              </div>
+              <div class="lb">
+                <div class="lb-row"><span class="rk top">1</span><div class="av-mini" style="background:linear-gradient(135deg,#FFC629,#FF6F00)"></div><span class="nm">marie_kn</span><span class="xp">624 XP</span></div>
+                <div class="lb-row"><span class="rk top">2</span><div class="av-mini" style="background:linear-gradient(135deg,#06d6a0,#118ab2)"></div><span class="nm">akira.l</span><span class="xp">512 XP</span></div>
+                <div class="lb-row me"><span class="rk top">3</span><div class="av-mini" style="background:linear-gradient(135deg,#FFC629,#FF9600)"></div><span class="nm">YOU</span><span class="xp">487 XP</span></div>
+                <div class="lb-row"><span class="rk">4</span><div class="av-mini" style="background:linear-gradient(135deg,#bc1888,#3a0e0a)"></div><span class="nm">pedrofx</span><span class="xp">421 XP</span></div>
+                <div class="lb-row"><span class="rk">5</span><div class="av-mini" style="background:linear-gradient(135deg,#a8dadc,#1d3557)"></div><span class="nm">nikodi</span><span class="xp">386 XP</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="duo-tab">
+            <div class="t green"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+            <div class="t blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+            <div class="t red"><svg viewBox="0 0 24 24"><path d="M5 4l3 5h8l3-5h-3l-1 2-3-2-3 2-1-2H5zM5 9v10a2 2 0 002 2h10a2 2 0 002-2V9"/></svg></div>
+            <div class="t purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6h6M14 2l6 6M16 13H8m8 4H8M10 9H8"/></svg></div>
+            <div class="t active"><svg viewBox="0 0 24 24" fill="var(--green)" stroke="var(--green)"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0112 0v2"/></svg></div>
+          </div>
+        </div>
+        <div class="iphone-label">Profile / League</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. Six saturated colors. One owl.</h2>
+      <p>Duolingo's iOS app is built around a hard rule: every interactive element must look pressable. Every button extrudes 4-6pt downward with a darker bottom border, so the eye knows what to tap before the brain reads the label.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat green">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9h-6v-6h-6v6H3z"/></svg></div>
+        <h3>Lesson path</h3>
+        <p>Vertical winding sequence of 62pt circular nodes alternating left/right. Completed = gold + crown level. Active = green with floating "START" pill above. Locked = gray with padlock glyph. Section header banner in <code>#58CC02</code>.</p>
+      </div>
+      <div class="feat purple">
+        <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2v6h6M14 2l6 6M16 13H8m8 4H8"/></svg></div>
+        <h3>Lesson screen</h3>
+        <p>Top: close X + green progress bar + heart count (lives). Body: Duo the owl avatar + speech bubble with prompt. Word bank chips at bottom. CHECK button stays gray-locked until a sentence is built; goes <code>#58CC02</code> on commit.</p>
+      </div>
+      <div class="feat blue">
+        <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <h3>Profile / League</h3>
+        <p>4-cell stat grid (Streak / XP / League / Top 3). League card outlined in <code>#1CB0F6</code> with current rank list — user's row highlighted in green-tint. Promotion zone (top 5) marked with crown icons.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">3D button system</div>
+          <h3>Every button looks like it remembers what gravity is.</h3>
+          <p>Duolingo's signature: every interactive surface extrudes 4-6pt downward via a solid darker bottom shadow. On press, the button shifts down 2pt and the shadow vanishes — the click is the press; the lift is the release.</p>
+          <p>Disabled state uses the same gray (<code>#E5E5E5</code>) for the fill AND the shadow. Color-coded by intent: green=correct/continue, blue=info/utility, red=danger/heart-lost, yellow=streak/reward, purple=premium.</p>
+          <div class="ios-feat-tokens">
+            <code>shadow: 0 4-6px 0 darker</code>
+            <code>press: translateY(2px)</code>
+            <code>active: shadow → 0</code>
+            <code>radius: 14px</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="btn-stack">
+            <div class="demo g">Continue</div>
+            <div class="demo b">Practice</div>
+            <div class="demo r">Lose a heart</div>
+            <div class="demo p">Get Super</div>
+            <div class="demo d">Check</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="streak-stack">
+            <div class="streak-flame">
+              <div class="num">12</div>
+            </div>
+            <div class="streak-label">12 day streak!</div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);text-align:center">Streak resets at local midnight if no XP earned</div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Streak fire</div>
+          <h3>A flame that grows when you show up.</h3>
+          <p>The streak counter is a radial-gradient orange flame with the day count in heavy 54pt 900-weight white type. Tap to open the streak modal — calendar of frozen / saved / extended days. Loss notifications come from Duo himself (a sad-owl illustration).</p>
+          <p>Lock screen widget surfaces the streak. Streak Society at 365 days swaps the flame to a gold variant.</p>
+          <div class="ios-feat-tokens">
+            <code>gradient: radial</code>
+            <code>colors: #FFD86F → #FF4B4B</code>
+            <code>shadow: 0 10px 0 #D43838</code>
+            <code>num: 54/900</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Duo expressions</div>
+          <h3>One owl, four moods, infinite guilt-trips.</h3>
+          <p>Duo the owl is Duolingo's animated mascot, rendered as a green spherical character with two white eyes and an orange beak. Five core states: idle (happy bobbing), correct (cheering), wrong (sad), dancing (level up), pleading (return notification).</p>
+          <p>Duo never appears smaller than 60×60pt. He fades in over the speech bubble during lesson prompts. Premium subscribers unlock the purple "Super Duo" variant.</p>
+          <div class="ios-feat-tokens">
+            <code>idle: green gradient</code>
+            <code>sad: saturate(0.5)</code>
+            <code>super: purple variant</code>
+            <code>min size: 60pt</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div>
+            <div class="duo-stack">
+              <div>
+                <div class="duo-mini happy">
+                  <span class="eye eye-l"></span>
+                  <span class="eye eye-r"></span>
+                  <span class="beak"></span>
+                </div>
+                <div class="duo-name">happy</div>
+              </div>
+              <div>
+                <div class="duo-mini sad">
+                  <span class="eye eye-l"></span>
+                  <span class="eye eye-r"></span>
+                  <span class="beak"></span>
+                </div>
+                <div class="duo-name">sad</div>
+              </div>
+              <div>
+                <div class="duo-mini danced">
+                  <span class="eye eye-l"></span>
+                  <span class="eye eye-r"></span>
+                  <span class="beak"></span>
+                </div>
+                <div class="duo-name">super</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>Six saturated colors. Every button extruded.</h2>
+        <p>Every token Duolingo's iOS app reaches for — surface ladder, type ramp, radius scale, components. The color system uses six brand-saturated hues with a paired "deep" shade for each — the deep one is always the 4pt shadow below.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.duolingo-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Six saturated brand hues, each paired with a darker shadow color. Green = correct & primary. Blue = info & utility. Red = heart lost & danger. Yellow = streak & reward. Orange = streak fire. Purple = premium / Super.</p>
+
+      <div class="ds-caption">Primary (with shadow pair)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#58CC02;box-shadow:0 4px 0 #3C8A02"></div><div class="name">Green</div><div class="val">#58CC02</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1CB0F6;box-shadow:0 4px 0 #0E92D2"></div><div class="name">Blue</div><div class="val">#1CB0F6</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF4B4B;box-shadow:0 4px 0 #D43838"></div><div class="name">Red</div><div class="val">#FF4B4B</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFC800;box-shadow:0 4px 0 #E5B300"></div><div class="name">Yellow</div><div class="val">#FFC800</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#CE82FF;box-shadow:0 4px 0 #B45EFF"></div><div class="name">Purple</div><div class="val">#CE82FF</div></div>
+      </div>
+
+      <div class="ds-caption">Accent</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#FF9600"></div><div class="name">Orange (Streak)</div><div class="val">#FF9600</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF86D2"></div><div class="name">Pink</div><div class="val">#FF86D2</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFD900"></div><div class="name">Gold (Crown)</div><div class="val">#FFD900</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#46A302"></div><div class="name">Green Deep</div><div class="val">#46A302</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3C8A02"></div><div class="name">Green Dark</div><div class="val">#3C8A02</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #E5E5E5"></div><div class="name">Canvas</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFF7E1"></div><div class="name">Canvas Warm</div><div class="val">#FFF7E1</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F7F7F7"></div><div class="name">Surface</div><div class="val">#F7F7F7</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E5E5E5"></div><div class="name">Locked</div><div class="val">#E5E5E5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#C0C0C0"></div><div class="name">Locked Deep</div><div class="val">#C0C0C0</div></div>
+      </div>
+
+      <div class="ds-caption">Ink</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#3C3C3C"></div><div class="name">Ink</div><div class="val">#3C3C3C</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5A5A5A"></div><div class="name">Ink Soft</div><div class="val">#5A5A5A</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#777777"></div><div class="name">Ink Muted</div><div class="val">#777777</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#AFAFAF"></div><div class="name">Ink Dim</div><div class="val">#AFAFAF</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #E5E5E5"></div><div class="name">Ink Inverse</div><div class="val">#ffffff</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">DIN Next Rounded / Feather Bold (substituted here with Nunito). Everything is chunky — 700 minimum, 900 common. Headlines tight at -1px tracking. Word chips and CTAs ALL CAPS. Number-only displays (XP, streak count) tabular.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--streak-num</td><td class="sample" style="font-size:36px;font-weight:900;color:var(--orange-deep);letter-spacing:-1px;font-feature-settings:'tnum'">12</td><td>36 / 2.25rem</td><td>900 (tnum)</td><td>-1px</td></tr>
+          <tr><td class="token">--screen-title</td><td class="sample" style="font-size:22px;font-weight:900;letter-spacing:-.5px">Order at a restaurant</td><td>22 / 1.38rem</td><td>900</td><td>-0.5px</td></tr>
+          <tr><td class="token">--section-banner</td><td class="sample" style="font-size:14px;font-weight:900;color:#fff;background:var(--green);padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px">Section 2 · Unit 5</td><td>14 / 0.88rem</td><td>900</td><td>0.5px UPPER</td></tr>
+          <tr><td class="token">--cta</td><td class="sample" style="font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:.8px;color:var(--green-deep)">Continue</td><td>14 / 0.88rem</td><td>900</td><td>0.8px UPPER</td></tr>
+          <tr><td class="token">--prompt</td><td class="sample" style="font-size:14px;font-weight:800">Translate this sentence</td><td>14 / 0.88rem</td><td>800</td><td>normal</td></tr>
+          <tr><td class="token">--word-chip</td><td class="sample" style="font-size:13px;font-weight:700;background:#fff;border:2px solid #E5E5E5;padding:5px 10px;border-radius:8px;box-shadow:0 2px 0 #E5E5E5;display:inline-block">jaguar</td><td>13 / 0.81rem</td><td>700</td><td>normal</td></tr>
+          <tr><td class="token">--stat-label</td><td class="sample" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-muted)">STREAK</td><td>9 / 0.56rem</td><td>700</td><td>0.5px UPPER</td></tr>
+          <tr><td class="token">--xp-counter</td><td class="sample" style="font-size:14px;font-weight:900;color:var(--green-deep);font-feature-settings:'tnum'">+15 XP</td><td>14 / 0.88rem</td><td>900</td><td>normal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Bubbles are circles (lesson nodes 50%, avatars 50%). Buttons chunky at 14-16px. Word chips at 12px. Modals at 20-24px. Speech bubbles at 14px. The chunkiness is part of the friendliness — Duolingo never sharpens its corners.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px;box-shadow:0 4px 0 var(--green-dark)"></div><div class="ds-radius-label">Min</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px;box-shadow:0 4px 0 var(--green-dark)"></div><div class="ds-radius-label">Tag</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px;box-shadow:0 4px 0 var(--green-dark)"></div><div class="ds-radius-label">Chip</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px;box-shadow:0 4px 0 var(--green-dark)"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px;box-shadow:0 4px 0 var(--green-dark)"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:20px;box-shadow:0 4px 0 var(--green-dark)"></div><div class="ds-radius-label">Modal</div><div class="ds-radius-val">20px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:9999px;box-shadow:0 4px 0 var(--green-dark)"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">9999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%;box-shadow:0 4px 0 var(--green-dark)"></div><div class="ds-radius-label">Node</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Lesson node</div><div class="tk-val">62pt</div><div class="tk-note">Circle diameter. 5pt extrusion shadow. Crown badge 24×14pt below.</div></div>
+        <div class="token-cell"><div class="tk-label">Button shadow</div><div class="tk-val">4-6pt</div><div class="tk-note">Always solid color, never blur. Disappears on press.</div></div>
+        <div class="token-cell"><div class="tk-label">Press depth</div><div class="tk-val">2pt</div><div class="tk-note">translateY on tap. Spring back on release in 80ms.</div></div>
+        <div class="token-cell"><div class="tk-label">Hearts (lives)</div><div class="tk-val">5</div><div class="tk-note">Free tier max. Each wrong answer → -1. Refill via Practice or Super.</div></div>
+        <div class="token-cell"><div class="tk-label">Tab bar</div><div class="tk-val">5 icons</div><div class="tk-note">Learn / Sections / Leagues / Quests / Profile. Color-coded per section.</div></div>
+        <div class="token-cell"><div class="tk-label">Confetti</div><div class="tk-val">on correct</div><div class="tk-note">Burst from check button. Color matches lesson section.</div></div>
+        <div class="token-cell"><div class="tk-label">XP popup</div><div class="tk-val">+15</div><div class="tk-note">Floats up from check button, 0.6s. Green text, tabular figures.</div></div>
+        <div class="token-cell"><div class="tk-label">Streak reset</div><div class="tk-val">local midnight</div><div class="tk-note">Needs ≥1 XP earned that day. Streak Freeze cosmetic saves 1 day.</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">A vocabulary of chunky, pressable, color-coded surfaces. The shadow is the component.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-green" href="#">Continue</a>
+            <a class="btn btn-blue" href="#">Practice</a>
+            <a class="btn btn-red" href="#">Lose a heart</a>
+            <a class="btn btn-yellow" href="#">Daily quest</a>
+            <a class="btn btn-purple" href="#">Get Super</a>
+            <a class="btn btn-gray" href="#">Check</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs</h5>
+          <div class="ds-card-stack">
+            <input class="input-light" placeholder="Type the answer…" />
+            <input class="input-light" placeholder="Search lessons" />
+            <div class="ds-card-row">
+              <span class="tag tag-green">+15 XP</span>
+              <span class="tag tag-yellow">Streak</span>
+              <span class="tag tag-red">Heart lost</span>
+              <span class="tag tag-purple">Super</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Word chips</h5>
+          <div class="ds-card-stack">
+            <div class="ds-card-row" style="gap:6px">
+              <span style="background:#fff;border:2px solid var(--border);padding:7px 12px;border-radius:12px;box-shadow:0 3px 0 var(--border);font-size:13px;font-weight:700">The</span>
+              <span style="background:#fff;border:2px solid var(--border);padding:7px 12px;border-radius:12px;box-shadow:0 3px 0 var(--border);font-size:13px;font-weight:700">jaguar</span>
+              <span style="background:#fff;border:2px solid var(--border);padding:7px 12px;border-radius:12px;box-shadow:0 3px 0 var(--border);font-size:13px;font-weight:700">eats</span>
+            </div>
+            <div class="ds-card-row" style="gap:6px">
+              <span style="background:var(--border-soft);color:var(--border);padding:7px 12px;border-radius:12px;font-size:13px;font-weight:700;border:2px solid var(--border-soft)">used</span>
+              <span style="background:rgba(88,204,2,.18);color:var(--green-deep);padding:7px 12px;border-radius:12px;font-size:13px;font-weight:700;border:2px solid var(--green)">correct</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="11" r="9" fill="#fff"/><circle cx="9" cy="10" r="3" fill="#000"/><circle cx="15" cy="10" r="3" fill="#000"/><path d="M9 16c1 1 2 1.5 3 1.5s2-.5 3-1.5" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+      Duolingo iOS
+    </div>
+    <p>Design reference. Not affiliated with Duolingo, Inc. Token values are derived from the public iOS app and Duolingo's published brand guidelines. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.duolingo-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-light" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.duolingo-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.duolingo-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

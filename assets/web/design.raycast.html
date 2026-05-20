@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Raycast — Inspired Design</title>
+<meta name="description" content="A Raycast-inspired marketing page: pure near-black canvas, white CTA pill, command-palette mockup as hero, Inter with ss03, hero red stripe gradient. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  /* Brand */
+  --primary: #ffffff;
+  --primary-pressed: #e8e8e8;
+  --on-primary: #000000;
+  /* Text */
+  --ink: #f4f4f6;
+  --body: #cdcdcd;
+  --charcoal: #d3d3d4;
+  --mute: #9c9c9d;
+  --ash: #6a6b6c;
+  --stone: #434345;
+  --on-dark: #ffffff;
+  --on-dark-mute: rgba(255,255,255,0.72);
+  /* Surfaces */
+  --canvas: #07080a;
+  --surface: #0d0d0d;
+  --surface-elevated: #101111;
+  --surface-card: #121212;
+  --button-fg: #18191a;
+  /* Hairlines */
+  --hairline: #242728;
+  --hairline-soft: rgba(255,255,255,0.08);
+  --hairline-strong: rgba(255,255,255,0.16);
+  /* Accents — scoped to extension/category illustrations */
+  --accent-blue: #57c1ff;
+  --accent-blue-soft: rgba(87,193,255,0.15);
+  --accent-red: #ff6161;
+  --accent-red-soft: rgba(255,97,97,0.15);
+  --accent-green: #59d499;
+  --accent-green-soft: rgba(89,212,153,0.15);
+  --accent-yellow: #ffc533;
+  --accent-yellow-soft: rgba(255,197,51,0.15);
+  /* Hero stripe */
+  --stripe-start: #ff5757;
+  --stripe-end: #a1131a;
+  /* Keycap gradient */
+  --key-start: #121212;
+  --key-end: #0d0d0d;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-feature-settings: "calt", "kern", "liga", "ss03";
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(255,255,255,0.18); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--hairline-strong); border-radius: 6px; }
+.mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+
+/* —— Layout —— */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top nav —— */
+.topnav {
+  height: 56px;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.topnav .row { display: flex; align-items: center; height: 100%; gap: 24px; font-size: 14px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--on-dark); font-weight: 500; letter-spacing: 0.2px; font-size: 16px;
+}
+.brand .logo { width: 22px; height: 22px; }
+.nav-links { display: flex; gap: 4px; margin-left: 12px; align-items: center; }
+.nav-links a { color: var(--body); padding: 6px 10px; border-radius: 6px; font-weight: 500; font-size: 13.5px; letter-spacing: 0.2px; }
+.nav-links a:hover { color: var(--on-dark); background: var(--surface-elevated); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 8px 16px;
+  border-radius: 8px;
+  font: 500 14px/1.4 "Inter", system-ui;
+  letter-spacing: 0.2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent; color: var(--on-dark);
+  transition: background .15s, color .15s, border-color .15s;
+  white-space: nowrap;
+}
+.btn:focus-visible { outline: 2px solid var(--on-dark); outline-offset: 2px; }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-pressed); }
+.btn-secondary { background: transparent; color: var(--on-dark); }
+.btn-secondary:hover { background: var(--surface-elevated); }
+.btn-tertiary { background: var(--surface-elevated); color: var(--on-dark); border-color: var(--hairline); }
+.btn-tertiary:hover { background: var(--surface-card); border-color: var(--hairline-strong); }
+.btn-install { background: transparent; color: var(--on-dark); border: 1px solid var(--hairline-strong); padding: 6px 14px; height: 32px; font-size: 13.5px; }
+.btn-install:hover { background: var(--surface-elevated); }
+
+/* —— Type —— */
+.eyebrow {
+  font-size: 12px; font-weight: 500; line-height: 1.5; letter-spacing: 0.4px;
+  color: var(--mute); text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.display-xl {
+  font-weight: 600; font-size: clamp(36px, 6.5vw, 64px);
+  line-height: 1.1; letter-spacing: -1.2px;
+  margin: 0; color: var(--ink);
+  font-feature-settings: "calt", "kern", "ss02", "ss03", "ss08";
+}
+.display-lg {
+  font-weight: 500; font-size: clamp(36px, 4.6vw, 56px);
+  line-height: 1.17; letter-spacing: 0.2px;
+  margin: 0; color: var(--ink);
+}
+.heading-xl { font-weight: 500; font-size: 24px; line-height: 1.4; letter-spacing: 0.2px; margin: 0; color: var(--ink); }
+.heading-lg { font-weight: 500; font-size: 22px; line-height: 1.15; margin: 0; color: var(--ink); }
+.heading-md { font-weight: 500; font-size: 20px; line-height: 1.4; letter-spacing: 0.2px; margin: 0; color: var(--ink); }
+.heading-sm { font-weight: 500; font-size: 18px; line-height: 1.4; letter-spacing: 0.2px; margin: 0; color: var(--ink); }
+.body-lg { font-size: 18px; line-height: 1.6; color: var(--body); }
+.body-md { font-size: 16px; line-height: 1.6; color: var(--body); }
+.body-sm { font-size: 14px; line-height: 1.6; color: var(--body); }
+.caption-md { font-size: 13px; line-height: 1.4; letter-spacing: 0.1px; color: var(--mute); }
+.caption-sm { font-size: 12px; line-height: 1.5; letter-spacing: 0.4px; color: var(--mute); }
+
+/* —— Sections —— */
+section { padding: 96px 0; }
+
+/* —— Hero with stripe gradient —— */
+.hero {
+  position: relative;
+  padding: 96px 0 80px;
+  overflow: hidden;
+}
+.hero-stripe {
+  position: absolute;
+  top: -120px; left: -10%; right: -10%;
+  height: 480px;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(108deg,
+      transparent 30%,
+      rgba(255,87,87,0.32) 36%, rgba(255,87,87,0.32) 39%,
+      transparent 40%,
+      transparent 44%,
+      rgba(220,40,40,0.42) 50%, rgba(220,40,40,0.42) 53%,
+      transparent 54%,
+      transparent 58%,
+      rgba(161,19,26,0.50) 64%, rgba(161,19,26,0.50) 67%,
+      transparent 68%,
+      transparent 100%
+    );
+  filter: blur(8px);
+  opacity: 0.95;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+}
+.hero .wrap { position: relative; z-index: 1; }
+.hero .display-xl { max-width: 16ch; margin-bottom: 24px; }
+.hero .display-xl em { font-style: normal; color: var(--mute); }
+.hero .lead { font-size: 18px; line-height: 1.6; color: var(--body); max-width: 560px; margin: 0 0 32px; }
+.hero .cta-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero .cta-meta { color: var(--mute); font-size: 13px; letter-spacing: 0.1px; margin-left: 4px; display: inline-flex; align-items: center; gap: 8px; }
+
+/* —— Command-palette mockup (the protagonist) —— */
+.cp-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 56px;
+  max-width: 920px;
+  margin-left: auto; margin-right: auto;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+}
+.cp-titlebar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hairline);
+}
+.cp-traffic { display: flex; gap: 6px; }
+.cp-traffic span { width: 11px; height: 11px; border-radius: 50%; background: var(--surface-card); border: 1px solid var(--hairline); }
+.cp-title { font-size: 12px; color: var(--mute); margin-left: auto; margin-right: auto; letter-spacing: 0.2px; }
+
+.cp-search {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--hairline);
+}
+.cp-search svg { color: var(--ash); flex-shrink: 0; }
+.cp-search input {
+  flex: 1; background: transparent; border: 0; outline: 0;
+  font: 400 18px/1.4 "Inter", system-ui;
+  color: var(--on-dark);
+  font-feature-settings: "calt", "kern", "liga", "ss03";
+}
+.cp-search input::placeholder { color: var(--mute); }
+.cp-search .right { display: flex; gap: 4px; align-items: center; }
+
+.cp-body { padding: 8px; min-height: 320px; }
+.cp-section { padding: 4px 12px; font-size: 11px; color: var(--mute); letter-spacing: 0.4px; text-transform: uppercase; font-weight: 500; }
+.cp-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px; color: var(--on-dark);
+  cursor: default;
+}
+.cp-row:hover { background: var(--surface-card); }
+.cp-row.active { background: var(--surface-card); }
+.cp-row .icon-tile {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-card); border: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+.cp-row .icon-tile.yellow { background: var(--accent-yellow); color: #000; }
+.cp-row .icon-tile.red { background: var(--accent-red); color: #fff; }
+.cp-row .icon-tile.green { background: var(--accent-green); color: #000; }
+.cp-row .icon-tile.blue { background: var(--accent-blue); color: #000; }
+.cp-row .icon-tile svg { display: block; }
+.cp-row .label { flex: 1; }
+.cp-row .meta { color: var(--ash); font-size: 13px; }
+.cp-row .badge {
+  font-size: 11px; padding: 2px 6px; border-radius: 4px;
+  background: var(--surface-elevated); color: var(--on-dark-mute);
+  letter-spacing: 0.4px;
+}
+.cp-row .kbd-cluster { display: inline-flex; gap: 4px; align-items: center; }
+.kbd-key {
+  background: linear-gradient(180deg, var(--key-start), var(--key-end));
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  font: 400 12px/1 "Inter", system-ui;
+  color: var(--body);
+  height: 22px;
+  min-width: 22px;
+  padding: 0 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.cp-footer {
+  display: flex; align-items: center; padding: 10px 16px;
+  border-top: 1px solid var(--hairline);
+  font-size: 12px; color: var(--mute);
+  background: var(--surface);
+}
+.cp-footer .left { display: inline-flex; align-items: center; gap: 6px; }
+.cp-footer .right { margin-left: auto; display: inline-flex; gap: 16px; align-items: center; }
+.cp-footer .item { display: inline-flex; gap: 6px; align-items: center; }
+
+/* —— Logos row —— */
+.logos {
+  padding: 40px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+.logo-mark { font-weight: 500; font-size: 16px; letter-spacing: 0.2px; color: var(--ash); }
+.logo-mark:hover { color: var(--on-dark); }
+
+/* —— Section head —— */
+.section-head { max-width: 720px; }
+.section-head .display-lg { margin-bottom: 18px; }
+.section-head .body-lg { margin-top: 12px; max-width: 600px; }
+
+/* —— Feature grid —— */
+.feature-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 56px;
+}
+@media (max-width: 1024px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.feature-card.elevated { background: var(--surface-elevated); }
+.feature-card .icon-row { display: flex; align-items: center; gap: 8px; }
+.feature-card .icon-tile {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-card); border: 1px solid var(--hairline);
+}
+.feature-card .icon-tile.yellow { background: var(--accent-yellow); color: #000; border-color: transparent; }
+.feature-card .icon-tile.red { background: var(--accent-red); color: #fff; border-color: transparent; }
+.feature-card .icon-tile.green { background: var(--accent-green); color: #000; border-color: transparent; }
+.feature-card .icon-tile.blue { background: var(--accent-blue); color: #000; border-color: transparent; }
+.feature-card h3 { font: 500 18px/1.4 "Inter", system-ui; letter-spacing: 0.2px; margin: 0; }
+.feature-card p { margin: 0; color: var(--body); font-size: 14px; line-height: 1.6; }
+.feature-card .kbd-hint { display: inline-flex; gap: 4px; margin-top: 4px; }
+
+/* —— Store extension row —— */
+.store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+@media (max-width: 880px) { .store-grid { grid-template-columns: 1fr; } }
+.store-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex; align-items: center; gap: 16px;
+}
+.store-card .app-icon {
+  width: 48px; height: 48px;
+  border-radius: 8px;
+  background: var(--surface-card);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--hairline);
+}
+.store-card .app-icon.yellow { background: var(--accent-yellow); border-color: transparent; }
+.store-card .app-icon.red { background: var(--accent-red); border-color: transparent; }
+.store-card .app-icon.green { background: var(--accent-green); border-color: transparent; }
+.store-card .app-icon.blue { background: var(--accent-blue); border-color: transparent; }
+.store-card .info { flex: 1; min-width: 0; }
+.store-card .info .name { font-weight: 500; font-size: 14px; color: var(--ink); letter-spacing: 0.2px; }
+.store-card .info .auth { font-size: 13px; color: var(--mute); margin-top: 2px; letter-spacing: 0.1px; }
+.store-card .info .desc { font-size: 13px; color: var(--body); margin-top: 6px; line-height: 1.5; }
+
+/* —— Pricing tabs —— */
+.pricing-tabs-wrap { display: flex; justify-content: center; margin-top: 24px; }
+.pricing-tabs {
+  display: inline-flex; padding: 4px;
+  background: var(--surface); border: 1px solid var(--hairline);
+  border-radius: 9999px; gap: 4px;
+}
+.pricing-tabs button {
+  background: transparent; border: 0; padding: 6px 14px;
+  border-radius: 9999px; color: var(--body);
+  font: 500 13px/1.4 "Inter", system-ui; cursor: pointer; letter-spacing: 0.2px;
+}
+.pricing-tabs button.active { background: var(--surface-elevated); color: var(--on-dark); }
+
+/* —— Pricing tiers —— */
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+@media (max-width: 1024px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tier.featured { background: var(--surface-elevated); border-color: var(--hairline-strong); }
+.tier h3 { margin: 0; font: 500 24px/1.3 "Inter", system-ui; letter-spacing: 0.2px; }
+.tier .price { font: 500 44px/1 "Inter", system-ui; letter-spacing: 0.2px; }
+.tier .price .per { font-size: 14px; font-weight: 400; color: var(--mute); margin-left: 4px; letter-spacing: 0; }
+.tier .desc { color: var(--body); font-size: 16px; line-height: 1.6; min-height: 50px; }
+.tier ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier li { font-size: 14px; color: var(--body); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+.tier li svg { flex: none; margin-top: 3px; color: var(--accent-green); }
+.tier .cta-wrap { margin-top: auto; }
+.tier-badge {
+  display: inline-block; background: var(--surface-elevated); color: var(--on-dark-mute);
+  font-size: 12px; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.4px;
+  align-self: flex-start;
+}
+
+/* —— Testimonial —— */
+.testimonial {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 24px;
+  max-width: 760px; margin: 0 auto;
+}
+.testimonial blockquote {
+  margin: 0; font-size: 22px; font-weight: 500; line-height: 1.4; letter-spacing: 0.2px;
+  color: var(--ink);
+}
+.testimonial .author { display: flex; align-items: center; gap: 12px; }
+.tm-avatar {
+  width: 40px; height: 40px; border-radius: 9999px;
+  background: linear-gradient(135deg, #ff6161, #a1131a);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 600; font-size: 14px;
+}
+.testimonial .meta { display: flex; flex-direction: column; }
+.testimonial .meta strong { font-size: 14px; font-weight: 500; color: var(--ink); letter-spacing: 0.2px; }
+.testimonial .meta span { font-size: 13px; color: var(--mute); }
+
+/* —— CTA band —— */
+.cta-band {
+  text-align: center;
+  padding: 120px 0;
+}
+.cta-band .display-lg { margin: 0 auto 24px; max-width: 16ch; }
+.cta-band .body-lg { max-width: 540px; margin: 0 auto 32px; }
+
+/* —— Footer —— */
+footer {
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline);
+  padding: 64px 0 48px;
+  position: relative;
+  overflow: hidden;
+}
+.footer-stripe {
+  position: absolute; top: 0; left: -10%; right: -10%;
+  height: 80px; pointer-events: none;
+  background:
+    linear-gradient(108deg,
+      transparent 40%,
+      rgba(255,87,87,0.18) 46%, rgba(255,87,87,0.18) 48%,
+      transparent 49%,
+      rgba(220,40,40,0.20) 56%, rgba(220,40,40,0.20) 58%,
+      transparent 59%,
+      rgba(161,19,26,0.22) 64%, rgba(161,19,26,0.22) 67%,
+      transparent 68%);
+  filter: blur(6px);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+}
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 2fr repeat(5, 1fr); position: relative; z-index: 1; }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; } }
+@media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 { font-size: 13px; font-weight: 500; color: var(--on-dark); margin: 0 0 16px; letter-spacing: 0.2px; }
+.footer-grid ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid li a { font-size: 13px; color: var(--body); letter-spacing: 0.1px; }
+.footer-grid li a:hover { color: var(--on-dark); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+  padding-top: 32px; margin-top: 48px;
+  border-top: 1px solid var(--hairline);
+  font-size: 13px; color: var(--mute);
+  position: relative; z-index: 1;
+}
+.brand-mini { max-width: 280px; display: flex; flex-direction: column; gap: 12px; }
+.brand-mini p { margin: 0; font-size: 13px; color: var(--body); line-height: 1.6; }
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--surface); border: 1px solid var(--hairline);
+  padding: 6px 14px; border-radius: 9999px; font-size: 13px; color: var(--body);
+}
+.src-link:hover { color: var(--on-dark); border-color: var(--hairline-strong); }
+
+/* —— Design system block —— */
+.ds-block { padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+.ds-heading { font-size: 24px; font-weight: 500; letter-spacing: 0.2px; margin: 0 0 16px; color: var(--ink); }
+.ds-caption {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase;
+  color: var(--mute); margin: 28px 0 12px;
+}
+.ds-block .ds-caption:first-of-type { margin-top: 16px; }
+
+.ds-sw-grid { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .ds-sw-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .ds-sw-grid { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
+.ds-sw .chip { height: 56px; }
+.ds-sw .meta { padding: 8px 10px; border-top: 1px solid var(--hairline); }
+.ds-sw .name { font-size: 12px; font-weight: 500; color: var(--ink); letter-spacing: 0.2px; }
+.ds-sw .val { font-size: 11px; color: var(--mute); font-family: "JetBrains Mono", ui-monospace, monospace; margin-top: 2px; }
+
+.ds-typescale { background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; overflow: hidden; }
+.ds-tr { display: grid; grid-template-columns: 140px 240px 1fr; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid var(--hairline); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font: 500 11px/1.3 "JetBrains Mono", ui-monospace, monospace; color: var(--ink); }
+.ds-spec { font: 400 11px/1.3 "JetBrains Mono", ui-monospace, monospace; color: var(--mute); }
+.ds-sam { color: var(--ink); }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(7, 1fr); }
+@media (max-width: 800px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--surface-elevated); border: 1px solid var(--hairline-strong); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input {
+  height: 36px; padding: 8px 12px; border-radius: 8px;
+  border: 1px solid var(--hairline); background: var(--surface-elevated);
+  color: var(--on-dark); font-family: inherit; font-size: 14px; width: 100%;
+  font-feature-settings: "calt", "kern", "liga", "ss03";
+}
+.ds-input.focused { border-color: var(--hairline-strong); outline: none; }
+.ds-field-label { font: 400 11px/1.4 "JetBrains Mono", ui-monospace, monospace; color: var(--mute); margin-bottom: 6px; display: block; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini { border-radius: 10px; padding: 20px; border: 1px solid var(--hairline); background: var(--surface); display: flex; flex-direction: column; gap: 8px; }
+.ds-card-mini h4 { margin: 0; font: 500 16px/1.4 "Inter", system-ui; color: var(--ink); letter-spacing: 0.2px; }
+.ds-card-mini p { margin: 0; font-size: 13px; color: var(--body); line-height: 1.6; }
+.ds-card-mini.elevated { background: var(--surface-elevated); }
+
+/* —— Surface ladder tiles —— */
+.ds-ladder { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 800px) { .ds-ladder { grid-template-columns: repeat(3, 1fr); } }
+.ds-ladder .tile { border-radius: 8px; padding: 16px; min-height: 84px; border: 1px solid var(--hairline); display: flex; flex-direction: column; justify-content: space-between; }
+.ds-ladder .tile .lab { font: 500 11px/1.3 "JetBrains Mono", ui-monospace, monospace; color: var(--mute); }
+.ds-ladder .tile .v { font: 400 11px/1.3 "JetBrains Mono", ui-monospace, monospace; color: var(--body); }
+
+/* —— Badge group —— */
+.ds-tag-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.badge-pro { background: var(--surface-elevated); color: var(--on-dark-mute); font-size: 12px; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.4px; }
+.badge-info-soft { background: var(--accent-blue-soft); color: var(--accent-blue); font-size: 12px; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.4px; }
+.badge-success-soft { background: var(--accent-green-soft); color: var(--accent-green); font-size: 12px; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.4px; }
+.badge-warn-soft { background: var(--accent-yellow-soft); color: var(--accent-yellow); font-size: 12px; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.4px; }
+.badge-error-soft { background: var(--accent-red-soft); color: var(--accent-red); font-size: 12px; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.4px; }
+.pill-tab {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 9999px;
+  font-size: 14px; color: var(--body);
+}
+.pill-tab.active { background: var(--surface-elevated); color: var(--on-dark); }
+</style>
+</head>
+<body>
+
+<header class="topnav"><div class="wrap row">
+  <a class="brand" href="#">
+    <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 9.5L12 3l9 6.5v9L12 21l-9-2.5v-9z" stroke="#ff5757" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M9 12.5l3 2 3-2-3-2-3 2z" fill="#ff5757"/>
+    </svg>
+    Raycast
+  </a>
+  <nav class="nav-links">
+    <a href="#">Pro</a>
+    <a href="#">AI</a>
+    <a href="#">Store</a>
+    <a href="#">Manual</a>
+    <a href="#">Changelog</a>
+    <a href="#">Blog</a>
+    <a href="#">Pricing</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-secondary">Sign in</a>
+    <a href="#" class="btn btn-primary">Download</a>
+  </div>
+</div></header>
+
+<section class="hero">
+  <div class="hero-stripe" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Built for the perfect tools</p>
+    <h1 class="display-xl">Your shortcut to <em>everything.</em></h1>
+    <p class="lead">A collection of powerful productivity tools all within an extendable launcher. With Raycast, you can accomplish your tasks, calculate, share common links, and much more.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Download for Mac</a>
+      <a href="#" class="btn btn-secondary">Watch the demo →</a>
+      <span class="cta-meta">macOS 12+ · Free for personal use</span>
+    </div>
+
+    <!-- Command palette mockup (the protagonist) -->
+    <div class="cp-card">
+      <div class="cp-titlebar">
+        <div class="cp-traffic"><span></span><span></span><span></span></div>
+        <span class="cp-title">Raycast</span>
+      </div>
+      <div class="cp-search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+        <input value="open" />
+        <div class="right">
+          <span class="kbd-key">⌘</span>
+          <span class="kbd-key">K</span>
+        </div>
+      </div>
+
+      <div class="cp-body">
+        <div class="cp-section">Suggestions</div>
+        <div class="cp-row active">
+          <span class="icon-tile yellow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h18v18H3z" opacity="0.15"/><text x="6" y="17" font-family="Inter" font-weight="700" font-size="13" fill="currentColor">Y</text></svg>
+          </span>
+          <span class="label">Search Hacker News</span>
+          <span class="badge">Command</span>
+          <span class="kbd-cluster">
+            <span class="kbd-key">⏎</span>
+          </span>
+        </div>
+        <div class="cp-row">
+          <span class="icon-tile red">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h14v16H5z" opacity="0.15"/><text x="6" y="17" font-family="Inter" font-weight="700" font-size="13" fill="currentColor">#</text></svg>
+          </span>
+          <span class="label">Open Slack Channel</span>
+          <span class="meta">slack</span>
+          <span class="kbd-cluster">
+            <span class="kbd-key">⌘</span>
+            <span class="kbd-key">1</span>
+          </span>
+        </div>
+        <div class="cp-row">
+          <span class="icon-tile green">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" opacity="0.15"/><text x="6" y="17" font-family="Inter" font-weight="700" font-size="13" fill="currentColor">L</text></svg>
+          </span>
+          <span class="label">Create Linear Issue</span>
+          <span class="meta">linear</span>
+          <span class="kbd-cluster">
+            <span class="kbd-key">⌘</span>
+            <span class="kbd-key">N</span>
+          </span>
+        </div>
+        <div class="cp-row">
+          <span class="icon-tile blue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5h18v14H3z" opacity="0.15"/><text x="6" y="17" font-family="Inter" font-weight="700" font-size="13" fill="currentColor">N</text></svg>
+          </span>
+          <span class="label">Open Notion Database</span>
+          <span class="meta">notion</span>
+          <span class="kbd-cluster">
+            <span class="kbd-key">⌘</span>
+            <span class="kbd-key">2</span>
+          </span>
+        </div>
+
+        <div class="cp-section">AI Commands</div>
+        <div class="cp-row">
+          <span class="icon-tile">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 16v6M4 12h6M14 12h6M5.6 5.6l4.2 4.2M14.2 14.2l4.2 4.2M5.6 18.4l4.2-4.2M14.2 9.8l4.2-4.2"/></svg>
+          </span>
+          <span class="label">Ask AI</span>
+          <span class="meta">"summarize this thread…"</span>
+          <span class="kbd-cluster"><span class="kbd-key">⌘</span><span class="kbd-key">⏎</span></span>
+        </div>
+        <div class="cp-row">
+          <span class="icon-tile">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
+          </span>
+          <span class="label">Translate Snippet</span>
+          <span class="meta">→ French</span>
+          <span class="kbd-cluster"><span class="kbd-key">⌘</span><span class="kbd-key">T</span></span>
+        </div>
+        <div class="cp-row">
+          <span class="icon-tile">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </span>
+          <span class="label">Quick Math · 2*pi*0.42</span>
+          <span class="meta">= 2.638938</span>
+          <span class="kbd-cluster"><span class="kbd-key">⏎</span></span>
+        </div>
+      </div>
+
+      <div class="cp-footer">
+        <div class="left">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5v9L12 21l-9-2.5v-9z"/></svg>
+          Raycast 1.92
+        </div>
+        <div class="right">
+          <div class="item">Actions <span class="kbd-key">⌘</span><span class="kbd-key">K</span></div>
+          <div class="item">Open <span class="kbd-key">⏎</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="logos">
+  <span class="logo-mark">Vercel</span>
+  <span class="logo-mark">Linear</span>
+  <span class="logo-mark">Notion</span>
+  <span class="logo-mark">Figma</span>
+  <span class="logo-mark">Mercury</span>
+  <span class="logo-mark">Loom</span>
+  <span class="logo-mark">Slack</span>
+</div></div>
+
+<section><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Core features</p>
+    <h2 class="display-lg">An extendable launcher.</h2>
+    <p class="body-lg">Tailored to your needs. Built for community. Designed by you. Raycast is more than a launcher — it's a way to keep your hands on the keyboard.</p>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="icon-row">
+        <span class="icon-tile yellow"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h18v18H3z" opacity="0.2"/><text x="6" y="17" font-family="Inter" font-weight="700" font-size="13" fill="currentColor">⚡</text></svg></span>
+        <span class="heading-sm">Quicklinks</span>
+      </div>
+      <p>Open any webpage, query, or deep-link with a custom shortcut. Auto-fill parameters from your clipboard or selection.</p>
+      <div class="kbd-hint"><span class="kbd-key">⌘</span><span class="kbd-key">/</span></div>
+    </div>
+    <div class="feature-card elevated">
+      <div class="icon-row">
+        <span class="icon-tile blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h18v18H3z" opacity="0.2"/><text x="6" y="17" font-family="Inter" font-weight="700" font-size="13" fill="currentColor">{ }</text></svg></span>
+        <span class="heading-sm">Snippets</span>
+      </div>
+      <p>Save text you type frequently as snippets. Trigger them with a custom keyword and watch them expand inline anywhere.</p>
+      <div class="kbd-hint"><span class="kbd-key">⌘</span><span class="kbd-key">⇧</span><span class="kbd-key">S</span></div>
+    </div>
+    <div class="feature-card">
+      <div class="icon-row">
+        <span class="icon-tile green"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" opacity="0.2"/><text x="7" y="17" font-family="Inter" font-weight="700" font-size="13" fill="currentColor">∑</text></svg></span>
+        <span class="heading-sm">Calculator</span>
+      </div>
+      <p>Inline math, unit conversion, dates, currencies. Type and read the answer — no calculator app needed.</p>
+      <div class="kbd-hint"><span class="kbd-key">2*pi*r</span></div>
+    </div>
+    <div class="feature-card">
+      <div class="icon-row">
+        <span class="icon-tile red"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" opacity="0.2"/><text x="6" y="17" font-family="Inter" font-weight="700" font-size="13" fill="currentColor">✶</text></svg></span>
+        <span class="heading-sm">Window Management</span>
+      </div>
+      <p>Arrange windows with keyboard shortcuts. Halves, thirds, corners, displays — all without the mouse leaving the keyboard.</p>
+      <div class="kbd-hint"><span class="kbd-key">⌃</span><span class="kbd-key">⌥</span><span class="kbd-key">→</span></div>
+    </div>
+    <div class="feature-card elevated">
+      <div class="icon-row">
+        <span class="icon-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 16v6M4 12h6M14 12h6"/></svg></span>
+        <span class="heading-sm">AI Chat</span>
+      </div>
+      <p>One ⌘⏎ away from sonnet, gpt-4, and friends. Compose, summarize, translate without leaving the launcher.</p>
+      <div class="kbd-hint"><span class="kbd-key">⌘</span><span class="kbd-key">⏎</span></div>
+    </div>
+    <div class="feature-card">
+      <div class="icon-row">
+        <span class="icon-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg></span>
+        <span class="heading-sm">Open SDK</span>
+      </div>
+      <p>Build your own extensions with TypeScript + React. Publish to the store and share with the community in a click.</p>
+      <div class="kbd-hint"><span class="kbd-key">npx</span><span class="kbd-key">ray</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Store</p>
+    <h2 class="display-lg">Built by the community.</h2>
+    <p class="body-lg">1,800+ extensions from developers around the world. Tap into your favourite tools without ever leaving the launcher.</p>
+  </div>
+
+  <div class="store-grid">
+    <div class="store-card">
+      <div class="app-icon yellow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#000"><text x="5" y="18" font-family="Inter" font-weight="700" font-size="16">Y</text></svg>
+      </div>
+      <div class="info">
+        <div class="name">Hacker News</div>
+        <div class="auth">by thomas</div>
+        <div class="desc">Browse Hacker News from your launcher. Top, new, ask, show.</div>
+      </div>
+      <a href="#" class="btn btn-install">Install</a>
+    </div>
+    <div class="store-card">
+      <div class="app-icon red">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><text x="5" y="18" font-family="Inter" font-weight="700" font-size="16">#</text></svg>
+      </div>
+      <div class="info">
+        <div class="name">Slack</div>
+        <div class="auth">by raycast</div>
+        <div class="desc">Open channels, send messages, set status from the launcher.</div>
+      </div>
+      <a href="#" class="btn btn-install">Install</a>
+    </div>
+    <div class="store-card">
+      <div class="app-icon green">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#000"><text x="5" y="18" font-family="Inter" font-weight="700" font-size="16">L</text></svg>
+      </div>
+      <div class="info">
+        <div class="name">Linear</div>
+        <div class="auth">by raycast</div>
+        <div class="desc">Create issues, browse cycles, jump to any project view.</div>
+      </div>
+      <a href="#" class="btn btn-install">Install</a>
+    </div>
+    <div class="store-card">
+      <div class="app-icon blue">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#000"><text x="5" y="18" font-family="Inter" font-weight="700" font-size="16">N</text></svg>
+      </div>
+      <div class="info">
+        <div class="name">Notion</div>
+        <div class="auth">by raycast</div>
+        <div class="desc">Search pages, create blocks, dump quick notes from anywhere.</div>
+      </div>
+      <a href="#" class="btn btn-install">Install</a>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top: 0;"><div class="wrap">
+  <div class="testimonial">
+    <blockquote>"Raycast disappears into my flow the way Spotlight never did. Once you've got your shortcut layer here, there's no going back."</blockquote>
+    <div class="author">
+      <div class="tm-avatar">DK</div>
+      <div class="meta">
+        <strong>Daniel Kim</strong>
+        <span>Engineering lead, Stripe</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head" style="text-align: center; margin: 0 auto;">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="display-lg">Free for individuals.</h2>
+  </div>
+  <div class="pricing-tabs-wrap">
+    <div class="pricing-tabs">
+      <button class="active">Monthly</button>
+      <button>Yearly · save 20%</button>
+    </div>
+  </div>
+
+  <div class="tiers">
+    <div class="tier">
+      <span class="tier-badge">Free</span>
+      <h3>Personal</h3>
+      <div class="price">$0</div>
+      <div class="desc">Everything you need to replace Spotlight. Unlimited commands, free forever.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unlimited core commands</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Community extensions</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Quicklinks, snippets, calculator</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-tertiary" style="width: 100%;">Download for Mac</a></div>
+    </div>
+    <div class="tier featured">
+      <span class="tier-badge">Pro</span>
+      <h3>Pro</h3>
+      <div class="price">$8<span class="per">/mo</span></div>
+      <div class="desc">Cloud sync, custom themes, and access to Raycast Pro features across your devices.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Cloud sync across machines</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Custom themes + window mgmt</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Pro support + scheduled commands</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Email aliases</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-primary" style="width: 100%;">Get Pro</a></div>
+    </div>
+    <div class="tier">
+      <span class="tier-badge">Advanced AI</span>
+      <h3>Pro + AI</h3>
+      <div class="price">$16<span class="per">/mo</span></div>
+      <div class="desc">All of Pro plus access to sonnet, gpt-4o, and our AI Chat workspace.</div>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>AI Chat (sonnet · gpt-4o · gemini)</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Custom AI commands</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>API access</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-tertiary" style="width: 100%;">Get Pro + AI</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="cta-band"><div class="wrap">
+  <h2 class="display-lg">A better way to work.</h2>
+  <p class="body-lg">Free to download. Free for personal use. Free to fall in love with.</p>
+  <a href="#" class="btn btn-primary">Download for Mac</a>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-head" style="margin-bottom: 48px;">
+    <p class="eyebrow">Design System</p>
+    <h2 class="display-lg">The tokens behind every pixel.</h2>
+    <p class="body-lg">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.raycast.html" target="_blank" rel="noopener" style="color: var(--on-dark); text-decoration: underline; text-underline-offset: 3px;">DESIGN.md</a>. The chrome IS the in-product chrome. White CTA pill. Surface ladder carries depth. Inter with ss03 site-wide.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Brand</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="meta"><div class="name">primary</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#e8e8e8"></div><div class="meta"><div class="name">primary-pressed</div><div class="val">#e8e8e8</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">on-primary</div><div class="val">#000000</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:linear-gradient(108deg, #ff5757, #a1131a)"></div><div class="meta"><div class="name">hero-stripe</div><div class="val">#ff5757 → #a1131a</div></div></div>
+    </div>
+
+    <p class="ds-caption">Surface ladder — depth without shadow</p>
+    <div class="ds-ladder">
+      <div class="tile" style="background:#07080a;"><span class="lab">canvas</span><span class="v">#07080a</span></div>
+      <div class="tile" style="background:#0d0d0d;"><span class="lab">surface</span><span class="v">#0d0d0d</span></div>
+      <div class="tile" style="background:#101111;"><span class="lab">surface-elevated</span><span class="v">#101111</span></div>
+      <div class="tile" style="background:#121212;"><span class="lab">surface-card</span><span class="v">#121212</span></div>
+      <div class="tile" style="background:#18191a;"><span class="lab">button-fg</span><span class="v">#18191a</span></div>
+    </div>
+
+    <p class="ds-caption">Text</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#f4f4f6"></div><div class="meta"><div class="name">ink</div><div class="val">#f4f4f6</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#cdcdcd"></div><div class="meta"><div class="name">body</div><div class="val">#cdcdcd</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#d3d3d4"></div><div class="meta"><div class="name">charcoal</div><div class="val">#d3d3d4</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9c9c9d"></div><div class="meta"><div class="name">mute</div><div class="val">#9c9c9d</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#6a6b6c"></div><div class="meta"><div class="name">ash</div><div class="val">#6a6b6c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#434345"></div><div class="meta"><div class="name">stone</div><div class="val">#434345</div></div></div>
+    </div>
+
+    <p class="ds-caption">Hairlines</p>
+    <div class="ds-sw-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 600px;">
+      <div class="ds-sw"><div class="chip" style="background:#242728"></div><div class="meta"><div class="name">hairline</div><div class="val">#242728</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:rgba(255,255,255,0.08)"></div><div class="meta"><div class="name">hairline-soft</div><div class="val">rgba w/ .08</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:rgba(255,255,255,0.16)"></div><div class="meta"><div class="name">hairline-strong</div><div class="val">rgba w/ .16</div></div></div>
+    </div>
+
+    <p class="ds-caption">Category accents — scoped to extension illustrations only</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#ffc533"></div><div class="meta"><div class="name">accent-yellow</div><div class="val">#ffc533 (HN)</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ff6161"></div><div class="meta"><div class="name">accent-red</div><div class="val">#ff6161 (Slack)</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#59d499"></div><div class="meta"><div class="name">accent-green</div><div class="val">#59d499 (Linear)</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#57c1ff"></div><div class="meta"><div class="name">accent-blue</div><div class="val">#57c1ff (info)</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption" style="margin-bottom: 16px;">Inter site-wide with font-feature-settings "calt", "kern", "liga", "ss03" — the ss03 alternate g is the brand voice</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">64 · w600 · 0 · 1.10 · ss02/ss08</span><div class="ds-sam" style="font-size:50px; font-weight:600; line-height:1.1; font-feature-settings: 'calt','kern','ss02','ss03','ss08';">Your shortcut to everything</div></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">56 · w500 · +0.2 · 1.17</span><div class="ds-sam" style="font-size:42px; font-weight:500; letter-spacing:0.2px; line-height:1.17;">Built by the community</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-xl</span><span class="ds-spec">24 · w500 · +0.2 · 1.40</span><div class="ds-sam" style="font-size:24px; font-weight:500; letter-spacing:0.2px;">Sub-section / tier name</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-md</span><span class="ds-spec">20 · w500 · +0.2 · 1.40</span><div class="ds-sam" style="font-size:20px; font-weight:500; letter-spacing:0.2px;">Card group title</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-sm</span><span class="ds-spec">18 · w500 · +0.2 · 1.40</span><div class="ds-sam" style="font-size:18px; font-weight:500; letter-spacing:0.2px;">Extension card title</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">18 · w400 · 0 · 1.60</span><div class="ds-sam" style="font-size:18px; color: var(--body);">Hero subtitle, pricing description, leading paragraph.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 · w400 · 0 · 1.60</span><div class="ds-sam" style="font-size:16px; color: var(--body);">Default body — paragraph copy across cards and prose.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-sm</span><span class="ds-spec">14 · w400 · 0 · 1.60</span><div class="ds-sam" style="font-size:14px; color: var(--body);">Card description, secondary copy.</div></div>
+      <div class="ds-tr"><span class="ds-tok">caption-sm</span><span class="ds-spec">12 · w400 · +0.4 · 1.50</span><div class="ds-sam" style="font-size:12px; letter-spacing:0.4px; color: var(--mute);">Section eyebrow · badge · taxonomy</div></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">14 · w500 · +0.2 · 1.60</span><div class="ds-sam" style="font-size:14px; font-weight:500; letter-spacing:0.2px;">Download · Sign in · Install</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:0"></div><span class="ds-tok">none</span><span class="ds-spec">0 · bands</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">xs</span><span class="ds-spec">4 · keycap</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:6px"></div><span class="ds-tok">sm</span><span class="ds-spec">6 · cp-row</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="ds-tok">md</span><span class="ds-spec">8 · btn / input</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:10px"></div><span class="ds-tok">lg</span><span class="ds-spec">10 · cards</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:16px"></div><span class="ds-tok">xl</span><span class="ds-spec">16 · cp-card</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">full</span><span class="ds-spec">∞ · pill / tab</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — white CTA is universal · 8px radius</p>
+    <div class="ds-comp-row">
+      <a class="btn btn-primary">Download</a>
+      <a class="btn" style="background:var(--primary-pressed);color:var(--on-primary);">Pressed</a>
+      <a class="btn btn-secondary">Sign in</a>
+      <a class="btn btn-tertiary">Watch demo</a>
+      <a class="btn btn-install">Install Extension</a>
+    </div>
+
+    <p class="ds-caption">Inputs — surface-elevated · 8px radius · hairline brightens on focus</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="Search the store"/>
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="open slack channel"/>
+      </div>
+    </div>
+
+    <p class="ds-caption">Pill tabs, keycaps, badges</p>
+    <div class="ds-tag-row">
+      <span class="pill-tab active">All Extensions</span>
+      <span class="pill-tab">Recently Added</span>
+      <span class="pill-tab">Most Popular</span>
+      <span class="kbd-key">⌘</span>
+      <span class="kbd-key">K</span>
+      <span class="kbd-key">⏎</span>
+      <span class="badge-pro">Pro</span>
+      <span class="badge-info-soft">Beta</span>
+      <span class="badge-success-soft">Success</span>
+      <span class="badge-warn-soft">Warning</span>
+      <span class="badge-error-soft">Error</span>
+    </div>
+
+    <p class="ds-caption">Card variants — 10px / 8px radius · hairline border · no shadow</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-mini">
+        <h4>feature-card-dark</h4>
+        <p>Background surface · 10px radius · 1px hairline. Default 2- or 3-up grid card.</p>
+      </div>
+      <div class="ds-card-mini elevated">
+        <h4>feature-card-elevated</h4>
+        <p>Background surface-elevated. Used to break visual rhythm in alternating feature rows.</p>
+      </div>
+      <div class="ds-card-mini">
+        <h4>command-palette-card</h4>
+        <p>Background surface · 16px radius · contains the in-product mockup. The hero protagonist.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="footer-stripe" aria-hidden="true"></div>
+  <div class="wrap">
+  <div class="footer-grid">
+    <div class="brand-mini">
+      <a class="brand" href="#">
+        <svg class="logo" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3l9 6.5v9L12 21l-9-2.5v-9z" stroke="#ff5757" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12.5l3 2 3-2-3-2-3 2z" fill="#ff5757"/></svg>
+        Raycast
+      </a>
+      <p>A collection of powerful productivity tools wrapped in an extendable launcher. Tokens sourced from awesome-design-md.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Download</a></li>
+        <li><a href="#">Pro</a></li>
+        <li><a href="#">AI</a></li>
+        <li><a href="#">Changelog</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Core Features</h4>
+      <ul>
+        <li><a href="#">Quicklinks</a></li>
+        <li><a href="#">Snippets</a></li>
+        <li><a href="#">Window mgmt</a></li>
+        <li><a href="#">Calendar</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Store</h4>
+      <ul>
+        <li><a href="#">Browse</a></li>
+        <li><a href="#">Featured</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Publish</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Community</h4>
+      <ul>
+        <li><a href="#">Slack</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">X / Twitter</a></li>
+        <li><a href="#">Manual</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© Raycast (inspired) · Generated for design study</div>
+    <div>Canvas #07080a · White CTA · Surface ladder · Radius 4 / 8 / 10 / 16</div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.raycast.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vercel — Inspired Design</title>
+<meta name="description" content="A Vercel-inspired marketing page: stark ink-on-white duet, mesh gradient hero, 100px pill CTAs, geist-feel Inter, mono captions. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand — ink primary */
+  --primary: #171717;
+  --on-primary: #ffffff;
+  --ink: #171717;
+  --body: #4d4d4d;
+  --mute: #888888;
+  /* Surfaces */
+  --canvas: #ffffff;
+  --canvas-soft: #fafafa;
+  --canvas-soft-2: #f5f5f5;
+  /* Hairlines */
+  --hairline: #ebebeb;
+  --hairline-strong: #a1a1a1;
+  /* Semantic + accent */
+  --link: #0070f3;
+  --link-deep: #0761d1;
+  --link-bg-soft: #d3e5ff;
+  --success: #0070f3;
+  --error: #ee0000;
+  --error-soft: #f7d4d6;
+  --warning: #f5a623;
+  --warning-soft: #ffefcf;
+  --violet: #7928ca;
+  --cyan: #50e3c2;
+  --pink: #ff0080;
+  /* Mesh gradient stops */
+  --g-develop-start: #007cf0;
+  --g-develop-end: #00dfd8;
+  --g-preview-start: #7928ca;
+  --g-preview-end: #ff0080;
+  --g-ship-start: #ff4d4d;
+  --g-ship-end: #f9cb28;
+  /* Stacked shadows */
+  --shadow-1: 0 0 0 1px rgba(0,0,0,0.08) inset;
+  --shadow-2: 0 1px 1px rgba(0,0,0,0.02), 0 2px 2px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.08) inset;
+  --shadow-3: 0 2px 2px rgba(0,0,0,0.04), 0 8px 8px -8px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.08) inset;
+  --shadow-4: 0 2px 2px rgba(0,0,0,0.04), 0 8px 16px -4px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.08) inset;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+  background: var(--canvas-soft);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--ink); color: var(--canvas); }
+
+.mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+/* —— Layout —— */
+.wrap { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+.wrap-narrow { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* —— Top nav —— */
+.top-nav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+  height: 64px;
+}
+.nav-inner {
+  height: 100%; display: flex; align-items: center; gap: 24px;
+}
+.logo-mark {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 16px; font-weight: 600; color: var(--ink);
+  letter-spacing: -0.4px;
+}
+.logo-mark svg { display: block; }
+.nav-center { display: flex; gap: 4px; margin-left: 16px; }
+.nav-center a {
+  font-size: 14px; font-weight: 400; color: var(--body);
+  padding: 8px 12px; border-radius: 9999px;
+  transition: background .15s ease, color .15s ease;
+  letter-spacing: -0.28px;
+}
+.nav-center a:hover { background: var(--canvas-soft); color: var(--ink); }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+@media (max-width: 900px) { .nav-center { display: none; } }
+
+.nav-pill {
+  display: inline-flex; align-items: center;
+  height: 28px; padding: 0 10px;
+  border-radius: 6px;
+  font-size: 14px; font-weight: 500;
+  letter-spacing: -0.28px;
+  border: 1px solid transparent;
+  cursor: pointer; text-decoration: none;
+  font-family: inherit;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.nav-pill-dark { background: var(--primary); color: var(--on-primary); }
+.nav-pill-dark:hover { background: #000; }
+.nav-pill-light { background: var(--canvas); color: var(--ink); }
+.nav-pill-light:hover { background: var(--canvas-soft); }
+.nav-pill-bordered { background: var(--canvas); color: var(--ink); border-color: var(--hairline); }
+.nav-pill-bordered:hover { border-color: var(--hairline-strong); }
+.nav-pill-bordered .star { color: var(--mute); margin-right: 6px; }
+
+/* —— Marketing banner pill —— */
+.banner-row {
+  display: flex; justify-content: center; padding: 32px 24px 0;
+}
+.banner-marketing {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 9999px;
+  padding: 6px 14px 6px 6px;
+  font-size: 13px; color: var(--body);
+  letter-spacing: -0.28px;
+  box-shadow: var(--shadow-2);
+}
+.banner-marketing .badge-inline {
+  display: inline-flex; align-items: center;
+  background: var(--canvas-soft); color: var(--body);
+  font-size: 12px; padding: 3px 9px; border-radius: 9999px;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0;
+}
+.banner-marketing .arrow { color: var(--mute); margin-left: 4px; }
+
+/* —— HERO with mesh gradient —— */
+.hero {
+  background: var(--canvas);
+  padding: 64px 24px 96px;
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+.hero-mesh {
+  position: absolute; left: 50%; top: -120px;
+  transform: translateX(-50%);
+  width: 1100px; height: 720px;
+  filter: blur(80px) saturate(115%);
+  opacity: 0.7;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 50% at 18% 32%, var(--g-develop-start) 0%, transparent 65%),
+    radial-gradient(34% 48% at 32% 56%, var(--g-develop-end) 0%, transparent 60%),
+    radial-gradient(34% 50% at 52% 30%, var(--g-preview-start) 0%, transparent 60%),
+    radial-gradient(38% 55% at 70% 60%, var(--g-preview-end) 0%, transparent 60%),
+    radial-gradient(34% 50% at 85% 28%, var(--g-ship-start) 0%, transparent 60%),
+    radial-gradient(38% 60% at 96% 64%, var(--g-ship-end) 0%, transparent 60%);
+  z-index: 0;
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 880px; margin: 0 auto;
+}
+.hero h1 {
+  font-size: clamp(40px, 6.5vw, 72px);
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: -3.6px;
+  color: var(--ink);
+  margin: 32px 0 24px;
+}
+.hero h1 .grad {
+  background: linear-gradient(90deg, var(--g-preview-start), var(--g-preview-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero .lead {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--body);
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+.hero-ctas {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+}
+
+/* —— Pill buttons — marketing-scale 100px —— */
+.pill {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 100px;
+  font-size: 16px; font-weight: 500; line-height: 1;
+  font-family: inherit;
+  border: 1px solid transparent;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.pill-primary { background: var(--primary); color: var(--on-primary); }
+.pill-primary:hover { background: #000; }
+.pill-secondary { background: var(--canvas); color: var(--ink); border-color: var(--hairline); }
+.pill-secondary:hover { border-color: var(--hairline-strong); }
+.pill-sm { height: 36px; padding: 0 16px; font-size: 14px; }
+
+/* —— Logo strip —— */
+.logo-strip {
+  display: flex; align-items: center; justify-content: center;
+  gap: 56px; flex-wrap: wrap;
+  padding: 32px 24px 64px;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+}
+.logo-strip-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--mute); letter-spacing: 0;
+  display: block; width: 100%; text-align: center; margin-bottom: 16px;
+}
+.brand-mark {
+  font-size: 18px; font-weight: 500; color: var(--body);
+  opacity: 0.7; letter-spacing: -0.4px;
+}
+.brand-mark.serif { font-family: serif; font-style: italic; }
+
+/* —— Section base —— */
+.section {
+  padding: 96px 24px;
+  background: var(--canvas);
+}
+.section-soft { background: var(--canvas-soft); }
+.section-dark { background: var(--primary); color: var(--on-primary); }
+.section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.section-head .eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--body);
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.section-head h2 {
+  font-size: clamp(28px, 4.5vw, 48px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -2.0px;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+.section-dark .section-head h2 { color: var(--on-primary); }
+.section-dark .section-head .eyebrow { color: var(--canvas-soft-2); opacity: 0.7; }
+.section-head p {
+  font-size: 18px; line-height: 1.55; color: var(--body); margin: 0;
+}
+.section-dark .section-head p { color: rgba(255,255,255,0.7); }
+
+/* —— Feature grid —— */
+.feature-row {
+  display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 900px) { .feature-row { grid-template-columns: 1fr; } }
+.card {
+  background: var(--canvas);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow-3);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.card .ico-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.card .ico {
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink);
+}
+.card .label-mono {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; color: var(--mute); letter-spacing: 0;
+  text-transform: uppercase;
+}
+.card h3 {
+  font-size: 20px; font-weight: 600;
+  line-height: 1.2; letter-spacing: -0.6px;
+  color: var(--ink); margin: 0;
+}
+.card p {
+  font-size: 14px; line-height: 1.55; color: var(--body); margin: 0;
+  letter-spacing: -0.28px;
+}
+.card .inline-link {
+  color: var(--link); font-size: 14px;
+  margin-top: auto; padding-top: 8px;
+  font-weight: 500;
+}
+.card .inline-link::after { content: " →"; }
+
+/* —— Code editor mockup (dark) —— */
+.split-band {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; align-items: stretch;
+}
+@media (max-width: 960px) { .split-band { grid-template-columns: 1fr; } }
+.code-editor {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-radius: 8px;
+  padding: 24px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+}
+.code-editor .head {
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 16px; border-bottom: 1px solid #2a2a2a;
+  margin-bottom: 16px;
+}
+.code-editor .head .dot { width: 10px; height: 10px; border-radius: 50%; background: #3a3a3a; }
+.code-editor .head .file {
+  margin-left: 12px; font-family: "Inter", sans-serif; font-size: 13px;
+  color: #999;
+}
+.code-editor pre { margin: 0; white-space: pre; color: var(--on-primary); }
+.code-editor .ln { color: #555; display: inline-block; width: 24px; text-align: right; padding-right: 12px; user-select: none; }
+.code-editor .k { color: #ff80bf; }
+.code-editor .s { color: var(--cyan); }
+.code-editor .c { color: #666; }
+.code-editor .v { color: var(--g-ship-end); }
+.code-editor .fn { color: var(--link); }
+.code-editor .deploy-out {
+  margin-top: 16px;
+  padding: 14px;
+  background: #0a0a0a;
+  border-radius: 6px;
+  border-left: 2px solid var(--success);
+  font-size: 12px;
+}
+.code-editor .deploy-out .ok { color: var(--cyan); }
+.code-editor .deploy-out .url { color: var(--link); }
+.code-editor .deploy-out .gray { color: #888; }
+
+.metrics-card {
+  background: var(--canvas);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow-3);
+  display: flex; flex-direction: column; gap: 18px;
+}
+.metrics-card .head { display: flex; align-items: center; justify-content: space-between; }
+.metrics-card .head h4 { margin: 0; font-size: 16px; font-weight: 500; letter-spacing: -0.32px; }
+.metrics-card .head .mono { font-size: 12px; color: var(--mute); }
+.metrics-card .grid {
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.metric {
+  background: var(--canvas-soft);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.metric .label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; color: var(--mute);
+  text-transform: uppercase;
+}
+.metric .value {
+  font-size: 28px; font-weight: 600; letter-spacing: -1.5px;
+  color: var(--ink); line-height: 1.1;
+  font-feature-settings: "tnum";
+}
+.metric .delta {
+  font-size: 12px; color: var(--success); font-family: "JetBrains Mono", monospace;
+}
+.metric .delta.down { color: var(--error); }
+
+/* —— Tab ghost pill row —— */
+.tab-row {
+  display: flex; gap: 4px; justify-content: center;
+  padding: 6px;
+  background: var(--canvas);
+  border-radius: 64px;
+  margin: 0 auto 48px;
+  width: fit-content;
+  box-shadow: var(--shadow-2);
+}
+.tab-ghost {
+  background: transparent; color: var(--body);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 64px;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.tab-ghost.active { background: var(--canvas-soft-2); color: var(--ink); }
+.tab-ghost:hover { color: var(--ink); }
+
+/* —— Template grid —— */
+.template-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1100px) { .template-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 800px) { .template-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .template-grid { grid-template-columns: 1fr; } }
+.template-card {
+  background: var(--canvas);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--shadow-2);
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.template-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-3); }
+.template-card .thumb {
+  aspect-ratio: 16 / 10;
+  border-radius: 4px;
+  background-color: var(--canvas-soft-2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.template-card .thumb.gradient-develop {
+  background: linear-gradient(135deg, var(--g-develop-start), var(--g-develop-end));
+}
+.template-card .thumb.gradient-preview {
+  background: linear-gradient(135deg, var(--g-preview-start), var(--g-preview-end));
+}
+.template-card .thumb.gradient-ship {
+  background: linear-gradient(135deg, var(--g-ship-start), var(--g-ship-end));
+}
+.template-card .thumb.dark { background: var(--primary); color: white; }
+.template-card .thumb .logo-glyph {
+  font-family: "Inter", sans-serif;
+  font-size: 32px; font-weight: 600; color: rgba(255,255,255,0.95);
+  letter-spacing: -2px;
+}
+.template-card .meta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+}
+.template-card .name { font-size: 14px; font-weight: 500; color: var(--ink); letter-spacing: -0.28px; }
+.template-card .author { font-size: 12px; color: var(--mute); font-family: "JetBrains Mono", monospace; }
+.template-card .badge-secondary {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; color: var(--body);
+  background: var(--canvas-soft);
+  border-radius: 9999px;
+  padding: 2px 8px;
+}
+
+/* —— Pricing —— */
+.tiers {
+  display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 900px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  background: var(--canvas);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: var(--shadow-4);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tier h3 {
+  font-size: 24px; font-weight: 600;
+  letter-spacing: -0.96px;
+  margin: 0;
+  color: var(--ink);
+}
+.tier .price-row { display: flex; align-items: baseline; gap: 6px; margin: 4px 0 0; }
+.tier .price {
+  font-size: 48px; font-weight: 600;
+  letter-spacing: -2.4px;
+  line-height: 1;
+  color: var(--ink);
+  font-feature-settings: "tnum";
+}
+.tier .per {
+  font-size: 14px; color: var(--mute);
+  font-family: "JetBrains Mono", monospace;
+}
+.tier .blurb {
+  font-size: 14px; color: var(--body);
+  letter-spacing: -0.28px; line-height: 1.55;
+  min-height: 42px; margin: 0;
+}
+.tier ul {
+  padding: 0; margin: 16px 0 24px; list-style: none;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.tier li {
+  display: flex; gap: 8px; align-items: start;
+  font-size: 14px; color: var(--body);
+  letter-spacing: -0.28px;
+}
+.tier li::before {
+  content: "✓"; flex: none;
+  color: var(--ink); font-size: 14px;
+  width: 16px;
+}
+.tier .pricing-cta { margin-top: auto; }
+.tier-featured {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.tier-featured h3, .tier-featured .price { color: var(--on-primary); }
+.tier-featured .per, .tier-featured .blurb, .tier-featured li { color: rgba(255,255,255,0.7); }
+.tier-featured li::before { color: var(--on-primary); }
+.tier-featured .label-top {
+  display: inline-flex; align-self: flex-start;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  margin-bottom: 4px;
+}
+
+/* —— Dark band code-editor showcase —— */
+.dark-band-inner { max-width: 1100px; margin: 0 auto; }
+.compute-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 48px;
+}
+@media (max-width: 900px) { .compute-grid { grid-template-columns: 1fr; } }
+.compute-card {
+  background: #1c1c1c;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.compute-card .mono-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; color: #888;
+  text-transform: uppercase;
+}
+.compute-card h4 {
+  font-size: 18px; font-weight: 600;
+  letter-spacing: -0.6px; color: white;
+  margin: 0;
+}
+.compute-card p {
+  font-size: 14px; color: rgba(255,255,255,0.65);
+  line-height: 1.55; margin: 0;
+  letter-spacing: -0.28px;
+}
+.compute-card .stat-line {
+  display: flex; justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid #2a2a2a;
+  font-size: 12px;
+  font-family: "JetBrains Mono", monospace;
+}
+.compute-card .stat-line .k { color: #888; }
+.compute-card .stat-line .v { color: var(--cyan); }
+
+/* —— Footer —— */
+footer {
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline);
+  padding: 64px 24px 32px;
+  color: var(--body);
+}
+.footer-grid {
+  display: grid; gap: 32px;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  max-width: 1400px; margin: 0 auto;
+}
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid .brand-mini {
+  display: flex; flex-direction: column; gap: 16px; max-width: 260px;
+}
+.footer-grid .brand-mini .small {
+  font-size: 13px; color: var(--body); letter-spacing: -0.28px;
+}
+.footer-grid h4 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--ink);
+  text-transform: uppercase; margin: 0 0 16px;
+}
+.footer-grid ul { padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0; }
+.footer-grid li a { font-size: 14px; color: var(--body); letter-spacing: -0.28px; }
+.footer-grid li a:hover { color: var(--ink); }
+.footer-bottom {
+  max-width: 1400px; margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+  display: flex; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  font-size: 12px; color: var(--mute);
+  letter-spacing: -0.24px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 9999px;
+  padding: 8px 14px;
+  font-size: 12px; color: var(--body);
+  font-family: "JetBrains Mono", monospace;
+  box-shadow: var(--shadow-2);
+}
+.src-link:hover { color: var(--ink); }
+
+/* ════════════════════════════════════════════ */
+/*           DESIGN SYSTEM REFERENCE             */
+/* ════════════════════════════════════════════ */
+.ds-section { background: var(--canvas); padding: 96px 24px; border-top: 1px solid var(--hairline); }
+.ds-intro { max-width: 720px; margin: 0 auto 64px; text-align: center; }
+.ds-intro .eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--body);
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.ds-intro h2 {
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 600;
+  letter-spacing: -2.0px;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+.ds-intro p {
+  font-size: 18px; color: var(--body); line-height: 1.55; margin: 0;
+}
+.ds-intro p a { color: var(--link); }
+
+.ds-block { max-width: 1200px; margin: 56px auto 0; padding-top: 48px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading {
+  font-size: 32px; font-weight: 600;
+  letter-spacing: -1.28px; line-height: 1.2;
+  margin: 0 0 20px; color: var(--ink);
+}
+.ds-caption {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; color: var(--mute);
+  text-transform: uppercase; margin: 28px 0 12px;
+}
+
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw {
+  background: var(--canvas);
+  border-radius: 8px;
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+}
+.ds-sw .chip { height: 56px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: -0.28px; }
+.ds-sw .val { font-size: 11px; color: var(--mute); margin-top: 2px; font-family: "JetBrains Mono", monospace; }
+
+.ds-typescale {
+  background: var(--canvas);
+  border-radius: 8px;
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+}
+.ds-tr {
+  display: grid; grid-template-columns: 140px 240px 1fr;
+  gap: 24px; padding: 22px 28px; align-items: baseline;
+  border-bottom: 1px solid var(--hairline);
+}
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font-size: 11px; color: var(--ink); font-family: "JetBrains Mono", monospace; }
+.ds-spec { font-size: 11px; color: var(--mute); font-family: "JetBrains Mono", monospace; }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 8px; } .ds-sam { font-size: 22px !important; line-height: 1.2 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(7, 1fr); }
+@media (max-width: 900px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 520px) { .ds-radius { grid-template-columns: repeat(2, 1fr); } }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-rad .box { width: 72px; height: 72px; background: var(--canvas); box-shadow: var(--shadow-2); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 640px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input {
+  height: 40px; padding: 0 12px; border-radius: 6px;
+  border: 1px solid var(--hairline);
+  background: var(--canvas); color: var(--ink);
+  font-family: inherit; font-size: 14px; font-weight: 400;
+  letter-spacing: -0.28px;
+  width: 100%;
+}
+.ds-input:focus, .ds-input.focused {
+  outline: none; border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+}
+.ds-field-label {
+  font-size: 11px; color: var(--mute);
+  font-family: "JetBrains Mono", monospace;
+  margin-bottom: 6px; display: block;
+}
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini {
+  background: var(--canvas);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow-3);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ds-card-mini h4 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.6px; color: var(--ink); }
+.ds-card-mini p { margin: 0; font-size: 14px; color: var(--body); letter-spacing: -0.28px; line-height: 1.55; }
+.ds-card-mini.dark { background: var(--primary); color: var(--on-primary); }
+.ds-card-mini.dark h4 { color: white; }
+.ds-card-mini.dark p { color: rgba(255,255,255,0.7); }
+.ds-card-mini.soft { background: var(--canvas-soft); }
+
+</style>
+</head>
+<body>
+
+<header class="top-nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo-mark">
+      <svg width="22" height="20" viewBox="0 0 76 65" fill="none">
+        <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#171717"/>
+      </svg>
+      <span>vercell</span>
+    </a>
+    <div class="nav-center">
+      <a href="#">Products</a>
+      <a href="#">Solutions</a>
+      <a href="#">Resources</a>
+      <a href="#">Enterprise</a>
+      <a href="#">Docs</a>
+      <a href="#">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-pill nav-pill-bordered"><span class="star">✦</span> Ask AI</a>
+      <a href="#" class="nav-pill nav-pill-light">Log In</a>
+      <a href="#" class="nav-pill nav-pill-dark">Sign Up</a>
+    </div>
+  </div>
+</header>
+
+<!-- ─── BANNER + HERO ─── -->
+<div class="banner-row">
+  <a href="#" class="banner-marketing">
+    <span class="badge-inline">v4.0</span>
+    Frontend Cloud is here · read the announcement
+    <span class="arrow">→</span>
+  </a>
+</div>
+
+<section class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-inner">
+    <h1>Build and deploy<br>on <span class="grad">the AI Cloud.</span></h1>
+    <p class="lead">Vercell provides the developer tools and cloud infrastructure to build, scale, and secure a faster, more personalized web. Your favorite frameworks, hosted globally on the edge.</p>
+    <div class="hero-ctas">
+      <a href="#" class="pill pill-primary">Start Deploying</a>
+      <a href="#" class="pill pill-secondary">Get a Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LOGO STRIP ─── -->
+<div class="logo-strip">
+  <span class="logo-strip-label">// trusted by teams building at scale</span>
+  <span class="brand-mark">notion</span>
+  <span class="brand-mark serif">Stripe</span>
+  <span class="brand-mark">linear</span>
+  <span class="brand-mark serif">Adobe</span>
+  <span class="brand-mark">supabase</span>
+  <span class="brand-mark">framer</span>
+  <span class="brand-mark serif">Mistral</span>
+</div>
+
+<!-- ─── FEATURE BAND — three cards ─── -->
+<section class="section section-soft">
+  <div class="wrap-narrow">
+    <div class="section-head">
+      <p class="eyebrow">// FRONTEND CLOUD</p>
+      <h2>Your frontend, delivered.</h2>
+      <p>Deploy from a Git push. Preview every branch on a unique URL. Ship to a global edge in less than ten seconds.</p>
+    </div>
+
+    <div class="feature-row">
+      <div class="card">
+        <div class="ico-row">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 22 2 22"/></svg></div>
+          <span class="label-mono">/develop</span>
+        </div>
+        <h3>Preview every commit.</h3>
+        <p>Every git branch lands on a unique URL with isolated env vars, integration tests, and a comment thread your designer can click on.</p>
+        <a href="#" class="inline-link">Read the docs</a>
+      </div>
+      <div class="card">
+        <div class="ico-row">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
+          <span class="label-mono">/preview</span>
+        </div>
+        <h3>Global, by default.</h3>
+        <p>Static assets cached at 119 regions. Server functions cold-start in 50ms or less. Latency you can promise without paging the on-call.</p>
+        <a href="#" class="inline-link">See the edge network</a>
+      </div>
+      <div class="card">
+        <div class="ico-row">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <span class="label-mono">/ship</span>
+        </div>
+        <h3>Rollback in one click.</h3>
+        <p>Promote to production with a click. Revert to last green deploy in less time than it takes to read this sentence. Atomic, immutable, observable.</p>
+        <a href="#" class="inline-link">See deploy dashboards</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SPLIT: editor + metrics ─── -->
+<section class="section">
+  <div class="wrap-narrow">
+    <div class="section-head">
+      <p class="eyebrow">// DEVELOPER EXPERIENCE</p>
+      <h2>Git push. Production deploy.</h2>
+      <p>The CLI, the dashboard, and the integration are the same workflow — three surfaces over one truth.</p>
+    </div>
+
+    <div class="split-band">
+      <div class="code-editor">
+        <div class="head">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="file">~ vercell deploy --prod</span>
+        </div>
+<pre><span class="ln">1</span><span class="c">// next.config.ts</span>
+<span class="ln">2</span><span class="k">import</span> {<span class="v">defineConfig</span>} <span class="k">from</span> <span class="s">"vercell"</span>;
+<span class="ln">3</span>
+<span class="ln">4</span><span class="k">export default</span> <span class="fn">defineConfig</span>({
+<span class="ln">5</span>  <span class="v">runtime</span>: <span class="s">"edge"</span>,
+<span class="ln">6</span>  <span class="v">regions</span>: [<span class="s">"sfo1"</span>, <span class="s">"fra1"</span>, <span class="s">"hnd1"</span>],
+<span class="ln">7</span>  <span class="v">cache</span>: { <span class="v">isr</span>: <span class="s">"60s"</span> },
+<span class="ln">8</span>});</pre>
+        <div class="deploy-out">
+          <div class="gray">› Building 47 routes...</div>
+          <div class="gray">› Uploading 312 files (2.1 MB)...</div>
+          <div><span class="ok">✓</span> Production: <span class="url">https://app.vercell.app</span> <span class="gray">[ready in 8.3s]</span></div>
+        </div>
+      </div>
+
+      <div class="metrics-card">
+        <div class="head">
+          <h4>Last 24 hours · production</h4>
+          <span class="mono">app.vercell.app</span>
+        </div>
+        <div class="grid">
+          <div class="metric">
+            <span class="label">// REQUESTS</span>
+            <span class="value">2.4M</span>
+            <span class="delta">+18.2% vs avg</span>
+          </div>
+          <div class="metric">
+            <span class="label">// p75 TTFB</span>
+            <span class="value">142ms</span>
+            <span class="delta">−6ms vs avg</span>
+          </div>
+          <div class="metric">
+            <span class="label">// edge cache</span>
+            <span class="value">98.4%</span>
+            <span class="delta">+0.3pp</span>
+          </div>
+          <div class="metric">
+            <span class="label">// errors</span>
+            <span class="value">0.04%</span>
+            <span class="delta down">+2 incidents</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DARK BAND — compute model ─── -->
+<section class="section section-dark">
+  <div class="dark-band-inner">
+    <div class="section-head">
+      <p class="eyebrow">// COMPUTE</p>
+      <h2 style="color: var(--on-primary);">A compute model for all workloads.</h2>
+      <p>Edge, serverless, fluid — the same project, three runtime shapes. Pick the right one per route, never per app.</p>
+    </div>
+
+    <div class="compute-grid">
+      <div class="compute-card">
+        <span class="mono-label">// EDGE</span>
+        <h4>0ms cold start.</h4>
+        <p>Render at the closest point of presence. Best for personalization, A/B routing, geo-fencing.</p>
+        <div class="stat-line"><span class="k">p99 latency</span><span class="v">38ms</span></div>
+      </div>
+      <div class="compute-card">
+        <span class="mono-label">// SERVERLESS</span>
+        <h4>Pay per request.</h4>
+        <p>Node 22 functions that scale to zero between bursts. Best for APIs and long-running work.</p>
+        <div class="stat-line"><span class="k">scale ceiling</span><span class="v">100K rps</span></div>
+      </div>
+      <div class="compute-card">
+        <span class="mono-label">// FLUID</span>
+        <h4>One isolate, many requests.</h4>
+        <p>Multiplexed concurrent execution. Best for AI inference, streaming responses, agentic loops.</p>
+        <div class="stat-line"><span class="k">concurrency</span><span class="v">∞</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEMPLATE GRID ─── -->
+<section class="section section-soft">
+  <div class="wrap-narrow">
+    <div class="section-head">
+      <p class="eyebrow">// TEMPLATES</p>
+      <h2>Deploy your first app in seconds.</h2>
+      <p>Production-grade starting points for every framework. Click deploy, fork the source, ship Friday.</p>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab-ghost active">AI Apps</button>
+      <button class="tab-ghost">Web Apps</button>
+      <button class="tab-ghost">E-commerce</button>
+      <button class="tab-ghost">Marketing</button>
+      <button class="tab-ghost">Platforms</button>
+    </div>
+
+    <div class="template-grid">
+      <div class="template-card">
+        <div class="thumb gradient-develop"><span class="logo-glyph">▲</span></div>
+        <div class="meta">
+          <span class="name">Next.js Boilerplate</span>
+          <span class="badge-secondary">New</span>
+        </div>
+        <span class="author">@vercell</span>
+      </div>
+      <div class="template-card">
+        <div class="thumb gradient-preview"><span class="logo-glyph">AI</span></div>
+        <div class="meta">
+          <span class="name">AI Chatbot</span>
+          <span class="badge-secondary">SDK</span>
+        </div>
+        <span class="author">@vercell-labs</span>
+      </div>
+      <div class="template-card">
+        <div class="thumb gradient-ship"><span class="logo-glyph">$</span></div>
+        <div class="meta">
+          <span class="name">Commerce</span>
+          <span class="badge-secondary">Live</span>
+        </div>
+        <span class="author">@shopify</span>
+      </div>
+      <div class="template-card">
+        <div class="thumb dark"><span class="logo-glyph">Sv</span></div>
+        <div class="meta">
+          <span class="name">SvelteKit App</span>
+          <span class="badge-secondary">v2</span>
+        </div>
+        <span class="author">@sveltejs</span>
+      </div>
+      <div class="template-card">
+        <div class="thumb" style="background: linear-gradient(135deg, #1a1a3e, #4a1a8e);"><span class="logo-glyph">Nx</span></div>
+        <div class="meta">
+          <span class="name">Nuxt 4 Starter</span>
+          <span class="badge-secondary">Beta</span>
+        </div>
+        <span class="author">@nuxt</span>
+      </div>
+      <div class="template-card">
+        <div class="thumb" style="background: linear-gradient(135deg, #00dfd8, #f9cb28);"><span class="logo-glyph">As</span></div>
+        <div class="meta">
+          <span class="name">Astro Blog</span>
+          <span class="badge-secondary">Pop.</span>
+        </div>
+        <span class="author">@astro</span>
+      </div>
+      <div class="template-card">
+        <div class="thumb" style="background: linear-gradient(135deg, #ff0080, #7928ca);"><span class="logo-glyph">Rm</span></div>
+        <div class="meta">
+          <span class="name">Remix Stack</span>
+          <span class="badge-secondary">v3</span>
+        </div>
+        <span class="author">@remix-run</span>
+      </div>
+      <div class="template-card">
+        <div class="thumb" style="background: linear-gradient(135deg, #007cf0, #ff4d4d);"><span class="logo-glyph">Hn</span></div>
+        <div class="meta">
+          <span class="name">Hono Edge API</span>
+          <span class="badge-secondary">µ</span>
+        </div>
+        <span class="author">@honojs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section class="section">
+  <div class="wrap-narrow">
+    <div class="section-head">
+      <p class="eyebrow">// PRICING</p>
+      <h2>Pay for what runs.</h2>
+      <p>No deploy fees, no minimum spend, free TLS forever. Active CPU billing per millisecond — not per request.</p>
+    </div>
+
+    <div class="tiers">
+      <div class="tier">
+        <h3>Hobby</h3>
+        <div class="price-row"><span class="price">$0</span><span class="per">/forever</span></div>
+        <p class="blurb">For personal projects, side hustles, and learning the platform.</p>
+        <ul>
+          <li>Unlimited deploys from Git</li>
+          <li>100 GB bandwidth / month</li>
+          <li>Preview URLs &amp; rollbacks</li>
+          <li>Community support</li>
+        </ul>
+        <div class="pricing-cta"><a href="#" class="pill pill-secondary pill-sm">Start free</a></div>
+      </div>
+      <div class="tier tier-featured">
+        <span class="label-top">// MOST CHOSEN</span>
+        <h3>Pro</h3>
+        <div class="price-row"><span class="price">$20</span><span class="per">/seat/mo</span></div>
+        <p class="blurb">For teams running production workloads with strict SLAs.</p>
+        <ul>
+          <li>Everything in Hobby</li>
+          <li>1 TB bandwidth included</li>
+          <li>Concurrent builds &amp; CDN</li>
+          <li>Analytics, Speed Insights</li>
+          <li>Email + Slack support</li>
+        </ul>
+        <div class="pricing-cta"><a href="#" class="pill pill-sm" style="background: white; color: var(--ink);">Upgrade</a></div>
+      </div>
+      <div class="tier">
+        <h3>Enterprise</h3>
+        <div class="price-row"><span class="price">Custom</span></div>
+        <p class="blurb">For platforms processing billions, with audit, SSO, and dedicated support.</p>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>SAML SSO &amp; SCIM</li>
+          <li>SOC 2 II · HIPAA · ISO</li>
+          <li>Dedicated infrastructure</li>
+          <li>24×7 support · SLA 99.99%</li>
+        </ul>
+        <div class="pricing-cta"><a href="#" class="pill pill-secondary pill-sm">Contact sales</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!--          DESIGN SYSTEM REFERENCE             -->
+<!-- ════════════════════════════════════════════ -->
+<section class="ds-section">
+  <div class="wrap">
+    <div class="ds-intro">
+      <p class="eyebrow">// DESIGN SYSTEM</p>
+      <h2>Ink, white, and one mesh.</h2>
+      <p>Vercel's chrome is one of the cleanest stark systems on the web — black ink on near-white canvas, a 200-step gray scale, mono captions for technical voice, and a multi-stop mesh gradient as the entire decoration. Tokens below are sourced from the brand's <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.vercel.html" target="_blank" rel="noopener">DESIGN.md</a>.</p>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+
+      <p class="ds-caption">// Surface — the four-step ladder</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid var(--hairline)"></div><div class="meta"><div class="name">canvas</div><div class="val">#ffffff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fafafa"></div><div class="meta"><div class="name">canvas-soft</div><div class="val">#fafafa</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f5f5f5"></div><div class="meta"><div class="name">canvas-soft-2</div><div class="val">#f5f5f5</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#171717"></div><div class="meta"><div class="name">primary / ink</div><div class="val">#171717</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ebebeb"></div><div class="meta"><div class="name">hairline</div><div class="val">#ebebeb</div></div></div>
+      </div>
+
+      <p class="ds-caption">// Text &amp; mute</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#171717"></div><div class="meta"><div class="name">ink</div><div class="val">#171717</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4d4d4d"></div><div class="meta"><div class="name">body</div><div class="val">#4d4d4d</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#888888"></div><div class="meta"><div class="name">mute</div><div class="val">#888888</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#a1a1a1"></div><div class="meta"><div class="name">hairline-strong</div><div class="val">#a1a1a1</div></div></div>
+      </div>
+
+      <p class="ds-caption">// Semantic</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0070f3"></div><div class="meta"><div class="name">link / success</div><div class="val">#0070f3</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#d3e5ff"></div><div class="meta"><div class="name">link-bg-soft</div><div class="val">#d3e5ff</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ee0000"></div><div class="meta"><div class="name">error</div><div class="val">#ee0000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f5a623"></div><div class="meta"><div class="name">warning</div><div class="val">#f5a623</div></div></div>
+      </div>
+
+      <p class="ds-caption">// Mesh gradient stops — the entire decoration system</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg, #007cf0, #00dfd8)"></div><div class="meta"><div class="name">develop</div><div class="val">#007cf0 → #00dfd8</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg, #7928ca, #ff0080)"></div><div class="meta"><div class="name">preview</div><div class="val">#7928ca → #ff0080</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg, #ff4d4d, #f9cb28)"></div><div class="meta"><div class="name">ship</div><div class="val">#ff4d4d → #f9cb28</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#50e3c2"></div><div class="meta"><div class="name">cyan</div><div class="val">#50e3c2</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#7928ca"></div><div class="meta"><div class="name">violet</div><div class="val">#7928ca</div></div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-caption" style="margin-bottom: 16px;">// Geist (subbed Inter) w400/500/600 · Geist Mono (subbed JetBrains Mono) for code &amp; eyebrows · ceiling weight 600</p>
+      <div class="ds-typescale">
+        <div class="ds-tr">
+          <span class="ds-tok">display-xl</span>
+          <span class="ds-spec">48 · w600 · −2.4 · 48</span>
+          <div class="ds-sam" style="font-size:44px; font-weight:600; letter-spacing:-2.4px; line-height:48px;">Build and deploy on the AI Cloud.</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">display-lg</span>
+          <span class="ds-spec">32 · w600 · −1.28 · 40</span>
+          <div class="ds-sam" style="font-size:30px; font-weight:600; letter-spacing:-1.28px; line-height:40px;">Your frontend, delivered.</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">display-md</span>
+          <span class="ds-spec">24 · w600 · −0.96 · 32</span>
+          <div class="ds-sam" style="font-size:24px; font-weight:600; letter-spacing:-0.96px; line-height:32px;">Pricing tier &middot; card cluster head</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">display-sm</span>
+          <span class="ds-spec">20 · w600 · −0.6 · 28</span>
+          <div class="ds-sam" style="font-size:20px; font-weight:600; letter-spacing:-0.6px; line-height:28px;">Inline display micro-heading</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">body-lg</span>
+          <span class="ds-spec">18 · w400 · 0 · 28</span>
+          <div class="ds-sam" style="font-size:18px; font-weight:400; line-height:28px;">Lead paragraph under section headlines. Set in geometric sans, weight 400, neutral tracking.</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">body-md</span>
+          <span class="ds-spec">16 · w400 · 0 · 24</span>
+          <div class="ds-sam" style="font-size:16px; font-weight:400; line-height:24px;">Default body paragraph. Sentence-case. Tracking neutral. The brand reads engineered, not editorial.</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">body-sm</span>
+          <span class="ds-spec">14 · w400 · −0.28 · 20</span>
+          <div class="ds-sam" style="font-size:14px; font-weight:400; letter-spacing:-0.28px; line-height:20px;">Secondary body · nav links · button-md labels</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">caption-mono</span>
+          <span class="ds-spec">12 · w400 · 0 · 16 · mono</span>
+          <div class="ds-sam mono" style="font-size:12px; line-height:16px;">// section eyebrow — mono caps for the technical voice</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">code</span>
+          <span class="ds-spec">13 · w400 · 0 · 20 · mono</span>
+          <div class="ds-sam mono" style="font-size:13px; line-height:20px;">$ vercell deploy --prod</div>
+        </div>
+        <div class="ds-tr">
+          <span class="ds-tok">button-lg</span>
+          <span class="ds-spec">16 · w500 · 0 · 24</span>
+          <div class="ds-sam" style="font-size:16px; font-weight:500; line-height:24px;">Start Deploying &middot; Get a Demo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <div class="ds-radius">
+        <div class="ds-rad"><div class="box" style="border-radius:0"></div><span class="ds-tok">none</span><span class="ds-spec">0 · hero</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">xs</span><span class="ds-spec">4</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:6px"></div><span class="ds-tok">sm</span><span class="ds-spec">6 · inputs</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:8px"></div><span class="ds-tok">md</span><span class="ds-spec">8 · cards</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:12px"></div><span class="ds-tok">lg</span><span class="ds-spec">12 · pricing</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:64px"></div><span class="ds-tok">pill-sm</span><span class="ds-spec">64 · tabs</span></div>
+        <div class="ds-rad"><div class="box" style="border-radius:100px"></div><span class="ds-tok">pill</span><span class="ds-spec">100 · CTAs</span></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+
+      <p class="ds-caption">// Buttons — pill 100r marketing scale · sm 6r nav scale</p>
+      <div class="ds-comp-row">
+        <a href="#" class="pill pill-primary">Start Deploying</a>
+        <a href="#" class="pill pill-secondary">Get a Demo</a>
+        <a href="#" class="pill pill-primary pill-sm">Sign Up</a>
+        <a href="#" class="pill pill-secondary pill-sm">Log In</a>
+        <a href="#" class="nav-pill nav-pill-dark">nav-cta-signup</a>
+        <a href="#" class="nav-pill nav-pill-light">nav-cta-login</a>
+        <a href="#" class="nav-pill nav-pill-bordered"><span class="star">✦</span> Ask AI</a>
+        <button class="tab-ghost active">tab-ghost</button>
+      </div>
+
+      <p class="ds-caption">// Inputs — 6r · 40h · 0/12 padding · ink focus ring</p>
+      <div class="ds-input-pair">
+        <div>
+          <label class="ds-field-label">form-input</label>
+          <input class="ds-input" placeholder="yourname@team.com" />
+        </div>
+        <div>
+          <label class="ds-field-label">form-input · focused</label>
+          <input class="ds-input focused" value="yzfly@vercell.com" />
+        </div>
+      </div>
+
+      <p class="ds-caption">// Badges &amp; banners</p>
+      <div class="ds-comp-row">
+        <span style="display:inline-block;padding:2px 8px;border-radius:9999px;background:var(--canvas-soft);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--body);">badge-secondary</span>
+        <span style="display:inline-block;padding:2px 8px;border-radius:9999px;background:var(--link-bg-soft);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--link-deep);">v4.0 NEW</span>
+        <span style="display:inline-block;padding:2px 8px;border-radius:9999px;background:var(--warning-soft);font-family:'JetBrains Mono',monospace;font-size:11px;color:#7a4a10;">BETA</span>
+        <span class="banner-marketing" style="margin: 0;">
+          <span class="badge-inline">v4.0</span>Marketing banner pill<span class="arrow">→</span>
+        </span>
+      </div>
+
+      <p class="ds-caption">// Cards — 8r marketing · 12r pricing · stacked shadow + inset hairline</p>
+      <div class="ds-card-grid">
+        <div class="ds-card-mini">
+          <h4>card-marketing</h4>
+          <p>White canvas, 8r, padding 24. Stacked shadow built from 3 small offsets + inset 1px ring — never a heavy single drop.</p>
+        </div>
+        <div class="ds-card-mini soft">
+          <h4>card-soft</h4>
+          <p>Canvas-soft (#fafafa) — the page body tone. Used inside cluster groups to differentiate from pure-canvas cards.</p>
+        </div>
+        <div class="ds-card-mini dark">
+          <h4>pricing-card-featured</h4>
+          <p>Polarity-flipped to ink primary with white text. The dark surface IS the featured-tier signal — never an accent ribbon.</p>
+        </div>
+      </div>
+
+      <p class="ds-caption">// Code editor mockup — the brand's signature dark surface</p>
+      <div class="code-editor" style="max-width: 600px;">
+        <div class="head">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="file">~ component-spec.ts</span>
+        </div>
+<pre><span class="k">type</span> <span class="v">PillButton</span> = {
+  <span class="v">radius</span>: <span class="s">"100px"</span>; <span class="c">// marketing-scale</span>
+  <span class="v">height</span>: <span class="s">48</span>;     <span class="c">// pixels</span>
+  <span class="v">weight</span>: <span class="s">500</span>;
+};</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="brand-mini">
+      <div class="logo-mark">
+        <svg width="20" height="18" viewBox="0 0 76 65" fill="none">
+          <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#171717"/>
+        </svg>
+        <span>vercell</span>
+      </div>
+      <p class="small">A Vercel-inspired single-page composition. Tokens and components sourced from awesome-design-md.</p>
+    </div>
+    <div>
+      <h4>// products</h4>
+      <ul>
+        <li><a href="#">Frontend Cloud</a></li>
+        <li><a href="#">Edge Functions</a></li>
+        <li><a href="#">Compute</a></li>
+        <li><a href="#">AI SDK</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>// resources</h4>
+      <ul>
+        <li><a href="#">Docs</a></li>
+        <li><a href="#">Templates</a></li>
+        <li><a href="#">Showcase</a></li>
+        <li><a href="#">Status</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>// company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Customers</a></li>
+        <li><a href="#">Newsroom</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>// legal</h4>
+      <ul>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© vercell-inspired · generated for design study</div>
+    <div>ink #171717 · pill 100r · Geist (sub. Inter) · mono caps</div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.vercel.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

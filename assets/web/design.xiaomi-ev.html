@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>小米汽车 Xiaomi EV — Design System Study</title>
+<meta name="description" content="小米汽车 SU7 / SU7 Ultra 设计语言研究: 黑色为底, 极速红与小米橙双 accent, 性能数据感, 跑车叙事. 营销 Demo + 设计系统参考." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Brand */
+  --mi-orange: #FF6900;
+  --mi-orange-hover: #ff7d24;
+  --su7-red: #E1162B;
+  --su7-red-hover: #f02a40;
+  /* Surfaces */
+  --black: #000000;
+  --ink-0: #0a0a0a;
+  --ink-1: #141414;
+  --ink-2: #1a1a1a;
+  --ink-3: #222222;
+  --silver: #c8ccd1;
+  --silver-2: #8a8f96;
+  --white: #ffffff;
+  --paper: #f5f5f7;
+  /* Text */
+  --text-on-dark: #ffffff;
+  --text-soft: rgba(255,255,255,0.72);
+  --text-mute: rgba(255,255,255,0.48);
+  --text-dark: #0a0a0a;
+  --text-body: #3a3a3c;
+  --text-tert: #6e6e73;
+  /* Type */
+  --font-display: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  --font-text: "Noto Sans SC", "Inter", "PingFang SC", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Radius */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-full: 999px;
+  /* Motion */
+  --t: 0.32s cubic-bezier(0.5, 0, 0, 0.75);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--black);
+  color: var(--text-on-dark);
+  font-family: var(--font-text);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Nav ===== */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; padding: 14px 32px; transition: background-color var(--t), border-color var(--t); border-bottom: 1px solid transparent; }
+.nav.scrolled { background: rgba(0,0,0,0.78); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border-bottom-color: rgba(255,255,255,0.06); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1240px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 28px; height: 28px; border-radius: 6px; background: var(--mi-orange); display: grid; place-items: center; color: var(--black); font-family: var(--font-display); font-weight: 900; font-size: 14px; letter-spacing: -1px; }
+.brand-text { font-family: var(--font-display); font-size: 16px; font-weight: 700; letter-spacing: 0.5px; color: var(--text-on-dark); }
+.brand-text .cn { font-family: var(--font-text); margin-left: 4px; opacity: 0.92; }
+.nav-mid { display: flex; gap: 4px; }
+.nav-btn { background: transparent; border: 0; color: var(--text-on-dark); font-size: 14px; font-weight: 500; padding: 6px 14px; min-height: 34px; border-radius: var(--r-xs); cursor: pointer; transition: color var(--t), background var(--t); }
+.nav-btn:hover { background: rgba(255,255,255,0.08); }
+.nav-right { display: flex; gap: 6px; align-items: center; }
+.icon-btn { background: transparent; border: 0; width: 34px; height: 34px; border-radius: var(--r-xs); display: grid; place-items: center; color: var(--text-on-dark); cursor: pointer; transition: background var(--t); }
+.icon-btn:hover { background: rgba(255,255,255,0.08); }
+.icon-btn svg { width: 18px; height: 18px; }
+
+/* ===== Buttons ===== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 600; padding: 0 22px; min-height: 44px; min-width: 180px; border-radius: var(--r-sm); border: 1px solid transparent; cursor: pointer; transition: background var(--t), color var(--t), border-color var(--t), transform 0.15s; }
+.btn:active { transform: scale(0.98); }
+.btn-orange { background: var(--mi-orange); color: var(--black); }
+.btn-orange:hover { background: var(--mi-orange-hover); }
+.btn-red { background: var(--su7-red); color: var(--white); }
+.btn-red:hover { background: var(--su7-red-hover); }
+.btn-ghost-dark { background: rgba(255,255,255,0.08); color: var(--white); border-color: rgba(255,255,255,0.18); backdrop-filter: blur(12px); }
+.btn-ghost-dark:hover { background: rgba(255,255,255,0.16); }
+.btn-outline-light { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.4); }
+.btn-outline-light:hover { border-color: var(--white); background: rgba(255,255,255,0.06); }
+
+/* ===== Hero ===== */
+.hero { position: relative; min-height: 100vh; padding: 120px 24px 60px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; align-items: center; background: radial-gradient(120% 80% at 50% 20%, #1a1a1a 0%, #0a0a0a 55%, #000 100%); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 50% 100%, rgba(225,22,43,0.18), transparent 70%); pointer-events: none; }
+.hero-top { text-align: center; position: relative; z-index: 2; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: var(--r-full); background: rgba(225,22,43,0.18); border: 1px solid rgba(225,22,43,0.5); color: #ff6b7a; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
+.hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--su7-red); }
+.hero-title { font-family: var(--font-display); font-size: clamp(48px, 9vw, 128px); font-weight: 900; color: var(--white); line-height: 0.95; margin: 0 0 14px; letter-spacing: -3px; }
+.hero-title .accent { color: var(--su7-red); }
+.hero-sub { font-size: 16px; color: var(--text-soft); margin: 0 auto; max-width: 560px; font-weight: 400; }
+.hero-stage { width: min(1100px, 95vw); position: relative; z-index: 2; margin: -20px auto 0; }
+.hero-bottom { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.hero-meta { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; color: var(--text-mute); font-size: 12px; }
+.hero-meta span { display: flex; align-items: center; gap: 6px; }
+.hero-meta svg { width: 14px; height: 14px; color: var(--mi-orange); }
+
+/* ===== Spec strip ===== */
+.spec-strip { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 64px 24px; }
+.spec-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
+.spec-cell { text-align: left; }
+.spec-val { font-family: var(--font-display); font-size: clamp(36px, 4.5vw, 64px); font-weight: 800; color: var(--white); letter-spacing: -2px; line-height: 1; }
+.spec-val .unit { font-size: 14px; font-weight: 500; color: var(--text-soft); margin-left: 6px; letter-spacing: 0; }
+.spec-label { font-size: 12px; font-weight: 500; color: var(--text-mute); margin-top: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.spec-cell.accent .spec-val { color: var(--su7-red); }
+
+/* ===== Section base ===== */
+.section { padding: 120px 24px; position: relative; }
+.section.dark { background: var(--black); }
+.section.darker { background: #0a0a0a; }
+.section.light { background: var(--white); color: var(--text-dark); }
+.section-head { max-width: 1100px; margin: 0 auto 56px; }
+.section-eyebrow { display: inline-block; font-size: 12px; font-weight: 600; color: var(--mi-orange); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+.section-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 800; color: var(--white); line-height: 1.05; letter-spacing: -2px; margin: 0 0 16px; }
+.section.light .section-title { color: var(--text-dark); }
+.section-desc { font-size: 16px; color: var(--text-soft); max-width: 640px; line-height: 1.6; margin: 0; }
+.section.light .section-desc { color: var(--text-body); }
+
+/* ===== Performance feature ===== */
+.perf-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.perf-card { background: linear-gradient(180deg, #161616 0%, #0c0c0c 100%); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r-md); padding: 32px; transition: border-color var(--t), transform var(--t); }
+.perf-card:hover { border-color: rgba(225,22,43,0.5); transform: translateY(-4px); }
+.perf-card .ico { width: 44px; height: 44px; border-radius: var(--r-sm); background: rgba(255,105,0,0.12); color: var(--mi-orange); display: grid; place-items: center; margin-bottom: 22px; }
+.perf-card .ico svg { width: 22px; height: 22px; }
+.perf-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--white); margin: 0 0 8px; letter-spacing: -0.5px; }
+.perf-card p { font-size: 14px; color: var(--text-soft); margin: 0 0 18px; line-height: 1.6; }
+.perf-card .stat { display: flex; align-items: baseline; gap: 6px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06); }
+.perf-card .stat-num { font-family: var(--font-display); font-size: 32px; font-weight: 800; color: var(--su7-red); letter-spacing: -1px; }
+.perf-card .stat-unit { font-size: 13px; color: var(--text-mute); }
+
+/* ===== Spec table (Apple-like) ===== */
+.spec-table-wrap { max-width: 1100px; margin: 0 auto; background: linear-gradient(180deg, #141414, #0a0a0a); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-md); overflow: hidden; }
+.spec-table-head { padding: 32px 32px 0; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+.spec-table-head h3 { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--white); margin: 0; letter-spacing: -1px; }
+.spec-table-head .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: var(--r-full); background: rgba(225,22,43,0.16); border: 1px solid rgba(225,22,43,0.4); color: var(--su7-red); font-size: 12px; font-weight: 600; }
+.spec-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+.spec-table th, .spec-table td { padding: 18px 32px; text-align: left; border-top: 1px solid rgba(255,255,255,0.06); font-size: 14px; }
+.spec-table th { color: var(--text-mute); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; width: 40%; }
+.spec-table td { color: var(--white); font-weight: 500; }
+.spec-table td .big { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--mi-orange); letter-spacing: -0.5px; margin-right: 4px; }
+.spec-table tr:last-child th, .spec-table tr:last-child td { border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+/* ===== Model selector / pricing ===== */
+.models { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.model-card { background: linear-gradient(180deg, #161616 0%, #0a0a0a 100%); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-md); padding: 36px 28px; position: relative; overflow: hidden; }
+.model-card.featured { border-color: var(--su7-red); }
+.model-card.featured::before { content: "SU7 ULTRA"; position: absolute; top: 16px; right: 16px; background: var(--su7-red); color: var(--white); font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: var(--r-xs); letter-spacing: 1px; }
+.model-name { font-family: var(--font-display); font-size: 28px; font-weight: 800; letter-spacing: -1px; color: var(--white); margin: 0 0 6px; }
+.model-tag { font-size: 13px; color: var(--mi-orange); margin-bottom: 24px; font-weight: 500; }
+.model-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 28px; }
+.model-price .from { font-size: 12px; color: var(--text-mute); margin-right: 4px; }
+.model-price .amount { font-family: var(--font-display); font-size: 40px; font-weight: 800; color: var(--white); letter-spacing: -1.5px; }
+.model-price .unit { font-size: 13px; color: var(--text-soft); }
+.model-feats { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 12px; }
+.model-feats li { font-size: 13px; color: var(--text-soft); display: flex; gap: 10px; align-items: center; }
+.model-feats svg { width: 14px; height: 14px; color: var(--mi-orange); flex-shrink: 0; }
+
+/* ===== Trust band ===== */
+.trust-band { background: linear-gradient(135deg, #0a0a0a 0%, #1a0408 100%); padding: 80px 24px; text-align: center; border-top: 1px solid rgba(225,22,43,0.2); border-bottom: 1px solid rgba(225,22,43,0.2); }
+.trust-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+.trust-num { font-family: var(--font-display); font-size: 56px; font-weight: 900; color: var(--white); letter-spacing: -2px; line-height: 1; }
+.trust-num .red { color: var(--su7-red); }
+.trust-label { font-size: 13px; color: var(--text-soft); margin-top: 14px; }
+
+/* ===== DESIGN SYSTEM ===== */
+.ds-section { background: var(--white); color: var(--text-dark); padding: 120px 24px 144px; }
+.ds-wrap { max-width: 1240px; margin: 0 auto; }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 64px; }
+.ds-eyebrow { font-size: 12px; font-weight: 600; color: var(--mi-orange); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; }
+.ds-intro h2 { font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); font-weight: 800; margin: 0 0 12px; line-height: 1.05; color: var(--text-dark); letter-spacing: -1.5px; }
+.ds-intro p { font-size: 15px; color: var(--text-body); line-height: 1.6; margin: 0; max-width: 560px; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--black); color: var(--white); border-radius: var(--r-sm); font-size: 13px; font-weight: 600; transition: background var(--t); }
+.ds-source:hover { background: var(--mi-orange); color: var(--black); }
+.ds-block { margin-top: 56px; padding-top: 48px; border-top: 1px solid #eaeaea; }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: var(--text-dark); margin: 0 0 8px; letter-spacing: -0.5px; }
+.ds-desc { font-size: 14px; color: var(--text-body); margin: 0 0 28px; max-width: 620px; line-height: 1.6; }
+.ds-caption { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tert); margin: 32px 0 14px; }
+.ds-swatches { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
+.ds-sw { background: var(--white); border-radius: var(--r-sm); overflow: hidden; border: 1px solid #eaeaea; }
+.ds-sw .chip { height: 84px; }
+.ds-sw .meta { padding: 12px 14px; }
+.ds-sw .name { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.ds-sw .val { font-size: 11px; color: var(--text-tert); font-family: var(--font-mono); margin-top: 2px; }
+.ds-type-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid #eaeaea; border-radius: var(--r-sm); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid #eaeaea; font-size: 13px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-tert); background: #fafafa; }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--su7-red); }
+.ds-radius { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.ds-radius-cell { background: var(--white); border: 1px solid #eaeaea; padding: 22px 14px; text-align: center; border-radius: var(--r-sm); }
+.ds-radius-box { width: 64px; height: 64px; background: var(--mi-orange); margin: 0 auto 12px; }
+.ds-radius-label { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.ds-radius-val { font-size: 11px; color: var(--text-tert); font-family: var(--font-mono); margin-top: 2px; }
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.ds-card { background: var(--white); border: 1px solid #eaeaea; border-radius: var(--r-sm); padding: 26px; }
+.ds-card h5 { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-dark); margin: 0 0 18px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; }
+.ds-input { background: var(--white); border: 1px solid #eaeaea; border-radius: var(--r-sm); padding: 11px 14px; font-size: 14px; font-family: inherit; color: var(--text-dark); outline: none; transition: border-color var(--t); width: 100%; }
+.ds-input:focus { border-color: var(--mi-orange); }
+.ds-tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: var(--r-xs); font-size: 11px; font-weight: 600; }
+.ds-tag-orange { background: var(--mi-orange); color: var(--black); }
+.ds-tag-red { background: var(--su7-red); color: var(--white); }
+.ds-tag-dark { background: var(--black); color: var(--white); }
+.ds-tag-outline { background: var(--white); color: var(--text-body); border: 1px solid #eaeaea; }
+
+/* ===== Footer ===== */
+footer { background: var(--black); padding: 64px 24px 48px; border-top: 1px solid rgba(255,255,255,0.06); }
+.foot-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.foot-col h4 { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--white); margin: 0 0 16px; text-transform: uppercase; letter-spacing: 1px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot-col a { font-size: 13px; color: var(--text-mute); transition: color var(--t); }
+.foot-col a:hover { color: var(--mi-orange); }
+.foot-brand { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin: 0 0 14px; }
+.foot-brand-desc { font-size: 13px; color: var(--text-mute); line-height: 1.6; max-width: 320px; margin: 0; }
+.foot-bottom { max-width: 1240px; margin: 32px auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--text-mute); }
+
+/* ===== Floating source link ===== */
+.src-link { position: fixed; right: 24px; bottom: 24px; z-index: 60; background: var(--mi-orange); color: var(--black); padding: 10px 18px; border-radius: var(--r-sm); font-size: 13px; font-weight: 700; transition: background var(--t), transform var(--t); box-shadow: 0 12px 32px rgba(255,105,0,0.4); }
+.src-link:hover { background: var(--white); transform: translateY(-2px); }
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .nav { padding: 12px 16px; }
+  .nav-mid { display: none; }
+  .hero-title { letter-spacing: -1.5px; }
+  .spec-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .perf-grid, .models, .trust-grid { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .ds-radius { grid-template-columns: repeat(2, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .section { padding: 80px 16px; }
+  .section-title { letter-spacing: -1px; }
+  .trust-num { font-size: 40px; }
+  .foot-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<header class="nav" id="topNav">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <span class="brand-mark">MI</span>
+      <span class="brand-text">Xiaomi<span class="cn">汽车</span></span>
+    </a>
+    <nav class="nav-mid">
+      <button class="nav-btn">SU7</button>
+      <button class="nav-btn">SU7 Ultra</button>
+      <button class="nav-btn">充电</button>
+      <button class="nav-btn">小米生态</button>
+      <button class="nav-btn">服务支持</button>
+      <button class="nav-btn">门店</button>
+    </nav>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="搜索">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="账户">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>
+      </button>
+      <a class="btn btn-orange" href="#" style="min-width:0;padding:0 20px;min-height:38px;font-size:13px">立即预订</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-eyebrow"><span class="dot"></span>SU7 ULTRA · 旗舰性能</div>
+    <h1 class="hero-title">为发烧<br/><span class="accent">而造</span></h1>
+    <p class="hero-sub">1548 PS 三电机 · 2.78 秒零百加速 · 极速 359 km/h · 纽北赛道认证</p>
+  </div>
+
+  <div class="hero-stage" aria-hidden="true">
+    <svg viewBox="0 0 1100 280" width="100%">
+      <defs>
+        <linearGradient id="su7Body" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#3a3a3a"/>
+          <stop offset="0.5" stop-color="#141414"/>
+          <stop offset="1" stop-color="#000"/>
+        </linearGradient>
+        <linearGradient id="su7Glass" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#1a1a22"/>
+          <stop offset="1" stop-color="#050507"/>
+        </linearGradient>
+        <radialGradient id="su7Light" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="#E1162B"/>
+          <stop offset="1" stop-color="#E1162B" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="rimRed" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#E1162B"/>
+          <stop offset="1" stop-color="#FF6900"/>
+        </linearGradient>
+      </defs>
+      <!-- ground shadow -->
+      <ellipse cx="550" cy="252" rx="450" ry="14" fill="rgba(0,0,0,0.6)" filter="blur(8px)"/>
+      <!-- body lower -->
+      <path d="M70,210 C110,170 220,150 360,140 C520,130 660,130 780,140 C900,150 1000,170 1030,200 L1030,232 C1030,240 1020,248 1005,248 L95,248 C75,248 65,240 65,232 Z" fill="url(#su7Body)"/>
+      <!-- roof -->
+      <path d="M270,140 C340,90 480,80 580,82 C680,84 740,98 790,140 L730,160 L320,160 Z" fill="url(#su7Body)"/>
+      <!-- glass -->
+      <path d="M295,140 C355,100 480,92 575,94 C665,96 720,108 765,140 L720,154 L330,154 Z" fill="url(#su7Glass)"/>
+      <!-- side highlight -->
+      <path d="M120,196 C300,168 700,164 970,194" stroke="rgba(225,22,43,0.5)" stroke-width="1.4" fill="none"/>
+      <path d="M120,206 C300,182 700,178 970,206" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
+      <!-- door cut -->
+      <path d="M520,140 L520,210" stroke="rgba(0,0,0,0.6)" stroke-width="0.6"/>
+      <!-- wheels -->
+      <g>
+        <circle cx="250" cy="232" r="46" fill="#050505"/>
+        <circle cx="250" cy="232" r="38" fill="url(#rimRed)" opacity="0.18"/>
+        <circle cx="250" cy="232" r="32" fill="#1a1a1a"/>
+        <circle cx="250" cy="232" r="28" fill="none" stroke="#E1162B" stroke-width="1.2"/>
+        <g stroke="#c8ccd1" stroke-width="2" fill="none">
+          <line x1="250" y1="208" x2="250" y2="256"/>
+          <line x1="226" y1="232" x2="274" y2="232"/>
+          <line x1="232" y1="214" x2="268" y2="250"/>
+          <line x1="268" y1="214" x2="232" y2="250"/>
+        </g>
+        <circle cx="250" cy="232" r="6" fill="#E1162B"/>
+      </g>
+      <g>
+        <circle cx="860" cy="232" r="46" fill="#050505"/>
+        <circle cx="860" cy="232" r="38" fill="url(#rimRed)" opacity="0.18"/>
+        <circle cx="860" cy="232" r="32" fill="#1a1a1a"/>
+        <circle cx="860" cy="232" r="28" fill="none" stroke="#E1162B" stroke-width="1.2"/>
+        <g stroke="#c8ccd1" stroke-width="2" fill="none">
+          <line x1="860" y1="208" x2="860" y2="256"/>
+          <line x1="836" y1="232" x2="884" y2="232"/>
+          <line x1="842" y1="214" x2="878" y2="250"/>
+          <line x1="878" y1="214" x2="842" y2="250"/>
+        </g>
+        <circle cx="860" cy="232" r="6" fill="#E1162B"/>
+      </g>
+      <!-- headlight -->
+      <path d="M1010,180 L1040,196 L1010,212 Z" fill="url(#su7Light)"/>
+      <ellipse cx="1010" cy="196" rx="10" ry="3" fill="#ff5a6a"/>
+      <!-- badge -->
+      <rect x="525" y="218" width="50" height="14" rx="2" fill="#E1162B"/>
+      <text x="550" y="228.5" text-anchor="middle" fill="#fff" font-family="Inter" font-size="9" font-weight="800">SU7 ULTRA</text>
+      <!-- spoiler -->
+      <path d="M85,170 L150,160 L160,168 L95,176 Z" fill="#0a0a0a"/>
+    </svg>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-actions">
+      <a class="btn btn-red" href="#">立即预订</a>
+      <a class="btn btn-ghost-dark" href="#">预约试驾</a>
+    </div>
+    <div class="hero-meta">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>纽北圈速 7:04.957</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2.78s 0-100</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>800km CLTC 续航</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Spec strip ===== -->
+<section class="spec-strip">
+  <div class="spec-inner">
+    <div class="spec-cell accent">
+      <div class="spec-val">1548<span class="unit">PS</span></div>
+      <div class="spec-label">三电机最大马力</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">2.78<span class="unit">s</span></div>
+      <div class="spec-label">0-100 km/h 加速</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">359<span class="unit">km/h</span></div>
+      <div class="spec-label">最高时速</div>
+    </div>
+    <div class="spec-cell">
+      <div class="spec-val">800<span class="unit">km</span></div>
+      <div class="spec-label">CLTC 综合续航</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Performance Features ===== -->
+<section class="section darker">
+  <div class="section-head" style="text-align:center;margin-left:auto;margin-right:auto">
+    <span class="section-eyebrow">性能矩阵</span>
+    <h2 class="section-title">四大核心 · 重新定义性能纯电</h2>
+    <p class="section-desc" style="margin:0 auto">从赛道到城市, 从极速到日常. 小米汽车以全栈自研三电系统, 智能驾驶, 以及人车家全生态, 重新定义中国高端纯电.</p>
+  </div>
+  <div class="perf-grid">
+    <div class="perf-card">
+      <div class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h3>极致动力</h3>
+      <p>三电机超级电驱 · 21,000 rpm 极速转子 · V8s 超级电机扭矩拉满, 输出每一毫秒.</p>
+      <div class="stat"><span class="stat-num">1548</span><span class="stat-unit">PS · 综合最大马力</span></div>
+    </div>
+    <div class="perf-card">
+      <div class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 12 9 16 13 21 8"/></svg>
+      </div>
+      <h3>超长续航</h3>
+      <p>800V 高压平台 + 麒麟电池. 5 分钟超充补能 220 km, 16 万公里电池容量保持率 90% 以上.</p>
+      <div class="stat"><span class="stat-num">800</span><span class="stat-unit">km · CLTC 综合续航</span></div>
+    </div>
+    <div class="perf-card">
+      <div class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.07 7.07l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.07-7.07l4.24-4.24"/></svg>
+      </div>
+      <h3>小米 Pilot Max</h3>
+      <p>全场景智能驾驶, 城市 NOA 全国开通, 双 Orin-X 芯片 + 激光雷达, 端到端大模型驱动.</p>
+      <div class="stat"><span class="stat-num">508</span><span class="stat-unit">TOPS · 算力</span></div>
+    </div>
+    <div class="perf-card">
+      <div class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <h3>HyperOS 智能座舱</h3>
+      <p>小米澎湃 OS 上车. 16.1 寸 3K 中控 + 全液晶仪表 + AR-HUD, 与手机, 平板, 家居无缝流转.</p>
+      <div class="stat"><span class="stat-num">200+</span><span class="stat-unit">米家设备 互联</span></div>
+    </div>
+    <div class="perf-card">
+      <div class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      </div>
+      <h3>赛道级底盘</h3>
+      <p>双腔空气悬架 + CDC 连续可变阻尼. 主动后轮转向, 转弯半径仅 5.7 m. 赛道模式秒变猛兽.</p>
+      <div class="stat"><span class="stat-num">7:04</span><span class="stat-unit">·957 纽北圈速</span></div>
+    </div>
+    <div class="perf-card">
+      <div class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="6 7 6 4 18 4 18 7"/><path d="M6 14l4 4 8-8"/></svg>
+      </div>
+      <h3>主动安全</h3>
+      <p>笼式车身 + 2000 MPa 热成型钢 · AEB 自动紧急制动覆盖 130 km/h · 全方位 9 安全气囊.</p>
+      <div class="stat"><span class="stat-num">C-NCAP</span><span class="stat-unit">五星 + 五星</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Spec table ===== -->
+<section class="section dark">
+  <div class="section-head" style="text-align:center;margin-left:auto;margin-right:auto">
+    <span class="section-eyebrow">SU7 ULTRA · 性能参数</span>
+    <h2 class="section-title">数据, 不需要修辞</h2>
+  </div>
+  <div class="spec-table-wrap">
+    <div class="spec-table-head">
+      <h3>SU7 Ultra 量产版</h3>
+      <span class="badge">● 限量 1908 台</span>
+    </div>
+    <table class="spec-table">
+      <tbody>
+        <tr><th>综合最大马力</th><td><span class="big">1548</span>PS · 三电机四驱</td></tr>
+        <tr><th>0-100 km/h 加速</th><td><span class="big">2.78</span>秒 (含起步时间)</td></tr>
+        <tr><th>最高时速</th><td><span class="big">359</span>km/h</td></tr>
+        <tr><th>纽北圈速</th><td><span class="big">7:04</span>·957 (量产电动车)</td></tr>
+        <tr><th>CLTC 综合续航</th><td><span class="big">630</span>km</td></tr>
+        <tr><th>超充补能</th><td><span class="big">11</span>min 充至 80%</td></tr>
+        <tr><th>电池容量</th><td><span class="big">93.7</span>kWh 宁德时代麒麟</td></tr>
+        <tr><th>制动距离 100-0</th><td><span class="big">30.8</span>m AP Racing 碳陶</td></tr>
+        <tr><th>风阻系数</th><td><span class="big">0.195</span>Cd 同级最低</td></tr>
+        <tr><th>整车质量</th><td><span class="big">1900</span>kg 全碳纤维车顶</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== Model selector ===== -->
+<section class="section darker">
+  <div class="section-head" style="text-align:center;margin-left:auto;margin-right:auto">
+    <span class="section-eyebrow">车型选购</span>
+    <h2 class="section-title">三种性能 · 一个梦想</h2>
+    <p class="section-desc" style="margin:0 auto">从入门标准版到极致 Ultra, 总有一款属于你的发烧.</p>
+  </div>
+  <div class="models">
+    <div class="model-card">
+      <h3 class="model-name">SU7</h3>
+      <div class="model-tag">标准版 · 后驱</div>
+      <div class="model-price"><span class="from">起售价</span><span class="amount">21.59</span><span class="unit">万元</span></div>
+      <ul class="model-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>700 km CLTC 续航</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>0-100 km/h 5.28 秒</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>小米 Pilot Pro 智驾</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>HyperOS 智能座舱</li>
+      </ul>
+      <a class="btn btn-ghost-dark" href="#" style="width:100%">立即配置</a>
+    </div>
+    <div class="model-card">
+      <h3 class="model-name">SU7 Max</h3>
+      <div class="model-tag">高性能版 · 双电机四驱</div>
+      <div class="model-price"><span class="from">起售价</span><span class="amount">29.99</span><span class="unit">万元</span></div>
+      <ul class="model-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>800 km CLTC 续航</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>0-100 km/h 2.78 秒</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>双 Orin-X 激光雷达</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>双腔空气悬架</li>
+      </ul>
+      <a class="btn btn-orange" href="#" style="width:100%">立即配置</a>
+    </div>
+    <div class="model-card featured">
+      <h3 class="model-name">SU7 Ultra</h3>
+      <div class="model-tag">赛道旗舰 · 三电机</div>
+      <div class="model-price"><span class="from">起售价</span><span class="amount">52.99</span><span class="unit">万元</span></div>
+      <ul class="model-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>1548 PS · 359 km/h</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>纽北圈速 7:04.957</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>全碳纤维车顶 + 尾翼</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>AP Racing 碳陶刹车</li>
+      </ul>
+      <a class="btn btn-red" href="#" style="width:100%">立即预订</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Trust band ===== -->
+<section class="trust-band">
+  <div class="trust-grid">
+    <div>
+      <div class="trust-num"><span class="red">26</span> <span style="font-size:30px;font-weight:600">个月</span></div>
+      <div class="trust-label">从立项到下线 · 中国汽车工业新速度</div>
+    </div>
+    <div>
+      <div class="trust-num">10<span style="font-size:30px;font-weight:600">万+</span></div>
+      <div class="trust-label">交付台数 · 用户口碑持续印证</div>
+    </div>
+    <div>
+      <div class="trust-num"><span class="red">7:04</span></div>
+      <div class="trust-label">纽北圈速 · 量产电动车纪录</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM REFERENCE (Part B) ===== -->
+<section class="ds-section" id="design-system">
+  <div class="ds-wrap">
+    <div class="ds-intro">
+      <div>
+        <div class="ds-eyebrow">Design System Reference</div>
+        <h2>黑底 · 橙红双 Accent · 极致数据感.</h2>
+        <p>小米汽车的视觉语言: 大面积纯黑 + 小米橙作为品牌信号 + 极速红专属性能叙事. 字体偏重 800-900 数据感, 圆角克制, 跑车科技混合.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.xiaomi-ev.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">黑色绝对主导, 小米橙作为品牌锚点出现在 logo, 主要 CTA 与图标背景, 极速红 (#E1162B) 专门保留给 SU7 Ultra 与高性能场景, 营造跑车性能识别度.</p>
+
+      <div class="ds-caption">品牌主色</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000"></div><div class="meta"><div class="name">Pure Black</div><div class="val">#000000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FF6900"></div><div class="meta"><div class="name">Xiaomi Orange</div><div class="val">#FF6900</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E1162B"></div><div class="meta"><div class="name">SU7 Ultra Red</div><div class="val">#E1162B</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #eee"></div><div class="meta"><div class="name">Pure White</div><div class="val">#FFFFFF</div></div></div>
+      </div>
+
+      <div class="ds-caption">暗色层级</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0a0a0a"></div><div class="meta"><div class="name">Ink 0</div><div class="val">#0A0A0A</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#141414"></div><div class="meta"><div class="name">Ink 1</div><div class="val">#141414</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1a1a1a"></div><div class="meta"><div class="name">Ink 2</div><div class="val">#1A1A1A</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#222"></div><div class="meta"><div class="name">Ink 3</div><div class="val">#222222</div></div></div>
+      </div>
+
+      <div class="ds-caption">银灰金属</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#e5e7ea,#c8ccd1)"></div><div class="meta"><div class="name">Silver Light</div><div class="val">#C8CCD1</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8a8f96"></div><div class="meta"><div class="name">Silver Mid</div><div class="val">#8A8F96</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f5f5f7"></div><div class="meta"><div class="name">Paper</div><div class="val">#F5F5F7</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#FF6900,#E1162B)"></div><div class="meta"><div class="name">Performance Gradient</div><div class="val">orange → red</div></div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Inter + Noto Sans SC. 大标题倾向 800-900 重量配 -2px 负字距, 营造极致数据感. 中文使用 PingFang SC 700-900, 配合英文数字形成 spec table 风格.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display-mega</td><td style="font-family:Inter;font-size:48px;font-weight:900;letter-spacing:-2px;line-height:1">SU7 ULTRA</td><td>96-128px</td><td>900</td><td>Hero 标题, 数字与英文</td></tr>
+          <tr><td class="token">--display-cn</td><td style="font-family:'Noto Sans SC';font-size:36px;font-weight:900;letter-spacing:-1px">为发烧而造</td><td>48-72px</td><td>900</td><td>中文 Slogan</td></tr>
+          <tr><td class="token">--spec-num</td><td style="font-family:Inter;font-size:40px;font-weight:800;color:#E1162B;letter-spacing:-1.5px">1548 <span style="font-size:14px;color:#6e6e73">PS</span></td><td>40-64px</td><td>800</td><td>性能数据</td></tr>
+          <tr><td class="token">--section-title</td><td style="font-size:24px;font-weight:800;letter-spacing:-0.5px">数据, 不需要修辞</td><td>32-48px</td><td>800</td><td>section 标题</td></tr>
+          <tr><td class="token">--card-title</td><td style="font-size:18px;font-weight:700">极致动力</td><td>20-22px</td><td>700</td><td>卡片标题</td></tr>
+          <tr><td class="token">--body</td><td style="font-size:14px;color:#3a3a3c">三电机超级电驱, 21000rpm 极速转子.</td><td>14-15px</td><td>400</td><td>正文</td></tr>
+          <tr><td class="token">--eyebrow</td><td style="font-size:11px;color:#FF6900;font-weight:600;text-transform:uppercase;letter-spacing:2px">PERFORMANCE MATRIX</td><td>11-12px</td><td>600</td><td>橙色提示</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">圆角克制. CTA 主按钮 8px, 卡片 12px, 标签 4px. 性能感来自方正而非圆润.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">XS</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">SM</div><div class="ds-radius-val">8px · 按钮</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">MD</div><div class="ds-radius-val">12px · 卡片</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">徽章</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">三种按钮: 极速红 (Ultra 专属), 小米橙 (主 CTA), 暗色 ghost (次级). 卡片偏向深色 + 渐变, 数据用红色高亮.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-red" style="min-width:0" href="#">立即预订 Ultra</a>
+            <a class="btn btn-orange" style="min-width:0" href="#">立即配置 SU7 Max</a>
+            <a class="btn btn-outline-light" style="min-width:0;background:#000;border-color:#000" href="#">预约试驾</a>
+            <a href="#" style="font-size:13px;color:#FF6900;text-decoration:underline">了解更多 →</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="ds-input" placeholder="输入手机号预约试驾" />
+            <input class="ds-input" placeholder="查询附近门店" />
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+              <span class="ds-tag ds-tag-red">ULTRA</span>
+              <span class="ds-tag ds-tag-orange">MAX</span>
+              <span class="ds-tag ds-tag-dark">SU7</span>
+              <span class="ds-tag ds-tag-outline">现车</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Spec Cell</h5>
+          <div style="background:#000;border-radius:12px;padding:24px;color:#fff">
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">三电机马力</div>
+            <div style="font-family:Inter;font-size:40px;font-weight:800;letter-spacing:-1.5px;color:#E1162B">1548<span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);margin-left:6px">PS</span></div>
+            <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,0.6)">三电机四驱 · V8s 超级转子</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-col">
+      <div class="foot-brand">小米汽车 · Xiaomi EV</div>
+      <p class="foot-brand-desc">为发烧而造. 中国新一代高端纯电品牌, 让科技与性能, 真正属于每个热爱者.</p>
+    </div>
+    <div class="foot-col">
+      <h4>车型</h4>
+      <ul>
+        <li><a href="#">SU7</a></li>
+        <li><a href="#">SU7 Pro</a></li>
+        <li><a href="#">SU7 Max</a></li>
+        <li><a href="#">SU7 Ultra</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>购车</h4>
+      <ul>
+        <li><a href="#">立即预订</a></li>
+        <li><a href="#">预约试驾</a></li>
+        <li><a href="#">查询门店</a></li>
+        <li><a href="#">金融方案</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>服务</h4>
+      <ul>
+        <li><a href="#">充电网络</a></li>
+        <li><a href="#">售后服务</a></li>
+        <li><a href="#">车主社区</a></li>
+        <li><a href="#">小米生态</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>关于</h4>
+      <ul>
+        <li><a href="#">关于小米汽车</a></li>
+        <li><a href="#">新闻中心</a></li>
+        <li><a href="#">加入我们</a></li>
+        <li><a href="#">联系我们</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>Design Study · Tribute to Xiaomi EV's visual language</span>
+    <span>© 2026 Xiaomi Auto · 京 ICP 备 10046444 号</span>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.xiaomi-ev.html" target="_blank" rel="noopener">View source ↗</a>
+
+<script>
+  (function(){
+    var nav = document.getElementById('topNav');
+    function onScroll(){
+      var y = window.scrollY || window.pageYOffset;
+      if (y > 40) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>

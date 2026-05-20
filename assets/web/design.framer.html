@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Frameworks — Inspired by Framer's design system</title>
+<meta name="description" content="A Framer-inspired marketing page: near-black canvas, oversized white display type with aggressive negative tracking, white pill CTAs, vibrant gradient spotlight cards. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand */
+  --primary: #ffffff;
+  --on-primary: #000000;
+  --accent-blue: #0099ff;
+  /* Ink */
+  --ink: #ffffff;
+  --ink-muted: #999999;
+  /* Surfaces (all dark) */
+  --canvas: #090909;
+  --surface-1: #141414;
+  --surface-2: #1c1c1c;
+  --hairline: #262626;
+  --hairline-soft: #1a1a1a;
+  --inverse-canvas: #ffffff;
+  --inverse-ink: #000000;
+  /* Gradient palette (signature) */
+  --g-magenta: #d44df0;
+  --g-violet: #6a4cf5;
+  --g-orange: #ff7a3d;
+  --g-coral: #ff5577;
+  /* Semantic */
+  --semantic-success: #22c55e;
+  /* Radius (Framer's granular ladder) */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 15px;
+  --r-xl: 20px;
+  --r-xxl: 30px;
+  --r-pill: 100px;
+  --r-full: 9999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, system-ui, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: -0.15px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01" 1, "cv11" 1, "cv05" 1;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent-blue); color: #fff; }
+
+.wrap { max-width: 1199px; margin: 0 auto; padding: 0 30px; }
+.display { font-family: "Manrope", "Inter", sans-serif; font-weight: 500; color: var(--ink); }
+
+/* ===== Top nav ===== */
+.topnav {
+  background: var(--canvas);
+  position: sticky; top: 0; z-index: 30;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.topnav .row { display: flex; align-items: center; height: 56px; gap: 24px; }
+.brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "Manrope", "Inter", sans-serif;
+  font-weight: 600; font-size: 18px; color: var(--ink);
+  letter-spacing: -0.5px;
+}
+.brand .glyph {
+  width: 22px; height: 22px;
+  background: var(--ink);
+  color: var(--canvas);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px;
+  border-radius: 4px;
+}
+.nav-links { display: flex; gap: 4px; margin-left: 16px; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--ink-muted);
+  padding: 8px 12px; border-radius: var(--r-pill);
+}
+.nav-links a:hover { color: var(--ink); background: var(--surface-1); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+/* ===== Buttons (pills only) ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit;
+  font-size: 14px; font-weight: 500; line-height: 1;
+  letter-spacing: -0.14px;
+  border-radius: var(--r-pill);
+  border: 0; cursor: pointer;
+  padding: 10px 15px;
+  transition: transform .15s, background .15s;
+}
+.btn:hover { transform: scale(0.98); }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-secondary { background: var(--surface-1); color: var(--ink); }
+.btn-translucent { background: var(--surface-2); color: var(--ink); border-radius: var(--r-xxl); padding: 8px 14px; }
+.btn-lg { padding: 14px 22px; font-size: 15px; }
+.icon-btn-circ {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--surface-1); color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; cursor: pointer;
+}
+
+/* ===== Typography ===== */
+.display-xxl {
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: clamp(56px, 9vw, 110px);
+  font-weight: 500; line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--ink); margin: 0;
+}
+.display-xl {
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: clamp(48px, 7vw, 85px);
+  font-weight: 500; line-height: 0.95;
+  letter-spacing: -0.05em;
+  color: var(--ink); margin: 0;
+}
+.display-lg {
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: clamp(36px, 5vw, 62px);
+  font-weight: 500; line-height: 1.0;
+  letter-spacing: -0.05em;
+  color: var(--ink); margin: 0;
+}
+.display-md {
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: 32px; font-weight: 500; line-height: 1.13;
+  letter-spacing: -1px;
+  color: var(--ink); margin: 0;
+}
+.headline { font-size: 22px; font-weight: 700; line-height: 1.2; letter-spacing: -0.8px; color: var(--ink); margin: 0; }
+.subhead { font-size: 24px; font-weight: 400; line-height: 1.3; color: var(--ink); margin: 0; letter-spacing: -0.01px; }
+.body-lg { font-size: 18px; line-height: 1.3; color: var(--ink); letter-spacing: -0.18px; }
+.body-md { font-size: 15px; line-height: 1.3; color: var(--ink); }
+.caption { font-size: 13px; font-weight: 500; color: var(--ink-muted); letter-spacing: -0.13px; }
+.eyebrow { font-size: 13px; font-weight: 500; color: var(--ink-muted); text-transform: none; letter-spacing: -0.13px; }
+
+/* ===== Hero ===== */
+section { padding: 96px 0; }
+.hero { padding: 80px 0 96px; text-align: center; }
+.hero h1 { margin: 0 auto 24px; max-width: 920px; }
+.hero .lead { font-size: 18px; color: var(--ink-muted); max-width: 560px; margin: 0 auto 32px; line-height: 1.4; }
+.hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ===== Canvas mockup (the centerpiece) ===== */
+.canvas-mock {
+  margin: 64px auto 0;
+  max-width: 1100px;
+  background: var(--surface-1);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-xl);
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0.5px 0 rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+.canvas-mock-bar {
+  display: flex; align-items: center; gap: 10px;
+  height: 32px;
+  padding: 0 12px;
+  margin-bottom: 12px;
+}
+.canvas-mock-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--surface-2); }
+.canvas-mock-bar .url {
+  background: var(--surface-2); color: var(--ink-muted);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 12px;
+  flex: 1; max-width: 340px;
+  text-align: center;
+}
+.canvas-mock-inner {
+  background: var(--canvas);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+.canvas-layer {
+  position: absolute;
+  border-radius: var(--r-md);
+  font-size: 12px; color: var(--ink-muted);
+  padding: 12px; line-height: 1.3;
+}
+.cl-text {
+  left: 32px; top: 40px; width: 260px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500; font-size: 28px;
+  color: var(--ink); line-height: 0.95; letter-spacing: -1.2px;
+  padding: 0;
+}
+.cl-text small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-muted); letter-spacing: 0; margin-top: 16px; }
+.cl-btn {
+  left: 32px; top: 220px;
+  background: var(--primary); color: var(--on-primary);
+  border-radius: var(--r-pill);
+  padding: 8px 14px; font-weight: 500;
+  font-size: 13px;
+}
+.cl-spotlight {
+  right: 32px; top: 32px;
+  width: 280px; height: 220px;
+  background: linear-gradient(135deg, var(--g-violet) 0%, var(--g-magenta) 100%);
+  border-radius: var(--r-xxl);
+  padding: 0;
+}
+.cl-card-1 {
+  right: 32px; top: 270px;
+  width: 130px; height: 80px;
+  background: var(--surface-2);
+  border: 0.5px solid rgba(255,255,255,0.08);
+}
+.cl-card-2 {
+  right: 180px; top: 270px;
+  width: 130px; height: 80px;
+  background: linear-gradient(135deg, var(--g-orange) 0%, var(--g-coral) 100%);
+  color: #000;
+  font-weight: 500;
+}
+.canvas-handles {
+  position: absolute;
+  border: 1px solid var(--accent-blue);
+  border-radius: 4px;
+  pointer-events: none;
+}
+.canvas-handles .h {
+  position: absolute;
+  width: 8px; height: 8px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+  border: 1.5px solid var(--canvas);
+}
+.canvas-handles .h.tl { left: -5px; top: -5px; }
+.canvas-handles .h.tr { right: -5px; top: -5px; }
+.canvas-handles .h.bl { left: -5px; bottom: -5px; }
+.canvas-handles .h.br { right: -5px; bottom: -5px; }
+
+/* Spotlight card section */
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+@media (max-width: 880px) { .spotlight-grid { grid-template-columns: 1fr; gap: 16px; } }
+.spotlight-card {
+  border-radius: var(--r-xxl);
+  padding: 32px;
+  min-height: 320px;
+  color: var(--ink);
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.spotlight-card h3 {
+  font-family: "Manrope", sans-serif;
+  font-size: 32px; font-weight: 500; line-height: 1.05;
+  letter-spacing: -1px;
+  margin: 0 0 12px;
+}
+.spotlight-card p { font-size: 18px; line-height: 1.3; opacity: 0.92; margin: 0; max-width: 380px; }
+.spotlight-card .badge {
+  display: inline-block;
+  font-size: 13px; font-weight: 500;
+  background: rgba(255,255,255,0.18);
+  color: var(--ink);
+  padding: 4px 12px; border-radius: var(--r-pill);
+  margin-bottom: auto;
+  align-self: flex-start;
+}
+.sp-violet { background: radial-gradient(circle at 30% 20%, #8b6cf7 0%, var(--g-violet) 50%, #2a1755 100%); grid-column: span 7; }
+.sp-magenta { background: radial-gradient(circle at 80% 80%, #ff7afe 0%, var(--g-magenta) 50%, #5a1b6b 100%); grid-column: span 5; }
+.sp-orange { background: radial-gradient(circle at 30% 70%, #ffb27a 0%, var(--g-orange) 50%, #802a0e 100%); grid-column: span 5; }
+.sp-coral { background: radial-gradient(circle at 70% 30%, #ff8ea3 0%, var(--g-coral) 60%, #6b1f2e 100%); grid-column: span 7; }
+@media (max-width: 880px) {
+  .sp-violet, .sp-magenta, .sp-orange, .sp-coral { grid-column: span 12; }
+}
+
+/* Mockup tile grid (template gallery) */
+.tile-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+@media (max-width: 880px) { .tile-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .tile-grid { grid-template-columns: 1fr; } }
+.tile {
+  background: var(--surface-1);
+  border-radius: var(--r-lg);
+  padding: 12px;
+  border: 0.5px solid rgba(255,255,255,0.05);
+}
+.tile .preview {
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  background: var(--canvas);
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.tile .preview::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(140deg, var(--canvas) 0%, var(--canvas) 40%, transparent 40%);
+}
+.tile .preview.p1 { background: linear-gradient(135deg, var(--g-orange), var(--g-coral)); }
+.tile .preview.p2 { background: linear-gradient(135deg, var(--g-violet), var(--g-magenta)); }
+.tile .preview.p3 { background: linear-gradient(135deg, #333, #666); }
+.tile .preview.p4 { background: linear-gradient(135deg, var(--g-coral), var(--g-magenta)); }
+.tile .preview.p5 { background: var(--surface-2); }
+.tile .preview.p6 { background: linear-gradient(135deg, #1a3a5c, #0a1a2c); }
+.tile .meta { display: flex; align-items: center; justify-content: space-between; padding: 0 4px; }
+.tile .name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.tile .by { font-size: 13px; color: var(--ink-muted); }
+
+/* Pricing tier */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+@media (max-width: 1024px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card {
+  background: var(--surface-1);
+  border-radius: var(--r-xl);
+  padding: 24px;
+}
+.pricing-card.featured { background: var(--surface-2); }
+.pricing-card h3 { font-size: 22px; font-weight: 700; line-height: 1.2; letter-spacing: -0.8px; margin: 0 0 6px; }
+.pricing-card .desc { font-size: 14px; color: var(--ink-muted); margin: 0 0 16px; min-height: 36px; }
+.pricing-card .price { font-family: "Manrope", sans-serif; font-size: 40px; font-weight: 500; letter-spacing: -1.5px; line-height: 1; margin: 0 0 4px; }
+.pricing-card .price small { font-size: 14px; color: var(--ink-muted); font-weight: 400; letter-spacing: 0; }
+.pricing-card .cta { margin: 20px 0 16px; }
+.pricing-card .cta .btn { width: 100%; }
+.pricing-card ul { list-style: none; padding: 0; margin: 0; }
+.pricing-card li {
+  font-size: 14px; color: var(--ink); padding: 6px 0;
+  display: flex; align-items: center; gap: 10px;
+}
+.pricing-card li::before {
+  content: ""; display: inline-block;
+  width: 14px; height: 14px;
+  background: var(--semantic-success);
+  border-radius: 50%;
+  flex: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4'><polyline points='20 6 9 17 4 12'/></svg>");
+  background-size: 10px; background-position: center; background-repeat: no-repeat;
+}
+
+.pricing-tabs {
+  display: inline-flex; padding: 4px;
+  background: var(--surface-1);
+  border-radius: var(--r-pill);
+  margin: 0 auto 32px;
+}
+.pricing-tabs .tab {
+  font-size: 14px; font-weight: 500;
+  color: var(--ink-muted);
+  padding: 8px 14px; border-radius: var(--r-pill);
+  cursor: pointer;
+}
+.pricing-tabs .tab.active { background: var(--surface-2); color: var(--ink); }
+
+/* FAQ */
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-row {
+  background: var(--canvas);
+  border-radius: var(--r-md);
+  padding: 24px;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.faq-row h4 { font-size: 18px; font-weight: 500; margin: 0 0 8px; color: var(--ink); }
+.faq-row p { font-size: 15px; color: var(--ink-muted); margin: 0; line-height: 1.4; }
+
+/* ===== Footer ===== */
+footer { background: var(--canvas); padding: 80px 0 40px; border-top: 1px solid var(--hairline-soft); }
+.footer-grid { display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 32px; margin-bottom: 48px; }
+@media (max-width: 880px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+footer h4 { font-size: 13px; font-weight: 500; color: var(--ink); margin: 0 0 16px; }
+footer ul { list-style: none; padding: 0; margin: 0; }
+footer li { margin: 8px 0; }
+footer a { font-size: 13px; color: var(--ink-muted); }
+footer a:hover { color: var(--ink); }
+.footer-brand .wordmark {
+  font-family: "Manrope", sans-serif;
+  font-size: 28px; font-weight: 500; letter-spacing: -1.4px;
+  color: var(--ink); margin: 0 0 12px;
+}
+.footer-bottom {
+  border-top: 1px solid var(--hairline-soft);
+  padding-top: 24px;
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--ink-muted);
+  letter-spacing: -0.12px;
+  flex-wrap: wrap; gap: 8px;
+}
+
+/* ===== Source link ===== */
+.src-link {
+  position: fixed; right: 20px; bottom: 20px;
+  background: var(--primary); color: var(--on-primary);
+  border: 0;
+  font-size: 13px; font-weight: 500;
+  padding: 10px 16px; border-radius: var(--r-pill);
+  z-index: 100;
+  letter-spacing: -0.14px;
+}
+.src-link:hover { background: var(--accent-blue); color: #fff; }
+
+/* ============= DS section ============= */
+.ds-block { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--hairline); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading {
+  font-family: "Manrope", sans-serif;
+  font-size: 32px; font-weight: 500; letter-spacing: -1.5px;
+  color: var(--ink); margin: 0 0 16px; line-height: 1.05;
+}
+.ds-caption {
+  font-size: 13px; font-weight: 500;
+  color: var(--ink-muted); letter-spacing: -0.13px;
+  margin: 32px 0 12px;
+}
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1000px) { .ds-swatches { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px)  { .ds-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px)  { .ds-swatches { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { background: var(--surface-1); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 70px; }
+.ds-sw .meta { padding: 10px 12px; }
+.ds-sw .name { font-size: 13px; font-weight: 500; color: var(--ink); }
+.ds-sw .val { font-size: 12px; color: var(--ink-muted); margin-top: 2px; font-family: ui-monospace, Menlo, monospace; }
+
+.ds-tints { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); margin-top: 12px; }
+@media (max-width: 800px) { .ds-tints { grid-template-columns: repeat(2, 1fr); } }
+.ds-tint { border-radius: var(--r-xxl); padding: 28px; aspect-ratio: 5 / 4; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
+.ds-tint .lab { font-weight: 500; font-size: 18px; font-family: "Manrope", sans-serif; letter-spacing: -0.5px; }
+.ds-tint .v { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+
+.ds-typescale { border: 1px solid var(--hairline); border-radius: var(--r-xl); overflow: hidden; background: var(--canvas); }
+.ds-tr { display: grid; grid-template-columns: 160px 280px 1fr; gap: 16px; padding: 18px 24px; border-top: 1px solid var(--hairline-soft); align-items: center; }
+.ds-tr:first-child { border-top: 0; }
+.ds-tok { font-weight: 500; font-size: 14px; color: var(--ink); }
+.ds-spec { font-size: 12px; color: var(--ink-muted); font-family: ui-monospace, Menlo, monospace; }
+.ds-sam { color: var(--ink); }
+@media (max-width: 800px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(8, 1fr); }
+@media (max-width: 900px) { .ds-radius { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .ds-radius { grid-template-columns: repeat(3, 1fr); } }
+.ds-rad { text-align: center; }
+.ds-rad .box { width: 64px; height: 64px; background: var(--surface-1); border: 1px solid var(--hairline); margin: 0 auto 8px; }
+.ds-rad .lab { font-size: 13px; font-weight: 500; color: var(--ink); }
+.ds-rad .vv { font-size: 11px; color: var(--ink-muted); font-family: ui-monospace, monospace; }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 700px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-field-label { font-size: 12px; font-weight: 500; color: var(--ink-muted); display: block; margin-bottom: 6px; letter-spacing: -0.12px; }
+.ds-input {
+  width: 100%; height: 40px;
+  background: var(--surface-1);
+  color: var(--ink);
+  border: 0;
+  border-radius: var(--r-md);
+  padding: 0 14px;
+  font-size: 15px; font-family: inherit;
+  letter-spacing: -0.15px;
+}
+.ds-input:focus { outline: 0; box-shadow: 0 0 0 1px rgba(0,153,255,0.5), 0 0 0 4px rgba(0,153,255,0.15); }
+.ds-input.focused { box-shadow: 0 0 0 1px rgba(0,153,255,0.5), 0 0 0 4px rgba(0,153,255,0.15); }
+.ds-card-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 880px) { .ds-card-row { grid-template-columns: 1fr; } }
+.ds-card-demo { padding: 24px; border-radius: var(--r-xl); background: var(--surface-1); }
+.ds-card-demo.featured { background: var(--surface-2); }
+.ds-card-demo.gradient { background: linear-gradient(135deg, var(--g-violet) 0%, var(--g-magenta) 100%); border-radius: var(--r-xxl); }
+
+</style>
+</head>
+<body>
+
+<!-- ============== TOP NAV ============== -->
+<header class="topnav"><div class="wrap"><div class="row">
+  <a href="#" class="brand">
+    <span class="glyph">F</span>
+    <span>Frameworks</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#">Features</a>
+    <a href="#">Templates</a>
+    <a href="#">AI</a>
+    <a href="#">Pricing</a>
+    <a href="#">Updates</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-secondary">Sign in</a>
+    <a href="#" class="btn btn-primary">Get started for free</a>
+  </div>
+</div></div></header>
+
+<!-- ============== PART A — Marketing ============== -->
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <h1 class="display-xxl">The internet&nbsp;is&nbsp;your&nbsp;canvas.</h1>
+  <p class="lead">Frameworks is a design tool that publishes. Drag elements, ship the URL. No handoff, no exports, no waiting on engineering for your hero copy.</p>
+  <div class="hero-ctas">
+    <a href="#" class="btn btn-primary btn-lg">Start free</a>
+    <a href="#" class="btn btn-secondary btn-lg">Watch the demo</a>
+  </div>
+
+  <!-- Canvas mockup centerpiece -->
+  <div class="canvas-mock">
+    <div class="canvas-mock-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">frameworks.co/canvas</span>
+    </div>
+    <div class="canvas-mock-inner">
+      <div class="canvas-layer cl-text">
+        Design out loud.
+        <small>A page made by dragging, not exporting.</small>
+      </div>
+      <div class="canvas-layer cl-btn">Get started →</div>
+      <div class="canvas-layer cl-spotlight" style="position: absolute;"></div>
+      <div class="canvas-layer cl-card-1"></div>
+      <div class="canvas-layer cl-card-2" style="display: flex; align-items: center; justify-content: center; font-weight: 500;">CTA</div>
+      <!-- selection handles around the spotlight -->
+      <div class="canvas-handles" style="right: 28px; top: 28px; width: 288px; height: 228px;">
+        <span class="h tl"></span><span class="h tr"></span><span class="h bl"></span><span class="h br"></span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SPOTLIGHT GRID (signature) -->
+<section><div class="wrap">
+  <div style="text-align: left; max-width: 720px; margin: 0 0 48px;">
+    <p class="eyebrow">— Built for shipping</p>
+    <h2 class="display-lg" style="margin: 16px 0;">A canvas that&nbsp;publishes.</h2>
+    <p class="body-lg" style="color: var(--ink-muted); max-width: 560px;">Every block on this page is the same kind of layer you'd drag into a Frameworks artboard. Drag, drop, ship — no exports.</p>
+  </div>
+
+  <div class="spotlight-grid">
+    <div class="spotlight-card sp-violet">
+      <span class="badge">Atmosphere</span>
+      <div style="margin-top: 96px;">
+        <h3>One canvas. One URL. Zero handoff.</h3>
+        <p>Designs that publish themselves. The artboard IS the website — no exporting, no engineering ticket, no Friday-night handoff document.</p>
+      </div>
+    </div>
+    <div class="spotlight-card sp-magenta">
+      <span class="badge">AI</span>
+      <div style="margin-top: 96px;">
+        <h3>Localize a page in a click.</h3>
+        <p>Translate any layer into 30 languages without breaking the layout.</p>
+      </div>
+    </div>
+    <div class="spotlight-card sp-orange">
+      <span class="badge">Templates</span>
+      <div style="margin-top: 96px;">
+        <h3>Start where the best ones do.</h3>
+        <p>Hundreds of free templates from the community. Remix, then ship.</p>
+      </div>
+    </div>
+    <div class="spotlight-card sp-coral">
+      <span class="badge">Performance</span>
+      <div style="margin-top: 96px;">
+        <h3>Pages that pass Core Web Vitals.</h3>
+        <p>Lazy-load images, optimized fonts, edge cache — production-grade out of the box, with no &lt;script&gt; you have to write.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- TEMPLATE TILE GALLERY -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div style="text-align: left; max-width: 720px; margin: 0 0 32px;">
+    <p class="eyebrow">— Built with Frameworks</p>
+    <h2 class="display-md" style="margin: 16px 0;">Sites shipped this&nbsp;week.</h2>
+  </div>
+  <div class="tile-grid">
+    <div class="tile">
+      <div class="preview p1"></div>
+      <div class="meta"><span class="name">Nudge</span><span class="by">By Tonik</span></div>
+    </div>
+    <div class="tile">
+      <div class="preview p2"></div>
+      <div class="meta"><span class="name">Speedrun</span><span class="by">By a16z</span></div>
+    </div>
+    <div class="tile">
+      <div class="preview p3"></div>
+      <div class="meta"><span class="name">Editorial</span><span class="by">By Atelier</span></div>
+    </div>
+    <div class="tile">
+      <div class="preview p4"></div>
+      <div class="meta"><span class="name">Coral · landing</span><span class="by">By Studio Loop</span></div>
+    </div>
+    <div class="tile">
+      <div class="preview p5"></div>
+      <div class="meta"><span class="name">Hush · agency</span><span class="by">By Atelier</span></div>
+    </div>
+    <div class="tile">
+      <div class="preview p6"></div>
+      <div class="meta"><span class="name">Aurora · SaaS</span><span class="by">By North</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PRICING -->
+<section><div class="wrap">
+  <div style="text-align: center; max-width: 720px; margin: 0 auto 32px;">
+    <p class="eyebrow">— Pricing</p>
+    <h2 class="display-lg" style="margin: 16px 0;">Pricing that ships.</h2>
+  </div>
+  <div style="text-align: center;">
+    <div class="pricing-tabs">
+      <span class="tab">Monthly</span>
+      <span class="tab active">Yearly · save 20%</span>
+    </div>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <h3>Basic</h3>
+      <p class="desc">For getting a site live this weekend.</p>
+      <p class="price">$0<small> / mo</small></p>
+      <div class="cta"><a href="#" class="btn btn-secondary">Start free</a></div>
+      <ul>
+        <li>1 site</li>
+        <li>Frameworks subdomain</li>
+        <li>Community templates</li>
+      </ul>
+    </div>
+    <div class="pricing-card featured">
+      <h3>Pro</h3>
+      <p class="desc">For freelancers and small teams shipping client work.</p>
+      <p class="price">$15<small> / mo</small></p>
+      <div class="cta"><a href="#" class="btn btn-primary">Get Pro</a></div>
+      <ul>
+        <li>Unlimited sites</li>
+        <li>Custom domain</li>
+        <li>Password-protected pages</li>
+        <li>AI translate</li>
+      </ul>
+    </div>
+    <div class="pricing-card">
+      <h3>Business</h3>
+      <p class="desc">For marketing teams running the site.</p>
+      <p class="price">$30<small> / mo</small></p>
+      <div class="cta"><a href="#" class="btn btn-secondary">Choose Business</a></div>
+      <ul>
+        <li>Everything in Pro</li>
+        <li>5 editor seats</li>
+        <li>Roles & permissions</li>
+        <li>Staging environments</li>
+      </ul>
+    </div>
+    <div class="pricing-card">
+      <h3>Enterprise</h3>
+      <p class="desc">For the largest design organizations.</p>
+      <p class="price" style="font-size: 28px; letter-spacing: -1px;">Custom</p>
+      <div class="cta"><a href="#" class="btn btn-secondary">Talk to sales</a></div>
+      <ul>
+        <li>SSO + SCIM</li>
+        <li>Audit log API</li>
+        <li>Dedicated CSM</li>
+        <li>Premium support</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section style="padding-top: 0;"><div class="wrap">
+  <div style="text-align: center; max-width: 720px; margin: 0 auto 32px;">
+    <p class="eyebrow">— Questions</p>
+    <h2 class="display-md" style="margin: 16px 0;">Frequently asked.</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-row"><h4>Do I need to know code?</h4><p>No. The canvas is the artifact — there's nothing to export.</p></div>
+    <div class="faq-row"><h4>Can I use my own domain?</h4><p>Pro and above include custom domain mapping with auto-HTTPS.</p></div>
+    <div class="faq-row"><h4>How do collaborators work?</h4><p>Business adds 5 editor seats with roles and permissions; Enterprise scales to unlimited with SSO.</p></div>
+    <div class="faq-row"><h4>What happens to my site if I cancel?</h4><p>It moves to a Frameworks subdomain. You keep editing on Basic, or export the published HTML at any time.</p></div>
+  </div>
+</div></section>
+
+
+<!-- ============== PART B — Design System ============== -->
+<section><div class="wrap">
+  <div style="max-width: 720px; margin: 0 auto 48px; text-align: center;">
+    <p class="eyebrow">— Design system</p>
+    <h2 class="display-lg" style="margin: 16px 0;">The poster, the&nbsp;canvas, the&nbsp;ring.</h2>
+    <p class="body-lg" style="color: var(--ink-muted);">Source: <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.framer.html" target="_blank" rel="noopener" style="color: var(--ink); border-bottom: 1px solid var(--ink-muted);">DESIGN.md</a>. Dark canvas. GT Walsheim display (Manrope substitute). Inter Variable body with character variants. Aggressive negative letter-spacing. One blue accent, four gradient spotlight cards.</p>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">Anchor surfaces — canvas + lift</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="meta"><div class="name">primary / inverse-canvas</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#090909"></div><div class="meta"><div class="name">canvas</div><div class="val">#090909</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#141414"></div><div class="meta"><div class="name">surface-1</div><div class="val">#141414</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1c1c1c"></div><div class="meta"><div class="name">surface-2</div><div class="val">#1c1c1c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#262626"></div><div class="meta"><div class="name">hairline</div><div class="val">#262626</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#1a1a1a"></div><div class="meta"><div class="name">hairline-soft</div><div class="val">#1a1a1a</div></div></div>
+    </div>
+
+    <p class="ds-caption">Text — binary hierarchy</p>
+    <div class="ds-swatches" style="grid-template-columns: repeat(4, 1fr); max-width: 720px;">
+      <div class="ds-sw"><div class="chip" style="background:#ffffff"></div><div class="meta"><div class="name">ink</div><div class="val">#ffffff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#999999"></div><div class="meta"><div class="name">ink-muted</div><div class="val">#999999</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0099ff"></div><div class="meta"><div class="name">accent-blue · signal-only</div><div class="val">#0099ff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#22c55e"></div><div class="meta"><div class="name">semantic-success</div><div class="val">#22c55e</div></div></div>
+    </div>
+
+    <p class="ds-caption">Gradient spotlight family — the brand atmosphere</p>
+    <div class="ds-tints">
+      <div class="ds-tint" style="background: radial-gradient(circle at 30% 20%, #8b6cf7 0%, #6a4cf5 50%, #2a1755 100%);"><div class="lab">gradient-violet</div><div class="v">#6a4cf5 · most common</div></div>
+      <div class="ds-tint" style="background: radial-gradient(circle at 70% 30%, #ff7afe 0%, #d44df0 50%, #5a1b6b 100%);"><div class="lab">gradient-magenta</div><div class="v">#d44df0 · pink-magenta</div></div>
+      <div class="ds-tint" style="background: radial-gradient(circle at 30% 70%, #ffb27a 0%, #ff7a3d 50%, #802a0e 100%);"><div class="lab">gradient-orange</div><div class="v">#ff7a3d · sunset wash</div></div>
+      <div class="ds-tint" style="background: radial-gradient(circle at 70% 30%, #ff8ea3 0%, #ff5577 60%, #6b1f2e 100%);"><div class="lab">gradient-coral</div><div class="v">#ff5577 · coral-pink</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="body-md" style="color: var(--ink-muted); margin: 0 0 24px; letter-spacing: -0.15px;">GT Walsheim Medium is Frameworks's proprietary display face — Manrope at weight 500 is the closest open-source substitute, with negative letter-spacing applied as a percentage of size (~5% at display, ~1% at body). Inter Variable handles the body, with character variants cv05, cv09, cv11 and stylistic sets ss03, ss07 enabled.</p>
+
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xxl</span><span class="ds-spec">110 / 500 / 0.85 / -5.5px · GT Walsheim</span><span class="ds-sam display" style="font-size: 56px; line-height: 0.85; letter-spacing: -2.8px;">The internet is</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">85 / 500 / 0.95 / -4.25px</span><span class="ds-sam display" style="font-size: 48px; line-height: 0.95; letter-spacing: -2.4px;">Section opener</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-lg</span><span class="ds-spec">62 / 500 / 1.00 / -3.1px</span><span class="ds-sam display" style="font-size: 40px; line-height: 1.0; letter-spacing: -2px;">Sub-section opener</span></div>
+      <div class="ds-tr"><span class="ds-tok">display-md</span><span class="ds-spec">32 / 500 / 1.13 / -1.0px</span><span class="ds-sam display" style="font-size: 28px; line-height: 1.13; letter-spacing: -0.9px;">Card title</span></div>
+      <div class="ds-tr"><span class="ds-tok">headline</span><span class="ds-spec">22 / 700 / 1.20 / -0.8px · Inter</span><span class="ds-sam" style="font-size: 22px; font-weight: 700; line-height: 1.2; letter-spacing: -0.8px;">Pricing tier headline</span></div>
+      <div class="ds-tr"><span class="ds-tok">subhead</span><span class="ds-spec">24 / 400 / 1.30</span><span class="ds-sam" style="font-size: 22px; font-weight: 400; line-height: 1.3;">Lead body next to display</span></div>
+      <div class="ds-tr"><span class="ds-tok">body-lg</span><span class="ds-spec">18 / 400 / 1.30 / -0.18px</span><span class="ds-sam" style="font-size: 18px; line-height: 1.3; letter-spacing: -0.18px;">Hero subhead, lead paragraphs.</span></div>
+      <div class="ds-tr"><span class="ds-tok">body</span><span class="ds-spec">15 / 400 / 1.30 / -0.15px</span><span class="ds-sam" style="font-size: 15px; line-height: 1.3; letter-spacing: -0.15px;">Default body. The brand voice depends on Inter's character variants.</span></div>
+      <div class="ds-tr"><span class="ds-tok">caption</span><span class="ds-spec">13 / 500 / 1.20 / -0.13px</span><span class="ds-sam" style="font-size: 13px; font-weight: 500; line-height: 1.2; letter-spacing: -0.13px; color: var(--ink-muted);">— Eyebrow / footer column</span></div>
+      <div class="ds-tr"><span class="ds-tok">button</span><span class="ds-spec">14 / 500 / 1.00 / -0.14px</span><span class="ds-sam" style="font-size: 14px; font-weight: 500; letter-spacing: -0.14px;">Get started for free</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius</h3>
+    <p class="body-md" style="color: var(--ink-muted); margin: 0 0 24px;">An unusually granular ladder: 4 → 100px pills + full circle. 20px is the default card; 30px is reserved for gradient spotlight cards so they read as atmospheric panels, not tighter UI.</p>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius: 4px;"></div><div class="lab">xs</div><div class="vv">4 · chips</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 6px;"></div><div class="lab">sm</div><div class="vv">6 · tags</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 10px;"></div><div class="lab">md</div><div class="vv">10 · inputs</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 15px;"></div><div class="lab">lg</div><div class="vv">15 · templates</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 20px;"></div><div class="lab">xl</div><div class="vv">20 · pricing</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 30px;"></div><div class="lab">xxl</div><div class="vv">30 · spotlight</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 100px;"></div><div class="lab">pill</div><div class="vv">100 · CTA</div></div>
+      <div class="ds-rad"><div class="box" style="border-radius: 9999px;"></div><div class="lab">full</div><div class="vv">∞ · icon</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">Buttons — pill is the brand vocabulary</p>
+    <div class="ds-comp-row">
+      <a href="#" class="btn btn-primary">button-primary</a>
+      <a href="#" class="btn btn-secondary">button-secondary</a>
+      <a href="#" class="btn btn-translucent">button-translucent</a>
+      <button class="icon-btn-circ" aria-label="next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+
+    <p class="ds-caption">Pricing tabs — selected = lift, not color</p>
+    <div class="ds-comp-row">
+      <div class="pricing-tabs" style="margin: 0;">
+        <span class="tab">Monthly</span>
+        <span class="tab active">Yearly</span>
+      </div>
+    </div>
+
+    <p class="ds-caption">Inputs — blue ring is the only chromatic depth signal</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input · default</label>
+        <input class="ds-input" placeholder="hello@frameworks.co" />
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="hello@frameworks.co" />
+      </div>
+    </div>
+
+    <p class="ds-caption">Cards — surface lift carries hierarchy</p>
+    <div class="ds-card-row">
+      <div class="ds-card-demo">
+        <p class="eyebrow" style="font-size: 12px; margin: 0;">pricing-card</p>
+        <p class="headline" style="font-size: 20px; margin: 8px 0;">surface-1</p>
+        <p class="body-md" style="color: var(--ink-muted);">Standard tier. 20px radius. 24px padding.</p>
+      </div>
+      <div class="ds-card-demo featured">
+        <p class="eyebrow" style="font-size: 12px; margin: 0;">pricing-card-featured</p>
+        <p class="headline" style="font-size: 20px; margin: 8px 0;">surface-2 · lifted</p>
+        <p class="body-md" style="color: var(--ink-muted);">Pro tier. Same shape — one surface step up. No chromatic outline.</p>
+      </div>
+      <div class="ds-card-demo gradient">
+        <p class="eyebrow" style="font-size: 12px; margin: 0; color: rgba(255,255,255,0.85);">gradient-spotlight-card</p>
+        <p style="font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 22px; letter-spacing: -0.8px; margin: 8px 0 0;">Atmosphere · not background.</p>
+        <p class="body-md" style="opacity: 0.92; margin-top: 8px;">30px radius. One per long page. Three is a moodboard.</p>
+      </div>
+    </div>
+
+    <p class="ds-caption">Pills — the only button shape</p>
+    <div class="ds-comp-row">
+      <span class="btn btn-primary" style="cursor: default;">primary</span>
+      <span class="btn btn-secondary" style="cursor: default;">secondary</span>
+      <span class="btn btn-translucent" style="cursor: default;">translucent</span>
+      <span class="btn" style="background: var(--accent-blue); color: #fff; cursor: default;">accent-blue · signal</span>
+      <span class="btn" style="background: transparent; color: var(--accent-blue); text-decoration: underline; cursor: default;">hyperlink</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============== FOOTER ============== -->
+<footer><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <p class="wordmark">Frameworks</p>
+      <p style="font-size: 13px; color: var(--ink-muted); margin: 0; letter-spacing: -0.13px;">The internet is your canvas.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <ul><li><a href="#">Canvas</a></li><li><a href="#">AI</a></li><li><a href="#">Templates</a></li><li><a href="#">Hosting</a></li></ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul><li><a href="#">Academy</a></li><li><a href="#">Blog</a></li><li><a href="#">Changelog</a></li><li><a href="#">Brand kit</a></li></ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Press</a></li></ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul><li><a href="#">Terms</a></li><li><a href="#">Privacy</a></li><li><a href="#">Security</a></li><li><a href="#">Cookies</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Frameworks. Made on the canvas.</span>
+    <span>Inspired by framer DESIGN.md · awesome-design-md</span>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.framer.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

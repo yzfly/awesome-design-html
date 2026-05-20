@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>文心一言 — 设计系统研究</title>
+<meta name="description" content="文心一言设计语言视觉研究: 百度蓝紫双色梦幻渐变, 知识增强的中国大模型设计语言. 营销 demo + 设计系统参考." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --canvas: #ffffff;
+  --canvas-tint: #f9faff;
+  --surface-1: #f4f5ff;
+  --surface-2: #ecedff;
+  --accent: #2932E1;
+  --accent-2: #5163FF;
+  --accent-3: #8E63FF;
+  --accent-pink: #E63DBF;
+  --accent-soft: rgba(41, 50, 225, 0.08);
+  --grad-primary: linear-gradient(135deg, #2932E1 0%, #5163FF 50%, #8E63FF 100%);
+  --grad-mesh: radial-gradient(60% 50% at 80% 20%, rgba(142, 99, 255, 0.35), transparent 65%), radial-gradient(50% 40% at 15% 75%, rgba(41, 50, 225, 0.25), transparent 70%), radial-gradient(40% 50% at 60% 90%, rgba(230, 61, 191, 0.18), transparent 65%);
+  --ink: #15172c;
+  --ink-bright: #0a0b1a;
+  --ink-soft: #2d2f50;
+  --ink-muted: #5e6184;
+  --ink-dim: #9a9db8;
+  --border: #e6e8f5;
+  --border-soft: #f0f1fa;
+  --shadow-card: 0 8px 28px rgba(41, 50, 225, 0.08);
+  --shadow-deep: 0 16px 48px rgba(41, 50, 225, 0.16);
+  --font-ui: "Inter", "Noto Sans SC", -apple-system, "PingFang SC", sans-serif;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 14px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1200px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -0.3px; color: var(--ink-bright); }
+.brand-mark { width: 32px; height: 32px; border-radius: var(--r-md); background: var(--grad-primary); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(41, 50, 225, 0.32); }
+.brand-mark svg { width: 18px; height: 18px; color: #fff; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link { padding: 8px 14px; font-size: 14px; font-weight: 500; color: var(--ink-muted); border-radius: var(--r-md); transition: color .15s, background .15s; }
+.nav-link:hover { color: var(--accent); }
+.nav-link.active { color: var(--accent); font-weight: 600; }
+.nav-cta { display: flex; gap: 10px; align-items: center; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; cursor: pointer; border: 0; transition: all .15s; font-weight: 600; }
+.btn-grad { background: var(--grad-primary); color: #fff; padding: 13px 28px; border-radius: var(--r-pill); font-size: 14px; box-shadow: 0 6px 20px rgba(41, 50, 225, 0.32); }
+.btn-grad:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(41, 50, 225, 0.42); }
+.btn-primary { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: var(--r-pill); font-size: 14px; }
+.btn-primary:hover { background: #1f28c8; }
+.btn-outline { background: #fff; color: var(--accent); padding: 12px 24px; border-radius: var(--r-pill); border: 1.5px solid var(--accent); font-size: 14px; }
+.btn-outline:hover { background: var(--accent-soft); }
+.btn-ghost { background: var(--surface-1); color: var(--accent); padding: 12px 24px; border-radius: var(--r-pill); font-size: 14px; }
+.btn-ghost:hover { background: var(--surface-2); }
+.btn-sm { padding: 8px 16px; font-size: 13px; }
+
+/* Hero */
+.hero { padding: 80px 0 100px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: var(--grad-mesh); z-index: -1; }
+.hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: var(--r-pill); background: #fff; border: 1px solid var(--border); color: var(--accent); box-shadow: 0 2px 8px rgba(41, 50, 225, 0.08); }
+.eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad-primary); }
+.hero h1 { font-size: 72px; line-height: 1.05; letter-spacing: -2.4px; font-weight: 800; margin: 22px 0 18px; color: var(--ink-bright); }
+.hero h1 em { font-style: normal; background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p.lead { font-size: 17px; line-height: 1.7; color: var(--ink-muted); max-width: 520px; margin: 0 0 32px; }
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero-meta { margin-top: 44px; display: flex; gap: 40px; }
+.hero-meta-item { font-size: 13px; color: var(--ink-muted); }
+.hero-meta-item strong { display: block; background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; font-size: 28px; letter-spacing: -0.8px; line-height: 1; margin-bottom: 4px; }
+
+/* Hero chat mockup */
+.wx-chat {
+  background: #fff;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-deep);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.wx-chat-head { padding: 16px 20px; background: var(--grad-primary); color: #fff; display: flex; align-items: center; gap: 10px; }
+.wx-chat-head .dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; opacity: 0.9; }
+.wx-chat-head .title { font-size: 14px; font-weight: 600; }
+.wx-chat-head .badge { margin-left: auto; font-size: 11px; padding: 2px 10px; border-radius: var(--r-pill); background: rgba(255,255,255,0.22); font-weight: 600; }
+.wx-chat-body { padding: 22px; min-height: 280px; }
+.wx-msg { display: flex; gap: 12px; margin-bottom: 16px; }
+.wx-avatar { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+.wx-avatar.user { background: var(--surface-1); color: var(--ink-soft); }
+.wx-avatar.ai { background: var(--grad-primary); color: #fff; }
+.wx-content { flex: 1; font-size: 14px; line-height: 1.7; color: var(--ink-soft); padding-top: 4px; }
+.wx-content strong { background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.wx-card { background: var(--surface-1); border-radius: var(--r-md); padding: 14px; margin-top: 10px; border-left: 3px solid var(--accent-3); }
+.wx-card .lbl { font-size: 11px; font-weight: 600; color: var(--accent-3); margin-bottom: 4px; letter-spacing: 0.4px; text-transform: uppercase; }
+.wx-card .val { font-size: 13.5px; color: var(--ink-soft); }
+.wx-input { border-top: 1px solid var(--border-soft); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+.wx-input .field { flex: 1; font-size: 13.5px; color: var(--ink-dim); }
+.wx-input .send { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-primary); color: #fff; display: grid; place-items: center; box-shadow: 0 4px 12px rgba(41, 50, 225, 0.3); }
+.wx-input .send svg { width: 15px; height: 15px; }
+
+/* Sections */
+.section { padding: 96px 0; }
+.section-head { margin-bottom: 56px; text-align: center; }
+.section-eyebrow { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 14px; letter-spacing: 0.6px; text-transform: uppercase; }
+.section-title { font-size: 48px; line-height: 1.1; letter-spacing: -1.6px; font-weight: 800; margin: 0 0 16px; color: var(--ink-bright); }
+.section-title em { font-style: normal; background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.section-sub { font-size: 16px; color: var(--ink-muted); line-height: 1.65; max-width: 620px; margin: 0 auto; }
+
+/* Features */
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.feat { background: #fff; border-radius: var(--r-lg); padding: 32px 28px; position: relative; overflow: hidden; transition: all .25s; border: 1px solid var(--border); }
+.feat::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad-primary); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+.feat:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: transparent; }
+.feat:hover::before { transform: scaleX(1); }
+.feat-icon { width: 52px; height: 52px; border-radius: var(--r-md); background: var(--grad-primary); color: #fff; display: grid; place-items: center; margin-bottom: 22px; box-shadow: 0 6px 16px rgba(41, 50, 225, 0.28); }
+.feat-icon svg { width: 24px; height: 24px; }
+.feat-title { font-size: 19px; font-weight: 700; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.3px; }
+.feat-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.65; margin: 0 0 14px; }
+.feat-link { font-size: 13px; color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+
+/* Showcase band */
+.showcase {
+  background: var(--grad-primary);
+  border-radius: var(--r-xl);
+  padding: 64px 56px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.showcase::before { content: ""; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.16) 0%, transparent 60%); top: -200px; right: -150px; }
+.showcase::after { content: ""; position: absolute; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(230,61,191,0.3) 0%, transparent 60%); bottom: -150px; left: -100px; }
+.showcase-inner { position: relative; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center; }
+.showcase h3 { font-size: 42px; line-height: 1.1; letter-spacing: -1.2px; font-weight: 800; margin: 0 0 16px; }
+.showcase p { font-size: 16px; line-height: 1.7; opacity: 0.92; margin: 0 0 28px; max-width: 480px; }
+.showcase-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.showcase-stat { background: rgba(255,255,255,0.14); backdrop-filter: blur(10px); border-radius: var(--r-lg); padding: 24px; }
+.showcase-stat .num { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 6px; line-height: 1; }
+.showcase-stat .lbl { font-size: 13px; opacity: 0.85; }
+
+/* Agents preview */
+.agents-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.agent { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px 20px; text-align: center; transition: all .2s; cursor: pointer; }
+.agent:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: var(--accent-2); }
+.agent-icon { width: 56px; height: 56px; border-radius: var(--r-md); margin: 0 auto 14px; display: grid; place-items: center; color: #fff; }
+.agent-icon.g1 { background: linear-gradient(135deg, #2932E1, #5163FF); }
+.agent-icon.g2 { background: linear-gradient(135deg, #5163FF, #8E63FF); }
+.agent-icon.g3 { background: linear-gradient(135deg, #8E63FF, #E63DBF); }
+.agent-icon.g4 { background: linear-gradient(135deg, #E63DBF, #5163FF); }
+.agent-icon svg { width: 24px; height: 24px; }
+.agent-name { font-size: 14.5px; font-weight: 700; color: var(--ink-bright); margin-bottom: 4px; }
+.agent-desc { font-size: 12px; color: var(--ink-muted); line-height: 1.5; }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.plan { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px 28px; transition: all .2s; position: relative; }
+.plan:hover { border-color: var(--accent); }
+.plan.featured { border: 0; background: linear-gradient(180deg, #fff 0%, #f4f5ff 100%); box-shadow: 0 0 0 2px var(--accent); }
+.plan-badge { position: absolute; top: -10px; left: 28px; background: var(--grad-primary); color: #fff; padding: 4px 12px; border-radius: var(--r-pill); font-size: 11px; font-weight: 700; }
+.plan-name { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.6px; }
+.plan-title { font-size: 22px; font-weight: 700; color: var(--ink-bright); letter-spacing: -0.4px; margin-bottom: 16px; }
+.plan-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 18px; }
+.plan-price .num { font-size: 40px; font-weight: 800; color: var(--ink-bright); letter-spacing: -1.2px; }
+.plan-price .per { font-size: 13px; color: var(--ink-muted); }
+.plan-blurb { font-size: 13.5px; color: var(--ink-muted); margin-bottom: 24px; line-height: 1.55; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 11px; }
+.plan li { font-size: 14px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px; line-height: 1.55; }
+.plan li svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--accent); margin-top: 4px; }
+.plan-cta { width: 100%; }
+
+/* CTA */
+.cta-band { background: var(--grad-primary); border-radius: var(--r-xl); padding: 64px 48px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+.cta-band::before { content: ""; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(230,61,191,0.3) 0%, transparent 60%); top: -300px; right: -200px; }
+.cta-band h2 { font-size: 44px; line-height: 1.12; letter-spacing: -1.4px; margin: 0 0 14px; font-weight: 800; position: relative; }
+.cta-band p { margin: 0 auto 28px; font-size: 16px; opacity: 0.95; max-width: 560px; position: relative; }
+.cta-band .btn { position: relative; background: #fff; color: var(--accent); }
+.cta-band .btn:hover { background: var(--ink-bright); color: #fff; }
+
+/* Footer */
+footer { padding: 64px 0 40px; background: var(--canvas-tint); border-top: 1px solid var(--border-soft); }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
+.foot-brand p { color: var(--ink-muted); font-size: 13.5px; line-height: 1.65; margin: 16px 0 22px; max-width: 280px; }
+.foot-col h4 { font-size: 13px; font-weight: 700; color: var(--ink-bright); margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); transition: color .12s; }
+.foot-col li a:hover { color: var(--accent); }
+.foot-bottom { display: flex; justify-content: space-between; padding-top: 28px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 12px; }
+
+/* Design system */
+.ds-section { background: var(--canvas-tint); padding: 100px 0; border-top: 1px solid var(--border-soft); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 38px; letter-spacing: -1.2px; line-height: 1.12; margin: 0 0 10px; font-weight: 800; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-muted); font-size: 14.5px; max-width: 580px; line-height: 1.65; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; background: #fff; border: 1px solid var(--border); border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--ink-soft); transition: all .15s; }
+.ds-source:hover { border-color: var(--accent); color: var(--accent); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 24px; font-weight: 800; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.4px; }
+.ds-desc { font-size: 14px; color: var(--ink-muted); margin: 0 0 24px; line-height: 1.6; max-width: 580px; }
+.ds-caption { font-size: 11px; font-weight: 700; color: var(--accent); margin: 28px 0 12px; letter-spacing: 0.6px; text-transform: uppercase; }
+.ds-swatches { display: grid; gap: 14px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 72px; }
+.ds-sw .meta { padding: 12px 14px; }
+.ds-sw .name { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 11px; color: var(--ink-muted); font-family: ui-monospace, monospace; margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border-soft); font-size: 13.5px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-muted); background: var(--surface-1); }
+.ds-type-table td { color: var(--ink-soft); }
+.ds-type-table td.token { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--accent); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.ds-radius-cell { background: #fff; border: 1px solid var(--border); padding: 18px 8px; text-align: center; border-radius: var(--r-md); }
+.ds-radius-box { width: 56px; height: 56px; background: var(--grad-primary); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 11.5px; font-weight: 600; color: var(--ink); }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: ui-monospace, monospace; margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; }
+.ds-card h5 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input-line { background: #fff; border: 1.5px solid var(--border); padding: 12px 18px; border-radius: var(--r-pill); color: var(--ink); font-size: 13.5px; font-family: inherit; width: 100%; outline: none; transition: all .15s; }
+.input-line:focus { border-color: var(--accent); }
+.input-line::placeholder { color: var(--ink-dim); }
+.tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; }
+.tag-grad { background: var(--grad-primary); color: #fff; }
+.tag-blue { background: var(--accent-soft); color: var(--accent); }
+.tag-line { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+
+/* Floating source */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: #fff; border: 1px solid var(--border); padding: 10px 18px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--ink-soft); box-shadow: var(--shadow-card); transition: all .15s; }
+.src-link:hover { color: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero h1 { font-size: 46px; letter-spacing: -1.4px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .agents-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .showcase-inner { grid-template-columns: 1fr; }
+  .showcase { padding: 40px 28px; }
+  .showcase h3 { font-size: 30px; }
+  .cta-band { padding: 48px 28px; }
+  .cta-band h2 { font-size: 30px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 36px; }
+  .section-title { font-size: 32px; }
+  .ds-intro h2 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l8-12 8 12-8-4z"/></svg>
+      </span>
+      <span>文心</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link active" href="#">文心一言</a>
+      <a class="nav-link" href="#">文心智能体</a>
+      <a class="nav-link" href="#">文心一格</a>
+      <a class="nav-link" href="#">文心 API</a>
+      <a class="nav-link" href="#">企业服务</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#">登录</a>
+      <a class="btn btn-grad btn-sm" href="#">立即体验</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>ERNIE 4.5 · 知识增强大模型</span>
+      <h1>知识增强的 <em>中国大模型</em></h1>
+      <p class="lead">文心一言由百度自主研发, 基于飞桨深度学习平台和文心知识增强大模型. 万亿知识图谱与海量数据深度融合, 让大模型不只是会说话, 更懂中文世界.</p>
+      <div class="hero-actions">
+        <a class="btn btn-grad" href="#">立即对话</a>
+        <a class="btn btn-outline" href="#">查看 API 文档</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>千万+</strong>日活用户</div>
+        <div class="hero-meta-item"><strong>4.5</strong>版本迭代</div>
+        <div class="hero-meta-item"><strong>3万亿</strong>知识图谱</div>
+      </div>
+    </div>
+
+    <div class="wx-chat">
+      <div class="wx-chat-head">
+        <span class="dot"></span>
+        <span class="title">文心一言 4.5</span>
+        <span class="badge">在线</span>
+      </div>
+      <div class="wx-chat-body">
+        <div class="wx-msg">
+          <div class="wx-avatar user">我</div>
+          <div class="wx-content">2025 年中国新能源汽车销量 Top 3 品牌是哪些?</div>
+        </div>
+        <div class="wx-msg">
+          <div class="wx-avatar ai">文</div>
+          <div class="wx-content">
+            根据最新的<strong>权威数据</strong>, 2025 年中国新能源汽车销量前三品牌分别是:
+            <div class="wx-card">
+              <div class="lbl">销量榜单</div>
+              <div class="val">
+                1. 比亚迪 · 426 万辆<br/>
+                2. 特斯拉中国 · 78 万辆<br/>
+                3. 理想汽车 · 52 万辆
+              </div>
+            </div>
+            数据来源已自动检索, 可点击查看详细出处.
+          </div>
+        </div>
+      </div>
+      <div class="wx-input">
+        <div class="field">向文心一言提问</div>
+        <div class="send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">能力矩阵</div>
+      <h2 class="section-title">六大能力 · 一个 <em>大模型</em></h2>
+      <p class="section-sub">从语言理解到多模态生成, 从知识问答到智能体编排, 文心覆盖企业与开发者的全部 AI 需求.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h3 class="feat-title">文心对话</h3>
+        <p class="feat-desc">中文理解领先, 复杂问题分步推理, 长文写作连贯. 支持万字输出, 适合写报告, 写策划, 写代码.</p>
+        <a class="feat-link" href="#">开始对话 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <h3 class="feat-title">文生图</h3>
+        <p class="feat-desc">文心一格提供国风, 写实, 二次元等多风格图像生成, 高分辨率细节出色, 中文 prompt 理解精准.</p>
+        <a class="feat-link" href="#">生成图像 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <h3 class="feat-title">文生视频</h3>
+        <p class="feat-desc">百度自研视频生成模型, 一句话生成 4K 短视频, 支持镜头语言控制, 时长可达 60 秒.</p>
+        <a class="feat-link" href="#">体验视频生成 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+        </div>
+        <h3 class="feat-title">文心智能体</h3>
+        <p class="feat-desc">零代码搭建个性化 AI 助手, 调用插件与知识库, 一键发布到搜索, 小程序, 企业内部.</p>
+        <a class="feat-link" href="#">创建智能体 →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3 class="feat-title">代码助手</h3>
+        <p class="feat-desc">Comate 智能编码助手, 支持主流 IDE, 代码补全, 解释, 单测生成, 国内开发者首选.</p>
+        <a class="feat-link" href="#">下载 Comate →</a>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3 class="feat-title">企业 API</h3>
+        <p class="feat-desc">千帆大模型平台提供模型托管, 训练, 部署一站式服务, 服务超 10 万家企业客户.</p>
+        <a class="feat-link" href="#">了解千帆 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="section">
+  <div class="container">
+    <div class="showcase">
+      <div class="showcase-inner">
+        <div>
+          <h3>从 ERNIE 到 ERNIE 4.5, 持续进化</h3>
+          <p>文心大模型已迭代至 4.5 版本, 在中文理解, 复杂推理, 多模态生成上持续领先. 千万级日活检验, 万亿级 token 训练, 让每一次升级都触达更广的场景.</p>
+          <a class="btn btn-grad" style="background:#fff;color:#2932E1;box-shadow:none" href="#">查看技术演进 →</a>
+        </div>
+        <div class="showcase-stats">
+          <div class="showcase-stat">
+            <div class="num">4.5</div>
+            <div class="lbl">最新模型版本</div>
+          </div>
+          <div class="showcase-stat">
+            <div class="num">10万+</div>
+            <div class="lbl">企业服务客户</div>
+          </div>
+          <div class="showcase-stat">
+            <div class="num">85%</div>
+            <div class="lbl">中文任务领先率</div>
+          </div>
+          <div class="showcase-stat">
+            <div class="num">2017</div>
+            <div class="lbl">首次发布年份</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">智能体广场</div>
+      <h2 class="section-title">精选 <em>文心智能体</em></h2>
+      <p class="section-sub">十万开发者搭建, 覆盖工作, 学习, 生活全场景. 选一个, 或者自己造一个.</p>
+    </div>
+
+    <div class="agents-grid">
+      <div class="agent">
+        <div class="agent-icon g1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+        </div>
+        <div class="agent-name">PPT 一键生成</div>
+        <div class="agent-desc">输入主题, 5 秒生成精美 PPT</div>
+      </div>
+      <div class="agent">
+        <div class="agent-icon g2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+        </div>
+        <div class="agent-name">论文润色</div>
+        <div class="agent-desc">学术写作语法纠错与改写</div>
+      </div>
+      <div class="agent">
+        <div class="agent-icon g3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="agent-name">小红书爆款写手</div>
+        <div class="agent-desc">种草文案 emoji 标题一条龙</div>
+      </div>
+      <div class="agent">
+        <div class="agent-icon g4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        </div>
+        <div class="agent-name">简历优化大师</div>
+        <div class="agent-desc">针对岗位定制简历表达</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">订阅方案</div>
+      <h2 class="section-title">个人到企业 · <em>按需选择</em></h2>
+      <p class="section-sub">免费版满足日常对话, 专业版解锁全部高级能力, 企业版量身定制专属模型与部署.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">免费版</div>
+        <div class="plan-title">文心一言 Free</div>
+        <div class="plan-price"><span class="num">¥0</span><span class="per">/月 · 永久</span></div>
+        <div class="plan-blurb">所有用户即开即用, 满足日常聊天与轻量创作.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>每日免费对话额度</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>ERNIE 4.0 基础模型</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>访问公共智能体</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">免费开始</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">最受欢迎</div>
+        <div class="plan-name">专业版</div>
+        <div class="plan-title">文心一言 Pro</div>
+        <div class="plan-price"><span class="num">¥59.9</span><span class="per">/月</span></div>
+        <div class="plan-blurb">解锁 4.5 旗舰模型与全部多模态能力.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>ERNIE 4.5 旗舰模型</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>文生图 / 文生视频不限量</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>专属高速通道</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>智能体无限创建</li>
+        </ul>
+        <a class="btn btn-grad plan-cta" href="#">升级 Pro</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">企业版</div>
+        <div class="plan-title">千帆大模型平台</div>
+        <div class="plan-price"><span class="num">定制</span><span class="per">联系销售</span></div>
+        <div class="plan-blurb">企业级模型托管, 微调, 部署一站式服务.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>私有化部署</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>定制行业模型</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>SLA 99.9% 保障</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>1v1 专家服务</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">联系销售</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2>知识增强 · 中文最懂</h2>
+      <p>千万用户的选择, 百度二十年技术积累. 用文心一言, 让你的工作流接入真正懂中文的大模型.</p>
+      <a class="btn" href="#">立即免费体验</a>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>蓝紫梦幻 · 知识增强的视觉语言</h2>
+        <p>文心一言的视觉系统由百度蓝出发, 向紫色过渡, 偶尔触及粉色高光. 这套渐变体系是知识增强大模型的视觉具象 — 蓝色稳重, 紫色想象, 粉色未来.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wenxin.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">蓝紫双色渐变是文心的视觉签名. 主色从百度蓝 #2932E1 一路过渡到紫色 #8E63FF, 偶尔加入粉色 #E63DBF 作为强调. 渐变方向永远是 135deg, 保持视觉一致.</p>
+
+      <div class="ds-caption">主色 Brand Gradient</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#2932E1"></div><div class="meta"><div class="name">百度蓝</div><div class="val">#2932E1</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5163FF"></div><div class="meta"><div class="name">中间蓝</div><div class="val">#5163FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8E63FF"></div><div class="meta"><div class="name">紫色端</div><div class="val">#8E63FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E63DBF"></div><div class="meta"><div class="name">粉色 Accent</div><div class="val">#E63DBF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#2932E1,#5163FF,#8E63FF)"></div><div class="meta"><div class="name">主渐变</div><div class="val">135deg 三色</div></div></div>
+      </div>
+
+      <div class="ds-caption">背景与表面</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #e6e8f5"></div><div class="meta"><div class="name">画布</div><div class="val">#FFFFFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f9faff;border:1px solid #e6e8f5"></div><div class="meta"><div class="name">微底</div><div class="val">#F9FAFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f4f5ff;border:1px solid #e6e8f5"></div><div class="meta"><div class="name">浅紫底</div><div class="val">#F4F5FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ecedff;border:1px solid #e6e8f5"></div><div class="meta"><div class="name">分组</div><div class="val">#ECEDFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e6e8f5"></div><div class="meta"><div class="name">分割线</div><div class="val">#E6E8F5</div></div></div>
+      </div>
+
+      <div class="ds-caption">文字</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0a0b1a"></div><div class="meta"><div class="name">标题</div><div class="val">#0A0B1A</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#15172c"></div><div class="meta"><div class="name">正文</div><div class="val">#15172C</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2d2f50"></div><div class="meta"><div class="name">次级</div><div class="val">#2D2F50</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5e6184"></div><div class="meta"><div class="name">辅助</div><div class="val">#5E6184</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#9a9db8"></div><div class="meta"><div class="name">禁用</div><div class="val">#9A9DB8</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">PingFang SC + Inter 双字族, 主标题使用 800-900 重量级, 配合渐变文字, 传递百度大厂的科技力量感. 章节标题保持较大字号以营造视觉冲击.</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>样例</th><th>字号</th><th>字重</th><th>用途</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:32px;font-weight:800;letter-spacing:-1px">中国大模型</td><td>72 / 4.5rem</td><td>800</td><td>Hero 主标题</td></tr>
+          <tr><td class="token">--title-section</td><td class="sample" style="font-size:26px;font-weight:800">六大能力一个大模型</td><td>48 / 3rem</td><td>800</td><td>章节标题</td></tr>
+          <tr><td class="token">--title-card</td><td class="sample" style="font-size:19px;font-weight:700">文心对话</td><td>19 / 1.19rem</td><td>700</td><td>卡片标题</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:16px;font-weight:400">知识增强的中国大模型</td><td>16 / 1rem</td><td>400</td><td>正文</td></tr>
+          <tr><td class="token">--body-sm</td><td class="sample" style="font-size:14px;font-weight:400;color:#5e6184">支持万字输出</td><td>14 / 0.88rem</td><td>400</td><td>辅助</td></tr>
+          <tr><td class="token">--button</td><td class="sample" style="font-size:14px;font-weight:600">立即体验</td><td>14 / 0.88rem</td><td>600</td><td>按钮</td></tr>
+          <tr><td class="token">--label</td><td class="sample" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#2932E1">ERNIE 4.5</td><td>11 / 0.69rem</td><td>700</td><td>小标签</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">混合圆角策略: 按钮采用 pill 形保持友好, 卡片 14px 适度圆润, 标签 4px 干净利落. 配合渐变背景, 共同营造科技感不失温度的体验.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">最小</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:14px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">14px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">容器</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">圆形</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">渐变按钮承担主操作, 蓝色实心按钮承担次操作, 描边按钮承担辅助操作. 标签使用渐变背景或浅蓝底, 强调蓝紫双色基调.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-grad" href="#">渐变主按钮</a>
+            <a class="btn btn-primary" href="#">蓝色实心</a>
+            <a class="btn btn-outline" href="#">蓝色描边</a>
+            <a class="btn btn-ghost" href="#">幽灵按钮</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="input-line" placeholder="向文心一言提问" />
+            <input class="input-line" placeholder="搜索智能体" />
+            <div class="ds-card-row">
+              <span class="tag tag-grad">ERNIE 4.5</span>
+              <span class="tag tag-blue">推理</span>
+              <span class="tag tag-line">多模态</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:linear-gradient(135deg,#2932E1,#8E63FF);color:#fff;border-radius:14px;padding:18px;width:100%">
+              <div style="font-size:11px;font-weight:700;margin-bottom:6px;opacity:0.9">ERNIE 4.5</div>
+              <div style="font-size:15px;font-weight:700;margin-bottom:4px">旗舰模型</div>
+              <div style="font-size:12px;opacity:0.9">百度自研, 中文最强</div>
+            </div>
+            <div style="background:#fff;border:1px solid #e6e8f5;border-radius:14px;padding:16px;width:100%;border-left:3px solid #2932E1">
+              <div style="font-size:11px;font-weight:600;color:#2932E1;margin-bottom:4px">智能体</div>
+              <div style="font-size:14px;font-weight:600;color:#0a0b1a">PPT 一键生成</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l8-12 8 12-8-4z"/></svg>
+          </span>
+          <span>文心</span>
+        </div>
+        <p>这是一份设计研究 — 文心一言视觉语言的自包含致敬, 用于演示百度大模型蓝紫渐变设计系统. 与百度公司无官方关联.</p>
+      </div>
+      <div class="foot-col">
+        <h4>产品</h4>
+        <ul>
+          <li><a href="#">文心一言</a></li>
+          <li><a href="#">文心智能体</a></li>
+          <li><a href="#">文心一格</a></li>
+          <li><a href="#">Comate 编码</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>开发者</h4>
+        <ul>
+          <li><a href="#">千帆大模型平台</a></li>
+          <li><a href="#">API 文档</a></li>
+          <li><a href="#">价格说明</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>企业服务</h4>
+        <ul>
+          <li><a href="#">行业解决方案</a></li>
+          <li><a href="#">私有化部署</a></li>
+          <li><a href="#">案例展示</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#">技术博客</a></li>
+          <li><a href="#">研究论文</a></li>
+          <li><a href="#">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计研究 · 致敬文心一言视觉语言 · 作者 云中江树</span>
+      <span>用户协议 · 隐私政策</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wenxin.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

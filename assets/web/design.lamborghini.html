@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lamborghini — Inspired Design</title>
+<meta name="description" content="A Lamborghini-inspired marketing page: true-black canvas, surgical gold accent, hexagonal geometric language, all-caps display, zero-radius sharp rectangles. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Barlow+Condensed:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Brand & accents */
+  --gold: #FFC000;
+  --gold-hover: #917300;
+  --gold-text: #FFCE3E;
+  --cyan: #29ABE2;
+  --teal: #1EAEDB;
+  --link: #3860BE;
+  /* Surfaces */
+  --abyss: #000000;
+  --iron: #181818;
+  --charcoal: #202020;
+  --shadow: #313131;
+  --iron-mid: #555555;
+  --slate: #666666;
+  --ash: #7D7D7D;
+  --steel: #969696;
+  --graphite: #494949;
+  --smoke: #F5F5F5;
+  --near-white: #F8F8F8;
+  --mist: #E6E6E6;
+  --on-dark: #FFFFFF;
+  --on-light: #000000;
+  /* Radius */
+  --r-none: 0px;
+  --r-1: 1px;
+  --r-2: 2px;
+  --r-pill: 20px;
+  /* Spacing */
+  --s-2: 2px; --s-4: 4px; --s-8: 8px; --s-12: 12px; --s-16: 16px;
+  --s-20: 20px; --s-24: 24px; --s-32: 32px; --s-40: 40px;
+  --s-48: 48px; --s-56: 56px; --s-80: 80px; --s-96: 96px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Barlow Condensed", "Inter", "Helvetica Neue", Arial, sans-serif;
+  background: var(--abyss);
+  color: var(--on-dark);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--gold); color: var(--on-light); }
+.num { font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
+
+/* ═══ DISPLAY TYPE — LamboType substitute ═══ */
+.display, h1, h2, h3, .eyebrow, .nav a, .btn {
+  font-family: "Barlow Condensed", "Inter", system-ui, sans-serif;
+}
+
+/* ═══ TOP NAV — floating in darkness ═══ */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  background: transparent;
+  padding: 24px 40px;
+}
+.topnav.scrolled {
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1440px; margin: 0 auto;
+}
+.nav-menu {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--on-dark); font-size: 14px;
+  font-weight: 400; letter-spacing: 0.2px; text-transform: uppercase;
+  cursor: pointer;
+}
+.nav-menu .lines {
+  display: inline-block;
+  width: 22px; height: 14px;
+  position: relative;
+}
+.nav-menu .lines::before, .nav-menu .lines::after, .nav-menu .lines span {
+  content: "";
+  position: absolute; left: 0; right: 0;
+  height: 1.5px; background: var(--on-dark);
+}
+.nav-menu .lines::before { top: 0; }
+.nav-menu .lines span { top: 6px; }
+.nav-menu .lines::after { bottom: 0; }
+
+.nav-logo {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--on-dark);
+}
+.nav-logo .bull {
+  width: 40px; height: 30px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.nav-logo .wordmark {
+  font-size: 18px; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase;
+}
+.nav-right { display: inline-flex; align-items: center; gap: 20px; }
+.nav-icon { width: 20px; height: 20px; color: var(--on-dark); cursor: pointer; }
+.nav-icon:hover { color: var(--gold); }
+
+/* ═══ BUTTONS — zero radius, angular ═══ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  text-transform: uppercase;
+  border-radius: var(--r-none);
+  cursor: pointer; border: none;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+.btn-gold {
+  background: var(--gold); color: var(--abyss);
+  padding: 18px 32px;
+  font-size: 16px; font-weight: 500;
+  letter-spacing: 0.4px;
+}
+.btn-gold:hover { background: var(--gold-hover); color: var(--abyss); }
+
+.btn-ghost {
+  background: transparent; color: var(--on-dark);
+  border: 1px solid rgba(255,255,255,0.5);
+  padding: 16px 28px;
+  font-size: 14.4px; font-weight: 400;
+  letter-spacing: 0.2px;
+  opacity: 0.85;
+}
+.btn-ghost:hover { background: var(--teal); border-color: var(--teal); opacity: 1; }
+
+.btn-white {
+  background: var(--on-dark); color: var(--charcoal);
+  padding: 16px 28px;
+  font-size: 14.4px; font-weight: 500;
+  letter-spacing: 0.2px;
+}
+.btn-white:hover { background: var(--mist); }
+
+.btn-small {
+  padding: 10px 18px;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.13px;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--abyss);
+  overflow: hidden;
+  display: flex; align-items: flex-end;
+}
+.hero-stage {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 40%, rgba(255,192,0,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 70%, rgba(41,171,226,0.07) 0%, transparent 60%),
+    linear-gradient(180deg, #050505 0%, #000000 60%);
+}
+.hero-stage::before {
+  /* Sweeping cinematic light */
+  content: "";
+  position: absolute; left: -10%; right: -10%; top: 0; bottom: 0;
+  background: linear-gradient(115deg,
+    transparent 35%,
+    rgba(255,192,0,0.06) 50%,
+    transparent 65%);
+}
+.hero-stage::after {
+  /* Bottom dark gradient for legibility */
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0; height: 50%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+}
+
+/* Silhouette of car as decorative svg-shape */
+.hero-silhouette {
+  position: absolute;
+  left: 50%; top: 45%;
+  transform: translate(-50%, -50%);
+  width: 78%; max-width: 1100px;
+  aspect-ratio: 1100 / 380;
+  pointer-events: none;
+}
+.hero-silhouette .body {
+  position: absolute; inset: 18% 4% 14% 4%;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 70%, #050505 100%);
+  clip-path: polygon(
+    0% 70%, 4% 55%, 12% 40%, 22% 30%, 35% 22%,
+    48% 18%, 60% 18%, 72% 22%, 82% 28%, 90% 38%,
+    96% 50%, 100% 70%, 100% 100%, 0% 100%
+  );
+  box-shadow: 0 0 80px rgba(255,192,0,0.15);
+}
+.hero-silhouette .windshield {
+  position: absolute; left: 32%; right: 32%; top: 28%; bottom: 50%;
+  background: linear-gradient(180deg, rgba(41,171,226,0.18) 0%, rgba(0,0,0,0.4) 100%);
+  clip-path: polygon(8% 100%, 30% 0%, 70% 0%, 92% 100%);
+}
+.hero-silhouette .headlight {
+  position: absolute;
+  top: 60%; width: 6%; aspect-ratio: 1;
+  background: radial-gradient(circle, #FFCE3E 0%, #FFC000 30%, transparent 70%);
+  filter: blur(2px);
+}
+.hero-silhouette .headlight.l { left: 12%; }
+.hero-silhouette .headlight.r { right: 12%; }
+.hero-silhouette .wheel {
+  position: absolute; top: 65%; width: 9%; aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1a1a1a 0%, #050505 60%, #000 100%);
+  border: 1px solid #2a2a2a;
+}
+.hero-silhouette .wheel.l { left: 14%; }
+.hero-silhouette .wheel.r { right: 14%; }
+.hero-silhouette .stripe {
+  position: absolute; left: 6%; right: 6%; bottom: 22%;
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(255,192,0,0.5), transparent);
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 40px 80px;
+  width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.hero-eyebrow::before {
+  content: ""; width: 32px; height: 1px; background: var(--gold);
+}
+.hero h1 {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: clamp(54px, 9vw, 120px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  margin: 0 0 32px;
+  color: var(--on-dark);
+}
+.hero h1 .accent { color: var(--gold); }
+.hero-sub {
+  font-size: 18px; color: var(--smoke);
+  max-width: 580px; line-height: 1.56;
+  margin: 0 0 40px;
+  font-weight: 400;
+}
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* Hexagonal pause button */
+.hex-pause {
+  position: absolute; right: 40px; bottom: 80px;
+  z-index: 3;
+  width: 56px; height: 56px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--on-dark);
+  cursor: pointer;
+}
+.hex-pause svg { display: block; }
+.hex-pause:hover { color: var(--gold); }
+
+/* Progress bar at bottom */
+.hero-progress {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  z-index: 3;
+}
+.hero-progress::after {
+  content: ""; display: block;
+  width: 35%; height: 1px;
+  background: var(--on-dark);
+}
+.hero-credit {
+  position: absolute;
+  left: 40px; bottom: 24px;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.225px; text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  z-index: 3;
+}
+
+/* ═══ SECTION HEADER ═══ */
+.section { padding: 96px 0; }
+.section-head { max-width: 1440px; margin: 0 auto 56px; padding: 0 40px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--gold); }
+h2.section-title {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: clamp(40px, 5.5vw, 80px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.4px;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  color: var(--on-dark);
+}
+.section-sub {
+  max-width: 640px;
+  color: var(--ash);
+  font-size: 18px;
+  line-height: 1.56;
+  margin: 0;
+}
+
+/* ═══ FEATURE STRIP ═══ */
+.feature-strip {
+  background: var(--abyss);
+  padding: 80px 40px;
+  border-bottom: 1px solid var(--charcoal);
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  max-width: 1440px; margin: 0 auto;
+}
+.feature-cell {
+  padding: 32px;
+  border-right: 1px solid var(--charcoal);
+}
+.feature-cell:last-child { border-right: none; }
+.feature-cell .label {
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.225px; text-transform: uppercase;
+  color: var(--ash);
+  margin-bottom: 16px;
+}
+.feature-cell .value {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 54px; font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.5px;
+  color: var(--on-dark);
+  margin-bottom: 8px;
+}
+.feature-cell .unit {
+  font-size: 12px; color: var(--ash);
+  letter-spacing: 0.96px; text-transform: uppercase;
+}
+.feature-cell .value .accent { color: var(--gold); }
+@media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } .feature-cell { border-right: none; border-bottom: 1px solid var(--charcoal); } }
+
+/* ═══ LINEUP — model grid ═══ */
+.lineup { background: var(--abyss); padding: 96px 40px; }
+.lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--charcoal);
+  max-width: 1440px; margin: 0 auto;
+  border: 1px solid var(--charcoal);
+}
+.model-card {
+  background: var(--abyss);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.model-card:hover { background: var(--iron); }
+.model-photo {
+  aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0c0c0c 0%, #000 100%);
+}
+.model-photo .scene {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 75%, rgba(255,192,0,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 30%, rgba(41,171,226,0.05) 0%, transparent 70%);
+}
+.model-photo .car {
+  position: absolute;
+  left: 8%; right: 8%; bottom: 18%; height: 36%;
+  background: linear-gradient(180deg, #1c1c1c 0%, #050505 70%);
+  clip-path: polygon(0% 65%, 6% 45%, 16% 30%, 30% 20%, 48% 14%, 64% 14%, 78% 22%, 88% 32%, 96% 48%, 100% 65%, 100% 100%, 0% 100%);
+}
+.model-photo.tone-gold .car {
+  background: linear-gradient(180deg, #2a230a 0%, #0a0805 70%);
+  box-shadow: inset 0 -10px 20px rgba(255,192,0,0.25);
+}
+.model-photo.tone-cyan .car {
+  background: linear-gradient(180deg, #0a1a22 0%, #050a0e 70%);
+}
+.model-photo .car-wh {
+  position: absolute; bottom: 8%;
+  width: 9%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, #1a1a1a 30%, #000 70%);
+}
+.model-photo .car-wh.l { left: 18%; }
+.model-photo .car-wh.r { right: 18%; }
+.model-photo .glare {
+  position: absolute;
+  left: 30%; right: 30%; top: 38%; height: 4%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.6;
+  filter: blur(1px);
+}
+.model-badge {
+  position: absolute; top: 16px; left: 16px;
+  background: var(--steel);
+  color: var(--on-dark);
+  padding: 4px 10px;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.225px; text-transform: uppercase;
+  border-radius: var(--r-2);
+}
+.model-body {
+  padding: 32px;
+}
+.model-tag {
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  color: var(--ash);
+  margin-bottom: 12px;
+}
+.model-name {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.2px;
+  text-transform: uppercase;
+  color: var(--on-dark);
+  margin: 0 0 24px;
+}
+.model-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px 0;
+  border-top: 1px solid var(--charcoal);
+  border-bottom: 1px solid var(--charcoal);
+  margin-bottom: 24px;
+}
+.model-specs .stat .v {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 27px; font-weight: 400;
+  line-height: 1.0;
+  color: var(--on-dark);
+  margin-bottom: 4px;
+  letter-spacing: -0.1px;
+}
+.model-specs .stat .l {
+  font-size: 10px; color: var(--ash);
+  letter-spacing: 0.225px; text-transform: uppercase;
+}
+.model-cta-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.model-cta-row .price {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 18px;
+  color: var(--gold-text);
+  letter-spacing: 0.16px;
+}
+@media (max-width: 1100px) { .lineup-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .lineup-grid { grid-template-columns: 1fr; } }
+
+/* ═══ EVENT BAND — Lamborghini Arena ═══ */
+.event-band {
+  background: var(--abyss);
+  padding: 0;
+  border-top: 1px solid var(--charcoal);
+  border-bottom: 1px solid var(--charcoal);
+  position: relative;
+  overflow: hidden;
+}
+.event-stage {
+  position: relative;
+  min-height: 540px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(41,171,226,0.10) 0%, transparent 60%),
+    linear-gradient(135deg, #050505 0%, #0a0a0a 100%);
+}
+.event-photo {
+  position: relative;
+  overflow: hidden;
+}
+.event-photo::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 40% 60%, rgba(255,192,0,0.25) 0%, transparent 45%),
+    radial-gradient(ellipse at 70% 30%, rgba(255,192,0,0.10) 0%, transparent 50%),
+    linear-gradient(180deg, #0a0805 0%, #1a1208 50%, #050505 100%);
+}
+.event-photo .track-lines {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 60%;
+  background:
+    repeating-linear-gradient(115deg,
+      transparent 0px, transparent 30px,
+      rgba(255,192,0,0.08) 30px, rgba(255,192,0,0.08) 32px);
+}
+.event-photo .crowd-glow {
+  position: absolute;
+  left: 10%; right: 10%; bottom: 28%;
+  height: 6%;
+  background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+  opacity: 0.5; filter: blur(3px);
+}
+.event-photo .stage-light {
+  position: absolute; top: 0;
+  width: 0; height: 0;
+  border-style: solid;
+}
+.event-photo .stage-light.l {
+  left: 15%;
+  border-width: 0 30px 380px 30px;
+  border-color: transparent transparent rgba(255,192,0,0.08) transparent;
+}
+.event-photo .stage-light.r {
+  right: 15%;
+  border-width: 0 30px 380px 30px;
+  border-color: transparent transparent rgba(41,171,226,0.08) transparent;
+}
+
+.event-content {
+  padding: 80px 64px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.event-content .eyebrow { color: var(--gold-text); }
+.event-content h2 {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: clamp(36px, 4vw, 54px);
+  font-weight: 400; line-height: 1.0;
+  letter-spacing: -0.3px; text-transform: uppercase;
+  color: var(--on-dark);
+  margin: 0 0 24px;
+}
+.event-content p {
+  color: var(--smoke);
+  font-size: 16px; line-height: 1.56;
+  margin: 0 0 32px;
+  max-width: 480px;
+}
+.event-meta {
+  display: flex; gap: 40px;
+  padding: 24px 0;
+  border-top: 1px solid var(--shadow);
+  margin-bottom: 32px;
+}
+.event-meta .item .l {
+  font-size: 10px; color: var(--ash);
+  letter-spacing: 0.225px; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.event-meta .item .v {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 24px; color: var(--on-dark);
+  letter-spacing: -0.2px;
+}
+@media (max-width: 900px) {
+  .event-stage { grid-template-columns: 1fr; min-height: auto; }
+  .event-photo { min-height: 320px; }
+  .event-content { padding: 48px 32px; }
+}
+
+/* ═══ CTA BAND ═══ */
+.cta-band {
+  background: var(--abyss);
+  padding: 120px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-band::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(255,192,0,0.06) 0%, transparent 60%);
+}
+.cta-inner { position: relative; max-width: 900px; margin: 0 auto; }
+.cta-inner .eyebrow {
+  display: inline-flex; justify-content: center;
+  margin-bottom: 32px;
+}
+.cta-band h2 {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: clamp(48px, 6.5vw, 96px);
+  font-weight: 400; line-height: 0.96;
+  letter-spacing: -0.5px; text-transform: uppercase;
+  margin: 0 0 24px;
+  color: var(--on-dark);
+}
+.cta-band h2 .accent { color: var(--gold); }
+.cta-band p {
+  color: var(--smoke);
+  font-size: 18px; line-height: 1.56;
+  max-width: 560px; margin: 0 auto 40px;
+}
+
+/* ═══ FOOTER ═══ */
+.footer {
+  background: var(--iron);
+  color: var(--ash);
+  padding: 80px 40px 32px;
+  border-top: 1px solid var(--charcoal);
+}
+.footer-inner { max-width: 1440px; margin: 0 auto; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 56px;
+}
+.footer h5 {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  color: var(--on-dark);
+  margin: 0 0 20px;
+}
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer ul li { padding: 6px 0; }
+.footer ul li a {
+  font-size: 13px; font-weight: 400;
+  color: var(--steel);
+}
+.footer ul li a:hover { color: var(--gold); }
+.footer-intro p {
+  font-size: 13px; color: var(--ash);
+  margin: 16px 0 0; max-width: 280px; line-height: 1.6;
+}
+.footer-brand {
+  display: inline-flex; align-items: center; gap: 12px;
+  color: var(--on-dark);
+}
+.footer-brand .wordmark {
+  font-size: 16px; letter-spacing: 4px;
+  text-transform: uppercase; font-weight: 500;
+}
+.footer-bottom {
+  border-top: 1px solid var(--charcoal);
+  padding-top: 24px;
+  display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  font-size: 11px; color: var(--slate);
+  letter-spacing: 0.225px; text-transform: uppercase;
+}
+@media (max-width: 1000px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ════════════════════════════════════════════ */
+/*           DESIGN SYSTEM REFERENCE            */
+/* ════════════════════════════════════════════ */
+.ds-section { background: var(--abyss); padding: 96px 0; border-top: 1px solid var(--charcoal); }
+.ds-intro { max-width: 1440px; margin: 0 auto 64px; padding: 0 40px; }
+.ds-eyebrow {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  color: var(--gold);
+  display: inline-flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.ds-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--gold); }
+.ds-intro h2 {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 64px; font-weight: 400;
+  line-height: 1.0; letter-spacing: -0.4px;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  color: var(--on-dark);
+}
+.ds-intro p {
+  font-size: 16px; color: var(--ash);
+  max-width: 720px; line-height: 1.56;
+  margin: 0;
+}
+.ds-block {
+  max-width: 1440px; margin: 0 auto 80px; padding: 0 40px;
+}
+.ds-block h3 {
+  font-family: "Barlow Condensed", system-ui, sans-serif;
+  font-size: 27px; font-weight: 400;
+  letter-spacing: -0.1px; text-transform: uppercase;
+  color: var(--on-dark);
+  margin: 0 0 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--charcoal);
+}
+.ds-block h4 {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  color: var(--gold);
+  margin: 32px 0 16px;
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--charcoal);
+  border: 1px solid var(--charcoal);
+}
+.swatch { background: var(--abyss); }
+.swatch-chip { height: 96px; border-bottom: 1px solid var(--charcoal); }
+.swatch-meta { padding: 14px 16px; }
+.swatch-name { font-size: 12px; font-weight: 500; color: var(--on-dark); letter-spacing: 0.5px; margin-bottom: 4px; text-transform: uppercase; }
+.swatch-hex {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px; color: var(--ash);
+}
+.swatch-role { font-size: 10px; color: var(--steel); letter-spacing: 0.225px; text-transform: uppercase; margin-top: 4px; }
+
+.type-table {
+  width: 100%; border-collapse: collapse;
+}
+.type-table th, .type-table td {
+  text-align: left; padding: 16px 12px;
+  border-bottom: 1px solid var(--charcoal);
+  font-size: 14px; font-weight: 400; vertical-align: middle;
+}
+.type-table th {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  color: var(--ash);
+}
+.type-token {
+  font-family: ui-monospace, monospace; font-size: 12px;
+  color: var(--on-dark); font-weight: 400;
+}
+.type-spec { color: var(--ash); font-size: 12px; font-family: ui-monospace, monospace; }
+.type-sample-hero { font-family: "Barlow Condensed", sans-serif; font-size: 64px; font-weight: 400; line-height: 0.92; text-transform: uppercase; letter-spacing: -0.5px; }
+.type-sample-display { font-family: "Barlow Condensed", sans-serif; font-size: 48px; font-weight: 400; line-height: 1.0; text-transform: uppercase; }
+.type-sample-section { font-family: "Barlow Condensed", sans-serif; font-size: 32px; font-weight: 400; line-height: 1.1; text-transform: uppercase; }
+.type-sample-feature { font-family: "Barlow Condensed", sans-serif; font-size: 22px; font-weight: 400; text-transform: uppercase; }
+.type-sample-body { font-size: 16px; font-weight: 400; }
+.type-sample-caption { font-size: 13px; font-weight: 600; letter-spacing: -0.42px; text-transform: uppercase; }
+.type-sample-label { font-size: 12px; font-weight: 500; letter-spacing: 0.96px; text-transform: uppercase; }
+.type-sample-micro { font-size: 10px; font-weight: 400; letter-spacing: 0.225px; text-transform: uppercase; }
+
+.radius-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.radius-item { text-align: center; }
+.radius-square {
+  width: 100%; aspect-ratio: 1;
+  background: var(--charcoal);
+  border: 1px solid var(--shadow);
+  margin-bottom: 12px;
+}
+.radius-name { font-size: 12px; font-weight: 500; color: var(--on-dark); letter-spacing: 0.5px; text-transform: uppercase; }
+.radius-val { font-size: 11px; color: var(--ash); font-family: ui-monospace, monospace; margin-top: 4px; }
+
+.comp-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+  background: var(--charcoal);
+  border: 1px solid var(--charcoal);
+}
+.comp-card {
+  background: var(--iron);
+  padding: 32px;
+}
+.comp-card h5 {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  color: var(--gold); margin: 0 0 20px;
+}
+.comp-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 14px; }
+.comp-row:last-child { margin-bottom: 0; }
+.demo-input {
+  width: 100%; max-width: 320px;
+  height: 48px; padding: 12px 16px;
+  border: 1px solid var(--ash);
+  background: var(--abyss);
+  color: var(--on-dark);
+  font-family: inherit; font-size: 14px;
+  border-radius: var(--r-none);
+}
+.demo-input::placeholder { color: var(--steel); }
+.demo-input:focus { outline: 0; border-color: var(--gold); }
+.badge {
+  background: var(--steel);
+  color: var(--on-dark);
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.225px; text-transform: uppercase;
+  border-radius: var(--r-2);
+  padding: 4px 10px;
+  display: inline-flex; align-items: center;
+}
+.badge.gold { background: var(--gold); color: var(--abyss); }
+.badge.cyan { background: var(--cyan); color: var(--abyss); }
+.toggle {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; color: var(--ash);
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.toggle-track {
+  position: relative;
+  width: 44px; height: 22px;
+  background: var(--shadow);
+  border: 1px solid var(--ash);
+  border-radius: var(--r-pill);
+}
+.toggle-track::after {
+  content: ""; position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--on-dark);
+}
+.toggle.on .toggle-track { background: var(--gold); border-color: var(--gold); }
+.toggle.on .toggle-track::after { left: auto; right: 2px; background: var(--abyss); }
+
+@media (max-width: 900px) {
+  .comp-grid { grid-template-columns: 1fr; }
+  .radius-row { grid-template-columns: repeat(2, 1fr); }
+  .ds-intro h2 { font-size: 44px; }
+}
+
+/* ═══ FLOATING SOURCE LINK ═══ */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 100;
+  background: var(--gold); color: var(--abyss);
+  border-radius: var(--r-none);
+  padding: 14px 20px;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.96px; text-transform: uppercase;
+  font-family: "Barlow Condensed", sans-serif;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.src-link:hover { background: var(--gold-hover); color: var(--abyss); }
+</style>
+</head>
+<body>
+
+<!-- ╔══ TOP NAV ══╗ -->
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="nav-menu" aria-label="Menu">
+      <span class="lines"><span></span></span>
+      <span>Menu</span>
+    </div>
+    <a href="#" class="nav-logo" aria-label="Lamborghini">
+      <span class="bull" aria-hidden="true">
+        <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
+          <path d="M20 2 L26 8 L24 12 L28 14 L30 22 L26 26 L20 28 L14 26 L10 22 L12 14 L16 12 L14 8 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M14 18 L20 22 L26 18" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        </svg>
+      </span>
+      <span class="wordmark">Lamborghini</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-icon" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+      </span>
+      <span class="nav-icon" aria-label="Bookmark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4h12v18l-6-4-6 4Z"/></svg>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<!-- ╔══ HERO ══╗ -->
+<section class="hero">
+  <div class="hero-stage"></div>
+  <div class="hero-silhouette">
+    <div class="body"></div>
+    <div class="windshield"></div>
+    <div class="headlight l"></div>
+    <div class="headlight r"></div>
+    <div class="wheel l"></div>
+    <div class="wheel r"></div>
+    <div class="stripe"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">New · V12 Hybrid · 2026</div>
+    <h1>Temerario.<br/>Born of <span class="accent">Fury</span>.</h1>
+    <p class="hero-sub">A 4.0-litre twin-turbo V8 fused with three electric motors. 920 hp delivered with surgical precision. Limited to 1,499 examples, hand-assembled at Sant'Agata Bolognese.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#">Discover Temerario</a>
+      <a class="btn btn-ghost" href="#">Start Configuration</a>
+    </div>
+  </div>
+  <div class="hex-pause" aria-label="Pause video">
+    <svg width="36" height="40" viewBox="0 0 36 40" fill="none">
+      <path d="M18 2 L33 11 L33 29 L18 38 L3 29 L3 11 Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      <rect x="14" y="14" width="3" height="12" fill="currentColor"/>
+      <rect x="20" y="14" width="3" height="12" fill="currentColor"/>
+    </svg>
+  </div>
+  <div class="hero-credit">Footage · Sant'Agata Test Track · 04.2026</div>
+  <div class="hero-progress"></div>
+</section>
+
+<!-- ╔══ FEATURE STRIP — performance numbers ══╗ -->
+<section class="feature-strip">
+  <div class="feature-grid">
+    <div class="feature-cell">
+      <div class="label">Output</div>
+      <div class="value num">920<span class="accent">.</span></div>
+      <div class="unit">HP · Hybrid V8</div>
+    </div>
+    <div class="feature-cell">
+      <div class="label">0 — 100 km/h</div>
+      <div class="value num">2.7<span class="accent">s</span></div>
+      <div class="unit">Sport+ Launch</div>
+    </div>
+    <div class="feature-cell">
+      <div class="label">V-Max</div>
+      <div class="value num">343</div>
+      <div class="unit">Km/h</div>
+    </div>
+    <div class="feature-cell">
+      <div class="label">Limited to</div>
+      <div class="value num">1,499</div>
+      <div class="unit">Units · Worldwide</div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══ LINEUP ══╗ -->
+<section class="lineup">
+  <div class="section-head">
+    <div class="eyebrow">The Lineup</div>
+    <h2 class="section-title">Six Bulls.<br/>One Bloodline.</h2>
+    <p class="section-sub">Every Lamborghini carries the geometry of Sant'Agata — hexagonal precision, aerodynamic violence, and a 12° angled aesthetic stamped into every panel and pixel.</p>
+  </div>
+
+  <div class="lineup-grid">
+    <article class="model-card">
+      <div class="model-photo">
+        <div class="scene"></div>
+        <div class="model-badge">V12 · Coupé</div>
+        <div class="car"></div>
+        <div class="car-wh l"></div>
+        <div class="car-wh r"></div>
+        <div class="glare"></div>
+      </div>
+      <div class="model-body">
+        <div class="model-tag">Super Sports · Mid-engine</div>
+        <h3 class="model-name">Revuelto</h3>
+        <div class="model-specs">
+          <div class="stat"><div class="v num">1,015</div><div class="l">HP</div></div>
+          <div class="stat"><div class="v num">2.5s</div><div class="l">0—100</div></div>
+          <div class="stat"><div class="v num">350</div><div class="l">Km/h</div></div>
+        </div>
+        <div class="model-cta-row">
+          <span class="price">From €500,000</span>
+          <a class="btn btn-gold btn-small" href="#">Configure</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="model-card">
+      <div class="model-photo tone-gold">
+        <div class="scene"></div>
+        <div class="model-badge">V8 Hybrid</div>
+        <div class="car"></div>
+        <div class="car-wh l"></div>
+        <div class="car-wh r"></div>
+        <div class="glare"></div>
+      </div>
+      <div class="model-body">
+        <div class="model-tag">Super Sports · 2026</div>
+        <h3 class="model-name">Temerario</h3>
+        <div class="model-specs">
+          <div class="stat"><div class="v num">920</div><div class="l">HP</div></div>
+          <div class="stat"><div class="v num">2.7s</div><div class="l">0—100</div></div>
+          <div class="stat"><div class="v num">343</div><div class="l">Km/h</div></div>
+        </div>
+        <div class="model-cta-row">
+          <span class="price">From €320,000</span>
+          <a class="btn btn-gold btn-small" href="#">Configure</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="model-card">
+      <div class="model-photo tone-cyan">
+        <div class="scene"></div>
+        <div class="model-badge">Super SUV</div>
+        <div class="car"></div>
+        <div class="car-wh l"></div>
+        <div class="car-wh r"></div>
+        <div class="glare"></div>
+      </div>
+      <div class="model-body">
+        <div class="model-tag">Super SUV · 4-seater</div>
+        <h3 class="model-name">Urus SE</h3>
+        <div class="model-specs">
+          <div class="stat"><div class="v num">800</div><div class="l">HP</div></div>
+          <div class="stat"><div class="v num">3.4s</div><div class="l">0—100</div></div>
+          <div class="stat"><div class="v num">312</div><div class="l">Km/h</div></div>
+        </div>
+        <div class="model-cta-row">
+          <span class="price">From €240,000</span>
+          <a class="btn btn-gold btn-small" href="#">Configure</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="model-card">
+      <div class="model-photo">
+        <div class="scene"></div>
+        <div class="model-badge">Few-off · V12</div>
+        <div class="car"></div>
+        <div class="car-wh l"></div>
+        <div class="car-wh r"></div>
+        <div class="glare"></div>
+      </div>
+      <div class="model-body">
+        <div class="model-tag">Limited · 29 Units</div>
+        <h3 class="model-name">Invencible</h3>
+        <div class="model-specs">
+          <div class="stat"><div class="v num">780</div><div class="l">HP</div></div>
+          <div class="stat"><div class="v num">2.8s</div><div class="l">0—100</div></div>
+          <div class="stat"><div class="v num">355</div><div class="l">Km/h</div></div>
+        </div>
+        <div class="model-cta-row">
+          <span class="price">By invitation</span>
+          <a class="btn btn-gold btn-small" href="#">Reserve</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="model-card">
+      <div class="model-photo tone-gold">
+        <div class="scene"></div>
+        <div class="model-badge">Track · LMDh</div>
+        <div class="car"></div>
+        <div class="car-wh l"></div>
+        <div class="car-wh r"></div>
+        <div class="glare"></div>
+      </div>
+      <div class="model-body">
+        <div class="model-tag">Motorsport · Closed-cockpit</div>
+        <h3 class="model-name">SC63</h3>
+        <div class="model-specs">
+          <div class="stat"><div class="v num">680</div><div class="l">HP</div></div>
+          <div class="stat"><div class="v num">2.4s</div><div class="l">0—100</div></div>
+          <div class="stat"><div class="v num">340</div><div class="l">Km/h</div></div>
+        </div>
+        <div class="model-cta-row">
+          <span class="price">Racing only</span>
+          <a class="btn btn-gold btn-small" href="#">Programme</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="model-card">
+      <div class="model-photo tone-cyan">
+        <div class="scene"></div>
+        <div class="model-badge">Icona · 19 Units</div>
+        <div class="car"></div>
+        <div class="car-wh l"></div>
+        <div class="car-wh r"></div>
+        <div class="glare"></div>
+      </div>
+      <div class="model-body">
+        <div class="model-tag">Icona · Open Roof</div>
+        <h3 class="model-name">Fenomeno</h3>
+        <div class="model-specs">
+          <div class="stat"><div class="v num">1,080</div><div class="l">HP</div></div>
+          <div class="stat"><div class="v num">2.4s</div><div class="l">0—100</div></div>
+          <div class="stat"><div class="v num">350+</div><div class="l">Km/h</div></div>
+        </div>
+        <div class="model-cta-row">
+          <span class="price">By invitation</span>
+          <a class="btn btn-gold btn-small" href="#">Reserve</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ╔══ EVENT BAND — Lamborghini Arena ══╗ -->
+<section class="event-band">
+  <div class="event-stage">
+    <div class="event-photo">
+      <div class="track-lines"></div>
+      <div class="stage-light l"></div>
+      <div class="stage-light r"></div>
+      <div class="crowd-glow"></div>
+    </div>
+    <div class="event-content">
+      <div class="eyebrow">Lamborghini Arena</div>
+      <h2>The night<br/>the bulls run.</h2>
+      <p>One weekend a year, every Lamborghini ever produced by Sant'Agata gathers at the Arena in Misano. 1,200 cars. 80,000 spectators. Zero compromise.</p>
+      <div class="event-meta">
+        <div class="item">
+          <div class="l">Edition</div>
+          <div class="v">VII · 2026</div>
+        </div>
+        <div class="item">
+          <div class="l">Dates</div>
+          <div class="v">12—14 Sept</div>
+        </div>
+        <div class="item">
+          <div class="l">Venue</div>
+          <div class="v">Misano · IT</div>
+        </div>
+      </div>
+      <div class="hero-ctas">
+        <a class="btn btn-gold" href="#">Tickets</a>
+        <a class="btn btn-ghost" href="#">Programme</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══ CTA BAND ══╗ -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <div class="eyebrow">Ad Personam</div>
+    <h2>Build the one<br/>that's <span class="accent">only yours</span>.</h2>
+    <p>Choose chassis, livery, leather grain, stitching pitch and ECU map. 1.3 million configurations. Each car receives a unique chassis number, etched by hand at Sant'Agata Bolognese.</p>
+    <div class="hero-ctas" style="justify-content:center">
+      <a class="btn btn-gold" href="#">Start Configuration</a>
+      <a class="btn btn-ghost" href="#">Find Atelier</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!--           DESIGN SYSTEM REFERENCE              -->
+<!-- ════════════════════════════════════════════ -->
+<section class="ds-section">
+  <div class="ds-intro">
+    <div class="ds-eyebrow">Design System · Reference</div>
+    <h2>The geometry<br/>beneath the bull.</h2>
+    <p>Lamborghini's design language is constructed from hexagons, three-armed stars, and 12° angled terminals — every surface either reflects light or absorbs it, with absolutely nothing in between. Gold (#FFC000) is rationed like fuel: only the primary action gets it.</p>
+  </div>
+
+  <!-- COLOR -->
+  <div class="ds-block">
+    <h3>Color</h3>
+
+    <h4>Primary &amp; Accent</h4>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#FFC000"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Lamborghini Gold</div>
+          <div class="swatch-hex">#FFC000</div>
+          <div class="swatch-role">Primary CTA only</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#917300"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Dark Gold</div>
+          <div class="swatch-hex">#917300</div>
+          <div class="swatch-role">Hover state</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#FFCE3E"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Gold Text</div>
+          <div class="swatch-hex">#FFCE3E</div>
+          <div class="swatch-role">Inline accents</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#29ABE2"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Cyan Pulse</div>
+          <div class="swatch-hex">#29ABE2</div>
+          <div class="swatch-role">Info highlight</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#3860BE"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Link Blue</div>
+          <div class="swatch-hex">#3860BE</div>
+          <div class="swatch-role">Link hover</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#1EAEDB"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Teal Action</div>
+          <div class="swatch-hex">#1EAEDB</div>
+          <div class="swatch-role">Ghost btn hover</div>
+        </div>
+      </div>
+    </div>
+
+    <h4>Surface &amp; Background</h4>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#000000"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Absolute Black</div>
+          <div class="swatch-hex">#000000</div>
+          <div class="swatch-role">Dominant canvas</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#181818"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Dark Iron</div>
+          <div class="swatch-hex">#181818</div>
+          <div class="swatch-role">Footer · deep sections</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#202020"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Charcoal</div>
+          <div class="swatch-hex">#202020</div>
+          <div class="swatch-role">Elevated cards</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#313131"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Shadow</div>
+          <div class="swatch-hex">#313131</div>
+          <div class="swatch-role">Disabled text</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#F8F8F8"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Near White</div>
+          <div class="swatch-hex">#F8F8F8</div>
+          <div class="swatch-role">Light-mode surface</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#E6E6E6"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Mist</div>
+          <div class="swatch-hex">#E6E6E6</div>
+          <div class="swatch-role">Light divider</div>
+        </div>
+      </div>
+    </div>
+
+    <h4>Neutrals &amp; Text</h4>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#FFFFFF"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Pure White</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-role">Heading on dark</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#F5F5F5"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Smoke</div>
+          <div class="swatch-hex">#F5F5F5</div>
+          <div class="swatch-role">Body on dark</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#969696"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Steel</div>
+          <div class="swatch-hex">#969696</div>
+          <div class="swatch-role">Badges · disabled</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#7D7D7D"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Ash</div>
+          <div class="swatch-hex">#7D7D7D</div>
+          <div class="swatch-role">Mid gray · meta</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#666666"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Slate</div>
+          <div class="swatch-hex">#666666</div>
+          <div class="swatch-role">Secondary content</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#494949"></div>
+        <div class="swatch-meta">
+          <div class="swatch-name">Graphite</div>
+          <div class="swatch-hex">#494949</div>
+          <div class="swatch-role">Text on light</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="ds-block">
+    <h3>Typography — LamboType</h3>
+    <table class="type-table">
+      <thead>
+        <tr><th style="width:28%">Role</th><th style="width:32%">Sample</th><th style="width:18%">Token</th><th>Spec</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hero Display</td>
+          <td><span class="type-sample-hero">Temerario</span></td>
+          <td class="type-token">--t-hero</td>
+          <td class="type-spec">120 / 400 / 0.92 LH / -0.5 LS / UPPER</td>
+        </tr>
+        <tr>
+          <td>Display 2</td>
+          <td><span class="type-sample-display">Lineup</span></td>
+          <td class="type-token">--t-display</td>
+          <td class="type-spec">80 / 400 / 1.13 LH / UPPER</td>
+        </tr>
+        <tr>
+          <td>Section Title</td>
+          <td><span class="type-sample-section">Born of fury</span></td>
+          <td class="type-token">--t-section</td>
+          <td class="type-spec">54 / 400 / 1.19 LH / UPPER</td>
+        </tr>
+        <tr>
+          <td>Feature Heading</td>
+          <td><span class="type-sample-feature">Hybrid V8</span></td>
+          <td class="type-token">--t-feature</td>
+          <td class="type-spec">27 / 400 / 1.37 LH / UPPER</td>
+        </tr>
+        <tr>
+          <td>Body</td>
+          <td><span class="type-sample-body">A 4.0-litre twin-turbo V8 fused with three electric motors.</span></td>
+          <td class="type-token">--t-body</td>
+          <td class="type-spec">16 / 400 / 1.50 LH</td>
+        </tr>
+        <tr>
+          <td>Caption</td>
+          <td><span class="type-sample-caption">Sant'Agata Bolognese</span></td>
+          <td class="type-token">--t-caption</td>
+          <td class="type-spec">14 / 600 / -0.42 LS / UPPER</td>
+        </tr>
+        <tr>
+          <td>Label</td>
+          <td><span class="type-sample-label">V12 · Limited</span></td>
+          <td class="type-token">--t-label</td>
+          <td class="type-spec">12 / 500 / 0.96 LS / UPPER</td>
+        </tr>
+        <tr>
+          <td>Micro</td>
+          <td><span class="type-sample-micro">Footage · 04.2026</span></td>
+          <td class="type-token">--t-micro</td>
+          <td class="type-spec">10 / 400 / 0.225 LS / UPPER</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RADIUS -->
+  <div class="ds-block">
+    <h3>Radius Scale — Sharp by default</h3>
+    <div class="radius-row">
+      <div class="radius-item">
+        <div class="radius-square" style="border-radius:0px"></div>
+        <div class="radius-name">None</div>
+        <div class="radius-val">0px · Default</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-square" style="border-radius:1px"></div>
+        <div class="radius-name">Hairline</div>
+        <div class="radius-val">1px · Spans</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-square" style="border-radius:2px"></div>
+        <div class="radius-name">Micro</div>
+        <div class="radius-val">2px · Badges</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-square" style="border-radius:20px"></div>
+        <div class="radius-name">Pill</div>
+        <div class="radius-val">20px · Toggle only</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENTS -->
+  <div class="ds-block">
+    <h3>Components — Matrix</h3>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <h5>Buttons</h5>
+        <div class="comp-row">
+          <a class="btn btn-gold" href="#">Discover More</a>
+          <a class="btn btn-gold btn-small" href="#">Tickets</a>
+        </div>
+        <div class="comp-row">
+          <a class="btn btn-ghost" href="#">Secondary</a>
+          <a class="btn btn-white" href="#">White Fill</a>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h5>Badges &amp; Pills</h5>
+        <div class="comp-row">
+          <span class="badge gold">Limited</span>
+          <span class="badge cyan">Info</span>
+          <span class="badge">V12 · Coupé</span>
+        </div>
+        <div class="comp-row">
+          <span class="badge">Few-off · 29 Units</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h5>Input</h5>
+        <div class="comp-row">
+          <input class="demo-input" placeholder="EMAIL FOR ATELIER UPDATES" />
+        </div>
+        <div class="comp-row">
+          <input class="demo-input" value="contact@example.com" />
+        </div>
+      </div>
+      <div class="comp-card">
+        <h5>Toggle &amp; Switch</h5>
+        <div class="comp-row">
+          <div class="toggle on">
+            <span class="toggle-track"></span>
+            <span>Sport+ Mode</span>
+          </div>
+        </div>
+        <div class="comp-row">
+          <div class="toggle">
+            <span class="toggle-track"></span>
+            <span>Strada · Default</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══ FOOTER ══╗ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-intro">
+        <a href="#" class="footer-brand">
+          <span class="bull" aria-hidden="true">
+            <svg width="32" height="24" viewBox="0 0 40 30" fill="none">
+              <path d="M20 2 L26 8 L24 12 L28 14 L30 22 L26 26 L20 28 L14 26 L10 22 L12 14 L16 12 L14 8 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="wordmark">Lamborghini</span>
+        </a>
+        <p>Automobili Lamborghini S.p.A. — designed, engineered and built at Sant'Agata Bolognese since 1963.</p>
+      </div>
+      <div>
+        <h5>Models</h5>
+        <ul>
+          <li><a href="#">Revuelto</a></li>
+          <li><a href="#">Temerario</a></li>
+          <li><a href="#">Urus SE</a></li>
+          <li><a href="#">Few-off</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Experience</h5>
+        <ul>
+          <li><a href="#">Lamborghini Arena</a></li>
+          <li><a href="#">Esperienza</a></li>
+          <li><a href="#">Accademia</a></li>
+          <li><a href="#">Squadra Corse</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Ownership</h5>
+        <ul>
+          <li><a href="#">Ad Personam</a></li>
+          <li><a href="#">Selezione</a></li>
+          <li><a href="#">Atelier Locator</a></li>
+          <li><a href="#">Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Investors</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Automobili Lamborghini · All Rights Reserved</span>
+      <span>Privacy · Cookies · Legal · Sant'Agata Bolognese, IT</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.lamborghini.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>

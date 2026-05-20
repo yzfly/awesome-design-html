@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Telegram — iOS design spec</title>
+<meta name="description" content="Telegram iOS app design reference. White canvas, #229ED9 brand blue, paper-plane mark, soft light-blue outgoing bubbles, channel-first information density." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --canvas:#ffffff; --surface-1:#F4F4F5; --surface-2:#EBEDF0; --surface-card:#fff; --surface-card-alt:#F7F7F8;
+  --accent:#229ED9; --accent-legacy:#0088CC; --accent-hover:#1A8BC0;
+  --bubble-out:#E1F0FA; --bubble-in:#ffffff;
+  --ink:#000000; --ink-soft:#1f1f1f; --ink-muted:#707579; --ink-dim:#a8a8ad;
+  --border:#E1E3E6; --border-soft:#F0F0F2;
+  --negative:#E53935; --warning:#F0B400; --premium:#F6BE3B;
+  --tick:#3E8EE0;
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",helvetica,arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r-min:2px; --r-sm:4px; --r-md:6px; --r-lg:10px; --r-xl:13px; --r-pill:500px; --r-full:9999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+img,svg{display:block;max-width:100%}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* ========== NAV ========== */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-soft)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.2px;color:var(--ink)}
+.brand-mark{width:30px;height:30px;border-radius:50%;background:linear-gradient(180deg,#5EC3F5,#229ED9 60%,#0F7DB3);display:grid;place-items:center;box-shadow:0 4px 10px rgba(34,158,217,.25)}
+.brand-mark svg{width:18px;height:18px;fill:#fff}
+.nav-mid{display:flex;gap:4px}
+.nav-pill{padding:8px 14px;border-radius:var(--r-full);font-size:14px;font-weight:600;color:var(--ink-muted)}
+.nav-pill:hover{color:var(--ink)}
+.nav-pill.active{color:var(--accent);background:rgba(34,158,217,.10)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;line-height:1;cursor:pointer;border:0;text-decoration:none;transition:transform .12s, background .15s, color .15s}
+.btn:hover{transform:scale(1.03)}
+.btn-primary{background:var(--accent);color:#fff;padding:12px 22px;border-radius:10px}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-pill{background:var(--surface-1);color:var(--ink);padding:10px 18px;border-radius:10px}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 18px;border-radius:10px}
+.btn-light{background:#fff;color:var(--accent);padding:12px 22px;border-radius:10px;border:1px solid var(--border)}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:48px 0 100px;overflow:hidden;background:linear-gradient(180deg,#F4FAFD,#fff 60%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 600px at 50% 0%,rgba(34,158,217,.14),transparent 70%),radial-gradient(700px 500px at 80% 30%,rgba(94,195,245,.10),transparent 70%);pointer-events:none}
+.hero-inner{position:relative;text-align:center;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r-full);background:rgba(34,158,217,.12);color:var(--accent);font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:18px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:.95;letter-spacing:-2.2px;font-weight:900;margin-bottom:22px;color:var(--ink)}
+.hero h1 .gradient-word{background:linear-gradient(120deg,#5EC3F5,#229ED9 50%,#0F7DB3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;line-height:1.5;color:var(--ink-muted);max-width:600px;margin:0 auto 30px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:90px}
+.hero-stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:30px;perspective:1600px}
+
+/* ========== iPHONE FRAME ========== */
+.iphone{width:280px;aspect-ratio:9/19.5;background:linear-gradient(140deg,#2c2c2c,#0a0a0a 60%);border-radius:46px;padding:9px;position:relative;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.05)}
+.iphone::before{content:"";position:absolute;top:120px;left:-2px;width:3px;height:32px;background:#1a1a1a;border-radius:2px 0 0 2px}
+.iphone::after{content:"";position:absolute;top:180px;left:-2px;width:3px;height:50px;background:#1a1a1a;border-radius:2px 0 0 2px;box-shadow:0 80px 0 #1a1a1a}
+.iphone .right-btn{position:absolute;top:160px;right:-2px;width:3px;height:80px;background:#1a1a1a;border-radius:0 2px 2px 0}
+.iphone-screen{width:100%;height:100%;border-radius:38px;overflow:hidden;position:relative;background:var(--canvas)}
+.dynamic-island{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:28px;background:#000;border-radius:999px;z-index:20}
+.status-bar{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:18px 26px 0;z-index:15;font-size:13px;font-weight:600;color:#000;letter-spacing:-.2px}
+.status-bar.dark{color:#fff}
+.status-bar .sb-icons{display:flex;gap:5px;align-items:center}
+.iphone-stage-center{transform:translateY(-30px) scale(1.05);z-index:3}
+.iphone-stage-left{transform:rotate(-4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-stage-right{transform:rotate(4deg) translateY(20px);z-index:2;opacity:.95}
+.iphone-label{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.6px;text-transform:uppercase;white-space:nowrap}
+
+/* avatars (gradient circles) */
+.tg-av{border-radius:50%;flex-shrink:0;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px}
+.av-1{background:linear-gradient(160deg,#FF885E,#FF516A)}
+.av-2{background:linear-gradient(160deg,#A0DE7E,#54CB68)}
+.av-3{background:linear-gradient(160deg,#82B1FF,#665FFF)}
+.av-4{background:linear-gradient(160deg,#FFCD6A,#FFA85C)}
+.av-5{background:linear-gradient(160deg,#E0A2F3,#D669ED)}
+.av-6{background:linear-gradient(160deg,#72D5FD,#2A9EF1)}
+.av-7{background:linear-gradient(160deg,#9DA8B3,#5F6A78)}
+.av-8{background:linear-gradient(160deg,#F6BE3B,#E89A1A)}
+
+/* ========== SCREEN: CHATS LIST ========== */
+.scr{position:absolute;inset:0;color:var(--ink);font-size:11px;display:flex;flex-direction:column;padding-top:52px}
+.scr-chats{background:#fff}
+.chats-nav{display:flex;align-items:center;justify-content:space-between;padding:0 14px 8px}
+.chats-nav .nav-edit{font-size:13px;color:var(--accent);font-weight:500}
+.chats-nav .nav-title{font-size:17px;font-weight:700}
+.chats-nav .nav-compose svg{width:20px;height:20px;fill:var(--accent)}
+.tg-search{margin:0 12px 8px;background:var(--surface-1);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-muted)}
+.tg-search svg{width:13px;height:13px;fill:var(--ink-muted)}
+.tg-filters{display:flex;gap:6px;padding:0 12px 8px;overflow:hidden}
+.tg-filter{padding:5px 11px;border-radius:13px;background:var(--surface-1);font-size:11px;font-weight:600;color:var(--ink-muted);white-space:nowrap}
+.tg-filter.active{background:var(--accent);color:#fff}
+.tg-list{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.tg-row{display:flex;gap:10px;align-items:center;padding:7px 12px}
+.tg-row .av{width:44px;height:44px;font-size:14px}
+.tg-row .meta{flex:1;min-width:0}
+.tg-row .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.tg-row .name{font-size:13px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tg-row .name svg{display:inline-block;vertical-align:-2px;margin-left:2px}
+.tg-row .time{font-size:10px;color:var(--ink-dim);font-feature-settings:"tnum";flex-shrink:0;margin-left:6px}
+.tg-row .bot{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.tg-row .prev{font-size:11.5px;color:var(--ink-muted);line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:160px}
+.tg-row .prev .prev-name{color:var(--ink);font-weight:500}
+.tg-row .badge{min-width:18px;height:18px;padding:0 6px;border-radius:9px;background:var(--accent);color:#fff;font-size:10px;font-weight:600;display:grid;place-items:center;flex-shrink:0;font-feature-settings:"tnum"}
+.tg-row .badge.muted{background:var(--ink-dim)}
+.tg-row .bell{width:14px;height:14px;fill:var(--ink-dim);flex-shrink:0}
+.tg-row .pin{width:11px;height:11px;fill:var(--ink-dim);flex-shrink:0}
+.tg-row .ticks{display:inline-block;vertical-align:-2px;color:var(--tick)}
+.tg-row .ticks svg{width:13px;height:13px;display:inline-block}
+
+/* tab bar */
+.tab-bar{position:absolute;bottom:0;left:0;right:0;height:62px;background:rgba(255,255,255,.94);backdrop-filter:blur(20px);display:flex;justify-content:space-around;align-items:flex-start;padding:8px 8px 0;border-top:1px solid var(--border-soft);z-index:10}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink-dim);font-size:9.5px;font-weight:500;flex:1}
+.tab.active{color:var(--accent)}
+.tab svg{width:22px;height:22px;fill:currentColor}
+
+/* ========== SCREEN: CHAT THREAD ========== */
+.scr-thread{background:#fff;padding-top:0}
+.thread-header{position:absolute;top:0;left:0;right:0;background:rgba(247,247,248,.95);backdrop-filter:blur(20px);padding:46px 12px 8px;display:flex;align-items:center;gap:10px;z-index:14;border-bottom:1px solid var(--border-soft)}
+.thread-header .back{font-size:18px;color:var(--accent);font-weight:400}
+.thread-header .av{width:32px;height:32px;font-size:11px;border-radius:50%}
+.thread-header .info{flex:1;min-width:0}
+.thread-header .nm{font-size:13px;font-weight:600;color:var(--ink)}
+.thread-header .sub{font-size:11px;color:var(--ink-muted);margin-top:1px}
+.thread-header .acts{display:flex;gap:12px;align-items:center}
+.thread-header .acts svg{width:18px;height:18px;fill:var(--accent)}
+.thread-body{flex:1;overflow:hidden;padding:88px 10px 8px;display:flex;flex-direction:column;gap:6px;background:#fff}
+.date-sep{align-self:center;background:rgba(140,140,160,.18);color:#5f6a78;font-size:10px;font-weight:500;padding:2px 10px;border-radius:11px;margin:4px 0}
+.bubble{max-width:200px;padding:7px 10px 5px;border-radius:13px;font-size:12px;line-height:1.35;position:relative;box-shadow:0 1px 1px rgba(0,0,0,.03)}
+.bubble.in{align-self:flex-start;background:var(--bubble-in);border:1px solid #EEF0F2;color:var(--ink);border-bottom-left-radius:4px}
+.bubble.out{align-self:flex-end;background:var(--bubble-out);color:var(--ink);border-bottom-right-radius:4px}
+.bubble .meta{display:flex;justify-content:flex-end;align-items:center;gap:2px;font-size:9px;color:var(--ink-muted);margin-top:2px;font-feature-settings:"tnum"}
+.bubble .ticks{color:var(--tick);display:inline-flex}
+.bubble .ticks svg{width:13px;height:11px}
+.bubble.quote::before{content:"";position:absolute;left:6px;top:6px;bottom:18px;width:2px;background:var(--accent);border-radius:2px}
+.bubble.quote{padding-left:14px}
+.bubble.quote .q-name{font-size:10.5px;font-weight:600;color:var(--accent);margin-bottom:1px}
+.bubble.quote .q-prev{font-size:10.5px;color:var(--ink-muted);margin-bottom:4px}
+.voice{display:flex;align-items:center;gap:8px;padding:4px 0}
+.voice .vplay{width:28px;height:28px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.voice .vplay svg{width:14px;height:14px;fill:#fff}
+.voice .wave{display:flex;align-items:center;gap:2px;height:18px}
+.voice .wave span{width:2px;background:var(--accent);border-radius:1px;opacity:.7}
+.voice .wave span:nth-child(odd){opacity:.4}
+.voice .vtime{font-size:9.5px;color:var(--ink-muted);font-feature-settings:"tnum"}
+.sticker{align-self:flex-end;width:120px;height:120px;background:linear-gradient(160deg,#FFE08A,#FFA85C 50%,#FF6B6B);border-radius:18px;display:grid;place-items:center;font-size:48px;line-height:1}
+.thread-input{position:absolute;bottom:0;left:0;right:0;background:rgba(247,247,248,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border-soft);padding:7px 10px 30px;display:flex;align-items:center;gap:7px;z-index:13}
+.thread-input .attach{width:22px;height:22px;fill:var(--accent)}
+.thread-input .ta{flex:1;background:#fff;border:1px solid var(--border);border-radius:18px;padding:7px 10px;font-size:11px;color:var(--ink-muted);min-height:30px;display:flex;align-items:center;gap:6px;justify-content:space-between}
+.thread-input .ta .emoji{width:16px;height:16px;fill:var(--ink-dim)}
+.thread-input .mic{width:22px;height:22px;fill:var(--accent)}
+
+/* ========== SCREEN: CHANNEL VIEW ========== */
+.scr-channel{background:#F7F7F8;padding-top:0}
+.ch-header{position:absolute;top:0;left:0;right:0;background:rgba(247,247,248,.95);backdrop-filter:blur(20px);padding:46px 12px 6px;display:flex;align-items:center;gap:10px;z-index:14;border-bottom:1px solid var(--border-soft)}
+.ch-header .back{font-size:18px;color:var(--accent)}
+.ch-header .av{width:30px;height:30px;font-size:11px;border-radius:50%}
+.ch-header .info{flex:1;min-width:0}
+.ch-header .nm{font-size:13px;font-weight:600}
+.ch-header .sub{font-size:10.5px;color:var(--ink-muted);margin-top:1px}
+.ch-header .acts svg{width:18px;height:18px;fill:var(--accent)}
+.ch-pin{position:absolute;top:86px;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);padding:6px 12px;display:flex;align-items:center;gap:8px;z-index:13;border-bottom:1px solid var(--border-soft)}
+.ch-pin .stripe{width:3px;height:26px;background:var(--accent);border-radius:2px}
+.ch-pin .pin-meta{flex:1;min-width:0}
+.ch-pin .pl{font-size:10px;color:var(--accent);font-weight:600}
+.ch-pin .pp{font-size:11px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ch-body{flex:1;overflow:hidden;padding:130px 10px 8px;display:flex;flex-direction:column;gap:8px}
+.ch-post{background:#fff;border-radius:13px;padding:9px 11px 7px;font-size:11.5px;line-height:1.4;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.03);border:1px solid #EEF0F2}
+.ch-post .pt{font-weight:600;font-size:11px;margin-bottom:3px;color:var(--ink)}
+.ch-post .pi{margin-top:6px;height:80px;border-radius:8px;background:linear-gradient(135deg,#5EC3F5,#229ED9 60%,#0F7DB3)}
+.ch-post .reactions{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+.ch-react{padding:2px 7px;border-radius:11px;background:rgba(34,158,217,.10);color:var(--accent);font-size:10px;font-weight:600;display:flex;align-items:center;gap:3px}
+.ch-react.alt{background:rgba(255,136,94,.12);color:#FF7A50}
+.ch-meta{display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-size:9.5px;color:var(--ink-muted);font-feature-settings:"tnum"}
+.ch-meta .views{display:flex;align-items:center;gap:3px}
+.ch-meta .views svg{width:10px;height:10px;fill:var(--ink-muted)}
+
+/* ========== FEATURES SECTION ========== */
+.section{padding:120px 0;border-top:1px solid var(--border-soft);background:#fff;color:var(--ink)}
+.section-eyebrow{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head h2{font-size:clamp(34px,4.5vw,56px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin-bottom:18px;color:var(--ink)}
+.section-head p{font-size:17px;color:var(--ink-muted);line-height:1.5;max-width:560px}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--surface-1);border-radius:14px;padding:28px;border:1px solid var(--border-soft)}
+.feat:hover{background:var(--surface-2)}
+.feat .feat-ic{width:36px;height:36px;border-radius:50%;background:rgba(34,158,217,.14);display:grid;place-items:center;margin-bottom:18px}
+.feat .feat-ic svg{width:18px;height:18px;fill:var(--accent)}
+.feat h3{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px;color:var(--ink)}
+.feat p{font-size:14px;color:var(--ink-muted);line-height:1.55}
+.feat code{font-family:var(--font-mono);font-size:11.5px;background:rgba(34,158,217,.10);padding:1px 6px;border-radius:3px;color:var(--accent)}
+
+/* iOS specific feature row */
+.ios-feat{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:40px 0;border-top:1px solid var(--border-soft)}
+.ios-feat:first-child{border-top:0}
+.ios-feat-text h3{font-size:32px;font-weight:800;letter-spacing:-.6px;margin-bottom:16px;color:var(--ink)}
+.ios-feat-text p{font-size:15px;color:var(--ink-muted);line-height:1.6;margin-bottom:14px;max-width:440px}
+.ios-feat-tokens{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ios-feat-tokens code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-1);padding:5px 10px;border-radius:6px;color:var(--ink);border:1px solid var(--border-soft)}
+.ios-feat-visual{background:var(--surface-1);border-radius:14px;padding:50px;display:grid;place-items:center;min-height:420px;border:1px solid var(--border-soft);position:relative;overflow:hidden}
+
+/* animated sticker / emoji visual */
+.sticker-stack{display:flex;flex-direction:column;gap:14px;width:260px;align-items:center}
+.sticker-row{display:flex;gap:10px}
+.sticker-cell{width:80px;height:80px;border-radius:18px;display:grid;place-items:center;font-size:34px;box-shadow:0 6px 18px rgba(0,0,0,.07)}
+.sticker-cell.s1{background:linear-gradient(160deg,#FFE08A,#FFA85C)}
+.sticker-cell.s2{background:linear-gradient(160deg,#A8D8FF,#5EC3F5)}
+.sticker-cell.s3{background:linear-gradient(160deg,#FFB5C5,#FF7AA0)}
+.sticker-cell.s4{background:linear-gradient(160deg,#C9F0C8,#7CCF7B)}
+.sticker-cell.s5{background:linear-gradient(160deg,#E0C7FF,#B791F0)}
+.sticker-cell.s6{background:linear-gradient(160deg,#F6BE3B,#E89A1A)}
+
+/* quote visual */
+.quote-stack{display:flex;flex-direction:column;gap:10px;width:300px}
+.quote-bubble{background:#fff;border:1px solid #EEF0F2;border-radius:13px;padding:10px 12px;position:relative}
+.quote-bubble.in.q{padding-left:18px}
+.quote-bubble.in.q::before{content:"";position:absolute;left:7px;top:8px;bottom:24px;width:2px;background:var(--accent);border-radius:2px}
+.quote-bubble .qn{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:2px}
+.quote-bubble .qp{font-size:11.5px;color:var(--ink-muted);margin-bottom:6px}
+.quote-bubble .qb{font-size:13px;color:var(--ink);line-height:1.35}
+.quote-bubble.out{background:var(--bubble-out);border:0;align-self:flex-end;max-width:240px}
+
+/* premium badge */
+.premium-stack{display:flex;flex-direction:column;gap:14px;width:280px;align-items:center}
+.premium-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:linear-gradient(135deg,#F6BE3B,#E89A1A);color:#fff;font-size:13px;font-weight:700;box-shadow:0 10px 24px rgba(246,190,59,.30)}
+.premium-badge svg{width:14px;height:14px;fill:#fff}
+.premium-feat{background:#fff;border:1px solid #EEF0F2;border-radius:12px;padding:12px 14px;width:100%;display:flex;align-items:center;gap:10px}
+.premium-feat .pi{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#F6BE3B,#E89A1A);display:grid;place-items:center}
+.premium-feat .pi svg{width:15px;height:15px;fill:#fff}
+.premium-feat .pt{font-size:12px;font-weight:600;color:var(--ink)}
+.premium-feat .ps{font-size:11px;color:var(--ink-muted);margin-top:1px}
+
+/* ========== DESIGN SYSTEM (Part B) ========== */
+.ds-section{padding:120px 0;background:#F7F7F8;border-top:1px solid var(--border-soft);color:var(--ink)}
+.ds-intro{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:30px}
+.ds-intro h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;margin:14px 0 14px;color:var(--ink)}
+.ds-intro p{font-size:16px;color:var(--ink-muted);max-width:560px;line-height:1.5}
+.ds-source{font-family:var(--font-mono);font-size:12px;color:var(--accent);border:1px solid var(--border);background:#fff;padding:8px 14px;border-radius:var(--r-full);white-space:nowrap}
+.ds-source:hover{background:var(--surface-1)}
+
+.ds-block{padding:50px 0;border-top:1px solid var(--border)}
+.ds-block:first-of-type{border-top:0;padding-top:0}
+.ds-heading{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px;color:var(--ink)}
+.ds-desc{font-size:15px;color:var(--ink-muted);max-width:680px;line-height:1.5;margin-bottom:28px}
+.ds-caption{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin:24px 0 10px}
+
+.ds-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ds-sw{background:#fff;border-radius:10px;padding:10px;border:1px solid var(--border-soft)}
+.ds-sw .chip{height:64px;border-radius:8px;margin-bottom:10px}
+.ds-sw .name{font-size:12px;font-weight:600;line-height:1.2}
+.ds-sw .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-type-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:12px;background:#fff;border-radius:10px;overflow:hidden}
+.ds-type-table th{text-align:left;padding:12px 14px;color:var(--ink-dim);font-weight:500;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px;font-size:11px;background:var(--surface-1)}
+.ds-type-table td{padding:14px;border-bottom:1px solid var(--border-soft);vertical-align:middle}
+.ds-type-table td.token{color:var(--accent)}
+.ds-type-table td.sample{font-family:var(--font-ui);color:var(--ink)}
+
+.ds-radius{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.ds-radius-cell{text-align:center}
+.ds-radius-box{width:100%;aspect-ratio:1;background:linear-gradient(140deg,#5EC3F5,#229ED9 60%,#0F7DB3);margin-bottom:10px}
+.ds-radius-label{font-size:12px;font-weight:700}
+.ds-radius-val{font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);margin-top:2px}
+
+.ds-comp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ds-card{background:#fff;border-radius:14px;padding:22px;border:1px solid var(--border-soft)}
+.ds-card h5{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);margin-bottom:18px;font-weight:500}
+.ds-card-stack{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ds-card-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input-pill{background:var(--surface-1);border:1px solid var(--border-soft);border-radius:10px;padding:11px 14px;color:var(--ink);font-family:inherit;font-size:13px;width:100%;outline:none}
+.input-pill::placeholder{color:var(--ink-dim)}
+.tag{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:10px;letter-spacing:.2px}
+.tag-unread{background:var(--accent);color:#fff}
+.tag-mention{background:#54CB68;color:#fff}
+.tag-premium{background:linear-gradient(135deg,#F6BE3B,#E89A1A);color:#fff}
+
+.token-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.token-cell{background:#fff;border-radius:10px;padding:18px;border:1px solid var(--border-soft)}
+.token-cell .tk-label{font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px}
+.token-cell .tk-val{font-size:18px;font-weight:800;margin-top:6px;color:var(--ink);letter-spacing:-.2px}
+.token-cell .tk-note{font-size:11px;color:var(--ink-muted);margin-top:6px;line-height:1.4}
+
+/* footer */
+footer{padding:60px 0;border-top:1px solid var(--border);background:#fff;color:var(--ink)}
+.foot{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center}
+.foot p{font-size:13px;color:var(--ink-muted);line-height:1.5}
+.foot a{color:var(--accent);font-weight:600}
+
+.float-link{position:fixed;bottom:18px;right:18px;background:var(--accent);border:0;color:#fff;font-family:var(--font-mono);font-size:12px;padding:10px 14px;border-radius:var(--r-full);z-index:99;box-shadow:0 10px 24px rgba(34,158,217,.4)}
+.float-link:hover{background:var(--accent-hover)}
+
+@media(max-width:920px){
+  .hero-stage{flex-direction:column;align-items:center;gap:60px}
+  .iphone-stage-center,.iphone-stage-left,.iphone-stage-right{transform:none}
+  .ios-feat{grid-template-columns:1fr;gap:30px}
+  .feature-grid{grid-template-columns:1fr}
+  .ds-swatches{grid-template-columns:repeat(2,1fr)}
+  .ds-radius{grid-template-columns:repeat(4,1fr)}
+  .ds-comp{grid-template-columns:1fr}
+  .token-strip{grid-template-columns:repeat(2,1fr)}
+  .foot{grid-template-columns:1fr;text-align:center}
+  .nav-mid{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M21.5 3.5L2.5 11l5.5 2 2 6.5L13 16l4.5 3.5 4-16z" fill="#fff"/></svg>
+      </span>
+      Telegram <span style="font-weight:500;color:var(--ink-muted);font-size:13px;margin-left:4px">iOS</span>
+    </div>
+    <nav class="nav-mid">
+      <a class="nav-pill active" href="#hero">Overview</a>
+      <a class="nav-pill" href="#features">Surfaces</a>
+      <a class="nav-pill" href="#design-system">Tokens</a>
+      <a class="nav-pill" href="#footer">Source</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-pill" href="#">Web</a>
+      <a class="btn btn-primary" href="#">Open Telegram</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span>iOS Design Spec</div>
+    <h1>Fast, light, and <span class="gradient-word">flying</span><br/>at the speed of a paper plane.</h1>
+    <p>The Telegram iOS app, dissected. White canvas. One unmistakable blue. Bubbles at 13px. The brand is built around motion — and motion lives in restraint.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#design-system">View Design Tokens</a>
+      <a class="btn btn-outline" href="#features">Explore Surfaces</a>
+    </div>
+
+    <div class="hero-stage">
+
+      <!-- CHATS LIST -->
+      <div class="iphone iphone-stage-left">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="14" height="10" viewBox="0 0 18 14" fill="#000"><path d="M9 3c-2.4 0-4.6.9-6.3 2.4l1.6 1.6C5.6 5.8 7.2 5.2 9 5.2s3.4.6 4.7 1.8l1.6-1.6C13.6 3.9 11.4 3 9 3zm0 4c-1.4 0-2.7.5-3.6 1.4l1.6 1.6C7.5 9.4 8.2 9.2 9 9.2s1.5.2 2 .8l1.6-1.6C11.7 7.5 10.4 7 9 7zm0 4l-1.4 1.4c.4.4.9.6 1.4.6s1-.2 1.4-.6L9 11z"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.4"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.4"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-chats">
+            <div class="chats-nav">
+              <span class="nav-edit">Edit</span>
+              <span class="nav-title">Chats</span>
+              <span class="nav-compose"><svg viewBox="0 0 24 24"><path d="M16.5 3.5l4 4-11 11H5.5v-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="tg-search">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2"/></svg>
+              Search
+            </div>
+            <div class="tg-filters">
+              <span class="tg-filter active">All Chats</span>
+              <span class="tg-filter">Personal</span>
+              <span class="tg-filter">Channels</span>
+              <span class="tg-filter">Bots</span>
+            </div>
+            <div class="tg-list">
+              <div class="tg-row">
+                <div class="tg-av av-1 av">DT</div>
+                <div class="meta">
+                  <div class="top"><div class="name">Durov's Channel</div><div class="time">14:32</div></div>
+                  <div class="bot"><div class="prev"><span class="prev-name">Pavel:</span> A new update for stickers...</div><div class="badge">128</div></div>
+                </div>
+              </div>
+              <div class="tg-row">
+                <div class="tg-av av-2 av">LM</div>
+                <div class="meta">
+                  <div class="top"><div class="name">Linh Mei <svg width="11" height="11" viewBox="0 0 24 24" fill="#229ED9"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 14.5 7.1 17.2 8 11.7 4 7.8l5.5-.8z"/></svg></div><div class="time">13:11</div></div>
+                  <div class="bot"><div class="prev">See you tomorrow at the cafe ✨</div><span class="ticks"><svg viewBox="0 0 14 12" fill="currentColor"><path d="M5.2 8.4L2.3 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z"/><path d="M9.7 8.4L6.8 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z" transform="translate(-3.5)"/></svg></span></div>
+                </div>
+              </div>
+              <div class="tg-row">
+                <div class="tg-av av-3 av">CB</div>
+                <div class="meta">
+                  <div class="top"><div class="name">Crypto Bot</div><div class="time">12:47</div></div>
+                  <div class="bot"><div class="prev">/balance — BTC 0.024</div><svg class="bell" viewBox="0 0 24 24"><path d="M12 22a2 2 0 002-2h-4a2 2 0 002 2zm6-6V11a6 6 0 10-12 0v5l-2 2v1h16v-1z"/></svg></div>
+                </div>
+              </div>
+              <div class="tg-row">
+                <div class="tg-av av-4 av">JS</div>
+                <div class="meta">
+                  <div class="top"><div class="name">Jiang Shu</div><div class="time">11:02</div></div>
+                  <div class="bot"><div class="prev">Voice message · 0:42</div><div class="badge">3</div></div>
+                </div>
+              </div>
+              <div class="tg-row">
+                <div class="tg-av av-5 av">RX</div>
+                <div class="meta">
+                  <div class="top"><div class="name">React Devs <svg class="pin" viewBox="0 0 16 16" style="margin-left:3px"><path d="M10 1l4 4-2.5 2.5L13 9l-1.5 1.5L9 8 6 11l-.5-.5L2 14l-.5-.5L5 10l-3-3 1.5-1.5L6 7l1.5-1.5z"/></svg></div><div class="time">10:30</div></div>
+                  <div class="bot"><div class="prev"><span class="prev-name">Dan:</span> v19 just dropped 🚀</div><div class="badge muted">14</div></div>
+                </div>
+              </div>
+              <div class="tg-row">
+                <div class="tg-av av-6 av">MS</div>
+                <div class="meta">
+                  <div class="top"><div class="name">Mom</div><div class="time">Yesterday</div></div>
+                  <div class="bot"><div class="prev">call me when you wake up</div><span class="ticks"><svg viewBox="0 0 14 12" fill="currentColor"><path d="M5.2 8.4L2.3 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z"/></svg></span></div>
+                </div>
+              </div>
+              <div class="tg-row">
+                <div class="tg-av av-7 av">SG</div>
+                <div class="meta">
+                  <div class="top"><div class="name">Savings Group</div><div class="time">Mon</div></div>
+                  <div class="bot"><div class="prev"><span class="prev-name">Anna:</span> 📎 invoice_april.pdf</div></div>
+                </div>
+              </div>
+              <div class="tg-row">
+                <div class="tg-av av-8 av">PG</div>
+                <div class="meta">
+                  <div class="top"><div class="name">Premium Gifts</div><div class="time">Sun</div></div>
+                  <div class="bot"><div class="prev">A free month for you 🎁</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0124 0" fill="currentColor" stroke="currentColor"/></svg>Contacts</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 4l3 1 1 4-2 1a11 11 0 006 6l1-2 4 1 1 3a2 2 0 01-2 2A15 15 0 013 6a2 2 0 012-2z" fill="currentColor"/></svg>Calls</div>
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H7l-3 3z" fill="currentColor"/></svg>Chats</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M19 13a7 7 0 000-2l2-1.5-2-3.5-2.4 1A7 7 0 0014 5.6L13.5 3h-3L10 5.6A7 7 0 007.4 7l-2.4-1-2 3.5L5 11a7 7 0 000 2l-2 1.5 2 3.5 2.4-1a7 7 0 002.6 1.4L10.5 21h3l.5-2.6a7 7 0 002.6-1.4l2.4 1 2-3.5z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Settings</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Chats</div>
+      </div>
+
+      <!-- CHAT THREAD -->
+      <div class="iphone iphone-stage-center">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.4"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.4"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-thread">
+            <div class="thread-header">
+              <span class="back">‹</span>
+              <div class="tg-av av-2 av">LM</div>
+              <div class="info">
+                <div class="nm">Linh Mei</div>
+                <div class="sub">last seen recently</div>
+              </div>
+              <div class="acts">
+                <svg viewBox="0 0 24 24"><path d="M5 4l3 1 1 4-2 1a11 11 0 006 6l1-2 4 1 1 3a2 2 0 01-2 2A15 15 0 013 6a2 2 0 012-2z" fill="currentColor"/></svg>
+                <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+              </div>
+            </div>
+            <div class="thread-body">
+              <div class="date-sep">Today</div>
+              <div class="bubble in">hey are you up for coffee tmrw morning?<div class="meta">10:32</div></div>
+              <div class="bubble out">yes! same place as last time?<div class="meta">10:33 <span class="ticks"><svg viewBox="0 0 14 12" fill="currentColor"><path d="M5.2 8.4L2.3 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z"/><path d="M9.7 8.4L6.8 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z" transform="translate(-3.5)"/></svg></span></div></div>
+              <div class="bubble in quote">
+                <div class="q-name">Linh Mei</div>
+                <div class="q-prev">same place as last time?</div>
+                <div>yes, the one with the bookshelf</div>
+                <div class="meta">10:35</div>
+              </div>
+              <div class="bubble out">
+                <div class="voice">
+                  <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                  <div class="wave">
+                    <span style="height:4px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:8px"></span><span style="height:16px"></span><span style="height:6px"></span><span style="height:12px"></span><span style="height:10px"></span><span style="height:8px"></span><span style="height:14px"></span><span style="height:6px"></span><span style="height:12px"></span>
+                  </div>
+                  <div class="vtime">0:14</div>
+                </div>
+                <div class="meta">10:36 <span class="ticks"><svg viewBox="0 0 14 12" fill="currentColor"><path d="M5.2 8.4L2.3 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z"/><path d="M9.7 8.4L6.8 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z" transform="translate(-3.5)"/></svg></span></div>
+              </div>
+              <div class="sticker">🐱</div>
+            </div>
+            <div class="thread-input">
+              <svg class="attach" viewBox="0 0 24 24"><path d="M21 12l-9 9a5 5 0 01-7-7L14 5a3.5 3.5 0 014.9 4.9L11 18a2 2 0 01-2.8-2.8L16 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <div class="ta">
+                <span>Message</span>
+                <span style="display:flex;gap:6px"><svg class="emoji" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path d="M8 14a4 4 0 008 0" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+              </div>
+              <svg class="mic" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V7a3 3 0 00-6 0v4a3 3 0 003 3zm5-3a5 5 0 01-10 0M12 19v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Chat</div>
+      </div>
+
+      <!-- CHANNEL -->
+      <div class="iphone iphone-stage-right">
+        <span class="right-btn"></span>
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="sb-icons">
+              <svg width="14" height="9" viewBox="0 0 18 12" fill="#000"><rect x="0" y="2" width="3" height="8" rx="1"/><rect x="5" y="0" width="3" height="10" rx="1"/><rect x="10" y="0" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="10" rx="1"/></svg>
+              <svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="3" stroke="#000" stroke-opacity="0.4"/><rect x="2" y="2.5" width="17" height="7" rx="1.5" fill="#000"/><rect x="22" y="3.5" width="1.5" height="5" rx="0.5" fill="#000" fill-opacity="0.4"/></svg>
+            </div>
+          </div>
+          <div class="scr scr-channel">
+            <div class="ch-header">
+              <span class="back" style="color:var(--accent);font-size:18px">‹</span>
+              <div class="tg-av av-3 av">DT</div>
+              <div class="info">
+                <div class="nm">Durov's Channel</div>
+                <div class="sub">894,521 subscribers</div>
+              </div>
+              <div class="acts"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></div>
+            </div>
+            <div class="ch-pin">
+              <div class="stripe"></div>
+              <div class="pin-meta">
+                <div class="pl">Pinned message</div>
+                <div class="pp">Telegram Premium is here. Tap to learn more.</div>
+              </div>
+            </div>
+            <div class="ch-body">
+              <div class="ch-post">
+                <div class="pt">Durov</div>
+                A new generation of animated stickers is rolling out today. Expect smoother motion, smaller files, and full TGS support across all clients.
+                <div class="pi"></div>
+                <div class="reactions">
+                  <span class="ch-react">👍 12.4K</span>
+                  <span class="ch-react alt">🔥 8.1K</span>
+                  <span class="ch-react">🎉 3.2K</span>
+                </div>
+                <div class="ch-meta"><span class="views"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> 894K</span><span>edited · 14:32</span></div>
+              </div>
+              <div class="ch-post">
+                <div class="pt">Durov</div>
+                Quote replies now carry a colored vertical bar matching the original sender. Small, but it changes how threads feel.
+                <div class="reactions">
+                  <span class="ch-react">👍 7.2K</span>
+                  <span class="ch-react alt">❤️ 4.4K</span>
+                </div>
+                <div class="ch-meta"><span class="views"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> 412K</span><span>13:01</span></div>
+              </div>
+            </div>
+            <div class="tab-bar">
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0124 0" fill="currentColor"/></svg>Contacts</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><path d="M5 4l3 1 1 4-2 1a11 11 0 006 6l1-2 4 1 1 3a2 2 0 01-2 2A15 15 0 013 6a2 2 0 012-2z" fill="currentColor"/></svg>Calls</div>
+              <div class="tab active"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H7l-3 3z" fill="currentColor"/></svg>Chats</div>
+              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M19 13a7 7 0 000-2l2-1.5-2-3.5-2.4 1A7 7 0 0014 5.6L13.5 3h-3L10 5.6A7 7 0 007.4 7l-2.4-1-2 3.5L5 11a7 7 0 000 2l-2 1.5 2 3.5 2.4-1a7 7 0 002.6 1.4L10.5 21h3l.5-2.6a7 7 0 002.6-1.4l2.4 1 2-3.5z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Settings</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">Channel</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">iOS Surface Anatomy</div>
+      <h2>Three surfaces. One unmistakable blue.</h2>
+      <p>Telegram on iOS is white-canvas, glass-blurred, and unhurried. Every screen earns its place through the same rules — generous spacing, 13px bubbles, and a single accent that does all the heavy lifting.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H7l-3 3z"/></svg></div>
+        <h3>Chats List</h3>
+        <p>Pinned chats float above. Filter pills run across the top — <code>All Chats · Personal · Channels · Bots</code>. Unread counts come in blue <code>#229ED9</code>; muted chats fall back to gray.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21.5 3.5L2.5 11l5.5 2 2 6.5L13 16l4.5 3.5 4-16z"/></svg></div>
+        <h3>Chat Thread</h3>
+        <p>Incoming bubbles are white with a 1px hairline. Outgoing bubbles sit on <code>#E1F0FA</code> — soft sky blue, never saturated. Tail-corner radius drops from 13px to 4px.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg></div>
+        <h3>Channel</h3>
+        <p>Channel posts get full-width cards on a faint gray canvas. Reactions chip-row docks below. View counts ride on tabular figures — every post is read by hundreds of thousands.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:120px">
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Animated Stickers</div>
+          <h3>Vector emotion at 60fps.</h3>
+          <p>Telegram pioneered TGS — vector animated stickers compressed under 30KB. Premium adds a sister format with fuller motion, particle effects, and synced sound. The sticker drawer is a first-class surface, never a footnote.</p>
+          <p>Stickers obey their own radius: <code>18px</code> on cells, no padding on the bubble — they break the bubble grammar on purpose.</p>
+          <div class="ios-feat-tokens">
+            <code>cell: 80×80</code>
+            <code>radius: 18px</code>
+            <code>format: .tgs</code>
+            <code>maxSize: 30KB</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="sticker-stack">
+            <div class="sticker-row">
+              <div class="sticker-cell s1">😎</div>
+              <div class="sticker-cell s2">🐳</div>
+              <div class="sticker-cell s3">💖</div>
+            </div>
+            <div class="sticker-row">
+              <div class="sticker-cell s4">🌱</div>
+              <div class="sticker-cell s5">🦄</div>
+              <div class="sticker-cell s6">🔥</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-visual">
+          <div class="quote-stack">
+            <div class="quote-bubble in q">
+              <div class="qn">Linh Mei</div>
+              <div class="qp">same place as last time?</div>
+              <div class="qb">yes, the one with the bookshelf 📚</div>
+            </div>
+            <div class="quote-bubble out">
+              <div class="qb">perfect. 9am works?</div>
+            </div>
+          </div>
+        </div>
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Quote Reply</div>
+          <h3>A 2px bar carries the whole context.</h3>
+          <p>Reply to any message and Telegram inlines a quote — sender name in their personal accent, preview text below, then your reply. The vertical bar borrows the sender's color, so threads stay legible without expanding the bubble.</p>
+          <p>Quote bars use <code>2px</code> width, <code>2px</code> radius, sit <code>6px</code> from the left edge of the bubble padding.</p>
+          <div class="ios-feat-tokens">
+            <code>bar: 2px</code>
+            <code>radius: 13px</code>
+            <code>inset: 6px 8px</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="ios-feat">
+        <div class="ios-feat-text">
+          <div class="section-eyebrow">Telegram Premium</div>
+          <h3>A gold gradient that earns its keep.</h3>
+          <p>Premium is the one place Telegram allows itself a non-blue accent. A linear gold <code>#F6BE3B → #E89A1A</code> appears on the subscription badge, the star icon next to premium usernames, and on the upsell sheet — and nowhere else.</p>
+          <p>The gold is paired with the same radius vocabulary as the rest of the app, so it reads as a feature flag, not a brand reset.</p>
+          <div class="ios-feat-tokens">
+            <code>#F6BE3B → #E89A1A</code>
+            <code>shadow: 24/30%</code>
+            <code>star-icon: 14×14</code>
+          </div>
+        </div>
+        <div class="ios-feat-visual">
+          <div class="premium-stack">
+            <div class="premium-badge"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg> Telegram Premium</div>
+            <div class="premium-feat">
+              <div class="pi"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+              <div><div class="pt">Premium Stickers</div><div class="ps">Exclusive animated packs</div></div>
+            </div>
+            <div class="premium-feat">
+              <div class="pi"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-9" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
+              <div><div class="pt">4 GB Uploads</div><div class="ps">Send 4 GB media files</div></div>
+            </div>
+            <div class="premium-feat">
+              <div class="pi"><svg viewBox="0 0 24 24"><path d="M12 3v18M6 9l6-6 6 6" fill="none" stroke="#fff" stroke-width="2"/></svg></div>
+              <div><div class="pt">2× Faster Downloads</div><div class="ps">No speed limits, anywhere</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN SYSTEM ===== -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>The whole vocabulary, in one place.</h2>
+        <p>Every token Telegram's iOS app reaches for — color, type, radius, components. Light-mode canonical; dark mode is a free inversion. The blue is the only accent you don't get to negotiate.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.telegram-ios.html" target="_blank" rel="noopener">View Source ↗</a>
+    </div>
+
+    <!-- COLORS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">A single brand blue, a single bubble tint, and a four-step gray ladder. Premium adds gold. Everything else is white or near-white.</p>
+
+      <div class="ds-caption">Primary Brand</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#229ED9"></div><div class="name">Brand Blue</div><div class="val">#229ED9</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#0088CC"></div><div class="name">Legacy Blue</div><div class="val">#0088CC</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5EC3F5"></div><div class="name">Light Blue</div><div class="val">#5EC3F5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E1F0FA;border:1px solid #d8e8f2"></div><div class="name">Bubble Out</div><div class="val">#E1F0FA</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(180deg,#5EC3F5,#229ED9 60%,#0F7DB3)"></div><div class="name">Mark Gradient</div><div class="val">light → deep</div></div>
+      </div>
+
+      <div class="ds-caption">Surface & Border</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #E1E3E6"></div><div class="name">Canvas</div><div class="val">#ffffff</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F7F7F8"></div><div class="name">Surface Soft</div><div class="val">#F7F7F8</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F4F4F5"></div><div class="name">Surface</div><div class="val">#F4F4F5</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#EBEDF0"></div><div class="name">Surface 2</div><div class="val">#EBEDF0</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E1E3E6"></div><div class="name">Border</div><div class="val">#E1E3E6</div></div>
+      </div>
+
+      <div class="ds-caption">Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="name">Ink</div><div class="val">#000000</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1f1f1f"></div><div class="name">Ink Soft</div><div class="val">#1f1f1f</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#707579"></div><div class="name">Muted</div><div class="val">#707579</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#a8a8ad"></div><div class="name">Dim</div><div class="val">#a8a8ad</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3E8EE0"></div><div class="name">Tick Blue</div><div class="val">#3E8EE0</div></div>
+      </div>
+
+      <div class="ds-caption">Semantic / Premium</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#54CB68"></div><div class="name">Online / Success</div><div class="val">#54CB68</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#E53935"></div><div class="name">Negative</div><div class="val">#E53935</div></div>
+        <div class="ds-sw"><div class="chip" style="background:#F0B400"></div><div class="name">Warning</div><div class="val">#F0B400</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#F6BE3B,#E89A1A)"></div><div class="name">Premium Gold</div><div class="val">gradient</div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(160deg,#FF885E,#FF516A)"></div><div class="name">Avatar 1</div><div class="val">peach</div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">SF Pro on device — substituted here with Inter. Three weights only: 400 / 500 / 600. Tabular figures on times, view counts, and unread badges so numbers never jitter.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--nav-title</td><td class="sample" style="font-size:17px;font-weight:600">Chats</td><td>17 / 1.06rem</td><td>600</td><td>centered</td></tr>
+          <tr><td class="token">--chat-name</td><td class="sample" style="font-size:17px;font-weight:600">Linh Mei</td><td>17 / 1.06rem</td><td>600</td><td>list rows</td></tr>
+          <tr><td class="token">--bubble-body</td><td class="sample" style="font-size:15px;font-weight:400">see you tomorrow at the cafe ✨</td><td>15 / 0.94rem</td><td>400</td><td>line 1.35</td></tr>
+          <tr><td class="token">--preview</td><td class="sample" style="font-size:15px;font-weight:400;color:#707579">Pavel: A new update for stickers...</td><td>15 / 0.94rem</td><td>400</td><td>muted</td></tr>
+          <tr><td class="token">--time</td><td class="sample" style="font-size:13px;font-weight:400;color:#707579;font-feature-settings:'tnum'">14:32</td><td>13 / 0.81rem</td><td>400 (tnum)</td><td>right-align</td></tr>
+          <tr><td class="token">--meta-time</td><td class="sample" style="font-size:11px;font-weight:400;color:#707579;font-feature-settings:'tnum'">10:33</td><td>11 / 0.69rem</td><td>400 (tnum)</td><td>in-bubble</td></tr>
+          <tr><td class="token">--button</td><td class="sample" style="font-size:15px;font-weight:600;color:#229ED9">Edit</td><td>15 / 0.94rem</td><td>600</td><td>accent blue</td></tr>
+          <tr><td class="token">--badge-count</td><td class="sample" style="font-size:13px;font-weight:600;color:#fff;background:#229ED9;padding:2px 8px;border-radius:9px;font-feature-settings:'tnum';display:inline-block">128</td><td>13 / 0.81rem</td><td>600 (tnum)</td><td>pill 9px</td></tr>
+          <tr><td class="token">--date-sep</td><td class="sample" style="font-size:11px;font-weight:500;color:#5f6a78">Today</td><td>11 / 0.69rem</td><td>500</td><td>pill on gray</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Bubbles land at 13px — Telegram's signature corner — collapsing to 4px on the tail. Buttons at 10px. Search bar at 10px. Avatars and channel icons always 50%.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Minimal</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Tail</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Image</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:10px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">10px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:13px"></div><div class="ds-radius-label">Bubble</div><div class="ds-radius-val">13px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:18px"></div><div class="ds-radius-label">Sticker</div><div class="ds-radius-val">18px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:500px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">500px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Avatar</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- iOS spec strip -->
+    <div class="ds-block">
+      <h3 class="ds-heading">iOS Spec Strip</h3>
+      <p class="ds-desc">The constants that anchor the iOS implementation across iPhone 12 mini through iPhone 16 Pro Max.</p>
+      <div class="token-strip">
+        <div class="token-cell"><div class="tk-label">Tab bar height</div><div class="tk-val">83pt</div><div class="tk-note">Including 34pt home indicator safe area.</div></div>
+        <div class="token-cell"><div class="tk-label">Chat avatar</div><div class="tk-val">44pt</div><div class="tk-note">Drops to 32pt in thread header, 30pt in pinned strip.</div></div>
+        <div class="token-cell"><div class="tk-label">Bubble radius</div><div class="tk-val">13pt</div><div class="tk-note">Tail corner collapses to 4pt on incoming + outgoing.</div></div>
+        <div class="token-cell"><div class="tk-label">Bubble padding</div><div class="tk-val">7×10pt</div><div class="tk-note">Compact vertical, generous horizontal. 2pt meta gap.</div></div>
+        <div class="token-cell"><div class="tk-label">Read tick</div><div class="tk-val">13×11pt</div><div class="tk-note">Double check in #3E8EE0. Single check = delivered.</div></div>
+        <div class="token-cell"><div class="tk-label">Search bar</div><div class="tk-val">36pt</div><div class="tk-note">Surface fill #F4F4F5. 10pt radius. 12pt side padding.</div></div>
+        <div class="token-cell"><div class="tk-label">Unread badge</div><div class="tk-val">18pt</div><div class="tk-note">Min width 18, padding 0×6, accent blue or muted gray.</div></div>
+        <div class="token-cell"><div class="tk-label">Animation</div><div class="tk-val">spring</div><div class="tk-note">0.35s, damping 0.7. Bubble entry from below + fade.</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">The tactile vocabulary — bubbles, ticks, badges, filter pills, premium gold. Composed of the same five primitives, recombined.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Send Message</a>
+            <a class="btn btn-pill" href="#">Mute Channel</a>
+            <a class="btn btn-outline" href="#">Subscribe</a>
+            <a class="btn btn-light" href="#">Open Bot</a>
+            <div class="ds-card-row" style="margin-top:6px">
+              <button style="width:44px;height:44px;border-radius:50%;background:var(--accent);display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M21.5 3.5L2.5 11l5.5 2 2 6.5L13 16l4.5 3.5 4-16z"/></svg></button>
+              <button style="width:32px;height:32px;border-radius:50%;background:var(--accent);display:grid;place-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.5"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="input-pill" placeholder="Search" />
+            <input class="input-pill" placeholder="Message" />
+            <div class="ds-card-row">
+              <span class="tag tag-unread">128</span>
+              <span class="tag tag-mention">@mention</span>
+              <span class="tag tag-premium">Premium</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Bubbles</h5>
+          <div class="ds-card-stack" style="background:#fff;padding:0;width:100%">
+            <div style="background:#fff;border:1px solid #EEF0F2;border-radius:13px;border-bottom-left-radius:4px;padding:7px 10px;font-size:13px;color:#000;max-width:80%">hey are you up for coffee?</div>
+            <div style="align-self:flex-end;background:#E1F0FA;border-radius:13px;border-bottom-right-radius:4px;padding:7px 10px;font-size:13px;color:#000;max-width:80%">yes! 9am works.<div style="display:flex;justify-content:flex-end;align-items:center;gap:2px;font-size:10px;color:#707579;margin-top:2px"><span>10:33</span><span style="color:#3E8EE0;display:inline-flex"><svg width="14" height="11" viewBox="0 0 14 12" fill="currentColor"><path d="M5.2 8.4L2.3 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z"/><path d="M9.7 8.4L6.8 5.5l-.9.9 3.8 3.8 7.3-7.3-.9-.9z" transform="translate(-3.5)"/></svg></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container foot">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M21.5 3.5L2.5 11l5.5 2 2 6.5L13 16l4.5 3.5 4-16z" fill="#fff"/></svg></span>
+      Telegram iOS
+    </div>
+    <p>Design reference. Not affiliated with Telegram FZ-LLC. Token values derived from the public iOS app and Telegram's design assets. View this design reference on <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.telegram-ios.html" target="_blank" rel="noopener">GitHub</a>.</p>
+    <a class="btn btn-pill" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.telegram-ios.html" target="_blank" rel="noopener">README ↗</a>
+  </div>
+</footer>
+
+<a class="float-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/ios/design.telegram-ios.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

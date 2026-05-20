@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kimi · Moonshot AI — 设计系统研究</title>
+<meta name="description" content="Kimi 设计语言视觉研究: 白底紫月渐变, 圆润友好的中国 AI 助手设计语言, 长文本对话场景的产品体感. 营销 demo + 设计系统参考." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --canvas: #ffffff;
+  --canvas-tint: #faf8ff;
+  --surface-1: #f7f4ff;
+  --surface-2: #efeaff;
+  --accent: #7B5BFF;
+  --accent-2: #A88BFF;
+  --accent-deep: #5538DC;
+  --accent-soft: rgba(123, 91, 255, 0.08);
+  --accent-grad: linear-gradient(135deg, #5538DC 0%, #7B5BFF 50%, #A88BFF 100%);
+  --moon-grad: radial-gradient(circle at 35% 30%, #C9B8FF 0%, #A88BFF 35%, #5538DC 100%);
+  --ink: #1a1a2e;
+  --ink-bright: #0d0d20;
+  --ink-soft: #3d3d54;
+  --ink-muted: #6e6e85;
+  --ink-dim: #a5a5b8;
+  --border: #ece7fa;
+  --border-soft: #f3f0fc;
+  --border-mid: #d8cffb;
+  --shadow-card: 0 8px 32px rgba(85, 56, 220, 0.08);
+  --shadow-deep: 0 16px 48px rgba(85, 56, 220, 0.15);
+  --font-ui: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1200px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -0.3px; color: var(--ink-bright); }
+.brand-mark { width: 32px; height: 32px; border-radius: 50%; background: var(--moon-grad); position: relative; overflow: hidden; }
+.brand-mark::after { content: ""; position: absolute; width: 22px; height: 22px; border-radius: 50%; background: #fff; right: -8px; top: -2px; }
+.nav-links { display: flex; align-items: center; gap: 6px; }
+.nav-pill { padding: 8px 16px; border-radius: var(--r-pill); font-size: 14px; font-weight: 500; color: var(--ink-muted); transition: color .15s, background .15s; }
+.nav-pill:hover { color: var(--accent); background: var(--accent-soft); }
+.nav-pill.active { color: var(--accent); background: var(--accent-soft); }
+.nav-cta { display: flex; gap: 10px; align-items: center; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; cursor: pointer; border: 0; transition: all .15s; font-weight: 600; }
+.btn-primary { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: var(--r-pill); font-size: 14px; box-shadow: 0 4px 14px rgba(123, 91, 255, 0.32); }
+.btn-primary:hover { background: var(--accent-deep); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(123, 91, 255, 0.42); }
+.btn-grad { background: var(--accent-grad); color: #fff; padding: 14px 28px; border-radius: var(--r-pill); font-size: 15px; box-shadow: 0 6px 20px rgba(85, 56, 220, 0.32); }
+.btn-grad:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(85, 56, 220, 0.42); }
+.btn-outline { background: #fff; color: var(--accent); padding: 12px 24px; border-radius: var(--r-pill); border: 1.5px solid var(--accent); font-size: 14px; }
+.btn-outline:hover { background: var(--accent-soft); }
+.btn-ghost { background: var(--surface-1); color: var(--accent-deep); padding: 12px 24px; border-radius: var(--r-pill); font-size: 14px; }
+.btn-ghost:hover { background: var(--surface-2); }
+.btn-sm { padding: 8px 16px; font-size: 13px; }
+
+/* Hero */
+.hero { padding: 80px 0 100px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background:
+  radial-gradient(50% 40% at 85% 25%, rgba(168, 139, 255, 0.28), transparent 65%),
+  radial-gradient(40% 30% at 15% 80%, rgba(123, 91, 255, 0.18), transparent 70%);
+  z-index: -1;
+}
+.hero-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--accent-deep); padding: 6px 14px; border-radius: var(--r-pill); background: var(--accent-soft); }
+.eyebrow .moon-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent-2); }
+.hero h1 { font-size: 64px; line-height: 1.1; letter-spacing: -2px; font-weight: 800; margin: 22px 0 18px; color: var(--ink-bright); }
+.hero h1 em { font-style: normal; background: var(--accent-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p.lead { font-size: 17px; line-height: 1.7; color: var(--ink-muted); max-width: 520px; margin: 0 0 32px; }
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero-meta { margin-top: 44px; display: flex; gap: 36px; }
+.hero-meta-item { font-size: 13px; color: var(--ink-muted); }
+.hero-meta-item strong { display: block; color: var(--ink-bright); font-weight: 700; font-size: 24px; letter-spacing: -0.6px; }
+
+/* Moon hero illustration */
+.moon-stage { position: relative; min-height: 480px; display: grid; place-items: center; }
+.moon-circle {
+  width: 280px; height: 280px; border-radius: 50%;
+  background: var(--moon-grad);
+  box-shadow: 0 30px 80px rgba(85, 56, 220, 0.4), inset -20px -20px 60px rgba(85, 56, 220, 0.4);
+  position: relative;
+}
+.moon-circle::before { content: ""; position: absolute; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.18); top: 40px; left: 60px; }
+.moon-circle::after { content: ""; position: absolute; width: 25px; height: 25px; border-radius: 50%; background: rgba(85, 56, 220, 0.3); bottom: 70px; right: 60px; }
+.moon-ring { position: absolute; border-radius: 50%; border: 1px solid var(--border-mid); animation: spin 20s linear infinite; }
+.moon-ring.r1 { width: 380px; height: 380px; }
+.moon-ring.r2 { width: 460px; height: 460px; border-style: dashed; opacity: 0.5; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.star { position: absolute; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent-2); }
+.star.s1 { top: 20%; left: 15%; }
+.star.s2 { top: 70%; right: 12%; }
+.star.s3 { bottom: 18%; left: 22%; width: 6px; height: 6px; }
+.star.s4 { top: 30%; right: 18%; width: 5px; height: 5px; }
+
+/* Chat input mockup */
+.chat-card {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 420px;
+  background: #fff;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-deep);
+  padding: 18px;
+  border: 1px solid var(--border);
+}
+.chat-files { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.chat-file { display: flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border-radius: var(--r-sm); font-size: 12px; color: var(--accent-deep); font-weight: 500; }
+.chat-file svg { width: 12px; height: 12px; }
+.chat-input-row { display: flex; align-items: center; gap: 10px; padding-top: 4px; }
+.chat-input-text { flex: 1; font-size: 14px; color: var(--ink-soft); }
+.chat-send { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; flex-shrink: 0; }
+.chat-send svg { width: 16px; height: 16px; }
+
+/* Sections */
+.section { padding: 96px 0; border-top: 1px solid var(--border-soft); }
+.section-head { margin-bottom: 56px; text-align: center; }
+.section-eyebrow { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 14px; letter-spacing: 0.4px; text-transform: uppercase; }
+.section-title { font-size: 44px; line-height: 1.12; letter-spacing: -1.5px; font-weight: 800; margin: 0 0 16px; color: var(--ink-bright); }
+.section-sub { font-size: 16px; color: var(--ink-muted); line-height: 1.65; max-width: 600px; margin: 0 auto; }
+
+/* Features */
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.feat { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px 28px; transition: all .2s; position: relative; overflow: hidden; }
+.feat:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-card); }
+.feat-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: var(--accent-grad); color: #fff; display: grid; place-items: center; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(123, 91, 255, 0.3); }
+.feat-icon svg { width: 22px; height: 22px; }
+.feat-title { font-size: 19px; font-weight: 700; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.3px; }
+.feat-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.65; margin: 0; }
+
+/* Long context highlight */
+.context-band {
+  background: var(--accent-grad);
+  border-radius: var(--r-xl);
+  padding: 56px 48px;
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.context-band::before { content: ""; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,0.08); top: -120px; right: -80px; }
+.context-band h3 { font-size: 36px; line-height: 1.15; letter-spacing: -1px; font-weight: 800; margin: 0 0 14px; }
+.context-band p { font-size: 15px; line-height: 1.7; opacity: 0.92; margin: 0 0 24px; }
+.context-stat { background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); border-radius: var(--r-lg); padding: 24px; position: relative; z-index: 1; }
+.context-stat .num { font-size: 64px; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
+.context-stat .lbl { font-size: 14px; opacity: 0.85; }
+
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.plan { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px 28px; transition: all .2s; }
+.plan:hover { border-color: var(--accent); box-shadow: var(--shadow-card); }
+.plan.featured { background: var(--accent-grad); color: #fff; border: 0; position: relative; box-shadow: var(--shadow-deep); }
+.plan.featured .plan-name, .plan.featured .plan-title, .plan.featured .plan-blurb, .plan.featured .plan-price .num, .plan.featured .plan-price .per, .plan.featured li { color: #fff !important; }
+.plan.featured li svg { color: #fff; }
+.plan-badge { position: absolute; top: -10px; right: 28px; background: #fff; color: var(--accent-deep); padding: 4px 12px; border-radius: var(--r-pill); font-size: 11px; font-weight: 700; }
+.plan-name { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.6px; }
+.plan-title { font-size: 22px; font-weight: 700; color: var(--ink-bright); letter-spacing: -0.5px; margin-bottom: 16px; }
+.plan-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 18px; }
+.plan-price .num { font-size: 40px; font-weight: 800; color: var(--ink-bright); letter-spacing: -1.2px; }
+.plan-price .per { font-size: 13px; color: var(--ink-muted); }
+.plan-blurb { font-size: 13.5px; color: var(--ink-muted); margin-bottom: 24px; line-height: 1.55; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 11px; }
+.plan li { font-size: 14px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 10px; line-height: 1.55; }
+.plan li svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--accent); margin-top: 4px; }
+.plan-cta { width: 100%; }
+
+/* CTA */
+.cta-band {
+  background: var(--moon-grad);
+  border-radius: var(--r-xl);
+  padding: 64px 48px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.cta-band::before { content: ""; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,0.08); top: -200px; left: -100px; }
+.cta-band::after { content: ""; position: absolute; width: 250px; height: 250px; border-radius: 50%; background: rgba(255,255,255,0.06); bottom: -100px; right: -80px; }
+.cta-band h2 { font-size: 40px; line-height: 1.15; letter-spacing: -1.2px; margin: 0 0 14px; font-weight: 800; position: relative; }
+.cta-band p { margin: 0 auto 28px; font-size: 16px; opacity: 0.92; max-width: 560px; position: relative; }
+.cta-band .btn { position: relative; background: #fff; color: var(--accent-deep); }
+.cta-band .btn:hover { background: var(--ink-bright); color: #fff; }
+
+/* Footer */
+footer { padding: 64px 0 40px; background: var(--canvas-tint); border-top: 1px solid var(--border-soft); }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
+.foot-brand p { color: var(--ink-muted); font-size: 13.5px; line-height: 1.65; margin: 16px 0 22px; max-width: 280px; }
+.foot-col h4 { font-size: 13px; font-weight: 700; color: var(--ink-bright); margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); transition: color .12s; }
+.foot-col li a:hover { color: var(--accent); }
+.foot-bottom { display: flex; justify-content: space-between; padding-top: 28px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 12px; }
+
+/* Design system */
+.ds-section { background: var(--canvas-tint); padding: 100px 0; border-top: 1px solid var(--border-soft); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro h2 { font-size: 38px; letter-spacing: -1.2px; line-height: 1.12; margin: 0 0 10px; font-weight: 800; color: var(--ink-bright); }
+.ds-intro p { margin: 0; color: var(--ink-muted); font-size: 14.5px; max-width: 580px; line-height: 1.65; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; background: #fff; border: 1px solid var(--border); border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--ink-soft); transition: all .15s; }
+.ds-source:hover { border-color: var(--accent); color: var(--accent); }
+.ds-block { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border); }
+.ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.ds-heading { font-size: 24px; font-weight: 800; color: var(--ink-bright); margin: 0 0 8px; letter-spacing: -0.4px; }
+.ds-desc { font-size: 14px; color: var(--ink-muted); margin: 0 0 24px; line-height: 1.6; max-width: 580px; }
+.ds-caption { font-size: 11px; font-weight: 700; color: var(--accent); margin: 28px 0 12px; letter-spacing: 0.6px; text-transform: uppercase; }
+.ds-swatches { display: grid; gap: 14px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 72px; }
+.ds-sw .meta { padding: 12px 14px; }
+.ds-sw .name { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 11px; color: var(--ink-muted); font-family: ui-monospace, monospace; margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border-soft); font-size: 13.5px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-muted); background: var(--surface-1); }
+.ds-type-table td { color: var(--ink-soft); }
+.ds-type-table td.token { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--accent); }
+.ds-type-table td.sample { color: var(--ink-bright); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.ds-radius-cell { background: #fff; border: 1px solid var(--border); padding: 18px 8px; text-align: center; border-radius: var(--r-md); }
+.ds-radius-box { width: 56px; height: 56px; background: var(--accent-grad); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 11.5px; font-weight: 600; color: var(--ink); }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: ui-monospace, monospace; margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; }
+.ds-card h5 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.input-soft { background: var(--surface-1); border: 1.5px solid transparent; padding: 12px 18px; border-radius: var(--r-pill); color: var(--ink); font-size: 13.5px; font-family: inherit; width: 100%; outline: none; transition: all .15s; }
+.input-soft:focus { border-color: var(--accent); background: #fff; }
+.input-soft::placeholder { color: var(--ink-dim); }
+.tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; }
+.tag-purple { background: var(--accent-soft); color: var(--accent-deep); }
+.tag-grad { background: var(--accent-grad); color: #fff; }
+.tag-soft { background: var(--surface-2); color: var(--accent-deep); }
+
+/* Floating source */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: #fff; border: 1px solid var(--border); padding: 10px 18px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--ink-soft); box-shadow: var(--shadow-card); transition: all .15s; }
+.src-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero h1 { font-size: 44px; letter-spacing: -1.4px; }
+  .moon-stage { min-height: 380px; }
+  .moon-circle { width: 220px; height: 220px; }
+  .moon-ring.r1 { width: 300px; height: 300px; }
+  .moon-ring.r2 { width: 360px; height: 360px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .context-band { grid-template-columns: 1fr; padding: 40px 28px; }
+  .context-band h3 { font-size: 28px; }
+  .cta-band { padding: 48px 28px; }
+  .cta-band h2 { font-size: 30px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 34px; }
+  .section-title { font-size: 30px; }
+  .ds-intro h2 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="brand-mark"></span>
+      <span>Kimi</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-pill active" href="#">首页</a>
+      <a class="nav-pill" href="#">Kimi 智能体</a>
+      <a class="nav-pill" href="#">浏览器助手</a>
+      <a class="nav-pill" href="#">开发者</a>
+      <a class="nav-pill" href="#">下载</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-outline btn-sm" href="#">登录</a>
+      <a class="btn btn-primary btn-sm" href="#">立即体验</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow"><span class="moon-dot"></span>Moonshot AI · 月之暗面出品</span>
+      <h1>长文本对话 AI <em>读懂世界</em></h1>
+      <p class="lead">Kimi 是你的智能助手, 擅长中英文对话, 支持 200 万字超长上下文, 能读完一本书, 一份研报, 一个项目代码. 让 AI 真正理解你的需求, 不只是回答问题.</p>
+      <div class="hero-actions">
+        <a class="btn btn-grad" href="#">开始与 Kimi 对话</a>
+        <a class="btn btn-ghost" href="#">下载浏览器插件</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>200万</strong>字超长上下文</div>
+        <div class="hero-meta-item"><strong>千万+</strong>月活用户</div>
+        <div class="hero-meta-item"><strong>50+</strong>智能体场景</div>
+      </div>
+    </div>
+
+    <div class="moon-stage">
+      <div class="moon-ring r2"></div>
+      <div class="moon-ring r1"></div>
+      <div class="moon-circle"></div>
+      <span class="star s1"></span>
+      <span class="star s2"></span>
+      <span class="star s3"></span>
+      <span class="star s4"></span>
+      <div class="chat-card">
+        <div class="chat-files">
+          <span class="chat-file">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            研究报告.pdf · 218页
+          </span>
+          <span class="chat-file">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            财报.xlsx
+          </span>
+        </div>
+        <div class="chat-input-row">
+          <div class="chat-input-text">Kimi, 帮我读完这两份文件, 总结核心观点</div>
+          <div class="chat-send">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">能力一览</div>
+      <h2 class="section-title">不止聊天 · 是你的 AI 工作伙伴</h2>
+      <p class="section-sub">从文件理解到联网搜索, 从代码编写到深度研究, Kimi 用一个对话框承载所有 AI 能力, 让你少切换 app 多思考问题.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h3 class="feat-title">超长文本对话</h3>
+        <p class="feat-desc">业界领先的 200 万字上下文窗口, 一次性读完整本书, 整套财报, 整个代码仓库, 不再为长度发愁.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3 class="feat-title">实时联网搜索</h3>
+        <p class="feat-desc">接入全网最新信息, 自动检索 + 多页阅读 + 信源标注, 让回答基于真实可追溯的资料, 不再凭空编造.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3 class="feat-title">文件深度理解</h3>
+        <p class="feat-desc">支持 PDF, Word, Excel, PPT, 图片等格式, 一次上传 50 个文件, 跨文档检索, 表格图表精准还原.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3 class="feat-title">代码编程助手</h3>
+        <p class="feat-desc">理解整个仓库结构, 解释代码, 生成函数, 重构模块, 写单测. 是程序员手边的另一个大脑.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9 1.65 1.65 0 004.27 7.18l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.6 1.65 1.65 0 0010 3.09V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </div>
+        <h3 class="feat-title">Kimi 智能体</h3>
+        <p class="feat-desc">数百款场景化助手, 翻译, 写作, 招聘, 法律, 旅行规划, 总有一个懂你. 也可零代码创建专属智能体.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+        </div>
+        <h3 class="feat-title">浏览器插件</h3>
+        <p class="feat-desc">划词翻译, 网页总结, 视频字幕解读, 让 AI 跟随你的浏览节奏, 一键唤起不打断工作流.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LONG CONTEXT BAND -->
+<section class="section">
+  <div class="container">
+    <div class="context-band">
+      <div>
+        <h3>200 万字, 一次读完</h3>
+        <p>从一本书到一份完整的合同, 从一个项目的全部源码到一个团队半年的会议记录 — Kimi 让你不再需要切分文档, 不再需要反复贴入. 把所有材料一次给它, 它一次记得.</p>
+        <a class="btn btn-primary" style="background:#fff;color:#5538DC;box-shadow:none" href="#">上传你的第一个文件</a>
+      </div>
+      <div class="context-stat">
+        <div class="num">2M</div>
+        <div class="lbl">最大支持字符上下文窗口</div>
+        <div style="margin-top:18px;height:1px;background:rgba(255,255,255,0.2)"></div>
+        <div style="display:flex;justify-content:space-between;margin-top:14px;font-size:13px">
+          <div>
+            <div style="opacity:0.7;font-size:12px">单次上传文件</div>
+            <div style="font-weight:700;font-size:18px;margin-top:2px">50 个</div>
+          </div>
+          <div>
+            <div style="opacity:0.7;font-size:12px">支持格式</div>
+            <div style="font-weight:700;font-size:18px;margin-top:2px">10+ 种</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">用户方案</div>
+      <h2 class="section-title">免费畅聊 · 按需升级</h2>
+      <p class="section-sub">Kimi 对所有用户免费开放基础能力. 进阶用户可选会员获得更高优先级和更强模型.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">免费版</div>
+        <div class="plan-title">Kimi 探索</div>
+        <div class="plan-price"><span class="num">¥0</span><span class="per">/月 · 永久免费</span></div>
+        <div class="plan-blurb">面向所有用户的免费体验, 满足日常对话与轻量文件场景.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>每日免费对话额度</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>128K 上下文窗口</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>联网搜索 / 文件理解</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>访问公开智能体</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">免费开始</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">最受欢迎</div>
+        <div class="plan-name">会员版</div>
+        <div class="plan-title">Kimi 探索 Plus</div>
+        <div class="plan-price"><span class="num">¥99</span><span class="per">/月</span></div>
+        <div class="plan-blurb">深度使用者首选, 更长上下文, 更稳定的高峰期访问.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>200 万字超长上下文</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>高峰期优先响应</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>更强 Kimi K1 推理模型</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>无限智能体创建</li>
+        </ul>
+        <a class="btn plan-cta" style="background:#fff;color:#5538DC;font-weight:700;padding:12px 24px;border-radius:999px" href="#">升级 Plus</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">开发者</div>
+        <div class="plan-title">Moonshot API</div>
+        <div class="plan-price"><span class="num">¥12</span><span class="per">/ M tokens (输入)</span></div>
+        <div class="plan-blurb">面向开发者的 API 服务, OpenAI 兼容接口, 接入即可使用.</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>moonshot-v1 系列模型</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>8K / 32K / 128K 多档</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>OpenAI SDK 兼容</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>注册赠送 15 元额度</li>
+        </ul>
+        <a class="btn btn-outline plan-cta" href="#">查看 API 文档</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2>有问题, 问 Kimi</h2>
+      <p>每天有千万用户用 Kimi 阅读, 思考, 创造. 加入他们, 让 AI 成为你的第二大脑.</p>
+      <a class="btn" href="#">立即开始对话</a>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>紫月与圆润 · 友好型 AI 的视觉</h2>
+        <p>Kimi 的设计语言围绕 "月亮" 主题展开 — 紫色渐变, 圆形几何, 微微发光的星点. 它不像企业 AI 那样严肃, 而是更接近一位夜晚守候你的伙伴, 温柔而可靠.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.kimi.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">紫色主导, 从深紫到浅紫一气呵成的月相梯度. 白底搭配淡紫表面, 让紫色在不刺眼的前提下成为视觉锚点. 渐变是 Kimi 视觉的灵魂.</p>
+
+      <div class="ds-caption">主色 Primary Purple</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#5538DC"></div><div class="meta"><div class="name">深紫</div><div class="val">#5538DC</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#7B5BFF"></div><div class="meta"><div class="name">Kimi 紫</div><div class="val">#7B5BFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#A88BFF"></div><div class="meta"><div class="name">浅紫</div><div class="val">#A88BFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#C9B8FF"></div><div class="meta"><div class="name">月光紫</div><div class="val">#C9B8FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(135deg,#5538DC,#A88BFF)"></div><div class="meta"><div class="name">月相渐变</div><div class="val">linear-gradient</div></div></div>
+      </div>
+
+      <div class="ds-caption">背景与表面 Surface</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #ece7fa"></div><div class="meta"><div class="name">画布白</div><div class="val">#FFFFFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#faf8ff;border:1px solid #ece7fa"></div><div class="meta"><div class="name">微紫底</div><div class="val">#FAF8FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f7f4ff;border:1px solid #ece7fa"></div><div class="meta"><div class="name">紫色卡</div><div class="val">#F7F4FF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#efeaff;border:1px solid #ece7fa"></div><div class="meta"><div class="name">紫色分组</div><div class="val">#EFEAFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ece7fa"></div><div class="meta"><div class="name">分割线</div><div class="val">#ECE7FA</div></div></div>
+      </div>
+
+      <div class="ds-caption">文字 Ink</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0d0d20"></div><div class="meta"><div class="name">标题黑</div><div class="val">#0D0D20</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#1a1a2e"></div><div class="meta"><div class="name">正文</div><div class="val">#1A1A2E</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3d3d54"></div><div class="meta"><div class="name">次级</div><div class="val">#3D3D54</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#6e6e85"></div><div class="meta"><div class="name">辅助</div><div class="val">#6E6E85</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#a5a5b8"></div><div class="meta"><div class="name">禁用</div><div class="val">#A5A5B8</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Inter + Noto Sans SC 双字族, 600-800 重量级承担标题, 400-500 承担正文. 标题字重较重以传递友好和力量感, 不同于 DeepSeek 的克制.</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>样例</th><th>字号</th><th>字重</th><th>用途</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:30px;font-weight:800;letter-spacing:-1px">读懂世界</td><td>64 / 4rem</td><td>800</td><td>Hero 主标题</td></tr>
+          <tr><td class="token">--title-section</td><td class="sample" style="font-size:24px;font-weight:800">不止聊天</td><td>44 / 2.75rem</td><td>800</td><td>章节标题</td></tr>
+          <tr><td class="token">--title-card</td><td class="sample" style="font-size:19px;font-weight:700">超长文本对话</td><td>19 / 1.19rem</td><td>700</td><td>卡片标题</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:16px;font-weight:400">长文本对话, 一次读完</td><td>16 / 1rem</td><td>400</td><td>正文</td></tr>
+          <tr><td class="token">--body-sm</td><td class="sample" style="font-size:14px;font-weight:400;color:#6e6e85">支持 200 万字上下文</td><td>14 / 0.88rem</td><td>400</td><td>辅助</td></tr>
+          <tr><td class="token">--button</td><td class="sample" style="font-size:14px;font-weight:600">立即体验</td><td>14 / 0.88rem</td><td>600</td><td>按钮</td></tr>
+          <tr><td class="token">--badge</td><td class="sample" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#7B5BFF">PLUS</td><td>11 / 0.69rem</td><td>700</td><td>小标签</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">圆润是 Kimi 的几何性格. 按钮全部 pill 形, 卡片 16px 大圆角, 没有锐利的角. 这种圆润对应 "月亮" 的整体意象, 也传递友好不具攻击性的产品姿态.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">最小</div><div class="ds-radius-val">6px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:10px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">10px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">容器</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">月亮</div><div class="ds-radius-val">50%</div></div>
+      </div>
+    </div>
+
+    <!-- Shadow -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Shadow & Glow</h3>
+      <p class="ds-desc">Kimi 的阴影系统带有紫色调, 而非中性灰. 这让浮起的元素自然延续品牌色, 同时月光发光效果用于强调元素和状态指示, 呼应月亮主题.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>柔光卡片</h5>
+          <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 8px 32px rgba(85,56,220,0.08);width:100%;text-align:center">
+            <div style="font-size:13px;font-weight:600;color:#1a1a2e">Soft Shadow</div>
+            <div style="font-size:11px;color:#6e6e85;margin-top:4px;font-family:ui-monospace">0 8px 32px rgba(85,56,220,0.08)</div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>深紫阴影</h5>
+          <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 16px 48px rgba(85,56,220,0.15);width:100%;text-align:center">
+            <div style="font-size:13px;font-weight:600;color:#1a1a2e">Deep Shadow</div>
+            <div style="font-size:11px;color:#6e6e85;margin-top:4px;font-family:ui-monospace">0 16px 48px rgba(85,56,220,0.15)</div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>月光发光</h5>
+          <div style="background:linear-gradient(135deg,#5538DC,#A88BFF);border-radius:50%;width:80px;height:80px;margin:8px auto;box-shadow:0 0 32px rgba(168,139,255,0.6)"></div>
+          <div style="text-align:center;font-size:11px;color:#6e6e85;margin-top:8px;font-family:ui-monospace">0 0 32px rgba(168,139,255,0.6)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voice & Tone -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Voice & Tone</h3>
+      <p class="ds-desc">Kimi 的文字气质是 "夜晚陪你思考的朋友". 不像企业 AI 那样刻板, 也不像玩具 AI 那样轻浮. 友好但不谄媚, 专业但不冷漠, 像一位读过很多书的同学.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>友好</h5>
+          <div style="font-size:14px;color:#1a1a2e;line-height:1.65">"有问题, 问 Kimi" 而非 "立即使用 AI 助手".<br/>"帮我读完这本书" 而非 "执行文档分析任务".<br/>用第一人称, 像在和朋友对话.</div>
+        </div>
+        <div class="ds-card">
+          <h5>可靠</h5>
+          <div style="font-size:14px;color:#1a1a2e;line-height:1.65">"200 万字超长上下文" 给出明确数字.<br/>"千万级用户每日使用" 用事实背书.<br/>不夸张能力边界, 不承诺无法做到的事.</div>
+        </div>
+        <div class="ds-card">
+          <h5>克制的可爱</h5>
+          <div style="font-size:14px;color:#1a1a2e;line-height:1.65">月亮 + 紫色 + 圆角 = 友好的视觉.<br/>但不滥用 emoji, 不用过度卡通元素.<br/>圆润是底色, 不是噱头.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">紫色按钮承担主操作, 渐变按钮用于强调入口. 输入框默认浅紫底, 聚焦时变为白底 + 紫色描边. 标签使用半透明紫色背景, 保持视觉轻盈.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-grad" href="#">渐变主按钮</a>
+            <a class="btn btn-primary" href="#">紫色实心</a>
+            <a class="btn btn-outline" href="#">紫色描边</a>
+            <a class="btn btn-ghost" href="#">幽灵紫色</a>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs & Tags</h5>
+          <div class="ds-card-stack">
+            <input class="input-soft" placeholder="向 Kimi 提问任何问题" />
+            <input class="input-soft" placeholder="搜索智能体" />
+            <div class="ds-card-row">
+              <span class="tag tag-grad">PLUS</span>
+              <span class="tag tag-purple">长文本</span>
+              <span class="tag tag-soft">联网</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack">
+            <div style="background:#f7f4ff;border-radius:16px;padding:18px;width:100%">
+              <div style="font-size:11px;font-weight:700;color:#7B5BFF;margin-bottom:6px;letter-spacing:0.4px">KIMI K1</div>
+              <div style="font-size:15px;font-weight:700;color:#0d0d20;margin-bottom:4px">深度推理模型</div>
+              <div style="font-size:12.5px;color:#6e6e85">数学, 代码, 逻辑题首选</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#5538DC,#A88BFF);color:#fff;border-radius:16px;padding:18px;width:100%">
+              <div style="font-size:11px;font-weight:700;margin-bottom:6px;opacity:0.9">PLUS</div>
+              <div style="font-size:15px;font-weight:700">¥99 / 月</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <span>Kimi</span>
+        </div>
+        <p>这是一份设计研究 — Kimi (Moonshot AI) 视觉语言的自包含致敬, 用于演示长文本 AI 产品的紫月视觉系统. 与北京月之暗面科技无官方关联.</p>
+      </div>
+      <div class="foot-col">
+        <h4>产品</h4>
+        <ul>
+          <li><a href="#">Kimi 智能助手</a></li>
+          <li><a href="#">Kimi 智能体</a></li>
+          <li><a href="#">浏览器插件</a></li>
+          <li><a href="#">移动 App</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>开发者</h4>
+        <ul>
+          <li><a href="#">Moonshot API</a></li>
+          <li><a href="#">API 文档</a></li>
+          <li><a href="#">价格说明</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>会员</h4>
+        <ul>
+          <li><a href="#">Plus 会员</a></li>
+          <li><a href="#">企业版</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#">月之暗面</a></li>
+          <li><a href="#">加入我们</a></li>
+          <li><a href="#">联系方式</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计研究 · 致敬 Kimi 视觉语言 · 作者 云中江树</span>
+      <span>用户协议 · 隐私政策</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.kimi.html" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

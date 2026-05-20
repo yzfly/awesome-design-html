@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OpenCode — Inspired Design</title>
+<meta name="description" content="An OpenCode-inspired marketing page rendered entirely in monospace: warm cream canvas, near-black ink, ASCII bracket markers, 4px-radius interactive elements, and a single dark TUI hero mockup. Sourced from awesome-design-md." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  /* Brand / ink */
+  --primary: #201d1d;
+  --on-primary: #fdfcfc;
+  --ink: #201d1d;
+  --ink-deep: #0f0000;
+  --charcoal: #302c2c;
+  --body: #424245;
+  --mute: #646262;
+  --stone: #6e6e73;
+  --ash: #9a9898;
+  /* Surfaces */
+  --canvas: #fdfcfc;
+  --surface-soft: #f8f7f7;
+  --surface-card: #f1eeee;
+  --surface-dark: #201d1d;
+  --surface-dark-elevated: #302c2c;
+  --hairline: rgba(15,0,0,0.12);
+  --hairline-strong: #646262;
+  --on-dark: #fdfcfc;
+  --on-dark-mute: #9a9898;
+  /* Semantic (TUI scope only) */
+  --accent: #007aff;
+  --warning: #ff9f0a;
+  --danger: #ff3b30;
+  --success: #30d158;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(32,29,29,0.18); }
+
+/* —— Layout —— */
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+.wrap-wide { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+/* —— Top nav —— */
+.topnav {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+  height: 56px;
+  display: flex; align-items: center;
+}
+.topnav .row { display: flex; align-items: center; gap: 24px; font-size: 16px; width: 100%; }
+.brand-ascii {
+  font: 700 12px/0.9 "JetBrains Mono", monospace;
+  color: var(--ink);
+  white-space: pre;
+  letter-spacing: 0;
+}
+.nav-links { display: flex; gap: 0; margin-left: 24px; align-items: center; }
+.nav-links a {
+  color: var(--ink); padding: 6px 12px; border-radius: 0;
+  font: 500 16px/1.5 "JetBrains Mono", monospace;
+}
+.nav-links a:hover { color: var(--mute); }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.gh-stars { color: var(--mute); font-size: 14px; }
+.gh-stars strong { color: var(--ink); font-weight: 500; }
+
+/* —— Buttons —— */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 36px; padding: 4px 20px;
+  border-radius: 4px;
+  font: 500 16px/2 "JetBrains Mono", monospace;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent; color: var(--ink);
+  transition: background .15s, border-color .15s, color .15s;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--ink-deep); }
+.btn-secondary { background: var(--canvas); color: var(--ink); border-color: var(--hairline-strong); }
+.btn-secondary:hover { background: var(--surface-soft); }
+.btn-tab {
+  background: transparent; color: var(--mute);
+  padding: 8px 16px; height: 36px; border-radius: 0;
+  border-bottom: 2px solid transparent;
+}
+.btn-tab.active { color: var(--ink); border-bottom-color: var(--ash); }
+
+/* —— Type —— */
+.eyebrow {
+  font: 700 16px/1.5 "JetBrains Mono", monospace;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.display-xl {
+  font: 700 38px/1.5 "JetBrains Mono", monospace;
+  letter-spacing: 0;
+  margin: 0; color: var(--ink);
+}
+.heading-md { font: 700 16px/1.5 "JetBrains Mono", monospace; margin: 0; color: var(--ink); }
+.body-md { font-size: 16px; line-height: 1.5; color: var(--body); margin: 0; }
+.body-md.ink { color: var(--ink); }
+.body-strong { font-size: 16px; line-height: 1.5; color: var(--ink); font-weight: 500; }
+.caption-md { font: 400 14px/2 "JetBrains Mono", monospace; color: var(--mute); }
+
+/* —— Sections —— */
+section { padding: 96px 0; }
+section.tight { padding: 48px 0; }
+.section-head { margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--hairline); }
+.section-head .heading-md { display: flex; align-items: center; gap: 8px; }
+.section-head .heading-md::before { content: "[+]"; color: var(--ink); }
+
+/* —— Badge —— */
+.badge-news {
+  display: inline-block;
+  background: var(--surface-dark); color: var(--on-dark);
+  font: 400 14px/2 "JetBrains Mono", monospace;
+  padding: 2px 8px; border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+/* —— Hero —— */
+.hero { padding: 64px 0 32px; }
+.hero .display-xl { max-width: 26ch; margin-bottom: 24px; }
+.hero .lead { font-size: 16px; line-height: 1.5; max-width: 64ch; color: var(--body); margin: 0 0 32px; }
+.hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.hero .cta-row .meta { color: var(--mute); font-size: 14px; margin-left: 4px; }
+
+/* —— Install snippet + tab strip —— */
+.install-block { margin-top: 48px; max-width: 720px; }
+.install-tabs {
+  display: flex; gap: 0; border-bottom: 1px solid var(--hairline);
+  margin-bottom: 16px;
+}
+.install-snippet {
+  background: var(--surface-card); color: var(--ink);
+  font: 400 16px/1.5 "JetBrains Mono", monospace;
+  border-radius: 4px;
+  padding: 12px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.install-snippet .cmd { flex: 1; }
+.install-snippet .copy {
+  color: var(--mute); cursor: pointer;
+  border: 1px solid transparent; padding: 2px 6px; border-radius: 4px;
+}
+.install-snippet .copy:hover { background: var(--canvas); color: var(--ink); }
+
+/* —— TUI hero mockup —— */
+.tui-mockup {
+  background: var(--surface-dark);
+  color: var(--on-dark);
+  border-radius: 0;
+  padding: 64px 32px;
+  margin: 64px 0 0;
+  font: 400 14px/1.6 "JetBrains Mono", monospace;
+  position: relative;
+  overflow: hidden;
+}
+.tui-wordmark {
+  font: 700 14px/0.9 "JetBrains Mono", monospace;
+  color: var(--on-dark);
+  white-space: pre;
+  text-align: center;
+  margin: 0 auto 48px;
+  display: block;
+}
+.tui-prompt-row {
+  background: var(--surface-dark-elevated);
+  color: var(--on-dark);
+  border-radius: 4px;
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 12px;
+  max-width: 720px; margin: 0 auto;
+  font: 400 14px/1.5 "JetBrains Mono", monospace;
+}
+.tui-prompt-row .pipe { color: var(--ash); }
+.tui-prompt-row .label { color: var(--on-dark); }
+.tui-prompt-row .token {
+  border: 1px solid var(--ash); color: var(--on-dark-mute);
+  padding: 2px 8px; border-radius: 4px; font-size: 12px;
+}
+.tui-prompt-row .cursor {
+  display: inline-block; width: 7px; height: 16px;
+  background: var(--on-dark); margin-left: 4px; vertical-align: middle;
+  animation: blink 1s steps(2) infinite;
+}
+@keyframes blink { 0%,49% { opacity:1; } 50%,100% { opacity: 0; } }
+.tui-output {
+  max-width: 720px; margin: 24px auto 0;
+  color: var(--on-dark-mute); font-size: 13px;
+}
+.tui-output .line { padding: 1px 0; white-space: pre-wrap; }
+.tui-output .ok { color: var(--success); }
+.tui-output .warn { color: var(--warning); }
+.tui-output .err { color: var(--danger); }
+.tui-output .acc { color: var(--accent); }
+.tui-output .arrow { color: var(--ash); }
+.tui-keybinds {
+  max-width: 720px; margin: 32px auto 0;
+  display: flex; gap: 24px; flex-wrap: wrap;
+  color: var(--ash); font-size: 13px;
+}
+.tui-keybinds .kbd {
+  border: 1px solid var(--surface-dark-elevated); background: var(--surface-dark-elevated);
+  color: var(--on-dark-mute); padding: 1px 6px; border-radius: 4px; margin-right: 4px;
+}
+
+/* —— Feature list rows —— */
+.feat-list { display: flex; flex-direction: column; }
+.feat-row {
+  display: grid; grid-template-columns: 36px 220px 1fr; gap: 16px;
+  padding: 12px 0; border-bottom: 1px solid var(--hairline);
+  align-items: baseline;
+}
+.feat-row:last-child { border-bottom: 0; }
+.feat-mark { color: var(--ink); font-weight: 500; }
+.feat-key { color: var(--ink); font-weight: 500; }
+.feat-desc { color: var(--body); }
+@media (max-width: 720px) {
+  .feat-row { grid-template-columns: 28px 1fr; }
+  .feat-desc { grid-column: 2 / span 1; }
+}
+
+/* —— Stat block / chart tiles —— */
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+@media (max-width: 760px) { .stat-grid { grid-template-columns: 1fr; } }
+.stat-tile { padding: 24px 16px; border-right: 1px solid var(--hairline); }
+.stat-tile:last-child { border-right: 0; }
+.stat-tile .plot {
+  height: 84px; margin-bottom: 12px;
+  display: block; width: 100%;
+}
+.stat-tile .cap { color: var(--mute); font-size: 14px; }
+.stat-tile .cap strong { color: var(--ink); font-weight: 500; }
+
+/* —— Pricing —— */
+.pricing-grid {
+  display: grid; gap: 0; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--hairline);
+}
+@media (max-width: 880px) { .pricing-grid { grid-template-columns: 1fr; } }
+.tier {
+  padding: 24px 24px 32px;
+  border-right: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  display: flex; flex-direction: column;
+}
+.tier:last-child { border-right: 0; }
+.tier h3 { margin: 0 0 4px; font: 700 16px/1.5 "JetBrains Mono", monospace; color: var(--ink); }
+.tier h3::before { content: "[ "; color: var(--mute); }
+.tier h3::after { content: " ]"; color: var(--mute); }
+.tier .price { font: 700 24px/1.3 "JetBrains Mono", monospace; color: var(--ink); margin-top: 12px; }
+.tier .per { font: 400 14px/1.5 "JetBrains Mono", monospace; color: var(--mute); }
+.tier .desc { font-size: 14px; color: var(--body); line-height: 1.5; margin-top: 8px; }
+.tier ul { list-style: none; margin: 16px 0 24px; padding: 0; }
+.tier ul li { font-size: 14px; color: var(--body); line-height: 1.7; padding: 2px 0; }
+.tier ul li::before { content: "[+] "; color: var(--ink); }
+.tier .cta-wrap { margin-top: auto; }
+
+/* —— FAQ —— */
+.faq-list { border-top: 1px solid var(--hairline); }
+.faq-row {
+  padding: 12px 0; border-bottom: 1px solid var(--hairline);
+  display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: baseline;
+}
+.faq-mark { color: var(--ink); }
+.faq-row strong { color: var(--ink); font-weight: 500; }
+.faq-row p { color: var(--body); margin: 4px 0 0; }
+
+/* —— DS section —— */
+.ds-section { padding-top: 64px; }
+.ds-block { margin-bottom: 64px; }
+.ds-heading {
+  font: 700 16px/1.5 "JetBrains Mono", monospace;
+  color: var(--ink); margin: 0 0 16px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: center; gap: 8px;
+}
+.ds-heading::before { content: "[#]"; color: var(--ink); }
+.ds-caption { font: 400 14px/2 "JetBrains Mono", monospace; color: var(--mute); margin: 16px 0 12px; }
+
+.ds-sw-grid { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .ds-sw-grid { grid-template-columns: repeat(2, 1fr); } }
+.ds-sw { border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; background: var(--canvas); }
+.ds-sw .chip { height: 56px; }
+.ds-sw .meta { padding: 8px 10px; border-top: 1px solid var(--hairline); }
+.ds-sw .name { font: 500 13px/1.4 "JetBrains Mono", monospace; color: var(--ink); }
+.ds-sw .val { font: 400 12px/1.4 "JetBrains Mono", monospace; color: var(--mute); margin-top: 2px; }
+
+.ds-typescale { border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; }
+.ds-tr { display: grid; grid-template-columns: 140px 240px 1fr; align-items: baseline; gap: 24px; padding: 16px 20px; border-bottom: 1px solid var(--hairline); }
+.ds-tr:last-child { border-bottom: 0; }
+.ds-tok { font: 500 12px/1.4 "JetBrains Mono", monospace; color: var(--ink); }
+.ds-spec { font: 400 12px/1.4 "JetBrains Mono", monospace; color: var(--mute); }
+.ds-sam { color: var(--ink); font-family: "JetBrains Mono", monospace; }
+@media (max-width: 760px) { .ds-tr { grid-template-columns: 1fr; gap: 6px; } .ds-sam { font-size: 22px !important; line-height: 1.3 !important; } }
+
+.ds-radius { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); max-width: 480px; }
+.ds-rad { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ds-rad .box { width: 80px; height: 80px; background: var(--surface-card); border: 1px solid var(--hairline-strong); }
+
+.ds-comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.ds-input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+@media (max-width: 600px) { .ds-input-pair { grid-template-columns: 1fr; } }
+.ds-input {
+  height: 40px; padding: 8px 12px; border-radius: 4px;
+  border: 1px solid var(--hairline); background: var(--surface-soft);
+  color: var(--ink); font: 400 16px/1.5 "JetBrains Mono", monospace; width: 100%;
+}
+.ds-input.focused { border-color: var(--ink); background: var(--canvas); outline: none; }
+.ds-field-label { font: 400 14px/2 "JetBrains Mono", monospace; color: var(--mute); display: block; }
+
+.ds-card-grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 880px) { .ds-card-grid { grid-template-columns: 1fr; } }
+.ds-card-mini { border-radius: 4px; padding: 16px 20px; border: 1px solid var(--hairline); background: var(--surface-soft); display: flex; flex-direction: column; gap: 8px; }
+.ds-card-mini.dark { background: var(--surface-dark); border-color: var(--surface-dark); }
+.ds-card-mini.dark h4 { color: var(--on-dark); }
+.ds-card-mini.dark p { color: var(--on-dark-mute); }
+.ds-card-mini h4 { margin: 0; font: 700 14px/1.5 "JetBrains Mono", monospace; color: var(--ink); }
+.ds-card-mini p { margin: 0; font: 400 13px/1.6 "JetBrains Mono", monospace; color: var(--body); }
+
+/* —— Footer —— */
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: 48px 0 32px;
+  background: var(--canvas);
+}
+.footer-row {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+  border-bottom: 1px solid var(--hairline);
+}
+@media (max-width: 760px) { .footer-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .footer-row { grid-template-columns: 1fr; } }
+.footer-row a {
+  padding: 16px 12px; text-align: center;
+  font: 400 14px/2 "JetBrains Mono", monospace;
+  color: var(--mute);
+  border-right: 1px solid var(--hairline);
+}
+.footer-row a:last-child { border-right: 0; }
+.footer-row a:hover { color: var(--ink); background: var(--surface-soft); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 16px; gap: 24px; flex-wrap: wrap;
+  font: 400 14px/2 "JetBrains Mono", monospace; color: var(--mute);
+}
+
+/* —— Source link —— */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  background: var(--surface-dark); border: 1px solid var(--surface-dark);
+  padding: 8px 14px; border-radius: 4px;
+  font: 500 14px/1.4 "JetBrains Mono", monospace; color: var(--on-dark);
+}
+.src-link:hover { background: var(--ink-deep); }
+</style>
+</head>
+<body>
+
+<header class="topnav"><div class="wrap-wide row">
+  <a href="#" class="brand-ascii" aria-label="OpenCode">█▀█ █▀█ █▀▀ █▄░█  █▀▀ █▀█ █▀▄ █▀▀
+█▄█ █▀▀ ██▄ █░▀█  █▄▄ █▄█ █▄▀ ██▄</a>
+  <nav class="nav-links">
+    <a href="#">GitHub <span class="gh-stars">[<strong>150K</strong>]</span></a>
+    <a href="#">Docs</a>
+    <a href="#">Zen</a>
+    <a href="#">Go</a>
+    <a href="#">Enterprise</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-primary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download
+    </a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <span class="badge-news">[news]  v0.42 — terminal sessions are now resumable</span>
+  <h1 class="display-xl">The open source AI coding agent built for the terminal.</h1>
+  <p class="lead">OpenCode runs as a TUI in any shell. Plan, edit, and ship code with the model of your choice — no IDE, no browser, no telemetry. Bring your own key. Bring your own LSP. Bring your own agent.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary">Get started with Zen</a>
+    <a href="#" class="btn btn-secondary">Read docs →</a>
+    <span class="meta">macOS · Linux · Windows · v0.42</span>
+  </div>
+
+  <div class="install-block">
+    <div class="install-tabs">
+      <button class="btn-tab active">curl</button>
+      <button class="btn-tab">npm</button>
+      <button class="btn-tab">bun</button>
+      <button class="btn-tab">brew</button>
+      <button class="btn-tab">yay</button>
+    </div>
+    <div class="install-snippet">
+      <span class="cmd">curl -fsSL https://opencode.ai/install | bash</span>
+      <span class="copy" aria-label="copy">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="11" height="11" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap-wide">
+  <div class="tui-mockup">
+    <pre class="tui-wordmark" aria-hidden="true">  ▄▄▄▄▄    ▄▄▄▄    ▄▄▄▄▄   ▄▄   ▄▄    ▄▄▄▄    ▄▄▄▄    ▄▄▄▄▄    ▄▄▄▄▄
+ ██  ██   ██  ██   ██      ████ ████   ██  ██  ██  ██   ██  ██   ██
+ ██  ██   ████     ████    ██ ████ ██  ██      ██  ██   ██  ██   ████
+ ██  ██   ██       ██      ██  ██  ██  ██      ██  ██   ██  ██   ██
+  ▀▀▀▀    ██       ▀▀▀▀▀   ▀▀      ▀▀   ▀▀▀▀    ▀▀▀▀    ▀▀▀▀▀    ▀▀▀▀▀</pre>
+    <div class="tui-prompt-row">
+      <span class="pipe">│</span>
+      <span class="label">Build</span>
+      <span class="token">Claude Opus 4.7</span>
+      <span class="token">OpenCode Zen</span>
+      <span style="flex:1;"></span>
+      <span class="cursor"></span>
+    </div>
+    <div class="tui-output">
+      <div class="line"><span class="arrow">›</span> <span class="acc">plan</span> add exponential backoff to queue.ts</div>
+      <div class="line">  <span class="ok">✓</span> read <span class="acc">src/queue.ts</span>  <span style="color:var(--ash);">42 lines</span></div>
+      <div class="line">  <span class="ok">✓</span> grep <span class="warn">"retry"</span> across 184 files</div>
+      <div class="line">  <span class="ok">✓</span> propose patch <span class="acc">queue.ts:32-48</span></div>
+      <div class="line">  <span class="warn">●</span> run <span class="acc">pnpm test --filter queue</span></div>
+      <div class="line">    <span class="ok">PASS</span> src/queue.test.ts  <span style="color:var(--ash);">18 tests · 1.4s</span></div>
+      <div class="line">    <span class="ok">PASS</span> src/retry.test.ts  <span style="color:var(--ash);">6 tests · new</span></div>
+      <div class="line"><span class="arrow">›</span> <span class="acc">commit</span> "queue: retry with exponential backoff"</div>
+      <div class="line">  <span class="ok">✓</span> staged 2 files · 38 insertions(+), 4 deletions(-)</div>
+    </div>
+    <div class="tui-keybinds">
+      <span><span class="kbd">tab</span>switch agent</span>
+      <span><span class="kbd">ctrl-p</span>commands</span>
+      <span><span class="kbd">ctrl-r</span>resume session</span>
+      <span><span class="kbd">?</span>help</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="tight"><div class="wrap">
+  <div class="section-head"><h2 class="heading-md">What is OpenCode?</h2></div>
+  <p class="body-md ink" style="max-width: 64ch;">A 100% open source, terminal-native AI coding agent. Runs as a TUI in any shell. Auto-loads the right LSPs. Plans, edits, runs tests, opens PRs. Works with Claude, GPT, Gemini, local models, or your own. No IDE plugin. No browser. Nothing leaves your machine unless you tell it to.</p>
+
+  <div class="stat-grid" style="margin-top: 48px;">
+    <div class="stat-tile">
+      <svg class="plot" viewBox="0 0 220 84" preserveAspectRatio="none" aria-hidden="true">
+        <polyline points="0,72 18,68 36,60 54,55 72,48 90,40 108,32 126,28 144,22 162,16 180,12 198,8 220,4" fill="none" stroke="#424245" stroke-width="1.2"/>
+        <g fill="#424245"><circle cx="36" cy="60" r="1.2"/><circle cx="90" cy="40" r="1.2"/><circle cx="144" cy="22" r="1.2"/><circle cx="220" cy="4" r="1.5"/></g>
+      </svg>
+      <div class="cap"><strong>Fig 1.</strong> 150K GitHub Stars</div>
+    </div>
+    <div class="stat-tile">
+      <svg class="plot" viewBox="0 0 220 84" preserveAspectRatio="none" aria-hidden="true">
+        <g stroke="#424245" stroke-width="1" stroke-dasharray="2 4">
+          <line x1="0" y1="64" x2="220" y2="64"/>
+          <line x1="0" y1="48" x2="220" y2="48"/>
+          <line x1="0" y1="32" x2="220" y2="32"/>
+        </g>
+        <polyline points="0,68 30,58 60,48 90,42 120,35 150,28 180,20 220,14" fill="none" stroke="#201d1d" stroke-width="1.5"/>
+      </svg>
+      <div class="cap"><strong>Fig 2.</strong> 850 Contributors</div>
+    </div>
+    <div class="stat-tile">
+      <svg class="plot" viewBox="0 0 220 84" preserveAspectRatio="none" aria-hidden="true">
+        <g fill="#424245">
+          <circle cx="20" cy="72" r="1.2"/><circle cx="40" cy="64" r="1.2"/><circle cx="60" cy="58" r="1.2"/>
+          <circle cx="80" cy="50" r="1.2"/><circle cx="100" cy="46" r="1.2"/><circle cx="120" cy="38" r="1.2"/>
+          <circle cx="140" cy="30" r="1.2"/><circle cx="160" cy="24" r="1.2"/><circle cx="180" cy="18" r="1.2"/>
+          <circle cx="200" cy="12" r="1.5"/>
+        </g>
+      </svg>
+      <div class="cap"><strong>Fig 3.</strong> 6.5M Monthly Devs</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="tight"><div class="wrap">
+  <div class="section-head"><h2 class="heading-md">Built for privacy first</h2></div>
+  <div class="feat-list">
+    <div class="feat-row">
+      <span class="feat-mark">[+]</span>
+      <span class="feat-key">LSP enabled</span>
+      <span class="feat-desc">Automatically loads the right LSPs for the language you opened. TypeScript, Go, Rust, Python — out of the box.</span>
+    </div>
+    <div class="feat-row">
+      <span class="feat-mark">[+]</span>
+      <span class="feat-key">BYO model</span>
+      <span class="feat-desc">Claude, GPT, Gemini, Llama, or any OpenAI-compatible endpoint. Your key, your provider, your spend.</span>
+    </div>
+    <div class="feat-row">
+      <span class="feat-mark">[+]</span>
+      <span class="feat-key">Resumable sessions</span>
+      <span class="feat-desc">Quit your terminal mid-task. The agent picks up exactly where it left off — context, tool calls, partial diffs intact.</span>
+    </div>
+    <div class="feat-row">
+      <span class="feat-mark">[+]</span>
+      <span class="feat-key">No telemetry</span>
+      <span class="feat-desc">Zero outbound network traffic that isn't your model call. We don't see your code. We don't see your prompts.</span>
+    </div>
+    <div class="feat-row">
+      <span class="feat-mark">[-]</span>
+      <span class="feat-key">No cloud lock-in</span>
+      <span class="feat-desc">Self-host the agent. Self-host the model. The whole stack runs offline if your weights do.</span>
+    </div>
+    <div class="feat-row">
+      <span class="feat-mark">[x]</span>
+      <span class="feat-key">MIT licensed</span>
+      <span class="feat-desc">Fork it. Sell it. Embed it. Read the source — every commit is public.</span>
+    </div>
+  </div>
+</div></section>
+
+<section class="tight"><div class="wrap">
+  <div class="section-head"><h2 class="heading-md">Pricing</h2></div>
+  <p class="body-md" style="margin: 0 0 32px; max-width: 64ch;">OpenCode itself is free. <span class="body-strong">Zen</span> is the managed routing layer that load-balances across providers and gives you one bill instead of five.</p>
+  <div class="pricing-grid">
+    <div class="tier">
+      <h3>OSS</h3>
+      <div class="price">$0<span class="per">  forever</span></div>
+      <div class="desc">The full agent, MIT licensed. Bring your own key.</div>
+      <ul>
+        <li>Full TUI + LSP integration</li>
+        <li>BYO model (Claude, GPT, local)</li>
+        <li>Resumable sessions</li>
+        <li>Community Discord</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="width: 100%;">curl ... | bash</a></div>
+    </div>
+    <div class="tier">
+      <h3>Zen</h3>
+      <div class="price">$20<span class="per">  / mo</span></div>
+      <div class="desc">Managed routing across every provider. One key. One bill.</div>
+      <ul>
+        <li>Everything in OSS</li>
+        <li>Smart model routing</li>
+        <li>Usage dashboard + caps</li>
+        <li>Priority on rate limits</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-primary" style="width: 100%;">Start Zen</a></div>
+    </div>
+    <div class="tier">
+      <h3>Enterprise</h3>
+      <div class="price">Talk<span class="per">  to us</span></div>
+      <div class="desc">On-prem deployment, audit logs, SAML SSO, and a contract that survives procurement.</div>
+      <ul>
+        <li>Self-hosted control plane</li>
+        <li>SAML SSO + SCIM</li>
+        <li>Audit logs + DLP hooks</li>
+        <li>SLA + named support</li>
+      </ul>
+      <div class="cta-wrap"><a href="#" class="btn btn-secondary" style="width: 100%;">Contact sales</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="tight"><div class="wrap">
+  <div class="section-head"><h2 class="heading-md">FAQ</h2></div>
+  <div class="faq-list">
+    <div class="faq-row">
+      <span class="faq-mark">−</span>
+      <div>
+        <strong>Is OpenCode actually free?</strong>
+        <p>Yes. The agent, the TUI, the LSP integration — all MIT. Zen is the optional managed routing tier. You never need it.</p>
+      </div>
+    </div>
+    <div class="faq-row">
+      <span class="faq-mark">+</span>
+      <div>
+        <strong>Does it work offline?</strong>
+        <p>If your model does, yes. Point it at a local llama.cpp endpoint and the whole stack runs without an internet connection.</p>
+      </div>
+    </div>
+    <div class="faq-row">
+      <span class="faq-mark">+</span>
+      <div>
+        <strong>Will my code leave my machine?</strong>
+        <p>Only the prompt you send to the model you chose. We don't run an inference layer. We don't proxy. We don't log.</p>
+      </div>
+    </div>
+    <div class="faq-row">
+      <span class="faq-mark">+</span>
+      <div>
+        <strong>How is this different from Cursor or Warp?</strong>
+        <p>Those are editors and terminals with an AI panel. OpenCode is the inverse — an agent that lives in the terminal you already use, with no UI of its own beyond the TUI.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============================================================== -->
+<!-- PART B — DESIGN SYSTEM REFERENCE                                -->
+<!-- ============================================================== -->
+<section class="ds-section"><div class="wrap">
+  <div class="section-head" style="margin-bottom: 32px;">
+    <h2 class="heading-md">Design System</h2>
+  </div>
+  <p class="body-md" style="margin: 0 0 48px; max-width: 64ch;">A single-font system. Berkeley Mono carries every text role; here it's substituted by JetBrains Mono and IBM Plex Mono. Warm cream canvas. 4px radius on interactive elements only. 0px everywhere else. ASCII brackets are the icons. Source — <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.opencode.html" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">DESIGN.md</a>.</p>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Color</h3>
+
+    <p class="ds-caption">[ink] — the only "brand color"</p>
+    <div class="ds-sw-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 540px;">
+      <div class="ds-sw"><div class="chip" style="background:#201d1d"></div><div class="meta"><div class="name">ink / primary</div><div class="val">#201d1d</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#0f0000"></div><div class="meta"><div class="name">ink-deep</div><div class="val">#0f0000</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#fdfcfc; border-bottom: 1px solid var(--hairline);"></div><div class="meta"><div class="name">canvas / on-primary</div><div class="val">#fdfcfc</div></div></div>
+    </div>
+
+    <p class="ds-caption">[surface] — cream is the only body background</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#fdfcfc; border-bottom: 1px solid var(--hairline);"></div><div class="meta"><div class="name">canvas</div><div class="val">#fdfcfc</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f8f7f7"></div><div class="meta"><div class="name">surface-soft</div><div class="val">#f8f7f7</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#f1eeee"></div><div class="meta"><div class="name">surface-card</div><div class="val">#f1eeee</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#201d1d"></div><div class="meta"><div class="name">surface-dark</div><div class="val">#201d1d</div></div></div>
+    </div>
+
+    <p class="ds-caption">[text] — 4-tier neutral ladder</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#201d1d"></div><div class="meta"><div class="name">ink</div><div class="val">#201d1d</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#302c2c"></div><div class="meta"><div class="name">charcoal</div><div class="val">#302c2c</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#424245"></div><div class="meta"><div class="name">body</div><div class="val">#424245</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#646262"></div><div class="meta"><div class="name">mute</div><div class="val">#646262</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#6e6e73"></div><div class="meta"><div class="name">stone</div><div class="val">#6e6e73</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#9a9898"></div><div class="meta"><div class="name">ash</div><div class="val">#9a9898</div></div></div>
+    </div>
+
+    <p class="ds-caption">[semantic] — reserved for the in-product TUI only</p>
+    <div class="ds-sw-grid">
+      <div class="ds-sw"><div class="chip" style="background:#007aff"></div><div class="meta"><div class="name">accent</div><div class="val">#007aff</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ff9f0a"></div><div class="meta"><div class="name">warning</div><div class="val">#ff9f0a</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#ff3b30"></div><div class="meta"><div class="name">danger</div><div class="val">#ff3b30</div></div></div>
+      <div class="ds-sw"><div class="chip" style="background:#30d158"></div><div class="meta"><div class="name">success</div><div class="val">#30d158</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Typography</h3>
+    <p class="ds-caption">Berkeley Mono → JetBrains Mono / IBM Plex Mono fallback. One face. One mood. The page IS a man page.</p>
+    <div class="ds-typescale">
+      <div class="ds-tr"><span class="ds-tok">display-xl</span><span class="ds-spec">38 · w700 · 0 · 1.5</span><div class="ds-sam" style="font-size:34px; font-weight:700;">The open source AI coding agent</div></div>
+      <div class="ds-tr"><span class="ds-tok">heading-md</span><span class="ds-spec">16 · w700 · 0 · 1.5</span><div class="ds-sam" style="font-size:16px; font-weight:700;">What is OpenCode?</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-md</span><span class="ds-spec">16 · w400 · 0 · 1.5</span><div class="ds-sam" style="font-size:16px; color: var(--body);">Default paragraph copy across the page.</div></div>
+      <div class="ds-tr"><span class="ds-tok">body-strong</span><span class="ds-spec">16 · w500 · 0 · 1.5</span><div class="ds-sam" style="font-size:16px; font-weight:500;">Inline emphasis and nav links.</div></div>
+      <div class="ds-tr"><span class="ds-tok">button-md</span><span class="ds-spec">16 · w500 · 0 · 2.0</span><div class="ds-sam" style="font-size:16px; font-weight:500; line-height:2;">Download · Get started with Zen</div></div>
+      <div class="ds-tr"><span class="ds-tok">caption-md</span><span class="ds-spec">14 · w400 · 0 · 2.0</span><div class="ds-sam" style="font-size:14px; color: var(--mute); line-height:2;">Footer link · copyright · Fig 1.</div></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Radius — only two values</h3>
+    <div class="ds-radius">
+      <div class="ds-rad"><div class="box" style="border-radius:0"></div><span class="ds-tok">none</span><span class="ds-spec">0  · containers</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:4px"></div><span class="ds-tok">sm</span><span class="ds-spec">4  · interactive</span></div>
+      <div class="ds-rad"><div class="box" style="border-radius:9999px"></div><span class="ds-tok">full</span><span class="ds-spec">∞  · avatars</span></div>
+    </div>
+  </div>
+
+  <div class="ds-block">
+    <h3 class="ds-heading">Components</h3>
+
+    <p class="ds-caption">[buttons] — 4px radius. Interactive elements only.</p>
+    <div class="ds-comp-row">
+      <a class="btn btn-primary">button-primary</a>
+      <a class="btn btn-secondary">button-secondary</a>
+      <a class="btn btn-tab active" style="height: auto;">button-tab · active</a>
+      <a class="btn btn-tab" style="height: auto;">button-tab</a>
+    </div>
+
+    <p class="ds-caption">[inputs] — surface-soft default · canvas + ink border on focus</p>
+    <div class="ds-input-pair">
+      <div>
+        <label class="ds-field-label">text-input</label>
+        <input class="ds-input" placeholder="you@company.com"/>
+      </div>
+      <div>
+        <label class="ds-field-label">text-input · focused</label>
+        <input class="ds-input focused" value="zephyr@anomaly.dev"/>
+      </div>
+    </div>
+
+    <p class="ds-caption">[badges] — small chips, ASCII brackets, 4px radius</p>
+    <div class="ds-comp-row">
+      <span class="badge-news" style="margin-bottom: 0;">[news] v0.42</span>
+      <span class="badge-news" style="margin-bottom: 0; background: transparent; color: var(--ink); border: 1px solid var(--hairline-strong);">[beta] Zen</span>
+      <span class="badge-news" style="margin-bottom: 0; background: var(--surface-card); color: var(--ink);">[stable]</span>
+    </div>
+
+    <p class="ds-caption">[card variants] — flat-on-cream · the dark card is the only "elevated" surface</p>
+    <div class="ds-card-grid">
+      <div class="ds-card-mini">
+        <h4>[+] feature-row</h4>
+        <p>Bracket marker + bold key + body description. Sits in a flat list with a hairline rule beneath it.</p>
+      </div>
+      <div class="ds-card-mini">
+        <h4>[#] chart-tile</h4>
+        <p>Sparse inline SVG plot. Caption underneath: Fig N. label. Never specific data points — the chart is decorative type.</p>
+      </div>
+      <div class="ds-card-mini dark">
+        <h4>[•] tui-mockup</h4>
+        <p>The single dark surface. Reserved for the hero TUI preview — never used as chrome treatment elsewhere.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap-wide">
+  <div class="footer-row">
+    <a href="#">GitHub [150K]</a>
+    <a href="#">Docs</a>
+    <a href="#">Changelog</a>
+    <a href="#">Discord</a>
+    <a href="#">X / Twitter</a>
+  </div>
+  <div class="footer-bottom">
+    <div>©2026 Anomaly · Inspired marketing study</div>
+    <div>Brand · Privacy · Terms · English ▼</div>
+  </div>
+</div></footer>
+
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.opencode.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+
+</body>
+</html>
