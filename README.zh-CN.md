@@ -4,12 +4,8 @@
   <img src=".github/assets/banner.svg" alt="Awesome Design HTML — 113 brand-themed HTML designs as a Claude Code skill" width="100%" />
 </a>
 
-<br/><br/>
-
 <a href="README.md"><img src="https://img.shields.io/badge/Read_in-English-2962ff?style=for-the-badge&logo=googletranslate&logoColor=white" alt="English"></a>
 <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/阅读-中文-c92a2a?style=for-the-badge&logo=googletranslate&logoColor=white" alt="中文"></a>
-
-<br/><br/>
 
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-242830?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="License MIT"></a>
 <a href="#-网页库--91-个营销页"><img src="https://img.shields.io/badge/Web-91_brands-3ECF8E?style=flat-square&logo=html5&logoColor=white" alt="91 个网页"></a>
@@ -17,8 +13,6 @@
 <a href="https://docs.claude.com/claude-code"><img src="https://img.shields.io/badge/Claude_Code-skill-d97757?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code 技能"></a>
 <a href="https://github.com/yzfly/awesome-design-html/stargazers"><img src="https://img.shields.io/github/stars/yzfly/awesome-design-html?style=flat-square&logo=github&color=fbca04&logoColor=white" alt="GitHub Stars"></a>
 <a href="https://github.com/yzfly/awesome-design-html/releases"><img src="https://img.shields.io/github/v/release/yzfly/awesome-design-html?style=flat-square&logo=github&color=8957e5" alt="最新版本"></a>
-
-<br/><br/>
 
 <p>
 <b><a href="https://code.jiangshu.ai/awesome-design-html/">🎨 在线画廊</a></b>
