@@ -83,31 +83,131 @@ That's why this project is `awesome-design-html`, not `awesome-design-md`.
 
 ---
 
-## ⭐ Featured demos (one-click open)
+## ⭐ Featured demos — see them, don't just read them
 
-**AI flagships** — [Claude](https://code.jiangshu.ai/awesome-design-html/assets/web/design.claude.html) · [ChatGPT iOS](https://code.jiangshu.ai/awesome-design-html/assets/ios/design.chatgpt-ios.html) · [Cursor](https://code.jiangshu.ai/awesome-design-html/assets/web/design.cursor.html) · [Supabase](https://code.jiangshu.ai/awesome-design-html/assets/web/design.supabase.html) · [OpenCode](https://code.jiangshu.ai/awesome-design-html/assets/web/design.opencode.html) · [Mistral](https://code.jiangshu.ai/awesome-design-html/assets/web/design.mistral.html)
+> 24 hand-picked previews. Click any thumbnail to open the full live demo.
 
-**iOS · visual impact** — [Tinder](https://code.jiangshu.ai/awesome-design-html/assets/ios/design.tinder-ios.html) · [Duolingo](https://code.jiangshu.ai/awesome-design-html/assets/ios/design.duolingo-ios.html) · [Instagram](https://code.jiangshu.ai/awesome-design-html/assets/ios/design.instagram-ios.html) · [Snapchat](https://code.jiangshu.ai/awesome-design-html/assets/ios/design.snapchat-ios.html) · [Spotify iOS](https://code.jiangshu.ai/awesome-design-html/assets/ios/design.spotify-ios.html) · [WhatsApp](https://code.jiangshu.ai/awesome-design-html/assets/ios/design.whatsapp-ios.html)
+### AI flagships
 
-**Web · premium** — [Stripe](https://code.jiangshu.ai/awesome-design-html/assets/web/design.stripe.html) · [Linear](https://code.jiangshu.ai/awesome-design-html/assets/web/design.linear.html) · [Notion](https://code.jiangshu.ai/awesome-design-html/assets/web/design.notion.html) · [Vercel](https://code.jiangshu.ai/awesome-design-html/assets/web/design.vercel.html) · [Figma](https://code.jiangshu.ai/awesome-design-html/assets/web/design.figma.html) · [Airbnb](https://code.jiangshu.ai/awesome-design-html/assets/web/design.airbnb.html)
+<table>
+<tr>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.claude.html"><img src=".github/assets/thumbnails/claude.webp" width="100%" alt="Claude"/><br/><sub><b>Claude</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.chatgpt-ios.html"><img src=".github/assets/thumbnails/chatgpt-ios.webp" width="100%" alt="ChatGPT iOS"/><br/><sub><b>ChatGPT iOS</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.cursor.html"><img src=".github/assets/thumbnails/cursor.webp" width="100%" alt="Cursor"/><br/><sub><b>Cursor</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.supabase.html"><img src=".github/assets/thumbnails/supabase.webp" width="100%" alt="Supabase"/><br/><sub><b>Supabase</b></sub></a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.opencode.html"><img src=".github/assets/thumbnails/opencode.webp" width="100%" alt="OpenCode"/><br/><sub><b>OpenCode</b></sub></a></td>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.mistral.html"><img src=".github/assets/thumbnails/mistral.webp" width="100%" alt="Mistral"/><br/><sub><b>Mistral</b></sub></a></td>
+<td align="center" colspan="2"><sub>+ Cohere · ElevenLabs · Lovable · MiniMax · Ollama · Runway · Together · VoltAgent · xAI — <a href="#-web-library--91-marketing-pages">see Web library</a></sub></td>
+</tr>
+</table>
 
-**Luxury / iconic** — [Apple](https://code.jiangshu.ai/awesome-design-html/assets/web/design.apple.html) · [Tesla](https://code.jiangshu.ai/awesome-design-html/assets/web/design.tesla.html) · [Ferrari](https://code.jiangshu.ai/awesome-design-html/assets/web/design.ferrari.html) · [BMW M](https://code.jiangshu.ai/awesome-design-html/assets/web/design.bmw-m.html) · [Bugatti](https://code.jiangshu.ai/awesome-design-html/assets/web/design.bugatti.html) · [Lamborghini](https://code.jiangshu.ai/awesome-design-html/assets/web/design.lamborghini.html)
+### iOS · visual impact
+
+<table>
+<tr>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.tinder-ios.html"><img src=".github/assets/thumbnails/tinder-ios.webp" width="100%" alt="Tinder"/><br/><sub><b>Tinder</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.duolingo-ios.html"><img src=".github/assets/thumbnails/duolingo-ios.webp" width="100%" alt="Duolingo"/><br/><sub><b>Duolingo</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.instagram-ios.html"><img src=".github/assets/thumbnails/instagram-ios.webp" width="100%" alt="Instagram"/><br/><sub><b>Instagram</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.snapchat-ios.html"><img src=".github/assets/thumbnails/snapchat-ios.webp" width="100%" alt="Snapchat"/><br/><sub><b>Snapchat</b></sub></a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.spotify-ios.html"><img src=".github/assets/thumbnails/spotify-ios.webp" width="100%" alt="Spotify iOS"/><br/><sub><b>Spotify iOS</b></sub></a></td>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.whatsapp-ios.html"><img src=".github/assets/thumbnails/whatsapp-ios.webp" width="100%" alt="WhatsApp"/><br/><sub><b>WhatsApp</b></sub></a></td>
+<td align="center" colspan="2"><sub>+ Apple Music · Discord · DoorDash · Hinge · Netflix · Notion · Robinhood · Starbucks · Telegram · Threads · TikTok · Uber · X / Twitter · YouTube — <a href="#-ios-library--22-app-mockups">see iOS library</a></sub></td>
+</tr>
+</table>
+
+### Web · premium
+
+<table>
+<tr>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.stripe.html"><img src=".github/assets/thumbnails/stripe.webp" width="100%" alt="Stripe"/><br/><sub><b>Stripe</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.linear.html"><img src=".github/assets/thumbnails/linear.webp" width="100%" alt="Linear"/><br/><sub><b>Linear</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.notion.html"><img src=".github/assets/thumbnails/notion.webp" width="100%" alt="Notion"/><br/><sub><b>Notion</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.vercel.html"><img src=".github/assets/thumbnails/vercel.webp" width="100%" alt="Vercel"/><br/><sub><b>Vercel</b></sub></a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.figma.html"><img src=".github/assets/thumbnails/figma.webp" width="100%" alt="Figma"/><br/><sub><b>Figma</b></sub></a></td>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.airbnb.html"><img src=".github/assets/thumbnails/airbnb.webp" width="100%" alt="Airbnb"/><br/><sub><b>Airbnb</b></sub></a></td>
+<td align="center" colspan="2"><sub>+ Airtable · Cal.com · Intercom · Miro · Slack · Superhuman · Webflow · Zapier · Clay — <a href="#-web-library--91-marketing-pages">see Web library</a></sub></td>
+</tr>
+</table>
+
+### Luxury · iconic
+
+<table>
+<tr>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.apple.html"><img src=".github/assets/thumbnails/apple.webp" width="100%" alt="Apple"/><br/><sub><b>Apple</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.tesla.html"><img src=".github/assets/thumbnails/tesla.webp" width="100%" alt="Tesla"/><br/><sub><b>Tesla</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.ferrari.html"><img src=".github/assets/thumbnails/ferrari.webp" width="100%" alt="Ferrari"/><br/><sub><b>Ferrari</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.bmw-m.html"><img src=".github/assets/thumbnails/bmw-m.webp" width="100%" alt="BMW M"/><br/><sub><b>BMW M</b></sub></a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.bugatti.html"><img src=".github/assets/thumbnails/bugatti.webp" width="100%" alt="Bugatti"/><br/><sub><b>Bugatti</b></sub></a></td>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.lamborghini.html"><img src=".github/assets/thumbnails/lamborghini.webp" width="100%" alt="Lamborghini"/><br/><sub><b>Lamborghini</b></sub></a></td>
+<td align="center" colspan="2"><sub>+ BMW · Renault — <a href="#-web-library--91-marketing-pages">see Web library</a></sub></td>
+</tr>
+</table>
 
 ## 🇨🇳 China showcase — 20 new brands (2026)
 
 The first comprehensive set of **China tech brand design references** for AI coding agents. Each demo is brand-faithful (real hex values, real typography, real layouts) and ships with a full Part B design-system reference.
 
-**ByteDance**: [飞书 Feishu](https://code.jiangshu.ai/awesome-design-html/assets/web/design.feishu.html) · [抖音 Douyin](https://code.jiangshu.ai/awesome-design-html/assets/web/design.douyin.html) · [豆包 Doubao](https://code.jiangshu.ai/awesome-design-html/assets/web/design.doubao.html)
+### ByteDance · Alibaba · Tencent
 
-**Alibaba**: [阿里云 Aliyun](https://code.jiangshu.ai/awesome-design-html/assets/web/design.aliyun.html) · [支付宝 Alipay](https://code.jiangshu.ai/awesome-design-html/assets/web/design.alipay.html) · [钉钉 DingTalk](https://code.jiangshu.ai/awesome-design-html/assets/web/design.dingtalk.html) · [语雀 Yuque](https://code.jiangshu.ai/awesome-design-html/assets/web/design.yuque.html)
+<table>
+<tr>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.feishu.html"><img src=".github/assets/thumbnails/feishu.webp" width="100%" alt="Feishu"/><br/><sub><b>飞书 Feishu</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.douyin.html"><img src=".github/assets/thumbnails/douyin.webp" width="100%" alt="Douyin"/><br/><sub><b>抖音 Douyin</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.doubao.html"><img src=".github/assets/thumbnails/doubao.webp" width="100%" alt="Doubao"/><br/><sub><b>豆包 Doubao</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.aliyun.html"><img src=".github/assets/thumbnails/aliyun.webp" width="100%" alt="Aliyun"/><br/><sub><b>阿里云 Aliyun</b></sub></a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.alipay.html"><img src=".github/assets/thumbnails/alipay.webp" width="100%" alt="Alipay"/><br/><sub><b>支付宝 Alipay</b></sub></a></td>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.dingtalk.html"><img src=".github/assets/thumbnails/dingtalk.webp" width="100%" alt="DingTalk"/><br/><sub><b>钉钉 DingTalk</b></sub></a></td>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.yuque.html"><img src=".github/assets/thumbnails/yuque.webp" width="100%" alt="Yuque"/><br/><sub><b>语雀 Yuque</b></sub></a></td>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.tencent-cloud.html"><img src=".github/assets/thumbnails/tencent-cloud.webp" width="100%" alt="Tencent Cloud"/><br/><sub><b>腾讯云 Tencent Cloud</b></sub></a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.wechat.html"><img src=".github/assets/thumbnails/wechat.webp" width="100%" alt="WeChat"/><br/><sub><b>微信 WeChat</b></sub></a></td>
+<td colspan="3"></td>
+</tr>
+</table>
 
-**Tencent**: [腾讯云 Tencent Cloud](https://code.jiangshu.ai/awesome-design-html/assets/web/design.tencent-cloud.html) · [微信 WeChat](https://code.jiangshu.ai/awesome-design-html/assets/web/design.wechat.html)
+### China AI
 
-**China AI**: [DeepSeek](https://code.jiangshu.ai/awesome-design-html/assets/web/design.deepseek.html) · [Kimi](https://code.jiangshu.ai/awesome-design-html/assets/web/design.kimi.html) · [文心一言 Wenxin](https://code.jiangshu.ai/awesome-design-html/assets/web/design.wenxin.html) · [通义千问 Qwen](https://code.jiangshu.ai/awesome-design-html/assets/web/design.qwen.html)
+<table>
+<tr>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.deepseek.html"><img src=".github/assets/thumbnails/deepseek.webp" width="100%" alt="DeepSeek"/><br/><sub><b>DeepSeek</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.kimi.html"><img src=".github/assets/thumbnails/kimi.webp" width="100%" alt="Kimi"/><br/><sub><b>Kimi</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.wenxin.html"><img src=".github/assets/thumbnails/wenxin.webp" width="100%" alt="Wenxin"/><br/><sub><b>文心一言 Wenxin</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.qwen.html"><img src=".github/assets/thumbnails/qwen.webp" width="100%" alt="Qwen"/><br/><sub><b>通义千问 Qwen</b></sub></a></td>
+</tr>
+</table>
 
-**EV (国产新能源)**: [小米汽车 Xiaomi EV](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi-ev.html) · [蔚来 NIO](https://code.jiangshu.ai/awesome-design-html/assets/web/design.nio.html) · [理想 Li Auto](https://code.jiangshu.ai/awesome-design-html/assets/web/design.li-auto.html) · [极氪 ZEEKR](https://code.jiangshu.ai/awesome-design-html/assets/web/design.zeekr.html)
+### EV · 国产新能源
 
-**Content & Consumer**: [哔哩哔哩 Bilibili](https://code.jiangshu.ai/awesome-design-html/assets/web/design.bilibili.html) · [米哈游 miHoYo](https://code.jiangshu.ai/awesome-design-html/assets/web/design.mihoyo.html) · [小米 Xiaomi](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi.html)
+<table>
+<tr>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi-ev.html"><img src=".github/assets/thumbnails/xiaomi-ev.webp" width="100%" alt="Xiaomi EV"/><br/><sub><b>小米汽车 Xiaomi EV</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.nio.html"><img src=".github/assets/thumbnails/nio.webp" width="100%" alt="NIO"/><br/><sub><b>蔚来 NIO</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.li-auto.html"><img src=".github/assets/thumbnails/li-auto.webp" width="100%" alt="Li Auto"/><br/><sub><b>理想 Li Auto</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.zeekr.html"><img src=".github/assets/thumbnails/zeekr.webp" width="100%" alt="ZEEKR"/><br/><sub><b>极氪 ZEEKR</b></sub></a></td>
+</tr>
+</table>
+
+### Content & Consumer
+
+<table>
+<tr>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.bilibili.html"><img src=".github/assets/thumbnails/bilibili.webp" width="100%" alt="Bilibili"/><br/><sub><b>哔哩哔哩 Bilibili</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.mihoyo.html"><img src=".github/assets/thumbnails/mihoyo.webp" width="100%" alt="miHoYo"/><br/><sub><b>米哈游 miHoYo</b></sub></a></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi.html"><img src=".github/assets/thumbnails/xiaomi.webp" width="100%" alt="Xiaomi"/><br/><sub><b>小米 Xiaomi</b></sub></a></td>
+<td width="25%"></td>
+</tr>
+</table>
 
 ---
 

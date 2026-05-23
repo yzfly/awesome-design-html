@@ -18,3 +18,6 @@ Thumbs.db
 
 # Local Claude Code session state
 .claude/
+
+# Thumbnail capture intermediates (PNG → WebP, only WebP is committed)
+.github/assets/thumbnails/png/
