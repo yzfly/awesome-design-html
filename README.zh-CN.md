@@ -1,14 +1,14 @@
 <div align="center">
 
 <a href="https://code.jiangshu.ai/awesome-design-html/">
-  <img src=".github/assets/banner.svg" alt="Awesome Design HTML — 113 brand-themed HTML designs as a Claude Code skill" width="100%" />
+  <img src=".github/assets/banner.svg" alt="Awesome Design HTML — 114 brand-themed HTML designs as a Claude Code skill" width="100%" />
 </a>
 
 <a href="README.md"><img src="https://img.shields.io/badge/Read_in-English-2962ff?style=for-the-badge&logo=googletranslate&logoColor=white" alt="English"></a>
 <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/阅读-中文-c92a2a?style=for-the-badge&logo=googletranslate&logoColor=white" alt="中文"></a>
 
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-242830?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="License MIT"></a>
-<a href="#-网页库--91-个营销页"><img src="https://img.shields.io/badge/Web-91_brands-3ECF8E?style=flat-square&logo=html5&logoColor=white" alt="91 个网页"></a>
+<a href="#-网页库--92-个营销页"><img src="https://img.shields.io/badge/Web-92_brands-3ECF8E?style=flat-square&logo=html5&logoColor=white" alt="92 个网页"></a>
 <a href="#-ios-库--22-个-app-仿真"><img src="https://img.shields.io/badge/iOS-22_apps-007AFF?style=flat-square&logo=apple&logoColor=white" alt="22 个 iOS app"></a>
 <a href="https://docs.claude.com/claude-code"><img src="https://img.shields.io/badge/Claude_Code-skill-d97757?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code 技能"></a>
 <a href="https://github.com/yzfly/awesome-design-html/stargazers"><img src="https://img.shields.io/github/stars/yzfly/awesome-design-html?style=flat-square&logo=github&color=fbca04&logoColor=white" alt="GitHub Stars"></a>
@@ -21,7 +21,7 @@
 &nbsp;·&nbsp;
 <b><a href="#-为什么是-html不是-markdown">💡 为什么 HTML?</a></b>
 &nbsp;·&nbsp;
-<b><a href="#-精选-demo一键打开">⭐ 浏览 113 个</a></b>
+<b><a href="#-精选-demo一键打开">⭐ 浏览 114 个</a></b>
 </p>
 
 </div>
@@ -71,7 +71,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 - **AI 原生读 HTML。** 现代编程 agent(Claude Code、Cursor、Copilot)能直接解析 HTML,不需要"翻译层"。
 - **作品本身就是文档。** 不再有"规范 vs 实现"的漂移 —— 因为根本没有分离的规范。
 
-**这个 skill 就是建立在这个理念上。** 113 个参考全部都是自说明的 HTML 页面。你不是读 Stripe 网格渐变的描述 —— 你打开 Stripe 的 HTML,渐变**就在那**。Claude 读同一个文件,应用同一套 token。
+**这个 skill 就是建立在这个理念上。** 114 个参考全部都是自说明的 HTML 页面。你不是读 Stripe 网格渐变的描述 —— 你打开 Stripe 的 HTML,渐变**就在那**。Claude 读同一个文件,应用同一套 token。
 
 所以这个项目叫 `awesome-design-html`,不叫 `awesome-design-md`。
 
@@ -93,7 +93,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.opencode.html"><img src=".github/assets/thumbnails/opencode.webp" width="100%" alt="OpenCode"/><br/><sub><b>OpenCode</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.mistral.html"><img src=".github/assets/thumbnails/mistral.webp" width="100%" alt="Mistral"/><br/><sub><b>Mistral</b></sub></a></td>
-<td align="center" colspan="2"><sub>更多 AI: Cohere · ElevenLabs · Lovable · MiniMax · Ollama · Runway · Together · VoltAgent · xAI — <a href="#-网页库--91-个营销页">见网页库</a></sub></td>
+<td align="center" colspan="2"><sub>更多 AI: Cohere · ElevenLabs · Lovable · MiniMax · Ollama · Runway · Together · VoltAgent · xAI — <a href="#-网页库--92-个营销页">见网页库</a></sub></td>
 </tr>
 </table>
 
@@ -125,7 +125,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.figma.html"><img src=".github/assets/thumbnails/figma.webp" width="100%" alt="Figma"/><br/><sub><b>Figma</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.airbnb.html"><img src=".github/assets/thumbnails/airbnb.webp" width="100%" alt="Airbnb"/><br/><sub><b>Airbnb</b></sub></a></td>
-<td align="center" colspan="2"><sub>更多: Airtable · Cal.com · Intercom · Miro · Slack · Superhuman · Webflow · Zapier · Clay — <a href="#-网页库--91-个营销页">见网页库</a></sub></td>
+<td align="center" colspan="2"><sub>更多: Airtable · Cal.com · Intercom · Miro · Slack · Superhuman · Webflow · Zapier · Clay — <a href="#-网页库--92-个营销页">见网页库</a></sub></td>
 </tr>
 </table>
 
@@ -141,7 +141,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.bugatti.html"><img src=".github/assets/thumbnails/bugatti.webp" width="100%" alt="Bugatti"/><br/><sub><b>Bugatti</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.lamborghini.html"><img src=".github/assets/thumbnails/lamborghini.webp" width="100%" alt="Lamborghini"/><br/><sub><b>Lamborghini</b></sub></a></td>
-<td align="center" colspan="2"><sub>更多: BMW · Renault — <a href="#-网页库--91-个营销页">见网页库</a></sub></td>
+<td align="center" colspan="2"><sub>更多: BMW · Renault — <a href="#-网页库--92-个营销页">见网页库</a></sub></td>
 </tr>
 </table>
 
@@ -205,7 +205,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 
 ---
 
-## 📄 网页库 — 91 个营销页
+## 📄 网页库 — 92 个营销页
 
 **效率 / SaaS** — [Airtable](https://code.jiangshu.ai/awesome-design-html/assets/web/design.airtable.html) · [Cal.com](https://code.jiangshu.ai/awesome-design-html/assets/web/design.cal.html) · [Intercom](https://code.jiangshu.ai/awesome-design-html/assets/web/design.intercom.html) · [Miro](https://code.jiangshu.ai/awesome-design-html/assets/web/design.miro.html) · [Notion](https://code.jiangshu.ai/awesome-design-html/assets/web/design.notion.html) · [Slack](https://code.jiangshu.ai/awesome-design-html/assets/web/design.slack.html) · [Superhuman](https://code.jiangshu.ai/awesome-design-html/assets/web/design.superhuman.html) · [Webflow](https://code.jiangshu.ai/awesome-design-html/assets/web/design.webflow.html) · [Zapier](https://code.jiangshu.ai/awesome-design-html/assets/web/design.zapier.html) · [Clay](https://code.jiangshu.ai/awesome-design-html/assets/web/design.clay.html)
 
@@ -255,7 +255,7 @@ awesome-design-html/
 ├── LICENSE          # MIT
 ├── index.html       # 画廊入口页
 └── assets/
-    ├── web/         # 91 个网页 HTML
+    ├── web/         # 92 个网页 HTML
     └── ios/         # 22 个 iOS app HTML
 ```
 
