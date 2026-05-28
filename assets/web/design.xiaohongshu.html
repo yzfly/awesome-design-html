@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>小红书 · Xiaohongshu — Design System Reference</title>
+<meta name="description" content="小红书 xiaohongshu.com/explore 探索页设计语言研究：品牌红 #FF2442、左侧分类导航、瀑布流变高笔记卡、白底无边框 + hover 微抬、heart icon 红色 + 灰色数字。Marketing + 设计系统参考一体的单文件示例。" />
+<meta property="og:title" content="小红书 Xiaohongshu — Design System Reference" />
+<meta property="og:description" content="A self-contained tribute to xiaohongshu.com/explore: signature red #FF2442, left category rail, true masonry note grid with variable-height covers, white cards with hover-lift, red heart + gray count." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Canvas: pure white in main, very faint cool gray as page wrapper */
+  --canvas: #ffffff;
+  --canvas-tint: #f7f7f7;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --surface-3: #ebebeb;
+
+  --ink: #1a1a1a;
+  --ink-soft: #333333;
+  --ink-muted: #666666;
+  --ink-dim: #999999;
+  --ink-faint: #b9b9bd;
+  --border: #efefef;
+  --border-soft: #f5f5f5;
+
+  /* Brand */
+  --red: #ff2442;
+  --red-deep: #e91e3a;
+  --red-soft: #ffe8ec;
+  --red-tint: #fff3f5;
+  --pink: #ff6b9d;
+  --orange: #ff6b35;
+  --yellow: #ffc83d;
+  --green: #00b578;
+
+  /* Gradients */
+  --grad-red: linear-gradient(135deg, #ff2442 0%, #ff6b9d 100%);
+  --grad-cover-a: linear-gradient(135deg, #ffd6e0 0%, #ff8aa8 60%, #ff5b8a 100%);
+  --grad-cover-b: linear-gradient(135deg, #fff0c4 0%, #ffb86b 60%, #ff7a4a 100%);
+  --grad-cover-c: linear-gradient(135deg, #d6eaff 0%, #87b8ff 60%, #5a7fff 100%);
+  --grad-cover-d: linear-gradient(135deg, #e7d6ff 0%, #c89bff 60%, #9c6bff 100%);
+  --grad-cover-e: linear-gradient(135deg, #c8f0e0 0%, #6dd0b0 60%, #2fa884 100%);
+  --grad-cover-f: linear-gradient(135deg, #fff7c4 0%, #ffe066 50%, #ffb800 100%);
+  --grad-cover-g: linear-gradient(135deg, #ffe8d9 0%, #ffb59c 60%, #e87856 100%);
+  --grad-cover-h: linear-gradient(135deg, #ffcfd9 0%, #ff8aa8 100%);
+  --grad-cover-i: linear-gradient(160deg, #232238 0%, #4a3f6e 50%, #ff5b8a 100%);
+  --grad-cover-j: linear-gradient(135deg, #f5f5f7 0%, #d8d4d0 50%, #a8a098 100%);
+
+  /* Shadows — hairline glow only */
+  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.08);
+  --shadow-red: 0 4px 12px rgba(255, 36, 66, 0.32);
+
+  /* Type */
+  --font-ui: "PingFang SC", "HarmonyOS Sans SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, "Inter", sans-serif;
+  --font-num: "HarmonyOS Sans", "SF Pro Display", "Inter", "PingFang SC", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Radii — XHS uses big 16px on cards, 999px on inputs/buttons */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 20px;
+  --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+img, svg { display: block; }
+
+.num { font-family: var(--font-num); font-feature-settings: "tnum"; }
+.mono { font-family: var(--font-mono); }
+
+/* ===================== TOP NAV ===================== */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.top-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 28px;
+  max-width: 1680px;
+  margin: 0 auto;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--red);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(255, 36, 66, 0.28);
+}
+.brand-mark svg { width: 20px; height: 20px; }
+.brand-name {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: -0.5px;
+  font-family: var(--font-ui);
+}
+.brand-tag {
+  font-size: 11.5px;
+  color: var(--ink-dim);
+  padding-left: 10px;
+  margin-left: 4px;
+  border-left: 1px solid var(--border);
+  font-weight: 400;
+}
+
+/* Search */
+.search-wrap { flex: 0 1 600px; }
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface-2);
+  border-radius: var(--r-pill);
+  padding: 11px 22px;
+  transition: background .15s ease;
+}
+.search:focus-within { background: #fff; box-shadow: 0 0 0 2px var(--red); }
+.search input {
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  flex: 1;
+  color: var(--ink);
+}
+.search input::placeholder { color: var(--ink-dim); }
+.search .submit {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.search .submit:hover { background: var(--red-deep); }
+.hot-tags { margin-top: 8px; display: flex; gap: 14px; padding: 0 22px; font-size: 11.5px; }
+.hot-tags .lbl { color: var(--ink-dim); }
+.hot-tags a { color: var(--ink-muted); }
+.hot-tags a:hover { color: var(--red); }
+.hot-tags .fire { color: var(--orange); }
+
+.top-actions { display: flex; align-items: center; gap: 14px; margin-left: auto; }
+.t-link { font-size: 13.5px; color: var(--ink-soft); font-weight: 500; }
+.t-link:hover { color: var(--red); }
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--red);
+  color: #fff;
+  border: 0;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: var(--r-pill);
+  font-size: 13.5px;
+  box-shadow: var(--shadow-red);
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-pill:hover { background: var(--red-deep); }
+.btn-pill.outline {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+.btn-pill.outline:hover { border-color: var(--red); color: var(--red); }
+.qr-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  display: grid; place-items: center;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+.qr-btn:hover { color: var(--red); }
+
+/* ===================== APP LAYOUT ===================== */
+.app {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  max-width: 1680px;
+  margin: 0 auto;
+  gap: 0;
+  padding: 0;
+}
+
+/* ===================== LEFT RAIL ===================== */
+.rail {
+  padding: 16px 8px 24px 28px;
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+.rail-group { margin-bottom: 18px; }
+.rail-h {
+  font-size: 11px;
+  color: var(--ink-dim);
+  padding: 6px 14px 6px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.rail-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px;
+  border-radius: var(--r-pill);
+  font-size: 14px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+}
+.rail-item:hover { background: var(--surface-2); }
+.rail-item.active { background: var(--red-soft); color: var(--red); font-weight: 600; }
+.rail-item .ico { width: 18px; height: 18px; flex-shrink: 0; }
+.rail-item .dot {
+  margin-left: auto;
+  background: var(--red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-num);
+}
+
+.rail-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 6px;
+}
+.rail-tag {
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+.rail-tag:hover { background: var(--surface-2); color: var(--ink); }
+.rail-tag.active { background: var(--ink); color: #fff; }
+
+.rail-foot { padding: 14px; font-size: 11px; color: var(--ink-faint); line-height: 1.6; }
+.rail-foot a { color: var(--ink-dim); margin-right: 8px; }
+.rail-foot a:hover { color: var(--red); }
+.rail-foot .copy { display: block; margin-top: 10px; }
+
+/* ===================== MAIN ===================== */
+.main {
+  padding: 16px 28px 40px 16px;
+  min-width: 0;
+}
+
+/* ----- Category strip (top of feed) ----- */
+.cat-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.cat-strip::-webkit-scrollbar { display: none; }
+.cat {
+  padding: 7px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.cat:hover { background: var(--surface-2); color: var(--ink); }
+.cat.active { background: var(--ink); color: #fff; font-weight: 600; }
+.cat-strip .more {
+  margin-left: auto;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  display: grid; place-items: center;
+  color: var(--ink-muted);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* ----- Masonry grid (true variable-height; uses CSS columns) ----- */
+.masonry {
+  column-count: 5;
+  column-gap: 12px;
+}
+@media (max-width: 1440px) { .masonry { column-count: 4; } }
+@media (max-width: 1100px) { .masonry { column-count: 3; } }
+@media (max-width: 760px)  { .masonry { column-count: 2; } }
+@media (max-width: 440px)  { .masonry { column-count: 1; } }
+
+.note {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  border-radius: var(--r-xl);
+  background: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+  display: block;
+}
+.note:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+
+.cover {
+  width: 100%;
+  position: relative;
+  background-color: var(--surface-2);
+  /* aspect-ratio is set inline per card to get true masonry feel */
+}
+.cover .badge-live, .cover .badge-vid, .cover .badge-tag {
+  position: absolute;
+  top: 10px;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(6px);
+}
+.cover .badge-live {
+  left: 10px;
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 36, 66, 0.4);
+}
+.cover .badge-live::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+.cover .badge-vid {
+  right: 10px;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-family: var(--font-num);
+}
+.cover .badge-tag {
+  left: 10px;
+  background: rgba(255,255,255,0.92);
+  color: var(--ink);
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+.cover .pages {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-num);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(6px);
+}
+.cover .caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 24px 12px 12px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, transparent 100%);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Cover variants (pure CSS — no external images) */
+.cv-a { background: var(--grad-cover-a); }
+.cv-b { background: var(--grad-cover-b); }
+.cv-c { background: var(--grad-cover-c); }
+.cv-d { background: var(--grad-cover-d); }
+.cv-e { background: var(--grad-cover-e); }
+.cv-f { background: var(--grad-cover-f); }
+.cv-g { background: var(--grad-cover-g); }
+.cv-h { background: var(--grad-cover-h); }
+.cv-i { background: var(--grad-cover-i); }
+.cv-j { background: var(--grad-cover-j); }
+
+.note-body { padding: 8px 12px 12px; }
+.note-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+.note-title .topic { color: var(--red); }
+.author-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.author-row .avatar {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--grad-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  font-family: var(--font-num);
+}
+.author-row .avatar.b { background: linear-gradient(135deg, #87b8ff, #5a7fff); }
+.author-row .avatar.c { background: linear-gradient(135deg, #ffb86b, #ff7a4a); }
+.author-row .avatar.d { background: linear-gradient(135deg, #c89bff, #9c6bff); }
+.author-row .avatar.e { background: linear-gradient(135deg, #6dd0b0, #2fa884); }
+.author-row .name {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-weight: 400;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.author-row .like {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-family: var(--font-num);
+  cursor: pointer;
+}
+.author-row .like svg { width: 14px; height: 14px; }
+.author-row .like.active { color: var(--red); }
+.author-row .like.active svg { fill: var(--red); stroke: var(--red); }
+
+/* ----- Promo / Live featured cards (taller heroes scattered in feed) ----- */
+.note.featured .cover {
+  background: var(--grad-cover-i);
+  position: relative;
+}
+.note.featured .cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(255, 95, 138, 0.32), transparent 60%);
+}
+
+/* ===================== FLOATING ACTIONS ===================== */
+.fab-rail {
+  position: fixed;
+  right: 24px;
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 40;
+}
+.fab {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  display: grid;
+  place-items: center;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: transform .15s ease, color .15s ease;
+}
+.fab:hover { color: var(--red); transform: translateY(-2px); }
+.fab.publish {
+  background: var(--grad-red);
+  color: #fff;
+  box-shadow: var(--shadow-red);
+}
+.fab.publish:hover { color: #fff; }
+
+/* ===================== DESIGN SYSTEM (Part B) ===================== */
+.ds-wrap {
+  background: var(--canvas-tint);
+  border-top: 1px solid var(--border);
+  padding: 80px 28px;
+  margin-top: 80px;
+}
+.ds {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: var(--r-xl);
+  padding: 48px 40px;
+  box-shadow: var(--shadow-1);
+}
+.ds-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.ds-intro .eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--red);
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  margin-bottom: 8px;
+}
+.ds-intro h2 { font-size: 30px; font-weight: 700; letter-spacing: -0.6px; margin: 0 0 8px; color: var(--ink); }
+.ds-intro p { font-size: 14px; color: var(--ink-muted); max-width: 640px; margin: 0; line-height: 1.65; }
+.ds-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.ds-source:hover { border-color: var(--red); color: var(--red); }
+
+.ds-block { margin-top: 40px; }
+.ds-h { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--ink); margin: 0 0 6px; }
+.ds-d { font-size: 13px; color: var(--ink-muted); margin: 0 0 22px; max-width: 700px; line-height: 1.65; }
+.ds-cap {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--red);
+  font-family: var(--font-mono);
+  margin: 26px 0 12px;
+}
+
+.ds-sw { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.sw { border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.sw .chip { height: 76px; }
+.sw .meta { padding: 11px 13px; }
+.sw .nm { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.sw .val { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-muted); margin-top: 2px; }
+
+.ds-tt { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-tt th, .ds-tt td { text-align: left; padding: 13px 14px; border-bottom: 1px solid var(--border-soft); font-size: 13px; vertical-align: middle; }
+.ds-tt tr:last-child td { border-bottom: 0; }
+.ds-tt th {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink-muted);
+  background: var(--surface-2);
+}
+.ds-tt td.tok { font-family: var(--font-mono); font-size: 11.5px; color: var(--red); }
+.ds-tt td.spec { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
+
+.ds-r { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+.r-cell { background: var(--surface); border: 1px solid var(--border); padding: 16px 6px; text-align: center; border-radius: var(--r-md); }
+.r-box { width: 56px; height: 56px; background: var(--grad-red); margin: 0 auto 10px; }
+.r-nm { font-size: 11.5px; color: var(--ink); font-weight: 600; }
+.r-vl { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-c { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.ds-c .box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px; }
+.ds-c .box h5 {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 16px;
+  font-family: var(--font-mono);
+}
+.ds-c .stk { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.input-md {
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  padding: 10px 16px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 100%;
+  outline: none;
+  color: var(--ink);
+}
+.input-md:focus { border-color: var(--red); background: #fff; }
+.tg {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 500;
+}
+.tg-red { background: var(--red-soft); color: var(--red); }
+.tg-pink { background: var(--red); color: #fff; }
+.tg-grey { background: var(--surface-2); color: var(--ink-muted); }
+.tg-grad { background: var(--grad-red); color: #fff; }
+.tg-ink { background: var(--ink); color: #fff; }
+
+/* ===================== SOURCE LINK ===================== */
+.src-link {
+  position: fixed;
+  right: 16px; bottom: 16px;
+  z-index: 50;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 9px 16px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  box-shadow: var(--shadow-1);
+}
+.src-link:hover { color: var(--red); border-color: var(--red); }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1100px) {
+  .app { grid-template-columns: 1fr; }
+  .rail { display: none; }
+  .main { padding: 16px; }
+  .search-wrap { display: none; }
+}
+@media (max-width: 760px) {
+  .top-inner { padding: 10px 14px; gap: 12px; }
+  .brand-tag { display: none; }
+  .ds-wrap { padding: 48px 14px; }
+  .ds { padding: 24px 18px; }
+  .ds-sw { grid-template-columns: repeat(3, 1fr); }
+  .ds-r { grid-template-columns: repeat(4, 1fr); }
+  .ds-c { grid-template-columns: 1fr; }
+  .top-actions .t-link { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============== TOP NAV ============== -->
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="#">
+      <span class="brand-mark" aria-label="小红书">
+        <!-- Stylized little-red-book mark -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="3" width="16" height="18" rx="2" fill="#fff"/>
+          <rect x="4" y="3" width="3" height="18" rx="1" fill="#ffb3c1"/>
+          <path d="M11 8h6M11 11h5M11 14h6" stroke="#ff2442" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="brand-name">小红书</span>
+      <span class="brand-tag">标记我的生活</span>
+    </a>
+
+    <div class="search-wrap">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input placeholder="春日穿搭｜法式碎花裙" />
+        <span class="submit">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <a class="t-link" href="#">业务合作</a>
+      <a class="t-link" href="#">创作中心</a>
+      <button class="btn-pill outline">下载 APP</button>
+      <button class="btn-pill">登 录</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============== APP ============== -->
+<div class="app">
+
+  <!-- ============== LEFT RAIL ============== -->
+  <aside class="rail">
+    <div class="rail-group">
+      <div class="rail-item active">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        发现
+      </div>
+      <div class="rail-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        购物
+      </div>
+      <div class="rail-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>
+        消息
+        <span class="dot">3</span>
+      </div>
+      <div class="rail-item">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        我
+      </div>
+    </div>
+
+    <div class="rail-group">
+      <div class="rail-h">推荐分类</div>
+      <div class="rail-tabs">
+        <span class="rail-tag active">推荐</span>
+        <span class="rail-tag">穿搭</span>
+        <span class="rail-tag">美食</span>
+        <span class="rail-tag">彩妆</span>
+        <span class="rail-tag">影视</span>
+        <span class="rail-tag">职场</span>
+        <span class="rail-tag">情感</span>
+        <span class="rail-tag">家居</span>
+        <span class="rail-tag">旅行</span>
+        <span class="rail-tag">健身</span>
+        <span class="rail-tag">读书</span>
+        <span class="rail-tag">科技数码</span>
+      </div>
+    </div>
+
+    <div class="rail-foot">
+      <a href="#">关于我们</a>
+      <a href="#">用户协议</a>
+      <a href="#">隐私政策</a>
+      <a href="#">侵权投诉</a>
+      <a href="#">联系我们</a>
+      <span class="copy">© 行吟信息科技 (上海) 有限公司</span>
+    </div>
+  </aside>
+
+  <!-- ============== MAIN FEED ============== -->
+  <main class="main">
+
+    <!-- Category strip mirrors the rail tabs (matches XHS responsive duplication) -->
+    <nav class="cat-strip" aria-label="categories">
+      <span class="cat active">推荐</span>
+      <span class="cat">穿搭</span>
+      <span class="cat">美食</span>
+      <span class="cat">彩妆</span>
+      <span class="cat">影视</span>
+      <span class="cat">职场</span>
+      <span class="cat">情感</span>
+      <span class="cat">家居</span>
+      <span class="cat">游戏</span>
+      <span class="cat">旅行</span>
+      <span class="cat">健身</span>
+      <span class="cat">读书</span>
+      <span class="cat">科技数码</span>
+      <span class="cat">摄影</span>
+      <span class="cat">绘画</span>
+      <span class="more" title="更多">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </nav>
+
+    <!-- ============== MASONRY FEED ============== -->
+    <section class="masonry">
+
+      <!-- Card 1 - tall fashion -->
+      <a class="note">
+        <div class="cover cv-a" style="aspect-ratio: 3 / 4.6">
+          <span class="pages">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h14v14H7"/></svg>
+            1/9
+          </span>
+          <div class="caption">春日法式碎花裙搭配</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title"><span class="topic">#初夏 ootd</span> 法式碎花连衣裙 10 套示范｜小个子也能驾驭</div>
+          <div class="author-row">
+            <span class="avatar">薯</span>
+            <span class="name">薯条小宇宙</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>38.6w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2 - food / video -->
+      <a class="note">
+        <div class="cover cv-b" style="aspect-ratio: 3 / 4">
+          <span class="badge-vid">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            03:24
+          </span>
+          <div class="caption">手冲拿铁 在家也能做</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">在家做拿铁 ☕ 这把意式机一年回本｜咖啡入坑指南</div>
+          <div class="author-row">
+            <span class="avatar c">咖</span>
+            <span class="name">咖啡里的猫</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>1.8w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3 - taller home -->
+      <a class="note">
+        <div class="cover cv-c" style="aspect-ratio: 3 / 4.2">
+          <span class="badge-tag">极简家居</span>
+          <div class="caption">100 件断舍离</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">极简生活第 365 天｜我扔掉了哪 100 件东西，省了 1.2w</div>
+          <div class="author-row">
+            <span class="avatar b">极</span>
+            <span class="name">极简少女小蝉</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>24.5w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 4 - books square -->
+      <a class="note">
+        <div class="cover cv-d" style="aspect-ratio: 1 / 1">
+          <div class="caption">《被讨厌的勇气》读后感</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">读完《被讨厌的勇气》的我 终于把朋友圈关了</div>
+          <div class="author-row">
+            <span class="avatar d">读</span>
+            <span class="name">读书 ing 江树</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>9,684</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 5 - travel LIVE -->
+      <a class="note featured">
+        <div class="cover" style="aspect-ratio: 3 / 4.4">
+          <span class="badge-live">LIVE</span>
+          <div class="caption">京都樱花季 · 正在直播</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">京都岚山｜樱花季实地探店 直播带你云赏樱 🌸</div>
+          <div class="author-row">
+            <span class="avatar c">京</span>
+            <span class="name">京都漫步小山</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>5.2w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 6 - fitness -->
+      <a class="note">
+        <div class="cover cv-e" style="aspect-ratio: 3 / 4">
+          <span class="pages">1/6</span>
+          <div class="caption">28 天瑜伽日记</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">28 天瑜伽打卡日记｜从腰酸背痛到能劈一字马</div>
+          <div class="author-row">
+            <span class="avatar e">瑜</span>
+            <span class="name">瑜伽 daily 阿杏</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>3,128</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 7 - makeup -->
+      <a class="note">
+        <div class="cover cv-h" style="aspect-ratio: 3 / 4.3">
+          <span class="badge-tag">妆教</span>
+          <div class="caption">温柔感裸妆教程</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">温柔系裸妆教程｜10 分钟出门，新手也能学会</div>
+          <div class="author-row">
+            <span class="avatar">妆</span>
+            <span class="name">妆下日记 momo</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>12.4w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 8 - tech short -->
+      <a class="note">
+        <div class="cover cv-i" style="aspect-ratio: 3 / 3.4">
+          <span class="badge-vid">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            01:12
+          </span>
+          <div class="caption">Mac mini M4 上手</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">Mac mini M4｜4999 块的小钢炮，真香警告</div>
+          <div class="author-row">
+            <span class="avatar b">数</span>
+            <span class="name">数码薯阿桶</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>6,842</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 9 - food -->
+      <a class="note">
+        <div class="cover cv-f" style="aspect-ratio: 3 / 4">
+          <span class="pages">1/12</span>
+          <div class="caption">一人食食谱 · 七日</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">一人食食谱合集｜不用开火 7 天不重样 还瘦了 2 斤</div>
+          <div class="author-row">
+            <span class="avatar c">一</span>
+            <span class="name">一人食小厨房</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>18.6w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 10 - art square -->
+      <a class="note">
+        <div class="cover cv-j" style="aspect-ratio: 1 / 1.05">
+          <div class="caption">极简素描</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">极简素描入门｜每天一根线条 30 天画出第一幅作品</div>
+          <div class="author-row">
+            <span class="avatar d">绘</span>
+            <span class="name">绘画日记本</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>1,284</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 11 - travel tall -->
+      <a class="note">
+        <div class="cover cv-g" style="aspect-ratio: 3 / 4.6">
+          <span class="badge-tag">攻略</span>
+          <div class="caption">大理 3 天 2 夜慢游</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">大理 3 天 2 夜慢游攻略｜避开人潮 看洱海日落</div>
+          <div class="author-row">
+            <span class="avatar e">大</span>
+            <span class="name">大理风很大</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>9.4w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 12 - psy short -->
+      <a class="note">
+        <div class="cover cv-a" style="aspect-ratio: 3 / 3.2">
+          <div class="caption">情绪日记 03 期</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">坚持写情绪日记的第 100 天 我治好了 emo</div>
+          <div class="author-row">
+            <span class="avatar">情</span>
+            <span class="name">情绪铺子小屋</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>2,866</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 13 - office wear -->
+      <a class="note">
+        <div class="cover cv-c" style="aspect-ratio: 3 / 4">
+          <span class="pages">1/7</span>
+          <div class="caption">通勤穿搭周历</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">170cm 微胖通勤穿搭周历｜显瘦显高 不踩雷</div>
+          <div class="author-row">
+            <span class="avatar c">通</span>
+            <span class="name">通勤穿搭事务所</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>15.2w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 14 - city walk -->
+      <a class="note">
+        <div class="cover cv-e" style="aspect-ratio: 3 / 4.2">
+          <span class="badge-tag">city walk</span>
+          <div class="caption">武康路漫步</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title"><span class="topic">#周末 city walk</span> 上海武康路全攻略｜咖啡店 + 选物店地图</div>
+          <div class="author-row">
+            <span class="avatar e">城</span>
+            <span class="name">城里漫步指南</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>7,326</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 15 -->
+      <a class="note">
+        <div class="cover cv-d" style="aspect-ratio: 3 / 3.4">
+          <div class="caption">手账分享</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">入坑手账两年｜从一笔一画到一本可以反复翻的小书</div>
+          <div class="author-row">
+            <span class="avatar d">手</span>
+            <span class="name">手账食堂</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>3.8w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 16 -->
+      <a class="note">
+        <div class="cover cv-b" style="aspect-ratio: 3 / 4">
+          <span class="badge-vid">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            05:42
+          </span>
+          <div class="caption">日式厨房收纳</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">租房党的日式厨房收纳｜100 块改造出干净台面</div>
+          <div class="author-row">
+            <span class="avatar c">厨</span>
+            <span class="name">厨房收纳师阿粒</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>4,562</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 17 -->
+      <a class="note">
+        <div class="cover cv-h" style="aspect-ratio: 3 / 4.3">
+          <span class="badge-tag">护肤</span>
+          <div class="caption">敏感肌护肤心得</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">敏感肌爆痘自救｜停用 80% 护肤品 反而变好了</div>
+          <div class="author-row">
+            <span class="avatar">护</span>
+            <span class="name">护肤实验薯</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>22.4w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 18 -->
+      <a class="note">
+        <div class="cover cv-f" style="aspect-ratio: 3 / 3.6">
+          <span class="pages">1/8</span>
+          <div class="caption">秋日烤箱菜单</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">秋日烤箱菜单｜8 道一锅出 厨房新手也不会糊</div>
+          <div class="author-row">
+            <span class="avatar c">烤</span>
+            <span class="name">烤箱里的诗</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>5,948</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 19 -->
+      <a class="note">
+        <div class="cover cv-g" style="aspect-ratio: 3 / 4.4">
+          <div class="caption">海岛潜水日记</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">薄荷岛潜水 7 天｜从旱鸭子到拿到 OW 证 全流程花费</div>
+          <div class="author-row">
+            <span class="avatar c">潜</span>
+            <span class="name">潜水的小鱼丸</span>
+            <span class="like active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>11.8w</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 20 -->
+      <a class="note">
+        <div class="cover cv-i" style="aspect-ratio: 3 / 3.2">
+          <span class="badge-tag" style="background:rgba(255,255,255,0.92);color:var(--red)">影视</span>
+          <div class="caption">本周新片速递</div>
+        </div>
+        <div class="note-body">
+          <div class="note-title">本周新片不踩雷｜3 部冷门高分电影 收藏不亏</div>
+          <div class="author-row">
+            <span class="avatar d">影</span>
+            <span class="name">影迷日报</span>
+            <span class="like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>2,184</span>
+          </div>
+        </div>
+      </a>
+
+    </section>
+
+  </main>
+</div>
+
+<!-- ============== FLOATING ACTIONS ============== -->
+<div class="fab-rail">
+  <div class="fab" title="回到顶部">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </div>
+  <div class="fab" title="反馈">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>
+  </div>
+  <div class="fab publish" title="发布笔记">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </div>
+</div>
+
+<!-- ============== DESIGN SYSTEM (Part B) ============== -->
+<div class="ds-wrap">
+  <section class="ds">
+    <div class="ds-intro">
+      <div>
+        <div class="eyebrow">Part B · Design System Reference</div>
+        <h2>小红书 Xiaohongshu · 设计语言</h2>
+        <p>从 <strong>xiaohongshu.com/explore</strong> 的探索页提取的代币 token：品牌红 <span class="mono" style="color:var(--red)">#FF2442</span> 的红色锚点、PingFang SC 字体阶梯、瀑布流 16px 圆角白卡、999px 胶囊按钮 + 输入框、红色 heart icon + 灰色数字、左侧分类胶囊导航。Light-only，不做暗色模式。</p>
+      </div>
+      <a class="ds-source" href="https://www.xiaohongshu.com/explore" target="_blank" rel="noreferrer noopener">View source ↗</a>
+    </div>
+
+    <!-- COLOR -->
+    <div class="ds-block">
+      <h3 class="ds-h">Color · 色彩</h3>
+      <p class="ds-d">围绕一支招牌品牌红 <span class="mono">#FF2442</span> 展开：跟 TikTok 红 (#FE2C55) 不同，小红书的红更偏粉橘、更温暖。粉色 #FF6B9D 作为渐变伴侣，热门用橙色，等级/金币用金色。整体回避蓝紫 — 这是它与微信/微博/抖音的视觉区隔点。</p>
+
+      <div class="ds-cap">Brand</div>
+      <div class="ds-sw">
+        <div class="sw"><div class="chip" style="background:var(--red)"></div><div class="meta"><div class="nm">Brand Red</div><div class="val">#FF2442</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--red-deep)"></div><div class="meta"><div class="nm">Red Deep</div><div class="val">#E91E3A</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--pink)"></div><div class="meta"><div class="nm">Pink</div><div class="val">#FF6B9D</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--red-soft)"></div><div class="meta"><div class="nm">Rose Soft</div><div class="val">#FFE8EC</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--orange)"></div><div class="meta"><div class="nm">Hot Orange</div><div class="val">#FF6B35</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--yellow)"></div><div class="meta"><div class="nm">Coin Gold</div><div class="val">#FFC83D</div></div></div>
+      </div>
+
+      <div class="ds-cap">Neutral · Status</div>
+      <div class="ds-sw">
+        <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="meta"><div class="nm">Ink</div><div class="val">#1A1A1A</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--ink-muted)"></div><div class="meta"><div class="nm">Ink Muted</div><div class="val">#666666</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--ink-dim)"></div><div class="meta"><div class="nm">Ink Dim</div><div class="val">#999999</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--canvas-tint);border-top:1px solid var(--border)"></div><div class="meta"><div class="nm">Canvas Tint</div><div class="val">#F7F7F7</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--border)"></div><div class="meta"><div class="nm">Border</div><div class="val">#EFEFEF</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--green)"></div><div class="meta"><div class="nm">Trend Up</div><div class="val">#00B578</div></div></div>
+      </div>
+
+      <div class="ds-cap">Signature Gradient</div>
+      <div class="ds-sw">
+        <div class="sw"><div class="chip" style="background:var(--grad-red)"></div><div class="meta"><div class="nm">Brand Red→Pink</div><div class="val">135° #FF2442 → #FF6B9D</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--grad-cover-a)"></div><div class="meta"><div class="nm">Cover · Rose</div><div class="val">135° rose lifestyle</div></div></div>
+        <div class="sw"><div class="chip" style="background:var(--grad-cover-c)"></div><div class="meta"><div class="nm">Cover · Sky</div><div class="val">135° sky lifestyle</div></div></div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-block">
+      <h3 class="ds-h">Typography · 字体</h3>
+      <p class="ds-d">中文 PingFang SC 优先，留 HarmonyOS 与 Noto Sans SC 兜底。笔记标题 14px / 500 weight 是绝对的视觉锚点 — 两行截断；正文 13–14 px 一致；hover 状态不放大字号，只抬升卡片。</p>
+      <table class="ds-tt">
+        <thead><tr><th>Token</th><th>Spec</th><th>Sample</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="tok">--brand</td>
+            <td class="spec">PingFang SC · 700 · 21 · -0.5px · red</td>
+            <td><span style="font-size:21px;font-weight:700;color:var(--red);letter-spacing:-0.5px">小红书</span></td>
+          </tr>
+          <tr>
+            <td class="tok">--brand-tag</td>
+            <td class="spec">PingFang SC · 400 · 11.5 · #999</td>
+            <td><span style="font-size:11.5px;color:var(--ink-dim)">标记我的生活</span></td>
+          </tr>
+          <tr>
+            <td class="tok">--cat-tab</td>
+            <td class="spec">PingFang SC · 500/600 · 13.5 / 1.4</td>
+            <td><span style="font-size:13.5px;font-weight:600">穿搭 · 美食 · 旅行</span></td>
+          </tr>
+          <tr>
+            <td class="tok">--note-title</td>
+            <td class="spec">PingFang SC · 500 · 14 / 1.4 · 2-line clamp · #1A1A1A</td>
+            <td><span style="font-size:14px;font-weight:500;line-height:1.4">春日法式碎花裙 10 套搭配示范</span></td>
+          </tr>
+          <tr>
+            <td class="tok">--author</td>
+            <td class="spec">PingFang SC · 400 · 12 · #666</td>
+            <td><span style="font-size:12px;color:var(--ink-muted)">薯条小宇宙</span></td>
+          </tr>
+          <tr>
+            <td class="tok">--like-num</td>
+            <td class="spec">HarmonyOS Sans · 400 · 12 · tnum · #666</td>
+            <td><span class="num" style="font-size:12px;color:var(--ink-muted)">38.6w · 1.8w · 9,684</span></td>
+          </tr>
+          <tr>
+            <td class="tok">--hashtag</td>
+            <td class="spec">PingFang SC · 500 · 14 · #FF2442</td>
+            <td><span style="font-size:14px;font-weight:500;color:var(--red)">#初夏 ootd</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS -->
+    <div class="ds-block">
+      <h3 class="ds-h">Radius · 圆角</h3>
+      <p class="ds-d">笔记卡 <span class="mono">r-xl 16px</span>，按钮 / 输入框 / 胶囊导航 <span class="mono">pill 999px</span>，封面右上角徽章 pill — 「大胶囊 + 16px 卡」是这套设计语言的节奏感来源。</p>
+      <div class="ds-r">
+        <div class="r-cell"><div class="r-box" style="border-radius:4px"></div><div class="r-nm">r-xs</div><div class="r-vl">4px</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:6px"></div><div class="r-nm">r-sm</div><div class="r-vl">6px</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:8px"></div><div class="r-nm">r-md</div><div class="r-vl">8px</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:12px"></div><div class="r-nm">r-lg</div><div class="r-vl">12px</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:16px"></div><div class="r-nm">r-xl ★</div><div class="r-vl">16px</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:20px"></div><div class="r-nm">r-2xl</div><div class="r-vl">20px</div></div>
+        <div class="r-cell"><div class="r-box" style="border-radius:999px"></div><div class="r-nm">pill ★</div><div class="r-vl">999px</div></div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-block">
+      <h3 class="ds-h">Components · 组件</h3>
+      <p class="ds-d">胶囊按钮（红填色 / 描边白底） · 圆形搜索按钮 · 黑色 active 胶囊分类（不是红） · 红心 + 灰色数字（仅在 active 状态下变红）· 实时 LIVE 红徽章带白点闪烁。</p>
+
+      <div class="ds-c">
+        <div class="box">
+          <h5>Buttons · CTA</h5>
+          <div class="stk">
+            <button class="btn-pill">登 录</button>
+            <button class="btn-pill outline">下载 APP</button>
+            <button class="btn-pill" style="background:var(--ink);box-shadow:none">已关注</button>
+            <button class="btn-pill" style="background:var(--surface-2);color:var(--ink);box-shadow:none">取 消</button>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="width:36px;height:36px;border-radius:50%;background:var(--grad-red);box-shadow:var(--shadow-red);display:grid;place-items:center;color:#fff">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+              <span style="font-size:12.5px;color:var(--ink-muted)">悬浮发布 FAB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h5>Search · Input</h5>
+          <div class="stk" style="width:100%">
+            <div class="search" style="width:100%">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input placeholder="春日穿搭｜法式碎花裙" />
+              <span class="submit">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+            <input class="input-md" placeholder="评论一下..." />
+            <input class="input-md" value="法式碎花裙 10 套示范" />
+          </div>
+        </div>
+
+        <div class="box">
+          <h5>Tags · Like · Badges</h5>
+          <div class="stk">
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="tg tg-red">薯条推荐</span>
+              <span class="tg tg-pink">热门</span>
+              <span class="tg tg-grad">优质创作者</span>
+              <span class="tg tg-ink">已关注</span>
+              <span class="tg tg-grey">私密笔记</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="tg tg-red" style="font-weight:500">#初夏 ootd</span>
+              <span class="tg tg-red" style="font-weight:500">#一人食</span>
+              <span class="tg tg-red" style="font-weight:500">#city walk</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--ink-muted)">
+              <span style="display:inline-flex;align-items:center;gap:4px">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff2442" stroke="#ff2442" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+                <span class="num" style="color:var(--red)">38.6w</span>
+              </span>
+              <span style="display:inline-flex;align-items:center;gap:4px">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+                <span class="num">9,684</span>
+              </span>
+              <span class="tg" style="background:var(--red);color:#fff;font-size:10.5px;font-weight:600;display:inline-flex;align-items:center;gap:4px">
+                <span style="width:6px;height:6px;background:#fff;border-radius:50%"></span>
+                LIVE
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<a class="src-link" href="https://www.xiaohongshu.com/explore" target="_blank" rel="noreferrer noopener">
+  View source ↗ xiaohongshu.com/explore
+</a>
+
+</body>
+</html>

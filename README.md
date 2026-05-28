@@ -1,14 +1,14 @@
 <div align="center">
 
 <a href="https://code.jiangshu.ai/awesome-design-html/">
-  <img src=".github/assets/banner.svg" alt="Awesome Design HTML — 114 brand-themed HTML designs as a Claude Code skill" width="100%" />
+  <img src=".github/assets/banner.svg" alt="Awesome Design HTML — 115 brand-themed HTML designs as a Claude Code skill" width="100%" />
 </a>
 
 <a href="README.md"><img src="https://img.shields.io/badge/Read_in-English-2962ff?style=for-the-badge&logo=googletranslate&logoColor=white" alt="English"></a>
 <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/阅读-中文-c92a2a?style=for-the-badge&logo=googletranslate&logoColor=white" alt="中文"></a>
 
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-242830?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="License MIT"></a>
-<a href="#-web-library--92-marketing-pages"><img src="https://img.shields.io/badge/Web-92_brands-3ECF8E?style=flat-square&logo=html5&logoColor=white" alt="92 web brands"></a>
+<a href="#-web-library--93-marketing-pages"><img src="https://img.shields.io/badge/Web-93_brands-3ECF8E?style=flat-square&logo=html5&logoColor=white" alt="93 web brands"></a>
 <a href="#-ios-library--22-app-mockups"><img src="https://img.shields.io/badge/iOS-22_apps-007AFF?style=flat-square&logo=apple&logoColor=white" alt="22 iOS apps"></a>
 <a href="https://docs.claude.com/claude-code"><img src="https://img.shields.io/badge/Claude_Code-skill-d97757?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code skill"></a>
 <a href="https://github.com/yzfly/awesome-design-html/stargazers"><img src="https://img.shields.io/github/stars/yzfly/awesome-design-html?style=flat-square&logo=github&color=fbca04&logoColor=white" alt="GitHub Stars"></a>
@@ -21,7 +21,7 @@
 &nbsp;·&nbsp;
 <b><a href="#-why-html-not-markdown">💡 Why HTML?</a></b>
 &nbsp;·&nbsp;
-<b><a href="#-featured-demos-one-click-open">⭐ Browse 114 demos</a></b>
+<b><a href="#-featured-demos-one-click-open">⭐ Browse 115 demos</a></b>
 </p>
 
 </div>
@@ -71,7 +71,7 @@ A quiet shift is happening in how AI projects document themselves: **away from M
 - **AI reads HTML natively.** Modern coding agents (Claude Code, Cursor, Copilot) parse an HTML file directly. They don't need a translation layer.
 - **The artifact *is* the documentation.** No more "spec drift" between docs and code — because there's no separate doc.
 
-**This skill is built on that thesis.** Each of the 114 references is a self-describing HTML page. You don't read about Stripe's mesh gradient — you open Stripe's HTML and the gradient *is there*. Claude reads the same file and applies the same tokens.
+**This skill is built on that thesis.** Each of the 115 references is a self-describing HTML page. You don't read about Stripe's mesh gradient — you open Stripe's HTML and the gradient *is there*. Claude reads the same file and applies the same tokens.
 
 That's why this project is `awesome-design-html`, not `awesome-design-md`.
 
@@ -93,7 +93,7 @@ That's why this project is `awesome-design-html`, not `awesome-design-md`.
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.opencode.html"><img src=".github/assets/thumbnails/opencode.webp" width="100%" alt="OpenCode"/><br/><sub><b>OpenCode</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.mistral.html"><img src=".github/assets/thumbnails/mistral.webp" width="100%" alt="Mistral"/><br/><sub><b>Mistral</b></sub></a></td>
-<td align="center" colspan="2"><sub>+ Cohere · ElevenLabs · Lovable · MiniMax · Ollama · Runway · Together · VoltAgent · xAI — <a href="#-web-library--92-marketing-pages">see Web library</a></sub></td>
+<td align="center" colspan="2"><sub>+ Cohere · ElevenLabs · Lovable · MiniMax · Ollama · Runway · Together · VoltAgent · xAI — <a href="#-web-library--93-marketing-pages">see Web library</a></sub></td>
 </tr>
 </table>
 
@@ -125,7 +125,7 @@ That's why this project is `awesome-design-html`, not `awesome-design-md`.
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.figma.html"><img src=".github/assets/thumbnails/figma.webp" width="100%" alt="Figma"/><br/><sub><b>Figma</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.airbnb.html"><img src=".github/assets/thumbnails/airbnb.webp" width="100%" alt="Airbnb"/><br/><sub><b>Airbnb</b></sub></a></td>
-<td align="center" colspan="2"><sub>+ Airtable · Cal.com · Intercom · Miro · Slack · Superhuman · Webflow · Zapier · Clay — <a href="#-web-library--92-marketing-pages">see Web library</a></sub></td>
+<td align="center" colspan="2"><sub>+ Airtable · Cal.com · Intercom · Miro · Slack · Superhuman · Webflow · Zapier · Clay — <a href="#-web-library--93-marketing-pages">see Web library</a></sub></td>
 </tr>
 </table>
 
@@ -141,11 +141,11 @@ That's why this project is `awesome-design-html`, not `awesome-design-md`.
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.bugatti.html"><img src=".github/assets/thumbnails/bugatti.webp" width="100%" alt="Bugatti"/><br/><sub><b>Bugatti</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.lamborghini.html"><img src=".github/assets/thumbnails/lamborghini.webp" width="100%" alt="Lamborghini"/><br/><sub><b>Lamborghini</b></sub></a></td>
-<td align="center" colspan="2"><sub>+ BMW · Renault — <a href="#-web-library--92-marketing-pages">see Web library</a></sub></td>
+<td align="center" colspan="2"><sub>+ BMW · Renault — <a href="#-web-library--93-marketing-pages">see Web library</a></sub></td>
 </tr>
 </table>
 
-## 🇨🇳 China showcase — 20 new brands (2026)
+## 🇨🇳 China showcase — 22 new brands (2026)
 
 The first comprehensive set of **China tech brand design references** for AI coding agents. Each demo is brand-faithful (real hex values, real typography, real layouts) and ships with a full Part B design-system reference.
 
@@ -199,13 +199,15 @@ The first comprehensive set of **China tech brand design references** for AI cod
 <td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.bilibili.html"><img src=".github/assets/thumbnails/bilibili.webp" width="100%" alt="Bilibili"/><br/><sub><b>哔哩哔哩 Bilibili</b></sub></a></td>
 <td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.mihoyo.html"><img src=".github/assets/thumbnails/mihoyo.webp" width="100%" alt="miHoYo"/><br/><sub><b>米哈游 miHoYo</b></sub></a></td>
 <td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi.html"><img src=".github/assets/thumbnails/xiaomi.webp" width="100%" alt="Xiaomi"/><br/><sub><b>小米 Xiaomi</b></sub></a></td>
-<td width="25%"></td>
+<td width="25%" align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaohongshu.html"><sub><b>小红书 Xiaohongshu</b><br/><i>Masonry feed</i></sub></a></td>
 </tr>
 </table>
 
 ---
 
-## 📄 Web library — 92 marketing pages
+## 📄 Web library — 93 marketing pages
+
+**🇨🇳 China tier** — [飞书 Feishu](https://code.jiangshu.ai/awesome-design-html/assets/web/design.feishu.html) · [抖音 Douyin](https://code.jiangshu.ai/awesome-design-html/assets/web/design.douyin.html) · [豆包 Doubao](https://code.jiangshu.ai/awesome-design-html/assets/web/design.doubao.html) · [阿里云 Aliyun](https://code.jiangshu.ai/awesome-design-html/assets/web/design.aliyun.html) · [支付宝 Alipay](https://code.jiangshu.ai/awesome-design-html/assets/web/design.alipay.html) · [钉钉 DingTalk](https://code.jiangshu.ai/awesome-design-html/assets/web/design.dingtalk.html) · [语雀 Yuque](https://code.jiangshu.ai/awesome-design-html/assets/web/design.yuque.html) · [腾讯云 Tencent Cloud](https://code.jiangshu.ai/awesome-design-html/assets/web/design.tencent-cloud.html) · [微信 WeChat](https://code.jiangshu.ai/awesome-design-html/assets/web/design.wechat.html) · [DeepSeek](https://code.jiangshu.ai/awesome-design-html/assets/web/design.deepseek.html) · [Kimi](https://code.jiangshu.ai/awesome-design-html/assets/web/design.kimi.html) · [文心一言 Wenxin](https://code.jiangshu.ai/awesome-design-html/assets/web/design.wenxin.html) · [通义千问 Qwen](https://code.jiangshu.ai/awesome-design-html/assets/web/design.qwen.html) · [Qwen Cloud](https://code.jiangshu.ai/awesome-design-html/assets/web/design.qwencloud.html) · [小米汽车 Xiaomi EV](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi-ev.html) · [蔚来 NIO](https://code.jiangshu.ai/awesome-design-html/assets/web/design.nio.html) · [理想 Li Auto](https://code.jiangshu.ai/awesome-design-html/assets/web/design.li-auto.html) · [极氪 ZEEKR](https://code.jiangshu.ai/awesome-design-html/assets/web/design.zeekr.html) · [哔哩哔哩 Bilibili](https://code.jiangshu.ai/awesome-design-html/assets/web/design.bilibili.html) · [米哈游 miHoYo](https://code.jiangshu.ai/awesome-design-html/assets/web/design.mihoyo.html) · [小米 Xiaomi](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi.html) · [小红书 Xiaohongshu](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaohongshu.html)
 
 **Productivity / SaaS** — [Airtable](https://code.jiangshu.ai/awesome-design-html/assets/web/design.airtable.html) · [Cal.com](https://code.jiangshu.ai/awesome-design-html/assets/web/design.cal.html) · [Intercom](https://code.jiangshu.ai/awesome-design-html/assets/web/design.intercom.html) · [Miro](https://code.jiangshu.ai/awesome-design-html/assets/web/design.miro.html) · [Notion](https://code.jiangshu.ai/awesome-design-html/assets/web/design.notion.html) · [Slack](https://code.jiangshu.ai/awesome-design-html/assets/web/design.slack.html) · [Superhuman](https://code.jiangshu.ai/awesome-design-html/assets/web/design.superhuman.html) · [Webflow](https://code.jiangshu.ai/awesome-design-html/assets/web/design.webflow.html) · [Zapier](https://code.jiangshu.ai/awesome-design-html/assets/web/design.zapier.html) · [Clay](https://code.jiangshu.ai/awesome-design-html/assets/web/design.clay.html)
 
@@ -255,7 +257,7 @@ awesome-design-html/
 ├── LICENSE          # MIT
 ├── index.html       # gallery landing page
 └── assets/
-    ├── web/         # 92 marketing-page HTMLs
+    ├── web/         # 93 marketing-page HTMLs
     └── ios/         # 22 iOS app mockup HTMLs
 ```
 
