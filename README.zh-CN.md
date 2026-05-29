@@ -21,7 +21,7 @@
 &nbsp;·&nbsp;
 <b><a href="#-为什么是-html不是-markdown">💡 为什么 HTML?</a></b>
 &nbsp;·&nbsp;
-<b><a href="#-精选-demo一键打开">⭐ 浏览 115 个</a></b>
+<b><a href="#-精选-demo--直接看不用脑补">⭐ 浏览 115 个</a></b>
 </p>
 
 </div>
@@ -109,7 +109,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.spotify-ios.html"><img src=".github/assets/thumbnails/spotify-ios.webp" width="100%" alt="Spotify iOS"/><br/><sub><b>Spotify iOS</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/ios/design.whatsapp-ios.html"><img src=".github/assets/thumbnails/whatsapp-ios.webp" width="100%" alt="WhatsApp"/><br/><sub><b>WhatsApp</b></sub></a></td>
-<td align="center" colspan="2"><sub>更多 iOS: Apple Music · Discord · DoorDash · Hinge · Netflix · Notion · Robinhood · Starbucks · Telegram · Threads · TikTok · Uber · X / Twitter · YouTube — <a href="#-ios-库--22-个-app-mockup">见 iOS 库</a></sub></td>
+<td align="center" colspan="2"><sub>更多 iOS: Apple Music · Discord · DoorDash · Hinge · Netflix · Notion · Robinhood · Starbucks · Telegram · Threads · TikTok · Uber · X / Twitter · YouTube — <a href="#-ios-库--22-个-app-仿真">见 iOS 库</a></sub></td>
 </tr>
 </table>
 

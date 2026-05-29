@@ -21,7 +21,7 @@
 &nbsp;·&nbsp;
 <b><a href="#-why-html-not-markdown">💡 Why HTML?</a></b>
 &nbsp;·&nbsp;
-<b><a href="#-featured-demos-one-click-open">⭐ Browse 115 demos</a></b>
+<b><a href="#-featured-demos--see-them-dont-just-read-them">⭐ Browse 115 demos</a></b>
 </p>
 
 </div>

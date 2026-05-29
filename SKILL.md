@@ -169,7 +169,7 @@ A few slugs were normalized:
 
 - The user is asking for a generic layout pattern (e.g., "two-column dashboard") with no brand reference — use general design judgment instead.
 - The user has their own design system / brand guidelines that should override these references.
-- The user is asking about a brand NOT in the 113-brand list — say so explicitly rather than guess.
+- The user is asking about a brand NOT in the 115-brand list — say so explicitly rather than guess.
 
 ## Source attribution
 
