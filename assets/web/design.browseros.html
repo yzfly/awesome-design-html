@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BrowserOS — Design System Reference</title>
+<meta name="description" content="BrowserOS (browseros.com) design language study: an open-source agentic browser. Warm off-white cream canvas, single terracotta-orange accent, friendly dog mascot, rounded-rectangle buttons (not pill), grid-paper new-tab hero, BYO-model provider grid, and a settings UI engineered to feel un-intimidating. Marketing demo + design system reference." />
+<meta property="og:title" content="BrowserOS — Design System Reference" />
+<meta property="og:description" content="A self-contained tribute to BrowserOS's visual language: cream canvas, one terracotta accent, a white poodle mascot, and the warmest settings panel in browser-land. 色 / 形 / 神 extraction included." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* BrowserOS signature: warm cream canvas + warm-black ink + ONE terracotta accent + a dog */
+  --canvas: #faf7f2;
+  --canvas-tint: #f5f1ea;
+  --surface-1: #f1ece3;
+  --surface-2: #e9e2d6;
+  --card: #ffffff;
+
+  --ink: #211b15;
+  --ink-soft: #3d352c;
+  --ink-muted: #786c5d;
+  --ink-dim: #a99c8b;
+
+  --border: #ece5d9;
+  --border-soft: #f3ede3;
+  --line: #e0d8ca;
+
+  /* The one accent. Everything chromatic is a shade of this. */
+  --orange: #e25b2a;          /* primary CTA fill, send button */
+  --orange-strong: #ea5616;   /* logo square, hottest hits */
+  --orange-deep: #c9491c;     /* hover / pressed */
+  --orange-soft: rgba(226, 91, 42, 0.10);
+  --orange-tint: #fbeae0;     /* NEW pill / badge background */
+
+  /* Warm, low, large-radius shadows — never cold gray */
+  --shadow-soft: 0 1px 2px rgba(80, 50, 20, 0.05);
+  --shadow-card: 0 18px 40px -16px rgba(80, 50, 20, 0.12);
+  --shadow-pop: 0 28px 60px -20px rgba(80, 50, 20, 0.20);
+  --shadow-orange: 0 10px 24px -8px rgba(226, 91, 42, 0.45);
+
+  /* Type */
+  --font-ui: "Inter", "Noto Sans SC", -apple-system, "PingFang SC", "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Radius — BrowserOS rounds generously but stops short of full pills on buttons */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-2xl: 30px;
+  --r-pill: 999px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+img, svg { display: block; }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.muted { color: var(--ink-muted); }
+.mono { font-family: var(--font-mono); }
+.accent { color: var(--orange); }
+
+/* ---------- Dog mark ---------- */
+.dog-square {
+  border-radius: 26%;
+  background: linear-gradient(160deg, #f1703f 0%, var(--orange-strong) 60%, #d8480f 100%);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-orange);
+  flex: none;
+}
+.dog-square svg { width: 64%; height: 64%; }
+
+/* ---------- Announcement ---------- */
+.ann {
+  background: var(--orange-tint);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  padding: 9px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.ann-pill {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  background: var(--orange);
+  color: #fff;
+  border-radius: var(--r-pill);
+  padding: 2px 9px;
+}
+.ann a { color: var(--orange-deep); font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+
+/* ---------- Nav ---------- */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(250, 247, 242, 0.82);
+  backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav { display: flex; align-items: center; gap: 22px; padding: 13px 24px; max-width: 1240px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.3px; color: var(--ink); }
+.brand .dog-square { width: 30px; height: 30px; }
+.nav-links { display: flex; align-items: center; gap: 2px; margin-left: 18px; }
+.nav-link { padding: 8px 13px; font-size: 14px; font-weight: 500; color: var(--ink-soft); border-radius: var(--r-md); }
+.nav-link:hover { color: var(--orange-deep); background: var(--orange-soft); }
+.nav-cta { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.gh { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--ink-soft); padding: 8px 12px; border-radius: var(--r-md); }
+.gh:hover { background: var(--surface-1); }
+.gh .star { color: var(--ink-muted); font-weight: 500; }
+
+/* ---------- Buttons (rounded-rect, NOT pill) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit; font-weight: 600; border: 0; cursor: pointer;
+  border-radius: var(--r-md);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+.btn-primary { background: var(--orange); color: #fff; padding: 11px 20px; font-size: 14px; box-shadow: var(--shadow-orange); }
+.btn-primary:hover { background: var(--orange-deep); transform: translateY(-1px); }
+.btn-dark { background: var(--ink); color: #fff; padding: 11px 20px; font-size: 14px; }
+.btn-dark:hover { transform: translateY(-1px); box-shadow: var(--shadow-card); }
+.btn-line { background: var(--card); color: var(--ink); border: 1px solid var(--line); padding: 10px 20px; font-size: 14px; }
+.btn-line:hover { border-color: var(--orange); color: var(--orange-deep); }
+.btn-soft { background: var(--surface-1); color: var(--ink); padding: 11px 20px; font-size: 14px; }
+.btn-soft:hover { background: var(--surface-2); }
+.btn-sm { padding: 7px 14px; font-size: 13px; }
+.btn-block { width: 100%; }
+
+/* ---------- Hero (the new-tab recreation) ---------- */
+.hero { position: relative; padding: 30px 0 86px; overflow: hidden; }
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 38%, #000 35%, transparent 78%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 38%, #000 35%, transparent 78%);
+  opacity: 0.55;
+  z-index: 0;
+}
+.hero-inner { position: relative; z-index: 1; text-align: center; max-width: 760px; margin: 0 auto; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-pill); padding: 6px 14px 6px 6px;
+  font-size: 13px; font-weight: 500; color: var(--ink-soft);
+  box-shadow: var(--shadow-soft); margin-bottom: 30px;
+}
+.hero-badge .tag { background: var(--orange-tint); color: var(--orange-deep); font-weight: 700; font-size: 11px; padding: 2px 9px; border-radius: var(--r-pill); }
+.hero .dog-hero { width: 84px; height: 84px; margin: 0 auto 26px; }
+.hero h1 {
+  font-size: 60px; font-weight: 800; letter-spacing: -2px; line-height: 1.04;
+  margin: 0 0 18px; color: var(--ink);
+}
+.hero h1 .pen { color: var(--orange); }
+.hero h1 .caret {
+  display: inline-block; width: 5px; height: 50px; background: var(--orange);
+  border-radius: 2px; margin-left: 4px; vertical-align: -7px;
+  animation: blink 1.05s steps(2) infinite;
+}
+@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+.hero-lead { font-size: 19px; line-height: 1.5; color: var(--ink-muted); max-width: 540px; margin: 0 auto 34px; }
+
+/* the omni search bar — the soul of the new tab */
+.omni {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r-xl); box-shadow: var(--shadow-card);
+  max-width: 620px; margin: 0 auto 16px; overflow: hidden; text-align: left;
+}
+.omni-top { display: flex; align-items: center; gap: 12px; padding: 16px 16px 16px 20px; }
+.omni-top .mag { color: var(--ink-dim); flex: none; }
+.omni-top .ph { flex: 1; font-size: 16px; color: var(--ink-dim); }
+.omni-top .mic { color: var(--ink-dim); cursor: pointer; }
+.omni-send { width: 40px; height: 40px; border-radius: var(--r-md); background: var(--orange); display: grid; place-items: center; color: #fff; flex: none; box-shadow: var(--shadow-orange); }
+.omni-bar { display: flex; align-items: center; gap: 18px; padding: 11px 18px; border-top: 1px solid var(--border-soft); background: var(--canvas-tint); }
+.omni-chip { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+.omni-chip svg { color: var(--ink-muted); }
+.omni-chip.hot { color: var(--orange-deep); font-weight: 600; margin-left: auto; }
+.omni-chip.hot .new { background: var(--orange); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: var(--r-pill); }
+
+.hero-sites { display: flex; align-items: flex-start; justify-content: center; gap: 14px; margin-top: 40px; }
+.site { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 78px; }
+.site .ico { width: 52px; height: 52px; border-radius: var(--r-lg); background: var(--card); border: 1px solid var(--border); display: grid; place-items: center; box-shadow: var(--shadow-soft); font-weight: 700; color: var(--ink-soft); }
+.site .lbl { font-size: 11.5px; color: var(--ink-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 78px; }
+
+/* ---------- Stat strip ---------- */
+.stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--canvas-tint); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat { padding: 30px 24px; text-align: center; border-left: 1px solid var(--border); }
+.stat:first-child { border-left: 0; }
+.stat .num { font-size: 34px; font-weight: 800; letter-spacing: -1px; color: var(--ink); line-height: 1; margin-bottom: 7px; font-feature-settings: "tnum"; }
+.stat .num .u { color: var(--orange); }
+.stat .lbl { font-size: 13px; color: var(--ink-muted); }
+
+/* ---------- Section heads ---------- */
+.section { padding: 92px 0; }
+.eyebrow { font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 14px; }
+.section-head { text-align: center; margin-bottom: 52px; }
+.section-head h2 { font-size: 42px; font-weight: 800; letter-spacing: -1.2px; line-height: 1.1; margin: 0 0 14px; color: var(--ink); }
+.section-head h2 .o { color: var(--orange); }
+.section-head .lead { font-size: 17px; color: var(--ink-muted); max-width: 560px; margin: 0 auto; line-height: 1.55; }
+
+/* ---------- Provider grid ---------- */
+.prov-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.prov-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 16px 18px; display: flex; align-items: center; gap: 14px; position: relative;
+  transition: border-color .18s, transform .18s, box-shadow .18s;
+}
+.prov-card:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.prov-card.feat { border-color: var(--orange); background: linear-gradient(180deg, #fff, var(--orange-soft)); }
+.prov-ico { width: 40px; height: 40px; border-radius: var(--r-md); background: var(--surface-1); display: grid; place-items: center; flex: none; font-family: var(--font-mono); font-weight: 700; font-size: 15px; color: var(--ink-soft); }
+.prov-name { font-size: 15px; font-weight: 600; color: var(--ink); flex: 1; }
+.prov-use { font-size: 12px; font-weight: 700; color: var(--orange-deep); border: 1px solid var(--orange); border-radius: var(--r-sm); padding: 5px 12px; background: #fff; }
+.prov-new { position: absolute; top: -8px; left: 14px; background: var(--orange); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.4px; padding: 2px 8px; border-radius: var(--r-pill); }
+
+/* ---------- Settings window mock ---------- */
+.win {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-2xl);
+  box-shadow: var(--shadow-pop); overflow: hidden; display: grid; grid-template-columns: 248px 1fr;
+}
+.win-side { background: var(--canvas-tint); border-right: 1px solid var(--border); padding: 22px 16px; }
+.win-side .back { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 22px; }
+.win-side .grp { font-size: 10.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: var(--ink-dim); margin: 18px 0 8px; padding-left: 10px; }
+.side-item { display: flex; align-items: center; gap: 11px; padding: 9px 10px; border-radius: var(--r-md); font-size: 14px; font-weight: 500; color: var(--ink-soft); margin-bottom: 2px; }
+.side-item svg { color: var(--ink-muted); flex: none; }
+.side-item.active { background: var(--surface-2); color: var(--ink); font-weight: 600; }
+.side-item.active svg { color: var(--orange); }
+.win-main { padding: 30px 32px; background: var(--card); }
+.panel-head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.panel-head .dog-square { width: 44px; height: 44px; }
+.panel-head h3 { font-size: 22px; font-weight: 700; margin: 0; letter-spacing: -0.4px; }
+.panel-head p { font-size: 13px; color: var(--ink-muted); margin: 2px 0 0; }
+.panel-card { border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; margin-top: 18px; background: var(--card); }
+.field-row { display: flex; align-items: center; gap: 12px; justify-content: center; }
+.field-lbl { font-size: 14px; color: var(--ink-soft); font-weight: 500; }
+.select { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); padding: 9px 14px; font-size: 14px; font-weight: 600; color: var(--ink); min-width: 220px; }
+.select .ch { margin-left: auto; color: var(--ink-dim); }
+.add-prov { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--orange); color: var(--orange-deep); background: #fff; border-radius: var(--r-md); padding: 9px 16px; font-size: 14px; font-weight: 600; }
+.mcp-banner { display: flex; align-items: center; gap: 14px; border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px 18px; margin-top: 16px; background: var(--canvas-tint); }
+.mcp-banner .ic { width: 40px; height: 40px; border-radius: var(--r-md); background: var(--orange-tint); display: grid; place-items: center; color: var(--orange-deep); flex: none; }
+.mcp-banner .tx { flex: 1; }
+.mcp-banner .tx b { font-size: 14px; color: var(--ink); }
+.mcp-banner .tx b .cnt { color: var(--orange); font-weight: 700; }
+.mcp-banner .tx span { display: block; font-size: 12.5px; color: var(--ink-muted); margin-top: 2px; }
+.mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+.mini { display: flex; align-items: center; gap: 9px; border: 1px solid var(--border); border-radius: var(--r-md); padding: 10px 12px; }
+.mini .d { width: 26px; height: 26px; border-radius: 7px; background: var(--surface-1); display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--ink-soft); flex: none; }
+.mini .n { font-size: 13px; font-weight: 600; flex: 1; }
+.mini .u { font-size: 11px; font-weight: 700; color: var(--orange-deep); }
+
+/* ---------- Feature rows ---------- */
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.frow + .frow { margin-top: 88px; }
+.frow.rev .ftext { order: 2; }
+.ftext .eyebrow { margin-bottom: 12px; }
+.ftext h3 { font-size: 30px; font-weight: 800; letter-spacing: -0.8px; margin: 0 0 14px; line-height: 1.12; }
+.ftext p { font-size: 16px; color: var(--ink-muted); line-height: 1.6; margin: 0 0 18px; }
+.flist { list-style: none; padding: 0; margin: 0 0 22px; display: flex; flex-direction: column; gap: 11px; }
+.flist li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; color: var(--ink-soft); }
+.flist .ck { width: 20px; height: 20px; border-radius: 50%; background: var(--orange-tint); color: var(--orange-deep); display: grid; place-items: center; flex: none; margin-top: 1px; }
+.fart { border-radius: var(--r-2xl); border: 1px solid var(--border); background: var(--canvas-tint); padding: 28px; min-height: 320px; position: relative; overflow: hidden; box-shadow: var(--shadow-card); }
+
+/* agent step card */
+.agent-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-soft); }
+.agent-card .row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--border); font-size: 13px; color: var(--ink-soft); }
+.agent-card .row:last-child { border-bottom: 0; }
+.agent-card .row .dot { width: 18px; height: 18px; border-radius: 50%; flex: none; display: grid; place-items: center; }
+.agent-card .row .dot.done { background: var(--orange-tint); color: var(--orange-deep); }
+.agent-card .row .dot.run { border: 2px solid var(--orange); border-top-color: transparent; animation: spin 0.9s linear infinite; }
+.agent-card .row .dot.wait { background: var(--surface-2); }
+@keyframes spin { to { transform: rotate(360deg); } }
+.agent-card .row .t { flex: 1; }
+.agent-card .row .ms { font-family: var(--font-mono); font-size: 11px; color: var(--ink-dim); }
+.agent-prompt { display: flex; align-items: center; gap: 10px; background: var(--surface-1); border-radius: var(--r-md); padding: 11px 14px; font-size: 13px; color: var(--ink); margin-bottom: 14px; }
+.agent-prompt .gt { color: var(--orange); font-weight: 800; font-family: var(--font-mono); }
+
+/* mcp tool chips */
+.tool-cloud { display: flex; flex-wrap: wrap; gap: 9px; align-content: flex-start; }
+.tool-chip { display: inline-flex; align-items: center; gap: 7px; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-pill); padding: 7px 13px; font-size: 13px; font-weight: 500; color: var(--ink-soft); box-shadow: var(--shadow-soft); }
+.tool-chip .gd { width: 8px; height: 8px; border-radius: 2px; background: var(--orange); flex: none; }
+
+/* privacy lock art */
+.lock-art { display: grid; place-items: center; gap: 16px; height: 100%; }
+.lock-badge { width: 96px; height: 96px; border-radius: var(--r-xl); background: linear-gradient(160deg, #fff, var(--surface-1)); border: 1px solid var(--border); display: grid; place-items: center; color: var(--orange-deep); box-shadow: var(--shadow-card); }
+.lock-line { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+.lock-line .ok { color: var(--orange-deep); }
+
+/* ---------- CTA band ---------- */
+.cta-band { background: linear-gradient(170deg, #fff 0%, var(--orange-tint) 100%); border: 1px solid var(--border); border-radius: var(--r-2xl); padding: 84px 40px; text-align: center; position: relative; overflow: hidden; }
+.cta-band .dog-square { width: 64px; height: 64px; margin: 0 auto 24px; }
+.cta-band h2 { font-size: 52px; font-weight: 800; letter-spacing: -1.6px; line-height: 1.05; margin: 0 0 16px; color: var(--ink); }
+.cta-band h2 .o { color: var(--orange); }
+.cta-band p { font-size: 18px; color: var(--ink-muted); margin: 0 auto 30px; max-width: 480px; }
+.cta-actions { display: inline-flex; gap: 12px; }
+
+/* ---------- Footer ---------- */
+footer { padding: 60px 0 34px; background: var(--canvas-tint); border-top: 1px solid var(--border); }
+.foot-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 44px; margin-bottom: 40px; }
+.foot-brand p { color: var(--ink-muted); font-size: 13px; line-height: 1.65; margin: 14px 0 0; max-width: 280px; }
+.foot-col h4 { font-size: 13px; font-weight: 700; color: var(--ink); margin: 0 0 15px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); }
+.foot-col li a:hover { color: var(--orange-deep); }
+.foot-bottom { display: flex; justify-content: space-between; padding-top: 22px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-muted); gap: 16px; flex-wrap: wrap; }
+
+/* ---------- Design system (Part B) ---------- */
+.ds-section { background: var(--canvas-tint); padding: 96px 0; border-top: 1px solid var(--border); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 50px; }
+.ds-intro .eyebrow { margin-bottom: 12px; }
+.ds-intro h2 { font-size: 36px; font-weight: 800; letter-spacing: -1.1px; line-height: 1.14; margin: 0 0 12px; color: var(--ink); }
+.ds-intro p { font-size: 14px; color: var(--ink-muted); max-width: 640px; line-height: 1.7; margin: 0; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); font-size: 12px; font-weight: 600; color: var(--ink-soft); white-space: nowrap; }
+.ds-source:hover { border-color: var(--orange); color: var(--orange-deep); }
+
+/* 色形神 triad */
+.triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+.triad-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; }
+.triad-card .gly { font-size: 30px; font-weight: 800; color: var(--orange); line-height: 1; margin-bottom: 12px; font-family: var(--font-ui); }
+.triad-card h4 { font-size: 15px; font-weight: 700; margin: 0 0 8px; color: var(--ink); }
+.triad-card p { font-size: 13px; color: var(--ink-muted); line-height: 1.6; margin: 0; }
+.triad-card .pin { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 700; color: var(--orange-deep); background: var(--orange-tint); border-radius: var(--r-pill); padding: 3px 10px; }
+
+.ds-block { margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--border); }
+.ds-heading { font-size: 23px; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.4px; color: var(--ink); }
+.ds-desc { font-size: 14px; color: var(--ink-muted); margin: 0 0 24px; line-height: 1.65; max-width: 660px; }
+.ds-caption { font-size: 11px; font-weight: 700; color: var(--orange); margin: 26px 0 12px; letter-spacing: 0.6px; text-transform: uppercase; }
+.ds-swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+.ds-sw { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 70px; }
+.ds-sw .meta { padding: 11px 13px; }
+.ds-sw .name { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 11px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-type-table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border-soft); font-size: 13.5px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-muted); background: var(--surface-1); }
+.ds-type-table td { color: var(--ink-soft); }
+.ds-type-table td.token { font-family: var(--font-mono); font-size: 11.5px; color: var(--orange-deep); }
+.ds-type-table td.sample { color: var(--ink); }
+
+.ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.ds-radius-cell { background: var(--card); border: 1px solid var(--border); padding: 18px 8px; text-align: center; border-radius: var(--r-md); }
+.ds-radius-box { width: 54px; height: 54px; background: linear-gradient(160deg, #f1703f, var(--orange-strong)); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 11.5px; font-weight: 600; color: var(--ink); }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; }
+.ds-card h5 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.input-rr { background: var(--surface-1); border: 1.5px solid transparent; padding: 11px 16px; border-radius: var(--r-md); font-size: 13.5px; font-family: inherit; color: var(--ink); width: 100%; outline: none; }
+.input-rr:focus { border-color: var(--orange); background: var(--card); }
+.tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: var(--r-pill); font-size: 12px; font-weight: 700; }
+.tag-solid { background: var(--orange); color: #fff; }
+.tag-soft { background: var(--orange-tint); color: var(--orange-deep); }
+.tag-gray { background: var(--surface-1); color: var(--ink-soft); }
+
+/* ---------- Floating source ---------- */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: var(--card); border: 1px solid var(--border); padding: 10px 18px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--ink-soft); box-shadow: var(--shadow-card); }
+.src-link:hover { color: var(--orange-deep); border-color: var(--orange); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .hero h1 { font-size: 44px; letter-spacing: -1.3px; }
+  .hero h1 .caret { height: 38px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { border-left: 0; }
+  .prov-grid { grid-template-columns: repeat(2, 1fr); }
+  .win { grid-template-columns: 1fr; }
+  .win-side { display: none; }
+  .frow { grid-template-columns: 1fr; gap: 32px; }
+  .frow.rev .ftext { order: 0; }
+  .triad { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .ds-swatches, .ds-radius, .ds-comp { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .section { padding: 64px 0; }
+  .section-head h2 { font-size: 32px; letter-spacing: -0.8px; }
+  .cta-band h2 { font-size: 36px; }
+  .mini-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 34px; }
+  .hero-sites { flex-wrap: wrap; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="ann">
+  <span class="ann-pill">New</span>
+  <span>BrowserOS now works with Claude Code, Cursor &amp; 66+ tools as an MCP server</span>
+  <a href="#mcp">Set up →</a>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <span class="dog-square">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <g fill="#fff">
+            <path d="M30 40 C15 52 15 88 32 98 C42 92 43 64 41 50 Z"/>
+            <path d="M90 40 C105 52 105 88 88 98 C78 92 77 64 79 50 Z"/>
+            <circle cx="60" cy="30" r="13"/>
+            <ellipse cx="60" cy="55" rx="31" ry="29"/>
+            <ellipse cx="60" cy="80" rx="21" ry="18"/>
+          </g>
+          <circle cx="49" cy="53" r="4.2" fill="#ea5616"/>
+          <circle cx="71" cy="53" r="4.2" fill="#ea5616"/>
+          <ellipse cx="60" cy="74" rx="6" ry="4.6" fill="#ea5616"/>
+        </svg>
+      </span>
+      <span>BrowserOS</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="#agents">Agents</a>
+      <a class="nav-link" href="#providers">Providers</a>
+      <a class="nav-link" href="#mcp">MCP</a>
+      <a class="nav-link" href="#privacy">Privacy</a>
+      <a class="nav-link" href="#design-system">Design</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/browseros-ai/BrowserOS" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+        BrowserOS <span class="star">★ 28.4k</span>
+      </a>
+      <a class="btn btn-primary btn-sm" href="#">Download</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO (the new-tab, recreated) -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-badge">
+      <span class="tag">Open source</span>
+      <span>The agentic browser that runs on your machine</span>
+    </div>
+    <div class="dog-square dog-hero">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <g fill="#fff">
+          <path d="M30 40 C15 52 15 88 32 98 C42 92 43 64 41 50 Z"/>
+          <path d="M90 40 C105 52 105 88 88 98 C78 92 77 64 79 50 Z"/>
+          <circle cx="60" cy="30" r="13"/>
+          <ellipse cx="60" cy="55" rx="31" ry="29"/>
+          <ellipse cx="60" cy="80" rx="21" ry="18"/>
+        </g>
+        <circle cx="49" cy="53" r="4.2" fill="#ea5616"/>
+        <circle cx="71" cy="53" r="4.2" fill="#ea5616"/>
+        <ellipse cx="60" cy="74" rx="6" ry="4.6" fill="#ea5616"/>
+      </svg>
+    </div>
+    <h1>Ask your <span class="pen">browser</span>.<br>It does the rest<span class="caret"></span></h1>
+    <p class="hero-lead">A privacy-first, open-source browser with AI agents built in — bring your own model, automate any tab, keep every byte local.</p>
+
+    <!-- omni search -->
+    <div class="omni">
+      <div class="omni-top">
+        <svg class="mag" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="ph">Ask BrowserOS or search the web…</span>
+        <svg class="mic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg>
+        <span class="omni-send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </div>
+      <div class="omni-bar">
+        <span class="omni-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.3-1.1.6-1.3-2.2-.300000-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.7 1 .7 2v3c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg>
+          GitHub
+        </span>
+        <span class="omni-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Add workspace
+        </span>
+        <span class="omni-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          Tabs
+        </span>
+        <span class="omni-chip hot"><span class="new">New</span> Apps</span>
+      </div>
+    </div>
+
+    <!-- top sites -->
+    <div class="hero-sites">
+      <div class="site"><div class="ico">GH</div><div class="lbl">Repository</div></div>
+      <div class="site"><div class="ico" style="color:var(--orange-deep)">夜</div><div class="lbl">言灵 · WhoBot</div></div>
+      <div class="site"><div class="ico">A</div><div class="lbl">Authenticator</div></div>
+      <div class="site"><div class="ico" style="color:#2b6cf0">百</div><div class="lbl">百度一下</div></div>
+      <div class="site"><div class="ico">W</div><div class="lbl">Web Store</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat"><div class="num">100<span class="u">%</span></div><div class="lbl">Open source · local-first</div></div>
+      <div class="stat"><div class="num">13</div><div class="lbl">LLM providers, one click</div></div>
+      <div class="stat"><div class="num">66<span class="u">+</span></div><div class="lbl">MCP tools connectable</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">Bytes sent to our servers</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROVIDERS -->
+<section class="section" id="providers">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Bring your own model</div>
+      <h2>Your keys. Your model.<br><span class="o">One click</span> to wire it up.</h2>
+      <p class="lead">Pick a quick template or paste any OpenAI-compatible endpoint. BrowserOS never proxies your prompts — the model talks straight from your machine.</p>
+    </div>
+    <div class="prov-grid">
+      <div class="prov-card feat"><span class="prov-new">NEW</span><span class="prov-ico">⌬</span><span class="prov-name">ChatGPT Plus/Pro</span><span class="prov-use">USE</span></div>
+      <div class="prov-card feat"><span class="prov-new">NEW</span><span class="prov-ico">◐</span><span class="prov-name">GitHub Copilot</span><span class="prov-use">USE</span></div>
+      <div class="prov-card feat"><span class="prov-new">NEW</span><span class="prov-ico">通</span><span class="prov-name">Qwen Code</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">K</span><span class="prov-name">Moonshot AI</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">◍</span><span class="prov-name">OpenAI</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">◍</span><span class="prov-name">OpenAI Compatible</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">∗</span><span class="prov-name">Anthropic</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">✦</span><span class="prov-name">Google</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">🦙</span><span class="prov-name">Ollama</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">⤳</span><span class="prov-name">OpenRouter</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">≣</span><span class="prov-name">LMStudio</span><span class="prov-use">USE</span></div>
+      <div class="prov-card"><span class="prov-ico">A</span><span class="prov-name">Azure</span><span class="prov-use">USE</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SETTINGS WINDOW MOCK -->
+<section class="section" style="padding-top:0" id="settings">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">The settings panel</div>
+      <h2>A config screen that<br>refuses to <span class="o">intimidate</span></h2>
+      <p class="lead">The hardest surface in any browser — wiring up models, MCP servers, keys — rebuilt as something you'd actually enjoy opening. Cream, calm, and one friendly dog watching over it.</p>
+    </div>
+
+    <div class="win">
+      <aside class="win-side">
+        <div class="back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back
+        </div>
+        <div class="grp">Provider settings</div>
+        <div class="side-item active">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M8 4h8" stroke-linecap="round"/></svg>
+          BrowserOS AI
+        </div>
+        <div class="side-item">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.6A8.4 8.4 0 1 1 21 11.5z" stroke-linejoin="round"/></svg>
+          Chat &amp; Council Provider
+        </div>
+        <div class="side-item">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.7" y2="16.7"/></svg>
+          Search Provider
+        </div>
+        <div class="grp">Other</div>
+        <div class="side-item">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="11.5" r="2"/><circle cx="17" cy="14" r="2"/><path d="M12 20a8 8 0 1 1 8-8" stroke-linecap="round"/></svg>
+          Customize BrowserOS
+        </div>
+        <div class="side-item">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg>
+          BrowserOS as MCP
+        </div>
+        <div class="side-item">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Usage &amp; Billing
+        </div>
+      </aside>
+
+      <div class="win-main">
+        <div class="panel-head">
+          <span class="dog-square">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <g fill="#fff"><path d="M30 40 C15 52 15 88 32 98 C42 92 43 64 41 50 Z"/><path d="M90 40 C105 52 105 88 88 98 C78 92 77 64 79 50 Z"/><circle cx="60" cy="30" r="13"/><ellipse cx="60" cy="55" rx="31" ry="29"/><ellipse cx="60" cy="80" rx="21" ry="18"/></g>
+              <circle cx="49" cy="53" r="4.2" fill="#ea5616"/><circle cx="71" cy="53" r="4.2" fill="#ea5616"/><ellipse cx="60" cy="74" rx="6" ry="4.6" fill="#ea5616"/>
+            </svg>
+          </span>
+          <div>
+            <h3>LLM Providers</h3>
+            <p>Add your provider and choose the default LLM</p>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="field-row">
+            <span class="field-lbl">Default Provider:</span>
+            <span class="select">GitHub Copilot <span class="ch">▾</span></span>
+            <span class="add-prov">+ Add custom provider</span>
+          </div>
+        </div>
+
+        <div class="mcp-banner" id="mcp">
+          <span class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg>
+          </span>
+          <div class="tx">
+            <b>Use BrowserOS with Claude Code, Cursor &amp; more <span class="cnt">(66+ tools)</span></b>
+            <span>Connect your favorite coding tools to BrowserOS as an MCP server</span>
+          </div>
+          <a class="btn btn-line btn-sm" href="#">Set up →</a>
+        </div>
+
+        <div class="ds-caption" style="margin-bottom:8px">Quick provider templates · 13 available</div>
+        <div class="mini-grid">
+          <div class="mini"><span class="d">⌬</span><span class="n">ChatGPT Plus/Pro</span><span class="u">USE</span></div>
+          <div class="mini"><span class="d">◐</span><span class="n">GitHub Copilot</span><span class="u">USE</span></div>
+          <div class="mini"><span class="d">∗</span><span class="n">Anthropic</span><span class="u">USE</span></div>
+          <div class="mini"><span class="d">🦙</span><span class="n">Ollama</span><span class="u">USE</span></div>
+          <div class="mini"><span class="d">◍</span><span class="n">OpenAI</span><span class="u">USE</span></div>
+          <div class="mini"><span class="d">✦</span><span class="n">Google</span><span class="u">USE</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE ROWS -->
+<section class="section" id="agents">
+  <div class="container">
+
+    <div class="frow">
+      <div class="ftext">
+        <div class="eyebrow">Agentic browsing</div>
+        <h3>Tell it the goal.<br>Watch it click.</h3>
+        <p>BrowserOS agents read the page, plan the steps, and drive the tabs for you — the model runs on your hardware, so nothing leaves the machine.</p>
+        <ul class="flist">
+          <li><span class="ck">✓</span> Multi-step tasks across tabs &amp; workspaces</li>
+          <li><span class="ck">✓</span> Local execution — your screen, your data</li>
+          <li><span class="ck">✓</span> Pause, inspect, and take the wheel anytime</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Watch a run</a>
+      </div>
+      <div class="fart">
+        <div class="agent-prompt"><span class="gt">&gt;</span> Find the 3 cheapest direct flights NRT→SIN next Friday and open each</div>
+        <div class="agent-card">
+          <div class="row"><span class="dot done">✓</span><span class="t">Opened flights.google.com</span><span class="ms">0.4s</span></div>
+          <div class="row"><span class="dot done">✓</span><span class="t">Set route &amp; date filters</span><span class="ms">1.1s</span></div>
+          <div class="row"><span class="dot done">✓</span><span class="t">Sorted by price, read top results</span><span class="ms">2.3s</span></div>
+          <div class="row"><span class="dot run"></span><span class="t">Opening 3 fares in background tabs…</span><span class="ms">live</span></div>
+          <div class="row"><span class="dot wait"></span><span class="t">Summarize &amp; compare</span><span class="ms">queued</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="frow rev" id="mcp-row">
+      <div class="ftext">
+        <div class="eyebrow">BrowserOS as MCP</div>
+        <h3>Your browser,<br>now a tool for every agent.</h3>
+        <p>Expose BrowserOS as an MCP server and let Claude Code, Cursor, and 66+ tools drive real tabs — clicking, reading, filling forms in a live session.</p>
+        <ul class="flist">
+          <li><span class="ck">✓</span> One toggle to publish 66+ browser actions</li>
+          <li><span class="ck">✓</span> Works with any MCP-speaking client</li>
+          <li><span class="ck">✓</span> Snapshot → act → verify, built in</li>
+        </ul>
+        <a class="btn btn-line" href="#">Read the docs ↗</a>
+      </div>
+      <div class="fart">
+        <div class="tool-cloud">
+          <span class="tool-chip"><span class="gd"></span>click</span>
+          <span class="tool-chip"><span class="gd"></span>take_snapshot</span>
+          <span class="tool-chip"><span class="gd"></span>fill</span>
+          <span class="tool-chip"><span class="gd"></span>navigate_page</span>
+          <span class="tool-chip"><span class="gd"></span>get_dom</span>
+          <span class="tool-chip"><span class="gd"></span>scroll</span>
+          <span class="tool-chip"><span class="gd"></span>new_page</span>
+          <span class="tool-chip"><span class="gd"></span>group_tabs</span>
+          <span class="tool-chip"><span class="gd"></span>save_screenshot</span>
+          <span class="tool-chip"><span class="gd"></span>select_option</span>
+          <span class="tool-chip"><span class="gd"></span>search_history</span>
+          <span class="tool-chip"><span class="gd"></span>create_bookmark</span>
+          <span class="tool-chip"><span class="gd"></span>press_key</span>
+          <span class="tool-chip" style="border-color:var(--orange);color:var(--orange-deep)">+ 53 more</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="frow" id="privacy">
+      <div class="ftext">
+        <div class="eyebrow">Privacy by architecture</div>
+        <h3>Local-first isn't<br>a setting. It's the spine.</h3>
+        <p>No telemetry funnel, no prompt proxy. Run Ollama or LM Studio and the agent never touches the network. It's a Chromium fork — bring your extensions and bookmarks straight over.</p>
+        <ul class="flist">
+          <li><span class="ck">✓</span> Bring your own key — direct to the model</li>
+          <li><span class="ck">✓</span> Fully local with Ollama / LM Studio</li>
+          <li><span class="ck">✓</span> Import from Chrome in one step</li>
+        </ul>
+        <a class="btn btn-primary" href="#">Download free</a>
+      </div>
+      <div class="fart">
+        <div class="lock-art">
+          <div class="lock-badge">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="lock-line"><span class="ok">●</span> Prompts stay on device</div>
+          <div class="lock-line"><span class="ok">●</span> 0 bytes to BrowserOS servers</div>
+          <div class="lock-line"><span class="ok">●</span> Open source, auditable build</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="section" style="padding-top:24px">
+  <div class="container">
+    <div class="cta-band">
+      <div class="dog-square">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <g fill="#fff"><path d="M30 40 C15 52 15 88 32 98 C42 92 43 64 41 50 Z"/><path d="M90 40 C105 52 105 88 88 98 C78 92 77 64 79 50 Z"/><circle cx="60" cy="30" r="13"/><ellipse cx="60" cy="55" rx="31" ry="29"/><ellipse cx="60" cy="80" rx="21" ry="18"/></g>
+          <circle cx="49" cy="53" r="4.2" fill="#ea5616"/><circle cx="71" cy="53" r="4.2" fill="#ea5616"/><ellipse cx="60" cy="74" rx="6" ry="4.6" fill="#ea5616"/>
+        </svg>
+      </div>
+      <h2>Take your browser <span class="o">back</span>.</h2>
+      <p>Free, open source, and yours to run however you like. macOS, Windows &amp; Linux.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="#">Download for macOS</a>
+        <a class="btn btn-line" href="#">Star on GitHub ★</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM (Part B) -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="eyebrow">Design System Reference · 色 / 形 / 神</div>
+        <h2>Cream canvas · one terracotta · a dog that disarms</h2>
+        <p>Extracted through the <strong>色 / 形 / 神</strong> lens — color, form, spirit. BrowserOS's whole move is to take the most intimidating surface in software (model keys, MCP servers, provider endpoints) and make it feel like a warm consumer app. It does that with three decisions, repeated everywhere.</p>
+      </div>
+      <a class="ds-source" href="https://www.browseros.com/" target="_blank" rel="noopener">View browseros.com ↗</a>
+    </div>
+
+    <!-- the triad -->
+    <div class="triad">
+      <div class="triad-card">
+        <div class="gly">色</div>
+        <h4>One accent, mostly empty</h4>
+        <p>Warm off-white canvas (#FAF7F2) carries everything; a single terracotta orange appears on barely 3% of pixels — CTA, NEW pill, the send button. Even the grays lean warm. Nothing cold ever enters.</p>
+        <span class="pin">克制 · restraint</span>
+      </div>
+      <div class="triad-card">
+        <div class="gly">形</div>
+        <h4>Rounded-rect, hairline, air</h4>
+        <p>Big 16–22px radii, 1px warm hairline borders instead of heavy shadows, generous whitespace, a faint grid-paper new-tab. Buttons stop short of full pills — a rounded rectangle (~12px) is the tell.</p>
+        <span class="pin">手感 · feel</span>
+      </div>
+      <div class="triad-card">
+        <div class="gly">神</div>
+        <h4>De-threaten the hard stuff</h4>
+        <p>A white poodle mascot watches over the keys-and-endpoints screen. The new tab empties out to a single question. The spirit: make configuring AI feel un-scary, almost friendly.</p>
+        <span class="pin">去威慑 · disarm</span>
+      </div>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">The canvas is never pure white — it's a warm cream that makes the whole product feel paper-like, not clinical. The orange is the entire brand; use it on <em>one</em> thing per view (the primary action) and let warm grays carry the rest.</p>
+
+      <div class="ds-caption">The accent (the whole brand)</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#e25b2a"></div><div class="meta"><div class="name">Orange</div><div class="val">#E25B2A · CTA</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ea5616"></div><div class="meta"><div class="name">Orange strong</div><div class="val">#EA5616 · logo</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#c9491c"></div><div class="meta"><div class="name">Orange deep</div><div class="val">#C9491C · hover</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fbeae0;border:1px solid #ece5d9"></div><div class="meta"><div class="name">Orange tint</div><div class="val">#FBEAE0 · badge</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(160deg,#f1703f,#ea5616,#d8480f)"></div><div class="meta"><div class="name">Mark gradient</div><div class="val">dog square</div></div></div>
+      </div>
+
+      <div class="ds-caption">Warm canvas &amp; ink ladder</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#faf7f2;border:1px solid #ece5d9"></div><div class="meta"><div class="name">Canvas</div><div class="val">#FAF7F2</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f1ece3;border:1px solid #ece5d9"></div><div class="meta"><div class="name">Surface-1</div><div class="val">#F1ECE3</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ece5d9;border:1px solid #e0d8ca"></div><div class="meta"><div class="name">Border</div><div class="val">#ECE5D9</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#211b15"></div><div class="meta"><div class="name">Ink</div><div class="val">#211B15</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#786c5d"></div><div class="meta"><div class="name">Ink muted</div><div class="val">#786C5D</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Inter does the work, paired with Noto Sans SC for the mixed CN/EN reality of the new tab. Display weights run heavy (800) with tight tracking; the warmth comes from the cream and the rounding, not the letterforms. Tabular figures on the stat strip.</p>
+      <table class="ds-type-table">
+        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Tracking</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:30px;font-weight:800;letter-spacing:-1px">Ask your <span class="accent">browser</span></td><td>60 / 3.75rem</td><td>800</td><td>-2px</td><td>Hero H1</td></tr>
+          <tr><td class="token">--section</td><td class="sample" style="font-size:23px;font-weight:800;letter-spacing:-0.7px">One click to wire it up</td><td>42 / 2.6rem</td><td>800</td><td>-1.2px</td><td>Section H2</td></tr>
+          <tr><td class="token">--feature</td><td class="sample" style="font-size:20px;font-weight:800;letter-spacing:-0.5px">Tell it the goal</td><td>30 / 1.875rem</td><td>800</td><td>-0.8px</td><td>Feature H3</td></tr>
+          <tr><td class="token">--lead</td><td class="sample" style="font-size:15px;font-weight:400;color:var(--ink-muted)">A privacy-first, open-source browser.</td><td>19 / 1.18rem</td><td>400</td><td>0</td><td>Lead / body</td></tr>
+          <tr><td class="token">--eyebrow</td><td class="sample" style="font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--orange)">Bring your own model</td><td>12 / 0.75rem</td><td>700</td><td>0.8px</td><td>Eyebrow</td></tr>
+          <tr><td class="token">--mono</td><td class="sample mono" style="font-size:13px;color:var(--orange-deep)">base_url = localhost:11434</td><td>13 / 0.81rem</td><td>500</td><td>0</td><td>Endpoints · stats</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Rounds generously but deliberately stops short of full pills on buttons — the rounded <em>rectangle</em> at ~12px is a BrowserOS signature. Full pills are reserved for badges, chips, and the announcement bar.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">Chip</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:22px"></div><div class="ds-radius-label">Search</div><div class="ds-radius-val">22px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:30px"></div><div class="ds-radius-label">Window</div><div class="ds-radius-val">30px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">Pill</div><div class="ds-radius-val">badge only</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">CTA hierarchy: orange-fill rounded-rect (primary) → white hairline-bordered rect (secondary) → warm soft fill (tertiary). The orange-bordered <span class="mono">USE</span> button is the provider-grid workhorse. Inputs sit on warm fills and bloom orange on focus.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-primary" href="#">Download</a>
+            <a class="btn btn-line" href="#">Read the docs ↗</a>
+            <a class="btn btn-soft" href="#">Set up</a>
+            <span class="prov-use">USE</span>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Inputs &amp; Tags</h5>
+          <div class="ds-card-stack">
+            <input class="input-rr" placeholder="Ask BrowserOS or search the web…" />
+            <input class="input-rr" placeholder="Paste an OpenAI-compatible URL" />
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="tag tag-solid">New</span>
+              <span class="tag tag-soft">66+ tools</span>
+              <span class="tag tag-gray">Local</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Cards</h5>
+          <div class="ds-card-stack" style="width:100%">
+            <div class="prov-card feat" style="width:100%"><span class="prov-new">NEW</span><span class="prov-ico">∗</span><span class="prov-name">Anthropic</span><span class="prov-use">USE</span></div>
+            <div class="mcp-banner" style="width:100%;margin:0">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/></svg></span>
+              <div class="tx"><b>MCP server <span class="cnt">(66+)</span></b><span>Warm hairline banner</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <span class="dog-square">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <g fill="#fff"><path d="M30 40 C15 52 15 88 32 98 C42 92 43 64 41 50 Z"/><path d="M90 40 C105 52 105 88 88 98 C78 92 77 64 79 50 Z"/><circle cx="60" cy="30" r="13"/><ellipse cx="60" cy="55" rx="31" ry="29"/><ellipse cx="60" cy="80" rx="21" ry="18"/></g>
+              <circle cx="49" cy="53" r="4.2" fill="#ea5616"/><circle cx="71" cy="53" r="4.2" fill="#ea5616"/><ellipse cx="60" cy="74" rx="6" ry="4.6" fill="#ea5616"/>
+            </svg>
+          </span>
+          <span>BrowserOS</span>
+        </div>
+        <p>A design research tribute to BrowserOS's visual language — warm cream, one terracotta accent, and a dog that takes the fear out of configuration. No official affiliation.</p>
+      </div>
+      <div class="foot-col"><h4>Product</h4><ul><li><a href="#agents">Agents</a></li><li><a href="#providers">Providers</a></li><li><a href="#mcp">MCP server</a></li><li><a href="#privacy">Privacy</a></li></ul></div>
+      <div class="foot-col"><h4>Developers</h4><ul><li><a href="#">Docs</a></li><li><a href="#">GitHub</a></li><li><a href="#">Changelog</a></li><li><a href="#">Discord</a></li></ul></div>
+      <div class="foot-col"><h4>Models</h4><ul><li><a href="#">Ollama</a></li><li><a href="#">OpenAI</a></li><li><a href="#">Anthropic</a></li><li><a href="#">OpenRouter</a></li></ul></div>
+      <div class="foot-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Manifesto</a></li><li><a href="#">Contact</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Design research · Tribute to browseros.com · 作者 云中江树</span>
+      <span>色 / 形 / 神 extraction · Terms · Privacy</span>
+    </div>
+  </div>
+</footer>
+
+<a class="src-link" href="https://www.browseros.com/" target="_blank" rel="noopener">View source ↗</a>
+
+</body>
+</html>

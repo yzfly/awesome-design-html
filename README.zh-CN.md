@@ -1,14 +1,14 @@
 <div align="center">
 
 <a href="https://code.jiangshu.ai/awesome-design-html/">
-  <img src=".github/assets/banner.svg" alt="Awesome Design HTML — 115 brand-themed HTML designs as a Claude Code skill" width="100%" />
+  <img src=".github/assets/banner.svg" alt="Awesome Design HTML — 116 brand-themed HTML designs as a Claude Code skill" width="100%" />
 </a>
 
 <a href="README.md"><img src="https://img.shields.io/badge/Read_in-English-2962ff?style=for-the-badge&logo=googletranslate&logoColor=white" alt="English"></a>
 <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/阅读-中文-c92a2a?style=for-the-badge&logo=googletranslate&logoColor=white" alt="中文"></a>
 
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-242830?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="License MIT"></a>
-<a href="#-网页库--93-个营销页"><img src="https://img.shields.io/badge/Web-93_brands-3ECF8E?style=flat-square&logo=html5&logoColor=white" alt="93 个网页"></a>
+<a href="#-网页库--94-个营销页"><img src="https://img.shields.io/badge/Web-94_brands-3ECF8E?style=flat-square&logo=html5&logoColor=white" alt="94 个网页"></a>
 <a href="#-ios-库--22-个-app-仿真"><img src="https://img.shields.io/badge/iOS-22_apps-007AFF?style=flat-square&logo=apple&logoColor=white" alt="22 个 iOS app"></a>
 <a href="https://docs.claude.com/claude-code"><img src="https://img.shields.io/badge/Claude_Code-skill-d97757?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code 技能"></a>
 <a href="https://github.com/yzfly/awesome-design-html/stargazers"><img src="https://img.shields.io/github/stars/yzfly/awesome-design-html?style=flat-square&logo=github&color=fbca04&logoColor=white" alt="GitHub Stars"></a>
@@ -21,7 +21,7 @@
 &nbsp;·&nbsp;
 <b><a href="#-为什么是-html不是-markdown">💡 为什么 HTML?</a></b>
 &nbsp;·&nbsp;
-<b><a href="#-精选-demo--直接看不用脑补">⭐ 浏览 115 个</a></b>
+<b><a href="#-精选-demo--直接看不用脑补">⭐ 浏览 116 个</a></b>
 </p>
 
 </div>
@@ -71,7 +71,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 - **AI 原生读 HTML。** 现代编程 agent(Claude Code、Cursor、Copilot)能直接解析 HTML,不需要"翻译层"。
 - **作品本身就是文档。** 不再有"规范 vs 实现"的漂移 —— 因为根本没有分离的规范。
 
-**这个 skill 就是建立在这个理念上。** 115 个参考全部都是自说明的 HTML 页面。你不是读 Stripe 网格渐变的描述 —— 你打开 Stripe 的 HTML,渐变**就在那**。Claude 读同一个文件,应用同一套 token。
+**这个 skill 就是建立在这个理念上。** 116 个参考全部都是自说明的 HTML 页面。你不是读 Stripe 网格渐变的描述 —— 你打开 Stripe 的 HTML,渐变**就在那**。Claude 读同一个文件,应用同一套 token。
 
 所以这个项目叫 `awesome-design-html`,不叫 `awesome-design-md`。
 
@@ -93,7 +93,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.opencode.html"><img src=".github/assets/thumbnails/opencode.webp" width="100%" alt="OpenCode"/><br/><sub><b>OpenCode</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.mistral.html"><img src=".github/assets/thumbnails/mistral.webp" width="100%" alt="Mistral"/><br/><sub><b>Mistral</b></sub></a></td>
-<td align="center" colspan="2"><sub>更多 AI: Cohere · ElevenLabs · Lovable · MiniMax · Ollama · Runway · Together · VoltAgent · xAI — <a href="#-网页库--93-个营销页">见网页库</a></sub></td>
+<td align="center" colspan="2"><sub>更多 AI: Cohere · ElevenLabs · Lovable · MiniMax · Ollama · Runway · Together · VoltAgent · xAI — <a href="#-网页库--94-个营销页">见网页库</a></sub></td>
 </tr>
 </table>
 
@@ -125,7 +125,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.figma.html"><img src=".github/assets/thumbnails/figma.webp" width="100%" alt="Figma"/><br/><sub><b>Figma</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.airbnb.html"><img src=".github/assets/thumbnails/airbnb.webp" width="100%" alt="Airbnb"/><br/><sub><b>Airbnb</b></sub></a></td>
-<td align="center" colspan="2"><sub>更多: Airtable · Cal.com · Intercom · Miro · Slack · Superhuman · Webflow · Zapier · Clay — <a href="#-网页库--93-个营销页">见网页库</a></sub></td>
+<td align="center" colspan="2"><sub>更多: Airtable · Cal.com · Intercom · Miro · Slack · Superhuman · Webflow · Zapier · Clay — <a href="#-网页库--94-个营销页">见网页库</a></sub></td>
 </tr>
 </table>
 
@@ -141,7 +141,7 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 <tr>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.bugatti.html"><img src=".github/assets/thumbnails/bugatti.webp" width="100%" alt="Bugatti"/><br/><sub><b>Bugatti</b></sub></a></td>
 <td align="center"><a href="https://code.jiangshu.ai/awesome-design-html/assets/web/design.lamborghini.html"><img src=".github/assets/thumbnails/lamborghini.webp" width="100%" alt="Lamborghini"/><br/><sub><b>Lamborghini</b></sub></a></td>
-<td align="center" colspan="2"><sub>更多: BMW · Renault — <a href="#-网页库--93-个营销页">见网页库</a></sub></td>
+<td align="center" colspan="2"><sub>更多: BMW · Renault — <a href="#-网页库--94-个营销页">见网页库</a></sub></td>
 </tr>
 </table>
 
@@ -205,14 +205,14 @@ AI 项目的文档写法正在悄悄发生转向:**从 Markdown README 转向自
 
 ---
 
-## 📄 网页库 — 93 个营销页
+## 📄 网页库 — 94 个营销页
 
 **🇨🇳 中国大厂** — [飞书 Feishu](https://code.jiangshu.ai/awesome-design-html/assets/web/design.feishu.html) · [抖音 Douyin](https://code.jiangshu.ai/awesome-design-html/assets/web/design.douyin.html) · [豆包 Doubao](https://code.jiangshu.ai/awesome-design-html/assets/web/design.doubao.html) · [阿里云 Aliyun](https://code.jiangshu.ai/awesome-design-html/assets/web/design.aliyun.html) · [支付宝 Alipay](https://code.jiangshu.ai/awesome-design-html/assets/web/design.alipay.html) · [钉钉 DingTalk](https://code.jiangshu.ai/awesome-design-html/assets/web/design.dingtalk.html) · [语雀 Yuque](https://code.jiangshu.ai/awesome-design-html/assets/web/design.yuque.html) · [腾讯云 Tencent Cloud](https://code.jiangshu.ai/awesome-design-html/assets/web/design.tencent-cloud.html) · [微信 WeChat](https://code.jiangshu.ai/awesome-design-html/assets/web/design.wechat.html) · [DeepSeek](https://code.jiangshu.ai/awesome-design-html/assets/web/design.deepseek.html) · [Kimi](https://code.jiangshu.ai/awesome-design-html/assets/web/design.kimi.html) · [文心一言 Wenxin](https://code.jiangshu.ai/awesome-design-html/assets/web/design.wenxin.html) · [通义千问 Qwen](https://code.jiangshu.ai/awesome-design-html/assets/web/design.qwen.html) · [Qwen Cloud](https://code.jiangshu.ai/awesome-design-html/assets/web/design.qwencloud.html) · [小米汽车 Xiaomi EV](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi-ev.html) · [蔚来 NIO](https://code.jiangshu.ai/awesome-design-html/assets/web/design.nio.html) · [理想 Li Auto](https://code.jiangshu.ai/awesome-design-html/assets/web/design.li-auto.html) · [极氪 ZEEKR](https://code.jiangshu.ai/awesome-design-html/assets/web/design.zeekr.html) · [哔哩哔哩 Bilibili](https://code.jiangshu.ai/awesome-design-html/assets/web/design.bilibili.html) · [米哈游 miHoYo](https://code.jiangshu.ai/awesome-design-html/assets/web/design.mihoyo.html) · [小米 Xiaomi](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaomi.html) · [小红书 Xiaohongshu](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xiaohongshu.html)
 
 
 **效率 / SaaS** — [Airtable](https://code.jiangshu.ai/awesome-design-html/assets/web/design.airtable.html) · [Cal.com](https://code.jiangshu.ai/awesome-design-html/assets/web/design.cal.html) · [Intercom](https://code.jiangshu.ai/awesome-design-html/assets/web/design.intercom.html) · [Miro](https://code.jiangshu.ai/awesome-design-html/assets/web/design.miro.html) · [Notion](https://code.jiangshu.ai/awesome-design-html/assets/web/design.notion.html) · [Slack](https://code.jiangshu.ai/awesome-design-html/assets/web/design.slack.html) · [Superhuman](https://code.jiangshu.ai/awesome-design-html/assets/web/design.superhuman.html) · [Webflow](https://code.jiangshu.ai/awesome-design-html/assets/web/design.webflow.html) · [Zapier](https://code.jiangshu.ai/awesome-design-html/assets/web/design.zapier.html) · [Clay](https://code.jiangshu.ai/awesome-design-html/assets/web/design.clay.html)
 
-**开发工具 / IDE** — [Cursor](https://code.jiangshu.ai/awesome-design-html/assets/web/design.cursor.html) · [Figma](https://code.jiangshu.ai/awesome-design-html/assets/web/design.figma.html) · [Framer](https://code.jiangshu.ai/awesome-design-html/assets/web/design.framer.html) · [OpenCode](https://code.jiangshu.ai/awesome-design-html/assets/web/design.opencode.html) · [Raycast](https://code.jiangshu.ai/awesome-design-html/assets/web/design.raycast.html) · [Sanity](https://code.jiangshu.ai/awesome-design-html/assets/web/design.sanity.html) · [Vercel](https://code.jiangshu.ai/awesome-design-html/assets/web/design.vercel.html) · [Warp](https://code.jiangshu.ai/awesome-design-html/assets/web/design.warp.html)
+**开发工具 / IDE** — [BrowserOS](https://code.jiangshu.ai/awesome-design-html/assets/web/design.browseros.html) · [Cursor](https://code.jiangshu.ai/awesome-design-html/assets/web/design.cursor.html) · [Figma](https://code.jiangshu.ai/awesome-design-html/assets/web/design.figma.html) · [Framer](https://code.jiangshu.ai/awesome-design-html/assets/web/design.framer.html) · [OpenCode](https://code.jiangshu.ai/awesome-design-html/assets/web/design.opencode.html) · [Raycast](https://code.jiangshu.ai/awesome-design-html/assets/web/design.raycast.html) · [Sanity](https://code.jiangshu.ai/awesome-design-html/assets/web/design.sanity.html) · [Vercel](https://code.jiangshu.ai/awesome-design-html/assets/web/design.vercel.html) · [Warp](https://code.jiangshu.ai/awesome-design-html/assets/web/design.warp.html)
 
 **AI / 大模型** — [Claude](https://code.jiangshu.ai/awesome-design-html/assets/web/design.claude.html) · [Cohere](https://code.jiangshu.ai/awesome-design-html/assets/web/design.cohere.html) · [ElevenLabs](https://code.jiangshu.ai/awesome-design-html/assets/web/design.elevenlabs.html) · [Lovable](https://code.jiangshu.ai/awesome-design-html/assets/web/design.lovable.html) · [MiniMax](https://code.jiangshu.ai/awesome-design-html/assets/web/design.minimax.html) · [Mistral](https://code.jiangshu.ai/awesome-design-html/assets/web/design.mistral.html) · [Ollama](https://code.jiangshu.ai/awesome-design-html/assets/web/design.ollama.html) · [Runway](https://code.jiangshu.ai/awesome-design-html/assets/web/design.runwayml.html) · [Together](https://code.jiangshu.ai/awesome-design-html/assets/web/design.together.html) · [VoltAgent](https://code.jiangshu.ai/awesome-design-html/assets/web/design.voltagent.html) · [xAI](https://code.jiangshu.ai/awesome-design-html/assets/web/design.xai.html)
 
@@ -258,7 +258,7 @@ awesome-design-html/
 ├── LICENSE          # MIT
 ├── index.html       # 画廊入口页
 └── assets/
-    ├── web/         # 93 个网页 HTML
+    ├── web/         # 94 个网页 HTML
     └── ios/         # 22 个 iOS app HTML
 ```
 
