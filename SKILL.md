@@ -1,13 +1,13 @@
 ---
 name: awesome-design-html
-description: "116 brand-themed single-page HTML design references: 94 marketing webpages (Stripe, Linear, Notion, Apple, Vercel, Figma, Airbnb, Cursor, Claude, BrowserOS, Spotify, Tesla, Ferrari, BMW + China tier: 飞书 Feishu, 抖音 Douyin, 豆包 Doubao, 阿里云 Aliyun, 支付宝 Alipay, 钉钉 DingTalk, 语雀 Yuque, 腾讯云 Tencent Cloud, 微信 WeChat, DeepSeek, Kimi, 文心一言 Wenxin, 通义千问 Qwen, Qwen Cloud, 小米汽车 Xiaomi EV, 蔚来 NIO, 理想 Li Auto, 极氪 ZEEKR, 哔哩哔哩 Bilibili, 米哈游 miHoYo, 小米 Xiaomi, 小红书 Xiaohongshu) under assets/web/ + 22 iOS app mockups (Instagram, Spotify, TikTok, WhatsApp, Telegram, Discord, Threads, X/Twitter, Snapchat, YouTube, Netflix, Apple Music, Uber, Airbnb, ChatGPT, Notion, Tinder, Hinge, Starbucks, DoorDash, Robinhood, Duolingo) under assets/ios/. Each HTML contains brand-faithful demo + design system reference. Triggers: '做个飞书风的页面', '参考 DeepSeek 极简', '小米汽车 hero', '小红书风格瀑布流', 'do a Linear-style page', 'mimic Stripe hero gradient', 'iPhone mockup of Spotify Now Playing', or any brand-name + design/style/page/UI/screen."
+description: "117 brand-themed single-page HTML design references: 95 marketing webpages (Stripe, Linear, Notion, Apple, Vercel, Figma, Airbnb, Cursor, Claude, BrowserOS, Bun, Spotify, Tesla, Ferrari, BMW + China tier: 飞书 Feishu, 抖音 Douyin, 豆包 Doubao, 阿里云 Aliyun, 支付宝 Alipay, 钉钉 DingTalk, 语雀 Yuque, 腾讯云 Tencent Cloud, 微信 WeChat, DeepSeek, Kimi, 文心一言 Wenxin, 通义千问 Qwen, Qwen Cloud, 小米汽车 Xiaomi EV, 蔚来 NIO, 理想 Li Auto, 极氪 ZEEKR, 哔哩哔哩 Bilibili, 米哈游 miHoYo, 小米 Xiaomi, 小红书 Xiaohongshu) under assets/web/ + 22 iOS app mockups (Instagram, Spotify, TikTok, WhatsApp, Telegram, Discord, Threads, X/Twitter, Snapchat, YouTube, Netflix, Apple Music, Uber, Airbnb, ChatGPT, Notion, Tinder, Hinge, Starbucks, DoorDash, Robinhood, Duolingo) under assets/ios/. Each HTML contains brand-faithful demo + design system reference. Triggers: '做个飞书风的页面', '参考 DeepSeek 极简', '小米汽车 hero', '小红书风格瀑布流', 'do a Linear-style page', 'mimic Stripe hero gradient', 'iPhone mockup of Spotify Now Playing', or any brand-name + design/style/page/UI/screen."
 ---
 
 # Awesome Design HTML
 
 A reference library of **116 brand-themed single-file HTML pages**, split into two flavors:
 
-- **`assets/web/`** — 94 marketing-page demos (incl. 22 中国大厂). Hero + features + pricing + design system reference. Use when the user wants a **website / landing page / product page** in a brand's style.
+- **`assets/web/`** — 95 marketing-page demos (incl. 22 中国大厂). Hero + features + pricing + design system reference. Use when the user wants a **website / landing page / product page** in a brand's style.
 - **`assets/ios/`** — 22 iOS app mockups. Three iPhone frames in a hero stage showing the real app's home / detail / profile screens + design system reference. Use when the user wants a **mobile app UI mockup** or to honor a brand's **native iOS surfaces** (Now Playing, swipe deck, chat bubble, lesson path...).
 
 Every file is self-contained: inline CSS in a `:root` token block, Google Fonts CDN, brand-faithful colors / typography / radius / components, plus a "View source ↗" link to the underlying design spec.
@@ -41,7 +41,7 @@ A few slugs were normalized:
 | x.com (Twitter) | `x-twitter` | (iOS only) |
 | apple-music | `apple-music` | (iOS only) |
 
-## Brand index — Web (94)
+## Brand index — Web (95)
 
 ### 🇨🇳 中国大厂 China tier (22, NEW 2026)
 
@@ -52,12 +52,12 @@ A few slugs were normalized:
 **新能源车**: xiaomi-ev (小米汽车), nio (蔚来), li-auto (理想), zeekr (极氪)
 **内容/消费**: bilibili (哔哩哔哩), mihoyo (米哈游), xiaomi (小米), xiaohongshu (小红书 · 瀑布流 explore feed)
 
-### Global tier (72)
+### Global tier (73)
 
 
 **Productivity / SaaS**: airtable, cal, intercom, miro, notion, slack, superhuman, webflow, zapier
 
-**Dev tools / IDEs**: browseros (agentic browser · cream + terracotta + dog mascot), cursor, figma, framer, opencode, raycast, sanity, vercel, warp
+**Dev tools / IDEs**: browseros (agentic browser · cream + terracotta + dog mascot), bun (all-in-one JS toolkit · cream heritage hero + hot-pink #ff73a8 + bun mascot · docs surface), cursor, figma, framer, opencode, raycast, sanity, vercel, warp
 
 **AI / LLM platforms**: claude, cohere, elevenlabs, lovable, minimax, mistral, ollama, runwayml, together, voltagent, xai
 
@@ -169,7 +169,7 @@ A few slugs were normalized:
 
 - The user is asking for a generic layout pattern (e.g., "two-column dashboard") with no brand reference — use general design judgment instead.
 - The user has their own design system / brand guidelines that should override these references.
-- The user is asking about a brand NOT in the 115-brand list — say so explicitly rather than guess.
+- The user is asking about a brand NOT in the 116-brand list — say so explicitly rather than guess.
 
 ## Source attribution
 

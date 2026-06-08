@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bun — Inspired Design</title>
+<meta name="description" content="A Bun-inspired docs & marketing page: cream #fbf0df heritage hero, the white bun mascot, hot-pink #ff73a8 accent, warm-pink hairlines, pill CTAs, 3-column doc layout, dark install terminal. Inter + Inter Display + JetBrains Mono." />
+<meta property="og:title" content="Bun — Inspired Design Reference" />
+<meta property="og:description" content="Bun's docs texture extracted: cream heritage band, hot-pink accent on clean warm-white, the bun mascot, fast-install terminal, full design system reference." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* —— Brand & accent —— */
+  --bun-pink:#ff73a8;          /* the one chromatic accent (docs --primary: 255 115 168) */
+  --bun-pink-deep:#f24b8e;
+  --bun-pink-soft:#ffe4ef;     /* active-pill / tint background */
+  --bun-cheek:#f9a8d4;         /* mascot cheeks */
+  --bun-cream:#fbf0df;         /* iconic Bun heritage canvas */
+  --bun-cream-deep:#f3e3c8;
+
+  /* —— Surfaces —— */
+  --canvas:#ffffff;
+  --canvas-warm:#fdfbfc;       /* faint warm white */
+  --surface:#faf7f8;
+  --surface-soft:#f7f4f5;
+  --ink-canvas:#15131a;        /* dark terminal canvas */
+  --term:#1a1820;
+
+  /* —— Hairlines (warm pink-grey, Bun's signature) —— */
+  --hairline:#f5f1f3;
+  --hairline-mid:#ece6e9;
+  --hairline-dark:#2a2730;
+
+  /* —— Text —— */
+  --ink:#1e1a1b;
+  --charcoal:#2d282a;
+  --slate:#464243;
+  --steel:#575355;
+  --stone:#777375;
+  --muted:#a39ea1;
+  --on-dark:#ffffff;
+  --on-dark-muted:#b8b3bd;
+  --on-cream:#1e1a1b;
+
+  --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-xxl:24px; --r-full:9999px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--canvas);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+.mono{font-family:"JetBrains Mono","SF Mono",Menlo,Consolas,monospace}
+.disp{font-family:"Inter",sans-serif;font-weight:800}
+::selection{background:var(--bun-pink-soft);color:var(--ink)}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.wrap-narrow{max-width:1120px;margin:0 auto;padding:0 32px}
+
+/* —— Bun mascot mark —— */
+.bun{position:relative;display:inline-block;width:34px;height:30px;flex:0 0 auto}
+.bun .body{position:absolute;inset:0;background:#fffdf9;border:2px solid var(--ink);border-radius:50% 50% 46% 46%/60% 60% 40% 40%;box-shadow:inset 0 -4px 0 rgba(0,0,0,0.04)}
+.bun .eye{position:absolute;top:13px;width:3px;height:5px;border:1.6px solid var(--ink);border-top:none;border-radius:0 0 4px 4px}
+.bun .eye.l{left:9px}
+.bun .eye.r{right:9px}
+.bun .cheek{position:absolute;top:16px;width:5px;height:4px;border-radius:50%;background:var(--bun-cheek)}
+.bun .cheek.l{left:5px}
+.bun .cheek.r{right:5px}
+.bun .mouth{position:absolute;top:17px;left:50%;transform:translateX(-50%);width:6px;height:3px;border:1.6px solid var(--ink);border-top:none;border-radius:0 0 6px 6px}
+.bun.lg{width:96px;height:84px}
+.bun.lg .eye{top:38px;width:8px;height:13px;border-width:4px;left:auto}
+.bun.lg .eye.l{left:26px}
+.bun.lg .eye.r{right:26px}
+.bun.lg .cheek{top:46px;width:14px;height:10px}
+.bun.lg .cheek.l{left:14px}
+.bun.lg .cheek.r{right:14px}
+.bun.lg .mouth{top:48px;width:16px;height:8px;border-width:4px}
+
+/* —— Promo banner —— */
+.promo{background:var(--ink);color:var(--on-dark);font-size:14px;font-weight:500;padding:10px 16px;text-align:center}
+.promo a{display:inline-flex;align-items:center;gap:8px}
+.promo .tag{background:var(--bun-pink);color:var(--ink);font-weight:700;font-size:11px;padding:2px 8px;border-radius:var(--r-full)}
+.promo .arrow{color:var(--bun-pink);margin-left:2px}
+
+/* —— Top nav —— */
+.nav{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--hairline);position:sticky;top:0;z-index:30;height:64px}
+.nav-inner{height:100%;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:800;font-size:21px;letter-spacing:-0.5px}
+.nav-links{display:flex;gap:2px;margin-left:6px}
+.nav-links a{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;color:var(--stone);padding:8px 12px;border-radius:var(--r-md)}
+.nav-links a .ni{width:15px;height:15px;color:var(--muted)}
+.nav-links a:hover{color:var(--ink);background:var(--surface)}
+.nav-links a.active{color:var(--ink)}
+.nav-links a.active .ni{color:var(--bun-pink)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-ghost{font-size:14px;font-weight:500;color:var(--steel);padding:8px 10px}
+.nav-ghost:hover{color:var(--ink)}
+.star{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink);border:1px solid var(--hairline-mid);border-radius:var(--r-md);padding:7px 11px}
+.star b{color:var(--steel);font-weight:500}
+@media(max-width:1040px){.nav-links{display:none}}
+@media(max-width:560px){.nav-ghost,.star{display:none}}
+
+/* —— Buttons —— */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:600;font-size:14px;line-height:1.3;padding:10px 18px;border-radius:var(--r-full);border:1px solid transparent;cursor:pointer;transition:all .15s ease;height:40px}
+.btn-primary{background:var(--bun-pink);color:var(--ink)}
+.btn-primary:hover{background:var(--bun-pink-deep);color:#fff}
+.btn-ink{background:var(--ink);color:var(--on-dark)}
+.btn-ink:hover{background:#000}
+.btn-secondary{background:var(--canvas);color:var(--ink);border-color:var(--hairline-mid)}
+.btn-secondary:hover{border-color:var(--stone)}
+.btn-on-dark{background:var(--on-dark);color:var(--ink)}
+.btn-on-dark:hover{background:#f0eef2}
+.btn-ghost{background:transparent;color:var(--ink);padding:8px 12px;border-radius:var(--r-md);font-weight:500}
+.btn-ghost:hover{background:var(--surface)}
+.btn-sm{height:34px;padding:7px 14px;font-size:13px}
+.btn-cmd{font-family:"JetBrains Mono",monospace;font-weight:500;background:var(--canvas);border:1px solid var(--hairline-mid);color:var(--ink);border-radius:var(--r-lg);height:auto}
+
+/* —— Hero (cream heritage band) —— */
+.hero{position:relative;overflow:hidden;background:var(--bun-cream);padding:72px 0 88px;text-align:center}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(ellipse at 50% -10%,rgba(255,255,255,0.7) 0%,transparent 55%),radial-gradient(circle at 84% 22%,rgba(255,115,168,0.14) 0%,transparent 38%),radial-gradient(circle at 14% 30%,rgba(255,115,168,0.10) 0%,transparent 40%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 32px}
+.hero .bun.lg{margin:0 auto 22px;display:block}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);border:1px solid rgba(30,26,27,0.08);border-radius:var(--r-full);padding:6px 14px 6px 8px;font-size:13px;font-weight:500;color:var(--ink);margin-bottom:26px}
+.hero-pill .ver{background:var(--ink);color:#fff;font-weight:700;font-size:11px;padding:2px 8px;border-radius:var(--r-full)}
+.hero-pill .arrow{color:var(--bun-pink-deep)}
+.hero h1{font-size:76px;font-weight:800;line-height:1.02;letter-spacing:-3px;color:var(--ink);margin:0 0 22px}
+.hero h1 .pk{color:var(--bun-pink-deep)}
+.hero .sub{font-size:21px;line-height:1.5;color:var(--slate);max-width:620px;margin:0 auto 32px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.install-cmd{display:inline-flex;align-items:center;gap:12px;background:var(--canvas);border:1px solid rgba(30,26,27,0.1);border-radius:var(--r-lg);padding:11px 14px 11px 16px;font-family:"JetBrains Mono",monospace;font-size:14px;color:var(--ink);box-shadow:0 2px 4px rgba(30,26,27,0.04)}
+.install-cmd .pr{color:var(--bun-pink-deep);font-weight:600}
+.install-cmd .copy{margin-left:4px;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r-sm);color:var(--stone);border:1px solid var(--hairline-mid)}
+.hero-meta{font-size:13px;color:var(--steel);margin-bottom:54px}
+.hero-meta b{color:var(--ink);font-weight:600}
+@media(max-width:760px){.hero h1{font-size:46px;letter-spacing:-1.6px}.hero .sub{font-size:17px}}
+
+/* —— Hero doc mockup (the "质感") —— */
+.mock{max-width:1120px;margin:0 auto;background:var(--canvas);border:1px solid var(--hairline-mid);border-radius:var(--r-xl);box-shadow:0 30px 60px -16px rgba(30,26,27,0.18),0 2px 8px rgba(30,26,27,0.04);overflow:hidden;text-align:left}
+.mock-bar{display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--surface);border-bottom:1px solid var(--hairline);font-size:13px;color:var(--steel)}
+.mock-bar .lights{display:flex;gap:6px}
+.mock-bar .lights span{width:11px;height:11px;border-radius:var(--r-full);background:var(--hairline-mid)}
+.mock-bar .url{flex:1;background:var(--canvas);border:1px solid var(--hairline-mid);border-radius:var(--r-md);padding:5px 12px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--steel);max-width:360px;margin:0 auto;text-align:center}
+.mock-grid{display:grid;grid-template-columns:240px 1fr 200px;min-height:460px}
+@media(max-width:880px){.mock-grid{grid-template-columns:1fr}}
+
+/* Doc sidebar */
+.doc-side{border-right:1px solid var(--hairline);padding:20px 16px;background:var(--canvas);font-size:13px}
+.doc-side .search{background:var(--surface);border:1px solid var(--hairline-mid);border-radius:var(--r-md);padding:9px 12px;font-size:13px;color:var(--stone);margin-bottom:18px;display:flex;align-items:center;gap:7px}
+.doc-side .search .k{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:11px;background:var(--canvas);border:1px solid var(--hairline-mid);padding:2px 6px;border-radius:var(--r-xs);color:var(--steel)}
+.doc-side .sec{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:0.4px;text-transform:uppercase;color:var(--ink);padding:16px 8px 8px}
+.doc-side .sec svg{width:13px;height:13px;color:var(--stone)}
+.doc-side .item{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--r-full);color:var(--steel);font-weight:400;font-size:13.5px;line-height:1.4}
+.doc-side .item:hover{color:var(--ink);background:var(--surface)}
+.doc-side .item.active{background:var(--bun-pink-soft);color:var(--bun-pink-deep);font-weight:600}
+
+/* Doc body */
+.doc-body{padding:26px 30px;background:var(--canvas);min-width:0}
+.doc-crumb{font-size:12px;color:var(--stone);margin-bottom:12px}
+.doc-crumb span{color:var(--steel)}
+.doc-body h3{font-size:30px;font-weight:800;margin:0 0 8px;color:var(--ink);letter-spacing:-0.8px}
+.doc-body .doc-sub{font-size:15px;color:var(--steel);margin:0 0 20px;line-height:1.6}
+.doc-body p{font-size:14.5px;color:var(--charcoal);line-height:1.7;margin:0 0 14px}
+.doc-body .inl-code{background:rgba(245,241,243,0.7);color:var(--steel);border:1px solid var(--hairline);border-radius:var(--r-sm);padding:2px 6px;font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:500}
+.doc-body .lnk{color:var(--bun-pink-deep);font-weight:500;border-bottom:1.5px solid var(--bun-pink-soft)}
+.code-block{background:var(--term);border-radius:var(--r-lg);overflow:hidden;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.6;margin:16px 0;border:1px solid var(--hairline-dark)}
+.code-head{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--hairline-dark);color:var(--on-dark-muted);font-size:12px}
+.code-head .dot{width:8px;height:8px;border-radius:var(--r-full);background:var(--bun-pink)}
+.code-head .copy{margin-left:auto;font-size:11px;border:1px solid var(--hairline-dark);padding:2px 8px;border-radius:var(--r-sm);color:var(--on-dark-muted)}
+.code-body{padding:14px 16px;color:var(--on-dark);white-space:pre;overflow:auto}
+.code-body .k{color:#c792ea}
+.code-body .s{color:#a7e2b4}
+.code-body .n{color:#ffcb6b}
+.code-body .c{color:#6b6776}
+.code-body .f{color:#82aaff}
+.code-body .pk{color:var(--bun-pink)}
+.cmp-row{padding:14px 0;border-bottom:1px solid var(--hairline);font-size:13px}
+.cmp-row:last-child{border-bottom:none}
+
+/* Doc TOC */
+.doc-toc{border-left:1px solid var(--hairline);padding:24px 18px;font-size:13px;background:var(--canvas)}
+.doc-toc h6{font-size:11px;font-weight:700;letter-spacing:0.4px;text-transform:uppercase;color:var(--ink);margin:0 0 12px}
+.doc-toc a{display:block;padding:5px 0;color:var(--stone)}
+.doc-toc a:hover{color:var(--ink)}
+.doc-toc a.active{color:var(--bun-pink-deep);font-weight:600;border-left:2px solid var(--bun-pink);padding-left:9px;margin-left:-11px}
+@media(max-width:880px){.doc-side,.doc-toc{display:none}}
+
+/* —— Logo wall —— */
+.logos{padding:44px 0;border-bottom:1px solid var(--hairline)}
+.logos .ll{text-align:center;font-size:13px;color:var(--stone);font-weight:500;letter-spacing:0.2px;margin-bottom:22px}
+.logos .row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:center}
+@media(max-width:760px){.logos .row{grid-template-columns:repeat(3,1fr)}}
+.logos .item{padding:12px;text-align:center;color:var(--slate);font-weight:600;font-size:17px;letter-spacing:-0.3px}
+
+/* —— Section —— */
+.section{padding:96px 0}
+.section + .section{border-top:1px solid var(--hairline)}
+.section-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--bun-pink-deep);text-transform:uppercase;letter-spacing:0.6px;margin:0 0 14px}
+.section-h{font-size:48px;font-weight:800;line-height:1.08;letter-spacing:-1.6px;color:var(--ink);margin:0 0 16px;max-width:780px}
+.section-lede{font-size:18px;line-height:1.6;color:var(--steel);max-width:680px;margin:0 0 48px}
+
+/* —— Feature grid —— */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:980px){.feat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.feat-grid{grid-template-columns:1fr}}
+.feat{background:var(--canvas);border:1px solid var(--hairline-mid);border-radius:var(--r-xl);padding:30px;transition:border-color .15s ease,box-shadow .15s ease}
+.feat:hover{border-color:var(--bun-pink-soft);box-shadow:0 8px 24px -12px rgba(255,115,168,0.4)}
+.feat .ic{width:42px;height:42px;border-radius:var(--r-lg);background:var(--bun-pink-soft);display:inline-flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--bun-pink-deep)}
+.feat h3{font-size:21px;font-weight:700;color:var(--ink);margin:0 0 8px;letter-spacing:-0.4px}
+.feat p{font-size:15px;line-height:1.6;color:var(--steel);margin:0 0 14px}
+.feat .cmd{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);padding:7px 11px;display:inline-flex;gap:7px}
+.feat .cmd .pr{color:var(--bun-pink-deep)}
+
+/* —— Dark install band —— */
+.band-dark{background:var(--ink-canvas);color:var(--on-dark);padding:96px 0;position:relative;overflow:hidden}
+.band-dark::after{content:"";position:absolute;left:-8%;bottom:-40%;width:55%;height:160%;background:radial-gradient(circle at center,rgba(255,115,168,0.16) 0%,transparent 60%);pointer-events:none}
+.band-dark .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:52px;align-items:center;position:relative;z-index:2}
+@media(max-width:880px){.band-dark .grid{grid-template-columns:1fr}}
+.band-dark h2{font-size:46px;font-weight:800;line-height:1.08;letter-spacing:-1.4px;margin:0 0 16px;color:#fff}
+.band-dark h2 .pk{color:var(--bun-pink)}
+.band-dark p{font-size:18px;line-height:1.6;color:rgba(255,255,255,0.72);margin:0 0 28px;max-width:480px}
+.band-dark .actions{display:flex;gap:12px;flex-wrap:wrap}
+.band-dark .stat-row{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap}
+.band-dark .stat .v{font-size:34px;font-weight:800;letter-spacing:-1px;color:var(--bun-pink)}
+.band-dark .stat .l{font-size:13px;color:rgba(255,255,255,0.6);margin-top:2px}
+.terminal{background:rgba(0,0,0,0.36);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-xl);overflow:hidden;font-family:"JetBrains Mono",monospace;font-size:13px;box-shadow:0 24px 60px -12px rgba(0,0,0,0.5)}
+.terminal-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:12px;color:rgba(255,255,255,0.5)}
+.terminal-bar .lights span{width:10px;height:10px;border-radius:var(--r-full);background:rgba(255,255,255,0.14);display:inline-block;margin-right:5px}
+.terminal-body{padding:20px 22px;color:rgba(255,255,255,0.9);line-height:1.8;white-space:pre-wrap}
+.terminal-body .pr{color:var(--bun-pink)}
+.terminal-body .cm{color:rgba(255,255,255,0.4)}
+.terminal-body .ok{color:#7ee2a8}
+.terminal-body .hl{color:#fff;font-weight:600}
+
+/* —— Benchmark / testimonial (pink) —— */
+.testi{background:var(--bun-pink);color:var(--ink);border-radius:var(--r-xxl);padding:60px;display:grid;grid-template-columns:1.4fr 0.7fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+.testi::after{content:"";position:absolute;right:-6%;top:-30%;width:40%;height:160%;background:radial-gradient(circle at center,rgba(255,255,255,0.3) 0%,transparent 60%)}
+@media(max-width:860px){.testi{grid-template-columns:1fr;padding:40px}}
+.testi .inner{position:relative;z-index:2}
+.testi .badge{background:rgba(30,26,27,0.12);border-radius:var(--r-full);padding:5px 12px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;margin-bottom:16px}
+.testi blockquote{margin:0;font-size:30px;font-weight:700;line-height:1.25;letter-spacing:-0.6px}
+.testi .attr{margin-top:24px;font-size:14px;font-weight:600;color:rgba(30,26,27,0.8);display:flex;align-items:center;gap:10px}
+.testi .av{width:38px;height:38px;border-radius:var(--r-full);background:rgba(255,255,255,0.45);display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+.testi .panel{position:relative;z-index:2;background:rgba(255,255,255,0.55);border-radius:var(--r-lg);padding:22px;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.9}
+.testi .panel .row{display:flex;justify-content:space-between}
+.testi .panel .nm{color:var(--charcoal)}
+.testi .panel .bun{font-weight:700;color:var(--ink)}
+.testi .panel .slow{color:rgba(30,26,27,0.5)}
+
+/* —— DS Section —— */
+.ds{background:var(--surface);border-top:1px solid var(--hairline);padding:96px 0}
+.ds-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.ds h2{font-size:38px;font-weight:800;letter-spacing:-1px;color:var(--ink);margin:0 0 6px}
+.ds .sub{color:var(--steel);font-size:15px}
+.ds-hd a{font-size:13px;font-weight:600;color:var(--ink);border:1px solid var(--hairline-mid);background:var(--canvas);padding:9px 15px;border-radius:var(--r-full)}
+.ds-block{margin-top:56px}
+.ds-block > h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--stone);margin:0 0 16px}
+.ds-block .desc{font-size:15px;color:var(--steel);margin:0 0 22px;max-width:580px;line-height:1.6}
+
+.color-cat{margin-top:20px}
+.color-cat-title{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 10px}
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+@media(max-width:980px){.swatches{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.swatches{grid-template-columns:repeat(2,1fr)}}
+.sw{background:var(--canvas);border:1px solid var(--hairline-mid);border-radius:var(--r-md);overflow:hidden}
+.sw-chip{height:64px;border-bottom:1px solid var(--hairline)}
+.sw-meta{padding:9px 11px;font-size:12px;line-height:1.4}
+.sw-name{font-weight:600;color:var(--ink)}
+.sw-val{font-family:"JetBrains Mono",monospace;color:var(--steel);font-size:11px;margin-top:2px}
+
+.typo{background:var(--canvas);border:1px solid var(--hairline-mid);border-radius:var(--r-lg);overflow:hidden}
+.typo-row{display:grid;grid-template-columns:160px 220px 1fr;gap:24px;padding:18px 22px;border-top:1px solid var(--hairline);align-items:center}
+.typo-row:first-child{border-top:none}
+.typo-row .tok{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink);font-weight:500}
+.typo-row .spec{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--steel)}
+.typo-row .smp{color:var(--ink)}
+@media(max-width:760px){.typo-row{grid-template-columns:1fr;gap:8px}}
+
+.radii{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+@media(max-width:860px){.radii{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:560px){.radii{grid-template-columns:repeat(2,1fr)}}
+.rad{background:var(--canvas);border:1px solid var(--hairline-mid);padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;border-radius:var(--r-md)}
+.rad-vis{width:56px;height:56px;background:var(--bun-pink-soft);border:1px solid var(--bun-pink)}
+.rad .nm{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink);font-weight:500}
+.rad .vl{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--steel)}
+
+.cmp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:860px){.cmp-grid{grid-template-columns:1fr}}
+.cmp{background:var(--canvas);border:1px solid var(--hairline-mid);border-radius:var(--r-lg);padding:24px}
+.cmp h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--stone);margin:0 0 16px}
+.cmp .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.cmp .row:last-child{margin-bottom:0}
+.cmp .label{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--steel);min-width:120px}
+.pill-tab{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r-full);font-size:14px;font-weight:500;color:var(--steel);background:var(--canvas);border:1px solid var(--hairline-mid);cursor:pointer}
+.pill-tab.on{background:var(--bun-pink-soft);color:var(--bun-pink-deep);border-color:transparent;font-weight:600}
+.input{background:var(--canvas);border:1px solid var(--hairline-mid);border-radius:var(--r-lg);height:40px;padding:8px 14px;font-size:14px;font-family:inherit;color:var(--ink);width:240px}
+.input.focused{border:2px solid var(--bun-pink);padding:7px 13px}
+.badge-type{background:var(--surface);color:var(--steel);font-family:"JetBrains Mono",monospace;font-size:12px;padding:2px 8px;border-radius:var(--r-sm)}
+.badge-pink{background:var(--bun-pink-soft);color:var(--bun-pink-deep);font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:600;padding:2px 8px;border-radius:var(--r-sm)}
+.badge-new{background:var(--bun-pink);color:var(--ink);font-size:10px;font-weight:700;letter-spacing:0.4px;padding:2px 7px;border-radius:var(--r-full);text-transform:uppercase}
+
+/* —— Footer —— */
+.foot{background:var(--canvas);border-top:1px solid var(--hairline);padding:64px 0 32px}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px}
+@media(max-width:980px){.foot-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:640px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-col h5{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 12px}
+.foot-col a{display:block;font-size:14px;color:var(--steel);padding:5px 0}
+.foot-col a:hover{color:var(--bun-pink-deep)}
+.foot-brand-row .brand{margin-bottom:14px}
+.foot-line{margin-top:48px;padding-top:24px;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;color:var(--stone);font-size:13px;flex-wrap:wrap;gap:12px}
+
+/* Floating badge */
+.float-md{position:fixed;right:18px;bottom:18px;z-index:50;background:var(--ink);color:var(--on-dark);font-size:13px;font-weight:600;padding:10px 16px;border-radius:var(--r-full);box-shadow:0 6px 18px rgba(30,26,27,0.22);display:inline-flex;align-items:center;gap:8px}
+.float-md:hover{background:#000}
+.float-md .d{width:8px;height:8px;border-radius:var(--r-full);background:var(--bun-pink)}
+</style>
+</head>
+<body>
+
+<!-- Promo banner -->
+<div class="promo">
+  <a href="#"><span class="tag">v1.2</span> Bun 1.2 ships a Node-compatible package manager, S3 & Postgres clients, and 90% faster installs <span class="arrow">→</span></a>
+</div>
+
+<!-- Top nav -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#">
+      <span class="bun"><span class="body"></span><span class="eye l"></span><span class="eye r"></span><span class="cheek l"></span><span class="cheek r"></span><span class="mouth"></span></span>
+      Bun
+    </a>
+    <nav class="nav-links">
+      <a href="#" class="active"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M5 5l2 2M17 17l2 2M2 12h3M19 12h3M5 19l2-2M17 7l2-2"/></svg> Runtime</a>
+      <a href="#"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> Package Manager</a>
+      <a href="#"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> Bundler</a>
+      <a href="#"><svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/></svg> Test Runner</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-ghost" href="#">Guides</a>
+      <a class="nav-ghost" href="#">Blog</a>
+      <a class="star" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 17.3 5.8 20.9l1.6-6.8L2.2 8.9l6.9-.6z"/></svg> 76.4k <b>★</b></a>
+      <a class="btn btn-primary btn-sm" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg> Install Bun</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="bun lg"><span class="body"></span><span class="eye l"></span><span class="eye r"></span><span class="cheek l"></span><span class="cheek r"></span><span class="mouth"></span></span>
+    <span class="hero-pill"><span class="ver">NEW</span> Bun is now production-ready on Windows <span class="arrow">→</span></span>
+    <h1>Bun is a fast<br>all-in-one <span class="pk">toolkit</span></h1>
+    <p class="sub">Develop, test, run, and bundle JavaScript &amp; TypeScript projects — all with Bun. A runtime, package manager, bundler and test runner in a single tool.</p>
+    <div class="hero-actions">
+      <div class="install-cmd"><span class="pr">$</span> curl -fsSL bun.sh/install | bash <span class="copy"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg></span></div>
+      <a class="btn btn-ink" href="#">Read the docs →</a>
+    </div>
+    <div class="hero-meta">Works with <b>npm</b>, <b>Node.js</b> APIs and <b>node_modules</b> — no rewrite required.</div>
+
+    <!-- Doc page mockup -->
+    <div class="mock">
+      <div class="mock-bar">
+        <div class="lights"><span></span><span></span><span></span></div>
+        <div class="url">bun.com / docs / runtime / bun-apis</div>
+        <div style="font-size:11px;font-weight:600;color:var(--steel)">v1.2.4</div>
+      </div>
+      <div class="mock-grid">
+        <aside class="doc-side">
+          <div class="search">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+            Search the docs…
+            <span class="k">⌘K</span>
+          </div>
+          <div class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6M12 19h8"/></svg> Get Started</div>
+          <div class="item">Welcome to Bun</div>
+          <div class="item">Installation</div>
+          <div class="item">Quickstart</div>
+          <div class="item">TypeScript</div>
+          <div class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2"/></svg> Core Runtime</div>
+          <div class="item active">Bun APIs</div>
+          <div class="item">Watch Mode</div>
+          <div class="item">Debugging</div>
+          <div class="item">bunfig.toml</div>
+        </aside>
+        <div class="doc-body">
+          <div class="doc-crumb">Runtime <span>/</span> <span>Bun APIs</span></div>
+          <h3>Bun APIs</h3>
+          <p class="doc-sub">Fast, native implementations of the things you build with every day.</p>
+          <p>Bun implements a set of native APIs for HTTP servers, file I/O, hashing, and SQLite — all written in native code and exposed on the global <span class="inl-code">Bun</span> object. They're drop-in replacements that run <span class="lnk">3–5× faster</span> than their Node.js counterparts.</p>
+          <div class="code-block">
+            <div class="code-head"><span class="dot"></span><span>server.ts</span><span class="copy">Copy</span></div>
+            <div class="code-body"><span class="c">// Bun.serve — a fast HTTP server</span>
+<span class="k">const</span> server = <span class="pk">Bun</span>.<span class="f">serve</span>({
+  <span class="f">port</span>: <span class="n">3000</span>,
+  <span class="f">fetch</span>(req) {
+    <span class="k">return</span> <span class="k">new</span> <span class="f">Response</span>(<span class="s">"Bun &#129371;"</span>);
+  },
+});
+
+<span class="pk">console</span>.<span class="f">log</span>(<span class="s">`Listening on :${server.port}`</span>);</div>
+          </div>
+          <h6 style="font-size:13px;font-weight:700;color:var(--ink);margin:20px 0 8px;text-transform:uppercase;letter-spacing:0.4px">Native modules</h6>
+          <div class="cmp-row" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;border:none;padding:8px 0">
+            <span class="badge-pink">Bun.serve</span><span class="badge-pink">Bun.file</span><span class="badge-pink">Bun.$</span><span class="badge-pink">bun:sqlite</span><span class="badge-pink">Bun.password</span>
+          </div>
+        </div>
+        <aside class="doc-toc">
+          <h6>On this page</h6>
+          <a href="#" class="active">Bun APIs</a>
+          <a href="#">HTTP server</a>
+          <a href="#">File I/O</a>
+          <a href="#">SQLite</a>
+          <a href="#">Hashing</a>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logo wall -->
+<section class="logos">
+  <div class="wrap">
+    <div class="ll">Trusted in production by fast-moving teams</div>
+    <div class="row">
+      <div class="item">Vercel</div>
+      <div class="item">Shopify</div>
+      <div class="item">Midjourney</div>
+      <div class="item">Linear</div>
+      <div class="item">Replit</div>
+      <div class="item">Anthropic</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section">
+  <div class="wrap-narrow">
+    <div class="section-eyebrow"><span class="bun"><span class="body"></span><span class="eye l"></span><span class="eye r"></span><span class="cheek l"></span><span class="cheek r"></span><span class="mouth"></span></span> One tool, the whole workflow</div>
+    <h2 class="section-h">Everything you need to build, in a single binary.</h2>
+    <p class="section-lede">Bun replaces node, npm, pnpm, yarn, jest, webpack, esbuild and dotenv. Less to install, less to configure, dramatically faster — and fully compatible with the ecosystem you already use.</p>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M5 5l2 2M17 17l2 2M2 12h3M19 12h3M5 19l2-2M17 7l2-2"/></svg></div>
+        <h3>Runtime</h3>
+        <p>A JavaScriptCore-powered runtime with first-class TypeScript, JSX and ESM. Starts in milliseconds, no transpile step.</p>
+        <span class="cmd"><span class="pr">$</span> bun run index.ts</span>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05"/></svg></div>
+        <h3>Package manager</h3>
+        <p>An npm-compatible installer that's up to 25× faster than npm. Global cache, lockfile, workspaces — all built in.</p>
+        <span class="cmd"><span class="pr">$</span> bun install</span>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Bundler</h3>
+        <p>Bundle for the browser, Node, or Bun with a single command. Tree-shaking, code-splitting, and a plugin API on board.</p>
+        <span class="cmd"><span class="pr">$</span> bun build ./app.ts</span>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/></svg></div>
+        <h3>Test runner</h3>
+        <p>A Jest-compatible test runner built into the binary. Snapshots, mocks, and DOM testing — running at native speed.</p>
+        <span class="cmd"><span class="pr">$</span> bun test</span>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+        <h3>Node compatible</h3>
+        <p>Implements Node.js APIs and globals — <code class="inl-code" style="font-size:12px">fs</code>, <code class="inl-code" style="font-size:12px">path</code>, <code class="inl-code" style="font-size:12px">http</code>, <code class="inl-code" style="font-size:12px">Buffer</code> — so your existing code just runs.</p>
+        <span class="cmd"><span class="pr">$</span> bun --bun next dev</span>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M9 4v14"/></svg></div>
+        <h3>Built-in clients</h3>
+        <p>Native SQLite, Postgres, Redis and S3 clients ship with the runtime. No drivers, no dependencies — just import and go.</p>
+        <span class="cmd"><span class="pr">$</span> import { sql } from "bun"</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dark install band -->
+<section class="band-dark">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <span class="section-eyebrow" style="color:var(--bun-pink)">Install, faster</span>
+        <h2>Your <span class="pk">node_modules</span>, in a blink.</h2>
+        <p>Bun installs dependencies up to 25× faster than npm by using a global module cache and the fastest possible syscalls on each OS. Same lockfile semantics, none of the waiting.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#">Try bun install</a>
+          <a class="btn btn-ghost" href="#" style="color:#fff">Read the benchmarks →</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="v">25×</div><div class="l">faster than npm</div></div>
+          <div class="stat"><div class="v">7×</div><div class="l">faster than pnpm</div></div>
+          <div class="stat"><div class="v">0.36s</div><div class="l">cold Next.js install</div></div>
+        </div>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <span>~/my-app · zsh</span>
+        </div>
+        <div class="terminal-body">
+<span class="cm"># swap npm for bun — same package.json</span>
+<span class="pr">$</span> bun install
+<span class="cm">bun install v1.2.4</span>
+
+<span class="ok">+</span> react<span class="cm">@19.0.0</span>
+<span class="ok">+</span> typescript<span class="cm">@5.7.2</span>
+<span class="ok">+</span> @types/node<span class="cm">@22.10.1</span>
+
+<span class="hl">412 packages installed</span> <span class="ok">[0.36s]</span>
+
+<span class="cm"># run it — no build step</span>
+<span class="pr">$</span> bun run dev
+<span class="ok">&#10003;</span> ready on <span class="hl">http://localhost:3000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benchmark / testimonial -->
+<section class="section">
+  <div class="wrap">
+    <div class="testi">
+      <div class="inner">
+        <span class="badge">&#9889; bun:test</span>
+        <blockquote>"We moved our entire CI to Bun and watched test suites go from 4 minutes to 38 seconds. It felt illegal."</blockquote>
+        <div class="attr">
+          <span class="av">JR</span>
+          <div>Jordan Reyes · Staff Engineer, Replit</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="row"><span class="nm">bun test</span><span class="bun">0.38s</span></div>
+        <div class="row"><span class="nm">vitest</span><span class="slow">2.10s</span></div>
+        <div class="row"><span class="nm">jest</span><span class="slow">5.74s</span></div>
+        <div style="height:1px;background:rgba(30,26,27,0.15);margin:10px 0"></div>
+        <div class="row"><span class="nm">1,240 tests</span><span class="bun">all green</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DS Reference -->
+<section class="ds">
+  <div class="wrap">
+    <div class="ds-hd">
+      <div>
+        <h2>Design system reference</h2>
+        <div class="sub">Tokens, type ladder, radius, components — extracted from the live bun.com/docs surface.</div>
+      </div>
+      <a href="https://bun.com/docs" target="_blank" rel="noopener">View source ↗</a>
+    </div>
+
+    <div class="ds-block">
+      <h3>Color</h3>
+      <p class="desc">Hot pink <code class="inl-code" style="font-size:12px">#ff73a8</code> is the single chromatic accent — CTAs, active sidebar pills, links, focus rings. The cream <code class="inl-code" style="font-size:12px">#fbf0df</code> is Bun's heritage canvas, kept for the hero. Hairlines are a warm pink-grey, never neutral.</p>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Brand &amp; accent</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#ff73a8"></div><div class="sw-meta"><div class="sw-name">Bun pink</div><div class="sw-val">#ff73a8</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#f24b8e"></div><div class="sw-meta"><div class="sw-name">Pink deep</div><div class="sw-val">#f24b8e</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#ffe4ef"></div><div class="sw-meta"><div class="sw-name">Pink soft</div><div class="sw-val">#ffe4ef</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#f9a8d4"></div><div class="sw-meta"><div class="sw-name">Cheek</div><div class="sw-val">#f9a8d4</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#fbf0df"></div><div class="sw-meta"><div class="sw-name">Cream</div><div class="sw-val">#fbf0df</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#f3e3c8"></div><div class="sw-meta"><div class="sw-name">Cream deep</div><div class="sw-val">#f3e3c8</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Surface</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#ffffff;border-right:1px solid var(--hairline)"></div><div class="sw-meta"><div class="sw-name">Canvas</div><div class="sw-val">#ffffff</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#fdfbfc"></div><div class="sw-meta"><div class="sw-name">Warm white</div><div class="sw-val">#fdfbfc</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#faf7f8"></div><div class="sw-meta"><div class="sw-name">Surface</div><div class="sw-val">#faf7f8</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#f5f1f3"></div><div class="sw-meta"><div class="sw-name">Hairline</div><div class="sw-val">#f5f1f3</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#ece6e9"></div><div class="sw-meta"><div class="sw-name">Hairline mid</div><div class="sw-val">#ece6e9</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#15131a"></div><div class="sw-meta"><div class="sw-name">Terminal</div><div class="sw-val">#15131a</div></div></div>
+        </div>
+      </div>
+
+      <div class="color-cat">
+        <p class="color-cat-title">Text</p>
+        <div class="swatches">
+          <div class="sw"><div class="sw-chip" style="background:#1e1a1b"></div><div class="sw-meta"><div class="sw-name">Ink</div><div class="sw-val">#1e1a1b</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#2d282a"></div><div class="sw-meta"><div class="sw-name">Charcoal</div><div class="sw-val">#2d282a</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#464243"></div><div class="sw-meta"><div class="sw-name">Slate</div><div class="sw-val">#464243</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#575355"></div><div class="sw-meta"><div class="sw-name">Steel</div><div class="sw-val">#575355</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#777375"></div><div class="sw-meta"><div class="sw-name">Stone</div><div class="sw-val">#777375</div></div></div>
+          <div class="sw"><div class="sw-chip" style="background:#a39ea1"></div><div class="sw-meta"><div class="sw-name">Muted</div><div class="sw-val">#a39ea1</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Typography</h3>
+      <p class="desc">Inter for UI and prose, Inter Display weight 800 for headlines with tight negative tracking, JetBrains Mono for every command and code surface. Documentation prose runs a relaxed 1.7 line-height.</p>
+      <div class="typo">
+        <div class="typo-row"><div class="tok">hero-display</div><div class="spec">76 / 800 / -3px</div><div class="smp disp" style="font-size:46px;letter-spacing:-1.8px;line-height:1.05">A fast all-in-one toolkit</div></div>
+        <div class="typo-row"><div class="tok">section-h</div><div class="spec">48 / 800 / -1.6px</div><div class="smp disp" style="font-size:34px;letter-spacing:-1.2px">Everything in one binary</div></div>
+        <div class="typo-row"><div class="tok">doc-title</div><div class="spec">30 / 800 / -0.8px</div><div class="smp" style="font-size:26px;font-weight:800;letter-spacing:-0.6px">Bun APIs</div></div>
+        <div class="typo-row"><div class="tok">feature-h</div><div class="spec">21 / 700 / -0.4px</div><div class="smp" style="font-size:21px;font-weight:700">Package manager</div></div>
+        <div class="typo-row"><div class="tok">subtitle</div><div class="spec">21 / 400 / 1.5</div><div class="smp" style="font-size:19px;color:var(--slate)">A runtime, bundler and test runner in one.</div></div>
+        <div class="typo-row"><div class="tok">body-md</div><div class="spec">16 / 400 / 1.5</div><div class="smp" style="font-size:16px;color:var(--charcoal)">Primary marketing body copy.</div></div>
+        <div class="typo-row"><div class="tok">doc-body</div><div class="spec">14.5 / 400 / 1.7</div><div class="smp" style="font-size:14.5px;color:var(--charcoal);line-height:1.7">Documentation prose, relaxed for long-form reading.</div></div>
+        <div class="typo-row"><div class="tok">micro-upper</div><div class="spec">11 / 700 · UPPER</div><div class="smp" style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--stone)">CORE RUNTIME</div></div>
+        <div class="typo-row"><div class="tok">code-md</div><div class="spec">13 / 500 · JetBrains</div><div class="smp mono" style="font-size:13px"><span style="color:var(--bun-pink-deep)">$</span> bun install</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Radius</h3>
+      <p class="desc">Pills for buttons, nav stars and sidebar items — the soft, friendly Bun silhouette. Cards and ghost commands sit at 12–16px. Code chips at 6px.</p>
+      <div class="radii">
+        <div class="rad"><div class="rad-vis" style="border-radius:4px"></div><div class="nm">xs</div><div class="vl">4px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:6px"></div><div class="nm">sm</div><div class="vl">6px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:8px"></div><div class="nm">md</div><div class="vl">8px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:12px"></div><div class="nm">lg</div><div class="vl">12px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:16px"></div><div class="nm">xl</div><div class="vl">16px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:24px"></div><div class="nm">xxl</div><div class="vl">24px</div></div>
+        <div class="rad"><div class="rad-vis" style="border-radius:9999px"></div><div class="nm">full</div><div class="vl">9999px</div></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <h3>Components</h3>
+      <p class="desc">Pink-fill pill primaries, warm-hairline secondaries, pink active-pill sidebar items, mono command chips, and the dark code block with a pink dot. Focus states ring in Bun pink.</p>
+      <div class="cmp-grid">
+        <div class="cmp">
+          <h4>Buttons</h4>
+          <div class="row"><span class="label">primary</span><a class="btn btn-primary">Install Bun</a></div>
+          <div class="row"><span class="label">ink</span><a class="btn btn-ink">Read the docs →</a></div>
+          <div class="row"><span class="label">secondary</span><a class="btn btn-secondary">Quickstart</a></div>
+          <div class="row"><span class="label">on-dark</span><div style="background:var(--ink-canvas);padding:8px;border-radius:var(--r-md)"><a class="btn btn-on-dark">Benchmarks</a></div></div>
+          <div class="row"><span class="label">ghost</span><a class="btn btn-ghost">Guides</a></div>
+        </div>
+        <div class="cmp">
+          <h4>Pills, tabs &amp; badges</h4>
+          <div class="row"><span class="label">sidebar-pill</span><span class="pill-tab on">Bun APIs</span><span class="pill-tab">Watch Mode</span></div>
+          <div class="row"><span class="label">star</span><span class="star" style="cursor:default"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 17.3 5.8 20.9l1.6-6.8L2.2 8.9l6.9-.6z"/></svg> 76.4k <b>★</b></span></div>
+          <div class="row"><span class="label">badge-new</span><span class="badge-new">New</span><span class="badge-pink">Bun.serve</span></div>
+        </div>
+        <div class="cmp">
+          <h4>Inputs</h4>
+          <div class="row"><span class="label">text</span><input class="input" placeholder="Search the docs…"/></div>
+          <div class="row"><span class="label">focused</span><input class="input focused" value="bun install"/></div>
+        </div>
+        <div class="cmp">
+          <h4>Doc primitives</h4>
+          <div class="row"><span class="label">inline-code</span><span class="inl-code">Bun.file()</span></div>
+          <div class="row"><span class="label">badge-type</span><span class="badge-type">string</span><span class="badge-type">number</span></div>
+          <div class="row"><span class="label">link</span><a class="lnk" href="#" style="color:var(--bun-pink-deep);font-weight:500;border-bottom:1.5px solid var(--bun-pink-soft)">compatibility page</a></div>
+        </div>
+        <div class="cmp" style="grid-column:span 2">
+          <h4>Code block</h4>
+          <div class="code-block" style="margin:0">
+            <div class="code-head"><span class="dot"></span><span>install.sh</span><span class="copy">Copy</span></div>
+            <div class="code-body"><span class="pk">$</span> curl -fsSL bun.sh/install | bash
+<span class="pk">$</span> bun init <span class="c"># scaffold a new project</span>
+<span class="pk">$</span> bun run index.ts <span class="ok" style="color:#7ee2a8">&#10003; ready</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col foot-brand-row">
+        <a class="brand" href="#"><span class="bun"><span class="body"></span><span class="eye l"></span><span class="eye r"></span><span class="cheek l"></span><span class="cheek r"></span><span class="mouth"></span></span> Bun</a>
+        <p style="font-size:14px;color:var(--steel);max-width:280px;margin:0 0 16px;line-height:1.6">The fast all-in-one JavaScript runtime. Build, test, run and bundle from a single binary.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--steel)">
+          <span style="width:8px;height:8px;border-radius:var(--r-full);background:var(--bun-pink)"></span>
+          All systems operational
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Docs</h5>
+        <a href="#">Runtime</a><a href="#">Package Manager</a><a href="#">Bundler</a><a href="#">Test Runner</a>
+      </div>
+      <div class="foot-col">
+        <h5>Learn</h5>
+        <a href="#">Quickstart</a><a href="#">Guides</a><a href="#">API Reference</a><a href="#">Examples</a>
+      </div>
+      <div class="foot-col">
+        <h5>Community</h5>
+        <a href="#">GitHub</a><a href="#">Discord</a><a href="#">X / Twitter</a><a href="#">YouTube</a>
+      </div>
+      <div class="foot-col">
+        <h5>Project</h5>
+        <a href="#">Blog</a><a href="#">Roadmap</a><a href="#">Releases</a><a href="#">License</a>
+      </div>
+    </div>
+    <div class="foot-line">
+      <div>© 2026 Oven, Inc. — Bun is MIT licensed.</div>
+      <div>Made fast, for the web.</div>
+    </div>
+  </div>
+</footer>
+
+<a class="float-md" href="https://bun.com/docs" target="_blank" rel="noopener"><span class="d"></span> View source ↗</a>
+
+</body>
+</html>
