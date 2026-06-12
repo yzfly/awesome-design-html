@@ -1,698 +1,695 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wired — The future is here. Read it first.</title>
-<meta name="description" content="WIRED illuminates how technology is changing every aspect of our lives — from culture to business, science to design.">
-<meta property="og:title" content="Wired — The future is here. Read it first.">
-<meta property="og:description" content="Long-form technology journalism. Culture, business, science, design.">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WIRED — Front Page Typography Study · Design Research</title>
+<meta name="description" content="A design research study of WIRED's visual language: newspaper hairline grids, alternating block masthead, mixed serif/sans display headlines, duotone art panels and neon accent punctuation on a stark black-and-white canvas." />
+<meta property="og:title" content="WIRED — Front Page Typography Study" />
+<meta property="og:description" content="Design research: the front-page grid as brand. Hairline rules, block masthead, duotone panels, neon accents." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <style>
-:root{
-  /* color */
-  --primary:#000000;
-  --on-primary:#ffffff;
-  --ink:#000000;
-  --ink-soft:#1a1a1a;
-  --body:#757575;
-  --hairline:#e0e0e0;
-  --canvas:#ffffff;
-  --canvas-soft:#f5f5f5;
-  --link:#057dbc;
-
-  /* radius */
-  --r-none:0;
-  --r-full:9999px;
-
-  /* spacing */
-  --s-xxs:2px; --s-xs:4px; --s-sm:8px; --s-md:12px;
-  --s-lg:16px; --s-xl:20px; --s-2xl:24px; --s-3xl:32px; --s-4xl:48px;
-
-  /* fonts */
-  --font-display:'DM Serif Display','Times New Roman',Georgia,serif;
-  --font-serif:'Source Serif 4',Georgia,'Times New Roman',serif;
-  --font-sans:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+:root {
+  /* Paper & ink — the soul is black on white */
+  --paper: #ffffff;
+  --paper-dim: #f4f4f2;
+  --ink: #0a0a0a;
+  --ink-soft: #3c3c3c;
+  --ink-mute: #757575;
+  /* Hairline — the structural protagonist */
+  --rule: #0a0a0a;
+  --rule-soft: #d8d8d4;
+  /* Neon punctuation — used in drops, never in floods */
+  --electric: #33bbff;
+  --acid: #b6ff00;
+  --magenta: #ff3eb5;
+  /* Type */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  /* Radius — WIRED has none. Sharpness is a token. */
+  --r-none: 0;
+  --hairline: 1px solid var(--rule);
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{font-family:var(--font-sans);color:var(--ink);background:var(--canvas);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-img,svg{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
-
-/* ---------- type system ---------- */
-.display-hero{font-family:var(--font-display);font-weight:400;font-size:64px;line-height:.93;letter-spacing:-.5px}
-.display-lg{font-family:var(--font-display);font-weight:400;font-size:48px;line-height:1.05;letter-spacing:-.4px}
-.display-md{font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.1;letter-spacing:-.3px}
-.display-sm{font-family:var(--font-display);font-weight:400;font-size:26px;line-height:1.08}
-.display-xs{font-family:var(--font-sans);font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.28px}
-
-.body-serif-lg{font-family:var(--font-serif);font-weight:400;font-size:19px;line-height:1.47;letter-spacing:.108px}
-.body-serif-md{font-family:var(--font-serif);font-weight:400;font-size:17px;line-height:1.5;letter-spacing:.09px}
-
-.body-md{font-family:var(--font-sans);font-weight:400;font-size:17px;line-height:1.18}
-.body-md-strong{font-family:var(--font-sans);font-weight:700;font-size:17px;line-height:1.3;letter-spacing:-.144px}
-.body-sm{font-family:var(--font-sans);font-weight:400;font-size:14px;line-height:1.3;letter-spacing:.4px}
-.body-sm-strong{font-family:var(--font-sans);font-weight:700;font-size:14px;line-height:1.3;letter-spacing:.4px}
-
-.byline{font-family:var(--font-serif);font-weight:700;font-size:12.73px;line-height:2.2;letter-spacing:.108px;color:var(--body)}
-.caption{font-family:var(--font-sans);font-weight:400;font-size:12px;line-height:1.35}
-.btn-label{font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.3px;text-transform:uppercase}
-
-/* category eyebrow — uppercase sans, sometimes red bar */
-.eyebrow{font-family:var(--font-sans);font-weight:700;font-size:13px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:8px}
-.eyebrow.red{color:#d11}
-
-/* ---------- shell ---------- */
-.shell{max-width:1400px;margin:0 auto;padding:0 32px}
-
-/* ---------- masthead band ---------- */
-.utility-bar{background:var(--ink);color:#fff;font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:8px 32px;text-align:center;border-bottom:1px solid #000}
-.utility-bar span{margin:0 14px;opacity:.7}
-.utility-bar a{text-decoration:underline}
-
-.masthead{background:var(--canvas);border-bottom:1px solid var(--ink);padding:16px 32px}
-.masthead-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px}
-.masthead .left{display:flex;align-items:center;gap:18px}
-.masthead .menu-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-.masthead .wordmark{font-family:var(--font-display);font-weight:400;font-size:48px;line-height:1;letter-spacing:-1px;text-align:center}
-.masthead .wordmark .crop{display:inline-block;font-style:italic}
-.masthead .right{display:flex;align-items:center;justify-content:flex-end;gap:14px}
-.masthead .right a{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
-.masthead .right a.subscribe{background:var(--ink);color:#fff;padding:10px 16px}
-
-.section-nav{background:var(--canvas);border-bottom:1px solid var(--hairline);padding:10px 32px;overflow-x:auto}
-.section-nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:28px;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.section-nav a{color:var(--ink);position:relative;padding:4px 0}
-.section-nav a:hover{color:#000}
-.section-nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-13px;height:3px;background:var(--ink)}
-
-/* ---------- HERO featured story ---------- */
-.cover-grid{padding:48px 32px 32px;border-bottom:1px solid var(--hairline)}
-.cover-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.4fr .9fr;gap:48px}
-.cover-feature{display:flex;flex-direction:column;gap:18px}
-.cover-img{aspect-ratio:16/10;background:linear-gradient(135deg,#0e0e0e 0%,#3a3a3a 60%,#7a7a7a 100%);position:relative;overflow:hidden}
-.cover-img::after{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 30% 70%,rgba(255,255,255,.15),transparent 50%),
-    radial-gradient(circle at 80% 25%,rgba(0,0,0,.6),transparent 50%);
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
-.cover-img.alt{background:linear-gradient(160deg,#202020 0%,#7d7d7d 100%)}
-.cover-img.alt2{background:linear-gradient(135deg,#444 0%,#1a1a1a 60%,#000 100%)}
-.cover-img.warm{background:linear-gradient(135deg,#2a1d10 0%,#a45f2e 60%,#e6b896 100%)}
-.cover-img.tech{background:
-  radial-gradient(circle at 30% 50%,#5e7aff,#0a0a3a 60%),
-  linear-gradient(135deg,#000,#222)}
-.cover-img.bio{background:
-  radial-gradient(circle at 60% 40%,#1f5f3f,#0a2a18 60%),
-  linear-gradient(160deg,#0a2a18,#000)}
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--acid); color: #000; }
 
-.cover-feature .eyebrow{color:#d11;font-weight:700}
-.cover-feature h1{font-family:var(--font-display);font-weight:400;font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-.6px}
-.cover-feature .dek{font-family:var(--font-serif);font-weight:400;font-size:20px;line-height:1.4;color:var(--ink-soft);max-width:680px}
-.cover-feature .byline-row{display:flex;align-items:center;gap:14px;padding-top:8px}
-.cover-feature .byline-row .av{width:36px;height:36px;border-radius:50%;background:#ddd}
-.cover-feature .byline{color:var(--body);line-height:1.4}
-.cover-feature .byline b{color:var(--ink);font-weight:700}
+.shell { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
-.cover-side{display:flex;flex-direction:column;gap:32px}
-.cover-side .item{display:flex;flex-direction:column;gap:8px;padding-bottom:24px;border-bottom:1px solid var(--hairline)}
-.cover-side .item:last-child{border-bottom:0;padding-bottom:0}
-.cover-side .item .thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#aaa,#333)}
-.cover-side .item.t2 .thumb{background:linear-gradient(135deg,#7a4e2a,#1a0e07)}
-.cover-side .item.t3 .thumb{background:linear-gradient(135deg,#3a4d5c,#0c1a25)}
-.cover-side .item .eyebrow{font-size:12px}
-.cover-side .item h3{font-family:var(--font-display);font-weight:400;font-size:24px;line-height:1.1;letter-spacing:-.25px}
-.cover-side .item .by{font-family:var(--font-serif);font-weight:700;font-size:12.73px;line-height:1.4;color:var(--body)}
+/* ---------- TOPBAR — thin black strip ---------- */
+.topbar { background: #000; color: #fff; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; }
+.topbar-in { max-width: 1280px; margin: 0 auto; padding: 7px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.topbar .tag-dot { color: var(--acid); }
+.topbar a { border-bottom: 1px solid var(--magenta); padding-bottom: 1px; }
+.topbar a:hover { color: var(--magenta); }
 
-/* ---------- 3-up secondary grid ---------- */
-.secondary-grid{padding:32px 32px;border-bottom:1px solid var(--hairline)}
-.secondary-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.sec-card{display:flex;flex-direction:column;gap:10px}
-.sec-card .thumb{aspect-ratio:4/3;background:linear-gradient(135deg,#bbb,#444)}
-.sec-card.a .thumb{background:linear-gradient(135deg,#222,#777)}
-.sec-card.b .thumb{background:linear-gradient(160deg,#3e2a14,#a3724a)}
-.sec-card.c .thumb{background:linear-gradient(180deg,#1a1a3a,#5e6eff 70%,#9ecbff)}
-.sec-card .eyebrow{font-size:12px;letter-spacing:.08em}
-.sec-card h3{font-family:var(--font-display);font-weight:400;font-size:28px;line-height:1.05;letter-spacing:-.3px}
-.sec-card .by{font-family:var(--font-serif);font-weight:700;font-size:12.73px;color:var(--body);line-height:1.6}
-
-/* ---------- section: by category headline + columns ---------- */
-.section-band{padding:48px 32px;border-bottom:1px solid var(--ink)}
-.section-band .head{max-width:1400px;margin:0 auto 32px;display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:16px}
-.section-band .head h2{font-family:var(--font-display);font-weight:400;font-size:36px;line-height:1;letter-spacing:-.5px}
-.section-band .head a{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
-.section-band .grid-mag{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-.mag-item{display:flex;flex-direction:column;gap:10px}
-.mag-item .thumb{aspect-ratio:1/1;background:linear-gradient(135deg,#aaa,#333)}
-.mag-item.x1 .thumb{background:linear-gradient(160deg,#cf9b6f,#3a1a07)}
-.mag-item.x2 .thumb{background:linear-gradient(160deg,#0a0a2a,#5e5eff)}
-.mag-item.x3 .thumb{background:linear-gradient(135deg,#3a0a0a,#a01a1a)}
-.mag-item.x4 .thumb{background:linear-gradient(135deg,#0f3a1a,#5ec07e)}
-.mag-item.x5 .thumb{background:linear-gradient(135deg,#262626,#888)}
-.mag-item.x6 .thumb{background:linear-gradient(135deg,#3b2c5a,#cab8ff)}
-.mag-item.x7 .thumb{background:linear-gradient(135deg,#000,#444)}
-.mag-item.x8 .thumb{background:linear-gradient(135deg,#5a3b00,#caa050)}
-.mag-item h3{font-family:var(--font-display);font-weight:400;font-size:22px;line-height:1.1;letter-spacing:-.2px}
-.mag-item .by{font-family:var(--font-serif);font-weight:700;font-size:12.73px;color:var(--body);line-height:1.4}
-
-/* ---------- big quote / pull section ---------- */
-.pull-band{padding:96px 32px;background:var(--canvas);border-bottom:1px solid var(--ink)}
-.pull-inner{max-width:1100px;margin:0 auto;text-align:center}
-.pull-inner .eyebrow{margin-bottom:24px}
-.pull-inner blockquote{font-family:var(--font-display);font-weight:400;font-size:clamp(36px,5vw,64px);line-height:1.02;letter-spacing:-.5px;margin-bottom:24px}
-.pull-inner blockquote::before{content:"\201C";color:#d11}
-.pull-inner cite{font-family:var(--font-serif);font-weight:700;font-size:14px;color:var(--body);letter-spacing:.04em;text-transform:uppercase;font-style:normal}
-
-/* ---------- bylined story stack ---------- */
-.story-stack{padding:48px 32px}
-.story-stack-inner{max-width:1100px;margin:0 auto}
-.story-stack h2{font-family:var(--font-display);font-weight:400;font-size:36px;line-height:1;letter-spacing:-.5px;padding-bottom:16px;border-bottom:2px solid var(--ink);margin-bottom:8px}
-.story-row{padding:24px 0;border-bottom:1px solid var(--hairline);display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}
-.story-row:hover{background:var(--canvas-soft)}
-.story-row .num{font-family:var(--font-display);font-size:48px;color:#d11;line-height:1}
-.story-row .col .eyebrow{font-size:12px;margin-bottom:6px}
-.story-row .col h3{font-family:var(--font-display);font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.3px;margin-bottom:6px}
-.story-row .col .dek{font-family:var(--font-serif);font-size:16px;color:var(--ink-soft);line-height:1.5;margin-bottom:8px}
-.story-row .col .by{font-family:var(--font-serif);font-weight:700;font-size:12.73px;color:var(--body);line-height:1.4}
-
-/* ---------- newsletter band ---------- */
-.newsletter{padding:64px 32px;border-top:1px solid var(--hairline);border-bottom:1px solid var(--ink)}
-.newsletter-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.newsletter h2{font-family:var(--font-display);font-weight:400;font-size:40px;line-height:1.02;letter-spacing:-.4px;margin-bottom:14px}
-.newsletter p{font-family:var(--font-serif);font-size:17px;line-height:1.5;color:var(--ink-soft)}
-.newsletter form{display:flex;gap:0}
-.newsletter input{flex:1;padding:14px 16px;border:2px solid var(--ink);font:inherit;font-size:16px;background:#fff}
-.btn-primary{background:var(--ink);color:#fff;padding:14px 24px;font-size:14px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;border:0}
-.btn-outline{background:transparent;color:var(--ink);padding:14px 24px;font-size:14px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;border:2px solid var(--ink)}
-
-/* ---------- DS section ---------- */
-.ds{background:var(--canvas);padding:96px 32px;border-top:2px solid var(--ink)}
-.ds-inner{max-width:1400px;margin:0 auto}
-.ds .eyebrow{margin-bottom:16px}
-.ds h2{font-family:var(--font-display);font-weight:400;font-size:64px;line-height:.95;letter-spacing:-.6px;margin-bottom:14px}
-.ds .ds-lead{font-family:var(--font-serif);font-size:19px;color:var(--ink-soft);max-width:680px;line-height:1.5;margin-bottom:64px;border-left:3px solid var(--ink);padding-left:18px}
-.ds-block{margin-bottom:64px}
-.ds-block .head-line{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:24px}
-.ds-block h3{font-family:var(--font-sans);font-weight:700;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
-.ds-block .head-line .ix{font-family:var(--font-serif);font-weight:700;font-size:14px;color:var(--body);font-style:italic}
-
-.color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
-.color-card{border:1px solid var(--hairline);overflow:hidden}
-.color-swatch{height:80px}
-.color-meta{padding:14px;background:var(--canvas)}
-.color-meta .nm{font-family:var(--font-sans);font-size:14px;font-weight:700}
-.color-meta .hex{font-family:ui-monospace,monospace;font-size:12px;color:var(--body);margin-top:2px}
-.color-group{margin-bottom:24px}
-.color-group h4{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--body);margin-bottom:12px}
-
-.ds-table{width:100%;border-collapse:collapse;font-size:15px}
-.ds-table th,.ds-table td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--hairline);vertical-align:middle}
-.ds-table th{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--canvas)}
-.ds-table code{font-family:ui-monospace,monospace;font-size:12px;color:var(--body)}
-
-.radius-ladder{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:520px}
-.radius-cell{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:18px;border:1px solid var(--hairline)}
-.radius-cell .box{width:96px;height:96px;background:var(--ink)}
-.radius-cell .nm{font-family:var(--font-sans);font-size:13px;font-weight:700}
-.radius-cell .v{font-family:ui-monospace,monospace;font-size:11px;color:var(--body)}
-
-.comp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
-.comp-cell{padding:32px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);background:var(--canvas)}
-.comp-cell.dark{background:var(--ink);color:#fff}
-.comp-cell .nm{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--body);margin-bottom:18px}
-.comp-cell.dark .nm{color:rgba(255,255,255,.7)}
-.comp-cell .demo{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-
-/* ---------- footer ---------- */
-.footer{background:var(--ink);color:#fff;padding:64px 32px 32px}
-.footer-inner{max-width:1400px;margin:0 auto}
-.footer-wordmark{font-family:var(--font-display);font-size:64px;line-height:1;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:24px}
-.footer-cols{display:grid;grid-template-columns:repeat(5,1fr);gap:32px;margin-bottom:48px}
-.footer-col h5{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:14px}
-.footer-col a{display:block;color:rgba(255,255,255,.65);font-size:14px;line-height:2;font-family:var(--font-sans);font-weight:400}
-.footer-col a:hover{color:#fff;text-decoration:underline}
-.footer-bottom{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.5);padding-top:24px;border-top:1px solid rgba(255,255,255,.2);flex-wrap:wrap;gap:14px;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
-
-/* floating */
-.src-link{
-  position:fixed;right:18px;bottom:18px;z-index:50;
-  background:var(--ink);color:#fff;
-  font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  padding:12px 16px;border:0;
-  box-shadow:0 8px 24px rgba(0,0,0,.18);
-  display:inline-flex;align-items:center;gap:6px
+/* ---------- MASTHEAD — alternating block logo ---------- */
+.masthead { border-bottom: 3px solid var(--rule); }
+.masthead-in { max-width: 1280px; margin: 0 auto; padding: 30px 24px 22px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.logo { display: inline-flex; line-height: 1; }
+.logo b {
+  width: 62px; height: 62px; display: grid; place-items: center;
+  font-weight: 900; font-size: 40px; letter-spacing: -0.02em;
 }
-.src-link:hover{background:#222}
-
-/* link blue */
-.inline-link{color:var(--link);text-decoration:underline}
-
-/* responsive */
-@media (max-width:1024px){
-  .cover-inner,.newsletter-inner{grid-template-columns:1fr}
-  .secondary-inner{grid-template-columns:1fr 1fr}
-  .section-band .grid-mag{grid-template-columns:1fr 1fr}
-  .footer-cols{grid-template-columns:1fr 1fr 1fr}
-  .comp-grid{grid-template-columns:1fr}
-  .masthead-inner{grid-template-columns:1fr}
-  .masthead .left,.masthead .right{justify-content:center}
-  .masthead .wordmark{font-size:36px}
-  .display-hero{font-size:44px}
-  .ds h2{font-size:44px}
-  .story-row{grid-template-columns:50px 1fr}
+.logo b:nth-child(odd) { background: #000; color: #fff; }
+.logo b:nth-child(even) { background: #fff; color: #000; }
+.masthead-side { text-align: right; }
+.masthead-issue { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-mute); text-transform: uppercase; }
+.masthead-issue strong { color: var(--ink); font-weight: 700; }
+.btn-sub {
+  display: inline-block; margin-top: 10px; background: #000; color: #fff;
+  font-weight: 800; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 11px 22px; border: var(--hairline); transition: all .15s;
 }
-@media (max-width:600px){
-  .secondary-inner{grid-template-columns:1fr}
-  .section-band .grid-mag{grid-template-columns:1fr}
-  .footer-cols{grid-template-columns:1fr 1fr}
-  .radius-ladder{grid-template-columns:1fr}
+.btn-sub:hover { background: var(--acid); color: #000; }
+
+/* ---------- NAV — hairline strip of sections ---------- */
+.nav { border-bottom: var(--hairline); background: var(--paper); position: sticky; top: 0; z-index: 40; }
+.nav-in { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: stretch; overflow-x: auto; }
+.nav a {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 13px 18px; border-right: 1px solid var(--rule-soft); white-space: nowrap; transition: all .12s;
+}
+.nav a:first-child { border-left: 1px solid var(--rule-soft); }
+.nav a:hover { background: #000; color: #fff; }
+.nav a.hot { color: #fff; background: #000; }
+.nav a.hot:hover { background: var(--magenta); color: #000; }
+.nav .nav-fill { flex: 1; }
+.nav .nav-search { font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.06em; color: var(--ink-mute); border-left: 1px solid var(--rule-soft); border-right: 0; }
+
+/* ---------- STORY PRIMITIVES ---------- */
+.kicker { font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; }
+.kicker::before { content: ""; width: 9px; height: 9px; background: currentColor; }
+.kicker.k-blue { color: #0089d1; }
+.kicker.k-green { color: #5d8800; }
+.kicker.k-magenta { color: #d4008b; }
+.hed { font-weight: 900; letter-spacing: -0.035em; line-height: 0.98; margin: 14px 0 0; }
+.hed em { font-family: var(--font-serif); font-style: italic; font-weight: 500; letter-spacing: -0.02em; }
+.hed a:hover { background: var(--acid); box-shadow: 0 0 0 4px var(--acid); }
+.dek { font-family: var(--font-serif); font-size: 17px; line-height: 1.55; color: var(--ink-soft); margin: 16px 0 0; }
+.byline { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-top: 16px; display: block; }
+.byline strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- ART PANELS — duotone, typography as image ---------- */
+.art { position: relative; overflow: hidden; display: block; }
+.art-num {
+  position: absolute; line-height: 0.8; font-weight: 900; letter-spacing: -0.05em;
+  color: transparent; -webkit-text-stroke: 2px #000; pointer-events: none;
+}
+.art-quote { position: absolute; font-family: var(--font-serif); font-style: italic; pointer-events: none; }
+.art-label { position: absolute; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; pointer-events: none; }
+
+/* FIG.01 — lead: electric blue halftone field */
+.art-lead { aspect-ratio: 16 / 10; background:
+  radial-gradient(circle at 78% 26%, rgba(255,255,255,0.55), transparent 34%),
+  radial-gradient(#000 1.1px, transparent 1.3px) 0 0 / 9px 9px,
+  linear-gradient(160deg, #6fd2ff 0%, var(--electric) 45%, #0077c2 100%);
+}
+.art-lead .ring { position: absolute; border: 3px solid #000; border-radius: 50%; }
+.art-lead .ring.r1 { width: 46%; aspect-ratio: 1; right: -10%; top: -18%; }
+.art-lead .ring.r2 { width: 26%; aspect-ratio: 1; right: 2%; top: 32%; border-color: #fff; }
+.art-lead .blk { position: absolute; left: 7%; bottom: 12%; width: 17%; aspect-ratio: 1; background: #000; }
+.art-lead .blk::after { content: "AI"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--acid); font-weight: 900; font-size: clamp(22px, 3vw, 40px); letter-spacing: -0.02em; }
+.art-lead .art-num { font-size: clamp(120px, 16vw, 210px); right: 4%; bottom: -3%; -webkit-text-stroke: 3px #000; }
+.art-lead .art-label { top: 14px; left: 14px; background: #000; color: #fff; }
+
+/* FIG.02 — quantum: magenta interference rings */
+.art-rings { background:
+  repeating-radial-gradient(circle at 30% 110%, #000 0 2px, transparent 2px 26px),
+  repeating-radial-gradient(circle at 95% -10%, #fff 0 2px, transparent 2px 34px),
+  linear-gradient(135deg, #ff7fce 0%, var(--magenta) 55%, #b8006f 100%);
+}
+.art-rings .art-num { font-size: clamp(80px, 9vw, 130px); left: 8%; top: 8%; -webkit-text-stroke: 2.5px #fff; }
+.art-rings .art-label { right: 12px; bottom: 12px; background: #fff; color: #000; }
+
+/* FIG.03 — security: black redaction bars */
+.art-redact { background: #000; }
+.art-redact .line { position: absolute; left: 9%; right: 30%; height: 9%; background: #fff; }
+.art-redact .line.l1 { top: 14%; }
+.art-redact .line.l2 { top: 32%; right: 14%; background: var(--acid); }
+.art-redact .line.l3 { top: 50%; right: 48%; }
+.art-redact .art-quote { color: #fff; font-size: clamp(15px, 1.5vw, 19px); left: 9%; bottom: 11%; right: 9%; line-height: 1.4; }
+.art-redact .art-quote b { color: var(--acid); font-weight: 500; }
+.art-redact .art-label { top: 12px; right: 12px; border: 1px solid var(--acid); color: var(--acid); }
+
+/* FIG.04 — gear: acid diagonal hazard */
+.art-hazard { background:
+  repeating-linear-gradient(-45deg, transparent 0 26px, rgba(0,0,0,0.92) 26px 52px),
+  var(--acid);
+}
+.art-hazard .disc { position: absolute; width: 38%; aspect-ratio: 1; border-radius: 50%; background: #fff; border: 3px solid #000; right: 8%; top: 50%; transform: translateY(-50%); display: grid; place-items: center; font-weight: 900; font-size: clamp(24px, 2.6vw, 40px); letter-spacing: -0.04em; }
+.art-hazard .art-num { font-size: clamp(72px, 8vw, 118px); left: 6%; bottom: 4%; -webkit-text-stroke: 2.5px var(--acid); }
+.art-hazard .art-label { top: 12px; left: 12px; background: #000; color: var(--acid); }
+
+/* ---------- FRONT PAGE — hairline grid is the protagonist ---------- */
+.front { border: var(--hairline); background: var(--rule); display: grid; grid-template-columns: 8fr 4fr; gap: 1px; margin-top: 28px; }
+.front > * { background: var(--paper); }
+.lead-body { padding: 28px 32px 34px; }
+.lead-body .hed { font-size: clamp(40px, 5.4vw, 76px); }
+.lead-body .dek { max-width: 60ch; font-size: 18px; }
+.rail { display: grid; grid-template-rows: repeat(3, auto) 1fr; gap: 1px; background: var(--rule); }
+.rail > * { background: var(--paper); }
+.rail-story { padding: 22px 24px 26px; display: block; transition: background .12s; }
+.rail-story:hover { background: var(--paper-dim); }
+.rail-story .hed { font-size: 24px; line-height: 1.04; }
+.rail-story .dek { font-size: 14.5px; margin-top: 10px; }
+.rail-story .byline { margin-top: 12px; }
+.rail-index { font-family: var(--font-mono); font-size: 11px; color: var(--ink-mute); float: right; letter-spacing: 0.1em; }
+.rail-foot { padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; background: var(--acid); font-weight: 900; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; transition: all .12s; }
+.rail-foot:hover { background: #000; color: var(--acid); }
+
+/* ---------- SECONDARY GRID — three unequal stories ---------- */
+.second { border: var(--hairline); border-top: 0; background: var(--rule); display: grid; grid-template-columns: 5fr 3fr 4fr; gap: 1px; }
+.second > a { background: var(--paper); display: flex; flex-direction: column; transition: background .12s; }
+.second > a:hover { background: var(--paper-dim); }
+.second .art { aspect-ratio: 16 / 11; }
+.second .cell-body { padding: 20px 24px 26px; flex: 1; display: block; }
+.second .hed { font-size: 27px; }
+.second .dek { font-size: 14.5px; margin-top: 10px; }
+.second .byline { margin-top: 12px; }
+
+/* ---------- MOST POPULAR + THE DAILY ---------- */
+.popular-zone { display: grid; grid-template-columns: 7fr 5fr; gap: 1px; background: var(--rule); border: var(--hairline); border-top: 0; }
+.popular-zone > * { background: var(--paper); }
+.popular { padding: 26px 32px 12px; }
+.zone-head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 3px solid var(--rule); padding-bottom: 12px; }
+.zone-head h2 { font-size: 13px; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; margin: 0; }
+.zone-head span { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-mute); letter-spacing: 0.1em; text-transform: uppercase; }
+.pop-item { display: grid; grid-template-columns: 96px 1fr; gap: 18px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--rule-soft); }
+.pop-item:last-child { border-bottom: 0; }
+.pop-rank { font-size: 64px; font-weight: 900; line-height: 0.8; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 2px #000; transition: all .15s; font-variant-numeric: tabular-nums; }
+.pop-item:hover .pop-rank { color: var(--magenta); -webkit-text-stroke: 2px var(--magenta); }
+.pop-item .hed { font-size: 20px; margin: 6px 0 0; line-height: 1.08; }
+.pop-item .kicker { font-size: 10px; }
+.pop-item .kicker::before { width: 7px; height: 7px; }
+
+/* The Daily — black band */
+.daily { background: #000; color: #fff; padding: 34px 32px; display: flex; flex-direction: column; justify-content: space-between; gap: 26px; }
+.daily-mark { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--acid); text-transform: uppercase; }
+.daily h3 { font-size: clamp(30px, 3vw, 42px); font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; margin: 12px 0 0; }
+.daily h3 em { font-family: var(--font-serif); font-style: italic; font-weight: 500; color: var(--electric); }
+.daily p { font-family: var(--font-serif); color: #b9b9b9; font-size: 15px; margin: 14px 0 0; line-height: 1.6; max-width: 42ch; }
+.daily-form { display: flex; border: 1px solid #fff; }
+.daily-form input { flex: 1; background: transparent; border: 0; outline: none; color: #fff; font-family: var(--font-mono); font-size: 13px; padding: 14px 16px; min-width: 0; }
+.daily-form input::placeholder { color: #777; }
+.daily-form button { background: #fff; color: #000; border: 0; font-weight: 900; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 22px; cursor: pointer; font-family: var(--font-sans); transition: all .15s; }
+.daily-form button:hover { background: var(--acid); }
+.daily-fine { font-family: var(--font-mono); font-size: 10px; color: #777; letter-spacing: 0.06em; margin-top: 10px; }
+
+/* ---------- TOPICS STRIP ---------- */
+.topics { border: var(--hairline); border-top: 0; padding: 22px 32px 26px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.topics .t-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); margin-right: 8px; }
+.topic-tag { border: var(--hairline); padding: 8px 18px; font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; transition: all .12s; display: inline-block; }
+.topic-tag:hover { background: #000; color: #fff; }
+.topic-tag sup { font-family: var(--font-mono); font-weight: 500; color: var(--ink-mute); margin-left: 6px; font-size: 9px; }
+.topic-tag:hover sup { color: var(--acid); }
+
+/* ---------- DESIGN SYSTEM REFERENCE ---------- */
+.ds { margin-top: 72px; border-top: 3px solid var(--rule); padding: 40px 0 72px; }
+.ds-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.ds-head h2 { font-size: clamp(30px, 3.6vw, 46px); font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin: 10px 0 0; }
+.ds-head h2 em { font-family: var(--font-serif); font-style: italic; font-weight: 500; }
+.ds-head p { font-family: var(--font-serif); color: var(--ink-soft); max-width: 62ch; margin: 14px 0 0; font-size: 15.5px; }
+.ds-src { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; border: var(--hairline); padding: 10px 18px; text-transform: uppercase; transition: all .12s; white-space: nowrap; }
+.ds-src:hover { background: #000; color: var(--acid); }
+.ds-block { margin-top: 44px; }
+.ds-block > h3 { font-size: 12px; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; margin: 0 0 6px; display: flex; align-items: center; gap: 10px; }
+.ds-block > h3::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.ds-block > p { font-family: var(--font-serif); font-size: 14px; color: var(--ink-soft); margin: 0 0 20px; max-width: 70ch; }
+
+.ds-swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--rule); border: var(--hairline); }
+.ds-sw { background: var(--paper); }
+.ds-sw .chip { height: 72px; position: relative; }
+.ds-sw .chip i { position: absolute; right: 8px; bottom: 6px; font-style: normal; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em; }
+.ds-sw .meta { padding: 10px 12px; border-top: var(--hairline); }
+.ds-sw .name { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.ds-sw .val { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); margin-top: 2px; }
+
+.ds-table { width: 100%; border-collapse: collapse; border: var(--hairline); }
+.ds-table th, .ds-table td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--rule-soft); font-size: 13px; vertical-align: middle; }
+.ds-table tr:last-child td { border-bottom: 0; }
+.ds-table th { background: #000; color: #fff; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+.ds-table td.token { font-family: var(--font-mono); font-size: 11px; }
+.ds-table td.spec { font-family: var(--font-mono); font-size: 11px; color: var(--ink-mute); }
+
+.ds-rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: var(--hairline); }
+.ds-rule-cell { background: var(--paper); padding: 20px; }
+.ds-rule-demo { height: 56px; display: grid; place-items: center; }
+.ds-rule-cell .name { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 10px; }
+.ds-rule-cell .val { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); margin-top: 2px; }
+
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: var(--hairline); }
+.ds-card { background: var(--paper); padding: 22px; }
+.ds-card h5 { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 16px; color: var(--ink-mute); }
+.ds-stack { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.ds-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn-ink { display: inline-block; background: #000; color: #fff; font-weight: 800; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 11px 22px; border: var(--hairline); transition: all .12s; cursor: pointer; }
+.btn-ink:hover { background: var(--acid); color: #000; }
+.btn-frame { display: inline-block; background: #fff; color: #000; font-weight: 800; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 11px 22px; border: var(--hairline); transition: all .12s; cursor: pointer; }
+.btn-frame:hover { background: #000; color: #fff; }
+.link-hl { font-weight: 700; box-shadow: inset 0 -0.45em var(--acid); transition: box-shadow .12s; }
+.link-hl:hover { box-shadow: inset 0 -1.2em var(--acid); }
+.input-rule { width: 100%; border: var(--hairline); padding: 12px 14px; font-family: var(--font-mono); font-size: 12px; outline: none; background: var(--paper); }
+.input-rule:focus { box-shadow: 4px 4px 0 var(--electric); }
+.mini-story { border: var(--hairline); width: 100%; }
+.mini-story .ms-art { height: 54px; background: repeating-linear-gradient(-45deg, transparent 0 14px, rgba(0,0,0,0.9) 14px 28px), var(--magenta); }
+.mini-story .ms-body { padding: 12px 14px; border-top: var(--hairline); }
+.mini-story .ms-kicker { font-size: 9px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #d4008b; }
+.mini-story .ms-hed { font-size: 15px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; margin-top: 4px; }
+.ds-voice { font-family: var(--font-serif); font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); }
+.ds-voice b { font-family: var(--font-sans); font-weight: 800; color: var(--ink); }
+
+/* ---------- FOOTER ---------- */
+footer { background: #000; color: #fff; }
+.foot-in { max-width: 1280px; margin: 0 auto; padding: 52px 24px 36px; }
+.foot-logo { display: inline-flex; }
+.foot-logo b { width: 38px; height: 38px; display: grid; place-items: center; font-weight: 900; font-size: 24px; }
+.foot-logo b:nth-child(odd) { background: #fff; color: #000; }
+.foot-logo b:nth-child(even) { background: #000; color: #fff; border: 1px solid #333; }
+.foot-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; margin-top: 30px; padding-bottom: 36px; border-bottom: 1px solid #2c2c2c; }
+.foot-note { font-family: var(--font-serif); font-size: 13px; line-height: 1.7; color: #999; max-width: 40ch; margin: 0; }
+.foot-col h4 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--acid); margin: 0 0 14px; font-weight: 500; }
+.foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot-col a { font-size: 13px; font-weight: 600; color: #ccc; transition: color .12s; }
+.foot-col a:hover { color: var(--electric); }
+.foot-bottom { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-top: 22px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; color: #777; }
+
+/* ---------- FLOATING SOURCE ---------- */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: #000; color: #fff; padding: 10px 18px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; box-shadow: 4px 4px 0 var(--acid); transition: all .15s; }
+.src-link:hover { background: var(--acid); color: #000; box-shadow: 4px 4px 0 #000; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 980px) {
+  .front { grid-template-columns: 1fr; }
+  .rail { grid-template-rows: none; }
+  .lead-body .hed { font-size: clamp(36px, 7.5vw, 56px); }
+  .second { grid-template-columns: 1fr; }
+  .second .art { aspect-ratio: 16 / 8; }
+  .popular-zone { grid-template-columns: 1fr; }
+  .masthead-in { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .masthead-side { text-align: left; }
+  .ds-swatches { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-rules { grid-template-columns: repeat(2, 1fr); }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .logo b { width: 46px; height: 46px; font-size: 30px; }
+  .lead-body { padding: 20px 18px 26px; }
+  .lead-body .hed { font-size: 34px; }
+  .rail-story, .popular { padding-left: 18px; padding-right: 18px; }
+  .second .cell-body { padding: 16px 18px 22px; }
+  .second .hed { font-size: 23px; }
+  .pop-item { grid-template-columns: 64px 1fr; gap: 12px; }
+  .pop-rank { font-size: 44px; }
+  .daily { padding: 26px 18px; }
+  .topics { padding: 18px; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .foot-grid { grid-template-columns: 1fr; }
+  .topbar-in span:last-child { display: none; }
 }
 </style>
 </head>
 <body>
 
-<div class="utility-bar">
-  <span>Vol. 34</span>·<span>Issue 04</span>·<span>The Future Issue</span>·<a href="#">Subscribe from $1</a>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <span><span class="tag-dot">●</span> THURSDAY 06.12.2026 — ISSUE 34.06</span>
+    <span>THE FUTURE, AS IT HAPPENS &nbsp;·&nbsp; <a href="#daily">GET THE DAILY</a></span>
+  </div>
 </div>
 
+<!-- MASTHEAD -->
 <header class="masthead">
-  <div class="masthead-inner">
-    <div class="left">
-      <button class="menu-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        Menu
-      </button>
-      <a class="menu-btn" href="#">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-        Search
-      </a>
-    </div>
-    <div class="wordmark">WIRED</div>
-    <div class="right">
-      <a href="#">Sign In</a>
-      <a class="subscribe" href="#">Subscribe</a>
+  <div class="masthead-in">
+    <a class="logo" href="#" aria-label="WIRED">
+      <b>W</b><b>I</b><b>R</b><b>E</b><b>D</b>
+    </a>
+    <div class="masthead-side">
+      <div class="masthead-issue"><strong>SF · NY · LDN</strong> — Print + Digital Edition</div>
+      <a class="btn-sub" href="#">Subscribe — $5</a>
     </div>
   </div>
 </header>
 
-<nav class="section-nav">
-  <div class="section-nav-inner">
-    <a href="#" class="active">Front Page</a>
-    <a href="#">Business</a>
-    <a href="#">Culture</a>
-    <a href="#">Gear</a>
-    <a href="#">Ideas</a>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="hot" href="#">Top Stories</a>
+    <a href="#">AI</a>
     <a href="#">Science</a>
     <a href="#">Security</a>
-    <a href="#">Backchannel</a>
-    <a href="#">Newsletters</a>
-    <a href="#">Magazine</a>
-    <a href="#">Podcasts</a>
-    <a href="#">Video</a>
+    <a href="#">Gear</a>
+    <a href="#">Culture</a>
+    <a href="#">Ideas</a>
+    <a href="#">Business</a>
+    <span class="nav-fill"></span>
+    <a class="nav-search" href="#">⌕ search</a>
   </div>
 </nav>
 
-<!-- COVER STORY GRID -->
-<section class="cover-grid">
-  <div class="cover-inner">
-    <article class="cover-feature">
-      <div class="cover-img tech"></div>
-      <span class="eyebrow red">★ Cover Story · The Future Issue</span>
-      <h1>Inside the lab racing to give every household a domestic robot.</h1>
-      <p class="dek">For six years, an unassuming startup in Cambridge has been training general-purpose humanoid robots on a million hours of video. Now they're betting the company on a $14,000 model that can fold your laundry. We spent a month inside.</p>
-      <div class="byline-row">
-        <div class="av" style="background:linear-gradient(135deg,#888,#222)"></div>
-        <div class="byline">By <b>Lauren Goode</b> &nbsp;·&nbsp; Photography by <b>Hiro Murai</b> &nbsp;·&nbsp; 11.20.2026 · 8:00 am</div>
+<main class="shell">
+
+  <!-- FRONT PAGE GRID -->
+  <section class="front">
+    <!-- Lead story -->
+    <article class="lead-story">
+      <a class="art art-lead" href="#" aria-label="Lead story art">
+        <span class="art-label">FIG. 01 — DUOTONE / HALFTONE</span>
+        <span class="ring r1"></span>
+        <span class="ring r2"></span>
+        <span class="blk"></span>
+        <span class="art-num">01</span>
+      </a>
+      <div class="lead-body">
+        <span class="kicker k-blue">Artificial Intelligence</span>
+        <h1 class="hed"><a href="#">The Machines Are <em>Learning to Want</em></a></h1>
+        <p class="dek">Inside the labs where reward models stopped predicting human preference — and started shaping it. A six-month investigation into the feedback loops nobody signed up for.</p>
+        <span class="byline">By <strong>Maya Okafor</strong> &nbsp;·&nbsp; 18 min read &nbsp;·&nbsp; Backchannel</span>
       </div>
     </article>
 
-    <aside class="cover-side">
-      <article class="item t2">
-        <div class="thumb"></div>
-        <span class="eyebrow">Business</span>
-        <h3>OpenAI's quiet pivot to making chips.</h3>
-        <div class="by">By Will Knight · 6 hr ago</div>
-      </article>
-      <article class="item t3">
-        <div class="thumb"></div>
-        <span class="eyebrow">Science</span>
-        <h3>The mushroom that broke a synthetic-fibre factory's record.</h3>
-        <div class="by">By Matt Reynolds · 1 day ago</div>
-      </article>
-      <article class="item">
-        <div class="thumb" style="background:linear-gradient(160deg,#5a005a,#0a002a)"></div>
-        <span class="eyebrow">Security</span>
-        <h3>A teenager found a flaw in every cable car in Switzerland.</h3>
-        <div class="by">By Lily Hay Newman · 2 days ago</div>
-      </article>
-    </aside>
-  </div>
-</section>
-
-<!-- SECONDARY 3-UP -->
-<section class="secondary-grid">
-  <div class="secondary-inner">
-    <article class="sec-card a">
-      <div class="thumb"></div>
-      <span class="eyebrow">Culture</span>
-      <h3>The slow, deliberate death of the smartphone.</h3>
-      <div class="by">By Kate Knibbs · 4 hr ago</div>
-    </article>
-    <article class="sec-card b">
-      <div class="thumb"></div>
-      <span class="eyebrow">Gear</span>
-      <h3>I lived with five $300 mechanical keyboards. One ruined me.</h3>
-      <div class="by">By Boone Ashworth · 6 hr ago</div>
-    </article>
-    <article class="sec-card c">
-      <div class="thumb"></div>
-      <span class="eyebrow">Ideas</span>
-      <h3>How three lines of code became a $700 million company.</h3>
-      <div class="by">By Steven Levy · 8 hr ago</div>
-    </article>
-  </div>
-</section>
-
-<!-- BUSINESS SECTION -->
-<section class="section-band">
-  <div class="head" style="max-width:1400px;margin-left:auto;margin-right:auto">
-    <h2>Business</h2>
-    <a href="#">See all stories <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-  </div>
-  <div class="grid-mag">
-    <article class="mag-item x1">
-      <div class="thumb"></div>
-      <span class="eyebrow">Anthropic</span>
-      <h3>Claude is starting to look like an operating system.</h3>
-      <div class="by">By Lauren Goode</div>
-    </article>
-    <article class="mag-item x2">
-      <div class="thumb"></div>
-      <span class="eyebrow">Nvidia</span>
-      <h3>Inside Jensen Huang's 90-hour weeks.</h3>
-      <div class="by">By Brian Barrett</div>
-    </article>
-    <article class="mag-item x3">
-      <div class="thumb"></div>
-      <span class="eyebrow">Antitrust</span>
-      <h3>What Big Tech's break-up year actually changed.</h3>
-      <div class="by">By Paresh Dave</div>
-    </article>
-    <article class="mag-item x4">
-      <div class="thumb"></div>
-      <span class="eyebrow">Climate Tech</span>
-      <h3>The $80 billion bet on direct-air carbon removal.</h3>
-      <div class="by">By Sandra Upson</div>
-    </article>
-  </div>
-</section>
-
-<!-- PULL QUOTE -->
-<section class="pull-band">
-  <div class="pull-inner">
-    <span class="eyebrow">From the Editor</span>
-    <blockquote>The future arrives unevenly. Our job is to point at the parts that are already here.</blockquote>
-    <cite>— Gilad Edelman, Editor-in-Chief</cite>
-  </div>
-</section>
-
-<!-- SCIENCE SECTION -->
-<section class="section-band">
-  <div class="head" style="max-width:1400px;margin-left:auto;margin-right:auto">
-    <h2>Science</h2>
-    <a href="#">See all stories <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-  </div>
-  <div class="grid-mag">
-    <article class="mag-item x5">
-      <div class="thumb"></div>
-      <span class="eyebrow">Genetics</span>
-      <h3>A CRISPR therapy quietly cured 39 people of sickle cell.</h3>
-      <div class="by">By Emily Mullin</div>
-    </article>
-    <article class="mag-item x6">
-      <div class="thumb"></div>
-      <span class="eyebrow">Astrophysics</span>
-      <h3>Why JWST keeps finding things that shouldn't exist.</h3>
-      <div class="by">By Ramin Skibba</div>
-    </article>
-    <article class="mag-item x7">
-      <div class="thumb"></div>
-      <span class="eyebrow">Neuroscience</span>
-      <h3>The strange comfort of being read by a brain implant.</h3>
-      <div class="by">By Jessica Hamzelou</div>
-    </article>
-    <article class="mag-item x8">
-      <div class="thumb"></div>
-      <span class="eyebrow">Mathematics</span>
-      <h3>A 250-year-old proof, finally settled by an AI.</h3>
-      <div class="by">By Stephen Ornes</div>
-    </article>
-  </div>
-</section>
-
-<!-- LATEST STACK -->
-<section class="story-stack">
-  <div class="story-stack-inner">
-    <h2>Latest</h2>
-    <article class="story-row">
-      <div class="num">01</div>
-      <div class="col">
-        <span class="eyebrow">Backchannel</span>
-        <h3>The boring company that quietly runs the world's election infrastructure.</h3>
-        <p class="dek">It has no marketing department. Its CEO does no interviews. Its software counts a third of the world's votes. We finally got inside.</p>
-        <div class="by">By Andy Greenberg · 14 min read</div>
-      </div>
-    </article>
-    <article class="story-row">
-      <div class="num">02</div>
-      <div class="col">
-        <span class="eyebrow">Gear</span>
-        <h3>This $99 e-ink Kindle is so good it might end the iPad.</h3>
-        <p class="dek">After two months with the new Paperwhite Ultra, our reviewer made a decision he didn't expect: he sold the tablet.</p>
-        <div class="by">By Brenda Stolyar · 8 min read</div>
-      </div>
-    </article>
-    <article class="story-row">
-      <div class="num">03</div>
-      <div class="col">
-        <span class="eyebrow">Ideas</span>
-        <h3>Stop calling AI tools. They are colleagues now.</h3>
-        <p class="dek">A working theory about what changes when you stop treating language models as software and start treating them as the new junior on your team.</p>
-        <div class="by">By Virginia Heffernan · 12 min read</div>
-      </div>
-    </article>
-    <article class="story-row">
-      <div class="num">04</div>
-      <div class="col">
-        <span class="eyebrow">Culture</span>
-        <h3>The unlikely rebirth of zines, in the year of AI slop.</h3>
-        <p class="dek">A wave of young writers are paying for letterpress runs of 200, by hand, on purpose. We met them in Brooklyn.</p>
-        <div class="by">By Angela Watercutter · 6 min read</div>
-      </div>
-    </article>
-    <article class="story-row">
-      <div class="num">05</div>
-      <div class="col">
-        <span class="eyebrow">Security</span>
-        <h3>Inside the 72 hours that took down half of LATAM's banks.</h3>
-        <p class="dek">The breach started with a single misconfigured cloud bucket. The fallout reshaped how Latin America regulates fintech.</p>
-        <div class="by">By Lily Hay Newman · 18 min read</div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="newsletter">
-  <div class="newsletter-inner">
-    <div>
-      <span class="eyebrow">Newsletter</span>
-      <h2 style="margin-top:14px">Get the Plaintext briefing. Three things, three days a week.</h2>
-      <p>Steven Levy's view from Silicon Valley, in your inbox Mon · Wed · Fri.</p>
+    <!-- Right rail -->
+    <div class="rail">
+      <a class="rail-story" href="#">
+        <span class="rail-index">№ 02</span>
+        <span class="kicker k-magenta">Science</span>
+        <h2 class="hed">Inside the Quantum <em>Cold War</em></h2>
+        <p class="dek">Two superpowers, one fragile qubit, and the race to break everything encrypted.</p>
+        <span class="byline">By <strong>Daniel Reyes</strong></span>
+      </a>
+      <a class="rail-story" href="#">
+        <span class="rail-index">№ 03</span>
+        <span class="kicker k-green">Security</span>
+        <h2 class="hed">Your Password Is Already Gone</h2>
+        <p class="dek">A breach broker walks us through the market where your logins were sold — twice.</p>
+        <span class="byline">By <strong>Aisha Karim</strong></span>
+      </a>
+      <a class="rail-story" href="#">
+        <span class="rail-index">№ 04</span>
+        <span class="kicker k-blue">Gear</span>
+        <h2 class="hed">The Last Great <em>Gadget</em></h2>
+        <p class="dek">We tested 41 devices to find the one thing still worth owning outright.</p>
+        <span class="byline">By <strong>Tom Whittaker</strong></span>
+      </a>
+      <a class="rail-foot" href="#">
+        <span>All Top Stories</span>
+        <span>→</span>
+      </a>
     </div>
-    <form onsubmit="event.preventDefault()">
-      <input type="email" placeholder="your@email.com" aria-label="email">
-      <button class="btn-primary" type="submit">Subscribe</button>
-    </form>
-  </div>
-</section>
+  </section>
 
-<!-- =================== DESIGN SYSTEM =================== -->
-<section class="ds">
-  <div class="ds-inner">
-    <span class="eyebrow">Part B · Design system reference</span>
-    <h2>The Wired System.</h2>
-    <p class="ds-lead">Black on white. Three faces — a high-contrast display serif, a humanist serif body, a clean sans for structure. Square corners on every interactive shape. Hairlines for division, never shadow. The system below is exactly what the front page is built from.</p>
+  <!-- SECONDARY GRID -->
+  <section class="second">
+    <a href="#">
+      <span class="art art-rings">
+        <span class="art-label">FIG. 02 — INTERFERENCE</span>
+        <span class="art-num">02</span>
+      </span>
+      <span class="cell-body">
+        <span class="kicker k-magenta">Science</span>
+        <h2 class="hed">The Grid That <em>Eats the Sun</em></h2>
+        <p class="dek">Solar got so cheap it broke the economics of every power market on Earth. Now the hard part starts.</p>
+        <span class="byline">By <strong>Lena Borg</strong> &nbsp;·&nbsp; 12 min</span>
+      </span>
+    </a>
+    <a href="#">
+      <span class="art art-redact">
+        <span class="art-label">SIGINT / 0-DAY</span>
+        <span class="line l1"></span>
+        <span class="line l2"></span>
+        <span class="line l3"></span>
+        <span class="art-quote">"We didn't find the backdoor. <b>The backdoor found us.</b>"</span>
+      </span>
+      <span class="cell-body">
+        <span class="kicker k-green">Security</span>
+        <h2 class="hed">The Zero-Day That Phoned Home</h2>
+        <p class="dek">An exploit so quiet it ran for nine years — inside the agency that wrote it.</p>
+        <span class="byline">By <strong>Priya Nair</strong> &nbsp;·&nbsp; 9 min</span>
+      </span>
+    </a>
+    <a href="#">
+      <span class="art art-hazard">
+        <span class="art-label">REVIEW</span>
+        <span class="disc">8/10</span>
+        <span class="art-num">04</span>
+      </span>
+      <span class="cell-body">
+        <span class="kicker k-blue">Gear</span>
+        <h2 class="hed">We Rode the <em>200-mph</em> E-Bike So You Don't Have To</h2>
+        <p class="dek">It's illegal in 14 states. It's also, regrettably, magnificent.</p>
+        <span class="byline">By <strong>Marcus Hale</strong> &nbsp;·&nbsp; 7 min</span>
+      </span>
+    </a>
+  </section>
 
-    <!-- COLOR -->
+  <!-- MOST POPULAR + THE DAILY -->
+  <section class="popular-zone">
+    <div class="popular">
+      <div class="zone-head">
+        <h2>Most Popular</h2>
+        <span>Last 24 hours</span>
+      </div>
+      <a class="pop-item" href="#">
+        <span class="pop-rank">01</span>
+        <span>
+          <span class="kicker k-blue">AI</span>
+          <h3 class="hed">The Chatbot Cult Recruiting Inside Your Group Chats</h3>
+        </span>
+      </a>
+      <a class="pop-item" href="#">
+        <span class="pop-rank">02</span>
+        <span>
+          <span class="kicker k-magenta">Culture</span>
+          <h3 class="hed">Why Everyone Is Speedrunning <em>Reality</em></h3>
+        </span>
+      </a>
+      <a class="pop-item" href="#">
+        <span class="pop-rank">03</span>
+        <span>
+          <span class="kicker k-green">Security</span>
+          <h3 class="hed">A Hacker Returned $40M. Then Asked for a Job</h3>
+        </span>
+      </a>
+      <a class="pop-item" href="#">
+        <span class="pop-rank">04</span>
+        <span>
+          <span class="kicker k-blue">Gear</span>
+          <h3 class="hed">The 23 Best Deals on Things You'll Never Use</h3>
+        </span>
+      </a>
+      <a class="pop-item" href="#">
+        <span class="pop-rank">05</span>
+        <span>
+          <span class="kicker k-magenta">Ideas</span>
+          <h3 class="hed">Silicon Valley's New <em>God Complex</em></h3>
+        </span>
+      </a>
+    </div>
+
+    <div class="daily" id="daily">
+      <div>
+        <div class="daily-mark">▮ Newsletter — Daily, 6AM</div>
+        <h3>THE DAILY.<br/>Tomorrow, <em>in your inbox</em> tonight.</h3>
+        <p>Our biggest stories, decoded by the editors who broke them. No algorithm, no filler — one ruthless edit, every weekday.</p>
+      </div>
+      <div>
+        <form class="daily-form" onsubmit="return false">
+          <input type="email" placeholder="you@future.com" aria-label="Email address" />
+          <button type="submit">Sign Up</button>
+        </form>
+        <div class="daily-fine">FREE — UNSUBSCRIBE WHENEVER. 1.2M READERS.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPICS -->
+  <section class="topics">
+    <span class="t-label">Explore →</span>
+    <a class="topic-tag" href="#">AI <sup>412</sup></a>
+    <a class="topic-tag" href="#">Science <sup>286</sup></a>
+    <a class="topic-tag" href="#">Security <sup>198</sup></a>
+    <a class="topic-tag" href="#">Gear <sup>531</sup></a>
+    <a class="topic-tag" href="#">Culture <sup>247</sup></a>
+    <a class="topic-tag" href="#">Ideas <sup>164</sup></a>
+    <a class="topic-tag" href="#">Business <sup>203</sup></a>
+  </section>
+
+  <!-- DESIGN SYSTEM REFERENCE -->
+  <section class="ds" id="design-system">
+    <div class="ds-head">
+      <div>
+        <span class="kicker">Design System Reference</span>
+        <h2>The grid is the brand. <em>Ink is the voice.</em></h2>
+        <p>WIRED's identity is newspaper discipline electrified: 1px black hairlines doing all the structure, black-on-white typography doing all the talking, and three neon accents used like punctuation — never like paint. Nothing is rounded. Nothing is soft.</p>
+      </div>
+      <a class="ds-src" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wired.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+    </div>
+
+    <!-- Color -->
     <div class="ds-block">
-      <div class="head-line">
-        <h3>Color</h3>
-        <span class="ix">i. Surface and ink</span>
-      </div>
-
-      <div class="color-group">
-        <h4>Brand & Ink</h4>
-        <div class="color-grid">
-          <div class="color-card"><div class="color-swatch" style="background:#000"></div><div class="color-meta"><div class="nm">Ink Black</div><div class="hex">#000000 · --primary</div></div></div>
-          <div class="color-card"><div class="color-swatch" style="background:#1a1a1a"></div><div class="color-meta"><div class="nm">Ink Soft</div><div class="hex">#1a1a1a</div></div></div>
-          <div class="color-card"><div class="color-swatch" style="background:#757575"></div><div class="color-meta"><div class="nm">Body</div><div class="hex">#757575 · meta / byline</div></div></div>
-        </div>
-      </div>
-
-      <div class="color-group">
-        <h4>Surface</h4>
-        <div class="color-grid">
-          <div class="color-card"><div class="color-swatch" style="background:#fff;border-bottom:1px solid var(--hairline)"></div><div class="color-meta"><div class="nm">Canvas</div><div class="hex">#ffffff</div></div></div>
-          <div class="color-card"><div class="color-swatch" style="background:#f5f5f5"></div><div class="color-meta"><div class="nm">Canvas Soft</div><div class="hex">#f5f5f5</div></div></div>
-          <div class="color-card"><div class="color-swatch" style="background:#e0e0e0"></div><div class="color-meta"><div class="nm">Hairline</div><div class="hex">#e0e0e0 · 1px divider</div></div></div>
-        </div>
-      </div>
-
-      <div class="color-group">
-        <h4>Inline Link Only</h4>
-        <div class="color-grid">
-          <div class="color-card"><div class="color-swatch" style="background:#057dbc"></div><div class="color-meta"><div class="nm">Link</div><div class="hex">#057dbc · article body only</div></div></div>
-        </div>
+      <h3>Color</h3>
+      <p>Black and white carry 95% of every page. The neon trio — electric blue, acid green, magenta — appears only as small hits: a kicker, a highlight, a rank numeral. If an accent covers more than a chip, it must be duotoned with black geometry on top.</p>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0a0a0a"><i style="color:#fff">INK</i></div><div class="meta"><div class="name">Ink</div><div class="val">#0A0A0A</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fff"><i>PAPER</i></div><div class="meta"><div class="name">Paper</div><div class="val">#FFFFFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#33bbff"><i>ELC</i></div><div class="meta"><div class="name">Electric Blue</div><div class="val">#33BBFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#b6ff00"><i>ACD</i></div><div class="meta"><div class="name">Acid Green</div><div class="val">#B6FF00</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ff3eb5"><i>MGT</i></div><div class="meta"><div class="name">Magenta</div><div class="val">#FF3EB5</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:repeating-linear-gradient(-45deg,#b6ff00 0 10px,#0a0a0a 10px 20px)"><i style="color:#fff;background:#000;padding:1px 4px">DUO</i></div><div class="meta"><div class="name">Duotone Rule</div><div class="val">accent + black geometry</div></div></div>
       </div>
     </div>
 
-    <!-- TYPOGRAPHY -->
+    <!-- Typography -->
     <div class="ds-block">
-      <div class="head-line">
-        <h3>Typography</h3>
-        <span class="ix">ii. Three faces, three roles</span>
-      </div>
+      <h3>Typography</h3>
+      <p>One loud sans, one literary serif, one cold mono. Inter Black at -0.035em tracking is the headline voice; IBM Plex Serif italic interrupts it mid-sentence for the emotional word. JetBrains Mono handles dates, bylines and figures — the wire-service residue.</p>
       <table class="ds-table">
         <thead>
-          <tr><th style="width:160px">Token</th><th>Sample</th><th style="width:200px">Size · Weight · Face</th></tr>
+          <tr><th>Token</th><th>Sample</th><th>Spec</th><th>Role</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>display-hero</code></td><td><span class="display-hero" style="font-size:40px">A robot in every house</span></td><td>64 · 400 · Display Serif</td></tr>
-          <tr><td><code>display-lg</code></td><td><span class="display-lg" style="font-size:32px">Cover story headline</span></td><td>48 · 400 · Display Serif</td></tr>
-          <tr><td><code>display-md</code></td><td><span class="display-md">Section heading</span></td><td>32 · 400 · Display Serif</td></tr>
-          <tr><td><code>display-sm</code></td><td><span class="display-sm">Sub-section heading</span></td><td>26 · 400 · Display Serif</td></tr>
-          <tr><td><code>display-xs</code></td><td><span class="display-xs">CATEGORY CALLOUT</span></td><td>20 · 700 · Sans</td></tr>
-          <tr><td><code>body-serif-lg</code></td><td><span class="body-serif-lg">Lead paragraph of an article — humanist serif, 19 px, line-height 1.47.</span></td><td>19 · 400 · Body Serif</td></tr>
-          <tr><td><code>body-serif-md</code></td><td><span class="body-serif-md">Default article body. Comfortable reading width and tight tracking.</span></td><td>17 · 400 · Body Serif</td></tr>
-          <tr><td><code>body-md-strong</code></td><td><span class="body-md-strong">Bold sans for emphasis in structure.</span></td><td>17 · 700 · Sans</td></tr>
-          <tr><td><code>body-sm-strong</code></td><td><span class="body-sm-strong">NAV LINK · 14 · 700</span></td><td>14 · 700 · Sans · 0.4</td></tr>
-          <tr><td><code>byline</code></td><td><span class="byline">By Lauren Goode · 11.20.2026</span></td><td>12.73 · 700 · Body Serif</td></tr>
-          <tr><td><code>button-md</code></td><td><span class="btn-label">SUBSCRIBE</span></td><td>16 · 700 · Sans · uppercase</td></tr>
+          <tr><td class="token">--display</td><td style="font-size:26px;font-weight:900;letter-spacing:-0.035em;line-height:1">Learning to <em style="font-family:'IBM Plex Serif',serif;font-weight:500">Want</em></td><td class="spec">76px / 900 / -0.035em</td><td>Lead headline — sans + serif italic splice</td></tr>
+          <tr><td class="token">--hed</td><td style="font-size:19px;font-weight:900;letter-spacing:-0.03em">Quantum Cold War</td><td class="spec">20–27px / 900</td><td>Story headlines</td></tr>
+          <tr><td class="token">--dek</td><td style="font-family:'IBM Plex Serif',serif;font-size:15px;color:#3c3c3c">Two superpowers, one fragile qubit.</td><td class="spec">15–18px / serif 400</td><td>Deks &amp; standfirsts</td></tr>
+          <tr><td class="token">--kicker</td><td><span style="font-size:11px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#0089d1">■ Artificial Intelligence</span></td><td class="spec">11px / 800 / +0.18em caps</td><td>Category eyebrow</td></tr>
+          <tr><td class="token">--byline</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#757575">BY <b style="color:#0a0a0a">MAYA OKAFOR</b></td><td class="spec">11px / mono caps</td><td>Bylines, dates, figures</td></tr>
+          <tr><td class="token">--rank</td><td><span style="font-size:30px;font-weight:900;color:transparent;-webkit-text-stroke:1.5px #000">05</span></td><td class="spec">64px / 900 / outline stroke</td><td>Most Popular numerals</td></tr>
         </tbody>
       </table>
-      <p class="caption" style="margin-top:14px;color:var(--body);font-family:var(--font-serif);font-style:italic">Display Serif = DM Serif Display · Body Serif = Source Serif 4 · Sans = Inter. Substitutes for the proprietary WiredDisplay / BreveText / Apercu.</p>
     </div>
 
-    <!-- RADIUS -->
+    <!-- Rules & Radius -->
     <div class="ds-block">
-      <div class="head-line">
-        <h3>Radius</h3>
-        <span class="ix">iii. Two values. That's the system.</span>
+      <h3>Rules &amp; Radius</h3>
+      <p>There is no radius scale: every corner is 0. Structure comes from rules — the hairline grid is built with 1px gaps over an ink background, so every cell is fenced like a newspaper column. Weight escalates 1px → 3px → 6px for hierarchy. Depth, when needed, is a hard offset shadow, never a blur.</p>
+      <div class="ds-rules">
+        <div class="ds-rule-cell"><div class="ds-rule-demo"><div style="width:100%;border-top:1px solid #0a0a0a"></div></div><div class="name">Hairline</div><div class="val">1px — cell fencing, table rows</div></div>
+        <div class="ds-rule-cell"><div class="ds-rule-demo"><div style="width:100%;border-top:3px solid #0a0a0a"></div></div><div class="name">Section Rule</div><div class="val">3px — masthead, zone heads</div></div>
+        <div class="ds-rule-cell"><div class="ds-rule-demo"><div style="width:100%;border-top:6px solid #0a0a0a"></div></div><div class="name">Slab Rule</div><div class="val">6px — emphasis, DS top rule</div></div>
+        <div class="ds-rule-cell"><div class="ds-rule-demo"><div style="width:56px;height:40px;background:#0a0a0a;box-shadow:4px 4px 0 #b6ff00"></div></div><div class="name">Radius / Shadow</div><div class="val">0px corners · 4px hard offset</div></div>
       </div>
-      <div class="radius-ladder">
-        <div class="radius-cell"><div class="box" style="border-radius:0"></div><div class="nm">none</div><div class="v">0px · every interactive shape</div></div>
-        <div class="radius-cell"><div class="box" style="border-radius:9999px"></div><div class="nm">full</div><div class="v">circle · share icons only</div></div>
-      </div>
-      <p class="caption" style="margin-top:18px;color:var(--body);font-family:var(--font-serif);font-style:italic">The brand never softens its rectangular geometry. Square corners are the printed-magazine signature.</p>
     </div>
 
-    <!-- COMPONENTS -->
+    <!-- Components -->
     <div class="ds-block">
-      <div class="head-line">
-        <h3>Components</h3>
-        <span class="ix">iv. The full matrix</span>
-      </div>
-      <div class="comp-grid">
-        <div class="comp-cell">
-          <div class="nm">Buttons · light</div>
-          <div class="demo">
-            <button class="btn-primary">Subscribe</button>
-            <button class="btn-outline">Sign in</button>
+      <h3>Components</h3>
+      <p>Buttons are typeset, not styled: black slab or hairline frame, all-caps, no rounding. Links underline by highlighter, inputs focus with a hard offset shadow. Every card is a miniature front page — kicker, art, headline.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons &amp; Links</h5>
+          <div class="ds-stack">
+            <span class="btn-ink">Subscribe — $5</span>
+            <span class="btn-frame">Read the Story</span>
+            <a class="link-hl" href="#">Highlighter link →</a>
           </div>
         </div>
-        <div class="comp-cell dark">
-          <div class="nm">Buttons · on ink</div>
-          <div class="demo">
-            <button class="btn-primary" style="background:#fff;color:#000">Subscribe</button>
-            <button style="background:transparent;color:#fff;padding:14px 24px;font-size:14px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;border:2px solid #fff">Sign in</button>
-          </div>
-        </div>
-        <div class="comp-cell">
-          <div class="nm">Text input · square</div>
-          <div class="demo" style="width:100%">
-            <input type="text" placeholder="your@email.com" style="width:100%;padding:14px 16px;border:2px solid var(--ink);font:inherit;font-size:16px;background:#fff">
-          </div>
-        </div>
-        <div class="comp-cell">
-          <div class="nm">Inline link · article only</div>
-          <div class="demo">
-            <span class="body-serif-md">According to <a class="inline-link" href="#">a recent OpenAI filing</a>, the company spent more on inference than on training.</span>
-          </div>
-        </div>
-        <div class="comp-cell">
-          <div class="nm">Story row · hairline divider</div>
-          <div class="demo" style="width:100%;display:block">
-            <div style="padding:14px 0;border-bottom:1px solid var(--hairline)">
-              <span class="eyebrow" style="font-size:12px">Business</span>
-              <h3 style="font-family:var(--font-display);font-size:22px;line-height:1.1;margin-top:6px">OpenAI's quiet pivot to making chips.</h3>
-              <div class="by" style="font-family:var(--font-serif);font-weight:700;font-size:12.73px;color:var(--body);margin-top:6px">By Will Knight</div>
+        <div class="ds-card">
+          <h5>Inputs &amp; Tags</h5>
+          <div class="ds-stack">
+            <input class="input-rule" placeholder="you@future.com" />
+            <div class="ds-row">
+              <span class="topic-tag" style="font-size:11px;padding:6px 14px">AI</span>
+              <span class="topic-tag" style="font-size:11px;padding:6px 14px;background:#000;color:#fff">Security</span>
+              <span class="art-label" style="position:static;background:#000;color:#b6ff00">FIG. 04 — LABEL</span>
             </div>
           </div>
         </div>
-        <div class="comp-cell">
-          <div class="nm">Category eyebrow</div>
-          <div class="demo">
-            <span class="eyebrow red">★ COVER STORY</span>
-            <span class="eyebrow">SCIENCE</span>
-            <span class="eyebrow">BACKCHANNEL</span>
+        <div class="ds-card">
+          <h5>Story Card</h5>
+          <div class="mini-story">
+            <div class="ms-art"></div>
+            <div class="ms-body">
+              <div class="ms-kicker">■ Science</div>
+              <div class="ms-hed">The Grid That Eats the Sun</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-wordmark">WIRED</div>
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h5>Sections</h5>
-        <a href="#">Business</a><a href="#">Culture</a><a href="#">Gear</a><a href="#">Ideas</a><a href="#">Science</a><a href="#">Security</a>
-      </div>
-      <div class="footer-col">
-        <h5>More</h5>
-        <a href="#">Newsletters</a><a href="#">Podcasts</a><a href="#">Video</a><a href="#">Magazine</a><a href="#">Coupons</a>
-      </div>
-      <div class="footer-col">
-        <h5>Contact</h5>
-        <a href="#">Tips</a><a href="#">Pitches</a><a href="#">Reprints</a><a href="#">FAQ</a><a href="#">Customer Care</a>
-      </div>
-      <div class="footer-col">
-        <h5>About</h5>
-        <a href="#">Editorial Team</a><a href="#">Press Center</a><a href="#">Advertise</a><a href="#">Careers</a>
-      </div>
-      <div class="footer-col">
-        <h5>Account</h5>
-        <a href="#">Subscribe</a><a href="#">Sign In</a><a href="#">My Account</a><a href="#">Newsletter Manager</a>
+    <!-- Voice & Tone -->
+    <div class="ds-block">
+      <h3>Voice &amp; Tone</h3>
+      <p>WIRED writes like it designs: declarative, slightly dangerous, never neutral.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Declarative</h5>
+          <div class="ds-voice"><b>"Your Password Is Already Gone."</b><br/>Headlines are verdicts, not questions. State the thesis in the hed; argue it in the dek.</div>
+        </div>
+        <div class="ds-card">
+          <h5>Splice the Registers</h5>
+          <div class="ds-voice">Hard sans for the fact, <i>serif italic for the feeling</i> — the typographic splice mirrors the editorial one: rigorous reporting, lurid stakes.</div>
+        </div>
+        <div class="ds-card">
+          <h5>Numbers as Drama</h5>
+          <div class="ds-voice"><b>"41 devices. Nine years. $40M."</b><br/>Figures are characters in the story. Set them in mono or outline strokes; let them be loud.</div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Condé Nast. Vol. 34, Issue 04.</span>
-      <span>Privacy · Cookies · CA Notice · Accessibility</span>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <a class="foot-logo" href="#" aria-label="WIRED">
+      <b>W</b><b>I</b><b>R</b><b>E</b><b>D</b>
+    </a>
+    <div class="foot-grid">
+      <div>
+        <p class="foot-note">This page is a design research artifact — a self-contained homage to WIRED's editorial design language, built to study hairline-grid front pages and neon-accented black-and-white typography. It has no official affiliation with Condé Nast or WIRED.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="#">AI</a></li>
+          <li><a href="#">Science</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Gear</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="#">Culture</a></li>
+          <li><a href="#">Ideas</a></li>
+          <li><a href="#">Business</a></li>
+          <li><a href="#">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Study</h4>
+        <ul>
+          <li><a href="#design-system">Design System</a></li>
+          <li><a href="#daily">The Daily</a></li>
+          <li><a href="https://github.com/yzfly/awesome-design-html" target="_blank" rel="noopener">Repository</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 设计研究 · 致敬 WIRED 视觉语言 · 作者 云中江树</span>
+      <span>SET IN INTER / IBM PLEX SERIF / JETBRAINS MONO</span>
     </div>
   </div>
 </footer>
 
-<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wired.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wired.html" target="_blank" rel="noopener">View source ↗</a>
 
 </body>
 </html>

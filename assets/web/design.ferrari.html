@@ -3,1487 +3,798 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ferrari — Inspired Design</title>
-<meta name="description" content="A Ferrari-inspired marketing page: cinematic near-black canvas with Rosso Corsa accent, FerrariSans-substitute Inter at weight 500, sharp 0px CTAs, full-bleed cinematic photography. Sourced from awesome-design-md." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Ferrari — Where Numbers Become Luxury · Design Study</title>
+<meta name="description" content="Ferrari brand design study: cinematic near-black panels where performance figures are set like Didot couture — 1000 CV, 2.5 s, V12 — with low-slung silhouettes, Rosso Corsa restraint and a Scuderia red band. Marketing demo + design system reference." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root {
-  /* Brand & accents */
-  --primary: #da291c;
-  --primary-active: #b01e0a;
-  --primary-hover: #9d2211;
-  --on-primary: #ffffff;
-  /* Text */
-  --ink: #ffffff;
-  --body: #969696;
-  --body-strong: #ffffff;
-  --body-on-light: #181818;
-  --muted: #666666;
-  --muted-soft: #8f8f8f;
-  --on-dark: #ffffff;
-  --on-light: #181818;
-  /* Surfaces */
-  --canvas: #181818;
-  --canvas-elevated: #303030;
-  --canvas-light: #ffffff;
-  --surface-card: #303030;
-  --surface-soft-light: #f7f7f7;
-  --surface-strong-light: #ebebeb;
-  /* Hairlines */
-  --hairline: #303030;
-  --hairline-on-light: #d2d2d2;
-  --hairline-soft: #ebebeb;
-  /* Accents */
-  --accent-yellow: #fff200;
-  /* Semantic */
-  --semantic-info: #4c98b9;
-  --semantic-success: #03904a;
-  --semantic-warning: #f13a2c;
-  /* Radius */
-  --r-none: 0px;
+  /* Canvas — pit lane at midnight */
+  --canvas: #0a0a0b;
+  --canvas-raised: #101012;
+  --surface-1: #151517;
+  --surface-2: #1b1b1e;
+  /* Rosso — one color, used like a scarce material */
+  --rosso: #da291c;
+  --rosso-bright: #ff3b2d;
+  --rosso-deep: #8e1409;
+  --rosso-body: #4a0c07;
+  --rosso-soft: rgba(218, 41, 28, 0.1);
+  /* Giallo Modena — the shield's ground, drops of it only */
+  --giallo: #fff200;
+  /* Avorio — warm ivory text, not clinical white */
+  --ivory: #f4f1ea;
+  --ink: #e8e4dc;
+  --ink-muted: #a39c91;
+  --ink-dim: #6b665e;
+  /* Grigio — Purosangue body */
+  --grigio-body: #2c2c31;
+  /* Lines */
+  --border: rgba(244, 241, 234, 0.09);
+  --border-strong: rgba(244, 241, 234, 0.18);
+  --shadow-card: 0 14px 44px rgba(0, 0, 0, 0.55);
+  --font-serif: "Bodoni Moda", "Didot", "Bodoni MT", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  /* Ferrari edges are machined, not rounded */
+  --r-0: 0px;
   --r-xs: 2px;
   --r-sm: 4px;
-  --r-md: 6px;
-  --r-lg: 8px;
-  --r-xl: 12px;
-  --r-full: 9999px;
-  /* Spacing */
-  --s-xxxs: 4px; --s-xxs: 8px; --s-xs: 16px; --s-sm: 24px;
-  --s-md: 32px; --s-lg: 48px; --s-xl: 64px; --s-xxl: 96px; --s-super: 128px;
+  --r-pill: 999px;
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: "Inter", -apple-system, system-ui, sans-serif;
   background: var(--canvas);
   color: var(--ink);
-  font-size: 14px;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 a { color: inherit; text-decoration: none; }
-::selection { background: var(--primary); color: #fff; }
-.num { font-variant-numeric: tabular-nums; }
+::selection { background: rgba(218, 41, 28, 0.5); color: var(--ivory); }
 
-.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
 
-/* —— Top Nav —— */
-.top-nav {
-  background: var(--canvas);
-  border-bottom: 1px solid var(--hairline);
-  position: sticky; top: 0; z-index: 30;
-  height: 64px;
-}
-.nav-inner {
-  height: 100%; display: flex; align-items: center; gap: 32px;
-}
-.ferrari-logo {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 4px;
-  color: var(--ink);
-}
-.ferrari-logo .shield {
-  width: 36px; height: 44px;
-  background: var(--primary);
-  position: relative;
-  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 9px; letter-spacing: 1.5px; font-weight: 700;
-  color: var(--accent-yellow);
-  padding-top: 6px;
-}
-.nav-center {
-  display: flex; gap: 4px; margin-left: 8px;
-}
-.nav-center a {
-  font-size: 13px; font-weight: 600; color: var(--ink);
-  padding: 8px 14px;
-  letter-spacing: 0.65px; text-transform: uppercase;
-}
-.nav-center a:hover { color: var(--primary); }
-.nav-right {
-  margin-left: auto;
-  display: flex; align-items: center; gap: 16px;
-}
-.nav-icon {
-  width: 36px; height: 36px;
-  display: inline-flex; align-items: center; justify-content: center;
-  color: var(--ink);
-}
-.nav-icon:hover { color: var(--primary); }
-@media (max-width: 1100px) { .nav-center { display: none; } }
+/* Nav */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(10, 10, 11, 0.82); backdrop-filter: blur(18px) saturate(130%); border-bottom: 1px solid var(--border); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 28px; max-width: 1240px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-name { font-family: var(--font-serif); font-weight: 600; font-size: 21px; letter-spacing: 4px; text-transform: uppercase; color: var(--ivory); }
+.brand-shield { display: block; width: 23px; height: 31px; }
+.nav-links { display: flex; align-items: center; gap: 2px; }
+.nav-item { padding: 9px 14px; font-size: 12px; font-weight: 500; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink-muted); transition: color .15s; }
+.nav-item:hover { color: var(--ivory); }
+.nav-item.active { color: var(--ivory); border-bottom: 1px solid var(--rosso); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; border: 0; transition: all .18s; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 12px; font-family: var(--font-sans); }
+.btn-rosso { background: var(--rosso); color: var(--ivory); padding: 13px 30px; border-radius: var(--r-xs); }
+.btn-rosso:hover { background: var(--rosso-bright); box-shadow: 0 6px 28px rgba(218, 41, 28, 0.4); }
+.btn-outline { background: transparent; color: var(--ivory); padding: 12px 29px; border: 1px solid var(--border-strong); border-radius: var(--r-xs); }
+.btn-outline:hover { border-color: var(--ivory); }
+.btn-ghost { background: rgba(244,241,234,0.06); color: var(--ivory); padding: 13px 30px; border-radius: var(--r-xs); }
+.btn-ghost:hover { background: rgba(244,241,234,0.12); }
+.btn-sm { padding: 9px 18px; font-size: 11px; }
 
-/* —— Buttons —— */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  gap: 8px;
-  height: 48px;
-  padding: 0 32px;
-  font-family: inherit;
-  font-size: 14px; font-weight: 700;
-  letter-spacing: 1.4px; text-transform: uppercase;
-  border-radius: var(--r-none);
-  border: 1px solid transparent;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background .12s ease, color .12s ease, border-color .12s ease;
-}
-.btn-primary { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
-.btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
-.btn-outline-dark { background: transparent; color: var(--ink); border-color: var(--ink); }
-.btn-outline-dark:hover { background: var(--ink); color: var(--on-light); }
-.btn-outline-light { background: transparent; color: var(--on-light); border-color: var(--on-light); }
-.btn-outline-light:hover { background: var(--on-light); color: var(--canvas-light); }
-.btn-text {
-  background: transparent; color: var(--ink);
-  font-size: 14px; font-weight: 700;
-  letter-spacing: 1.4px; text-transform: uppercase;
-  padding: 0; height: auto; border: 0;
-}
-.btn-text:hover { color: var(--primary); }
+/* Masthead — brief, the cars are the stars */
+.masthead { padding: 110px 0 90px; text-align: center; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+.masthead::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 55% at 50% 118%, rgba(218, 41, 28, 0.16), transparent 70%); pointer-events: none; }
+.masthead-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--rosso); }
+.masthead h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(42px, 6.4vw, 96px); line-height: 1.04; letter-spacing: 1px; margin: 26px auto 22px; color: var(--ivory); max-width: 1100px; }
+.masthead h1 em { font-style: italic; font-weight: 500; color: var(--rosso); }
+.masthead .lead { font-family: var(--font-serif); font-style: italic; font-size: clamp(18px, 2vw, 23px); color: var(--ink-muted); margin: 0 auto; max-width: 620px; line-height: 1.6; position: relative; }
+.masthead .lead .en { font-family: var(--font-sans); font-style: normal; font-size: 12.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-dim); display: block; margin-top: 14px; }
+.masthead-rule { width: 56px; height: 3px; background: var(--giallo); margin: 38px auto 0; position: relative; }
 
-/* —— Hero band cinema —— */
-.hero {
-  position: relative;
-  background: var(--canvas);
-  overflow: hidden;
-}
-.hero-cinema {
-  position: relative;
-  min-height: 720px;
-  background:
-    radial-gradient(ellipse at 65% 70%, rgba(218,41,28,0.32) 0%, transparent 45%),
-    radial-gradient(ellipse at 20% 30%, rgba(50,30,30,0.6) 0%, transparent 55%),
-    linear-gradient(180deg, #1f1a1a 0%, #181818 50%, #0a0606 100%);
-}
-.hero-cinema::before {
-  content: ""; position: absolute;
-  left: 6%; right: 6%; bottom: 24%; height: 32%;
-  background: linear-gradient(180deg, #a01509 0%, #4a0a05 80%, #1a0303 100%);
-  border-radius: 70% 70% 22% 22% / 100% 100% 35% 35%;
-  filter: blur(1.5px);
-  box-shadow:
-    0 -20px 80px -20px rgba(218,41,28,0.4),
-    0 60px 100px -10px rgba(0,0,0,0.6);
-}
-.hero-cinema::after {
-  content: ""; position: absolute;
-  left: 14%; right: 14%; bottom: 14%; height: 4%;
-  background: rgba(0,0,0,0.7);
-  filter: blur(14px);
-  border-radius: 50%;
-}
-.hero-cinema .car-wh {
-  position: absolute; bottom: 20%;
-  width: 11%; aspect-ratio: 1; border-radius: 50%;
-  background:
-    radial-gradient(circle, #050505 30%, #2a2a2a 55%, #4a4a4a 65%, #1a1a1a 80%);
-  border: 3px solid #000;
-  z-index: 2;
-}
-.hero-cinema .car-wh.l { left: 18%; }
-.hero-cinema .car-wh.r { right: 18%; }
-.hero-cinema .accent-stripe {
-  position: absolute; left: 0; right: 0; bottom: 32%; height: 1.5px;
-  background: linear-gradient(to right, transparent 0%, rgba(218,41,28,0.6) 50%, transparent 100%);
-}
-.hero-cinema .track-glare {
-  position: absolute; top: -10%; right: -10%;
-  width: 60%; height: 80%;
-  background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 60%);
-  transform: rotate(-15deg);
-}
+/* Car panels — cinematic near-black */
+.car { padding: 120px 0 96px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+.car-bg { position: absolute; inset: 0; pointer-events: none; }
+.car .ghost-index { position: absolute; top: 28px; right: -10px; font-family: var(--font-serif); font-weight: 700; font-size: clamp(180px, 26vw, 360px); line-height: 1; color: rgba(244, 241, 234, 0.028); pointer-events: none; user-select: none; }
+.car-head { position: relative; }
+.car-kicker { display: flex; align-items: baseline; gap: 18px; font-size: 11.5px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--rosso); }
+.car-kicker .rule { flex: 0 0 64px; height: 1px; background: var(--rosso); align-self: center; }
+.car-kicker .sub { color: var(--ink-dim); letter-spacing: 3px; }
+.car-name { font-family: var(--font-serif); font-weight: 600; font-size: clamp(58px, 9.6vw, 138px); line-height: 0.98; letter-spacing: 0.5px; color: var(--ivory); margin: 22px 0 18px; }
+.car-tagline { font-family: var(--font-serif); font-style: italic; font-size: clamp(19px, 2.2vw, 26px); color: var(--ink-muted); margin: 0; max-width: 700px; line-height: 1.55; }
+.car-tagline strong { color: var(--ivory); font-weight: 500; }
+.car-figure { margin: 64px auto 56px; position: relative; max-width: 1080px; }
+.car-figure svg { display: block; width: 100%; height: auto; }
+.car-figure .caption { position: absolute; bottom: -4px; right: 0; font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-dim); }
 
-.hero-overlay {
-  position: absolute; left: 0; right: 0; top: 0; bottom: 0;
-  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.55) 100%);
-  z-index: 1;
-}
-.hero-content {
-  position: relative;
-  z-index: 3;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 96px 32px 64px;
-}
-.hero-eyebrow {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 24px;
-  display: inline-flex; align-items: center; gap: 12px;
-}
-.hero-eyebrow::before {
-  content: ""; width: 24px; height: 1px; background: var(--primary);
-}
-.hero h1 {
-  font-size: 80px;
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -1.6px;
-  margin: 0 0 24px;
-  max-width: 900px;
-}
-.hero-sub {
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--body);
-  max-width: 540px;
-  margin: 0 0 40px;
-  line-height: 1.5;
-}
-.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+/* Spec strip — the numbers are the product */
+.specs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border-strong); border-bottom: 1px solid var(--border); }
+.spec { padding: 36px 28px 32px; border-left: 1px solid var(--border); }
+.spec:first-child { border-left: 0; padding-left: 0; }
+.spec-num { font-family: var(--font-serif); font-weight: 600; font-size: clamp(54px, 6.4vw, 104px); line-height: 0.95; letter-spacing: -1px; color: var(--ivory); font-variant-numeric: lining-nums; white-space: nowrap; }
+.spec-num sub { font-family: var(--font-serif); font-style: italic; font-weight: 500; font-size: 0.3em; letter-spacing: 0; color: var(--ink-muted); vertical-align: baseline; margin-left: 6px; }
+.spec.hero-stat .spec-num { color: var(--rosso); }
+.spec-label { margin-top: 16px; font-size: 11px; font-weight: 600; letter-spacing: 2.6px; text-transform: uppercase; color: var(--ink-dim); }
+.spec-label i { font-style: normal; color: var(--ink-muted); }
+.car-foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 44px; flex-wrap: wrap; }
+.car-foot .note { font-size: 13px; color: var(--ink-dim); max-width: 520px; line-height: 1.7; }
+.car-foot .actions { display: flex; gap: 12px; }
 
-.hero-credit {
-  position: absolute; left: 32px; bottom: 24px;
-  z-index: 3;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-}
-.hero-meta-card {
-  position: absolute; right: 32px; bottom: 24px;
-  z-index: 3;
-  background: rgba(24,24,24,0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 16px 24px;
-  display: flex; gap: 32px;
-}
-.hero-meta-card .stat {
-  text-align: left;
-}
-.hero-meta-card .stat .v {
-  font-size: 24px; font-weight: 700;
-  letter-spacing: -0.5px;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-.hero-meta-card .stat .l {
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--body);
-  margin-top: 2px;
-}
-@media (max-width: 800px) {
-  .hero h1 { font-size: 40px; letter-spacing: -0.8px; }
-  .hero-meta-card { display: none; }
-}
+/* Per-car atmosphere */
+#sf90 .car-bg { background: radial-gradient(52% 46% at 22% 88%, rgba(218, 41, 28, 0.13), transparent 70%); }
+#gtb296 .car-bg { background: radial-gradient(50% 44% at 80% 86%, rgba(218, 41, 28, 0.11), transparent 70%); }
+#purosangue .car-bg { background: radial-gradient(54% 46% at 50% 92%, rgba(160, 160, 175, 0.07), transparent 70%); }
 
-/* —— Section —— */
-.section { padding: 96px 32px; }
-.section-head {
-  max-width: 1280px; margin: 0 auto 64px;
-}
-.section-eyebrow {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 16px;
-  display: inline-flex; align-items: center; gap: 12px;
-}
-.section-eyebrow::before {
-  content: ""; width: 24px; height: 1px; background: var(--primary);
-}
-.section h2 {
-  font-size: 56px; font-weight: 500;
-  line-height: 1.1; letter-spacing: -1.12px;
-  margin: 0 0 16px;
-  color: var(--ink);
-  max-width: 880px;
-}
-.section-sub {
-  font-size: 18px; font-weight: 400;
-  color: var(--body);
-  max-width: 620px;
-  margin: 0;
-}
+/* Heritage timeline */
+.heritage { padding: 120px 0 100px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.heritage::before { content: ""; position: absolute; inset: 0; background: radial-gradient(46% 40% at 50% -10%, rgba(218, 41, 28, 0.07), transparent 70%); pointer-events: none; }
+.sec-head { max-width: 720px; margin-bottom: 64px; position: relative; }
+.sec-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 4.5px; text-transform: uppercase; color: var(--rosso); margin-bottom: 18px; }
+.sec-title { font-family: var(--font-serif); font-weight: 600; font-size: clamp(36px, 4.6vw, 58px); line-height: 1.05; color: var(--ivory); margin: 0 0 16px; }
+.sec-title em { font-style: italic; font-weight: 500; }
+.sec-sub { font-size: 15.5px; color: var(--ink-muted); line-height: 1.75; margin: 0; }
+.timeline { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; border-top: 1px solid var(--border-strong); }
+.era { padding: 40px 26px 8px 0; position: relative; }
+.era::before { content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--canvas); border: 2px solid var(--rosso); }
+.era.now::before { background: var(--giallo); border-color: var(--giallo); box-shadow: 0 0 14px rgba(255, 242, 0, 0.4); }
+.era-year { font-family: var(--font-serif); font-weight: 600; font-size: clamp(44px, 4.6vw, 76px); line-height: 1; color: var(--ivory); letter-spacing: -1px; }
+.era-model { margin-top: 14px; font-size: 12px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--rosso); }
+.era-note { margin-top: 8px; font-size: 13px; color: var(--ink-muted); line-height: 1.65; max-width: 200px; }
+.heritage-coda { margin-top: 64px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+.heritage-coda .arrow { font-family: var(--font-serif); font-size: 30px; color: var(--ink-dim); }
+.heritage-coda .to-year { font-family: var(--font-serif); font-weight: 600; font-style: italic; font-size: clamp(40px, 4vw, 60px); color: var(--rosso); line-height: 1; }
+.heritage-coda .coda-note { font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--ink-muted); }
 
-/* —— Model lineup —— */
-.model-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  max-width: 1280px; margin: 0 auto;
-}
-.model-card {
-  background: var(--canvas);
-  display: flex; flex-direction: column;
-}
-.model-photo {
-  aspect-ratio: 16 / 10;
-  position: relative;
-  overflow: hidden;
-  background: var(--canvas-elevated);
-  margin-bottom: 24px;
-}
-.model-photo.tone-red {
-  background:
-    radial-gradient(ellipse at 50% 80%, rgba(218,41,28,0.32) 0%, transparent 55%),
-    linear-gradient(135deg, #2a1818 0%, #181818 100%);
-}
-.model-photo.tone-cool {
-  background:
-    radial-gradient(ellipse at 50% 80%, rgba(76,152,185,0.18) 0%, transparent 55%),
-    linear-gradient(135deg, #1a2128 0%, #181818 100%);
-}
-.model-photo.tone-yellow {
-  background:
-    radial-gradient(ellipse at 50% 80%, rgba(246,229,0,0.18) 0%, transparent 55%),
-    linear-gradient(135deg, #221c0a 0%, #181818 100%);
-}
-.model-photo .silhouette {
-  position: absolute;
-  left: 6%; right: 6%; bottom: 22%; height: 38%;
-  background: linear-gradient(180deg, #5a1a13 0%, #1a0606 100%);
-  border-radius: 70% 70% 22% 22% / 100% 100% 30% 30%;
-  filter: blur(1.5px);
-  box-shadow: 0 30px 50px -10px rgba(0,0,0,0.5);
-}
-.model-photo.tone-cool .silhouette { background: linear-gradient(180deg, #4a5560 0%, #0a0e12 100%); }
-.model-photo.tone-yellow .silhouette { background: linear-gradient(180deg, #c5b020 0%, #1a1505 100%); }
-.model-photo .wh {
-  position: absolute; bottom: 16%;
-  width: 11%; aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(circle, #050505 30%, #3a3a3a 60%, #050505 80%);
-  border: 2px solid #000;
-}
-.model-photo .wh.l { left: 16%; } .model-photo .wh.r { right: 16%; }
-.model-badge {
-  position: absolute; top: 16px; left: 16px;
-  background: rgba(24,24,24,0.75);
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 4px 10px;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--ink);
-}
-.model-tag {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--body);
-  margin-bottom: 8px;
-}
-.model-name {
-  font-size: 32px; font-weight: 500;
-  letter-spacing: -0.5px;
-  color: var(--ink);
-  margin: 0 0 16px;
-  line-height: 1.05;
-}
-.model-mini-specs {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 24px;
-  padding-top: 16px;
-  border-top: 1px solid var(--hairline);
-}
-.model-mini-specs .item .v {
-  font-size: 20px; font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink);
-  letter-spacing: -0.3px;
-}
-.model-mini-specs .item .l {
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 2px;
-}
-@media (max-width: 900px) { .model-grid { grid-template-columns: 1fr; } }
+/* Scuderia band — the one all-red section */
+.scuderia { background: var(--rosso); color: var(--ivory); position: relative; overflow: hidden; padding: 110px 0 96px; }
+.scuderia::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(115deg, rgba(0,0,0,0.05) 0 2px, transparent 2px 84px), radial-gradient(60% 70% at 50% 120%, rgba(0, 0, 0, 0.22), transparent 70%); pointer-events: none; }
+.scuderia-stripe { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--giallo); }
+.scuderia .inner { position: relative; }
+.scuderia-kicker { display: flex; align-items: center; gap: 16px; font-size: 11.5px; font-weight: 700; letter-spacing: 4.5px; text-transform: uppercase; color: rgba(244, 241, 234, 0.85); }
+.scuderia-kicker .tricolore { display: inline-flex; width: 30px; height: 14px; }
+.scuderia-kicker .tricolore i { flex: 1; }
+.scuderia h2 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(46px, 7vw, 96px); line-height: 1; margin: 24px 0 14px; letter-spacing: 0.5px; }
+.scuderia h2 em { font-style: italic; font-weight: 500; }
+.scuderia .motto { font-family: var(--font-serif); font-style: italic; font-size: clamp(18px, 2vw, 23px); color: rgba(244, 241, 234, 0.82); margin: 0 0 64px; max-width: 760px; }
+.scuderia-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(244, 241, 234, 0.3); }
+.scuderia-stat { padding: 34px 28px 0; border-left: 1px solid rgba(244, 241, 234, 0.22); }
+.scuderia-stat:first-child { border-left: 0; padding-left: 0; }
+.scuderia-stat .num { font-family: var(--font-serif); font-weight: 600; font-size: clamp(52px, 6vw, 96px); line-height: 0.95; }
+.scuderia-stat .num sub { font-family: var(--font-serif); font-style: italic; font-weight: 500; font-size: 0.3em; margin-left: 5px; vertical-align: baseline; color: rgba(244,241,234,0.75); }
+.scuderia-stat .num.giallo { color: var(--giallo); }
+.scuderia-stat .lbl { margin-top: 14px; font-size: 11px; font-weight: 700; letter-spacing: 2.6px; text-transform: uppercase; color: rgba(244, 241, 234, 0.7); }
 
-/* —— Spec band —— */
-.spec-band {
-  background: var(--canvas);
-  padding: 96px 32px;
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-}
-.spec-band-inner {
-  max-width: 1280px; margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 64px;
-  align-items: center;
-}
-.spec-photo {
-  aspect-ratio: 4 / 3;
-  background:
-    radial-gradient(ellipse at 40% 60%, rgba(218,41,28,0.35) 0%, transparent 50%),
-    linear-gradient(135deg, #2a1010 0%, #0a0303 100%);
-  position: relative;
-  overflow: hidden;
-}
-.spec-photo .silhouette {
-  position: absolute;
-  left: 8%; right: 8%; bottom: 22%; height: 32%;
-  background: linear-gradient(180deg, #8a1d10 0%, #1a0303 100%);
-  border-radius: 65% 65% 22% 22% / 100% 100% 30% 30%;
-  filter: blur(1.5px);
-}
-.spec-photo .wh {
-  position: absolute; bottom: 16%;
-  width: 11%; aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(circle, #050505 30%, #3a3a3a 60%, #050505 80%);
-  border: 2px solid #000;
-}
-.spec-photo .wh.l { left: 18%; } .spec-photo .wh.r { right: 18%; }
-.spec-photo .caption-overlay {
-  position: absolute; left: 24px; bottom: 24px;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
-}
-.spec-band h3 {
-  font-size: 56px; font-weight: 500;
-  line-height: 1.1; letter-spacing: -1.12px;
-  margin: 0 0 16px;
-}
-.spec-band > .spec-band-inner > div:last-child > p {
-  font-size: 16px; font-weight: 400; color: var(--body); margin: 0 0 32px;
-}
-.spec-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border-top: 1px solid var(--hairline);
-}
-.spec-cell {
-  padding: 32px 24px 32px 0;
-  border-bottom: 1px solid var(--hairline);
-}
-.spec-value {
-  font-size: 64px; font-weight: 700;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -1.4px;
-  line-height: 1;
-  margin-bottom: 12px;
-}
-.spec-value .unit {
-  font-size: 16px; font-weight: 500;
-  color: var(--muted);
-  letter-spacing: 0;
-  margin-left: 4px;
-}
-.spec-label {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--muted);
-}
-@media (max-width: 900px) {
-  .spec-band-inner { grid-template-columns: 1fr; }
-}
+/* Design system */
+.ds-section { background: var(--canvas-raised); padding: 110px 0 100px; border-bottom: 1px solid var(--border); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-bottom: 64px; }
+.ds-intro h2 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.08; margin: 0 0 12px; color: var(--ivory); }
+.ds-intro p { margin: 0; color: var(--ink-muted); font-size: 14.5px; max-width: 640px; line-height: 1.75; }
+.ds-source { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid var(--border-strong); border-radius: var(--r-xs); font-size: 11px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--ink-muted); transition: all .15s; }
+.ds-source:hover { border-color: var(--rosso); color: var(--ivory); }
+.ds-block { margin-top: 60px; padding-top: 44px; border-top: 1px solid var(--border); }
+.ds-block:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+.ds-heading { font-family: var(--font-serif); font-size: 25px; font-weight: 600; color: var(--ivory); margin: 0 0 10px; }
+.ds-desc { font-size: 14px; color: var(--ink-muted); margin: 0 0 26px; line-height: 1.7; max-width: 640px; }
+.ds-caption { font-size: 10.5px; font-weight: 600; color: var(--rosso); margin: 30px 0 12px; letter-spacing: 2.6px; text-transform: uppercase; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r-xs); overflow: hidden; }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 11px 13px; }
+.ds-sw .name { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.ds-sw .val { font-size: 11px; color: var(--ink-dim); margin-top: 2px; letter-spacing: 0.5px; }
 
-/* —— Livery band — Rosso accent —— */
-.livery-band {
-  background: var(--primary);
-  background:
-    linear-gradient(180deg, #a00c01 0%, #da291c 64%);
-  color: var(--ink);
-  padding: 96px 32px;
-  text-align: center;
-}
-.livery-band-inner { max-width: 880px; margin: 0 auto; }
-.livery-band .stripe-bar {
-  width: 48px; height: 2px; background: #fff;
-  margin: 0 auto 24px;
-}
-.livery-band h2 {
-  font-size: 48px; font-weight: 500;
-  letter-spacing: -0.96px;
-  line-height: 1.1;
-  margin: 0 0 24px;
-}
-.livery-band p {
-  font-size: 16px;
-  color: rgba(255,255,255,0.85);
-  margin: 0 0 32px;
-}
+.ds-type-table { width: 100%; border-collapse: collapse; background: var(--surface-1); border: 1px solid var(--border); }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 15px 16px; border-bottom: 1px solid var(--border); font-size: 13.5px; vertical-align: middle; }
+.ds-type-table tr:last-child td { border-bottom: 0; }
+.ds-type-table th { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--ink-dim); background: var(--surface-2); }
+.ds-type-table td { color: var(--ink-muted); }
+.ds-type-table td.token { font-size: 12px; color: var(--rosso-bright); letter-spacing: 0.5px; }
+.ds-type-table td.sample { color: var(--ivory); }
 
-/* —— F1 Driver / Calendar split —— */
-.f1-band {
-  background: var(--canvas);
-  padding: 96px 32px;
-}
-.f1-band-inner {
-  max-width: 1280px; margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 64px;
-}
-.f1-drivers {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-.driver-card {
-  background: var(--canvas-elevated);
-  padding: 24px;
-  position: relative;
-}
-.driver-photo {
-  aspect-ratio: 4 / 5;
-  background:
-    radial-gradient(ellipse at 50% 40%, rgba(218,41,28,0.25) 0%, transparent 60%),
-    linear-gradient(180deg, #3a1818 0%, #181010 100%);
-  position: relative;
-  margin-bottom: 16px;
-  overflow: hidden;
-}
-.driver-photo .helmet {
-  position: absolute; top: 40%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%; aspect-ratio: 1;
-  background: radial-gradient(ellipse at 50% 40%, #c0b0a0 0%, #6a5a4a 60%, #2a1a10 100%);
-  border-radius: 48% 48% 42% 42% / 55% 55% 40% 40%;
-}
-.driver-photo .visor {
-  position: absolute; top: 38%; left: 26%; right: 26%;
-  height: 12%;
-  background: linear-gradient(180deg, #0a0a0a 0%, #2a2a2a 100%);
-  border-radius: 30% 30% 50% 50%;
-}
-.driver-photo .race-number {
-  position: absolute; right: 16px; top: 16px;
-  font-size: 56px; font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--primary);
-  letter-spacing: -2px;
-  line-height: 1;
-}
-.driver-name {
-  font-size: 18px; font-weight: 700; margin: 0 0 4px;
-}
-.driver-team {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--body);
-}
-.race-calendar {
-  background: var(--canvas);
-}
-.race-calendar h3 {
-  font-size: 36px; font-weight: 500;
-  letter-spacing: -0.36px;
-  margin: 0 0 32px;
-}
-.race-rows { display: flex; flex-direction: column; }
-.race-row {
-  padding: 20px 0;
-  border-bottom: 1px solid var(--hairline);
-  display: grid;
-  grid-template-columns: 80px 1fr 100px 80px;
-  gap: 24px;
-  align-items: center;
-}
-.race-row .rd {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-.race-row .race {
-  font-size: 16px; font-weight: 500;
-  color: var(--ink);
-}
-.race-row .race small {
-  display: block;
-  font-size: 12px; color: var(--body);
-  font-weight: 400; margin-top: 2px;
-}
-.race-row .date {
-  font-size: 13px; color: var(--body);
-  font-variant-numeric: tabular-nums;
-}
-.race-row .pos {
-  font-size: 32px; font-weight: 700;
-  color: var(--primary);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -1px;
-  text-align: right;
-}
-.race-row .pos.tba {
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0;
-}
-@media (max-width: 900px) {
-  .f1-band-inner { grid-template-columns: 1fr; }
-}
+.ds-radius { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.ds-radius-cell { background: var(--surface-1); border: 1px solid var(--border); padding: 22px 12px; text-align: center; }
+.ds-radius-box { width: 56px; height: 56px; background: linear-gradient(150deg, var(--rosso), var(--rosso-deep)); margin: 0 auto 12px; }
+.ds-radius-label { font-size: 11.5px; font-weight: 600; color: var(--ink); letter-spacing: 0.5px; }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-dim); margin-top: 2px; letter-spacing: 1px; }
 
-/* —— Preowned (light band) —— */
-.preowned {
-  background: var(--canvas-light);
-  color: var(--on-light);
-  padding: 96px 32px;
-}
-.preowned .section-eyebrow { color: var(--primary); }
-.preowned h2 { color: var(--on-light); }
-.preowned .section-sub { color: #555; }
-.preowned-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  max-width: 1280px; margin: 0 auto;
-}
-.preowned-card {
-  background: var(--canvas-light);
-  border: 1px solid var(--hairline-on-light);
-  padding: 0;
-}
-.preowned-photo {
-  aspect-ratio: 16 / 10;
-  background:
-    radial-gradient(ellipse at 50% 80%, rgba(218,41,28,0.18) 0%, transparent 60%),
-    linear-gradient(135deg, #d8d2cc 0%, #f0ece8 100%);
-  position: relative;
-  overflow: hidden;
-}
-.preowned-photo .silhouette {
-  position: absolute;
-  left: 8%; right: 8%; bottom: 24%; height: 32%;
-  background: linear-gradient(180deg, #c92516 0%, #6a0e07 100%);
-  border-radius: 70% 70% 22% 22% / 100% 100% 30% 30%;
-  filter: blur(1px);
-}
-.preowned-photo.tone-yellow .silhouette { background: linear-gradient(180deg, #d4b410 0%, #6a5a05 100%); }
-.preowned-photo.tone-blue .silhouette { background: linear-gradient(180deg, #1a2c40 0%, #050a14 100%); }
-.preowned-photo.tone-grey .silhouette { background: linear-gradient(180deg, #909090 0%, #2a2a2a 100%); }
-.preowned-photo .wh {
-  position: absolute; bottom: 18%;
-  width: 11%; aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(circle, #1a1a1a 30%, #3a3a3a 60%, #1a1a1a 80%);
-}
-.preowned-photo .wh.l { left: 18%; } .preowned-photo .wh.r { right: 18%; }
-.preowned-photo .badge-pill {
-  position: absolute; top: 16px; left: 16px;
-  background: var(--canvas-light);
-  color: var(--on-light);
-  border-radius: var(--r-full);
-  padding: 4px 12px;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-}
-.preowned-photo .badge-pill.approved {
-  background: var(--primary); color: var(--on-primary);
-}
-.preowned-body { padding: 24px; }
-.preowned-model {
-  font-size: 18px; font-weight: 700;
-  color: var(--on-light);
-  margin: 0 0 4px;
-  letter-spacing: -0.3px;
-}
-.preowned-meta {
-  font-size: 13px; color: #555;
-  margin-bottom: 16px;
-  font-variant-numeric: tabular-nums;
-}
-.preowned-price {
-  font-size: 24px; font-weight: 700;
-  color: var(--on-light);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.5px;
-  margin-bottom: 12px;
-}
-.preowned-loc {
-  display: flex; justify-content: space-between; align-items: center;
-  padding-top: 12px;
-  border-top: 1px solid var(--hairline-soft);
-  font-size: 12px; color: #777;
-}
-.preowned-loc .view {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--primary);
-}
-@media (max-width: 1100px) { .preowned-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .preowned-grid { grid-template-columns: 1fr; } }
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.ds-card { background: var(--surface-1); border: 1px solid var(--border); padding: 26px 24px; }
+.ds-card h5 { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.2px; color: var(--rosso); margin: 0 0 18px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.tag { display: inline-flex; align-items: center; padding: 5px 14px; font-size: 10.5px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; border-radius: var(--r-pill); }
+.tag-rosso { background: var(--rosso-soft); color: var(--rosso-bright); border: 1px solid rgba(218,41,28,0.4); }
+.tag-ivory { background: var(--ivory); color: #141210; }
+.tag-line { background: transparent; color: var(--ink-muted); border: 1px solid var(--border-strong); }
+.ds-voice { font-size: 14px; color: var(--ink); line-height: 1.75; }
+.ds-voice em { font-family: var(--font-serif); color: var(--ivory); }
 
-/* —— Newsletter band —— */
-.newsletter {
-  background: var(--canvas);
-  padding: 96px 32px;
-}
-.newsletter-band {
-  max-width: 1280px; margin: 0 auto;
-  background: var(--canvas-elevated);
-  padding: 64px;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 48px;
-  align-items: center;
-}
-.newsletter h3 {
-  font-size: 36px; font-weight: 500;
-  letter-spacing: -0.36px;
-  margin: 0 0 12px;
-}
-.newsletter p {
-  font-size: 14px; color: var(--body);
-  margin: 0;
-}
-.newsletter-form {
-  display: flex; gap: 8px;
-}
-.newsletter-input {
-  flex: 1;
-  height: 48px;
-  background: var(--canvas);
-  border: 1px solid var(--hairline);
-  color: var(--ink);
-  padding: 14px 16px;
-  font-family: inherit;
-  font-size: 14px;
-  border-radius: var(--r-sm);
-}
-.newsletter-input:focus { outline: 0; border-color: var(--ink); }
-@media (max-width: 800px) {
-  .newsletter-band { grid-template-columns: 1fr; padding: 32px; }
-}
+/* Footer */
+footer { padding: 72px 0 44px; background: var(--canvas); }
+.foot-top { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; margin-bottom: 52px; }
+.foot-brand p { color: var(--ink-dim); font-size: 13px; line-height: 1.75; margin: 18px 0 0; max-width: 420px; }
+.foot-cols { display: flex; gap: 72px; flex-wrap: wrap; }
+.foot-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--ivory); margin: 0 0 18px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); transition: color .12s; }
+.foot-col li a:hover { color: var(--ivory); }
+.foot-bottom { display: flex; justify-content: space-between; padding-top: 26px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-dim); flex-wrap: wrap; gap: 12px; }
 
-/* —— Footer —— */
-.footer {
-  background: var(--canvas);
-  color: var(--body);
-  padding: 64px 48px 32px;
-  border-top: 1px solid var(--hairline);
-}
-.footer-inner { max-width: 1280px; margin: 0 auto; }
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr repeat(5, 1fr);
-  gap: 32px;
-  margin-bottom: 48px;
-}
-.footer h5 {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--ink);
-  margin: 0 0 16px;
-}
-.footer ul { list-style: none; padding: 0; margin: 0; }
-.footer ul li { padding: 6px 0; }
-.footer ul li a {
-  font-size: 13px; font-weight: 400; color: var(--body);
-}
-.footer ul li a:hover { color: var(--ink); }
-.footer-intro p {
-  font-size: 13px; color: var(--body); margin: 16px 0 0; max-width: 240px;
-}
-.footer-bottom {
-  border-top: 1px solid var(--hairline);
-  padding-top: 24px;
-  display: flex; justify-content: space-between;
-  flex-wrap: wrap; gap: 16px;
-  font-size: 12px; color: var(--muted);
-}
-@media (max-width: 1000px) {
-  .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
-}
+/* Floating source */
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: var(--surface-1); border: 1px solid var(--border-strong); padding: 10px 18px; border-radius: var(--r-xs); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-muted); box-shadow: var(--shadow-card); transition: all .15s; }
+.src-link:hover { color: var(--ivory); border-color: var(--rosso); }
 
-/* ════════════════════════════════════════════ */
-/*           DESIGN SYSTEM REFERENCE             */
-/* ════════════════════════════════════════════ */
-.ds-section { background: var(--canvas); padding: 96px 32px; border-top: 1px solid var(--hairline); }
-.ds-intro { max-width: 1280px; margin: 0 auto 64px; }
-.ds-eyebrow {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--primary); margin-bottom: 16px;
-  display: inline-flex; align-items: center; gap: 12px;
+/* Responsive */
+@media (max-width: 980px) {
+  .nav-links { display: none; }
+  .masthead { padding: 76px 0 64px; }
+  .car { padding: 80px 0 64px; }
+  .car-figure { margin: 44px 0 40px; }
+  .specs { grid-template-columns: 1fr 1fr; }
+  .spec { padding: 26px 20px 24px; }
+  .spec:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .spec:nth-child(n+3) { border-top: 1px solid var(--border); }
+  .timeline { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+  .era { padding-right: 16px; }
+  .scuderia { padding: 80px 0 70px; }
+  .scuderia-stats { grid-template-columns: 1fr 1fr; }
+  .scuderia-stat { padding: 26px 20px 0; }
+  .scuderia-stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .ds-radius { grid-template-columns: repeat(2, 1fr); }
+  .foot-cols { gap: 44px; }
 }
-.ds-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--primary); }
-.ds-intro h2 {
-  font-size: 56px; font-weight: 500;
-  letter-spacing: -1.12px; line-height: 1.1;
-  margin: 0 0 24px;
+@media (max-width: 540px) {
+  .masthead h1 { font-size: 42px; }
+  .car-name { font-size: 46px; }
+  .specs { grid-template-columns: 1fr; }
+  .spec { border-left: 0; padding-left: 0; }
+  .spec:nth-child(n+2) { border-top: 1px solid var(--border); }
+  .spec-num { font-size: 56px; }
+  .timeline { grid-template-columns: 1fr; }
+  .scuderia-stats { grid-template-columns: 1fr; }
+  .scuderia-stat { border-left: 0; padding-left: 0; }
+  .scuderia-stat:nth-child(n+2) { border-top: 1px solid rgba(244,241,234,0.22); margin-top: 24px; }
+  .car-foot .actions { width: 100%; flex-direction: column; align-items: stretch; }
 }
-.ds-intro p {
-  font-size: 16px; font-weight: 400; color: var(--body);
-  max-width: 720px; margin: 0;
-}
-.ds-block {
-  max-width: 1280px; margin: 0 auto 80px;
-}
-.ds-block h3 {
-  font-size: 26px; font-weight: 500;
-  letter-spacing: 0.195px;
-  color: var(--ink); margin: 0 0 24px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--hairline);
-}
-.ds-block h4 {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--muted); margin: 24px 0 12px;
-}
-.swatches {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
-}
-.swatch {
-  border: 1px solid var(--hairline);
-  background: var(--canvas-elevated);
-}
-.swatch-chip { height: 80px; }
-.swatch-meta { padding: 12px; }
-.swatch-name { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 4px; letter-spacing: 0.5px; }
-.swatch-hex {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 11px; color: var(--body);
-}
-
-.type-table {
-  width: 100%; border-collapse: collapse;
-}
-.type-table th, .type-table td {
-  text-align: left; padding: 16px 12px;
-  border-bottom: 1px solid var(--hairline);
-  font-size: 14px; font-weight: 400; vertical-align: middle;
-}
-.type-table th {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--muted);
-}
-.type-token {
-  font-family: ui-monospace, monospace; font-size: 12px;
-  color: var(--ink); font-weight: 400;
-}
-.type-spec { color: var(--body); font-size: 13px; font-family: ui-monospace, monospace; }
-.type-sample-display-mega { font-size: 48px; font-weight: 500; line-height: 1.05; letter-spacing: -0.96px; }
-.type-sample-display-xl { font-size: 40px; font-weight: 500; line-height: 1.1; letter-spacing: -0.8px; }
-.type-sample-display-lg { font-size: 28px; font-weight: 500; letter-spacing: -0.28px; }
-.type-sample-title { font-size: 18px; font-weight: 700; }
-.type-sample-body { font-size: 14px; font-weight: 400; }
-.type-sample-caption-up { font-size: 11px; font-weight: 600; letter-spacing: 1.1px; text-transform: uppercase; }
-.type-sample-number { font-size: 48px; font-weight: 700; letter-spacing: -0.96px; font-variant-numeric: tabular-nums; }
-
-.radius-row {
-  display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px;
-}
-.radius-item { text-align: center; }
-.radius-square {
-  width: 100%; aspect-ratio: 1;
-  background: var(--canvas-elevated);
-  border: 1px solid var(--hairline);
-  margin-bottom: 8px;
-}
-.radius-name { font-size: 12px; font-weight: 600; color: var(--ink); letter-spacing: 0.5px; }
-.radius-val { font-size: 11px; color: var(--muted); font-family: ui-monospace, monospace; }
-
-.comp-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-}
-.comp-card {
-  background: var(--canvas-elevated);
-  padding: 32px;
-}
-.comp-card h5 {
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  color: var(--body); margin: 0 0 16px;
-}
-.comp-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 12px; }
-.comp-row:last-child { margin-bottom: 0; }
-.demo-input {
-  width: 100%; max-width: 320px;
-  height: 48px; padding: 14px 16px;
-  border: 1px solid var(--hairline);
-  background: var(--canvas);
-  color: var(--ink);
-  font-family: inherit; font-size: 14px;
-  border-radius: var(--r-sm);
-}
-.demo-input:focus { outline: 0; border-color: var(--ink); }
-.badge-pill {
-  background: var(--canvas-elevated);
-  border: 1px solid var(--hairline);
-  color: var(--ink);
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1.1px; text-transform: uppercase;
-  border-radius: var(--r-full);
-  padding: 4px 12px;
-  display: inline-flex; align-items: center;
-}
-.badge-pill.approved { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
-.badge-pill.info { background: var(--semantic-info); border-color: var(--semantic-info); }
-
-@media (max-width: 800px) {
-  .comp-grid { grid-template-columns: 1fr; }
-  .radius-row { grid-template-columns: repeat(4, 1fr); }
-}
-
-/* —— Source link —— */
-.src-link {
-  position: fixed; right: 16px; bottom: 16px; z-index: 50;
-  background: var(--primary);
-  color: var(--on-primary);
-  border-radius: var(--r-none);
-  padding: 12px 16px;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 1.4px; text-transform: uppercase;
-}
-.src-link:hover { background: var(--primary-hover); }
 </style>
 </head>
 <body>
 
-<nav class="top-nav">
-  <div class="wrap nav-inner">
-    <a href="#" class="ferrari-logo" aria-label="Ferrari">
-      <div class="shield">F</div>
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav">
+    <a class="brand" href="#">
+      <svg class="brand-shield" viewBox="0 0 23 31" aria-hidden="true">
+        <path d="M1.5 1.5h20v15.5c0 7.2-4.6 11.4-10 12.9-5.4-1.5-10-5.7-10-12.9z" fill="#fff200" stroke="rgba(0,0,0,0.4)" stroke-width="0.8"/>
+        <rect x="1.5" y="1.5" width="6.66" height="4.2" fill="#008c45"/>
+        <rect x="8.16" y="1.5" width="6.66" height="4.2" fill="#f4f1ea"/>
+        <rect x="14.82" y="1.5" width="5.18" height="4.2" fill="#cd212a"/>
+        <text x="11.5" y="21.5" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" font-style="italic" font-weight="700" font-size="10.5" fill="#111">SF</text>
+      </svg>
+      <span class="brand-name">Ferrari</span>
     </a>
-    <div class="nav-center">
-      <a href="#">Models</a>
-      <a href="#">F1</a>
-      <a href="#">Hypercars</a>
-      <a href="#">Pre-Owned</a>
-      <a href="#">Lifestyle</a>
-      <a href="#">Owners</a>
-    </div>
-    <div class="nav-right">
-      <a class="nav-icon" href="#" aria-label="Search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
-      </a>
-      <a class="nav-icon" href="#" aria-label="Language">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
-      </a>
-      <a class="nav-icon" href="#" aria-label="Account">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
-      </a>
-    </div>
+    <nav class="nav-links">
+      <a class="nav-item active" href="#sf90">SF90</a>
+      <a class="nav-item" href="#gtb296">296 GTB</a>
+      <a class="nav-item" href="#purosangue">Purosangue</a>
+      <a class="nav-item" href="#heritage">Heritage</a>
+      <a class="nav-item" href="#scuderia">Scuderia</a>
+      <a class="nav-item" href="#design-system">Design</a>
+    </nav>
+    <a class="btn btn-rosso btn-sm" href="#sf90">Configure</a>
   </div>
-</nav>
+</div>
 
-<!-- ╔══ HERO ══╗ -->
-<section class="hero">
-  <div class="hero-cinema">
-    <div class="track-glare"></div>
-    <div class="hero-overlay"></div>
-    <div class="accent-stripe"></div>
-    <div class="car-wh l"></div>
-    <div class="car-wh r"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Ferrari · Hypercar · 2026</div>
-      <h1>F80. The new<br/>frontier of performance.</h1>
-      <p class="hero-sub">A 1,200 hp hybrid V6 that owes its DNA to the 499P Le Mans winner. Limited to 799 examples. Reservations now open through Ferrari Atelier.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="#">Discover F80</a>
-        <a class="btn btn-outline-dark" href="#">Reserve at Atelier</a>
-      </div>
-    </div>
-    <div class="hero-credit">Photo · Maranello Test Track · A. Bertolacci</div>
-    <div class="hero-meta-card">
-      <div class="stat"><div class="v num">1,200</div><div class="l">HP</div></div>
-      <div class="stat"><div class="v num">2.15s</div><div class="l">0—100 km/h</div></div>
-      <div class="stat"><div class="v num">350</div><div class="l">km/h V-Max</div></div>
-    </div>
+<!-- MASTHEAD -->
+<section class="masthead">
+  <div class="container">
+    <div class="masthead-eyebrow">Maranello · Since 1947</div>
+    <h1>We do not sell cars.<br/>We sell <em>numbers</em><br/>worth dreaming of.</h1>
+    <p class="lead">Mille cavalli. Due secondi e mezzo. Dodici cilindri.
+      <span class="en">A thousand horses · Two and a half seconds · Twelve cylinders</span>
+    </p>
+    <div class="masthead-rule"></div>
   </div>
 </section>
 
-<!-- ╔══ MODEL LINEUP ══╗ -->
-<section class="section">
-  <div class="section-head">
-    <div class="section-eyebrow">The Range</div>
-    <h2>Every Ferrari, one philosophy.</h2>
-    <p class="section-sub">From the entry-level Roma to the F80 hypercar — every car carrying the Cavallino Rampante is engineered, built, and tested at Maranello.</p>
-  </div>
+<!-- SF90 STRADALE -->
+<section class="car" id="sf90">
+  <div class="car-bg"></div>
+  <div class="ghost-index">01</div>
+  <div class="container">
+    <div class="car-head">
+      <div class="car-kicker"><span>01</span><span class="rule"></span><span>Range-Topping Hybrid</span><span class="sub">PHEV · AWD</span></div>
+      <h2 class="car-name">SF90 Stradale</h2>
+      <p class="car-tagline">La Ferrari più potente di sempre. — <strong>The most powerful Ferrari ever</strong>: a twin-turbo V8 and three electric motors, named for ninety years of the Scuderia.</p>
+    </div>
 
-  <div class="model-grid">
-    <div class="model-card">
-      <div class="model-photo tone-red">
-        <div class="model-badge">V12 · GT</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="model-tag">Sports · Mid-engine</div>
-      <h3 class="model-name">SF90 Stradale</h3>
-      <div class="model-mini-specs">
-        <div class="item"><div class="v num">986</div><div class="l">HP</div></div>
-        <div class="item"><div class="v num">2.5s</div><div class="l">0—100</div></div>
-        <div class="item"><div class="v num">340</div><div class="l">km/h</div></div>
-      </div>
-      <a class="btn btn-outline-dark" href="#">Configure</a>
+    <div class="car-figure" aria-label="SF90 Stradale silhouette">
+      <svg viewBox="0 0 1200 330" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="sf90-body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#5c100a"/>
+            <stop offset="0.55" stop-color="#3a0a06"/>
+            <stop offset="1" stop-color="#200504"/>
+          </linearGradient>
+          <linearGradient id="sf90-rim" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="rgba(218,41,28,0)"/>
+            <stop offset="0.35" stop-color="rgba(255,90,70,0.9)"/>
+            <stop offset="0.75" stop-color="rgba(218,41,28,0.55)"/>
+            <stop offset="1" stop-color="rgba(218,41,28,0)"/>
+          </linearGradient>
+        </defs>
+        <line x1="40" y1="304" x2="1160" y2="304" stroke="rgba(244,241,234,0.12)" stroke-width="1"/>
+        <path d="M100 200
+                 C190 188 300 174 405 160
+                 C455 124 515 98 615 90
+                 C695 86 765 96 835 114
+                 C895 128 955 136 1015 142
+                 C1065 146 1092 150 1102 154
+                 L1110 212
+                 C1092 240 1048 254 995 258
+                 L250 262
+                 C175 258 115 238 100 200 Z" fill="url(#sf90-body)"/>
+        <path d="M100 200 C190 188 300 174 405 160 C455 124 515 98 615 90 C695 86 765 96 835 114 C895 128 955 136 1015 142 C1065 146 1092 150 1102 154"
+              fill="none" stroke="url(#sf90-rim)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M468 152 C508 118 562 100 625 95 C692 92 745 102 798 118 L768 142 C690 126 562 132 468 152 Z" fill="rgba(244,241,234,0.07)"/>
+        <path d="M200 218 C450 206 800 202 1040 210" fill="none" stroke="rgba(244,241,234,0.06)" stroke-width="1.5"/>
+        <path d="M122 204 L196 194" stroke="rgba(244,241,234,0.35)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="308" cy="242" r="62" fill="#0c0c0e"/>
+        <circle cx="308" cy="242" r="28" fill="none" stroke="rgba(218,41,28,0.55)" stroke-width="2.5"/>
+        <circle cx="898" cy="238" r="66" fill="#0c0c0e"/>
+        <circle cx="898" cy="238" r="30" fill="none" stroke="rgba(218,41,28,0.55)" stroke-width="2.5"/>
+      </svg>
+      <div class="caption">Silhouette study · not to scale</div>
     </div>
-    <div class="model-card">
-      <div class="model-photo tone-yellow">
-        <div class="model-badge">V8 · BERLINETTA</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="model-tag">Sports · Front-engine</div>
-      <h3 class="model-name">296 GTB</h3>
-      <div class="model-mini-specs">
-        <div class="item"><div class="v num">830</div><div class="l">HP</div></div>
-        <div class="item"><div class="v num">2.9s</div><div class="l">0—100</div></div>
-        <div class="item"><div class="v num">330</div><div class="l">km/h</div></div>
-      </div>
-      <a class="btn btn-outline-dark" href="#">Configure</a>
-    </div>
-    <div class="model-card">
-      <div class="model-photo tone-cool">
-        <div class="model-badge">V12 · GTC4</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="model-tag">GT · 4-seater</div>
-      <h3 class="model-name">Purosangue</h3>
-      <div class="model-mini-specs">
-        <div class="item"><div class="v num">725</div><div class="l">HP</div></div>
-        <div class="item"><div class="v num">3.3s</div><div class="l">0—100</div></div>
-        <div class="item"><div class="v num">310</div><div class="l">km/h</div></div>
-      </div>
-      <a class="btn btn-outline-dark" href="#">Configure</a>
-    </div>
-    <div class="model-card">
-      <div class="model-photo tone-red">
-        <div class="model-badge">V12 · ICONA</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="model-tag">Icona · V12 NA</div>
-      <h3 class="model-name">12Cilindri</h3>
-      <div class="model-mini-specs">
-        <div class="item"><div class="v num">830</div><div class="l">HP</div></div>
-        <div class="item"><div class="v num">2.9s</div><div class="l">0—100</div></div>
-        <div class="item"><div class="v num">340</div><div class="l">km/h</div></div>
-      </div>
-      <a class="btn btn-outline-dark" href="#">Configure</a>
-    </div>
-    <div class="model-card">
-      <div class="model-photo tone-yellow">
-        <div class="model-badge">V8 · GT</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="model-tag">GT · Coupé</div>
-      <h3 class="model-name">Roma</h3>
-      <div class="model-mini-specs">
-        <div class="item"><div class="v num">620</div><div class="l">HP</div></div>
-        <div class="item"><div class="v num">3.4s</div><div class="l">0—100</div></div>
-        <div class="item"><div class="v num">320</div><div class="l">km/h</div></div>
-      </div>
-      <a class="btn btn-outline-dark" href="#">Configure</a>
-    </div>
-    <div class="model-card">
-      <div class="model-photo tone-red">
-        <div class="model-badge">HYBRID · V6 · LIMITED</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="model-tag">Hypercar · 799 units</div>
-      <h3 class="model-name">F80</h3>
-      <div class="model-mini-specs">
-        <div class="item"><div class="v num">1,200</div><div class="l">HP</div></div>
-        <div class="item"><div class="v num">2.15s</div><div class="l">0—100</div></div>
-        <div class="item"><div class="v num">350</div><div class="l">km/h</div></div>
-      </div>
-      <a class="btn btn-outline-dark" href="#">Reserve</a>
-    </div>
-  </div>
-</section>
 
-<!-- ╔══ SPEC BAND ══╗ -->
-<section class="spec-band">
-  <div class="spec-band-inner">
-    <div class="spec-photo">
-      <div class="silhouette"></div>
-      <div class="wh l"></div><div class="wh r"></div>
-      <div class="caption-overlay">F80 · 120° V6 Hybrid · 1,200 HP</div>
+    <div class="specs">
+      <div class="spec hero-stat">
+        <div class="spec-num">1000<sub>cv</sub></div>
+        <div class="spec-label">Potenza Combinata</div>
+      </div>
+      <div class="spec">
+        <div class="spec-num">2.5<sub>s</sub></div>
+        <div class="spec-label">0–100 km/h</div>
+      </div>
+      <div class="spec">
+        <div class="spec-num">340<sub>km/h</sub></div>
+        <div class="spec-label">Top Speed</div>
+      </div>
+      <div class="spec">
+        <div class="spec-num">V8</div>
+        <div class="spec-label">Twin-Turbo · 3 990 cc</div>
+      </div>
     </div>
-    <div>
-      <div class="section-eyebrow">F80 — Technical Specification</div>
-      <h3>From the racetrack,<br/>to the road.</h3>
-      <p>The 3.0L 120° twin-turbo V6 derives directly from the engine that took the 499P to overall victory at Le Mans in 2023, 2024 and 2025. Combined with three electric motors and an 800V architecture, it delivers an unprecedented power density per litre.</p>
-      <div class="spec-grid">
-        <div class="spec-cell">
-          <div class="spec-value num">1,200<span class="unit">HP</span></div>
-          <div class="spec-label">Combined Output</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-value num">2.15<span class="unit">s</span></div>
-          <div class="spec-label">0—100 km/h</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-value num">5.75<span class="unit">s</span></div>
-          <div class="spec-label">0—200 km/h</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-value num">350<span class="unit">km/h</span></div>
-          <div class="spec-label">V-Max</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-value num">1,525<span class="unit">kg</span></div>
-          <div class="spec-label">Dry Weight</div>
-        </div>
-        <div class="spec-cell">
-          <div class="spec-value num">1,050<span class="unit">kg</span></div>
-          <div class="spec-label">Downforce @ 250</div>
-        </div>
+
+    <div class="car-foot">
+      <p class="note">Four digits of power, first of its name. The plug-in hybrid architecture exists for one reason only: there was no other way to reach one thousand.</p>
+      <div class="actions">
+        <a class="btn btn-rosso" href="#">Configure SF90</a>
+        <a class="btn btn-outline" href="#">Technical Dossier</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ╔══ LIVERY BAND — Rosso accent ══╗ -->
-<section class="livery-band">
-  <div class="livery-band-inner">
-    <div class="stripe-bar"></div>
-    <h2>Rosso Corsa.<br/>Since 1947.</h2>
-    <p>The colour that won 16 Formula 1 Constructors' titles. 9 Le Mans overall victories. 5,000+ Grand Prix finishes. One brand. One red.</p>
-    <a class="btn btn-outline-dark" href="#" style="border-color:#fff;color:#fff;">Discover Ferrari Heritage</a>
-  </div>
-</section>
+<!-- 296 GTB -->
+<section class="car" id="gtb296">
+  <div class="car-bg"></div>
+  <div class="ghost-index">02</div>
+  <div class="container">
+    <div class="car-head">
+      <div class="car-kicker"><span>02</span><span class="rule"></span><span>Berlinetta</span><span class="sub">V6 Hybrid · RWD</span></div>
+      <h2 class="car-name">296 GTB</h2>
+      <p class="car-tagline">Definisce il divertimento di guida. — Six cylinders at 120 degrees, and the rediscovery of <strong>fun as an engineering target</strong>.</p>
+    </div>
 
-<!-- ╔══ F1 + RACE CALENDAR ══╗ -->
-<section class="f1-band">
-  <div class="section-head">
-    <div class="section-eyebrow">Scuderia Ferrari · 2026 Season</div>
-    <h2>Formula 1.</h2>
-    <p class="section-sub">Scuderia Ferrari is the oldest, most successful, and most-watched team in Formula 1. The 2026 season opens in Melbourne, March 8.</p>
-  </div>
-  <div class="f1-band-inner">
-    <div class="f1-drivers">
-      <div class="driver-card">
-        <div class="driver-photo">
-          <div class="race-number num">16</div>
-          <div class="helmet"></div>
-          <div class="visor"></div>
-        </div>
-        <h4 class="driver-name">Charles Leclerc</h4>
-        <div class="driver-team">Monaco · #16</div>
+    <div class="car-figure" aria-label="296 GTB silhouette">
+      <svg viewBox="0 0 1200 330" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="gtb-body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#560f09"/>
+            <stop offset="0.55" stop-color="#360905"/>
+            <stop offset="1" stop-color="#1e0403"/>
+          </linearGradient>
+          <linearGradient id="gtb-rim" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="rgba(218,41,28,0)"/>
+            <stop offset="0.45" stop-color="rgba(255,90,70,0.85)"/>
+            <stop offset="0.8" stop-color="rgba(218,41,28,0.5)"/>
+            <stop offset="1" stop-color="rgba(218,41,28,0)"/>
+          </linearGradient>
+        </defs>
+        <line x1="40" y1="304" x2="1160" y2="304" stroke="rgba(244,241,234,0.12)" stroke-width="1"/>
+        <path d="M110 204
+                 C200 192 305 178 410 164
+                 C460 128 522 102 618 94
+                 C692 90 756 100 822 118
+                 C882 134 942 144 1000 152
+                 C1044 158 1070 162 1080 166
+                 L1088 218
+                 C1070 244 1028 256 978 260
+                 L255 262
+                 C182 258 124 242 110 204 Z" fill="url(#gtb-body)"/>
+        <path d="M110 204 C200 192 305 178 410 164 C460 128 522 102 618 94 C692 90 756 100 822 118 C882 134 942 144 1000 152 C1044 158 1070 162 1080 166"
+              fill="none" stroke="url(#gtb-rim)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M472 156 C512 122 565 104 628 99 C690 96 740 106 788 122 L760 146 C685 130 565 136 472 156 Z" fill="rgba(244,241,234,0.07)"/>
+        <path d="M210 220 C460 208 790 204 1010 214" fill="none" stroke="rgba(244,241,234,0.06)" stroke-width="1.5"/>
+        <path d="M132 208 L204 198" stroke="rgba(244,241,234,0.35)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="312" cy="242" r="62" fill="#0c0c0e"/>
+        <circle cx="312" cy="242" r="28" fill="none" stroke="rgba(218,41,28,0.55)" stroke-width="2.5"/>
+        <circle cx="882" cy="240" r="64" fill="#0c0c0e"/>
+        <circle cx="882" cy="240" r="29" fill="none" stroke="rgba(218,41,28,0.55)" stroke-width="2.5"/>
+      </svg>
+      <div class="caption">Silhouette study · not to scale</div>
+    </div>
+
+    <div class="specs">
+      <div class="spec hero-stat">
+        <div class="spec-num">830<sub>cv</sub></div>
+        <div class="spec-label">Potenza Combinata</div>
       </div>
-      <div class="driver-card">
-        <div class="driver-photo">
-          <div class="race-number num">44</div>
-          <div class="helmet"></div>
-          <div class="visor"></div>
-        </div>
-        <h4 class="driver-name">Lewis Hamilton</h4>
-        <div class="driver-team">United Kingdom · #44</div>
+      <div class="spec">
+        <div class="spec-num">2.9<sub>s</sub></div>
+        <div class="spec-label">0–100 km/h</div>
+      </div>
+      <div class="spec">
+        <div class="spec-num">8500<sub>rpm</sub></div>
+        <div class="spec-label">Redline</div>
+      </div>
+      <div class="spec">
+        <div class="spec-num">V6</div>
+        <div class="spec-label">120° Hot-V · 2 992 cc</div>
       </div>
     </div>
-    <div class="race-calendar">
-      <h3>Race Calendar — 2026</h3>
-      <div class="race-rows">
-        <div class="race-row">
-          <div class="rd">R 01</div>
-          <div class="race">Australian GP<small>Albert Park · Melbourne</small></div>
-          <div class="date">08 MAR</div>
-          <div class="pos num">P2</div>
-        </div>
-        <div class="race-row">
-          <div class="rd">R 02</div>
-          <div class="race">Bahrain GP<small>Sakhir International</small></div>
-          <div class="date">22 MAR</div>
-          <div class="pos num">P1</div>
-        </div>
-        <div class="race-row">
-          <div class="rd">R 03</div>
-          <div class="race">Saudi Arabian GP<small>Jeddah Corniche</small></div>
-          <div class="date">05 APR</div>
-          <div class="pos num">P3</div>
-        </div>
-        <div class="race-row">
-          <div class="rd">R 04</div>
-          <div class="race">Japanese GP<small>Suzuka Circuit</small></div>
-          <div class="date">19 APR</div>
-          <div class="pos num">P1</div>
-        </div>
-        <div class="race-row">
-          <div class="rd">R 05</div>
-          <div class="race">Chinese GP<small>Shanghai International</small></div>
-          <div class="date">03 MAY</div>
-          <div class="pos tba">TBA</div>
-        </div>
-        <div class="race-row">
-          <div class="rd">R 06</div>
-          <div class="race">Monaco GP<small>Circuit de Monaco</small></div>
-          <div class="date">24 MAY</div>
-          <div class="pos tba">TBA</div>
-        </div>
+
+    <div class="car-foot">
+      <p class="note">The engineers call the engine "piccolo V12" — a little V12 — for how it sings past eight thousand. The first six-cylinder road car to wear the prancing horse.</p>
+      <div class="actions">
+        <a class="btn btn-rosso" href="#">Configure 296 GTB</a>
+        <a class="btn btn-outline" href="#">Hear the V6</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ╔══ PREOWNED ══╗ -->
-<section class="preowned">
-  <div class="section-head">
-    <div class="section-eyebrow">Ferrari Approved · Pre-Owned</div>
-    <h2 style="color:#181818;">Certified Pre-Owned Inventory.</h2>
-    <p class="section-sub" style="color:#555;">Every Ferrari Approved car undergoes a 100-point inspection at an Authorised Ferrari Service Centre. Includes 24-month official Ferrari warranty extension.</p>
-  </div>
-  <div class="preowned-grid">
-    <div class="preowned-card">
-      <div class="preowned-photo">
-        <div class="badge-pill approved">Approved</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
+<!-- PUROSANGUE -->
+<section class="car" id="purosangue">
+  <div class="car-bg"></div>
+  <div class="ghost-index">03</div>
+  <div class="container">
+    <div class="car-head">
+      <div class="car-kicker"><span>03</span><span class="rule"></span><span>Quattro Porte, Quattro Posti</span><span class="sub">V12 · AWD</span></div>
+      <h2 class="car-name">Purosangue</h2>
+      <p class="car-tagline">Purosangue — thoroughbred. Four doors, four seats, and a naturally aspirated <strong>V12 with no apologies</strong>.</p>
+    </div>
+
+    <div class="car-figure" aria-label="Purosangue silhouette">
+      <svg viewBox="0 0 1200 330" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="puro-body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3b3b42"/>
+            <stop offset="0.55" stop-color="#222226"/>
+            <stop offset="1" stop-color="#121214"/>
+          </linearGradient>
+          <linearGradient id="puro-rim" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="rgba(244,241,234,0)"/>
+            <stop offset="0.4" stop-color="rgba(244,241,234,0.65)"/>
+            <stop offset="0.8" stop-color="rgba(244,241,234,0.3)"/>
+            <stop offset="1" stop-color="rgba(244,241,234,0)"/>
+          </linearGradient>
+        </defs>
+        <line x1="40" y1="304" x2="1160" y2="304" stroke="rgba(244,241,234,0.12)" stroke-width="1"/>
+        <path d="M90 178
+                 C180 166 290 156 390 148
+                 C435 110 490 80 590 70
+                 L800 66
+                 C870 70 930 88 990 116
+                 C1040 138 1072 148 1088 154
+                 L1100 216
+                 C1084 244 1038 256 985 260
+                 L270 264
+                 C190 260 115 226 90 178 Z" fill="url(#puro-body)"/>
+        <path d="M90 178 C180 166 290 156 390 148 C435 110 490 80 590 70 L800 66 C870 70 930 88 990 116 C1040 138 1072 148 1088 154"
+              fill="none" stroke="url(#puro-rim)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M452 140 C492 108 545 86 600 80 L658 78 L658 136 Z" fill="rgba(244,241,234,0.07)"/>
+        <path d="M678 78 L800 75 C852 79 902 94 942 114 L918 138 L678 138 Z" fill="rgba(244,241,234,0.07)"/>
+        <path d="M200 214 C460 202 800 198 1030 208" fill="none" stroke="rgba(244,241,234,0.06)" stroke-width="1.5"/>
+        <path d="M110 184 L186 174" stroke="rgba(244,241,234,0.35)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="300" cy="238" r="66" fill="#0c0c0e"/>
+        <circle cx="300" cy="238" r="30" fill="none" stroke="rgba(244,241,234,0.35)" stroke-width="2.5"/>
+        <circle cx="920" cy="238" r="66" fill="#0c0c0e"/>
+        <circle cx="920" cy="238" r="30" fill="none" stroke="rgba(244,241,234,0.35)" stroke-width="2.5"/>
+      </svg>
+      <div class="caption">Silhouette study · not to scale</div>
+    </div>
+
+    <div class="specs">
+      <div class="spec hero-stat">
+        <div class="spec-num">V12</div>
+        <div class="spec-label">Aspirato · <i>6 496 cc</i></div>
       </div>
-      <div class="preowned-body">
-        <h4 class="preowned-model">812 Superfast</h4>
-        <div class="preowned-meta">2021 · 8,420 km · LHD · Rosso Corsa</div>
-        <div class="preowned-price num">€328,500</div>
-        <div class="preowned-loc"><span>Maranello · Italia</span><span class="view">Configure →</span></div>
+      <div class="spec">
+        <div class="spec-num">725<sub>cv</sub></div>
+        <div class="spec-label">Max Power</div>
+      </div>
+      <div class="spec">
+        <div class="spec-num">3.3<sub>s</sub></div>
+        <div class="spec-label">0–100 km/h</div>
+      </div>
+      <div class="spec">
+        <div class="spec-num">8250<sub>rpm</sub></div>
+        <div class="spec-label">Redline</div>
       </div>
     </div>
-    <div class="preowned-card">
-      <div class="preowned-photo tone-yellow">
-        <div class="badge-pill approved">Approved</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="preowned-body">
-        <h4 class="preowned-model">SF90 Spider</h4>
-        <div class="preowned-meta">2023 · 3,210 km · LHD · Giallo Modena</div>
-        <div class="preowned-price num">€552,000</div>
-        <div class="preowned-loc"><span>Modena · Italia</span><span class="view">Configure →</span></div>
-      </div>
-    </div>
-    <div class="preowned-card">
-      <div class="preowned-photo tone-blue">
-        <div class="badge-pill approved">Approved</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="preowned-body">
-        <h4 class="preowned-model">Roma Spider</h4>
-        <div class="preowned-meta">2024 · 1,840 km · LHD · Blu Tour de France</div>
-        <div class="preowned-price num">€288,400</div>
-        <div class="preowned-loc"><span>Roma · Italia</span><span class="view">Configure →</span></div>
-      </div>
-    </div>
-    <div class="preowned-card">
-      <div class="preowned-photo tone-grey">
-        <div class="badge-pill">Classiche</div>
-        <div class="silhouette"></div>
-        <div class="wh l"></div><div class="wh r"></div>
-      </div>
-      <div class="preowned-body">
-        <h4 class="preowned-model">F40</h4>
-        <div class="preowned-meta">1991 · 18,600 km · RHD · Rosso Corsa</div>
-        <div class="preowned-price num">€2,850,000</div>
-        <div class="preowned-loc"><span>Maranello · Classiche</span><span class="view">Configure →</span></div>
+
+    <div class="car-foot">
+      <p class="note">While the industry downsizes, Maranello put its largest engine in its most practical car. Twelve cylinders is not a spec here — it is a position.</p>
+      <div class="actions">
+        <a class="btn btn-rosso" href="#">Configure Purosangue</a>
+        <a class="btn btn-outline" href="#">The V12 Story</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ╔══ NEWSLETTER ══╗ -->
-<section class="newsletter">
-  <div class="newsletter-band">
-    <div>
-      <h3>Stay close to Maranello.</h3>
-      <p>Newsletter dispatches from Ferrari — F1 race recaps, Atelier launches, Tailor Made program updates. Monthly. No spam.</p>
+<!-- HERITAGE -->
+<section class="heritage" id="heritage">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Heritage · 1947 → 2026</div>
+      <h2 class="sec-title">Every era has <em>one number</em> people remember.</h2>
+      <p class="sec-sub">Seventy-nine years compressed into five machines. Each one moved the line for what a road car was allowed to be.</p>
     </div>
-    <form class="newsletter-form" onsubmit="event.preventDefault();">
-      <input class="newsletter-input" type="email" placeholder="your@email.com" />
-      <button class="btn btn-primary">Subscribe</button>
-    </form>
+
+    <div class="timeline">
+      <div class="era">
+        <div class="era-year">1947</div>
+        <div class="era-model">125 S</div>
+        <div class="era-note">The first Ferrari. A 1.5-litre V12 — twelve cylinders from day one.</div>
+      </div>
+      <div class="era">
+        <div class="era-year">1962</div>
+        <div class="era-model">250 GTO</div>
+        <div class="era-note">Thirty-six built. Now the most valuable car ever sold.</div>
+      </div>
+      <div class="era">
+        <div class="era-year">1987</div>
+        <div class="era-model">F40</div>
+        <div class="era-note">The last car Enzo approved. 478 cv, no carpets, no excuses.</div>
+      </div>
+      <div class="era">
+        <div class="era-year">2002</div>
+        <div class="era-model">Enzo</div>
+        <div class="era-note">Formula 1 technology in a road car, named after the founder.</div>
+      </div>
+      <div class="era now">
+        <div class="era-year">2019</div>
+        <div class="era-model">SF90 Stradale</div>
+        <div class="era-note">The first series-production hybrid. One thousand cavalli.</div>
+      </div>
+    </div>
+
+    <div class="heritage-coda">
+      <span class="arrow">⟶</span>
+      <span class="to-year">2026</span>
+      <span class="coda-note">La storia continua. The next number is already on a dyno in Maranello.</span>
+    </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════ -->
-<!--           DESIGN SYSTEM REFERENCE              -->
-<!-- ════════════════════════════════════════════ -->
-
-<section class="ds-section">
-  <div class="ds-intro">
-    <div class="ds-eyebrow">Design System Reference</div>
-    <h2>The Ferrari cinematic language.</h2>
-    <p>A luxury-automotive interface that reads as cinematic editorial. Near-black canvas (#181818, never pure black), display weight stays at 500 with negative letter-spacing, Rosso Corsa used scarcely as the single brand voltage. Tokens below are extracted from the brand's <a href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.ferrari.html" target="_blank" rel="noopener" style="color: var(--primary);">DESIGN.md</a>.</p>
-  </div>
-
-  <div class="ds-block">
-    <h3>Color</h3>
-
-    <h4>Brand</h4>
-    <div class="swatches">
-      <div class="swatch"><div class="swatch-chip" style="background:#da291c;"></div><div class="swatch-meta"><div class="swatch-name">Rosso Corsa · primary</div><div class="swatch-hex">#da291c</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#b01e0a;"></div><div class="swatch-meta"><div class="swatch-name">primary-active</div><div class="swatch-hex">#b01e0a</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#9d2211;"></div><div class="swatch-meta"><div class="swatch-name">primary-hover</div><div class="swatch-hex">#9d2211</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#fff200;"></div><div class="swatch-meta"><div class="swatch-name">accent-yellow · Hypersail</div><div class="swatch-hex">#fff200</div></div></div>
+<!-- SCUDERIA F1 BAND -->
+<section class="scuderia" id="scuderia">
+  <div class="scuderia-stripe"></div>
+  <div class="container inner">
+    <div class="scuderia-kicker">
+      <span class="tricolore" aria-hidden="true"><i style="background:#008c45"></i><i style="background:#f4f1ea"></i><i style="background:#cd212a"></i></span>
+      <span>Scuderia Ferrari HP · Formula 1</span>
     </div>
+    <h2>Noi siamo <em>la Scuderia.</em></h2>
+    <p class="motto">The only team to start every Formula 1 season since 1950. The road cars pay for the racing. The racing is the point.</p>
 
-    <h4>Surface</h4>
-    <div class="swatches">
-      <div class="swatch"><div class="swatch-chip" style="background:#181818;"></div><div class="swatch-meta"><div class="swatch-name">canvas</div><div class="swatch-hex">#181818</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#303030;"></div><div class="swatch-meta"><div class="swatch-name">canvas-elevated · surface-card</div><div class="swatch-hex">#303030</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#ffffff;border-bottom:1px solid #303030;"></div><div class="swatch-meta"><div class="swatch-name">canvas-light</div><div class="swatch-hex">#ffffff</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#f7f7f7;"></div><div class="swatch-meta"><div class="swatch-name">surface-soft-light</div><div class="swatch-hex">#f7f7f7</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#ebebeb;"></div><div class="swatch-meta"><div class="swatch-name">surface-strong-light</div><div class="swatch-hex">#ebebeb</div></div></div>
-    </div>
-
-    <h4>Text & Hairlines</h4>
-    <div class="swatches">
-      <div class="swatch"><div class="swatch-chip" style="background:#ffffff;border-bottom:1px solid #303030;"></div><div class="swatch-meta"><div class="swatch-name">ink · body-strong</div><div class="swatch-hex">#ffffff</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#969696;"></div><div class="swatch-meta"><div class="swatch-name">body</div><div class="swatch-hex">#969696</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#666666;"></div><div class="swatch-meta"><div class="swatch-name">muted</div><div class="swatch-hex">#666666</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#8f8f8f;"></div><div class="swatch-meta"><div class="swatch-name">muted-soft</div><div class="swatch-hex">#8f8f8f</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#303030;"></div><div class="swatch-meta"><div class="swatch-name">hairline</div><div class="swatch-hex">#303030</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#d2d2d2;"></div><div class="swatch-meta"><div class="swatch-name">hairline-on-light</div><div class="swatch-hex">#d2d2d2</div></div></div>
-    </div>
-
-    <h4>Semantic</h4>
-    <div class="swatches">
-      <div class="swatch"><div class="swatch-chip" style="background:#4c98b9;"></div><div class="swatch-meta"><div class="swatch-name">semantic-info</div><div class="swatch-hex">#4c98b9</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#03904a;"></div><div class="swatch-meta"><div class="swatch-name">semantic-success</div><div class="swatch-hex">#03904a</div></div></div>
-      <div class="swatch"><div class="swatch-chip" style="background:#f13a2c;"></div><div class="swatch-meta"><div class="swatch-name">semantic-warning</div><div class="swatch-hex">#f13a2c</div></div></div>
-    </div>
-  </div>
-
-  <div class="ds-block">
-    <h3>Typography</h3>
-    <p style="font-size: 14px; color: var(--body); margin-bottom: 24px;">FerrariSans (Inter substitute) at modest weights — display 500, body 400. Display sizes carry negative letter-spacing (-0.36 to -1.6px). CTA labels are uppercase with 1.4px tracking. Display weight never goes bold — the cinematic photography does the heavy lifting.</p>
-    <table class="type-table">
-      <thead><tr><th>Token</th><th>Spec</th><th style="width: 50%;">Sample</th></tr></thead>
-      <tbody>
-        <tr><td class="type-token">display-mega</td><td class="type-spec">80 / 500 / -1.6px</td><td><span class="type-sample-display-mega">F80. Frontier.</span></td></tr>
-        <tr><td class="type-token">display-xl</td><td class="type-spec">56 / 500 / -1.12px</td><td><span class="type-sample-display-xl">Subsidiary hero.</span></td></tr>
-        <tr><td class="type-token">display-lg</td><td class="type-spec">36 / 500 / -0.36px</td><td><span class="type-sample-display-lg">Section head.</span></td></tr>
-        <tr><td class="type-token">title-md</td><td class="type-spec">18 / 700 / 0</td><td><span class="type-sample-title">Component title</span></td></tr>
-        <tr><td class="type-token">body-md</td><td class="type-spec">14 / 400 / 0</td><td><span class="type-sample-body">Default body — running editorial text.</span></td></tr>
-        <tr><td class="type-token">caption-uppercase</td><td class="type-spec">11 / 600 / 1.1px</td><td><span class="type-sample-caption-up">Section label</span></td></tr>
-        <tr><td class="type-token">button</td><td class="type-spec">14 / 700 / 1.4px</td><td><a class="btn btn-primary">Discover F80</a></td></tr>
-        <tr><td class="type-token">number-display</td><td class="type-spec">80 / 700 / -1.6px</td><td><span class="type-sample-number">P1</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="ds-block">
-    <h3>Radius — sharp by default</h3>
-    <p style="font-size: 14px; color: var(--body); margin-bottom: 24px;">CTAs and cards stay at 0px. Inputs use 4px sm. Pill geometry is reserved for badge labels only.</p>
-    <div class="radius-row">
-      <div class="radius-item"><div class="radius-square" style="border-radius:0;"></div><div class="radius-name">none</div><div class="radius-val">0px</div></div>
-      <div class="radius-item"><div class="radius-square" style="border-radius:2px;"></div><div class="radius-name">xs</div><div class="radius-val">2px</div></div>
-      <div class="radius-item"><div class="radius-square" style="border-radius:4px;"></div><div class="radius-name">sm</div><div class="radius-val">4px</div></div>
-      <div class="radius-item"><div class="radius-square" style="border-radius:6px;"></div><div class="radius-name">md</div><div class="radius-val">6px</div></div>
-      <div class="radius-item"><div class="radius-square" style="border-radius:8px;"></div><div class="radius-name">lg</div><div class="radius-val">8px</div></div>
-      <div class="radius-item"><div class="radius-square" style="border-radius:12px;"></div><div class="radius-name">xl</div><div class="radius-val">12px</div></div>
-      <div class="radius-item"><div class="radius-square" style="border-radius:9999px;"></div><div class="radius-name">full</div><div class="radius-val">∞</div></div>
-    </div>
-  </div>
-
-  <div class="ds-block">
-    <h3>Components</h3>
-    <div class="comp-grid">
-      <div class="comp-card">
-        <h5>Buttons</h5>
-        <div class="comp-row"><a class="btn btn-primary">Discover F80</a><a class="btn btn-outline-dark">Reserve</a></div>
-        <div class="comp-row"><a class="btn-text">Configure →</a></div>
+    <div class="scuderia-stats">
+      <div class="scuderia-stat">
+        <div class="num giallo">16</div>
+        <div class="lbl">Constructors' Titles</div>
       </div>
-      <div class="comp-card">
-        <h5>Inputs (4px radius)</h5>
-        <input class="demo-input" type="email" placeholder="your@email.com" />
-        <div style="height: 12px;"></div>
-        <input class="demo-input" type="text" value="Maranello, IT" />
+      <div class="scuderia-stat">
+        <div class="num">15</div>
+        <div class="lbl">Drivers' Titles</div>
       </div>
-      <div class="comp-card">
-        <h5>Badge pills</h5>
-        <div class="comp-row">
-          <span class="badge-pill approved">Approved</span>
-          <span class="badge-pill">Classiche</span>
-          <span class="badge-pill info" style="color:#fff;">Tailor Made</span>
-          <span class="badge-pill">V12 NA</span>
-        </div>
+      <div class="scuderia-stat">
+        <div class="num">249<sub>+</sub></div>
+        <div class="lbl">Grand Prix Wins</div>
       </div>
-      <div class="comp-card">
-        <h5>Spec / race position</h5>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-top: 12px;">
-          <div>
-            <div class="spec-value num" style="font-size: 40px;">1,200<span class="unit">HP</span></div>
-            <div class="spec-label">Output</div>
+      <div class="scuderia-stat">
+        <div class="num">1950</div>
+        <div class="lbl">Every Season Since</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section class="ds-section" id="design-system">
+  <div class="container">
+    <div class="ds-intro">
+      <div>
+        <div class="sec-eyebrow">Design System Reference</div>
+        <h2>Numbers set like couture</h2>
+        <p>The structural idea of this study: Ferrari's identity does not live in photographs — it lives in figures. So the page treats performance data as the hero asset, set in Didone serifs at display sizes on a near-black stage, with Rosso Corsa rationed like a scarce material and one drop of Giallo Modena.</p>
+      </div>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.ferrari.html" target="_blank" rel="noopener">View source ↗</a>
+    </div>
+
+    <!-- Color -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">Near-black carbon canvas, warm ivory text, and exactly one saturated red. Rosso Corsa appears small (rules, kickers, the hero figure) everywhere except a single full-bleed Scuderia band. Giallo Modena — the shield's ground — is used in drops: a rule, a dot, one statistic.</p>
+
+      <div class="ds-caption">Rosso — Rationed</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#da291c"></div><div class="meta"><div class="name">Rosso Corsa</div><div class="val">#DA291C</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ff3b2d"></div><div class="meta"><div class="name">Rosso Vivo</div><div class="val">#FF3B2D</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#8e1409"></div><div class="meta"><div class="name">Rosso Cupo</div><div class="val">#8E1409</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#4a0c07"></div><div class="meta"><div class="name">Body Red</div><div class="val">#4A0C07</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fff200"></div><div class="meta"><div class="name">Giallo Modena</div><div class="val">#FFF200</div></div></div>
+      </div>
+
+      <div class="ds-caption">Carbon Canvas</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#0a0a0b"></div><div class="meta"><div class="name">Nero Pista</div><div class="val">#0A0A0B</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#101012"></div><div class="meta"><div class="name">Raised</div><div class="val">#101012</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#151517"></div><div class="meta"><div class="name">Card</div><div class="val">#151517</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#2c2c31"></div><div class="meta"><div class="name">Grigio Body</div><div class="val">#2C2C31</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(244,241,234,0.09)"></div><div class="meta"><div class="name">Hairline</div><div class="val">Ivory · 9%</div></div></div>
+      </div>
+
+      <div class="ds-caption">Avorio — Warm Text</div>
+      <div class="ds-swatches">
+        <div class="ds-sw"><div class="chip" style="background:#f4f1ea"></div><div class="meta"><div class="name">Avorio</div><div class="val">#F4F1EA</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e8e4dc"></div><div class="meta"><div class="name">Body</div><div class="val">#E8E4DC</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#a39c91"></div><div class="meta"><div class="name">Muted</div><div class="val">#A39C91</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#6b665e"></div><div class="meta"><div class="name">Dim</div><div class="val">#6B665E</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#141210"></div><div class="meta"><div class="name">Ink on Ivory</div><div class="val">#141210</div></div></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">Bodoni Moda carries everything that matters: model names, performance figures, italic Italian asides. Inter does the quiet work — labels are small, uppercase and widely tracked, so the serif numerals read even larger by contrast. The figure is the headline; the label is the footnote.</p>
+      <table class="ds-type-table">
+        <thead>
+          <tr><th>Token</th><th>Sample</th><th>Size</th><th>Face</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="token">--figure-hero</td><td class="sample" style="font-family:'Bodoni Moda',serif;font-size:38px;font-weight:600;line-height:1">1000<span style="font-style:italic;font-size:0.4em;color:#a39c91"> cv</span></td><td>56–104px</td><td>Bodoni 600</td><td>Performance figures</td></tr>
+          <tr><td class="token">--model-name</td><td class="sample" style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:600">SF90 Stradale</td><td>58–138px</td><td>Bodoni 600</td><td>Model names</td></tr>
+          <tr><td class="token">--tagline-it</td><td class="sample" style="font-family:'Bodoni Moda',serif;font-style:italic;font-size:19px;color:#a39c91">La Ferrari più potente di sempre</td><td>19–26px</td><td>Bodoni Italic</td><td>Italian taglines</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:15px">The road cars pay for the racing.</td><td>14–16px</td><td>Inter 400</td><td>Prose</td></tr>
+          <tr><td class="token">--label</td><td class="sample" style="font-size:11px;font-weight:600;letter-spacing:2.6px;text-transform:uppercase;color:#6b665e">Combined Power</td><td>10.5–12px</td><td>Inter 600 · +2.6 tracking</td><td>Spec labels, nav</td></tr>
+          <tr><td class="token">--kicker</td><td class="sample" style="font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#da291c">Maranello · Since 1947</td><td>11px</td><td>Inter 600 · +4 tracking</td><td>Section eyebrows</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Radius -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">Edges are machined, not rounded. Surfaces and figures sit at 0; interactive elements get 2–4px so they don't look like print errors; the pill exists only for small tags. Anything softer would betray the carbon.</p>
+      <div class="ds-radius">
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Surfaces · Figures</div><div class="ds-radius-val">0px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">Buttons</div><div class="ds-radius-val">2px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Inputs</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">Tags only</div><div class="ds-radius-val">999px</div></div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">One red button per view — like one red car per garage. Everything else is hairline-outlined ivory on carbon. The spec block is the signature component: serif figure, italic unit, tracked label, divided by hairlines, never boxed in a card.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Buttons</h5>
+          <div class="ds-card-stack">
+            <a class="btn btn-rosso" href="#">Configure</a>
+            <a class="btn btn-outline" href="#">Technical Dossier</a>
+            <a class="btn btn-ghost" href="#">Book a Test Drive</a>
           </div>
-          <div>
-            <div class="spec-value num" style="font-size: 40px; color: var(--primary);">P1</div>
-            <div class="spec-label">Bahrain · 22 Mar</div>
+        </div>
+        <div class="ds-card">
+          <h5>Spec Block</h5>
+          <div style="border-top:1px solid rgba(244,241,234,0.18);padding-top:22px">
+            <div style="font-family:'Bodoni Moda',serif;font-weight:600;font-size:58px;line-height:0.95;color:#da291c">830<span style="font-style:italic;font-size:0.3em;color:#a39c91;margin-left:5px">cv</span></div>
+            <div style="margin-top:14px;font-size:11px;font-weight:600;letter-spacing:2.6px;text-transform:uppercase;color:#6b665e">Combined Power</div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Tags & Kickers</h5>
+          <div class="ds-card-stack">
+            <div class="ds-card-row">
+              <span class="tag tag-rosso">PHEV</span>
+              <span class="tag tag-ivory">V12</span>
+              <span class="tag tag-line">AWD</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#da291c"><span>02</span><span style="width:48px;height:1px;background:#da291c"></span><span>Berlinetta</span></div>
+            <div style="width:48px;height:3px;background:#fff200"></div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Voice & Tone -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Voice & Tone</h3>
+      <p class="ds-desc">Ferrari copy speaks in declarations, not features. Italian comes first when the emotion matters; English follows like a translation in a museum. Numbers are stated bare — never "up to", never "approximately".</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>Declarative</h5>
+          <div class="ds-voice"><em>"La Ferrari più potente di sempre."</em><br/>Not "one of the most powerful". The superlative or silence — hedging is for other brands.</div>
+        </div>
+        <div class="ds-card">
+          <h5>Italian First</h5>
+          <div class="ds-voice"><em>"Noi siamo la Scuderia."</em><br/>Italian is the voice; English is the subtitle. Cavalli, not horsepower. Rosso, not red.</div>
+        </div>
+        <div class="ds-card">
+          <h5>Numbers as Poetry</h5>
+          <div class="ds-voice"><em>1000 · 2.5 · V12</em><br/>A figure set large enough needs no adjective. The spec sheet is the love letter.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ╔══ FOOTER ══╗ -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-intro">
-        <div class="ferrari-logo">
-          <div class="shield">F</div>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="#">
+          <svg class="brand-shield" viewBox="0 0 23 31" aria-hidden="true">
+            <path d="M1.5 1.5h20v15.5c0 7.2-4.6 11.4-10 12.9-5.4-1.5-10-5.7-10-12.9z" fill="#fff200" stroke="rgba(0,0,0,0.4)" stroke-width="0.8"/>
+            <rect x="1.5" y="1.5" width="6.66" height="4.2" fill="#008c45"/>
+            <rect x="8.16" y="1.5" width="6.66" height="4.2" fill="#f4f1ea"/>
+            <rect x="14.82" y="1.5" width="5.18" height="4.2" fill="#cd212a"/>
+            <text x="11.5" y="21.5" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" font-style="italic" font-weight="700" font-size="10.5" fill="#111">SF</text>
+          </svg>
+          <span class="brand-name">Ferrari</span>
+        </a>
+        <p>这是一份设计研究 — 对 Ferrari 视觉语言的自包含致敬, 用于演示 "性能数字即奢侈品排版" 的品牌信息架构. 本页与 Ferrari S.p.A. 无任何官方关联, 所有数据仅作排版演示.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Range</h4>
+          <ul>
+            <li><a href="#sf90">SF90 Stradale</a></li>
+            <li><a href="#gtb296">296 GTB</a></li>
+            <li><a href="#purosangue">Purosangue</a></li>
+          </ul>
         </div>
-        <p>Built in Maranello, Italy. Since 1947. The Prancing Horse.</p>
-      </div>
-      <div>
-        <h5>Models</h5>
-        <ul>
-          <li><a href="#">F80</a></li>
-          <li><a href="#">SF90 Stradale</a></li>
-          <li><a href="#">296 GTB</a></li>
-          <li><a href="#">12Cilindri</a></li>
-          <li><a href="#">Purosangue</a></li>
-          <li><a href="#">Roma</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Pre-Owned</h5>
-        <ul>
-          <li><a href="#">Ferrari Approved</a></li>
-          <li><a href="#">Ferrari Classiche</a></li>
-          <li><a href="#">Online Inventory</a></li>
-          <li><a href="#">Trade-In</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Lifestyle</h5>
-        <ul>
-          <li><a href="#">Tailor Made</a></li>
-          <li><a href="#">Atelier</a></li>
-          <li><a href="#">Ferrari Store</a></li>
-          <li><a href="#">Museum</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Scuderia Ferrari</h5>
-        <ul>
-          <li><a href="#">F1 Team</a></li>
-          <li><a href="#">Race Calendar</a></li>
-          <li><a href="#">Hypercar / WEC</a></li>
-          <li><a href="#">Driver Academy</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Owners</h5>
-        <ul>
-          <li><a href="#">My Ferrari</a></li>
-          <li><a href="#">Service</a></li>
-          <li><a href="#">Genuine Parts</a></li>
-          <li><a href="#">Track Days</a></li>
-        </ul>
+        <div class="foot-col">
+          <h4>Racing</h4>
+          <ul>
+            <li><a href="#scuderia">Scuderia Ferrari</a></li>
+            <li><a href="#heritage">Heritage</a></li>
+            <li><a href="#">Corse Clienti</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Study</h4>
+          <ul>
+            <li><a href="#design-system">Design System</a></li>
+            <li><a href="https://github.com/yzfly/awesome-design-html" target="_blank" rel="noopener">awesome-design-html</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div>© Ferrari-inspired · generated for design study · Maranello</div>
-      <div>Rosso Corsa #da291c · sharp 0px corners · FerrariSans 500 · cinematic photography</div>
+    <div class="foot-bottom">
+      <span>© 2026 设计研究 · 致敬 Ferrari 视觉语言 · 作者 云中江树</span>
+      <span>Rosso Corsa #DA291C · Giallo Modena #FFF200</span>
     </div>
   </div>
 </footer>
 
-<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.ferrari.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.ferrari.html" target="_blank" rel="noopener">View source ↗</a>
 
 </body>
 </html>

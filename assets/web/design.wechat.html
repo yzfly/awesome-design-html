@@ -3,47 +3,46 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>微信 WeChat — 设计语言研究</title>
-<meta name="description" content="微信视觉语言的设计研究：极简留白 + 微信绿 #07C160 单色锚点、对话气泡几何、轻字重、克制到像一封信的国民应用美学。营销 demo + 设计系统参考。" />
+<title>微信 WeChat — 设计系统研究 · 一个生活方式</title>
+<meta name="description" content="微信 (WeChat) 设计语言视觉研究: 让聊天流本身成为品牌 — #EDEDED 聊天背景, #95EC69 己方气泡, 红包与转账卡片, 朋友圈九宫格, 小程序宫格与微信支付. 克制到近乎没有设计的设计. 营销 demo + 设计系统参考." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
 <style>
 :root {
-  /* Surface */
+  /* 画布 — 白与浅灰, 微信的克制 */
   --canvas: #ffffff;
-  --surface-1: #f7f7f7;
-  --surface-2: #ededed;
-  --surface-chat: #f5f5f5;
-  /* Brand */
-  --wx-green: #07C160;
-  --wx-green-deep: #05A856;
-  --wx-green-soft: #C3F0D5;
-  --wx-green-fog: #E8F9EF;
-  /* Text */
-  --ink: #1d1d1f;
-  --ink-bright: #000000;
-  --ink-soft: #555555;
+  --canvas-soft: #f7f7f7;
+  --chat-bg: #ededed;
+  /* 墨 — 文字层 */
+  --ink: #191919;
+  --ink-soft: #4c4c4c;
   --ink-muted: #888888;
-  --ink-dim: #b2b2b2;
-  /* Border */
-  --border: #ececec;
-  --border-soft: #f5f5f5;
-  /* Semantic */
-  --negative: #fa5151;
-  --warning: #fa9d3b;
-  /* Shadow */
-  --shadow-soft: 0 2px 16px rgba(0,0,0,0.04);
-  --shadow-bubble: 0 4px 20px rgba(7,193,96,0.12);
-  /* Type */
-  --font-ui: "Inter", "PingFang SC", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  /* Radii */
-  --r-min: 2px;
-  --r-sm: 4px;
-  --r-md: 8px;
-  --r-lg: 12px;
-  --r-xl: 20px;
+  --ink-faint: #b2b2b2;
+  /* 品牌绿 — 只做点缀 */
+  --brand: #07c160;
+  --brand-deep: #06ad56;
+  --brand-soft: rgba(7, 193, 96, 0.08);
+  /* 聊天气泡 */
+  --bubble-self: #95ec69;
+  --bubble-other: #ffffff;
+  /* 功能色 */
+  --link-blue: #576b95;
+  --hongbao: #fa9d3b;
+  --hongbao-grad: linear-gradient(160deg, #fbab53 0%, #f78f2d 100%);
+  --gold: #fcd886;
+  --danger: #fa5151;
+  /* 线与影 */
+  --border: rgba(0, 0, 0, 0.08);
+  --border-soft: rgba(0, 0, 0, 0.05);
+  --shadow-phone: 0 30px 70px rgba(25, 25, 25, 0.16);
+  --shadow-card: 0 8px 30px rgba(25, 25, 25, 0.07);
+  --font-ui: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
   --r-pill: 999px;
 }
 
@@ -53,179 +52,266 @@ body {
   background: var(--canvas);
   color: var(--ink);
   font-family: var(--font-ui);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.7;
-  font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 a { color: inherit; text-decoration: none; }
-button { font-family: inherit; }
+::selection { background: rgba(7, 193, 96, 0.22); }
 
-.container { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-/* Nav */
-.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.94); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); }
-.nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; max-width: 1140px; margin: 0 auto; }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 17px; color: var(--ink-bright); }
-.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; }
-.brand-mark svg { width: 30px; height: 30px; }
-.nav-links { display: flex; align-items: center; gap: 32px; }
-.nav-link { font-size: 14px; font-weight: 400; color: var(--ink-soft); transition: color .15s; }
-.nav-link:hover { color: var(--wx-green); }
-.nav-link.active { color: var(--ink-bright); font-weight: 500; }
-.nav-cta { display: flex; gap: 12px; align-items: center; }
+/* Nav — 像微信一样, 几乎没有设计 */
+.nav-wrap { position: sticky; top: 0; z-index: 40; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(18px) saturate(150%); border-bottom: 1px solid var(--border-soft); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1120px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; letter-spacing: -0.2px; }
+.brand-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--brand); display: grid; place-items: center; }
+.brand-mark svg { width: 18px; height: 18px; color: #fff; }
+.nav-links { display: flex; align-items: center; gap: 2px; }
+.nav-item { padding: 8px 14px; border-radius: var(--r-sm); font-size: 14px; font-weight: 500; color: var(--ink-soft); transition: color .15s, background .15s; }
+.nav-item:hover { color: var(--ink); background: var(--canvas-soft); }
+.nav-item.active { color: var(--brand); }
+.nav-cta { display: flex; gap: 10px; align-items: center; }
 
-/* Buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; cursor: pointer; border: 1px solid transparent; transition: all .15s ease; font-weight: 500; }
-.btn-primary { background: var(--wx-green); color: #fff; padding: 12px 28px; border-radius: var(--r-md); font-size: 15px; }
-.btn-primary:hover { background: var(--wx-green-deep); }
-.btn-pill { background: var(--wx-green); color: #fff; padding: 12px 28px; border-radius: var(--r-pill); font-size: 15px; }
-.btn-pill:hover { background: var(--wx-green-deep); }
-.btn-outline { background: transparent; color: var(--ink-bright); padding: 12px 26px; border-radius: var(--r-md); border-color: var(--border); font-size: 15px; }
-.btn-outline:hover { border-color: var(--ink-bright); }
-.btn-text { background: transparent; color: var(--wx-green); padding: 8px 0; font-size: 14px; font-weight: 500; }
-.btn-text:hover { color: var(--wx-green-deep); }
-.btn-sm { padding: 8px 18px; font-size: 13px; }
+/* Buttons — weui 的形状 */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; border: 0; transition: all .15s; font-weight: 500; font-family: inherit; }
+.btn-brand { background: var(--brand); color: #fff; padding: 12px 28px; border-radius: var(--r-sm); font-size: 15px; }
+.btn-brand:hover { background: var(--brand-deep); }
+.btn-plain { background: var(--canvas-soft); color: var(--ink); padding: 12px 28px; border-radius: var(--r-sm); font-size: 15px; }
+.btn-plain:hover { background: #efefef; }
+.btn-outline { background: transparent; color: var(--brand); padding: 11px 27px; border-radius: var(--r-sm); border: 1px solid var(--brand); font-size: 15px; }
+.btn-outline:hover { background: var(--brand-soft); }
+.btn-sm { padding: 7px 16px; font-size: 13px; }
 
-/* Hero */
-.hero { padding: 120px 0 100px; text-align: center; position: relative; overflow: hidden; }
-.hero-bg { position: absolute; inset: 0; background:
-  radial-gradient(60% 50% at 50% 30%, rgba(7,193,96,0.06), transparent 70%);
-  z-index: -1;
-}
-.hero h1 { font-size: 64px; line-height: 1.15; letter-spacing: -1.6px; font-weight: 500; margin: 0 0 24px; color: var(--ink-bright); }
-.hero h1 .light { font-weight: 300; color: var(--ink-soft); }
-.hero p.lead { font-size: 18px; line-height: 1.75; color: var(--ink-soft); max-width: 540px; margin: 0 auto 48px; font-weight: 400; }
-.hero-actions { display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap; }
+/* Hero — 左边一句话, 右边一段对话 */
+.hero { padding: 84px 0 96px; background: linear-gradient(180deg, var(--canvas-soft) 0%, var(--canvas) 78%); overflow: hidden; }
+.hero-inner { display: grid; grid-template-columns: 1fr 420px; gap: 72px; align-items: center; }
+.hero-copy { padding: 24px 0; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--ink-muted); padding: 6px 14px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--canvas); }
+.eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
+.hero h1 { font-size: 56px; line-height: 1.22; letter-spacing: 1px; font-weight: 900; margin: 40px 0 8px; }
+.hero h1 .light { display: block; font-size: 24px; font-weight: 400; color: var(--ink-muted); letter-spacing: 6px; margin-top: 18px; }
+.hero p.lead { font-size: 16px; line-height: 2; color: var(--ink-soft); max-width: 440px; margin: 32px 0 40px; }
+.hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.hero-meta { margin-top: 64px; display: flex; gap: 48px; border-top: 1px solid var(--border); padding-top: 28px; }
+.hero-meta-item { font-size: 13px; color: var(--ink-muted); }
+.hero-meta-item strong { display: block; color: var(--ink); font-weight: 700; font-size: 26px; letter-spacing: -0.5px; margin-bottom: 2px; font-variant-numeric: tabular-nums; }
+.hero-meta-item strong em { font-style: normal; color: var(--brand); }
 
-/* Bubble visual */
-.bubble-stage { margin: 96px auto 0; max-width: 780px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; text-align: left; }
-.bubble-mock { background: var(--surface-chat); border-radius: 28px; padding: 36px 24px; position: relative; box-shadow: var(--shadow-soft); min-height: 360px; }
-.bubble-mock::before { content: ""; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 80px; height: 5px; background: var(--ink-dim); border-radius: 999px; opacity: 0.3; }
-.bubble-row { display: flex; gap: 10px; margin: 18px 0; align-items: flex-end; }
-.bubble-row.me { justify-content: flex-end; }
-.bub-avatar { width: 36px; height: 36px; border-radius: 6px; background: var(--ink-dim); flex-shrink: 0; display: grid; place-items: center; color: #fff; font-size: 13px; font-weight: 500; }
-.bub-avatar.green { background: var(--wx-green); }
-.bub { max-width: 200px; padding: 10px 14px; border-radius: 6px; font-size: 14px; line-height: 1.55; position: relative; }
-.bub.them { background: #fff; color: var(--ink); }
-.bub.them::before { content: ""; position: absolute; left: -5px; top: 12px; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-right: 5px solid #fff; }
-.bub.me { background: #9eea6a; color: var(--ink-bright); }
-.bub.me::after { content: ""; position: absolute; right: -5px; top: 12px; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 5px solid #9eea6a; }
-.bubble-eyebrow { font-size: 13px; color: var(--wx-green); font-weight: 500; letter-spacing: 0.3px; margin-bottom: 14px; }
-.bubble-side h3 { font-size: 28px; font-weight: 500; line-height: 1.25; margin: 0 0 16px; color: var(--ink-bright); letter-spacing: -0.6px; }
-.bubble-side p { font-size: 15px; color: var(--ink-soft); margin: 0 0 24px; line-height: 1.75; }
-.bubble-meta { display: flex; gap: 32px; }
-.bubble-meta div strong { display: block; font-size: 24px; font-weight: 600; color: var(--ink-bright); line-height: 1; }
-.bubble-meta div span { display: block; font-size: 12px; color: var(--ink-muted); margin-top: 6px; }
+/* 手机 — 聊天流本身就是品牌 */
+.phone { width: 400px; background: #111; border-radius: 48px; padding: 12px; box-shadow: var(--shadow-phone); position: relative; }
+.phone-screen { background: var(--chat-bg); border-radius: 38px; overflow: hidden; }
+.phone-status { display: flex; justify-content: space-between; align-items: center; padding: 14px 26px 4px; font-size: 12px; font-weight: 600; color: var(--ink); }
+.phone-status .sig { display: flex; gap: 5px; align-items: center; }
+.phone-status .sig i { display: block; width: 16px; height: 9px; border: 1px solid var(--ink); border-radius: 2.5px; position: relative; }
+.phone-status .sig i::after { content: ""; position: absolute; inset: 1.5px; right: 5px; background: var(--ink); border-radius: 1px; }
+.chat-nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
+.chat-nav .back { display: flex; align-items: center; gap: 2px; font-size: 13px; color: var(--ink); }
+.chat-nav .back svg { width: 18px; height: 18px; }
+.chat-nav .back .badge { background: var(--ink-muted); color: #fff; font-size: 10.5px; padding: 0 6px; border-radius: var(--r-pill); line-height: 16px; }
+.chat-nav .name { font-size: 16px; font-weight: 500; }
+.chat-nav .more { font-size: 18px; letter-spacing: 1.5px; color: var(--ink); line-height: 1; padding-bottom: 8px; }
+.chat-body { padding: 14px 12px 18px; display: flex; flex-direction: column; gap: 14px; }
+.chat-time { align-self: center; font-size: 11px; color: var(--ink-faint); padding: 1px 8px; }
+.msg { display: flex; gap: 9px; align-items: flex-start; max-width: 86%; }
+.msg.self { align-self: flex-end; flex-direction: row-reverse; }
+.avatar { width: 36px; height: 36px; border-radius: var(--r-xs); flex-shrink: 0; display: grid; place-items: center; color: #fff; font-size: 13px; font-weight: 700; }
+.avatar.a-her { background: linear-gradient(135deg, #8c9dc0, #5b6e96); }
+.avatar.a-me { background: linear-gradient(135deg, #4abe7d, #2d8f5c); }
+.bubble { background: var(--bubble-other); border-radius: var(--r-xs); padding: 9px 12px; font-size: 14.5px; line-height: 1.55; position: relative; min-width: 0; }
+.msg.self .bubble { background: var(--bubble-self); }
+.bubble::before { content: ""; position: absolute; top: 13px; left: -5px; width: 10px; height: 10px; background: inherit; transform: rotate(45deg); border-radius: 1.5px; }
+.msg.self .bubble::before { left: auto; right: -5px; }
+.bubble.voice { display: flex; align-items: center; gap: 8px; width: 132px; cursor: pointer; }
+.msg.self .bubble.voice { flex-direction: row-reverse; }
+.msg.self .bubble.voice .wave { transform: scaleX(-1); }
+.bubble.voice .wave { width: 16px; height: 16px; flex-shrink: 0; }
+.bubble.voice .dur { font-size: 13px; color: var(--ink-soft); }
+.bubble.img-bubble { padding: 0; overflow: hidden; border-radius: var(--r-sm); }
+.bubble.img-bubble::before { display: none; }
+.chat-photo { width: 168px; height: 118px; display: block; background:
+  radial-gradient(60% 50% at 72% 22%, rgba(255, 244, 214, 0.9), transparent 60%),
+  linear-gradient(165deg, #ffd089 0%, #fe9c6e 42%, #7f6bb0 100%); position: relative; }
+.chat-photo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(180deg, transparent, rgba(47, 36, 84, 0.55)); }
+.chat-card-msg { width: 218px; border-radius: var(--r-sm); overflow: hidden; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); }
+.hb-top { background: var(--hongbao-grad); display: flex; align-items: center; gap: 11px; padding: 13px 12px; }
+.hb-icon { width: 34px; height: 41px; border-radius: 4px; background: #f6635b; flex-shrink: 0; position: relative; box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.12); }
+.hb-icon::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 16px; background: #ef4f48; border-radius: 4px 4px 0 0; clip-path: ellipse(86% 100% at 50% 0%); }
+.hb-icon::after { content: ""; position: absolute; left: 50%; top: 11px; transform: translateX(-50%); width: 13px; height: 13px; border-radius: 50%; background: var(--gold); box-shadow: 0 1px 2px rgba(150, 60, 0, 0.35); }
+.hb-txt .t1 { display: block; color: #fff; font-size: 14px; line-height: 1.4; }
+.hb-txt .t2 { display: block; color: rgba(255, 255, 255, 0.72); font-size: 11px; }
+.hb-foot { background: #fff; padding: 4.5px 12px; font-size: 10.5px; color: var(--ink-faint); display: flex; align-items: center; gap: 5px; }
+.hb-foot i { width: 11px; height: 11px; border-radius: 3px; background: var(--hongbao); display: inline-block; }
+.hb-foot i.pay { background: var(--brand); }
+.tf-top { background: var(--hongbao-grad); display: flex; align-items: center; gap: 11px; padding: 13px 12px; }
+.tf-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.95); flex-shrink: 0; display: grid; place-items: center; color: #f78f2d; }
+.tf-icon svg { width: 20px; height: 20px; }
+.tf-txt .t1 { display: block; color: #fff; font-size: 16px; font-weight: 500; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.tf-txt .t2 { display: block; color: rgba(255, 255, 255, 0.72); font-size: 11px; }
 
-/* Section */
-.section { padding: 120px 0; }
-.section-alt { background: var(--surface-1); }
-.section-head { text-align: center; margin-bottom: 80px; max-width: 720px; margin-left: auto; margin-right: auto; }
-.section-eyebrow { display: inline-block; font-size: 13px; font-weight: 500; color: var(--wx-green); margin-bottom: 18px; letter-spacing: 0.5px; }
-.section-title { font-size: 40px; line-height: 1.25; letter-spacing: -1px; font-weight: 500; margin: 0 0 18px; color: var(--ink-bright); }
-.section-sub { font-size: 16px; color: var(--ink-soft); line-height: 1.8; font-weight: 400; }
+/* Sections */
+.section { padding: 96px 0; }
+.section.tinted { background: var(--canvas-soft); }
+.section-head { margin-bottom: 52px; max-width: 560px; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.section-eyebrow { font-size: 13px; font-weight: 700; color: var(--brand); margin-bottom: 12px; letter-spacing: 3px; }
+.section-title { font-size: 38px; line-height: 1.25; letter-spacing: 0.5px; font-weight: 900; margin: 0 0 14px; }
+.section-sub { font-size: 15.5px; color: var(--ink-soft); line-height: 1.9; margin: 0; }
 
-/* Ecosystem grid */
-.eco-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
-.eco-card { background: #fff; padding: 48px 36px; transition: background .15s; cursor: pointer; }
-.eco-card:hover { background: var(--surface-1); }
-.eco-icon { width: 48px; height: 48px; border-radius: 10px; background: var(--wx-green-fog); display: grid; place-items: center; color: var(--wx-green); margin-bottom: 24px; }
-.eco-icon svg { width: 26px; height: 26px; stroke-width: 1.8; }
-.eco-card h3 { font-size: 18px; font-weight: 500; margin: 0 0 8px; color: var(--ink-bright); }
-.eco-card p { font-size: 14px; color: var(--ink-soft); margin: 0 0 16px; line-height: 1.7; }
-.eco-link { font-size: 13px; color: var(--wx-green); font-weight: 500; }
+/* 朋友圈 — 信息流 mockup */
+.moments-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+.moments-points { display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
+.m-point { display: flex; gap: 14px; align-items: flex-start; }
+.m-point .n { width: 26px; height: 26px; border-radius: 50%; background: var(--brand-soft); color: var(--brand); font-size: 13px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; margin-top: 2px; }
+.m-point .t { font-size: 15.5px; font-weight: 700; }
+.m-point .d { font-size: 14px; color: var(--ink-soft); line-height: 1.75; margin-top: 2px; }
+.moments-card { background: var(--canvas); border: 1px solid var(--border-soft); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding: 26px 24px; }
+.m-post { display: flex; gap: 12px; }
+.m-post .m-content { flex: 1; min-width: 0; }
+.m-post + .m-post { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-soft); }
+.m-avatar { width: 42px; height: 42px; border-radius: 6px; flex-shrink: 0; display: grid; place-items: center; color: #fff; font-size: 14px; font-weight: 700; }
+.m-name { font-size: 15px; font-weight: 700; color: var(--link-blue); margin-bottom: 3px; }
+.m-text { font-size: 14.5px; color: var(--ink); line-height: 1.65; margin-bottom: 10px; }
+.m-ninegrid { display: grid; grid-template-columns: repeat(3, 76px); gap: 5px; margin-bottom: 10px; }
+.m-ninegrid i { display: block; aspect-ratio: 1; border-radius: 3px; }
+.m-rowimgs { display: flex; gap: 5px; margin-bottom: 10px; }
+.m-rowimgs i { display: block; width: 76px; height: 76px; border-radius: 3px; }
+.m-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink-faint); }
+.m-meta .ops { background: var(--canvas-soft); border-radius: var(--r-xs); padding: 3px 9px; color: var(--link-blue); font-weight: 700; letter-spacing: 1px; line-height: 1; }
+.m-social { background: var(--canvas-soft); border-radius: var(--r-xs); padding: 8px 11px; margin-top: 9px; font-size: 13px; line-height: 1.7; }
+.m-social .likes { color: var(--link-blue); font-weight: 500; padding-bottom: 6px; border-bottom: 1px solid var(--border-soft); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.m-social .likes svg { width: 14px; height: 14px; flex-shrink: 0; }
+.m-social .cmt b { color: var(--link-blue); font-weight: 500; }
+.m-social .cmt { color: var(--ink-soft); }
 
-/* Quote */
-.quote { padding: 140px 0; text-align: center; }
-.quote blockquote { font-size: 36px; line-height: 1.45; letter-spacing: -0.6px; font-weight: 400; color: var(--ink-bright); margin: 0 auto; max-width: 720px; }
-.quote cite { display: block; margin-top: 32px; font-size: 13px; color: var(--ink-muted); font-style: normal; letter-spacing: 0.5px; }
+/* 小程序 — 宫格面板 */
+.mini-panel { background: var(--canvas); border: 1px solid var(--border-soft); border-radius: var(--r-xl); box-shadow: var(--shadow-card); padding: 36px 40px 40px; max-width: 880px; margin: 0 auto; }
+.mini-search { display: flex; align-items: center; gap: 8px; justify-content: center; background: var(--canvas-soft); border-radius: var(--r-sm); padding: 10px; font-size: 14px; color: var(--ink-faint); margin-bottom: 32px; }
+.mini-search svg { width: 15px; height: 15px; }
+.mini-label { font-size: 13px; color: var(--ink-muted); margin-bottom: 22px; }
+.mini-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px 16px; }
+.mini-app { text-align: center; }
+.mini-icon { width: 58px; height: 58px; border-radius: var(--r-md); margin: 0 auto 10px; display: grid; place-items: center; color: #fff; font-size: 21px; font-weight: 700; box-shadow: 0 4px 12px rgba(25, 25, 25, 0.1); }
+.mini-name { font-size: 13px; color: var(--ink-soft); }
+.mini-hint { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border-soft); text-align: center; font-size: 13.5px; color: var(--ink-muted); }
+.mini-hint b { color: var(--ink); font-weight: 700; }
 
-/* Stat strip */
-.stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.stat-cell { background: #fff; padding: 56px 24px; text-align: center; }
-.stat-cell strong { display: block; font-size: 48px; font-weight: 500; color: var(--wx-green); letter-spacing: -1px; line-height: 1; }
-.stat-cell span { display: block; font-size: 13px; color: var(--ink-soft); margin-top: 14px; }
+/* 微信支付 — 支付成功页 */
+.pay-grid { display: grid; grid-template-columns: 1fr 0.95fr; gap: 64px; align-items: center; }
+.pay-card { background: var(--canvas); border: 1px solid var(--border-soft); border-radius: var(--r-xl); box-shadow: var(--shadow-card); padding: 52px 40px 36px; max-width: 360px; margin: 0 auto; text-align: center; }
+.pay-check { width: 64px; height: 64px; border-radius: 50%; background: var(--brand); display: grid; place-items: center; margin: 0 auto 18px; }
+.pay-check svg { width: 32px; height: 32px; color: #fff; }
+.pay-state { font-size: 17px; font-weight: 500; margin-bottom: 26px; }
+.pay-amount { font-size: 44px; font-weight: 700; letter-spacing: -1px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.pay-amount .yen { font-size: 26px; vertical-align: 6px; margin-right: 2px; }
+.pay-merchant { font-size: 13px; color: var(--ink-muted); margin: 8px 0 34px; }
+.pay-detail { border-top: 1px solid var(--border-soft); padding-top: 18px; margin-bottom: 30px; display: flex; flex-direction: column; gap: 9px; }
+.pay-detail .row { display: flex; justify-content: space-between; font-size: 13px; }
+.pay-detail .k { color: var(--ink-muted); }
+.pay-detail .v { color: var(--ink); }
+.pay-done { width: 100%; }
+.pay-feats { display: flex; flex-direction: column; gap: 20px; margin-top: 36px; }
+.pay-feat { display: flex; gap: 14px; align-items: flex-start; }
+.pay-feat .ic { width: 40px; height: 40px; border-radius: var(--r-sm); background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; flex-shrink: 0; }
+.pay-feat .ic svg { width: 19px; height: 19px; }
+.pay-feat .t { font-size: 15.5px; font-weight: 700; }
+.pay-feat .d { font-size: 14px; color: var(--ink-soft); line-height: 1.75; margin-top: 2px; }
 
-/* CTA */
-.cta { padding: 140px 0; text-align: center; }
-.cta h2 { font-size: 48px; line-height: 1.2; letter-spacing: -1px; font-weight: 500; margin: 0 0 18px; color: var(--ink-bright); }
-.cta p { font-size: 17px; color: var(--ink-soft); margin: 0 auto 40px; max-width: 460px; line-height: 1.75; }
+/* 理念带 — 用完即走 */
+.philosophy { text-align: center; padding: 30px 0 10px; }
+.philosophy .quote { font-size: 34px; font-weight: 900; line-height: 1.5; letter-spacing: 1px; max-width: 720px; margin: 0 auto 18px; }
+.philosophy .quote em { font-style: normal; color: var(--brand); }
+.philosophy .by { font-size: 14px; color: var(--ink-muted); }
 
-/* Footer */
-footer { background: var(--surface-1); padding: 64px 0 32px; border-top: 1px solid var(--border-soft); }
-.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
-.foot-brand p { color: var(--ink-soft); font-size: 13px; line-height: 1.75; margin: 14px 0 22px; max-width: 280px; }
-.foot-col h4 { font-size: 13px; font-weight: 500; color: var(--ink-bright); margin: 0 0 18px; }
-.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-.foot-col li a { font-size: 13px; color: var(--ink-soft); transition: color .12s; }
-.foot-col li a:hover { color: var(--wx-green); }
-.foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-muted); flex-wrap: wrap; gap: 14px; }
-
-/* Design System Part B */
-.ds-section { background: #fff; padding: 120px 0; border-top: 1px solid var(--border-soft); }
-.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 64px; }
-.ds-intro h2 { font-size: 36px; letter-spacing: -1px; line-height: 1.25; margin: 0 0 12px; font-weight: 500; color: var(--ink-bright); }
-.ds-intro p { margin: 0; color: var(--ink-soft); font-size: 14px; max-width: 540px; line-height: 1.75; }
-.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r-pill); font-size: 12px; font-weight: 500; color: var(--ink-soft); transition: all .15s; }
-.ds-source:hover { color: var(--wx-green); border-color: var(--wx-green); }
-.ds-block { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border-soft); }
+/* Design system */
+.ds-section { background: var(--canvas-soft); padding: 96px 0; border-top: 1px solid var(--border-soft); }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 52px; }
+.ds-intro h2 { font-size: 34px; letter-spacing: 0.5px; line-height: 1.25; margin: 0 0 10px; font-weight: 900; }
+.ds-intro p { margin: 0; color: var(--ink-soft); font-size: 14.5px; max-width: 580px; line-height: 1.85; }
+.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; background: var(--canvas); border: 1px solid var(--border); border-radius: var(--r-pill); font-size: 12.5px; font-weight: 500; color: var(--ink-soft); transition: all .15s; }
+.ds-source:hover { border-color: var(--brand); color: var(--brand); }
+.ds-block { margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--border); }
 .ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
-.ds-heading { font-size: 22px; font-weight: 500; color: var(--ink-bright); margin: 0 0 10px; }
-.ds-desc { font-size: 13px; color: var(--ink-soft); margin: 0 0 28px; line-height: 1.75; max-width: 580px; }
-.ds-caption { font-size: 11px; font-weight: 500; letter-spacing: 1px; color: var(--ink-muted); text-transform: uppercase; margin: 32px 0 14px; }
+.ds-heading { font-size: 21px; font-weight: 700; margin: 0 0 8px; }
+.ds-desc { font-size: 14px; color: var(--ink-soft); margin: 0 0 22px; line-height: 1.8; max-width: 580px; }
+.ds-caption { font-size: 12px; font-weight: 700; color: var(--brand); margin: 26px 0 12px; letter-spacing: 2.5px; }
 .ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
-.ds-sw { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
-.ds-sw .chip { height: 64px; }
-.ds-sw .meta { padding: 10px 12px; }
-.ds-sw .name { font-size: 12px; font-weight: 500; color: var(--ink); }
-.ds-sw .val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+.ds-sw { background: var(--canvas); border: 1px solid var(--border-soft); border-radius: var(--r-md); overflow: hidden; }
+.ds-sw .chip { height: 62px; }
+.ds-sw .meta { padding: 11px 13px; }
+.ds-sw .name { font-size: 12.5px; font-weight: 700; }
+.ds-sw .val { font-size: 11px; color: var(--ink-muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
 
-.ds-type-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
-.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px; border-bottom: 1px solid var(--border-soft); font-size: 13px; vertical-align: middle; }
+.ds-type-table { width: 100%; border-collapse: collapse; background: var(--canvas); border: 1px solid var(--border-soft); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 13px 14px; border-bottom: 1px solid var(--border-soft); font-size: 13.5px; vertical-align: middle; }
 .ds-type-table tr:last-child td { border-bottom: 0; }
-.ds-type-table th { font-size: 11px; font-weight: 500; letter-spacing: 0.8px; color: var(--ink-muted); text-transform: uppercase; background: var(--surface-1); }
-.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--wx-green); }
-.ds-type-table td.sample { color: var(--ink-bright); }
+.ds-type-table th { font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px; color: var(--ink-muted); background: var(--canvas-soft); }
+.ds-type-table td { color: var(--ink-soft); }
+.ds-type-table td.token { font-size: 12px; color: var(--brand-deep); font-weight: 500; }
+.ds-type-table td.sample { color: var(--ink); }
 
 .ds-radius { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
-.ds-radius-cell { background: #fff; border: 1px solid var(--border); padding: 18px 8px; text-align: center; border-radius: 8px; }
-.ds-radius-box { width: 56px; height: 56px; background: var(--wx-green); margin: 0 auto 10px; }
-.ds-radius-label { font-size: 12px; font-weight: 500; color: var(--ink); }
-.ds-radius-val { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); margin-top: 2px; }
+.ds-radius-cell { background: var(--canvas); border: 1px solid var(--border-soft); padding: 18px 8px; text-align: center; border-radius: var(--r-md); }
+.ds-radius-box { width: 52px; height: 52px; background: var(--brand); margin: 0 auto 10px; opacity: 0.9; }
+.ds-radius-label { font-size: 12px; font-weight: 700; }
+.ds-radius-val { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
 
-.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.ds-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); padding: 24px; }
-.ds-card h5 { font-size: 11px; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; color: var(--wx-green); margin: 0 0 18px; }
-.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
-.ds-card-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.input { background: var(--surface-1); border: 1px solid transparent; padding: 12px 16px; border-radius: var(--r-md); color: var(--ink); font-size: 14px; font-family: inherit; width: 100%; outline: none; transition: all .15s; }
-.input:focus { background: #fff; border-color: var(--wx-green); }
-.tag { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-.tag-green { background: var(--wx-green-fog); color: var(--wx-green-deep); }
-.tag-mute { background: var(--surface-2); color: var(--ink-muted); }
-.tag-line { background: transparent; color: var(--ink-soft); border: 1px solid var(--border); }
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.ds-card { background: var(--canvas); border: 1px solid var(--border-soft); border-radius: var(--r-lg); padding: 22px; }
+.ds-card h5 { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--brand); margin: 0 0 16px; }
+.ds-card-stack { display: flex; flex-direction: column; gap: 13px; align-items: flex-start; }
+.ds-cell-list { width: 100%; border: 1px solid var(--border-soft); border-radius: var(--r-sm); overflow: hidden; }
+.ds-cell { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--canvas); font-size: 14px; border-bottom: 1px solid var(--border-soft); }
+.ds-cell:last-child { border-bottom: 0; }
+.ds-cell .arrow { color: var(--ink-faint); font-size: 14px; }
+.ds-cell .red-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); display: inline-block; margin-left: 8px; vertical-align: 1px; }
+.tag { display: inline-flex; align-items: center; padding: 3px 11px; border-radius: var(--r-xs); font-size: 12px; font-weight: 500; }
+.tag-brand { background: var(--brand-soft); color: var(--brand-deep); }
+.tag-orange { background: rgba(250, 157, 59, 0.12); color: #d97c1e; }
+.tag-blue { background: rgba(87, 107, 149, 0.1); color: var(--link-blue); }
+.badge-num { background: var(--danger); color: #fff; font-size: 11px; font-weight: 700; min-width: 18px; height: 18px; border-radius: var(--r-pill); display: inline-grid; place-items: center; padding: 0 5px; }
+
+/* Footer */
+footer { padding: 60px 0 36px; background: var(--canvas); border-top: 1px solid var(--border-soft); }
+.foot-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 48px; margin-bottom: 44px; }
+.foot-brand p { color: var(--ink-muted); font-size: 13px; line-height: 1.85; margin: 14px 0 0; max-width: 300px; }
+.foot-col h4 { font-size: 13.5px; font-weight: 700; margin: 0 0 16px; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+.foot-col li a { font-size: 13px; color: var(--ink-muted); transition: color .12s; }
+.foot-col li a:hover { color: var(--brand); }
+.foot-bottom { display: flex; justify-content: space-between; padding-top: 26px; border-top: 1px solid var(--border-soft); font-size: 12px; color: var(--ink-faint); flex-wrap: wrap; gap: 12px; }
 
 /* Floating source */
-.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: #fff; border: 1px solid var(--border); padding: 10px 18px; border-radius: var(--r-pill); font-size: 12px; font-weight: 500; color: var(--ink-soft); box-shadow: var(--shadow-soft); transition: all .15s; }
-.src-link:hover { color: var(--wx-green); border-color: var(--wx-green); }
+.src-link { position: fixed; right: 16px; bottom: 16px; z-index: 50; background: var(--canvas); border: 1px solid var(--border); padding: 10px 18px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--ink-soft); box-shadow: var(--shadow-card); transition: all .15s; }
+.src-link:hover { color: var(--brand); border-color: var(--brand); }
 
 /* Responsive */
 @media (max-width: 980px) {
-  .hero { padding: 80px 0 64px; }
-  .hero h1 { font-size: 40px; letter-spacing: -1.2px; }
-  .bubble-stage { grid-template-columns: 1fr; gap: 40px; margin-top: 60px; }
-  .eco-grid { grid-template-columns: 1fr; }
-  .stat-strip { grid-template-columns: repeat(2, 1fr); }
-  .quote blockquote { font-size: 24px; }
-  .cta h2 { font-size: 32px; }
-  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .hero { padding: 56px 0 72px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 56px; }
+  .hero h1 { font-size: 42px; }
+  .phone { width: 100%; max-width: 400px; margin: 0 auto; }
+  .moments-grid, .pay-grid { grid-template-columns: 1fr; gap: 44px; }
+  .mini-grid { grid-template-columns: repeat(4, 1fr); gap: 24px 10px; }
+  .mini-panel { padding: 28px 22px 32px; }
   .ds-comp { grid-template-columns: 1fr; }
   .ds-swatches { grid-template-columns: repeat(2, 1fr); }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .nav-links { display: none; }
-  .section { padding: 80px 0; }
+  .section { padding: 64px 0; }
+  .philosophy .quote { font-size: 26px; }
+  .hero-meta { gap: 28px; flex-wrap: wrap; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 33px; }
+  .hero h1 .light { font-size: 18px; letter-spacing: 4px; }
+  .section-title { font-size: 28px; }
+  .ds-intro h2 { font-size: 26px; }
+  .mini-grid { grid-template-columns: repeat(2, 1fr); }
+  .m-ninegrid { grid-template-columns: repeat(3, 1fr); }
+  .m-rowimgs i { width: 30%; height: auto; aspect-ratio: 1; }
+  .pay-card { padding: 40px 24px 28px; }
 }
 </style>
 </head>
@@ -236,374 +322,427 @@ footer { background: var(--surface-1); padding: 64px 0 32px; border-top: 1px sol
   <div class="nav">
     <a class="brand" href="#">
       <span class="brand-mark">
-        <svg viewBox="0 0 32 32" fill="none">
-          <path d="M12 5C6.48 5 2 8.69 2 13.25c0 2.62 1.51 4.95 3.85 6.46l-.78 2.39 2.81-1.41a13.5 13.5 0 003.62.52c.39 0 .77-.02 1.15-.06a8.18 8.18 0 01-.34-2.32c0-4.31 4.18-7.81 9.34-7.81.34 0 .67.02 1 .04C21.84 7.62 17.34 5 12 5z" fill="#07C160"/>
-          <path d="M30 18.94c0-3.62-3.62-6.56-8.06-6.56s-8.06 2.94-8.06 6.56c0 3.62 3.62 6.56 8.06 6.56.92 0 1.81-.13 2.64-.36l2.3 1.16-.63-1.95C28.76 23.16 30 21.18 30 18.94z" fill="#07C160"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 4C5.36 4 2 6.91 2 10.5c0 1.99 1.04 3.77 2.67 4.96L4 17.8l2.61-1.43c.6.18 1.23.3 1.89.36-.12-.46-.19-.94-.19-1.43 0-3.59 3.36-6.3 7.19-6.3.31 0 .62.02.92.05C15.62 6.13 12.83 4 9.5 4zM7 8a1 1 0 110 2 1 1 0 010-2zm5 0a1 1 0 110 2 1 1 0 010-2zm3.5 3C12.46 11 10 13.13 10 15.75S12.46 20.5 15.5 20.5c.62 0 1.22-.09 1.78-.25L19.5 21.5l-.6-1.96c1.28-.87 2.1-2.24 2.1-3.79C21 13.13 18.54 11 15.5 11zm-2 2.5a.9.9 0 110 1.8.9.9 0 010-1.8zm4 0a.9.9 0 110 1.8.9.9 0 010-1.8z"/></svg>
       </span>
       <span>微信</span>
     </a>
     <nav class="nav-links">
-      <a class="nav-link active" href="#">首页</a>
-      <a class="nav-link" href="#">公众平台</a>
-      <a class="nav-link" href="#">开放平台</a>
-      <a class="nav-link" href="#">小程序</a>
-      <a class="nav-link" href="#">视频号</a>
-      <a class="nav-link" href="#">微信支付</a>
+      <a class="nav-item active" href="#">微信</a>
+      <a class="nav-item" href="#moments">朋友圈</a>
+      <a class="nav-item" href="#mini">小程序</a>
+      <a class="nav-item" href="#pay">微信支付</a>
+      <a class="nav-item" href="#design-system">设计</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-text" href="#">登录</a>
+      <a class="btn btn-plain btn-sm" href="#">网页版</a>
+      <a class="btn btn-brand btn-sm" href="#">下载微信</a>
     </div>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="dot"></span>WeChat · 腾讯出品</span>
+      <h1>微信, 是一个<br/>生活方式<span class="light">超过十亿人, 每天在这里见面</span></h1>
+      <p class="lead">一条语音, 一个红包, 一张照片, 一次转账 — 微信不发明生活, 只是让生活在指尖自然地发生. 跨平台, 免费使用, 简单到不需要说明书.</p>
+      <div class="hero-actions">
+        <a class="btn btn-brand" href="#">免费下载</a>
+        <a class="btn btn-plain" href="#">了解更多功能</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>13<em>亿+</em></strong>月活跃账户</div>
+        <div class="hero-meta-item"><strong>2011</strong>年, 第一条消息发出</div>
+        <div class="hero-meta-item"><strong>450<em>亿</em></strong>条消息, 每天</div>
+      </div>
+    </div>
+
+    <!-- 手机里的一段对话 -->
+    <div class="phone" aria-label="微信聊天界面示意">
+      <div class="phone-screen">
+        <div class="phone-status">
+          <span>9:41</span>
+          <span class="sig"><i></i></span>
+        </div>
+        <div class="chat-nav">
+          <span class="back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <span class="badge">12</span>
+          </span>
+          <span class="name">江树</span>
+          <span class="more">···</span>
+        </div>
+        <div class="chat-body">
+          <span class="chat-time">下午 6:02</span>
+
+          <div class="msg">
+            <span class="avatar a-her">树</span>
+            <div class="bubble">今晚老地方吃火锅? 我订了七点的位置</div>
+          </div>
+
+          <div class="msg self">
+            <span class="avatar a-me">我</span>
+            <div class="bubble">好啊, 我刚下班, 路上了</div>
+          </div>
+
+          <div class="msg self">
+            <span class="avatar a-me">我</span>
+            <div class="bubble voice">
+              <svg class="wave" viewBox="0 0 24 24" fill="none" stroke="#3d3d3d" stroke-width="2" stroke-linecap="round"><path d="M8 9.5a5 5 0 010 5"/><path d="M11 6.8a9 9 0 010 10.4"/><path d="M14 4a13 13 0 010 16"/></svg>
+              <span class="dur">12″</span>
+            </div>
+          </div>
+
+          <div class="msg">
+            <span class="avatar a-her">树</span>
+            <div class="bubble img-bubble"><span class="chat-photo" role="img" aria-label="日落照片"></span></div>
+          </div>
+
+          <div class="msg">
+            <span class="avatar a-her">树</span>
+            <div class="bubble">店门口的晚霞, 先到先看</div>
+          </div>
+
+          <span class="chat-time">下午 6:47</span>
+
+          <div class="msg self">
+            <span class="avatar a-me">我</span>
+            <div class="chat-card-msg">
+              <div class="hb-top">
+                <span class="hb-icon"></span>
+                <span class="hb-txt"><span class="t1">恭喜发财, 大吉大利</span><span class="t2">领取红包</span></span>
+              </div>
+              <div class="hb-foot"><i></i>微信红包</div>
+            </div>
+          </div>
+
+          <div class="msg">
+            <span class="avatar a-her">树</span>
+            <div class="chat-card-msg">
+              <div class="tf-top">
+                <span class="tf-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 4 3 8 7 12"/><line x1="3" y1="8" x2="15" y2="8"/><polyline points="17 12 21 16 17 20"/><line x1="21" y1="16" x2="9" y2="16"/></svg>
+                </span>
+                <span class="tf-txt"><span class="t1">¥88.00</span><span class="t2">那我请锅底, AA 别想了</span></span>
+              </div>
+              <div class="hb-foot"><i class="pay"></i>微信转账</div>
+            </div>
+          </div>
+
+          <div class="msg self">
+            <span class="avatar a-me">我</span>
+            <div class="bubble">哈哈哈成交, 到了</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 朋友圈 -->
+<section class="section" id="moments">
   <div class="container">
-    <h1>微信,<br/><span class="light">是一个生活方式。</span></h1>
-    <p class="lead">十三亿人在用的应用,连接每一次问候、每一笔支付、每一段视频,以及每一个突然想说的"在吗"。</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#">免费下载</a>
-      <a class="btn btn-outline" href="#">了解微信</a>
-    </div>
-
-    <div class="bubble-stage">
-      <div class="bubble-mock">
-        <div class="bubble-row">
-          <div class="bub-avatar">妈</div>
-          <div class="bub them">今晚回来吃饭吗?</div>
-        </div>
-        <div class="bubble-row me">
-          <div class="bub me">回!做我爱吃的就行</div>
-        </div>
-        <div class="bubble-row">
-          <div class="bub-avatar">妈</div>
-          <div class="bub them">好,给你包饺子 🥟</div>
-        </div>
-        <div class="bubble-row me">
-          <div class="bub me">爱你</div>
+    <div class="moments-grid">
+      <div>
+        <div class="section-eyebrow">朋友圈</div>
+        <h2 class="section-title">生活, 给在乎的人看</h2>
+        <p class="section-sub">不是广场, 是院子. 朋友圈只对朋友可见, 点赞和评论也只有共同好友看得到 — 分享不必表演.</p>
+        <div class="moments-points">
+          <div class="m-point">
+            <span class="n">1</span>
+            <div>
+              <div class="t">九宫格, 朋友圈的语法</div>
+              <div class="d">一张到九张, 不裁剪你的生活. 照片按你拍的顺序排, 没有算法替你挑选.</div>
+            </div>
+          </div>
+          <div class="m-point">
+            <span class="n">2</span>
+            <div>
+              <div class="t">三天可见, 由你决定</div>
+              <div class="d">展示的范围, 保留的时长, 谁能看谁不能看, 边界始终握在你手里.</div>
+            </div>
+          </div>
+          <div class="m-point">
+            <span class="n">3</span>
+            <div>
+              <div class="t">没有转发, 没有热搜</div>
+              <div class="d">朋友圈不制造流行, 只承载关系. 这里唯一的推荐算法, 是你的朋友本身.</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="bubble-side">
-        <div class="bubble-eyebrow">— 一段日常 —</div>
-        <h3>用完即走,<br/>走了还来。</h3>
-        <p>张小龙说,好的产品是用完即走的工具,而不是绑架你的注意力。我们想做后者,但更想做前者。</p>
-        <div class="bubble-meta">
-          <div><strong>13.7亿</strong><span>月活跃用户</span></div>
-          <div><strong>14年</strong><span>陪伴每一天</span></div>
+
+      <div class="moments-card" aria-label="朋友圈信息流示意">
+        <div class="m-post">
+          <span class="m-avatar" style="background:linear-gradient(135deg,#f2b263,#e08c3f)">阿</span>
+          <div class="m-content">
+            <div class="m-name">阿岚</div>
+            <div class="m-text">川西七日, 把秋天看完了.</div>
+            <div class="m-ninegrid">
+              <i style="background:linear-gradient(150deg,#9ec4e8,#5d87b8)"></i>
+              <i style="background:linear-gradient(150deg,#f5c98a,#d98e4a)"></i>
+              <i style="background:linear-gradient(150deg,#a8d8b9,#5fa777)"></i>
+              <i style="background:linear-gradient(150deg,#e8b3a6,#c1705e)"></i>
+              <i style="background:linear-gradient(150deg,#c9c2e8,#8a7fc0)"></i>
+              <i style="background:linear-gradient(150deg,#f0e1a8,#cdb35e)"></i>
+              <i style="background:linear-gradient(150deg,#b3d9e0,#6da4b2)"></i>
+              <i style="background:linear-gradient(150deg,#e6c4d8,#b984a5)"></i>
+              <i style="background:linear-gradient(150deg,#aab8d4,#6b7ca3)"></i>
+            </div>
+            <div class="m-meta"><span>2 小时前</span><span class="ops">··</span></div>
+            <div class="m-social">
+              <div class="likes">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                江树, 老周, 杳杳, 半夏
+              </div>
+              <div class="cmt"><b>江树:</b> 第六张是新都桥? 取景绝了</div>
+              <div class="cmt"><b>阿岚:</b> 回复 江树: 是! 下次一起</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="m-post">
+          <span class="m-avatar" style="background:linear-gradient(135deg,#7fb5a2,#4d8a74)">周</span>
+          <div class="m-content">
+            <div class="m-name">老周</div>
+            <div class="m-text">面包店开业第 100 天. 谢谢每一个回头客.</div>
+            <div class="m-rowimgs">
+              <i style="background:linear-gradient(150deg,#f3d6a8,#d8a05c)"></i>
+              <i style="background:linear-gradient(150deg,#e0c1a3,#a9805a)"></i>
+              <i style="background:linear-gradient(150deg,#f0e4ce,#c9b48a)"></i>
+            </div>
+            <div class="m-meta"><span>昨天</span><span class="ops">··</span></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ECOSYSTEM -->
-<section class="section section-alt">
+<!-- 小程序 -->
+<section class="section tinted" id="mini">
   <div class="container">
-    <div class="section-head">
-      <span class="section-eyebrow">微信生态</span>
-      <h2 class="section-title">一个 App,无数种可能</h2>
-      <p class="section-sub">从聊天到支付,从内容到商业,微信用最克制的入口,承载最丰富的世界。</p>
+    <div class="section-head center">
+      <div class="section-eyebrow">小程序</div>
+      <h2 class="section-title">无需安装, 用完即走</h2>
+      <p class="section-sub">扫一个码, 点一个卡片, 服务就在眼前. 不占内存, 不求关注, 不发通知 — 好的工具应该在完成使命后退场.</p>
     </div>
 
-    <div class="eco-grid">
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-        </div>
-        <h3>公众号</h3>
-        <p>每个人都有自己想表达的内容,公众号让创作者与读者保持长期、深度的连接。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
+    <div class="mini-panel" aria-label="小程序面板示意">
+      <div class="mini-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+        搜索小程序
       </div>
-
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/></svg>
-        </div>
-        <h3>小程序</h3>
-        <p>无需下载,即点即用。提供轻量、便捷的服务接入,连接 4 百万开发者与亿级用户。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
+      <div class="mini-label">最近使用</div>
+      <div class="mini-grid">
+        <div class="mini-app"><span class="mini-icon" style="background:linear-gradient(135deg,#5ec26a,#2f9e4f)">行</span><div class="mini-name">出行打车</div></div>
+        <div class="mini-app"><span class="mini-icon" style="background:linear-gradient(135deg,#f8b03c,#ef8a1f)">食</span><div class="mini-name">外卖点餐</div></div>
+        <div class="mini-app"><span class="mini-icon" style="background:linear-gradient(135deg,#5a8df0,#3a63c9)">影</span><div class="mini-name">电影演出</div></div>
+        <div class="mini-app"><span class="mini-icon" style="background:linear-gradient(135deg,#f2734f,#d8482b)">购</span><div class="mini-name">百货商城</div></div>
+        <div class="mini-app"><span class="mini-icon" style="background:linear-gradient(135deg,#41b9c9,#2691a6)">递</span><div class="mini-name">快递查询</div></div>
+        <div class="mini-app"><span class="mini-icon" style="background:linear-gradient(135deg,#8e7be8,#6450c8)">读</span><div class="mini-name">读书听书</div></div>
+        <div class="mini-app"><span class="mini-icon" style="background:linear-gradient(135deg,#f0648c,#d23a68)">健</span><div class="mini-name">运动健康</div></div>
+        <div class="mini-app"><span class="mini-icon" style="background:linear-gradient(135deg,#6aa84f,#477f33)">缴</span><div class="mini-name">生活缴费</div></div>
       </div>
-
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-        </div>
-        <h3>视频号</h3>
-        <p>每个人都是创作者,每条视频都值得被看见。视频号承载了你生活中每一个想分享的瞬间。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
-      </div>
-
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-        </div>
-        <h3>微信支付</h3>
-        <p>从扫码到刷掌,把支付变成最自然的一个动作。日均交易笔数突破 10 亿。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
-      </div>
-
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <h3>企业微信</h3>
-        <p>与微信深度互通,让企业沟通像聊微信一样自然,服务超过 1000 万家企业组织。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
-      </div>
-
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <h3>开放平台</h3>
-        <p>开放接入能力,让每一个开发者,都能在微信生态中找到自己的位置。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
-      </div>
+      <div class="mini-hint">超过 <b>450 万</b>个小程序在微信里运行, 平均打开耗时不到 <b>1 秒</b></div>
     </div>
   </div>
 </section>
 
-<!-- QUOTE -->
-<section class="quote">
+<!-- 微信支付 -->
+<section class="section" id="pay">
   <div class="container">
-    <blockquote>"如果一个用户每天在微信里花一两个小时,但这一两个小时,只是用来达成他想做的事,然后离开 — 这就是我们想要的。"</blockquote>
-    <cite>— 张小龙 · 微信公开课</cite>
+    <div class="pay-grid">
+      <div class="pay-card" aria-label="支付成功页示意">
+        <div class="pay-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="pay-state">支付成功</div>
+        <div class="pay-amount"><span class="yen">¥</span>36.80</div>
+        <div class="pay-merchant">老地方火锅 (望京店)</div>
+        <div class="pay-detail">
+          <div class="row"><span class="k">支付方式</span><span class="v">零钱</span></div>
+          <div class="row"><span class="k">支付时间</span><span class="v">今天 21:08</span></div>
+        </div>
+        <a class="btn btn-brand pay-done" href="#">完成</a>
+      </div>
+
+      <div>
+        <div class="section-eyebrow">微信支付</div>
+        <h2 class="section-title">一个绿色的对勾<br/>结束一笔账</h2>
+        <p class="section-sub">从菜市场的二维码到跨境消费, 支付被简化成同一个动作: 出示, 确认, 完成. 绿色在微信里很少大面积出现 — 一旦出现, 就意味着 "成了".</p>
+        <div class="pay-feats">
+          <div class="pay-feat">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 18h3v3h-3z"/></svg></span>
+            <div>
+              <div class="t">收付款码</div>
+              <div class="d">一张码走遍街头巷尾, 收款语音播报, 摊主不用抬头.</div>
+            </div>
+          </div>
+          <div class="pay-feat">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 4 3 8 7 12"/><line x1="3" y1="8" x2="15" y2="8"/><polyline points="17 12 21 16 17 20"/><line x1="21" y1="16" x2="9" y2="16"/></svg></span>
+            <div>
+              <div class="t">转账与红包</div>
+              <div class="d">钱跟着对话走. 转账是橙金色的郑重, 红包是节日的仪式.</div>
+            </div>
+          </div>
+          <div class="pay-feat">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>
+            <div>
+              <div class="t">安全垫底</div>
+              <div class="d">指纹与面容验证, 延迟到账与冻结通道, 每一笔都有退路.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- SCENARIOS -->
-<section class="section section-alt">
+<!-- 理念 -->
+<section class="section tinted">
   <div class="container">
-    <div class="section-head">
-      <span class="section-eyebrow">生活场景</span>
-      <h2 class="section-title">一个动作,<br/>解决一件小事。</h2>
-      <p class="section-sub">我们没有刻意去设计场景,场景来自每一个普通人,每一段普通的日子。</p>
-    </div>
-
-    <div class="eco-grid">
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
-        </div>
-        <h3>扫一扫</h3>
-        <p>从付钱到加好友,从坐地铁到点外卖。一个简单的动作,串起了大半个中国的日常。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
-      </div>
-
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-        </div>
-        <h3>家人群</h3>
-        <p>在外的孩子和远在家乡的父母,被一条语音、一张照片、一个红包,温柔地拉到同一个屋檐下。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
-      </div>
-
-      <div class="eco-card">
-        <div class="eco-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <h3>朋友圈</h3>
-        <p>每一条"仅三天可见",都是这个时代最委婉的距离感。安静地看,克制地发。</p>
-        <a class="eco-link" href="#">了解更多 →</a>
-      </div>
+    <div class="philosophy">
+      <div class="quote">好的产品<em>用完即走</em>,<br/>走了还会回来.</div>
+      <div class="by">微信的产品观 — 克制, 是最难的设计</div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<section>
-  <div class="stat-strip">
-    <div class="stat-cell"><strong>13.7亿</strong><span>月活用户</span></div>
-    <div class="stat-cell"><strong>400万+</strong><span>小程序开发者</span></div>
-    <div class="stat-cell"><strong>10亿+</strong><span>日支付笔数</span></div>
-    <div class="stat-cell"><strong>200+</strong><span>覆盖国家与地区</span></div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta">
-  <div class="container">
-    <h2>下载微信</h2>
-    <p>从今天起,把生活里的每一个小事,放在一个安静的地方。</p>
-    <div class="hero-actions">
-      <a class="btn btn-pill" href="#">立即下载</a>
-      <a class="btn btn-text" href="#">查看版本日志 →</a>
-    </div>
-  </div>
-</section>
-
-<!-- DESIGN SYSTEM Part B -->
+<!-- DESIGN SYSTEM -->
 <section class="ds-section" id="design-system">
   <div class="container">
     <div class="ds-intro">
       <div>
-        <span class="section-eyebrow">设计系统参考</span>
-        <h2>极简,是为了让生活说话</h2>
-        <p>微信的视觉语言克制到几乎像一封手写信:大量留白,单一的微信绿,轻字重(400–500),只有最必要的色彩与圆角。设计在这里不是被看见,而是被忘记。</p>
+        <div class="section-eyebrow">Design System Reference</div>
+        <h2>克制到近乎没有设计</h2>
+        <p>微信的设计语言是 "退后一步": 大面积的白与浅灰把舞台让给内容, 品牌绿只在按钮, 角标和那个支付成功的对勾上出现. 真正的辨识度藏在结构里 — #EDEDED 的聊天背景, #95EC69 的己方气泡, 橙金色的红包, 这些不是装饰, 是十亿人的肌肉记忆.</p>
       </div>
-      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wechat.html" target="_blank" rel="noopener">查看 DESIGN.md ↗</a>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wechat.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
     </div>
 
-    <!-- Colors -->
+    <!-- Color -->
     <div class="ds-block">
-      <h3 class="ds-heading">色彩</h3>
-      <p class="ds-desc">几乎只有微信绿 #07C160 一种功能色,其余皆是灰阶。色彩在微信里是稀有品,只在按钮、链接、未读红点出现。</p>
+      <h3 class="ds-heading">Color</h3>
+      <p class="ds-desc">三层逻辑: 中性灰承载界面, 品牌绿只表达 "确认与完成", 橙金色专属于钱. 颜色越少, 每种颜色的语义越重 — 看到橙色就知道是红包, 看到绿勾就知道钱付出去了.</p>
 
-      <div class="ds-caption">品牌主色</div>
+      <div class="ds-caption">中性 · 界面的全部底色</div>
       <div class="ds-swatches">
-        <div class="ds-sw"><div class="chip" style="background:#07C160"></div><div class="meta"><div class="name">微信绿</div><div class="val">#07C160</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#05A856"></div><div class="meta"><div class="name">深绿</div><div class="val">#05A856</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#C3F0D5"></div><div class="meta"><div class="name">浅绿</div><div class="val">#C3F0D5</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#E8F9EF"></div><div class="meta"><div class="name">背景绿</div><div class="val">#E8F9EF</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#9eea6a"></div><div class="meta"><div class="name">气泡绿</div><div class="val">#9eea6a</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.06)"></div><div class="meta"><div class="name">纯白画布</div><div class="val">#FFFFFF</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f7f7f7"></div><div class="meta"><div class="name">浅灰面</div><div class="val">#F7F7F7</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ededed"></div><div class="meta"><div class="name">聊天背景</div><div class="val">#EDEDED</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#191919"></div><div class="meta"><div class="name">正文墨</div><div class="val">#191919</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#888888"></div><div class="meta"><div class="name">次级灰</div><div class="val">#888888</div></div></div>
       </div>
 
-      <div class="ds-caption">中性灰阶 — 微信的主基调</div>
+      <div class="ds-caption">品牌绿 · 确认与完成</div>
       <div class="ds-swatches">
-        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">主标题</div><div class="val">#000000</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#1d1d1f"></div><div class="meta"><div class="name">正文</div><div class="val">#1d1d1f</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#555555"></div><div class="meta"><div class="name">辅助</div><div class="val">#555555</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#888888"></div><div class="meta"><div class="name">弱化</div><div class="val">#888888</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#b2b2b2"></div><div class="meta"><div class="name">禁用</div><div class="val">#b2b2b2</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#07c160"></div><div class="meta"><div class="name">微信绿</div><div class="val">#07C160</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#06ad56"></div><div class="meta"><div class="name">按压态</div><div class="val">#06AD56</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#95ec69"></div><div class="meta"><div class="name">己方气泡</div><div class="val">#95EC69</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(7,193,96,0.08)"></div><div class="meta"><div class="name">绿底衬</div><div class="val">#07C160 · 8%</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#576b95"></div><div class="meta"><div class="name">链接蓝</div><div class="val">#576B95</div></div></div>
       </div>
 
-      <div class="ds-caption">背景与分隔</div>
+      <div class="ds-caption">功能色 · 钱与警示</div>
       <div class="ds-swatches">
-        <div class="ds-sw"><div class="chip" style="background:#ffffff;border:1px solid #ececec"></div><div class="meta"><div class="name">底色</div><div class="val">#ffffff</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#f7f7f7;border:1px solid #ececec"></div><div class="meta"><div class="name">页面底</div><div class="val">#f7f7f7</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#f5f5f5;border:1px solid #ececec"></div><div class="meta"><div class="name">聊天背景</div><div class="val">#f5f5f5</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#ededed;border:1px solid #ececec"></div><div class="meta"><div class="name">弱底</div><div class="val">#ededed</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#ececec;border:1px solid #d8d8d8"></div><div class="meta"><div class="name">分隔线</div><div class="val">#ececec</div></div></div>
-      </div>
-
-      <div class="ds-caption">语义色</div>
-      <div class="ds-swatches">
-        <div class="ds-sw"><div class="chip" style="background:#07C160"></div><div class="meta"><div class="name">成功</div><div class="val">#07C160</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#fa9d3b"></div><div class="meta"><div class="name">提醒</div><div class="val">#fa9d3b</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#fa5151"></div><div class="meta"><div class="name">未读红点</div><div class="val">#fa5151</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#10aeff"></div><div class="meta"><div class="name">链接蓝</div><div class="val">#10aeff</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#888888"></div><div class="meta"><div class="name">中性</div><div class="val">#888888</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fa9d3b"></div><div class="meta"><div class="name">红包橙</div><div class="val">#FA9D3B</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(160deg,#fbab53,#f78f2d)"></div><div class="meta"><div class="name">红包渐变</div><div class="val">#FBAB53 → #F78F2D</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fcd886"></div><div class="meta"><div class="name">金印</div><div class="val">#FCD886</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f6635b"></div><div class="meta"><div class="name">红包封皮</div><div class="val">#F6635B</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#fa5151"></div><div class="meta"><div class="name">警示红</div><div class="val">#FA5151</div></div></div>
       </div>
     </div>
 
     <!-- Typography -->
     <div class="ds-block">
-      <h3 class="ds-heading">字体</h3>
-      <p class="ds-desc">PingFang SC 是微信的隐性骨架。字重控制在 300–500,几乎不出现 700 以上 — 因为生活不需要被吼出来。</p>
+      <h3 class="ds-heading">Typography</h3>
+      <p class="ds-desc">系统字优先, Noto Sans SC 兜底. 微信几乎不靠字体表达品牌 — 层级全部来自字号与灰度, 加粗只给关键信息, 数字 (金额) 是唯一被允许放大的主角.</p>
       <table class="ds-type-table">
         <thead>
-          <tr><th>Token</th><th>样例</th><th>字号</th><th>字重</th><th>行高</th></tr>
+          <tr><th>Token</th><th>样例</th><th>字号</th><th>字重</th><th>用途</th></tr>
         </thead>
         <tbody>
-          <tr><td class="token">--display</td><td class="sample" style="font-size:32px;font-weight:500;letter-spacing:-1px">微信是一个生活方式</td><td>64 / 48 / 32</td><td>500</td><td>1.15</td></tr>
-          <tr><td class="token">--display-light</td><td class="sample" style="font-size:32px;font-weight:300;color:#555">是一个生活方式</td><td>32</td><td>300</td><td>1.25</td></tr>
-          <tr><td class="token">--title</td><td class="sample" style="font-size:18px;font-weight:500">公众号</td><td>18</td><td>500</td><td>1.5</td></tr>
-          <tr><td class="token">--body</td><td class="sample" style="font-size:15px;font-weight:400">今晚回来吃饭吗?</td><td>15</td><td>400</td><td>1.7</td></tr>
-          <tr><td class="token">--meta</td><td class="sample" style="font-size:13px;font-weight:400;color:#555">了解更多</td><td>13 / 14</td><td>400 / 500</td><td>1.55</td></tr>
-          <tr><td class="token">--caption</td><td class="sample" style="font-size:12px;font-weight:400;color:#888">14 年前</td><td>12</td><td>400</td><td>1.5</td></tr>
-          <tr><td class="token">--btn</td><td class="sample" style="font-size:15px;font-weight:500">免费下载</td><td>15</td><td>500</td><td>1</td></tr>
+          <tr><td class="token">--display</td><td class="sample" style="font-size:28px;font-weight:900;letter-spacing:0.5px">微信, 是一个生活方式</td><td>56 / 3.5rem</td><td>900</td><td>Hero 主标题</td></tr>
+          <tr><td class="token">--title-section</td><td class="sample" style="font-size:22px;font-weight:900">用完即走</td><td>38 / 2.4rem</td><td>900</td><td>章节标题</td></tr>
+          <tr><td class="token">--amount</td><td class="sample" style="font-size:24px;font-weight:700;font-variant-numeric:tabular-nums">¥36.80</td><td>44 / 2.75rem</td><td>700</td><td>金额数字</td></tr>
+          <tr><td class="token">--title-cell</td><td class="sample" style="font-size:16px;font-weight:500">江树</td><td>16-17 / 1rem</td><td>500</td><td>会话名, 导航标题</td></tr>
+          <tr><td class="token">--body</td><td class="sample" style="font-size:14.5px">今晚老地方吃火锅?</td><td>14.5 / 0.9rem</td><td>400</td><td>气泡与正文</td></tr>
+          <tr><td class="token">--caption</td><td class="sample" style="font-size:12px;color:#888888">下午 6:02 · 领取红包</td><td>11-12 / 0.72rem</td><td>400</td><td>时间戳, 辅助说明</td></tr>
+          <tr><td class="token">--link</td><td class="sample" style="font-size:14px;font-weight:500;color:#576b95">江树, 老周, 杳杳</td><td>13-14 / 0.85rem</td><td>500</td><td>昵称与链接 (蓝)</td></tr>
         </tbody>
       </table>
     </div>
 
     <!-- Radius -->
     <div class="ds-block">
-      <h3 class="ds-heading">圆角</h3>
-      <p class="ds-desc">气泡 6px、按钮 8px,大块卡片 20–28px,徽章 999px。每一组圆角都有它"想表达的语气"。</p>
+      <h3 class="ds-heading">Radius</h3>
+      <p class="ds-desc">微信的圆角出奇地小: 气泡和头像只有 4px, 按钮 8px. 小圆角是这套语言 "工具感" 的来源 — 它不讨好, 只可靠. 大圆角只留给面板和手机本身.</p>
       <div class="ds-radius">
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:2px"></div><div class="ds-radius-label">最小</div><div class="ds-radius-val">2px</div></div>
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">标签</div><div class="ds-radius-val">4px</div></div>
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:6px"></div><div class="ds-radius-label">气泡</div><div class="ds-radius-val">6px</div></div>
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">按钮</div><div class="ds-radius-val">8px</div></div>
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:20px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">20–28px</div></div>
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">徽章</div><div class="ds-radius-val">999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">气泡 · 头像</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">按钮 · 卡片消息</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">小程序图标</div><div class="ds-radius-val">12px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:16px"></div><div class="ds-radius-label">浮层卡片</div><div class="ds-radius-val">16px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:24px"></div><div class="ds-radius-label">面板</div><div class="ds-radius-val">24px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px"></div><div class="ds-radius-label">角标 Pill</div><div class="ds-radius-val">999px</div></div>
       </div>
     </div>
 
     <!-- Components -->
     <div class="ds-block">
-      <h3 class="ds-heading">组件</h3>
-      <p class="ds-desc">微信组件的核心是"克制":没有阴影,只有边框;没有渐变,只有色块;没有动效,只有过渡。</p>
+      <h3 class="ds-heading">Components</h3>
+      <p class="ds-desc">三个原子: 绿色实心按钮 (唯一主操作), 列表 Cell (微信一切设置页的骨架), 聊天气泡 (双色双向). 红点和数字角标是整套系统里最强烈的视觉信号 — 所以才必须最小.</p>
       <div class="ds-comp">
         <div class="ds-card">
-          <h5>按钮</h5>
+          <h5>Buttons & Tags</h5>
           <div class="ds-card-stack">
-            <a class="btn btn-primary" href="#">主要按钮</a>
-            <a class="btn btn-pill" href="#">胶囊按钮</a>
-            <a class="btn btn-outline" href="#">次要按钮</a>
-            <a class="btn btn-text" href="#">文字链接 →</a>
-          </div>
-        </div>
-        <div class="ds-card">
-          <h5>输入与标签</h5>
-          <div class="ds-card-stack">
-            <input class="input" placeholder="搜索" />
-            <input class="input" placeholder="请输入微信号" />
-            <div class="ds-card-row">
-              <span class="tag tag-green">已认证</span>
-              <span class="tag tag-mute">普通会员</span>
-              <span class="tag tag-line">未读</span>
+            <a class="btn btn-brand" href="#">绿色主操作</a>
+            <a class="btn btn-plain" href="#">浅灰次操作</a>
+            <a class="btn btn-outline" href="#">描边按钮</a>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <span class="tag tag-brand">已完成</span>
+              <span class="tag tag-orange">红包</span>
+              <span class="tag tag-blue">#话题</span>
+              <span class="badge-num">99+</span>
             </div>
           </div>
         </div>
         <div class="ds-card">
-          <h5>消息气泡</h5>
-          <div class="ds-card-stack" style="width:100%;background:#f5f5f5;border-radius:12px;padding:20px;gap:10px;">
-            <div style="display:flex;gap:10px;width:100%;">
-              <div style="width:32px;height:32px;border-radius:6px;background:#888;flex-shrink:0;"></div>
-              <div style="background:#fff;padding:8px 12px;border-radius:6px;font-size:13px;max-width:180px;">在吗?</div>
-            </div>
-            <div style="display:flex;justify-content:flex-end;width:100%;">
-              <div style="background:#9eea6a;padding:8px 12px;border-radius:6px;font-size:13px;max-width:180px;color:#000;">在的,什么事?</div>
-            </div>
+          <h5>List Cell</h5>
+          <div class="ds-cell-list">
+            <div class="ds-cell"><span>新消息通知<span class="red-dot"></span></span><span class="arrow">›</span></div>
+            <div class="ds-cell"><span>朋友圈权限</span><span class="arrow">›</span></div>
+            <div class="ds-cell"><span>支付安全</span><span style="font-size:12px;color:#b2b2b2">已开启 ›</span></div>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h5>Bubbles</h5>
+          <div style="background:#ededed;border-radius:8px;padding:16px 14px;display:flex;flex-direction:column;gap:10px">
+            <div style="align-self:flex-start;background:#fff;border-radius:4px;padding:8px 11px;font-size:13.5px;max-width:80%">对方气泡 · 白</div>
+            <div style="align-self:flex-end;background:#95ec69;border-radius:4px;padding:8px 11px;font-size:13.5px;max-width:80%">己方气泡 · #95EC69</div>
+            <div style="align-self:center;font-size:11px;color:#b2b2b2">下午 6:02</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Iconography -->
+    <!-- Voice & Tone -->
     <div class="ds-block">
-      <h3 class="ds-heading">图标</h3>
-      <p class="ds-desc">微信图标语言采用 2px 线性描边,圆角端点。 单色克制,极少使用填充色。每个图标只表达一个概念,不添加任何装饰。</p>
-      <div class="ds-comp" style="grid-template-columns:repeat(6,1fr);">
-        <div class="ds-card" style="text-align:center;padding:24px 12px;">
-          <div style="display:grid;place-items:center;margin-bottom:10px;color:var(--ink);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          </div>
-          <div style="font-size:11px;color:var(--ink-soft);">聊天</div>
+      <h3 class="ds-heading">Voice & Tone</h3>
+      <p class="ds-desc">微信的文案像它的界面一样寡言: 不感叹, 不催促, 不解释自己. 一句 "是一个生活方式" 说了十几年, 因为没有更短的说法了.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>寡言</h5>
+          <div style="font-size:14px;color:#4c4c4c;line-height:1.85">"微信, 是一个生活方式" — 主语加判断, 没有形容词.<br/>按钮只写动词: 完成, 发送, 领取.<br/>能不说的, 一个字都不说.</div>
         </div>
-        <div class="ds-card" style="text-align:center;padding:24px 12px;">
-          <div style="display:grid;place-items:center;margin-bottom:10px;color:var(--ink);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          </div>
-          <div style="font-size:11px;color:var(--ink-soft);">通讯录</div>
+        <div class="ds-card">
+          <h5>工具的谦逊</h5>
+          <div style="font-size:14px;color:#4c4c4c;line-height:1.85">"用完即走" 把退场写进产品观.<br/>不推送 "快回来看看", 不做开屏广告.<br/>不打扰, 是工具对人最高的尊重.</div>
         </div>
-        <div class="ds-card" style="text-align:center;padding:24px 12px;">
-          <div style="display:grid;place-items:center;margin-bottom:10px;color:var(--ink);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div style="font-size:11px;color:var(--ink-soft);">发现</div>
-        </div>
-        <div class="ds-card" style="text-align:center;padding:24px 12px;">
-          <div style="display:grid;place-items:center;margin-bottom:10px;color:var(--ink);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div style="font-size:11px;color:var(--ink-soft);">我</div>
-        </div>
-        <div class="ds-card" style="text-align:center;padding:24px 12px;">
-          <div style="display:grid;place-items:center;margin-bottom:10px;color:var(--ink);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
-          </div>
-          <div style="font-size:11px;color:var(--ink-soft);">扫一扫</div>
-        </div>
-        <div class="ds-card" style="text-align:center;padding:24px 12px;">
-          <div style="display:grid;place-items:center;margin-bottom:10px;color:var(--ink);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div style="font-size:11px;color:var(--ink-soft);">服务号</div>
+        <div class="ds-card">
+          <h5>仪式感只给人情</h5>
+          <div style="font-size:14px;color:#4c4c4c;line-height:1.85">"恭喜发财, 大吉大利" 是全系统最热烈的一句话.<br/>克制的另一面: 该有温度的地方, 绝不冷淡.<br/>钱的颜色是橙金, 因为那是人情的颜色.</div>
         </div>
       </div>
     </div>
@@ -618,57 +757,46 @@ footer { background: var(--surface-1); padding: 64px 0 32px; border-top: 1px sol
       <div class="foot-brand">
         <div class="brand">
           <span class="brand-mark">
-            <svg viewBox="0 0 32 32" fill="none">
-              <path d="M12 5C6.48 5 2 8.69 2 13.25c0 2.62 1.51 4.95 3.85 6.46l-.78 2.39 2.81-1.41a13.5 13.5 0 003.62.52c.39 0 .77-.02 1.15-.06a8.18 8.18 0 01-.34-2.32c0-4.31 4.18-7.81 9.34-7.81.34 0 .67.02 1 .04C21.84 7.62 17.34 5 12 5z" fill="#07C160"/>
-              <path d="M30 18.94c0-3.62-3.62-6.56-8.06-6.56s-8.06 2.94-8.06 6.56c0 3.62 3.62 6.56 8.06 6.56.92 0 1.81-.13 2.64-.36l2.3 1.16-.63-1.95C28.76 23.16 30 21.18 30 18.94z" fill="#07C160"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 4C5.36 4 2 6.91 2 10.5c0 1.99 1.04 3.77 2.67 4.96L4 17.8l2.61-1.43c.6.18 1.23.3 1.89.36-.12-.46-.19-.94-.19-1.43 0-3.59 3.36-6.3 7.19-6.3.31 0 .62.02.92.05C15.62 6.13 12.83 4 9.5 4zM7 8a1 1 0 110 2 1 1 0 010-2zm5 0a1 1 0 110 2 1 1 0 010-2zm3.5 3C12.46 11 10 13.13 10 15.75S12.46 20.5 15.5 20.5c.62 0 1.22-.09 1.78-.25L19.5 21.5l-.6-1.96c1.28-.87 2.1-2.24 2.1-3.79C21 13.13 18.54 11 15.5 11zm-2 2.5a.9.9 0 110 1.8.9.9 0 010-1.8zm4 0a.9.9 0 110 1.8.9.9 0 010-1.8z"/></svg>
           </span>
           <span>微信</span>
         </div>
-        <p>本站为微信视觉语言的设计学习样本,旨在展示其极简留白美学与"用完即走"哲学。与腾讯微信团队无任何隶属关系。</p>
+        <p>这是一份设计研究 — 微信 (WeChat) 视觉语言的自包含致敬, 用于演示 "结构即品牌" 的克制设计系统. 与腾讯公司无官方关联.</p>
       </div>
       <div class="foot-col">
         <h4>产品</h4>
         <ul>
-          <li><a href="#">公众号</a></li>
-          <li><a href="#">小程序</a></li>
+          <li><a href="#">微信</a></li>
+          <li><a href="#moments">朋友圈</a></li>
+          <li><a href="#mini">小程序</a></li>
           <li><a href="#">视频号</a></li>
-          <li><a href="#">微信支付</a></li>
         </ul>
       </div>
       <div class="foot-col">
-        <h4>开发者</h4>
+        <h4>服务</h4>
         <ul>
-          <li><a href="#">开放平台</a></li>
+          <li><a href="#pay">微信支付</a></li>
+          <li><a href="#">公众平台</a></li>
           <li><a href="#">企业微信</a></li>
-          <li><a href="#">开发文档</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h4>关于</h4>
         <ul>
-          <li><a href="#">微信公开课</a></li>
+          <li><a href="#design-system">设计语言</a></li>
           <li><a href="#">隐私保护</a></li>
-          <li><a href="#">微信团队</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h4>下载</h4>
-        <ul>
-          <li><a href="#">iOS</a></li>
-          <li><a href="#">Android</a></li>
-          <li><a href="#">Mac / Windows</a></li>
+          <li><a href="#">帮助中心</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 设计学习作品 · 致敬微信视觉语言</span>
-      <span>用户协议 · 隐私政策 · 法律声明</span>
+      <span>© 2026 设计研究 · 致敬微信视觉语言 · 作者 云中江树</span>
+      <span>本页面为非官方设计研究, 与腾讯无官方关联</span>
     </div>
   </div>
 </footer>
 
-<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wechat.html" target="_blank" rel="noopener">查看源码 ↗</a>
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.wechat.html" target="_blank" rel="noopener">View source ↗</a>
 
 </body>
 </html>

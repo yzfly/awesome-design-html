@@ -3,514 +3,578 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tesla — Design System Study</title>
-<meta name="description" content="A visual study of Tesla's design language: radical subtraction, single Electric Blue accent, full-viewport cinematic photography, 4px barely-rounded buttons. Marketing demo + design system reference." />
+<title>Tesla — Full-Screen Vertical Cinema | Design Study</title>
+<meta name="description" content="A design study of Tesla's visual language: full-screen scroll-snap panels, one vehicle per viewport, silhouettes over photography, numbers instead of adjectives, whisper-quiet uppercase CTAs." />
+<meta property="og:title" content="Tesla — Full-Screen Vertical Cinema | Design Study" />
+<meta property="og:description" content="One vehicle per viewport. Silhouettes, specs and translucent pills — the structure itself is the brand." />
+<meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root {
-  /* The one accent */
-  --electric-blue: #3E6AE1;
-  --electric-blue-hover: #325cc8;
-  /* Surfaces */
-  --white: #FFFFFF;
-  --light-ash: #F4F4F4;
-  --carbon-dark: #171A20;
-  --frosted: rgba(255, 255, 255, 0.75);
-  /* Text */
-  --ink-dark: #171A20;
-  --ink-body: #393C41;
-  --ink-tert: #5C5E62;
-  --ink-placeholder: #8E8E8E;
-  /* Borders */
-  --cloud: #EEEEEE;
-  --pale-silver: #D0D1D2;
-  /* Type */
-  --font-display: "Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  --font-text: "Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  /* Radius */
-  --r-sm: 4px;
-  --r-md: 12px;
-  --r-full: 50%;
-  /* Motion */
-  --t: 0.33s cubic-bezier(0.5, 0, 0, 0.75);
+  /* Canvas — the two frames of the film */
+  --cinema-black: #000000;
+  --silver-screen: #f4f4f4;
+  --paper: #ffffff;
+  /* Ink */
+  --ink: #171a20;
+  --ink-muted: #5c5e62;
+  --ink-dim: #a2a3a5;
+  --moon: #f4f4f4;
+  --moon-muted: #8e9094;
+  /* Accent — used sparingly, like Tesla itself */
+  --electric-blue: #3e6ae1;
+  --logo-red: #e82127;
+  /* Translucent CTA pair */
+  --cta-light-bg: rgba(244, 244, 244, 0.88);
+  --cta-dark-bg: rgba(23, 26, 32, 0.55);
+  /* Lines */
+  --line-dark: rgba(23, 26, 32, 0.14);
+  --line-light: rgba(244, 244, 244, 0.16);
+  --font-ui: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", sans-serif;
+  --r-card: 4px;
+  --r-md: 8px;
+  --r-pill: 999px;
 }
 
 * { box-sizing: border-box; }
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-snap-type: none; scroll-behavior: auto; }
+}
 html, body { margin: 0; padding: 0; }
 body {
-  background: var(--white);
-  color: var(--ink-dark);
-  font-family: var(--font-text);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.43;
+  background: var(--cinema-black);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
-button { font-family: inherit; }
+::selection { background: rgba(62, 106, 225, 0.25); }
 
-.container { max-width: 1383px; margin: 0 auto; padding: 0 24px; }
-
-/* ===== Nav ===== */
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 16px 32px; transition: background-color var(--t); }
-.nav.scrolled { background: var(--frosted); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1383px; margin: 0 auto; }
-.wordmark { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: 4px; color: var(--ink-dark); }
-.nav-mid { display: flex; gap: 4px; }
-.nav-btn { background: transparent; border: 0; color: var(--ink-dark); font-size: 14px; font-weight: 500; padding: 4px 16px; min-height: 32px; border-radius: var(--r-sm); cursor: pointer; transition: background-color var(--t), color var(--t); }
-.nav-btn:hover { background: rgba(0,0,0,0.05); }
-.nav-right { display: flex; gap: 4px; align-items: center; }
-.icon-btn { background: transparent; border: 0; width: 32px; height: 32px; border-radius: var(--r-sm); display: grid; place-items: center; color: var(--ink-dark); cursor: pointer; transition: background-color var(--t); }
-.icon-btn:hover { background: rgba(0,0,0,0.05); }
-.icon-btn svg { width: 16px; height: 16px; }
-
-/* On dark hero, nav text is white */
-.nav.over-dark .nav-btn,
-.nav.over-dark .wordmark,
-.nav.over-dark .icon-btn { color: var(--white); }
-.nav.over-dark .nav-btn:hover,
-.nav.over-dark .icon-btn:hover { background: rgba(255,255,255,0.12); }
-
-/* ===== Buttons ===== */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 500; padding: 4px 16px; min-height: 40px; min-width: 200px; border-radius: var(--r-sm); border: 3px solid transparent; cursor: pointer; transition: background-color var(--t), color var(--t), border-color var(--t), box-shadow 0.25s; }
-.btn-primary { background: var(--electric-blue); color: var(--white); }
-.btn-primary:hover { background: var(--electric-blue-hover); }
-.btn-secondary { background: var(--white); color: var(--ink-body); }
-.btn-secondary:hover { background: var(--light-ash); }
-.btn-on-dark-secondary { background: rgba(244,244,244,0.65); color: var(--ink-dark); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-.btn-on-dark-secondary:hover { background: rgba(255,255,255,0.85); }
-
-/* ===== Hero (100vh full-bleed cinematic) ===== */
-.hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 144px 24px 96px; }
-.hero-bg { position: absolute; inset: 0; z-index: -1; }
-.hero-bg.dusk { background:
-  linear-gradient(180deg, rgba(23,26,32,0.0) 0%, rgba(23,26,32,0.0) 50%, rgba(23,26,32,0.4) 100%),
-  radial-gradient(80% 60% at 50% 30%, #c9d4e8 0%, #8298c0 35%, #4d6691 65%, #28324d 100%);
+/* ============ NAV — fixed, transparent, blends over both frames ============ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 36px;
+  mix-blend-mode: difference;
+  color: #fff;
 }
-.hero-bg.dusk::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 36%; background:
-  linear-gradient(180deg, transparent 0%, #1a1f2c 20%, #0d1018 100%);
+.wordmark {
+  font-size: 17px; font-weight: 700; letter-spacing: 0.42em;
+  text-indent: 0.42em; /* visually re-center the tracked caps */
 }
-.hero-bg.dusk::after { content: ""; position: absolute; left: 50%; bottom: 22%; transform: translateX(-50%); width: min(900px, 80vw); height: 14vh; background:
-  radial-gradient(60% 50% at 50% 100%, rgba(255,255,255,0.18), transparent 70%);
-  filter: blur(6px);
+.nav-menu { display: flex; gap: 6px; position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-menu a { font-size: 13px; font-weight: 500; padding: 6px 14px; opacity: 0.85; transition: opacity .15s; }
+.nav-menu a:hover { opacity: 1; }
+.nav-right { display: flex; align-items: center; gap: 18px; }
+.nav-right a { display: grid; place-items: center; opacity: 0.85; transition: opacity .15s; }
+.nav-right a:hover { opacity: 1; }
+.nav-right svg { width: 19px; height: 19px; }
+
+/* ============ VEHICLE PANELS — one model, one viewport ============ */
+.panel {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: space-between;
+  padding: 104px 32px 40px;
+  background: var(--p-bg);
+  color: var(--p-ink);
+  overflow: hidden;
 }
-.car-stage { position: absolute; left: 50%; bottom: 18%; transform: translateX(-50%); width: min(960px, 90vw); }
-.car-shadow { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); width: 92%; height: 28px; background: radial-gradient(50% 100% at 50% 50%, rgba(0,0,0,0.55), transparent 75%); filter: blur(4px); }
-.hero-top { text-align: center; }
-.hero-eyebrow { font-size: 22px; font-weight: 400; color: var(--electric-blue); margin-bottom: 8px; }
-.hero-title { font-family: var(--font-display); font-size: 40px; font-weight: 500; color: var(--white); line-height: 1.2; margin: 0; letter-spacing: normal; }
-.hero-sub { font-size: 14px; color: var(--white); margin: 6px 0 0; }
-.hero-sub a { text-decoration: underline; }
-.hero-bottom { display: flex; flex-direction: column; align-items: center; gap: 28px; width: 100%; }
-.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-.carousel-dots { display: flex; gap: 12px; }
-.dot { width: 10px; height: 10px; border-radius: var(--r-full); background: rgba(255,255,255,0.5); cursor: pointer; transition: background var(--t); }
-.dot.active { background: var(--white); }
-.carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: var(--r-full); background: rgba(244,244,244,0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 0; cursor: pointer; display: grid; place-items: center; color: var(--ink-dark); transition: background var(--t); }
-.carousel-arrow:hover { background: rgba(255,255,255,0.9); }
-.carousel-arrow.left { left: 24px; }
-.carousel-arrow.right { right: 24px; }
-.carousel-arrow svg { width: 18px; height: 18px; }
-
-/* ===== Sub-hero (full viewport sections) ===== */
-.full-section { min-height: 100vh; padding: 144px 24px 96px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
-.full-section.light { background: var(--white); }
-.full-section.ash { background: var(--light-ash); }
-.full-section .hero-title.dark { color: var(--ink-dark); }
-.full-section .hero-sub.dark { color: var(--ink-body); }
-
-/* Studio car stage (light bg) */
-.studio-stage { width: min(1100px, 92vw); height: 50vh; position: relative; }
-.studio-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 16%; background: radial-gradient(50% 100% at 50% 100%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 70%); }
-
-/* Specs band */
-.specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; margin-top: 32px; max-width: 1100px; }
-.spec { text-align: center; }
-.spec-val { font-family: var(--font-display); font-size: 36px; font-weight: 500; color: var(--ink-dark); letter-spacing: -0.5px; }
-.spec-val sup { font-size: 14px; font-weight: 400; color: var(--ink-tert); margin-left: 4px; }
-.spec-label { font-size: 12px; font-weight: 500; color: var(--ink-tert); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.8px; }
-
-/* ===== Category cards (lower section) ===== */
-.cat-section { padding: 96px 24px; background: var(--white); }
-.cat-head { max-width: 1100px; margin: 0 auto 40px; }
-.cat-head h2 { font-family: var(--font-display); font-size: 36px; font-weight: 500; margin: 0 0 8px; letter-spacing: normal; }
-.cat-head p { font-size: 14px; color: var(--ink-body); margin: 0; max-width: 600px; }
-.cat-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; max-width: 1100px; margin: 0 auto; }
-.cat-card { aspect-ratio: 16/10; border-radius: var(--r-md); overflow: hidden; position: relative; cursor: pointer; }
-.cat-card.small { aspect-ratio: 5/4; }
-.cat-img-1 { background: linear-gradient(135deg, #6e8aae 0%, #2a3a5c 60%, #131923 100%); }
-.cat-img-2 { background: linear-gradient(135deg, #b3b8c2 0%, #5a6273 60%, #1e242e 100%); }
-.cat-img-3 { background: linear-gradient(135deg, #2e4172 0%, #1c2945 60%, #0c1322 100%); }
-.cat-img-4 { background: linear-gradient(135deg, #d5d8de 0%, #8e96a3 60%, #3a414f 100%); }
-.cat-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.25) 100%); }
-.cat-label { position: absolute; top: 20px; left: 24px; color: var(--white); font-size: 16px; font-weight: 500; z-index: 1; }
-.cat-meta { position: absolute; bottom: 20px; left: 24px; right: 24px; color: var(--white); z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; }
-.cat-meta strong { font-family: var(--font-display); font-size: 28px; font-weight: 500; letter-spacing: -0.3px; }
-.cat-cta { font-size: 14px; font-weight: 500; padding: 4px 14px; min-height: 32px; border-radius: var(--r-sm); background: rgba(244,244,244,0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: var(--ink-dark); display: inline-flex; align-items: center; }
-
-/* ===== Energy / inline section ===== */
-.energy { padding: 96px 24px; background: var(--white); border-top: 1px solid var(--cloud); }
-.energy-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.energy h2 { font-family: var(--font-display); font-size: 40px; font-weight: 500; line-height: 1.15; margin: 0 0 16px; }
-.energy p { font-size: 15px; color: var(--ink-body); line-height: 1.6; margin: 0 0 28px; max-width: 460px; }
-.energy-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.energy-visual { aspect-ratio: 4/3; border-radius: var(--r-md); background:
-  radial-gradient(80% 60% at 50% 40%, #f0f3f8 0%, #c2cad9 40%, #5d6a85 80%, #28324a 100%);
-  position: relative; overflow: hidden; display: grid; place-items: center;
+.panel--dark {
+  --p-bg: #000000;
+  --p-ink: var(--moon);
+  --p-muted: var(--moon-muted);
+  --p-line: var(--line-light);
+  --car-top: #42474e; --car-bot: #15171a;
+  --car-glass: #0e1014;
+  --car-hi: rgba(255, 255, 255, 0.30);
+  --tire: #0e0f11; --tire-edge: rgba(255, 255, 255, 0.18);
+  --rim: #43484f; --hub: #23262a;
+  --car-shadow: rgba(255, 255, 255, 0.05);
+  --cta2-bg: rgba(140, 145, 150, 0.18);
+  --cta2-ink: var(--moon);
+  --cta2-edge: rgba(244, 244, 244, 0.16);
 }
-.energy-visual svg { width: 60%; }
+.panel--light {
+  --p-bg: #f4f4f4;
+  --p-ink: var(--ink);
+  --p-muted: var(--ink-muted);
+  --p-line: var(--line-dark);
+  --car-top: #2c2f33; --car-bot: #101214;
+  --car-glass: #494f56;
+  --car-hi: rgba(255, 255, 255, 0.45);
+  --tire: #17191c; --tire-edge: rgba(23, 26, 32, 0.25);
+  --rim: #5a6066; --hub: #34383d;
+  --car-shadow: rgba(23, 26, 32, 0.10);
+  --cta2-bg: var(--cta-dark-bg);
+  --cta2-ink: var(--moon);
+  --cta2-edge: transparent;
+}
+.panel-head { text-align: center; }
+.panel-head h2 {
+  margin: 0 0 8px;
+  font-size: clamp(34px, 4vw, 44px);
+  font-weight: 600; letter-spacing: 0.04em; line-height: 1.1;
+}
+.panel-head p { margin: 0; font-size: 15px; color: var(--p-muted); letter-spacing: 0.01em; }
 
-/* ===== Chat bar (persistent) ===== */
-.chatbar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--cloud); z-index: 30; padding: 12px 24px; }
-.chat-inner { max-width: 1383px; margin: 0 auto; display: flex; gap: 16px; align-items: center; justify-content: space-between; }
-.chat-input { flex: 1; display: flex; gap: 10px; align-items: center; }
-.chat-input .chat-icon { width: 18px; height: 18px; color: var(--ink-tert); }
-.chat-label { font-size: 14px; font-weight: 500; color: var(--ink-dark); }
-.chat-placeholder { font-size: 14px; color: var(--ink-placeholder); }
-.chat-send { width: 32px; height: 32px; border: 1px solid var(--cloud); background: var(--white); border-radius: var(--r-sm); display: grid; place-items: center; cursor: pointer; color: var(--ink-body); }
-.chat-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--ink-dark); padding: 4px 14px; min-height: 32px; border-radius: var(--r-sm); transition: background var(--t); }
-.chat-cta:hover { background: var(--light-ash); }
-.chat-cta-icon { color: var(--electric-blue); }
+.panel-stage { flex: 1; display: grid; place-items: center; width: 100%; min-height: 0; padding: 12px 0; }
+.car { width: min(840px, 90vw); height: auto; display: block; }
+.car .ground { fill: var(--car-shadow); }
+.car .punch { fill: var(--p-bg); }
+.car .glass { fill: var(--car-glass); }
+.car .car-hi { fill: none; stroke: var(--car-hi); stroke-width: 2.5; stroke-linecap: round; }
+.car .tire { fill: var(--tire); stroke: var(--tire-edge); stroke-width: 1.5; }
+.car .rim { fill: none; stroke: var(--rim); stroke-width: 2.5; }
+.car .hub { fill: var(--hub); }
 
-/* ===== Footer ===== */
-footer { background: var(--white); padding: 32px 24px 96px; border-top: 1px solid var(--cloud); }
-.foot-inner { max-width: 1383px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: center; font-size: 12px; color: var(--ink-tert); }
-.foot-inner a:hover { color: var(--ink-dark); }
+.panel-foot {
+  width: 100%; max-width: 1080px;
+  display: flex; align-items: center; justify-content: space-between; gap: 28px;
+}
+.specs { display: flex; align-items: stretch; }
+.spec { padding: 2px 30px; text-align: left; }
+.spec:first-child { padding-left: 0; }
+.spec + .spec { border-left: 1px solid var(--p-line); }
+.spec .num {
+  font-size: 30px; font-weight: 600; letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums; line-height: 1.15;
+}
+.spec .num span { font-size: 13px; font-weight: 500; color: var(--p-muted); margin-left: 4px; letter-spacing: 0; }
+.spec .lbl {
+  font-size: 11px; font-weight: 500; color: var(--p-muted);
+  text-transform: uppercase; letter-spacing: 0.14em; margin-top: 3px;
+}
+.ctas { display: flex; gap: 14px; }
+.cta {
+  display: inline-block; width: 196px; padding: 12px 0; text-align: center;
+  border-radius: var(--r-pill);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+.cta:hover { transform: translateY(-1px); }
+.cta-light { background: var(--cta-light-bg); color: var(--ink); box-shadow: 0 1px 8px rgba(23, 26, 32, 0.10); }
+.cta-light:hover { background: #ffffff; }
+.cta-dark { background: var(--cta2-bg); color: var(--cta2-ink); border: 1px solid var(--cta2-edge); }
+.cta-dark:hover { background: rgba(23, 26, 32, 0.7); }
+.panel--dark .cta-dark:hover { background: rgba(140, 145, 150, 0.28); }
 
-/* ===== Floating source link ===== */
-.src-link { position: fixed; right: 24px; bottom: 80px; z-index: 60; background: var(--white); border: 1px solid var(--cloud); padding: 8px 16px; border-radius: var(--r-sm); font-size: 13px; font-weight: 500; color: var(--ink-body); transition: color var(--t), border-color var(--t); }
-.src-link:hover { color: var(--electric-blue); border-color: var(--electric-blue); }
+/* ============ ENERGY BAND ============ */
+.energy {
+  background: var(--cinema-black); color: var(--moon);
+  padding: 110px 32px 120px;
+  scroll-snap-align: start;
+  border-top: 1px solid rgba(244, 244, 244, 0.08);
+}
+.wrap { max-width: 1120px; margin: 0 auto; }
+.energy-head { text-align: center; margin-bottom: 64px; }
+.eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--moon-muted); margin-bottom: 14px;
+}
+.energy-head h2 { margin: 0 0 10px; font-size: clamp(28px, 3.2vw, 38px); font-weight: 600; letter-spacing: 0.01em; }
+.energy-head p { margin: 0; font-size: 15px; color: var(--moon-muted); }
+.energy-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.energy-item {
+  border: 1px solid rgba(244, 244, 244, 0.12); border-radius: var(--r-md);
+  padding: 34px 30px; transition: border-color .2s, background .2s;
+}
+.energy-item:hover { border-color: rgba(244, 244, 244, 0.3); background: rgba(244, 244, 244, 0.03); }
+.energy-item svg { width: 30px; height: 30px; color: var(--moon); margin-bottom: 20px; }
+.energy-item h3 { margin: 0 0 6px; font-size: 18px; font-weight: 600; letter-spacing: 0.02em; }
+.energy-item p { margin: 0 0 18px; font-size: 13.5px; color: var(--moon-muted); line-height: 1.65; }
+.energy-item .more { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--moon); border-bottom: 1px solid rgba(244,244,244,0.3); padding-bottom: 2px; }
 
-/* ===== DESIGN SYSTEM (Part B) ===== */
-.ds-section { background: var(--light-ash); padding: 120px 24px 144px; }
-.ds-wrap { max-width: 1100px; margin: 0 auto; }
-.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 64px; }
-.ds-eyebrow { font-size: 12px; font-weight: 500; color: var(--ink-tert); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-.ds-intro h2 { font-family: var(--font-display); font-size: 36px; font-weight: 500; margin: 0 0 10px; line-height: 1.15; }
-.ds-intro p { font-size: 14px; color: var(--ink-body); line-height: 1.6; margin: 0; max-width: 520px; }
-.ds-source { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--white); border: 1px solid var(--cloud); border-radius: var(--r-sm); font-size: 13px; font-weight: 500; color: var(--ink-body); transition: color var(--t), border-color var(--t); }
-.ds-source:hover { color: var(--electric-blue); border-color: var(--electric-blue); }
-.ds-block { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--cloud); }
+/* ============ DESIGN SYSTEM REFERENCE ============ */
+.ds-section { background: var(--paper); color: var(--ink); padding: 96px 32px 90px; scroll-snap-align: start; }
+.ds-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+.ds-intro .eyebrow { color: var(--ink-muted); }
+.ds-intro h2 { font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.01em; line-height: 1.15; margin: 0 0 10px; font-weight: 700; }
+.ds-intro p { margin: 0; color: var(--ink-muted); font-size: 14.5px; max-width: 620px; line-height: 1.7; }
+.ds-source {
+  display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px;
+  border: 1px solid var(--line-dark); border-radius: var(--r-pill);
+  font-size: 12px; font-weight: 600; color: var(--ink-muted); transition: all .15s; white-space: nowrap;
+}
+.ds-source:hover { border-color: var(--ink); color: var(--ink); }
+.ds-block { margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--line-dark); }
 .ds-block:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
-.ds-heading { font-family: var(--font-display); font-size: 24px; font-weight: 500; color: var(--ink-dark); margin: 0 0 8px; }
-.ds-desc { font-size: 13px; color: var(--ink-body); margin: 0 0 28px; max-width: 600px; line-height: 1.6; }
-.ds-caption { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-tert); margin: 28px 0 12px; }
-.ds-swatches { display: grid; gap: 14px; grid-template-columns: repeat(4, 1fr); }
-.ds-sw { background: var(--white); border-radius: var(--r-sm); overflow: hidden; border: 1px solid var(--cloud); }
-.ds-sw .chip { height: 72px; }
-.ds-sw .meta { padding: 12px 14px; }
-.ds-sw .name { font-size: 13px; font-weight: 500; color: var(--ink-dark); }
-.ds-sw .val { font-size: 11px; color: var(--ink-tert); font-family: var(--font-mono); margin-top: 2px; }
+.ds-heading { font-size: 21px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; }
+.ds-desc { font-size: 14px; color: var(--ink-muted); margin: 0 0 24px; line-height: 1.7; max-width: 620px; }
+.ds-caption { font-size: 11px; font-weight: 600; color: var(--ink-dim); margin: 26px 0 12px; letter-spacing: 0.18em; text-transform: uppercase; }
+.ds-swatches { display: grid; gap: 12px; grid-template-columns: repeat(5, 1fr); }
+.ds-sw { border: 1px solid var(--line-dark); border-radius: var(--r-md); overflow: hidden; background: #fff; }
+.ds-sw .chip { height: 64px; }
+.ds-sw .meta { padding: 11px 13px; }
+.ds-sw .name { font-size: 12.5px; font-weight: 600; }
+.ds-sw .val { font-size: 11px; color: var(--ink-dim); margin-top: 2px; font-variant-numeric: tabular-nums; }
 
-.ds-type-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--cloud); border-radius: var(--r-sm); overflow: hidden; }
-.ds-type-table th, .ds-type-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--cloud); font-size: 13px; vertical-align: middle; }
+.ds-type-table { width: 100%; border-collapse: collapse; border: 1px solid var(--line-dark); border-radius: var(--r-md); overflow: hidden; }
+.ds-type-table th, .ds-type-table td { text-align: left; padding: 13px 14px; border-bottom: 1px solid var(--line-dark); font-size: 13.5px; vertical-align: middle; }
 .ds-type-table tr:last-child td { border-bottom: 0; }
-.ds-type-table th { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-tert); background: var(--light-ash); }
-.ds-type-table td.token { font-family: var(--font-mono); font-size: 11px; color: var(--electric-blue); }
-.ds-type-table td.sample { color: var(--ink-dark); }
+.ds-type-table th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-dim); background: var(--silver-screen); }
+.ds-type-table td { color: var(--ink-muted); }
+.ds-type-table td.sample { color: var(--ink); }
 
-.ds-radius { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.ds-radius-cell { background: var(--white); border: 1px solid var(--cloud); padding: 22px 14px; text-align: center; border-radius: var(--r-sm); }
-.ds-radius-box { width: 64px; height: 64px; background: var(--electric-blue); margin: 0 auto 12px; }
-.ds-radius-label { font-size: 13px; font-weight: 500; color: var(--ink-dark); }
-.ds-radius-val { font-size: 11px; color: var(--ink-tert); font-family: var(--font-mono); margin-top: 2px; }
+.ds-radius { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.ds-radius-cell { border: 1px solid var(--line-dark); padding: 20px 8px; text-align: center; border-radius: var(--r-md); }
+.ds-radius-box { width: 54px; height: 54px; background: var(--ink); margin: 0 auto 10px; }
+.ds-radius-label { font-size: 11.5px; font-weight: 600; }
+.ds-radius-val { font-size: 10.5px; color: var(--ink-dim); margin-top: 2px; }
 
-.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.ds-card { background: var(--white); border: 1px solid var(--cloud); border-radius: var(--r-sm); padding: 26px; }
-.ds-card h5 { font-family: var(--font-display); font-size: 16px; font-weight: 500; color: var(--ink-dark); margin: 0 0 18px; }
-.ds-card-stack { display: flex; flex-direction: column; gap: 14px; align-items: stretch; }
-.ds-input { background: var(--white); border: 1px solid var(--cloud); border-radius: var(--r-sm); padding: 10px 14px; font-size: 14px; font-family: inherit; color: var(--ink-dark); outline: none; transition: border-color var(--t); width: 100%; }
-.ds-input::placeholder { color: var(--ink-placeholder); }
-.ds-input:focus { border-color: var(--electric-blue); }
-.ds-tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: var(--r-sm); font-size: 11px; font-weight: 500; }
-.ds-tag-blue { background: var(--electric-blue); color: var(--white); }
-.ds-tag-outline { color: var(--ink-body); border: 1px solid var(--cloud); background: var(--white); }
-.ds-tag-dark { background: var(--carbon-dark); color: var(--white); }
+.ds-comp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.ds-card { border: 1px solid var(--line-dark); border-radius: var(--r-md); padding: 22px; background: #fff; }
+.ds-card h5 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-dim); margin: 0 0 16px; }
+.ds-stack { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.ds-mini-dark { background: #000; border-radius: var(--r-md); padding: 18px; width: 100%; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.ds-card .cta { width: 180px; padding: 11px 0; }
+.ds-vt { font-size: 13.5px; color: var(--ink-muted); line-height: 1.75; margin: 0; }
+.ds-vt strong { color: var(--ink); font-weight: 600; }
 
-/* ===== Responsive ===== */
+/* ============ FOOTER ============ */
+footer {
+  background: var(--silver-screen); color: var(--ink-muted);
+  padding: 52px 32px 40px; text-align: center;
+  scroll-snap-align: end;
+  border-top: 1px solid var(--line-dark);
+}
+.foot-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 22px; }
+.foot-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); transition: color .12s; }
+.foot-links a:hover { color: var(--ink); }
+.foot-note { font-size: 12.5px; line-height: 1.8; max-width: 640px; margin: 0 auto 14px; }
+.foot-copy { font-size: 12px; color: var(--ink-dim); }
+
+/* Floating source */
+.src-link {
+  position: fixed; right: 16px; bottom: 16px; z-index: 70;
+  background: rgba(255, 255, 255, 0.92); border: 1px solid var(--line-dark);
+  padding: 10px 18px; border-radius: var(--r-pill);
+  font-size: 12px; font-weight: 600; color: var(--ink-muted);
+  box-shadow: 0 4px 18px rgba(23, 26, 32, 0.12);
+  backdrop-filter: blur(8px); transition: all .15s;
+}
+.src-link:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ============ RESPONSIVE ============ */
 @media (max-width: 980px) {
-  .nav { padding: 14px 16px; }
-  .nav-mid { display: none; }
-  .hero-title { font-size: 32px; }
-  .hero-actions { flex-direction: column; width: min(320px, 100%); }
-  .btn { width: 100%; min-width: 0; }
-  .specs { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .cat-grid { grid-template-columns: 1fr; }
-  .energy-inner { grid-template-columns: 1fr; gap: 40px; }
-  .ds-comp { grid-template-columns: 1fr; }
+  .nav { padding: 16px 22px; }
+  .nav-menu { display: none; }
+  .panel { padding: 92px 22px 32px; }
+  .panel-foot { flex-direction: column; gap: 24px; }
+  .specs { justify-content: center; }
+  .energy-row { grid-template-columns: 1fr; }
   .ds-swatches { grid-template-columns: repeat(2, 1fr); }
-  .ds-radius { grid-template-columns: repeat(2, 1fr); }
-  .chat-cta { display: none; }
-  .full-section { min-height: 0; padding: 96px 16px 64px; }
+  .ds-radius { grid-template-columns: repeat(3, 1fr); }
+  .ds-comp { grid-template-columns: 1fr; }
+  .energy { padding: 80px 22px 88px; }
+  .ds-section { padding: 72px 22px; }
 }
 @media (max-width: 540px) {
-  .hero-title { font-size: 28px; }
-  .spec-val { font-size: 26px; }
-  .energy h2, .ds-intro h2, .cat-head h2 { font-size: 28px; }
+  body { overflow-x: clip; }
+  .panel-head h2 { font-size: 30px; }
+  .specs { width: 100%; max-width: 370px; justify-content: center; }
+  .spec { padding: 2px 10px; flex: 1; }
+  .spec:first-child { padding-left: 10px; }
+  .spec .num { font-size: 19px; }
+  .spec .num span { font-size: 11px; margin-left: 2px; }
+  .spec .lbl { font-size: 9px; letter-spacing: 0.09em; }
+  .ctas { flex-direction: column; width: 100%; max-width: 320px; }
+  .cta { width: 100%; }
+  .ds-swatches { grid-template-columns: 1fr; }
+  .foot-links { gap: 16px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ===== Nav (over dark hero) ===== -->
-<header class="nav over-dark" id="topNav">
-  <div class="nav-inner">
-    <a class="wordmark" href="#">T E S L A</a>
-    <nav class="nav-mid">
-      <button class="nav-btn">Vehicles</button>
-      <button class="nav-btn">Energy</button>
-      <button class="nav-btn">Charging</button>
-      <button class="nav-btn">Discover</button>
-      <button class="nav-btn">Shop</button>
-    </nav>
-    <div class="nav-right">
-      <button class="icon-btn" aria-label="Help">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.7 1.5c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12" y2="17"/></svg>
-      </button>
-      <button class="icon-btn" aria-label="Language">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
-      </button>
-      <button class="icon-btn" aria-label="Account">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>
-      </button>
-    </div>
+<!-- NAV — blends by difference so it survives both black and silver frames -->
+<header class="nav">
+  <a class="wordmark" href="#model-s">TESLA</a>
+  <nav class="nav-menu">
+    <a href="#model-s">Vehicles</a>
+    <a href="#energy">Energy</a>
+    <a href="#">Charging</a>
+    <a href="#design-system">Discover</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" aria-label="Support">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>
+    </a>
+    <a href="#" aria-label="Language">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+    </a>
+    <a href="#" aria-label="Account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
   </div>
 </header>
 
-<!-- ===== HERO 1 — dusk cinematic ===== -->
-<section class="hero">
-  <div class="hero-bg dusk"></div>
-
-  <!-- carousel arrows -->
-  <button class="carousel-arrow left" aria-label="Previous">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
-  </button>
-  <button class="carousel-arrow right" aria-label="Next">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
-  </button>
-
-  <div class="hero-top">
-    <div class="hero-eyebrow">0% APR Available</div>
-    <h1 class="hero-title">Model S</h1>
-    <p class="hero-sub">From $74,990 · <a href="#">After Estimated Savings</a></p>
+<!-- PANEL 1 · MODEL S — low fastback on the black frame -->
+<section class="panel panel--dark" id="model-s">
+  <div class="panel-head">
+    <h2>Model S</h2>
+    <p>The original. Still the benchmark.</p>
   </div>
-
-  <!-- car stage (SVG silhouette) -->
-  <div class="car-stage" aria-hidden="true">
-    <svg viewBox="0 0 960 220" width="100%">
+  <div class="panel-stage">
+    <svg class="car" viewBox="0 0 920 260" role="img" aria-label="Model S side silhouette">
       <defs>
-        <linearGradient id="carBody" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stop-color="#dde3ec"/>
-          <stop offset="0.55" stop-color="#8a96ab"/>
-          <stop offset="1" stop-color="#2a3140"/>
-        </linearGradient>
-        <linearGradient id="carGlass" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stop-color="#1f2638"/>
-          <stop offset="1" stop-color="#0e131e"/>
+        <linearGradient id="bodyS" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--car-top)"/>
+          <stop offset="1" stop-color="var(--car-bot)"/>
         </linearGradient>
       </defs>
-      <!-- body -->
-      <path d="M60,160 C100,120 200,90 320,80 C440,70 560,70 660,90 C760,108 830,128 880,150 C905,160 920,170 920,180 C920,190 900,200 870,200 L80,200 C50,200 40,190 40,180 C40,172 48,168 60,160 Z" fill="url(#carBody)"/>
-      <!-- glass -->
-      <path d="M250,100 C320,80 480,76 580,86 C640,92 690,100 720,120 L640,138 L300,138 L260,118 Z" fill="url(#carGlass)"/>
-      <!-- bottom skirt -->
-      <path d="M60,180 L920,180 L900,200 L80,200 Z" fill="#0a0d14"/>
-      <!-- wheels -->
-      <circle cx="220" cy="195" r="32" fill="#0a0d14"/>
-      <circle cx="220" cy="195" r="20" fill="#2a2e38"/>
-      <circle cx="220" cy="195" r="8" fill="#0a0d14"/>
-      <circle cx="740" cy="195" r="32" fill="#0a0d14"/>
-      <circle cx="740" cy="195" r="20" fill="#2a2e38"/>
-      <circle cx="740" cy="195" r="8" fill="#0a0d14"/>
-      <!-- headlight glint -->
-      <ellipse cx="880" cy="135" rx="18" ry="4" fill="#fff" opacity="0.85"/>
-      <ellipse cx="880" cy="142" rx="22" ry="3" fill="#3E6AE1" opacity="0.7"/>
+      <path fill="url(#bodyS)" d="M96 198 C76 196 66 184 70 172 C73 160 86 151 110 147 C170 138 220 134 268 130 C300 110 330 97 368 93 C420 87 470 87 516 92 C560 97 610 113 644 129 C690 138 750 145 794 151 C826 156 846 164 854 175 C858 184 850 192 832 195 L820 198 L96 198 Z"/>
+      <path class="glass" d="M290 127 C316 110 342 101 374 98 C420 93 464 93 504 98 C542 102 582 114 612 126 C540 131 400 131 290 127 Z"/>
+      <path class="car-hi" d="M308 105 C390 88 480 87 546 96"/>
+      <circle class="punch" cx="266" cy="196" r="39"/>
+      <circle class="punch" cx="725" cy="196" r="39"/>
+      <ellipse class="ground" cx="460" cy="238" rx="340" ry="7"/>
+      <g>
+        <circle class="tire" cx="266" cy="196" r="34"/>
+        <circle class="rim" cx="266" cy="196" r="19"/>
+        <circle class="hub" cx="266" cy="196" r="6.5"/>
+        <circle class="tire" cx="725" cy="196" r="34"/>
+        <circle class="rim" cx="725" cy="196" r="19"/>
+        <circle class="hub" cx="725" cy="196" r="6.5"/>
+      </g>
     </svg>
-    <div class="car-shadow"></div>
   </div>
-
-  <div class="hero-bottom">
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#">Order Now</a>
-      <a class="btn btn-on-dark-secondary" href="#">View Inventory</a>
-    </div>
-    <div class="carousel-dots" aria-label="Slide indicators">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-  </div>
-</section>
-
-<!-- ===== HERO 2 — Model Y studio (light) ===== -->
-<section class="full-section light">
-  <div class="hero-top">
-    <h1 class="hero-title dark">Model Y</h1>
-    <p class="hero-sub dark">From $44,990 · After Estimated Savings</p>
-  </div>
-
-  <div class="studio-stage" aria-hidden="true">
-    <svg viewBox="0 0 1100 280" width="100%">
-      <defs>
-        <linearGradient id="suvBody" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stop-color="#f1f3f6"/>
-          <stop offset="0.5" stop-color="#c8cdd6"/>
-          <stop offset="1" stop-color="#5a6172"/>
-        </linearGradient>
-        <linearGradient id="suvGlass" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stop-color="#3a4356"/>
-          <stop offset="1" stop-color="#1a1f2c"/>
-        </linearGradient>
-      </defs>
-      <!-- body -->
-      <path d="M80,200 C120,150 240,100 380,90 C520,80 660,80 780,100 C880,118 970,140 1020,170 C1050,190 1060,210 1060,225 L40,225 C40,215 50,205 80,200 Z" fill="url(#suvBody)"/>
-      <!-- glass -->
-      <path d="M280,110 C360,90 540,86 660,96 C740,104 800,114 830,140 L730,160 L320,160 L290,138 Z" fill="url(#suvGlass)"/>
-      <!-- skirt -->
-      <path d="M40,210 L1060,210 L1040,235 L60,235 Z" fill="#171a20"/>
-      <!-- wheels -->
-      <circle cx="260" cy="225" r="40" fill="#171a20"/>
-      <circle cx="260" cy="225" r="26" fill="#3a414f"/>
-      <circle cx="260" cy="225" r="10" fill="#171a20"/>
-      <circle cx="860" cy="225" r="40" fill="#171a20"/>
-      <circle cx="860" cy="225" r="26" fill="#3a414f"/>
-      <circle cx="860" cy="225" r="10" fill="#171a20"/>
-      <!-- highlight stripe -->
-      <path d="M120,170 C300,135 700,130 920,160" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none"/>
-    </svg>
-    <div class="studio-floor"></div>
-  </div>
-
-  <div class="hero-bottom">
+  <div class="panel-foot">
     <div class="specs">
-      <div class="spec"><div class="spec-val">320 <sup>mi</sup></div><div class="spec-label">Range (EPA est.)</div></div>
-      <div class="spec"><div class="spec-val">3.5 <sup>s</sup></div><div class="spec-label">0–60 mph</div></div>
-      <div class="spec"><div class="spec-val">155 <sup>mph</sup></div><div class="spec-label">Top Speed</div></div>
-      <div class="spec"><div class="spec-val">$0 <sup></sup></div><div class="spec-label">Down at Signing</div></div>
+      <div class="spec"><div class="num">634<span>km</span></div><div class="lbl">Range (WLTP)</div></div>
+      <div class="spec"><div class="num">2.1<span>s</span></div><div class="lbl">0–100 km/h</div></div>
+      <div class="spec"><div class="num">322<span>km/h</span></div><div class="lbl">Top Speed</div></div>
     </div>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#">Order Now</a>
-      <a class="btn btn-secondary" href="#">Demo Drive</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Category cards (Sport Sedan / Midsize SUV / Compact / Premium) ===== -->
-<section class="cat-section">
-  <div class="cat-head">
-    <h2>Every model, one philosophy.</h2>
-    <p>From sport sedans to family SUVs, every Tesla shares the same uncompromised electric drivetrain, the same minimal interior, the same software that quietly improves itself.</p>
-  </div>
-  <div class="cat-grid">
-    <div class="cat-card cat-img-1">
-      <span class="cat-label">Sport Sedan</span>
-      <div class="cat-meta"><strong>Model S</strong><span class="cat-cta">Learn more →</span></div>
-    </div>
-    <div class="cat-card small cat-img-2">
-      <span class="cat-label">Midsize SUV</span>
-      <div class="cat-meta"><strong>Model Y</strong><span class="cat-cta">Order →</span></div>
-    </div>
-    <div class="cat-card small cat-img-3">
-      <span class="cat-label">Performance</span>
-      <div class="cat-meta"><strong>Model 3</strong><span class="cat-cta">Configure →</span></div>
-    </div>
-    <div class="cat-card cat-img-4">
-      <span class="cat-label">Premium SUV</span>
-      <div class="cat-meta"><strong>Model X</strong><span class="cat-cta">Learn more →</span></div>
+    <div class="ctas">
+      <a class="cta cta-light" href="#">Custom Order</a>
+      <a class="cta cta-dark" href="#">Demo Drive</a>
     </div>
   </div>
 </section>
 
-<!-- ===== Energy / Powerwall ===== -->
-<section class="energy">
-  <div class="energy-inner">
-    <div>
-      <h2>Power your home with sun.</h2>
-      <p>Solar panels and Powerwall work together day and night to power your home with clean energy. Pair with the Tesla app to see exactly where every watt comes from and where it goes.</p>
-      <div class="energy-actions">
-        <a class="btn btn-primary" href="#">Order Powerwall</a>
-        <a class="btn btn-secondary" href="#">Learn More</a>
+<!-- PANEL 2 · MODEL 3 — compact sedan on the silver frame -->
+<section class="panel panel--light" id="model-3">
+  <div class="panel-head">
+    <h2>Model 3</h2>
+    <p>Engineered for the everyday.</p>
+  </div>
+  <div class="panel-stage">
+    <svg class="car" viewBox="0 0 920 260" style="width:min(760px, 86vw)" role="img" aria-label="Model 3 side silhouette">
+      <defs>
+        <linearGradient id="body3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--car-top)"/>
+          <stop offset="1" stop-color="var(--car-bot)"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#body3)" d="M166 198 C148 196 140 188 143 177 C146 167 158 158 182 153 C224 145 262 141 304 137 C330 116 358 103 392 99 C436 94 478 94 516 99 C552 103 592 117 622 131 C658 139 706 145 740 150 C766 154 782 161 788 171 C792 180 786 190 770 194 L758 198 L160 198 Z"/>
+      <path class="glass" d="M322 133 C344 117 368 106 398 103 C436 99 472 99 506 104 C538 108 570 119 596 129 C520 134 420 135 322 133 Z"/>
+      <path class="car-hi" d="M336 112 C402 95 482 94 542 102"/>
+      <circle class="punch" cx="300" cy="198" r="38"/>
+      <circle class="punch" cx="677" cy="198" r="38"/>
+      <ellipse class="ground" cx="464" cy="238" rx="300" ry="7"/>
+      <g>
+        <circle class="tire" cx="300" cy="198" r="33"/>
+        <circle class="rim" cx="300" cy="198" r="18.5"/>
+        <circle class="hub" cx="300" cy="198" r="6.5"/>
+        <circle class="tire" cx="677" cy="198" r="33"/>
+        <circle class="rim" cx="677" cy="198" r="18.5"/>
+        <circle class="hub" cx="677" cy="198" r="6.5"/>
+      </g>
+    </svg>
+  </div>
+  <div class="panel-foot">
+    <div class="specs">
+      <div class="spec"><div class="num">629<span>km</span></div><div class="lbl">Range (WLTP)</div></div>
+      <div class="spec"><div class="num">4.4<span>s</span></div><div class="lbl">0–100 km/h</div></div>
+      <div class="spec"><div class="num">201<span>km/h</span></div><div class="lbl">Top Speed</div></div>
+    </div>
+    <div class="ctas">
+      <a class="cta cta-light" href="#">Custom Order</a>
+      <a class="cta cta-dark" href="#">Demo Drive</a>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL 3 · MODEL X — tall-back SUV on the black frame -->
+<section class="panel panel--dark" id="model-x">
+  <div class="panel-head">
+    <h2>Model X</h2>
+    <p>Utility, at full scale.</p>
+  </div>
+  <div class="panel-stage">
+    <svg class="car" viewBox="0 0 920 260" role="img" aria-label="Model X side silhouette">
+      <defs>
+        <linearGradient id="bodyX" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--car-top)"/>
+          <stop offset="1" stop-color="var(--car-bot)"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#bodyX)" d="M96 196 C76 194 66 182 70 170 C72 148 80 118 108 102 C150 82 230 70 330 67 C410 65 475 67 522 75 C572 84 622 104 662 122 C702 133 752 141 792 148 C824 154 844 163 852 174 C856 184 848 192 830 195 L818 196 L96 196 Z"/>
+      <path class="glass" d="M190 100 C250 84 340 78 425 79 C472 80 510 86 542 93 C574 100 608 112 634 122 C530 127 330 122 190 100 Z"/>
+      <path class="car-hi" d="M168 84 C260 68 400 64 488 71 C552 77 614 96 658 116"/>
+      <circle class="punch" cx="262" cy="194" r="41"/>
+      <circle class="punch" cx="712" cy="194" r="41"/>
+      <ellipse class="ground" cx="460" cy="238" rx="340" ry="7"/>
+      <g>
+        <circle class="tire" cx="262" cy="194" r="36"/>
+        <circle class="rim" cx="262" cy="194" r="20"/>
+        <circle class="hub" cx="262" cy="194" r="7"/>
+        <circle class="tire" cx="712" cy="194" r="36"/>
+        <circle class="rim" cx="712" cy="194" r="20"/>
+        <circle class="hub" cx="712" cy="194" r="7"/>
+      </g>
+    </svg>
+  </div>
+  <div class="panel-foot">
+    <div class="specs">
+      <div class="spec"><div class="num">576<span>km</span></div><div class="lbl">Range (WLTP)</div></div>
+      <div class="spec"><div class="num">2.6<span>s</span></div><div class="lbl">0–100 km/h</div></div>
+      <div class="spec"><div class="num">262<span>km/h</span></div><div class="lbl">Top Speed</div></div>
+    </div>
+    <div class="ctas">
+      <a class="cta cta-light" href="#">Custom Order</a>
+      <a class="cta cta-dark" href="#">Demo Drive</a>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL 4 · CYBERTRUCK — straight lines only, stainless on silver -->
+<section class="panel panel--light" id="cybertruck">
+  <div class="panel-head">
+    <h2>Cybertruck</h2>
+    <p>Built different. Literally.</p>
+  </div>
+  <div class="panel-stage">
+    <svg class="car" viewBox="0 0 920 260" role="img" aria-label="Cybertruck side silhouette">
+      <defs>
+        <linearGradient id="bodyC" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#cfd3d7"/>
+          <stop offset="0.55" stop-color="#aab0b6"/>
+          <stop offset="1" stop-color="#878d94"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#bodyC)" stroke="rgba(40,44,48,0.35)" stroke-width="1" d="M106 200 L94 186 L97 146 L124 114 L470 80 L840 156 L854 176 L844 200 Z"/>
+      <polygon fill="#14171b" points="486,92 740,140 692,148 476,109"/>
+      <path fill="none" stroke="rgba(23,26,32,0.30)" stroke-width="1.5" d="M118 152 L846 174"/>
+      <path class="car-hi" style="stroke:rgba(255,255,255,0.7);stroke-width:2" d="M140 112 L466 82 L820 152"/>
+      <polygon class="punch" points="188,202 212,154 268,154 292,202"/>
+      <polygon class="punch" points="658,202 682,154 738,154 762,202"/>
+      <ellipse class="ground" cx="464" cy="238" rx="350" ry="7"/>
+      <g>
+        <circle class="tire" cx="240" cy="196" r="36"/>
+        <circle class="rim" cx="240" cy="196" r="20"/>
+        <circle class="hub" cx="240" cy="196" r="7"/>
+        <circle class="tire" cx="710" cy="196" r="36"/>
+        <circle class="rim" cx="710" cy="196" r="20"/>
+        <circle class="hub" cx="710" cy="196" r="7"/>
+      </g>
+    </svg>
+  </div>
+  <div class="panel-foot">
+    <div class="specs">
+      <div class="spec"><div class="num">515<span>km</span></div><div class="lbl">Range (est.)</div></div>
+      <div class="spec"><div class="num">2.7<span>s</span></div><div class="lbl">0–100 km/h</div></div>
+      <div class="spec"><div class="num">209<span>km/h</span></div><div class="lbl">Top Speed</div></div>
+    </div>
+    <div class="ctas">
+      <a class="cta cta-light" href="#">Custom Order</a>
+      <a class="cta cta-dark" href="#">Demo Drive</a>
+    </div>
+  </div>
+</section>
+
+<!-- ENERGY — the film's epilogue: short, dark, declarative -->
+<section class="energy" id="energy">
+  <div class="wrap">
+    <div class="energy-head">
+      <div class="eyebrow">Tesla Energy</div>
+      <h2>Generate, store, power everything.</h2>
+      <p>The cars are one half of the mission. This is the other.</p>
+    </div>
+    <div class="energy-row">
+      <div class="energy-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.9" y1="4.9" x2="7" y2="7"/><line x1="17" y1="17" x2="19.1" y2="19.1"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.9" y1="19.1" x2="7" y2="17"/><line x1="17" y1="7" x2="19.1" y2="4.9"/></svg>
+        <h3>Solar Roof</h3>
+        <p>Turn your roof into a power plant. Tiles, not panels — invisible until the bill arrives.</p>
+        <a class="more" href="#">Learn More</a>
+      </div>
+      <div class="energy-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="16" height="10" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/><rect x="6" y="10" width="7" height="4" rx="1"/></svg>
+        <h3>Powerwall</h3>
+        <p>Store sunlight, spend it at night. Whole-home backup that never asks for attention.</p>
+        <a class="more" href="#">Learn More</a>
+      </div>
+      <div class="energy-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="7" y1="6" x2="7" y2="18"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="17" y1="6" x2="17" y2="18"/></svg>
+        <h3>Megapack</h3>
+        <p>Utility-scale storage, shipping today. A grid that holds steady when demand does not.</p>
+        <a class="more" href="#">Learn More</a>
       </div>
     </div>
-    <div class="energy-visual" aria-hidden="true">
-      <svg viewBox="0 0 320 220" fill="none">
-        <!-- house silhouette -->
-        <path d="M40,180 L40,110 L160,40 L280,110 L280,180 Z" fill="rgba(255,255,255,0.92)"/>
-        <rect x="140" y="135" width="40" height="45" fill="#171a20"/>
-        <rect x="70" y="120" width="30" height="22" fill="#3E6AE1"/>
-        <rect x="220" y="120" width="30" height="22" fill="#3E6AE1"/>
-        <!-- powerwall -->
-        <rect x="260" y="100" width="22" height="80" rx="3" fill="#171a20"/>
-        <rect x="263" y="106" width="16" height="4" rx="1" fill="#3E6AE1"/>
-        <!-- sun -->
-        <circle cx="60" cy="50" r="14" fill="#ffd28a"/>
-      </svg>
-    </div>
   </div>
 </section>
 
-<!-- ===== DESIGN SYSTEM REFERENCE (Part B) ===== -->
+<!-- DESIGN SYSTEM REFERENCE -->
 <section class="ds-section" id="design-system">
-  <div class="ds-wrap">
+  <div class="wrap">
     <div class="ds-intro">
       <div>
-        <div class="ds-eyebrow">Design System Reference</div>
-        <h2>Radical subtraction. One blue. All else white.</h2>
-        <p>Tesla's interface earns its calm through omission — no shadows, no gradients, no decorative color. Universal Sans, one accent blue, and 4px corners. Below: the tokens behind the silence.</p>
+        <div class="eyebrow">Design System Reference</div>
+        <h2>结构即品牌: 全屏纵向的电影脚本</h2>
+        <p>Tesla 的辨识度不在配色, 在信息架构本身: 一屏一辆车, 滚动即换幕. 每一幕的剧本完全相同 — 名字, 一句话, 一辆车, 三个数字, 两枚按钮 — 重复本身成为节奏, 黑与银交替成为剪辑. 页面不解释产品, 它放映产品.</p>
       </div>
-      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.tesla.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
+      <a class="ds-source" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.tesla.html" target="_blank" rel="noopener">View source ↗</a>
     </div>
 
-    <!-- Colors -->
+    <!-- Color -->
     <div class="ds-block">
       <h3 class="ds-heading">Color</h3>
-      <p class="ds-desc">A monochrome-plus-one palette: a single Electric Blue carries every primary interaction, six grays carry hierarchy, white carries everything else. Photography supplies the emotional color.</p>
+      <p class="ds-desc">两块幕布轮流登场: 影院黑与银幕灰. 文字只有一种墨色和它的灰阶. 彩色被压缩到极限 — 蓝色只给链接与状态, 红色只属于词标. 当整个页面接近无彩, 车身的一道高光就是最亮的颜色.</p>
 
-      <div class="ds-caption">Primary</div>
+      <div class="ds-caption">幕布 Frames</div>
       <div class="ds-swatches">
-        <div class="ds-sw"><div class="chip" style="background:#3E6AE1"></div><div class="meta"><div class="name">Electric Blue</div><div class="val">#3E6AE1</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #eee"></div><div class="meta"><div class="name">Pure White</div><div class="val">#FFFFFF</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#F4F4F4"></div><div class="meta"><div class="name">Light Ash</div><div class="val">#F4F4F4</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#171A20"></div><div class="meta"><div class="name">Carbon Dark</div><div class="val">#171A20</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="name">影院黑</div><div class="val">#000000</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#f4f4f4"></div><div class="meta"><div class="name">银幕灰</div><div class="val">#F4F4F4</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#171a20"></div><div class="meta"><div class="name">Tesla 墨</div><div class="val">#171A20</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#5c5e62"></div><div class="meta"><div class="name">次级灰</div><div class="val">#5C5E62</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid rgba(23,26,32,0.1)"></div><div class="meta"><div class="name">纸白</div><div class="val">#FFFFFF</div></div></div>
       </div>
 
-      <div class="ds-caption">Text Hierarchy</div>
+      <div class="ds-caption">克制的彩色 & 半透明层</div>
       <div class="ds-swatches">
-        <div class="ds-sw"><div class="chip" style="background:#171A20"></div><div class="meta"><div class="name">Carbon Dark</div><div class="val">#171A20</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#393C41"></div><div class="meta"><div class="name">Graphite</div><div class="val">#393C41</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#5C5E62"></div><div class="meta"><div class="name">Pewter</div><div class="val">#5C5E62</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#8E8E8E"></div><div class="meta"><div class="name">Silver Fog</div><div class="val">#8E8E8E</div></div></div>
-      </div>
-
-      <div class="ds-caption">Borders & Surfaces</div>
-      <div class="ds-swatches">
-        <div class="ds-sw"><div class="chip" style="background:#EEEEEE"></div><div class="meta"><div class="name">Cloud Gray</div><div class="val">#EEEEEE</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:#D0D1D2"></div><div class="meta"><div class="name">Pale Silver</div><div class="val">#D0D1D2</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:rgba(255,255,255,0.75);border:1px solid #eee"></div><div class="meta"><div class="name">Frosted Glass</div><div class="val">rgba(255,255,255,.75)</div></div></div>
-        <div class="ds-sw"><div class="chip" style="background:rgba(128,128,128,0.65)"></div><div class="meta"><div class="name">Overlay</div><div class="val">rgba(128,128,128,.65)</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#3e6ae1"></div><div class="meta"><div class="name">电气蓝</div><div class="val">#3E6AE1 · 链接/状态</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:#e82127"></div><div class="meta"><div class="name">词标红</div><div class="val">#E82127 · 仅 logo</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:linear-gradient(180deg,#cfd3d7,#878d94)"></div><div class="meta"><div class="name">不锈钢</div><div class="val">#CFD3D7 → #878D94</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(244,244,244,0.88);border-bottom:1px solid rgba(23,26,32,0.1)"></div><div class="meta"><div class="name">主 CTA 浅</div><div class="val">#F4F4F4 · 88%</div></div></div>
+        <div class="ds-sw"><div class="chip" style="background:rgba(23,26,32,0.55)"></div><div class="meta"><div class="name">次 CTA 深</div><div class="val">#171A20 · 55%</div></div></div>
       </div>
     </div>
 
     <!-- Typography -->
     <div class="ds-block">
       <h3 class="ds-heading">Typography</h3>
-      <p class="ds-desc">Universal Sans Display + Universal Sans Text (substituted with Inter). Only weights 400 and 500. Letter-spacing stays at "normal" everywhere — Tesla trusts the typeface to speak for itself.</p>
+      <p class="ds-desc">Inter 全场, 一种字体演完整部电影. 层级不靠字体切换, 靠尺寸与字距的两极: 车型名舒展, 规格数字收紧, 按钮全大写却只有 12px — 命令式的内容, 耳语式的音量.</p>
       <table class="ds-type-table">
-        <thead><tr><th>Token</th><th>Sample</th><th>Size</th><th>Weight</th><th>Notes</th></tr></thead>
+        <thead>
+          <tr><th>Role</th><th>样例</th><th>字号</th><th>字重</th><th>字距</th></tr>
+        </thead>
         <tbody>
-          <tr><td class="token">--display-hero</td><td class="sample" style="font-size:40px;font-weight:500;line-height:1.2">Model Y</td><td>40px / 2.50rem</td><td>500</td><td>Universal Sans Display</td></tr>
-          <tr><td class="token">--promo</td><td class="sample" style="font-size:22px;font-weight:400;color:#3E6AE1">0% APR Available</td><td>22px / 1.38rem</td><td>400</td><td>Blue promo on hero</td></tr>
-          <tr><td class="token">--product-name</td><td class="sample" style="font-size:17px;font-weight:500">Model S Plaid</td><td>17px / 1.06rem</td><td>500</td><td>Nav panel model names</td></tr>
-          <tr><td class="token">--category-label</td><td class="sample" style="font-size:16px;font-weight:500">Sport Sedan</td><td>16px</td><td>500</td><td>Card overlay label</td></tr>
-          <tr><td class="token">--nav-item</td><td class="sample" style="font-size:14px;font-weight:500">Vehicles</td><td>14px / 0.88rem</td><td>500</td><td>Primary nav</td></tr>
-          <tr><td class="token">--button-label</td><td class="sample" style="font-size:14px;font-weight:500">Order Now</td><td>14px</td><td>500</td><td>CTA label</td></tr>
-          <tr><td class="token">--body</td><td class="sample" style="font-size:14px;font-weight:400;color:#393C41">Body text in Graphite at 14/400</td><td>14px / 0.88rem</td><td>400</td><td>Default copy</td></tr>
-          <tr><td class="token">--sub-link</td><td class="sample" style="font-size:14px;font-weight:400;color:#5C5E62">Learn · Order · Experience</td><td>14px</td><td>400</td><td>Tertiary links in Pewter</td></tr>
+          <tr><td>Model name</td><td class="sample" style="font-size:28px;font-weight:600;letter-spacing:0.04em">Model S</td><td>44px</td><td>600</td><td>+0.04em</td></tr>
+          <tr><td>Tagline</td><td class="sample" style="font-size:15px;color:#5c5e62">The original. Still the benchmark.</td><td>15px</td><td>400</td><td>+0.01em</td></tr>
+          <tr><td>Spec number</td><td class="sample" style="font-size:24px;font-weight:600;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">634 <span style="font-size:12px;color:#5c5e62">km</span></td><td>30px</td><td>600</td><td>-0.02em</td></tr>
+          <tr><td>Spec label</td><td class="sample" style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:#5c5e62">Range (WLTP)</td><td>11px</td><td>500</td><td>+0.14em</td></tr>
+          <tr><td>CTA label</td><td class="sample" style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.2em">Custom Order</td><td>12px</td><td>600</td><td>+0.2em</td></tr>
+          <tr><td>Wordmark</td><td class="sample" style="font-size:15px;font-weight:700;letter-spacing:0.42em">TESLA</td><td>17px</td><td>700</td><td>+0.42em</td></tr>
         </tbody>
       </table>
     </div>
@@ -518,71 +582,68 @@ footer { background: var(--white); padding: 32px 24px 96px; border-top: 1px soli
     <!-- Radius -->
     <div class="ds-block">
       <h3 class="ds-heading">Radius</h3>
-      <p class="ds-desc">A minimal vocabulary: 4px on every interactive surface, ~12px on category cards, 50% on carousel dots. Sharp corners are the default everywhere else.</p>
+      <p class="ds-desc">面板永远直角满幅, 像银幕本身. 圆角只出现在两个极端: 信息容器的轻微 4-8px, 与按钮的完整 pill. 唯一的正圆留给车轮.</p>
       <div class="ds-radius">
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">Sharp</div><div class="ds-radius-val">0px</div></div>
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">Button</div><div class="ds-radius-val">4px</div></div>
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:12px"></div><div class="ds-radius-label">Card</div><div class="ds-radius-val">~12px</div></div>
-        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">Dot</div><div class="ds-radius-val">50%</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:0"></div><div class="ds-radius-label">面板</div><div class="ds-radius-val">0 · 满幅直角</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:4px"></div><div class="ds-radius-label">卡片</div><div class="ds-radius-val">4px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:8px"></div><div class="ds-radius-label">容器</div><div class="ds-radius-val">8px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:999px;width:80px"></div><div class="ds-radius-label">CTA Pill</div><div class="ds-radius-val">999px</div></div>
+        <div class="ds-radius-cell"><div class="ds-radius-box" style="border-radius:50%"></div><div class="ds-radius-label">车轮</div><div class="ds-radius-val">50%</div></div>
       </div>
     </div>
 
     <!-- Components -->
     <div class="ds-block">
       <h3 class="ds-heading">Components</h3>
-      <p class="ds-desc">The full vocabulary: Primary blue CTA paired with secondary white, transparent nav buttons, and a transparent text-link variant. No shadows, no scale animations — every transition is a color shift over 0.33s.</p>
+      <p class="ds-desc">组件只有一对 CTA, 一组规格, 一条导航 — 因为每一幕都只需要这三样. 半透明加背景模糊让按钮浮在任何画面上而不遮挡它; 规格组用细竖线分隔, 数字大, 标签小而疏.</p>
       <div class="ds-comp">
         <div class="ds-card">
-          <h5>Buttons</h5>
-          <div class="ds-card-stack">
-            <a class="btn btn-primary" style="min-width:0" href="#">Order Now</a>
-            <a class="btn btn-secondary" style="min-width:0;border:1px solid #eee" href="#">View Inventory</a>
-            <button class="nav-btn" style="background:rgba(0,0,0,0.04);padding:6px 16px;min-height:36px;justify-content:flex-start">Vehicles</button>
-            <a href="#" style="font-size:14px;font-weight:400;color:#5C5E62;text-decoration:underline">Learn more</a>
-            <div style="display:flex;gap:8px;align-items:center">
-              <button class="carousel-arrow" style="position:static;transform:none;width:36px;height:36px;border:1px solid #eee">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
-              </button>
-              <span style="font-size:12px;color:var(--ink-tert)">Carousel control</span>
+          <h5>CTA Pair · 浅幕 / 深幕</h5>
+          <div class="ds-stack">
+            <a class="cta cta-light" href="#" style="box-shadow:0 1px 8px rgba(23,26,32,0.14)">Custom Order</a>
+            <a class="cta" href="#" style="background:rgba(23,26,32,0.55);color:#f4f4f4">Demo Drive</a>
+            <div class="ds-mini-dark">
+              <a class="cta cta-light" href="#">Custom Order</a>
+              <a class="cta" href="#" style="background:rgba(140,145,150,0.18);color:#f4f4f4;border:1px solid rgba(244,244,244,0.16)">Demo Drive</a>
             </div>
           </div>
         </div>
         <div class="ds-card">
-          <h5>Inputs & Tags</h5>
-          <div class="ds-card-stack">
-            <input class="ds-input" placeholder="Enter zip code" />
-            <input class="ds-input" placeholder="What's Dog Mode?" />
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
-              <span class="ds-tag ds-tag-blue">New</span>
-              <span class="ds-tag ds-tag-outline">Pre-Owned</span>
-              <span class="ds-tag ds-tag-dark">Inventory</span>
-            </div>
-            <div style="display:flex;gap:12px;align-items:center;margin-top:6px">
-              <div style="display:flex;gap:8px;align-items:center">
-                <span class="dot active" style="background:#171A20"></span>
-                <span class="dot" style="background:#D0D1D2"></span>
-                <span class="dot" style="background:#D0D1D2"></span>
-              </div>
-              <span style="font-size:12px;color:var(--ink-tert)">Carousel indicator</span>
-            </div>
+          <h5>Spec Group</h5>
+          <div style="display:flex;align-items:stretch;margin-top:6px">
+            <div style="padding-right:22px"><div style="font-size:26px;font-weight:600;letter-spacing:-0.02em">634<span style="font-size:12px;color:#5c5e62;margin-left:3px">km</span></div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:#5c5e62;margin-top:3px">Range</div></div>
+            <div style="padding:0 22px;border-left:1px solid rgba(23,26,32,0.14)"><div style="font-size:26px;font-weight:600;letter-spacing:-0.02em">2.1<span style="font-size:12px;color:#5c5e62;margin-left:3px">s</span></div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:#5c5e62;margin-top:3px">0–100</div></div>
+            <div style="padding-left:22px;border-left:1px solid rgba(23,26,32,0.14)"><div style="font-size:26px;font-weight:600;letter-spacing:-0.02em">322<span style="font-size:12px;color:#5c5e62;margin-left:3px">km/h</span></div><div style="font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:#5c5e62;margin-top:3px">Top Speed</div></div>
           </div>
+          <p style="font-size:12px;color:#a2a3a5;margin:18px 0 0;line-height:1.6">大数字 + 细竖线 + 疏排小标签. 数字本身就是文案.</p>
         </div>
         <div class="ds-card">
-          <h5>Cards & Surfaces</h5>
-          <div class="ds-card-stack">
-            <div style="aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg,#6e8aae,#2a3a5c);position:relative;overflow:hidden">
-              <span style="position:absolute;top:14px;left:18px;color:#fff;font-size:14px;font-weight:500">Sport Sedan</span>
-              <span style="position:absolute;bottom:14px;left:18px;color:#fff;font-size:18px;font-weight:500">Model S</span>
-            </div>
-            <div style="background:var(--white);border:1px solid var(--cloud);border-radius:4px;padding:18px">
-              <div style="font-size:14px;font-weight:500;margin-bottom:4px">Model 3</div>
-              <div style="font-size:13px;color:var(--ink-tert);margin-bottom:14px">From $42,990 · After Estimated Savings</div>
-              <div style="display:flex;gap:18px">
-                <a href="#" style="font-size:13px;font-weight:400;color:#5C5E62;text-decoration:underline">Learn</a>
-                <a href="#" style="font-size:13px;font-weight:400;color:#5C5E62;text-decoration:underline">Order</a>
-              </div>
-            </div>
+          <h5>Nav · mix-blend-mode: difference</h5>
+          <div class="ds-mini-dark" style="flex-direction:row;align-items:center;justify-content:space-between;gap:8px">
+            <span style="font-size:13px;font-weight:700;letter-spacing:0.42em;color:#fff">TESLA</span>
+            <span style="font-size:11.5px;font-weight:500;color:rgba(255,255,255,0.85)">Vehicles &nbsp; Energy &nbsp; Charging</span>
           </div>
+          <p style="font-size:12px;color:#a2a3a5;margin:16px 0 0;line-height:1.7">导航固定悬浮, 白字以 difference 混合 — 黑幕上是白, 银幕上自动反相为墨色, 一套导航穿越所有幕布.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voice & Tone -->
+    <div class="ds-block">
+      <h3 class="ds-heading">Voice & Tone</h3>
+      <p class="ds-desc">Tesla 的文案像规格表一样寡言. 每一幕只允许一个名词和一句陈述, 其余交给数字 — 不形容, 不感叹, 不挽留.</p>
+      <div class="ds-comp">
+        <div class="ds-card">
+          <h5>名词即句子</h5>
+          <p class="ds-vt"><strong>"Model S."</strong> 车型名加句号就是完整的标题.<br/>tagline 限一句, 不超过八个词.<br/>没有欢迎语, 没有 slogan 轰炸.</p>
+        </div>
+        <div class="ds-card">
+          <h5>数字替代形容词</h5>
+          <p class="ds-vt">不说 "极致性能", 说 <strong>"2.1 s"</strong>.<br/>不说 "超长续航", 说 <strong>"634 km"</strong>.<br/>规格本身是诗, 形容词是杂音.</p>
+        </div>
+        <div class="ds-card">
+          <h5>大写的低语</h5>
+          <p class="ds-vt"><strong>"CUSTOM ORDER"</strong> — 全大写却只有 12px.<br/>字距拉开到 0.2em, 音量降到耳语.<br/>命令式的内容, 克制的声压.</p>
         </div>
       </div>
     </div>
@@ -590,57 +651,19 @@ footer { background: var(--white); padding: 32px 24px 96px; border-top: 1px soli
   </div>
 </section>
 
-<!-- ===== Chat bar (persistent) ===== -->
-<div class="chatbar">
-  <div class="chat-inner">
-    <div class="chat-input">
-      <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      <span class="chat-label">Ask a Question</span>
-      <span class="chat-placeholder">— What's Dog Mode?</span>
-    </div>
-    <button class="chat-send" aria-label="Send">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
-    <a class="chat-cta" href="#">
-      <svg class="chat-cta-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      Schedule a Drive Today
-    </a>
-  </div>
-</div>
-
-<!-- ===== Footer ===== -->
+<!-- FOOTER -->
 <footer>
-  <div class="foot-inner">
-    <span>Design Study · Tribute to Tesla's visual language</span>
-    <a href="#">Tesla © 2026</a>
-    <a href="#">Privacy &amp; Legal</a>
-    <a href="#">Vehicle Recalls</a>
-    <a href="#">Contact</a>
-    <a href="#">News</a>
-    <a href="#">Get Updates</a>
-    <a href="#">Locations</a>
+  <div class="foot-links">
+    <a href="#model-s">Vehicles</a>
+    <a href="#energy">Energy</a>
+    <a href="#design-system">Design System</a>
+    <a href="https://github.com/yzfly/awesome-design-html" target="_blank" rel="noopener">GitHub</a>
   </div>
+  <p class="foot-note">这是一份设计研究 — 对 Tesla 视觉语言的自包含致敬, 用于演示 "全屏纵向滚动面板" 的结构化品牌表达. 与 Tesla, Inc. 无官方关联, 页面数据仅为示意.</p>
+  <p class="foot-copy">© 2026 设计研究 · 致敬 Tesla 视觉语言 · 作者 云中江树</p>
 </footer>
 
-<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.tesla.html" target="_blank" rel="noopener">View DESIGN.md ↗</a>
-
-<script>
-  // Nav scroll behavior: switch from over-dark transparent to scrolled frosted
-  (function(){
-    var nav = document.getElementById('topNav');
-    function onScroll(){
-      var y = window.scrollY || window.pageYOffset;
-      if (y > window.innerHeight - 80) {
-        nav.classList.add('scrolled');
-        nav.classList.remove('over-dark');
-      } else {
-        nav.classList.remove('scrolled');
-        nav.classList.add('over-dark');
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-  })();
-</script>
+<a class="src-link" href="https://github.com/yzfly/awesome-design-html/blob/main/assets/web/design.tesla.html" target="_blank" rel="noopener">View source ↗</a>
 
 </body>
 </html>
