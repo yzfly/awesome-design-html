@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>中国传统色 · Chinese Traditional Colors — 742 色卡</title>
+<meta name="description" content="742 种中国传统色色卡：每色含名称与 HEX/RGB/CMYK，按色相归类，点击即可复制。一份可直接取用的中式配色参考。Chinese Traditional Colors — 742 named hues with HEX/RGB/CMYK, click to copy." />
+<meta name="author" content="云中江树" />
+<meta name="keywords" content="中国传统色,中国色,色卡,传统色,配色,Chinese Traditional Colors,color palette,HEX,RGB,CMYK" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="中国传统色 · 742 色卡 Chinese Traditional Colors" />
+<meta property="og:description" content="742 种中国传统色，按色相归类，点击复制 HEX/RGB/CMYK。一份可直接取用的中式配色参考。" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  /* ink & paper — 宣纸 + 墨 + 朱砂 */
+  --paper:        #f4efe6;
+  --paper-warm:   #efe7d8;
+  --card:         #faf6ee;
+  --ink:          #1c1814;
+  --ink-soft:     #4a4239;
+  --ink-mute:     #8c8275;
+  --seal:         #9d2b1f;   /* 朱砂 / 印泥红 */
+  --seal-deep:    #7c1f16;
+  --gold:         #b08d3e;   /* 赭石描金 */
+  --hairline:     rgba(28,24,20,.12);
+  --hairline-2:   rgba(28,24,20,.07);
+  --shadow:       0 1px 0 rgba(28,24,20,.04), 0 6px 22px rgba(28,24,20,.08);
+  --shadow-h:     0 2px 0 rgba(28,24,20,.06), 0 14px 38px rgba(28,24,20,.16);
+  --font-serif:   "Noto Serif SC", "Songti SC", "STSong", serif;
+  --font-mono:    "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-serif);
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(rgba(28,24,20,.025) 1px, transparent 1px);
+  background-size:4px 4px;
+}
+
+/* ===== top bar ===== */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px 30px;
+  background:rgba(244,239,230,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--hairline);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.seal{
+  width:38px;height:38px;border-radius:7px;
+  background:var(--seal);color:#f4efe6;
+  display:grid;place-items:center;
+  font-family:var(--font-serif);font-weight:700;font-size:19px;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18);
+  letter-spacing:-1px;
+}
+.brand b{font-size:18px;font-weight:700;letter-spacing:.5px}
+.brand span{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:.5px}
+.gh{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft);
+  text-decoration:none;padding:8px 14px;border:1px solid var(--hairline);
+  border-radius:8px;background:var(--card);transition:.18s;
+}
+.gh:hover{border-color:var(--seal);color:var(--seal)}
+.gh svg{width:15px;height:15px;fill:currentColor}
+
+/* ===== hero ===== */
+.hero{
+  max-width:1200px;margin:0 auto;padding:70px 30px 40px;text-align:center;
+}
+.hero .eyebrow{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--seal);margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(48px,9vw,104px);font-weight:900;line-height:.96;
+  letter-spacing:4px;color:var(--ink);
+}
+.hero h1 .alt{
+  display:block;font-size:clamp(15px,2.4vw,24px);font-weight:400;
+  letter-spacing:6px;color:var(--ink-mute);margin-top:18px;
+  font-family:var(--font-mono);text-transform:uppercase;
+}
+.hero p.lead{
+  max-width:560px;margin:30px auto 0;font-size:16px;line-height:1.9;
+  color:var(--ink-soft);font-weight:300;
+}
+.hero .meta{
+  margin-top:34px;display:flex;gap:26px;justify-content:center;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:12.5px;color:var(--ink-mute);
+}
+.hero .meta b{color:var(--seal);font-weight:600}
+
+/* ===== controls ===== */
+.controls{
+  position:sticky;top:67px;z-index:40;
+  max-width:1480px;margin:18px auto 0;padding:14px 30px;
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  background:rgba(244,239,230,.9);backdrop-filter:blur(12px);
+  border-top:1px solid var(--hairline-2);border-bottom:1px solid var(--hairline);
+}
+.search{
+  flex:1;min-width:220px;display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--hairline);border-radius:10px;
+  padding:10px 14px;
+}
+.search input{
+  flex:1;border:0;background:transparent;outline:0;color:var(--ink);
+  font-family:var(--font-serif);font-size:15px;
+}
+.search input::placeholder{color:var(--ink-mute)}
+.search svg{width:16px;height:16px;stroke:var(--ink-mute);fill:none;stroke-width:2}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.fbtn{
+  font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft);
+  background:var(--card);border:1px solid var(--hairline);
+  padding:8px 13px;border-radius:8px;cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.fbtn:hover{border-color:var(--ink-mute)}
+.fbtn.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.fbtn .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle;border:1px solid rgba(0,0,0,.12)}
+
+/* ===== groups ===== */
+main{max-width:1480px;margin:0 auto;padding:30px 30px 90px}
+.group{margin-top:48px;scroll-margin-top:140px}
+.group-head{
+  display:flex;align-items:baseline;gap:14px;margin-bottom:18px;
+  padding-bottom:12px;border-bottom:1px solid var(--hairline);
+}
+.group-head h2{font-size:26px;font-weight:700;letter-spacing:2px}
+.group-head .en{font-family:var(--font-mono);font-size:12px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:1.5px}
+.group-head .cnt{margin-left:auto;font-family:var(--font-mono);font-size:12px;color:var(--ink-mute)}
+
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;
+}
+.swatch{
+  border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid var(--hairline);
+  background:var(--card);transition:transform .16s,box-shadow .16s,border-color .16s;
+  display:flex;flex-direction:column;
+}
+.swatch:hover{transform:translateY(-3px);box-shadow:var(--shadow-h);border-color:transparent}
+.swatch .chip{height:96px;position:relative}
+.swatch .chip::after{
+  content:"复制 ⧉";position:absolute;right:8px;bottom:8px;
+  font-family:var(--font-mono);font-size:10px;padding:3px 7px;border-radius:5px;
+  background:rgba(255,255,255,.78);color:#1c1814;opacity:0;transition:.15s;
+  backdrop-filter:blur(4px);
+}
+.swatch:hover .chip::after{opacity:1}
+.swatch.dk .chip::after{background:rgba(0,0,0,.42);color:#fff}
+.swatch .info{padding:11px 12px 13px;background:var(--card)}
+.swatch .nm{font-size:16px;font-weight:600;letter-spacing:.5px;line-height:1.2}
+.swatch .hx{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-mute);margin-top:5px;text-transform:uppercase}
+
+.empty{text-align:center;padding:90px 0;color:var(--ink-mute)}
+.empty .big{font-family:var(--font-mono);font-size:15px;margin-bottom:8px;color:var(--seal)}
+
+/* ===== toast ===== */
+.toast{
+  position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:13px;
+  padding:12px 20px;border-radius:10px;box-shadow:var(--shadow-h);
+  opacity:0;pointer-events:none;transition:.22s;z-index:80;letter-spacing:.5px;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast b{color:#f0c674}
+
+/* ===== footer ===== */
+footer{border-top:1px solid var(--hairline);background:var(--paper-warm)}
+.foot{
+  max-width:1480px;margin:0 auto;padding:40px 30px;
+  display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:flex-start;
+}
+.foot .col p{font-size:14px;line-height:1.9;color:var(--ink-soft);font-weight:300;max-width:520px}
+.foot .col a{color:var(--seal);text-decoration:none;font-weight:500}
+.foot .col a:hover{text-decoration:underline}
+.foot .by{margin-top:14px;font-family:var(--font-mono);font-size:12px;color:var(--ink-mute)}
+.foot .links{display:flex;flex-direction:column;gap:9px;font-family:var(--font-mono);font-size:13px}
+.foot .links a{color:var(--ink-soft);text-decoration:none}
+.foot .links a:hover{color:var(--seal)}
+
+/* ===== view source ===== */
+.viewsrc{
+  position:fixed;right:18px;bottom:18px;z-index:70;
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--font-mono);font-size:12px;color:var(--paper);
+  background:var(--ink);padding:9px 14px;border-radius:9px;text-decoration:none;
+  box-shadow:var(--shadow-h);transition:.18s;
+}
+.viewsrc:hover{background:var(--seal)}
+
+@media (max-width:680px){
+  .hero{padding:46px 20px 26px}
+  .topbar{padding:12px 18px}
+  main{padding:20px 18px 70px}
+  .controls{padding:12px 18px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:9px}
+  .swatch .chip{height:78px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="seal">色</div>
+    <div>
+      <b>中国传统色</b><br/>
+      <span>CHINESE TRADITIONAL COLORS · 742</span>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/nevertoday/zhongguo-traditional-colors" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2 0 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.3.9 1 .9 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+    GitHub 原始项目
+  </a>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">华夏色谱 · 742 名色</div>
+  <h1>中国传统色<span class="alt">Chinese Traditional Colors</span></h1>
+  <p class="lead">从「乳白」到「青黛」，742 种自草木山川、四时风物中提炼的颜色。每一个名字都是一段风景。点击色块即可复制 HEX 色值。</p>
+  <div class="meta">
+    <span><b>742</b> 名色</span>
+    <span><b id="grpCount">—</b> 色系</span>
+    <span>点击 <b>复制</b> HEX</span>
+  </div>
+</section>
+
+<div class="controls">
+  <div class="search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input id="q" type="text" placeholder="搜索颜色名 或 HEX 值，如「黛」「胭脂」「#FF」…" autocomplete="off" />
+  </div>
+  <div class="filters" id="filters"></div>
+</div>
+
+<main>
+  <div id="groups"></div>
+  <div class="empty" id="empty" style="display:none">
+    <div class="big">[ 无匹配 ]</div>
+    <p>换个关键词试试。</p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="col">
+      <p>色卡数据来自开源项目 <a href="https://github.com/nevertoday/zhongguo-traditional-colors" target="_blank" rel="noopener">nevertoday/zhongguo-traditional-colors</a>（742 高清中国传统色卡）。本页将其整理为按色相归类、可检索、可复制的单文件 HTML 色谱，收录于 <a href="https://github.com/yzfly/awesome-design-html" target="_blank" rel="noopener">awesome-design-html</a> 设计参考库。</p>
+      <div class="by">整理 / 制作 · 云中江树 · 微信公众号「云中江树」</div>
+    </div>
+    <div class="links">
+      <a href="https://github.com/nevertoday/zhongguo-traditional-colors" target="_blank" rel="noopener">原始项目 ↗</a>
+      <a href="https://github.com/yzfly/awesome-design-html" target="_blank" rel="noopener">awesome-design-html ↗</a>
+      <a href="https://github.com/yzfly/awesome-design-html#readme" target="_blank" rel="noopener">README ↗</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">已复制 <b id="toastVal"></b></div>
+<a class="viewsrc" href="https://github.com/nevertoday/zhongguo-traditional-colors" target="_blank" rel="noopener">View source ↗</a>
+
+<script>
+// ===== 742 中国传统色 — name + hex =====
+const COLORS = [
+{n:"乳白",h:"#F9F4DC"},{n:"杏仁黄",h:"#F7E8AA"},{n:"茉莉黄",h:"#F8DF72"},{n:"麦秆黄",h:"#F8DF70"},{n:"油菜花黄",h:"#FBDA41"},{n:"佛手黄",h:"#FED71A"},
+{n:"篾黄",h:"#F7DE98"},{n:"葵扇黄",h:"#F8D86A"},{n:"柠檬黄",h:"#FCD337"},{n:"金瓜黄",h:"#FCD217"},{n:"藤黄",h:"#FFD111"},{n:"酪黄",h:"#F6DEAD"},
+{n:"香水玫瑰黄",h:"#F7DA94"},{n:"淡密黄",h:"#F9D367"},{n:"大豆黄",h:"#FBCD31"},{n:"素馨黄",h:"#FCCB16"},{n:"向日葵黄",h:"#FECC11"},{n:"雅梨黄",h:"#FBC82F"},
+{n:"黄连黄",h:"#FCC515"},{n:"金盏黄",h:"#FCC307"},{n:"蛋壳黄",h:"#F8C387"},{n:"肉色",h:"#F7C173"},{n:"鹅掌黄",h:"#FBB929"},{n:"鸡蛋黄",h:"#FBB612"},
+{n:"鼬黄",h:"#FCB70A"},{n:"榴萼黄",h:"#F9A633"},{n:"淡橘橙",h:"#FBA414"},{n:"枇杷黄",h:"#FCA106"},{n:"橙皮黄",h:"#FCA104"},{n:"北瓜黄",h:"#FC8C23"},
+{n:"杏黄",h:"#F28E16"},{n:"雄黄",h:"#FF9900"},{n:"万寿菊黄",h:"#FB8B05"},{n:"菊蕾白",h:"#E9DDB6"},{n:"秋葵黄",h:"#EED045"},{n:"硫华黄",h:"#F2CE2B"},
+{n:"柚黄",h:"#F1CA17"},{n:"芒果黄",h:"#DDC871"},{n:"蒿黄",h:"#DFC243"},{n:"姜黄",h:"#E2C027"},{n:"香蕉黄",h:"#E4BF11"},{n:"草黄",h:"#D2B42C"},
+{n:"新禾绿",h:"#D2B116"},{n:"月灰",h:"#B7AE8F"},{n:"淡灰绿",h:"#AD9E5F"},{n:"草灰绿",h:"#8E804B"},{n:"苔绿",h:"#887322"},{n:"碧螺春绿",h:"#867018"},
+{n:"燕羽灰",h:"#685E48"},{n:"蟹壳灰",h:"#695E45"},{n:"潭水绿",h:"#645822"},{n:"橄榄绿",h:"#5E5314"},{n:"蚌肉白",h:"#F9F1DB"},{n:"豆汁黄",h:"#F8E8C1"},
+{n:"淡茧黄",h:"#F9D770"},{n:"乳鸭黄",h:"#FFC90C"},{n:"荔肉白",h:"#F2E6CE"},{n:"象牙黄",h:"#F0D695"},{n:"炒米黄",h:"#F4CE69"},{n:"鹦鹉冠黄",h:"#F6C430"},
+{n:"木瓜黄",h:"#F9C116"},{n:"浅烙黄",h:"#F9BD10"},{n:"莲子白",h:"#E5D3AA"},{n:"谷黄",h:"#E8B004"},{n:"栀子黄",h:"#EBB10D"},{n:"芥黄",h:"#D9A40E"},
+{n:"银鼠灰",h:"#B5AA90"},{n:"尘灰",h:"#B6A476"},{n:"枯绿",h:"#B78D12"},{n:"鲛青",h:"#87723E"},{n:"粽叶绿",h:"#876818"},{n:"灰绿",h:"#8A6913"},
+{n:"鹤灰",h:"#4A4035"},{n:"淡松烟",h:"#4D4030"},{n:"暗海水绿",h:"#584717"},{n:"棕榈绿",h:"#5B4913"},{n:"米色",h:"#F9E9CD"},{n:"淡肉色",h:"#F8E0B0"},
+{n:"麦芽糖黄",h:"#F9D27D"},{n:"琥珀黄",h:"#FEBA07"},{n:"甘草黄",h:"#F3BF4C"},{n:"初熟杏黄",h:"#F8BC31"},{n:"浅驼色",h:"#E2C17C"},{n:"沙石黄",h:"#E5B751"},
+{n:"虎皮黄",h:"#EAAD1A"},{n:"土黄",h:"#D6A01D"},{n:"百灵鸟灰",h:"#B4A992"},{n:"山鸡黄",h:"#B78B26"},{n:"龟背黄",h:"#826B48"},{n:"苍黄",h:"#806332"},
+{n:"莱阳梨黄",h:"#815F25"},{n:"蜴蜊绿",h:"#835E1D"},{n:"松鼠灰",h:"#4F4032"},{n:"橄榄灰",h:"#503E2A"},{n:"蟹壳绿",h:"#513C20"},{n:"古铜绿",h:"#533C1B"},
+{n:"焦茶绿",h:"#553B18"},{n:"粉白",h:"#FBF2E3"},{n:"落英淡粉",h:"#F9E8D0"},{n:"瓜瓤粉",h:"#F9CB8B"},{n:"蜜黄",h:"#FBB957"},{n:"金叶黄",h:"#FFA60F"},
+{n:"金莺黄",h:"#F4A83A"},{n:"鹿角棕",h:"#E3BD8D"},{n:"凋叶棕",h:"#E7A23F"},{n:"玳瑁黄",h:"#DAA45A"},{n:"软木黄",h:"#DE9E44"},{n:"风帆黄",h:"#DC9123"},
+{n:"桂皮淡棕",h:"#C09351"},{n:"猴毛灰",h:"#97846C"},{n:"山鸡褐",h:"#986524"},{n:"驼色",h:"#66462A"},{n:"茶褐",h:"#5D3D21"},{n:"古铜褐",h:"#5C3719"},
+{n:"荷花白",h:"#FBECDE"},{n:"玫瑰粉",h:"#F8B37F"},{n:"橘橙",h:"#F97D1C"},{n:"美人焦橙",h:"#FA7E23"},{n:"润红",h:"#F7CDBC"},{n:"淡桃红",h:"#F6CEC1"},
+{n:"海螺橙",h:"#F0945D"},{n:"桃红",h:"#F0ADA0"},{n:"颊红",h:"#EEAA9C"},{n:"淡罂粟红",h:"#EEA08C"},{n:"晨曦红",h:"#EA8958"},{n:"蟹壳红",h:"#F27635"},
+{n:"金莲花橙",h:"#F86B1D"},{n:"草莓红",h:"#EF6F48"},{n:"龙睛鱼红",h:"#EF632B"},{n:"蜻蜓红",h:"#F1441D"},{n:"大红",h:"#F04B22"},{n:"柿红",h:"#F2481B"},
+{n:"榴花红",h:"#F34718"},{n:"银朱",h:"#F43E06"},{n:"朱红",h:"#ED5126"},{n:"鲑鱼红",h:"#F09C5A"},{n:"金黄",h:"#F26B1F"},{n:"鹿皮褐",h:"#D99156"},
+{n:"醉瓜肉",h:"#DB8540"},{n:"麂棕",h:"#DE7622"},{n:"淡银灰",h:"#C1B2A3"},{n:"淡赭",h:"#BE7E4A"},{n:"槟榔综",h:"#C1651A"},{n:"银灰",h:"#918072"},
+{n:"海鸥灰",h:"#9A8878"},{n:"淡咖啡",h:"#945833"},{n:"岩石棕",h:"#964D22"},{n:"芒果棕",h:"#954416"},{n:"石板灰",h:"#624941"},{n:"珠母灰",h:"#64483D"},
+{n:"丁香棕",h:"#71361D"},{n:"咖啡",h:"#753117"},{n:"筍皮棕",h:"#732E12"},{n:"燕颔红",h:"#FC6315"},{n:"玉粉红",h:"#E8B49A"},{n:"金驼",h:"#E46828"},
+{n:"铁棕",h:"#D85916"},{n:"蛛网灰",h:"#B7A091"},{n:"淡可可棕",h:"#B7511D"},{n:"中红灰",h:"#8B614D"},{n:"淡土黄",h:"#8C4B31"},{n:"淡豆沙",h:"#873D24"},
+{n:"椰壳棕",h:"#883A1E"},{n:"淡铁灰",h:"#5B423A"},{n:"中灰驼",h:"#603D30"},{n:"淡栗棕",h:"#673424"},{n:"可可棕",h:"#652B1C"},{n:"柞叶棕",h:"#692A1B"},
+{n:"野蔷薇红",h:"#FB9968"},{n:"菠萝红",h:"#FC7930"},{n:"藕荷",h:"#EDC3AE"},{n:"陶瓷红",h:"#E16723"},{n:"晓灰",h:"#D4C4B7"},{n:"余烬红",h:"#CF7543"},
+{n:"火砖红",h:"#CD6227"},{n:"火泥棕",h:"#AA6A4C"},{n:"绀红",h:"#A6522C"},{n:"橡树棕",h:"#773D31"},{n:"海报灰",h:"#483332"},{n:"玫瑰灰",h:"#4B2E2B"},
+{n:"火山棕",h:"#482522"},{n:"豆沙",h:"#481E1C"},{n:"淡米粉",h:"#FBEEE2"},{n:"初桃粉红",h:"#F6DCCE"},{n:"介壳淡粉红",h:"#F7CFBA"},{n:"淡藏花红",h:"#F6AD8F"},
+{n:"瓜瓤红",h:"#F68C60"},{n:"芙蓉红",h:"#F9723D"},{n:"莓酱红",h:"#FA5D19"},{n:"法螺红",h:"#EE8055"},{n:"落霞红",h:"#CF4813"},{n:"淡玫瑰灰",h:"#B89485"},
+{n:"蟹蝥红",h:"#B14B28"},{n:"火岩棕",h:"#863020"},{n:"赭石",h:"#862617"},{n:"暗驼棕",h:"#592620"},{n:"酱棕",h:"#5A1F1B"},{n:"栗棕",h:"#5C1E19"},
+{n:"洋水仙红",h:"#F4C7BA"},{n:"谷鞘红",h:"#F17666"},{n:"苹果红",h:"#F15642"},{n:"铁水红",h:"#F5391C"},{n:"桂红",h:"#F25A47"},{n:"极光红",h:"#F33B1F"},
+{n:"粉红",h:"#F2B9B2"},{n:"舌红",h:"#F19790"},{n:"曲红",h:"#F05A46"},{n:"红汞红",h:"#F23E23"},{n:"淡绯",h:"#F2CAC9"},{n:"无花果红",h:"#EFAFAD"},
+{n:"榴子红",h:"#F1908C"},{n:"胭脂红",h:"#F03F24"},{n:"合欢红",h:"#F0A1A8"},{n:"春梅红",h:"#F1939C"},{n:"香叶红",h:"#F07C82"},{n:"珊瑚红",h:"#F04A3A"},
+{n:"萝卜红",h:"#F13C22"},{n:"淡茜红",h:"#E77C8E"},{n:"艳红",h:"#ED5A65"},{n:"淡菽红",h:"#ED4845"},{n:"鱼鳃红",h:"#ED3B2F"},{n:"樱桃红",h:"#ED3321"},
+{n:"淡蕊香红",h:"#EE4866"},{n:"石竹红",h:"#EE4863"},{n:"草茉莉红",h:"#EF475D"},{n:"茶花红",h:"#EE3F4D"},{n:"枸枢红",h:"#ED3333"},{n:"秋海棠红",h:"#EC2B24"},
+{n:"丽春红",h:"#EB261A"},{n:"夕阳红",h:"#DE2A18"},{n:"鹤顶红",h:"#D42517"},{n:"鹅血石红",h:"#AB372F"},{n:"覆盆子红",h:"#AC1F18"},{n:"貂紫",h:"#5D3131"},
+{n:"暗玉紫",h:"#5C2223"},{n:"栗紫",h:"#5A191B"},{n:"葡萄酱紫",h:"#5A1216"},{n:"牡丹粉红",h:"#EEA2A4"},{n:"山茶红",h:"#ED556A"},{n:"海棠红",h:"#F03752"},
+{n:"玉红",h:"#C04851"},{n:"高粱红",h:"#C02C38"},{n:"满江红",h:"#A7535A"},{n:"枣红",h:"#7C1823"},{n:"葡萄紫",h:"#4C1F24"},{n:"酱紫",h:"#4D1018"},
+{n:"淡曙红",h:"#EE2746"},{n:"唐菖蒲红",h:"#DE1C31"},{n:"鹅冠红",h:"#D11A2D"},{n:"莓红",h:"#C45A65"},{n:"枫叶红",h:"#C21F30"},{n:"苋菜红",h:"#A61B29"},
+{n:"烟红",h:"#894E54"},{n:"暗紫苑红",h:"#82202B"},{n:"殷红",h:"#82111F"},{n:"猪肝紫",h:"#541E24"},{n:"金鱼紫",h:"#500A16"},{n:"草珠红",h:"#F8EBE6"},
+{n:"淡绛红",h:"#EC7696"},{n:"品红",h:"#EF3473"},{n:"凤仙花红",h:"#EA7293"},{n:"粉团花红",h:"#EC9BAD"},{n:"夹竹桃红",h:"#EB507E"},{n:"榲桲红",h:"#ED2F6A"},
+{n:"姜红",h:"#EEB8C3"},{n:"莲瓣红",h:"#EA517F"},{n:"水红",h:"#F1C4CD"},{n:"报春红",h:"#EC8AA4"},{n:"月季红",h:"#CE5777"},{n:"豇豆红",h:"#ED9DB2"},
+{n:"霞光红",h:"#EF82A0"},{n:"松叶牡丹红",h:"#EB3C70"},{n:"喜蛋红",h:"#EC2C64"},{n:"鼠鼻红",h:"#E3B4B8"},{n:"尖晶玉红",h:"#CC163A"},{n:"山黎豆红",h:"#C27C88"},
+{n:"锦葵红",h:"#BF3553"},{n:"鼠背灰",h:"#73575C"},{n:"甘蔗紫",h:"#621624"},{n:"石竹紫",h:"#63071C"},{n:"苍蝇灰",h:"#36282B"},{n:"卵石紫",h:"#30161C"},
+{n:"李紫",h:"#2B1216"},{n:"茄皮紫",h:"#2D0C13"},{n:"吊钟花红",h:"#CE5E8A"},{n:"兔眼红",h:"#EC4E8A"},{n:"紫荆红",h:"#EE2C79"},{n:"菜头紫",h:"#951C48"},
+{n:"鹞冠紫",h:"#621D34"},{n:"葡萄酒红",h:"#62102E"},{n:"磨石紫",h:"#382129"},{n:"檀紫",h:"#381924"},{n:"火鹅紫",h:"#33141E"},{n:"墨紫",h:"#310F1B"},
+{n:"晶红",h:"#EEA6B7"},{n:"扁豆花红",h:"#EF498B"},{n:"白芨红",h:"#DE7897"},{n:"嫩菱红",h:"#DE3F7C"},{n:"菠根红",h:"#D13C74"},{n:"酢酱草红",h:"#C5708B"},
+{n:"洋葱紫",h:"#A8456B"},{n:"海象紫",h:"#4B1E2F"},{n:"绀紫",h:"#461629"},{n:"古铜紫",h:"#440E25"},{n:"石蕊红",h:"#F0C9CF"},{n:"芍药耕红",h:"#EBA0B3"},
+{n:"藏花红",h:"#EC2D7A"},{n:"初荷红",h:"#E16C96"},{n:"马鞭草紫",h:"#EDE3E7"},{n:"丁香淡紫",h:"#E9D7DF"},{n:"丹紫红",h:"#D2568C"},{n:"玫瑰红",h:"#D2357D"},
+{n:"淡牵牛紫",h:"#D1C2D3"},{n:"凤信紫",h:"#C8ADC4"},{n:"萝兰紫",h:"#C08EAF"},{n:"玫瑰紫",h:"#BA2F7B"},{n:"藤萝紫",h:"#8076A3"},{n:"槿紫",h:"#806D9E"},
+{n:"蕈紫",h:"#815C94"},{n:"桔梗紫",h:"#813C85"},{n:"魏紫",h:"#7E1671"},{n:"芝兰紫",h:"#E9CCD3"},{n:"菱锰红",h:"#D276A3"},{n:"龙须红",h:"#CC5595"},
+{n:"蓟粉红",h:"#E6D2D5"},{n:"电气石红",h:"#C35691"},{n:"樱草紫",h:"#C06F98"},{n:"芦穗灰",h:"#BDAEAD"},{n:"隐红灰",h:"#B598A1"},{n:"苋菜紫",h:"#9B1E64"},
+{n:"芦灰",h:"#856D72"},{n:"暮云灰",h:"#4F383E"},{n:"斑鸠灰",h:"#482936"},{n:"淡藤萝紫",h:"#F2E7E5"},{n:"淡青紫",h:"#E0C8D1"},{n:"青蛤壳紫",h:"#BC84A8"},
+{n:"豆蔻紫",h:"#AD6598"},{n:"扁豆紫",h:"#A35C8F"},{n:"芥花紫",h:"#983680"},{n:"青莲",h:"#8B2671"},{n:"芓紫",h:"#894276"},{n:"葛巾紫",h:"#7E2065"},
+{n:"牵牛紫",h:"#681752"},{n:"紫灰",h:"#5D3F51"},{n:"龙睛鱼紫",h:"#4E2A40"},{n:"荸荠紫",h:"#411C35"},{n:"古鼎灰",h:"#36292F"},{n:"乌梅紫",h:"#1E131D"},
+{n:"深牵牛紫",h:"#1C0D1A"},{n:"银白",h:"#F1F0ED"},{n:"芡食白",h:"#E2E1E4"},{n:"远山紫",h:"#CCCCD6"},{n:"淡蓝紫",h:"#A7A8BD"},{n:"山梗紫",h:"#61649F"},
+{n:"螺甸紫",h:"#74759B"},{n:"玛瑙灰",h:"#CFCCC9"},{n:"野菊紫",h:"#525288"},{n:"满天星紫",h:"#2E317C"},{n:"锌灰",h:"#7A7374"},{n:"野葡萄紫",h:"#302F4B"},
+{n:"剑锋紫",h:"#3E3841"},{n:"龙葵紫",h:"#322F3B"},{n:"暗龙胆紫",h:"#22202E"},{n:"晶石紫",h:"#1F2040"},{n:"暗蓝紫",h:"#131124"},{n:"景泰蓝",h:"#2775B6"},
+{n:"尼罗蓝",h:"#2474B5"},{n:"远天蓝",h:"#D0DFE6"},{n:"星蓝",h:"#93B5CF"},{n:"羽扇豆蓝",h:"#619AC3"},{n:"花青",h:"#2376B7"},{n:"睛蓝",h:"#5698C3"},
+{n:"虹蓝",h:"#2177B8"},{n:"湖水蓝",h:"#B0D5DF"},{n:"秋波蓝",h:"#8ABCD1"},{n:"涧石蓝",h:"#66A9C9"},{n:"潮蓝",h:"#2983BB"},{n:"群青",h:"#1772B4"},
+{n:"霁青",h:"#63BBD0"},{n:"碧青",h:"#5CB3CC"},{n:"宝石蓝",h:"#2486B9"},{n:"天蓝",h:"#1677B3"},{n:"柏林蓝",h:"#126BAE"},{n:"海青",h:"#22A2C3"},
+{n:"钴蓝",h:"#1A94BC"},{n:"鸢尾蓝",h:"#158BB8"},{n:"牵牛花蓝",h:"#1177B0"},{n:"飞燕草蓝",h:"#0F59A4"},{n:"品蓝",h:"#2B73AF"},{n:"银鱼白",h:"#CDD1D3"},
+{n:"安安蓝",h:"#3170A7"},{n:"鱼尾灰",h:"#5E616D"},{n:"鲸鱼灰",h:"#475164"},{n:"海参灰",h:"#FFFEFA"},{n:"沙鱼灰",h:"#35333C"},{n:"钢蓝",h:"#0F1423"},
+{n:"云水蓝",h:"#BACCD9"},{n:"晴山蓝",h:"#8FB2C9"},{n:"靛青",h:"#1661AB"},{n:"大理石灰",h:"#C4CBCF"},{n:"海涛蓝",h:"#15559A"},{n:"蝶翅蓝",h:"#4E7CA1"},
+{n:"海军蓝",h:"#346C9C"},{n:"水牛灰",h:"#2F2F35"},{n:"牛角灰",h:"#2D2E36"},{n:"燕颔蓝",h:"#131824"},{n:"云峰白",h:"#D8E3E7"},{n:"井天蓝",h:"#C3D7DF"},
+{n:"云山蓝",h:"#2F90B9"},{n:"釉蓝",h:"#1781B5"},{n:"鸥蓝",h:"#C7D2D4"},{n:"搪磁蓝",h:"#11659A"},{n:"月影白",h:"#C0C4C3"},{n:"星灰",h:"#B2BBBE"},
+{n:"淡蓝灰",h:"#5E7987"},{n:"鷃蓝",h:"#144A74"},{n:"嫩灰",h:"#74787A"},{n:"战舰灰",h:"#495C69"},{n:"瓦罐灰",h:"#47484C"},{n:"青灰",h:"#2B333E"},
+{n:"鸽蓝",h:"#1C2938"},{n:"钢青",h:"#142334"},{n:"暗蓝",h:"#101F30"},{n:"月白",h:"#EEF7F2"},{n:"海天蓝",h:"#C6E6E8"},{n:"清水蓝",h:"#93D5DC"},
+{n:"瀑布蓝",h:"#51C4D3"},{n:"蔚蓝",h:"#29B7CB"},{n:"孔雀蓝",h:"#0EB0C9"},{n:"甸子蓝",h:"#10AEC2"},{n:"石绿",h:"#57C3C2"},{n:"竹篁绿",h:"#B9DEC9"},
+{n:"粉绿",h:"#83CBAC"},{n:"美蝶绿",h:"#12AA9C"},{n:"毛绿",h:"#66C18C"},{n:"蔻梢绿",h:"#5DBE8A"},{n:"麦苗绿",h:"#55BB8A"},{n:"蛙绿",h:"#45B787"},
+{n:"铜绿",h:"#2BAE85"},{n:"竹绿",h:"#1BA784"},{n:"蓝绿",h:"#12A182"},{n:"穹灰",h:"#C4D7D6"},{n:"翠蓝",h:"#1E9EB3"},{n:"胆矾蓝",h:"#0F95B0"},
+{n:"樫鸟蓝",h:"#1491A8"},{n:"闪蓝",h:"#7CABB1"},{n:"冰山蓝",h:"#A4ACA7"},{n:"虾壳青",h:"#869D9D"},{n:"晚波蓝",h:"#648E93"},{n:"蜻蜓蓝",h:"#3B818C"},
+{n:"玉鈫蓝",h:"#126E82"},{n:"垩灰",h:"#737C7B"},{n:"夏云灰",h:"#617172"},{n:"苍蓝",h:"#134857"},{n:"黄昏灰",h:"#474B4C"},{n:"灰蓝",h:"#21373D"},
+{n:"深灰蓝",h:"#132C33"},{n:"玉簪绿",h:"#A4CAB6"},{n:"青矾绿",h:"#2C9678"},{n:"草原远绿",h:"#9ABEAF"},{n:"梧枝绿",h:"#69A794"},{n:"浪花绿",h:"#92B3A5"},
+{n:"海王绿",h:"#248067"},{n:"亚丁绿",h:"#428675"},{n:"镍灰",h:"#9FA39A"},{n:"明灰",h:"#8A988E"},{n:"淡绿灰",h:"#70887D"},{n:"飞泉绿",h:"#497568"},
+{n:"狼烟灰",h:"#5D655F"},{n:"绿灰",h:"#314A43"},{n:"苍绿",h:"#223E36"},{n:"深海绿",h:"#1A3B32"},{n:"长石灰",h:"#363433"},{n:"苷蓝绿",h:"#1F2623"},
+{n:"莽丛绿",h:"#141E1B"},{n:"淡翠绿",h:"#C6DFC8"},{n:"明绿",h:"#9ECCAB"},{n:"田园绿",h:"#68B88E"},{n:"翠绿",h:"#20A162"},{n:"淡绿",h:"#61AC85"},
+{n:"葱绿",h:"#40A070"},{n:"孔雀绿",h:"#229453"},{n:"艾绿",h:"#CAD3C3"},{n:"蟾绿",h:"#3C9566"},{n:"宫殿绿",h:"#20894D"},{n:"松霜绿",h:"#83A78D"},
+{n:"蛋白石绿",h:"#579572"},{n:"薄荷绿",h:"#207F4C"},{n:"瓦松绿",h:"#6E8B74"},{n:"荷叶绿",h:"#1A6840"},{n:"田螺绿",h:"#5E665B"},{n:"白屈菜绿",h:"#485B4D"},
+{n:"河豚灰",h:"#393733"},{n:"蒽油绿",h:"#373834"},{n:"槲寄生绿",h:"#2B312C"},{n:"云杉绿",h:"#15231B"},{n:"嫩菊绿",h:"#F0F5E5"},{n:"艾背绿",h:"#DFECD5"},
+{n:"嘉陵水绿",h:"#ADD5A2"},{n:"玉髓绿",h:"#41B349"},{n:"鲜绿",h:"#43B244"},{n:"宝石绿",h:"#41AE3C"},{n:"海沬绿",h:"#E2E7BF"},{n:"姚黄",h:"#D0DEAA"},
+{n:"橄榄石绿",h:"#B2CF87"},{n:"水绿",h:"#8CC269"},{n:"芦苇绿",h:"#B7D07A"},{n:"槐花黄绿",h:"#D2D97A"},{n:"苹果绿",h:"#BACF65"},{n:"芽绿",h:"#96C24E"},
+{n:"蝶黄",h:"#E2D849"},{n:"橄榄黄绿",h:"#BEC936"},{n:"鹦鹉绿",h:"#5BAE23"},{n:"油绿",h:"#253D24"},{n:"象牙白",h:"#FFFEF8"},{n:"汉白玉",h:"#F8F4ED"},
+{n:"雪白",h:"#FFFEF9"},{n:"鱼肚白",h:"#F7F4ED"},{n:"珍珠灰",h:"#E4DFD7"},{n:"浅灰",h:"#DAD4CB"},{n:"铅灰",h:"#BBB5AC"},{n:"中灰",h:"#A49C93"},
+{n:"瓦灰",h:"#867E76"},{n:"夜灰",h:"#847C74"},{n:"雁灰",h:"#80766E"},{n:"深灰",h:"#81776E"},{n:"蓝翠竹",h:"#4B8F8C"},{n:"云青灰",h:"#8A9A9C"},
+{n:"黑",h:"#000000"},{n:"普鲁士蓝",h:"#003152"},{n:"山岚",h:"#B2C9B2"},{n:"綟绶",h:"#6B8E23"},{n:"黛蓝",h:"#2A3C5C"},{n:"烟紫",h:"#704A70"},
+{n:"暮山紫",h:"#6E4D7E"},{n:"月白天青",h:"#C6D7DB"},{n:"翠微",h:"#3CB371"},{n:"紫云",h:"#A020F0"},{n:"青霜",h:"#4682B4"},{n:"梅子青",h:"#7BC092"},
+{n:"火焰红",h:"#F4512C"},{n:"琥珀",h:"#CA6924"},{n:"浅褐色",h:"#D2B48C"},{n:"烟青",h:"#708090"},{n:"苍碧",h:"#2A52BE"},{n:"月华",h:"#E0FFFF"},
+{n:"绫素白",h:"#F8F3E6"},{n:"墨韵黑",h:"#2E2E2E"},{n:"夜筵青",h:"#1D3F5A"},{n:"霜白",h:"#F2F3F4"},{n:"秋香",h:"#C3B787"},{n:"绯红",h:"#E3256B"},
+{n:"霞绯",h:"#FF6B6B"},{n:"鸦青",h:"#424B50"},{n:"玄黑",h:"#0E100F"},{n:"黛青",h:"#2A475F"},{n:"缃绮",h:"#F8C471"},{n:"烟褐",h:"#8B6D5C"},
+{n:"柳苍",h:"#3E6A3D"},{n:"蟹壳青",h:"#86A1A7"},{n:"雪青",h:"#B0D8E8"},{n:"云蓝",h:"#87CEEB"},{n:"梅红",h:"#B34B43"},{n:"柳绿",h:"#70C870"},
+{n:"绀碧",h:"#4B6C8C"},{n:"月蓝",h:"#6B8E99"},{n:"霜蓝",h:"#4A6FA6"},{n:"松墨",h:"#2E4B26"},{n:"竹青",h:"#00A86B"},{n:"湖蓝",h:"#66B7D0"},
+{n:"潆青",h:"#6B8E9A"},{n:"霜青",h:"#7CB9A8"},{n:"烟萦紫",h:"#8A4B9C"},{n:"缥缃",h:"#A4C2A8"},{n:"露碧",h:"#A0D8D8"},{n:"绀青",h:"#4F84FF"},
+{n:"柳黄",h:"#C9E079"},{n:"槐黄",h:"#D8C37C"},{n:"缥色",h:"#A8C9E4"},{n:"松花",h:"#B6D7A8"},{n:"缥碧",h:"#7AB9C1"},{n:"荷绿",h:"#4A7856"},
+{n:"檀褐",h:"#8E443D"},{n:"月魄",h:"#E0E7EF"},{n:"滢蓝",h:"#8EC4E9"},{n:"湖绿",h:"#70C8A4"},{n:"枫丹",h:"#C92B27"},{n:"雾绡",h:"#CDE8F9"},
+{n:"樱粉",h:"#F7B7C5"},{n:"霜紫",h:"#B8A5D2"},{n:"缥青",h:"#2B5F7C"},{n:"瑶碧",h:"#4B9CD3"},{n:"墨玉",h:"#2E4B3A"},{n:"莹翠",h:"#3EB489"},
+{n:"茜色",h:"#FF4D4D"},{n:"鹅黄",h:"#F2C867"},{n:"霜华",h:"#D0E7F9"},{n:"粉色",h:"#FADADD"},{n:"天青",h:"#6C9BCA"},{n:"天水碧",h:"#AED9D4"},
+{n:"檀色",h:"#A65F2E"},{n:"霜色",h:"#E8F4F8"},{n:"橙色",h:"#FF8C00"},{n:"奶橙色",h:"#FFD8B3"},{n:"黛绿",h:"#3B7A57"},{n:"勃艮第红",h:"#6D0B1E"},
+{n:"朱砂红",h:"#D92121"},{n:"朱墙",h:"#C41E3A"},{n:"东方既白",h:"#E6F2FF"},{n:"藕丝",h:"#D8B0C8"},{n:"奶黄色",h:"#F9E4A5"},{n:"浅栗棕",h:"#C8A58E"},
+{n:"浅绛",h:"#D9A594"},{n:"缁",h:"#2C2C2C"},{n:"緅",h:"#5C4A43"},{n:"缊",h:"#C79A6A"},{n:"青组缨",h:"#3B7C7F"},{n:"爵弁",h:"#6B3E3C"},
+{n:"玄色",h:"#1A1A1A"},{n:"黛紫",h:"#5D3A6F"},{n:"浅肤色",h:"#EBCDA8"},{n:"海棠",h:"#FF6F61"},{n:"黛青山",h:"#2E5A6F"},{n:"银红",h:"#C74A4D"},
+{n:"蓝色",h:"#4A8DDA"},{n:"绛紫",h:"#8E354A"},{n:"醋",h:"#8A3A3A"},{n:"玄青",h:"#2B3A4F"},{n:"霜叶红",h:"#C73B44"},{n:"竹月",h:"#BCE5D6"},
+{n:"银褐",h:"#A88A6F"},{n:"荞麦",h:"#D2B89A"},{n:"茶粉绿",h:"#B8C7A0"},{n:"长春花蓝",h:"#7EC0EE"},{n:"青骊",h:"#2E3439"},{n:"荞麦棕",h:"#8B6D47"},
+{n:"纯衣",h:"#F5F3E9"},{n:"緇",h:"#3B3131"},{n:"纁裳",h:"#D46A6A"},{n:"韎韐",h:"#A5441B"},{n:"纁屦",h:"#D47A5E"},{n:"皮弁",h:"#8B5D33"},
+{n:"素衣",h:"#F2F0E6"},{n:"素积",h:"#D2C8BC"},{n:"缁带",h:"#2E2A2D"},{n:"素鞸",h:"#D6C9B8"},{n:"白屦",h:"#F5F3E6"},{n:"缁絇繶纯",h:"#2E2014"},
+{n:"黄裳",h:"#F5D87E"},{n:"青絇繶纯",h:"#3B7A5D"},{n:"浅灰蓝",h:"#C2D1E0"},{n:"官绿",h:"#7AA35A"},{n:"明黄",h:"#FFD700"},{n:"玉青",h:"#4A9D9C"},
+{n:"暖灰",h:"#B7A8A5"},{n:"墨色",h:"#1D1B1C"},{n:"宝蓝",h:"#1A3E72"},{n:"帝王紫",h:"#7B3F61"},{n:"暗金",h:"#9C8B4D"},{n:"灰橙色",h:"#C48A69"},
+{n:"茜红",h:"#C70039"},{n:"烟蓝",h:"#7BA4B8"},{n:"落霞",h:"#FA7C5E"},{n:"纁色",h:"#D46D3A"},{n:"緅色",h:"#5C4033"},{n:"雾霾蓝",h:"#7BA0A5"},
+{n:"浅薄荷绿",h:"#B2F0D9"},{n:"丁香紫",h:"#C8A2C8"},{n:"烟粉",h:"#E4B5C4"},{n:"灰粉",h:"#D8B0B0"},{n:"棉花糖白",h:"#FFF8F0"},{n:"金棕",h:"#B8860B"},
+{n:"复方甘草",h:"#8B6E4F"},{n:"天际灰",h:"#C8D3D7"},{n:"藕粉",h:"#FEDBE1"},{n:"紫藤萝",h:"#9B8AE8"},{n:"浅紫藤萝",h:"#D1B3FF"},{n:"粉紫藤萝",h:"#D8B0D8"},
+{n:"白雪藤",h:"#E8F4F0"},{n:"凝脂莲青",h:"#C6E3E1"},{n:"焦绿",h:"#3B5F3A"},{n:"奶油白",h:"#FFF8E7"},{n:"浅豆绿",h:"#B2C8A0"},{n:"茉莉白",h:"#F8F4E9"},
+{n:"芝麻黑",h:"#2E292B"},{n:"流黄",h:"#D4A017"},{n:"柠檬绿",h:"#CCFF00"},{n:"青绿",h:"#2E8B57"},{n:"木色",h:"#8B4513"},{n:"高级灰",h:"#9C9CA4"},
+{n:"云峰灰",h:"#C1C8D6"},{n:"檀香紫",h:"#8A6E8B"},{n:"松烟墨",h:"#3B3A3E"},{n:"杏子",h:"#FDDA9F"},{n:"霁蓝",h:"#1E5A8F"},{n:"靛蓝",h:"#4B0082"},
+{n:"玫红色",h:"#FF007F"},{n:"新绿",h:"#6CC788"},{n:"杏子灰",h:"#D9CBB8"},{n:"玉色",h:"#F0F8FF"},{n:"霜地",h:"#E2F0CB"},{n:"黛绿色",h:"#3AB08C"},
+{n:"茜裙",h:"#C75A6B"},{n:"黛色",h:"#3B4F5C"},{n:"松花绿",h:"#A0D6B4"},{n:"灰色",h:"#8A8A8A"},{n:"白色",h:"#F8F8F8"},{n:"马尔斯绿",h:"#3A5F4B"},
+{n:"藕丝秋半",h:"#D9C6B0"},{n:"浅蓝",h:"#B0D4E3"},{n:"湘蓝",h:"#4A76A8"},{n:"荔色",h:"#F57C00"},{n:"鸦青色",h:"#2F4F4F"},{n:"杏粉",h:"#F0D9D0"},
+{n:"浅杏粉",h:"#F5E6E0"},{n:"米白",h:"#F5F0E6"},{n:"梨花白",h:"#F8F5F0"},{n:"荠麦绿",h:"#8DB67A"},{n:"蓼蓝青",h:"#2E5A88"},{n:"胭脂泪",h:"#9D4E5C"},
+{n:"藕荷色",h:"#B5A0C2"},{n:"杏子阴",h:"#B8A996"},{n:"浅苋菜紫",h:"#D8BFD8"},{n:"社红配",h:"#C83737"},{n:"猩红",h:"#BC1E46"},{n:"莺儿",h:"#A8D865"},
+{n:"青蓝",h:"#2A5C82"},{n:"苍筤",h:"#2E5D4A"},{n:"汉绣绿",h:"#2E7D32"},{n:"汉绣红",h:"#9E2F2F"},{n:"藕丝秋",h:"#D9C6B3"},{n:"墨绿",h:"#1A3B2E"},
+{n:"荼蘼白",h:"#F8F4F0"},{n:"石青",h:"#2E5D8C"},{n:"鎏金",h:"#D4AF37"},{n:"墨黑",h:"#0F1A20"},{n:"藕丝秋色",h:"#DCC6B5"},{n:"胭脂晕",h:"#C94A5E"},
+{n:"鸦黄",h:"#E6C24D"},{n:"翠青",h:"#2AAE6F"},{n:"青黛",h:"#1A3A5F"},{n:"深绿",h:"#0D5E3A"},
+];
+
+// ===== helpers =====
+function hexToRgb(h){const n=parseInt(h.slice(1),16);return[(n>>16)&255,(n>>8)&255,n&255]}
+function luminance(h){const[r,g,b]=hexToRgb(h);return(0.299*r+0.587*g+0.114*b)/255}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let h=0,s=0,l=(mx+mn)/2;const d=mx-mn;if(d){s=l>.5?d/(2-mx-mn):d/(mx+mn);switch(mx){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4}h*=60}return[h,s,l]}
+
+// ===== classify each color into a 色系 family =====
+const FAMILIES = [
+  {key:'red',    cn:'红',  en:'Reds',    hue:[345,360],hue2:[0,12], rep:'#9d2b1f'},
+  {key:'pink',   cn:'粉赤', en:'Pinks',   hue:[330,345],            rep:'#e07a86'},
+  {key:'orange', cn:'橙',  en:'Oranges', hue:[18,42],              rep:'#e8743b'},
+  {key:'yellow', cn:'黄',  en:'Yellows', hue:[43,66],              rep:'#f1ca17'},
+  {key:'green',  cn:'绿',  en:'Greens',  hue:[67,160],             rep:'#2aae6f'},
+  {key:'cyan',   cn:'青',  en:'Cyans',   hue:[161,200],            rep:'#1f9c94'},
+  {key:'blue',   cn:'蓝',  en:'Blues',   hue:[201,255],            rep:'#1a3a5f'},
+  {key:'purple', cn:'紫',  en:'Purples', hue:[256,329],            rep:'#7d4b8a'},
+];
+function classify(h){
+  const[r,g,b]=hexToRgb(h);const[hue,s,l]=rgbToHsl(r,g,b);
+  if(s<0.10) return 'neutral';
+  if(l>0.93) return 'white';
+  if(l<0.12) return 'black';
+  for(const f of FAMILIES){
+    if(f.hue && hue>=f.hue[0] && hue<=f.hue[1]) return f.key;
+    if(f.hue2 && hue>=f.hue2[0] && hue<=f.hue2[1]) return f.key;
+  }
+  return 'red';
+}
+const GROUPS = [
+  {key:'red',cn:'红',en:'Reds',rep:'#9d2b1f'},
+  {key:'pink',cn:'粉赤',en:'Pinks',rep:'#e07a86'},
+  {key:'orange',cn:'橙',en:'Oranges',rep:'#e8743b'},
+  {key:'yellow',cn:'黄',en:'Yellows',rep:'#f1ca17'},
+  {key:'green',cn:'绿',en:'Greens',rep:'#2aae6f'},
+  {key:'cyan',cn:'青',en:'Cyans',rep:'#1f9c94'},
+  {key:'blue',cn:'蓝',en:'Blues',rep:'#1a3a5f'},
+  {key:'purple',cn:'紫',en:'Purples',rep:'#7d4b8a'},
+  {key:'white',cn:'白',en:'Whites',rep:'#f4efe6'},
+  {key:'neutral',cn:'灰褐',en:'Neutrals',rep:'#8c8275'},
+  {key:'black',cn:'黑',en:'Blacks',rep:'#1c1814'},
+];
+COLORS.forEach(c=>{c.fam=classify(c.h);c.dk=luminance(c.h)<0.55});
+// sort within group by hue->lightness for a gradient flow
+function sortKey(c){const[r,g,b]=hexToRgb(c.h);const[hue,s,l]=rgbToHsl(r,g,b);return hue*1000+(1-l)*100}
+COLORS.forEach(c=>c._sk=sortKey(c));
+
+// ===== render =====
+const groupsEl=document.getElementById('groups');
+const filtersEl=document.getElementById('filters');
+const emptyEl=document.getElementById('empty');
+const qEl=document.getElementById('q');
+let activeFam='all', query='';
+
+// build filter chips
+const used = GROUPS.filter(g=>COLORS.some(c=>c.fam===g.key));
+document.getElementById('grpCount').textContent = used.length;
+const chips = [{key:'all',cn:'全部',rep:'#1c1814'}, ...used];
+filtersEl.innerHTML = chips.map(g=>
+  `<button class="fbtn${g.key==='all'?' on':''}" data-fam="${g.key}"><span class="dot" style="background:${g.rep}"></span>${g.cn}</button>`
+).join('');
+filtersEl.addEventListener('click',e=>{
+  const b=e.target.closest('.fbtn');if(!b)return;
+  activeFam=b.dataset.fam;
+  filtersEl.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('on',x===b));
+  render();
+});
+
+qEl.addEventListener('input',()=>{query=qEl.value.trim().toLowerCase();render();});
+
+function render(){
+  let any=false;
+  const html = used.map(g=>{
+    if(activeFam!=='all' && activeFam!==g.key) return '';
+    let items=COLORS.filter(c=>c.fam===g.key);
+    if(query) items=items.filter(c=>c.n.toLowerCase().includes(query)||c.h.toLowerCase().includes(query));
+    if(!items.length) return '';
+    any=true;
+    items.sort((a,b)=>a._sk-b._sk);
+    const cells=items.map(c=>
+      `<div class="swatch${c.dk?' dk':''}" data-hex="${c.h}" data-name="${c.n}">
+        <div class="chip" style="background:${c.h}"></div>
+        <div class="info"><div class="nm">${c.n}</div><div class="hx">${c.h}</div></div>
+      </div>`
+    ).join('');
+    return `<section class="group" id="g-${g.key}">
+      <div class="group-head"><h2>${g.cn}</h2><span class="en">${g.en}</span><span class="cnt">${items.length}</span></div>
+      <div class="grid">${cells}</div>
+    </section>`;
+  }).join('');
+  groupsEl.innerHTML=html;
+  emptyEl.style.display=any?'none':'block';
+}
+render();
+
+// ===== copy =====
+const toast=document.getElementById('toast'),toastVal=document.getElementById('toastVal');
+let toastTimer;
+groupsEl.addEventListener('click',async e=>{
+  const sw=e.target.closest('.swatch');if(!sw)return;
+  const hex=sw.dataset.hex, name=sw.dataset.name;
+  const[r,g,b]=hexToRgb(hex);
+  const text=hex;
+  try{await navigator.clipboard.writeText(text);}catch(_){
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+  }
+  toastVal.textContent=`${name} ${hex} · rgb(${r},${g},${b})`;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove('show'),1700);
+});
+</script>
+</body>
+</html>

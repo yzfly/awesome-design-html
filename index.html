@@ -275,7 +275,7 @@ footer{background:var(--canvas-dark);color:var(--on-dark);padding:60px 28px;bord
       <span data-en="CLAUDE CODE SKILL · v1.0" data-zh="CLAUDE CODE 技能 · v1.0">CLAUDE CODE SKILL · v1.0</span>
     </div>
     <h1>
-      <span data-en="115 brand designs," data-zh="115 个品牌设计,">115 brand designs,</span><br/>
+      <span data-en="116 brand designs," data-zh="116 个品牌设计,">116 brand designs,</span><br/>
       <span class="acc" data-en="ready to read" data-zh="即开即用">ready to read</span><span class="punct">.</span>
     </h1>
     <p class="lead" data-en="Single-file HTML references for marketing pages and iOS apps. Hand the GitHub link to Claude Code and it'll design Stripe-mesh heroes, Linear-dark surfaces, Spotify Now-Playing screens — without guessing."
@@ -300,12 +300,12 @@ footer{background:var(--canvas-dark);color:var(--on-dark);padding:60px 28px;bord
 <div class="stat-tiles">
   <div class="stat-tile">
     <div class="label" data-en="// total brands" data-zh="// 品牌总数">// total brands</div>
-    <div class="n"><span class="marker">●</span>115</div>
-    <div class="sub" data-en="93 web + 22 iOS · 22 China" data-zh="93 网页 + 22 iOS · 22 中国">93 web + 22 iOS · 22 China</div>
+    <div class="n"><span class="marker">●</span>116</div>
+    <div class="sub" data-en="94 web + 22 iOS · 22 China" data-zh="94 网页 + 22 iOS · 22 中国">94 web + 22 iOS · 22 China</div>
   </div>
   <div class="stat-tile">
     <div class="label" data-en="// marketing pages" data-zh="// 营销网页">// marketing pages</div>
-    <div class="n">93</div>
+    <div class="n">94</div>
     <div class="sub" data-en="incl. 20 China showcase" data-zh="含 20 中国大厂展示">incl. 20 China showcase</div>
   </div>
   <div class="stat-tile">
@@ -437,8 +437,8 @@ footer{background:var(--canvas-dark);color:var(--on-dark);padding:60px 28px;bord
   <div class="toolbar-inner">
     <span class="section-label"><span class="marker">●</span> <span data-en="GALLERY" data-zh="画廊">GALLERY</span></span>
     <div class="filter-pills" id="filters">
-      <button class="fp active" data-filter="all" data-en="All" data-zh="全部">All <span class="ct">115</span></button>
-      <button class="fp" data-filter="web" data-en="Web" data-zh="网页">Web <span class="ct">93</span></button>
+      <button class="fp active" data-filter="all" data-en="All" data-zh="全部">All <span class="ct">116</span></button>
+      <button class="fp" data-filter="web" data-en="Web" data-zh="网页">Web <span class="ct">94</span></button>
       <button class="fp" data-filter="ios" data-en="iOS" data-zh="iOS">iOS <span class="ct">22</span></button>
       <button class="fp" data-filter="china" data-en="🇨🇳 China" data-zh="🇨🇳 中国大厂">🇨🇳 China <span class="ct">20</span></button>
       <button class="fp" data-filter="ai" data-en="AI" data-zh="AI">AI</button>
@@ -456,7 +456,7 @@ footer{background:var(--canvas-dark);color:var(--on-dark);padding:60px 28px;bord
 <!-- ===== GALLERY ===== -->
 <main class="gallery">
   <div class="gallery-head">
-    <div class="ttl"><span class="marker">●</span> <span data-en="Showing" data-zh="显示">Showing</span> <strong id="count">115</strong> <span data-en="of 115 demos · click to open" data-zh="个 / 共 115 · 点击打开">of 115 demos · click to open</span></div>
+    <div class="ttl"><span class="marker">●</span> <span data-en="Showing" data-zh="显示">Showing</span> <strong id="count">116</strong> <span data-en="of 116 demos · click to open" data-zh="个 / 共 116 · 点击打开">of 116 demos · click to open</span></div>
   </div>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" style="display:none">
@@ -521,6 +521,9 @@ footer{background:var(--canvas-dark);color:var(--on-dark);padding:60px 28px;bord
 
 // ===== BRAND DATA =====
 const brands = [
+  // ===== 中国传统色 · 742 名色色谱 (featured first) =====
+  { slug:'zhongguo-colors', name:'中国传统色', platform:'web', cat:'art', bg:'linear-gradient(135deg,#9d2b1f 0%,#e8743b 22%,#f1ca17 42%,#2aae6f 62%,#1a3a5f 82%,#7d4b8a 100%)', dark:true, en:'742 traditional hues · click to copy', zh:'742 名色色谱 · 点击复制' },
+
   // ===== Tier 1 — PREMIUM AI + iOS · global flagships =====
   { slug:'claude',     name:'Claude',     platform:'web', cat:'ai',        bg:'linear-gradient(135deg,#f4f1ea 0%,#d97757 50%,#5a2e0c)',              dark:false, en:'Editorial warm · serif tradition', zh:'文学暖色 · 衬线传统' },
   { slug:'chatgpt-ios',     name:'ChatGPT',     platform:'ios', cat:'ai',           bg:'linear-gradient(135deg,#10a37f 0%,#0a8169 100%)',           dark:true,  en:'AI chat · OpenAI green', zh:'AI 对话 · OpenAI 绿' },
